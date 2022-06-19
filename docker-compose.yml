@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - .:/usr/src
+    tmpfs:
+      - /usr/src/tmp/pids
+      - /usr/src/tmp/cache
+    tty: true
+    stdin_open: true
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    # command: bundle exec rdebug-ide --debug --host 0.0.0.0 --port 1234 -- bin/rails server -p 3000 -b 0.0.0.0
+    env_file:
+      - ./.env
+
+  db:
+    image: postgres:14.3-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+
+volumes:
+  postgres:
+
