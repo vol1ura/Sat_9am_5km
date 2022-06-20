@@ -9,6 +9,7 @@ gem 'rails', '~> 7.0.3'
 
 gem 'activeadmin'
 gem 'devise'
+gem 'devise-i18n'
 gem 'jbuilder'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'

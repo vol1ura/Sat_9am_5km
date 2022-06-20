@@ -90,6 +90,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.2)
+      devise (>= 4.8.0)
     digest (3.1.0)
     erubi (1.10.0)
     ffi (1.15.5)
@@ -238,6 +240,7 @@ DEPENDENCIES
   activeadmin
   byebug
   devise
+  devise-i18n
   jbuilder
   pg (~> 1.1)
   puma (~> 5.0)

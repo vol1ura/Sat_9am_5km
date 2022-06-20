@@ -21,6 +21,7 @@ Bundler.require(*Rails.groups)
 module KuzminkiRun
   class Application < Rails::Application
     config.time_zone = 'Europe/Moscow'
+    config.i18n.default_locale = :ru
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
