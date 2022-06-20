@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Activity < ApplicationRecord
+class Athlete < ApplicationRecord
   has_many :results, dependent: :destroy
-  has_many :athletes, through: :results
+  has_many :activities, through: :results
 end

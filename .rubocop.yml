@@ -1,0 +1,90 @@
+require:
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-performance
+  - rubocop-rspec
+
+# METRICS
+Metrics/AbcSize:
+  Max: 35
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/MethodLength:
+  Max: 16
+Metrics/ClassLength:
+  Exclude:
+    - 'app/models/**/*'
+Metrics/BlockLength:
+  Exclude:
+    - 'config/**/*'
+    - 'spec/**/*'
+  IgnoredMethods:
+    - params
+    - resource
+    - resources
+    - helpers
+    - requires
+    - optional
+    - given
+    - namespace
+
+# STYLE
+Style/Alias:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'config/**/*'
+    - 'config.ru'
+    - 'spec/**/*'
+    - 'app/views/**/*.json.jbuilder'
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+
+# LAYOUT
+Layout/LineLength:
+  Max: 124
+# Layout/EmptyLineAfterMagicComment:
+#   Enabled: false
+# Layout/EmptyLinesAroundClassBody:
+#   Enabled: false
+Layout/BeginEndAlignment:
+  EnforcedStyleAlignWith: begin
+
+# LINT
+Lint/RescueException:
+  Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*'
+
+# RSpec
+RSpec/MultipleExpectations:
+  Max: 4
+  Exclude:
+    - 'spec/system/**/*'
+RSpec/ExampleLength:
+  Max: 10
+  Exclude:
+    - 'spec/system/**/*'
+
+# Rails
+# Rails/SkipsModelValidations:
+#   Enabled: false
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - 'tmp/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - '.pryrc'
+  NewCops: enable
