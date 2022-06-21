@@ -8,6 +8,7 @@ gem 'sass-rails', '>= 6'
 gem 'rails', '~> 7.0.3'
 
 gem 'activeadmin'
+gem 'cancancan'
 gem 'devise'
 gem 'devise-i18n'
 gem 'jbuilder'
