@@ -2,5 +2,5 @@
 
 class Activity < ApplicationRecord
   has_many :results, dependent: :destroy
-  has_many :athletes, through: :results
+  has_many :users, through: :results
 end
