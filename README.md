@@ -8,12 +8,12 @@ Contributions welcome!
 
 To build project execute
 ```shell
-docker-compose build web
+make build_proj
 ```
 
 Now you can run it
 ```shell
-docker-compose up
+make proj
 ```
 
 ### TODO

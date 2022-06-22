@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+active_admin_form_for [:admin, resource] do |f|
+  inputs 'Загрузите документы' do
+    f.label 'Файл со сканера'
+    f.file_field :protocol, input_html: { multiple: true }
+    f.label 'Файл с секундомера'
+    f.file_field :protocol, input_html: { multiple: true }
+    input :description, label: 'Описание'
+    input :published, label: 'Опубликовать результаты забега'
+  end
+  actions
+end

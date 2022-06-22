@@ -1,0 +1,8 @@
+coverage/
+tmp/
+log/
+
+.git/
+.vscode/
+.dockerignore
+.byebug_history

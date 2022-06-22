@@ -12,10 +12,10 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
-
 /public/assets
 /vendor
 !/vendor/.keep
+.reek.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
