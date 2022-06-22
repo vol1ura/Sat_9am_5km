@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_205814) do
 
   create_table "activities", force: :cascade do |t|
     t.date "date"
+    t.text "description"
+    t.boolean "published", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
