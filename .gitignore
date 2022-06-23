@@ -15,6 +15,7 @@
 /public/assets
 /vendor
 !/vendor/.keep
+/coverage
 .reek.yml
 
 # Ignore master key for decrypting credentials and more.
