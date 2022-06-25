@@ -1,12 +1,55 @@
 ---
 ru:
   activerecord:
+    models:
+      club:
+        one: Клуб
+        other: Клубы
+      event:
+        one: Мероприятие
+        other: Мероприятия
+      activity:
+        one: Забег
+        other: Забеги
+      athlete:
+        one: Участник
+        other: Участники
+      result:
+        one: Результат
+        other: Результаты
+
+    attributes:
+      user:
+        first_name: 'имя'
+        last_name: 'фамилия'
+        email: 'e-mail'
+      athlete:
+        name: 'имя'
+        parkrun_code: 'номер parkrun'
+        fiveverst_code: 'номер 5вёрст'
+        gender: 'пол'
+        user: 'пользователь'
+      club:
+        name: 'название'
+      event:
+        active: 'активен'
+        code_name: 'кодовое имя'
+        town: 'город'
+        place: 'местонахождение'
+        description: 'описание'
+
     errors:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
         restrict_dependent_destroy:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
           has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+      models:
+        event:
+          attributes:
+            code_name:
+              invalid: 'только строчные латинские буквы и символ "_" вместо пробела'
+
   date:
     abbr_day_names:
     - Вс

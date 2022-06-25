@@ -6,6 +6,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+.byebug_history
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*

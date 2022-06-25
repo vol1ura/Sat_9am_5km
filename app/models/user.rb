@@ -5,10 +5,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :validatable
 
-  has_many :results, dependent: :destroy
-  has_many :activities, through: :results
-
-  validates :parkrun_id, uniqueness: true, allow_nil: true
-
+  # TODO: use bit mask instead of enum for many roles
   enum role: { admin: 0, uploader: 1 }
 end
