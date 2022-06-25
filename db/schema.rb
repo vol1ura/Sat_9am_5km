@@ -32,17 +32,49 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_205814) do
     t.date "date"
     t.text "description"
     t.boolean "published", default: false
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_activities_on_event_id"
+  end
+
+  create_table "athletes", force: :cascade do |t|
+    t.string "name"
+    t.integer "parkrun_code"
+    t.integer "fiveverst_code"
+    t.boolean "male"
+    t.bigint "user_id"
+    t.bigint "club_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_athletes_on_club_id"
+    t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
+    t.index ["parkrun_code"], name: "index_athletes_on_parkrun_code", unique: true
+    t.index ["user_id"], name: "index_athletes_on_user_id"
+  end
+
+  create_table "clubs", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.boolean "active", default: true
+    t.string "code_name"
+    t.string "town"
+    t.string "place"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "results", force: :cascade do |t|
+    t.integer "position"
     t.time "total_time"
     t.integer "role", default: 0
     t.bigint "activity_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "athlete_id"
     t.index ["activity_id"], name: "index_results_on_activity_id"
-    t.index ["user_id"], name: "index_results_on_user_id"
+    t.index ["athlete_id"], name: "index_results_on_athlete_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,14 +87,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_205814) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.string "parkrun_id"
-    t.boolean "male"
     t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["parkrun_id"], name: "index_users_on_parkrun_id", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activities", "events"
+  add_foreign_key "athletes", "clubs"
+  add_foreign_key "athletes", "users"
   add_foreign_key "results", "activities"
-  add_foreign_key "results", "users"
+  add_foreign_key "results", "athletes"
 end

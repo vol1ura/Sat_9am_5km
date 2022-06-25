@@ -2,8 +2,12 @@
 
 ActiveAdmin.register User do
   config.comments = false
+  actions :all, except: :destroy
 
-  permit_params :first_name, :last_name, :male, :parkrun_id, :email, :password, :password_confirmation
+  permit_params do
+    permitted = %i[first_name last_name password password_confirmation]
+    permitted << :role if current_user.admin?
+  end
 
   index download_links: false do
     selectable_column
@@ -11,26 +15,22 @@ ActiveAdmin.register User do
     column :email
     column :first_name
     column :last_name
-    column :parkrun_id
-    column :male
     column :created_at
     actions
   end
 
   filter :email
-  filter :male
-  filter :parkrun_id
-  filter :created_at
+  filter :first_name
+  filter :last_name
 
   form do |f|
     f.inputs do
-      f.input :male, label: 'Мужчина'
+      # f.input :email
       f.input :first_name
       f.input :last_name
-      f.input :parkrun_id, label: 'Паркрановский номер'
-      f.input :email
-      # f.input :password
-      # f.input :password_confirmation
+      f.input :password
+      f.input :password_confirmation
+      f.input :role if current_user.admin?
     end
     f.actions
   end
