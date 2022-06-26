@@ -1,0 +1,18 @@
+panel 'Детали забега' do
+  attributes_table_for activity do
+    row('Забег прошёл в') { |a| a.event.place }
+    row :date
+    row :description
+    row :published
+  end
+end
+
+panel 'Протокол' do
+  table_for activity.results.order(:position) do
+    column :position
+    # TODO: use name from User if available
+    column('Имя участника') { |r| r.athlete&.name }
+    column('Результат') { |r| r.total_time.strftime('%H:%M:%S') }
+    column('Пол') { |r| r.athlete&.gender }
+  end
+end

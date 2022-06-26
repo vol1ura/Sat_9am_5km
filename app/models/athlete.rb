@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Athlete < ApplicationRecord
+  FIVE_VERST_BORDER = 790000000
+
   belongs_to :club, optional: true
   belongs_to :user, optional: true
 
