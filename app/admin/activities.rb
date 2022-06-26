@@ -17,15 +17,22 @@ ActiveAdmin.register Activity do
 
   form title: 'Загрузка забега', multipart: true, partial: 'form'
 
-  after_create do |activity|
-    # byebug
+  show do
+    render 'show', post: activity
 
-    # file_timer = params[:activity][:timer]
-    # table = CSV.parse(file_timer.read, headers: false)
-    # activity.date = Date.parse(table[0][1]) # Date of event in the second column of first row
-    # table[2..].each do |row|
-    #   activity.results << Result.new(total_time: row.last)
-    # end
+    active_admin_comments
+  end
+
+  after_create do |activity|
+    file_timer = params[:activity][:timer]
+    table = CSV.parse(file_timer.read, headers: false)
+    activity.date = Date.parse(table[0][1]) # Date of event in the second column of first row
+    table[2..].each do |row|
+      break if row.first == 'ENDOFEVENT'
+
+      activity.results << Result.new(position: row.first, total_time: row.last)
+    end
+    activity.save!
 
     Activity::MAX_SCANNERS.times do |scanner_number|
       file_scanner = params[:activity]["scanner#{scanner_number}".to_sym]
@@ -33,9 +40,15 @@ ActiveAdmin.register Activity do
 
       table = CSV.parse(file_scanner.read, headers: false)
       table[1..].each do |row|
-        user = User.find_or_create_by(parkrun_id: row.first) do
+        code = row.first.delete('A').to_i
+        code_type = code < Athlete::FIVE_VERST_BORDER ? :parkrun_code : :fiveverst_code
+        athlete = Athlete.find_by(code_type => code)
+        position = row.second.delete('P').to_i
+        result = activity.results.find_by(position: position)
+        # TODO: try to scrape here sites to find athlete
+        next unless athlete && result
 
-        end
+        result.update!(athlete: athlete)
       end
     end
   end

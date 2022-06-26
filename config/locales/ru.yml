@@ -31,6 +31,10 @@ ru:
         club: 'клуб'
         male: 'мужчина'
         user: 'пользователь'
+      activity:
+        date: 'дата забега'
+        published: 'опубликован?'
+        description: 'описание'
       club:
         name: 'название'
       event:
@@ -39,6 +43,9 @@ ru:
         town: 'город'
         place: 'местонахождение'
         description: 'описание'
+      result:
+        position: 'место'
+        total_time: 'результат'
 
     errors:
       messages:
