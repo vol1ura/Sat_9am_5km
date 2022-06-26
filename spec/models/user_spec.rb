@@ -16,12 +16,5 @@ RSpec.describe User, type: :model do
       another_user = build :user, email: email
       expect(another_user).not_to be_valid
     end
-
-    it 'invalid with existing parkrun_id' do
-      parkrun_id = 'A111111'
-      create :user, parkrun_id: parkrun_id
-      another_user = build :user, parkrun_id: parkrun_id
-      expect(another_user).not_to be_valid
-    end
   end
 end

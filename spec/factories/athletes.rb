@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :athlete do
-    parkrun_code { 124315 }
-    fiveverst_code { 2436234 }
-    user { nil }
+    name { Faker::Name.name }
+    parkrun_code { Faker::Number.number(digits: 6) }
+    fiveverst_code { Faker::Number.between(from: 790000000, to: 799999999) }
+    male { true }
   end
 end

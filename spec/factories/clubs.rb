@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :club do
-    name { "MyString" }
+    name { Faker::Team.name }
   end
 end

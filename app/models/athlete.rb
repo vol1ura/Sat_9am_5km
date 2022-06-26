@@ -8,7 +8,7 @@ class Athlete < ApplicationRecord
   has_many :activities, through: :results
   has_many :events, through: :activities
 
-  # validates :name, :male, present: true
+  validates :name, presence: true
   validates :parkrun_code, uniqueness: true, allow_nil: true
   validates :fiveverst_code, uniqueness: true, allow_nil: true
 
