@@ -103,6 +103,8 @@ ru:
         title: "Поддомен"
       password:
         title: "Пароль"
+      password_confirmation:
+        title: "Подтверждение пароля"
       sign_up:
         title: "Зарегистрироваться"
         submit: "Зарегистрироваться"
