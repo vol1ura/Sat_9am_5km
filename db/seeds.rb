@@ -8,13 +8,13 @@ if Rails.env.development?
       last_name: 'Doe'
   )
 end
-Even.create!(
+Event.create!(
   code_name: 'kuzminki',
   town: 'Москва',
   place: 'парке Кузьминки',
   description: 'Каждую субботу сбор в 8:45 возле сцены.'
 )
-Even.create!(
+Event.create!(
   code_name: 'olimpiyskaya_derevnya',
   town: 'Москва',
   place: 'парке Олимпийская Деревня',

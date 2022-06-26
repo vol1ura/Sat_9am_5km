@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :result do
-    user
+    athlete
     activity
   end
 end

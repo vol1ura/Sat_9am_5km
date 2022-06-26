@@ -1,5 +1,8 @@
-require 'rails_helper'
-
 RSpec.describe Club, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.not_to be_valid }
+
+  it 'valid with name' do
+    club = described_class.new(name: Faker::Team.name)
+    expect(club).to be_valid
+  end
 end

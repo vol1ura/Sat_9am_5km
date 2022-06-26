@@ -28,6 +28,8 @@ ru:
         parkrun_code: 'номер parkrun'
         fiveverst_code: 'номер 5вёрст'
         gender: 'пол'
+        club: 'клуб'
+        male: 'мужчина'
         user: 'пользователь'
       club:
         name: 'название'
