@@ -25,6 +25,4 @@ heroku config:set RAILS_MASTER_KEY=$(cat config/master.key)
 
 ### TODO
 
-1. Add RSpec and write tests to continue with TDD
-2. Add module for uploading activities results
-3. Add frontend
+1. Add frontend
