@@ -20,7 +20,7 @@ gem 'sprockets-rails'
 
 group :development, :test do
   gem 'bullet'
-  gem 'byebug', require: false
+  gem 'byebug'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'rspec-rails', '~> 6.0.0.rc'
