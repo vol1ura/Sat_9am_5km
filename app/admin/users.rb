@@ -10,7 +10,6 @@ ActiveAdmin.register User do
   end
 
   index download_links: false do
-    selectable_column
     column :email
     column :first_name
     column :last_name
