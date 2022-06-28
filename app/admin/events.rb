@@ -19,4 +19,13 @@ ActiveAdmin.register Event do
   filter :code_name
   filter :town
   filter :place
+
+  index download_links: false do
+    column :active
+    column :code_name
+    column :town
+    column :place
+    column :created_at
+    actions
+  end
 end

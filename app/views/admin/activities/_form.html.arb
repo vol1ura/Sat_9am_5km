@@ -9,13 +9,13 @@ active_admin_form_for [:admin, resource] do |f|
     input :description, label: 'Описание'
     input :published, label: 'Опубликовать результаты забега'
   end
-  f.inputs 'Загрузите файлы' do
+  f.inputs 'Загрузите файл с секундомера' do
     input :timer, as: :file, label: 'Файл с секундомера'
-    input :scanner1, as: :file, label: 'Файл со сканера 1'
-    input :scanner2, as: :file, label: 'Файл со сканера 2'
-    input :scanner3, as: :file, label: 'Файл со сканера 3'
-    input :scanner4, as: :file, label: 'Файл со сканера 4'
-    input :scanner5, as: :file, label: 'Файл со сканера 5'
+  end
+  f.inputs 'Загрузите файлы со сканеров' do
+    Activity::MAX_SCANNERS.times do |i|
+      input "scanner#{i}".to_sym, as: :file, label: "Файл со сканера #{i}"
+    end
   end
 
   actions

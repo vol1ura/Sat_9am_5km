@@ -18,7 +18,7 @@ ActiveAdmin.register Activity do
   form title: 'Загрузка забега', multipart: true, partial: 'form'
 
   show do
-    render 'show', post: activity
+    render 'show', activity: activity
 
     active_admin_comments
   end
