@@ -9,12 +9,14 @@ if Rails.env.development?
   )
 end
 Event.create!(
+  name: 'Кузьминки',
   code_name: 'kuzminki',
   town: 'Москва',
   place: 'парке Кузьминки',
   description: 'Каждую субботу сбор в 8:45 возле сцены.'
 )
 Event.create!(
+  name: 'Олимпийская деревня',
   code_name: 'olimpiyskaya_derevnya',
   town: 'Москва',
   place: 'парке Олимпийская Деревня',
