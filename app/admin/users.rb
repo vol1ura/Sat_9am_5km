@@ -11,10 +11,10 @@ ActiveAdmin.register User do
 
   index download_links: false do
     selectable_column
-    id_column
     column :email
     column :first_name
     column :last_name
+    column :role
     column :created_at
     actions
   end
@@ -22,6 +22,8 @@ ActiveAdmin.register User do
   filter :email
   filter :first_name
   filter :last_name
+
+  show { render 'show', user: user }
 
   form do |f|
     f.inputs do
