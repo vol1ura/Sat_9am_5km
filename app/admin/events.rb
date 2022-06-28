@@ -5,24 +5,24 @@ ActiveAdmin.register Event do
   actions :all, except: :destroy
 
   permit_params do
-    permitted = [:description]
-    if params[:action] == 'create' && current_user.admin?
+    permitted = %i[description active place name]
+    if params[:action] == 'create'
       permitted << :code_name
       permitted << :town
     end
-    permitted << :active if current_user.admin?
-    permitted << :place if current_user.admin?
     permitted
   end
 
   filter :active
   filter :code_name
+  filter :name
   filter :town
   filter :place
 
   index download_links: false do
     column :active
     column :code_name
+    column :name
     column :town
     column :place
     column :created_at

@@ -11,24 +11,22 @@ ActiveAdmin.register_page 'Dashboard' do
       end
     end
 
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
+    columns do
+      column do
+        panel 'Недавние забеги' do
+          ul do
+            Activity.order(created_at: :desc).first(5).map do |activity|
+              li link_to("#{activity.date} - #{activity.event.code_name}", admin_activity_path(activity))
+            end
+          end
+        end
+      end
 
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
-  end # content
+      column do
+        panel 'Информация' do
+          para 'Добро пожаловать.'
+        end
+      end
+    end
+  end
 end
