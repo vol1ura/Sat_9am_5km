@@ -16,6 +16,7 @@
 if ENV['COVERAGE'] == 'on'
   require 'simplecov'
   SimpleCov.start 'rails' do
+    add_group 'ActiveAdmin', 'app/admin'
     add_group 'Services', 'app/services'
     add_filter '/spec/'
     add_filter do |source_file|
@@ -23,6 +24,8 @@ if ENV['COVERAGE'] == 'on'
     end
   end
 end
+
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
