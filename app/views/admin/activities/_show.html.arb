@@ -8,7 +8,7 @@ panel 'Детали забега' do
 end
 
 panel 'Протокол' do
-  table_for activity.results.order(:position) do
+  table_for activity.results.includes(:athlete).order(:position) do
     column :position
     # TODO: use name from User if available
     column('Имя участника') { |r| r.athlete&.name }

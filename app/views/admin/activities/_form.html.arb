@@ -14,7 +14,7 @@ active_admin_form_for [:admin, resource] do |f|
   end
   f.inputs 'Загрузите файлы со сканеров' do
     Activity::MAX_SCANNERS.times do |i|
-      input "scanner#{i}".to_sym, as: :file, label: "Файл со сканера #{i}"
+      input "scanner#{i}".to_sym, as: :file, label: "Файл со сканера #{i + 1}"
     end
   end
 

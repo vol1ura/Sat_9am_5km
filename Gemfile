@@ -14,6 +14,7 @@ gem 'cancancan', '~> 3.3'
 gem 'devise', '~> 4.8'
 gem 'devise-i18n'
 gem 'jbuilder'
+gem 'nokogiri'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
@@ -29,11 +30,15 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rake', require: false
   gem 'rubocop-rspec', require: false
-  gem 'simplecov', require: false
 
   # Adds support for Capybara system testing and selenium driver
   # gem 'capybara', '>= 3.26'
   # gem 'selenium-webdriver'
+end
+
+group :test do
+  gem 'simplecov', require: false
+  gem 'webmock', require: false
 end
 
 group :development do
