@@ -8,8 +8,6 @@ class Activity < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :athletes, through: :results
 
-  # validates :date, presence: true
-
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
 
