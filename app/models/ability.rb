@@ -7,10 +7,11 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
-    if user.admin?
-      can :manage, :all
-    else
-      can :read, :all
+    can :read, :all
+    if user.uploader?
+      can :manage, Result
+      can :manage, Activity
     end
+    can :manage, :all if user.admin?
   end
 end
