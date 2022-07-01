@@ -20,8 +20,8 @@
             <th>#</th>
             <th>Дата</th>
             <th>Число участников</th>
-            <th>Лидер по мужчинам</th>
-            <th>Лидер по женщинам</th>
+            <th class="hidden-on-phone">Лидер по мужчинам</th>
+            <th class="hidden-on-phone">Лидер по женщинам</th>
           </tr>
         </thead>
         <tbody>
@@ -32,8 +32,8 @@
               <td><%= @total_activities - idx %></td>
               <td><%= link_to activity.date, activity_path(activity) %></td>
               <td><%= activity.results.runner.size %></td>
-              <td><%= "#{male_leader_result.athlete.name} (#{human_result_time(male_leader_result.total_time)})" if male_leader_result&.athlete.present? %></td>
-              <td><%= "#{female_leader_result.athlete.name} (#{human_result_time(female_leader_result.total_time)})" if female_leader_result&.athlete.present? %></td>
+              <td class="hidden-on-phone"><%= "#{male_leader_result.athlete.name} (#{human_result_time(male_leader_result.total_time)})" if male_leader_result&.athlete.present? %></td>
+              <td class="hidden-on-phone"><%= "#{female_leader_result.athlete.name} (#{human_result_time(female_leader_result.total_time)})" if female_leader_result&.athlete.present? %></td>
             </tr>
           <% end %>
         </tbody>

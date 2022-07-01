@@ -10,8 +10,8 @@
       <th>Место</th>
       <th>Имя</th>
       <th>Результат</th>
-      <th class="club">Клуб</th>
-      <th class="gender">Пол</th>
+      <th class="hidden-on-phone">Клуб</th>
+      <th class="hidden-on-phone">Пол</th>
     </tr>
   </thead>
   <tbody>
@@ -26,8 +26,8 @@
           <% end %>
         </td>
         <td><%= human_result_time(result.total_time) %></td>
-        <td class="club"><%= result.athlete&.club&.name %></td>
-        <td class="gender"><%= result.athlete&.gender %></td>
+        <td class="hidden-on-phone"><%= result.athlete&.club&.name %></td>
+        <td class="hidden-on-phone"><%= result.athlete&.gender %></td>
       </tr>
     <% end %>
   </tbody>
