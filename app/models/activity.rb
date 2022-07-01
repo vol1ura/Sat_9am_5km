@@ -11,6 +11,10 @@ class Activity < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
 
+  def leader_result(male: true)
+    results.runner.joins(:athlete).where(athlete: { male: male }).order(:total_time).first
+  end
+
   def add_results_from_timer(file_timer)
     return unless file_timer
 

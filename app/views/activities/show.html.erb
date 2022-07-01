@@ -1,5 +1,9 @@
 <h2>Дата <%= @activity.date.strftime('%d.%m.%Y') %></h2>
 
+<h4>Краткий отчёт</h4>
+<p><%= @activity.description %></p>
+
+<h4>Результаты</h4>
 <table class="table table-striped">
   <thead>
     <tr>
