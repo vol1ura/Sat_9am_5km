@@ -4,12 +4,22 @@ $component-active-bg: #59dd30;
 @import "bootstrap";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
 
-.bd-footer a {
-    text-decoration: none;
-    color: var(--bs-body-color);
-}
+.bd-footer {
+    a {
+        text-decoration: none;
+        color: var(--bs-body-color);
+    }
+    a:hover {
+        text-decoration: underline;
+        color: inherit;
+    }
 
-.bd-footer a:hover {
-    text-decoration: underline;
-    color: inherit;
+    @media (max-width: 768px) {
+        .social-links {
+            order: 2;
+        }
+        .footer-text {
+            order: 3;
+        }
+    }
 }

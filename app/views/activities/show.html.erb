@@ -6,7 +6,8 @@
       <th>Место</th>
       <th>Имя</th>
       <th>Результат</th>
-      <th>Пол</th>
+      <th class="club">Клуб</th>
+      <th class="gender">Пол</th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +22,8 @@
           <% end %>
         </td>
         <td><%= human_result_time(result.total_time) %></td>
-        <td><%= result.athlete&.gender %></td>
+        <td class="club"><%= result.athlete&.club&.name %></td>
+        <td class="gender"><%= result.athlete&.gender %></td>
       </tr>
     <% end %>
   </tbody>
