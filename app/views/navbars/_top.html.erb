@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-success navbar-dark sticky-top">
+<nav class="navbar navbar-expand-lg bg-success navbar-dark sticky-top mb-3">
   <div class="container-fluid">
     <%= link_to 'Sat 9am 5km', root_path, class: 'navbar-brand text-uppercase' %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,25 +7,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-        <%= link_to 'Мероприятия', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+        <%= link_to 'Мероприятия', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events' || params[:page] == 'join'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
           <ul class="dropdown-menu" aria-labelledby="eventDropdown">
             <% Event.all.each do |event| %>
               <li><%= link_to event.name, event_path(event.code_name), class: 'dropdown-item' %></li>
             <% end %>
             <li><hr class="dropdown-divider"></li>
             <li>
-              <%= link_to 'Хотите организать у себя?', join_path, class:'dropdown-item' %>
+              <%= link_to 'Хотите организать у себя?', page_path(page: :join), class:'dropdown-item' %>
             </li>
           </ul>
         </li>
         <li class="nav-item">
-          <%= link_to 'Правила', rules_path, class:"nav-link #{'active' if params[:action] == 'rules'}" %>
+          <%= link_to 'Правила', page_path(page: :rules), class:"nav-link #{'active' if params[:page] == 'rules'}" %>
         </li>
         <li class="nav-item">
-          <%= link_to 'О нас', about_path, class:"nav-link #{'active' if params[:action] == 'about'}" %>
+          <%= link_to 'О нас', page_path(page: :about), class:"nav-link #{'active' if params[:page] == 'about'}" %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Поддержать проект', support_path, class:"nav-link #{'active' if params[:action] == 'support'}" %>
+          <%= link_to 'Поддержать проект', page_path(page: :support), class:"nav-link #{'active' if params[:page] == 'support'}" %>
         </li>
       </ul>
 
