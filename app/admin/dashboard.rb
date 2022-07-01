@@ -25,6 +25,7 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
         panel 'Информация' do
           para 'Добро пожаловать.'
+          para 'Сюда добавить инфу для новых руководителей забегов по тому, как пользоваться системой.'
         end
       end
     end

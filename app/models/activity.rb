@@ -7,12 +7,13 @@ class Activity < ApplicationRecord
 
   has_many :results, dependent: :destroy
   has_many :athletes, through: :results
+  has_many :volunteers, dependent: :destroy
 
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
 
   def leader_result(male: true)
-    results.runner.joins(:athlete).where(athlete: { male: male }).order(:total_time).first
+    results.joins(:athlete).where(athlete: { male: male }).order(:position).first
   end
 
   def add_results_from_timer(file_timer)

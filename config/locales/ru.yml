@@ -17,6 +17,9 @@ ru:
       result:
         one: Результат
         other: Результаты
+      volunteer:
+        one: Волонтёр
+        other: Волонтёры
 
     attributes:
       user:
@@ -46,6 +49,10 @@ ru:
       result:
         position: 'место'
         total_time: 'результат'
+      volunteer:
+        activity: забег
+        athlete: участник
+        role: роль
 
     errors:
       messages:
