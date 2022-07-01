@@ -5,19 +5,23 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
-gem 'sass-rails', '>= 6'
+gem 'importmap-rails', '~> 1.1'
+gem 'sassc-rails'
 
 gem 'rails', '~> 7.0.3'
 
 gem 'activeadmin'
+gem 'bootstrap', '~> 5.1.3'
 gem 'cancancan', '~> 3.3'
 gem 'devise', '~> 4.8'
 gem 'devise-i18n'
 gem 'jbuilder'
+gem 'mini_racer'
 gem 'nokogiri'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
+gem 'turbo-rails', '~> 1.1'
 
 group :development, :test do
   gem 'bullet'

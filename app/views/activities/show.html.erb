@@ -1,0 +1,52 @@
+<h2>Дата <%= @activity.date.strftime('%d.%m.%Y') %></h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Место</th>
+      <th>Имя</th>
+      <th>Результат</th>
+      <th>Пол</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @activity.results.includes(:athlete).runner.order(:position).each do |result| %>
+      <tr>
+        <td><%= result.position %></td>
+        <td>
+          <% if result.athlete.present? %>
+            <%= link_to result.athlete&.name, athlete_path(result.athlete_id) %>
+          <% else %>
+            <%= Athlete::NOBODY %>
+          <% end %>
+        </td>
+        <td><%= human_result_time(result.total_time) %></td>
+        <td><%= result.athlete&.gender %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= link_to "Все забеги", activities_path %>
+</div>
+
+<h2>Волонтёры</h2>
+<p>Забег не состоялся бы без помощи этих людей</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Позиция</th>
+      <th>Волонтёр</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @activity.results.volunteer.each do |result| %>
+      <tr>
+        <td><%= results.role %></td>
+        <td><%= result.athlete&.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

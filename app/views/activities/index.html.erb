@@ -1,0 +1,15 @@
+<h1>Прошедшие забеги</h1>
+
+<table id="activities" class="table table-success">
+  <thead>
+    <tr>
+      <th>Дата</th>
+      <th>Место</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @activities.each do |activity| %>
+      <%= render activity %>
+    <% end %>
+  </tbody>
+</table>

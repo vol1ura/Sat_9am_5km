@@ -1,0 +1,12 @@
+<h2>Результаты поиска</h2>
+<p>Всего найдено <%= @athletes.size %> уч.
+<ul class="list-group list-group-flush">
+  <% @athletes.each do |athlete| %>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold"><%= link_to athlete.name, athlete_path(athlete) %></div>
+        Parkrun ID: <%= athlete.parkrun_code || 'не заполнен' %>
+      </div>
+    </li>
+  <% end %>
+</ul>

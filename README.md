@@ -18,6 +18,11 @@ make proj
 
 ## Deploy
 
+To solve problem with building `mini_racer` on heroku:
+```shell
+bundle lock --add-platform x86_64-linux
+```
+
 After creating application on heroku
 ```shell
 heroku config:set RAILS_MASTER_KEY=$(cat config/master.key)
