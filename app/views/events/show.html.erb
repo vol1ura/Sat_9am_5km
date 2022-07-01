@@ -1,0 +1,54 @@
+<h1><%= @event.name %></h1>
+<div class="row">
+    <div class="col-8 mb-8">
+        <%= image_tag 'kuzminki_big.jpg', class: 'img-fluid', alt: 'Предстартовое фото' %>
+    </div>
+    <div class="col-4 mb-4">
+        <%= @event.description %>
+    </div>
+</div>
+
+<h2>Результаты</h2>
+<% if @total_activities.zero? %>
+  <p>Пока ещё тут нет загруженных и опубликованных результатов.</p>
+<% else %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Дата</th>
+        <th>Число участников</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @event.activities.published.order(date: :desc).each_with_index do |activity, idx| %>
+        <tr>
+          <td><%= @total_activities - idx %></td>
+          <td><%= link_to activity.date, activity_path(activity) %></td>
+          <td><%= activity.results.size %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<div class="row">
+    <div class="col-4 mb-4">
+        <h3>Как принять участие?</h3>
+        <p>
+        Бесплатные старты на 5 км для всех каждую субботу с фиксацией времени. Дистанцию можно пробежать или пройти пешком. У нас рады всем вне зависимости от возраста и уровня подготовки.
+        </p>
+    </div>
+    <div class="col-4 mb-4">
+        <h3>Как нас найти?</h3>
+        <p>
+        Бесплатные старты на 5 км для всех каждую субботу с фиксацией времени. Дистанцию можно пробежать или пройти пешком. У нас рады всем вне зависимости от возраста и уровня подготовки.
+        </p>
+    </div>
+    <div class="col-4 mb-4">
+        <h3>Сколько стоит?</h3>
+        <p>
+        Бесплатные старты на 5 км для всех каждую субботу с фиксацией времени. Дистанцию можно пробежать или пройти пешком. У нас рады всем вне зависимости от возраста и уровня подготовки.
+        </p>
+    </div>
+</div>

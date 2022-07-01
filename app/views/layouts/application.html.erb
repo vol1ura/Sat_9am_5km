@@ -7,9 +7,14 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'navbars/top' %>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <%= render 'navbars/bottom' %>
   </body>
 </html>

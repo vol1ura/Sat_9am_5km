@@ -16,6 +16,7 @@
 /public/assets
 /vendor
 !/vendor/.keep
+!/vendor/javascript/.keep
 /coverage
 .reek.yml
 
