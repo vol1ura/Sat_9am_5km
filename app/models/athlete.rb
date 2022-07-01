@@ -10,6 +10,7 @@ class Athlete < ApplicationRecord
   has_many :results, dependent: :nullify
   has_many :activities, through: :results
   has_many :events, through: :activities
+  has_many :volunteering, dependent: :destroy, class_name: 'Volunteer'
 
   validates :parkrun_code, uniqueness: true, allow_nil: true
   validates :fiveverst_code, uniqueness: true, allow_nil: true

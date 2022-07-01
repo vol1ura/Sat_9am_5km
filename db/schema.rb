@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_28_200515) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_01_164237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,7 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_200515) do
   create_table "results", force: :cascade do |t|
     t.integer "position"
     t.time "total_time"
-    t.integer "role", default: 0
     t.bigint "activity_id", null: false
     t.bigint "athlete_id"
     t.index ["activity_id"], name: "index_results_on_activity_id"
@@ -100,9 +99,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_200515) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "volunteers", force: :cascade do |t|
+    t.integer "role"
+    t.bigint "activity_id", null: false
+    t.bigint "athlete_id", null: false
+    t.index ["activity_id"], name: "index_volunteers_on_activity_id"
+    t.index ["athlete_id"], name: "index_volunteers_on_athlete_id"
+  end
+
   add_foreign_key "activities", "events"
   add_foreign_key "athletes", "clubs"
   add_foreign_key "athletes", "users"
   add_foreign_key "results", "activities"
   add_foreign_key "results", "athletes"
+  add_foreign_key "volunteers", "activities"
+  add_foreign_key "volunteers", "athletes"
 end

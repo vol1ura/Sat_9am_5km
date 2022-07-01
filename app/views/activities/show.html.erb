@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @activity.results.includes(:athlete).runner.order(:position).each do |result| %>
+    <% @activity.results.includes(athlete: :club).order(:position).each do |result| %>
       <tr>
         <td><%= result.position %></td>
         <td>
@@ -42,16 +42,15 @@
 <table class="table">
   <thead>
     <tr>
-      <th></th>
-      <th>Позиция</th>
+      <th>Роль</th>
       <th>Волонтёр</th>
     </tr>
   </thead>
   <tbody>
-    <% @activity.results.volunteer.each do |result| %>
+    <% @activity.volunteers.each do |volunteer| %>
       <tr>
-        <td><%= results.role %></td>
-        <td><%= result.athlete&.name %></td>
+        <td><%= volunteer.role %></td>
+        <td><%= volunteer.athlete.name %></td>
       </tr>
     <% end %>
   </tbody>

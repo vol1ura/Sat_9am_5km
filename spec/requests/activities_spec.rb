@@ -9,7 +9,7 @@ RSpec.describe '/activities', type: :request do
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Activity.create! valid_attributes
+      create_list :activity, 3
       get activities_url
       expect(response).to be_successful
     end

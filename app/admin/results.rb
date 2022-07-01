@@ -5,7 +5,7 @@ ActiveAdmin.register Result do
   includes :activity, :athlete
 
   # actions :all, except: :destroy
-  permit_params :total_time, :position, :role, :athlete_id
+  permit_params :total_time, :position, :athlete_id
 
   # menu priority: 2
   # filter :date
