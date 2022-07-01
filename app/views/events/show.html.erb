@@ -9,46 +9,56 @@
 </div>
 
 <h2>Результаты</h2>
-<% if @total_activities.zero? %>
-  <p>Пока ещё тут нет загруженных и опубликованных результатов.</p>
-<% else %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Дата</th>
-        <th>Число участников</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @event.activities.published.order(date: :desc).each_with_index do |activity, idx| %>
-        <tr>
-          <td><%= @total_activities - idx %></td>
-          <td><%= link_to activity.date, activity_path(activity) %></td>
-          <td><%= activity.results.size %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <% if @total_activities.zero? %>
+      <p>Пока ещё тут нет загруженных и опубликованных результатов.</p>
+    <% else %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Дата</th>
+            <th>Число участников</th>
+            <th>Лидер по мужчинам</th>
+            <th>Лидер по женщинам</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @event.activities.published.order(date: :desc).each_with_index do |activity, idx| %>
+            <% male_leader_result = activity.leader_result %>
+            <% female_leader_result = activity.leader_result(male: false) %>
+            <tr>
+              <td><%= @total_activities - idx %></td>
+              <td><%= link_to activity.date, activity_path(activity) %></td>
+              <td><%= activity.results.runner.size %></td>
+              <td><%= "#{male_leader_result.athlete.name} (#{human_result_time(male_leader_result.total_time)})" if male_leader_result&.athlete.present? %></td>
+              <td><%= "#{female_leader_result.athlete.name} (#{human_result_time(female_leader_result.total_time)})" if female_leader_result&.athlete.present? %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
 
 <div class="row">
     <div class="col-12 col-md-4">
         <h3>Как принять участие?</h3>
         <p>
-        Бесплатные старты на 5 км для всех каждую субботу с фиксацией времени. Дистанцию можно пробежать или пройти пешком. У нас рады всем вне зависимости от возраста и уровня подготовки.
+          Бесплатные старты на 5 км для всех каждую субботу с фиксацией времени. Дистанцию можно пробежать, пройти пешком, либо попробовать себя в качестве организатора-волонтёра. У нас рады всем вне зависимости от возраста и уровня подготовки.
         </p>
     </div>
     <div class="col-12 col-md-4">
         <h3>Как нас найти?</h3>
         <p>
-        Бесплатные старты на 5 км для всех каждую субботу с фиксацией времени. Дистанцию можно пробежать или пройти пешком. У нас рады всем вне зависимости от возраста и уровня подготовки.
+          <%= @event.place %>
         </p>
     </div>
     <div class="col-12 col-md-4">
         <h3>Сколько стоит?</h3>
         <p>
-        Бесплатные старты на 5 км для всех каждую субботу с фиксацией времени. Дистанцию можно пробежать или пройти пешком. У нас рады всем вне зависимости от возраста и уровня подготовки.
+          Наши забеги всегда были и будут бесплатными для всех. Мы проводим их силами волонтёров.
         </p>
     </div>
 </div>
