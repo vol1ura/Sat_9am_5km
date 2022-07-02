@@ -21,6 +21,7 @@ jobs:
       DATABASE_URL_TEST: "postgres://rails:password@localhost:5432/rails_test"
       TZ: "Europe/Moscow"
       COVERAGE: on
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       BULLET_ENABLED: true
       APP_HOST: "app.test.com"
       APP_DOMAIN: "test.com"
@@ -40,11 +41,10 @@ jobs:
       - name: Run tests
         run: bundle exec rspec
       - name: Upload report to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/.resultset.json
-          name: codecov-umbrella # optional
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN}
 
   lint:
     runs-on: ubuntu-22.04

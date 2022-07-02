@@ -23,6 +23,8 @@ if ENV['COVERAGE'] == 'on'
       source_file.lines.count <= 7
     end
   end
+  require 'simplecov_json_formatter'
+  SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
 end
 
 require 'webmock/rspec'
