@@ -3,8 +3,8 @@
 class AthletesController < ApplicationController
   def index
     @athletes = Athlete.where(
-      'name ILIKE :query OR parkrun_code = :query OR fivevers_code = :query',
-      query: "%#{params[:name]}%"
+      'name ILIKE :query OR parkrun_code = :number OR fiveverst_code = :number',
+      query: "%#{params[:name]}%", number: params[:name].to_i
     )
   end
 
