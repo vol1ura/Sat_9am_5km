@@ -1,8 +1,9 @@
 RSpec.describe '/athletes', type: :request do
   describe 'GET /index' do
-    xit 'renders a successful response' do
+    it 'renders a successful response' do
+      create :athlete, name: 'SOME Test'
       create_list :athlete, 3
-      get athletes_url
+      get athletes_url(name: 'Some')
       expect(response).to be_successful
     end
   end
