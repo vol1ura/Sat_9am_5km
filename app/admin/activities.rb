@@ -3,6 +3,8 @@
 ActiveAdmin.register Activity do
   belongs_to :event, optional: true
 
+  includes :event
+
   actions :all, except: :destroy
   permit_params :description, :published, :event_id
 
