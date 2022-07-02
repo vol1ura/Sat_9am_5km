@@ -11,6 +11,14 @@ RSpec.describe Activity, type: :model do
     end
   end
 
+  describe '#leader_result' do
+    it 'returns best male result' do
+      activity = create :activity
+      activity.results << build_list(:result, 3, activity_id: nil)
+      expect(activity.leader_result.position).to eq 1
+    end
+  end
+
   describe '#add_results_from_timer' do
     context 'when argument is nil' do
       it 'returns nil' do
