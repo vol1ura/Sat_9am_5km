@@ -24,7 +24,9 @@ gem 'sprockets-rails'
 gem 'turbo-rails', '~> 1.1'
 
 group :development, :test do
+  gem 'brakeman'
   gem 'bullet'
+  gem 'bundler-audit'
   gem 'byebug'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 panel 'Детали забега' do
   attributes_table_for activity do
     row('Забег прошёл в') { |a| a.event.place }
