@@ -28,8 +28,6 @@ ActiveAdmin.register Activity do
 
   show do
     render 'show', activity: activity
-
-    active_admin_comments
   end
 
   after_create do |activity|
