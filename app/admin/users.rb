@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  config.comments = false
   actions :all, except: :destroy
 
   permit_params do
@@ -26,7 +25,7 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs do
-      # f.input :email
+      f.input :email
       f.input :first_name
       f.input :last_name
       f.input :password

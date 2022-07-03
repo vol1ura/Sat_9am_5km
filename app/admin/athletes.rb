@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Athlete do
-  config.comments = false
   actions :all, except: :destroy
   includes :user
   # See permitted parameters documentation:
