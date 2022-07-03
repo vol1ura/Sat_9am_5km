@@ -27,6 +27,7 @@ ActiveAdmin.register Athlete do
 
   form do |f|
     f.semantic_errors
+    f.hidden_field :result_id, value: params[:result_id] if params[:result_id].present?
     f.inputs do
       f.input :name
       f.input :parkrun_code
@@ -35,5 +36,13 @@ ActiveAdmin.register Athlete do
       f.input :male, as: :radio, collection: [['мужчина', true], ['женщина', false]], include_blank: false, label: 'Пол'
     end
     f.actions
+  end
+
+  after_create do |athlete|
+    result_id = params[:athlete][:result_id]
+    if result_id.present?
+      athlete.results << Result.find(result_id)
+      athlete.save!
+    end
   end
 end
