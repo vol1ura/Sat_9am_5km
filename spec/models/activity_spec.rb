@@ -13,6 +13,7 @@ RSpec.describe Activity, type: :model do
 
   describe '#leader_result' do
     it 'returns best male result' do
+      FactoryBot.rewind_sequences
       activity = create :activity
       activity.results << build_list(:result, 3, activity_id: nil)
       expect(activity.leader_result.position).to eq 1
