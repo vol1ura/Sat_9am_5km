@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :result do
-    sequence(:position)
+    sequence :position
     athlete
     activity
   end

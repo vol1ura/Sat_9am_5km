@@ -2,6 +2,6 @@
 
 module ApplicationHelper
   def human_result_time(time)
-    time.strftime(time < 1.hour ? '%M:%S' : '%H:%M:%S')
+    time.strftime(time.hour.zero? ? '%M:%S' : '%H:%M:%S')
   end
 end
