@@ -11,7 +11,7 @@ ActiveAdmin.register Activity do
   menu priority: 3
 
   filter :date
-  filter :event, label: 'Площадка'
+  filter :event, label: 'Забег'
 
   scope :all
   scope :published
@@ -19,7 +19,7 @@ ActiveAdmin.register Activity do
 
   index download_links: false do
     column :date
-    column('Где?') { |r| r.event.name }
+    column('Где?') { |a| a.event.name }
     column :published
     actions
   end
