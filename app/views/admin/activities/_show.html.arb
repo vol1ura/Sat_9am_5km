@@ -2,7 +2,7 @@
 
 panel 'Детали забега' do
   attributes_table_for activity do
-    row('Забег прошёл в') { |a| a.event.place }
+    row('Забег') { |a| a.event.name }
     row :date
     row :description
     row :published
@@ -13,8 +13,23 @@ panel 'Протокол' do
   table_for activity.results.includes(:athlete).order(:position) do
     column :position
     # TODO: use name from User if available
-    column('Имя участника') { |r| r.athlete&.name }
-    column('Результат') { |r| r.total_time.strftime('%H:%M:%S') }
+    column('Имя участника') do |r|
+      if r.athlete
+        link_to r.athlete.name, edit_admin_athlete_path(r.athlete)
+      else
+        link_to Athlete::NOBODY, new_admin_athlete_path
+      end
+    end
+    column('Результат') { |r| human_result_time(r.total_time) }
     column('Пол') { |r| r.athlete&.gender }
+    column('Клуб') { |r| r.athlete&.club&.name }
+  end
+end
+
+panel 'Волонтёры' do
+  table_for activity.volunteers.includes(:athlete) do
+    # TODO: use name from User if available
+    column('Имя волонтёра') { |v| v.athlete&.name }
+    column('Роль', &:role)
   end
 end

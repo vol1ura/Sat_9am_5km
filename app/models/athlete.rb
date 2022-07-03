@@ -24,8 +24,7 @@ class Athlete < ApplicationRecord
 
     athlete_name = ::Finder::Athlete.call(code_type: code_type, code: code)
     rec ||= find_or_initialize_by(name: athlete_name, code_type => nil)
-    rec.name = athlete_name
-    rec.save!
+    rec.update!(code_type => code, name: athlete_name)
     rec
   end
 

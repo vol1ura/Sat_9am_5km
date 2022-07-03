@@ -1,4 +1,14 @@
+<% unless @event.active %>
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
+    <div>
+      <strong>Внимание!</strong> Данное мероприятие в настоящее время не проводится.
+    </div>
+  </div>
+<% end %>
+
 <h1><%= @event.name %></h1>
+
 <div class="row">
     <div class="col-12 col-md-8">
         <%= image_tag 'kuzminki_big.jpg', class: 'img-fluid', alt: 'Предстартовое фото' %>
@@ -9,8 +19,8 @@
 </div>
 
 <h2>Результаты</h2>
-<div class="row justify-content-center">
-  <div class="col-auto">
+<div class="row">
+  <div class="col-12">
     <% if @total_activities.zero? %>
       <p>Пока ещё тут нет загруженных и опубликованных результатов.</p>
     <% else %>

@@ -21,7 +21,9 @@ class Activity < ApplicationRecord
 
     transaction do
       table = CSV.parse(file_timer.read, headers: false)
-      self.date = Date.parse(table[0][1]) # Date of event in the second column of first row
+      raise 'Unknown timer file format' if table.dig(0, 0) != 'STARTOFEVENT'
+
+      self.date = Date.parse(table.dig(0, 1)) # Date of event in the second column of first row
       table[2..].each do |row|
         break if row.first == 'ENDOFEVENT'
 
@@ -35,6 +37,8 @@ class Activity < ApplicationRecord
     return unless file_scanner
 
     table = CSV.parse(file_scanner.read, headers: false)
+    return unless table.dig(1, 0).match?(/A\d+/)
+
     table[1..].each do |row|
       AddAthleteToResultJob.perform_later(self, row)
     end

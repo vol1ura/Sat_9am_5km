@@ -3,11 +3,11 @@
 active_admin_form_for [:admin, resource] do |f|
   f.semantic_errors
   f.inputs 'Выберите мероприятие' do
-    input :event_id, as: :select, label: 'Мероприятие', collection: Event.order(:code_name).pluck(:code_name, :id)
+    input :event_id, as: :select, label: 'Мероприятие', collection: Event.order(:name).pluck(:name, :id)
   end
   f.inputs 'Сведения о забеге' do
     input :description, label: 'Описание'
-    input :published, label: 'Опубликовать результаты забега'
+    input :published, label: 'Опубликовать результаты на сайте'
   end
   f.inputs 'Загрузите файл с секундомера' do
     input :timer, as: :file, label: 'Файл с секундомера'
