@@ -3,6 +3,8 @@
 ActiveAdmin.register Volunteer do
   permit_params :role, :activity_id, :athlete_id
 
+  filter :role, as: :select, collection: Volunteer::ROLES
+
   index download_links: false do
     selectable_column
     column :athlete
