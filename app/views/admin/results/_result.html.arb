@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+attributes_table_for result do
+  row :athlete
+  row :position
+  row('Результат') { |r| human_result_time(r.total_time) }
+  row('Забег') { |r| r.activity.event.name }
+  row('Дата забега') { |r| r.activity.date }
+end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# See the wiki for details:
-# https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 class Ability
   include CanCan::Ability
 
@@ -11,6 +9,7 @@ class Ability
     if user.uploader?
       can :manage, Result
       can :manage, Activity
+      cannot :destroy, Activity, published: true
     end
     can :manage, :all if user.admin?
   end
