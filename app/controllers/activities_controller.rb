@@ -2,7 +2,7 @@
 
 class ActivitiesController < ApplicationController
   def index
-    @activities = Activity.all.includes(:event)
+    @activities = Activity.published.includes(:event)
   end
 
   def show

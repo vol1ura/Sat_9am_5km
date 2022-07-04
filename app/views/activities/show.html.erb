@@ -42,15 +42,15 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Роль</th>
       <th>Волонтёр</th>
+      <th>Роль</th>
     </tr>
   </thead>
   <tbody>
-    <% @activity.volunteers.each do |volunteer| %>
+    <% @activity.volunteers.includes(:athlete).each do |volunteer| %>
       <tr>
+        <td><%= link_to volunteer.name, athlete_path(volunteer.athlete) %></td>
         <td><%= volunteer.role %></td>
-        <td><%= volunteer.athlete.name %></td>
       </tr>
     <% end %>
   </tbody>

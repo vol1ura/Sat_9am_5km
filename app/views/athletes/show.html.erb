@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @athlete.results.includes(:activity).order('activities.date DESC').each_with_index do |result, idx| %>
+      <% @athlete.results.published.includes(:activity).order('activity.date DESC').each_with_index do |result, idx| %>
         <tr>
           <td><%= @total_results - idx %></td>
           <td><%= link_to result.activity.date, activity_path(result.activity_id) %></td>

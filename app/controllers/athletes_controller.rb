@@ -10,7 +10,7 @@ class AthletesController < ApplicationController
 
   def show
     @athlete = Athlete.find(params[:id])
-    @total_results = @athlete.results.size
+    @total_results = @athlete.results.published.size
     @total_vol = @athlete.volunteering.size
   end
 end
