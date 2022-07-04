@@ -18,13 +18,7 @@ ActiveAdmin.register Result do
     actions
   end
 
-  form do |f|
-    f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs do
-      # f.input :athlete_name
-      # f.input :athlete_parkrun_code
-      f.input :position
-    end
-    f.actions
-  end
+  show { render result }
+
+  form partial: 'form'
 end

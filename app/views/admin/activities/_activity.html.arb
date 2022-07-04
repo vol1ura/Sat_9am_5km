@@ -20,7 +20,9 @@ panel 'Протокол' do
         link_to 'БЕЗ ТОКЕНА (создать)', new_admin_athlete_path(result_id: r.id), target: '_blank', rel: 'noopener'
       end
     end
-    column('Результат') { |r| human_result_time(r.total_time) }
+    column('Результат') do |r|
+      link_to human_result_time(r.total_time), edit_admin_result_path(r), target: '_blank', rel: 'noopener'
+    end
     column('Пол') { |r| r.athlete&.gender }
     column('Клуб') { |r| r.athlete&.club&.name }
   end

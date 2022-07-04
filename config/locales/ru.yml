@@ -23,32 +23,33 @@ ru:
 
     attributes:
       user:
-        first_name: 'имя'
-        last_name: 'фамилия'
+        first_name: имя
+        last_name: фамилия
         email: 'e-mail'
       athlete:
-        name: 'имя'
+        name: имя
         parkrun_code: 'номер parkrun'
         fiveverst_code: 'номер 5вёрст'
-        gender: 'пол'
-        club: 'клуб'
-        male: 'мужчина'
-        user: 'пользователь'
+        gender: пол
+        club: клуб
+        male: мужчина
+        user: пользователь
       activity:
         date: 'дата забега'
         published: 'опубликован?'
         description: 'описание'
       club:
-        name: 'название'
+        name: название
       event:
-        active: 'активен'
+        active: активен
         code_name: 'кодовое имя'
-        town: 'город'
-        place: 'местонахождение'
-        description: 'описание'
+        town: город
+        place: местонахождение
+        description: описание
       result:
-        position: 'место'
-        total_time: 'результат'
+        position: место
+        total_time: результат
+        athlete: участник
       volunteer:
         activity: забег
         athlete: участник
