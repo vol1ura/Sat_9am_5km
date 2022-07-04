@@ -3,6 +3,9 @@
     <%= link_to activity.date, activity %>
   </td>
   <td>
+    <%= link_to activity.event.name, event_path(activity.event.code_name) %>
+  </td>
+  <td>
     <%= activity.event.town %>
   </td>
 </tr>
