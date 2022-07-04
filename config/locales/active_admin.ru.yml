@@ -142,3 +142,7 @@ ru:
       block: "Список"
       grid: "Сетка"
       blog: "Блог"
+    resources:
+      volunteer:
+        new_model: 'Добавить волонтёрство'
+        edit_model: 'Изменить волонтёрство'

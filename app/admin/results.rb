@@ -4,11 +4,9 @@ ActiveAdmin.register Result do
   # belongs_to :activity, optional: true
   includes :activity, :athlete
 
-  # actions :all, except: :destroy
-  permit_params :total_time, :position, :athlete_id
+  actions :all, except: :new
 
-  # menu priority: 2
-  # filter :date
+  permit_params :total_time, :position, :athlete_id
 
   index download_links: false do
     selectable_column
