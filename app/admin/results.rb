@@ -21,7 +21,7 @@ ActiveAdmin.register Result do
   end
 
   form do |f|
-    f.semantic_errors
+    f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
       # f.input :athlete_name
       # f.input :athlete_parkrun_code

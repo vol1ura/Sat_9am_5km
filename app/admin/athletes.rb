@@ -26,7 +26,7 @@ ActiveAdmin.register Athlete do
   show { render athlete }
 
   form do |f|
-    f.semantic_errors
+    f.semantic_errors(*f.object.errors.attribute_names)
     f.hidden_field :result_id, value: params[:result_id] if params[:result_id].present?
     f.inputs do
       f.input :name
