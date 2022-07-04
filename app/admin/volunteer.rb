@@ -16,7 +16,7 @@ ActiveAdmin.register Volunteer do
   form partial: 'form'
 
   before_create do |volunteer|
-    athlete = Athlete.find_by! parkrun_code: params[:parkrun_code].to_s.strip
+    athlete = Athlete.find_by parkrun_code: params[:parkrun_code].to_s.strip
     volunteer.athlete = athlete
   end
 end
