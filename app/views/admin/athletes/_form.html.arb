@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 active_admin_form_for [:admin, resource] do |f|
-  if f.object.new_record?
-    panel 'Внимание!' do
-      <<~NOTE
+  panel 'Внимание!' do
+    para 'Номер Parkrun, а также номер 5вёрст вводятся только цифрами, без буквы "A" в начале.'
+    if f.object.new_record?
+      para <<~NOTE
         Чтобы результаты участника в будущем не затерялись,
         крайне желательно сразу указать его номер в системе Parkrun или 5вёрст.
       NOTE
