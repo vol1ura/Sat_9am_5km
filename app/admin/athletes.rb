@@ -5,6 +5,14 @@ ActiveAdmin.register Athlete do
   includes :user
   permit_params :parkrun_code, :fiveverst_code, :name, :male, :user_id, :club_id
 
+  filter :club
+  filter :name
+  filter :parkrun_code
+  filter :fiveverst_code
+  filter :male
+  filter :created_at
+  filter :updated_at
+
   index download_links: false do
     selectable_column
     column :name
@@ -15,15 +23,7 @@ ActiveAdmin.register Athlete do
     actions
   end
 
-  show do
-    attributes_table do
-      row :parkrun_code
-      row :fiveverst_code
-      row :gender
-      row :club
-      row :user
-    end
-  end
+  show { render athlete }
 
   form do |f|
     f.semantic_errors
