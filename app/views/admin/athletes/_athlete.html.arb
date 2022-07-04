@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+attributes_table_for athlete do
+  row :parkrun_code
+  row :fiveverst_code
+  row :gender
+  row :club
+  row :user
+end

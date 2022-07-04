@@ -5,7 +5,6 @@ ActiveAdmin.register Activity do
 
   includes :event
 
-  actions :all, except: :destroy
   permit_params :description, :published, :event_id
 
   menu priority: 3
@@ -24,11 +23,9 @@ ActiveAdmin.register Activity do
     actions
   end
 
-  form title: 'Загрузка забега', multipart: true, partial: 'form'
+  show { render activity }
 
-  show do
-    render 'show', activity: activity
-  end
+  form title: 'Загрузка забега', multipart: true, partial: 'form'
 
   after_create do |activity|
     activity.add_results_from_timer params[:activity][:timer]

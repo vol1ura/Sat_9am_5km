@@ -40,4 +40,25 @@ RSpec.describe Activity, type: :model do
       end
     end
   end
+
+  describe '#add_results_from_scanner' do
+    context 'when argument is nil' do
+      it 'returns nil' do
+        expect(activity.add_results_from_scanner(nil)).to be_nil
+      end
+    end
+
+    context 'with scanner file' do
+      let(:file_scanner) { File.open('spec/fixtures/files/parkrun_scanner_results.csv') }
+
+      before do
+        allow(AddAthleteToResultJob).to receive(:perform_later)
+      end
+
+      it 'scheduled job' do
+        activity.add_results_from_scanner(file_scanner)
+        expect(AddAthleteToResultJob).to have_received(:perform_later).at_least(:once)
+      end
+    end
+  end
 end

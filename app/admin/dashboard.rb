@@ -15,8 +15,8 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
         panel 'Недавние забеги' do
           ul do
-            Activity.includes(:event).order(created_at: :desc).first(5).map do |activity|
-              li link_to("#{activity.date} - #{activity.event.code_name}", admin_activity_path(activity))
+            Activity.published.includes(:event).order(:created_at).last(10).map do |activity|
+              li link_to(human_activity_name(activity), admin_activity_path(activity))
             end
           end
         end

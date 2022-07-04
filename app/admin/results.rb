@@ -15,7 +15,7 @@ ActiveAdmin.register Result do
     column :position
     column :athlete
     column('Результат') { |r| human_result_time(r.total_time) }
-    column('Забег') { |r| "#{r.activity.event.name} #{r.activity.date.to_s(:long)}" }
+    column('Забег') { |r| human_activity_name(r.activity) }
     column :user
     actions
   end

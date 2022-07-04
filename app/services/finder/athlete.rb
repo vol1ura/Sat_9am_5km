@@ -12,6 +12,7 @@ module Finder
         xpath: '//div[@class="entry-content the-content text-column"]/h3'
       }
     }.freeze
+    ANTI_BLOCK_PAUSE = 1.5
 
     def initialize(code_type:, code:)
       @code_type = code_type
@@ -31,7 +32,7 @@ module Finder
 
     def fetch_data
       url = NAME_PATH.dig(@code_type, :url) + @code.to_s
-      sleep 1 # pause to be not blocked
+      sleep ANTI_BLOCK_PAUSE unless Rails.env.test?
       res = Client.get(url)
       raise "Bad request. Body: #{res.body}" unless Net::HTTPSuccess
 

@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+attributes_table_for volunteer do
+  row('Забег') { |v| human_activity_name(v.activity) }
+  row :role
+end

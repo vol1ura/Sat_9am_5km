@@ -8,6 +8,10 @@ ActiveAdmin.register User do
     permitted << :role if current_user.admin?
   end
 
+  filter :email
+  filter :first_name
+  filter :last_name
+
   index download_links: false do
     column :email
     column :first_name
@@ -17,11 +21,7 @@ ActiveAdmin.register User do
     actions
   end
 
-  filter :email
-  filter :first_name
-  filter :last_name
-
-  show { render 'show', user: user }
+  show { render user }
 
   form do |f|
     f.inputs do
