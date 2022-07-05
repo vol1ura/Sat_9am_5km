@@ -21,4 +21,16 @@ ActiveAdmin.register Result do
   show { render result }
 
   form partial: 'form'
+
+  before_update do |result|
+    if params[:parkrun_code].present?
+      athlete = Athlete.find_by parkrun_code: params[:parkrun_code].to_s.strip
+      if athlete
+        result.athlete = athlete
+      else
+        flash[:alert] = "Участник с parkrun id='#{params[:parkrun_code]}' не найден. \
+        # Проверьте номер или сначала создайте такого участника."
+      end
+    end
+  end
 end
