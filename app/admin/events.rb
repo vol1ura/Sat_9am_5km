@@ -5,7 +5,7 @@ ActiveAdmin.register Event do
   actions :all, except: :destroy
 
   permit_params do
-    permitted = %i[description active place name]
+    permitted = %i[description active place name main_picture_link]
     if params[:action] == 'create'
       permitted << :code_name
       permitted << :town
@@ -25,6 +25,7 @@ ActiveAdmin.register Event do
     column :name
     column :town
     column :place
+    column :main_picture_link
     column :created_at
     actions
   end
