@@ -54,6 +54,23 @@ ru:
         activity: забег
         athlete: участник
         role: роль
+        roles:
+          director: Директор
+          marshal: Маршал
+          timer: Секундомер
+          photograph: Фотограф
+          tokens: 'Разадача карточек позиций'
+          scanner: Сканер
+          instructor: 'Инструктаж новичков'
+          marking_maker: 'Разметка тарссы'
+          event_closer: Замыкающий
+          marking_picker: 'Сбор разметки'
+          cards_sorter: 'Сортировка карточек'
+          bike_leader: 'Ведущий велосипед'
+          pacemaker: Пейсмейкер
+          results_handler: 'Обработка результатов'
+          equipment_supplier: 'Доставка оборудования'
+          public_relations: 'Связи с общественностью'
 
     errors:
       messages:

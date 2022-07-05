@@ -10,4 +10,8 @@ module ApplicationHelper
   def human_activity_name(activity)
     "#{activity.date} - #{activity.event.name}"
   end
+
+  def human_volunteer_role(role)
+    I18n.t("activerecord.attributes.volunteer.roles.#{role}")
+  end
 end

@@ -2,16 +2,22 @@
 
 active_admin_form_for [:admin, resource] do |f|
   f.semantic_errors(*f.object.errors.attribute_names)
-  inputs 'Номер волонтёра-участника в системе Parkrun (только цифры)' do
-    text_field_tag :parkrun_code, params[:parkrun_code].presence || f.object.athlete&.parkrun_code,
-                   placeholder: 'Parkrun ID', style: 'width: 10rem; margin-left: 1rem;'
-  end
-  last_activities_collection = Activity.includes(:event).order(:created_at).last(10).map do |a|
-    [human_activity_name(a), a.id]
-  end
-  inputs do
-    input :activity, collection: last_activities_collection
-    input :role
+  columns do
+    column do
+      inputs 'Номер волонтёра-участника в системе Parkrun (только цифры)' do
+        text_field_tag :parkrun_code, params[:parkrun_code].presence || f.object.athlete&.parkrun_code,
+                       placeholder: 'Parkrun ID', style: 'width: 10rem; margin-left: 1rem;'
+      end
+    end
+    column do
+      last_activities_collection = Activity.includes(:event).order(:created_at).last(10).map do |a|
+        [human_activity_name(a), a.id]
+      end
+      inputs do
+        input :activity, collection: last_activities_collection
+        input :role
+      end
+    end
   end
   actions
 end
