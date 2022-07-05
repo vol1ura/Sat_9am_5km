@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Athlete do
-  includes :user
+  includes :user, :club
   permit_params :parkrun_code, :fiveverst_code, :name, :male, :user_id, :club_id
 
-  filter :club
   filter :name
   filter :parkrun_code
   filter :fiveverst_code
   filter :male
+  filter :club
   filter :created_at
   filter :updated_at
 
@@ -18,6 +18,7 @@ ActiveAdmin.register Athlete do
     column :parkrun_code
     column :fiveverst_code
     column :gender
+    column :club
     column :user
     actions
   end
@@ -31,6 +32,25 @@ ActiveAdmin.register Athlete do
     if result_id.present?
       athlete.results << Result.find(result_id)
       athlete.save!
+    end
+  end
+
+  batch_action :join, confirm: 'Действительно хотите объединить этих участников?',
+                      form: { gender: %w[мужчина женщина] } do |ids, inputs|
+    collection = batch_action_collection.where(id: ids)
+    athlete = collection.where.not(name: nil).take
+    if athlete
+      athlete.parkrun_code ||= collection.where.not(parkrun_code: nil).take&.parkrun_code
+      athlete.fiveverst_code ||= collection.where.not(fiveverst_code: nil).take&.fiveverst_code
+      athlete.user_id ||= collection.where.not(user_id: nil).take&.user_id
+      athlete.male = inputs[:gender] == 'мужчина'
+      athlete.save!
+      Result.where(athlete_id: ids).update_all(athlete_id: athlete.id)
+      Volunteer.where(athlete_id: ids).update_all(athlete_id: athlete.id)
+      collection.where.not(id: athlete.id).destroy_all
+      redirect_to collection_path, notice: 'Участники были объединены.'
+    else
+      redirect_to collection_path, alert: 'Операция не выполнена. Участники не могут быть объединены.'
     end
   end
 end
