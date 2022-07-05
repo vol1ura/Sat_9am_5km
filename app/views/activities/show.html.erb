@@ -50,7 +50,7 @@
     <% @activity.volunteers.includes(:athlete).each do |volunteer| %>
       <tr>
         <td><%= link_to volunteer.name, athlete_path(volunteer.athlete) %></td>
-        <td><%= volunteer.role %></td>
+        <td><%= human_volunteer_role volunteer.role %></td>
       </tr>
     <% end %>
   </tbody>
