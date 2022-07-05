@@ -28,6 +28,13 @@ After creating application on heroku
 heroku config:set RAILS_MASTER_KEY=$(cat config/master.key)
 ```
 
+Backup database
+```shell
+heroku pg:backups:capture --app <my-app-name>
+heroku pg:backups:download --app <my-app-name>
+```
+
 ### TODO
 
 1. Add frontend
+2. Add batch operation to join athletes

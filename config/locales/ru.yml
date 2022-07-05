@@ -26,6 +26,7 @@ ru:
         first_name: имя
         last_name: фамилия
         email: 'e-mail'
+        role: права
       athlete:
         name: имя
         parkrun_code: 'номер parkrun'
@@ -43,6 +44,8 @@ ru:
       event:
         active: активен
         code_name: 'кодовое имя'
+        name: название
+        main_picture_link: 'ссылка на баннер'
         town: город
         place: местонахождение
         description: описание
@@ -50,6 +53,7 @@ ru:
         position: место
         total_time: результат
         athlete: участник
+        user: пользователь
       volunteer:
         activity: забег
         athlete: участник
