@@ -29,7 +29,7 @@ ActiveAdmin.register Result do
       if athlete
         result.athlete = athlete
       else
-        flash[:alert] = 'Участник с указанными ID не найден. Проверьте номера или сначала создайте такого участника.'
+        flash[:alert] = I18n.t('active_admin.results.cannot_link_athlete')
       end
     end
   end

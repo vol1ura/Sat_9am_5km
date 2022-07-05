@@ -78,6 +78,7 @@ ru:
       action_label: "%{title} выбранное"
       labels:
         destroy: "Удалить"
+        join: "Объединить"
     comments:
       created_at: "Дата создания"
       resource_type: "Тип ресурса"
@@ -93,7 +94,8 @@ ru:
       title_content: "Комментарии (%{count})"
       errors:
         empty_text: "Комментарий не сохранен, текст не должен быть пустым."
-
+    results:
+      cannot_link_athlete: 'Участник с указанными ID не найден. Проверьте номера или сначала создайте такого участника.'
     devise:
       username:
         title: "Имя пользователя"

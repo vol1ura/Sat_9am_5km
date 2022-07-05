@@ -17,6 +17,7 @@ Metrics/ClassLength:
 Metrics/BlockLength:
   Exclude:
     - 'app/admin/**/*'
+    - 'app/views/admin/**/*'
     - 'config/**/*'
     - 'spec/**/*'
   IgnoredMethods:
