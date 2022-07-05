@@ -1,25 +1,41 @@
 # frozen_string_literal: true
 
 active_admin_form_for [:admin, resource] do |f|
-  panel 'Редактирование результата' do
-    li f.object.athlete&.name || 'Участник не привязан'
-    li "Parkrun ID: #{f.object.athlete&.parkrun_code || 'не указан'}"
-    li "5 вёрст ID: #{f.object.athlete&.fiveverst_code || 'не указан'}"
-    li "Забег: #{f.object.activity.event.name}"
-    li "Дата забега: #{f.object.activity.date}"
-  end
   f.semantic_errors(*f.object.errors.attribute_names)
-  f.inputs 'Parkrun ID участника (только цифры, без буквы "A")' do
-    text_field_tag :parkrun_code, params[:parkrun_code].presence || f.object.athlete&.parkrun_code,
-                   placeholder: 'Parkrun ID', style: 'width: 10rem; margin-left: 1rem;'
+  columns do
+    column do
+      panel 'Редактирование результата' do
+        li f.object.athlete&.name || 'Участник не привязан'
+        li "Parkrun ID: #{f.object.athlete&.parkrun_code || 'не указан'}"
+        li "5 вёрст ID: #{f.object.athlete&.fiveverst_code || 'не указан'}"
+        li "Забег: #{f.object.activity.event.name}"
+        li "Дата забега: #{f.object.activity.date}"
+      end
+    end
+    column do
+      f.inputs 'Parkrun ID участника (только цифры, без буквы "A")' do
+        text_field_tag :parkrun_code, params[:parkrun_code].presence || f.object.athlete&.parkrun_code,
+                       placeholder: 'Parkrun ID', style: 'width: 10rem; margin-left: 1rem;'
+      end
+      f.inputs '5вёрст ID участника (только цифры, без буквы "A")' do
+        text_field_tag :fiveverst_code, params[:fiveverst_code].presence || f.object.athlete&.fiveverst_code,
+                       placeholder: '5вёрст ID', style: 'width: 10rem; margin-left: 1rem;'
+      end
+    end
   end
-  f.inputs do
-    f.input :position
-  end
-  f.inputs 'Результат (Часы:Минуты:Секунды)' do
-    div style: 'padding-left: 3rem;' do
-      f.time_select :total_time, include_seconds: true, ignore_date: true,
-                                 html_options: { value: Time.current.beginning_of_day }
+  columns do
+    column do
+      f.inputs 'Результат (Часы:Минуты:Секунды)' do
+        div style: 'padding-left: 3rem;' do
+          f.time_select :total_time, include_seconds: true, ignore_date: true,
+                                     html_options: { value: Time.current.beginning_of_day }
+        end
+      end
+    end
+    column do
+      f.inputs do
+        f.input :position
+      end
     end
   end
   f.actions
