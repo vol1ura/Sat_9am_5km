@@ -35,7 +35,7 @@ ActiveAdmin.register Athlete do
     end
   end
 
-  batch_action :join, confirm: 'Действительно хотите объединить этих участников?',
+  batch_action :join, confirm: I18n.t('active_admin.athletes.confirm_join'),
                       form: { gender: %w[мужчина женщина] } do |ids, inputs|
     collection = batch_action_collection.where(id: ids)
     athlete = collection.where.not(name: nil).take
@@ -48,16 +48,16 @@ ActiveAdmin.register Athlete do
       Result.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
       Volunteer.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
       collection.where.not(id: athlete.id).destroy_all
-      redirect_to collection_path, notice: 'Участники были объединены.'
+      redirect_to collection_path, notice: I18n.t('active_admin.athletes.successful_join')
     else
-      redirect_to collection_path, alert: 'Операция не выполнена. Участники не могут быть объединены.'
+      redirect_to collection_path, alert: I18n.t('active_admin.athletes.failed_join')
     end
   end
 
-  batch_action :gender_set, confirm: 'Установить пол выбранным участникам?',
+  batch_action :gender_set, confirm: I18n.t('active_admin.athletes.confirm_gender_set'),
                             form: { gender: %w[мужчина женщина] } do |ids, inputs|
     collection = batch_action_collection.where(id: ids)
     collection.update_all(male: inputs[:gender] == 'мужчина') # rubocop:disable Rails/SkipsModelValidations
-    redirect_to collection_path, notice: 'Смена пола успешно произведена.'
+    redirect_to collection_path, notice: I18n.t('active_admin.athletes.successful_gender_set')
   end
 end
