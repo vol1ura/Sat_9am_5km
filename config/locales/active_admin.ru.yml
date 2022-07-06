@@ -79,6 +79,7 @@ ru:
       labels:
         destroy: "Удалить"
         join: "Объединить"
+        gender_set: "Установить пол"
     comments:
       created_at: "Дата создания"
       resource_type: "Тип ресурса"
