@@ -33,12 +33,12 @@ class Athlete < ApplicationRecord
     return false unless athlete
 
     athlete.send(:grab_fields_from, collection)
-    return false unless athlete.save
-
-    Result.where(athlete_id: athletes_ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
-    Volunteer.where(athlete_id: athletes_ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
-    collection.where.not(id: athlete.id).destroy_all
-    true
+    transaction do
+      Result.where(athlete_id: athletes_ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
+      Volunteer.where(athlete_id: athletes_ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
+      collection.where.not(id: athlete.id).destroy_all
+      athlete.save or raise ActiveRecord::Rollback
+    end
   end
 
   def gender
