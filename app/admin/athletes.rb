@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Athlete do
   includes :user, :club
+
   permit_params :parkrun_code, :fiveverst_code, :name, :male, :user_id, :club_id
 
   filter :name
@@ -35,26 +36,18 @@ ActiveAdmin.register Athlete do
     end
   end
 
-  batch_action :join, confirm: I18n.t('active_admin.athletes.confirm_join'),
-                      form: { gender: %w[мужчина женщина] } do |ids, inputs|
+  batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
+                         if: proc { can? :manage, Athlete } do |ids|
     collection = batch_action_collection.where(id: ids)
-    athlete = collection.where.not(name: nil).take
-    if athlete
-      athlete.parkrun_code ||= collection.where.not(parkrun_code: nil).take&.parkrun_code
-      athlete.fiveverst_code ||= collection.where.not(fiveverst_code: nil).take&.fiveverst_code
-      athlete.user_id ||= collection.where.not(user_id: nil).take&.user_id
-      athlete.male = inputs[:gender] == 'мужчина'
-      athlete.save!
-      Result.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
-      Volunteer.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
-      collection.where.not(id: athlete.id).destroy_all
-      redirect_to collection_path, notice: I18n.t('active_admin.athletes.successful_join')
+    if Athlete.reunite(collection, ids)
+      redirect_to collection_path, notice: I18n.t('active_admin.athletes.successful_reunite')
     else
-      redirect_to collection_path, alert: I18n.t('active_admin.athletes.failed_join')
+      redirect_to collection_path, alert: I18n.t('active_admin.athletes.failed_reunite')
     end
   end
 
   batch_action :gender_set, confirm: I18n.t('active_admin.athletes.confirm_gender_set'),
+                            if: proc { can? :manage, Athlete },
                             form: { gender: %w[мужчина женщина] } do |ids, inputs|
     collection = batch_action_collection.where(id: ids)
     collection.update_all(male: inputs[:gender] == 'мужчина') # rubocop:disable Rails/SkipsModelValidations

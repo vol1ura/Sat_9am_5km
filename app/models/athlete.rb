@@ -28,6 +28,19 @@ class Athlete < ApplicationRecord
     rec
   end
 
+  def self.reunite(collection, athletes_ids)
+    athlete = collection.where.not(name: nil).take
+    return false unless athlete
+
+    athlete.send(:grab_fields_from, collection)
+    return false unless athlete.save
+
+    Result.where(athlete_id: athletes_ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
+    Volunteer.where(athlete_id: athletes_ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
+    collection.where.not(id: athlete.id).destroy_all
+    true
+  end
+
   def gender
     return if male.nil?
 
@@ -38,5 +51,12 @@ class Athlete < ApplicationRecord
 
   def fill_blank_name
     self.name = NOBODY
+  end
+
+  def grab_fields_from(collection)
+    self.parkrun_code ||= collection.where.not(parkrun_code: nil).take&.parkrun_code
+    self.fiveverst_code ||= collection.where.not(fiveverst_code: nil).take&.fiveverst_code
+    self.user_id ||= collection.where.not(user_id: nil).take&.user_id
+    self.male ||= collection.where.not(male: nil).take&.male
   end
 end
