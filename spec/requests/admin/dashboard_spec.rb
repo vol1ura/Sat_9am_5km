@@ -7,7 +7,7 @@ RSpec.describe '/admin/dashboard', type: :request do
 
   describe 'GET /admin' do
     it 'renders a successful response' do
-      create_list :activity, 3
+      create_list :activity, 3, published: true
       get admin_dashboard_url
       expect(response).to be_successful
     end

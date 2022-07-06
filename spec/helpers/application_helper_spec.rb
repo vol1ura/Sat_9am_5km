@@ -1,8 +1,36 @@
 RSpec.describe ApplicationHelper, type: :helper do
   describe '#human_result_time' do
-    it 'represent time in human format' do
-      time = Time.zone.now
-      expect(helper.human_result_time(time)).to eq('this that')
+    context 'when time is nil' do
+      it 'represent time in human format' do
+        expect(helper.human_result_time(nil)).to eq('XX:XX')
+      end
+    end
+
+    context 'when time is less than 1 hour' do
+      it 'represent time in human format' do
+        time = Time.zone.parse('00:17:30')
+        expect(helper.human_result_time(time)).to eq('17:30')
+      end
+    end
+
+    context 'when time is over 1 hour' do
+      it 'represent time in human format' do
+        time = Time.zone.parse('01:02:17')
+        expect(helper.human_result_time(time)).to eq('01:02:17')
+      end
+    end
+  end
+
+  describe '#human_activity_name' do
+    it 'returns formatted string' do
+      activity = create :activity
+      expect(helper.human_activity_name(activity)).to match(/\d{4}-\d\d-\d\d - \w+/)
+    end
+  end
+
+  describe '#human_volunteer_role' do
+    it 'returns translated role' do
+      expect(helper.human_volunteer_role(Volunteer::ROLES.keys.sample)).to match(/[а-яА-ЯёЁ ]+/)
     end
   end
 end

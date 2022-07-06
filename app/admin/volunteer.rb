@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Volunteer do
+  includes :athlete, activity: :event
+
   permit_params :role, :activity_id, :athlete_id
 
   filter :role, as: :select, collection: Volunteer::ROLES
@@ -9,7 +11,7 @@ ActiveAdmin.register Volunteer do
     selectable_column
     column :athlete
     column('Забег') { |v| human_activity_name(v.activity) }
-    column :role
+    column('Роль') { |v| human_volunteer_role v.role }
     actions
   end
 
