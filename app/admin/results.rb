@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Result do
   # belongs_to :activity, optional: true
-  includes :activity, :athlete
+  includes :athlete, activity: :event
 
   actions :all, except: :new
 
