@@ -1,8 +1,10 @@
+[![Quality&Tests](https://github.com/vol1ura/Sat_9am_5km/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/vol1ura/Sat_9am_5km/actions/workflows/rubyonrails.yml)
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
+
 # Sat 9am 5km - run event system
 
 Work just started and it's in progress now...
-
-Contributions welcome!
 
 ## Development
 
