@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :event do
-    name { Faker::Address.community }
+    name { Faker::Team.name }
     code_name { Faker::Internet.slug(glue: '_') }
     town { Faker::Address.city }
     place { Faker::Address.street_name }
