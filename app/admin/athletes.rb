@@ -45,12 +45,19 @@ ActiveAdmin.register Athlete do
       athlete.user_id ||= collection.where.not(user_id: nil).take&.user_id
       athlete.male = inputs[:gender] == 'мужчина'
       athlete.save!
-      Result.where(athlete_id: ids).update_all(athlete_id: athlete.id)
-      Volunteer.where(athlete_id: ids).update_all(athlete_id: athlete.id)
+      Result.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
+      Volunteer.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
       collection.where.not(id: athlete.id).destroy_all
       redirect_to collection_path, notice: 'Участники были объединены.'
     else
       redirect_to collection_path, alert: 'Операция не выполнена. Участники не могут быть объединены.'
     end
+  end
+
+  batch_action :gender_set, confirm: 'Установить пол выбранным участникам?',
+                            form: { gender: %w[мужчина женщина] } do |ids, inputs|
+    collection = batch_action_collection.where(id: ids)
+    collection.update_all(male: inputs[:gender] == 'мужчина') # rubocop:disable Rails/SkipsModelValidations
+    redirect_to collection_path, notice: 'Смена пола успешно произведена.'
   end
 end
