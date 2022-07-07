@@ -39,7 +39,7 @@ ActiveAdmin.register Athlete do
   batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
                          if: proc { can? :manage, Athlete } do |ids|
     collection = batch_action_collection.where(id: ids)
-    if Athlete.reunite(collection, ids)
+    if AthleteReuniter.call(collection, ids)
       redirect_to collection_path, notice: I18n.t('active_admin.athletes.successful_reunite')
     else
       redirect_to collection_path, alert: I18n.t('active_admin.athletes.failed_reunite')

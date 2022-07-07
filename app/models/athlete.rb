@@ -22,23 +22,10 @@ class Athlete < ApplicationRecord
     rec = find_by(code_type => code)
     return rec if rec && rec.name != NOBODY
 
-    athlete_name = ::Finder::Athlete.call(code_type: code_type, code: code)
+    athlete_name = AthleteFinder.call(code_type: code_type, code: code)
     rec ||= find_or_initialize_by(name: athlete_name, code_type => nil)
     rec.update!(code_type => code, name: athlete_name)
     rec
-  end
-
-  def self.reunite(collection, athletes_ids)
-    athlete = collection.where.not(name: nil).take
-    return false unless athlete
-
-    athlete.send(:grab_fields_from, collection)
-    transaction do
-      Result.where(athlete_id: athletes_ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
-      Volunteer.where(athlete_id: athletes_ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
-      collection.where.not(id: athlete.id).destroy_all
-      athlete.save or raise ActiveRecord::Rollback
-    end
   end
 
   def gender
@@ -51,12 +38,5 @@ class Athlete < ApplicationRecord
 
   def fill_blank_name
     self.name = NOBODY
-  end
-
-  def grab_fields_from(collection)
-    self.parkrun_code ||= collection.where.not(parkrun_code: nil).take&.parkrun_code
-    self.fiveverst_code ||= collection.where.not(fiveverst_code: nil).take&.fiveverst_code
-    self.user_id ||= collection.where.not(user_id: nil).take&.user_id
-    self.male ||= collection.where.not(male: nil).take&.male
   end
 end
