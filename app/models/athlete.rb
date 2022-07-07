@@ -21,7 +21,7 @@ class Athlete < ApplicationRecord
     namesakes = find_by_sql('SELECT LOWER(name) AS l_name FROM athletes GROUP BY l_name HAVING COUNT(*) > 1').pluck(:l_name)
     namesakes_ids = where('LOWER(name) in (?)', namesakes)
                     .pluck(:name, :id, :parkrun_code)
-                    .group_by(&:first)
+                    .group_by { |n| n.first.downcase }
                     .filter { |_, arr| arr.map(&:last).include?(nil) }
                     .flat_map { |_, arr| arr.map(&:second) }
     where(id: namesakes_ids).order(:name)
