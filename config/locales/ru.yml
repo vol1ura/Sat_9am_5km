@@ -344,7 +344,15 @@ ru:
   time:
     am: утра
     formats:
-      default: "%a, %d %b %Y, %H:%M:%S %z"
+      default: "%d %b %Y, %H:%M:%S %z"
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
     pm: вечера
+
+  views:
+    pagination:
+      previous: Предыдущая
+      first: Первая
+      next: Следующая
+      last: Последняя
+      truncate: '...'
