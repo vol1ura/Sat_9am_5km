@@ -42,7 +42,7 @@ ActiveAdmin.register Athlete do
     render :index, layout: false
   end
 
-  action_item :super_action, only: %i[index find_duplicates] do
+  action_item :find_duplicates_action, only: %i[index find_duplicates] do
     link_to 'Искать дубликаты', find_duplicates_admin_athletes_path
   end
 

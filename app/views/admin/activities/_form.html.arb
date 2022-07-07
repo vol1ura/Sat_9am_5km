@@ -2,16 +2,26 @@
 
 active_admin_form_for [:admin, resource] do |f|
   f.semantic_errors(*f.object.errors.attribute_names)
+
   f.inputs 'Выберите мероприятие' do
     input :event_id, as: :select, label: 'Мероприятие', collection: Event.order(:name).pluck(:name, :id)
   end
+
   f.inputs 'Сведения о забеге' do
     input :description, label: 'Описание'
     input :published, label: 'Опубликовать результаты на сайте'
   end
-  f.inputs 'Загрузите файл с секундомера' do
-    input :timer, as: :file, label: 'Файл с секундомера'
+
+  if resource.new_record?
+    f.inputs 'Загрузите файл с секундомера' do
+      input :timer, as: :file, label: 'Файл с секундомера'
+    end
+  else
+    panel 'Внимание!' do
+      para 'Файл с секундомера можно загрузить только при создании забега. Удалите и пересоздайте забег, если необходимо.'
+    end
   end
+
   f.inputs 'Загрузите файлы со сканеров' do
     Activity::MAX_SCANNERS.times do |i|
       input "scanner#{i}".to_sym, as: :file, label: "Файл со сканера #{i + 1}"
