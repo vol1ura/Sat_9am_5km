@@ -35,8 +35,8 @@
       <tr>
         <th>#</th>
         <th>Дата</th>
-        <th>Мероприятие</th>
         <th>Роль</th>
+        <th>Мероприятие</th>
       </tr>
     </thead>
     <tbody>
@@ -44,8 +44,8 @@
         <tr>
           <td><%= @total_vol - idx %></td>
           <td><%= link_to vol.activity.date, activity_path(vol.activity_id) %></td>
-          <td><%= vol.activity.event.name %></td>
           <td><%= human_volunteer_role vol.role %></td>
+          <td><%= vol.activity.event.name %></td>
         </tr>
       <% end %>
     </tbody>

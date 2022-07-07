@@ -18,8 +18,8 @@ class Athlete < ApplicationRecord
   before_validation :fill_blank_name, if: -> { name.blank? }
 
   def self.duplicates
-    namesakes = select(:name).group(:name).having('count(name) > 1').pluck(:name)
-    namesakes_ids = where(name: namesakes)
+    namesakes = find_by_sql('SELECT LOWER(name) AS l_name FROM athletes GROUP BY l_name HAVING COUNT(*) > 1').pluck(:l_name)
+    namesakes_ids = where('LOWER(name) in (?)', namesakes)
                     .pluck(:name, :id, :parkrun_code)
                     .group_by(&:first)
                     .filter { |_, arr| arr.map(&:last).include?(nil) }
