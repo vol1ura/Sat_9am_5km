@@ -17,6 +17,16 @@ class Athlete < ApplicationRecord
 
   before_validation :fill_blank_name, if: -> { name.blank? }
 
+  def self.duplicates
+    namesakes = select(:name).group(:name).having('count(name) > 1').pluck(:name)
+    namesakes_ids = where(name: namesakes)
+                    .pluck(:name, :id, :parkrun_code)
+                    .group_by(&:first)
+                    .filter { |_, arr| arr.map(&:last).include?(nil) }
+                    .flat_map { |_, arr| arr.map(&:second) }
+    where(id: namesakes_ids).order(:name)
+  end
+
   def self.find_or_scrape_by_code!(code)
     code_type = code < FIVE_VERST_BORDER ? :parkrun_code : :fiveverst_code
     rec = find_by(code_type => code)
