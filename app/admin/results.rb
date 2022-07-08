@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Result do
-  # belongs_to :activity, optional: true
+  # belongs_to :activity
+
   includes :athlete, activity: :event
 
   actions :all, except: :new

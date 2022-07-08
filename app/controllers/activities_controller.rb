@@ -2,7 +2,8 @@
 
 class ActivitiesController < ApplicationController
   def index
-    @activities = Activity.published.includes(:event)
+    today = Date.current
+    @activities = Activity.published.includes(:event).where('date >= ?', today.sunday? ? today.monday : today.prev_week)
   end
 
   def show
