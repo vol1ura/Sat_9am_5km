@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Activity do
-  belongs_to :event, optional: true
-
   includes :event
 
   permit_params :description, :published, :event_id

@@ -13,6 +13,9 @@ active_admin_form_for [:admin, resource] do |f|
       last_activities_collection = Activity.includes(:event).order(:created_at).last(10).map do |a|
         [human_activity_name(a), a.id]
       end
+      if f.object.activity.present? && last_activities_collection.exclude?(f.object.activity.id)
+        last_activities_collection << [human_activity_name(f.object.activity), f.object.activity.id]
+      end
       inputs do
         input :activity, collection: last_activities_collection
         input :role
