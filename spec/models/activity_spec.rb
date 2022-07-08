@@ -27,15 +27,28 @@ RSpec.describe Activity, type: :model do
       end
     end
 
-    context 'with timer file' do
-      let(:file_timer) { File.open('spec/fixtures/files/parkrun_timer_results.csv') }
+    context 'with timer file on iOS' do
+      let(:file_timer) { File.open('spec/fixtures/files/parkrun_timer_results_ios.csv') }
 
       it 'appends result to activity' do
         expect { activity.add_results_from_timer(file_timer) }.to change(activity.results, :size).to(5)
       end
 
       it 'change activity date according to timer file' do
-        date = Date.parse('23/04/2022')
+        date = Date.parse('04/06/2022')
+        expect { activity.add_results_from_timer(file_timer) }.to change(activity, :date).to(date)
+      end
+    end
+
+    context 'with timer file on Android' do
+      let(:file_timer) { File.open('spec/fixtures/files/parkrun_timer_results_android.csv') }
+
+      it 'appends result to activity' do
+        expect { activity.add_results_from_timer(file_timer) }.to change(activity.results, :size).to(6)
+      end
+
+      it 'change activity date according to timer file' do
+        date = Date.parse('26/03/2022')
         expect { activity.add_results_from_timer(file_timer) }.to change(activity, :date).to(date)
       end
     end

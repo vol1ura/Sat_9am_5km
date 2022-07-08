@@ -24,10 +24,12 @@ class Activity < ApplicationRecord
       raise 'Unknown timer file format' if table.dig(0, 0) != 'STARTOFEVENT'
 
       self.date = Date.parse(table.dig(0, 1)) # Date of event in the second column of first row
-      table[2..].each do |row|
+      correction = 1
+      table[1..].each do |row|
         break if row.first == 'ENDOFEVENT'
+        correction = 0 and next if row.third.blank? # We skip the second line (on some versions of Virtual Volunteer)
 
-        results << Result.new(position: row.first, total_time: row.last)
+        results << Result.new(position: row.first.to_i + correction, total_time: row.last)
       end
       save!
     end
