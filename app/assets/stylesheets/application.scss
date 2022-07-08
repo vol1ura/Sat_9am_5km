@@ -1,6 +1,14 @@
 @import "web/**/*";
 
-$component-active-bg: #59dd30;
+$primary: #2a2951;
+$secondary: #A0A0A0;
+$success: #008100;
+$danger: #FF411E;
+$warning: #D9AF26;
+$info: #6BF3BB;
+$light: #F0F0F0;
+$dark: #0F0F0F;
+
 @import "bootstrap";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
 
