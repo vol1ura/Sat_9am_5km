@@ -1,14 +1,16 @@
-<h2>Дата <%= @activity.date.strftime('%d.%m.%Y') %></h2>
+<h2>Забег состоялся <%= @activity.date.strftime('%d.%m.%Y') %></h2>
 
-<h4>Краткий отчёт</h4>
-<p><%= @activity.description %></p>
+<% if @activity.description.present? %>
+  <h4>Краткий отчёт</h4>
+  <p><%= @activity.description %></p>
+<% end %>
 
 <h4>Результаты</h4>
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Место</th>
-      <th>Имя</th>
+      <th>Участник</th>
       <th>Результат</th>
       <th class="hidden-on-phone">Клуб</th>
       <th class="hidden-on-phone">Пол</th>
@@ -17,10 +19,15 @@
   <tbody>
     <% @activity.results.includes(athlete: :club).order(:position).each do |result| %>
       <tr>
-        <td><%= result.position %></td>
+        <td class="position"><%= result.position %></td>
         <td>
           <% if result.athlete.present? %>
-            <%= link_to result.athlete&.name, athlete_path(result.athlete_id) %>
+            <div>
+              <%= link_to result.athlete&.name, athlete_path(result.athlete_id), class: 'athlete-link' %>
+            </div>
+            <div class="athlete-details fw-lighter">
+              забегов <%= result.athlete.results.published.size %>
+            </div>
           <% else %>
             <%= Athlete::NOBODY %>
           <% end %>
@@ -49,7 +56,7 @@
   <tbody>
     <% @activity.volunteers.includes(:athlete).each do |volunteer| %>
       <tr>
-        <td><%= link_to volunteer.name, athlete_path(volunteer.athlete) %></td>
+        <td><%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %></td>
         <td><%= human_volunteer_role volunteer.role %></td>
       </tr>
     <% end %>
