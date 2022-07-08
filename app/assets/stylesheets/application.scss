@@ -1,5 +1,3 @@
-@import "web/**/*";
-
 $primary: #2a2951;
 $secondary: #A0A0A0;
 $success: #008100;
@@ -31,3 +29,9 @@ $dark: #0F0F0F;
         }
     }
 }
+
+h1,h2,h3,h4,h5,h6 {
+    color: $primary;
+}
+
+@import "web/**/*";

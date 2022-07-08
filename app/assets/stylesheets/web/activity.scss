@@ -3,3 +3,13 @@
         display: none;
     }
 }
+
+.position {
+    color: $primary !important;
+    @extend .fs-2;
+}
+
+.athlete-link {
+    text-decoration: none;
+    font-weight: 800;
+}
