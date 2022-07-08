@@ -1,6 +1,19 @@
-<h2>Карта стартов</h2>
-<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af4483c7b6e6897a58abef5aa2767f9f4cc10f89aa282b6082987427673502f30&amp;width=100%25&amp;height=450&amp;lang=ru_RU&amp;scroll=true"></script>
+<h2>Наши мероприятия</h2>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <% Event.all.each do |event| %>
+    <div class="col">
+      <div class="card border-primary">
+        <%= link_to event_path(event.code_name) do
+          image_tag event.main_picture_link, class: 'card-img-top'
+        end %>
+        <div class="card-body">
+          <h4 class="card-title"><%= link_to event.name, event_path(event.code_name), class: 'card-title-link' %></h4>
+          <p class="card-text"><%= event.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<p>
-  Что-нибудь написать если есть такая возможность
-</p>
+<h2 class="mt-4">Карта мероприятий</h2>
+<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af4483c7b6e6897a58abef5aa2767f9f4cc10f89aa282b6082987427673502f30&amp;width=100%25&amp;height=450&amp;lang=ru_RU&amp;scroll=true"></script>
