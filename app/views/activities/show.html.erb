@@ -27,6 +27,10 @@
             </div>
             <div class="athlete-details fw-lighter">
               забегов <%= result.athlete.results.published.size %>
+              <% volunteering_count = result.athlete.volunteering.size
+                if volunteering_count.positive? %>
+              | волонтёрств <%= volunteering_count %>
+              <% end %>
             </div>
           <% else %>
             <%= Athlete::NOBODY %>
