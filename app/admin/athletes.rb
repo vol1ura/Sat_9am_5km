@@ -46,6 +46,10 @@ ActiveAdmin.register Athlete do
     link_to 'Искать дубликаты', find_duplicates_admin_athletes_path
   end
 
+  action_item :add_volunteering, only: :show, if: proc { can? :manage, Athlete } do
+    link_to 'Добавить волонтёрство', new_admin_volunteer_path(volunteer: { athlete_id: athlete.id })
+  end
+
   batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
                          if: proc { can? :manage, Athlete } do |ids|
     collection = batch_action_collection.where(id: ids)

@@ -21,6 +21,6 @@ ActiveAdmin.register Volunteer do
 
   before_create do |volunteer|
     athlete = Athlete.find_by parkrun_code: params[:parkrun_code].to_s.strip
-    volunteer.athlete = athlete
+    volunteer.athlete = athlete if athlete
   end
 end
