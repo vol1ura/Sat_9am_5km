@@ -41,3 +41,4 @@ heroku pg:backups:download --app <my-app-name>
 1. Add frontend
 2. Up and down athletes in protocol
 3. Insert and remove athletes
+4. Adding volunteers through Athlete menu by item action

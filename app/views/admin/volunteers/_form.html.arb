@@ -4,9 +4,17 @@ active_admin_form_for [:admin, resource] do |f|
   f.semantic_errors(*f.object.errors.attribute_names)
   columns do
     column do
-      inputs 'Номер волонтёра-участника в системе Parkrun (только цифры)' do
-        text_field_tag :parkrun_code, params[:parkrun_code].presence || f.object.athlete&.parkrun_code,
-                       placeholder: 'Parkrun ID', style: 'width: 10rem; margin-left: 1rem;'
+      athlete_id = params.dig(:volunteer, :athlete_id)
+      if athlete_id.present?
+        inputs do
+          h2 Athlete.find(athlete_id).name
+          f.hidden_field :athlete_id, value: athlete_id
+        end
+      else
+        inputs 'Номер волонтёра-участника в системе Parkrun (только цифры)' do
+          text_field_tag :parkrun_code, params[:parkrun_code].presence || f.object.athlete&.parkrun_code,
+                         placeholder: 'Parkrun ID', style: 'width: 10rem; margin-left: 1rem;'
+        end
       end
     end
     column do
