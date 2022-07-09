@@ -10,7 +10,7 @@ class Athlete < ApplicationRecord
   has_many :results, dependent: :nullify
   has_many :activities, through: :results
   has_many :events, through: :activities
-  has_many :volunteering, -> { joins(:activity).where(activity: { published: true }) },
+  has_many :volunteering, -> { joins(:activity).where(activity: { published: true }).order('activity.date DESC') },
            dependent: :destroy, class_name: 'Volunteer', inverse_of: :athlete
 
   validates :parkrun_code, uniqueness: true, allow_nil: true

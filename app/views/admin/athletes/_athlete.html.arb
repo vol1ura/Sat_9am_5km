@@ -7,3 +7,18 @@ attributes_table_for athlete do
   row :club
   row :user
 end
+
+panel 'Забеги участника' do
+  table_for athlete.results.joins(:activity).order('activities.date DESC') do
+    column('Забег') { |r| link_to human_activity_name(r.activity), admin_activity_path(r.activity) }
+    column :position
+    column('Результат') { |r| human_result_time r.total_time }
+  end
+end
+
+panel 'Волонтёрства участника' do
+  table_for athlete.volunteering.includes(:activity) do
+    column('Забег') { |v| link_to human_activity_name(v.activity), admin_activity_path(v.activity) }
+    column('Роль') { |v| human_volunteer_role v.role }
+  end
+end
