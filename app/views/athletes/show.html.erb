@@ -40,7 +40,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @athlete.volunteering.includes(:activity).order('activities.date DESC').each_with_index do |vol, idx| %>
+      <% @athlete.volunteering.includes(:activity).order('activity.date DESC').each_with_index do |vol, idx| %>
         <tr>
           <td><%= @total_vol - idx %></td>
           <td><%= link_to vol.activity.date, activity_path(vol.activity_id) %></td>

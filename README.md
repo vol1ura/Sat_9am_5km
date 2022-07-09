@@ -39,4 +39,5 @@ heroku pg:backups:download --app <my-app-name>
 ### TODO
 
 1. Add frontend
-2. Add batch operation to join athletes
+2. Up and down athletes in protocol
+3. Insert and remove athletes
