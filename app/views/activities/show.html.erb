@@ -17,30 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @activity.results.includes(athlete: :club).order(:position).each do |result| %>
-      <tr>
-        <td class="position"><%= result.position %></td>
-        <td>
-          <% if result.athlete.present? %>
-            <div>
-              <%= link_to result.athlete&.name, athlete_path(result.athlete_id), class: 'athlete-link' %>
-            </div>
-            <div class="athlete-details fw-lighter">
-              забегов <%= result.athlete.results.published.size %>
-              <% volunteering_count = result.athlete.volunteering.size
-                if volunteering_count.positive? %>
-              | волонтёрств <%= volunteering_count %>
-              <% end %>
-            </div>
-          <% else %>
-            <%= Athlete::NOBODY %>
-          <% end %>
-        </td>
-        <td><%= human_result_time(result.total_time) %></td>
-        <td class="hidden-on-phone"><%= result.athlete&.club&.name %></td>
-        <td class="hidden-on-phone"><%= result.athlete&.gender %></td>
-      </tr>
-    <% end %>
+    <%= render partial: 'result', collection: @activity.results.includes(athlete: :club).order(:position), cached: true %>
   </tbody>
 </table>
 

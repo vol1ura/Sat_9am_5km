@@ -33,7 +33,7 @@
 
       <%= form_with url: athletes_path, method: :get, class: 'd-flex mt-2', role: 'search' do |f| %>
         <div class="input-group mb-3">
-          <%= f.text_field :name, type: 'search', class: 'form-control', placeholder: 'Фамилия или ID', 'aria-label'=> 'Search', autocomplete: 'off' %>
+          <%= f.text_field :name, type: 'search', class: 'form-control', placeholder: 'Фамилия или ID', 'aria-label' => 'Search', autocomplete: 'off' %>
           <%= f.submit 'Поиск', class: 'btn btn-outline-light' %>
         </div>
       <% end %>

@@ -8,7 +8,7 @@ class Volunteer < ApplicationRecord
   }.freeze
 
   belongs_to :activity
-  belongs_to :athlete
+  belongs_to :athlete, counter_cache: :volunteering_count
 
   validates :role, presence: true
 
