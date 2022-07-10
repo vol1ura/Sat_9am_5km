@@ -29,8 +29,7 @@ end
 
 panel 'Волонтёры' do
   table_for activity.volunteers.includes(:athlete) do
-    # TODO: use name from User if available
-    column('Имя волонтёра') { |v| v.athlete&.name }
-    column('Роль', &:role)
+    column :name
+    column :role
   end
 end

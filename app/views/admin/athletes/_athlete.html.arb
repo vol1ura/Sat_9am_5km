@@ -9,7 +9,7 @@ attributes_table_for athlete do
 end
 
 panel 'Забеги участника' do
-  table_for athlete.results.joins(:activity).order('activities.date DESC') do
+  table_for athlete.results.includes(activity: :event).order('activities.date DESC') do
     column('Забег') { |r| link_to human_activity_name(r.activity), admin_activity_path(r.activity) }
     column :position
     column('Результат') { |r| human_result_time r.total_time }

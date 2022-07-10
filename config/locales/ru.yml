@@ -57,6 +57,7 @@ ru:
       volunteer:
         activity: забег
         athlete: участник
+        name: 'имя волонтёра'
         role: роль
         roles:
           director: Директор

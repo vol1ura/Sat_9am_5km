@@ -1,6 +1,6 @@
 <h2>Наши мероприятия</h2>
 <div class="row row-cols-1 row-cols-md-2 g-4">
-  <% Event.all.each do |event| %>
+  <% Event.order(:name).each do |event| %>
     <div class="col">
       <div class="card border-primary">
         <%= link_to event_path(event.code_name) do

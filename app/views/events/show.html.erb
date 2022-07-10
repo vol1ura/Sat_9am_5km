@@ -37,17 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @event.activities.published.order(date: :desc).each_with_index do |activity, idx| %>
-            <% male_leader_result = activity.leader_result %>
-            <% female_leader_result = activity.leader_result(male: false) %>
-            <tr>
-              <td><%= @total_activities - idx %></td>
-              <td><%= link_to activity.date, activity %></td>
-              <td><%= activity.results.size %></td>
-              <td class="hidden-on-phone"><%= "#{male_leader_result.athlete.name} (#{human_result_time(male_leader_result.total_time)})" if male_leader_result&.athlete.present? %></td>
-              <td class="hidden-on-phone"><%= "#{female_leader_result.athlete.name} (#{human_result_time(female_leader_result.total_time)})" if female_leader_result&.athlete.present? %></td>
-            </tr>
-          <% end %>
+          <%= render partial: 'activity', collection: @event.activities.published.order(date: :desc), cached: true %>
         </tbody>
       </table>
     <% end %>
