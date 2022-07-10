@@ -76,6 +76,8 @@ ru:
           results_handler: 'Обработка результатов'
           equipment_supplier: 'Доставка оборудования'
           public_relations: 'Связи с общественностью'
+          warm_up: 'Проведение разминки'
+          other: 'Разное'
 
     errors:
       messages:
