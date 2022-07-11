@@ -36,6 +36,11 @@ heroku pg:backups:capture --app <my-app-name>
 heroku pg:backups:download --app <my-app-name>
 ```
 
+Restore database
+```shell
+pg_restore -d <db-name> <path-to-dump> --no-privileges --no-owner -U <user>
+```
+
 ### TODO
 
 1. Add frontend
