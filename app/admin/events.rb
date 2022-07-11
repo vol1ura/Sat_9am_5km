@@ -29,4 +29,10 @@ ActiveAdmin.register Event do
     column :created_at
     actions
   end
+
+  sidebar 'Управление контактами', only: %i[show edit] do
+    ul do
+      li link_to 'Контакты', admin_event_contacts_path(resource)
+    end
+  end
 end

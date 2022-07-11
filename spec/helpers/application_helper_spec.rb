@@ -24,7 +24,7 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe '#human_activity_name' do
     it 'returns formatted string' do
       activity = create :activity
-      expect(helper.human_activity_name(activity)).to match(/\A\d{4}-\d\d-\d\d - [a-zа-яё\- ]+\z/i)
+      expect(helper.human_activity_name(activity)).to match(/\d{4}-\d\d-\d\d - .+/)
     end
   end
 
