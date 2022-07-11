@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_10_075648) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_175928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_075648) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "link"
+    t.integer "contact_type"
+    t.bigint "event_id", null: false
+    t.index ["event_id", "contact_type"], name: "index_contacts_on_event_id_and_contact_type", unique: true
+    t.index ["event_id"], name: "index_contacts_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -113,6 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_075648) do
   add_foreign_key "activities", "events"
   add_foreign_key "athletes", "clubs"
   add_foreign_key "athletes", "users"
+  add_foreign_key "contacts", "events"
   add_foreign_key "results", "activities"
   add_foreign_key "results", "athletes"
   add_foreign_key "volunteers", "activities"

@@ -3,23 +3,26 @@ ru:
   activerecord:
     models:
       club:
-        one: Клуб
+        one: клуб
         other: Клубы
       event:
-        one: Мероприятие
+        one: мероприятие
         other: Мероприятия
       activity:
-        one: Забег
+        one: забег
         other: Забеги
       athlete:
-        one: Участник
+        one: участник
         other: Участники
       result:
-        one: Результат
+        one: результат
         other: Результаты
       volunteer:
-        one: Волонтёр
+        one: волонтёр
         other: Волонтёры
+      contact:
+        one: контакт
+        other: Контакты
 
     attributes:
       user:
@@ -64,7 +67,7 @@ ru:
           marshal: Маршал
           timer: Секундомер
           photograph: Фотограф
-          tokens: 'Разадача карточек позиций'
+          tokens: 'Раздача карточек позиций'
           scanner: Сканер
           instructor: 'Инструктаж новичков'
           marking_maker: 'Разметка тарссы'
@@ -78,6 +81,24 @@ ru:
           public_relations: 'Связи с общественностью'
           warm_up: 'Проведение разминки'
           other: 'Разное'
+          attendant: 'Сопровождающий'
+      contact:
+        new_model: 'Добавить контакт'
+        edit_model: 'Изменить контакт'
+        delete_model: 'Удалить контакт'
+        event: мероприятие
+        link: контакт
+        contact_type: 'тип контакта'
+        contact_types:
+          email: e-mail
+          phone: телефон
+          tg_channel: 'телеграм канал'
+          tg_chat: 'телеграм чат'
+          vk: вконтакте
+          zen: дзен
+          instagram: инстаграм
+          facebook: фейсбук
+          strava: страва
 
     errors:
       messages:
