@@ -82,6 +82,8 @@ ru:
           warm_up: 'Проведение разминки'
           other: 'Разное'
           attendant: 'Сопровождающий'
+          finish_maker: 'Организация финиша'
+          volunteer_coordinator: 'Координатор волонтёров'
       contact:
         new_model: 'Добавить контакт'
         edit_model: 'Изменить контакт'
