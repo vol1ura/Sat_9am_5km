@@ -70,7 +70,7 @@ ru:
           tokens: 'Раздача карточек позиций'
           scanner: Сканер
           instructor: 'Инструктаж новичков'
-          marking_maker: 'Разметка тарссы'
+          marking_maker: 'Разметка трассы'
           event_closer: Замыкающий
           marking_picker: 'Сбор разметки'
           cards_sorter: 'Сортировка карточек'
