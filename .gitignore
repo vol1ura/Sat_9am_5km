@@ -19,8 +19,10 @@
 !/vendor/javascript/.keep
 /coverage
 .reek.yml
+/config/database.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
 .env
+.rbenv-vars

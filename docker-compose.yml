@@ -5,6 +5,7 @@ services:
       context: .
     volumes:
       - .:/usr/src
+      # - $HOME/.ssh:/root/.ssh
     tmpfs:
       - /usr/src/tmp/pids
       - /usr/src/tmp/cache

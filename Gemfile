@@ -16,7 +16,6 @@ gem 'cancancan', '~> 3.3'
 gem 'devise', '~> 4.8'
 gem 'devise-i18n'
 gem 'jbuilder'
-gem 'mini_racer'
 gem 'nokogiri'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
@@ -30,6 +29,7 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'mini_racer' # add node to docker and remove racer
   gem 'rspec-rails', '~> 6.0.0.rc'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
@@ -52,4 +52,13 @@ group :development do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'rack-mini-profiler'
+
+  gem 'capistrano', '~> 3.17', require: false
+  gem 'capistrano3-puma', require: false
+  # gem 'capistrano-postgresql', '~> 6.2', require: false
+  gem 'capistrano-rails', '~>1.6', require: false
+  gem 'capistrano-rbenv', '~>2.2.0', require: false
+
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+  gem 'ed25519', '>= 1.2', '< 2.0'
 end
