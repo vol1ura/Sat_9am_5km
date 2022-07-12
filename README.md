@@ -4,11 +4,20 @@
 
 # Sat 9am 5km - run event system
 
-Work just started and it's in progress now...
+## TODO
+
+- [ ] FEATURE: Up and down athletes in protocol
+- [ ] FEATURE: Insert and remove athletes in protocol
+- [ ] Remove mini-racer from the project
+- [ ] Migrate to Stimulus and Hotwire on frontend
+- [ ] CI-CD with GitHub Actions and Capistrano
+- [ ] Add Redis and configure adapter for async jobs
+- [ ] Add scheduled backups
+- [ ] Add logrotate
 
 ## Development
 
-To build project execute
+To build project install `Docker` and `docker-compose` and execute
 ```shell
 make build_proj
 ```
@@ -19,6 +28,48 @@ make proj
 ```
 
 ## Deploy
+
+#### 1. Configure server
+
+```shell
+# server
+sudo apt update
+locale
+sudo dpkg-reconfigure locales
+adduser <deploy-user>
+adduser <deploy-user> sudo
+# localhost
+ssh-copy-id root@1.2.3.4
+ssh-copy-id <deploy-user>@1.2.3.4
+```
+#### 2. Install rbenv
+
+#### 3. Install postgresql
+
+#### 4. Install nginx
+
+#### 5. Create app dir and copy keys
+
+```shell
+scp config/master.key <deploy-user>@1.2.3.4:/home/<deploy-user>/apps/<app-name>/shared/config/master.key
+scp .rbenb-vars <deploy-user>@1.2.3.4:/home/<deploy-user>/apps/<app-name>/.rbenv-vars
+```
+
+#### 6. Run Capistrano
+First time
+```shell
+cap production puma:config
+cap production puma:nginx_config
+sudo service nginx restart
+cap production puma:systemd:config puma:systemd:enable
+```
+
+After push
+```shell
+cap production deploy
+```
+
+### For Heroku
 
 To solve problem with building `mini_racer` on heroku:
 ```shell
@@ -32,17 +83,13 @@ heroku config:set RAILS_MASTER_KEY=$(cat config/master.key)
 
 Backup database
 ```shell
-heroku pg:backups:capture --app <my-app-name>
-heroku pg:backups:download --app <my-app-name>
+heroku pg:backups:capture --app <app-name>
+heroku pg:backups:download --app <app-name>
 ```
+
+### Database
 
 Restore database
 ```shell
 pg_restore -d <db-name> <path-to-dump> --no-privileges --no-owner -U <user>
 ```
-
-### TODO
-
-1. Add frontend
-2. Up and down athletes in protocol
-3. Insert and remove athletes in protocol
