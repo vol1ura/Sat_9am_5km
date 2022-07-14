@@ -18,7 +18,7 @@ jobs:
           POSTGRES_PASSWORD: password
     env:
       RAILS_ENV: test
-      DATABASE_URL_TEST: "postgres://rails:password@localhost:5432/rails_test"
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       TZ: "Europe/Moscow"
       COVERAGE: on
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
