@@ -1,15 +1,9 @@
-@media (max-width: 768px) {
-    .hidden-on-phone {
-        display: none;
-    }
-}
-
 .position {
-    color: $primary !important;
-    @extend .fs-2;
+  color: $primary !important;
+  @extend .fs-2;
 }
 
 .athlete-link {
-    text-decoration: none;
-    font-weight: 800;
+  text-decoration: none;
+  font-weight: 800;
 }
