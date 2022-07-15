@@ -1,4 +1,4 @@
-<h2>Забег состоялся <%= @activity.date.strftime('%d.%m.%Y') %></h2>
+<h2>Забег состоялся <%= l @activity.date %></h2>
 
 <% if @activity.description.present? %>
   <h4>Краткий отчёт</h4>
@@ -17,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= render partial: 'result', collection: @activity.results.includes(athlete: :club).order(:position), cached: true %>
+    <%= render partial: 'result', collection: @results, locals: { counts: @counts } %>
   </tbody>
 </table>
 

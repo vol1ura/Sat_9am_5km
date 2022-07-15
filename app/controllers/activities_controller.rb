@@ -8,5 +8,7 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.find(params[:id])
+    @counts = Result.joins(athlete: :activities).where(athlete: { activities: @activity }).published.group(:athlete).count
+    @results = @activity.results.includes(athlete: :club).order(:position)
   end
 end

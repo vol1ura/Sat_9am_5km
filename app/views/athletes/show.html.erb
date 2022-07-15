@@ -37,7 +37,7 @@
       <% @athlete.volunteering.includes(:activity).each_with_index do |vol, idx| %>
         <tr>
           <td><%= @total_vol - idx %></td>
-          <td><%= link_to vol.activity.date, activity_path(vol.activity_id) %></td>
+          <td><%= link_to l(vol.activity.date), activity_path(vol.activity_id) %></td>
           <td><%= human_volunteer_role vol.role %></td>
           <td><%= vol.activity.event.name %></td>
         </tr>
