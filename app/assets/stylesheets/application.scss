@@ -1,41 +1,48 @@
 $primary: #2a2951;
-$secondary: #A0A0A0;
+$secondary: #a0a0a0;
 $success: #008100;
-$danger: #FF411E;
-$warning: #D9AF26;
-$info: #6BF3BB;
-$light: #F0F0F0;
-$dark: #0F0F0F;
+$danger: #ff411e;
+$warning: #d9af26;
+$info: #6bf3bb;
+$light: #f0f0f0;
+$dark: #0f0f0f;
 
 @import "bootstrap";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
 
 .bd-footer {
-    a {
-        text-decoration: none;
-        color: var(--bs-body-color);
-    }
-    a:hover {
-        text-decoration: underline;
-        color: inherit;
-    }
+  a {
+    text-decoration: none;
+    color: var(--bs-body-color);
+  }
+  a:hover {
+    text-decoration: underline;
+    color: inherit;
+  }
 
-    @media (max-width: 768px) {
-        .social-links {
-            order: 2;
-        }
-        .footer-text {
-            order: 3;
-        }
+  @media (max-width: 768px) {
+    .social-links {
+      order: 2;
     }
+    .footer-text {
+      order: 3;
+    }
+  }
 }
 
-h1,h2,h3,h4,h5,h6 {
-    color: $primary;
+h1, h2, h3, h4, h5, h6 {
+  color: $primary;
+  margin-top: 0.5rem;
 }
 
 .card-title-link {
-    text-decoration: none;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-on-phone {
+    display: none;
+  }
 }
 
 @import "web/**/*";
