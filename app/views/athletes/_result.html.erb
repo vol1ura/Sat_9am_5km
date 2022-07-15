@@ -1,6 +1,6 @@
 <tr>
   <td><%= @total_results - result_counter %></td>
-  <td><%= link_to result.activity.date, activity_path(result.activity_id) %></td>
+  <td><%= link_to l(result.activity.date), activity_path(result.activity_id) %></td>
   <td><%= human_result_time(result.total_time) %></td>
   <td class="hidden-on-phone"><%= result.position %></td>
   <td><%= result.activity.event.name %></td>

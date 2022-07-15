@@ -6,7 +6,7 @@
         <%= link_to result.athlete&.name, athlete_path(result.athlete_id), class: 'athlete-link' %>
       </div>
       <div class="athlete-details fw-lighter">
-        забегов <%= result.athlete.results.published.size %>
+        забегов <%= counts[result.athlete] %>
         <% volunteering_count = result.athlete.volunteering.size
           if volunteering_count.positive? %>
         | волонтёрств <%= volunteering_count %>
