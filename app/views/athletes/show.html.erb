@@ -9,7 +9,7 @@
       <tr>
         <th>#</th>
         <th>Дата</th>
-        <th>Результат</th>
+        <th>Время</th>
         <th class="hidden-on-phone">Место</th>
         <th>Мероприятие</th>
       </tr>
@@ -42,8 +42,12 @@
               <% volunteering.each do |vol| %>
                 <li class="list-group-item">
                   <div class="hstack">
-                    <div><%= link_to l(vol.activity.date), activity_path(vol.activity_id) %></div>
-                    <div class="ms-auto"><%= vol.activity.event.name %></div>
+                    <div>
+                      <%= link_to l(vol.activity.date), activity_path(vol.activity_id) %>
+                    </div>
+                    <div class="ms-auto">
+                      <%= link_to vol.activity.event.name, event_path(code_name: vol.activity.event.code_name) %>
+                    </div>
                   </div>
                 </li>
               <% end %>
