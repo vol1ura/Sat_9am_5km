@@ -22,6 +22,9 @@ gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
 gem 'turbo-rails', '~> 1.1'
 
+gem 'hiredis'
+gem 'redis'
+
 group :development, :test do
   gem 'brakeman'
   gem 'bullet'

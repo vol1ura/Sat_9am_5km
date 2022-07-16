@@ -160,6 +160,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
     hashdiff (1.0.1)
+    hiredis (0.6.3)
     i18n (1.11.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.2)
@@ -280,6 +281,7 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
+    redis (4.7.1)
     regexp_parser (2.5.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -398,6 +400,7 @@ DEPENDENCIES
   ed25519 (>= 1.2, < 2.0)
   factory_bot_rails
   faker!
+  hiredis
   importmap-rails (~> 1.1)
   jbuilder
   mini_racer
@@ -409,6 +412,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler
   rails (~> 7.0.3)
+  redis
   rspec-rails (~> 6.0.0.rc)
   rubocop
   rubocop-performance
