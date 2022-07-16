@@ -4,5 +4,6 @@ log/
 
 .git/
 .vscode/
+deploy/
 .dockerignore
 .byebug_history
