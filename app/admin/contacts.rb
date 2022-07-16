@@ -2,6 +2,8 @@
 
 ActiveAdmin.register Contact do
   belongs_to :event
+  includes :event
+
   permit_params :link, :contact_type, :event_id
 
   index download_links: false do
