@@ -7,10 +7,11 @@
       </div>
       <div class="athlete-details fw-lighter">
         забегов <%= counts[result.athlete] %>
-        <% volunteering_count = result.athlete.volunteering.size
-          if volunteering_count.positive? %>
-        | волонтёрств <%= volunteering_count %>
-        <% end %>
+        <% volunteering_count = result.athlete.volunteering.size %>
+          <% if volunteering_count.positive? %>
+            <div class="vr"></div>
+            волонтёрств <%= volunteering_count %>
+          <% end %>
       </div>
     <% else %>
       <%= Athlete::NOBODY %>

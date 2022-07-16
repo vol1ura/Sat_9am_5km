@@ -23,13 +23,13 @@ class Activity < ApplicationRecord
       table = CSV.parse(file_timer.read, headers: false)
       raise 'Unknown timer file format' if table.dig(0, 0) != 'STARTOFEVENT'
 
-      self.date = Date.parse(table.dig(0, 1)) # Date of event in the second column of first row
-      correction = 1
+      self.date = Date.parse(table.dig(0, 1)) # Date of event is the second column of first row
+      column_correction = 1
       table[1..].each do |row|
         break if row.first == 'ENDOFEVENT'
-        correction = 0 and next if row.third.blank? # We skip the second line (on some versions of Virtual Volunteer)
+        column_correction = 0 and next if row.third.blank? # We skip the second line (on some versions of Virtual Volunteer)
 
-        results << Result.new(position: row.first.to_i + correction, total_time: row.last)
+        results << Result.new(position: row.first.to_i + column_correction, total_time: row.last)
       end
       save!
     end
