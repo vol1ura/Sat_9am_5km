@@ -24,24 +24,33 @@
 <% if @total_vol.zero? %>
   <p>Пока не было волонтёрств.</p>
 <% else %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Дата</th>
-        <th>Роль</th>
-        <th>Мероприятие</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @athlete.volunteering.includes(:activity).each_with_index do |vol, idx| %>
-        <tr>
-          <td><%= @total_vol - idx %></td>
-          <td><%= link_to l(vol.activity.date), activity_path(vol.activity_id) %></td>
-          <td><%= human_volunteer_role vol.role %></td>
-          <td><%= vol.activity.event.name %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <p>Всего волонтёрств <%= @total_vol %>.</p>
+  <% roles = @athlete.volunteering.pluck(:role).uniq %>
+  <div class="accordion accordion-flush" id="accordionRoles">
+    <% roles.each do |role| %>
+      <% volunteering = @athlete.volunteering.includes(activity: :event).where(role: role) %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id=<%= "flush-heading-#{role}" %>>
+          <button class="accordion-button collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target=<%= "#flush-collapse-#{role}" %> aria-expanded="false" aria-controls=<%= "flush-collapse-#{role}" %>>
+            <span class="badge text-bg-secondary bg-primary me-3"><%= volunteering.size %></span>
+            <%= human_volunteer_role role %>
+          </button>
+        </h2>
+        <div id=<%= "flush-collapse-#{role}" %> class="accordion-collapse collapse" aria-labelledby=<%= "flush-heading-#{role}" %> data-bs-parent="#accordionRoles">
+          <div class="accordion-body">
+            <ul class="list-group list-group-flush">
+              <% volunteering.each do |vol| %>
+                <li class="list-group-item">
+                  <div class="hstack">
+                    <div><%= link_to l(vol.activity.date), activity_path(vol.activity_id) %></div>
+                    <div class="ms-auto"><%= vol.activity.event.name %></div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
