@@ -38,7 +38,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
@@ -47,11 +47,18 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 
-  config.cache_store = :memory_store, { size: 128.megabytes }
+  config.cache_store = :redis_cache_store, {
+    driver: :hiredis,
+    host: 'localhost',
+    port: 6379,
+    db: 0,
+    namespace: 'dcache',
+    expires_in: 30.minutes
+  }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "sat_9am_5km_production"
+  # config.active_job.queue_adapter     = :sidekiq
+  # config.active_job.queue_name_prefix = 's95_production'
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
