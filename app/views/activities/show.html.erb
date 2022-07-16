@@ -1,11 +1,21 @@
-<h2>Забег состоялся <%= l @activity.date %></h2>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Главная', root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to @activity.event.name, event_path(@activity.event.code_name) %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Забег <%= l @activity.date %></li>
+  </ol>
+</nav>
 
 <% if @activity.description.present? %>
   <h4>Краткий отчёт</h4>
   <p><%= @activity.description %></p>
 <% end %>
 
-<h4>Результаты</h4>
+<h4>Протокол</h4>
 <table class="table table-striped">
   <thead>
     <tr>
