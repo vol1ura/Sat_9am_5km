@@ -8,6 +8,8 @@
 
 - [ ] FEATURE: Up and down athletes in protocol
 - [ ] FEATURE: Insert and remove athletes in protocol
+- [ ] Top50 results for men and women for each event
+- [ ] Separate page with activities inside event
 - [ ] Remove mini-racer from the project
 - [ ] Migrate to Stimulus and Hotwire on frontend
 - [ ] CI-CD with GitHub Actions and Capistrano
@@ -67,6 +69,14 @@ cap production puma:systemd:config puma:systemd:enable
 After push
 ```shell
 cap production deploy
+```
+
+#### 7. Install certificate
+Instructions on https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
+
+Test automatic renewal
+```shell
+sudo certbot renew --dry-run
 ```
 
 ### For Heroku
