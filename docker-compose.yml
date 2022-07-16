@@ -5,7 +5,7 @@ services:
       context: .
     volumes:
       - .:/usr/src
-      # - $HOME/.ssh:/root/.ssh
+      - ./deploy/.ssh:/root/.ssh
     tmpfs:
       - /usr/src/tmp/pids
       - /usr/src/tmp/cache
@@ -17,7 +17,7 @@ services:
       - db
     # command: bundle exec rdebug-ide --debug --host 0.0.0.0 --port 1234 -- bin/rails server -p 3000 -b 0.0.0.0
     env_file:
-      - ./.env
+      - ./deploy/.env
 
   db:
     image: postgres:14.3-alpine

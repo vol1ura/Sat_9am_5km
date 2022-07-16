@@ -54,7 +54,7 @@ ssh-copy-id <deploy-user>@1.2.3.4
 
 ```shell
 scp config/master.key <deploy-user>@1.2.3.4:/home/<deploy-user>/apps/<app-name>/shared/config/master.key
-scp .rbenb-vars <deploy-user>@1.2.3.4:/home/<deploy-user>/apps/<app-name>/.rbenv-vars
+scp ./deploy/.rbenb-vars <deploy-user>@1.2.3.4:/home/<deploy-user>/apps/<app-name>/.rbenv-vars
 ```
 
 #### 6. Run Capistrano
@@ -77,6 +77,12 @@ Instructions on https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
 Test automatic renewal
 ```shell
 sudo certbot renew --dry-run
+```
+
+### 8. Disable ssh login by password
+```shell
+vim /etc/ssh/sshd_config # set PasswordAuthentication no
+systemctl restart ssh
 ```
 
 ### For Heroku
