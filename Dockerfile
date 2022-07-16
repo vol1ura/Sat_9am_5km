@@ -1,16 +1,16 @@
 FROM ruby:3.1.0-alpine
 
 RUN apk add --update \
-  build-base \
-  postgresql-dev \
+  build-base postgresql-dev nodejs yarn \
   tzdata git vim openssh \
   && rm -rf /var/cache/apk/*
 
 # Russian locale settings
-# ENV LANG ru_RU.UTF-8
+ENV LANG ru_RU.UTF-8
 # ENV LANGUAGE ru_RU.UTF-8
 # ENV LC_ALL ru_RU.UTF-8
 
+RUN gem install bundler --version=2.3.7 --no-doc
 WORKDIR /tmp
 COPY Gemfile* ./
 RUN bundle install

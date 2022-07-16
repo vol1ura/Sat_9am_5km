@@ -190,8 +190,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    libv8-node (16.10.0.0-x86_64-linux)
-    libv8-node (16.10.0.0-x86_64-linux-musl)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -200,8 +198,6 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_racer (0.6.2)
-      libv8-node (~> 16.10.0.0)
     minitest (5.16.2)
     net-imap (0.2.3)
       digest
@@ -403,7 +399,6 @@ DEPENDENCIES
   hiredis
   importmap-rails (~> 1.1)
   jbuilder
-  mini_racer
   nokogiri
   pg (~> 1.1)
   pry-byebug

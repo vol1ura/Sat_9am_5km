@@ -10,7 +10,7 @@
 - [ ] FEATURE: Insert and remove athletes in protocol
 - [ ] Top50 results for men and women for each event
 - [ ] Separate page with activities inside event
-- [ ] Remove mini-racer from the project
+- [x] Remove mini-racer from the project
 - [ ] Migrate to Stimulus and Hotwire on frontend
 - [ ] CI-CD with GitHub Actions and Capistrano
 - [ ] Add Redis and configure adapter for async jobs
