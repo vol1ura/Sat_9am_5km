@@ -32,12 +32,12 @@ RSpec.describe '/admin/athletes', type: :request do
     end
 
     context 'with valid athletes' do
-      let!(:athletes) { create_list :athlete, 2, name: 'Same Name', male: true }
+      let(:athletes) { create_list :athlete, 2, name: 'Same Name', male: true }
       let(:valid_attributes) do
-        { batch_action: :reunite, batch_action_inputs: {}, collection_selection: athletes.map { |a| a.id.to_s } }
+        { batch_action: :reunite, batch_action_inputs: '{}', collection_selection: athletes.map(&:id) }
       end
 
-      it 'reunite selected athletes' do
+      it 'redirects to duplicates page' do
         post batch_action_admin_athletes_url, params: valid_attributes
         expect(response).to redirect_to find_duplicates_admin_athletes_path
       end
