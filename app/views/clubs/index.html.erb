@@ -1,0 +1,14 @@
+<h2>Клубы</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Название</td>
+      <td>Количество участников</td>
+      <td>Количество результатов</td>
+      <td class="hidden-on-phone">Количество волонтёрств</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'club', collection: @clubs %>
+  </tbody>
+</table>

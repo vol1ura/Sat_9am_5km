@@ -1,0 +1,28 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Главная', root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to 'Клубы', clubs_path %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Клуб <%= @club.name %></li>
+  </ol>
+</nav>
+
+<h2><%= @club.name %></h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Имя</td>
+      <td class="hidden-on-phone">Parkrun ID</td>
+      <td>Количество забегов</td>
+      <td class="hidden-on-phone">Количество волонтёрств</td>
+      <td>Лучшее время</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'athlete', collection: @athletes %>
+  </tbody>
+</table>

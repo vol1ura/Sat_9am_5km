@@ -1,4 +1,9 @@
-<h1><%= @athlete.name %></h1>
+<h1>
+  <%= @athlete.name %>
+  <% if @athlete.club %>
+    <span class="badge bg-light"><%= link_to @athlete.club.name, @athlete.club, style: 'text-decoration: none;' %></span>
+  <% end %>
+</h1>
 
 <h2>Все забеги</h2>
 <% if @total_results.zero? %>
