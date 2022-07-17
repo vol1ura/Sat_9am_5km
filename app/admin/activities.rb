@@ -33,9 +33,9 @@ ActiveAdmin.register Activity do
   end
 
   after_create do |activity|
-    activity.add_results_from_timer params[:activity][:timer]
+    TimerParser.call(activity, params[:activity][:timer])
     Activity::MAX_SCANNERS.times do |scanner_number|
-      activity.add_results_from_scanner params[:activity]["scanner#{scanner_number}".to_sym]
+      ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
     end
   end
 end
