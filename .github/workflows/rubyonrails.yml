@@ -21,7 +21,6 @@ jobs:
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       TZ: "Europe/Moscow"
       COVERAGE: on
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       BULLET_ENABLED: true
       APP_HOST: "app.test.com"
       APP_DOMAIN: "test.com"
@@ -38,13 +37,12 @@ jobs:
           bundler-cache: true
       - name: Set up database schema
         run: bin/rails db:schema:load
-      - name: Run tests
-        run: bundle exec rspec
-      - name: Upload report to Codecov
-        run: |
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -t ${CODECOV_TOKEN}
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
+        with:
+          coverageCommand: bundle exec rspec
 
   lint:
     runs-on: ubuntu-22.04
