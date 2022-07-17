@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class AthleteReuniter < ApplicationService
+  SKIPPED_ATTRIBUTES = %w[id created_at updated_at name].freeze
+  MODIFIED_ATTRIBUTES = %w[parkrun_code fiveverst_code user_id club_id male].freeze
+
   def initialize(collection, ids)
     @collection = collection
     @ids = ids
@@ -9,7 +12,9 @@ class AthleteReuniter < ApplicationService
   def call
     return false unless athlete
 
-    grab_fields_from_collection
+    grab_modified_attributes_from_collection
+    grab_volunteering_count_from_collection
+    check_modified_fields
     replace_all_by_one and return true
   rescue StandardError => e
     Rails.logger.error e.inspect
@@ -24,11 +29,29 @@ class AthleteReuniter < ApplicationService
     @athlete ||= collection.where.not(name: nil).take
   end
 
-  def grab_fields_from_collection
-    athlete.parkrun_code ||= collection.where.not(parkrun_code: nil).take&.parkrun_code
-    athlete.fiveverst_code ||= collection.where.not(fiveverst_code: nil).take&.fiveverst_code
-    athlete.user_id ||= collection.where.not(user_id: nil).take&.user_id
-    athlete.male ||= collection.where.not(male: nil).take&.male
+  def grab_volunteering_count_from_collection
+    athlete.volunteering_count = collection.sum(:volunteering_count)
+    unmodified_attributes.delete('volunteering_count')
+  end
+
+  def grab_modified_attributes_from_collection
+    MODIFIED_ATTRIBUTES.each do |attr|
+      athlete.public_send "#{attr}=", athlete.send(attr) || collection.where.not(attr => nil).take&.send(attr)
+      unmodified_attributes.delete(attr)
+    end
+  end
+
+  def unmodified_attributes
+    @unmodified_attributes ||= athlete.attribute_names - SKIPPED_ATTRIBUTES
+  end
+
+  def check_modified_fields
+    return if unmodified_attributes.empty?
+
+    message = "AthleteReuniter skips modification of public attribute(s): #{unmodified_attributes}"
+    raise StandardError, message if Rails.env.test?
+
+    Rails.logger.warn message
   end
 
   def replace_all_by_one

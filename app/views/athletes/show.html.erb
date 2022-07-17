@@ -4,7 +4,7 @@
 <% if @total_results.zero? %>
   <p>Пока не было результатов.</p>
 <% else %>
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>#</th>
@@ -25,12 +25,11 @@
   <p>Пока не было волонтёрств.</p>
 <% else %>
   <p>Всего волонтёрств <%= @total_vol %>.</p>
-  <% roles = @athlete.volunteering.pluck(:role).uniq %>
   <div class="accordion accordion-flush" id="accordionRoles">
-    <% roles.each do |role| %>
+    <% @athlete.volunteering.pluck(:role).uniq.each do |role| %>
       <% volunteering = @athlete.volunteering.includes(activity: :event).where(role: role) %>
       <div class="accordion-item">
-        <h2 class="accordion-header" id=<%= "flush-heading-#{role}" %>>
+        <h2 id=<%= "flush-heading-#{role}" %> class="accordion-header">
           <button class="accordion-button collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target=<%= "#flush-collapse-#{role}" %> aria-expanded="false" aria-controls=<%= "flush-collapse-#{role}" %>>
             <span class="badge text-bg-secondary bg-primary me-3"><%= volunteering.size %></span>
             <%= human_volunteer_role role %>
