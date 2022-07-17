@@ -1,3 +1,8 @@
 RSpec.describe Contact, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.not_to be_valid }
+
+  it 'valid with event, link and contact_type' do
+    contact = build :contact
+    expect(contact).to be_valid
+  end
 end
