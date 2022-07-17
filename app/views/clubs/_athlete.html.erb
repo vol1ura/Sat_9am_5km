@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to athlete.first.name, athlete_path(athlete.first) %></td>
+  <td class="hidden-on-phone"><%= athlete.first.parkrun_code %></td>
+  <td><%= athlete.last %></td>
+  <td class="hidden-on-phone"><%= athlete.first.volunteering.size %></td>
+  <td><%= human_result_time athlete.first.results.order(:total_time).first&.total_time %></td>
+</tr>

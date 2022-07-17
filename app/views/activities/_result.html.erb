@@ -18,6 +18,9 @@
     <% end %>
   </td>
   <td><%= human_result_time(result.total_time) %></td>
-  <td class="hidden-on-phone"><%= result.athlete&.club&.name %></td>
+  <td class="hidden-on-phone">
+    <% club = result.athlete&.club %>
+    <%= link_to club.name, club if club %>
+  </td>
   <td class="hidden-on-phone"><%= result.athlete&.gender %></td>
 </tr>
