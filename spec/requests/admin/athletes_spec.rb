@@ -16,6 +16,7 @@ RSpec.describe '/admin/athletes', type: :request do
   describe 'GET /show' do
     it 'renders a successful response' do
       athlete = create :athlete
+      create_list :volunteer, 3, :with_published_activity, athlete: athlete
       get admin_athlete_url(athlete)
       expect(response).to be_successful
     end
