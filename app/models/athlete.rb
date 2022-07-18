@@ -7,6 +7,8 @@ class Athlete < ApplicationRecord
   belongs_to :club, optional: true
   belongs_to :user, optional: true
 
+  has_many :trophies, dependent: :destroy
+  has_many :badges, through: :trophies
   has_many :results, dependent: :nullify
   has_many :activities, through: :results
   has_many :events, through: :activities

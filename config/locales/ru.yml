@@ -23,6 +23,12 @@ ru:
       contact:
         one: контакт
         other: Контакты
+      badge:
+        one: медалька
+        other: Медальки
+      trophy:
+        one: достижение
+        other: Достижения
 
     attributes:
       user:
@@ -101,6 +107,12 @@ ru:
           instagram: инстаграм
           facebook: фейсбук
           strava: страва
+      badge:
+        name: название
+        conditions: 'условия получения'
+        picture_link: 'путь к картинке'
+      trophy:
+        date: 'дата получения'
 
     errors:
       messages:
@@ -113,6 +125,14 @@ ru:
           attributes:
             code_name:
               invalid: 'только строчные латинские буквы и символ "_" вместо пробела'
+        badge:
+          attributes:
+            picture_link:
+              invalid: 'символы <, > и пробелы запрещены'
+        contact:
+          attributes:
+            link:
+              invalid: 'символы < и > запрещены'
 
   date:
     abbr_day_names:
@@ -146,8 +166,8 @@ ru:
     - пятница
     - суббота
     formats:
-      default: "%d %B %Y"
-      long: "%-d %B %Y"
+      default: "%-d %B %Y"
+      long: "%d %B %Y"
       short: "%-d %b"
     month_names:
     -

@@ -10,7 +10,7 @@ ActiveAdmin.register Volunteer do
   index download_links: false do
     selectable_column
     column :athlete
-    column('Забег') { |v| human_activity_name(v.activity) }
+    column('Забег') { |v| human_activity_name v.activity }
     column('Роль') { |v| human_volunteer_role v.role }
     actions
   end
