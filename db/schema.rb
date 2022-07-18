@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_11_175928) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_18_184146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_175928) do
     t.index ["user_id"], name: "index_athletes_on_user_id"
   end
 
+  create_table "badges", force: :cascade do |t|
+    t.string "name"
+    t.text "conditions"
+    t.string "picture_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "clubs", force: :cascade do |t|
     t.string "name"
   end
@@ -86,6 +94,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_175928) do
     t.bigint "athlete_id"
     t.index ["activity_id"], name: "index_results_on_activity_id"
     t.index ["athlete_id"], name: "index_results_on_athlete_id"
+  end
+
+  create_table "trophies", force: :cascade do |t|
+    t.bigint "badge_id", null: false
+    t.bigint "athlete_id", null: false
+    t.date "date"
+    t.index ["athlete_id"], name: "index_trophies_on_athlete_id"
+    t.index ["badge_id", "athlete_id"], name: "index_trophies_on_badge_id_and_athlete_id", unique: true
+    t.index ["badge_id"], name: "index_trophies_on_badge_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -124,6 +141,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_175928) do
   add_foreign_key "contacts", "events"
   add_foreign_key "results", "activities"
   add_foreign_key "results", "athletes"
+  add_foreign_key "trophies", "athletes"
+  add_foreign_key "trophies", "badges"
   add_foreign_key "volunteers", "activities"
   add_foreign_key "volunteers", "athletes"
 end

@@ -5,6 +5,18 @@
   <% end %>
 </h1>
 
+<% if @athlete.trophies.exists? %>
+  <div class="row row-cols-3 row-cols-md-6">
+    <% @athlete.trophies.each do |trophy| %>
+      <div class="col">
+        <div class="card p-2">
+          <%= image_tag trophy.badge.picture_link, class: "card-img-top" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
 <h2>Все забеги</h2>
 <% if @total_results.zero? %>
   <p>Пока не было результатов.</p>

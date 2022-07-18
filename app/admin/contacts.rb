@@ -4,7 +4,10 @@ ActiveAdmin.register Contact do
   belongs_to :event
   includes :event
 
-  permit_params :link, :contact_type, :event_id
+  permit_params do
+    permitted = %i[contact_type event_id]
+    permitted << :link if current_user.admin?
+  end
 
   index download_links: false do
     selectable_column
