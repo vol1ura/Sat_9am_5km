@@ -9,7 +9,9 @@
   <div class="d-flex justify-content-start flex-wrap">
     <% @athlete.trophies.each do |trophy| %>
       <div class="p-1">
-        <%= image_tag trophy.badge.picture_link, class: 'trophy' %>
+        <%= link_to badges_path do
+              image_tag trophy.badge.picture_link, class: 'trophy'
+            end %>
       </div>
     <% end %>
   </div>
