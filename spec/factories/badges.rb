@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :badge do
-    name { 'MyString' }
-    description { 'MyText' }
-    image_link { 'MyString' }
+    name { Faker::Fantasy::Tolkien.character }
+    conditions { Faker::Lorem.paragraph }
+    picture_link { 'badges/sm_fest.png' }
   end
 end
