@@ -1,0 +1,9 @@
+.trophy {
+  max-width: 100px;
+}
+
+@media (max-width: 768px) {
+  .trophy {
+    max-width: 75px;
+  }
+}
