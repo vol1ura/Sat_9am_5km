@@ -6,12 +6,10 @@
 </h1>
 
 <% if @athlete.trophies.exists? %>
-  <div class="row row-cols-3 row-cols-md-6">
+  <div class="d-flex justify-content-start flex-wrap">
     <% @athlete.trophies.each do |trophy| %>
-      <div class="col">
-        <div class="card p-2">
-          <%= image_tag trophy.badge.picture_link, class: "card-img-top" %>
-        </div>
+      <div class="p-1">
+        <%= image_tag trophy.badge.picture_link, class: 'trophy' %>
       </div>
     <% end %>
   </div>
