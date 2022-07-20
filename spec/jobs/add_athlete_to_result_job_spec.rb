@@ -1,7 +1,16 @@
 RSpec.describe AddAthleteToResultJob, type: :job do
   ActiveJob::Base.queue_adapter = :test
 
+  let(:activity) { create :activity }
+  let(:result) { create :result, activity: activity }
+  let(:athlete) { create :athlete }
+
   it 'performs immediately' do
-    expect { described_class.perform_later }.to have_enqueued_job.at(:no_wait)
+    expect { described_class.perform_later(activity, []) }.to have_enqueued_job.on_queue('default').at(:no_wait)
+  end
+
+  it 'updates result' do
+    described_class.perform_now(activity, ["A#{athlete.parkrun_code}", "P#{result.position}"])
+    expect(result.reload.athlete).to eq athlete
   end
 end

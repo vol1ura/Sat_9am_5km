@@ -55,4 +55,27 @@ RSpec.describe '/admin/athletes', type: :request do
       end
     end
   end
+
+  describe 'POST /admin/athletes' do
+    before do
+      user.admin!
+    end
+
+    let(:result) { create :result, athlete: nil }
+    let(:valid_attributes) do
+      {
+        athlete: {
+          name: Faker::Name.name,
+          result_id: result.id
+        }
+      }
+    end
+
+    it 'creates a new contact' do
+      expect do
+        post admin_athletes_url, params: valid_attributes
+      end.to change(Athlete, :count).by(1)
+      expect(result.reload.athlete).to be_present
+    end
+  end
 end
