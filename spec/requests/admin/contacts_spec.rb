@@ -22,4 +22,26 @@ RSpec.describe '/admin/contacts', type: :request do
       expect(response).to be_successful
     end
   end
+
+  describe 'POST /admin/contacts' do
+    before do
+      user.admin!
+    end
+
+    let(:event) { create :event }
+    let(:valid_attributes) do
+      {
+        contact: {
+          contact_type: :vk,
+          link: Faker::Internet.url
+        }
+      }
+    end
+
+    it 'creates a new contact' do
+      expect do
+        post admin_event_contacts_url(event), params: valid_attributes
+      end.to change(Contact, :count).by(1)
+    end
+  end
 end
