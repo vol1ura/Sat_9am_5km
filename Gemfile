@@ -11,6 +11,7 @@ gem 'sassc-rails'
 gem 'rails', '~> 7.0.3'
 
 gem 'activeadmin'
+gem 'barby', require: false
 gem 'bootstrap', '~> 5.1.3'
 gem 'cancancan', '~> 3.3'
 gem 'devise', '~> 4.8'
@@ -20,6 +21,7 @@ gem 'nokogiri'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
+# gem 'stimulus'
 gem 'turbo-rails', '~> 1.1'
 
 gem 'hiredis'
