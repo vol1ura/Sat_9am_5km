@@ -7,7 +7,7 @@ class ClubsController < ApplicationController
 
   def show
     @club = Club.find(params[:id])
-    @athletes = Result.joins(:athlete).where(athlete: { club: @club })
-                      .group(:athlete).order('count_athlete DESC').count(:athlete)
+    @count_results = Athlete.left_joins(:results).where(club: @club).group('athletes.id').count('results.id')
+    @athletes = Athlete.where(club: @club)
   end
 end

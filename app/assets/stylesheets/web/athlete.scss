@@ -1,5 +1,10 @@
+.acc-li-s {
+  min-width: 150px;
+}
+
 @media (min-width: 768px) {
   .acc-li-s {
+    min-width: 200px;
     margin-left: 2vw;
   }
 }
