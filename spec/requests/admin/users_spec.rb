@@ -21,6 +21,30 @@ RSpec.describe '/admin/users', type: :request do
     end
   end
 
+  describe 'PATCH /admin/users/1' do
+    before do
+      user.admin!
+    end
+
+    let(:valid_attributes) do
+      {
+        user: {
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
+          email: Faker::Internet.free_email,
+          password: user.password,
+          password_confirmation: user.password
+        }
+      }
+    end
+
+    xit "updates user's data" do
+      expect do
+        patch admin_user_url(user), params: valid_attributes
+      end.to change(user, :email).from(user.email).to(valid_attributes.dig(:user, :email))
+    end
+  end
+
   describe 'POST /admin/users/batch_action' do
     before do
       user.admin!
