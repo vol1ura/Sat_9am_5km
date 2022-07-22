@@ -16,10 +16,33 @@
 - [ ] Migrate to Stimulus and Hotwire on frontend
 - [ ] CI-CD with GitHub Actions and Capistrano
 - [ ] Add Redis and configure adapter for async jobs
-- [ ] Add scheduled backups
+- [x] Add scheduled backups
 - [ ] Add logrotate
 
 ## Development
+
+Create `deploy/.env` file.
+```shell
+SMTP_SERVER=smtp.test.ru
+APP_DOMAIN=test.ru
+APP_HOST=test.ru
+EMAIL_FROM='some@test.ru'
+```
+
+Create `config/database.yml`
+```yaml
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  database: s95_development
+  host: db
+  pool: 5
+  username: postgres
+  password: 123456
+test:
+  <<: *default
+  database: s95_test
+```
 
 To build project install `Docker` and `docker-compose` and execute
 ```shell
@@ -33,7 +56,7 @@ make proj
 
 ## Deploy
 
-#### 1. Configure server
+### 1. Configure server
 
 ```shell
 # server
@@ -46,20 +69,20 @@ adduser <deploy-user> sudo
 ssh-copy-id root@1.2.3.4
 ssh-copy-id <deploy-user>@1.2.3.4
 ```
-#### 2. Install rbenv
+### 2. Install rbenv
 
-#### 3. Install postgresql
+### 3. Install postgresql
 
-#### 4. Install nginx
+### 4. Install nginx
 
-#### 5. Create app dir and copy keys
+### 5. Create app dir and copy keys
 
 ```shell
 scp config/master.key <deploy-user>@1.2.3.4:/home/<deploy-user>/apps/<app-name>/shared/config/master.key
 scp ./deploy/.rbenb-vars <deploy-user>@1.2.3.4:/home/<deploy-user>/apps/<app-name>/.rbenv-vars
 ```
 
-#### 6. Run Capistrano
+### 6. Run Capistrano
 First time
 ```shell
 cap production puma:config
@@ -73,7 +96,7 @@ After push
 cap production deploy
 ```
 
-#### 7. Install certificate
+### 7. Install certificate
 Instructions on https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
 
 Test automatic renewal
@@ -87,7 +110,7 @@ vim /etc/ssh/sshd_config # set PasswordAuthentication no
 systemctl restart ssh
 ```
 
-### For Heroku
+### * For Heroku
 
 To solve problem with building `mini_racer` on heroku:
 ```shell
@@ -105,7 +128,7 @@ heroku pg:backups:capture --app <app-name>
 heroku pg:backups:download --app <app-name>
 ```
 
-### Database
+## Database
 
 Restore database
 ```shell
