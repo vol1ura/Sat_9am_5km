@@ -4,7 +4,7 @@
     <span class="badge bg-light"><%= link_to @athlete.club.name, @athlete.club, style: 'text-decoration: none;' %></span>
   <% end %>
   <% if @athlete.parkrun_code %>
-    <button type="button" class="btn btn-outline-primary ms-2" data-bs-toggle="modal" data-bs-target="#barcodeModal">
+    <button type="button" class="btn btn-outline-primary btn-light ms-2" data-bs-toggle="modal" data-bs-target="#barcodeModal">
       <i class="bi bi-upc-scan"></i>
     </button>
   <% end %>
@@ -66,7 +66,7 @@
                     <div class="acc-li-s">
                       <%= link_to l(vol.activity.date), activity_path(vol.activity_id) %>
                     </div>
-                    <div class="ms-5">
+                    <div class="ms-3">
                       <%= link_to vol.activity.event.name, event_path(code_name: vol.activity.event.code_name) %>
                     </div>
                   </div>
