@@ -3,6 +3,11 @@
   <% if @athlete.club %>
     <span class="badge bg-light"><%= link_to @athlete.club.name, @athlete.club, style: 'text-decoration: none;' %></span>
   <% end %>
+  <% if @athlete.parkrun_code %>
+    <button type="button" class="btn btn-outline-primary ms-2" data-bs-toggle="modal" data-bs-target="#barcodeModal">
+      <i class="bi bi-upc-scan"></i>
+    </button>
+  <% end %>
 </h1>
 
 <% if @athlete.trophies.exists? %>
@@ -58,10 +63,10 @@
               <% volunteering.each do |vol| %>
                 <li class="list-group-item">
                   <div class="hstack">
-                    <div>
+                    <div class="acc-li-s">
                       <%= link_to l(vol.activity.date), activity_path(vol.activity_id) %>
                     </div>
-                    <div class="ms-auto">
+                    <div class="ms-5">
                       <%= link_to vol.activity.event.name, event_path(code_name: vol.activity.event.code_name) %>
                     </div>
                   </div>
@@ -74,3 +79,21 @@
     <% end %>
   </div>
 <% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="barcodeModal" tabindex="-1" aria-labelledby="barcodeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="barcodeModalLabel">A<%= @athlete.parkrun_code %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex justify-content-center">
+        <div><%== @barcode %></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
