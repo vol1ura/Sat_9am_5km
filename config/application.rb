@@ -11,12 +11,12 @@ require 'action_mailer/railtie'
 # require 'action_mailbox/engine'
 # require 'action_text/engine'
 require 'action_view/railtie'
-# require 'action_cable/engine'
+require 'action_cable/engine'
 require 'sprockets/railtie'
 
 Bundler.require(*Rails.groups)
 
-module KuzminkiRun
+module Sat9am5km
   class Application < Rails::Application
     config.time_zone = ENV.fetch('TZ', 'Europe/Moscow')
     config.i18n.default_locale = :ru

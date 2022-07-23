@@ -12,17 +12,16 @@ gem 'rails', '~> 7.0.3'
 
 gem 'activeadmin'
 gem 'barby', require: false
-gem 'bootstrap', '~> 5.1.3'
+gem 'bootstrap', '~> 5.2.0'
 gem 'cancancan', '~> 3.3'
 gem 'devise', '~> 4.8'
 gem 'devise-i18n'
+# gem 'hotwire-rails'
 gem 'jbuilder'
 gem 'nokogiri'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'sprockets-rails'
-# gem 'stimulus'
-gem 'turbo-rails', '~> 1.1'
 
 gem 'hiredis'
 gem 'redis'
@@ -62,7 +61,4 @@ group :development do
   # gem 'capistrano-postgresql', '~> 6.2', require: false
   gem 'capistrano-rails', '~>1.6', require: false
   gem 'capistrano-rbenv', '~>2.2.0', require: false
-
-  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
-  gem 'ed25519', '>= 1.2', '< 2.0'
 end

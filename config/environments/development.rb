@@ -57,6 +57,8 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  config.logger = Logger.new(Rails.root.join('log', "#{Rails.env}.log"), 3, 1.megabytes)
+
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
@@ -65,7 +67,7 @@ Rails.application.configure do
   end
 
   # Raises error for missing translations.
-  # config.i18n.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
