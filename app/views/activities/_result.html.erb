@@ -1,5 +1,5 @@
 <tr>
-  <td class="position"><%= result.position %></td>
+  <td class="position"><%= result_counter.next %></td>
   <td>
     <% if result.athlete.present? %>
       <div>
@@ -23,5 +23,4 @@
     <% club = result.athlete&.club %>
     <%= link_to club.name, club if club %>
   </td>
-  <td class="hidden-on-phone"><%= result.athlete&.gender %></td>
 </tr>

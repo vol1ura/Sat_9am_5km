@@ -16,21 +16,30 @@
 <% end %>
 
 <h4>Протокол</h4>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Поз.</th>
-      <th>Участник</th>
-      <th>Результат</th>
-      <th>Темп</th>
-      <th class="hidden-on-phone">Клуб</th>
-      <th class="hidden-on-phone">Пол</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render partial: 'result', collection: @results, locals: { counts: @counts } %>
-  </tbody>
-</table>
+
+<ul class="nav nav-tabs" id="protocol" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="absolut-tab" data-bs-toggle="tab" data-bs-target="#absolut-tab-pane" type="button" role="tab" aria-controls="absolut-tab-pane" aria-selected="true">Абсолют</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="male-tab" data-bs-toggle="tab" data-bs-target="#male-tab-pane" type="button" role="tab" aria-controls="male-tab-pane" aria-selected="false">Мужчины</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="female-tab" data-bs-toggle="tab" data-bs-target="#female-tab-pane" type="button" role="tab" aria-controls="female-tab-pane" aria-selected="false">Женщины</button>
+  </li>
+</ul>
+
+<div class="tab-content" id="protocolContent">
+  <div class="tab-pane fade show active" id="absolut-tab-pane" role="tabpanel" aria-labelledby="absolut-tab" tabindex="0">
+    <%= render partial: 'protocol', locals: { results: @results, counts: @counts } %>
+  </div>
+  <div class="tab-pane fade" id="male-tab-pane" role="tabpanel" aria-labelledby="male-tab" tabindex="0">
+    <%= render partial: 'protocol', locals: { results: @results.where(athlete: { male: true }), counts: @counts } %>
+  </div>
+  <div class="tab-pane fade" id="female-tab-pane" role="tabpanel" aria-labelledby="female-tab" tabindex="0">
+    <%= render partial: 'protocol', locals: { results: @results.where(athlete: { male: false }), counts: @counts } %>
+  </div>
+</div>
 
 <div class="text-center">
   <%= link_to "Недавние забеги", activities_path %>
