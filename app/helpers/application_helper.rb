@@ -11,7 +11,7 @@ module ApplicationHelper
     return unless time
 
     avg_sec = ((((time.hour * 60) + time.min) * 60) + time.sec) / 5
-    format '%d:%02d', avg_sec / 60, avg_sec % 60
+    format '%<min>d:%<sec>02d', min: avg_sec / 60, sec: avg_sec % 60
   end
 
   def human_activity_name(activity)

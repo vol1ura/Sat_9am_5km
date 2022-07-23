@@ -32,6 +32,7 @@
         <th>#</th>
         <th>Дата</th>
         <th>Время</th>
+        <th class="hidden-on-phone">Темп</th>
         <th class="hidden-on-phone">Место</th>
         <th>Мероприятие</th>
       </tr>
@@ -53,7 +54,7 @@
       <div class="accordion-item">
         <h2 id=<%= "flush-heading-#{role}" %> class="accordion-header">
           <button class="accordion-button collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target=<%= "#flush-collapse-#{role}" %> aria-expanded="false" aria-controls=<%= "flush-collapse-#{role}" %>>
-            <span class="badge text-bg-secondary bg-primary me-3"><%= volunteering.size %></span>
+            <span class="badge text-bg-ligth bg-primary me-3"><%= volunteering.size %></span>
             <%= human_volunteer_role role %>
           </button>
         </h2>
