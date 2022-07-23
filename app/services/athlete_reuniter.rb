@@ -58,6 +58,7 @@ class AthleteReuniter < ApplicationService
     ActiveRecord::Base.transaction do
       Result.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
       Volunteer.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails/SkipsModelValidations
+      Trophy.where(athlete_id: ids).update_all(athlete_id: athlete.id) # rubocop:disable Rails::SkipsModelValidations
       collection.where.not(id: athlete.id).destroy_all
       athlete.save!
     end
