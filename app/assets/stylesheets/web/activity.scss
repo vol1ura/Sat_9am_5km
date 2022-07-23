@@ -1,9 +1,15 @@
 .position {
   color: $primary !important;
-  @extend .fs-2;
+  @extend .fs-3;
 }
 
 .athlete-link {
   text-decoration: none;
   font-weight: 800;
+}
+
+@media (max-width: 576px) {
+  .athlete-details {
+    font-size: small;
+  }
 }
