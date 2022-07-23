@@ -21,6 +21,10 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
   end
 
+  describe '#human_result_pace' do
+    it 'represents pace'
+  end
+
   describe '#human_activity_name' do
     it 'returns formatted string' do
       activity = create :activity
