@@ -1,0 +1,14 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><div class="d-block d-sm-none">Поз.</div><div class="d-none d-sm-block">Место</div></th>
+      <th>Участник</th>
+      <th>Результат</th>
+      <th>Темп</th>
+      <th class="hidden-on-phone">Клуб</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'result', collection: results, locals: { counts: counts } %>
+  </tbody>
+</table>
