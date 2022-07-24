@@ -42,25 +42,15 @@ ActiveAdmin.register Result do
   end
 
   member_action :up, method: :put, if: proc { can? :manage, Result } do
-    athlete = resource.athlete
-    @pred_result = Result.find_by(position: resource.position.pred, activity: resource.activity)
-    if @pred_result
-      resource.update!(athlete: @pred_result.athlete)
-      @pred_result.update!(athlete: athlete)
-    else
-      render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
-    end
+    @pred_result = resource.swap_with_position(resource.position.pred)
+  rescue StandardError
+    render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
   end
 
   member_action :down, method: :put, if: proc { can? :manage, Result } do
-    athlete = resource.athlete
-    @next_result = Result.find_by(position: resource.position.next, activity: resource.activity)
-    if @next_result
-      resource.update!(athlete: @next_result.athlete)
-      @next_result.update!(athlete: athlete)
-    else
-      render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
-    end
+    @next_result = resource.swap_with_position(resource.position.next)
+  rescue StandardError
+    render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
   end
 
   action_item :activity, only: :index do
