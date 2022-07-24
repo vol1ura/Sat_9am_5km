@@ -1,0 +1,7 @@
+$row1 = $('#result_<%= @pred_result.id %>');
+$row2 = $('#result_<%= resource.id %>');
+
+athlete1 = $row1.find('.col-athlete').html();
+athlete2 = $row2.find('.col-athlete').html();
+$row1.find('.col-athlete').html(athlete2);
+$row2.find('.col-athlete').html(athlete1);

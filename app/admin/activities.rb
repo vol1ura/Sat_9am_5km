@@ -38,4 +38,8 @@ ActiveAdmin.register Activity do
       ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
     end
   end
+
+  action_item :results, only: %i[show edit] do
+    link_to 'Редактор результатов', admin_activity_results_path(resource)
+  end
 end
