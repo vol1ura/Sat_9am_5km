@@ -2,6 +2,7 @@ RSpec.describe '/admin/users', type: :request do
   let(:user) { create(:user) }
 
   before do
+    user.admin!
     sign_in user
   end
 
@@ -15,39 +16,46 @@ RSpec.describe '/admin/users', type: :request do
 
   describe 'GET /admin/users/1' do
     it 'renders a successful response' do
-      user = create :user
       get admin_user_url(user)
       expect(response).to be_successful
     end
   end
 
-  describe 'PATCH /admin/users/1' do
-    before do
-      user.admin!
+  describe 'PATCH /admin/users/1/edit' do
+    it 'renders full form' do
+      get edit_admin_user_url(user)
+      expect(response).to be_successful
+      expect(response.body).to include 'user[role]'
     end
 
+    context 'when user is not admin' do
+      it 'not contains user role field' do
+        user.uploader!
+        get edit_admin_user_url(user)
+        expect(response.body).not_to include 'user[role]'
+      end
+    end
+  end
+
+  describe 'PATCH /admin/users/1' do
     let(:valid_attributes) do
       {
         user: {
           first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-          email: Faker::Internet.free_email,
           password: user.password,
           password_confirmation: user.password
         }
       }
     end
 
-    xit "updates user's data" do
-      expect do
-        patch admin_user_url(user), params: valid_attributes
-      end.to change(user, :email).from(user.email).to(valid_attributes.dig(:user, :email))
+    it "updates user's data" do
+      patch admin_user_url(user), params: valid_attributes
+      expect(user.reload.first_name).to eq valid_attributes.dig(:user, :first_name)
     end
   end
 
   describe 'POST /admin/users/batch_action' do
     before do
-      user.admin!
       Bullet.unused_eager_loading_enable = false
     end
 

@@ -1,7 +1,8 @@
-$row1 = $('#result_<%= resource.id %>');
-$row2 = $('#result_<%= @next_result.id %>');
+$row1 = document.getElementById('<%= dom_id resource %>');
+$row2 = document.getElementById('<%= dom_id @next_result %>');
 
-athlete1 = $row1.find('.col-athlete').html();
-athlete2 = $row2.find('.col-athlete').html();
-$row1.find('.col-athlete').html(athlete2);
-$row2.find('.col-athlete').html(athlete1);
+athlete1 = $row1.querySelector('.col-athlete').innerHTML;
+athlete2 = $row2.querySelector('.col-athlete').innerHTML;
+
+$row1.querySelector('.col-athlete').innerHTML = athlete2;
+$row2.querySelector('.col-athlete').innerHTML = athlete1;

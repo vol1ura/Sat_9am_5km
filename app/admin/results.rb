@@ -18,10 +18,10 @@ ActiveAdmin.register Result do
     column :position
     column :athlete
     column(:total_time) { |r| human_result_time(r.total_time) }
-    column('Забег') { |r| human_activity_name(r.activity) }
     column('Изменение позиции') do |r|
       render partial: 'up_down', locals: { activity: activity, result: r }
     end
+    column('Забег') { |r| human_activity_name(r.activity) }
     actions
   end
 
