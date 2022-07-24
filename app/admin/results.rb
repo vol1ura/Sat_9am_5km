@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Result do
-  # belongs_to :activity
+  belongs_to :activity
 
   includes :athlete, activity: :event
 
-  actions :all, except: :new
+  actions :all
+
+  config.sort_order = 'position_asc'
+  config.paginate = false
+  config.filters = false
 
   permit_params :total_time, :position, :athlete_id
 
@@ -13,9 +17,11 @@ ActiveAdmin.register Result do
     selectable_column
     column :position
     column :athlete
-    column('Результат') { |r| human_result_time(r.total_time) }
+    column(:total_time) { |r| human_result_time(r.total_time) }
     column('Забег') { |r| human_activity_name(r.activity) }
-    column :user
+    column('Изменение позиции') do |r|
+      render partial: 'up_down', locals: { activity: activity, result: r }
+    end
     actions
   end
 
@@ -33,5 +39,31 @@ ActiveAdmin.register Result do
         flash[:alert] = I18n.t('active_admin.results.cannot_link_athlete')
       end
     end
+  end
+
+  member_action :up, method: :put, if: proc { can? :manage, Result } do
+    athlete = resource.athlete
+    @pred_result = Result.find_by(position: resource.position.pred, activity: resource.activity)
+    if @pred_result
+      resource.update!(athlete: @pred_result.athlete)
+      @pred_result.update!(athlete: athlete)
+    else
+      render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
+    end
+  end
+
+  member_action :down, method: :put, if: proc { can? :manage, Result } do
+    athlete = resource.athlete
+    @next_result = Result.find_by(position: resource.position.next, activity: resource.activity)
+    if @next_result
+      resource.update!(athlete: @next_result.athlete)
+      @next_result.update!(athlete: athlete)
+    else
+      render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
+    end
+  end
+
+  action_item :activity, only: :index do
+    link_to 'Просмотр забега', admin_activity_path(params[:activity_id])
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource] do |f|
+active_admin_form_for [:admin, activity, resource] do |f|
   f.semantic_errors(*f.object.errors.attribute_names)
   columns do
     column do
@@ -25,6 +25,7 @@ active_admin_form_for [:admin, resource] do |f|
   end
   columns do
     column do
+      para 'Внимание! При изменении здесь времени, место изменено НЕ будет!'
       f.inputs 'Результат (Часы:Минуты:Секунды)' do
         div style: 'padding-left: 3rem;' do
           f.time_select :total_time, include_seconds: true, ignore_date: true,
@@ -33,6 +34,7 @@ active_admin_form_for [:admin, resource] do |f|
       end
     end
     column do
+      para 'Внимание! При изменении здесь номера, время изменено НЕ будет!'
       f.inputs do
         f.input :position
       end

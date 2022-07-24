@@ -20,7 +20,9 @@ panel 'Протокол' do
       end
     end
     column('Результат') do |r|
-      link_to human_result_time(r.total_time), edit_admin_result_path(r), target: '_blank', rel: 'noopener'
+      link_to human_result_time(r.total_time),
+              edit_admin_activity_result_path(activity, r),
+              target: '_blank', rel: 'noopener'
     end
     column('Пол') { |r| r.athlete&.gender }
     column('Клуб') { |r| r.athlete&.club&.name }
