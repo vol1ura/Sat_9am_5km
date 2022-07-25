@@ -9,15 +9,18 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-          <%= link_to 'Мероприятия', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events' || params[:page] == 'join'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+          <%= link_to 'Мероприятия', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
           <ul class="dropdown-menu" aria-labelledby="eventDropdown">
             <% Event.order(:name).each do |event| %>
               <li><%= link_to event.name, event_path(event.code_name), class: 'dropdown-item' %></li>
             <% end %>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <%= link_to 'Хотите организовать у себя?', page_path(page: :join), class:'dropdown-item' %>
-            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <%= link_to 'Результаты', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'activities'}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+          <ul class="dropdown-menu" aria-labelledby="dataDropdown">
+            <li><%= link_to 'Недавние результаты', activities_path, class: 'dropdown-item' %></li>
+            <li><%= link_to 'Клубные рейтинги', clubs_path, class: 'dropdown-item' %></li>
           </ul>
         </li>
         <li class="nav-item">
