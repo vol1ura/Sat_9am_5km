@@ -51,7 +51,7 @@ make build_proj
 
 Now you can run it
 ```shell
-make proj
+make
 ```
 
 ## Deploy
