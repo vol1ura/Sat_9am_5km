@@ -1,3 +1,5 @@
+target: proj
+
 proj:
 	docker-compose ps | grep -E 'kuzminki.run.web.*Up' || docker-compose up -d
 	docker attach `docker-compose ps | grep web | cut -d ' ' -f1`
