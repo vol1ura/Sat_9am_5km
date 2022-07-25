@@ -1,0 +1,11 @@
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  database: s95_development
+  host: db
+  pool: 5
+  username: postgres
+  password: 123456
+test:
+  <<: *default
+  database: s95_test

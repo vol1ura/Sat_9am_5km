@@ -21,30 +21,13 @@
 
 ## Development
 
-Create `deploy/.env` file.
+Create `deploy/.env` and `config/database.yml` files:
 ```shell
-SMTP_SERVER=smtp.test.ru
-APP_DOMAIN=test.ru
-APP_HOST=test.ru
-EMAIL_FROM='some@test.ru'
+cp .env.example ./deploy/.env
+cp ./config/database.yml.example ./config/database.yml
 ```
 
-Create `config/database.yml`
-```yaml
-development: &default
-  adapter: postgresql
-  encoding: unicode
-  database: s95_development
-  host: db
-  pool: 5
-  username: postgres
-  password: 123456
-test:
-  <<: *default
-  database: s95_test
-```
-
-To build project install `Docker` and `docker-compose` and execute
+To build project install `Docker`, `docker-compose` and execute
 ```shell
 make build_proj
 ```
