@@ -3,7 +3,8 @@
 class ActivitiesController < ApplicationController
   def index
     today = Date.current
-    @activities = Activity.published.includes(:event).where('date >= ?', today.sunday? ? today.monday : today.prev_week)
+    date_since = today.sunday? ? today.monday : today.prev_week
+    @activities = Activity.published.includes(:event).where(date: date_since..).order('events.name')
   end
 
   def show

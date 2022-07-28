@@ -30,6 +30,6 @@ ActiveAdmin.register Badge do
       li link_to 'Обладатели медалькой', admin_badge_trophies_path(resource)
     end
     h3 'Предпросмотр'
-    image_tag resource.picture_link
+    image_tag resource.picture_link, class: 'img-badge'
   end
 end

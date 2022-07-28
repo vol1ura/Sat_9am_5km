@@ -5,7 +5,7 @@ class AthletesController < ApplicationController
     query = params[:name].to_s.strip
     criteria = Athlete.includes(:club)
     @athletes =
-      if query.blank?
+      if query.length < 3
         Athlete.none
       elsif query.match?(/^\d+$/)
         criteria.where('parkrun_code = :number OR fiveverst_code = :number', number: query.to_i)
