@@ -8,10 +8,15 @@
 
 ## TODO
 
-- [ ] FEATURE: Up and down athletes in protocol
+- [x] FEATURE: Up and down athletes in protocol
 - [ ] FEATURE: Insert and remove athletes in protocol
+- [ ] FEATURE: Volunteers schedule list
+- [ ] FEATURE: Diagrams tab on activity show page - pie men/women, gist bar by result with median
+- [ ] FEATURE: Diagrams tab on clubs index page - men/women in club, counts, top athlete
+- [ ] FEATURE: Diagrams tab on athlete page - results dynamics, 
 - [ ] Top50 results for men and women for each event
 - [ ] Separate page with activities inside event
+- [ ] Event specific top menu
 - [x] Remove mini-racer from the project
 - [ ] Migrate to Stimulus and Hotwire on frontend
 - [ ] CI-CD with GitHub Actions and Capistrano

@@ -7,10 +7,10 @@ module ApplicationHelper
     time.strftime(time.hour.zero? ? '%M:%S' : '%H:%M:%S')
   end
 
-  def human_result_pace(time)
+  def human_result_pace(time, distance = 5)
     return unless time
 
-    avg_sec = ((((time.hour * 60) + time.min) * 60) + time.sec) / 5
+    avg_sec = ((((time.hour * 60) + time.min) * 60) + time.sec) / distance
     format '%<min>d:%<sec>02d', min: avg_sec / 60, sec: avg_sec % 60
   end
 
