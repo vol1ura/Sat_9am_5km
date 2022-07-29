@@ -14,13 +14,14 @@ gem 'activeadmin'
 gem 'barby', require: false
 gem 'bootstrap', '~> 5.2.0'
 gem 'cancancan', '~> 3.3'
+gem 'chartkick'
 gem 'devise', '~> 4.8'
 gem 'devise-i18n'
-# gem 'hotwire-rails'
+gem 'hotwire-rails'
 gem 'jbuilder'
 gem 'nokogiri'
-gem 'pg', '~> 1.1'
-gem 'puma', '~> 5.0'
+gem 'pg', '~> 1.3'
+gem 'puma', '~> 5.6'
 gem 'sprockets-rails'
 
 gem 'hiredis'
@@ -30,9 +31,12 @@ group :development, :test do
   gem 'brakeman'
   gem 'bullet'
   gem 'bundler-audit'
-  gem 'byebug'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  # gem 'ffaker'
+  gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'pry-rails'
   gem 'rspec-rails', '~> 6.0.0.rc'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
@@ -51,14 +55,15 @@ group :test do
 end
 
 group :development do
-  gem 'pry-byebug'
-  gem 'pry-doc'
-  gem 'pry-rails'
   gem 'rack-mini-profiler'
 
+  # Deploy
   gem 'capistrano', '~> 3.17', require: false
   gem 'capistrano3-puma', require: false
   # gem 'capistrano-postgresql', '~> 6.2', require: false
-  gem 'capistrano-rails', '~>1.6', require: false
-  gem 'capistrano-rbenv', '~>2.2.0', require: false
+  gem 'capistrano-rails', '~> 1.6', require: false
+  gem 'capistrano-rbenv', '~> 2.2.0', require: false
+
+  gem 'bcrypt_pbkdf', '~> 1.0'
+  gem 'ed25519', '~> 1.3'
 end
