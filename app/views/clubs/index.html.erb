@@ -1,14 +1,28 @@
 <h2>Клубы</h2>
+
+<!--<div data-controller="hello" id="app"></div>
+<div id="root"></div>-->
+<%#= column_chart Athlete.where.not(club: nil).group(:club).count.transform_keys { |k| k&.name } %>
+
 <table class="table table-striped">
-  <thead>
+  <thead data-controller="table-head">
     <tr>
       <td>Название</td>
-      <td>Количество участников</td>
-      <td>Количество результатов</td>
-      <td class="hidden-on-phone">Количество волонтёрств</td>
+      <td>
+        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="bi bi-caret-up-fill"></i></span>
+        Количество участников
+      </td>
+      <td>
+        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="bi bi-caret-up"></i></span>
+        Количество результатов
+      </td>
+      <td class="hidden-on-phone">
+        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="bi bi-caret-up"></i></span>
+        Количество волонтёрств
+      </td>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-group-divider">
     <%= render partial: 'club', collection: @clubs %>
   </tbody>
 </table>
