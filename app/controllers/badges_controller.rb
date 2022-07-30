@@ -2,6 +2,6 @@
 
 class BadgesController < ApplicationController
   def index
-    @badges = Badge.all
+    @badges = Badge.order(created_at: :desc)
   end
 end

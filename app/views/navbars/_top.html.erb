@@ -17,7 +17,7 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <%= link_to 'Результаты', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'activities'}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+          <%= link_to 'Результаты', '#', class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
           <ul class="dropdown-menu" aria-labelledby="dataDropdown">
             <li><%= link_to 'Недавние результаты', activities_path, class: 'dropdown-item' %></li>
             <li><%= link_to 'Клубные рейтинги', clubs_path, class: 'dropdown-item' %></li>
