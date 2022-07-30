@@ -43,6 +43,17 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
         with:
           coverageCommand: bundle exec rspec
+      - name: Deploy
+        uses: miloserdow/capistrano-deploy@master
+        with:
+          target: production
+          deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
+        env:
+          APP_NAME: ${{ secrets.APP_NAME }}
+          APP_REPO: ${{ secrets.APP_REPO }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          APP_DEPLOY_PATH: ${{ secrets.APP_DEPLOY_PATH }}
 
   lint:
     runs-on: ubuntu-22.04
