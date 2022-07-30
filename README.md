@@ -16,8 +16,8 @@
 - [ ] Top50 results for men and women for each event
 - [ ] Separate page with activities inside event
 - [ ] Event specific top menu
-- [ ] Migrate to Stimulus and Hotwire on frontend
-- [ ] CI-CD with GitHub Actions and Capistrano
+- [x] Migrate to Stimulus and Hotwire on frontend
+- [x] CI-CD with GitHub Actions and Capistrano
 - [ ] Add Redis and configure adapter for async jobs
 - [ ] Add logrotate
 
