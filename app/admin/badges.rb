@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Badge do
   permit_params do
-    permitted = %i[name conditions]
+    permitted = %i[name conditions received_date]
     permitted << :picture_link if current_user.admin?
   end
 
@@ -20,8 +20,9 @@ ActiveAdmin.register Badge do
   show do
     attributes_table do
       row :name
-      row :picture_link
+      row :received_date
       row :conditions
+      row :picture_link
     end
   end
 
