@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Badge do
-  permit_params do
-    permitted = %i[name conditions received_date]
-    permitted << :picture_link if current_user.admin?
-  end
+  permit_params :name, :conditions, :received_date, :picture_link
 
   filter :name
   filter :conditions

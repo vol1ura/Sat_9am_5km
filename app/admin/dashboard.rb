@@ -15,7 +15,7 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
         panel 'Недавние забеги' do
           ul do
-            Activity.published.includes(:event).order(:created_at).last(10).map do |activity|
+            Activity.published.includes(:event).order(created_at: :desc).first(10).map do |activity|
               li link_to(human_activity_name(activity), admin_activity_path(activity))
             end
           end
@@ -24,7 +24,6 @@ ActiveAdmin.register_page 'Dashboard' do
 
       column do
         panel 'Информация' do
-          para 'Добро пожаловать.'
           para 'Сюда добавить инфу для новых руководителей забегов по тому, как пользоваться системой.'
         end
       end

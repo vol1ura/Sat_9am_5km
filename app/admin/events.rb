@@ -4,14 +4,7 @@ ActiveAdmin.register Event do
   menu priority: 2
   actions :all, except: :destroy
 
-  permit_params do
-    permitted = %i[description active place name main_picture_link]
-    if params[:action] == 'create'
-      permitted << :code_name
-      permitted << :town
-    end
-    permitted
-  end
+  permit_params :description, :active, :place, :name, :main_picture_link, :code_name, :town
 
   filter :active
   filter :code_name
@@ -28,6 +21,15 @@ ActiveAdmin.register Event do
     column :main_picture_link
     column :created_at
     actions
+  end
+
+  sidebar 'Инструкция', only: %i[new edit] do
+    li 'Кодовое имя должно состоять из маленьких латинских букв, можно использовать символ "_". Для паркрановских локаций
+    крайне желательно использовать то же самое имя, что было. Например, angarskieprudy - Ангарские Пруды.'
+    li 'В поле Местонахождение должно быть описание как найти мероприятие. Этот текст появится в блоке Как нас найти?
+    на странице мероприятия. Желательно добавить 2-4 предложения.'
+    li 'Ссылка на баннер может быть как в виде url на внешнюю картинку, так и в виде указания относительного пути в ассетах.
+    Крайне желательно использовать формат jpg и привести к размеру 1280х482 пикселя.'
   end
 
   sidebar 'Управление контактами', only: %i[show edit] do
