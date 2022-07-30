@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_18_184146) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_29_125754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_184146) do
   create_table "athletes", force: :cascade do |t|
     t.string "name"
     t.integer "parkrun_code"
-    t.integer "fiveverst_code"
+    t.bigint "fiveverst_code"
     t.boolean "male"
     t.bigint "user_id"
     t.bigint "club_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_184146) do
     t.string "picture_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "received_date"
   end
 
   create_table "clubs", force: :cascade do |t|

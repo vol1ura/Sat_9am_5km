@@ -111,6 +111,7 @@ ru:
         name: название
         conditions: 'условия получения'
         picture_link: 'путь к картинке'
+        received_date: 'дата получения'
       trophy:
         date: 'дата получения'
 

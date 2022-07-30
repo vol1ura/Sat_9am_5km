@@ -11,8 +11,8 @@
             <div class="card-body">
               <h5 class="card-title text-uppercase"><%= badge.name %></h5>
               <p class="card-text"><%= badge.conditions %></p>
-              <% if @badge&.received_date %>
-                <p class="card-text"><small class="text-muted">Дата получения: badge.received_date</small></p>
+              <% if badge.received_date %>
+                <p class="card-text"><small class="text-muted">Дата получения: <%= l badge.received_date %> года</small></p>
               <% end %>
             </div>
           </div>
