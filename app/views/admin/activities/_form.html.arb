@@ -7,18 +7,24 @@ active_admin_form_for [:admin, resource] do |f|
     input :event_id, as: :select, label: 'Мероприятие', collection: Event.order(:name).pluck(:name, :id)
   end
 
+  unless resource.date && resource.results.exists?
+    f.inputs 'Укажите дату, если хотите создать забег для формирования команды волонтёров' do
+      input :date, as: :datepicker, datepicker_options: { min_date: '-1D', max_date: '+1M' }
+    end
+  end
+
   f.inputs 'Сведения о забеге' do
     input :description, label: 'Описание'
     input :published, label: 'Опубликовать результаты на сайте'
   end
 
-  if resource.new_record?
-    f.inputs 'Загрузите файл с секундомера' do
-      input :timer, as: :file, label: 'Файл с секундомера'
+  if resource.results.exists?
+    panel 'Внимание!' do
+      para 'Файл с секундомера уже загружен. Если его нужно загрузить повторно, сначала очистите все результаты забега.'
     end
   else
-    panel 'Внимание!' do
-      para 'Файл с секундомера можно загрузить только при создании забега. Удалите и пересоздайте забег, если необходимо.'
+    f.inputs 'Загрузите файл с секундомера' do
+      input :timer, as: :file, label: 'Файл с секундомера'
     end
   end
 

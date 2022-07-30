@@ -1,0 +1,55 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Главная', root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to @event.name, event_path(@event.code_name) %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">График волонтёрств</li>
+  </ol>
+</nav>
+
+<h1>График волонтёрств</h1>
+
+<p>
+  Мы будем очень признательны вам, если вы сможете оказать нам волонтёрскую помощь. Вы можете выбрать для себя
+  интересное и посильное любому занятие, которое позволит раскрыть себя, поддержать друзей, отлично провести время.
+</p>
+
+<p>Вот полный список волонтёрских позиций: <%= Volunteer::ROLES.keys.map { |k| human_volunteer_role(k).downcase }.join(', ') %>.</p>
+
+<p>Ниже вы можете посмотреть, какие позиции уже выбраны. Чтобы записаться просто напишите в наш телеграм чат.</p>
+
+<ul class="nav nav-tabs" id="protocol" role="tablist">
+  <% @activities.each_with_index do |activity, idx| %>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link <%= 'active' if idx.zero? %>" id="tab-<%= idx %>" data-bs-toggle="tab" data-bs-target="#tab-<%= idx %>-pane" type="button" role="tab" aria-controls="tab-<%= idx %>-pane" aria-selected="true">
+      <%= l activity.date %>
+    </button>
+  </li>
+  <% end %>
+</ul>
+
+<div class="tab-content" id="protocolContent">
+  <% @activities.each_with_index do |activity, idx| %>
+    <div class="tab-pane fade show <%= 'active' if idx.zero? %>" id="tab-<%= idx %>-pane" role="tabpanel" aria-labelledby="tab-<%= idx %>" tabindex="<%= idx %>">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Роль</th>
+            <th>Волонтёр</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <% activity.volunteers.includes(:athlete).each do |volunteer| %>
+            <tr>
+              <td><%= human_volunteer_role volunteer.role %></td>
+              <td><%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

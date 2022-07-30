@@ -9,7 +9,7 @@
 ## TODO
 
 - [ ] FEATURE: Insert and remove athletes in protocol
-- [ ] FEATURE: Volunteers schedule list
+- [x] FEATURE: Volunteers schedule list
 - [ ] FEATURE: Diagrams tab on activity show page - pie men/women, gist bar by result with median
 - [ ] FEATURE: Diagrams tab on clubs index page - men/women in club, counts, top athlete
 - [ ] FEATURE: Diagrams tab on athlete page - results dynamics,
