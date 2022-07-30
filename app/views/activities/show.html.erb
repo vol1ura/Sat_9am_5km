@@ -15,6 +15,7 @@
   <p><%= @activity.description %></p>
 <% end %>
 
+
 <h4>Протокол</h4>
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
@@ -41,10 +42,6 @@
   </div>
 </div>
 
-<div class="text-center">
-  <%= link_to "Недавние забеги", activities_path %>
-</div>
-
 <h2>Волонтёры</h2>
 <p>Забег провела команда волонтёров:</p>
 <table class="table">
@@ -54,7 +51,7 @@
       <th>Роль</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-group-divider">
     <% @activity.volunteers.includes(:athlete).each do |volunteer| %>
       <tr>
         <td><%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %></td>
