@@ -21,6 +21,29 @@ RSpec.describe '/admin/events', type: :request do
     end
   end
 
+  describe 'GET /admin/events/1/edit' do
+    let(:event) { create :event }
+
+    context 'when user is not authorized' do
+      it 'redirects to root url' do
+        get edit_admin_event_url(event)
+        expect(response).to have_http_status :found
+        expect(response).to redirect_to(admin_root_url)
+      end
+    end
+
+    context 'when user is admin' do
+      before do
+        user.admin!
+      end
+
+      it 'renders form' do
+        get edit_admin_event_url(event)
+        expect(response).to be_successful
+      end
+    end
+  end
+
   describe 'POST /admin/events' do
     before do
       user.admin!

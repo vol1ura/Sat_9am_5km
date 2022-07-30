@@ -6,7 +6,7 @@ RSpec.describe '/admin/results', type: :request do
     sign_in user
   end
 
-  describe 'GET /index' do
+  describe 'GET /admin/results' do
     it 'renders a successful response' do
       create_list :result, 3, activity: activity
       get admin_activity_results_url(activity)
@@ -14,7 +14,7 @@ RSpec.describe '/admin/results', type: :request do
     end
   end
 
-  describe 'GET /show' do
+  describe 'GET /admin/results/1' do
     it 'renders a successful response' do
       result = create :result, activity: activity
       get admin_activity_result_url(activity, result)

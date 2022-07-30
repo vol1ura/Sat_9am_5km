@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :trophy do
-    badge { nil }
-    athlete { nil }
+    badge
+    athlete
   end
 end
