@@ -32,11 +32,12 @@ ActiveAdmin.register Activity do
     уже есть в базе и создавать новую запись НЕ НУЖНО - кликните по результату и в открывшейся форме введите parkrun ID.'
   end
 
-  after_create do |activity|
+  after_save do |activity|
     TimerParser.call(activity, params[:activity][:timer])
     Activity::MAX_SCANNERS.times do |scanner_number|
       ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
     end
+    flash[:notice] = t('active_admin.activities.success_upload')
   end
 
   action_item :results, only: %i[show edit] do
