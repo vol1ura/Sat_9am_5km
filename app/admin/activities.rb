@@ -3,7 +3,7 @@
 ActiveAdmin.register Activity do
   includes :event
 
-  permit_params :description, :published, :event_id
+  permit_params :description, :published, :event_id, :date
 
   menu priority: 3
 
@@ -37,7 +37,7 @@ ActiveAdmin.register Activity do
     Activity::MAX_SCANNERS.times do |scanner_number|
       ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
     end
-    flash[:notice] = t('active_admin.activities.success_upload')
+    flash[:notice] = t('active_admin.activities.success_upload') if params[:activity][:scanner0]
   end
 
   action_item :results, only: %i[show edit] do
