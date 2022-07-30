@@ -37,7 +37,7 @@
         <th>Мероприятие</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
       <%= render partial: 'result', collection: @athlete.results.published.includes(activity: :event).order('activity.date DESC'), cached: true %>
     </tbody>
   </table>

@@ -9,7 +9,7 @@
         <td class="hidden-on-phone">Клуб</td>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
       <% @athletes.each do |athlete| %>
         <tr>
           <td><%= link_to athlete.name, athlete_path(athlete) %></td>
