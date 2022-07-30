@@ -1,7 +1,7 @@
 <% male_leader_result = activity.leader_result %>
 <% female_leader_result = activity.leader_result(male: false) %>
 <tr id="<%= dom_id activity %>">
-  <td><%= link_to activity.date, activity %></td>
+  <td><%= link_to l(activity.date), activity %></td>
   <td><%= link_to activity.event.name, event_path(activity.event.code_name) %></td>
   <td><%= activity.results.size %></td>
   <td class="hidden-on-phone"><%= "#{male_leader_result.athlete.name} (#{human_result_time(male_leader_result.total_time)})" if male_leader_result&.athlete.present? %></td>
