@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :athletes, only: %i[index show]
   resources :clubs, only: %i[index show]
   resources :badges, only: :index
+  resources :volunteers, only: %i[new edit create update]
   get '/pages/:page', to: 'pages#show', as: :page
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

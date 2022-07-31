@@ -1,0 +1,10 @@
+<%= turbo_frame_tag @volunteer.activity do %>
+  <%= form_with model: @volunteer do |f| %>
+    <%= f.hidden_field :role %>
+    <%= f.hidden_field :activity_id %>
+    <div class="input-group">
+      <%= text_field_tag :parkrun_code, @volunteer.athlete&.parkrun_code, class: 'form-control', placeholder: 'Parkrun ID', autocomplete: 'off', 'aria-label' => 'Parkrun ID', 'aria-describedby' => 'button-addon' %>
+      <button class="btn btn-outline-secondary" type="submit" id="button-addon"><i class="bi bi-patch-plus"></i></button>
+    </div>
+  <% end %>
+<% end %>
