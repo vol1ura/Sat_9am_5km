@@ -7,7 +7,7 @@
   max-width: 100px;
 }
 
-@media (max-width: 768px) {
+@include media(phoneScreen) {
   .trophy {
     max-width: 75px;
   }

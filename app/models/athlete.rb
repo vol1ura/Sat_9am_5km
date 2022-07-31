@@ -41,6 +41,10 @@ class Athlete < ApplicationRecord
     rec
   end
 
+  def personal_best(key = :total_time)
+    results.published.order(key).first
+  end
+
   def gender
     return if male.nil?
 
