@@ -9,6 +9,6 @@ class Contact < ApplicationRecord
 
   enum contact_type: {
     email: 0, phone: 1, tg_channel: 2, tg_chat: 3, vk: 4,
-    zen: 5, instagram: 6, facebook: 7, strava: 8
+    zen: 5, instagram: 6, facebook: 7, strava: 8, map_link: 9
   }
 end
