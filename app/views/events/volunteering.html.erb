@@ -16,9 +16,6 @@
   Мы будем очень признательны вам, если вы сможете оказать нам волонтёрскую помощь. Вы можете выбрать для себя
   интересное и посильное любому занятие, которое позволит раскрыть себя, поддержать друзей, отлично провести время.
 </p>
-
-<p>Вот полный список волонтёрских позиций: <%= Volunteer::ROLES.keys.map { |k| human_volunteer_role(k).downcase }.join(', ') %>.</p>
-
 <p>Ниже вы можете посмотреть, какие позиции уже выбраны. Чтобы записаться просто напишите в наш телеграм чат.</p>
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
@@ -30,7 +27,6 @@
   </li>
   <% end %>
 </ul>
-
 <div class="tab-content" id="protocolContent">
   <% @activities.each_with_index do |activity, idx| %>
     <div class="tab-pane fade show <%= 'active' if idx.zero? %>" id="tab-<%= idx %>-pane" role="tabpanel" aria-labelledby="tab-<%= idx %>" tabindex="<%= idx %>">
@@ -42,12 +38,152 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <% activity.volunteers.includes(:athlete).each do |volunteer| %>
+          <tr>
+            <td>Координатор всего :)</td>
+            <td><%= activity.volunteers.find_by(role: :director)&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :timer).to_a %>
+          <tr>
+            <td>Секундомер</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Секундомер</td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :tokens).to_a %>
+          <tr>
+            <td>Выдача карточек позиций</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Помощь в раздаче карточек</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :scanner).to_a %>
+          <% 6.times.each do |i| %>
             <tr>
-              <td><%= human_volunteer_role volunteer.role %></td>
-              <td><%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %></td>
+              <td>Фиксация результата</td>
+              <td><%= volunteers[i]&.athlete&.name %></td>
             </tr>
           <% end %>
+          <% volunteers = activity.volunteers.where(role: :marshal).to_a %>
+          <tr>
+            <td>Маршал на развороте</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Маршал на дамбе</td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Маршал у розового слона</td>
+            <td><%= volunteers[2]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Маршал</td>
+            <td><%= volunteers[3]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :photograph).to_a %>
+          <% 6.times.each do |i| %>
+            <tr>
+              <td>Фотограф</td>
+              <td><%= volunteers[i]&.athlete&.name %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td>Инструктаж новых участников</td>
+            <td><%= activity.volunteers.find_by(role: :instructor)&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Проведение разминки</td>
+            <td><%= activity.volunteers.find_by(role: :warm_up)&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :marking_maker).to_a %>
+          <% 6.times.each do |i| %>
+            <tr>
+              <td>Разметка трассы</td>
+              <td><%= volunteers[i]&.athlete&.name %></td>
+            </tr>
+          <% end %>
+          <% volunteers = activity.volunteers.where(role: :results_handler).to_a %>
+          <tr>
+            <td>Обработка результатов</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Обработка результатов</td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :event_closer).to_a %>
+          <tr>
+            <td>Замыкающий</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Замыкающий</td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :marking_picker).to_a %>
+          <tr>
+            <td>Сбор разметки</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Сбор разметки</td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Сбор разметки</td>
+            <td><%= volunteers[2]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :cards_sorter).to_a %>
+          <tr>
+            <td>Сортировка карточек</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Сортировка карточек</td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :finish_maker).to_a %>
+          <% 6.times.each do |i| %>
+            <tr>
+              <td>Организация финиша</td>
+              <td><%= volunteers[i]&.athlete&.name %></td>
+            </tr>
+          <% end %>
+          <% volunteers = activity.volunteers.where(role: :attendant).to_a %>
+          <tr>
+            <td>Сопровождение (для детского забега)<td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Сопровождение (для детского забега)<td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :other).to_a %>
+          <tr>
+            <td>Помощь в подготовке забега</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Помощь в подготовке забега</td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Ведущий велосипед</td>
+            <td><%= activity.volunteers.find_by(role: :bike_leader)&.athlete&.name %></td>
+          </tr>
+          <tr>
+            <td>Пейсмейкер</td>
+            <td><%= volunteers[0]&.athlete&.name %></td>
+          </tr>
+          <% volunteers = activity.volunteers.where(role: :attendant).to_a %>
+          <tr>
+            <td>Пейсмейкер</td>
+            <td><%= volunteers[1]&.athlete&.name %></td>
+          </tr>
         </tbody>
       </table>
     </div>

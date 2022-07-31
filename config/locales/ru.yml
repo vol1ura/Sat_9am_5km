@@ -58,6 +58,7 @@ ru:
         town: город
         place: местонахождение
         description: описание
+        visible_order: 'положение в ленте'
       result:
         position: место
         total_time: результат

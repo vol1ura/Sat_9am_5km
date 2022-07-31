@@ -1,6 +1,6 @@
 <h2>Наши мероприятия</h2>
 <div class="row row-cols-1 row-cols-md-2 g-4">
-  <% Event.order(:name).each do |event| %>
+  <% Event.all.each do |event| %>
     <div class="col">
       <div class="card border-primary h-100">
         <%= link_to event_path(event.code_name) do
@@ -16,4 +16,4 @@
 </div>
 
 <h2 class="mt-4">Карта мероприятий</h2>
-<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af4483c7b6e6897a58abef5aa2767f9f4cc10f89aa282b6082987427673502f30&amp;width=100%25&amp;height=450&amp;lang=ru_RU&amp;scroll=true"></script>
+<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af4483c7b6e6897a58abef5aa2767f9f4cc10f89aa282b6082987427673502f30&amp;width=100%25&amp;height=359&amp;lang=ru_RU&amp;scroll=true"></script>

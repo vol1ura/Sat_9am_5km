@@ -4,7 +4,7 @@ ActiveAdmin.register Event do
   menu priority: 2
   actions :all, except: :destroy
 
-  permit_params :description, :active, :place, :name, :main_picture_link, :code_name, :town
+  permit_params :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order
 
   filter :active
   filter :code_name
