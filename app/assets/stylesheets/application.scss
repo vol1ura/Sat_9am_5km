@@ -10,6 +10,12 @@ $dark: #0f0f0f;
 @import "bootstrap";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
 
+@mixin media($query) {
+  @if $query == phoneScreen {
+    @media (max-width: 768px) { @content; }
+  }
+}
+
 .bd-footer {
   a {
     text-decoration: none;
@@ -20,7 +26,7 @@ $dark: #0f0f0f;
     color: inherit;
   }
 
-  @media (max-width: 768px) {
+  @include media(phoneScreen) {
     .social-links {
       order: 2;
     }
@@ -39,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
-@media (max-width: 768px) {
+@include media(phoneScreen) {
   .hidden-on-phone {
     display: none;
   }
