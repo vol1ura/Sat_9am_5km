@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   ROLE = { admin: 0, uploader: 1 }.freeze
+
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable, :registerable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, :confirmable, :lockable
