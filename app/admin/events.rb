@@ -4,6 +4,8 @@ ActiveAdmin.register Event do
   menu priority: 2
   actions :all, except: :destroy
 
+  config.sort_order = 'visible_order'
+
   permit_params :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order
 
   filter :active
@@ -13,6 +15,7 @@ ActiveAdmin.register Event do
   filter :place
 
   index download_links: false do
+    column :visible_order
     column :active
     column :code_name
     column :name
