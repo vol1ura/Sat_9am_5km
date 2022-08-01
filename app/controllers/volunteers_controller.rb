@@ -22,7 +22,7 @@ class VolunteersController < ApplicationController
 
   private
 
-  def volunteer_params
+  def resource_params
     params.require(:volunteer).permit(:activity_id, :role)
   end
 
