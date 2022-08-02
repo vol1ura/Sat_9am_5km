@@ -24,11 +24,12 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/<%= ENV['YANDEX_METRIKA'] %>" style="position:absolute; left:-9999px;" alt=""></div></noscript>
     <!-- /Yandex.Metrika counter -->
   </head>
-  <body>
+  <body class="m-0 d-flex flex-column">
     <%= render 'navbars/top' %>
     <div class="container">
       <%= yield %>
     </div>
+    <div class="spacer"></div>
     <%= render 'navbars/bottom' %>
   </body>
 </html>

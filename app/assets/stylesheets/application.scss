@@ -16,6 +16,14 @@ $dark: #0f0f0f;
   }
 }
 
+body {
+  min-height: 100vh;
+}
+
+.spacer {
+  flex: 1 0 auto;
+}
+
 .bd-footer {
   a {
     text-decoration: none;
