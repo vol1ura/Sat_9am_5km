@@ -22,7 +22,7 @@ Metrics/BlockLength:
     - 'app/views/admin/**/*'
     - 'config/**/*'
     - 'spec/**/*'
-  IgnoredMethods:
+  AllowedMethods:
     - params
     - resource
     - resources
