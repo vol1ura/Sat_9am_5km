@@ -11,8 +11,6 @@ set :repo_url, ENV['APP_REPO']
 set :branch, 'master'
 set :deploy_to, ENV['APP_DEPLOY_PATH']
 
-set :use_sudo, false
-
 # Default value for :pty is false
 # set :pty, true
 
