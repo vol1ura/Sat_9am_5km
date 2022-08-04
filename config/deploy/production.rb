@@ -33,7 +33,6 @@ set :rails_env, 'production'
 set :stage, :production
 
 # Puma configuration
-set :puma_user, fetch(:user)
 set :puma_threads,    [5, 8]
 # set :puma_workers,    2
 set :puma_conf, "#{shared_path}/puma.rb"

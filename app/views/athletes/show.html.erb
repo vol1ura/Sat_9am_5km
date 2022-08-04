@@ -93,7 +93,13 @@
 <% if @total_vol.zero? %>
   <p>Пока не было волонтёрств.</p>
 <% else %>
-  <p>Всего волонтёрств <%= @total_vol %>. Коэффициент волонтёра: <%= @total_results.zero? ? '<i class="bi bi-infinity"></i>'.html_safe : (@total_vol * 5.0 / @total_results).round(1) %>.</p>
+  <p>
+    Всего волонтёрств <%= @total_vol %>.
+    Коэффициент волонтёра:
+    <abbr title="Число волонтёрств  на каждые 5 пробежек" class="initialism">
+      <%= @total_results.zero? ? '<i class="bi bi-infinity"></i>'.html_safe : (@total_vol * 5.0 / @total_results).round(1) %>
+    </abbr>.
+  </p>
   <div class="accordion accordion-flush" id="accordionRoles">
     <% @athlete.volunteering.pluck(:role).uniq.each do |role| %>
       <% volunteering = @athlete.volunteering.includes(activity: :event).where(role: role) %>
