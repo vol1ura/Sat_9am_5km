@@ -29,13 +29,30 @@ ru:
       trophy:
         one: достижение
         other: Достижения
+      permission:
+        one: полномочия
+        few: полномочий
+        many: полномочий
+        other: Полномочия
+      user:
+        one: пользователь
+        few: пользователя
+        many: пользователей
+        other: Пользователи
+
 
     attributes:
       user:
         first_name: имя
         last_name: фамилия
         email: 'e-mail'
-        role: права
+        role: роль
+      permission:
+        event: мероприятие
+        user: пользователь
+        action: действие
+        subject_id: id элемента
+        subject_class: класс объектов
       athlete:
         name: имя
         parkrun_code: 'номер parkrun'

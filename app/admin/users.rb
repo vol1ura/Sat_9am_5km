@@ -3,10 +3,7 @@
 ActiveAdmin.register User do
   actions :all, except: :destroy
 
-  permit_params do
-    permitted = %i[first_name last_name password password_confirmation]
-    permitted << :role if current_user.admin?
-  end
+  permit_params :first_name, :last_name, :password, :password_confirmation, :email
 
   filter :email
   filter :first_name
@@ -34,6 +31,10 @@ ActiveAdmin.register User do
       f.input :role if current_user.admin?
     end
     f.actions
+  end
+
+  action_item :permissions, only: %i[show edit] do
+    link_to 'Полномочия', admin_user_permissions_path(resource)
   end
 
   batch_action :change_roles, confirm: I18n.t('active_admin.users.confirm_change_roles'),

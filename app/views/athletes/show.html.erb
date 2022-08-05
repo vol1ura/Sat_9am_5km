@@ -97,7 +97,11 @@
     Всего волонтёрств <%= @total_vol %>.
     Коэффициент волонтёра:
     <abbr title="Число волонтёрств  на каждые 5 пробежек" class="initialism">
-      <%= @total_results.zero? ? '<i class="bi bi-infinity"></i>'.html_safe : (@total_vol * 5.0 / @total_results).round(1) %>
+      <% if @total_results.zero? %>
+        <i class="bi bi-infinity"></i>
+      <% else %>
+        <%= (@total_vol * 5.0 / @total_results).round(1) %>
+      <% end %>
     </abbr>.
   </p>
   <div class="accordion accordion-flush" id="accordionRoles">
