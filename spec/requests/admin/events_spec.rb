@@ -28,7 +28,7 @@ RSpec.describe '/admin/events', type: :request do
       it 'redirects to root url' do
         get edit_admin_event_url(event)
         expect(response).to have_http_status :found
-        expect(response).to redirect_to(admin_root_url)
+        expect(response).to redirect_to(root_url)
       end
     end
 

@@ -28,7 +28,7 @@ RSpec.describe '/admin/trophies', type: :request do
         trophy = create :trophy, badge: badge
         get edit_admin_badge_trophy_url(badge, trophy)
         expect(response).to have_http_status :found
-        expect(response).to redirect_to(admin_root_url)
+        expect(response).to redirect_to(root_url)
       end
     end
 
