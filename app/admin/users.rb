@@ -3,7 +3,10 @@
 ActiveAdmin.register User do
   actions :all, except: :destroy
 
-  permit_params :first_name, :last_name, :password, :password_confirmation, :email
+  permit_params do
+    permitted = %i[first_name last_name password password_confirmation]
+    permitted << :role if current_user.admin?
+  end
 
   filter :email
   filter :first_name

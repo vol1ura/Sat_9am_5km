@@ -2,6 +2,7 @@ RSpec.describe '/admin/volunteers', type: :request do
   let(:user) { create(:user) }
 
   before do
+    create :permission, user: user, action: 'manage', subject_class: 'Volunteer'
     sign_in user
   end
 
@@ -32,6 +33,7 @@ RSpec.describe '/admin/volunteers', type: :request do
     end
 
     it 'redirects unauthorized user' do
+      user.permissions = []
       post admin_volunteers_url, params: valid_attributes
       expect(response).to redirect_to(root_url)
     end
