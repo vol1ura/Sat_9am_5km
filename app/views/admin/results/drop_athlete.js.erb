@@ -1,0 +1,4 @@
+<% @results.each do |result| %>
+  cell = document.querySelector('#<%= dom_id result %> .col-athlete');
+  cell.innerHTML = '<%= link_to result.athlete.name, admin_athlete_path(result.athlete) if result.athlete %>';
+<% end %>
