@@ -8,6 +8,8 @@ class Result < ApplicationRecord
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
 
+  # before_save :change_positions, if: :will_save_change_to_position?
+
   def swap_with_position(target_position)
     current_athlete = athlete
     target_result = Result.find_by!(position: target_position, activity: activity)
@@ -15,4 +17,19 @@ class Result < ApplicationRecord
     target_result.update!(athlete: current_athlete)
     target_result
   end
+
+  def shift_attributes(key)
+    results = activity.results.includes(:athlete, :activity).where(position: position..).order(:position).to_a
+    results.each_cons(2) { |r0, r1| r0.update!(key => r1.public_send(key)) }
+    results.last.update!(key => nil)
+    results
+  end
+
+  # private
+
+  # def change_positions
+  #   from_pos = [position_in_database, position].min
+  #   to_pos = [position_in_database, position].max
+  #   results = activity.results.where(position: from_pos..to_pos).order(:position)
+  # end
 end

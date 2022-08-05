@@ -19,10 +19,12 @@ ActiveAdmin.register Result do
     column :athlete
     column(:total_time) { |r| human_result_time(r.total_time) }
     column('Изменение позиции') do |r|
-      render partial: 'up_down', locals: { activity: activity, result: r }
+      render partial: 'up_down', locals: { activity: r.activity, result: r }
     end
     column('Забег') { |r| human_activity_name(r.activity) }
-    actions
+    actions do |r|
+      render partial: 'drops', locals: { activity: r.activity, result: r }
+    end
   end
 
   show { render result }
@@ -51,6 +53,18 @@ ActiveAdmin.register Result do
     @next_result = resource.swap_with_position(resource.position.next)
   rescue StandardError
     render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
+  end
+
+  member_action :drop_time, method: :delete, if: proc { can? :manage, Result } do
+    @results = resource.shift_attributes(:total_time)
+  rescue StandardError
+    render js: "alert('#{t 'active_admin.results.drop_time_failed'}')"
+  end
+
+  member_action :drop_athlete, method: :delete, if: proc { can? :manage, Result } do
+    @results = resource.shift_attributes(:athlete)
+  rescue StandardError
+    render js: "alert('#{t 'active_admin.results.drop_athlete_failed'}')"
   end
 
   action_item :activity, only: :index do
