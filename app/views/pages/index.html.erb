@@ -1,11 +1,19 @@
+<% if alert %>
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;<%= alert %>
+  </div>
+<% end %>
+
 <h2>Наши мероприятия</h2>
 <div class="row row-cols-1 row-cols-md-2 g-4">
   <% Event.all.each do |event| %>
     <div class="col">
       <div class="card border-primary h-100">
-        <%= link_to event_path(event.code_name) do
-          image_tag event.main_picture_link, class: 'card-img-top'
-        end %>
+        <%=
+          link_to event_path(event.code_name) do
+            image_tag event.main_picture_link, class: 'card-img-top'
+          end
+        %>
         <div class="card-body">
           <h4 class="card-title"><%= link_to event.name, event_path(event.code_name), class: 'card-title-link' %></h4>
           <p class="card-text"><%= event.description %></p>

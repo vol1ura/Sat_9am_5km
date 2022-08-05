@@ -22,7 +22,7 @@ RSpec.describe '/admin/athletes', type: :request do
     end
 
     it 'renders add_volunteering button' do
-      user.update!(role: :admin)
+      user.admin!
       athlete = create :athlete
       get admin_athlete_url(athlete)
       expect(response.body).to include new_admin_volunteer_path(volunteer: { athlete_id: athlete.id })

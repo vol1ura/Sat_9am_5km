@@ -33,7 +33,7 @@ RSpec.describe '/admin/volunteers', type: :request do
 
     it 'redirects unauthorized user' do
       post admin_volunteers_url, params: valid_attributes
-      expect(response).to redirect_to(admin_root_url)
+      expect(response).to redirect_to(root_url)
     end
 
     context 'when user is admin' do
