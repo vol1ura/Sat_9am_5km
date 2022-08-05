@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_31_173111) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_224936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,6 +89,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_31_173111) do
     t.integer "visible_order"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.bigint "event_id"
+    t.bigint "subject_id"
+    t.string "subject_class"
+    t.string "action"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_permissions_on_user_id"
+  end
+
   create_table "results", force: :cascade do |t|
     t.integer "position"
     t.time "total_time"
@@ -141,6 +152,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_31_173111) do
   add_foreign_key "athletes", "clubs"
   add_foreign_key "athletes", "users"
   add_foreign_key "contacts", "events"
+  add_foreign_key "permissions", "users"
   add_foreign_key "results", "activities"
   add_foreign_key "results", "athletes"
   add_foreign_key "trophies", "athletes"
