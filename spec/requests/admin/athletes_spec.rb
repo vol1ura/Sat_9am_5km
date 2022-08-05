@@ -2,6 +2,7 @@ RSpec.describe '/admin/athletes', type: :request do
   let(:user) { create(:user) }
 
   before do
+    create :permission, user: user, action: 'read', subject_class: 'Athlete'
     sign_in user
   end
 

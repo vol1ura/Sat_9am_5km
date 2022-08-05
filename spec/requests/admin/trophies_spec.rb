@@ -3,6 +3,7 @@ RSpec.describe '/admin/trophies', type: :request do
   let(:badge) { create :badge }
 
   before do
+    user.admin!
     sign_in user
   end
 
@@ -25,6 +26,7 @@ RSpec.describe '/admin/trophies', type: :request do
   describe 'GET /admin/trophies/1/edit' do
     context 'when user is not authorized' do
       it 'redirects to root url' do
+        user.update!(role: nil)
         trophy = create :trophy, badge: badge
         get edit_admin_badge_trophy_url(badge, trophy)
         expect(response).to have_http_status :found
@@ -33,10 +35,6 @@ RSpec.describe '/admin/trophies', type: :request do
     end
 
     context 'when user is admin' do
-      before do
-        user.admin!
-      end
-
       it 'renders form' do
         trophy = create :trophy, badge: badge
         get edit_admin_badge_trophy_url(badge, trophy)
@@ -46,10 +44,6 @@ RSpec.describe '/admin/trophies', type: :request do
   end
 
   describe 'POST /admin/trophies' do
-    before do
-      user.admin!
-    end
-
     let(:athlete) { create :athlete }
     let(:valid_attributes) do
       {

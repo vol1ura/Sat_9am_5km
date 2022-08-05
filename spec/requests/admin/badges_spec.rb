@@ -2,6 +2,7 @@ RSpec.describe '/admin/badges', type: :request do
   let(:user) { create(:user) }
 
   before do
+    user.admin!
     sign_in user
   end
 

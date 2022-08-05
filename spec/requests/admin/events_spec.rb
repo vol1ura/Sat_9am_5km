@@ -2,6 +2,7 @@ RSpec.describe '/admin/events', type: :request do
   let(:user) { create(:user) }
 
   before do
+    user.admin!
     sign_in user
   end
 
@@ -26,17 +27,14 @@ RSpec.describe '/admin/events', type: :request do
 
     context 'when user is not authorized' do
       it 'redirects to root url' do
+        user.update!(role: nil)
         get edit_admin_event_url(event)
         expect(response).to have_http_status :found
         expect(response).to redirect_to(root_url)
       end
     end
 
-    context 'when user is admin' do
-      before do
-        user.admin!
-      end
-
+    context 'when user is authorized' do
       it 'renders form' do
         get edit_admin_event_url(event)
         expect(response).to be_successful
@@ -45,10 +43,6 @@ RSpec.describe '/admin/events', type: :request do
   end
 
   describe 'POST /admin/events' do
-    before do
-      user.admin!
-    end
-
     let(:valid_attributes) do
       {
         event: {

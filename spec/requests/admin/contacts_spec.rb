@@ -4,6 +4,7 @@ RSpec.describe '/admin/contacts', type: :request do
 
   before do
     FactoryBot.rewind_sequences
+    user.admin!
     sign_in user
   end
 

@@ -3,6 +3,7 @@ RSpec.describe '/admin/results', type: :request do
   let(:activity) { create :activity }
 
   before do
+    create :permission, user: user, action: 'read', subject_class: 'Result'
     sign_in user
   end
 

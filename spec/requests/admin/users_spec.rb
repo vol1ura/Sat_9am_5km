@@ -30,7 +30,7 @@ RSpec.describe '/admin/users', type: :request do
 
     context 'when user is not admin' do
       it 'not contains user role field' do
-        user.uploader!
+        user.update!(role: nil)
         get edit_admin_user_url(user)
         expect(response.body).not_to include 'user[role]'
       end
@@ -64,7 +64,7 @@ RSpec.describe '/admin/users', type: :request do
     end
 
     let(:valid_attributes) do
-      { batch_action: :change_roles, batch_action_inputs: { role: 'uploader' }.to_json, collection_selection: [user.id] }
+      { batch_action: :change_roles, batch_action_inputs: { role: nil }.to_json, collection_selection: [user.id] }
     end
 
     it 'renders a successful response' do
@@ -74,7 +74,7 @@ RSpec.describe '/admin/users', type: :request do
 
     it 'change user role' do
       post batch_action_admin_users_url, params: valid_attributes
-      expect(user.reload.role).to eq 'uploader'
+      expect(user.reload.role).to be_nil
     end
   end
 end
