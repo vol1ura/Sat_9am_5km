@@ -1,3 +1,8 @@
 RSpec.describe Permission, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.not_to be_valid }
+
+  it 'valid with user, action and subject_class' do
+    permission = create :permission
+    expect(permission).to be_valid
+  end
 end
