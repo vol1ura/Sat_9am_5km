@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :permission do
-    user { nil }
+    user
+    action { Permission::ACTIONS.sample }
+    subject_class { Permission::CLASSES.sample }
   end
 end

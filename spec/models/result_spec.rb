@@ -34,4 +34,9 @@ RSpec.describe Result, type: :model do
       end.to change(result1, :athlete_id).from(athlete1.id).to(athlete2.id)
     end
   end
+
+  describe '#shift_attributes' do
+    it 'shift time in protocol'
+    it 'shift athlete in protocol'
+  end
 end
