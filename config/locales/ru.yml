@@ -31,16 +31,12 @@ ru:
         other: Достижения
       permission:
         one: полномочия
-        few: полномочий
-        many: полномочий
         other: Полномочия
       user:
         one: пользователь
         few: пользователя
         many: пользователей
         other: Пользователи
-
-
     attributes:
       user:
         first_name: имя

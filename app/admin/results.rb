@@ -43,13 +43,13 @@ ActiveAdmin.register Result do
     end
   end
 
-  member_action :up, method: :put, if: proc { can? :manage, Result } do
+  member_action :up, method: :put, if: proc { can? :update, Result } do
     @pred_result = resource.swap_with_position(resource.position.pred)
   rescue StandardError
     render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
   end
 
-  member_action :down, method: :put, if: proc { can? :manage, Result } do
+  member_action :down, method: :put, if: proc { can? :update, Result } do
     @next_result = resource.swap_with_position(resource.position.next)
   rescue StandardError
     render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"

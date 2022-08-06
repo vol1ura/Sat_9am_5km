@@ -166,5 +166,17 @@ ru:
       blog: "Блог"
     resources:
       volunteer:
-        new_model: 'Добавить волонтёрство'
-        edit_model: 'Изменить волонтёрство'
+        new_model: Добавить волонтёрство
+        edit_model: Изменить волонтёрство
+        delete_model: Удалить волонтёрство
+      athlete:
+        new_model: Создать участника
+        edit_model: Изменить участника
+        delete_model: Удалить участника
+      user:
+        new_model: Создать пользователя
+        edit_model: Изменить пользователя
+      badge:
+        new_model: Создать медальку
+        edit_model: Изменить медальку
+        delete_model: Удалить медальку
