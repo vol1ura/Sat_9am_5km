@@ -6,7 +6,7 @@
     <li class="breadcrumb-item">
       <%= link_to @activity.event.name, event_path(@activity.event.code_name) %>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">Забег <%= l @activity.date %></li>
+    <li class="breadcrumb-item active" aria-current="page">Забег <%= l @activity.date %>г.</li>
   </ol>
 </nav>
 
@@ -15,12 +15,11 @@
   <p><%= @activity.description %></p>
 <% end %>
 
-
 <h4>Протокол</h4>
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="absolut-tab" data-bs-toggle="tab" data-bs-target="#absolut-tab-pane" type="button" role="tab" aria-controls="absolut-tab-pane" aria-selected="true">Общий</button>
+    <button class="nav-link active" id="absolute-tab" data-bs-toggle="tab" data-bs-target="#absolute-tab-pane" type="button" role="tab" aria-controls="absolute-tab-pane" aria-selected="true">Общий</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="male-tab" data-bs-toggle="tab" data-bs-target="#male-tab-pane" type="button" role="tab" aria-controls="male-tab-pane" aria-selected="false">Мужчины</button>
@@ -30,16 +29,12 @@
   </li>
 </ul>
 
-<div class="tab-content" id="protocolContent">
-  <div class="tab-pane fade show active" id="absolut-tab-pane" role="tabpanel" aria-labelledby="absolut-tab" tabindex="0">
+<div class="tab-content" data-controller="protocol">
+  <div class="tab-pane fade show active" id="absolute-tab-pane" role="tabpanel" aria-labelledby="absolute-tab" tabindex="0" data-protocol-target="absolute">
     <%= render partial: 'protocol', locals: { results: @results, counts: @counts } %>
   </div>
-  <div class="tab-pane fade" id="male-tab-pane" role="tabpanel" aria-labelledby="male-tab" tabindex="0">
-    <%= render partial: 'protocol', locals: { results: @results.where(athlete: { male: true }), counts: @counts } %>
-  </div>
-  <div class="tab-pane fade" id="female-tab-pane" role="tabpanel" aria-labelledby="female-tab" tabindex="0">
-    <%= render partial: 'protocol', locals: { results: @results.where(athlete: { male: false }), counts: @counts } %>
-  </div>
+  <div class="tab-pane fade" id="male-tab-pane" role="tabpanel" aria-labelledby="male-tab" tabindex="0" data-protocol-target="male"></div>
+  <div class="tab-pane fade" id="female-tab-pane" role="tabpanel" aria-labelledby="female-tab" tabindex="0" data-protocol-target="female"></div>
 </div>
 
 <h2>Волонтёры</h2>
