@@ -6,7 +6,7 @@
     <li class="breadcrumb-item">
       <%= link_to @activity.event.name, event_path(@activity.event.code_name) %>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">Забег <%= l @activity.date %>г.</li>
+    <li class="breadcrumb-item active" aria-current="page"><%= l @activity.date %>&nbsp;г.</li>
   </ol>
 </nav>
 
