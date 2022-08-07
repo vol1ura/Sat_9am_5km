@@ -9,13 +9,9 @@
   <% Event.all.each do |event| %>
     <div class="col">
       <div class="card border-primary h-100">
-        <%=
-          link_to event_path(event.code_name) do
-            image_tag event.main_picture_link, class: 'card-img-top', alt: event.name
-          end
-        %>
+        <%= image_tag event.main_picture_link, class: 'card-img-top', alt: event.name %>
         <div class="card-body">
-          <h4 class="card-title"><%= link_to event.name, event_path(event.code_name), class: 'card-title-link' %></h4>
+          <h4 class="card-title"><%= link_to event.name, event_path(event.code_name), class: 'card-title-link stretched-link' %></h4>
           <p class="card-text"><%= event.description %></p>
         </div>
       </div>
