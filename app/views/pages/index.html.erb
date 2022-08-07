@@ -11,7 +11,7 @@
       <div class="card border-primary h-100">
         <%=
           link_to event_path(event.code_name) do
-            image_tag event.main_picture_link, class: 'card-img-top'
+            image_tag event.main_picture_link, class: 'card-img-top', alt: event.name
           end
         %>
         <div class="card-body">
@@ -24,4 +24,4 @@
 </div>
 
 <h2 class="mt-4">Карта мероприятий</h2>
-<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af4483c7b6e6897a58abef5aa2767f9f4cc10f89aa282b6082987427673502f30&amp;width=100%25&amp;height=359&amp;lang=ru_RU&amp;scroll=true"></script>
+<script async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af4483c7b6e6897a58abef5aa2767f9f4cc10f89aa282b6082987427673502f30&amp;width=100%25&amp;height=359&amp;lang=ru_RU&amp;scroll=true"></script>
