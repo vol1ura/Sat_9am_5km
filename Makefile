@@ -1,8 +1,18 @@
+WEB_CONTAINER := `docker-compose ps | grep web | cut -d ' ' -f1`
+
 target: proj
 
 proj:
-	docker-compose ps | grep -E 'kuzminki.run.web.*Up' || docker-compose up -d
-	docker attach `docker-compose ps | grep web | cut -d ' ' -f1`
+	docker-compose ps | grep -E '.web.[1-9].*Up' || docker-compose up -d
+
+bind: proj
+	docker attach $(WEB_CONTAINER)
+
+rc: proj
+	docker exec -it $(WEB_CONTAINER) rails console
+
+ash: proj
+	docker exec -it $(WEB_CONTAINER) ash
 
 checkup:
 	rubocop --display-only-fail-level-offenses --fail-level=error && \
@@ -13,16 +23,8 @@ build_proj:
 	docker-compose build web
 	docker images --filter "dangling=true" -q | xargs docker rmi || echo "There were images tagged as <none> in use"
 
-rconsole:
-	docker exec -it `docker-compose ps | grep web | cut -d ' ' -f1` rails console
-
-ash:
-	docker exec -it `docker-compose ps | grep web | cut -d ' ' -f1` ash
-
 clean_logs:
-	rm ./log/development.log
-	touch ./log/development.log
-	rm ./log/test.log
-	touch ./log/test.log
+	rm ./log/capistrano.log
+	touch ./log/capistrano.log
 	rm ./log/bullet.log
 	touch ./log/bullet.log
