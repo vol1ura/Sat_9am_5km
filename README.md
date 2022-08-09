@@ -17,7 +17,7 @@
 - [ ] Separate page with activities inside event
 - [ ] Event specific top menu
 - [ ] Add Redis and configure adapter for async jobs
-- [ ] Add logrotate
+- [x] Setup logrotate
 
 ## Development
 
