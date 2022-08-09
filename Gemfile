@@ -33,7 +33,6 @@ group :development, :test do
   gem 'bundler-audit'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
-  # gem 'ffaker'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
@@ -43,14 +42,11 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rake', require: false
   gem 'rubocop-rspec', require: false
-
-  # Adds support for Capybara system testing and selenium driver
-  # gem 'capybara', '>= 3.26'
-  # gem 'selenium-webdriver'
 end
 
 group :test do
   gem 'simplecov', require: false
+  gem 'vcr'
   gem 'webmock', require: false
 end
 
@@ -60,7 +56,6 @@ group :development do
   # Deploy
   gem 'capistrano', '~> 3.17', require: false
   gem 'capistrano3-puma', require: false
-  # gem 'capistrano-postgresql', '~> 6.2', require: false
   gem 'capistrano-rails', '~> 1.6', require: false
   gem 'capistrano-rbenv', '~> 2.2.0', require: false
 
