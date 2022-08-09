@@ -40,6 +40,7 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
+          VK_TOKEN: ${{ secrets.VK_TOKEN }}
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
         with:
           coverageCommand: bundle exec rspec

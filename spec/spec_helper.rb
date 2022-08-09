@@ -25,7 +25,15 @@ if ENV['COVERAGE'] == 'on'
   end
 end
 
+require 'vcr'
 require 'webmock/rspec'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/fixtures/cassettes'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+  c.filter_sensitive_data('<VK_TOKEN>') { ENV.fetch('VK_TOKEN', '') }
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

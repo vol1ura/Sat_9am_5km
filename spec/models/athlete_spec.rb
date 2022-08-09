@@ -53,26 +53,10 @@ RSpec.describe Athlete, type: :model do
     end
 
     context 'when such athlete is not exists' do
-      let(:parkrun_code) { Faker::Number.number(digits: 6) }
-      let(:athlete_name) { Faker::Name.name }
+      let(:parkrun_code) { 875743 }
+      let(:athlete_name) { 'Юрий ВОЛОДИН' }
 
-      before do
-        stub_request(:get, "https://www.parkrun.com.au/results/athleteresultshistory/?athleteNumber=#{parkrun_code}")
-          .to_return(status: 200, body:
-            <<~BODY
-              <html>
-                <head></head>
-                <body>
-                  <div id="content" role="main">
-                    <h2>#{athlete_name}</h2>
-                  </div>
-                </body>
-              </html>
-            BODY
-          )
-      end
-
-      it 'parse parkrun site to find athlete' do
+      it 'parse parkrun site to find athlete', vcr: true do
         athlete = create :athlete, name: Athlete::NOBODY, parkrun_code: parkrun_code
         described_class.find_or_scrape_by_code!(athlete.parkrun_code)
         expect(athlete.reload.name).to eq athlete_name
