@@ -52,11 +52,11 @@ RSpec.describe Athlete, type: :model do
       end
     end
 
-    context 'when such athlete is not exists' do
+    context 'when such athlete is not exists in the database' do
       let(:parkrun_code) { 875743 }
       let(:athlete_name) { 'Юрий ВОЛОДИН' }
 
-      it 'parse parkrun site to find athlete', vcr: true do
+      it 'parses parkrun site to find athlete', vcr: true do
         athlete = create :athlete, name: Athlete::NOBODY, parkrun_code: parkrun_code
         described_class.find_or_scrape_by_code!(athlete.parkrun_code)
         expect(athlete.reload.name).to eq athlete_name
