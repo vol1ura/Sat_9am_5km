@@ -1,4 +1,4 @@
-# frozen_stirng_literal: true
+# frozen_string_literal: true
 
 RSpec.describe TimerParser, type: :service do
   let(:activity) { create :activity }
