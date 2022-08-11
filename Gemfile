@@ -27,6 +27,8 @@ gem 'sprockets-rails'
 gem 'hiredis'
 gem 'redis'
 
+gem 'rollbar'
+
 group :development, :test do
   gem 'brakeman'
   gem 'bullet'
