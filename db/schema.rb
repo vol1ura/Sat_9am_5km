@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_04_224936) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_11_005434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_224936) do
     t.date "date"
     t.text "description"
     t.boolean "published", default: false
-    t.bigint "event_id"
+    t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "results_count"
@@ -52,39 +52,38 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_224936) do
     t.index ["club_id"], name: "index_athletes_on_club_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
     t.index ["parkrun_code"], name: "index_athletes_on_parkrun_code", unique: true
-    t.index ["user_id"], name: "index_athletes_on_user_id"
+    t.index ["user_id"], name: "index_athletes_on_user_id", unique: true
   end
 
   create_table "badges", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "conditions"
-    t.string "picture_link"
+    t.string "picture_link", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "received_date"
   end
 
   create_table "clubs", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string "link"
-    t.integer "contact_type"
+    t.string "link", null: false
+    t.integer "contact_type", null: false
     t.bigint "event_id", null: false
     t.index ["event_id", "contact_type"], name: "index_contacts_on_event_id_and_contact_type", unique: true
-    t.index ["event_id"], name: "index_contacts_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
     t.boolean "active", default: true
-    t.string "code_name"
-    t.string "town"
-    t.string "place"
+    t.string "code_name", null: false
+    t.string "town", null: false
+    t.string "place", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "name", null: false
     t.string "main_picture_link"
     t.integer "visible_order"
   end
@@ -115,7 +114,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_224936) do
     t.date "date"
     t.index ["athlete_id"], name: "index_trophies_on_athlete_id"
     t.index ["badge_id", "athlete_id"], name: "index_trophies_on_badge_id_and_athlete_id", unique: true
-    t.index ["badge_id"], name: "index_trophies_on_badge_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -141,7 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_224936) do
   end
 
   create_table "volunteers", force: :cascade do |t|
-    t.integer "role"
+    t.integer "role", null: false
     t.bigint "activity_id", null: false
     t.bigint "athlete_id", null: false
     t.index ["activity_id"], name: "index_volunteers_on_activity_id"
