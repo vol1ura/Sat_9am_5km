@@ -51,6 +51,7 @@ group :test do
 end
 
 group :development do
+  gem 'database_consistency', require: false
   gem 'rack-mini-profiler'
 
   # Deploy
