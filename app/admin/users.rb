@@ -3,6 +3,8 @@
 ActiveAdmin.register User do
   actions :all, except: :destroy
 
+  menu if: proc { current_user.admin? }
+
   permit_params do
     permitted = %i[first_name last_name password password_confirmation]
     permitted << :role if current_user.admin?
@@ -36,7 +38,7 @@ ActiveAdmin.register User do
     f.actions
   end
 
-  action_item :permissions, only: %i[show edit] do
+  action_item :permissions, only: %i[show edit], if: proc { can? :manage, Permission } do
     link_to 'Полномочия', admin_user_permissions_path(resource)
   end
 

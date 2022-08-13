@@ -17,7 +17,7 @@ class Permission < ApplicationRecord
 
     case subject_class
     when 'Activity' then params[:event_id] = event_id
-    when 'Result', 'Volunteer' then params[:activity] = { event_id: event_id }
+    when 'Result' then params[:activity] = { event_id: event_id }
     end
 
     params

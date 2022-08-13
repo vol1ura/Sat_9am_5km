@@ -15,7 +15,7 @@ active_admin_form_for [:admin, resource] do |f|
 
   f.inputs 'Сведения о забеге' do
     input :description, label: 'Описание'
-    input :published, label: 'Опубликовать результаты на сайте'
+    input :published, label: 'Опубликовать результаты на сайте' unless resource.published && !current_user.admin?
   end
 
   if resource.results.exists?
