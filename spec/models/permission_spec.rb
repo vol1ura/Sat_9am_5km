@@ -20,5 +20,10 @@ RSpec.describe Permission, type: :model do
       permission = create :permission, event: event, subject_class: 'Activity'
       expect(permission.params).to include(event_id: event.id)
     end
+
+    it 'returns params with activity key' do
+      permission = create :permission, event: event, subject_class: 'Result'
+      expect(permission.params).to include(activity: { event_id: event.id })
+    end
   end
 end

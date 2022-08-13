@@ -18,12 +18,20 @@ active_admin_form_for [:admin, resource] do |f|
       end
     end
     column do
-      last_activities_collection = Activity.includes(:event).order(date: :desc).map do |a|
+      activities_collection = Activity.includes(:event).order(date: :desc)
+      unless current_user.admin?
+        allowed_events = current_user.permissions.where(
+          subject_class: 'Activity',
+          action: %w[create update manage]
+        ).pluck(:event_id).compact
+        activities_collection = activities_collection.where(event_id: allowed_events)
+      end
+      last_activities_collection = activities_collection.limit(20).map do |a|
         [human_activity_name(a), a.id]
       end
-      # if f.object.activity.present? && last_activities_collection.exclude?(f.object.activity.id)
-      #   last_activities_collection << [human_activity_name(f.object.activity), f.object.activity.id]
-      # end
+      if f.object.activity.present? && last_activities_collection.exclude?(f.object.activity.id)
+        last_activities_collection << [human_activity_name(f.object.activity), f.object.activity.id]
+      end
       inputs do
         input :activity, collection: last_activities_collection
         input :role

@@ -24,5 +24,6 @@ class Ability
       can permission.action.to_sym, permission.subject_class.constantize, permission.params
     end
     cannot :destroy, Activity, published: true
+    cannot :destroy, Athlete
   end
 end
