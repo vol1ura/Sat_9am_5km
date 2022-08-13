@@ -1,15 +1,16 @@
 RSpec.describe '/admin/results', type: :request do
   let(:user) { create :user }
-  let(:activity) { create :activity }
+  let(:event) { create :event }
+  let(:activity) { create :activity, event: event }
+  let!(:results) { create_list :result, 3, activity: activity }
 
   before do
-    create :permission, user: user, action: 'read', subject_class: 'Result'
+    create :permission, user: user, action: 'read', subject_class: 'Result', event_id: event.id
     sign_in user
   end
 
   describe 'GET /admin/results' do
     it 'renders a successful response' do
-      create_list :result, 3, activity: activity
       get admin_activity_results_url(activity)
       expect(response).to be_successful
     end
@@ -17,18 +18,14 @@ RSpec.describe '/admin/results', type: :request do
 
   describe 'GET /admin/results/1' do
     it 'renders a successful response' do
-      result = create :result, activity: activity
-      get admin_activity_result_url(activity, result)
+      get admin_activity_result_url(activity, results.first)
       expect(response).to be_successful
     end
   end
 
   context 'with manage permission' do
-    let(:activity) { create :activity }
-    let(:results) { create_list :result, 3, activity: activity }
-
     before do
-      create :permission, user: user, action: 'manage', subject_class: 'Result'
+      create :permission, user: user, action: 'manage', subject_class: 'Result', event_id: event.id
     end
 
     describe 'DELETE /admin/activities/1/results/1/drop_time' do
@@ -51,9 +48,6 @@ RSpec.describe '/admin/results', type: :request do
   end
 
   context 'without manage permission' do
-    let(:activity) { create :activity }
-    let(:results) { create_list :result, 3, activity: activity }
-
     describe 'DELETE /admin/activities/1/results/1/drop_time' do
       it 'renders alert' do
         delete drop_time_admin_activity_result_url(activity, results.first, format: :js)
