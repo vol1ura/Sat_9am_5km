@@ -7,6 +7,7 @@ class Result < ApplicationRecord
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true }
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
+  scope :top, ->(male, limit) { joins(:athlete).where(athlete: { male: male }).order(:total_time, :position).limit(limit) }
 
   # before_save :change_positions, if: :will_save_change_to_position?
 
@@ -24,12 +25,4 @@ class Result < ApplicationRecord
     results.last.update!(key => nil)
     results
   end
-
-  # private
-
-  # def change_positions
-  #   from_pos = [position_in_database, position].min
-  #   to_pos = [position_in_database, position].max
-  #   results = activity.results.where(position: from_pos..to_pos).order(:position)
-  # end
 end

@@ -36,7 +36,7 @@ Rollbar.configure do |config|
 
   # Enable asynchronous reporting (uses girl_friday or Threading if girl_friday
   # is not installed)
-  # config.use_async = true
+  config.use_async = true
   # Supply your own async handler:
   # config.async_handler = Proc.new { |payload|
   #  Thread.new { Rollbar.process_from_async_handler(payload) }

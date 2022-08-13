@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :badges, only: :index
   resources :volunteers, only: %i[new edit create update]
   get '/pages/:page', to: 'pages#show', as: :page
+  get '/top_results', to: 'results#top'
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 end
