@@ -3,5 +3,6 @@ FactoryBot.define do
     date { Faker::Date.backward(days: 30) }
     description { Faker::Lorem.paragraph }
     event
+    published { true }
   end
 end

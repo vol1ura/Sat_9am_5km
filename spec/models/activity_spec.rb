@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Activity, type: :model do
-  let(:activity) { build :activity }
+  let(:activity) { build :activity, published: false }
 
   describe 'validations' do
     it { is_expected.not_to be_valid }
@@ -14,8 +14,8 @@ RSpec.describe Activity, type: :model do
   describe '#leader_result' do
     it 'returns best male result' do
       FactoryBot.rewind_sequences
-      activity = create :activity
       activity.results << build_list(:result, 3, activity_id: nil)
+      activity.save!
       expect(activity.leader_result.position).to eq 1
     end
   end
