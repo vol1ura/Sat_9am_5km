@@ -26,6 +26,11 @@ RSpec.describe '/admin/results', type: :request do
   context 'with manage permission' do
     before do
       create :permission, user: user, action: 'manage', subject_class: 'Result', event_id: event.id
+      Bullet.unused_eager_loading_enable = false
+    end
+
+    after do
+      Bullet.unused_eager_loading_enable = true
     end
 
     describe 'DELETE /admin/activities/1/results/1/drop_time' do
