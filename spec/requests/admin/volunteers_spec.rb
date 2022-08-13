@@ -1,14 +1,16 @@
 RSpec.describe '/admin/volunteers', type: :request do
   let(:user) { create(:user) }
+  let(:event) { create :event }
+  let(:activity) { create :activity, event: event }
 
   before do
-    create :permission, user: user, action: 'manage', subject_class: 'Volunteer'
+    create :permission, user: user, action: 'manage', subject_class: 'Volunteer', event_id: event.id
     sign_in user
   end
 
   describe 'GET /admin/volunteers' do
     it 'renders a successful response' do
-      create_list :volunteer, 3
+      create_list :volunteer, 3, activity: activity
       get admin_volunteers_url
       expect(response).to be_successful
     end
@@ -16,7 +18,7 @@ RSpec.describe '/admin/volunteers', type: :request do
 
   describe 'GET /admin/volunteers/1' do
     it 'renders a successful response' do
-      volunteer = create :volunteer
+      volunteer = create :volunteer, activity: activity
       get admin_volunteer_url(volunteer)
       expect(response).to be_successful
     end
