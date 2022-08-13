@@ -13,7 +13,7 @@
 - [ ] FEATURE: Diagrams tab on activity show page - pie men/women, gist bar by result with median
 - [ ] FEATURE: Diagrams tab on clubs index page - men/women in club, counts, top athlete
 - [ ] FEATURE: Diagrams tab on athlete page - results dynamics,
-- [ ] Top50 results for men and women for each event
+- [x] Top50 results for men and women
 - [ ] Separate page with activities inside event
 - [ ] Event specific top menu
 - [ ] Add Redis and configure adapter for async jobs
