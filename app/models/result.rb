@@ -7,9 +7,20 @@ class Result < ApplicationRecord
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true }
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
-  scope :top, ->(male, limit) { joins(:athlete).where(athlete: { male: male }).order(:total_time, :position).limit(limit) }
 
-  # before_save :change_positions, if: :will_save_change_to_position?
+  def self.top(male:, limit:)
+    sql = <<-SQL.squish
+      SELECT res.* FROM results res INNER JOIN (
+        SELECT MIN(total_time) as min_tt, athlete.id as a_id FROM "results"
+        INNER JOIN "activities" "activity" ON "activity"."id" = "results"."activity_id"
+        INNER JOIN "athletes" "athlete" ON "athlete"."id" = "results"."athlete_id"
+        WHERE "activity"."published" = true AND "athlete"."male" = ?
+        GROUP BY a_id
+      ) t ON res.athlete_id = t.a_id AND res.total_time = t.min_tt
+      ORDER BY res.total_time
+    SQL
+    find_by_sql([sql, male]).first(limit)
+  end
 
   def swap_with_position(target_position)
     current_athlete = athlete

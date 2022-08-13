@@ -2,8 +2,7 @@
 
 class ResultsController < ApplicationController
   def top
-    published_results = Result.includes({ athlete: :club }, { activity: :event }).published
-    @male_results = published_results.top(true, 50)
-    @female_results = published_results.top(false, 50)
+    @male_results = Result.top(male: true, limit: 50)
+    @female_results = Result.top(male: false, limit: 50)
   end
 end
