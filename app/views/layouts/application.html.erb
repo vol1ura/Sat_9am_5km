@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title>Sat 9am 5km</title>
+    <title>
+      <%= yield_head_info(:title, 'Парковые забеги') %> | Sat9am5km
+    </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= favicon_link_tag asset_path('favicon.ico') %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag 'application' %>
     <%= javascript_importmap_tags %>
+    <meta name='description' content='<%= yield_head_info(:description, 'Еженедельные парковые пробежки в парках Москвы') %>'>
+    <meta name='keywords' content='<%= yield_head_info(:keywords, 'парковые пробежки,парковые забеги,забег в Кузьминках,забег в Измайлово,забег в Царицыно,забег в Олимпийской Деревне') %>'>
     <!-- Yandex.Metrika counter -->
     <script>
       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

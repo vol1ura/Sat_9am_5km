@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def head_info(tag, text)
+    content_for :"meta_#{tag}", text
+  end
+
+  def yield_head_info(tag, default_text = '')
+    content_for?(:"meta_#{tag}") ? content_for(:"meta_#{tag}") : default_text
+  end
+
   def human_result_time(time)
     return 'XX:XX' unless time
 
