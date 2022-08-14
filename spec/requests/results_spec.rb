@@ -5,11 +5,6 @@ RSpec.describe 'results', type: :request do
       activities_list.each do |activity|
         create_list :result, 3, activity: activity
       end
-      Bullet.n_plus_one_query_enable = false
-    end
-
-    after do
-      Bullet.n_plus_one_query_enable = true
     end
 
     it 'renders successful response' do

@@ -9,20 +9,19 @@ class Result < ApplicationRecord
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
 
   def self.top(male:, limit:)
-    sql = <<-SQL.squish
-      SELECT res.* FROM results res INNER JOIN (
-        SELECT MIN(total_time) as min_tt, athlete.id as a_id FROM "results"
-        INNER JOIN "activities" "activity" ON "activity"."id" = "results"."activity_id"
-        INNER JOIN "athletes" "athlete" ON "athlete"."id" = "results"."athlete_id"
-        WHERE "activity"."published" = true AND "athlete"."male" = ?
-        GROUP BY a_id
-      ) t ON res.athlete_id = t.a_id AND res.total_time = t.min_tt
-      ORDER BY res.total_time
-    SQL
-    find_by_sql([sql, male]).first(limit)
+    results = Arel::Table.new(:results)
+    athletes = Arel::Table.new(:athletes)
+    activities = Arel::Table.new(:activities)
+    composed_table = results.join(activities).on(activities[:id].eq(results[:activity_id]))
+                            .join(athletes).on(athletes[:id].eq(results[:athlete_id]))
+                            .where(activities[:published].eq(true).and(athletes[:male].eq(male)))
+                            .project(results[:total_time].minimum.as('min_tt'), athletes[:id].as('a_id'))
+                            .group(athletes[:id]).as('t')
+    join_query = "INNER JOIN #{composed_table.to_sql} ON results.athlete_id = t.a_id AND results.total_time = t.min_tt"
+    eager_load(activity: :event, athlete: :club).joins(join_query).order(:total_time).first(limit)
   end
 
-  def swap_with_position(target_position)
+  def swap_with_position!(target_position)
     current_athlete = athlete
     target_result = Result.find_by!(position: target_position, activity: activity)
     update!(athlete: target_result.athlete)
@@ -30,7 +29,7 @@ class Result < ApplicationRecord
     target_result
   end
 
-  def shift_attributes(key)
+  def shift_attributes!(key)
     results = activity.results.includes(:athlete, :activity).where(position: position..).order(:position).to_a
     results.each_cons(2) { |r0, r1| r0.update!(key => r1.public_send(key)) }
     results.last.update!(key => nil)

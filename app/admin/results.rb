@@ -44,25 +44,25 @@ ActiveAdmin.register Result do
   end
 
   member_action :up, method: :put, if: proc { can? :update, Result } do
-    @pred_result = resource.swap_with_position(resource.position.pred)
+    @pred_result = resource.swap_with_position!(resource.position.pred)
   rescue StandardError
     render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
   end
 
   member_action :down, method: :put, if: proc { can? :update, Result } do
-    @next_result = resource.swap_with_position(resource.position.next)
+    @next_result = resource.swap_with_position!(resource.position.next)
   rescue StandardError
     render js: "alert('#{I18n.t 'active_admin.results.cannot_move_result'}')"
   end
 
   member_action :drop_time, method: :delete, if: proc { can? :manage, Result } do
-    @results = resource.shift_attributes(:total_time)
+    @results = resource.shift_attributes!(:total_time)
   rescue StandardError
     render js: "alert('#{t 'active_admin.results.drop_time_failed'}')"
   end
 
   member_action :drop_athlete, method: :delete, if: proc { can? :manage, Result } do
-    @results = resource.shift_attributes(:athlete)
+    @results = resource.shift_attributes!(:athlete)
   rescue StandardError
     render js: "alert('#{t 'active_admin.results.drop_athlete_failed'}')"
   end
