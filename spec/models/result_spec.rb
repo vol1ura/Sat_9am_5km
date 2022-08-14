@@ -10,7 +10,7 @@ RSpec.describe Result, type: :model do
     end
   end
 
-  describe '#swap_with_position' do
+  describe '#swap_with_position!' do
     let(:activity) { create :activity }
     let(:athlete1) { create :athlete }
     let(:athlete2) { create :athlete }
@@ -19,18 +19,18 @@ RSpec.describe Result, type: :model do
 
     it 'moves result up' do
       expect do
-        result2.swap_with_position(1)
+        result2.swap_with_position!(1)
       end.to change(result2, :athlete_id).from(athlete2.id).to(athlete1.id)
     end
 
     it 'returns changed result' do
-      pred_result = result2.swap_with_position(1)
+      pred_result = result2.swap_with_position!(1)
       expect(pred_result).to have_attributes(id: result1.id, position: 1)
     end
 
     it 'moves result down' do
       expect do
-        result1.swap_with_position(2)
+        result1.swap_with_position!(2)
       end.to change(result1, :athlete_id).from(athlete1.id).to(athlete2.id)
     end
   end
