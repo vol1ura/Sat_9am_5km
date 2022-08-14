@@ -2,7 +2,7 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe '#human_result_time' do
     context 'when time is nil' do
       it 'represent time in human format' do
-        expect(helper.human_result_time(nil)).to eq 'XX:XX'
+        expect(helper.human_result_time(nil)).to eq 'xx:xx'
       end
     end
 

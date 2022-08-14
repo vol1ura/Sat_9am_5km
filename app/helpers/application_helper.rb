@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def human_result_time(time)
-    return 'XX:XX' unless time
+    return 'xx:xx' unless time
 
     time.strftime(time.hour.zero? ? '%M:%S' : '%H:%M:%S')
   end
