@@ -13,7 +13,7 @@
 
 <div class="row">
   <div class="col-12 col-md-8">
-    <%= image_tag @event.main_picture_link || 'big_logo.png', class: 'img-fluid', alt: 'Фото места проведения' %>
+    <%= image_tag @event.main_picture_link || 'big_logo.png', class: 'img-fluid', alt: 'Фото места проведения', title: @event.place %>
   </div>
   <div class="col-12 col-md-4">
     <%= @event.description %>

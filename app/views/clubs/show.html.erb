@@ -1,3 +1,4 @@
+<% head_info :title, @club.name %>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
@@ -11,6 +12,21 @@
 </nav>
 
 <h2><%= @club.name %></h2>
+
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill me-3"><%= Athlete.where(club: @club).size %></span>
+    количество участников
+  </li>
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill me-3"><%= Result.joins(:athlete).where(athlete: { club: @club }).size %></span>
+    количество забегов
+  </li>
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill me-3"><%= Volunteer.joins(:athlete).where(athlete: { club: @club }).size %></span>
+    количество волонтёрств
+  </li>
+</ul>
 
 <table class="table table-striped">
   <thead data-controller="table-head">
