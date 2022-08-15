@@ -18,7 +18,7 @@ class Result < ApplicationRecord
                             .project(results[:total_time].minimum.as('min_tt'), athletes[:id].as('a_id'))
                             .group(athletes[:id]).as('t')
     join_query = "INNER JOIN #{composed_table.to_sql} ON results.athlete_id = t.a_id AND results.total_time = t.min_tt"
-    eager_load(activity: :event, athlete: :club).joins(join_query).order(:total_time).first(limit)
+    joins(join_query).order(:total_time).first(limit)
   end
 
   def swap_with_position!(target_position)
