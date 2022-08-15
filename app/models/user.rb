@@ -4,8 +4,8 @@ class User < ApplicationRecord
   ROLE = { admin: 0 }.freeze
 
   # Include default devise modules. Others available are:
-  # :timeoutable, :trackable, :registerable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :confirmable, :lockable
+  # :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :registerable
 
   has_one :athlete, dependent: :nullify
   has_many :permissions, dependent: :destroy
