@@ -1,8 +1,9 @@
 <%=
   turbo_frame_tag activity do
+    has_rights = can?(:manage, volunteer) && can?(:update, activity)
     if volunteer
-      link_to_if can?(:manage, volunteer), volunteer.name, edit_volunteer_path(volunteer)
-    elsif can?(:manage, volunteer)
+      link_to_if has_rights, volunteer.name, edit_volunteer_path(volunteer)
+    elsif has_rights
       link_to 'добавить', new_volunteer_path(activity_id: activity.id, role: role)
     end
   end
