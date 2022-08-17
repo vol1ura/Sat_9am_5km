@@ -10,9 +10,9 @@ ActiveAdmin.register Permission do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
-      f.input :event
-      f.input :action, as: :select, collection: Permission::ACTIONS
       f.input :subject_class, as: :select, collection: Permission::CLASSES
+      f.input :action, as: :select, collection: Permission::ACTIONS
+      f.input :event
       f.input :subject_id
     end
     f.actions

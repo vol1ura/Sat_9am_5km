@@ -2,7 +2,7 @@
 
 class ClubsController < ApplicationController
   def index
-    @clubs = Athlete.joins(:club).group(:club).order('count_clubs DESC').count(:clubs)
+    @clubs = Athlete.joins(:club).group(:club).order(count_clubs: :desc).count(:clubs)
   end
 
   def show

@@ -18,7 +18,7 @@ module ApplicationHelper
   def human_result_pace(time, distance = 5)
     return unless time
 
-    avg_sec = ((((time.hour * 60) + time.min) * 60) + time.sec) / distance
+    avg_sec = (((((time.hour * 60) + time.min) * 60) + time.sec) / distance.to_f).round
     format '%<min>d:%<sec>02d', min: avg_sec / 60, sec: avg_sec % 60
   end
 
