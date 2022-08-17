@@ -3,8 +3,8 @@
 <tr>
   <td><%= @total_activities - activity_counter %></td>
   <td><%= link_to l(activity.date, format: :short), activity %></td>
-  <td class="text-center"><%= activity.results.size %></td>
-  <td class="hidden-on-phone text-center"><%= @count_volunteers.fetch(activity, 0) %></td>
+  <td><%= activity.results.size %></td>
+  <td class="hidden-on-phone"><%= @count_volunteers.fetch(activity, 0) %></td>
   <td class="hidden-on-phone"><%= "#{male_leader_result.athlete.name} (#{human_result_time(male_leader_result.total_time)})" if male_leader_result&.athlete.present? %></td>
   <td class="hidden-on-phone"><%= "#{female_leader_result.athlete.name} (#{human_result_time(female_leader_result.total_time)})" if female_leader_result&.athlete.present? %></td>
 </tr>

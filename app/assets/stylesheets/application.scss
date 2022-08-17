@@ -53,6 +53,12 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
+.table.table-centered {
+  th, tr {
+  @extend .text-center;
+  }
+}
+
 @include media(phoneScreen) {
   .hidden-on-phone {
     display: none;
