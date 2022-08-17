@@ -10,9 +10,13 @@
     <div class="col">
       <div class="card border-primary h-100">
         <%= image_tag event.main_picture_link, class: 'card-img-top', alt: event.name %>
+        <div class="position-absolute top-0 bg-dark bg-gradient bg-opacity-50 w-100 px-3">
+          <h4 class="text-light"><%= event.name %></h4>
+        </div>
         <div class="card-body">
-          <h4 class="card-title"><%= link_to event.name, event_path(event.code_name), class: 'card-title-link stretched-link' %></h4>
-          <p class="card-text"><%= event.description %></p>
+          <p class="card-text">
+            <%= link_to event.description, event_path(event.code_name), class: 'stretched-link text-decoration-none text-body fw-light' %>
+          </p>
         </div>
       </div>
     </div>
