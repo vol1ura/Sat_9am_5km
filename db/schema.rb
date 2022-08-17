@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_11_005434) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_17_195309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_005434) do
     t.string "name", null: false
     t.string "main_picture_link"
     t.integer "visible_order"
+    t.string "slogan"
   end
 
   create_table "permissions", force: :cascade do |t|
