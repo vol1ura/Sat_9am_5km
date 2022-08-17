@@ -6,7 +6,7 @@ ActiveAdmin.register Event do
 
   config.sort_order = 'visible_order'
 
-  permit_params :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order
+  permit_params :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order, :slogan
 
   filter :active
   filter :code_name
@@ -21,6 +21,7 @@ ActiveAdmin.register Event do
     column :name
     column :town
     column :place
+    column :slogan
     column :main_picture_link
     column :created_at
     actions
@@ -33,6 +34,7 @@ ActiveAdmin.register Event do
     на странице мероприятия. Желательно добавить 2-4 предложения.'
     li 'Ссылка на баннер может быть как в виде url на внешнюю картинку, так и в виде указания относительного пути в ассетах.
     Крайне желательно использовать формат jpg и привести к размеру 1280х482 пикселя.'
+    li 'В поле Девиз прописывается короткое ёмкое описание мероприятия, которое будет отображаться на главной странице.'
   end
 
   sidebar 'Управление контактами', only: %i[show edit] do

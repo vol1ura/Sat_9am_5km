@@ -70,6 +70,7 @@ ru:
         main_picture_link: 'ссылка на баннер'
         town: город
         place: местонахождение
+        slogan: девиз
         description: описание
         visible_order: 'положение в ленте'
       result:
