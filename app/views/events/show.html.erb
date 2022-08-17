@@ -9,24 +9,24 @@
   </div>
 <% end %>
 
-<h1><%= @event.name %></h1>
-
-<div class="row">
-  <div class="col-12 col-md-8">
-    <%= image_tag @event.main_picture_link || 'big_logo.png', class: 'img-fluid', alt: 'Фото места проведения', title: @event.place %>
-  </div>
-  <div class="col-12 col-md-4">
-    <%= @event.description %>
-    <h4>Наши контакты</h4>
-    <ul class="list-group list-group-flush">
-      <% @event.contacts.each do |contact| %>
-        <li class="list-group-item">
-          <%= sanitize link_to(I18n.t("activerecord.attributes.contact.contact_types.#{contact.contact_type}"), contact.link.html_safe, target: '_blank', rel: 'noopener') %>
-        </li>
-      <% end %>
-    </ul>
+<div class="row mb-3 px-3">
+  <div class="col-12 col-xxl-10 mx-auto position-relative px-0">
+    <div class="position-absolute top-0 bg-dark bg-gradient bg-opacity-50 w-100 px-3 rounded-top">
+      <h4 class="text-white"><%= @event.name %></h4>
+    </div>
+    <%= image_tag @event.main_picture_link || 'big_logo.png', class: 'img-fluid rounded', alt: 'Фото места проведения', title: @event.place %>
   </div>
 </div>
+
+<p><%= @event.description %></p>
+<h4>Наши контакты</h4>
+<ul class="list-group list-group-flush">
+  <% @event.contacts.each do |contact| %>
+    <li class="list-group-item">
+      <%= sanitize link_to(I18n.t("activerecord.attributes.contact.contact_types.#{contact.contact_type}"), contact.link.html_safe, target: '_blank', rel: 'noopener') %>
+    </li>
+  <% end %>
+</ul>
 
 <h2>Результаты</h2>
 <div class="row">
