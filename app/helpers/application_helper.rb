@@ -29,4 +29,8 @@ module ApplicationHelper
   def human_volunteer_role(role)
     I18n.t("activerecord.attributes.volunteer.roles.#{role}")
   end
+
+  def event_main_image_tag(event, options = {})
+    image_tag event.main_picture_link || 'events/placeholder_big.jpg', **options
+  end
 end

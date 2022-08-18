@@ -16,7 +16,7 @@
     <div class="position-absolute top-0 bg-dark bg-gradient bg-opacity-25 w-100 px-3 rounded-top">
       <h4 class="text-light"><%= @event.name %></h4>
     </div>
-    <%= image_tag @event.main_picture_link || 'big_logo.png', class: 'img-fluid rounded', alt: 'Фото места проведения', title: @event.place %>
+    <%= event_main_image_tag @event, class: 'img-fluid rounded', alt: 'Место мероприятия', title: @event.name %>
   </div>
 </div>
 
