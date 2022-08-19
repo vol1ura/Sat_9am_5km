@@ -33,6 +33,23 @@ RSpec.describe '/admin/results', type: :request do
       Bullet.unused_eager_loading_enable = true
     end
 
+    describe 'PATCH /admin/activities/1/results/1' do
+      it 'successfully add athlete to result' do
+        result = create :result, activity: activity, athlete: nil
+        athlete = create :athlete
+        patch admin_activity_result_url(activity, result, parkrun_code: athlete.parkrun_code)
+        expect(response).to have_http_status :found
+        expect(result.reload.athlete).to eq athlete
+      end
+
+      it 'cannot add athlete to result' do
+        result = create :result, activity: activity, athlete: nil
+        patch admin_activity_result_url(activity, result, parkrun_code: 0)
+        expect(response).to have_http_status :found
+        expect(result.reload.athlete).to be_nil
+      end
+    end
+
     describe 'DELETE /admin/activities/1/results/1/drop_time' do
       it 'change result total_time to next result total_time' do
         second_time = results.second.total_time
@@ -48,6 +65,26 @@ RSpec.describe '/admin/results', type: :request do
         delete drop_athlete_admin_activity_result_url(activity, results.first, format: :js)
         expect(results.first.reload.athlete).to eq second_athlete
         expect(results.last.reload.athlete).to be_nil
+      end
+    end
+
+    describe 'PUT /admin/activities/1/results/2/up' do
+      it 'swap athletes' do
+        first_athlete = results.first.athlete
+        second_athlete = results.second.athlete
+        put up_admin_activity_result_url(activity, results.second, format: :js)
+        expect(results.first.reload.athlete).to eq second_athlete
+        expect(results.second.reload.athlete).to eq first_athlete
+      end
+    end
+
+    describe 'PUT /admin/activities/1/results/1/down' do
+      it 'swap athletes' do
+        first_athlete = results.first.athlete
+        second_athlete = results.second.athlete
+        put down_admin_activity_result_url(activity, results.first, format: :js)
+        expect(results.first.reload.athlete).to eq second_athlete
+        expect(results.second.reload.athlete).to eq first_athlete
       end
     end
   end
@@ -66,6 +103,22 @@ RSpec.describe '/admin/results', type: :request do
         delete drop_athlete_admin_activity_result_url(activity, results.first, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'Не удалось'
+      end
+    end
+
+    describe 'PUT /admin/activities/1/results/2/up' do
+      it 'renders alert' do
+        put up_admin_activity_result_url(activity, results.second, format: :js)
+        expect(response).to be_successful
+        expect(response.body).to include 'Проверьте корректность'
+      end
+    end
+
+    describe 'PUT /admin/activities/1/results/1/down' do
+      it 'renders alert' do
+        put down_admin_activity_result_url(activity, results.first, format: :js)
+        expect(response).to be_successful
+        expect(response.body).to include 'Проверьте корректность'
       end
     end
   end
