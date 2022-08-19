@@ -37,7 +37,7 @@ ActiveAdmin.register Athlete do
   end
 
   collection_action :find_duplicates, method: :get do
-    @athletes = Athlete.duplicates.page(params[:page]).per(20)
+    @athletes = Athlete.duplicates.includes(:club, :user).page(params[:page]).per(20)
     @page_title = 'Потенциальные дубликаты'
     render :index, layout: false
   end

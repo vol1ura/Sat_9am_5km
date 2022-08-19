@@ -14,7 +14,7 @@ RSpec.describe '/admin/athletes', type: :request do
     end
   end
 
-  describe 'GET /show' do
+  describe 'GET /admin/athletes/1' do
     it 'renders a successful response' do
       athlete = create :athlete
       create_list :volunteer, 3, :with_published_activity, athlete: athlete
@@ -27,6 +27,16 @@ RSpec.describe '/admin/athletes', type: :request do
       athlete = create :athlete
       get admin_athlete_url(athlete)
       expect(response.body).to include new_admin_volunteer_path(volunteer: { athlete_id: athlete.id })
+    end
+  end
+
+  describe 'GET /admin/athletes/find_duplicates' do
+    it 'renders a successful response' do
+      create :athlete, name: 'John Doe', parkrun_code: nil
+      create :athlete, name: 'John Doe'.swapcase, fiveverst_code: nil
+      get find_duplicates_admin_athletes_url
+      expect(response).to be_successful
+      expect(response.body).to include 'John Doe'
     end
   end
 

@@ -13,7 +13,7 @@
 
 <% if @athlete.trophies.exists? %>
   <div class="d-flex justify-content-start flex-wrap">
-    <% @athlete.trophies.each do |trophy| %>
+    <% @athlete.trophies.includes(:badge).each do |trophy| %>
       <div class="p-1">
         <%= link_to badges_path do
               image_tag trophy.badge.picture_link, class: 'trophy'
