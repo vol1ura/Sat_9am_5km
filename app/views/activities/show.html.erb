@@ -37,7 +37,7 @@
   <div class="tab-pane fade" id="female-tab-pane" role="tabpanel" aria-labelledby="female-tab" tabindex="0" data-protocol-target="female"></div>
 </div>
 
-<h2>Волонтёры</h2>
+<h4>Волонтёры</h4>
 <p>Забег провела команда волонтёров:</p>
 <table class="table">
   <thead>
@@ -47,7 +47,7 @@
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <% @activity.volunteers.includes(:athlete).each do |volunteer| %>
+    <% @activity.volunteers.includes(:athlete).order(:id).each do |volunteer| %>
       <tr>
         <td><%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %></td>
         <td><%= human_volunteer_role volunteer.role %></td>
