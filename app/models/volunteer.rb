@@ -12,8 +12,9 @@ class Volunteer < ApplicationRecord
   belongs_to :athlete, counter_cache: :volunteering_count, touch: true
 
   validates :role, presence: true
+  validates :athlete_id, uniqueness: { scope: :activity_id }
 
   enum role: ROLES
 
-  delegate :name, to: :athlete
+  delegate :name, to: :athlete, allow_nil: true
 end
