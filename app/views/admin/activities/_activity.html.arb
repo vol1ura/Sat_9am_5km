@@ -32,6 +32,6 @@ end
 panel 'Волонтёры' do
   table_for activity.volunteers.includes(:athlete) do
     column :name
-    column :role
+    column(:role) { |v| human_volunteer_role v.role }
   end
 end

@@ -1,0 +1,80 @@
+<div class='autocomplete'>
+  <%=
+    form.hidden_field :athlete_id
+    text_field_tag :name, volunteer.name, class: 'query-field', type: 'text', placeholder: 'Начните вводить имя...', autocomplete: 'off'
+  %>
+  <div class="suggestions"></div>
+</div>
+
+<script>
+$(function () {
+  function closeAutoComplete() {
+    $('.suggestions').slideUp('fast')
+    $('.suggestions').html('')
+  };
+
+  $('.query-field').on('input', (e) => {
+    const name = $(e.target).val()
+    if (name.length < 3) {
+      closeAutoComplete()
+      return
+    }
+    suggestions = $('.autocomplete').find('.suggestions')
+    findAthletes(suggestions, name)
+    suggestions.slideDown('slow')
+  })
+
+  $('.query-field').keydown((e) => {
+    current = $('.autocomplete').find('.suggestions li.active')
+    if (e.which == 40) {
+      next = current.length ? current.next() : $('.suggestions li:first-child')
+      if (next.length) {
+        next.addClass('active')
+        current.removeClass('active')
+      }
+    }
+    if (e.which == 38) {
+      current.prev().addClass('active')
+      current.removeClass('active')
+    }
+    if (e.which == 13) {
+      e.preventDefault()
+      if (current.length) current.click()
+    }
+    if (e.which == 27) closeAutoComplete()
+  });
+
+  $('.suggestions').on('click', 'li', (e) => {
+    $('.query-field').val($(e.target).attr('name'))
+    $('#volunteer_athlete_id').val($(e.target).attr('id'))
+    closeAutoComplete()
+  })
+
+  $('body').on('click', (e) => {
+    trigger = $('.suggestions')
+    if (trigger != e.target && !trigger.has(e.target).length) {
+      closeAutoComplete()
+    }
+  })
+})
+
+function findAthletes(element, query) {
+  fetch('/athletes.json?name=' + query)
+    .then(response => response.json())
+    .then(data => {
+      let list = '';
+      data.athletes.forEach((athlete, idx) => {
+        if (idx >= 10) return;
+        attributes = `id="${athlete.id}" name="${athlete.name}" parkrun_code="${athlete.parkrun_code}" fivevers_code="${athlete.fiveverst_code}"`
+        athlete_code = athlete.parkrun_code || athlete.fiveverst_code || '[нет штрих-кода]'
+        list += `<li ${attributes}>A${athlete_code} ${athlete.name}</li>`
+      })
+      element.html(`<ul>${list}</ul>`)
+      return true
+    })
+    .catch(function (err) {
+      console.warn('Cannot find any athlete', err)
+      return []
+    })
+}
+</script>

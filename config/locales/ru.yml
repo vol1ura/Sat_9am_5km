@@ -59,8 +59,8 @@ ru:
         user: пользователь
       activity:
         date: 'дата забега'
-        published: 'опубликован?'
-        description: 'описание'
+        published: опубликован?
+        description: описание
       club:
         name: название
       event:
@@ -69,10 +69,12 @@ ru:
         name: название
         main_picture_link: 'ссылка на баннер'
         town: город
-        place: местонахождение
+        place: 'как найти?'
         slogan: девиз
         description: описание
-        visible_order: 'положение в ленте'
+        visible_order: 'вес в ленте'
+        created_at: создан
+        updated_at: обновлён
       result:
         position: место
         total_time: результат
