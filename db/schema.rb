@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_17_195309) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_20_125347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -143,7 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_17_195309) do
     t.integer "role", null: false
     t.bigint "activity_id", null: false
     t.bigint "athlete_id", null: false
-    t.index ["activity_id"], name: "index_volunteers_on_activity_id"
+    t.index ["activity_id", "athlete_id"], name: "index_volunteers_on_activity_id_and_athlete_id", unique: true
     t.index ["athlete_id"], name: "index_volunteers_on_athlete_id"
   end
 
