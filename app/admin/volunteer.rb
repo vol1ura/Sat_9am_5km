@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Volunteer do
+  belongs_to :activity
+
   includes :athlete, activity: :event
 
   permit_params :role, :activity_id, :athlete_id
+
+  config.sort_order = 'id'
 
   controller do
     def scoped_collection
@@ -21,8 +25,8 @@ ActiveAdmin.register Volunteer do
   index download_links: false do
     selectable_column
     column :athlete
-    column('Забег') { |v| human_activity_name v.activity }
     column('Роль') { |v| human_volunteer_role v.role }
+    column('Забег') { |v| human_activity_name v.activity }
     actions
   end
 

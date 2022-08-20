@@ -1,42 +1,10 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource] do |f|
+active_admin_form_for [:admin, activity, resource] do |f|
   f.semantic_errors(*f.object.errors.attribute_names)
-  columns do
-    column do
-      athlete_id = params.dig(:volunteer, :athlete_id)
-      if athlete_id.present?
-        inputs do
-          h2 Athlete.find(athlete_id).name
-          f.hidden_field :athlete_id, value: athlete_id
-        end
-      else
-        inputs 'Номер волонтёра-участника в системе Parkrun (только цифры)' do
-          text_field_tag :parkrun_code, params[:parkrun_code].presence || f.object.athlete&.parkrun_code,
-                         placeholder: 'Parkrun ID', style: 'width: 10rem; margin-left: 1rem;'
-        end
-      end
-    end
-    column do
-      activities_collection = Activity.includes(:event).order(date: :desc)
-      unless current_user.admin?
-        allowed_events = current_user.permissions.where(
-          subject_class: 'Activity',
-          action: %w[create update manage]
-        ).pluck(:event_id).compact
-        activities_collection = activities_collection.where(event_id: allowed_events)
-      end
-      last_activities_collection = activities_collection.limit(20).map do |a|
-        [human_activity_name(a), a.id]
-      end
-      if f.object.activity.present? && last_activities_collection.exclude?(f.object.activity.id)
-        last_activities_collection << [human_activity_name(f.object.activity), f.object.activity.id]
-      end
-      inputs do
-        input :activity, collection: last_activities_collection
-        input :role
-      end
-    end
+  inputs 'Выберите участника и волонтёрскую роль', style: 'max-width: 500px;' do
+    input :role
+    render partial: 'athlete_fields', locals: { volunteer: resource, form: f }
   end
   actions
 end

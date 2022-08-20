@@ -11,7 +11,7 @@ RSpec.describe '/admin/volunteers', type: :request do
   describe 'GET /admin/volunteers' do
     it 'renders a successful response' do
       create_list :volunteer, 3, activity: activity
-      get admin_volunteers_url
+      get admin_activity_volunteers_url(activity)
       expect(response).to be_successful
     end
   end
@@ -19,7 +19,7 @@ RSpec.describe '/admin/volunteers', type: :request do
   describe 'GET /admin/volunteers/1' do
     it 'renders a successful response' do
       volunteer = create :volunteer, activity: activity
-      get admin_volunteer_url(volunteer)
+      get admin_activity_volunteer_url(activity, volunteer)
       expect(response).to be_successful
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe '/admin/volunteers', type: :request do
 
     it 'redirects unauthorized user' do
       user.permissions = []
-      post admin_volunteers_url, params: valid_attributes
+      post admin_activity_volunteers_url(activity), params: valid_attributes
       expect(response).to redirect_to(root_url)
     end
 
@@ -47,13 +47,13 @@ RSpec.describe '/admin/volunteers', type: :request do
 
       it 'creates a new volunteer' do
         expect do
-          post admin_volunteers_url, params: valid_attributes
+          post admin_activity_volunteers_url(activity), params: valid_attributes
         end.to change(Volunteer, :count).by(1)
       end
 
       it "redirects to the volunteer's show page" do
-        post admin_volunteers_url, params: valid_attributes
-        expect(response).to redirect_to(admin_volunteer_url(Volunteer.last))
+        post admin_activity_volunteers_url(activity), params: valid_attributes
+        expect(response).to redirect_to(admin_activity_volunteer_url(activity, Volunteer.last))
       end
     end
   end

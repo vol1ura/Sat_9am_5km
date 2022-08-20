@@ -22,7 +22,6 @@ ActiveAdmin.register Event do
     column :town
     column :place
     column :slogan
-    column :main_picture_link
     column :created_at
     actions
   end
