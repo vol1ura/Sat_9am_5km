@@ -70,7 +70,7 @@ class Athlete < ApplicationRecord
   end
 
   def code
-    parkrun_code || fiveverst_code || (SAT_5AM_9KM_BORDER + id)
+    parkrun_code || fiveverst_code || (SAT_5AM_9KM_BORDER + id if id)
   end
 
   def gender
