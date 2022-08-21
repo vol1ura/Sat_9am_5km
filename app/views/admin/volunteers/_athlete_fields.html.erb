@@ -13,15 +13,20 @@ $(function () {
     $('.suggestions').html('')
   };
 
+  let timeout = null
+
   $('.query-field').on('input', (e) => {
     const name = $(e.target).val()
     if (name.length < 3) {
       closeAutoComplete()
       return
     }
-    suggestions = $('.autocomplete').find('.suggestions')
-    findAthletes(suggestions, name)
-    suggestions.slideDown('slow')
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      suggestions = $('.autocomplete').find('.suggestions')
+      findAthletes(suggestions, name)
+      suggestions.slideDown('slow')
+    }, 350)
   })
 
   $('.query-field').keydown((e) => {
