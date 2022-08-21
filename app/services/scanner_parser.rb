@@ -8,7 +8,6 @@ class ScannerParser < ApplicationService
 
   def call
     return unless @scanner_file
-
     return unless table.dig(1, 0).match?(/A\d+/)
 
     table[1..].each do |row|

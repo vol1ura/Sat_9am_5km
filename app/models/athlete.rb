@@ -1,8 +1,30 @@
 # frozen_string_literal: true
 
 class Athlete < ApplicationRecord
-  FIVE_VERST_BORDER = 790000000
+  SAT_5AM_9KM_BORDER = 770_000_000
+  FIVE_VERST_BORDER = 790_000_000
   NOBODY = 'НЕИЗВЕСТНЫЙ'
+
+  PersonalCode = Struct.new(:code) do
+    def code_type
+      @code_type ||=
+        if code < SAT_5AM_9KM_BORDER
+          :parkrun_code
+        elsif code > FIVE_VERST_BORDER
+          :fiveverst_code
+        else
+          :id
+        end
+    end
+
+    def id
+      @id ||= code.between?(SAT_5AM_9KM_BORDER, FIVE_VERST_BORDER) ? code - SAT_5AM_9KM_BORDER : code
+    end
+
+    def to_params
+      @to_params ||= { code_type => id }
+    end
+  end
 
   belongs_to :club, optional: true
   belongs_to :user, optional: true
@@ -31,18 +53,23 @@ class Athlete < ApplicationRecord
   end
 
   def self.find_or_scrape_by_code!(code)
-    code_type = code < FIVE_VERST_BORDER ? :parkrun_code : :fiveverst_code
-    rec = find_by(code_type => code)
-    return rec if rec && rec.name != NOBODY
+    personal_code = PersonalCode.new(code)
+    rec = find_by(**personal_code.to_params)
+    return rec if rec && (rec.name != NOBODY || personal_code.code_type == :id)
+    return create if personal_code.code_type == :id
 
-    athlete_name = AthleteFinder.call(code_type: code_type, code: code)
-    rec ||= find_or_initialize_by(name: athlete_name, code_type => nil)
-    rec.update!(code_type => code, name: athlete_name)
+    athlete_name = AthleteFinder.call(personal_code)
+    rec ||= find_or_initialize_by(name: athlete_name, personal_code.code_type => nil)
+    rec.update!(name: athlete_name, **personal_code.to_params)
     rec
   end
 
   def personal_best(key = :total_time)
     results.published.order(key).first
+  end
+
+  def code
+    parkrun_code || fiveverst_code || (SAT_5AM_9KM_BORDER + id)
   end
 
   def gender

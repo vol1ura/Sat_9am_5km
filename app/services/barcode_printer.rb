@@ -7,7 +7,7 @@ require 'barby/outputter/svg_outputter'
 # Outputs athlete parkrun barcode in SVG format
 class BarcodePrinter < ApplicationService
   def initialize(athlete)
-    @code = "A#{athlete.parkrun_code || athlete.fiveverst_code}"
+    @code = "A#{athlete.code}"
     @barcode = Barby::Code128.new(@code)
   end
 

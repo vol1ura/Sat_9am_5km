@@ -10,7 +10,8 @@ RSpec.describe AthleteFinder, type: :service do
     end
 
     it 'returns nil' do
-      expect(described_class.call(code_type: :parkrun_code, code: parkrun_code)).to be_nil
+      personal_code = Athlete::PersonalCode.new(parkrun_code)
+      expect(described_class.call(personal_code)).to be_nil
     end
   end
 end

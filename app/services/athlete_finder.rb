@@ -14,9 +14,9 @@ class AthleteFinder < ApplicationService
   ANTI_BLOCK_PAUSE = 1.5
   private_constant :NAME_PATH, :ANTI_BLOCK_PAUSE
 
-  def initialize(code_type:, code:)
-    @code_type = code_type
-    @code = code
+  def initialize(personal_code)
+    @code_type = personal_code.code_type
+    @code = personal_code.id
   end
 
   def call
@@ -33,9 +33,9 @@ class AthleteFinder < ApplicationService
   def fetch_data
     url = NAME_PATH.dig(@code_type, :url) + @code.to_s
     sleep ANTI_BLOCK_PAUSE unless Rails.env.test?
-    res = Client.get(url)
-    raise "Bad request. Body: #{res.body}" unless Net::HTTPSuccess
+    response_body = Client.get(url).body
+    raise "Bad request. Body: #{response_body}" unless Net::HTTPSuccess
 
-    res.body
+    response_body
   end
 end
