@@ -16,7 +16,7 @@ ActiveAdmin.register_page 'Dashboard' do
         panel t('active_admin.dashboard_welcome.info') do
           para t 'active_admin.dashboard_welcome.call_to_action'
         end
-        panel 'Обновления' do
+        panel t('active_admin.dashboard_welcome.change_log') do
           ul do
             li 'Увеличен размер шрифтов.'
             li 'Раздел "Волонтёры" перенесён в "Забеги" и доступен из каждого забега по кнопке "Редактор волонтёров".'
