@@ -46,7 +46,7 @@ class Athlete < ApplicationRecord
     namesakes = find_by_sql('SELECT LOWER(name) AS l_name FROM athletes GROUP BY l_name HAVING COUNT(*) > 1').pluck(:l_name)
     namesakes_ids = where('LOWER(name) in (?)', namesakes)
                     .pluck(:name, :id, :parkrun_code)
-                    .group_by { |n| n.first.downcase }
+                    .group_by { |athlete| athlete.first.downcase }
                     .filter { |_, arr| arr.map(&:last).include?(nil) }
                     .flat_map { |_, arr| arr.map(&:second) }
     where(id: namesakes_ids).order(:name)
@@ -54,14 +54,15 @@ class Athlete < ApplicationRecord
 
   def self.find_or_scrape_by_code!(code)
     personal_code = PersonalCode.new(code)
-    rec = find_by(**personal_code.to_params)
-    return rec if rec && (rec.name != NOBODY || personal_code.code_type == :id)
-    return create if personal_code.code_type == :id
+    code_type = personal_code.code_type
+    athlete = find_by(**personal_code.to_params)
+    return athlete if athlete && (athlete.name != NOBODY || code_type == :id)
+    return create if code_type == :id
 
     athlete_name = AthleteFinder.call(personal_code)
-    rec ||= find_or_initialize_by(name: athlete_name, personal_code.code_type => nil)
-    rec.update!(name: athlete_name, **personal_code.to_params)
-    rec
+    athlete ||= find_or_initialize_by(name: athlete_name, code_type => nil)
+    athlete.update!(name: athlete_name, **personal_code.to_params)
+    athlete
   end
 
   def personal_best(key = :total_time)
