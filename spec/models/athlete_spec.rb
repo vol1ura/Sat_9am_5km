@@ -45,21 +45,34 @@ RSpec.describe Athlete, type: :model do
   end
 
   describe '#find_or_scrape_by_code!' do
-    context 'when such athlete already exists' do
-      it 'returns athlete from database' do
-        athlete = create :athlete
+    context 'when such athlete exists in the database' do
+      let(:athlete) { create :athlete }
+
+      it 'returns athlete by parkrun code' do
         expect(described_class.find_or_scrape_by_code!(athlete.parkrun_code)).to eq athlete
+      end
+
+      it 'returns athlete by 5 verst code' do
+        expect(described_class.find_or_scrape_by_code!(athlete.fiveverst_code)).to eq athlete
+      end
+
+      it 'returns athlete by sat_9am_5km code' do
+        code = athlete.id + Athlete::SAT_5AM_9KM_BORDER
+        expect(described_class.find_or_scrape_by_code!(code)).to eq athlete
       end
     end
 
     context 'when such athlete is not exists in the database' do
-      let(:parkrun_code) { 875743 }
-      let(:athlete_name) { 'Юрий ВОЛОДИН' }
-
       it 'parses parkrun site to find athlete', vcr: true do
-        athlete = create :athlete, name: Athlete::NOBODY, parkrun_code: parkrun_code
+        athlete = create :athlete, name: Athlete::NOBODY, parkrun_code: 875743
         described_class.find_or_scrape_by_code!(athlete.parkrun_code)
-        expect(athlete.reload.name).to eq athlete_name
+        expect(athlete.reload.name).to eq 'Юрий ВОЛОДИН'
+      end
+
+      it 'parses 5 verst site to find athlete', vcr: true do
+        athlete = create :athlete, name: Athlete::NOBODY, fiveverst_code: 790069891
+        described_class.find_or_scrape_by_code!(athlete.fiveverst_code)
+        expect(athlete.reload.name).to eq 'Даниил ЯШНИКОВ'
       end
     end
   end
