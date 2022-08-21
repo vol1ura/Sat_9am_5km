@@ -10,14 +10,9 @@
 
 - [ ] FEATURE: Insert and remove athletes in protocol
 - [x] FEATURE: Volunteers schedule list
-- [ ] FEATURE: Diagrams tab on activity show page - pie men/women, gist bar by result with median
-- [ ] FEATURE: Diagrams tab on clubs index page - men/women in club, counts, top athlete
-- [ ] FEATURE: Diagrams tab on athlete page - results dynamics,
 - [x] Top50 results for men and women
 - [ ] Separate page with activities inside event
 - [ ] Event specific top menu
-- [ ] Add Redis and configure adapter for async jobs
-- [x] Setup logrotate
 
 ## Development
 
@@ -36,3 +31,7 @@ Now you can run it
 ```shell
 make
 ```
+
+- Site [http://localhost:3000](http://localhost:3000)
+- Admin panel [http://localhost:3000/admin](http://localhost:3000/admin)
+- Database panel [http://localhost:3003](http://localhost:3003)
