@@ -6,7 +6,7 @@ ActiveAdmin.register User do
   menu if: proc { current_user.admin? }
 
   permit_params do
-    permitted = %i[first_name last_name password password_confirmation]
+    permitted = %i[first_name last_name password password_confirmation email]
     permitted << :role if current_user.admin?
   end
 
