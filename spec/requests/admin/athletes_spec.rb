@@ -65,6 +65,23 @@ RSpec.describe '/admin/athletes', type: :request do
         expect(response).to redirect_to admin_athletes_path
       end
     end
+
+    context 'when set gender' do
+      let(:athletes) { create_list :athlete, 2, male: nil }
+      let(:batch_params) do
+        {
+          batch_action: :gender_set,
+          batch_action_inputs: { gender: 'мужчина' }.to_json,
+          collection_selection: athletes.map(&:id)
+        }
+      end
+
+      it 'changes gender to all athletes' do
+        post batch_action_admin_athletes_url, params: batch_params
+        expect(response).to redirect_to admin_athletes_path
+        expect(athletes.map(&:reload)).to all be_male
+      end
+    end
   end
 
   describe 'POST /admin/athletes' do

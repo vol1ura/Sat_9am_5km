@@ -25,13 +25,6 @@ ActiveAdmin.register Activity do
 
   form title: 'Загрузка забега', multipart: true, partial: 'form'
 
-  sidebar 'Редактирование протокола', only: :show do
-    li 'Если участник отобразился как "НЕИЗВЕСТНЫЙ", значит не удалось автоматически заполнить его имя.
-    Кликните по НЕИЗВЕСТНЫЙ и воспользуйтесь сайтом parkrun или 5вёрст чтобы по ID найти имя.'
-    li 'Если участник отобразился как "БЕЗ ТОКЕНА (создать)", значит он не отсканировался. Возможно, этот человек
-    уже есть в базе и создавать новую запись НЕ НУЖНО - кликните по результату и в открывшейся форме введите parkrun ID.'
-  end
-
   after_save do |activity|
     TimerParser.call(activity, params[:activity][:timer])
     Activity::MAX_SCANNERS.times do |scanner_number|

@@ -14,6 +14,12 @@ RSpec.describe '/admin/results', type: :request do
       get admin_activity_results_url(activity)
       expect(response).to be_successful
     end
+
+    it 'renders athlete without tokens' do
+      result = create :result, activity: activity, athlete: nil
+      get admin_activity_results_url(activity)
+      expect(response.body).to include 'БЕЗ ТОКЕНА (создать)', new_admin_athlete_path(result_id: result.id)
+    end
   end
 
   describe 'GET /admin/results/1' do
@@ -37,14 +43,14 @@ RSpec.describe '/admin/results', type: :request do
       it 'successfully add athlete to result' do
         result = create :result, activity: activity, athlete: nil
         athlete = create :athlete
-        patch admin_activity_result_url(activity, result, parkrun_code: athlete.parkrun_code)
+        patch admin_activity_result_url(activity, result, code: athlete.parkrun_code)
         expect(response).to have_http_status :found
         expect(result.reload.athlete).to eq athlete
       end
 
       it 'cannot add athlete to result' do
         result = create :result, activity: activity, athlete: nil
-        patch admin_activity_result_url(activity, result, parkrun_code: 0)
+        patch admin_activity_result_url(activity, result, code: 0)
         expect(response).to have_http_status :found
         expect(result.reload.athlete).to be_nil
       end

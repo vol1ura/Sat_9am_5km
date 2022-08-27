@@ -18,6 +18,8 @@ ActiveAdmin.register_page 'Dashboard' do
         end
         panel t('active_admin.dashboard_welcome.change_log') do
           ul do
+            li 'Расширен функционал редактора протокола за счёт переноса функций со странички просмотра забега.'
+            li 'Изменена форма редактирования результата. Можно вводить как parkrun, 5 вёрст id, так и id из базы сайта.'
             li <<~CHANGE
               Добавлен автокомлит на страницу "Расписание волонтёров" (например,
               #{volunteering_event_url(Event.first.code_name)}). Чтобы воспользоваться инструментом,
