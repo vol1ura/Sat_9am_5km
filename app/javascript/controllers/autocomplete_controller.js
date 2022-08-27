@@ -52,7 +52,7 @@ export default class extends Controller {
     this.resultsTarget.innerHTML = ''
     athletes.forEach((athlete, i) => {
       if (i >= 10) return
-      const list_item = `<li class="list-group-item" athlete_id="${athlete.id}" name="${athlete.name}"><span class="badge bg-secondary">A${athlete.parkrun_code || '[нет шк]'}</span> ${athlete.name}</li>`
+      const list_item = `<li class="list-group-item" athlete_id="${athlete.id}" name="${athlete.name}"><span class="badge bg-secondary">A${athlete.code}</span> ${athlete.name}</li>`
       this.resultsTarget.insertAdjacentHTML('beforeend', list_item)
     })
   }

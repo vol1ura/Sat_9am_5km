@@ -70,9 +70,7 @@ function findAthletes(element, query) {
       let list = '';
       data.athletes.forEach((athlete, idx) => {
         if (idx >= 10) return;
-        attributes = `id="${athlete.id}" name="${athlete.name}" parkrun_code="${athlete.parkrun_code}" fivevers_code="${athlete.fiveverst_code}"`
-        athlete_code = athlete.parkrun_code || athlete.fiveverst_code || '[нет штрих-кода]'
-        list += `<li ${attributes}>A${athlete_code} ${athlete.name}</li>`
+        list += `<li id="${athlete.id}" name="${athlete.name}">A${athlete.code} ${athlete.name}</li>`
       })
       element.html(`<ul>${list}</ul>`)
       return true
