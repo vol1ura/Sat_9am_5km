@@ -12,18 +12,8 @@ end
 panel 'Протокол' do
   table_for activity.results.includes(athlete: :club).order(:position) do
     column :position
-    column('Имя участника') do |r|
-      if r.athlete
-        link_to r.athlete.name, admin_athlete_path(r.athlete), target: '_blank', rel: 'noopener'
-      else
-        link_to 'БЕЗ ТОКЕНА (создать)', new_admin_athlete_path(result_id: r.id), target: '_blank', rel: 'noopener'
-      end
-    end
-    column('Результат') do |r|
-      link_to human_result_time(r.total_time),
-              edit_admin_activity_result_path(activity, r),
-              target: '_blank', rel: 'noopener'
-    end
+    column :athlete
+    column(:total_time) { |r| human_result_time(r.total_time) }
     column('Пол') { |r| r.athlete&.gender }
     column('Клуб') { |r| r.athlete&.club&.name }
   end

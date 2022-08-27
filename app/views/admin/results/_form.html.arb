@@ -13,13 +13,14 @@ active_admin_form_for [:admin, activity, resource] do |f|
       end
     end
     column do
-      f.inputs 'Parkrun ID участника (только цифры, без буквы "A")' do
-        text_field_tag :parkrun_code, params[:parkrun_code].presence || f.object.athlete&.parkrun_code,
-                       placeholder: 'Parkrun ID', style: 'width: 10rem; margin-left: 1rem;'
+      para 'Заполните одно из полей. Если хотите заменить участника, заполните ТОЛЬКО один из ID, другое поле очистите.'
+      f.inputs 'Parkrun или 5вёрст ID участника (только цифры, без буквы "A")' do
+        number_field_tag :code,
+                         params[:code].presence || f.object.athlete&.parkrun_code || f.object.athlete&.fiveverst_code,
+                         placeholder: 'Штрихкод ID', style: 'width: 10rem; margin-left: 1rem;'
       end
-      f.inputs '5вёрст ID участника (только цифры, без буквы "A")' do
-        text_field_tag :fiveverst_code, params[:fiveverst_code].presence || f.object.athlete&.fiveverst_code,
-                       placeholder: '5вёрст ID', style: 'width: 10rem; margin-left: 1rem;'
+      f.inputs 'ID участника в базе S95' do
+        f.number_field :athlete_id, placeholder: 'ID в базе', style: 'width: 10rem; margin-left: 1rem;'
       end
     end
   end
