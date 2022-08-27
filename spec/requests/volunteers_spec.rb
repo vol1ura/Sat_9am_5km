@@ -28,9 +28,9 @@ RSpec.describe '/volunteer', type: :request do
       {
         volunteer: {
           activity_id: activity.id,
+          athlete_id: athlete.id,
           role: Volunteer::ROLES.keys.sample
-        },
-        parkrun_code: athlete.parkrun_code
+        }
       }
     end
 
@@ -49,17 +49,17 @@ RSpec.describe '/volunteer', type: :request do
   describe 'PATCH /volunteer' do
     let(:valid_attributes) do
       {
-        parkrun_code: athlete.parkrun_code
+        volunteer: {
+          activity_id: activity.id,
+          athlete_id: athlete.id,
+          role: volunteer.role
+        }
       }
-    end
-
-    it 'renders a successful response' do
-      patch volunteer_url(volunteer), params: valid_attributes
-      expect(response).to be_successful
     end
 
     it 'change athlete' do
       patch volunteer_url(volunteer), params: valid_attributes
+      expect(response).to be_successful
       expect(volunteer.reload.athlete).to eq athlete
     end
   end

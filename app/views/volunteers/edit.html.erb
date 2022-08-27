@@ -1,10 +1,23 @@
 <%= turbo_frame_tag @volunteer.activity do %>
-  <%= form_with model: @volunteer do |f| %>
+  <%= form_with model: @volunteer, html: { 'data-controller' => 'autocomplete', 'data-autocomplete-url-value' => athletes_path(format: :json) } do |f| %>
     <%= f.hidden_field :role %>
     <%= f.hidden_field :activity_id %>
-    <div class="input-group">
-      <%= number_field_tag :parkrun_code, @volunteer.athlete&.parkrun_code, class: 'form-control', placeholder: 'Parkrun ID', autocomplete: 'off', 'aria-label' => 'Parkrun ID', 'aria-describedby' => 'button-addon' %>
-      <button class="btn btn-outline-secondary" type="submit" id="button-addon"><i class="bi bi-person-plus"></i></button>
+    <%= f.hidden_field :athlete_id, 'data-autocomplete-target' => 'hidden' %>
+    <div class="position-relative volunteers-autocomplete">
+      <div class="input-group">
+        <%=
+          text_field_tag :name, @volunteer&.name,
+                         class: 'form-control',
+                         placeholder: 'Начните вводить имя...',
+                         autocomplete: 'off',
+                         'aria-label' => 'Parkrun ID',
+                         'aria-describedby' => 'button-addon',
+                         'data-autocomplete-target' => 'input',
+                         'data-action' => 'keydown->autocomplete#search'
+        %>
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon"><i class="bi bi-person-plus-fill text-primary"></i></button>
+      </div>
+      <ul class="list-group list-group-flush position-absolute w-100 shadow rounded-bottom" data-autocomplete-target="results" data-action="click->autocomplete#select"></ul>
     </div>
   <% end %>
 <% end %>
