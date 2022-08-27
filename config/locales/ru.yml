@@ -43,6 +43,7 @@ ru:
         last_name: фамилия
         email: 'e-mail'
         role: роль
+        note: примечание
       permission:
         event: мероприятие
         user: пользователь
