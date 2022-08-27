@@ -10,12 +10,14 @@
                          class: 'form-control',
                          placeholder: 'Начните вводить имя...',
                          autocomplete: 'off',
-                         'aria-label' => 'Parkrun ID',
+                         'aria-label' => 'Athlete name',
                          'aria-describedby' => 'button-addon',
                          'data-autocomplete-target' => 'input',
                          'data-action' => 'keydown->autocomplete#search'
         %>
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon"><i class="bi bi-person-plus-fill text-primary"></i></button>
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon">
+          <i class="bi bi-person-plus-fill text-primary"></i>
+        </button>
       </div>
       <ul class="list-group list-group-flush position-absolute w-100 shadow rounded-bottom" data-autocomplete-target="results" data-action="click->autocomplete#select"></ul>
     </div>
