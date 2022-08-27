@@ -11,27 +11,20 @@ class VolunteersController < ApplicationController
   def edit; end
 
   def create
-    set_athlete
-    render_cell
+    render(@volunteer.save ? 'cell_name' : 'edit')
   end
 
   def update
-    set_athlete
-    render_cell
+    if @volunteer.update(resource_params)
+      render 'cell_name'
+    else
+      render 'edit'
+    end
   end
 
   private
 
   def resource_params
-    params.require(:volunteer).permit(:activity_id, :role)
-  end
-
-  def set_athlete
-    athlete = Athlete.find_by(parkrun_code: params[:parkrun_code])
-    @volunteer.athlete = athlete
-  end
-
-  def render_cell
-    render(@volunteer.save ? 'cell_name' : 'edit')
+    params.require(:volunteer).permit(:athlete_id, :activity_id, :role)
   end
 end

@@ -1,33 +1,13 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Mass Assignment",
-      "warning_code": 105,
-      "fingerprint": "3ad76a61bb17ddba406abb2b5c1e58d6b9db9ba580fae2004d233f96399033ed",
-      "check_name": "PermitAttributes",
-      "message": "Potentially dangerous key allowed for mass assignment",
-      "file": "app/controllers/volunteers_controller.rb",
-      "line": 26,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:volunteer).permit(:activity_id, :role)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "VolunteersController",
-        "method": "resource_params"
-      },
-      "user_input": ":role",
-      "confidence": "Medium",
-      "note": ""
-    },
-    {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 2,
       "fingerprint": "4acd18b6b0e37eed9fb5625d46e4332707992375d300e79def0e5415b860934b",
       "check_name": "CrossSiteScripting",
       "message": "Unescaped model attribute",
       "file": "app/views/athletes/show.html.erb",
-      "line": 139,
+      "line": 147,
       "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
       "code": "BarcodePrinter.call(Athlete.find(params[:id]))",
       "render_path": [
@@ -50,8 +30,28 @@
       "user_input": "Athlete.find(params[:id])",
       "confidence": "Weak",
       "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "f041cebf37ce5355708b1784e75f663e60ceb2938589fcfeb3a0a5d248a49443",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/volunteers_controller.rb",
+      "line": 28,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:volunteer).permit(:athlete_id, :activity_id, :role)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "VolunteersController",
+        "method": "resource_params"
+      },
+      "user_input": ":role",
+      "confidence": "Medium",
+      "note": ""
     }
   ],
-  "updated": "2022-08-01 19:58:11 +0300",
+  "updated": "2022-08-27 14:11:21 +0300",
   "brakeman_version": "5.2.3"
 }

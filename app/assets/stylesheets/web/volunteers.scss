@@ -1,0 +1,14 @@
+.volunteers-autocomplete {
+  ul {
+    z-index: 2;
+  }
+
+  li {
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+
+  li:hover {
+    background-color: $light;
+  }
+}
