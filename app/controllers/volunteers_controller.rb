@@ -15,11 +15,7 @@ class VolunteersController < ApplicationController
   end
 
   def update
-    if @volunteer.update(resource_params)
-      render 'cell_name'
-    else
-      render 'edit'
-    end
+    render(@volunteer.update(resource_params) ? 'cell_name' : 'edit')
   end
 
   private
