@@ -5,6 +5,7 @@ attributes_table_for user do
   row :last_name
   row :email
   row :role
+  row :note if current_user.admin?
   row :created_at
   row('Пракрановский номер') { |u| u.athlete&.parkrun_code }
   row('Номер 5 вёрст') { |u| u.athlete&.fiveverst_code }

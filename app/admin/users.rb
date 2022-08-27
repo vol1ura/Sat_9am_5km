@@ -7,7 +7,7 @@ ActiveAdmin.register User do
 
   permit_params do
     permitted = %i[first_name last_name password password_confirmation email]
-    permitted << :role if current_user.admin?
+    permitted.push(:role, :note) if current_user.admin?
   end
 
   filter :email
@@ -19,7 +19,10 @@ ActiveAdmin.register User do
     column :email
     column :first_name
     column :last_name
-    column :role
+    if current_user.admin?
+      column :note
+      column :role
+    end
     column :created_at
     actions
   end
@@ -33,7 +36,10 @@ ActiveAdmin.register User do
       f.input :last_name
       f.input :password
       f.input :password_confirmation
-      f.input :role if current_user.admin?
+      if current_user.admin?
+        f.input :role
+        f.input :note
+      end
     end
     f.actions
   end
