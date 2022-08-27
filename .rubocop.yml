@@ -8,9 +8,9 @@ require:
 Metrics/AbcSize:
   Max: 35
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 8
 Metrics/PerceivedComplexity:
-  Max: 10
+  Max: 8
 Metrics/MethodLength:
   Max: 16
 Metrics/ClassLength:
@@ -20,28 +20,15 @@ Metrics/BlockLength:
   Exclude:
     - 'app/admin/**/*'
     - 'app/views/admin/**/*'
-    - 'config/**/*'
     - 'spec/**/*'
-  AllowedMethods:
-    - params
-    - resource
-    - resources
-    - helpers
-    - requires
-    - optional
-    - given
-    - namespace
 
 # STYLE
 Style/Alias:
-  Enabled: false
-Style/AsciiComments:
   Enabled: false
 Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
   Exclude:
-    - 'config/**/*'
     - 'config.ru'
     - 'spec/**/*'
     - 'app/views/**/*.json.jbuilder'
@@ -53,17 +40,10 @@ Style/NumericLiterals:
 # LAYOUT
 Layout/LineLength:
   Max: 124
-# Layout/EmptyLineAfterMagicComment:
-#   Enabled: false
-# Layout/EmptyLinesAroundClassBody:
-#   Enabled: false
 Layout/BeginEndAlignment:
   EnforcedStyleAlignWith: begin
 
 # LINT
-Lint/RescueException:
-  Enabled: false
-
 Lint/MissingSuper:
   Exclude:
     - 'app/services/**/*'
@@ -77,12 +57,6 @@ RSpec/ExampleLength:
   Max: 10
   Exclude:
     - 'spec/system/**/*'
-
-# Rails
-# Rails/SkipsModelValidations:
-#   Enabled: false
-Rails/EnvironmentVariableAccess:
-  Enabled: false
 
 AllCops:
   TargetRubyVersion: 2.7
