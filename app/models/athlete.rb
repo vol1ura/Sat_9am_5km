@@ -42,9 +42,13 @@ class Athlete < ApplicationRecord
 
   before_validation :fill_blank_name, if: -> { name.blank? }
 
+  scope :with_extra_spaces, -> { where("name ILIKE ' %' OR name ILIKE '% ' OR name ILIKE '%  %'") }
+
   def self.duplicates
-    namesakes = find_by_sql('SELECT LOWER(name) AS l_name FROM athletes GROUP BY l_name HAVING COUNT(*) > 1').pluck(:l_name)
-    namesakes_ids = where('LOWER(name) in (?)', namesakes)
+    namesakes = select("array(SELECT unnest(string_to_array(LOWER(name), ' ')) order by 1) AS l_name")
+                .group('l_name').having('COUNT(*) > 1').map(&:l_name)
+    namesakes += namesakes.map(&:reverse)
+    namesakes_ids = where('LOWER(name) in (?)', namesakes.map { |namesake| namesake.join(' ') })
                     .pluck(:name, :id, :parkrun_code)
                     .group_by { |athlete| athlete.first.downcase }
                     .filter { |_, arr| arr.map(&:last).include?(nil) }

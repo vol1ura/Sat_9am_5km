@@ -51,7 +51,7 @@ ru:
         subject_id: id элемента
         subject_class: класс объектов
       athlete:
-        name: имя
+        name: Имя ФАМИЛИЯ
         parkrun_code: 'номер parkrun'
         fiveverst_code: 'номер 5вёрст'
         gender: пол
