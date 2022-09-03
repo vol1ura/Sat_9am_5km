@@ -5,6 +5,12 @@ ActiveAdmin.register Athlete do
 
   permit_params :parkrun_code, :fiveverst_code, :name, :male, :user_id, :club_id
 
+  config.per_page = [20, 50, 100]
+
+  scope :all, default: true
+  scope :duplicates
+  scope :with_extra_spaces
+
   filter :name
   filter :parkrun_code
   filter :fiveverst_code
@@ -36,21 +42,11 @@ ActiveAdmin.register Athlete do
     end
   end
 
-  collection_action :find_duplicates, method: :get do
-    @athletes = Athlete.duplicates.includes(:club, :user).page(params[:page]).per(20)
-    @page_title = 'Потенциальные дубликаты'
-    render :index, layout: false
-  end
-
-  action_item :find_duplicates_action, only: %i[index find_duplicates] do
-    link_to 'Искать дубликаты', find_duplicates_admin_athletes_path
-  end
-
   batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
                          if: proc { can? :manage, Athlete } do |ids|
     collection = batch_action_collection.where(id: ids)
     if AthleteReuniter.call(collection, ids)
-      redirect_to find_duplicates_admin_athletes_path, notice: I18n.t('active_admin.athletes.successful_reunite')
+      redirect_to collection_path(scope: :duplicates), notice: I18n.t('active_admin.athletes.successful_reunite')
     else
       redirect_to collection_path, alert: I18n.t('active_admin.athletes.failed_reunite')
     end

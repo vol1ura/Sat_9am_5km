@@ -53,6 +53,7 @@ ru:
       filters: "Фильтры"
       search_status: "Статус поиска"
     pagination:
+      per_page: 'на странице'
       empty: "%{model} не найдено"
       one: "Результат: <b>1</b> %{model}"
       one_page: "Результат: <b>%{n}</b> %{model}"

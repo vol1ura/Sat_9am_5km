@@ -25,11 +25,12 @@ RSpec.describe '/admin/athletes', type: :request do
 
   describe 'GET /admin/athletes/find_duplicates' do
     it 'renders a successful response' do
+      create :athlete, name: 'Doe JOHN', parkrun_code: nil
       create :athlete, name: 'John Doe', parkrun_code: nil
       create :athlete, name: 'John Doe'.swapcase, fiveverst_code: nil
-      get find_duplicates_admin_athletes_url
+      get admin_athletes_url(scope: :duplicates)
       expect(response).to be_successful
-      expect(response.body).to include 'John Doe'
+      expect(response.body).to include 'John Doe', 'Doe JOHN'
     end
   end
 
@@ -49,9 +50,9 @@ RSpec.describe '/admin/athletes', type: :request do
         { batch_action: :reunite, batch_action_inputs: '{}', collection_selection: athletes.map(&:id) }
       end
 
-      it 'redirects to duplicates page' do
+      it 'redirects to duplicates scope' do
         post batch_action_admin_athletes_url, params: valid_attributes
-        expect(response).to redirect_to find_duplicates_admin_athletes_path
+        expect(response).to redirect_to admin_athletes_url(scope: :duplicates)
       end
     end
 
