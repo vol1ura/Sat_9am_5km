@@ -13,11 +13,13 @@
 - [x] Top50 results for men and women
 - [ ] Separate page with activities inside event
 - [ ] Event specific top menu
+- [ ] Refactor TimerParser
 
 ## Development
 
 Create `deploy/.env` and `config/database.yml` files:
 ```shell
+mkdir deploy
 cp .env.example ./deploy/.env
 cp ./config/database.yml.example ./config/database.yml
 ```
