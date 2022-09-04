@@ -38,9 +38,10 @@ RSpec.describe Athlete, type: :model do
 
   describe '#duplicates' do
     it 'finds duplicated athletes by name case insensitive' do
-      create :athlete, name: 'Test Name'
+      create :athlete, name: 'Test Name', fiveverst_code: nil
+      create :athlete, name: 'Name Test', fiveverst_code: nil
       create :athlete, name: 'test NAME', parkrun_code: nil
-      expect(described_class.duplicates.size).to eq 2
+      expect(described_class.duplicates.size).to eq 3
     end
   end
 
