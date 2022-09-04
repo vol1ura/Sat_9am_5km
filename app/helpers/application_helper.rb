@@ -49,4 +49,12 @@ module ApplicationHelper
     title = SVG_TITLE_MAPPING[icon]
     image_tag "svg/#{icon}.svg", width: size, title: title, alt: title
   end
+
+  def athlete_external_link(athlete)
+    return unless athlete && (athlete.parkrun_code || athlete.fiveverst_code)
+
+    code_type = Athlete::PersonalCode.new(athlete.code).code_type
+    url = AthleteFinder::NAME_PATH.dig(code_type, :url) + athlete.public_send(code_type).to_s
+    link_to 'открыть', url, target: '_blank', rel: 'noopener'
+  end
 end

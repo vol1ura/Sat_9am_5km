@@ -13,6 +13,7 @@ panel 'Протокол' do
   table_for activity.results.includes(athlete: :club).order(:position) do
     column :position
     column :athlete
+    column('сайт 🌳') { |r| athlete_external_link(r.athlete) }
     column(:total_time) { |r| human_result_time(r.total_time) }
     column('Пол') { |r| r.athlete&.gender }
     column('Клуб') { |r| r.athlete&.club&.name }
