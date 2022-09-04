@@ -12,4 +12,13 @@ namespace :db do
       end
     end
   end
+
+  desc 'unification of athletes names'
+  task unify_athletes_names: :environment do
+    Athlete.all.find_each do |athlete|
+      name = athlete.name
+      trimmed_name = name.gsub(/^ | $|(?<= ) /, '')
+      athlete.update(name: trimmed_name) unless name == trimmed_name
+    end
+  end
 end
