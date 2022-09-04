@@ -18,6 +18,18 @@ ActiveAdmin.register Volunteer do
         end_of_association_chain.joins(:activity).where(activity: { event_id: event_ids })
       end
     end
+
+    def update
+      update! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
+
+    def create
+      create! do |format|
+        format.html { redirect_to collection_path } if resource.valid?
+      end
+    end
   end
 
   filter :role, as: :select, collection: Volunteer::ROLES
@@ -33,9 +45,4 @@ ActiveAdmin.register Volunteer do
   show(title: :name) { render volunteer }
 
   form partial: 'form'
-
-  before_create do |volunteer|
-    athlete = Athlete.find_by parkrun_code: params[:parkrun_code].to_s.strip
-    volunteer.athlete = athlete if athlete
-  end
 end
