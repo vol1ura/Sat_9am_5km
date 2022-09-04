@@ -12,7 +12,7 @@ class AthleteFinder < ApplicationService
     }
   }.freeze
   ANTI_BLOCK_PAUSE = 1.5
-  private_constant :NAME_PATH, :ANTI_BLOCK_PAUSE
+  private_constant :ANTI_BLOCK_PAUSE
 
   def initialize(personal_code)
     @code_type = personal_code.code_type
