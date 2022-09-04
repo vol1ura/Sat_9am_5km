@@ -8,9 +8,9 @@ require:
 Metrics/AbcSize:
   Max: 35
 Metrics/CyclomaticComplexity:
-  Max: 9
+  Max: 8
 Metrics/PerceivedComplexity:
-  Max: 9
+  Max: 8
 Metrics/MethodLength:
   Max: 16
 Metrics/ClassLength:

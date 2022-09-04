@@ -45,15 +45,20 @@ class Athlete < ApplicationRecord
   scope :with_extra_spaces, -> { where("name ILIKE ' %' OR name ILIKE '% ' OR name ILIKE '%  %'") }
 
   def self.duplicates
-    namesakes = select("array(SELECT unnest(string_to_array(LOWER(name), ' ')) order by 1) AS l_name")
-                .group('l_name').having('COUNT(*) > 1').map(&:l_name)
-    namesakes += namesakes.map(&:reverse)
-    namesakes_ids = where('LOWER(name) in (?)', namesakes.map { |namesake| namesake.join(' ') })
-                    .pluck(:name, :id, :parkrun_code)
-                    .group_by { |athlete| athlete.first.downcase }
-                    .filter { |_, arr| arr.map(&:last).include?(nil) }
+    sql = <<~SQL.squish
+      SELECT id, parkrun_code, fiveverst_code, l_name FROM (
+        SELECT id, parkrun_code, fiveverst_code, l_name, COUNT(id) OVER (PARTITION BY l_name) AS cnt FROM (
+          SELECT *, array(SELECT unnest(string_to_array(LOWER(name), ' ')) ORDER BY 1) AS l_name FROM athletes
+        ) AS q1
+      ) AS q2
+      WHERE q2.cnt > 1
+    SQL
+    namesakes_ids = find_by_sql(sql)
+                    .pluck(:l_name, :id, :parkrun_code, :fiveverst_code)
+                    .group_by(&:first)
+                    .reject { |_, arr| arr.all?(&:third) || arr.all?(&:last) }
                     .flat_map { |_, arr| arr.map(&:second) }
-    where(id: namesakes_ids).order(:name)
+    where(id: namesakes_ids)
   end
 
   def self.find_or_scrape_by_code!(code)
