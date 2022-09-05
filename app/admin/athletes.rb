@@ -9,7 +9,6 @@ ActiveAdmin.register Athlete do
 
   scope :all, default: true
   scope :duplicates
-  scope :with_extra_spaces
 
   filter :name
   filter :parkrun_code

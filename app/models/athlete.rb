@@ -41,8 +41,7 @@ class Athlete < ApplicationRecord
   validates :fiveverst_code, uniqueness: true, allow_nil: true
 
   before_validation :fill_blank_name, if: -> { name.blank? }
-
-  scope :with_extra_spaces, -> { where("name ILIKE ' %' OR name ILIKE '% ' OR name ILIKE '%  %'") }
+  before_save :remove_extra_spaces, if: :will_save_change_to_name?
 
   def self.duplicates
     sql = <<~SQL.squish
@@ -92,5 +91,10 @@ class Athlete < ApplicationRecord
 
   def fill_blank_name
     self.name = NOBODY
+  end
+
+  def remove_extra_spaces
+    trimmed_name = name.gsub(/^ | $|(?<= ) /, '')
+    self.name = trimmed_name unless name == trimmed_name
   end
 end

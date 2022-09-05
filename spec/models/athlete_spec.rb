@@ -13,6 +13,11 @@ RSpec.describe Athlete, type: :model do
     expect { athlete.save }.to change(athlete, :name).to(Athlete::NOBODY)
   end
 
+  it 'removes extra spaces from name' do
+    athlete = build :athlete, name: ' Test  TEST '
+    expect { athlete.save }.to change(athlete, :name).to('Test TEST')
+  end
+
   describe '#gender' do
     context 'when male is true' do
       it 'returns "мужчина"' do
