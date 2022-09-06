@@ -3,6 +3,7 @@
 class Athlete < ApplicationRecord
   SAT_5AM_9KM_BORDER = 770_000_000
   FIVE_VERST_BORDER = 790_000_000
+  RUN_PARK_BORDER = 7_000_000_000
   NOBODY = 'НЕИЗВЕСТНЫЙ'
 
   PersonalCode = Struct.new(:code) do
@@ -10,6 +11,8 @@ class Athlete < ApplicationRecord
       @code_type ||=
         if code < SAT_5AM_9KM_BORDER
           :parkrun_code
+        # elsif code > RUN_PARK_BORDER
+        #   :runpark_code
         elsif code > FIVE_VERST_BORDER
           :fiveverst_code
         else

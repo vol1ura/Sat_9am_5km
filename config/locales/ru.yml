@@ -52,8 +52,8 @@ ru:
         subject_class: класс объектов
       athlete:
         name: Имя ФАМИЛИЯ
-        parkrun_code: 'номер parkrun'
-        fiveverst_code: 'номер 5вёрст'
+        parkrun_code: 'parkrun ID'
+        fiveverst_code: '5В или RP ID'
         gender: пол
         club: клуб
         male: мужчина
