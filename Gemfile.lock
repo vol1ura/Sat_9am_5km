@@ -63,6 +63,8 @@ GEM
       kaminari (~> 1.0, >= 1.2.1)
       railties (>= 6.1, < 7.1)
       ransack (>= 2.1.1, < 4)
+    activeadmin_quill_editor (1.0.0)
+      activeadmin (~> 2.0)
     activejob (7.0.3.1)
       activesupport (= 7.0.3.1)
       globalid (>= 0.3.6)
@@ -393,6 +395,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  activeadmin_quill_editor
   barby
   bcrypt_pbkdf (~> 1.0)
   bootstrap (~> 5.2.0)

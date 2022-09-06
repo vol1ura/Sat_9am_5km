@@ -12,7 +12,7 @@
 
 <% if @activity.description.present? %>
   <h4>Краткий отчёт</h4>
-  <p><%= @activity.description %></p>
+  <p><%= sanitized_text @activity.description %></p>
 <% end %>
 
 <h4>Протокол</h4>

@@ -4,7 +4,7 @@ panel 'Детали забега' do
   attributes_table_for activity do
     row('Забег') { |a| a.event.name }
     row :date
-    row :description
+    row(:description) { |a| sanitized_text a.description }
     row :published
   end
 end
