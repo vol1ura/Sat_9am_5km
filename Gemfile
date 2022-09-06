@@ -11,6 +11,7 @@ gem 'sassc-rails'
 gem 'rails', '~> 7.0.3'
 
 gem 'activeadmin'
+gem 'activeadmin_quill_editor'
 gem 'barby', require: false
 gem 'bootstrap', '~> 5.2.0'
 gem 'cancancan', '~> 3.4'

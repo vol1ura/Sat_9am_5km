@@ -14,7 +14,25 @@ active_admin_form_for [:admin, resource] do |f|
   end
 
   f.inputs 'Сведения о забеге' do
-    input :description, label: 'Описание'
+    input :description, as: :quill_editor,
+                        label: 'Описание',
+                        input_html: {
+                          data: {
+                            options: {
+                              modules: {
+                                toolbar: [
+                                  %w[bold italic strike],
+                                  %w[blockquote code-block],
+                                  [{ list: 'ordered' }, { list: 'bullet' }],
+                                  ['link'],
+                                  ['clean']
+                                ]
+                              },
+                              placeholder: 'Какой же классный забег...',
+                              theme: 'snow'
+                            }
+                          }
+                        }
     input :published, label: 'Опубликовать результаты на сайте' unless resource.published && !current_user.admin?
   end
 
