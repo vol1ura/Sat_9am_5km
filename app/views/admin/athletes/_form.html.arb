@@ -2,7 +2,7 @@
 
 active_admin_form_for [:admin, resource] do |f|
   panel 'Внимание!' do
-    para 'Номер Parkrun, а также номер 5вёрст вводятся только цифрами, без буквы "A" в начале.'
+    para 'Номера Parkrun, 5 вёрст или RunPark вводятся только цифрами, без буквы "A" в начале.'
     if f.object.new_record?
       para <<~NOTE
         Чтобы результаты участника в будущем не затерялись,

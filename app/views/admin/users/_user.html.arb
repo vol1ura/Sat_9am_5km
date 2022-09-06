@@ -7,8 +7,8 @@ attributes_table_for user do
   row :role
   row :note if current_user.admin?
   row :created_at
-  row('Пракрановский номер') { |u| u.athlete&.parkrun_code }
-  row('Номер 5 вёрст') { |u| u.athlete&.fiveverst_code }
+  row('Номер паркран') { |u| u.athlete&.parkrun_code }
+  row('Номер 5 вёрст или RunPark') { |u| u.athlete&.fiveverst_code }
   row('Пол') { |u| u.athlete&.gender }
   row('Клуб') { |u| u.athlete&.club&.name }
 end
