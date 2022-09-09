@@ -35,7 +35,7 @@ export default class extends Controller {
         val1 = parseInt(val1)
         val2 = parseInt(val2)
       }
-      return sort_direction == 'desc' ? val1 > val2 : val1 < val2
+      return sort_direction == 'desc' ? val1 - val2 : val2 - val1
     })
     const table_body = table.querySelector('tbody')
     table_body.innerHTML = ''
