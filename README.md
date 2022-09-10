@@ -10,9 +10,7 @@
 
 - [ ] Separate page with activities inside event
 - [ ] Event specific top menu
-- [ ] Refactor TimerParser
 - [ ] Add callback when publish activity to check and fill date
-- [ ] Migrate to jsonb column for parkrun ids
 
 ## Development
 

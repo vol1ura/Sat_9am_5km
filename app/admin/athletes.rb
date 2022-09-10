@@ -11,6 +11,7 @@ ActiveAdmin.register Athlete do
   scope :duplicates
 
   filter :name
+  filter :id
   filter :parkrun_code
   filter :fiveverst_code
   filter :male
@@ -21,6 +22,7 @@ ActiveAdmin.register Athlete do
   index download_links: false do
     selectable_column
     column :name
+    column :id
     column :parkrun_code
     column :fiveverst_code
     column :gender
