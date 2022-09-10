@@ -8,6 +8,7 @@ ActiveAdmin.register Volunteer do
   permit_params :role, :activity_id, :athlete_id
 
   config.sort_order = 'id'
+  config.filters = false
 
   controller do
     def scoped_collection
@@ -32,9 +33,7 @@ ActiveAdmin.register Volunteer do
     end
   end
 
-  filter :role, as: :select, collection: Volunteer::ROLES
-
-  index download_links: false do
+  index download_links: false, title: -> { "Редактор волонтёров #{l(Activity.find(params[:activity_id]).date)}" } do
     selectable_column
     column :athlete
     column('Роль') { |v| human_volunteer_role v.role }
@@ -45,4 +44,8 @@ ActiveAdmin.register Volunteer do
   show(title: :name) { render volunteer }
 
   form partial: 'form'
+
+  action_item :activity, only: :index do
+    link_to 'Просмотр забега', admin_activity_path(params[:activity_id])
+  end
 end
