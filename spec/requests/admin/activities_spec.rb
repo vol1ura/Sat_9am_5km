@@ -7,7 +7,7 @@ RSpec.describe '/admin/activities', type: :request do
     sign_in user
   end
 
-  describe 'GET /index' do
+  describe 'GET /admin/activities' do
     it 'renders a successful response' do
       create_list :activity, 3, event: event
       get admin_activities_url
@@ -15,11 +15,36 @@ RSpec.describe '/admin/activities', type: :request do
     end
   end
 
-  describe 'GET /show' do
+  describe 'GET /admin/activities/1' do
     it 'renders a successful response' do
       activity = create :activity, published: false, event: event
       get admin_activity_url(activity)
       expect(response).to be_successful
+    end
+  end
+
+  describe 'POST /admin/activities' do
+    before do
+      user.admin!
+      allow(TimerParser).to receive(:call).and_return(nil)
+      allow(ScannerParser).to receive(:call).and_return(nil)
+    end
+
+    let(:valid_attributes) do
+      {
+        activity: {
+          event_id: event.id,
+          published: true,
+          timer: File.open('spec/fixtures/files/parkrun_timer_results_ios.csv'),
+          scanner0: File.open('spec/fixtures/files/parkrun_scanner_results.csv')
+        }
+      }
+    end
+
+    it 'calls TimerParser and ScannerParser' do
+      post admin_activities_url, params: valid_attributes
+      expect(TimerParser).to have_received(:call).once
+      expect(ScannerParser).to have_received(:call).exactly(Activity::MAX_SCANNERS).times
     end
   end
 end
