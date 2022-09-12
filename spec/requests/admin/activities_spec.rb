@@ -25,7 +25,7 @@ RSpec.describe '/admin/activities', type: :request do
 
   describe 'POST /admin/activities' do
     before do
-      user.admin!
+      create :permission, user: user, action: 'manage', subject_class: 'Activity', event_id: event.id
       allow(TimerParser).to receive(:call).and_return(nil)
       allow(ScannerParser).to receive(:call).and_return(nil)
     end

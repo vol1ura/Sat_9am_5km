@@ -35,12 +35,9 @@ ActiveAdmin.register Athlete do
 
   form partial: 'form'
 
-  after_create do |athlete|
-    result_id = params[:athlete][:result_id]
-    if result_id.present?
-      athlete.results << Result.find(result_id)
-      athlete.save!
-    end
+  before_create do |athlete|
+    result_id = params.dig(:athlete, :result_id)
+    athlete.results << Result.find(result_id) if result_id
   end
 
   batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
