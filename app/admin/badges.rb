@@ -9,6 +9,7 @@ ActiveAdmin.register Badge do
   index download_links: false do
     selectable_column
     column :name
+    column :received_date
     column :conditions
     column :picture_link
     actions
