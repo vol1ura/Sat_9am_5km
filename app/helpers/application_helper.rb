@@ -3,8 +3,8 @@
 module ApplicationHelper
   SVG_TITLE_MAPPING = {
     calendar: 'Дата',
-    first_man: 'Первый мучжина',
-    first_woman: 'Первый женщина',
+    first_man: 'Первый мужчина',
+    first_woman: 'Первая женщина',
     park: 'Мероприятие',
     participants: 'Количество участников',
     volunteers: 'Количество волонтёров',
