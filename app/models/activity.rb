@@ -7,7 +7,7 @@ class Activity < ApplicationRecord
 
   has_many :results, dependent: :destroy
   has_many :athletes, through: :results
-  has_many :volunteers, dependent: :destroy
+  has_many :volunteers, -> { order :id }, dependent: :destroy, inverse_of: :activity
 
   before_save :set_date, if: :will_save_change_to_published?
 

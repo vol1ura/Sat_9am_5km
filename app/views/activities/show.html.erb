@@ -47,7 +47,7 @@
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <% @activity.volunteers.includes(:athlete).order(:id).each do |volunteer| %>
+    <% @activity.volunteers.includes(:athlete).each do |volunteer| %>
       <tr>
         <td><%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %></td>
         <td><%= human_volunteer_role volunteer.role %></td>
