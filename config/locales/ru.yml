@@ -81,6 +81,8 @@ ru:
         total_time: результат
         athlete: участник
         user: пользователь
+        gender: пол
+        club: клуб
       volunteer:
         activity: забег
         athlete: участник

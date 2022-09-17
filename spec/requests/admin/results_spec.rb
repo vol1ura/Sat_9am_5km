@@ -93,6 +93,16 @@ RSpec.describe '/admin/results', type: :request do
         expect(results.second.reload.athlete).to eq first_athlete
       end
     end
+
+    describe 'PATCH /admin/activities/1/results/1/gender_set' do
+      it 'assigns gender for athlete' do
+        athlete = create :athlete, male: nil
+        result = create :result, athlete: athlete, activity: activity
+        patch gender_set_admin_activity_result_url(activity, result, male: true, format: :js)
+        expect(response).to be_successful
+        expect(athlete.reload.male).to be_truthy
+      end
+    end
   end
 
   context 'without manage permission' do
@@ -125,6 +135,14 @@ RSpec.describe '/admin/results', type: :request do
         put down_admin_activity_result_url(activity, results.first, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'Проверьте корректность'
+      end
+    end
+
+    describe 'PATCH /admin/activities/1/results/1/gender_set' do
+      it 'renders alert' do
+        patch gender_set_admin_activity_result_url(activity, results.first, male: true, format: :js)
+        expect(response).to be_successful
+        expect(response.body).to include 'У вас нет прав'
       end
     end
   end
