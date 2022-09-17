@@ -15,8 +15,12 @@ panel 'Протокол' do
     column :athlete
     column('сайт 🌳') { |r| athlete_external_link(r.athlete) }
     column(:total_time) { |r| human_result_time(r.total_time) }
-    column('Пол') { |r| r.athlete&.gender }
-    column('Клуб') { |r| r.athlete&.club&.name }
+    column(:gender) do |r|
+      if (athlete = r.athlete)
+        athlete.gender.presence || render(partial: 'gender_links', locals: { result: r, activity: activity })
+      end
+    end
+    column(:club) { |r| r.athlete&.club&.name }
   end
 end
 

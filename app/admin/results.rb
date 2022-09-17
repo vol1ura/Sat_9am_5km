@@ -86,6 +86,10 @@ ActiveAdmin.register Result do
     render js: "alert('#{t 'active_admin.results.drop_athlete_failed'}')"
   end
 
+  member_action :gender_set, method: :patch, if: proc { can? :manage, Athlete } do
+    render js: "alert('#{t 'active_admin.athletes.gender_set_failed'}')" unless resource.athlete.update(male: params[:male])
+  end
+
   action_item :activity, only: :index do
     link_to 'Просмотр забега', admin_activity_path(params[:activity_id])
   end
