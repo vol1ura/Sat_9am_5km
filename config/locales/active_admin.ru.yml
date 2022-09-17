@@ -80,7 +80,7 @@ ru:
         many: "Успешно удалено: %{count} %{plural_model}"
         other: "Успешно удалено: %{count} %{plural_model}"
       selection_toggle_explanation: "(Отметить всё / Снять выделение)"
-      action_label: "%{title} выбранное"
+      action_label: "%{title}"
       labels:
         destroy: "Удалить"
         reunite: "Объединить"

@@ -9,6 +9,7 @@ ActiveAdmin.register Volunteer do
 
   config.sort_order = 'id'
   config.filters = false
+  config.paginate = false
 
   controller do
     def scoped_collection
