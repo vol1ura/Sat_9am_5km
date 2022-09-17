@@ -14,6 +14,8 @@ ActiveAdmin.register Activity do
   scope :published
   scope :unpublished
 
+  config.batch_actions = false
+
   index download_links: false do
     column :date
     column('Где?') { |a| a.event.name }
