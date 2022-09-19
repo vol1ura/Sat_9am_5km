@@ -15,8 +15,8 @@ namespace :db do
 
   desc 'unification of athletes names'
   task unify_athletes_names: :environment do
-    Athlete.where("name ILIKE ' %' OR name ILIKE '% ' OR name ILIKE '%  %'").find_each do |athlete|
-      athlete.update(name: athlete.name.gsub(/^ | $|(?<= ) /, ''))
+    Athlete.where("name ILIKE ' %' OR name ILIKE '% ' OR name ILIKE '%  %' OR name ILIKE '%\t%'").find_each do |athlete|
+      athlete.update(name: athlete.name.gsub(/\s+/, ' ').gsub(/^ | $|(?<= ) /, ''))
     end
   end
 end
