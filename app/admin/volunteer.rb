@@ -23,13 +23,17 @@ ActiveAdmin.register Volunteer do
 
     def update
       update! do |format|
-        format.html { redirect_to collection_path } if resource.valid?
+        if resource.valid?
+          format.html { redirect_to collection_path, notice: t('active_admin.volunteers.successful_updated') }
+        end
       end
     end
 
     def create
       create! do |format|
-        format.html { redirect_to collection_path } if resource.valid?
+        if resource.valid?
+          format.html { redirect_to collection_path, notice: t('active_admin.volunteers.successful_created') }
+        end
       end
     end
   end
