@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_27_114406) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_204905) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_114406) do
     t.integer "volunteering_count"
     t.index ["club_id"], name: "index_athletes_on_club_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
+    t.index ["name"], name: "index_athletes_on_name", opclass: :gist_trgm_ops, using: :gist
     t.index ["parkrun_code"], name: "index_athletes_on_parkrun_code", unique: true
     t.index ["user_id"], name: "index_athletes_on_user_id", unique: true
   end
