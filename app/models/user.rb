@@ -10,5 +10,7 @@ class User < ApplicationRecord
   has_one :athlete, dependent: :nullify
   has_many :permissions, dependent: :destroy
 
+  validates :telegram_id, uniqueness: true, allow_nil: true
+
   enum role: ROLE
 end

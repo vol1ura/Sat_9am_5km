@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_26_204905) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_28_184305) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -138,8 +138,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_204905) do
     t.string "last_name"
     t.integer "role"
     t.string "note"
+    t.bigint "telegram_id"
+    t.string "telegram_user"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
   end
 
   create_table "volunteers", force: :cascade do |t|
