@@ -58,7 +58,7 @@ RSpec.describe ApplicationHelper, type: :helper do
 
     it 'returns 5 verst link' do
       athlete = create :athlete, parkrun_code: nil
-      expect(helper.athlete_external_link(athlete)).to match(%r{https://5verst\.ru.*=#{athlete.fiveverst_code}})
+      expect(helper.athlete_external_link(athlete)).to match(%r{https://5verst\.ru.*/#{athlete.fiveverst_code}/})
     end
 
     it 'returns nil' do
