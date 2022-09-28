@@ -1,17 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  SVG_TITLE_MAPPING = {
-    calendar: 'Дата',
-    first_man: 'Первый мужчина',
-    first_woman: 'Первая женщина',
-    park: 'Мероприятие',
-    participants: 'Количество участников',
-    volunteers: 'Количество волонтёров',
-    watch: 'Результат'
-  }.freeze
-  private_constant :SVG_TITLE_MAPPING
-
   def head_info(tag, text)
     content_for :"meta_#{tag}", text
   end
@@ -50,7 +39,16 @@ module ApplicationHelper
   end
 
   def svg_icon_tag(icon, size = '48px')
-    title = SVG_TITLE_MAPPING[icon]
+    svg_title_mapping = {
+      calendar: 'Дата',
+      first_man: 'Первый мужчина',
+      first_woman: 'Первая женщина',
+      park: 'Мероприятие',
+      participants: 'Количество участников',
+      volunteers: 'Количество волонтёров',
+      watch: 'Результат'
+    }
+    title = svg_title_mapping[icon]
     image_tag "svg/#{icon}.svg", width: size, title: title, alt: title
   end
 
