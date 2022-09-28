@@ -3,11 +3,11 @@
 class AthleteFinder < ApplicationService
   NAME_PATH = {
     parkrun_code: {
-      url: 'https://www.parkrun.com.au/results/athleteresultshistory/?athleteNumber=',
+      url: 'https://www.parkrun.com.au/results/athleteresultshistory/?athleteNumber=%d',
       xpath: '//div[@id="content"]/h2'
     },
     fiveverst_code: {
-      url: 'https://5verst.ru/userstats/?id=',
+      url: 'https://5verst.ru/userstats/%d/',
       xpath: '//div[@class="entry-content the-content text-column"]/h3'
     }
   }.freeze
@@ -31,7 +31,7 @@ class AthleteFinder < ApplicationService
   private
 
   def fetch_data
-    url = NAME_PATH.dig(@code_type, :url) + @code.to_s
+    url = format(NAME_PATH.dig(@code_type, :url), @code)
     sleep ANTI_BLOCK_PAUSE unless Rails.env.test?
     response_body = Client.get(url).body
     raise "Bad request. Body: #{response_body}" unless Net::HTTPSuccess

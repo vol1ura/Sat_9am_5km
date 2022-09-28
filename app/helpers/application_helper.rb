@@ -59,7 +59,7 @@ module ApplicationHelper
     return if athlete.fiveverst_code.to_i > Athlete::RUN_PARK_BORDER
 
     code_type = Athlete::PersonalCode.new(athlete.code).code_type
-    url = AthleteFinder::NAME_PATH.dig(code_type, :url) + athlete.public_send(code_type).to_s
+    url = format(AthleteFinder::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type))
     link_to 'открыть', url, target: '_blank', rel: 'noopener'
   end
 end
