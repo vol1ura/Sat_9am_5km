@@ -34,6 +34,10 @@ module ApplicationHelper
     sanitize text, tags: %w[strong em s blockquote pre ol ul li a p], attributes: %w[href rel target]
   end
 
+  def sanitized_link_to(text, link, options = {})
+    sanitize link_to(text, link, **options), tags: ['a'], attributes: %w[href rel target]
+  end
+
   def event_main_image_tag(event, options = {})
     image_tag event.main_picture_link || 'events/placeholder_big.jpg', **options
   end
