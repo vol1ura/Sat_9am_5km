@@ -66,4 +66,17 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(helper.athlete_external_link(athlete)).to be_nil
     end
   end
+
+  describe '#sanitized_link_to' do
+    it 'generates link with whitelisted attributes' do
+      link_tag = helper.sanitized_link_to(
+        '<script>test</script>',
+        Faker::Internet.url(host: 'example.com', path: '/foobar.html'),
+        target: '_blank',
+        rel: 'noopener'
+      )
+      expect(link_tag).to include 'test', 'target="_blank"', 'rel="noopener"'
+      expect(link_tag).not_to include '<script>', '</script>'
+    end
+  end
 end

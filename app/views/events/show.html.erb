@@ -25,7 +25,7 @@
 <ul class="list-group list-group-flush">
   <% @event.contacts.each do |contact| %>
     <li class="list-group-item">
-      <%= sanitize link_to(I18n.t("activerecord.attributes.contact.contact_types.#{contact.contact_type}"), contact.link.html_safe, target: '_blank', rel: 'noopener') %>
+      <%= sanitized_link_to(I18n.t("activerecord.attributes.contact.contact_types.#{contact.contact_type}"), contact.link, target: '_blank', rel: 'noopener') %>
     </li>
   <% end %>
 </ul>
