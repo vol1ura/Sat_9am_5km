@@ -24,15 +24,27 @@ class Result < ApplicationRecord
   def swap_with_position!(target_position)
     current_athlete = athlete
     target_result = Result.find_by!(position: target_position, activity: activity)
-    update!(athlete: target_result.athlete)
-    target_result.update!(athlete: current_athlete)
+    transaction do
+      update!(athlete: target_result.athlete)
+      target_result.update!(athlete: current_athlete)
+    end
     target_result
   end
 
   def shift_attributes!(key)
     results = activity.results.includes(:athlete, :activity).where(position: position..).order(:position).to_a
-    results.each_cons(2) { |r0, r1| r0.update!(key => r1.public_send(key)) }
-    results.last.update!(key => nil)
+    transaction do
+      results.each_cons(2) { |res0, res1| res0.update!(key => res1.public_send(key)) }
+      results.last.update!(key => nil)
+    end
     results
+  end
+
+  def insert_new_result_above!
+    results = activity.results.includes(:athlete, :activity).where(position: position..).order(:position)
+    transaction do
+      results.each { |res| res.update!(position: res.position.next) }
+      activity.results.create!(position: position)
+    end
   end
 end

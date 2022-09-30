@@ -94,6 +94,23 @@ RSpec.describe '/admin/results', type: :request do
       end
     end
 
+    describe 'POST /admin/activities/1/results/1/insert_above' do
+      it 'redirects to results' do
+        post insert_above_admin_activity_result_url(activity, results.first)
+        expect(response).to redirect_to admin_activity_results_path(activity)
+      end
+
+      it 'appends new result' do
+        first_athlete = activity.results.order(:position).first.athlete
+        expect do
+          post insert_above_admin_activity_result_url(activity, results.first)
+        end.to change(activity.results, :count).by(1)
+        new_results = activity.results.order(:position)
+        expect(new_results.first.total_time).to be_nil
+        expect(new_results.second.athlete).to eq first_athlete
+      end
+    end
+
     describe 'PATCH /admin/activities/1/results/1/gender_set' do
       it 'assigns gender for athlete' do
         athlete = create :athlete, male: nil
@@ -135,6 +152,19 @@ RSpec.describe '/admin/results', type: :request do
         put down_admin_activity_result_url(activity, results.first, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'Проверьте корректность'
+      end
+    end
+
+    describe 'POST /admin/activities/1/results/1/insert_above' do
+      it 'redirects to results' do
+        post insert_above_admin_activity_result_url(activity, results.first)
+        expect(response).to redirect_to admin_activity_results_path(activity)
+      end
+
+      it 'appends new result' do
+        expect do
+          post insert_above_admin_activity_result_url(activity, results.first)
+        end.not_to change(activity.results, :count)
       end
     end
 

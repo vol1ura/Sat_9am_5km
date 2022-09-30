@@ -32,7 +32,7 @@ ActiveAdmin.register Result do
       render partial: 'up_down', locals: { activity: r.activity, result: r }
     end
     actions do |r|
-      render partial: 'drops', locals: { activity: r.activity, result: r }
+      render partial: 'shifts', locals: { activity: r.activity, result: r } if can?(:manage, Result)
     end
   end
 
@@ -43,6 +43,7 @@ ActiveAdmin.register Result do
       li I18n.t('active_admin.results.explanation.delete_result')
       li I18n.t('active_admin.results.explanation.delete_time')
       li I18n.t('active_admin.results.explanation.delete_athlete')
+      li I18n.t('active_admin.results.explanation.insert_result')
     end
   end
 
@@ -84,6 +85,14 @@ ActiveAdmin.register Result do
     @results = resource.shift_attributes!(:athlete)
   rescue StandardError
     render js: "alert('#{t 'active_admin.results.drop_athlete_failed'}')"
+  end
+
+  member_action :insert_above, method: :post, if: proc { can? :manage, Result } do
+    resource.insert_new_result_above!
+    redirect_to collection_path, notice: t('active_admin.results.result_successfully_appended', position: resource.position)
+  rescue StandardError => e
+    Rails.logger.error e.inspect
+    redirect_to collection_path, alert: t('active_admin.results.insert_result_failed')
   end
 
   member_action :gender_set, method: :patch, if: proc { can? :manage, Athlete } do
