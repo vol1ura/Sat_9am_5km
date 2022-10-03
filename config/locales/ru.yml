@@ -41,9 +41,10 @@ ru:
       user:
         first_name: имя
         last_name: фамилия
-        email: 'e-mail'
+        email: e-mail
         role: роль
         note: примечание
+        telegram_user: телеграм
       permission:
         event: мероприятие
         user: пользователь
