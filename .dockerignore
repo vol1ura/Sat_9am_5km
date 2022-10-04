@@ -8,3 +8,4 @@ deploy/
 spec/requests/requests.http
 .dockerignore
 .byebug_history
+.tool-versions

@@ -9,6 +9,7 @@
 /.vscode
 .byebug_history
 .ruby-version
+.tool-versions
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*

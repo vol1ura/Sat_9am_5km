@@ -208,6 +208,7 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
     minitest (5.16.3)
     net-imap (0.2.3)
       digest
@@ -227,6 +228,11 @@ GEM
       timeout
     net-ssh (7.0.1)
     nio4r (2.5.8)
+    nokogiri (1.13.8)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
+    nokogiri (1.13.8-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -390,6 +396,8 @@ GEM
     zeitwerk (2.6.0)
 
 PLATFORMS
+  aarch64-linux-musl
+  ruby
   x86_64-linux
   x86_64-linux-musl
 

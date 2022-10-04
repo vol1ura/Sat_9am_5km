@@ -10,7 +10,8 @@ ENV LANG ru_RU.UTF-8
 # ENV LANGUAGE ru_RU.UTF-8
 # ENV LC_ALL ru_RU.UTF-8
 
-RUN gem install bundler --version=2.3.7 --no-doc
+RUN gem install bundler --version=2.3.7 --no-doc \
+  && bundle config set force_ruby_platform true
 WORKDIR /tmp
 COPY Gemfile* ./
 RUN bundle install
