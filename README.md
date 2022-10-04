@@ -4,7 +4,7 @@
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 ![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
 
-# Sat 9am 5km - run event system
+# Sat 9am 5km - run events system
 
 ## TODO
 
@@ -21,9 +21,13 @@ cp .env.example ./deploy/.env
 cp ./config/database.yml.example ./config/database.yml
 ```
 
-To build project install `Docker`, `docker-compose` and execute
+To build project install `Docker`, `docker-compose` (use V2 on Apple chip) and execute
 ```shell
 make build_proj
+make ash
+# in docker container
+rail db:prepare
+rails db:environment:set RAILS_ENV=test
 ```
 
 Now you can run it

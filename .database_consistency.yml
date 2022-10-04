@@ -1,6 +1,11 @@
 DatabaseConsistencySettings:
   color: true
 
+Athlete:
+  index_athletes_on_user_id:
+    UniqueIndexChecker:
+      enabled: false
+
 Event:
   code_name:
     MissingUniqueIndexChecker:
@@ -19,5 +24,11 @@ User:
     ColumnPresenceChecker:
       enabled: false
   index_users_on_reset_password_token:
+    UniqueIndexChecker:
+      enabled: false
+  index_users_on_confirmation_token:
+    UniqueIndexChecker:
+      enabled: false
+  index_users_on_unlock_token:
     UniqueIndexChecker:
       enabled: false
