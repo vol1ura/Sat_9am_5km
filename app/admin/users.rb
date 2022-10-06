@@ -11,13 +11,14 @@ ActiveAdmin.register User do
   end
 
   filter :email
+  filter :telegram_user
   filter :first_name
   filter :last_name
 
   index download_links: false do
     selectable_column
     column :email
-    column(:telegram_user) { |user| "@#{user.telegram_user}" if user.telegram_user }
+    column(:telegram_user) { |user| telegram_link user }
     column :first_name
     column :last_name
     if current_user.admin?
