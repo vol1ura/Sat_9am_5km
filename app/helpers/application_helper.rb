@@ -64,4 +64,10 @@ module ApplicationHelper
     url = format(AthleteFinder::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type))
     link_to 'открыть', url, target: '_blank', rel: 'noopener'
   end
+
+  def telegram_link(user)
+    return unless user&.telegram_user
+
+    link_to "@#{user.telegram_user}", "https://t.me/#{user.telegram_user}", target: '_blank', rel: 'noopener'
+  end
 end

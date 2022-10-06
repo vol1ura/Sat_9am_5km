@@ -4,7 +4,7 @@ attributes_table_for user do
   row :first_name
   row :last_name
   row :email
-  row(:telegram_user) { |user| "@#{user.telegram_user}" if user.telegram_user }
+  row(:telegram_user) { |user| telegram_link user }
   row :role
   row :note if current_user.admin?
   row :created_at
