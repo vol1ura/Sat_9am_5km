@@ -10,15 +10,20 @@ class UsersController < ApplicationController
       @user.skip_confirmation!
       @user.confirm
       @user.save!
-      if params[:athlete_id]
-        @athlete = Athlete.find(params[:athlete_id])
-        @athlete.update!(user: @user)
-      else
-        @athlete = @user.create_athlete!(athlete_params)
-      end
+      link_user_to_athlete
     end
 
     render json: { message: 'Регистрация успешно завершена.' }
+  end
+
+  def update
+    @user = User.find(params[:user_id])
+    @user.transaction do
+      @user.update!(user_params)
+      link_user_to_athlete
+    end
+
+    render json: { message: 'Участник успешно привязан.' }
   end
 
   rescue_from ActiveRecord::RecordInvalid do |e|
@@ -44,5 +49,14 @@ class UsersController < ApplicationController
     return if request.headers['Authorization'] == Rails.application.credentials.internal_api_key
 
     render json: { error: 'Token invalid' }, status: :unauthorized
+  end
+
+  def link_user_to_athlete
+    if params[:athlete_id]
+      @athlete = Athlete.find(params[:athlete_id])
+      @athlete.update!(user: @user)
+    else
+      @athlete = @user.create_athlete!(athlete_params)
+    end
   end
 end
