@@ -9,6 +9,8 @@ ActiveAdmin.register Trophy do
 
   config.filters = false
 
+  index download_links: false
+
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
