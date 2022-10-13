@@ -7,6 +7,8 @@ ActiveAdmin.register Permission do
 
   permit_params :event_id, :action, :subject_class, :subject_id
 
+  index download_links: false
+
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do

@@ -38,12 +38,17 @@ ActiveAdmin.register Volunteer do
     end
   end
 
-  index download_links: false, title: -> { "Редактор волонтёров #{l(Activity.find(params[:activity_id]).date)}" } do
+  index download_links: [:csv], title: -> { "Редактор волонтёров #{l(Activity.find(params[:activity_id]).date)}" } do
     selectable_column
     column :athlete
-    column('Роль') { |v| human_volunteer_role v.role }
-    column('Забег') { |v| human_activity_name v.activity }
+    column(:role) { |v| human_volunteer_role v.role }
+    column(:activity) { |v| human_activity_name v.activity }
     actions
+  end
+
+  csv do
+    column(:athlete, &:name)
+    column(:role) { |v| human_volunteer_role v.role }
   end
 
   show(title: :name) { render volunteer }

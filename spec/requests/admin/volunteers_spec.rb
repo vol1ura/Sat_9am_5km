@@ -1,4 +1,4 @@
-RSpec.describe '/admin/volunteers', type: :request do
+RSpec.describe '/admin/activities/1/volunteers', type: :request do
   let(:user) { create(:user) }
   let(:activity) { create :activity }
 
@@ -7,7 +7,7 @@ RSpec.describe '/admin/volunteers', type: :request do
     sign_in user
   end
 
-  describe 'GET /admin/volunteers' do
+  describe 'GET /admin/activities/1/volunteers' do
     it 'renders a successful response' do
       create_list :volunteer, 3, activity: activity
       get admin_activity_volunteers_url(activity)
@@ -27,7 +27,7 @@ RSpec.describe '/admin/volunteers', type: :request do
     end
   end
 
-  describe 'GET /admin/volunteers/1' do
+  describe 'GET /admin/activities/1/volunteers/1' do
     it 'renders a successful response' do
       volunteer = create :volunteer, activity: activity
       get admin_activity_volunteer_url(activity, volunteer)
@@ -35,7 +35,7 @@ RSpec.describe '/admin/volunteers', type: :request do
     end
   end
 
-  describe 'POST, PUT /admin/volunteers' do
+  describe 'POST, PUT /admin/activities/1/volunteers' do
     let(:athlete) { create :athlete }
     let(:valid_attributes) do
       {
@@ -63,7 +63,7 @@ RSpec.describe '/admin/volunteers', type: :request do
     end
   end
 
-  describe 'PUT /admin/volunteer/1' do
+  describe 'PUT /admin/activities/1/volunteer/1' do
     let(:volunteer) { create :volunteer, activity: activity }
     let(:athlete) { create :athlete }
     let(:valid_attributes) do
@@ -82,6 +82,14 @@ RSpec.describe '/admin/volunteers', type: :request do
 
     it 'redirects to the volunteers index page of current activity' do
       expect(response).to redirect_to(admin_activity_volunteers_url(activity))
+    end
+  end
+
+  describe 'GET /admin/activities/1/volunteers.csv' do
+    it 'downloads csv file' do
+      create_list :volunteer, 3, activity: activity
+      get admin_activity_volunteers_url(activity, format: :csv)
+      expect(response).to be_successful
     end
   end
 end
