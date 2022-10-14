@@ -420,8 +420,8 @@ ru:
 
   views:
     pagination:
-      previous: Предыдущая
-      first: Первая
-      next: Следующая
-      last: Последняя
-      truncate: '...'
+      previous: '←'
+      first: '↞'
+      next: '→'
+      last: '↠'
+      truncate: '&hellip;'
