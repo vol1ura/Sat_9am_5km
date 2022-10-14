@@ -1,0 +1,9 @@
+<tr>
+  <%
+    athlete = trophy.athlete
+    date = trophy.date
+  %>
+  <td><%= link_to athlete.name, athlete_path(athlete) %></td>
+  <td><%= l date if date %></td>
+  <td class="hidden-on-phone"><%= athlete.club&.name %></td>
+</tr>

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :activities, only: %i[index show]
   resources :athletes, only: %i[index show]
   resources :clubs, only: %i[index show]
-  resources :badges, only: :index
+  resources :badges, only: %i[index show]
   resources :volunteers, only: %i[new edit create update]
   resource :user, only: %i[create update]
   get '/pages/:page', to: 'pages#show', as: :page

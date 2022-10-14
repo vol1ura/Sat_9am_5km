@@ -73,4 +73,26 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+nav.pagination {
+  span {
+    border: 1px solid $secondary;
+    padding: 4px 8px;
+  }
+  a {
+    text-decoration: none;
+  }
+  span:hover {
+    background-color: $light;
+  }
+  .current {
+    background-color: $light;
+  }
+  span:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+  span:last-child {
+    border-radius: 0 5px 5px 0;
+  }
+}
+
 @import "web/**/*";

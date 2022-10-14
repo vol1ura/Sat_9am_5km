@@ -14,7 +14,9 @@
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title text-uppercase"><%= badge.name %></h5>
-              <p class="card-text"><%= badge.conditions %></p>
+              <p class="card-text">
+                <%= link_to badge.conditions, badge_path(badge), class: 'stretched-link text-decoration-none text-body' %>
+              </p>
               <% if badge.received_date %>
                 <p class="card-text"><small class="text-muted">Дата получения: <%= l badge.received_date %> года</small></p>
               <% end %>
