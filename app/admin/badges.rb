@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Badge do
+  actions :all, except: :destroy
+
   permit_params :name, :conditions, :received_date, :picture_link
 
   filter :name
@@ -24,9 +26,9 @@ ActiveAdmin.register Badge do
     end
   end
 
-  sidebar 'Управление медалькой', only: :show do
+  sidebar 'Управление наградой', only: :show do
     ul do
-      li link_to 'Обладатели медалькой', admin_badge_trophies_path(resource)
+      li link_to 'Обладатели', admin_badge_trophies_path(resource)
     end
     h3 'Предпросмотр'
     image_tag resource.picture_link, class: 'img-badge'

@@ -1,0 +1,48 @@
+badge_1:
+  id: 1
+  name: Test1
+  picture_link: 'badges/25_runs.png'
+badge_2:
+  id: 2
+  name: Test2
+  picture_link: 'badges/25_runs.png'
+badge_3:
+  id: 3
+  name: Test3
+  picture_link: 'badges/25_runs.png'
+badge_4:
+  id: 4
+  name: Test4
+  picture_link: 'badges/25_runs.png'
+badge_5:
+  id: 5
+  name: Test5
+  picture_link: 'badges/25_runs.png'
+badge_6:
+  id: 6
+  name: Test6
+  picture_link: 'badges/25_runs.png'
+badge_7:
+  id: 7
+  name: Test7
+  picture_link: 'badges/25_runs.png'
+badge_8:
+  id: 8
+  name: Test8
+  picture_link: 'badges/25_runs.png'
+badge_9:
+  id: 9
+  name: Test9
+  picture_link: 'badges/25_runs.png'
+badge_10:
+  id: 10
+  name: Test10
+  picture_link: 'badges/25_runs.png'
+badge_11:
+  id: 11
+  name: Test11
+  picture_link: 'badges/25_runs.png'
+badge_12:
+  id: 12
+  name: Test12
+  picture_link: 'badges/25_runs.png'
