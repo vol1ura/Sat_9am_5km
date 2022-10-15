@@ -84,6 +84,10 @@ class Athlete < ApplicationRecord
     parkrun_code || fiveverst_code || (SAT_5AM_9KM_BORDER + id if id)
   end
 
+  def award_by(trophy)
+    trophies << trophy unless trophies.exists?(badge_id: trophy.badge_id)
+  end
+
   def gender
     return if male.nil?
 

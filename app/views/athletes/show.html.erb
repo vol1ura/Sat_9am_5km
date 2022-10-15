@@ -12,9 +12,11 @@
   <div class="d-flex justify-content-start flex-wrap">
     <% @athlete.trophies.includes(:badge).each do |trophy| %>
       <div class="p-1">
-        <%= link_to badges_path do
-              image_tag trophy.badge.picture_link, class: 'trophy'
-            end %>
+        <%=
+          link_to badge_path(trophy.badge) do
+            image_tag trophy.badge.picture_link, class: 'trophy'
+          end
+        %>
       </div>
     <% end %>
   </div>
