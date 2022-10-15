@@ -46,3 +46,11 @@ badge_12:
   id: 12
   name: Test12
   picture_link: 'badges/25_runs.png'
+badge_19:
+  id: 19
+  name: Test19
+  picture_link: 'badges/25_runs.png'
+badge_20:
+  id: 20
+  name: Test20
+  picture_link: 'badges/25_runs.png'

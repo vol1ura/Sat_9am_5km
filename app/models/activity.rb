@@ -24,6 +24,6 @@ class Activity < ApplicationRecord
     return unless published
 
     self.date = Time.zone.today unless date
-    AthleteAwardingJob.perform_later(self) if volunteers.exists?
+    AthleteAwardingJob.perform_later(id) if volunteers.exists?
   end
 end
