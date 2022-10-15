@@ -5,7 +5,39 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
+  security:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+          bundler-cache: true
+      - name: Security audit dependencies
+        run: bundle exec bundler-audit --update
+      - name: Security audit application code
+        run: bundle exec brakeman -q -w2
+
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+      - name: Install packages
+        run: gem install rubocop rubocop-performance rubocop-rails rubocop-rake rubocop-rspec
+      - name: Lint Ruby files
+        run: rubocop --parallel
+
   test:
+    needs:
+      - security
+      - lint
     runs-on: ubuntu-22.04
     services:
       postgres:
@@ -26,24 +58,41 @@ jobs:
       APP_DOMAIN: "test.com"
       EMAIL_FROM: "test@test.ru"
       SMTP_SERVER: "smtp.yandex.ru"
-
+      VK_TOKEN: ${{ secrets.VK_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.0
           bundler-cache: true
       - name: Set up database schema
         run: bin/rails db:schema:load
+      - name: Rspec tests
+        if: github.ref != 'refs/heads/master'
+        run: bundle exec rspec
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v3.0.0
+        if: github.ref == 'refs/heads/master'
+        uses: paambaati/codeclimate-action@v3.1.0
         env:
-          VK_TOKEN: ${{ secrets.VK_TOKEN }}
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
         with:
           coverageCommand: bundle exec rspec
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    needs:
+      - test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+          bundler-cache: true
       - name: Deploy
         uses: miloserdow/capistrano-deploy@master
         with:
@@ -55,23 +104,3 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           APP_DEPLOY_PATH: ${{ secrets.APP_DEPLOY_PATH }}
-
-  lint:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
-        with:
-          ruby-version: 3.1.0
-      - name: Install packages
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-      - name: Security audit dependencies
-        run: bundle exec bundler-audit --update
-      - name: Security audit application code
-        run: bundle exec brakeman -q -w2
-      - name: Lint Ruby files
-        run: rubocop --parallel
