@@ -7,6 +7,7 @@ ActiveAdmin.register Badge do
 
   filter :name
   filter :conditions
+  filter :received_date
 
   index download_links: false do
     selectable_column
