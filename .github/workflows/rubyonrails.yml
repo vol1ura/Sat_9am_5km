@@ -5,7 +5,39 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
+  security:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+          bundler-cache: true
+      - name: Security audit dependencies
+        run: bundle exec bundler-audit --update
+      - name: Security audit application code
+        run: bundle exec brakeman -q -w2
+
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+      - name: Install packages
+        run: gem install rubocop rubocop-performance rubocop-rails rubocop-rake rubocop-rspec
+      - name: Lint Ruby files
+        run: rubocop --parallel
+
   test:
+    needs:
+      - security
+      - lint
     runs-on: ubuntu-22.04
     services:
       postgres:
@@ -42,36 +74,16 @@ jobs:
         run: bundle exec rspec
       - name: Test & publish code coverage
         if: github.ref == 'refs/heads/master'
-        uses: paambaati/codeclimate-action@v3.0.0
+        uses: paambaati/codeclimate-action@v3.1.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
         with:
           coverageCommand: bundle exec rspec
 
-  lint:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1.0
-          bundler-cache: true
-          target: development
-      - name: Security audit dependencies
-        run: bundle exec bundler-audit --update
-      - name: Security audit application code
-        run: bundle exec brakeman -q -w2
-      - name: Rubocop checks
-        uses: luizfonseca/github-actions-rubocop@1.5.6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy:
     if: github.ref == 'refs/heads/master'
     needs:
       - test
-      - lint
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
