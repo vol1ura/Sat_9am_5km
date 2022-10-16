@@ -24,57 +24,57 @@ badge_6:
   picture_link: 'badges/25_runs.png'
 badge_7:
   id: 7
-  name: Test7
+  name: '25 runs'
   picture_link: 'badges/25_runs.png'
 badge_8:
   id: 8
-  name: Test8
-  picture_link: 'badges/25_runs.png'
+  name: '50 runs'
+  picture_link: 'badges/50_runs.png'
 badge_9:
   id: 9
-  name: Test9
-  picture_link: 'badges/25_runs.png'
+  name: '100 runs'
+  picture_link: 'badges/100_runs.png'
 badge_10:
   id: 10
-  name: Test10
+  name: '25 volunteering'
   picture_link: 'badges/25_runs.png'
 badge_11:
   id: 11
-  name: Test11
+  name: '50 volunteering'
   picture_link: 'badges/25_runs.png'
 badge_12:
   id: 12
-  name: Test12
+  name: '100 volunteering'
   picture_link: 'badges/25_runs.png'
 badge_13:
   id: 13
-  name: Test13
+  name: 'breaking 16'
   picture_link: 'badges/25_runs.png'
 badge_14:
   id: 14
-  name: Test14
+  name: 'breaking 18'
   picture_link: 'badges/25_runs.png'
 badge_15:
   id: 15
-  name: Test15
+  name: 'breaking 20'
   picture_link: 'badges/25_runs.png'
 badge_16:
   id: 16
-  name: Test16
+  name: 'breaking 19'
   picture_link: 'badges/25_runs.png'
 badge_17:
   id: 17
-  name: Test17
+  name: 'breaking 21'
   picture_link: 'badges/25_runs.png'
 badge_18:
   id: 18
-  name: Test18
+  name: 'breaking 23'
   picture_link: 'badges/25_runs.png'
 badge_19:
   id: 19
-  name: Test19
+  name: 'tourist v5'
   picture_link: 'badges/25_runs.png'
 badge_20:
   id: 20
-  name: Test20
+  name: 'tourist a5'
   picture_link: 'badges/25_runs.png'
