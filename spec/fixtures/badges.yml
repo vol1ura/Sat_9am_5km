@@ -46,6 +46,30 @@ badge_12:
   id: 12
   name: Test12
   picture_link: 'badges/25_runs.png'
+badge_13:
+  id: 13
+  name: Test13
+  picture_link: 'badges/25_runs.png'
+badge_14:
+  id: 14
+  name: Test14
+  picture_link: 'badges/25_runs.png'
+badge_15:
+  id: 15
+  name: Test15
+  picture_link: 'badges/25_runs.png'
+badge_16:
+  id: 16
+  name: Test16
+  picture_link: 'badges/25_runs.png'
+badge_17:
+  id: 17
+  name: Test17
+  picture_link: 'badges/25_runs.png'
+badge_18:
+  id: 18
+  name: Test18
+  picture_link: 'badges/25_runs.png'
 badge_19:
   id: 19
   name: Test19
