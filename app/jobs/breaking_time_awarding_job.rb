@@ -3,6 +3,7 @@
 class BreakingTimeAwardingJob < ApplicationJob
   queue_as :default
 
+  EXPIRATION_PERIOD = 3 # In months
   BREAKING_TIME_BADGES = {
     male: [
       { id: 13, min: 16, male: true, next_ids: [14, 15] },
@@ -27,7 +28,7 @@ class BreakingTimeAwardingJob < ApplicationJob
     BREAKING_TIME_BADGES.values.flatten.each do |badge|
       accomplished_athlete_ids =
         Result.joins(:activity, athlete: :trophies)
-              .where(activity: { date: 3.months.ago.. })
+              .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
               .where(total_time: ...minutes_threshold(badge[:min]))
               .where(athlete: { trophies: { badge: badge[:id] } }).select(:athlete_id)
       Trophy.where(badge_id: badge[:id]).where.not(athlete_id: accomplished_athlete_ids).delete_all
@@ -43,7 +44,7 @@ class BreakingTimeAwardingJob < ApplicationJob
   def process_badge(prev_badge, badge, male)
     Result
       .joins(:activity, :athlete)
-      .where(activity: { date: 3.months.ago.. })
+      .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
       .where(total_time: minutes_threshold(prev_badge[:min])..)
       .where(total_time: ...minutes_threshold(badge[:min]))
       .where(athlete: { male: male })

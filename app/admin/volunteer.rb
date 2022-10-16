@@ -47,6 +47,7 @@ ActiveAdmin.register Volunteer do
   end
 
   csv do
+    column(:code) { |v| v.athlete.code }
     column(:athlete, &:name)
     column(:role) { |v| human_volunteer_role v.role }
   end
