@@ -7,13 +7,13 @@ namespace :badges do
     badge = Badge.find args.badge_id
 
     activity.athletes.each do |athlete|
-      athlete.trophies << Trophy.new(badge: badge, date: activity.date)
-      Rails.logger.warn(athlete.errors.inspect) unless athlete.save
+      athlete.award_by Trophy.new(badge: badge, date: activity.date)
+      Rails.logger.error(athlete.errors.inspect) unless athlete.save
     end
 
-    activity.volunteers.each do |vol|
-      vol.athlete.trophies << Trophy.new(badge: badge, date: activity.date)
-      Rails.logger.warn(vol.athlete.errors.inspect) unless vol.athlete.save
+    activity.volunteers.each do |volunteer|
+      volunteer.athlete.award_by Trophy.new(badge: badge, date: activity.date)
+      Rails.logger.error(volunteer.athlete.errors.inspect) unless volunteer.athlete.save
     end
   end
 end
