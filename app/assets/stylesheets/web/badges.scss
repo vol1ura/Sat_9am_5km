@@ -1,6 +1,7 @@
 .img-badge {
   max-width: 100%;
-  object-fit: contain;
+  max-height: 200px;
+  object-fit: scale-down;
 }
 
 .trophy {
