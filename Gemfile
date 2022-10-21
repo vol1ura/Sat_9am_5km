@@ -13,7 +13,7 @@ gem 'rails', '~> 7.0.3'
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
 gem 'barby', require: false
-gem 'bootstrap', '~> 5.2.0'
+gem 'bootstrap', '~> 5.2.2'
 gem 'cancancan', '~> 3.4'
 gem 'devise', '~> 4.8'
 gem 'devise-i18n'
