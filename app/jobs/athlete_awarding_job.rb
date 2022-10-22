@@ -13,7 +13,8 @@ class AthleteAwardingJob < ApplicationJob
     { id: 11, threshold: 50 },
     { id: 12, threshold: 100 }
   ].freeze
-  SKIP_EVENT_IDS = [4].freeze
+  TOURIST_VOLUNTEER_BADGE = { id: 19, threshold: 5 }.freeze
+  TOURIST_RUNNER_BADGE = { id: 20, threshold: 5 }.freeze
 
   def perform(activity_id)
     @activity = Activity.find activity_id
@@ -33,12 +34,10 @@ class AthleteAwardingJob < ApplicationJob
 
         athlete.award_by Trophy.new(badge_id: badge[:id], date: activity_date)
       end
-      events_count =
-        results
-        .joins(activity: :event)
-        .where.not(activity: { event_id: SKIP_EVENT_IDS })
-        .select('events.id').distinct.count
-      athlete.award_by Trophy.new(badge_id: 20, date: activity_date) if events_count >= 5
+      events_count = results.joins(activity: :event).select('events.id').distinct.count
+      if events_count >= TOURIST_RUNNER_BADGE[:threshold]
+        athlete.award_by Trophy.new(badge_id: TOURIST_RUNNER_BADGE[:id], date: activity_date)
+      end
       athlete.save!
     end
   end
@@ -51,12 +50,10 @@ class AthleteAwardingJob < ApplicationJob
 
         volunteer.athlete.award_by Trophy.new(badge_id: badge[:id], date: activity_date)
       end
-      events_count =
-        volunteering
-        .joins(activity: :event)
-        .where.not(activity: { event_id: SKIP_EVENT_IDS })
-        .select('events.id').distinct.count
-      volunteer.athlete.award_by Trophy.new(badge_id: 19, date: activity_date) if events_count >= 5
+      events_count = volunteering.joins(activity: :event).select('events.id').distinct.count
+      if events_count >= TOURIST_VOLUNTEER_BADGE[:threshold]
+        volunteer.athlete.award_by Trophy.new(badge_id: TOURIST_VOLUNTEER_BADGE[:id], date: activity_date)
+      end
       volunteer.athlete.save!
     end
   end
