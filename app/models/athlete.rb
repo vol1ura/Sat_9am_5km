@@ -40,8 +40,14 @@ class Athlete < ApplicationRecord
   has_many :volunteering, -> { joins(:activity).where(activity: { published: true }).order('activity.date DESC') },
            dependent: :destroy, class_name: 'Volunteer', inverse_of: :athlete
 
-  validates :parkrun_code, uniqueness: true, allow_nil: true
-  validates :fiveverst_code, uniqueness: true, allow_nil: true
+  validates :parkrun_code,
+            uniqueness: true,
+            numericality: { only_integer: true, less_than: SAT_5AM_9KM_BORDER },
+            allow_nil: true
+  validates :fiveverst_code,
+            uniqueness: true,
+            numericality: { only_integer: true, greater_than: FIVE_VERST_BORDER },
+            allow_nil: true
 
   before_validation :fill_blank_name, if: -> { name.blank? }
   before_save :remove_extra_spaces, if: :will_save_change_to_name?
