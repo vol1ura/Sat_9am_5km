@@ -42,20 +42,6 @@ module ApplicationHelper
     image_tag event.main_picture_link || 'events/placeholder_big.jpg', **options
   end
 
-  def svg_icon_tag(icon, size = '48px')
-    svg_title_mapping = {
-      calendar: 'Дата',
-      first_man: 'Первый мужчина',
-      first_woman: 'Первая женщина',
-      park: 'Мероприятие',
-      participants: 'Количество участников',
-      volunteers: 'Количество волонтёров',
-      watch: 'Результат'
-    }
-    title = svg_title_mapping[icon]
-    image_tag "svg/#{icon}.svg", width: size, title: title, alt: title
-  end
-
   def athlete_external_link(athlete)
     return unless athlete && (athlete.parkrun_code || athlete.fiveverst_code)
     return if athlete.fiveverst_code.to_i > Athlete::RUN_PARK_BORDER
