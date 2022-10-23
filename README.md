@@ -10,7 +10,6 @@
 
 - [ ] Separate page with activities inside event
 - [ ] Event specific top menu
-- [x] Add callback when publish activity to check and fill date
 
 ## Development
 
