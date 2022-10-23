@@ -16,4 +16,13 @@ namespace :badges do
       Rails.logger.error(volunteer.athlete.errors.inspect) unless volunteer.athlete.save
     end
   end
+
+  desc 'Awardings for last week'
+  task weekly_awarding: :environment do
+    activities = Activity.where(date: Date.current.all_week)
+    activities.each do |activity|
+      AthleteAwardingJob.perform_now(activity.id)
+    end
+    BreakingTimeAwardingJob.perform_now
+  end
 end
