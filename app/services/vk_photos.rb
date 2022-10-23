@@ -4,11 +4,14 @@ require 'net/http'
 
 class VkPhotos < ApplicationService
   API_QUERIES = {
-    owner_id: '-212432495', # https://vk.com/sat9am5km
-    access_token: ENV['VK_TOKEN'].freeze,
+    owner_id: "-#{ENV.fetch('VK_GROUP_ID', 1)}",
+    access_token: ENV.fetch('VK_TOKEN', '').freeze,
     v: '5.130'
   }.freeze
-  private_constant :API_QUERIES
+  ALBUMS_SET_SIZE = 3
+  MAX_WIDTH = 800
+
+  private_constant :API_QUERIES, :ALBUMS_SET_SIZE, :MAX_WIDTH
 
   def initialize(num)
     @num = num
@@ -17,7 +20,7 @@ class VkPhotos < ApplicationService
   def call
     random_photos = filter_landscape(latest_album_photos).sample(@num)
     random_photos.map do |photo|
-      photo['sizes'].filter { |p| p['width'] < 800 }.max_by { |p| p['width'] }['url']
+      photo['sizes'].filter { |p| p['width'] < MAX_WIDTH }.max_by { |p| p['width'] }['url']
     end
   rescue StandardError => e
     Rails.logger.error e.inspect
@@ -41,7 +44,7 @@ class VkPhotos < ApplicationService
 
   def latest_album_photos
     all_albums = request('photos.getAlbums')
-    album_id = all_albums.dig('response', 'items', rand(3), 'id')
+    album_id = all_albums.dig('response', 'items', rand(ALBUMS_SET_SIZE), 'id')
     album_photos = request('photos.get', album_id: album_id)
     album_photos.dig('response', 'items')
   end
