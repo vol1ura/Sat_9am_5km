@@ -31,10 +31,11 @@ export default class extends Controller {
     const result = Array.prototype.slice.call(table.querySelectorAll('tbody>tr')).sort((a, b) => {
       let val1 = a.querySelector(`td:nth-child(${column_idx + 1})`).innerHTML
       let val2 = b.querySelector(`td:nth-child(${column_idx + 1})`).innerHTML
-      if (!isNaN(val1) && !isNaN(val2)) {
-        val1 = parseInt(val1)
-        val2 = parseInt(val2)
+      if (isNaN(val1) || isNaN(val2)) {
+        return (sort_direction == 'desc' ? 1 : -1) * val1.localeCompare(val2)
       }
+      val1 = parseInt(val1)
+      val2 = parseInt(val2)
       return sort_direction == 'desc' ? val1 - val2 : val2 - val1
     })
     const table_body = table.querySelector('tbody')
