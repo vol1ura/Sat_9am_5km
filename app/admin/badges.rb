@@ -22,10 +22,12 @@ ActiveAdmin.register Badge do
     attributes_table do
       row :name
       row :received_date
-      row :conditions
+      row(:conditions) { |b| sanitized_text b.conditions }
       row :picture_link
     end
   end
+
+  form partial: 'form'
 
   sidebar 'Управление наградой', only: :show do
     ul do
