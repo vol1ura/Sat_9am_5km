@@ -13,7 +13,7 @@ ActiveAdmin.register Badge do
     selectable_column
     column :name
     column :received_date
-    column :conditions
+    column(:conditions) { |b| sanitized_text b.conditions }
     column :picture_link
     actions
   end
