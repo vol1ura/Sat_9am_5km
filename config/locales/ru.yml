@@ -189,7 +189,7 @@ ru:
     - пятница
     - суббота
     formats:
-      default: "%-d %B %Y"
+      default: "%-d %b %Y"
       long: "%d %B %Y"
       short: "%d.%m.%Y"
     month_names:
