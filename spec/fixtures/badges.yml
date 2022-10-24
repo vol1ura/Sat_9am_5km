@@ -78,3 +78,11 @@ badge_20:
   id: 20
   name: 'tourist a5'
   picture_link: 'badges/25_runs.png'
+badge_21:
+  id: 21
+  name: 'record female'
+  picture_link: 'badges/25_runs.png'
+badge_22:
+  id: 22
+  name: 'record male'
+  picture_link: 'badges/25_runs.png'

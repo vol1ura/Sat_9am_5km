@@ -1,4 +1,4 @@
-RSpec.describe '/user', type: :request do
+RSpec.describe '/user' do
   describe 'POST /user' do
     let(:user_attributes) do
       {
@@ -58,7 +58,7 @@ RSpec.describe '/user', type: :request do
       end
 
       it 'creates user with linked athlete' do
-        athlete = create :athlete
+        athlete = create(:athlete)
         expect do
           post user_path(format: :json), params: user_attributes.merge(athlete_id: athlete.id), headers: valid_headers
         end.to change(User, :count).by(1)
@@ -67,7 +67,7 @@ RSpec.describe '/user', type: :request do
   end
 
   describe 'PUT /user' do
-    let(:user) { create :user }
+    let(:user) { create(:user) }
     let(:athlete_attributes) do
       {
         athlete: {
@@ -118,7 +118,7 @@ RSpec.describe '/user', type: :request do
       end
 
       it 'creates user with linked athlete' do
-        athlete = create :athlete
+        athlete = create(:athlete)
         put user_path(format: :json), params: user_attributes.merge(athlete_id: athlete.id), headers: valid_headers
         expect(athlete.reload.user).to eq user
       end

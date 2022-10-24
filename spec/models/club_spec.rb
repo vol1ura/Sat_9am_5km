@@ -1,4 +1,4 @@
-RSpec.describe Club, type: :model do
+RSpec.describe Club do
   it { is_expected.not_to be_valid }
 
   it 'valid with name' do

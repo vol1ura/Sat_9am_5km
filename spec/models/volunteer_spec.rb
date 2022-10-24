@@ -1,4 +1,4 @@
-RSpec.describe Volunteer, type: :model do
+RSpec.describe Volunteer do
   describe 'validation' do
     subject(:volunteer) { described_class.new }
 

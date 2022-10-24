@@ -1,21 +1,21 @@
-RSpec.describe Result, type: :model do
+RSpec.describe Result do
   describe 'validation' do
     subject { described_class.new }
 
     it { is_expected.not_to be_valid }
 
     it 'valid with user and activity' do
-      result = build :result
+      result = build(:result)
       expect(result).to be_valid
     end
   end
 
   describe '#swap_with_position!' do
-    let(:activity) { create :activity }
-    let(:athlete1) { create :athlete }
-    let(:athlete2) { create :athlete }
-    let!(:result1) { create :result, activity: activity, position: 1, athlete: athlete1 }
-    let!(:result2) { create :result, activity: activity, position: 2, athlete: athlete2 }
+    let(:activity) { create(:activity) }
+    let(:athlete1) { create(:athlete) }
+    let(:athlete2) { create(:athlete) }
+    let!(:result1) { create(:result, activity: activity, position: 1, athlete: athlete1) }
+    let!(:result2) { create(:result, activity: activity, position: 2, athlete: athlete2) }
 
     it 'moves result up' do
       expect do

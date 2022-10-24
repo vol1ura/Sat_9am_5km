@@ -1,14 +1,14 @@
-RSpec.describe '/admin/athletes', type: :request do
+RSpec.describe '/admin/athletes' do
   let(:user) { create(:user) }
 
   before do
-    create :permission, user: user, action: 'read', subject_class: 'Athlete'
+    create(:permission, user: user, action: 'read', subject_class: 'Athlete')
     sign_in user
   end
 
   describe 'GET /admin/athletes' do
     it 'renders a successful response' do
-      create_list :athlete, 3
+      create_list(:athlete, 3)
       get admin_athletes_url
       expect(response).to be_successful
     end
@@ -16,8 +16,8 @@ RSpec.describe '/admin/athletes', type: :request do
 
   describe 'GET /admin/athletes/1' do
     it 'renders a successful response' do
-      athlete = create :athlete
-      create_list :volunteer, 3, :with_published_activity, athlete: athlete
+      athlete = create(:athlete)
+      create_list(:volunteer, 3, :with_published_activity, athlete: athlete)
       get admin_athlete_url(athlete)
       expect(response).to be_successful
     end
@@ -25,9 +25,9 @@ RSpec.describe '/admin/athletes', type: :request do
 
   describe 'GET /admin/athletes/find_duplicates' do
     it 'renders a successful response' do
-      create :athlete, name: 'Doe JOHN', parkrun_code: nil
-      create :athlete, name: 'John Doe', parkrun_code: nil
-      create :athlete, name: 'John Doe'.swapcase, fiveverst_code: nil
+      create(:athlete, name: 'Doe JOHN', parkrun_code: nil)
+      create(:athlete, name: 'John Doe', parkrun_code: nil)
+      create(:athlete, name: 'John Doe'.swapcase, fiveverst_code: nil)
       get admin_athletes_url(scope: :duplicates)
       expect(response).to be_successful
       expect(response.body).to include 'John Doe', 'Doe JOHN'
@@ -45,7 +45,7 @@ RSpec.describe '/admin/athletes', type: :request do
     end
 
     context 'with valid athletes' do
-      let(:athletes) { create_list :athlete, 2, name: 'Same Name', male: true }
+      let(:athletes) { create_list(:athlete, 2, name: 'Same Name', male: true) }
       let(:valid_attributes) do
         { batch_action: :reunite, batch_action_inputs: '{}', collection_selection: athletes.map(&:id) }
       end
@@ -68,7 +68,7 @@ RSpec.describe '/admin/athletes', type: :request do
     end
 
     context 'when set gender' do
-      let(:athletes) { create_list :athlete, 2, male: nil }
+      let(:athletes) { create_list(:athlete, 2, male: nil) }
       let(:batch_params) do
         {
           batch_action: :gender_set,
@@ -90,7 +90,7 @@ RSpec.describe '/admin/athletes', type: :request do
       user.admin!
     end
 
-    let(:result) { create :result, athlete: nil }
+    let(:result) { create(:result, athlete: nil) }
     let(:valid_attributes) do
       {
         athlete: {

@@ -1,4 +1,4 @@
-RSpec.describe '/admin/dashboard', type: :request do
+RSpec.describe '/admin/dashboard' do
   let(:user) { create(:user) }
 
   before do
@@ -7,7 +7,7 @@ RSpec.describe '/admin/dashboard', type: :request do
 
   describe 'GET /admin' do
     it 'renders a successful response' do
-      create_list :activity, 3, published: true
+      create_list(:activity, 3, published: true)
       get admin_dashboard_url
       expect(response).to be_successful
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Activity, type: :model do
-  let(:activity) { build :activity, published: false }
+RSpec.describe Activity do
+  let(:activity) { build(:activity, published: false) }
 
   describe 'validations' do
     it { is_expected.not_to be_valid }

@@ -1,15 +1,15 @@
-RSpec.describe '/admin/activities', type: :request do
+RSpec.describe '/admin/activities' do
   let(:user) { create(:user) }
-  let(:event) { create :event }
+  let(:event) { create(:event) }
 
   before do
-    create :permission, user: user, action: 'read', subject_class: 'Activity', event_id: event.id
+    create(:permission, user: user, action: 'read', subject_class: 'Activity', event_id: event.id)
     sign_in user
   end
 
   describe 'GET /admin/activities' do
     it 'renders a successful response' do
-      create_list :activity, 3, event: event
+      create_list(:activity, 3, event: event)
       get admin_activities_url
       expect(response).to be_successful
     end
@@ -17,7 +17,7 @@ RSpec.describe '/admin/activities', type: :request do
 
   describe 'GET /admin/activities/1' do
     it 'renders a successful response' do
-      activity = create :activity, published: false, event: event
+      activity = create(:activity, published: false, event: event)
       get admin_activity_url(activity)
       expect(response).to be_successful
     end
@@ -25,7 +25,7 @@ RSpec.describe '/admin/activities', type: :request do
 
   describe 'POST /admin/activities' do
     before do
-      create :permission, user: user, action: 'manage', subject_class: 'Activity', event_id: event.id
+      create(:permission, user: user, action: 'manage', subject_class: 'Activity', event_id: event.id)
       allow(TimerParser).to receive(:call).and_return(nil)
       allow(ScannerParser).to receive(:call).and_return(nil)
     end
