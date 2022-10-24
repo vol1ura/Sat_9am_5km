@@ -18,7 +18,7 @@
   </div>
   <div class="col-sm-8 col-md-9">
     <h2><%= @badge.name %></h2>
-    <p class="card-text"><%= @badge.conditions %></p>
+    <p class="card-text"><%= sanitized_text @badge.conditions %></p>
   </div>
 </div>
 
