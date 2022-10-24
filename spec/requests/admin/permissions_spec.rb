@@ -1,6 +1,6 @@
-RSpec.describe '/admin/events', type: :request do
+RSpec.describe '/admin/events' do
   let(:user) { create(:user) }
-  let(:permission) { create :permission }
+  let(:permission) { create(:permission) }
 
   before do
     sign_in user

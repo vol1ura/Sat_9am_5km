@@ -1,9 +1,9 @@
-RSpec.describe AddAthleteToResultJob, type: :job do
+RSpec.describe AddAthleteToResultJob do
   ActiveJob::Base.queue_adapter = :test
 
-  let(:activity) { create :activity }
-  let(:result) { create :result, activity: activity }
-  let(:athlete) { create :athlete }
+  let(:activity) { create(:activity) }
+  let(:result) { create(:result, activity: activity) }
+  let(:athlete) { create(:athlete) }
 
   it 'performs immediately' do
     expect { described_class.perform_later(activity, []) }.to have_enqueued_job.on_queue('default').at(:no_wait)

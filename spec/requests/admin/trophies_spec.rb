@@ -1,6 +1,6 @@
-RSpec.describe '/admin/trophies', type: :request do
-  let(:user) { create :user }
-  let(:badge) { create :badge }
+RSpec.describe '/admin/trophies' do
+  let(:user) { create(:user) }
+  let(:badge) { create(:badge) }
 
   before do
     user.admin!
@@ -9,7 +9,7 @@ RSpec.describe '/admin/trophies', type: :request do
 
   describe 'GET /admin/trophies' do
     it 'renders a successful response' do
-      create_list :trophy, 3, badge: badge
+      create_list(:trophy, 3, badge: badge)
       get admin_badge_trophies_url(badge)
       expect(response).to be_successful
     end
@@ -17,7 +17,7 @@ RSpec.describe '/admin/trophies', type: :request do
 
   describe 'GET /admin/trophies/1' do
     it 'renders a successful response' do
-      trophy = create :trophy, badge: badge
+      trophy = create(:trophy, badge: badge)
       get admin_badge_trophy_url(badge, trophy)
       expect(response).to be_successful
     end
@@ -27,7 +27,7 @@ RSpec.describe '/admin/trophies', type: :request do
     context 'when user is not authorized' do
       it 'redirects to root url' do
         user.update!(role: nil)
-        trophy = create :trophy, badge: badge
+        trophy = create(:trophy, badge: badge)
         get edit_admin_badge_trophy_url(badge, trophy)
         expect(response).to have_http_status :found
         expect(response).to redirect_to(root_url)
@@ -36,7 +36,7 @@ RSpec.describe '/admin/trophies', type: :request do
 
     context 'when user is admin' do
       it 'renders form' do
-        trophy = create :trophy, badge: badge
+        trophy = create(:trophy, badge: badge)
         get edit_admin_badge_trophy_url(badge, trophy)
         expect(response).to be_successful
       end
@@ -44,7 +44,7 @@ RSpec.describe '/admin/trophies', type: :request do
   end
 
   describe 'POST /admin/trophies' do
-    let(:athlete) { create :athlete }
+    let(:athlete) { create(:athlete) }
     let(:valid_attributes) do
       {
         trophy: {

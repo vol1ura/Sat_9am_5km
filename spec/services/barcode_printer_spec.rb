@@ -2,7 +2,7 @@
 
 RSpec.describe BarcodePrinter, type: :service do
   context 'with parkrun code' do
-    let(:athlete) { build :athlete, fiveverst_code: nil }
+    let(:athlete) { build(:athlete, fiveverst_code: nil) }
 
     it 'returns svg xml document' do
       expect(described_class.call(athlete)).to include '<svg xmlns="http://www.w3.org/2000/svg"',
@@ -11,7 +11,7 @@ RSpec.describe BarcodePrinter, type: :service do
   end
 
   context 'with 5 verst code' do
-    let(:athlete) { build :athlete, parkrun_code: nil }
+    let(:athlete) { build(:athlete, parkrun_code: nil) }
 
     it 'returns svg xml document' do
       expect(described_class.call(athlete)).to include '<svg xmlns="http://www.w3.org/2000/svg"',

@@ -1,4 +1,4 @@
-RSpec.describe '/admin/events', type: :request do
+RSpec.describe '/admin/events' do
   let(:user) { create(:user) }
 
   before do
@@ -8,7 +8,7 @@ RSpec.describe '/admin/events', type: :request do
 
   describe 'GET /admin/events' do
     it 'renders a successful response' do
-      create_list :event, 3
+      create_list(:event, 3)
       get admin_events_url
       expect(response).to be_successful
     end
@@ -16,14 +16,14 @@ RSpec.describe '/admin/events', type: :request do
 
   describe 'GET /admin/events/1' do
     it 'renders a successful response' do
-      event = create :event
+      event = create(:event)
       get admin_event_url(event)
       expect(response).to be_successful
     end
   end
 
   describe 'GET /admin/events/1/edit' do
-    let(:event) { create :event }
+    let(:event) { create(:event) }
 
     context 'when user is not authorized' do
       it 'redirects to root url' do

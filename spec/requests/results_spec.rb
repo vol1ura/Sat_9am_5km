@@ -1,9 +1,9 @@
-RSpec.describe 'results', type: :request do
+RSpec.describe 'results' do
   describe 'GET /top_results' do
     before do
-      activities_list = create_list :activity, 4, published: true
+      activities_list = create_list(:activity, 4, published: true)
       activities_list.each do |activity|
-        create_list :result, 3, activity: activity
+        create_list(:result, 3, activity: activity)
       end
     end
 

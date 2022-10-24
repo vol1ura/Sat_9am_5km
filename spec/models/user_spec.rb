@@ -1,4 +1,4 @@
-RSpec.describe User, type: :model do
+RSpec.describe User do
   describe 'validation' do
     subject(:user) { described_class.new }
 
@@ -12,8 +12,8 @@ RSpec.describe User, type: :model do
 
     it 'invalid with existing email' do
       email = Faker::Internet.free_email
-      create :user, email: email
-      another_user = build :user, email: email
+      create(:user, email: email)
+      another_user = build(:user, email: email)
       expect(another_user).not_to be_valid
     end
   end

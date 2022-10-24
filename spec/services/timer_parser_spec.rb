@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe TimerParser, type: :service do
-  let(:activity) { create :activity }
+  let(:activity) { create(:activity) }
 
   context 'when argument is nil' do
     it 'returns nil' do

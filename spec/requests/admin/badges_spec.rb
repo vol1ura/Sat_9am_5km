@@ -1,4 +1,4 @@
-RSpec.describe '/admin/badges', type: :request do
+RSpec.describe '/admin/badges' do
   let(:user) { create(:user) }
 
   before do
@@ -8,7 +8,7 @@ RSpec.describe '/admin/badges', type: :request do
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      create_list :badge, 3
+      create_list(:badge, 3)
       get admin_badges_url
       expect(response).to be_successful
     end
@@ -16,7 +16,7 @@ RSpec.describe '/admin/badges', type: :request do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      badge = create :badge
+      badge = create(:badge)
       get admin_badge_url(badge)
       expect(response).to be_successful
     end

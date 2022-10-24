@@ -1,4 +1,4 @@
-RSpec.describe '/admin/users', type: :request do
+RSpec.describe '/admin/users' do
   let(:user) { create(:user) }
 
   before do
@@ -8,7 +8,7 @@ RSpec.describe '/admin/users', type: :request do
 
   describe 'GET /admin/users' do
     it 'renders a successful response' do
-      create_list :user, 3
+      create_list(:user, 3)
       get admin_users_url
       expect(response).to be_successful
     end

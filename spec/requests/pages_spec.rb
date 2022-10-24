@@ -1,4 +1,4 @@
-RSpec.describe '/pages', type: :request do
+RSpec.describe '/pages' do
   describe 'GET /pages' do
     before do
       srand(1000)

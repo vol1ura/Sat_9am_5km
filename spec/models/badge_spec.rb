@@ -1,4 +1,4 @@
-RSpec.describe Badge, type: :model do
+RSpec.describe Badge do
   it { is_expected.not_to be_valid }
 
   it 'valid with name and picture link' do

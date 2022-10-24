@@ -1,11 +1,11 @@
-RSpec.describe '/admin/results', type: :request do
-  let(:user) { create :user }
-  let(:event) { create :event }
-  let(:activity) { create :activity, event: event }
-  let!(:results) { create_list :result, 3, activity: activity }
+RSpec.describe '/admin/results' do
+  let(:user) { create(:user) }
+  let(:event) { create(:event) }
+  let(:activity) { create(:activity, event: event) }
+  let!(:results) { create_list(:result, 3, activity: activity) }
 
   before do
-    create :permission, user: user, action: 'read', subject_class: 'Result', event_id: event.id
+    create(:permission, user: user, action: 'read', subject_class: 'Result', event_id: event.id)
     sign_in user
   end
 
@@ -16,7 +16,7 @@ RSpec.describe '/admin/results', type: :request do
     end
 
     it 'renders athlete without tokens' do
-      result = create :result, activity: activity, athlete: nil
+      result = create(:result, activity: activity, athlete: nil)
       get admin_activity_results_url(activity)
       expect(response.body).to include 'БЕЗ ТОКЕНА (создать)', new_admin_athlete_path(result_id: result.id)
     end
@@ -31,7 +31,7 @@ RSpec.describe '/admin/results', type: :request do
 
   context 'with manage permission' do
     before do
-      create :permission, user: user, action: 'manage', subject_class: 'Result', event_id: event.id
+      create(:permission, user: user, action: 'manage', subject_class: 'Result', event_id: event.id)
       Bullet.unused_eager_loading_enable = false
     end
 
@@ -41,15 +41,15 @@ RSpec.describe '/admin/results', type: :request do
 
     describe 'PATCH /admin/activities/1/results/1' do
       it 'successfully add athlete to result' do
-        result = create :result, activity: activity, athlete: nil
-        athlete = create :athlete
+        result = create(:result, activity: activity, athlete: nil)
+        athlete = create(:athlete)
         patch admin_activity_result_url(activity, result, code: athlete.parkrun_code)
         expect(response).to have_http_status :found
         expect(result.reload.athlete).to eq athlete
       end
 
       it 'cannot add athlete to result' do
-        result = create :result, activity: activity, athlete: nil
+        result = create(:result, activity: activity, athlete: nil)
         patch admin_activity_result_url(activity, result, code: 0)
         expect(response).to have_http_status :found
         expect(result.reload.athlete).to be_nil
@@ -113,8 +113,8 @@ RSpec.describe '/admin/results', type: :request do
 
     describe 'PATCH /admin/activities/1/results/1/gender_set' do
       it 'assigns gender for athlete' do
-        athlete = create :athlete, male: nil
-        result = create :result, athlete: athlete, activity: activity
+        athlete = create(:athlete, male: nil)
+        result = create(:result, athlete: athlete, activity: activity)
         patch gender_set_admin_activity_result_url(activity, result, male: true, format: :js)
         expect(response).to be_successful
         expect(athlete.reload.male).to be_truthy
