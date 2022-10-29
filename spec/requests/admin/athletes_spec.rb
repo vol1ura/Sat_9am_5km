@@ -63,7 +63,7 @@ RSpec.describe '/admin/athletes' do
 
       it 'redirects to admin athletes page' do
         post batch_action_admin_athletes_url, params: invalid_attributes
-        expect(response).to redirect_to admin_athletes_path
+        expect(response).to redirect_to admin_athletes_url(scope: :duplicates)
       end
     end
 

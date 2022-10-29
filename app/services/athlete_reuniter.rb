@@ -60,10 +60,20 @@ class AthleteReuniter < ApplicationService
       # rubocop:disable Rails/SkipsModelValidations
       Result.where(athlete_id: ids).update_all(athlete_id: athlete.id)
       Volunteer.where(athlete_id: ids).update_all(athlete_id: athlete.id)
-      Trophy.where(athlete_id: ids).update_all(athlete_id: athlete.id)
+      update_all_trophies
       collection.where.not(id: athlete.id).destroy_all
       athlete.save!
       # rubocop:enable Rails/SkipsModelValidations
+    end
+  end
+
+  def update_all_trophies
+    Trophy.where(athlete_id: ids).each do |trophy|
+      if (athlete_trophy = athlete.trophies.find_by(badge_id: trophy.badge_id))
+        athlete_trophy.update!(date: trophy.date) if trophy.date && trophy.date > athlete_trophy.date
+      else
+        trophy.update!(athlete: athlete)
+      end
     end
   end
 end
