@@ -25,7 +25,7 @@ To build project install `Docker`, `docker-compose` (use V2 on Apple chip) and e
 make build_proj
 make ash
 # in docker container
-rail db:prepare
+rails db:prepare
 rails db:environment:set RAILS_ENV=test
 ```
 

@@ -7,6 +7,7 @@
 !/log/.keep
 !/tmp/.keep
 /.vscode
+.DS_Store
 .byebug_history
 .ruby-version
 .tool-versions
