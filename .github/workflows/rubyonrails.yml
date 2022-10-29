@@ -59,6 +59,7 @@ jobs:
       EMAIL_FROM: "test@test.ru"
       SMTP_SERVER: "smtp.yandex.ru"
       VK_TOKEN: ${{ secrets.VK_TOKEN }}
+      VK_GROUP_ID: 212432495
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
