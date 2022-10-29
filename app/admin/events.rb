@@ -26,6 +26,24 @@ ActiveAdmin.register Event do
     actions
   end
 
+  show do
+    attributes_table do
+      row :active
+      row :code_name
+      row :name
+      row :town
+      row :place
+      row :main_picture_link
+      row :slogan
+      row :visible_order
+      row(:description) { |e| sanitized_text e.description }
+      row :updated_at
+      row :created_at
+    end
+  end
+
+  form partial: 'form'
+
   sidebar 'Инструкция', only: %i[new edit] do
     li 'Кодовое имя должно состоять из маленьких латинских букв, можно использовать символ "_". Для паркрановских локаций
     крайне желательно использовать то же самое имя, что было. Например, angarskieprudy - Ангарские Пруды.'
@@ -34,6 +52,7 @@ ActiveAdmin.register Event do
     li 'Ссылка на баннер может быть как в виде url на внешнюю картинку, так и в виде указания относительного пути в ассетах.
     Крайне желательно использовать формат jpg и привести к размеру 1280х482 пикселя.'
     li 'В поле Девиз прописывается короткое ёмкое описание мероприятия, которое будет отображаться на главной странице.'
+    li 'Вес в ленте - числовое значение, чем оно больше, тем ниже событие будет расположено в ленте на главной странице.'
   end
 
   sidebar 'Управление контактами', only: %i[show edit] do
