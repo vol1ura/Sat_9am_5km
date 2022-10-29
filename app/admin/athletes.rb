@@ -46,7 +46,7 @@ ActiveAdmin.register Athlete do
     if AthleteReuniter.call(collection, ids)
       redirect_to collection_path(scope: :duplicates), notice: I18n.t('active_admin.athletes.successful_reunite')
     else
-      redirect_to collection_path, alert: I18n.t('active_admin.athletes.failed_reunite')
+      redirect_to collection_path(scope: :duplicates), alert: I18n.t('active_admin.athletes.failed_reunite')
     end
   end
 
