@@ -6,18 +6,18 @@ badge_2:
   id: 2
   name: Test2
   picture_link: 'badges/25_runs.png'
-badge_3:
-  id: 3
-  name: Test3
-  picture_link: 'badges/25_runs.png'
+# badge_3:
+#   id: 3
+#   name: Test3
+#   picture_link: 'badges/25_runs.png'
 badge_4:
   id: 4
   name: Test4
   picture_link: 'badges/25_runs.png'
-badge_5:
-  id: 5
-  name: Test5
-  picture_link: 'badges/25_runs.png'
+# badge_5:
+#   id: 5
+#   name: Test5
+#   picture_link: 'badges/25_runs.png'
 badge_6:
   id: 6
   name: Test6
@@ -26,26 +26,50 @@ badge_7:
   id: 7
   name: '25 runs'
   picture_link: 'badges/25_runs.png'
+  kind: 10
+  info:
+    threshold: 25
+    type: 'athlete'
 badge_8:
   id: 8
   name: '50 runs'
   picture_link: 'badges/50_runs.png'
+  kind: 10
+  info:
+    threshold: 50
+    type": 'athlete'
 badge_9:
   id: 9
   name: '100 runs'
   picture_link: 'badges/100_runs.png'
+  kind: 10
+  info:
+    threshold: 100
+    type: 'athlete'
 badge_10:
   id: 10
   name: '25 volunteering'
   picture_link: 'badges/25_runs.png'
+  kind: 10
+  info:
+    threshold: 25
+    type: 'volunteer'
 badge_11:
   id: 11
   name: '50 volunteering'
   picture_link: 'badges/25_runs.png'
+  kind: 10
+  info:
+    threshold: 25
+    type: 'volunteer'
 badge_12:
   id: 12
   name: '100 volunteering'
   picture_link: 'badges/25_runs.png'
+  kind: 10
+  info:
+    threshold: 25
+    type: 'volunteer'
 badge_13:
   id: 13
   name: 'breaking 16'
@@ -74,10 +98,18 @@ badge_19:
   id: 19
   name: 'tourist v5'
   picture_link: 'badges/25_runs.png'
+  kind: 20
+  info:
+    threshold: 5
+    type: 'volunteer'
 badge_20:
   id: 20
   name: 'tourist a5'
   picture_link: 'badges/25_runs.png'
+  kind: 20
+  info:
+    threshold: 5
+    type: 'athlete'
 badge_21:
   id: 21
   name: 'record female'
