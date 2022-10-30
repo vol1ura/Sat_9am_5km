@@ -134,6 +134,13 @@ ru:
         conditions: 'условия получения'
         picture_link: 'путь к картинке'
         received_date: 'дата получения'
+        kind: тип
+        kinds:
+          funrun: фан-ран
+          participating: участник
+          tourist: турист
+          breaking: breaking
+          king: 'рекорд трассы'
       trophy:
         date: 'дата получения'
 
