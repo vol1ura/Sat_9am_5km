@@ -20,7 +20,7 @@ gem 'devise-i18n'
 gem 'hotwire-rails'
 gem 'jbuilder'
 gem 'nokogiri'
-gem 'pg', '~> 1.3'
+gem 'pg', '~> 1.4'
 gem 'puma', '~> 5.6'
 gem 'sprockets-rails'
 
