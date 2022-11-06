@@ -138,13 +138,13 @@ class AddColumnsToBadges < ActiveRecord::Migration[7.0]
       badge.conditions = "<p>Награда для обладательницы лучшего женского результата за всё время проведения парковых забегов в конкретной локации.</p>"
       badge.picture_link = 'badges/record_woman.png'
     end
-    badge.update!(info: { male: false }, kind: :king)
+    badge.update!(info: { male: false }, kind: :record)
 
     badge = Badge.find_or_create_by!(id: 22) do |badge|
       badge.name = 'Король паркового забега'
       badge.conditions = "<p>Награда для обладателя лучшего мужского результата за всё время проведения парковых забегов в конкретной локации.</p>"
       badge.picture_link = 'badges/record_man.png'
     end
-    badge.update!(info: { male: true }, kind: :king)
+    badge.update!(info: { male: true }, kind: :record)
   end
 end

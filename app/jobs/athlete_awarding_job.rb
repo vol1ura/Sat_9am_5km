@@ -22,7 +22,7 @@ class AthleteAwardingJob < ApplicationJob
         athlete.award_by Trophy.new(badge: badge, date: activity_date)
       end
       events_count = results.joins(activity: :event).select('events.id').distinct.count
-      tourist_badge = Badge.where(kind: :tourist).where("info ->> 'type' = 'athlete'").take
+      tourist_badge = Badge.tourist_kind.where("info ->> 'type' = 'athlete'").take
       if events_count >= tourist_badge.info['threshold']
         athlete.award_by Trophy.new(badge: tourist_badge, date: activity_date)
       end
@@ -41,7 +41,7 @@ class AthleteAwardingJob < ApplicationJob
         volunteer.athlete.award_by Trophy.new(badge: badge, date: activity_date)
       end
       events_count = volunteering.joins(activity: :event).select('events.id').distinct.count
-      tourist_badge = Badge.where(kind: :tourist).where("info ->> 'type' = 'volunteer'").take
+      tourist_badge = Badge.tourist_kind.where("info ->> 'type' = 'volunteer'").take
       if events_count >= tourist_badge.info['threshold']
         volunteer.athlete.award_by Trophy.new(badge: tourist_badge, date: activity_date)
       end
@@ -50,10 +50,7 @@ class AthleteAwardingJob < ApplicationJob
   end
 
   def participating_badges_dataset(type:)
-    Badge
-      .where(kind: :participating)
-      .where("info ->> 'type' = ?", type)
-      .order(Arel.sql("(info ->> 'threshold')::int"))
+    Badge.participating_kind.where("info ->> 'type' = ?", type).order(Arel.sql("info -> 'threshold'"))
   end
 
   def activity_date
