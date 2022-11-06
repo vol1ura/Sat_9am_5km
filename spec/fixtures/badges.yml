@@ -60,7 +60,7 @@ badge_11:
   picture_link: 'badges/25_runs.png'
   kind: 10
   info:
-    threshold: 25
+    threshold: 50
     type: 'volunteer'
 badge_12:
   id: 12
@@ -68,32 +68,56 @@ badge_12:
   picture_link: 'badges/25_runs.png'
   kind: 10
   info:
-    threshold: 25
+    threshold: 100
     type: 'volunteer'
 badge_13:
   id: 13
   name: 'breaking 16'
+  kind: 30
   picture_link: 'badges/25_runs.png'
+  info:
+    male: true
+    min: 16
 badge_14:
   id: 14
   name: 'breaking 18'
+  kind: 30
   picture_link: 'badges/25_runs.png'
+  info:
+    male: true
+    min: 18
 badge_15:
   id: 15
   name: 'breaking 20'
+  kind: 30
   picture_link: 'badges/25_runs.png'
+  info:
+    male: true
+    min: 20
 badge_16:
   id: 16
   name: 'breaking 19'
+  kind: 30
   picture_link: 'badges/25_runs.png'
+  info:
+    male: false
+    min: 19
 badge_17:
   id: 17
   name: 'breaking 21'
+  kind: 30
   picture_link: 'badges/25_runs.png'
+  info:
+    male: false
+    min: 21
 badge_18:
   id: 18
   name: 'breaking 23'
+  kind: 30
   picture_link: 'badges/25_runs.png'
+  info:
+    male: false
+    min: 23
 badge_19:
   id: 19
   name: 'tourist v5'
@@ -114,7 +138,11 @@ badge_21:
   id: 21
   name: 'record female'
   picture_link: 'badges/25_runs.png'
+  info:
+    male: false
 badge_22:
   id: 22
   name: 'record male'
   picture_link: 'badges/25_runs.png'
+  info:
+    male: true
