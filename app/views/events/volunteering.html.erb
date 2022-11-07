@@ -44,10 +44,10 @@
         </thead>
         <tbody class="table-group-divider">
           <tr>
-            <td>Координатор всего :)</td>
+            <td>Директор забега</td>
             <td><%= render partial: 'cell', locals: { volunteer: activity.volunteers.find_by(role: :director), role: :director, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :timer).to_a %>
+          <% volunteers = activity.volunteers.timer_role.to_a %>
           <tr>
             <td>Секундомер</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :timer, activity: activity } %></td>
@@ -56,7 +56,7 @@
             <td>Секундомер</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :timer, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :tokens).to_a %>
+          <% volunteers = activity.volunteers.tokens_role.to_a %>
           <tr>
             <td>Выдача карточек позиций</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :tokens, activity: activity } %></td>
@@ -65,32 +65,24 @@
             <td>Помощь в раздаче карточек</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :tokens, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :scanner).to_a %>
-          <% 6.times.each do |i| %>
+          <% volunteers = activity.volunteers.scanner_role.to_a %>
+          <% 3.times.each do |i| %>
             <tr>
               <td>Фиксация результата</td>
               <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :scanner, activity: activity } %></td>
             </tr>
           <% end %>
-          <% volunteers = activity.volunteers.where(role: :marshal).to_a %>
+          <% volunteers = activity.volunteers.marshal_role.to_a %>
           <tr>
-            <td>Маршал на развороте</td>
+            <td>Маршал</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :marshal, activity: activity } %></td>
           </tr>
           <tr>
-            <td>Маршал на дамбе</td>
+            <td>Маршал</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :marshal, activity: activity } %></td>
           </tr>
-          <tr>
-            <td>Маршал у розового слона</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[2], role: :marshal, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Маршал</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[3], role: :marshal, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.where(role: :photograph).to_a %>
-          <% 6.times.each do |i| %>
+          <% volunteers = activity.volunteers.photograph_role.to_a %>
+          <% 3.times.each do |i| %>
             <tr>
               <td>Фотограф</td>
               <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :photograph, activity: activity } %></td>
@@ -104,14 +96,14 @@
             <td>Проведение разминки</td>
             <td><%= render partial: 'cell', locals: { volunteer: activity.volunteers.find_by(role: :warm_up), role: :warm_up, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :marking_maker).to_a %>
-          <% 6.times.each do |i| %>
+          <% volunteers = activity.volunteers.marking_maker_role.to_a %>
+          <% 3.times.each do |i| %>
             <tr>
               <td>Разметка трассы</td>
               <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :marking_maker, activity: activity } %></td>
             </tr>
           <% end %>
-          <% volunteers = activity.volunteers.where(role: :results_handler).to_a %>
+          <% volunteers = activity.volunteers.results_handler_role.to_a %>
           <tr>
             <td>Обработка результатов</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :results_handler, activity: activity } %></td>
@@ -120,7 +112,7 @@
             <td>Обработка результатов</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :results_handler, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :event_closer).to_a %>
+          <% volunteers = activity.volunteers.event_closer_role.to_a %>
           <tr>
             <td>Замыкающий</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :event_closer, activity: activity } %></td>
@@ -129,20 +121,14 @@
             <td>Замыкающий</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :event_closer, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :marking_picker).to_a %>
-          <tr>
-            <td>Сбор разметки</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :marking_picker, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Сбор разметки</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :marking_picker, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Сбор разметки</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[2], role: :marking_picker, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.where(role: :cards_sorter).to_a %>
+          <% volunteers = activity.volunteers.marking_picker_role.to_a %>
+          <% 3.times.each do |i| %>
+            <tr>
+              <td>Сбор разметки</td>
+              <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :marking_picker, activity: activity } %></td>
+            </tr>
+          <% end %>
+          <% volunteers = activity.volunteers.cards_sorter_role.to_a %>
           <tr>
             <td>Сортировка карточек</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :cards_sorter, activity: activity } %></td>
@@ -151,14 +137,14 @@
             <td>Сортировка карточек</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :cards_sorter, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :finish_maker).to_a %>
-          <% 6.times.each do |i| %>
+          <% volunteers = activity.volunteers.finish_maker_role.to_a %>
+          <% 3.times.each do |i| %>
             <tr>
               <td>Организация финиша</td>
               <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :finish_maker, activity: activity } %></td>
             </tr>
           <% end %>
-          <% volunteers = activity.volunteers.where(role: :attendant).to_a %>
+          <% volunteers = activity.volunteers.attendant_role.to_a %>
           <tr>
             <td>Сопровождение (для детского забега)</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :attendant, activity: activity } %></td>
@@ -167,7 +153,7 @@
             <td>Сопровождение (для детского забега)</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :attendant, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :other).to_a %>
+          <% volunteers = activity.volunteers.other_role.to_a %>
           <tr>
             <td>Помощь в подготовке забега</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :other, activity: activity } %></td>
@@ -180,7 +166,7 @@
             <td>Ведущий велосипед</td>
             <td><%= render partial: 'cell', locals: { volunteer: activity.volunteers.find_by(role: :bike_leader), role: :bike_leader, activity: activity } %></td>
           </tr>
-          <% volunteers = activity.volunteers.where(role: :pacemaker).to_a %>
+          <% volunteers = activity.volunteers.pacemaker_role.to_a %>
           <tr>
             <td>Пейсмейкер</td>
             <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :pacemaker, activity: activity } %></td>
