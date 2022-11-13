@@ -4,6 +4,15 @@
     date = trophy.date
   %>
   <td><%= link_to athlete.name, athlete_path(athlete) %></td>
-  <td><%= l date if date %></td>
+  <% if @badge.record_kind? %>
+      <% trophy.info['data'].each do |record| %>
+        <% record_result = Result.find(record['result_id']) %>
+        <td><%= Event.find(record['event_id']).name %></td>
+        <td><%= human_result_time record_result.total_time %></td>
+        <td class="hidden-on-phone"><%= l record_result.activity.date %></td>
+      <% end %>
+  <% else %>
+    <td><%= l date if date %></td>
+  <% end %>
   <td class="hidden-on-phone"><%= athlete.club&.name %></td>
 </tr>

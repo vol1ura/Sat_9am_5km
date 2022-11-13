@@ -26,7 +26,13 @@
   <thead data-controller="table-head">
     <tr>
       <td>Участник</td>
-      <td>Дата получения</td>
+      <% if @badge.record_kind? %>
+        <td>Забег</td>
+        <td>Результат</td>
+        <td class="hidden-on-phone">Дата</td>
+      <% else %>
+        <td>Дата получения</td>
+      <% end %>
       <td class="hidden-on-phone">Клуб</td>
     </tr>
   </thead>

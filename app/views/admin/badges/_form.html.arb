@@ -5,8 +5,10 @@ active_admin_form_for [:admin, resource] do |f|
 
   f.inputs do
     input :name
+    input :picture_link
+    input :received_date
     input :conditions, as: :quill_editor,
-                       label: 'Условия получения',
+                       label: 'условия получения',
                        input_html: {
                          data: {
                            options: {
@@ -24,8 +26,6 @@ active_admin_form_for [:admin, resource] do |f|
                            }
                          }
                        }
-    input :picture_link
-    input :received_date
   end
 
   f.actions
