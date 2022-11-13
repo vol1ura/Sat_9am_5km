@@ -93,10 +93,11 @@ class AthleteAwardingJob < ApplicationJob
   end
 
   def award_record_badge(badge, result)
-    Trophy.create(
-      badge: badge,
-      athlete_id: result.athlete_id,
-      info: { data: [{ event_id: event_id, result_id: result.id }] }
-    )
+    trophy = Trophy.find_or_initialize_by(badge: badge, athlete_id: result.athlete_id)
+    trophy.update!(info: { data: [{ event_id: event_id, result_id: result.id }] }) and return unless trophy.info['data']
+
+    trophy.info['data'].delete_if { |d| d['event_id'] == event_id }
+    trophy.info['data'] << { event_id: event_id, result_id: result.id }
+    trophy.save!
   end
 end
