@@ -138,11 +138,13 @@ badge_21:
   id: 21
   name: 'record female'
   picture_link: 'badges/25_runs.png'
+  kind: 100
   info:
     male: false
 badge_22:
   id: 22
   name: 'record male'
   picture_link: 'badges/25_runs.png'
+  kind: 100
   info:
     male: true

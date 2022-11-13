@@ -26,17 +26,17 @@ RSpec.describe AthleteAwardingJob do
       create(:volunteer, activity: activity, athlete: athlete)
       expect do
         described_class.perform_now(activity.id)
-      end.to change(athlete.trophies, :count).by(2)
+      end.to change(athlete.trophies, :count).by(3)
     end
   end
 
-  context 'with tourist badges' do
+  context 'with tourist and record badges' do
     it 'creates runner badge' do
       create_list(:result, 5, athlete: athlete)
       last_activity_id = athlete.results.joins(:activity).order('activities.date').last.activity_id
       expect do
         described_class.perform_now(last_activity_id)
-      end.to change(athlete.trophies, :count).by(1)
+      end.to change(athlete.trophies, :count).by(2)
     end
 
     it 'creates volunteer badge' do
