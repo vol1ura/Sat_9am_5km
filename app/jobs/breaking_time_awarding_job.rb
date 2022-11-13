@@ -9,7 +9,7 @@ class BreakingTimeAwardingJob < ApplicationJob
     expire_badges
     [true, false].each do |male|
       award_badges(
-        Badge.breaking_kind.where("(info -> 'male')::boolean = ?", male).order(Arel.sql("info -> 'min'")),
+        Badge.breaking_kind.where("(info->'male')::boolean = ?", male).order(Arel.sql("info->'min'")),
         male: male
       )
     end
@@ -32,8 +32,8 @@ class BreakingTimeAwardingJob < ApplicationJob
   def award_badges(badges, male:)
     badges.each do |badge|
       time_threshold = badge.info['min']
-      prev_badges = badges.where("(info -> 'min')::integer < ?", time_threshold)
-      next_badges = badges.where("(info -> 'min')::integer > ?", time_threshold)
+      prev_badges = badges.where("(info->'min')::integer < ?", time_threshold)
+      next_badges = badges.where("(info->'min')::integer > ?", time_threshold)
       Result
         .joins(:activity, :athlete)
         .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
@@ -56,6 +56,6 @@ class BreakingTimeAwardingJob < ApplicationJob
   # rubocop:enable Metrics/MethodLength
 
   def minutes_threshold(minutes)
-    Time.zone.local(2000, 1, 1, 0, (minutes || 0), 0)
+    Time.zone.local(2000, 1, 1, 0, (minutes.presence || 0), 0)
   end
 end
