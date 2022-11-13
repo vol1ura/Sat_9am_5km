@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_184305) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_29_171300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -64,6 +64,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_184305) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "received_date"
+    t.integer "kind", default: 0, null: false
+    t.jsonb "info", default: "{}", null: false
+    t.index ["info"], name: "index_badges_on_info", using: :gin
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -115,8 +118,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_184305) do
     t.bigint "badge_id", null: false
     t.bigint "athlete_id", null: false
     t.date "date"
+    t.jsonb "info", default: "{}", null: false
     t.index ["athlete_id"], name: "index_trophies_on_athlete_id"
     t.index ["badge_id", "athlete_id"], name: "index_trophies_on_badge_id_and_athlete_id", unique: true
+    t.index ["info"], name: "index_trophies_on_info", using: :gin
   end
 
   create_table "users", force: :cascade do |t|

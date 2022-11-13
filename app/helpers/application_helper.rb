@@ -30,6 +30,10 @@ module ApplicationHelper
     I18n.t("activerecord.attributes.volunteer.roles.#{role}")
   end
 
+  def kind_of_badge(badge)
+    I18n.t("activerecord.attributes.badge.kinds.#{badge.kind}")
+  end
+
   def sanitized_text(text)
     sanitize text, tags: %w[strong em s blockquote pre ol ul li a p], attributes: %w[href rel target]
   end
