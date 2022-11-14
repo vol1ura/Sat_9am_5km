@@ -12,11 +12,18 @@
   <div class="d-flex justify-content-start flex-wrap">
     <% @athlete.trophies.includes(:badge).each do |trophy| %>
       <div class="p-1">
-        <%=
-          link_to badge_path(trophy.badge) do
+        <%
+          trophy_link = link_to badge_path(trophy.badge) do
             image_tag trophy.badge.picture_link, class: 'trophy'
           end
         %>
+        <% if trophy.badge.record_kind? %>
+          <% trophy.info['data'].each do |record_data| %>
+            <%= trophy_link %>
+          <% end %>
+        <% else %>
+          <%= trophy_link %>
+        <% end %>
       </div>
     <% end %>
   </div>
