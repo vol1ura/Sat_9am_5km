@@ -70,6 +70,8 @@ jobs:
           bundler-cache: true
       - name: Set up database schema
         run: bin/rails db:schema:load
+      - name: Check database consistency
+        run: bundle exec database_consistency
       - name: Rspec tests
         if: github.ref != 'refs/heads/master'
         run: bundle exec rspec
