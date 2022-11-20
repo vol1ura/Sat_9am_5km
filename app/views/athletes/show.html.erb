@@ -51,11 +51,10 @@
 
   <h2>Общая статистика</h2>
   <div class="accordion accordion-flush" id="accordionPersonalBest">
-    <% pb = @athlete.personal_best %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-personalBestAbsolute">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= human_result_time pb.total_time %></span>
+          <span class="badge text-bg-ligth bg-primary me-3"><%= human_result_time @pb_by_time.total_time %></span>
           лучший результат
         </button>
       </h2>
@@ -63,33 +62,38 @@
         <div class="accordion-body">
           <div class="hstack">
             <div class="acc-li-s">
-              <%= link_to l(pb.activity.date), activity_path(pb.activity_id) %>
+              <%= link_to l(@pb_by_time.activity.date), activity_path(@pb_by_time.activity_id) %>
             </div>
             <div class="ms-3">
-              <%= link_to pb.activity.event.name, event_path(code_name: pb.activity.event.code_name) %>
+              <%= link_to @pb_by_time.activity.event.name, event_path(code_name: @pb_by_time.activity.event.code_name) %>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <% pb = @athlete.personal_best(:position) %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-bestPositionAbsolute">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= pb.position %></span>
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @pb_by_position.take.position %></span>
           лучшее место
         </button>
       </h2>
       <div id="flush-collapseBestPositionAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-bestPositionAbsolute" data-bs-parent="#accordionPersonalBest">
         <div class="accordion-body">
-          <div class="hstack">
-            <div class="acc-li-s">
-              <%= link_to l(pb.activity.date), activity_path(pb.activity_id) %>
-            </div>
-            <div class="ms-3">
-              <%= link_to pb.activity.event.name, event_path(code_name: pb.activity.event.code_name) %>
-            </div>
-          </div>
+          <ul class="list-group list-group-flush">
+            <% @pb_by_position.each do |pb| %>
+              <li class="list-group-item">
+                <div class="hstack">
+                  <div class="acc-li-s">
+                    <%= link_to l(pb.activity.date), activity_path(pb.activity_id) %>
+                  </div>
+                  <div class="ms-3">
+                    <%= link_to pb.activity.event.name, event_path(code_name: pb.activity.event.code_name) %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
