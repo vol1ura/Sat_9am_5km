@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_29_171300) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_20_153524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -36,7 +36,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_171300) do
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "results_count"
     t.index ["event_id"], name: "index_activities_on_event_id"
   end
 
@@ -49,7 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_171300) do
     t.bigint "club_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "volunteering_count"
     t.index ["club_id"], name: "index_athletes_on_club_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
     t.index ["name"], name: "index_athletes_on_name", opclass: :gist_trgm_ops, using: :gist

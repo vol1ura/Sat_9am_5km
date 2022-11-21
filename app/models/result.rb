@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Result < ApplicationRecord
-  belongs_to :activity, counter_cache: true, touch: true
+  belongs_to :activity
   belongs_to :athlete, optional: true, touch: true
 
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true }
@@ -17,8 +17,9 @@ class Result < ApplicationRecord
                             .where(activities[:published].eq(true).and(athletes[:male].eq(male)))
                             .project(results[:total_time].minimum.as('min_tt'), athletes[:id].as('a_id'))
                             .group(athletes[:id]).as('t')
-    join_query = "INNER JOIN #{composed_table.to_sql} ON results.athlete_id = t.a_id AND results.total_time = t.min_tt"
-    joins(join_query).order(:total_time).first(limit)
+    joins(
+      "INNER JOIN #{composed_table.to_sql} ON results.athlete_id = t.a_id AND results.total_time = t.min_tt"
+    ).order(:total_time).first(limit)
   end
 
   def swap_with_position!(target_position)
