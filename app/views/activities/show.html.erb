@@ -27,6 +27,9 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="female-tab" data-bs-toggle="tab" data-bs-target="#female-tab-pane" type="button" role="tab" aria-controls="female-tab-pane" aria-selected="false">Женщины</button>
   </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="charts-tab" data-bs-toggle="tab" data-bs-target="#charts-tab-pane" type="button" role="tab" aria-controls="female-tab-pane" aria-selected="false"><i class="bi bi-bar-chart-line"></i></button>
+  </li>
 </ul>
 
 <div class="tab-content" data-controller="protocol">
@@ -35,6 +38,12 @@
   </div>
   <div class="tab-pane fade" id="male-tab-pane" role="tabpanel" aria-labelledby="male-tab" tabindex="0" data-protocol-target="male"></div>
   <div class="tab-pane fade" id="female-tab-pane" role="tabpanel" aria-labelledby="female-tab" tabindex="0" data-protocol-target="female"></div>
+  <div class="tab-pane fade" id="charts-tab-pane" role="tabpanel" aria-labelledby="charts-tab" tabindex="0" data-protocol-target="charts">
+    <div class="d-flex flex-wrap justify-content-around my-3">
+      <div id="chart-gender" class="col-12 col-md-6 col-xl-4"></div>
+      <div id="chart-clubs" class="col-12 col-md-6 col-xl-4"></div>
+    </div>
+  </div>
 </div>
 
 <h4>Волонтёры</h4>

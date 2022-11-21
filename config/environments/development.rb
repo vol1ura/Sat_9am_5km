@@ -59,6 +59,9 @@ Rails.application.configure do
 
   config.logger = Logger.new(Rails.root.join('log', "#{Rails.env}.log"), 3, 1.megabytes)
 
+  config.assets.digest = false
+  config.assets.prefix = '/dev-assets'
+
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 

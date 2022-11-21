@@ -11,6 +11,15 @@
 - [ ] Separate page with activities inside event
 - [ ] Event specific top menu
 
+### Charts
+
+- [ ] FEATURE: Diagrams tab on athlete page - results dynamics,
+- [ ] FEATURE: Diagrams tab on clubs index page - men/women in club, counts, top athlete
+- [ ] FEATURE: Diagrams tab on activity show page - pie men/women, gist bar by result with median
+- https://apexcharts.com/javascript-chart-demos/mixed-charts/multiple-yaxis/ - personal results time and bars with position in absolute and gender
+- https://apexcharts.com/javascript-chart-demos/bar-charts/stacked/ - event results with segments for man woman unknown and volunteers
+- choose something for clubs
+
 ## Development
 
 Create `deploy/.env` and `config/database.yml` files:
