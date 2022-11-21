@@ -14,7 +14,6 @@ class AthleteReuniter < ApplicationService
     return false unless athlete
 
     grab_modified_attributes_from_collection
-    grab_volunteering_count_from_collection
     check_modified_fields
     replace_all_by_one and return true
   rescue StandardError => e
@@ -28,11 +27,6 @@ class AthleteReuniter < ApplicationService
 
   def athlete
     @athlete ||= collection.where.not(name: nil).take
-  end
-
-  def grab_volunteering_count_from_collection
-    athlete.volunteering_count = collection.sum(:volunteering_count)
-    unmodified_attributes.delete('volunteering_count')
   end
 
   def grab_modified_attributes_from_collection

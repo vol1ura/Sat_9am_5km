@@ -9,7 +9,7 @@ class Volunteer < ApplicationRecord
   }.freeze
 
   belongs_to :activity
-  belongs_to :athlete, counter_cache: :volunteering_count, touch: true
+  belongs_to :athlete
 
   validates :role, presence: true
   validates :athlete_id, uniqueness: { scope: :activity_id }
