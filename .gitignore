@@ -18,7 +18,7 @@
 !/tmp/pids/.keep
 
 /public/assets
-/vendor
+/vendor/*
 !/vendor/.keep
 !/vendor/javascript/.keep
 /coverage
@@ -28,4 +28,5 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/deploy
+/deploy/*
+!/deploy/.env.example
