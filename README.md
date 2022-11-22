@@ -16,7 +16,7 @@
 Create `deploy/.env` and `config/database.yml` files:
 ```shell
 mkdir deploy
-cp .env.example ./deploy/.env
+cp ./deploy/.env.example ./deploy/.env
 cp ./config/database.yml.example ./config/database.yml
 ```
 
