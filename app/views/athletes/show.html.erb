@@ -51,6 +51,31 @@
 
   <h2>Общая статистика</h2>
   <div class="accordion accordion-flush" id="accordionPersonalBest">
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-totalResults">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalResults" aria-expanded="false" aria-controls="flush-collapseTotalResults">
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.results.published.size %></span>
+          всего пробежек
+        </button>
+      </h2>
+      <div id="flush-collapseTotalResults" class="accordion-collapse collapse" aria-labelledby="flush-totalResults" data-bs-parent="#accordionPersonalBest">
+        <div class="accordion-body">
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-totalEvents">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.results.joins(:activity).select(:event_id).distinct.count %></span>
+          посещённые мероприятия
+        </button>
+      </h2>
+      <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordionPersonalBest">
+        <div class="accordion-body">
+        </div>
+      </div>
+    </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-totalResults">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalResults" aria-expanded="false" aria-controls="flush-collapseTotalResults">
