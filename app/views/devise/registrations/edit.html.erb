@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Изменение персональных данных</h2>
 
 <%= form_for(resource, as: resource_name, url: user_registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>
@@ -12,32 +12,33 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br>
+  <div class="field mt-2">
+    <%= f.label :password %> <i>(оставьте пустым, если не хотите менять)</i><br>
     <%= f.password_field :password, autocomplete: 'new-password' %>
     <% if @minimum_password_length %>
       <br>
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <em>минимум <%= @minimum_password_length %> символов, одна цифра, одна заглавная буква и один символ</em>
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="field mt-2">
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
   </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br>
+  <div class="field mt-2">
+    <%= f.label :current_password %> <i>(необходим ваш текущий пароль для подтверждения изменений)</i><br>
     <%= f.password_field :current_password, autocomplete: 'current-password' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit 'Update' %>
+  <div class="actions mt-3">
+    <%= f.submit 'Обновить', class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Удалить мой аккаунт</h3>
 
-<p>Unhappy? <%= button_to 'Cancel my account', registration_path(resource_name), data: { confirm: 'Are you sure?' }, method: :delete %></p>
+<p>Ваша учётная запись будет удалена. Данное действие необратимо.</p>
+<%= button_to 'Удалить мой аккаунт', user_registration_path, data: { confirm: 'Вы уверены?' }, method: :delete, class: 'btn btn-danger' %>
 
-<%= link_to 'Back', :back %>
+<%= link_to 'Назад', :back, class: 'btn btn-light mt-4' %>

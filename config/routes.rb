@@ -11,8 +11,21 @@ Rails.application.routes.draw do
   resource :user, only: %i[create update]
   get '/pages/:page', to: 'pages#show', as: :page
   get '/top_results', to: 'results#top'
-  # devise_for :users, ActiveAdmin::Devise.config
-  devise_for :users, { sign_out_via: [:delete, :get] }
-  # , { path: :user, controllers: { sessions: 'users/sessions', passwords: 'users/passwords', unlocks: 'users/unlocks', registrations: 'users/registrations', confirmations: 'users/confirmations' }, path_names: { sign_in: 'login', sign_out: 'logout' }, sign_out_via: [:delete, :get] }
   ActiveAdmin.routes(self)
+  devise_for :users,
+    {
+      path: :user,
+      controllers: {
+        sessions: 'users/sessions',
+        passwords: 'users/passwords',
+        unlocks: 'users/unlocks',
+        registrations: 'users/registrations',
+        confirmations: 'users/confirmations'
+      },
+      path_names: {
+        sign_in: 'login',
+        sign_out: 'logout'
+      },
+      sign_out_via: [:delete, :get]
+    }
 end
