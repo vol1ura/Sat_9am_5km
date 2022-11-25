@@ -6,7 +6,7 @@ active_admin_form_for [:admin, resource] do |f|
   f.inputs do
     input :active
     input :name
-    input :code_name
+    input :code_name if resource.new_record?
     input :town
     input :place
     input :description, as: :quill_editor,
