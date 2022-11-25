@@ -1,4 +1,4 @@
-<h2>Изменение персональных данных</h2>
+<h2>Настройки</h2>
 
 <%= form_for(resource, as: resource_name, url: user_registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>
@@ -27,11 +27,21 @@
   </div>
 
   <div class="field mt-2">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field mt-2">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field mt-2">
     <%= f.label :current_password %> <i>(необходим ваш текущий пароль для подтверждения изменений)</i><br>
     <%= f.password_field :current_password, autocomplete: 'current-password' %>
   </div>
 
-  <div class="actions mt-3">
+  <div class="actions my-3">
     <%= f.submit 'Обновить', class: 'btn btn-primary' %>
   </div>
 <% end %>
@@ -39,6 +49,6 @@
 <h3>Удалить мой аккаунт</h3>
 
 <p>Ваша учётная запись будет удалена. Данное действие необратимо.</p>
-<%= button_to 'Удалить мой аккаунт', user_registration_path, data: { confirm: 'Вы уверены?' }, method: :delete, class: 'btn btn-danger' %>
-
+<%= link_to 'Удалить мой аккаунт', user_registration_path, data: { confirm: 'Вы уверены?' }, method: :delete, class: 'btn btn-danger' %>
+<br>
 <%= link_to 'Назад', :back, class: 'btn btn-light mt-4' %>
