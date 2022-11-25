@@ -426,6 +426,7 @@ ru:
     pm: вечера
 
   views:
+    greeting: 'Добро пожаловать на сайт Sat9am5km!'
     pagination:
       previous: '←'
       first: '↞'

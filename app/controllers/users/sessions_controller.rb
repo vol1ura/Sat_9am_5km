@@ -9,12 +9,13 @@ module Users
     #   super
     # end
 
-    # POST /resource/sign_in
-    # def create
-    #   super
-    # end
+    # POST /user/login
+    def create
+      super
+      flash[:notice] = I18n.t('views.greeting')
+    end
 
-    # DELETE /resource/sign_out
+    # DELETE /urser/logout
     # def destroy
     #   super
     # end
