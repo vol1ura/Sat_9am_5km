@@ -1,0 +1,13 @@
+<h2>Забыли пароль?</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'row' }) do |f| %>
+  <%= render 'devise/shared/error_messages', resource: resource %>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+    <div class="input-group">
+      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Ваш e-mail' %>
+      <%= f.submit 'Сбросить пароль', class: 'btn btn-outline-secondary' %>
+    </div>
+  </div>
+<% end %>
+
+<%= render 'devise/shared/links' %>

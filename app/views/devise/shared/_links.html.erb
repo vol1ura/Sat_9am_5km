@@ -1,0 +1,25 @@
+<%- if controller_name != 'sessions' %>
+  <%= link_to 'Войти', new_user_session_path %><br>
+<% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to 'Зарегистрироваться с помощью Telegram-бота', new_user_registration_path %><br>
+<% end %>
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to 'Забыли пароль?', new_user_password_path %><br>
+<% end %>
+
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <%= link_to 'Не получили ссылку для подтверждения?', new_user_confirmation_path %><br>
+<% end %>
+
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <%= link_to 'Не получили ссылку для разблокировки?', new_user_unlock_path %><br>
+<% end %>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), method: :post %><br>
+  <% end %>
+<% end %>
