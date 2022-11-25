@@ -1,0 +1,56 @@
+<h2>Регистрация</h2>
+
+<%= form_for resource, as: resource_name, url: user_registration_path do |f| %>
+  <%= render 'devise/shared/error_messages', resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %> <em>(будет выслана ссылка для подтверждения)</em><br>
+    <%= f.email_field :email, autofocus: true, autocomplete: 'email' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+      <em>(минимум <%= @minimum_password_length %> символов)</em>
+    <% end %><br>
+    <%= f.password_field :password, autocomplete: 'new-password' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name, autocomplete: 'name' %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name, autocomplete: 'surname' %>
+  </div>
+  <%= f.fields_for :athlete, (f.object.athlete || Athlete.new) do |form| %>
+    <div class="field">
+      <%= form.label :male %><br>
+      <%= form.collection_radio_buttons :male, [['мужчина', true], ['женщина', false]], :last, :first %>
+    </div>
+    <div class="field">
+      <%= form.label :parkrun_code %><br>
+      <%= form.number_field :parkrun_code, autocomplete: 'off' %>
+    </div>
+    <div class="field">
+      <%= form.label :fiveverst_code %><br>
+      <%= form.number_field :fiveverst_code, autocomplete: 'off' %>
+    </div>
+    <div class="field">
+      <%= form.label :club_id, 'Клуб (если есть)' %><br>
+      <%= form.collection_select :club_id, Club.order(:name), :id, :name %>
+    </div>
+  <% end %>
+
+  <div class="actions my-3">
+    <%= f.submit 'Зарегистрироваться', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= render 'devise/shared/links' %>

@@ -60,4 +60,8 @@ module ApplicationHelper
 
     link_to "@#{user.telegram_user}", "https://t.me/#{user.telegram_user}", target: '_blank', rel: 'noopener'
   end
+
+  def full_name(user)
+    "#{user.first_name} #{user.last_name}"
+  end
 end
