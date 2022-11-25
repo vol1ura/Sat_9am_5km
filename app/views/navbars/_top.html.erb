@@ -56,7 +56,7 @@
           <% end %>
         </ul>
 
-        <%= form_with url: athletes_path, method: :get, class: 'position-absolute bottom-0', role: 'search' do |f| %>
+        <%= form_with url: athletes_path, method: :get, class: 'position-absolute bottom-0 mb-3', role: 'search' do |f| %>
           <div class="input-group mb-3">
             <%= f.text_field :name, type: 'search', class: 'form-control', placeholder: 'Фамилия или ID', 'aria-label' => 'Search', autocomplete: 'off' %>
             <%= f.submit 'Поиск', class: 'btn btn-outline-light' %>
