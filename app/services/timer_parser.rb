@@ -16,7 +16,7 @@ class TimerParser < ApplicationService
       column_correction = 1
       table[1..].each do |row|
         break if row.first == 'ENDOFEVENT'
-        column_correction = 0 and next if row.third.blank? # We skip the second line (on some versions of Virtual Volunteer)
+        column_correction -= 1 and next if row.third.blank? || row.third.include?('00:00:00') # skip lines
 
         @activity.results << Result.new(position: row.first.to_i + column_correction, total_time: row.last)
       end

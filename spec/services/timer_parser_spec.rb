@@ -22,6 +22,14 @@ RSpec.describe TimerParser, type: :service do
     end
   end
 
+  context 'with zero time on first position in timer file on iOS' do
+    let(:file_timer) { File.open('spec/fixtures/files/parkrun_timer_results_ios_zero.csv') }
+
+    it 'appends result to activity' do
+      expect { described_class.call(activity, file_timer) }.to change(activity.results, :size).to(5)
+    end
+  end
+
   context 'with valid timer file on Android' do
     let(:file_timer) { File.open('spec/fixtures/files/parkrun_timer_results_android.csv') }
 
