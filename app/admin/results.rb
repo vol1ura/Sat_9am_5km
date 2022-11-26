@@ -63,6 +63,10 @@ ActiveAdmin.register Result do
     end
   end
 
+  after_destroy do |result|
+    collection.where('position > ?', result.position).each { |r| r.update(position: r.position.pred) }
+  end
+
   member_action :up, method: :put, if: proc { can? :update, Result } do
     @pred_result = resource.swap_with_position!(resource.position.pred)
   rescue StandardError
