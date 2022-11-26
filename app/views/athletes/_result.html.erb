@@ -4,5 +4,5 @@
   <td><%= human_result_time(result.total_time) %></td>
   <td class="hidden-on-phone"><%= human_result_pace(result.total_time) %></td>
   <td class="hidden-on-phone"><%= result.position %></td>
-  <td><%= link_to result.activity.event.name, event_path(code_name: result.activity.event.code_name) %></td>
+  <td class="event-name"><%= link_to result.activity.event.name, event_path(code_name: result.activity.event.code_name) %></td>
 </tr>
