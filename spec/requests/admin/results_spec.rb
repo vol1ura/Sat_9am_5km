@@ -74,6 +74,14 @@ RSpec.describe '/admin/results' do
       end
     end
 
+    describe 'DELETE /admin/activities/1/results' do
+      it 'properly remove result' do
+        expect do
+          delete admin_activity_result_url(activity, results.second)
+        end.to change { activity.results.order(:position).last.position }.by(-1)
+      end
+    end
+
     describe 'PUT /admin/activities/1/results/2/up' do
       it 'swap athletes' do
         first_athlete = results.first.athlete
