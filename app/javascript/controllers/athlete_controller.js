@@ -1,47 +1,19 @@
 import { Controller } from "@hotwired/stimulus"
 import ApexCharts from "apexcharts"
+import AthleteCharts from "charts/athlete"
+import { ruLocale } from "charts/ru"
 
 // Connects to data-controller="athlete"
 export default class extends Controller {
   connect() {
-    let events = {}
-    document.querySelectorAll(".event-name").forEach(cell => {
-      events[cell.textContent] = 1 + (events[cell.textContent] || 0)
-    })
+    Apex.chart = { locales: [ruLocale], defaultLocale: "ru" }
 
-    const eventsCountChart = new ApexCharts(
-      document.querySelector("#chart-events-count"),
-      {
-        series: [{
-          data: Object.values(events)
-        }],
-        chart: {
-          type: 'bar',
-        },
-        title: {
-          text: 'Количество забегов',
-          align: 'center'
-        },
-        plotOptions: {
-          bar: {
-            columnWidth: '45%',
-            distributed: true,
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        legend: {
-          show: false
-        },
-        xaxis: {
-          categories: Object.keys(events)
-        },
-        yaxis: {
-          tickAmount: 1
-        }
-      }
-    )
+    const athleteCharts = new AthleteCharts(document.querySelectorAll(".result"))
+
+    const eventsCountChart = new ApexCharts(document.querySelector("#chart-events-count"), athleteCharts.eventsChartOptions)
     eventsCountChart.render()
+
+    const resultsChart = new ApexCharts(document.querySelector("#chart-results"), athleteCharts.resultsChartOptions);
+    resultsChart.render();
   }
 }
