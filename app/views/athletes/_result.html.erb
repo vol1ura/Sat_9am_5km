@@ -1,8 +1,15 @@
-<tr>
+<%
+  activity_date = result.activity.date
+  event = result.activity.event
+  total_time = result.total_time
+%>
+<tr class="result">
   <td><%= @total_results - result_counter %></td>
-  <td><%= link_to l(result.activity.date), activity_path(result.activity_id) %></td>
-  <td><%= human_result_time(result.total_time) %></td>
-  <td class="hidden-on-phone"><%= human_result_pace(result.total_time) %></td>
+  <td class="event-date" timestamp="<%= activity_date.to_time.to_i * 1000 %>">
+    <%= link_to l(activity_date), activity_path(result.activity_id) %>
+  </td>
+  <td class="total-time" min="<%= (total_time.hour * 60 + total_time.min) * 60 + total_time.sec %>"><%= human_result_time(total_time) %></td>
+  <td class="hidden-on-phone"><%= human_result_pace(total_time) %></td>
   <td class="hidden-on-phone"><%= result.position %></td>
-  <td class="event-name"><%= link_to result.activity.event.name, event_path(code_name: result.activity.event.code_name) %></td>
+  <td class="event-name"><%= link_to event.name, event_path(code_name: event.code_name) %></td>
 </tr>
