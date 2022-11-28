@@ -45,6 +45,7 @@ ru:
         role: роль
         note: примечание
         telegram_user: телеграм
+        athlete: участник
       permission:
         event: мероприятие
         user: пользователь

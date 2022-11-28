@@ -12,4 +12,5 @@ attributes_table_for user do
   row('Номер 5 вёрст или RunPark') { |u| u.athlete&.fiveverst_code }
   row('Пол') { |u| u.athlete&.gender }
   row('Клуб') { |u| u.athlete&.club&.name }
+  row :athlete
 end
