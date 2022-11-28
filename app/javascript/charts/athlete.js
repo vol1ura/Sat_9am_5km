@@ -30,6 +30,7 @@ export default class AthleteCharts {
     const events = this.#eventsData
     return {
       series: [{
+        name: 'забегов',
         data: Object.values(events)
       }],
       chart: {

@@ -26,21 +26,19 @@ class AthleteAwardingJob < ApplicationJob
     award_best_result = false
     Trophy.transaction do
       trophies.each do |trophy|
-        records_data = trophy.info['data']
-        record_data = records_data.find { |d| d['event_id'] == event_id }
+        record_data = trophy.data.find { |d| d['event_id'] == event_id }
         record_result = Result.find(record_data['result_id'])
         next if best_result.total_time > record_result.total_time || best_result.activity.date < record_result.activity.date
 
         award_best_result ||= true
-        records_data.delete(record_data)
+        trophy.data.delete(record_data)
         if best_result.athlete_id == record_result.athlete_id
-          trophy.info['data'] = [*records_data, { event_id: event_id, result_id: best_result.id }]
+          trophy.data << { event_id: event_id, result_id: best_result.id }
           trophy.save!
           next
         end
-        trophy.destroy and next if records_data.empty?
+        trophy.destroy and next if trophy.data.empty?
 
-        trophy.info['data'] = records_data
         trophy.save!
       end
     end
@@ -52,7 +50,7 @@ class AthleteAwardingJob < ApplicationJob
 
   def award_runner(athlete)
     results = athlete.results.joins(:activity).where(activity: { published: true, date: ..activity_date })
-    participating_badges_dataset(type: 'athlete').each do |badge|
+    Badge.participating_dataset(type: 'athlete').each do |badge|
       next if results.size < badge.info['threshold']
 
       athlete.award_by Trophy.new(badge: badge, date: activity_date)
@@ -67,7 +65,7 @@ class AthleteAwardingJob < ApplicationJob
 
   def award_volunteer(athlete)
     volunteering = athlete.volunteering.where(activity: { date: ..activity_date })
-    participating_badges_dataset(type: 'volunteer').each do |badge|
+    Badge.participating_dataset(type: 'volunteer').each do |badge|
       next if volunteering.size < badge.info['threshold']
 
       athlete.award_by Trophy.new(badge: badge, date: activity_date)
@@ -80,10 +78,6 @@ class AthleteAwardingJob < ApplicationJob
     athlete.save!
   end
 
-  def participating_badges_dataset(type:)
-    Badge.participating_kind.where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
-  end
-
   def activity_date
     @activity_date ||= @activity.date
   end
@@ -94,10 +88,10 @@ class AthleteAwardingJob < ApplicationJob
 
   def award_record_badge(badge, result)
     trophy = Trophy.find_or_initialize_by(badge: badge, athlete_id: result.athlete_id)
-    trophy.update!(info: { data: [{ event_id: event_id, result_id: result.id }] }) and return unless trophy.info['data']
+    trophy.update!(info: { data: [{ event_id: event_id, result_id: result.id }] }) and return if trophy.data.blank?
 
-    trophy.info['data'].delete_if { |d| d['event_id'] == event_id }
-    trophy.info['data'] << { event_id: event_id, result_id: result.id }
+    trophy.data.delete_if { |d| d['event_id'] == event_id }
+    trophy.data << { event_id: event_id, result_id: result.id }
     trophy.save!
   end
 end

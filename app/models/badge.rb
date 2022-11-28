@@ -8,4 +8,8 @@ class Badge < ApplicationRecord
   validates :picture_link, presence: true, format: { with: /\A[^<>\s]+\z/ }
 
   enum kind: { funrun: 0, participating: 10, tourist: 20, breaking: 30, record: 100 }, _suffix: true
+
+  def self.participating_dataset(type:)
+    participating_kind.where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
+  end
 end
