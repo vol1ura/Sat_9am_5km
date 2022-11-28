@@ -13,7 +13,7 @@ ActiveAdmin.register Result do
 
   permit_params :total_time, :position, :athlete_id
 
-  index download_links: false, title: -> { "Редактор протокола #{l(Activity.find(params[:activity_id]).date)}" } do
+  index download_links: false, title: -> { "Редактор протокола #{@activity.date ? l(@activity.date) : '(нет даты)'}" } do
     selectable_column
     column :position
     column :athlete do |r|
