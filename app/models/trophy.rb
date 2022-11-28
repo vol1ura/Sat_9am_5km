@@ -5,4 +5,6 @@ class Trophy < ApplicationRecord
   belongs_to :athlete
 
   validates :athlete_id, uniqueness: { scope: :badge_id }
+
+  store_accessor :info, :data
 end

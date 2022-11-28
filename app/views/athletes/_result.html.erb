@@ -8,7 +8,7 @@
   <td class="event-date" timestamp="<%= activity_date.to_time.to_i * 1000 %>">
     <%= link_to l(activity_date), activity_path(result.activity_id) %>
   </td>
-  <td class="total-time" min="<%= (total_time.hour * 60 + total_time.min) * 60 + total_time.sec %>"><%= human_result_time(total_time) %></td>
+  <td class="total-time" min="<%= time_to_sec(total_time) %>"><%= human_result_time(total_time) %></td>
   <td class="hidden-on-phone"><%= human_result_pace(total_time) %></td>
   <td class="hidden-on-phone"><%= result.position %></td>
   <td class="event-name"><%= link_to event.name, event_path(code_name: event.code_name) %></td>
