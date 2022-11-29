@@ -12,6 +12,40 @@ export default class AthleteCharts {
     return events
   }
 
+  get #eventsResultsData() {
+    const data = {}
+    this.rows.forEach(row => {
+      const event = row.querySelector(".event-name").textContent
+      const timestamp = Number(row.querySelector(".total-time").getAttribute("min"))
+      data[event] = data[event] ? [...data[event], timestamp] : [timestamp]
+    })
+
+    const asc = arr => arr.sort((a, b) => a - b)
+    const quantile = (arr, q) => {
+      const sorted = asc(arr);
+      const pos = (sorted.length - 1) * q;
+      const base = Math.floor(pos);
+      const rest = pos - base;
+      if (sorted[base + 1] !== undefined) {
+        return sorted[base] + rest * (sorted[base + 1] - sorted[base]);
+      } else {
+        return sorted[base];
+      }
+    }
+
+    Object.keys(data).forEach(event => {
+      const results = data[event]
+      data[event] = [
+        Math.min(...results),
+        quantile(results, .25),
+        quantile(results, .50),
+        quantile(results, .75),
+        Math.max(...results)
+      ]
+    })
+    return data
+  }
+
   get #resultsData() {
     const points = []
     const labels = []
@@ -35,6 +69,7 @@ export default class AthleteCharts {
       }],
       chart: {
         type: 'bar',
+        height: 300
       },
       title: {
         text: 'Количество забегов',
@@ -111,6 +146,47 @@ export default class AthleteCharts {
       dataLabels: {
         enabled: true,
         formatter: (_, opt) => data.labels[opt.dataPointIndex]
+      }
+    }
+  }
+
+  get eventsWhiskersOptions() {
+    const data = this.#eventsResultsData
+    return {
+      series: [
+        {
+          type: 'boxPlot',
+          data: Object.keys(data).map(event => {
+            return {
+              x: event,
+              y: data[event]
+            }
+          })
+        }
+      ],
+      chart: {
+        type: 'boxPlot',
+        height: 300
+      },
+      title: {
+        text: 'Статистика',
+        align: 'center'
+      },
+      yaxis: {
+        title: {
+          text: 'Время (минуты)'
+        },
+        labels: {
+          formatter: val => (val / 60).toFixed(0)
+        }
+      },
+      plotOptions: {
+        boxPlot: {
+          colors: {
+            upper: '#5C4742',
+            lower: '#A5978B'
+          }
+        }
       }
     }
   }

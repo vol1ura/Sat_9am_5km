@@ -13,6 +13,9 @@ export default class extends Controller {
     const eventsCountChart = new ApexCharts(document.querySelector("#chart-events-count"), athleteCharts.eventsChartOptions)
     eventsCountChart.render()
 
+    const eventsWhiskersChart = new ApexCharts(document.querySelector("#chart-events-whiskers"), athleteCharts.eventsWhiskersOptions)
+    eventsWhiskersChart.render()
+
     const resultsChart = new ApexCharts(document.querySelector("#chart-results"), athleteCharts.resultsChartOptions);
     resultsChart.render();
   }
