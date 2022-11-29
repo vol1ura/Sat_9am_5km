@@ -5,7 +5,7 @@
 %>
 <tr class="result">
   <td><%= @total_results - result_counter %></td>
-  <td class="event-date" timestamp="<%= activity_date.to_time.to_i * 1000 %>">
+  <td class="event-date" timestamp="<%= activity_date.to_datetime.to_i * 1000 %>">
     <%= link_to l(activity_date), activity_path(result.activity_id) %>
   </td>
   <td class="total-time" min="<%= time_to_sec(total_time) %>"><%= human_result_time(total_time) %></td>
