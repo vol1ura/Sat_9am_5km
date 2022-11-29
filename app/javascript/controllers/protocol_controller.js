@@ -1,4 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
+import ApexCharts from 'apexcharts'
+import ActivityCharts from "../charts/activity"
 
 // Connects to data-controller="protocol"
 export default class extends Controller {
@@ -9,6 +11,11 @@ export default class extends Controller {
     this.filterTableByMale(this.maleTarget, 'true')
     this.femaleTarget.innerHTML = this.absoluteTarget.innerHTML
     this.filterTableByMale(this.femaleTarget, 'false')
+    const activityCharts = new ActivityCharts(this.absoluteTarget.querySelectorAll('tbody tr'))
+    const genderChart = new ApexCharts(document.querySelector("#chart-gender"), activityCharts.genderDonutOptions)
+    genderChart.render()
+    const clubsChart = new ApexCharts(document.querySelector("#chart-clubs"), activityCharts.clubsBarOptions)
+    clubsChart.render()
   }
 
   filterTableByMale(table, is_male) {
