@@ -10,11 +10,13 @@
     </button>
     <div class="offcanvas offcanvas-end text-bg-primary" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+          <%= link_to 'Sat 9am 5km', root_path, class: 'link-light text-decoration-none' %>
+        </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+      <div class="offcanvas-body d-flex flex-column justify-content-between">
+        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
           <li class="nav-item">
             <%= link_to 'Недавние результаты', activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" %>
           </li>
@@ -55,8 +57,8 @@
           <% end %>
         </ul>
 
-        <%= form_with url: athletes_path, method: :get, class: 'position-absolute bottom-0 mb-3', role: 'search' do |f| %>
-          <div class="input-group mb-3">
+        <%= form_with url: athletes_path, method: :get, class: 'my-3', role: 'search' do |f| %>
+          <div class="input-group">
             <%= f.text_field :name, type: 'search', class: 'form-control', placeholder: 'Фамилия или ID', 'aria-label' => 'Search', autocomplete: 'off' %>
             <%= f.submit 'Поиск', class: 'btn btn-outline-light' %>
           </div>
