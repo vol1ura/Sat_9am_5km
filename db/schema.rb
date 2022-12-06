@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_20_153524) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_06_222214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -159,12 +159,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_153524) do
   end
 
   add_foreign_key "activities", "events"
-  add_foreign_key "athletes", "clubs"
-  add_foreign_key "athletes", "users"
+  add_foreign_key "athletes", "clubs", on_delete: :nullify
+  add_foreign_key "athletes", "users", on_delete: :nullify
   add_foreign_key "contacts", "events"
   add_foreign_key "permissions", "users"
   add_foreign_key "results", "activities"
-  add_foreign_key "results", "athletes"
+  add_foreign_key "results", "athletes", on_delete: :nullify
   add_foreign_key "trophies", "athletes"
   add_foreign_key "trophies", "badges"
   add_foreign_key "volunteers", "activities"
