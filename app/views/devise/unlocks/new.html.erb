@@ -1,15 +1,13 @@
 <h2>Выслать инструкцию по разблокировке</h2>
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'row' }) do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email' %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit 'Выслать инструкцию' %>
+  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+    <div class="input-group">
+      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Ваш e-mail' %>
+      <%= f.submit 'Выслать инструкцию', class: 'btn btn-outline-secondary' %>
+    </div>
   </div>
 <% end %>
 
