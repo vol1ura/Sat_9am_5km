@@ -7,7 +7,7 @@
   <div class="field">
     <%= f.label :password, 'Новый пароль' %><br>
     <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> минимальное число символов)</em><br>
+      <em>(<%= @minimum_password_length %> минимальное число символов и обязательно должна быть одна цифра, одна прописная буква и один символ)</em><br>
     <% end %>
     <%= f.password_field :password, autofocus: true, autocomplete: 'new-password' %>
   </div>

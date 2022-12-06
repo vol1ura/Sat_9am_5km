@@ -116,7 +116,7 @@ export default class AthleteCharts {
         type: 'gradient'
       },
       series: [{
-        name: "время, мин.",
+        name: "время",
         data: data.points
       }],
       xaxis: {
