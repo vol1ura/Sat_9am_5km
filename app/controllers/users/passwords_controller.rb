@@ -8,10 +8,10 @@ module Users
     # end
 
     # POST /resource/password
-    def create
-      super
-      redirect_to root_path, notice: I18n.t('devise.passwords.send_instructions')
-    end
+    # def create
+    #   super
+    #   redirect_to root_path, notice: I18n.t('devise.passwords.send_instructions')
+    # end
 
     # GET /resource/password/edit?reset_password_token=abcdef
     # def edit
