@@ -166,7 +166,19 @@ export default class AthleteCharts {
       ],
       chart: {
         type: 'boxPlot',
-        height: 300
+        height: 300,
+        toolbar: {
+          show: true,
+          tools: {
+            download: true,
+            selection: false,
+            zoom: false,
+            zoomin: false,
+            zoomout: false,
+            pan: false,
+            reset: false
+          }
+        }
       },
       title: {
         text: 'Статистика',
