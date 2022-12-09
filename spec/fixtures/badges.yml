@@ -6,10 +6,11 @@ badge_2:
   id: 2
   name: Test2
   picture_link: 'badges/25_runs.png'
-# badge_3:
-#   id: 3
-#   name: Test3
-#   picture_link: 'badges/25_runs.png'
+badge_3:
+  id: 3
+  name: 'Кусково. Открытие'
+  picture_link: 'badges/kuskovo_open_2022.png'
+  received_date: '10.12.2022'
 badge_4:
   id: 4
   name: Test4
