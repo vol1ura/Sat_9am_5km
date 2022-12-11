@@ -4,18 +4,14 @@
     <thead>
       <tr>
         <td>Имя</td>
-        <td>Parkrun ID</td>
-        <td>5В или RP ID</td>
-        <td class="hidden-on-phone">Клуб</td>
+        <td>Клуб</td>
       </tr>
     </thead>
     <tbody class="table-group-divider">
       <% @athletes.each do |athlete| %>
         <tr>
           <td><%= link_to athlete.name, athlete_path(athlete) %></td>
-          <td><%= athlete.parkrun_code || 'нет' %></td>
-          <td><%= athlete.fiveverst_code || 'нет' %></td>
-          <td class="hidden-on-phone"><%= athlete.club&.name %></td>
+          <td><%= athlete.club&.name %></td>
         </tr>
       <% end %>
     </tbody>
