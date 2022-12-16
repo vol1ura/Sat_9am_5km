@@ -98,7 +98,7 @@ GEM
     barby (0.6.8)
     bcrypt (3.1.18)
     bcrypt_pbkdf (1.1.0)
-    bootstrap (5.2.2)
+    bootstrap (5.2.3)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.6, < 3)
       sassc-rails (>= 2.0.0)
@@ -393,7 +393,7 @@ GEM
     websocket-extensions (0.1.5)
     yard (0.9.28)
       webrick (~> 1.7.0)
-    zeitwerk (2.6.4)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   aarch64-linux-musl
@@ -406,7 +406,7 @@ DEPENDENCIES
   activeadmin_quill_editor
   barby
   bcrypt_pbkdf (~> 1.0)
-  bootstrap (~> 5.2.2)
+  bootstrap (~> 5.2.3)
   brakeman
   bullet
   bundler-audit
