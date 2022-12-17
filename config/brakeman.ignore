@@ -1,37 +1,6 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "Cross-Site Scripting",
-      "warning_code": 2,
-      "fingerprint": "4acd18b6b0e37eed9fb5625d46e4332707992375d300e79def0e5415b860934b",
-      "check_name": "CrossSiteScripting",
-      "message": "Unescaped model attribute",
-      "file": "app/views/athletes/show.html.erb",
-      "line": 147,
-      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
-      "code": "BarcodePrinter.call(Athlete.find(params[:id]))",
-      "render_path": [
-        {
-          "type": "controller",
-          "class": "AthletesController",
-          "method": "show",
-          "line": 22,
-          "file": "app/controllers/athletes_controller.rb",
-          "rendered": {
-            "name": "athletes/show",
-            "file": "app/views/athletes/show.html.erb"
-          }
-        }
-      ],
-      "location": {
-        "type": "template",
-        "template": "athletes/show"
-      },
-      "user_input": "Athlete.find(params[:id])",
-      "confidence": "Weak",
-      "note": ""
-    },
-    {
       "warning_type": "Mass Assignment",
       "warning_code": 105,
       "fingerprint": "f041cebf37ce5355708b1784e75f663e60ceb2938589fcfeb3a0a5d248a49443",

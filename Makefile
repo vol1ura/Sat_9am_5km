@@ -1,24 +1,24 @@
 WEB_CONTAINER := `docker-compose ps | grep web | cut -d ' ' -f1`
 
-target: proj
+target: project
 
-proj:
+project:
 	docker-compose ps | grep -E '.web.[1-9].*Up' || docker-compose up -d
 
-bind: proj
+bind: project
 	docker attach $(WEB_CONTAINER)
 
-rc: proj
+rc: project
 	docker exec -it $(WEB_CONTAINER) rails console
 
-ash: proj
+ash: project
 	docker exec -it $(WEB_CONTAINER) ash
 
 checkup:
 	rubocop --display-only-fail-level-offenses --fail-level=error && \
 	rubocop --only Lint/Debugger
 
-build_proj:
+build:
 	docker-compose run --rm web bundle lock
 	docker-compose build web
 	docker images --filter "dangling=true" -q | xargs docker rmi || echo "There were images tagged as <none> in use"
