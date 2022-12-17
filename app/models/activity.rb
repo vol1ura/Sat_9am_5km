@@ -9,7 +9,7 @@ class Activity < ApplicationRecord
   has_many :athletes, through: :results
   has_many :volunteers, -> { order :id }, dependent: :destroy, inverse_of: :activity
 
-  before_save :postprocessing, if: :will_save_change_to_published?
+  before_save :postprocessing, if: %i[will_save_change_to_published? published]
 
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
@@ -21,8 +21,6 @@ class Activity < ApplicationRecord
   private
 
   def postprocessing
-    return unless published
-
     self.date = Time.zone.today unless date
     AthleteAwardingJob.perform_later(id) if volunteers.exists?
     BreakingTimeAwardingJob.perform_later if results.exists?
