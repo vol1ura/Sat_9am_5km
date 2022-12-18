@@ -17,6 +17,7 @@ install_plugin Capistrano::SCM::Git
 #   https://github.com/capistrano/rbenv
 #   https://github.com/capistrano/bundler
 #   https://github.com/capistrano/rails
+#   https://github.com/seuros/capistrano-sidekiq
 #
 require 'capistrano/bundler'
 require 'capistrano/rails/assets'
@@ -24,9 +25,13 @@ require 'capistrano/rails/migrations'
 require 'capistrano/rbenv'
 # require 'capistrano/postgresql'
 require 'capistrano/puma'
+require 'capistrano/sidekiq'
+
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Nginx
 install_plugin Capistrano::Puma::Systemd
+install_plugin Capistrano::Sidekiq
+install_plugin Capistrano::Sidekiq::Systemd
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
