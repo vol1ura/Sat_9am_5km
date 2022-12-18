@@ -28,3 +28,4 @@
 /config/master.key
 /deploy/*
 !/deploy/.env.example
+!/deploy/sidekiq.service.example
