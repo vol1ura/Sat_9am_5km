@@ -22,6 +22,7 @@ gem 'jbuilder'
 gem 'nokogiri'
 gem 'pg', '~> 1.4'
 gem 'puma', '~> 5.6'
+gem 'sidekiq'
 gem 'sprockets-rails'
 
 gem 'hiredis'
@@ -61,6 +62,7 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-rails', '~> 1.6', require: false
   gem 'capistrano-rbenv', '~> 2.2.0', require: false
+  gem 'capistrano-sidekiq', '~> 2.3', require: false
 
   gem 'bcrypt_pbkdf', '~> 1.0'
   gem 'ed25519', '~> 1.3'
