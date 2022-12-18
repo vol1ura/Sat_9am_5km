@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'pages#show'
   resources :events, param: :code_name, only: :show do
@@ -28,4 +30,9 @@ Rails.application.routes.draw do
       },
       sign_out_via: [:delete, :get]
     }
+  if Rails.env.production?
+    authenticate :user, ->(user) { user.admin? } do
+      mount Sidekiq::Web => '/sidekiq'
+    end
+  end
 end
