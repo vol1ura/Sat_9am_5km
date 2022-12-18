@@ -1,0 +1,41 @@
+# This example file is based on https://github.com/mperham/sidekiq/tree/main/examples/systemd
+# To run this as a system service copy file into /lib/systemd/system (Ubuntu).
+# scp sidekiq.service root@host_ip:/lib/systemd/system
+# Then run:
+#   - systemctl enable sidekiq
+#   - systemctl {start,stop,restart} sidekiq
+#
+# This file corresponds to a single Sidekiq process.  Add multiple copies
+# to run multiple processes (sidekiq-1, sidekiq-2, etc).
+#
+# Use `journalctl -u sidekiq -rn 100` to view the last 100 lines of log output.
+#
+[Unit]
+Description=Sidekiq
+After=syslog.target network.target
+
+[Service]
+User=<user>
+Group=<user>
+UMask=0002
+
+Type=notify
+WatchdogSec=10
+
+WorkingDirectory=/home/<user>/path/to/app/current
+ExecStart=/bin/bash -lc 'exec /home/deploy/.rbenv/shims/bundle exec sidekiq -e production -C config/sidekiq.yml'
+
+# Greatly reduce Ruby memory fragmentation and heap usage
+# https://www.mikeperham.com/2018/04/25/taming-rails-memory-bloat/
+Environment=MALLOC_ARENA_MAX=2
+
+KillMode=process
+Restart=on-failure
+RestartSec=3
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=sidekiq
+
+[Install]
+WantedBy=multi-user.target

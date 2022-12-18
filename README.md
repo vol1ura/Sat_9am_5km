@@ -38,3 +38,4 @@ make
 - Admin panel [http://localhost:3000/admin](http://localhost:3000/admin)
 - Database panel [http://localhost:3003](http://localhost:3003)
 - Bug tracker [Rollbar.com](https://rollbar.com/Urka/Sat_9am_5km/)
+- Sidekiq [WebUI](https://s95.ru/sikekiq) for admin users
