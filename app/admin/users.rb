@@ -15,6 +15,10 @@ ActiveAdmin.register User do
   filter :first_name
   filter :last_name
 
+  scope :all
+  scope :admin
+  scope(:supervisors) { |scope| scope.joins(:permissions).distinct }
+
   index download_links: false do
     selectable_column
     column :email

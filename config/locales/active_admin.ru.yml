@@ -196,3 +196,10 @@ ru:
         new_model: Создать награду
         edit_model: Изменить награду
         delete_model: Удалить награду
+    scopes:
+      all: Все
+      admin: Админы
+      supervisors: Руководители
+      published: Опубликованы
+      unpublished: Не опубликованы
+      duplicates: Дубликаты?
