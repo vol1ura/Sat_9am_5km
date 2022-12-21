@@ -47,17 +47,11 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 
-  config.cache_store = :redis_cache_store, {
-    driver: :hiredis,
-    host: 'localhost',
-    port: 6379,
-    db: 0,
-    namespace: 'dcache',
-    expires_in: 30.minutes
-  }
+  config.cache_store = :mem_cache_store, 'localhost:11211', { pool_size: 10, pool_timeout: 5 }
+  config.session_store :cache_store, expire_after: 1.day
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  config.active_job.queue_adapter     = :sidekiq
+  config.active_job.queue_adapter = :sidekiq
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

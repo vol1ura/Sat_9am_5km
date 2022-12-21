@@ -139,6 +139,7 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
+    dalli (3.2.3)
     database_consistency (1.7.0)
       activerecord (>= 3.2)
     devise (4.8.1)
@@ -428,6 +429,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.2.0)
   capistrano-sidekiq (~> 2.3)
   capistrano3-puma
+  dalli
   database_consistency
   devise (~> 4.8)
   devise-i18n
