@@ -32,3 +32,8 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets' # , 'public/s
 set :sidekiq_service_unit_name, 'sidekiq'
 set :sidekiq_service_unit_user, :system
 set :sidekiq_config, 'config/sidekiq.yml'
+set :sidekiq_default_hooks, false
+
+after 'deploy:starting', 'sidekiq:quiet'
+after 'deploy:started', 'sidekiq:stop'
+after 'deploy:published', 'sidekiq:start'
