@@ -15,6 +15,7 @@ ActiveAdmin.register Activity do
   scope :unpublished
 
   config.batch_actions = false
+  config.sort_order = 'date_desc'
 
   index download_links: false do
     column :date

@@ -4,7 +4,7 @@ ActiveAdmin.register Event do
   menu priority: 2
   actions :all, except: :destroy
 
-  config.sort_order = 'visible_order'
+  config.sort_order = 'visible_order_asc'
 
   permit_params :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order, :slogan
 

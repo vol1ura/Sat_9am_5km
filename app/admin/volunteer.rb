@@ -7,7 +7,7 @@ ActiveAdmin.register Volunteer do
 
   permit_params :role, :activity_id, :athlete_id
 
-  config.sort_order = 'id'
+  config.sort_order = 'id_asc'
   config.filters = false
   config.paginate = false
 
