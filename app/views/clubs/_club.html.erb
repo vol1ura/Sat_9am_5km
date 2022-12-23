@@ -2,5 +2,7 @@
   <td><%= link_to club.first.name, club_path(club.first) %></td>
   <td><%= club.last %></td>
   <td><%= Result.joins(:athlete).where(athlete: { club_id: club.first.id }).size %></td>
-  <td class="hidden-on-phone"><%= Volunteer.joins(:athlete).where(athlete: { club_id: club.first.id }).size %></td>
+  <td class="hidden-on-phone">
+    <%= Volunteer.actual.joins(:athlete).where(athlete: { club_id: club.first.id }).size %>
+  </td>
 </tr>
