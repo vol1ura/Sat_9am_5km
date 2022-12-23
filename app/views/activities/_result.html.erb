@@ -1,5 +1,5 @@
 <tr data-male="<%= result.athlete&.male %>">
-  <td class="position"><%= result.position %></td>
+  <td class="position align-middle"><%= result.position %></td>
   <td>
     <% if result.athlete.present? %>
       <div>
@@ -7,7 +7,7 @@
       </div>
       <div class="athlete-details fw-lighter">
         забегов <%= @results_count[result.athlete] %>
-          <% if (volunteering_count = @volunteering_count[result.athlete]) %>
+          <% if (volunteering_count = @volunteering_count_a[result.athlete]) %>
             <div class="vr"></div>
             волонтёрств <%= volunteering_count %>
           <% end %>
@@ -16,9 +16,9 @@
       <%= Athlete::NOBODY %>
     <% end %>
   </td>
-  <td><%= human_result_time(result.total_time) %></td>
-  <td><%= human_result_pace(result.total_time) %></td>
-  <td class="hidden-on-phone">
+  <td class="align-middle"><%= human_result_time(result.total_time) %></td>
+  <td class="align-middle"><%= human_result_pace(result.total_time) %></td>
+  <td class="hidden-on-phone align-middle">
     <% club = result.athlete&.club %>
     <%= link_to club.name, club if club %>
   </td>
