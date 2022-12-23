@@ -15,5 +15,7 @@ class ClubsController < ApplicationController
         .count('results.id')
     @count_volunteering = Athlete.left_joins(:volunteering).where(club: @club).group('athletes.id').count('volunteers.id')
     @athletes = Athlete.where(club: @club).order(:name)
+    @total_results_count = Result.joins(:athlete).where(athlete: { club: @club }).size
+    @total_volunteering_count = Volunteer.actual.joins(:athlete).where(athlete: { club: @club }).size
   end
 end

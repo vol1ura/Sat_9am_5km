@@ -16,16 +16,13 @@
 
 <ul class="list-group list-group-flush">
   <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= Athlete.where(club: @club).size %></span>
-    количество участников
+    <span class="badge bg-primary rounded-pill me-3"><%= @athletes.size %></span> количество участников
   </li>
   <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= Result.joins(:athlete).where(athlete: { club: @club }).size %></span>
-    количество забегов
+    <span class="badge bg-primary rounded-pill me-3"><%= @total_results_count %></span> количество забегов
   </li>
   <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= Volunteer.joins(:athlete).where(athlete: { club: @club }).size %></span>
-    количество волонтёрств
+    <span class="badge bg-primary rounded-pill me-3"><%= @total_volunteering_count %></span> количество волонтёрств
   </li>
 </ul>
 
