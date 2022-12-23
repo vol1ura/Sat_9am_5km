@@ -49,8 +49,15 @@
   <tbody class="table-group-divider">
     <% @activity.volunteers.includes(:athlete).each do |volunteer| %>
       <tr>
-        <td><%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %></td>
-        <td><%= human_volunteer_role volunteer.role %></td>
+        <td>
+          <div>
+            <%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %>
+          </div>
+          <div class="athlete-details fw-lighter">
+            всего волонтёрств <%= @volunteering_count_v[volunteer.athlete] %>
+          </div>
+        </td>
+        <td class="align-middle"><%= human_volunteer_role volunteer.role %></td>
       </tr>
     <% end %>
   </tbody>

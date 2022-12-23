@@ -14,6 +14,8 @@ class Volunteer < ApplicationRecord
   validates :role, presence: true
   validates :athlete_id, uniqueness: { scope: :activity_id }
 
+  scope :actual, -> { joins(:activity).where(activity: { published: true }) }
+
   enum role: ROLES, _suffix: true
 
   delegate :name, to: :athlete, allow_nil: true
