@@ -61,11 +61,12 @@ class Athlete < ApplicationRecord
       ) AS q2
       WHERE q2.cnt > 1
     SQL
-    namesakes_ids = find_by_sql(sql)
-                    .pluck(:l_name, :id, :parkrun_code, :fiveverst_code)
-                    .group_by(&:first)
-                    .reject { |_, arr| arr.all?(&:third) || arr.all?(&:last) }
-                    .flat_map { |_, arr| arr.map(&:second) }
+    namesakes_ids =
+      find_by_sql(sql)
+        .pluck(:l_name, :id, :parkrun_code, :fiveverst_code)
+        .group_by(&:first)
+        .reject { |_, arr| arr.all?(&:third) || arr.all?(&:last) }
+        .flat_map { |_, arr| arr.map(&:second) }
     where(id: namesakes_ids)
   end
 

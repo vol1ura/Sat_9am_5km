@@ -20,10 +20,11 @@ class BreakingTimeAwardingJob < ApplicationJob
   def expire_badges
     Badge.breaking_kind.each do |badge|
       accomplished_athlete_ids =
-        Result.joins(:activity, athlete: :trophies)
-              .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
-              .where(total_time: ...minutes_threshold(badge.info['min']))
-              .where(athlete: { trophies: { badge: badge } }).select(:athlete_id)
+        Result
+          .joins(:activity, athlete: :trophies)
+          .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
+          .where(total_time: ...minutes_threshold(badge.info['min']))
+          .where(athlete: { trophies: { badge: badge } }).select(:athlete_id)
       Trophy.where(badge: badge).where.not(athlete_id: accomplished_athlete_ids).destroy_all
     end
   end
