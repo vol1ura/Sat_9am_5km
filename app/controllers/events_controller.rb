@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 
   def show
     @total_activities = @event.activities.published.size
-    @count_volunteers = Volunteer.joins(:activity).where(activity: { event: @event }).group(:activity).count
+    @volunteers_count = Volunteer.joins(:activity).where(activity: { event: @event }).group(:activity).count
   end
 
   def volunteering

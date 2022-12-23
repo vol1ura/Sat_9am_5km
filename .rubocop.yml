@@ -42,6 +42,8 @@ Layout/LineLength:
   Max: 124
 Layout/BeginEndAlignment:
   EnforcedStyleAlignWith: begin
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
 
 # LINT
 Lint/MissingSuper:

@@ -12,11 +12,13 @@ class Result < ApplicationRecord
     results = Arel::Table.new(:results)
     athletes = Arel::Table.new(:athletes)
     activities = Arel::Table.new(:activities)
-    composed_table = results.join(activities).on(activities[:id].eq(results[:activity_id]))
-                            .join(athletes).on(athletes[:id].eq(results[:athlete_id]))
-                            .where(activities[:published].eq(true).and(athletes[:male].eq(male)))
-                            .project(results[:total_time].minimum.as('min_tt'), athletes[:id].as('a_id'))
-                            .group(athletes[:id]).as('t')
+    composed_table =
+      results
+        .join(activities).on(activities[:id].eq(results[:activity_id]))
+        .join(athletes).on(athletes[:id].eq(results[:athlete_id]))
+        .where(activities[:published].eq(true).and(athletes[:male].eq(male)))
+        .project(results[:total_time].minimum.as('min_tt'), athletes[:id].as('a_id'))
+        .group(athletes[:id]).as('t')
     joins(
       "INNER JOIN #{composed_table.to_sql} ON results.athlete_id = t.a_id AND results.total_time = t.min_tt"
     ).order(:total_time).first(limit)
