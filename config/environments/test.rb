@@ -55,10 +55,12 @@ Rails.application.configure do
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
-  config.logger = Logger.new(Rails.root.join('log', "#{Rails.env}.log"), 2, 1.megabytes)
+  config.logger = Logger.new(Rails.root.join('log', "#{Rails.env}.log"), 2, 1.megabyte)
 
   # Raises error for missing translations.
-  # config.i18n.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
+
+  config.active_job.queue_adapter = :test
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
