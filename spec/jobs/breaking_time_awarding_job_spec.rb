@@ -1,6 +1,4 @@
 RSpec.describe BreakingTimeAwardingJob do
-  ActiveJob::Base.queue_adapter = :test
-
   fixtures :badges
 
   let(:athlete) { create(:athlete) }

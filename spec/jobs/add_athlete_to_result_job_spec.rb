@@ -1,6 +1,4 @@
 RSpec.describe AddAthleteToResultJob do
-  ActiveJob::Base.queue_adapter = :test
-
   let(:activity) { create(:activity) }
   let(:result) { create(:result, activity: activity) }
   let(:athlete) { create(:athlete) }
