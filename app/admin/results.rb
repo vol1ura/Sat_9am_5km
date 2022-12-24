@@ -5,8 +5,6 @@ ActiveAdmin.register Result do
 
   includes :athlete, :activity
 
-  actions :all
-
   config.sort_order = 'position_asc'
   config.paginate = false
   config.filters = false

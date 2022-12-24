@@ -12,6 +12,7 @@ ru:
     edit: Изменить
     delete: Удалить
     delete_confirmation: "Вы уверены, что хотите удалить это?"
+    successful_deleted: "Успешно удалён %{obj}"
     new_model: "Создать %{model}"
     edit_model: "Изменить %{model}"
     delete_model: "Удалить %{model}"
@@ -110,6 +111,8 @@ ru:
       confirm_gender_set: "Установить пол выбранным участникам?"
       successful_gender_set: "Смена пола успешно произведена."
       gender_set_failed: "Не удалось произвести смену пола."
+      cannot_delete_registered: "Действие отменено. Нельзя удалить зарегистрированного участника!"
+      cannot_delete_participant: "Действие отменено. Нельзя удалить участника, имеющего результаты!"
     results:
       cannot_link_athlete: 'Участник с указанными ID не найден. Проверьте номера или сначала создайте такого участника.'
       cannot_move_result: 'Ошибка! Проверьте корректность позиций.'

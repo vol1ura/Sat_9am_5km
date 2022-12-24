@@ -40,6 +40,20 @@ ActiveAdmin.register Athlete do
     athlete.results << Result.find(result_id) if result_id
   end
 
+  controller do
+    def destroy
+      if resource.user.present?
+        flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_registered')
+      elsif resource.results.exists? || resource.volunteering.exists?
+        flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_participant')
+      else
+        flash[:notice] = I18n.t('active_admin.successful_deleted', obj: resource.name)
+        resource.destroy
+      end
+      redirect_to collection_path
+    end
+  end
+
   batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
                          if: proc { can? :manage, Athlete } do |ids|
     collection = batch_action_collection.where(id: ids)
