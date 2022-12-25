@@ -8,4 +8,10 @@ class Event < ApplicationRecord
   validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ } # rubocop:disable Rails/UniqueValidationWithoutIndex
 
   default_scope { order(:visible_order, :name) }
+
+  def self.authorized_for(user)
+    return all if user.admin?
+
+    where(id: user.permissions.where(subject_class: 'Result').select(:event_id))
+  end
 end
