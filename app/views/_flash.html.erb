@@ -1,0 +1,9 @@
+<% if alert %>
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;<%= alert %>
+  </div>
+<% elsif notice %>
+  <div class="alert alert-success d-flex align-items-center" role="alert">
+    <i class="bi bi-house-heart-fill"></i>&nbsp;<%= notice %>
+  </div>
+<% end %>
