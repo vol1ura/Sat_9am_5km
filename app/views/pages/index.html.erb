@@ -1,13 +1,4 @@
-<% if alert %>
-  <div class="alert alert-danger d-flex align-items-center" role="alert">
-    <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;<%= alert %>
-  </div>
-<% elsif notice %>
-  <div class="alert alert-success d-flex align-items-center" role="alert">
-    <i class="bi bi-house-heart-fill"></i>&nbsp;<%= notice %>
-  </div>
-<% end %>
-
+<%= render '/flash' %>
 <h2>Наши мероприятия</h2>
 <div class="row row-cols-1 row-cols-md-2 g-4">
   <% Event.all.each do |event| %>

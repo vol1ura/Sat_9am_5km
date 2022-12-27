@@ -1,8 +1,9 @@
+<%= render '/flash' %>
 <h2>Вход</h2>
 
 <div class="row mb-3">
   <div class="col-sm-6">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_for resource, as: resource_name, url: session_path(resource_name), data: { turbo: false } do |f| %>
       <div class="row mb-3">
         <%= f.label :email, 'Ваш e-mail', class: 'col-sm-4 col-form-label' %>
         <div class="col-sm-8 col-md-6">

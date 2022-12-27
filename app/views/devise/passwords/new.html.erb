@@ -1,6 +1,6 @@
 <h2>Забыли пароль?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'row' }) do |f| %>
+<%= form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'row' }, data: { turbo: false } do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
     <div class="input-group">

@@ -1,6 +1,6 @@
 <h2>Настройки</h2>
 
-<%= form_for(resource, as: resource_name, url: user_registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= form_for resource, as: resource_name, url: user_registration_path(resource_name), html: { method: :put }, data: { turbo: false } do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>
 
   <div class="field">
