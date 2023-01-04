@@ -49,7 +49,7 @@ class AthleteAwardingJob < ApplicationJob
   # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def award_runner(athlete)
-    results = athlete.results.joins(:activity).where(activity: { published: true, date: ..activity_date })
+    results = athlete.results.published.where(activity: { date: ..activity_date })
     Badge.participating_dataset(type: 'athlete').each do |badge|
       next if results.size < badge.info['threshold']
 
