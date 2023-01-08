@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_105200) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_07_105022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -150,6 +150,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_105200) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "volunteering_positions", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.integer "rank", null: false
+    t.integer "role", null: false
+    t.integer "number", null: false
+    t.index ["event_id", "role"], name: "index_volunteering_positions_on_event_id_and_role", unique: true
+  end
+
   create_table "volunteers", force: :cascade do |t|
     t.integer "role", null: false
     t.bigint "activity_id", null: false
@@ -167,6 +175,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_105200) do
   add_foreign_key "results", "athletes", on_delete: :nullify
   add_foreign_key "trophies", "athletes"
   add_foreign_key "trophies", "badges"
+  add_foreign_key "volunteering_positions", "events"
   add_foreign_key "volunteers", "activities"
   add_foreign_key "volunteers", "athletes"
 end

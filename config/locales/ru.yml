@@ -20,6 +20,11 @@ ru:
       volunteer:
         one: волонтёр
         other: Волонтёры
+      volunteering_position:
+        one: позиция
+        few: позиций
+        many: позиции
+        other: Волонтёрская позиция
       contact:
         one: контакт
         other: Контакты
@@ -90,7 +95,7 @@ ru:
         athlete: участник
         name: 'имя волонтёра'
         role: роль
-        roles:
+        roles: &volunteer_roles
           director: Директор
           marshal: Маршал
           timer: Секундомер
@@ -112,6 +117,12 @@ ru:
           attendant: 'Сопровождающий'
           finish_maker: 'Организация финиша'
           volunteer_coordinator: 'Координатор волонтёров'
+      volunteering_position:
+        rank: ранг
+        number: количество
+        role: роль
+        roles:
+          <<: *volunteer_roles
       contact:
         new_model: 'Добавить контакт'
         edit_model: 'Изменить контакт'
@@ -312,6 +323,7 @@ ru:
       present: нужно оставить пустым
       required: не может отсутствовать
       taken: уже существует
+      more_than_one_volunteering: не может занимать более одной волонтёрской позиции в один день
       too_long:
         one: слишком большой длины (не может быть больше чем %{count} символ)
         few: слишком большой длины (не может быть больше чем %{count} символа)

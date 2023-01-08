@@ -55,9 +55,10 @@ ActiveAdmin.register Event do
     li 'Вес в ленте - числовое значение, чем оно больше, тем ниже событие будет расположено в ленте на главной странице.'
   end
 
-  sidebar 'Управление контактами', only: %i[show edit] do
+  sidebar 'Настройки', only: %i[show edit] do
     ul do
       li link_to 'Контакты', admin_event_contacts_path(resource)
+      li link_to 'Волонтёры', admin_event_volunteering_positions_path(resource)
     end
   end
 end
