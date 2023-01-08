@@ -131,6 +131,9 @@ ru:
     volunteers:
       successful_updated: 'Данные о волонтёрстве успешно обновлены'
       successful_created: 'Волонтёрство успешно добавлено'
+    volunteering_position:
+      successful_updated: 'Позиция успешно обновлена'
+      successful_created: 'Позиция успешно добавлена'
     users:
       confirm_change_roles: 'Уверены, что хотите сменить права выбранных пользователей?'
       successful_roles_changed: 'Права успешно установлены.'
@@ -199,6 +202,10 @@ ru:
         new_model: Создать награду
         edit_model: Изменить награду
         delete_model: Удалить награду
+      volunteering_position:
+        new_model: Добавить позицию
+        edit_model: Изменить позицию
+        delete_model: Удалить позицию
     scopes:
       all: Все
       admin: Админы

@@ -17,10 +17,12 @@
   интересное и посильное любому занятие, которое позволит раскрыть себя, поддержать друзей, отлично провести время.
 </p>
 <p>
-  Ниже вы можете посмотреть, какие позиции уже выбраны.
+  Ниже вы можете посмотреть список <em>обязательных позиций</em>, а также увидеть какие из них уже выбраны.
   <% if (tg_chat = @event.contacts.find_by(contact_type: :tg_chat)) %>
     Чтобы записаться, просто напишите в наш <%= sanitized_link_to('телеграм чат', tg_chat.link, target: '_blank', rel: 'noopener') %>.
   <% end %>
+  Помимо этого, иногда руководители забегов принимают решение о наборе дополнительных волонтёров -
+  следите за новостями, либо спрашивайте непосредственно в чате.
 </p>
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
@@ -43,138 +45,15 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr>
-            <td>Директор забега</td>
-            <td><%= render partial: 'cell', locals: { volunteer: activity.volunteers.find_by(role: :director), role: :director, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.timer_role.to_a %>
-          <tr>
-            <td>Секундомер</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :timer, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Секундомер</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :timer, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.tokens_role.to_a %>
-          <tr>
-            <td>Выдача карточек позиций</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :tokens, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Помощь в раздаче карточек</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :tokens, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.scanner_role.to_a %>
-          <% 3.times.each do |i| %>
-            <tr>
-              <td>Фиксация результата</td>
-              <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :scanner, activity: activity } %></td>
-            </tr>
+          <% @event.volunteering_positions.each do |position| %>
+            <% volunteers = activity.volunteers.public_send("#{position.role}_role").to_a %>
+            <% position.number.times.each do |i| %>
+              <tr>
+                <td><%= human_volunteer_role position.role %></td>
+                <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: position.role, activity: activity } %></td>
+              </tr>
+            <% end %>
           <% end %>
-          <% volunteers = activity.volunteers.marshal_role.to_a %>
-          <tr>
-            <td>Маршал</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :marshal, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Маршал</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :marshal, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.photograph_role.to_a %>
-          <% 3.times.each do |i| %>
-            <tr>
-              <td>Фотограф</td>
-              <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :photograph, activity: activity } %></td>
-            </tr>
-          <% end %>
-          <tr>
-            <td>Инструктаж новых участников</td>
-            <td><%= render partial: 'cell', locals: { volunteer: activity.volunteers.find_by(role: :instructor), role: :instructor, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Проведение разминки</td>
-            <td><%= render partial: 'cell', locals: { volunteer: activity.volunteers.find_by(role: :warm_up), role: :warm_up, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.marking_maker_role.to_a %>
-          <% 3.times.each do |i| %>
-            <tr>
-              <td>Разметка трассы</td>
-              <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :marking_maker, activity: activity } %></td>
-            </tr>
-          <% end %>
-          <% volunteers = activity.volunteers.results_handler_role.to_a %>
-          <tr>
-            <td>Обработка результатов</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :results_handler, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Обработка результатов</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :results_handler, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.event_closer_role.to_a %>
-          <tr>
-            <td>Замыкающий</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :event_closer, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Замыкающий</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :event_closer, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.marking_picker_role.to_a %>
-          <% 3.times.each do |i| %>
-            <tr>
-              <td>Сбор разметки</td>
-              <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :marking_picker, activity: activity } %></td>
-            </tr>
-          <% end %>
-          <% volunteers = activity.volunteers.cards_sorter_role.to_a %>
-          <tr>
-            <td>Сортировка карточек</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :cards_sorter, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Сортировка карточек</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :cards_sorter, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.finish_maker_role.to_a %>
-          <% 3.times.each do |i| %>
-            <tr>
-              <td>Организация финиша</td>
-              <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: :finish_maker, activity: activity } %></td>
-            </tr>
-          <% end %>
-          <% volunteers = activity.volunteers.attendant_role.to_a %>
-          <tr>
-            <td>Сопровождение (для детского забега)</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :attendant, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Сопровождение (для детского забега)</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :attendant, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.other_role.to_a %>
-          <tr>
-            <td>Помощь в подготовке забега</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :other, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Помощь в подготовке забега</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :other, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Ведущий велосипед</td>
-            <td><%= render partial: 'cell', locals: { volunteer: activity.volunteers.find_by(role: :bike_leader), role: :bike_leader, activity: activity } %></td>
-          </tr>
-          <% volunteers = activity.volunteers.pacemaker_role.to_a %>
-          <tr>
-            <td>Пейсмейкер</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[0], role: :pacemaker, activity: activity } %></td>
-          </tr>
-          <tr>
-            <td>Пейсмейкер</td>
-            <td><%= render partial: 'cell', locals: { volunteer: volunteers[1], role: :pacemaker, activity: activity } %></td>
-          </tr>
         </tbody>
       </table>
     </div>
