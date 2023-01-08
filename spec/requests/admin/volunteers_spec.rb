@@ -92,4 +92,20 @@ RSpec.describe '/admin/activities/1/volunteers' do
       expect(response).to be_successful
     end
   end
+
+  describe 'POST /admin/activities/1/volunteers' do
+    let!(:volunteer) { create(:volunteer, activity: activity) }
+    let(:other_activity) { create(:activity, date: activity.date) }
+    let(:invalid_attributes) do
+      {
+        volunteer: { athlete_id: volunteer.athlete_id, role: Volunteer::ROLES.keys.sample }
+      }
+    end
+
+    it 'cannot create new volunteer' do
+      expect do
+        post(admin_activity_volunteers_url(other_activity), params: invalid_attributes)
+      end.not_to change(Volunteer, :count)
+    end
+  end
 end
