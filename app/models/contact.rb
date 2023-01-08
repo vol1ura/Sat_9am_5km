@@ -4,7 +4,6 @@ class Contact < ApplicationRecord
   belongs_to :event
 
   validates :link, presence: true, format: { with: /\A[^<>]+\z/ }
-
   validates :contact_type, presence: true, uniqueness: { scope: :event_id }
 
   enum contact_type: {
