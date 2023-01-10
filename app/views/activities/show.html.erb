@@ -47,7 +47,7 @@
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <% @activity.volunteers.includes(:athlete).each do |volunteer| %>
+    <% @activity.volunteers_roster.includes(:athlete).each do |volunteer| %>
       <tr>
         <td>
           <div>
