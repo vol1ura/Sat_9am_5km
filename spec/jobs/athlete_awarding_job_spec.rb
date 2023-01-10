@@ -38,7 +38,10 @@ RSpec.describe AthleteAwardingJob do
     end
 
     it 'creates volunteer badge' do
-      create_list(:volunteer, 5, :with_published_activity, athlete: athlete)
+      5.times do |i|
+        activity = create(:activity, date: i.weeks.ago, published: true)
+        create(:volunteer, athlete: athlete, activity: activity)
+      end
       last_activity_id = athlete.volunteering.reorder('activity.date').last.activity_id
       expect do
         described_class.perform_now(last_activity_id)
