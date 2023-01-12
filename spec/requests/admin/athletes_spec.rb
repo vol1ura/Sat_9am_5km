@@ -15,10 +15,17 @@ RSpec.describe '/admin/athletes' do
   end
 
   describe 'GET /admin/athletes/1' do
-    it 'renders a successful response' do
-      athlete = create(:athlete)
-      create_list(:volunteer, 3, :with_published_activity, athlete: athlete)
+    let(:athlete) { create(:athlete) }
+
+    before do
+      3.times do |i|
+        create(:volunteer, activity_params: { date: i.week.ago }, athlete: athlete)
+      end
+
       get admin_athlete_url(athlete)
+    end
+
+    it 'renders a successful response' do
       expect(response).to be_successful
     end
   end
@@ -115,7 +122,7 @@ RSpec.describe '/admin/athletes' do
 
       it 'destroy athlete' do
         expect(response).to redirect_to admin_athletes_url
-        expect(Athlete.find_by(id: athlete.id)).to be_nil
+        expect(Athlete).not_to be_exists(id: athlete.id)
       end
     end
 

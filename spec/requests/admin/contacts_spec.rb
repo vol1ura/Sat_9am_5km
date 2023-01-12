@@ -25,11 +25,6 @@ RSpec.describe '/admin/contacts' do
   end
 
   describe 'POST /admin/contacts' do
-    before do
-      user.admin!
-    end
-
-    let(:event) { create(:event) }
     let(:valid_attributes) do
       {
         contact: {

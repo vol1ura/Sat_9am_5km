@@ -1,11 +1,12 @@
 FactoryBot.define do
   factory :volunteer do
     role { Volunteer::ROLES.keys.sample }
-    activity
     athlete
 
-    trait :with_published_activity do
-      association :activity, published: true
+    transient do
+      activity_params { {} }
     end
+
+    activity { association(:activity, **activity_params) }
   end
 end
