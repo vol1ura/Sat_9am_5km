@@ -3,11 +3,15 @@ RSpec.describe '/admin/activities' do
   let(:event) { create(:event) }
 
   before do
-    create(:permission, user: user, action: 'read', subject_class: 'Activity', event_id: event.id)
+    create(:permission, user: user, action: 'read', subject_class: 'Activity', event: event)
     sign_in user
   end
 
   describe 'GET /admin/activities' do
+    before do
+      create(:permission, user: user, action: 'manage', subject_class: 'VolunteeringPosition', event: event)
+    end
+
     it 'renders a successful response' do
       create_list(:activity, 3, event: event)
       get admin_activities_url
@@ -25,7 +29,7 @@ RSpec.describe '/admin/activities' do
 
   describe 'POST /admin/activities' do
     before do
-      create(:permission, user: user, action: 'manage', subject_class: 'Activity', event_id: event.id)
+      create(:permission, user: user, action: 'manage', subject_class: 'Activity', event: event)
       allow(TimerParser).to receive(:call).and_return(nil)
       allow(ScannerParser).to receive(:call).and_return(nil)
     end
