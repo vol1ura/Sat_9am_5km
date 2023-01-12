@@ -14,4 +14,8 @@ class User < ApplicationRecord
   validates :telegram_id, uniqueness: true, allow_nil: true
 
   enum role: ROLE
+
+  def volunteering_position_permission
+    permissions.find_by(subject_class: 'VolunteeringPosition', action: %w[manage update])
+  end
 end
