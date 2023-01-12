@@ -24,7 +24,7 @@ ActiveAdmin.register Activity do
     actions
   end
 
-  show { render activity }
+  show(title: ->(a) { "Забег №#{a.number}" }) { render activity }
 
   form title: 'Загрузка забега', multipart: true, partial: 'form'
 
@@ -42,5 +42,10 @@ ActiveAdmin.register Activity do
 
   action_item :results, only: %i[show edit] do
     link_to 'Редактор волонтёров', admin_activity_volunteers_path(resource)
+  end
+
+  action_item :volunteering_positions, only: :index, if: proc { current_user.volunteering_position_permission } do
+    link_to 'Волонтёрские позиции',
+            admin_event_volunteering_positions_path(current_user.volunteering_position_permission.event)
   end
 end
