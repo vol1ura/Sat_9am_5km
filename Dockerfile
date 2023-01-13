@@ -2,7 +2,7 @@ FROM ruby:3.1.0-alpine
 
 RUN apk add --update \
   build-base postgresql-dev nodejs yarn \
-  tzdata git vim openssh \
+  tzdata git vim openssh memcached \
   && rm -rf /var/cache/apk/*
 
 # Russian locale settings
