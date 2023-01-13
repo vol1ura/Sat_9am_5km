@@ -19,6 +19,7 @@ class Volunteer < ApplicationRecord
 
   enum role: ROLES, _suffix: true
 
+  delegate :date, to: :activity
   delegate :name, to: :athlete, allow_nil: true
 
   private

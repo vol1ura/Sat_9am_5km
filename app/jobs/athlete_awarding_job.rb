@@ -28,7 +28,7 @@ class AthleteAwardingJob < ApplicationJob
       trophies.each do |trophy|
         record_data = trophy.data.find { |d| d['event_id'] == event_id }
         record_result = Result.find(record_data['result_id'])
-        next if best_result.total_time > record_result.total_time || best_result.activity.date < record_result.activity.date
+        next if best_result.total_time > record_result.total_time || best_result.date < record_result.date
 
         award_best_result ||= true
         trophy.data.delete(record_data)

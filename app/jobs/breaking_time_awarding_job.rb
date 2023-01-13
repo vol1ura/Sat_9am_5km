@@ -46,7 +46,7 @@ class BreakingTimeAwardingJob < ApplicationJob
           next if Trophy.exists?(athlete_id: res.athlete_id, badge: prev_badges)
 
           trophy = Trophy.find_or_initialize_by(athlete_id: res.athlete_id, badge: badge)
-          trophy.date = res.date
+          trophy.date = res[:date]
           trophy.transaction do
             Trophy.where(athlete_id: res.athlete_id, badge: next_badges).delete_all
             trophy.save!
