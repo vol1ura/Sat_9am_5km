@@ -8,6 +8,8 @@ class Result < ApplicationRecord
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
 
+  delegate :date, to: :activity
+
   def self.top(male:, limit:)
     results = Arel::Table.new(:results)
     athletes = Arel::Table.new(:athletes)

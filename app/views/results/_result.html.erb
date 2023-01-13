@@ -2,7 +2,7 @@
   <td><%= result_counter.next %></td>
   <td><%= human_result_time result.total_time %></td>
   <td><%= link_to result.athlete.name, athlete_path(result.athlete_id), class: 'athlete-link' %></td>
-  <td><%= link_to l(result.activity.date, format: :short), result.activity %></td>
+  <td><%= link_to l(result.date, format: :short), result.activity %></td>
   <td class="hidden-on-phone">
     <% club = result.athlete&.club %>
     <%= link_to club.name, club if club %>
