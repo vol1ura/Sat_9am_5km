@@ -8,10 +8,6 @@ RSpec.describe '/admin/activities' do
   end
 
   describe 'GET /admin/activities' do
-    before do
-      create(:permission, user: user, action: 'manage', subject_class: 'VolunteeringPosition', event: event)
-    end
-
     it 'renders a successful response' do
       create_list(:activity, 3, event: event)
       get admin_activities_url
