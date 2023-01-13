@@ -22,7 +22,7 @@ cp ./config/database.yml.example ./config/database.yml
 
 To build project install `Docker`, `docker-compose` (use V2 on Apple chip) and execute
 ```shell
-make build_proj
+make build
 make ash
 # in docker container
 rails db:prepare
