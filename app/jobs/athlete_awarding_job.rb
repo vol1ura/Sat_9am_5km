@@ -56,7 +56,7 @@ class AthleteAwardingJob < ApplicationJob
       athlete.award_by Trophy.new(badge: badge, date: activity_date)
     end
     events_count = results.joins(activity: :event).select('events.id').distinct.count
-    tourist_badge = Badge.tourist_kind.where("info->>'type' = 'athlete'").take
+    tourist_badge = Badge.tourist_kind.find_by!("info->>'type' = 'athlete'")
     if events_count >= tourist_badge.info['threshold']
       athlete.award_by Trophy.new(badge: tourist_badge, date: activity_date)
     end
@@ -71,7 +71,7 @@ class AthleteAwardingJob < ApplicationJob
       athlete.award_by Trophy.new(badge: badge, date: activity_date)
     end
     events_count = volunteering.joins(activity: :event).select('events.id').distinct.count
-    tourist_badge = Badge.tourist_kind.where("info->>'type' = 'volunteer'").take
+    tourist_badge = Badge.tourist_kind.find_by!("info->>'type' = 'volunteer'")
     if events_count >= tourist_badge.info['threshold']
       athlete.award_by Trophy.new(badge: tourist_badge, date: activity_date)
     end
