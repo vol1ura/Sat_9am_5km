@@ -10,6 +10,7 @@ class Activity < ApplicationRecord
   has_many :volunteers, dependent: :destroy, inverse_of: :activity
 
   before_save :postprocessing, if: %i[will_save_change_to_published? published]
+  after_save :enqueue_awardings, if: %i[saved_change_to_published? published]
 
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
@@ -32,6 +33,9 @@ class Activity < ApplicationRecord
 
   def postprocessing
     self.date = Time.zone.today unless date
+  end
+
+  def enqueue_awardings
     AthleteAwardingJob.perform_later(id) if volunteers.exists?
     BreakingTimeAwardingJob.perform_later if results.exists?
   end
