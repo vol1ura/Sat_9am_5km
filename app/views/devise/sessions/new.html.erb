@@ -29,7 +29,9 @@
       <%= f.submit 'Войти', class: 'btn btn-primary mb-3' %>
     <% end %>
   </div>
-  <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-login="sat9am5kmbot" data-size="large" data-auth-url="https://s95.ru/user/login" data-request-access="write"></script>
+  <% if current_user&.admin? %>
+    <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-login="sat9am5kmbot" data-size="large" data-auth-url="https://s95.ru/user/login" data-request-access="write"></script>
+  <% end %>
   <div class="col-sm-6">
     <%= render 'devise/shared/links' %>
   </div>

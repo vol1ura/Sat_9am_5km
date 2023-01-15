@@ -15,7 +15,8 @@ class AthleteReuniter < ApplicationService
 
     grab_modified_attributes_from_collection
     check_modified_fields
-    replace_all_by_one and return true
+    replace_all_by_one
+    true
   rescue StandardError => e
     Rails.logger.error e.inspect
     false
