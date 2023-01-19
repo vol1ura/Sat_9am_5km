@@ -42,7 +42,6 @@ ActiveAdmin.register Volunteer do
     selectable_column
     column :athlete
     column(:role) { |v| human_volunteer_role v.role }
-    column(:activity) { |v| human_activity_name v.activity }
     actions
   end
 

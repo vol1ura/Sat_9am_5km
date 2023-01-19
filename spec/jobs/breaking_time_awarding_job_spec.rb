@@ -10,9 +10,7 @@ RSpec.describe BreakingTimeAwardingJob do
 
   it 'expires old trophy' do
     create(:trophy, date: 4.months.ago, athlete: athlete, badge_id: [13, 14, 15].sample)
-    expect do
-      described_class.perform_now
-    end.to change(athlete.trophies, :count).by(-1)
+    expect { described_class.perform_now }.to change(athlete.trophies, :count).by(-1)
   end
 
   it 'updates trophy date' do
