@@ -3,7 +3,7 @@
 ActiveAdmin.register Volunteer do
   belongs_to :activity
 
-  includes :athlete, activity: :event
+  includes :athlete
 
   permit_params :role, :activity_id, :athlete_id
 
@@ -46,9 +46,9 @@ ActiveAdmin.register Volunteer do
   end
 
   csv do
-    column(:code) { |v| v.athlete.code }
-    column(:athlete, &:name)
     column(:role) { |v| human_volunteer_role v.role }
+    column :name
+    column(:code) { |v| v.athlete.code }
   end
 
   show(title: :name) { render volunteer }
