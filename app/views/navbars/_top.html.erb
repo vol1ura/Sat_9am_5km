@@ -38,11 +38,11 @@
           <li class="nav-item">
             <%= link_to 'Поддержать проект', page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" %>
           </li>
-          <% if current_user&.athlete %>
+          <% if current_user %>
             <li class="nav-item dropdown mt-3">
               <%= link_to full_name(current_user), '#', class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
               <ul class="dropdown-menu" aria-labelledby="dataDropdown">
-                <li><%= link_to 'Профиль', athlete_path(current_user.athlete), class: 'dropdown-item' %></li>
+                <li><%= link_to_if current_user.athlete_id, 'Профиль', athlete_path(current_user.athlete), class: 'dropdown-item' %></li>
                 <li><%#= link_to 'Настройки', edit_user_registration_path, class: 'dropdown-item' %></li>
                 <% if current_user.admin? || Permission.exists?(user: current_user) %>
                   <li><%= link_to 'Админка', admin_root_path, class: 'dropdown-item' %></li>

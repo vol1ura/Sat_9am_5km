@@ -54,6 +54,6 @@ ActiveAdmin.register Activity do
   end
 
   action_item :clear_cache, only: :index, if: proc { current_user.admin? } do
-    link_to 'СБРОСИТЬ КЕШ', clear_cache_admin_activities_path, method: :delete
+    link_to 'СБРОСИТЬ КЕШ', clear_cache_admin_activities_path, method: :delete, data: { confirm: 'Сбросить кеш?' }
   end
 end
