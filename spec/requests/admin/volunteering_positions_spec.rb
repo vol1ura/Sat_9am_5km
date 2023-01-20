@@ -11,7 +11,9 @@ RSpec.describe '/admin/volunteering_positions' do
 
   describe 'GET /admin/volunteering_positions' do
     before do
-      create_list(:volunteering_position, 3, event: event)
+      Volunteer::ROLES.keys.sample(3).each do |role|
+        create(:volunteering_position, event: event, role: role)
+      end
     end
 
     it 'renders a successful response' do
