@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   end
 
   def volunteering
-    @activities = Activity.where(event: @event, date: Date.tomorrow..).order(:date).limit(4)
+    @activities = Activity.where(event: @event, date: Date.current..).order(:date).limit(4)
   end
 
   private
