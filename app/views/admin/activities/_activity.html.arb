@@ -6,6 +6,7 @@ panel 'Детали забега' do
     row :date
     row(:description) { |a| sanitized_text a.description }
     row :published
+    row('Протокол на сайте') { |a| link_to activity_url(a), activity_path(a) } if activity.published
   end
 end
 
