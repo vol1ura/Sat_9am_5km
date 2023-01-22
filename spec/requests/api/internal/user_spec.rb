@@ -1,5 +1,5 @@
-RSpec.describe '/user' do
-  describe 'POST /user' do
+RSpec.describe '/api/internal/user' do
+  describe 'POST /api/internal/user' do
     let(:user_attributes) do
       {
         user: {
@@ -21,7 +21,7 @@ RSpec.describe '/user' do
 
     context 'when header api key is invalid' do
       it 'returns unauthorized response' do
-        post user_path(format: :json),
+        post api_internal_user_path,
              params: user_attributes.merge(athlete_attributes),
              headers: {
                'Accept' => 'application/json',
@@ -40,12 +40,12 @@ RSpec.describe '/user' do
       end
 
       it 'renders successful response' do
-        post user_path(format: :json), params: user_attributes.merge(athlete_attributes), headers: valid_headers
+        post api_internal_user_path, params: user_attributes.merge(athlete_attributes), headers: valid_headers
         expect(response).to be_successful
       end
 
       it 'renders response with error' do
-        post user_path(format: :json),
+        post api_internal_user_path,
              params: user_attributes.merge(athlete_attributes).merge(user: { password: '12345' }),
              headers: valid_headers
         expect(response).to have_http_status :unprocessable_entity
@@ -53,20 +53,20 @@ RSpec.describe '/user' do
 
       it 'creates user with athlete' do
         expect do
-          post user_path(format: :json), params: user_attributes.merge(athlete_attributes), headers: valid_headers
+          post api_internal_user_path, params: user_attributes.merge(athlete_attributes), headers: valid_headers
         end.to change(User, :count).by(1).and change(Athlete, :count).by(1)
       end
 
       it 'creates user with linked athlete' do
         athlete = create(:athlete)
         expect do
-          post user_path(format: :json), params: user_attributes.merge(athlete_id: athlete.id), headers: valid_headers
+          post api_internal_user_path, params: user_attributes.merge(athlete_id: athlete.id), headers: valid_headers
         end.to change(User, :count).by(1)
       end
     end
   end
 
-  describe 'PUT /user' do
+  describe 'PUT /api/internal/user' do
     let(:user) { create(:user) }
     let(:athlete_attributes) do
       {
@@ -79,7 +79,7 @@ RSpec.describe '/user' do
 
     context 'when header api key is invalid' do
       it 'returns unauthorized response' do
-        put user_path(format: :json),
+        put api_internal_user_path,
             params: { user_id: user.id }.merge(athlete_attributes),
             headers: {
               'Accept' => 'application/json',
@@ -107,19 +107,19 @@ RSpec.describe '/user' do
       end
 
       it 'renders successful response' do
-        put user_path(format: :json), params: user_attributes.merge(athlete_attributes), headers: valid_headers
+        put api_internal_user_path, params: user_attributes.merge(athlete_attributes), headers: valid_headers
         expect(response).to be_successful
       end
 
       it 'links user with athlete' do
         expect do
-          put user_path(format: :json), params: user_attributes.merge(athlete_attributes), headers: valid_headers
+          put api_internal_user_path, params: user_attributes.merge(athlete_attributes), headers: valid_headers
         end.to change(Athlete, :count).by(1)
       end
 
       it 'creates user with linked athlete' do
         athlete = create(:athlete)
-        put user_path(format: :json), params: user_attributes.merge(athlete_id: athlete.id), headers: valid_headers
+        put api_internal_user_path, params: user_attributes.merge(athlete_id: athlete.id), headers: valid_headers
         expect(athlete.reload.user).to eq user
       end
     end
