@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :clubs, only: %i[index show]
   resources :badges, only: %i[index show]
   resources :volunteers, only: %i[new edit create update]
-  resource :user, only: %i[create update]
+  resource :user, only: :update
   get '/pages/:page', to: 'pages#show', as: :page
   get '/top_results', to: 'results#top'
   ActiveAdmin.routes(self)
@@ -30,6 +30,17 @@ Rails.application.routes.draw do
       },
       sign_out_via: [:delete, :get]
     }
+
+    namespace :api, format: :json do
+      namespace :internal do
+        resource :user, only: %i[create update]
+      end
+
+      # namespace :parkzhrun do
+      #   resource :athlete, only: :update
+      # end
+    end
+
   if Rails.env.production?
     authenticate :user, ->(user) { user.admin? } do
       mount Sidekiq::Web => '/sidekiq'
