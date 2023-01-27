@@ -35,10 +35,9 @@ Rails.application.routes.draw do
       namespace :internal do
         resource :user, only: %i[create update]
       end
-
-      # namespace :parkzhrun do
-      #   resource :athlete, only: :update
-      # end
+      namespace :parkzhrun do
+        resources :athletes, only: :update
+      end
     end
 
   if Rails.env.production?

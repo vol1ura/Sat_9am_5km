@@ -12,7 +12,7 @@ module Users
     # POST /user/login
     def create
       super
-      flash[:notice] = I18n.t('views.greeting')
+      flash[:notice] = t('views.greeting')
     end
 
     # DELETE /urser/logout

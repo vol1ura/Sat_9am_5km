@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Athlete < ApplicationRecord
+  PARKZHRUN_BORDER = 690_000_000
   SAT_5AM_9KM_BORDER = 770_000_000
   FIVE_VERST_BORDER = 790_000_000
   RUN_PARK_BORDER = 7_000_000_000
@@ -9,8 +10,10 @@ class Athlete < ApplicationRecord
   PersonalCode = Struct.new(:code) do
     def code_type
       @code_type ||=
-        if code < SAT_5AM_9KM_BORDER
+        if code < PARKZHRUN_BORDER
           :parkrun_code
+        elsif code < SAT_5AM_9KM_BORDER
+          :parkzhrun_code
         # elsif code > RUN_PARK_BORDER
         #   :runpark_code
         elsif code > FIVE_VERST_BORDER
@@ -47,6 +50,10 @@ class Athlete < ApplicationRecord
   validates :fiveverst_code,
             uniqueness: true,
             numericality: { only_integer: true, greater_than: FIVE_VERST_BORDER },
+            allow_nil: true
+  validates :parkzhrun_code,
+            uniqueness: true,
+            numericality: { only_integer: true, greater_than: PARKZHRUN_BORDER },
             allow_nil: true
 
   before_validation :fill_blank_name, if: -> { name.blank? }
