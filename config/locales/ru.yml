@@ -117,6 +117,7 @@ ru:
           attendant: 'Сопровождающий'
           finish_maker: 'Организация финиша'
           volunteer_coordinator: 'Координатор волонтёров'
+          food_maker: 'Организация питания'
       volunteering_position:
         rank: ранг
         number: количество
@@ -440,6 +441,7 @@ ru:
 
   views:
     greeting: 'Добро пожаловать на сайт Sat9am5km!'
+    update: 'Данные обновлены'
     pagination:
       previous: '←'
       first: '↞'
