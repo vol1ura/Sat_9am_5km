@@ -7,11 +7,11 @@ module API
         athlete = Athlete.find_by!(parkzhrun_code: params[:id])
         athlete.update!(athlete_params)
         head :ok
-      rescue ActiveRecord::RecordNotFound
+      rescue ActiveRecord::RecordNotFound => e
         Rails.logger.error e.inspect
-        render json: { errors: "Couldn't find Athlete with parkzhrun_id='#{param[:id]}'" }, status: :not_found
+        render json: { errors: "Couldn't find Athlete with parkzhrun_id='#{params[:id]}'" }, status: :not_found
       rescue ActiveRecord::RecordInvalid => e
-        Rollbar.error(e)
+        Rollbar.error e
         render json: { errors: e.message }, status: :unprocessable_entity
       end
 

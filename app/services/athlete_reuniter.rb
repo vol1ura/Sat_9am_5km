@@ -18,7 +18,7 @@ class AthleteReuniter < ApplicationService
     replace_all_by_one
     true
   rescue StandardError => e
-    Rails.logger.error e.inspect
+    Rollbar.error e
     false
   end
 
