@@ -35,5 +35,6 @@ module Sat9am5km
       domain: ENV.fetch('APP_DOMAIN'),
       enable_starttls_auto: true
     }
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
   end
 end
