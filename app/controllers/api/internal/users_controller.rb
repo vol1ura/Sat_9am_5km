@@ -26,7 +26,7 @@ module API
       end
 
       rescue_from ActiveRecord::RecordInvalid do |e|
-        Rails.logger.error e.inspect
+        Rollbar.error e
         errors = {}
         errors[:user] = @user.errors.full_messages if @user.invalid?
         errors[:athlete] = @athlete.errors.full_messages if @athlete&.invalid?

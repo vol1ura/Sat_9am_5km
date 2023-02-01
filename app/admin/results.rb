@@ -93,7 +93,7 @@ ActiveAdmin.register Result do
     resource.insert_new_result_above!
     redirect_to collection_path, notice: t('active_admin.results.result_successfully_appended', position: resource.position)
   rescue StandardError => e
-    Rails.logger.error e.inspect
+    Rollbar.error e
     redirect_to collection_path, alert: t('active_admin.results.insert_result_failed')
   end
 

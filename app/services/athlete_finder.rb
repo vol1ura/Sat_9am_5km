@@ -20,17 +20,17 @@ class AthleteFinder < ApplicationService
   end
 
   def call
-    parsed_data = Nokogiri::HTML.parse(fetch_data)
+    parsed_data = Nokogiri::HTML.parse(fetch)
     name_element = parsed_data.xpath(NAME_PATH.dig(@code_type, :xpath))
     name_element.text.split(' - ').first
   rescue StandardError => e
-    Rails.logger.error e.inspect
+    Rollbar.error e
     nil
   end
 
   private
 
-  def fetch_data
+  def fetch
     url = format(NAME_PATH.dig(@code_type, :url), @code)
     sleep ANTI_BLOCK_PAUSE unless Rails.env.test?
     response_body = Client.get(url).body
