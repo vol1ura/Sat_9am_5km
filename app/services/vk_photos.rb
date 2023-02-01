@@ -23,7 +23,7 @@ class VkPhotos < ApplicationService
       photo['sizes'].filter { |p| p['width'] < MAX_WIDTH }.max_by { |p| p['width'] }['url']
     end
   rescue StandardError => e
-    Rails.logger.error e.inspect
+    Rollbar.error e
     []
   end
 

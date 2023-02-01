@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       sign_out_via: [:delete, :get]
     }
 
-    namespace :api, format: :json do
+    namespace :api, defaults: { format: :json } do
       namespace :internal do
         resource :user, only: %i[create update]
       end
