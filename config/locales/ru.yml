@@ -448,3 +448,6 @@ ru:
       next: '→'
       last: '↠'
       truncate: '&hellip;'
+  parkzhrun_mailer:
+    success: 'Забег ПаркЖрун создан'
+    error: 'Ошибка! Не удалось создать забег ПаркЖрун.'

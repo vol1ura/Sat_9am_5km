@@ -45,7 +45,7 @@ class Athlete < ApplicationRecord
 
   validates :parkrun_code,
             uniqueness: true,
-            numericality: { only_integer: true, less_than: SAT_5AM_9KM_BORDER },
+            numericality: { only_integer: true, less_than: PARKZHRUN_BORDER },
             allow_nil: true
   validates :fiveverst_code,
             uniqueness: true,
