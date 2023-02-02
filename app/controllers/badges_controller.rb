@@ -7,6 +7,6 @@ class BadgesController < ApplicationController
 
   def show
     @badge = Badge.find(params[:id])
-    @trophies = @badge.trophies.includes(athlete: :club).order('athletes.name').page(params[:page]).per(25)
+    @trophies = @badge.trophies.includes(athlete: :club).order('date DESC', 'athletes.name').page(params[:page]).per(25)
   end
 end
