@@ -61,6 +61,7 @@ ru:
         name: Имя ФАМИЛИЯ
         parkrun_code: 'parkrun ID'
         fiveverst_code: '5В или RP ID'
+        parkzhrun_code: 'parkzhrun ID'
         gender: пол
         club: клуб
         male: мужчина

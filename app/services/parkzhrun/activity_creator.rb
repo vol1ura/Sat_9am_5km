@@ -43,7 +43,7 @@ module Parkzhrun
     def create_volunteers
       Client.fetch('volunteers', date_param).each do |result|
         volunteer = Volunteer.new(
-          role: result['role_id'],
+          role: result['role_id'].to_i,
           athlete: AthleteFinder.call(result['volunteer_id']),
           activity: activity
         )
