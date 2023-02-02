@@ -8,9 +8,7 @@ module API
       private
 
       def authorize_request
-        return if request.headers['Authorization'] == Rails.application.credentials.internal_api_key
-
-        render json: { error: 'Token invalid' }, status: :unauthorized
+        render json: { error: 'Forbidden' }, status: :forbidden if request.remote_ip != '127.0.0.1'
       end
     end
   end

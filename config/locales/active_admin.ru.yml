@@ -12,7 +12,7 @@ ru:
     edit: Изменить
     delete: Удалить
     delete_confirmation: "Вы уверены, что хотите удалить это?"
-    successful_deleted: "Успешно удалён %{obj}"
+    successfully_deleted: "Успешно удалён %{obj}"
     new_model: "Создать %{model}"
     edit_model: "Изменить %{model}"
     delete_model: "Удалить %{model}"

@@ -2,7 +2,8 @@
 
 class ResultsController < ApplicationController
   def top
-    @male_results = Result.includes(activity: :event, athlete: :club).top(male: true, limit: 50)
-    @female_results = Result.includes(activity: :event, athlete: :club).top(male: false, limit: 50)
+    scope = Result.includes(activity: :event, athlete: :club)
+    @male_results = scope.top(male: true, limit: 50)
+    @female_results = scope.top(male: false, limit: 50)
   end
 end

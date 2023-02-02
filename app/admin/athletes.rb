@@ -47,7 +47,7 @@ ActiveAdmin.register Athlete do
       elsif resource.results.exists? || resource.volunteering.exists?
         flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_participant')
       else
-        flash[:notice] = I18n.t('active_admin.successful_deleted', obj: resource.name)
+        flash[:notice] = I18n.t('active_admin.successfully_deleted', obj: resource.name)
         resource.destroy
       end
       redirect_to collection_path
@@ -56,12 +56,12 @@ ActiveAdmin.register Athlete do
 
   batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
                          if: proc { can? :manage, Athlete } do |ids|
-    collection = batch_action_collection.where(id: ids)
-    if AthleteReuniter.call(collection, ids)
-      redirect_to collection_path(scope: :duplicates), notice: I18n.t('active_admin.athletes.successful_reunite')
+    if AthleteReuniter.call(batch_action_collection.where(id: ids), ids)
+      flash[:notice] = I18n.t('active_admin.athletes.successful_reunite')
     else
-      redirect_to collection_path(scope: :duplicates), alert: I18n.t('active_admin.athletes.failed_reunite')
+      flash[:alert] = I18n.t('active_admin.athletes.failed_reunite')
     end
+    redirect_to collection_path(scope: :duplicates)
   end
 
   batch_action :gender_set, confirm: I18n.t('active_admin.athletes.confirm_gender_set'),

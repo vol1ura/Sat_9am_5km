@@ -33,9 +33,9 @@ class AthleteFinder < ApplicationService
   def fetch
     url = format(NAME_PATH.dig(@code_type, :url), @code)
     sleep ANTI_BLOCK_PAUSE unless Rails.env.test?
-    response_body = Client.get(url).body
-    raise "Bad request. Body: #{response_body}" unless Net::HTTPSuccess
+    response = Client.get(url)
+    raise "Bad request. Body: #{response.body}" unless response.is_a?(Net::HTTPSuccess)
 
-    response_body
+    response.body
   end
 end
