@@ -1,0 +1,20 @@
+<div class="col">
+  <div class="card mb-3 border-primary h-100">
+    <div class="row g-0">
+      <div class="col-sm-4 p-3 d-flex justify-content-center align-items-start">
+        <%= image_tag badge.picture_link, class: 'img-badge' %>
+      </div>
+      <div class="col-sm-8">
+        <div class="card-body">
+          <h5 class="card-title text-uppercase"><%= badge.name %></h5>
+          <p class="card-text">
+            <%= link_to sanitized_text(badge.conditions), badge_path(badge), class: 'stretched-link text-decoration-none text-body' %>
+          </p>
+          <% if badge.received_date %>
+            <p class="card-text"><small class="text-muted">Дата получения: <%= l badge.received_date %> года</small></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

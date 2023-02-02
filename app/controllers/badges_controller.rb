@@ -2,7 +2,8 @@
 
 class BadgesController < ApplicationController
   def index
-    @badges = Badge.order(created_at: :desc)
+    @funrun_badges = Badge.funrun_kind.order(received_date: :desc)
+    @not_funrun_badges = Badge.not_funrun_kind.order(created_at: :desc)
   end
 
   def show
