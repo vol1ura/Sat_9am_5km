@@ -2,6 +2,5 @@
 User-agent: *
 Disallow: /admin
 Disallow: /athletes/
-Disallow: /activities/
 Disallow: /volunteering
 Disallow: /sitemap*

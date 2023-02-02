@@ -43,11 +43,9 @@ class AthleteReuniter < ApplicationService
 
   def check_modified_fields
     return if unmodified_attributes.empty?
+    raise "AthleteReuniter skips modification of public attribute(s): #{unmodified_attributes}" if Rails.env.test?
 
-    message = "AthleteReuniter skips modification of public attribute(s): #{unmodified_attributes}"
-    raise StandardError, message if Rails.env.test?
-
-    Rails.logger.warn message
+    Rollbar.warn message
   end
 
   def replace_all_by_one

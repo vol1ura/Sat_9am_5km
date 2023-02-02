@@ -13,7 +13,6 @@ class Activity < ApplicationRecord
   after_save :enqueue_awardings, if: %i[saved_change_to_published? published]
 
   scope :published, -> { where(published: true) }
-  scope :unpublished, -> { where(published: false) }
 
   def volunteers_roster
     volunteers
