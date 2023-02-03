@@ -19,25 +19,34 @@
   <div class="col-sm-8 col-md-9">
     <h2><%= @badge.name %></h2>
     <p class="card-text"><%= sanitized_text @badge.conditions %></p>
+    <% if @badge.funrun_kind? && @badge.received_date %>
+      <p class="text-muted">Дата мероприятия: <%= l @badge.received_date %></p>
+    <% end %>
   </div>
 </div>
 
-<table class="table table-striped">
-  <thead data-controller="table-head">
-    <tr>
-      <td>Участник</td>
-      <% if @badge.record_kind? %>
-        <td>Забег</td>
-        <td>Результат</td>
-        <td class="hidden-on-phone">Дата</td>
-      <% else %>
-        <td>Дата получения</td>
-      <% end %>
-      <td class="hidden-on-phone">Клуб</td>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <%= render partial: 'trophy', collection: @trophies, cached: true %>
-  </tbody>
-</table>
-<%= paginate @trophies %>
+<% if @trophies.exists? %>
+  <table class="table table-striped">
+    <thead data-controller="table-head">
+      <tr>
+        <td>Участник</td>
+        <% if @badge.record_kind? %>
+          <td>Забег</td>
+          <td>Результат</td>
+          <td class="hidden-on-phone">Дата</td>
+        <% elsif !@badge.funrun_kind? %>
+          <td>Дата получения</td>
+        <% end %>
+        <td class="<%= 'hidden-on-phone' unless @badge.funrun_kind? %>">Клуб</td>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <%= render partial: 'trophy', collection: @trophies, cached: true %>
+    </tbody>
+  </table>
+  <%= paginate @trophies %>
+<% elsif @badge.funrun_kind? %>
+  <p>Скоро!</p>
+<% else %>
+  <p>Пока ещё ни у кого нет этой награды.</p>
+<% end %>
