@@ -16,7 +16,9 @@
 <% else %>
   <tr>
     <td><%= link_to athlete.name, athlete_path(athlete) %></td>
-    <td><%= l date if date %></td>
-    <td class="hidden-on-phone"><%= athlete.club&.name %></td>
+    <% unless @badge.funrun_kind? %>
+      <td><%= l date if date %></td>
+    <% end %>
+    <td class="<%= 'hidden-on-phone' unless @badge.funrun_kind? %>"><%= athlete.club&.name %></td>
   </tr>
 <% end %>
