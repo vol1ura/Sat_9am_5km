@@ -1,7 +1,7 @@
 <div class='autocomplete'>
   <%=
-    form.hidden_field :athlete_id
-    text_field_tag :name, volunteer.name, class: 'query-field', type: 'text', placeholder: 'Начните вводить имя...', autocomplete: 'off'
+    form.hidden_field :athlete_id, id: 'autocomplete-athlete-id'
+    text_field_tag :name, resource&.name, class: 'query-field', type: 'text', placeholder: 'Начните вводить имя...', autocomplete: 'off'
   %>
   <div class="suggestions"></div>
 </div>
@@ -51,7 +51,7 @@ $(function () {
 
   $('.suggestions').on('click', 'li', (e) => {
     $('.query-field').val($(e.target).attr('name'))
-    $('#volunteer_athlete_id').val($(e.target).attr('id'))
+    $('#autocomplete-athlete-id').val($(e.target).attr('id'))
     closeAutoComplete()
   })
 
