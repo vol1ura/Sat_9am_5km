@@ -9,11 +9,7 @@ module Parkzhrun
 
     def call
       return unless @code
-
-      athlete = Athlete.find_by(**personal_code.to_params)
-      athlete ||= Athlete.find_by(parkrun_code: athlete_info['parkrun_id']) if athlete_info['parkrun_id']
-      athlete ||= Athlete.find_by(fiveverst_code: athlete_info['five_verst_id']) if athlete_info['five_verst_id']
-      return athlete if athlete
+      return athlete if find_athlete_by_code || find_athlete_by_info
 
       Athlete.create!(
         name: "#{athlete_info['first_name']} #{athlete_info['last_name'].upcase}",
@@ -25,6 +21,18 @@ module Parkzhrun
     end
 
     private
+
+    attr_reader :athlete
+
+    def find_athlete_by_code
+      @athlete = Athlete.find_by(**personal_code.to_params)
+    end
+
+    def find_athlete_by_info
+      @athlete = Athlete.find_by(parkrun_code: athlete_info['parkrun_id']) if athlete_info['parkrun_id']
+      @athlete ||= Athlete.find_by(fiveverst_code: athlete_info['five_verst_id']) if athlete_info['five_verst_id']
+      @athlete
+    end
 
     def personal_code
       @personal_code ||= Athlete::PersonalCode.new(@code)
