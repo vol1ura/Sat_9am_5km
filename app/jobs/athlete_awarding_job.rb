@@ -49,7 +49,7 @@ class AthleteAwardingJob < ApplicationJob
   # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def award_runner(athlete)
-    results = athlete.results.published.where(activity: { date: ..activity_date })
+    results = athlete.results.published.where(activity: { date: ..activity_date }).order('activity.date')
     Badge.participating_dataset(type: 'athlete').each do |badge|
       next if results.size < badge.info['threshold']
 
@@ -60,6 +60,7 @@ class AthleteAwardingJob < ApplicationJob
     if events_count >= tourist_badge.info['threshold']
       athlete.award_by Trophy.new(badge: tourist_badge, date: activity_date)
     end
+    award_runner_by_rage_badge(athlete, results.last(3))
     athlete.save!
   end
 
@@ -93,5 +94,17 @@ class AthleteAwardingJob < ApplicationJob
     trophy.data.delete_if { |d| d['event_id'] == event_id }
     trophy.data << { event_id: event_id, result_id: result.id }
     trophy.save!
+  end
+
+  def award_runner_by_rage_badge(athlete, last_3_results)
+    return if last_3_results.size < 3
+
+    rage_badge = Badge.rage_kind.take!
+    if last_3_results.first.total_time >= last_3_results.second.total_time &&
+       last_3_results.second.total_time >= last_3_results.third.total_time
+      athlete.award_by Trophy.new(badge: rage_badge, date: activity_date)
+    else
+      athlete.trophies.where(badge: rage_badge).destroy_all
+    end
   end
 end
