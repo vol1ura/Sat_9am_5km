@@ -149,3 +149,8 @@ badge_22:
   kind: 100
   info:
     male: true
+badge_25:
+  id: 25
+  name: 'rage'
+  picture_link: 'badges/rage.png'
+  kind: 40
