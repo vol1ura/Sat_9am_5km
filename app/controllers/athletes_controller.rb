@@ -8,7 +8,8 @@ class AthletesController < ApplicationController
       if query.length < 3
         Athlete.none
       elsif query.match?(/^\d+$/)
-        criteria.where('parkrun_code = :number OR fiveverst_code = :number', number: query.to_i)
+        personal_code = Athlete::PersonalCode.new(query.to_i)
+        criteria.where(personal_code.code_type => personal_code.id)
       else
         criteria.where('name ILIKE :query', query: "%#{query}%")
       end
