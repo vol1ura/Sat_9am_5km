@@ -10,6 +10,10 @@ class Result < ApplicationRecord
 
   delegate :date, to: :activity
 
+  def self.total_time(hour = 0, min, sec)
+    Time.zone.local(2000, 1, 1, hour, min, sec)
+  end
+
   def self.top(male:, limit:)
     results = Arel::Table.new(:results)
     athletes = Arel::Table.new(:athletes)
