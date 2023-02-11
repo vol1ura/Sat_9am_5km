@@ -33,7 +33,7 @@ module Parkzhrun
       Client.fetch('results', date_param).each do |result|
         Result.create!(
           position: result['position'],
-          total_time: Time.zone.local(2000, 1, 1, *result['total_time'].split(':').map(&:to_i)),
+          total_time: Result.total_time(*result['total_time'].split(':').map(&:to_i)),
           athlete: AthleteFinder.call(result['athlete_id']),
           activity: activity
         )

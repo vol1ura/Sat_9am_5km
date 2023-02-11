@@ -15,13 +15,13 @@ RSpec.describe BreakingTimeAwardingJob do
 
   it 'updates trophy date' do
     trophy = create(:trophy, date: 2.months.ago, athlete: athlete, badge_id: 15)
-    create(:result, activity: activity, athlete: athlete, total_time: Time.zone.local(2000, 1, 1, 0, 19, 59))
+    create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(19, 59))
     expect { described_class.perform_now }.not_to change(athlete.trophies, :count)
     expect(trophy.reload.date).to eq activity.date
   end
 
   it 'adds new trophy' do
-    create(:result, activity: activity, athlete: athlete, total_time: Time.zone.local(2000, 1, 1, 0, 17, 59))
+    create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(17, 59))
     expect { described_class.perform_now }.to change(athlete.trophies, :count).by(1)
   end
 end

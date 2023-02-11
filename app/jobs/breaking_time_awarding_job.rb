@@ -56,7 +56,8 @@ class BreakingTimeAwardingJob < ApplicationJob
   end
   # rubocop:enable Metrics/MethodLength
 
+  # Threshold time. It is 00:00:00 for the first interval.
   def minutes_threshold(minutes)
-    Time.zone.local(2000, 1, 1, 0, (minutes.presence || 0), 0)
+    Result.total_time(minutes.presence || 0, 0)
   end
 end
