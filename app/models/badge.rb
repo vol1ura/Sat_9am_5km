@@ -9,7 +9,7 @@ class Badge < ApplicationRecord
 
   enum kind: { funrun: 0, participating: 10, tourist: 20, breaking: 30, rage: 40, record: 100 }, _suffix: true
 
-  def self.participating_dataset(type:)
-    participating_kind.where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
+  def self.dataset_of(kind:, type:)
+    public_send("#{kind}_kind").where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
   end
 end
