@@ -21,7 +21,7 @@ class AthleteAwardingJob < ApplicationJob
 
     record_badge = Badge.record_kind.find_by("(info->'male')::boolean = ?", male)
     trophies = Trophy.where(badge: record_badge).where("info @@ '$.data[*].event_id == ?'", event_id)
-    award_record_badge(record_badge, best_result) and return if trophies.empty?
+    award_by_record_badge(record_badge, best_result) and return if trophies.empty?
 
     award_best_result = false
     Trophy.transaction do
@@ -44,38 +44,24 @@ class AthleteAwardingJob < ApplicationJob
     end
     return if !award_best_result || trophies.exists?(athlete_id: best_result.athlete_id)
 
-    award_record_badge(record_badge, best_result)
+    award_by_record_badge(record_badge, best_result)
   end
   # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def award_runner(athlete)
     results = athlete.results.published.where(activity: { date: ..activity_date }).order('activity.date')
-    Badge.participating_dataset(type: 'athlete').each do |badge|
-      next if results.size < badge.info['threshold']
-
-      athlete.award_by Trophy.new(badge: badge, date: activity_date)
-    end
+    threshold_awarding(athlete, :participating, 'athlete', results.size)
     events_count = results.joins(activity: :event).select('events.id').distinct.count
-    tourist_badge = Badge.tourist_kind.find_by!("info->>'type' = 'athlete'")
-    if events_count >= tourist_badge.info['threshold']
-      athlete.award_by Trophy.new(badge: tourist_badge, date: activity_date)
-    end
-    award_runner_by_rage_badge(athlete, results.last(3))
+    threshold_awarding(athlete, :tourist, 'athlete', events_count)
+    award_by_rage_badge(athlete, results.last(3))
     athlete.save!
   end
 
   def award_volunteer(athlete)
     volunteering = athlete.volunteering.where(activity: { date: ..activity_date })
-    Badge.participating_dataset(type: 'volunteer').each do |badge|
-      next if volunteering.size < badge.info['threshold']
-
-      athlete.award_by Trophy.new(badge: badge, date: activity_date)
-    end
+    threshold_awarding(athlete, :participating, 'volunteer', volunteering.size)
     events_count = volunteering.joins(activity: :event).select('events.id').distinct.count
-    tourist_badge = Badge.tourist_kind.find_by!("info->>'type' = 'volunteer'")
-    if events_count >= tourist_badge.info['threshold']
-      athlete.award_by Trophy.new(badge: tourist_badge, date: activity_date)
-    end
+    threshold_awarding(athlete, :tourist, 'volunteer', events_count)
     athlete.save!
   end
 
@@ -87,7 +73,7 @@ class AthleteAwardingJob < ApplicationJob
     @event_id ||= @activity.event_id
   end
 
-  def award_record_badge(badge, result)
+  def award_by_record_badge(badge, result)
     trophy = Trophy.find_or_initialize_by(badge: badge, athlete_id: result.athlete_id)
     trophy.update!(info: { data: [{ event_id: event_id, result_id: result.id }] }) and return if trophy.data.blank?
 
@@ -96,7 +82,7 @@ class AthleteAwardingJob < ApplicationJob
     trophy.save!
   end
 
-  def award_runner_by_rage_badge(athlete, last_3_results)
+  def award_by_rage_badge(athlete, last_3_results)
     return if last_3_results.size < 3
 
     rage_badge = Badge.rage_kind.take!
@@ -106,5 +92,13 @@ class AthleteAwardingJob < ApplicationJob
     else
       athlete.trophies.where(badge: rage_badge).destroy_all
     end
+  end
+
+  def threshold_awarding(athlete, kind, type, value)
+    badges_dataset = Badge.dataset_of(kind: kind, type: type).where("(info->'threshold')::integer <= ?", value)
+    return unless (badge = badges_dataset.last) && !athlete.trophies.exists?(badge: badge)
+
+    athlete.trophies.where(badge: badges_dataset.where.not(id: badge.id)).destroy_all
+    athlete.award_by Trophy.new(badge: badge, date: activity_date)
   end
 end
