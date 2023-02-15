@@ -8,7 +8,7 @@ ruby '3.1.0'
 gem 'importmap-rails', '~> 1.1'
 gem 'sassc-rails'
 
-gem 'rails', '~> 7.0.3'
+gem 'rails', '~> 7.0.4'
 
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
