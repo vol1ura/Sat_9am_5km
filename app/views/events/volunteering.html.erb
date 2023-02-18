@@ -47,7 +47,7 @@
         <tbody class="table-group-divider">
           <% @event.volunteering_positions.each do |position| %>
             <% volunteers = activity.volunteers.public_send("#{position.role}_role").to_a %>
-            <% position.number.times.each do |i| %>
+            <% [position.number, volunteers.size].max.times.each do |i| %>
               <tr>
                 <td><%= human_volunteer_role position.role %></td>
                 <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: position.role, activity: activity } %></td>
