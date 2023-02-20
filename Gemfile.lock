@@ -140,7 +140,7 @@ GEM
       rexml
     crass (1.0.6)
     dalli (3.2.3)
-    database_consistency (1.7.2)
+    database_consistency (1.7.4)
       activerecord (>= 3.2)
     date (3.3.3)
     devise (4.8.1)
