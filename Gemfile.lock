@@ -149,7 +149,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.10.2)
+    devise-i18n (1.10.3)
       devise (>= 4.8.0)
     diff-lcs (1.5.0)
     docile (1.4.0)
@@ -301,9 +301,9 @@ GEM
     redis-client (0.11.2)
       connection_pool
     regexp_parser (2.6.2)
-    responders (3.0.1)
-      actionpack (>= 5.0)
-      railties (>= 5.0)
+    responders (3.1.0)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rexml (3.2.5)
     rollbar (3.3.3)
     rspec-core (3.12.0)
