@@ -15,7 +15,7 @@ module Parkzhrun
       activity.transaction do
         create_results
         create_volunteers
-        activity.update(published: true)
+        activity.update!(published: true)
       end
     end
 

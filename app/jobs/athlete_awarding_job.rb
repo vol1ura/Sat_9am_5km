@@ -16,7 +16,7 @@ class AthleteAwardingJob < ApplicationJob
 
   # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def process_event_records(male:)
-    best_result = @activity.results.joins(:athlete).where(athlete: { male: male }).order(:total_time, :position).first
+    best_result = @activity.results.joins(:athlete).where(athlete: { male: male }).order(:position).first
     return unless best_result
 
     record_badge = Badge.record_kind.find_by("(info->'male')::boolean = ?", male)
