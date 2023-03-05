@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  default_url_options host: ENV.fetch('APP_HOST')
+
   root 'pages#show'
   resources :events, param: :code_name, only: :show do
     get :volunteering, on: :member
