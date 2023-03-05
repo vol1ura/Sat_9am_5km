@@ -37,5 +37,6 @@ class Activity < ApplicationRecord
   def enqueue_awardings
     AthleteAwardingJob.perform_later(id) if volunteers.exists?
     BreakingTimeAwardingJob.perform_later if results.exists?
+    Telegram::NotificationJob.perform_later(id)
   end
 end
