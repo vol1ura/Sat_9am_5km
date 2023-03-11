@@ -4,7 +4,8 @@ module Telegram
   class NotificationJob < ApplicationJob
     queue_as :low
 
-    def perform(activity)
+    def perform(activity_id)
+      activity = Activity.find activity_id
       return unless activity.published
 
       activity.results.each { |result| Informer::Result.call(result) }
