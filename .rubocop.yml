@@ -20,6 +20,7 @@ Metrics/BlockLength:
   Exclude:
     - 'app/admin/**/*'
     - 'app/views/admin/**/*'
+    - 'lib/tasks/**/*'
     - 'spec/**/*'
 
 # STYLE

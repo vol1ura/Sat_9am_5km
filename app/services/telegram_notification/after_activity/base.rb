@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Telegram
-  module Informer
+module TelegramNotification
+  module AfterActivity
     class Base < ApplicationService
       def initialize(entity)
         @entity = entity
@@ -10,7 +10,7 @@ module Telegram
       def call
         return unless !@entity.informed && (telegram_id = @entity.athlete&.user&.telegram_id)
 
-        Bot.call('sendMessage', chat_id: telegram_id, text: text, disable_web_page_preview: true)
+        Bot.call('sendMessage', chat_id: telegram_id, text: text, disable_web_page_preview: true, parse_mode: 'Markdown')
         @entity.update!(informed: true)
       rescue StandardError => e
         Rollbar.error e
@@ -20,8 +20,8 @@ module Telegram
 
       def text
         <<~TEXT
-          С итоговым протоколом забега вы можете ознакомиться на нашем сайте: #{routes.activity_url(activity)}.
-          Все ваши результаты и статистика доступны по ссылке: #{routes.athlete_url(@entity.athlete)}.
+          С итоговым протоколом забега вы можете ознакомиться на [нашем сайте](#{routes.activity_url(activity)}).
+          Все ваши результаты и статистика доступны по [ссылке](#{routes.athlete_url(@entity.athlete)}).
         TEXT
       end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Telegram
-  module Informer
+module TelegramNotification
+  module AfterActivity
     class Result < Base
       private
 
