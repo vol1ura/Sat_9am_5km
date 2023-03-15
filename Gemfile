@@ -26,8 +26,8 @@ gem 'puma', '~> 5.6'
 gem 'sidekiq'
 gem 'sprockets-rails'
 
-gem 'hiredis'
-gem 'redis', require: ['redis', 'redis/connection/hiredis']
+gem 'hiredis-client'
+gem 'redis'
 
 gem 'rollbar'
 
