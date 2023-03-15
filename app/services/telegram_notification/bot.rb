@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Telegram
+module TelegramNotification
   class Bot < ApplicationService
     TOKEN = ENV.fetch('BOT_TOKEN')
     HEADERS = { 'Content-Type' => 'application/json' }.freeze

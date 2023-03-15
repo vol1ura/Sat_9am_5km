@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Telegram::Informer::Volunteer, type: :service do
+RSpec.describe TelegramNotification::AfterActivity::Volunteer, type: :service do
   let(:result) { create(:result, athlete: create(:athlete, user: create(:user))) }
   let(:bot_token) { '123456:aaabbb' }
   let!(:request) { stub_request(:post, %r{https://api\.telegram\.org/bot#{bot_token}/sendMessage}) }
 
-  before { stub_const('Telegram::Bot::TOKEN', bot_token) }
+  before { stub_const('TelegramNotification::Bot::TOKEN', bot_token) }
 
   context 'when request to telegram successful' do
     it 'informs athlete' do
