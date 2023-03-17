@@ -6,7 +6,7 @@ ActiveAdmin.register VolunteeringPosition do
   permit_params :event_id, :rank, :role, :number
 
   config.filters = false
-  config.sort_order = 'rank'
+  config.sort_order = 'rank_asc'
 
   breadcrumb do
     [
