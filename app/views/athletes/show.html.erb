@@ -118,7 +118,10 @@
                   <div class="acc-li-s">
                     <%= link_to l(pb.activity.date), activity_path(pb.activity_id) %>
                   </div>
-                  <div class="ms-3">
+                  <div class="mx-3">
+                    <%= human_result_time pb.total_time %>
+                  </div>
+                  <div>
                     <%= link_to pb.activity.event.name, event_path(code_name: pb.activity.event.code_name) %>
                   </div>
                 </div>
