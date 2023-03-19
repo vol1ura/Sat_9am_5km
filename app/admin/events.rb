@@ -61,4 +61,8 @@ ActiveAdmin.register Event do
       li link_to 'Волонтёры', admin_event_volunteering_positions_path(resource)
     end
   end
+
+  sidebar 'Предпросмотр', only: :show do
+    image_tag resource.main_picture_link, class: 'img-badge' if resource.main_picture_link
+  end
 end

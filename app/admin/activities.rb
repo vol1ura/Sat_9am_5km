@@ -49,7 +49,7 @@ ActiveAdmin.register Activity do
     link_to 'Редактор результатов', admin_activity_results_path(resource)
   end
 
-  action_item :results, only: %i[show edit] do
+  action_item :volunteers, only: %i[show edit] do
     link_to 'Редактор волонтёров', admin_activity_volunteers_path(resource)
   end
 
