@@ -11,8 +11,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :athlete, reject_if: :all_blank
   has_many :permissions, dependent: :destroy
 
-  validates :first_name, presence: true, format: { with: /(?i)\A[a-zа-яё]{2,}\z/ }
-  validates :last_name, presence: true, format: { with: /(?i)\A[a-zа-яё]{2,}(-[a-zа-яё]{2,})?\z/ }
+  validates :first_name, presence: true, format: { with: /\A[a-zа-яё]{2,}\z/i }
+  validates :last_name, presence: true, format: { with: /\A[a-zа-яё]{2,}(-[a-zа-яё]{2,})?\z/i }
   validates :telegram_id, uniqueness: true, allow_nil: true
 
   enum role: ROLE

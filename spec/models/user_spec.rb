@@ -4,7 +4,9 @@ RSpec.describe User do
 
     it { is_expected.not_to be_valid }
 
-    it 'valid with email and password' do
+    it 'valid with first_name, last_name, email and password' do
+      user.first_name = Faker::Name.first_name
+      user.last_name = Faker::Name.last_name
       user.password = Faker::Internet.password(min_length: 6)
       user.email = Faker::Internet.free_email
       expect(user).to be_valid
