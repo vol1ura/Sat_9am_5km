@@ -15,6 +15,8 @@ RSpec.describe '/api/internal/user' do
     let(:user_attributes) do
       {
         user: {
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
           email: Faker::Internet.free_email,
           password: Faker::Internet.password(min_length: 6),
           telegram_id: Faker::Number.number(digits: 8),
