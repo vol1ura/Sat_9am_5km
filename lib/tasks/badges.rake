@@ -19,7 +19,7 @@ namespace :badges do
 
   desc 'Awardings for last week'
   task weekly_awarding: :environment do
-    Activity.where(date: Date.current.all_week).each do |activity|
+    Activity.published.where(date: Date.current.all_week).each do |activity|
       AthleteAwardingJob.perform_now(activity.id)
     end
     BreakingTimeAwardingJob.perform_now
@@ -27,7 +27,7 @@ namespace :badges do
 
   desc 'Notify about breaking time badge expiration'
   task notify_breaking_time_badges_expiration: :environment do
-    date = BreakingTimeAwardingJob::EXPIRATION_PERIOD.months.ago + 1.week
+    date = BreakingTimeAwardingJob::EXPIRATION_PERIOD.months.ago.to_date + 1.week
     Trophy.where(badge: Badge.breaking_kind, date: ..date).each do |trophy|
       TelegramNotification::Badge::BreakingTimeExpiration.call(trophy)
     end
