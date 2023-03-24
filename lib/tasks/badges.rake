@@ -32,4 +32,11 @@ namespace :badges do
       TelegramNotification::Badge::BreakingTimeExpiration.call(trophy)
     end
   end
+
+  desc 'Notify about rage badge expiration'
+  task notify_rage_badges_expiration: :environment do
+    Trophy.where(badge: Badge.rage_kind, date: Date.current.prev_week(:saturday)).each do |trophy|
+      TelegramNotification::Badge::RageExpiration.call(trophy)
+    end
+  end
 end
