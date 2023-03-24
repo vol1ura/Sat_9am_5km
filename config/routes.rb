@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       end
       namespace :parkzhrun do
         resources :athletes, only: :update
+        resources :activities, only: :create
       end
     end
 
