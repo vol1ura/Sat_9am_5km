@@ -5,10 +5,44 @@
         image_tag 'logo_80.png', alt: 'Sat 9am 5km', width: 70
       end
     %>
+    <nav class="navbar navbar-expand-lg d-none d-lg-block navbar-dark me-auto">
+      <div class="container">
+        <div class="navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <%= link_to 'Мероприятия', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+              <ul class="dropdown-menu" aria-labelledby="eventDropdown">
+                <% Event.all.each do |event| %>
+                  <li><%= link_to event.name, event_path(event.code_name), class: 'dropdown-item' %></li>
+                <% end %>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <%= link_to 'Результаты', '#', class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+              <ul class="dropdown-menu" aria-labelledby="dataDropdown">
+                <li><%= link_to 'Недавние результаты', activities_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'Клубные рейтинги', clubs_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'Лучшие результаты', top_results_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'Личные награды', badges_path, class: 'dropdown-item' %></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Правила', page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'О нас', page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Поддержать проект', page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-primary" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas offcanvas-end text-bg-primary" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
           <%= link_to 'Sat 9am 5km', root_path, class: 'link-light text-decoration-none' %>
