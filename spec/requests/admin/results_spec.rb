@@ -74,6 +74,13 @@ RSpec.describe '/admin/results' do
       end
     end
 
+    describe 'DELETE /admin/activities/1/results/1/reset_athlete' do
+      it 'removes athlete from result' do
+        delete reset_athlete_admin_activity_result_url(activity, results.first, format: :js)
+        expect(results.first.reload.athlete).to be_nil
+      end
+    end
+
     describe 'DELETE /admin/activities/1/results' do
       it 'properly remove result' do
         expect do

@@ -41,6 +41,7 @@ ActiveAdmin.register Result do
       li I18n.t('active_admin.results.explanation.delete_result')
       li I18n.t('active_admin.results.explanation.delete_time')
       li I18n.t('active_admin.results.explanation.delete_athlete')
+      li I18n.t('active_admin.results.explanation.reset_athlete')
       li I18n.t('active_admin.results.explanation.insert_result')
     end
   end
@@ -87,6 +88,12 @@ ActiveAdmin.register Result do
     @results = resource.shift_attributes!(:athlete)
   rescue StandardError
     render js: "alert('#{t 'active_admin.results.drop_athlete_failed'}')"
+  end
+
+  member_action :reset_athlete, method: :delete, if: proc { can? :manage, Result } do
+    resource.update!(athlete_id: nil)
+  rescue StandardError
+    render js: "alert('#{t 'active_admin.results.reset_athlete_failed'}')"
   end
 
   member_action :insert_above, method: :post, if: proc { can? :manage, Result } do
