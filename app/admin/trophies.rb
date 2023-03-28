@@ -3,7 +3,7 @@
 ActiveAdmin.register Trophy do
   belongs_to :badge
 
-  includes :badge, :athlete
+  includes :athlete
 
   permit_params :badge_id, :athlete_id, :date
 
