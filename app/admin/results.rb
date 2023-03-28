@@ -3,7 +3,7 @@
 ActiveAdmin.register Result do
   belongs_to :activity
 
-  includes :athlete, :activity
+  includes :athlete
 
   config.sort_order = 'position_asc'
   config.paginate = false
