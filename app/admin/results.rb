@@ -27,10 +27,10 @@ ActiveAdmin.register Result do
               target: '_blank', rel: 'noopener'
     end
     column('Изменение позиции') do |r|
-      render partial: 'up_down', locals: { activity: r.activity, result: r }
+      render partial: 'up_down', locals: { activity: r.activity, result: r } if can?(:manage, r)
     end
     actions do |r|
-      render partial: 'shifts', locals: { activity: r.activity, result: r } if can?(:manage, Result)
+      render partial: 'shifts', locals: { activity: r.activity, result: r } if can?(:manage, r)
     end
   end
 
@@ -64,6 +64,7 @@ ActiveAdmin.register Result do
 
   after_destroy do |result|
     collection.where('position > ?', result.position).each { |r| r.update(position: r.position.pred) }
+    flash[:notice] = t('active_admin.results.result_destroyed', position: result.position)
   end
 
   member_action :up, method: :put, if: proc { can? :update, Result } do
@@ -109,6 +110,6 @@ ActiveAdmin.register Result do
   end
 
   action_item :activity, only: :index do
-    link_to 'Просмотр забега', admin_activity_path(params[:activity_id])
+    link_to 'Просмотр забега', admin_activity_path(activity.id)
   end
 end

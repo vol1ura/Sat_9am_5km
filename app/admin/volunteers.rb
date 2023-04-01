@@ -56,7 +56,7 @@ ActiveAdmin.register Volunteer do
   form partial: 'form'
 
   action_item :activity, only: :index do
-    link_to 'Просмотр забега', admin_activity_path(params[:activity_id])
+    link_to 'Просмотр забега', admin_activity_path(activity.id)
   end
 
   action_item :volunteering_positions, only: :index, if: proc { current_user.volunteering_position_permission } do
