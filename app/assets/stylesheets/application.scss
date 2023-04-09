@@ -95,4 +95,24 @@ nav.pagination {
   }
 }
 
+.img-social {
+  width: 60px;
+  @include media(phoneScreen) {
+    width: 50px;
+  }
+}
+.img-social:hover {
+  opacity: 0.85;
+}
+
+.img-partner {
+  height: 150px;
+  @include media(phoneScreen) {
+    height: 90px;
+  }
+}
+.img-partner:hover {
+  opacity: 0.85;
+}
+
 @import "web/**/*";

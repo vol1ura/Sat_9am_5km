@@ -23,13 +23,13 @@
 <%= sanitized_text @event.description %>
 
 <h4>Наши контакты</h4>
-<ul class="list-group list-group-flush">
-  <% @event.contacts.each do |contact| %>
-    <li class="list-group-item">
-      <%= sanitized_link_to(I18n.t("activerecord.attributes.contact.contact_types.#{contact.contact_type}"), contact.link, target: '_blank', rel: 'noopener') %>
-    </li>
+<div class="d-flex flex-wrap">
+  <% @event.contacts.order(:contact_type).each do |contact| %>
+    <%= link_to(contact.link.html_safe, target: '_blank', rel: 'noopener', class: 'me-2 me-sm-3 mb-2') do %>
+      <%= image_tag "social/#{contact.contact_type}.png", class: 'img-social', title: I18n.t("activerecord.attributes.contact.contact_types.#{contact.contact_type}") %>
+    <% end %>
   <% end %>
-</ul>
+</div>
 
 <h2>Результаты</h2>
 <div class="row">
