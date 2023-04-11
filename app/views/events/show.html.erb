@@ -4,8 +4,8 @@
   <div class="alert alert-danger d-flex align-items-center" role="alert">
     <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
     <div>
-      <strong>Внимание!</strong> Ближайший старт отменён. Следите за новостями в
-      <a href="https://t.me/s95news" class="alert-link">телеграм-канале</a>,
+      <strong>Внимание!</strong> <%= @total_activities.zero? ? 'Скоро открытие!' : 'Ближайший старт отменён.' %>
+      Следите за новостями в <a href="https://t.me/s95news" class="alert-link">телеграм-канале</a>,
       а пока приходите на другие <a href='/' class="alert-link">наши пробежки</a>.
     </div>
   </div>
