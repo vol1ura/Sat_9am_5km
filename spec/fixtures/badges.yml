@@ -15,10 +15,11 @@ badge_4:
   id: 4
   name: Test4
   picture_link: 'badges/25_runs.png'
-# badge_5:
-#   id: 5
-#   name: Test5
-#   picture_link: 'badges/25_runs.png'
+badge_5:
+  id: 5
+  name: Test5
+  picture_link: 'badges/25_runs.png'
+  received_date: '15.04.2023'
 badge_6:
   id: 6
   name: Test6
