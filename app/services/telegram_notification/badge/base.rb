@@ -22,7 +22,7 @@ module TelegramNotification
       end
 
       def text
-        "Все свои награды и результаты можно посмотреть [тут](#{routes.athlete_url(athlete)})."
+        "Все ваши награды и результаты можно посмотреть [тут](#{routes.athlete_url(athlete)})."
       end
 
       def routes

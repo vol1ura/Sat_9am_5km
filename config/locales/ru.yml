@@ -142,7 +142,7 @@ ru:
           instagram: инстаграм
           facebook: фейсбук
           strava: страва
-          map_link: 'карта и схема'
+          map_link: 'карта и схема проезда'
       badge:
         name: название
         conditions: 'условия получения'
