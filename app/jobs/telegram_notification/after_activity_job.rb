@@ -8,8 +8,8 @@ module TelegramNotification
       activity = Activity.find activity_id
       return unless activity.published
 
-      activity.results.each { |result| AfterActivity::Result.call(result) }
       activity.volunteers.each { |volunteer| AfterActivity::Volunteer.call(volunteer) }
+      activity.results.each { |result| AfterActivity::Result.call(result) }
     end
   end
 end
