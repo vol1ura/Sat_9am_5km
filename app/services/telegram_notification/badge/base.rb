@@ -10,7 +10,14 @@ module TelegramNotification
       def call
         return unless (telegram_id = athlete&.user&.telegram_id)
 
-        Bot.call('sendMessage', chat_id: telegram_id, text: text, disable_web_page_preview: true, parse_mode: 'Markdown')
+        Bot.call(
+          'sendMessage',
+          chat_id: telegram_id,
+          text: text,
+          disable_web_page_preview: true,
+          parse_mode: 'Markdown',
+          reply_markup: Bot::MAIN_KEYBOARD
+        )
       rescue StandardError => e
         Rollbar.error e
       end
