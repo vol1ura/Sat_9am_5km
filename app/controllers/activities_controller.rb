@@ -9,7 +9,9 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find_by(id: params[:id])
+    redirect_to activities_path and return unless @activity&.published
+
     @results_count =
       Result.joins(athlete: :activities).where(athlete: { activities: @activity }).published.group(:athlete).count
     @volunteering_count_a =

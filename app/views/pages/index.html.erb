@@ -1,21 +1,7 @@
 <%= render '/flash' %>
 <h2>Наши мероприятия</h2>
 <div class="row row-cols-1 row-cols-md-2 g-4">
-  <% Event.all.each do |event| %>
-    <div class="col">
-      <div class="card border-primary h-100">
-        <%= event_main_image_tag event, class: 'card-img-top', alt: event.name %>
-        <div class="position-absolute top-0 bg-dark bg-gradient bg-opacity-25 w-100 px-3">
-          <h4 class="text-light"><%= event.name %></h4>
-        </div>
-        <div class="card-body">
-          <p class="card-text">
-            <%= link_to event.slogan, event_path(event.code_name), class: 'stretched-link text-decoration-none text-body' %>
-          </p>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render partial: 'event', collection: Event.all, cached: true %>
 </div>
 
 <h2 class="mt-4">Наши партнёры</h2>
