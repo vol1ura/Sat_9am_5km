@@ -1,0 +1,13 @@
+<div class="col">
+  <div class="card border-primary h-100">
+    <%= event_main_image_tag event, class: 'card-img-top', alt: event.name %>
+    <div class="position-absolute top-0 bg-dark bg-gradient bg-opacity-25 w-100 px-3">
+      <h4 class="text-light"><%= event.name %></h4>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <%= link_to event.slogan, event_path(event.code_name), class: 'stretched-link text-decoration-none text-body' %>
+      </p>
+    </div>
+  </div>
+</div>
