@@ -1,9 +1,9 @@
 <h1>
   <%= @athlete.name %>
   <% if @athlete.club %>
-    <span class="badge bg-light"><%= link_to @athlete.club.name, @athlete.club, class: 'text-decoration-none' %></span>
+    <span class="badge bg-light mb-2"><%= link_to @athlete.club.name, @athlete.club, class: 'text-decoration-none' %></span>
   <% end %>
-  <button type="button" class="btn btn-outline-primary btn-light float-end float-md-none ms-md-3" data-bs-toggle="modal" data-bs-target="#barcodeModal">
+  <button type="button" class="btn btn-outline-primary btn-light float-end float-md-none ms-md-3 mb-2" data-bs-toggle="modal" data-bs-target="#barcodeModal">
     <i class="bi bi-upc-scan"></i>
   </button>
 </h1>
