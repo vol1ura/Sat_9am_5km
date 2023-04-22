@@ -34,6 +34,7 @@ class Athlete < ApplicationRecord
 
   belongs_to :club, optional: true
   belongs_to :user, optional: true
+  belongs_to :event, optional: true
 
   has_many :trophies, dependent: :destroy
   has_many :badges, through: :trophies

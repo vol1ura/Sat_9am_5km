@@ -2,6 +2,7 @@
 
 class Event < ApplicationRecord
   has_many :activities, dependent: :destroy
+  has_many :athletes, dependent: :nullify
   has_many :contacts, dependent: :destroy
   has_many :volunteering_positions, dependent: :destroy
 

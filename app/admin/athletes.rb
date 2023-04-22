@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Athlete do
-  includes :user, :club
+  includes :user, :club, :event
 
-  permit_params :parkrun_code, :fiveverst_code, :name, :male, :user_id, :club_id
+  permit_params :parkrun_code, :fiveverst_code, :name, :male, :user_id, :club_id, :event_id
 
   config.per_page = [20, 50, 100]
 
@@ -16,6 +16,7 @@ ActiveAdmin.register Athlete do
   filter :fiveverst_code
   filter :male
   filter :club
+  filter :event
   filter :created_at
   filter :updated_at
 
@@ -27,6 +28,7 @@ ActiveAdmin.register Athlete do
     column :fiveverst_code
     column :gender
     column :club
+    column :event
     column :user
     actions
   end

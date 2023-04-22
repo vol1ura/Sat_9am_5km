@@ -64,6 +64,7 @@ ru:
         parkzhrun_code: 'parkzhrun ID'
         gender: пол
         club: клуб
+        event: 'домашний забег'
         male: мужчина
         user: пользователь
       activity:
