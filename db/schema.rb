@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_11_105200) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_22_183405) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -49,7 +49,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_105200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "parkzhrun_code"
+    t.bigint "event_id"
     t.index ["club_id"], name: "index_athletes_on_club_id"
+    t.index ["event_id"], name: "index_athletes_on_event_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
     t.index ["name"], name: "index_athletes_on_name", opclass: :gist_trgm_ops, using: :gist
     t.index ["parkrun_code"], name: "index_athletes_on_parkrun_code", unique: true
@@ -172,6 +174,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_105200) do
 
   add_foreign_key "activities", "events"
   add_foreign_key "athletes", "clubs", on_delete: :nullify
+  add_foreign_key "athletes", "events", on_delete: :nullify
   add_foreign_key "athletes", "users", on_delete: :nullify
   add_foreign_key "contacts", "events"
   add_foreign_key "permissions", "users"

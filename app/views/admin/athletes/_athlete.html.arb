@@ -7,6 +7,7 @@ attributes_table_for athlete do
   row :parkzhrun_code
   row :gender
   row :club
+  row :event
   row :user
 end
 
