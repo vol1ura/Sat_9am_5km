@@ -21,7 +21,8 @@ class AthletesController < ApplicationController
     @pb_by_time = results.order(:total_time).first
     @pb_by_position = results.joins(:activity).where(position: results.minimum(:position)).order(date: :desc)
     @total_results = results.size
-    @total_vol = @athlete.volunteering.size
+    @volunteering = @athlete.volunteering
+    @total_vol = @volunteering.size
     @barcode = BarcodePrinter.call(@athlete)
   end
 end
