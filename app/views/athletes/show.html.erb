@@ -131,6 +131,47 @@
         </div>
       </div>
     </div>
+
+    <% if @total_vol.positive? %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-totalVolunteering">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalVolunteering" aria-expanded="false" aria-controls="flush-collapseTotalVolunteering">
+            <span class="badge text-bg-ligth bg-primary me-3"><%= @total_vol %></span>
+            всего волонтёрств
+          </button>
+        </h2>
+        <div id="flush-collapseTotalVolunteering" class="accordion-collapse collapse" aria-labelledby="flush-totalVolunteering" data-bs-parent="#accordionPersonalBest">
+          <div class="accordion-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="hstack">
+                  <div class="acc-li-s">Волонтёрский h-индекс</div>
+                  <div class="mx-3">
+                    <abbr title="Индекс равен h, если есть как минимум h позиций, на каждой из которых было как минимум h волонтёрств." class="initialism">
+                      <%= @volunteering.unscope(:order).group(:role).count.values.sort.reverse.map.with_index.take_while { |vc, idx| vc > idx }.size %>
+                    </abbr>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="hstack">
+                  <div class="acc-li-s">Коэффициент волонтёра</div>
+                  <div class="mx-3">
+                    <abbr title="Число волонтёрств  на каждые 5 пробежек" class="initialism">
+                      <% if @total_results.zero? %>
+                        <i class="bi bi-infinity"></i>
+                      <% else %>
+                        <%= (@total_vol * 5.0 / @total_results).round(1) %>
+                      <% end %>
+                    </abbr>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
@@ -138,17 +179,6 @@
 <% if @total_vol.zero? %>
   <p>Пока не было волонтёрств.</p>
 <% else %>
-  <p>
-    Всего волонтёрств <%= @total_vol %>.
-    Коэффициент волонтёра:
-    <abbr title="Число волонтёрств  на каждые 5 пробежек" class="initialism">
-      <% if @total_results.zero? %>
-        <i class="bi bi-infinity"></i>
-      <% else %>
-        <%= (@total_vol * 5.0 / @total_results).round(1) %>
-      <% end %>
-    </abbr>.
-  </p>
   <div class="accordion accordion-flush" id="accordionRoles">
     <% @athlete.volunteering.pluck(:role).uniq.each do |role| %>
       <% volunteering = @athlete.volunteering.includes(activity: :event).where(role: role) %>
