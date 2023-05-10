@@ -214,6 +214,7 @@ ru:
     formats:
       default: "%-d %b %Y"
       long: "%d %B %Y"
+      brief: "%d %B"
       short: "%d.%m.%Y"
     month_names:
     -
