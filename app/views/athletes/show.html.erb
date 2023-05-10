@@ -131,7 +131,6 @@
         </div>
       </div>
     </div>
-
     <% if @total_vol.positive? %>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-totalVolunteering">
@@ -148,7 +147,7 @@
                   <div class="acc-li-s">Волонтёрский h-индекс</div>
                   <div class="mx-3">
                     <abbr title="Индекс равен h, если есть как минимум h позиций, на каждой из которых было как минимум h волонтёрств." class="initialism">
-                      <%= @volunteering.unscope(:order).group(:role).count.values.sort.reverse.map.with_index.take_while { |vc, idx| vc > idx }.size %>
+                      <%= @volunteering.unscope(:order).group(:role).count.values.sort.reverse.map.with_index.take_while { |count, idx| count > idx }.size %>
                     </abbr>
                   </div>
                 </div>

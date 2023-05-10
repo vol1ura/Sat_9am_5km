@@ -17,7 +17,9 @@
   интересное и посильное любому занятие, которое позволит раскрыть себя, поддержать друзей, отлично провести время.
 </p>
 <p>
-  Ниже вы можете посмотреть список <em>обязательных позиций</em>, а также увидеть какие из них уже выбраны.
+  <% unless @activities.empty? %>
+    Ниже вы можете посмотреть список <em>обязательных позиций</em>, а также увидеть какие из них уже выбраны.
+  <% end %>
   <% if (tg_chat = @event.contacts.find_by(contact_type: :tg_chat)) %>
     Чтобы записаться, просто напишите в наш <%= sanitized_link_to('телеграм чат', tg_chat.link, target: '_blank', rel: 'noopener') %>.
   <% end %>
@@ -27,11 +29,11 @@
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
   <% @activities.each_with_index do |activity, idx| %>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link <%= 'active' if idx.zero? %>" id="tab-<%= idx %>" data-bs-toggle="tab" data-bs-target="#tab-<%= idx %>-pane" type="button" role="tab" aria-controls="tab-<%= idx %>-pane" aria-selected="true">
-      <%= l activity.date %>
-    </button>
-  </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link <%= 'active' if idx.zero? %>" id="tab-<%= idx %>" data-bs-toggle="tab" data-bs-target="#tab-<%= idx %>-pane" type="button" role="tab" aria-controls="tab-<%= idx %>-pane" aria-selected="true">
+        <%= l activity.date, format: :brief %>
+      </button>
+    </li>
   <% end %>
 </ul>
 <div class="tab-content" id="protocolContent">
@@ -46,7 +48,7 @@
         </thead>
         <tbody class="table-group-divider">
           <% @event.volunteering_positions.each do |position| %>
-            <% volunteers = activity.volunteers.public_send("#{position.role}_role").to_a %>
+            <% volunteers = activity.volunteers.includes(:athlete).public_send("#{position.role}_role").to_a %>
             <% [position.number, volunteers.size].max.times.each do |i| %>
               <tr>
                 <td><%= human_volunteer_role position.role %></td>
