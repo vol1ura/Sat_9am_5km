@@ -424,7 +424,7 @@ DEPENDENCIES
   cancancan (~> 3.4)
   capistrano (~> 3.17)
   capistrano-rails (~> 1.6)
-  capistrano-rbenv (~> 2.2.0)
+  capistrano-rbenv (~> 2.2)
   capistrano-sidekiq (~> 2.3)
   capistrano3-puma
   dalli
@@ -448,7 +448,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   redis
   rollbar
-  rspec-rails (~> 6.0.1)
+  rspec-rails (~> 6.0)
   rubocop
   rubocop-performance
   rubocop-rails
