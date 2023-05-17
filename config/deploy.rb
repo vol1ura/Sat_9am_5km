@@ -1,14 +1,16 @@
 # config valid for current version and patch releases of Capistrano
-lock '~> 3.17.0'
+lock '~> 3.17'
 
 set :user, ENV['DEPLOY_USER']
+
 set :rbenv_type, :user
 set :rbenv_ruby, '3.1.0'
 
 set :application, ENV['APP_NAME']
-set :repo_url, ENV['APP_REPO']
 
+set :repo_url, ENV['APP_REPO']
 set :branch, 'master'
+
 set :deploy_to, ENV['APP_DEPLOY_PATH']
 
 # Default value for :pty is false
