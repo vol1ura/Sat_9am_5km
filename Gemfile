@@ -40,7 +40,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 6.0.1'
+  gem 'rspec-rails', '~> 6.0'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
@@ -62,7 +62,7 @@ group :development do
   gem 'capistrano', '~> 3.17', require: false
   gem 'capistrano3-puma', require: false
   gem 'capistrano-rails', '~> 1.6', require: false
-  gem 'capistrano-rbenv', '~> 2.2.0', require: false
+  gem 'capistrano-rbenv', '~> 2.2', require: false
   gem 'capistrano-sidekiq', '~> 2.3', require: false
 
   gem 'bcrypt_pbkdf', '~> 1.0'
