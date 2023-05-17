@@ -22,7 +22,7 @@ gem 'hotwire-rails'
 gem 'jbuilder'
 gem 'nokogiri'
 gem 'pg', '~> 1.4'
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 6.2'
 gem 'sidekiq'
 gem 'sprockets-rails'
 
