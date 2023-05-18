@@ -56,8 +56,6 @@ jobs:
       BULLET_ENABLED: true
       APP_HOST: "app.test.com"
       APP_DOMAIN: "test.com"
-      EMAIL_FROM: "test@test.ru"
-      SMTP_SERVER: "smtp.yandex.ru"
       VK_TOKEN: ${{ secrets.VK_TOKEN }}
       VK_GROUP_ID: 212432495
       BOT_TOKEN: "123456:test"

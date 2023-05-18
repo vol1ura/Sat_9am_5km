@@ -27,11 +27,8 @@ module Sat9am5km
 
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address: ENV.fetch('SMTP_SERVER'),
-      port: 587,
+      **Rails.application.credentials.mailer,
       authentication: :plain,
-      user_name: Rails.application.credentials.dig(:mailer, :user_name),
-      password: Rails.application.credentials.dig(:mailer, :password),
       domain: ENV.fetch('APP_DOMAIN'),
       enable_starttls_auto: true
     }
