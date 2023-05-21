@@ -9,8 +9,8 @@ class Volunteer < ApplicationRecord
     food_maker: 21
   }.freeze
 
-  belongs_to :activity
-  belongs_to :athlete
+  belongs_to :activity, touch: true
+  belongs_to :athlete, touch: true
 
   validates :role, presence: true
   validates :athlete_id, uniqueness: { scope: :activity_id }
