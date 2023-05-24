@@ -140,7 +140,7 @@ GEM
       rexml
     crass (1.0.6)
     dalli (3.2.3)
-    database_consistency (1.7.4)
+    database_consistency (1.7.8)
       activerecord (>= 3.2)
     date (3.3.3)
     devise (4.8.1)
@@ -177,7 +177,7 @@ GEM
       rails (>= 6.0.0)
       stimulus-rails
       turbo-rails
-    i18n (1.12.0)
+    i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)

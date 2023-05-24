@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_22_183405) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_161558) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_22_183405) do
   create_table "activities", force: :cascade do |t|
     t.date "date"
     t.text "description"
-    t.boolean "published", default: false
+    t.boolean "published", default: false, null: false
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -83,7 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_22_183405) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.boolean "active", default: true
+    t.boolean "active", default: true, null: false
     t.string "code_name", null: false
     t.string "town", null: false
     t.string "place", null: false
