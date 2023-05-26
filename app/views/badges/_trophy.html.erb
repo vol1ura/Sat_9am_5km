@@ -5,7 +5,7 @@
 <% if @badge.record_kind? %>
   <% trophy.info['data'].each do |record| %>
     <tr>
-      <td><%= link_to athlete.name, athlete_path(athlete) %></td>
+      <td><%= link_to athlete.name, athlete %></td>
       <td><%= Event.find(record['event_id']).name %></td>
       <% record_result = Result.find(record['result_id']) %>
       <td><%= human_result_time record_result.total_time %></td>
@@ -15,7 +15,7 @@
   <% end %>
 <% else %>
   <tr>
-    <td><%= link_to athlete.name, athlete_path(athlete) %></td>
+    <td><%= link_to athlete.name, athlete %></td>
     <% unless @badge.funrun_kind? %>
       <td><%= l date if date %></td>
     <% end %>
