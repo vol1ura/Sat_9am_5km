@@ -11,6 +11,8 @@ class ScannerParser < ApplicationService
     return unless table.dig(1, 0).match?(/A\d+/)
 
     table[1..].each do |row|
+      next if row.second == 'null' # Athlete was already scanned
+
       AddAthleteToResultJob.perform_later(@activity, row)
     end
   end
