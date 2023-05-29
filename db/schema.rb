@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_161558) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_29_201740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -113,6 +113,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_161558) do
     t.bigint "activity_id", null: false
     t.bigint "athlete_id"
     t.boolean "informed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_results_on_activity_id"
     t.index ["athlete_id"], name: "index_results_on_athlete_id"
   end
@@ -122,6 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_161558) do
     t.bigint "athlete_id", null: false
     t.date "date"
     t.jsonb "info", default: "{}", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["athlete_id"], name: "index_trophies_on_athlete_id"
     t.index ["badge_id", "athlete_id"], name: "index_trophies_on_badge_id_and_athlete_id", unique: true
     t.index ["info"], name: "index_trophies_on_info", using: :gin
@@ -168,6 +172,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_161558) do
     t.bigint "activity_id", null: false
     t.bigint "athlete_id", null: false
     t.boolean "informed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["activity_id", "athlete_id"], name: "index_volunteers_on_activity_id_and_athlete_id", unique: true
     t.index ["athlete_id"], name: "index_volunteers_on_athlete_id"
   end
