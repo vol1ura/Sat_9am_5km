@@ -7,7 +7,7 @@ module TelegramNotification
 
       def text
         <<~TEXT
-          #{athlete.user.first_name}, поздравляем вас с участием в #{activity.number}-м забеге S95 #{activity.event.name}.
+          #{athlete.user.first_name}, поздравляем вас с участием в #{activity.number}-м забеге S95 #{activity.event_name}.
           Вы финишировали на #{@entity.position}-м месте в общем зачёте с результатом #{total_time}.
           Общее число принявших участие в забеге спортсменов составило #{activity.results.count}.
           #{super}

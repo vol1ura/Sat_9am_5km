@@ -27,7 +27,7 @@ module ApplicationHelper
   end
 
   def human_activity_name(activity)
-    "#{activity.date} - #{activity.event.name}"
+    "#{activity.date} - #{activity.event_name}"
   end
 
   def human_volunteer_role(role)

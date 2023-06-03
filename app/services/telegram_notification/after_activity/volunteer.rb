@@ -8,7 +8,7 @@ module TelegramNotification
       def text
         <<~TEXT
           #{athlete.user.first_name}, привет!
-          Благодарим вас за волонтёрство на #{activity.number}-м забеге S95 #{activity.event.name}.
+          Благодарим вас за волонтёрство на #{activity.number}-м забеге S95 #{activity.event_name}.
           Забеги S95 целиком зависят от вклада волонтёров, и мы очень признательны вам за помощь.
           #{super}
           С любовью,
