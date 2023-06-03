@@ -7,5 +7,5 @@
     <% club = result.athlete&.club %>
     <%= link_to club.name, club if club %>
   </td>
-  <td class="hidden-on-phone"><%= link_to result.activity.event.name, event_path(result.activity.event.code_name) %></td>
+  <td class="hidden-on-phone"><%= link_to result.activity.event_name, event_path(result.activity.event.code_name) %></td>
 </tr>

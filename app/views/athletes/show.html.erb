@@ -96,7 +96,7 @@
               <%= link_to l(@pb_by_time.activity.date), @pb_by_time.activity %>
             </div>
             <div class="ms-3">
-              <%= link_to @pb_by_time.activity.event.name, event_path(@pb_by_time.activity.event.code_name) %>
+              <%= link_to @pb_by_time.activity.event_name, event_path(@pb_by_time.activity.event.code_name) %>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@
                     <%= human_result_time pb.total_time %>
                   </div>
                   <div>
-                    <%= link_to pb.activity.event.name, event_path(pb.activity.event.code_name) %>
+                    <%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %>
                   </div>
                 </div>
               </li>
@@ -198,7 +198,7 @@
                       <%= link_to l(vol.activity.date), vol.activity %>
                     </div>
                     <div class="ms-3">
-                      <%= link_to vol.activity.event.name, event_path(vol.activity.event.code_name) %>
+                      <%= link_to vol.activity.event_name, event_path(vol.activity.event.code_name) %>
                     </div>
                   </div>
                 </li>

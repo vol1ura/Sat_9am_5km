@@ -14,6 +14,8 @@ class Activity < ApplicationRecord
 
   scope :published, -> { where(published: true) }
 
+  delegate :name, to: :event, prefix: true
+
   def volunteers_roster
     volunteers
       .joins("LEFT JOIN volunteering_positions vp on vp.event_id = #{event_id} AND vp.role = volunteers.role")

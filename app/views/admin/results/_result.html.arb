@@ -4,6 +4,6 @@ attributes_table_for result do
   row :athlete
   row :position
   row('Результат') { |r| human_result_time(r.total_time) }
-  row('Забег') { |r| r.activity.event.name }
+  row('Забег') { |r| r.activity.event_name }
   row 'Дата забега', &:date
 end

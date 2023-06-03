@@ -8,7 +8,7 @@ active_admin_form_for [:admin, activity, resource] do |f|
         li f.object.athlete&.name || 'Участник не привязан'
         li "Parkrun ID: #{f.object.athlete&.parkrun_code || 'не указан'}"
         li "5В или RP ID: #{f.object.athlete&.fiveverst_code || 'не указан'}"
-        li "Забег: #{f.object.activity.event.name}"
+        li "Забег: #{f.object.activity.event_name}"
         li "Дата забега: #{f.object.date}"
       end
     end
