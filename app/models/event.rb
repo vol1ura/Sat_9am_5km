@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   has_many :volunteering_positions, dependent: :destroy
 
   validates :name, :code_name, :town, :place, presence: true
-  validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ } # rubocop:disable Rails/UniqueValidationWithoutIndex
+  validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ }
 
   default_scope { order(:visible_order, :name) }
 
