@@ -93,6 +93,9 @@ GEM
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
     ast (2.4.2)
+    audited (5.3.3)
+      activerecord (>= 5.0, < 7.1)
+      request_store (~> 1.2)
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     barby (0.6.8)
@@ -302,6 +305,8 @@ GEM
     redis-client (0.11.2)
       connection_pool
     regexp_parser (2.7.0)
+    request_store (1.5.1)
+      rack (>= 1.4)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -415,6 +420,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   activeadmin_quill_editor
+  audited
   barby
   bcrypt_pbkdf (~> 1.0)
   bootstrap (~> 5.2.3)

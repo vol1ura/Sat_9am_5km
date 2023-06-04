@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  audited max_audits: 20
+  has_associated_audits
+
   ROLE = { admin: 0 }.freeze
 
   # Include default devise modules. Others available are:

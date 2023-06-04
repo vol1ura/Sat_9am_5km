@@ -14,3 +14,13 @@ attributes_table_for user do
   row('Клуб') { |u| u.athlete&.club&.name }
   row :athlete
 end
+
+panel 'Правки' do
+  table_for user.own_and_associated_audits.includes(:user, :auditable).reorder(created_at: :desc) do
+    column :auditable
+    column :audited_changes
+    column :version
+    column :user
+    column :created_at
+  end
+end
