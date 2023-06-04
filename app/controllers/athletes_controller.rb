@@ -11,7 +11,7 @@ class AthletesController < ApplicationController
         personal_code = Athlete::PersonalCode.new(query.to_i)
         criteria.where(personal_code.code_type => personal_code.id)
       else
-        criteria.where('name ILIKE :query', query: "%#{query}%")
+        criteria.where('name ILIKE :query', query: "%#{Athlete.sanitize_sql_like(query)}%")
       end
   end
 

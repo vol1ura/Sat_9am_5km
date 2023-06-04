@@ -1,10 +1,9 @@
 RSpec.describe '/admin/contacts' do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :admin) }
   let(:event) { create(:event) }
 
   before do
     FactoryBot.rewind_sequences
-    user.admin!
     sign_in user
   end
 

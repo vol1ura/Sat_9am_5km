@@ -7,6 +7,10 @@ FactoryBot.define do
     telegram_user { Faker::Internet.username }
     telegram_id { Faker::Number.number(digits: 10) }
 
+    trait :admin do
+      role { :admin }
+    end
+
     after :build, &:skip_confirmation_notification!
 
     after :create, &:confirm

@@ -1,11 +1,10 @@
 RSpec.describe '/admin/volunteering_positions' do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :admin) }
   let(:event) { create(:event) }
   let(:position) { create(:volunteering_position, event: event) }
 
   before do
     FactoryBot.rewind_sequences
-    user.admin!
     sign_in user
   end
 
