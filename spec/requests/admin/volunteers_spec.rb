@@ -19,9 +19,7 @@ RSpec.describe '/admin/activities/1/volunteers' do
     end
 
     context 'when user is admin' do
-      before do
-        user.admin!
-      end
+      before { user.admin! }
 
       it 'shows volunteers from not only allowed event' do
         volunteer = create(:volunteer)

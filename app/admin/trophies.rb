@@ -9,7 +9,14 @@ ActiveAdmin.register Trophy do
 
   config.filters = false
 
-  index download_links: false
+  index download_links: false do
+    selectable_column
+    column :athlete
+    column :date
+    column :info
+    column :updated_at
+    actions
+  end
 
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)

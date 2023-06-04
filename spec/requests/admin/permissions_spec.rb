@@ -2,9 +2,7 @@ RSpec.describe '/admin/events' do
   let(:user) { create(:user) }
   let(:permission) { create(:permission) }
 
-  before do
-    sign_in user
-  end
+  before { sign_in user }
 
   describe 'GET /admin/users/1/permissions' do
     it 'redirects non-admin users' do
@@ -32,9 +30,7 @@ RSpec.describe '/admin/events' do
     end
 
     context 'when user is admin' do
-      before do
-        user.admin!
-      end
+      before { user.admin! }
 
       it 'renders a form' do
         get edit_admin_user_permission_url(permission.user, permission)
@@ -49,14 +45,11 @@ RSpec.describe '/admin/events' do
         permission: {
           action: Permission::ACTIONS.sample,
           subject_class: Permission::CLASSES.sample,
-          # user_id: permission.user.id
         }
       }
     end
 
-    before do
-      user.admin!
-    end
+    before { user.admin! }
 
     it 'creates a new permission' do
       some_user = permission.user

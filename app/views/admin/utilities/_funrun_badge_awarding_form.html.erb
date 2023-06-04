@@ -1,0 +1,11 @@
+<%= form_with url: admin_utilities_award_funrun_badge_path do |f| %>
+  <div style="margin-bottom: 6px">
+    <%= f.label :badge_id, 'Бейдж' %>
+    <%= f.collection_select :badge_id, Badge.funrun_kind.order(received_date: :desc).first(5), :id, :name %>
+  </div>
+  <div style="margin-bottom: 6px">
+    <%= f.label :activity_id, 'Забег' %>
+    <%= f.select :activity_id, Activity.includes(:event).published.where(date: 2.weeks.ago..).order(date: :desc).map { |a| [human_activity_name(a), a.id]} %>
+  </div>
+  <%= f.submit 'Запустить награждение', data: { confirm: 'Запустить награждение?' } %>
+<% end %>

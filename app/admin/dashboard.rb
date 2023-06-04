@@ -51,7 +51,7 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
         panel t('active_admin.dashboard_welcome.latest_activities') do
           ul do
-            Activity.includes(:event).order(created_at: :desc).limit(10).map do |activity|
+            Activity.includes(:event).order(created_at: :desc).first(10).each do |activity|
               li link_to_if(can?(:read, activity), human_activity_name(activity), admin_activity_path(activity))
             end
           end
