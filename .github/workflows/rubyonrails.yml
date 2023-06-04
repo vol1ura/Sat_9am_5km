@@ -30,7 +30,7 @@ jobs:
         with:
           ruby-version: 3.1.0
       - name: Install packages
-        run: gem install rubocop rubocop-performance rubocop-rails rubocop-rake rubocop-rspec
+        run: bundle
       - name: Lint Ruby files
         run: rubocop --parallel
 

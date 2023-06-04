@@ -9,7 +9,7 @@ active_admin_form_for [:admin, resource] do |f|
 
   unless resource.date && resource.results.exists?
     f.inputs 'Укажите дату, если хотите создать забег для формирования команды волонтёров' do
-      input :date, as: :datepicker, datepicker_options: { min_date: '-1D', max_date: '+1M' }
+      input :date, as: :datepicker, datepicker_options: { min_date: '-1D', max_date: '+2M' }
     end
   end
 
