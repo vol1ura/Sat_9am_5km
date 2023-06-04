@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Activity < ApplicationRecord
+  audited
+  has_associated_audits
+
   MAX_SCANNERS = 5
 
   belongs_to :event

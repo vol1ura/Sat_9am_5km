@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Athlete < ApplicationRecord
+  audited associated_with: :user, max_audits: 20
+
   PARKZHRUN_BORDER = 690_000_000
   SAT_5AM_9KM_BORDER = 770_000_000
   FIVE_VERST_BORDER = 790_000_000

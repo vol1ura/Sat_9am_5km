@@ -68,7 +68,7 @@ ru:
         male: мужчина
         user: пользователь
       activity:
-        date: 'дата забега'
+        date: дата
         published: опубликован?
         description: описание
       club:
@@ -158,7 +158,10 @@ ru:
           record: 'рекорд трассы'
           rage: 'раж'
       trophy:
+        athlete: участник
         date: 'дата получения'
+        info: доп.информация
+        updated_at: обновлён
 
     errors:
       messages:
