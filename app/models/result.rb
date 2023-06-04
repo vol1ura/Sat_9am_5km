@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Result < ApplicationRecord
+  audited associated_with: :activity, except: :informed
+
   belongs_to :activity, touch: true
   belongs_to :athlete, optional: true, touch: true
 

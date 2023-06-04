@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Volunteer < ApplicationRecord
+  audited associated_with: :activity, except: :informed
+
   ROLES = {
     director: 0, marshal: 1, timer: 2, photograph: 3, tokens: 4, scanner: 5,
     instructor: 6, marking_maker: 7, event_closer: 8, marking_picker: 9, cards_sorter: 10,

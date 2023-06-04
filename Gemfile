@@ -12,6 +12,7 @@ gem 'rails', '~> 7.0.4'
 
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
+gem 'audited'
 gem 'barby', require: false
 gem 'bootstrap', '~> 5.2.3'
 gem 'cancancan', '~> 3.4'
