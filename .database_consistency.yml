@@ -9,11 +9,6 @@ Athlete:
     ThreeStateBooleanChecker:
       enabled: false
 
-Event:
-  code_name:
-    MissingUniqueIndexChecker:
-      enabled: false
-
 Permission:
   event:
     ForeignKeyChecker:

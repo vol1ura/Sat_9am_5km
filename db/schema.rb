@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_01_091157) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_03_135143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_091157) do
     t.string "main_picture_link"
     t.integer "visible_order"
     t.string "slogan"
+    t.index ["code_name"], name: "index_events_on_code_name", unique: true
   end
 
   create_table "permissions", force: :cascade do |t|
