@@ -18,6 +18,7 @@ end
 panel 'Правки' do
   table_for user.own_and_associated_audits.includes(:user, :auditable).reorder(created_at: :desc) do
     column :auditable
+    column :action
     column :audited_changes
     column :version
     column :user
