@@ -63,7 +63,11 @@ ActiveAdmin.register Result do
   end
 
   after_destroy do |result|
-    collection.where('position > ?', result.position).each { |r| r.update(position: r.position.pred) }
+    result.transaction do
+      collection.where('position > ?', result.position).each do |res|
+        res.decrement! :position  # rubocop:disable Rails/SkipsModelValidations
+      end
+    end
     flash[:notice] = t('active_admin.results.result_destroyed', position: result.position)
   end
 

@@ -54,7 +54,7 @@ class Result < ApplicationRecord
   def insert_new_result_above!
     results = activity.results.includes(:athlete, :activity).where(position: position..).order(:position)
     transaction do
-      results.each { |res| res.update!(position: res.position.next) }
+      results.each { |res| res.increment! :position }  # rubocop:disable Rails/SkipsModelValidations
       activity.results.create!(position: position)
     end
   end
