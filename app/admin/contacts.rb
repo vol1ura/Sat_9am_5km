@@ -7,7 +7,7 @@ ActiveAdmin.register Contact do
 
   permit_params :contact_type, :event_id, :link
 
-  index download_links: false, title: -> { "Контакты #{@event.name}" } do
+  index download_links: false, title: -> { t '.title', event_name: @event.name } do
     selectable_column
 
     column :contact_type

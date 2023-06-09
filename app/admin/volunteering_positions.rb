@@ -19,22 +19,18 @@ ActiveAdmin.register VolunteeringPosition do
   controller do
     def update
       update! do |format|
-        if resource.valid?
-          format.html { redirect_to collection_path, notice: t('active_admin.volunteering_position.successful_updated') }
-        end
+        format.html { redirect_to collection_path, notice: t('.successful') } if resource.valid?
       end
     end
 
     def create
       create! do |format|
-        if resource.valid?
-          format.html { redirect_to collection_path, notice: t('active_admin.volunteering_position.successful_created') }
-        end
+        format.html { redirect_to collection_path, notice: t('.successful') } if resource.valid?
       end
     end
   end
 
-  index download_links: false, title: -> { "Волонтёрские позиции #{@event.name}" } do
+  index download_links: false, title: -> { t '.title', event_name: @event.name } do
     selectable_column
     column :rank
     column :number

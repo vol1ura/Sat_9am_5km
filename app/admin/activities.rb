@@ -33,16 +33,7 @@ ActiveAdmin.register Activity do
     Activity::MAX_SCANNERS.times do |scanner_number|
       ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
     end
-    flash[:notice] = t('active_admin.activities.success_upload') if params[:activity][:scanner0]
-  end
-
-  collection_action :clear_cache, method: :delete, if: proc { current_admin_user.admin? } do
-    if ClearCache.call
-      flash[:notice] = t('active_admin.activities.cache_clear.success')
-    else
-      flash[:alert] = t('active_admin.activities.cache_clear.failed')
-    end
-    redirect_to collection_path
+    flash[:notice] = params[:activity][:scanner0] ? t('.success_upload') : t('.success_created')
   end
 
   action_item :results, only: %i[show edit] do
@@ -51,9 +42,5 @@ ActiveAdmin.register Activity do
 
   action_item :volunteers, only: %i[show edit] do
     link_to 'Редактор волонтёров', admin_activity_volunteers_path(resource)
-  end
-
-  action_item :clear_cache, only: :index, if: proc { current_user.admin? } do
-    link_to 'СБРОСИТЬ КЕШ', clear_cache_admin_activities_path, method: :delete, data: { confirm: 'Сбросить кеш?' }
   end
 end

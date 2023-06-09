@@ -23,22 +23,18 @@ ActiveAdmin.register Volunteer do
 
     def update
       update! do |format|
-        if resource.valid?
-          format.html { redirect_to collection_path, notice: t('active_admin.volunteers.successful_updated') }
-        end
+        format.html { redirect_to collection_path, notice: t('.successful') } if resource.valid?
       end
     end
 
     def create
       create! do |format|
-        if resource.valid?
-          format.html { redirect_to collection_path, notice: t('active_admin.volunteers.successful_created') }
-        end
+        format.html { redirect_to collection_path, notice: t('.successful') } if resource.valid?
       end
     end
   end
 
-  index download_links: [:csv], title: -> { "Редактор волонтёров #{@activity.date ? l(@activity.date) : '(нет даты)'}" } do
+  index download_links: [:csv], title: -> { t '.title', date: @activity.date ? l(@activity.date) : '(нет даты)' } do
     selectable_column
     column :athlete
     column(:role) { |v| human_volunteer_role v.role }

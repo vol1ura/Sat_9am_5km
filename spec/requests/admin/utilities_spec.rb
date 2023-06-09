@@ -20,4 +20,29 @@ RSpec.describe '/admin/utilities' do
       expect(response).to redirect_to admin_badge_trophies_path(badge.id)
     end
   end
+
+  describe 'DELETE /admin/utilities/clear_cache' do
+    before do
+      allow(ClearCache).to receive(:call).and_return(clear_result)
+      delete admin_utilities_clear_cache_url
+    end
+
+    context 'when cache was cleared' do
+      let(:clear_result) { true }
+
+      it 'redirects' do
+        expect(flash[:notice]).to be_present
+        expect(response).to redirect_to admin_utilities_url
+      end
+    end
+
+    context 'when cache was not cleared' do
+      let(:clear_result) { false }
+
+      it 'redirects' do
+        expect(flash[:alert]).to be_present
+        expect(response).to redirect_to admin_utilities_url
+      end
+    end
+  end
 end
