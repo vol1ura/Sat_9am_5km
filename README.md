@@ -29,6 +29,8 @@ make ash
 # in docker container
 rails db:prepare
 rails db:environment:set RAILS_ENV=test
+# add secrets
+EDITOR=vim rails credentials:edit
 ```
 
 Now you can run it
@@ -41,3 +43,4 @@ make
 - Database panel [http://localhost:3003](http://localhost:3003)
 - Bug tracker [Rollbar.com](https://rollbar.com/Urka/Sat_9am_5km/)
 - Sidekiq [WebUI](https://s95.ru/sidekiq) for admin users
+- [New Relic](https://newrelic.com/)

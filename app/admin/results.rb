@@ -34,15 +34,15 @@ ActiveAdmin.register Result do
     end
   end
 
-  sidebar I18n.t('active_admin.results.explanation.title'), only: :index do
+  sidebar I18n.t('.results.explanation.title'), only: :index do
     ul do
-      li I18n.t('active_admin.results.explanation.unknown_athlete')
-      li I18n.t('active_admin.results.explanation.without_token')
-      li I18n.t('active_admin.results.explanation.delete_result')
-      li I18n.t('active_admin.results.explanation.delete_time')
-      li I18n.t('active_admin.results.explanation.delete_athlete')
-      li I18n.t('active_admin.results.explanation.reset_athlete')
-      li I18n.t('active_admin.results.explanation.insert_result')
+      li I18n.t('.results.explanation.unknown_athlete')
+      li I18n.t('.results.explanation.without_token')
+      li I18n.t('.results.explanation.delete_result')
+      li I18n.t('.results.explanation.delete_time')
+      li I18n.t('.results.explanation.delete_athlete')
+      li I18n.t('.results.explanation.reset_athlete')
+      li I18n.t('.results.explanation.insert_result')
     end
   end
 
@@ -68,7 +68,7 @@ ActiveAdmin.register Result do
         res.decrement! :position  # rubocop:disable Rails/SkipsModelValidations
       end
     end
-    flash[:notice] = t('active_admin.results.result_destroyed', position: result.position)
+    flash[:notice] = t('.result_destroyed', position: result.position)
   end
 
   member_action :up, method: :put, if: proc { can? :update, Result } do
