@@ -41,12 +41,12 @@ active_admin_form_for [:admin, resource] do |f|
       para 'Файл с секундомера уже загружен. Если его нужно загрузить повторно, сначала очистите все результаты забега.'
     end
   else
-    f.inputs 'Загрузите файл с секундомера' do
+    f.inputs 'Загрузите файл с секундомера (только CSV)' do
       input :timer, as: :file, label: 'Файл с секундомера'
     end
   end
 
-  f.inputs 'Загрузите файлы со сканеров' do
+  f.inputs 'Загрузите файлы со сканеров (только CSV)' do
     Activity::MAX_SCANNERS.times do |i|
       input "scanner#{i}".to_sym, as: :file, label: "Файл со сканера #{i + 1}"
     end
