@@ -19,7 +19,7 @@ ActiveAdmin.register Activity do
 
   index download_links: false do
     column :date
-    column 'Где?', &:event_name
+    column :event_name
     column :published
     actions
   end

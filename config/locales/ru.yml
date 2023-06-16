@@ -71,6 +71,7 @@ ru:
         date: дата
         published: опубликован?
         description: описание
+        event_name: где?
       club:
         name: название
       event:
