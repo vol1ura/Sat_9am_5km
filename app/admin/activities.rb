@@ -34,6 +34,9 @@ ActiveAdmin.register Activity do
       ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
     end
     flash[:notice] = params[:activity][:scanner0] ? t('.success_upload') : t('.success_created')
+  rescue CSV::MalformedCSVError => e
+    Rollbar.error e
+    flash[:alert] = t('.failed_upload')
   end
 
   action_item :results, only: %i[show edit] do
