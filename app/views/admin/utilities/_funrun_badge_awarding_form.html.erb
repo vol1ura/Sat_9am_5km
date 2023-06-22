@@ -5,7 +5,16 @@
   </div>
   <div style="margin-bottom: 24px">
     <%= f.label :activity_id, 'Забег' %>
-    <%= f.select :activity_id, Activity.includes(:event).published.where(date: 2.weeks.ago..).order(date: :desc).map { |a| [human_activity_name(a), a.id]} %>
+    <%=
+      f.select :activity_id,
+               Activity
+                 .includes(:event)
+                 .published
+                 .where(date: 2.weeks.ago..)
+                 .order(date: :desc)
+                 .map { |a| [human_activity_name(a), a.id] },
+               include_blank: true
+    %>
   </div>
   <%= f.submit 'Запустить награждение', data: { confirm: 'Запустить награждение?' } %>
 <% end %>
