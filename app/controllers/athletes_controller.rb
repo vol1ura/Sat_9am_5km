@@ -13,6 +13,7 @@ class AthletesController < ApplicationController
       else
         criteria.where('name ILIKE :query', query: "%#{Athlete.sanitize_sql_like(query)}%")
       end
+    redirect_to athlete_path(@athletes.take) if @athletes.size == 1
   end
 
   def show
