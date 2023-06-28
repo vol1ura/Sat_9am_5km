@@ -1,21 +1,27 @@
 RSpec.describe '/athletes' do
   describe 'GET /athletes' do
+    before { create_list(:athlete, 3) }
+
     it 'renders a successful response for name search' do
       create(:athlete, name: 'SOME Test')
-      create_list(:athlete, 3)
+      create(:athlete, name: 'Some Other')
       get athletes_url(name: 'Some')
       expect(response).to be_successful
     end
 
-    it 'renders a successful response for ID search' do
-      create(:athlete, parkrun_code: 111_111)
-      create_list(:athlete, 3)
-      get athletes_url(name: 111_111)
-      expect(response).to be_successful
+    context 'with single search result' do
+      let!(:athlete) { create(:athlete, parkrun_code: 111_111) }
+
+      before { Bullet.unused_eager_loading_enable = false }
+      after { Bullet.unused_eager_loading_enable = true }
+
+      it 'renders a successful response for ID search' do
+        get athletes_url(name: 111_111)
+        expect(response).to redirect_to(athlete_url(athlete))
+      end
     end
 
     it 'renders a successful response for blank search' do
-      create_list(:athlete, 3)
       get athletes_url(name: ' ')
       expect(response).to be_successful
     end
