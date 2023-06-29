@@ -5,7 +5,7 @@ ActiveAdmin.register Badge do
 
   permit_params :name, :conditions, :received_date, :picture_link
 
-  filter :kind
+  filter :kind, as: :select, collection: Badge.kinds
   filter :name
   filter :conditions
   filter :received_date
@@ -33,9 +33,7 @@ ActiveAdmin.register Badge do
   form partial: 'form'
 
   sidebar 'Управление наградой', only: :show do
-    ul do
-      li link_to 'Обладатели', admin_badge_trophies_path(resource)
-    end
+    para link_to 'Обладатели', admin_badge_trophies_path(resource)
     h3 'Предпросмотр'
     image_tag resource.picture_link, class: 'img-badge'
   end

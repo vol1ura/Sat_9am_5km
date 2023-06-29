@@ -3,14 +3,6 @@
 class Volunteer < ApplicationRecord
   audited associated_with: :activity, except: :informed
 
-  ROLES = {
-    director: 0, marshal: 1, timer: 2, photograph: 3, tokens: 4, scanner: 5,
-    instructor: 6, marking_maker: 7, event_closer: 8, marking_picker: 9, cards_sorter: 10,
-    bike_leader: 11, pacemaker: 12, results_handler: 13, equipment_supplier: 14, public_relations: 15,
-    warm_up: 16, other: 17, attendant: 18, finish_maker: 19, volunteer_coordinator: 20,
-    food_maker: 21
-  }.freeze
-
   belongs_to :activity, touch: true
   belongs_to :athlete, touch: true
 
@@ -20,7 +12,13 @@ class Volunteer < ApplicationRecord
 
   scope :actual, -> { joins(:activity).where(activity: { published: true }) }
 
-  enum role: ROLES, _suffix: true
+  enum role: {
+    director: 0, marshal: 1, timer: 2, photograph: 3, tokens: 4, scanner: 5,
+    instructor: 6, marking_maker: 7, event_closer: 8, marking_picker: 9, cards_sorter: 10,
+    bike_leader: 11, pacemaker: 12, results_handler: 13, equipment_supplier: 14, public_relations: 15,
+    warm_up: 16, other: 17, attendant: 18, finish_maker: 19, volunteer_coordinator: 20,
+    food_maker: 21
+  }, _suffix: true
 
   delegate :date, to: :activity, allow_nil: true
   delegate :name, to: :athlete, allow_nil: true

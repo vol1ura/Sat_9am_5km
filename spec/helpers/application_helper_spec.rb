@@ -42,7 +42,7 @@ RSpec.describe ApplicationHelper do
 
   describe '#human_volunteer_role' do
     it 'returns translated role' do
-      expect(helper.human_volunteer_role(Volunteer::ROLES.keys.sample)).to match(/\A[а-яА-ЯёЁ ]+\z/)
+      expect(helper.human_volunteer_role(Volunteer.roles.keys.sample)).to match(/\A[а-яА-ЯёЁ ]+\z/)
     end
   end
 

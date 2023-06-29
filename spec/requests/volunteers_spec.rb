@@ -11,7 +11,7 @@ RSpec.describe '/volunteer' do
 
   describe 'GET /volunteers/new' do
     it 'renders a successful response' do
-      get new_volunteer_url(activity_id: activity.id, role: Volunteer::ROLES.keys.sample)
+      get new_volunteer_url(activity_id: activity.id, role: Volunteer.roles.keys.sample)
       expect(response).to be_successful
     end
   end
@@ -29,7 +29,7 @@ RSpec.describe '/volunteer' do
         volunteer: {
           activity_id: activity.id,
           athlete_id: athlete.id,
-          role: Volunteer::ROLES.keys.sample
+          role: Volunteer.roles.keys.sample
         }
       }
     end

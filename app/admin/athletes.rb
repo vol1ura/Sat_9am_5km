@@ -14,7 +14,7 @@ ActiveAdmin.register Athlete do
   filter :id
   filter :parkrun_code
   filter :fiveverst_code
-  filter :male
+  filter :male, as: :select, collection: { men: true, women: false }
   filter :club
   filter :event
   filter :created_at

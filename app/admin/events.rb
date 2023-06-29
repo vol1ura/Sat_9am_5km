@@ -8,11 +8,14 @@ ActiveAdmin.register Event do
 
   permit_params :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order, :slogan
 
-  filter :active
   filter :code_name
   filter :name
   filter :town
   filter :place
+
+  scope :all
+  scope(:active) { |s| s.where(active: true) }
+  scope(:inactive) { |s| s.where(active: false) }
 
   index download_links: false do
     column :visible_order
@@ -22,7 +25,6 @@ ActiveAdmin.register Event do
     column :town
     column :place
     column :slogan
-    column :created_at
     actions
   end
 
