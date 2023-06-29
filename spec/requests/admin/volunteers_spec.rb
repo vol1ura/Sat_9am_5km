@@ -41,7 +41,7 @@ RSpec.describe '/admin/activities/1/volunteers' do
     let(:athlete) { create(:athlete) }
     let(:valid_attributes) do
       {
-        volunteer: { athlete_id: athlete.id, role: Volunteer::ROLES.keys.sample }
+        volunteer: { athlete_id: athlete.id, role: Volunteer.roles.keys.sample }
       }
     end
 
@@ -70,7 +70,7 @@ RSpec.describe '/admin/activities/1/volunteers' do
     let(:athlete) { create(:athlete) }
     let(:valid_attributes) do
       {
-        volunteer: { athlete_id: athlete.id, role: Volunteer::ROLES.keys.sample }
+        volunteer: { athlete_id: athlete.id, role: Volunteer.roles.keys.sample }
       }
     end
 
@@ -100,7 +100,7 @@ RSpec.describe '/admin/activities/1/volunteers' do
     let(:other_activity) { create(:activity, date: activity.date) }
     let(:invalid_attributes) do
       {
-        volunteer: { athlete_id: volunteer.athlete_id, role: Volunteer::ROLES.keys.sample }
+        volunteer: { athlete_id: volunteer.athlete_id, role: Volunteer.roles.keys.sample }
       }
     end
 
