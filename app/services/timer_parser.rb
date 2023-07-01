@@ -8,11 +8,22 @@ class TimerParser < ApplicationService
 
   def call
     return unless @timer_file
+    return if @activity.results.exists?
     raise 'Unknown timer file format' if table.dig(0, 0) != 'STARTOFEVENT'
 
+    @activity.date = Date.parse(table.dig(0, 1)) # Date of event is the second column of first row
+    process_table
+  end
+
+  private
+
+  def table
+    @table ||= CSV.parse(@timer_file.read, headers: false)
+  end
+
+  def process_table
+    column_correction = 1
     @activity.transaction do
-      @activity.date = Date.parse(table.dig(0, 1)) # Date of event is the second column of first row
-      column_correction = 1
       Result.without_auditing do
         table[1..].each do |row|
           break if row.first == 'ENDOFEVENT'
@@ -23,11 +34,5 @@ class TimerParser < ApplicationService
       end
       @activity.save!
     end
-  end
-
-  private
-
-  def table
-    @table ||= CSV.parse(@timer_file.read, headers: false)
   end
 end
