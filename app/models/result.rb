@@ -7,6 +7,7 @@ class Result < ApplicationRecord
   belongs_to :athlete, optional: true, touch: true
 
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true }
+  validates :athlete_id, uniqueness: { scope: :activity_id }, allow_nil: true
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
 
@@ -35,8 +36,10 @@ class Result < ApplicationRecord
   def swap_with_position!(target_position)
     current_athlete = athlete
     target_result = Result.find_by!(position: target_position, activity: activity)
+    target_athlete = target_result.athlete
     transaction do
-      update!(athlete: target_result.athlete)
+      target_result.update!(athlete: nil)
+      update!(athlete: target_athlete)
       target_result.update!(athlete: current_athlete)
     end
     target_result
@@ -46,8 +49,11 @@ class Result < ApplicationRecord
     results = activity.results.includes(:athlete).where(position: position..).order(:position).to_a
     transaction do
       without_auditing do
-        results.each_cons(2) { |res0, res1| res0.update!(key => res1.public_send(key)) }
-        results.last.update!(key => nil)
+        results.each_cons(2) do |res0, res1|
+          value = res1.public_send(key)
+          res1.update!(key => nil)
+          res0.update!(key => value)
+        end
       end
     end
     results
