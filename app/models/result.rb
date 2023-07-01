@@ -45,8 +45,10 @@ class Result < ApplicationRecord
   def shift_attributes!(key)
     results = activity.results.includes(:athlete, :activity).where(position: position..).order(:position).to_a
     transaction do
-      results.each_cons(2) { |res0, res1| res0.update!(key => res1.public_send(key)) }
-      results.last.update!(key => nil)
+      without_auditing do
+        results.each_cons(2) { |res0, res1| res0.update!(key => res1.public_send(key)) }
+        results.last.update!(key => nil)
+      end
     end
     results
   end
