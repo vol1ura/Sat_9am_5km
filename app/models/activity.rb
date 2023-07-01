@@ -12,8 +12,8 @@ class Activity < ApplicationRecord
   has_many :athletes, through: :results
   has_many :volunteers, dependent: :destroy, inverse_of: :activity
 
-  before_save :postprocessing, if: %i[will_save_change_to_published? published]
-  after_save :enqueue_awardings, if: %i[saved_change_to_published? published]
+  before_save :set_date, if: %i[will_save_change_to_published? published]
+  after_commit :postprocessing, if: %i[saved_change_to_published? published]
 
   scope :published, -> { where(published: true) }
 
@@ -35,13 +35,14 @@ class Activity < ApplicationRecord
 
   private
 
-  def postprocessing
+  def set_date
     self.date = Time.zone.today unless date
   end
 
-  def enqueue_awardings
+  def postprocessing
     AthleteAwardingJob.perform_later(id) if volunteers.exists?
     BreakingTimeAwardingJob.perform_later if results.exists?
     TelegramNotification::AfterActivityJob.perform_later(id)
+    ClearCache.call
   end
 end
