@@ -88,7 +88,7 @@ ActiveAdmin.register Result do
   end
 
   member_action :drop_athlete, method: :delete, if: proc { can? :manage, Result } do
-    @results = resource.shift_attributes!(:athlete)
+    @results = resource.shift_attributes!(:athlete_id)
   rescue StandardError
     render js: "alert('#{t 'active_admin.results.drop_athlete_failed'}')"
   end
