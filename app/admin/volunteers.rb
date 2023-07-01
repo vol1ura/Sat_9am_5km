@@ -22,15 +22,11 @@ ActiveAdmin.register Volunteer do
     end
 
     def update
-      update! do |format|
-        format.html { redirect_to collection_path, notice: t('.successful') } if resource.valid?
-      end
+      update!(notice: t('.successful', volunteer_name: resource.name)) { collection_path }
     end
 
     def create
-      create! do |format|
-        format.html { redirect_to collection_path, notice: t('.successful') } if resource.valid?
-      end
+      create!(notice: t('.successful')) { collection_path }
     end
   end
 

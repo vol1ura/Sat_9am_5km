@@ -32,7 +32,7 @@ ru:
       create:
         successful: 'Волонтёрство успешно добавлено'
       update:
-        successful: 'Данные о волонтёрстве успешно обновлены'
+        successful: 'Данные о волонтёрстве %{volunteer_name} успешно обновлены'
   results:
     explanation:
       title: 'Пояснения'

@@ -18,15 +18,11 @@ ActiveAdmin.register VolunteeringPosition do
 
   controller do
     def update
-      update! do |format|
-        format.html { redirect_to collection_path, notice: t('.successful') } if resource.valid?
-      end
+      update!(notice: t('.successful')) { collection_path }
     end
 
     def create
-      create! do |format|
-        format.html { redirect_to collection_path, notice: t('.successful') } if resource.valid?
-      end
+      create!(notice: t('.successful')) { collection_path }
     end
   end
 
