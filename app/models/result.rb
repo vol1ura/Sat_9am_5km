@@ -43,7 +43,7 @@ class Result < ApplicationRecord
   end
 
   def shift_attributes!(key)
-    results = activity.results.includes(:athlete, :activity).where(position: position..).order(:position).to_a
+    results = activity.results.includes(:athlete).where(position: position..).order(:position).to_a
     transaction do
       without_auditing do
         results.each_cons(2) { |res0, res1| res0.update!(key => res1.public_send(key)) }
@@ -54,9 +54,8 @@ class Result < ApplicationRecord
   end
 
   def insert_new_result_above!
-    results = activity.results.includes(:athlete, :activity).where(position: position..).order(:position)
     transaction do
-      results.each { |res| res.increment! :position }  # rubocop:disable Rails/SkipsModelValidations
+      activity.results.where(position: position..).update_all('position = position + 1')  # rubocop:disable Rails/SkipsModelValidations
       activity.results.create!(position: position)
     end
   end
