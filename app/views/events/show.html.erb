@@ -52,6 +52,11 @@
           <%= render partial: 'activity', collection: @event.activities.published.order(date: :desc), cached: true %>
         </tbody>
       </table>
+      <% if @total_activities > 15 %>
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false">Показать все</button>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
