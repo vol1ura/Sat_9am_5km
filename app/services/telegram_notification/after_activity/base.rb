@@ -27,7 +27,7 @@ module TelegramNotification
 
       def text
         <<~TEXT.squish
-          С итоговым протоколом забега вы можете ознакомиться на [нашем сайте](#{routes.activity_url(activity)}).
+          С итоговым протоколом вы можете ознакомиться на [нашем сайте](#{routes.activity_url(activity)}).
           Все ваши результаты и статистика доступны по [ссылке](#{routes.athlete_url(@entity.athlete)}).
         TEXT
       end
