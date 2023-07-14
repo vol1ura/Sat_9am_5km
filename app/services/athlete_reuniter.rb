@@ -24,15 +24,13 @@ class AthleteReuniter < ApplicationService
 
   private
 
-  attr_reader :collection, :ids
-
   def athlete
-    @athlete ||= collection.where.not(name: nil).take
+    @athlete ||= @collection.where.not(name: nil).take
   end
 
   def grab_modified_attributes_from_collection
     MODIFIED_ATTRIBUTES.each do |attr|
-      athlete.public_send "#{attr}=", athlete.send(attr) || collection.where.not(attr => nil).take&.send(attr)
+      athlete.public_send "#{attr}=", athlete.send(attr) || @collection.where.not(attr => nil).take&.send(attr)
       unmodified_attributes.delete(attr)
     end
   end
@@ -53,17 +51,17 @@ class AthleteReuniter < ApplicationService
   def replace_all_by_one
     ActiveRecord::Base.transaction do
       # rubocop:disable Rails/SkipsModelValidations
-      Result.where(athlete_id: ids).update_all(athlete_id: athlete.id)
-      Volunteer.where(athlete_id: ids).update_all(athlete_id: athlete.id)
+      Result.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
+      Volunteer.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
       update_all_trophies
-      collection.where.not(id: athlete.id).destroy_all
+      @collection.where.not(id: athlete.id).destroy_all
       athlete.save!
       # rubocop:enable Rails/SkipsModelValidations
     end
   end
 
   def update_all_trophies
-    Trophy.where(athlete_id: ids).each do |trophy|
+    Trophy.where(athlete_id: @ids).each do |trophy|
       if (athlete_trophy = athlete.trophies.find_by(badge_id: trophy.badge_id))
         athlete_trophy.update!(date: trophy.date) if trophy.date && trophy.date > athlete_trophy.date
       else

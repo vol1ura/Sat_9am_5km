@@ -2,10 +2,8 @@
 
 class ActivitiesController < ApplicationController
   def index
-    today = Date.current
-    date_since = today.sunday? ? today.monday : today.prev_week
-    @activities = Activity.published.includes(:event).where(date: date_since..).order('activities.date DESC', 'events.name')
-    @results_count = Result.where(activity: @activities.unscope(:order, :includes)).group(:activity_id).count
+    @activities = Event.all.map { |event| event.activities.published.order(:date).last }
+    @results_count = Result.where(activity_id: @activities.map(&:id)).group(:activity_id).count
   end
 
   def show
