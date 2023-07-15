@@ -7,7 +7,7 @@ module Parkzhrun
         "https://parkzhrun.ru/wp-json/api/v1/#{resource}/#{param}",
         'Authorization' => Rails.application.credentials.parkzhrun_auth_key
       )
-      raise unless response.is_a?(Net::HTTPSuccess)
+      raise response.message unless response.is_a?(Net::HTTPSuccess)
 
       JSON.parse(response.body)[resource]
     end
