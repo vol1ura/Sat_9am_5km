@@ -2,7 +2,12 @@
 
 class ActivitiesController < ApplicationController
   def index
-    @activities = Event.all.map { |event| event.activities.published.order(:date).last }
+    @activities =
+      Event
+        .unscope(:order)
+        .map { |event| event.activities.published.order(:date).last }
+        .sort_by { |activity| [activity.date, -activity.event.visible_order.to_i] }
+        .reverse
     @results_count = Result.where(activity_id: @activities.map(&:id)).group(:activity_id).count
   end
 
