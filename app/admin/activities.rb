@@ -37,6 +37,8 @@ ActiveAdmin.register Activity do
   rescue CSV::MalformedCSVError => e
     Rollbar.error e
     flash[:alert] = t('.failed_upload')
+  rescue TimerParser::FormatError
+    flash[:alert] = t('.bad_timer_format')
   end
 
   action_item :results, only: %i[show edit] do

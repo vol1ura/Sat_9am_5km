@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TimerParser < ApplicationService
+  class FormatError < StandardError; end
+
   def initialize(activity, timer_file)
     @activity = activity
     @timer_file = timer_file
@@ -9,7 +11,7 @@ class TimerParser < ApplicationService
   def call
     return unless @timer_file
     return if @activity.results.exists?
-    raise 'Unknown timer file format' if table.dig(0, 0) != 'STARTOFEVENT'
+    raise FormatError if table.dig(0, 0) != 'STARTOFEVENT'
 
     @activity.date = Date.parse(table.dig(0, 1)) # Date of event is the second column of first row
     process_table
