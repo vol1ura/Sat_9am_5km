@@ -67,10 +67,11 @@ function findAthletes(element, query) {
   fetch('/athletes.json?name=' + query)
     .then(response => response.json())
     .then(data => {
-      let list = '';
+      list = ''
       data.athletes.forEach((athlete, idx) => {
         if (idx >= 10) return;
-        list += `<li id="${athlete.id}" name="${athlete.name}">A${athlete.code} ${athlete.name}</li>`
+        home_event = athlete.home_event ? ` (${athlete.home_event})` : ''
+        list += `<li id="${athlete.id}" name="${athlete.name}"><b>A${athlete.code}</b> ${athlete.name}${home_event}</li>`
       })
       element.html(`<ul>${list}</ul>`)
       return true
