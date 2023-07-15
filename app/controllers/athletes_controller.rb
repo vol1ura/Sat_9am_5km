@@ -3,7 +3,7 @@
 class AthletesController < ApplicationController
   def index
     query = params[:name].to_s.strip
-    criteria = Athlete.includes(:club)
+    criteria = Athlete.includes(:club).order(:event_id)
     @athletes =
       if query.length < 3
         Athlete.none
