@@ -5,6 +5,8 @@ ActiveAdmin.register Result do
 
   includes :athlete
 
+  actions :all, except: :show
+
   config.sort_order = 'position_asc'
   config.paginate = false
   config.filters = false
@@ -46,8 +48,6 @@ ActiveAdmin.register Result do
     end
   end
 
-  show { render result }
-
   form partial: 'form'
 
   before_update do |result|
@@ -63,9 +63,7 @@ ActiveAdmin.register Result do
   end
 
   after_destroy do |result|
-    result.transaction do
-      collection.where('position > ?', result.position).update_all('position = position - 1') # rubocop:disable Rails/SkipsModelValidations
-    end
+    collection.where('position > ?', result.position).update_all('position = position - 1') # rubocop:disable Rails/SkipsModelValidations
     flash[:notice] = t('.result_destroyed', position: result.position)
   end
 
