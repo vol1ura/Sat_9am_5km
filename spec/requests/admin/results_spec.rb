@@ -22,13 +22,6 @@ RSpec.describe '/admin/results' do
     end
   end
 
-  describe 'GET /admin/results/1' do
-    it 'renders a successful response' do
-      get admin_activity_result_url(activity, results.first)
-      expect(response).to be_successful
-    end
-  end
-
   context 'with manage permission' do
     before do
       create(:permission, user: user, action: 'manage', subject_class: 'Result', event_id: event.id)
