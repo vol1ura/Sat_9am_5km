@@ -3,6 +3,8 @@
 ActiveAdmin.register Volunteer do
   belongs_to :activity
 
+  actions :all, except: :show
+
   includes :athlete
 
   permit_params :role, :activity_id, :athlete_id
@@ -42,8 +44,6 @@ ActiveAdmin.register Volunteer do
     column :name
     column(:code) { |v| v.athlete.code }
   end
-
-  show(title: :name) { render volunteer }
 
   form partial: 'form'
 

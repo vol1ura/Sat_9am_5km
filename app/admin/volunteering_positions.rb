@@ -3,6 +3,8 @@
 ActiveAdmin.register VolunteeringPosition do
   belongs_to :event
 
+  actions :all, except: :show
+
   permit_params :event_id, :rank, :role, :number
 
   config.filters = false

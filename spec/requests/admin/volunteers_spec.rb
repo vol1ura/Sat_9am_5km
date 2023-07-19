@@ -29,14 +29,6 @@ RSpec.describe '/admin/activities/1/volunteers' do
     end
   end
 
-  describe 'GET /admin/activities/1/volunteers/1' do
-    it 'renders a successful response' do
-      volunteer = create(:volunteer, activity: activity)
-      get admin_activity_volunteer_url(activity, volunteer)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'POST, PUT /admin/activities/1/volunteers' do
     let(:athlete) { create(:athlete) }
     let(:valid_attributes) do

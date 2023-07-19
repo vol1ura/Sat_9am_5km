@@ -15,14 +15,6 @@ RSpec.describe '/admin/contacts' do
     end
   end
 
-  describe 'GET /admin/contacts/1' do
-    it 'renders a successful response' do
-      contact = create(:contact, event: event)
-      get admin_event_contact_url(event, contact)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'POST /admin/contacts' do
     let(:valid_attributes) do
       {
