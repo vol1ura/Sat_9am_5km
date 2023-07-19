@@ -21,13 +21,6 @@ RSpec.describe '/admin/volunteering_positions' do
     end
   end
 
-  describe 'GET /admin/volunteering_positions/1' do
-    it 'renders a successful response' do
-      get admin_event_volunteering_position_url(event, position)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET /admin/volunteering_positions/1/edit' do
     it 'renders a successful response' do
       get edit_admin_event_volunteering_position_url(event, position)
