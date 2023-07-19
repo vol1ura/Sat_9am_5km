@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class AthleteReuniter < ApplicationService
-  SKIPPED_ATTRIBUTES = %w[id created_at updated_at name].freeze
-  MODIFIED_ATTRIBUTES = %w[parkrun_code fiveverst_code parkzhrun_code user_id club_id event_id male].freeze
+  SKIPPED_ATTRIBUTES = %w[id created_at updated_at name user_id].freeze
+  MODIFIED_ATTRIBUTES = %w[parkrun_code fiveverst_code parkzhrun_code club_id event_id male].freeze
   private_constant :SKIPPED_ATTRIBUTES, :MODIFIED_ATTRIBUTES
 
   def initialize(collection, ids)
@@ -11,6 +11,7 @@ class AthleteReuniter < ApplicationService
   end
 
   def call
+    return false if @collection.where.not(user_id: nil).size > 1
     return false unless athlete
 
     grab_modified_attributes_from_collection
@@ -25,7 +26,7 @@ class AthleteReuniter < ApplicationService
   private
 
   def athlete
-    @athlete ||= @collection.where.not(name: nil).take
+    @athlete ||= @collection.where.not(user_id: nil).take || @collection.where.not(name: nil).take
   end
 
   def grab_modified_attributes_from_collection
