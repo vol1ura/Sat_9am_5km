@@ -3,13 +3,15 @@
 active_admin_form_for [:admin, resource] do |f|
   f.semantic_errors(*f.object.errors.attribute_names)
 
-  f.inputs 'Выберите мероприятие' do
-    input :event_id, as: :select, label: 'Мероприятие', collection: Event.authorized_for(current_user).pluck(:name, :id)
-  end
+  unless resource.published
+    f.inputs 'Выберите мероприятие' do
+      input :event_id, as: :select, label: 'Мероприятие', collection: Event.authorized_for(current_user).pluck(:name, :id)
+    end
 
-  unless resource.date && resource.results.exists?
-    f.inputs 'Укажите дату, если хотите создать забег для формирования команды волонтёров' do
-      input :date, as: :datepicker, datepicker_options: { min_date: '-1D', max_date: '+2M' }
+    unless resource.date && resource.results.exists?
+      f.inputs 'Укажите дату, если хотите создать забег для формирования команды волонтёров' do
+        input :date, as: :datepicker, datepicker_options: { min_date: '-1D', max_date: '+2M' }
+      end
     end
   end
 
