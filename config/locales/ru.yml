@@ -448,7 +448,7 @@ ru:
     pm: вечера
 
   views:
-    greeting: 'Добро пожаловать на проект Sat9am5km!'
+    greeting: '%{name}, приветствуем в S95!'
     update: 'Данные обновлены'
     pagination:
       previous: '←'

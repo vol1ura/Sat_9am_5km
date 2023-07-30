@@ -14,6 +14,6 @@ class Event < ApplicationRecord
   def self.authorized_for(user)
     return all if user.admin?
 
-    where(id: user.permissions.where(subject_class: 'Result').select(:event_id))
+    where(id: user.permissions.where(subject_class: 'Activity').select(:event_id))
   end
 end
