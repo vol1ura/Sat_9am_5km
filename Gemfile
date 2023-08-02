@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.0'
 
-gem 'importmap-rails', '~> 1.1'
+gem 'importmap-rails', '~> 1.2'
 gem 'sassc-rails'
 
 gem 'rails', '~> 7.0.4'
