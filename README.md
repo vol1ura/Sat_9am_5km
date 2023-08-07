@@ -44,4 +44,4 @@ make
 - Database panel [http://localhost:3003](http://localhost:3003)
 - Bug tracker [Rollbar.com](https://rollbar.com/Urka/Sat_9am_5km/)
 - Sidekiq [WebUI](https://s95.ru/sidekiq) for admin users
-- [New Relic](https://newrelic.com/)
+- Rails Performance [dev](http://localhost:3000/app_performance/) or [prod](https://s95.ru/app_performance/) for admin users
