@@ -43,9 +43,8 @@ Rails.application.routes.draw do
       end
     end
 
-  if Rails.env.production?
     authenticate :user, ->(user) { user.admin? } do
-      mount Sidekiq::Web => '/sidekiq'
+      mount Sidekiq::Web => '/sidekiq' if Rails.env.production?
+      mount RailsPerformance::Engine => '/app_performance'
     end
-  end
 end
