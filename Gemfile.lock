@@ -183,7 +183,7 @@ GEM
       turbo-rails
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.1.5)
+    importmap-rails (1.2.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     inherited_resources (1.13.1)
@@ -222,8 +222,8 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.2)
-    minitest (5.18.1)
+    mini_portile2 (2.8.4)
+    minitest (5.19.0)
     net-imap (0.3.6)
       date
       net-protocol
@@ -266,7 +266,7 @@ GEM
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.7.1)
-    rack (2.2.7)
+    rack (2.2.8)
     rack-mini-profiler (3.0.0)
       rack (>= 1.2.0)
     rack-test (2.1.0)
@@ -285,8 +285,9 @@ GEM
       activesupport (= 7.0.5.1)
       bundler (>= 1.15.0)
       railties (= 7.0.5.1)
-    rails-dom-testing (2.0.3)
-      activesupport (>= 4.2.0)
+    rails-dom-testing (2.1.1)
+      activesupport (>= 5.0.0)
+      minitest
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
@@ -419,7 +420,7 @@ GEM
     websocket-extensions (0.1.5)
     yard (0.9.28)
       webrick (~> 1.7.0)
-    zeitwerk (2.6.8)
+    zeitwerk (2.6.10)
 
 PLATFORMS
   aarch64-linux-musl
@@ -452,7 +453,7 @@ DEPENDENCIES
   faker!
   hiredis-client
   hotwire-rails
-  importmap-rails (~> 1.1)
+  importmap-rails (~> 1.2)
   jbuilder
   nokogiri
   pg (~> 1.4)
