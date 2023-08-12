@@ -1,8 +1,6 @@
 <tr>
   <td><%= link_to club.first.name, club.first %></td>
   <td><%= club.last %></td>
-  <td><%= Result.joins(:athlete).where(athlete: { club_id: club.first.id }).size %></td>
-  <td class="hidden-on-phone">
-    <%= Volunteer.actual.joins(:athlete).where(athlete: { club_id: club.first.id }).size %>
-  </td>
+  <td><%= @count_results.fetch(club.first.id, 0) %></td>
+  <td class="hidden-on-phone"><%= @count_volunteering.fetch(club.first.id, 0) %></td>
 </tr>
