@@ -96,14 +96,14 @@ GEM
     audited (5.3.3)
       activerecord (>= 5.0, < 7.1)
       request_store (~> 1.2)
-    autoprefixer-rails (10.4.7.0)
+    autoprefixer-rails (10.4.13.0)
       execjs (~> 2)
     barby (0.6.8)
     bcrypt (3.1.18)
     bcrypt_pbkdf (1.1.0)
-    bootstrap (5.2.3)
+    bootstrap (5.3.1)
       autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 2.11.6, < 3)
+      popper_js (>= 2.11.8, < 3)
       sassc-rails (>= 2.0.0)
     brakeman (5.4.1)
     browser (5.3.1)
@@ -250,7 +250,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.4.5)
-    popper_js (2.11.6)
+    popper_js (2.11.8)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -434,7 +434,7 @@ DEPENDENCIES
   audited
   barby
   bcrypt_pbkdf (~> 1.0)
-  bootstrap (~> 5.2.3)
+  bootstrap (~> 5.3.1)
   brakeman
   bullet
   bundler-audit
