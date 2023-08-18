@@ -8,10 +8,21 @@ RSpec.describe '/activities' do
   end
 
   describe 'GET /show' do
+    let(:activity) { create(:activity) }
+    let!(:result) { create(:result, activity: activity) }
+
     it 'renders a successful response' do
-      activity = create(:activity)
       get activity_url(activity)
       expect(response).to be_successful
+    end
+
+    it 'renders json' do
+      get activity_url(activity, format: :json)
+      expect(response.parsed_body.dig('results', 0)).to eq(
+        'total_time' => result.total_time.strftime('%M:%S'),
+        'position' => result.position,
+        'athlete' => %w[id name parkrun_code gender].index_with { |field| result.athlete.public_send(field) }
+      )
     end
   end
 end
