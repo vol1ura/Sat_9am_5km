@@ -29,11 +29,13 @@ ActiveAdmin.register Activity do
   form title: 'Загрузка забега', multipart: true, partial: 'form'
 
   after_save do |activity|
-    TimerParser.call(activity, params[:activity][:timer])
-    Activity::MAX_SCANNERS.times do |scanner_number|
-      ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
+    if activity.valid?
+      TimerParser.call(activity, params[:activity][:timer])
+      Activity::MAX_SCANNERS.times do |scanner_number|
+        ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
+      end
+      flash[:notice] = t('.success_upload') if params[:activity][:timer] || params[:activity][:scanner0]
     end
-    flash[:notice] = params[:activity][:scanner0] ? t('.success_upload') : t('.success_created')
   rescue CSV::MalformedCSVError => e
     Rollbar.error e
     flash[:alert] = t('.failed_upload')
