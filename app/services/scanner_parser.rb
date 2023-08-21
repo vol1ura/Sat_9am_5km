@@ -2,18 +2,18 @@
 
 class ScannerParser < ApplicationService
   def initialize(activity, scanner_file)
-    @activity = activity
+    @activity_id = activity.id
     @scanner_file = scanner_file
   end
 
   def call
     return unless @scanner_file
-    return unless table.dig(1, 0).match?(/A\d+/)
 
     table[1..].each do |row|
-      next if row.second.blank? # Athlete was already scanned
+      code, position, = row
+      next unless code&.match?(/^A\d+/) && position&.match?(/^P\d+/)
 
-      AddAthleteToResultJob.perform_later(@activity, row)
+      AddAthleteToResultJob.perform_later(@activity_id, code, position)
     end
   end
 
