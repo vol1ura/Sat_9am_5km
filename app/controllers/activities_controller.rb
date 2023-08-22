@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
     @activities =
       Event
         .unscope(:order)
-        .map { |event| event.activities.published.order(:date).last }
+        .filter_map { |event| event.activities.published.order(:date).last }
         .sort_by { |activity| [activity.date, -activity.event.visible_order.to_i] }
         .reverse
     @results_count = Result.where(activity_id: @activities.map(&:id)).group(:activity_id).count
