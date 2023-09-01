@@ -1,0 +1,68 @@
+<% head_info :title, @club.name %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Главная', root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to 'Клубы', clubs_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to @club.name, club_path(@club) %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Активность участников</li>
+  </ol>
+</nav>
+
+<h2>Активность участников</h2>
+
+<h3>Забеги</h3>
+
+<table class="table table-striped">
+  <thead data-controller="table-head">
+    <tr>
+      <td>Место</td>
+      <td>Имя</td>
+      <td>Результат</td>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <% @events_with_athletes.each do |event| %>
+      <tr>
+        <th colspan="3" class="table-warning"><%= link_to event.name, event_path(event.code_name) %></th>
+      </tr>
+      <% @last_week_results.includes(:athlete).where(activity: { event: event }).order(:position).each do |result| %>
+      <tr>
+        <td><%= result.position %></td>
+        <td><%= link_to result.athlete.name, athlete_path(result.athlete) %></td>
+        <td><%= human_result_time result.total_time %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Волонтёрства</h3>
+
+<table class="table table-striped">
+  <thead data-controller="table-head">
+    <tr>
+      <td>Имя</td>
+      <td>Роль</td>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <% @events_with_volunteers.each do |event| %>
+      <tr>
+        <th colspan="2" class="table-warning"><%= link_to event.name, event_path(event) %></th>
+      </tr>
+      <% @last_week_volunteerings.includes(:athlete).where(activity: { event: event }).each do |volunteering| %>
+      <tr>
+        <td><%= link_to volunteering.name, athlete_path(volunteering.athlete) %></td>
+        <td><%= human_volunteer_role volunteering.role %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

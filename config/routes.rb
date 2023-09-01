@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   end
   resources :activities, only: %i[index show]
   resources :athletes, only: %i[index show]
-  resources :clubs, only: %i[index show]
-  resources :badges, only: %i[index show]
   resources :volunteers, only: %i[new edit create update]
+  resources :badges, only: %i[index show]
+  resources :clubs, only: %i[index show] do
+    get :last_week, on: :member
+  end
   resource :user, only: :update
   get '/pages/:page', to: 'pages#show', as: :page
   get '/top_results', to: 'results#top'
