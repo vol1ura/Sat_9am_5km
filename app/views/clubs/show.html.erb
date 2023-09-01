@@ -24,6 +24,9 @@
   <li class="list-group-item">
     <span class="badge bg-primary rounded-pill me-3"><%= @total_volunteering_count %></span> количество волонтёрств
   </li>
+  <li class="list-group-item">
+    <%= link_to 'Активность участников клуба на последней неделе', last_week_club_path(@club) %>
+  </li>
 </ul>
 
 <table class="table table-striped">

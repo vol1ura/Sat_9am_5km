@@ -14,11 +14,11 @@ class ActivitiesController < ApplicationController
   def show
     @activity = Activity.published.find(params[:id])
     @results_count =
-      Result.joins(athlete: :activities).where(athlete: { activities: @activity }).published.group(:athlete).count
+      Result.published.joins(athlete: :activities).where(athlete: { activities: @activity }).group(:athlete).count
     @volunteering_count_a =
-      Volunteer.joins(athlete: :activities).actual.where(athlete: { activities: @activity }).group(:athlete).count
+      Volunteer.published.joins(athlete: :activities).where(athlete: { activities: @activity }).group(:athlete).count
     @volunteering_count_v =
-      Volunteer.actual.group(:athlete).having(athlete_id: @activity.volunteers.select(:athlete_id)).count
+      Volunteer.published.group(:athlete).having(athlete_id: @activity.volunteers.select(:athlete_id)).count
     @results = @activity.results.includes(athlete: :club).order(:position)
   end
 end

@@ -10,7 +10,7 @@ class Volunteer < ApplicationRecord
   validates :athlete_id, uniqueness: { scope: :activity_id }
   validate :cannot_be_assigned_on_more_than_one_position
 
-  scope :actual, -> { joins(:activity).where(activity: { published: true }) }
+  scope :published, -> { joins(:activity).where(activity: { published: true }) }
 
   enum role: {
     director: 0, marshal: 1, timer: 2, photograph: 3, tokens: 4, scanner: 5,
