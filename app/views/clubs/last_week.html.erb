@@ -43,7 +43,7 @@
       <tbody class="table-group-divider">
         <% @activities_with_results.each do |activity| %>
           <tr>
-            <th colspan="3" class="table-warning">
+            <th colspan="3" class="table-warning table-active">
               <%= link_to activity.event_name, activity_path(activity) %>
             </th>
           </tr>
@@ -69,7 +69,7 @@
       <tbody class="table-group-divider">
         <% @activities_with_volunteers.each do |activity| %>
           <tr>
-            <th colspan="2" class="table-warning">
+            <th colspan="2" class="table-warning table-active">
               <%= link_to activity.event_name, activity_path(activity) %>
             </th>
           </tr>
