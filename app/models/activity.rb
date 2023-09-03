@@ -21,7 +21,7 @@ class Activity < ApplicationRecord
 
   def volunteers_roster
     volunteers
-      .joins("LEFT JOIN volunteering_positions vp on vp.event_id = #{event_id} AND vp.role = volunteers.role")
+      .joins("LEFT JOIN volunteering_positions vp ON vp.event_id = #{event_id} AND vp.role = volunteers.role")
       .order(:rank)
   end
 
@@ -36,7 +36,7 @@ class Activity < ApplicationRecord
   private
 
   def set_date
-    self.date = Time.zone.today unless date
+    self.date = Date.current unless date
   end
 
   def postprocessing

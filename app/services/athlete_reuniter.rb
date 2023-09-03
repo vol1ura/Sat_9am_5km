@@ -17,6 +17,7 @@ class AthleteReuniter < ApplicationService
     grab_modified_attributes_from_collection
     check_modified_fields
     replace_all_by_one
+    ClearCache.call
     true
   rescue StandardError => e
     Rollbar.error e

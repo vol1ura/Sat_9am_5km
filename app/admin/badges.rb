@@ -16,7 +16,6 @@ ActiveAdmin.register Badge do
     column :name
     column :received_date
     column(:conditions) { |b| sanitized_text b.conditions }
-    column :picture_link
     actions
   end
 

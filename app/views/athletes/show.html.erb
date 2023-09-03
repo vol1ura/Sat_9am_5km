@@ -147,7 +147,7 @@
                   <div class="acc-li-s">Волонтёрский h-индекс</div>
                   <div class="mx-3">
                     <abbr title="Индекс равен h, если есть как минимум h позиций, на каждой из которых было как минимум h волонтёрств." class="initialism">
-                      <%= @volunteering.unscope(:order).group(:role).count.values.sort.reverse.map.with_index.take_while { |count, idx| count > idx }.size %>
+                      <%= @volunteering.group(:role).reorder(count_all: :desc).count.values.map.with_index.take_while { |count, idx| count > idx }.size %>
                     </abbr>
                   </div>
                 </div>
