@@ -21,10 +21,10 @@ RSpec.describe '/admin/utilities' do
     end
   end
 
-  describe 'DELETE /admin/utilities/clear_cache' do
+  describe 'DELETE /admin/utilities/cache' do
     before do
       allow(ClearCache).to receive(:call).and_return(clear_result)
-      delete admin_utilities_clear_cache_url
+      delete admin_utilities_cache_url
     end
 
     context 'when cache was cleared' do
