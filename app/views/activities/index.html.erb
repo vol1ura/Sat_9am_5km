@@ -1,17 +1,20 @@
 <% head_info :title, 'Недавние забеги' %>
 <h2>Недавние забеги</h2>
 
-<table id="activities" class="table table-striped">
-  <thead>
-    <tr>
-      <th>Дата</th>
-      <th>Мероприятие</th>
-      <th class="text-center">Участники</th>
-      <th class="hidden-on-phone">Первый</th>
-      <th class="hidden-on-phone">Первая</th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <%= render @activities, cached: true %>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table id="activities" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Мероприятие</th>
+        <th class="text-center">Участники</th>
+        <th class="text-center">Волонтёры</th>
+        <th>Первый</th>
+        <th>Первая</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <%= render @activities, cached: true %>
+    </tbody>
+  </table>
+</div>
