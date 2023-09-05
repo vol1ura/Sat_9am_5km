@@ -29,9 +29,9 @@ ActiveAdmin.register_page 'Utilities' do
 
   page_action :cache, method: :delete do
     if ClearCache.call
-      flash[:notice] = t('.success')
+      flash[:notice] = t('.clear_success')
     else
-      flash[:alert] = t('.failed')
+      flash[:alert] = t('.clear_failed')
     end
     redirect_to admin_utilities_path
   end
