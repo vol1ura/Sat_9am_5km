@@ -155,3 +155,19 @@ badge_25:
   name: 'rage'
   picture_link: 'badges/rage.png'
   kind: 40
+badge_32:
+  id: 32
+  name: 'tourist v10'
+  picture_link: 'badges/25_runs.png'
+  kind: 20
+  info:
+    threshold: 110
+    type: 'volunteer'
+badge_33:
+  id: 33
+  name: 'tourist a10'
+  picture_link: 'badges/25_runs.png'
+  kind: 20
+  info:
+    threshold: 10
+    type: 'athlete'
