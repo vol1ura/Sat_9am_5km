@@ -18,6 +18,10 @@ class User < ApplicationRecord
 
   enum role: { admin: 0 }
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[email first_name last_name role telegram_user]
+  end
+
   def volunteering_position_permission
     permissions.find_by(subject_class: 'VolunteeringPosition', action: %w[manage update])
   end

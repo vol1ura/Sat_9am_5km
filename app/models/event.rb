@@ -16,4 +16,8 @@ class Event < ApplicationRecord
 
     where(id: user.permissions.where(subject_class: 'Activity').select(:event_id))
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[active code_name description name place town]
+  end
 end

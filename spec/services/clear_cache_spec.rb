@@ -2,25 +2,19 @@
 
 RSpec.describe ClearCache, type: :service do
   context 'when cache is clear' do
-    before do
-      allow(Rails.cache).to receive(:read).and_return(nil)
-      allow(Rails.cache).to receive(:write).and_return(true)
-    end
+    before { allow(Rails.cache).to receive_messages(read: nil, write: true) }
 
     it 'writes cache' do
-      expect(described_class.call).to be_truthy
+      expect(described_class.call).to be true
       expect(Rails.cache).to have_received(:write).once
     end
   end
 
   context 'when clearing was performing recently' do
-    before do
-      allow(Rails.cache).to receive(:read).and_return(1.minute.ago)
-      allow(Rails.cache).to receive(:write).and_return(true)
-    end
+    before { allow(Rails.cache).to receive_messages(read: 1.minute.ago, write: true) }
 
     it 'returns false' do
-      expect(described_class.call).to be_falsey
+      expect(described_class.call).to be false
       expect(Rails.cache).not_to have_received(:write)
     end
   end
