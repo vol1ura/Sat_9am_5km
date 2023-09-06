@@ -19,6 +19,10 @@ class Activity < ApplicationRecord
 
   delegate :name, to: :event, prefix: true
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[date event_id published]
+  end
+
   def volunteers_roster
     volunteers
       .joins("LEFT JOIN volunteering_positions vp ON vp.event_id = #{event_id} AND vp.role = volunteers.role")

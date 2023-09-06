@@ -93,6 +93,10 @@ class Athlete < ApplicationRecord
     athlete
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[club_id created_at event_id fiveverst_code id male name parkrun_code updated_at]
+  end
+
   def code
     parkrun_code || fiveverst_code || (SAT_5AM_9KM_BORDER + id if id)
   end

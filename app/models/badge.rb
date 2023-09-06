@@ -12,4 +12,8 @@ class Badge < ApplicationRecord
   def self.dataset_of(kind:, type:)
     public_send("#{kind}_kind").where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[conditions kind name received_date]
+  end
 end
