@@ -21,9 +21,9 @@
   <div class="col-12 col-sm-10 col-md-8 col-lg-6">
     <div id="carouselControls" class="carousel slide my-3" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <% VkPhotos.call(7).each_with_index do |photo, i| %>
-          <div class="carousel-item <%= 'active' if i.zero? %>">
-            <img src="<%= photo %>" class="d-block w-100" alt="Кузьминки">
+        <% VkPhotos.call(7).each_with_index do |photo, idx| %>
+          <div class="carousel-item <%= 'active' if idx.zero? %>">
+            <img src="<%= photo %>" class="d-block w-100" alt="Кузьминки" loading="lazy">
           </div>
         <% end %>
       </div>
