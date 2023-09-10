@@ -75,11 +75,15 @@ h1, h2, h3, h4, h5, h6 {
 
 nav.pagination {
   span {
-    border: 1px solid $secondary;
+    border-width: 1px 0 1px 1px;
+    border-style: solid;
+    border-color: $secondary;
     padding: 4px 8px;
+    @extend .position-relative;
   }
   a {
     text-decoration: none;
+    @extend .stretched-link;
   }
   span:hover {
     background-color: $light;
@@ -92,6 +96,7 @@ nav.pagination {
   }
   span:last-child {
     border-radius: 0 5px 5px 0;
+    border-width: 1px;
   }
 }
 
