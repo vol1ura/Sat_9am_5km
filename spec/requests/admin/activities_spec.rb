@@ -9,7 +9,7 @@ RSpec.describe '/admin/activities' do
 
   describe 'GET /admin/activities' do
     before do
-      create_list(:activity, 3, event: event)
+      create_list(:activity, 3, event:)
       user.admin!
     end
 

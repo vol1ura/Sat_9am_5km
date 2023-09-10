@@ -31,7 +31,7 @@ module API
         errors[:user] = @user.errors.full_messages if @user.invalid?
         errors[:athlete] = @athlete.errors.full_messages if @athlete&.invalid?
 
-        render json: { errors: errors }, status: :unprocessable_entity
+        render json: { errors: }, status: :unprocessable_entity
       end
 
       private

@@ -8,10 +8,7 @@ class BreakingTimeAwardingJob < ApplicationJob
   def perform
     expire_badges
     [true, false].each do |male|
-      award_badges(
-        Badge.breaking_kind.where("(info->'male')::boolean = ?", male).order(Arel.sql("info->'min'")),
-        male: male
-      )
+      award_badges(Badge.breaking_kind.where("(info->'male')::boolean = ?", male).order(Arel.sql("info->'min'")), male:)
     end
   end
 
@@ -24,8 +21,8 @@ class BreakingTimeAwardingJob < ApplicationJob
           .joins(:activity, athlete: :trophies)
           .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
           .where(total_time: ...minutes_threshold(badge.info['min']))
-          .where(athlete: { trophies: { badge: badge } }).select(:athlete_id)
-      Trophy.where(badge: badge).where.not(athlete_id: accomplished_athlete_ids).destroy_all
+          .where(athlete: { trophies: { badge: } }).select(:athlete_id)
+      Trophy.where(badge:).where.not(athlete_id: accomplished_athlete_ids).destroy_all
     end
   end
 
@@ -39,7 +36,7 @@ class BreakingTimeAwardingJob < ApplicationJob
         .joins(:activity, :athlete)
         .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
         .where(total_time: minutes_threshold(prev_badges.last&.info&.dig('min'))...minutes_threshold(time_threshold))
-        .where(athlete: { male: male })
+        .where(athlete: { male: })
         .order(:date)
         .select(:athlete_id, :date)
         .each do |res|

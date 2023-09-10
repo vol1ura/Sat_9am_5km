@@ -25,8 +25,6 @@ Metrics/BlockLength:
     - 'spec/**/*'
 
 # STYLE
-Style/Alias:
-  Enabled: false
 Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
@@ -36,6 +34,8 @@ Style/FrozenStringLiteralComment:
     - 'app/views/**/*.json.jbuilder'
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
+Style/HashSyntax:
+  EnforcedShorthandSyntax: consistent
 Style/NumericLiterals:
   Enabled: false
 
@@ -63,7 +63,7 @@ RSpec/ExampleLength:
     - 'spec/system/**/*'
 
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.1
   Exclude:
     - 'tmp/**/*'
     - 'bin/**/*'

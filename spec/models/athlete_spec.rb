@@ -3,8 +3,8 @@ RSpec.describe Athlete do
 
   it 'invalid with existing parkrun_code' do
     parkrun_code = Faker::Number.number(digits: 6)
-    create(:athlete, parkrun_code: parkrun_code)
-    another_athlete = build(:athlete, parkrun_code: parkrun_code)
+    create(:athlete, parkrun_code:)
+    another_athlete = build(:athlete, parkrun_code:)
     expect(another_athlete).not_to be_valid
   end
 

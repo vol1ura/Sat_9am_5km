@@ -30,7 +30,7 @@ RSpec.describe '/athletes' do
   describe 'GET /athletes/1' do
     it 'renders a successful response' do
       athlete = create(:athlete)
-      create_list(:result, 3, athlete: athlete)
+      create_list(:result, 3, athlete:)
       get athlete_url(athlete)
       expect(response).to be_successful
     end

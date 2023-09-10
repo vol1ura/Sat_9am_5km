@@ -9,7 +9,7 @@ class AthleteAwardingJob < ApplicationJob
     @activity = Activity.find activity_id
     return unless @activity.published
 
-    [true, false].each { |male| process_event_records(male: male) }
+    [true, false].each { |male| process_event_records(male:) }
     @activity.athletes.each { |athlete| award_runner(athlete) }
     @activity.volunteers.each { |volunteer| award_volunteer(volunteer.athlete) }
   end
@@ -18,7 +18,7 @@ class AthleteAwardingJob < ApplicationJob
 
   # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def process_event_records(male:)
-    best_result = @activity.results.joins(:athlete).where(athlete: { male: male }).order(:position).first
+    best_result = @activity.results.joins(:athlete).where(athlete: { male: }).order(:position).first
     return unless best_result
 
     record_badge = Badge.record_kind.find_by("(info->'male')::boolean = ?", male)
@@ -96,8 +96,8 @@ class AthleteAwardingJob < ApplicationJob
   end
 
   def threshold_awarding(athlete, kind, type, value)
-    badges_dataset = Badge.dataset_of(kind: kind, type: type).where("(info->'threshold')::integer <= ?", value)
-    return unless (badge = badges_dataset.last) && !athlete.trophies.exists?(badge: badge)
+    badges_dataset = Badge.dataset_of(kind:, type:).where("(info->'threshold')::integer <= ?", value)
+    return unless (badge = badges_dataset.last) && !athlete.trophies.exists?(badge:)
 
     athlete.trophies.where(badge: badges_dataset.where.not(id: badge.id)).destroy_all
     athlete.award_by Trophy.new(badge: badge, date: activity_date)

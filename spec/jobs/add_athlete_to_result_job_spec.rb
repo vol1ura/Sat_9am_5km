@@ -1,6 +1,6 @@
 RSpec.describe AddAthleteToResultJob do
   let(:activity_id) { create(:activity).id }
-  let(:result) { create(:result, activity_id: activity_id) }
+  let(:result) { create(:result, activity_id:) }
   let(:athlete) { create(:athlete) }
 
   it 'performs immediately' do

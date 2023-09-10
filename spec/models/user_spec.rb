@@ -14,8 +14,8 @@ RSpec.describe User do
 
     it 'invalid with existing email' do
       email = Faker::Internet.free_email
-      create(:user, email: email)
-      another_user = build(:user, email: email)
+      create(:user, email:)
+      another_user = build(:user, email:)
       expect(another_user).not_to be_valid
     end
   end

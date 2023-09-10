@@ -1,8 +1,8 @@
 RSpec.describe '/admin/results' do
   let(:user) { create(:user) }
   let(:event) { create(:event) }
-  let(:activity) { create(:activity, event: event) }
-  let!(:results) { create_list(:result, 3, activity: activity) }
+  let(:activity) { create(:activity, event:) }
+  let!(:results) { create_list(:result, 3, activity:) }
 
   before do
     create(:permission, user: user, action: 'read', subject_class: 'Result', event_id: event.id)
@@ -122,7 +122,7 @@ RSpec.describe '/admin/results' do
     describe 'PATCH /admin/activities/1/results/1/gender_set' do
       it 'assigns gender for athlete' do
         athlete = create(:athlete, male: nil)
-        result = create(:result, athlete: athlete, activity: activity)
+        result = create(:result, athlete:, activity:)
         patch gender_set_admin_activity_result_url(activity, result, male: true, format: :js)
         expect(response).to be_successful
         expect(athlete.reload.male).to be_truthy

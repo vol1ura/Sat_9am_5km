@@ -6,7 +6,7 @@ RSpec.describe '/pages' do
 
     %w[index about support rules].each do |page|
       it "renders page #{page} with successful response", vcr: page == 'about' do
-        get page_url(page: page)
+        get page_url(page:)
         expect(response).to be_successful
       end
     end
