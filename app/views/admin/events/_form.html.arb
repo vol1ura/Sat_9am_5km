@@ -21,12 +21,12 @@ active_admin_form_for [:admin, resource] do |f|
                                   [{ list: 'ordered' }, { list: 'bullet' }],
                                   ['link'],
                                   ['clean']
-                                ]
+                                ],
                               },
                               placeholder: 'Описать кто и где проводит, особенности.',
-                              theme: 'snow'
-                            }
-                          }
+                              theme: 'snow',
+                            },
+                          },
                         }
     input :main_picture_link
     input :slogan

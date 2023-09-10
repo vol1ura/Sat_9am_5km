@@ -4,7 +4,7 @@ RSpec.describe '/api/parkzhrun/activities' do
     let(:headers) do
       {
         'Accept' => 'application/json',
-        'Authorization' => Rails.application.credentials.parkzhrun_api_key
+        'Authorization' => Rails.application.credentials.parkzhrun_api_key,
       }
     end
 
@@ -12,7 +12,7 @@ RSpec.describe '/api/parkzhrun/activities' do
       let(:headers) do
         {
           'Accept' => 'application/json',
-          'Authorization' => Faker::Crypto.sha256
+          'Authorization' => Faker::Crypto.sha256,
         }
       end
 

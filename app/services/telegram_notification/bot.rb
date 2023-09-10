@@ -6,7 +6,7 @@ module TelegramNotification
     HEADERS = { 'Content-Type' => 'application/json' }.freeze
     MAIN_KEYBOARD = {
       keyboard: [['ℹ️ штрих-код', '❓ справка']],
-      resize_keyboard: true
+      resize_keyboard: true,
     }.freeze
 
     def initialize(method, **payload)

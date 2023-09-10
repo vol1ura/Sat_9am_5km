@@ -49,8 +49,8 @@ RSpec.describe '/admin/events' do
           name: Faker::Team.name,
           code_name: Faker::Internet.slug(glue: '_'),
           town: Faker::Address.city,
-          place: Faker::Address.street_name
-        }
+          place: Faker::Address.street_name,
+        },
       }
     end
 

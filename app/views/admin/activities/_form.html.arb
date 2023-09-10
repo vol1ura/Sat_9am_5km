@@ -28,12 +28,12 @@ active_admin_form_for [:admin, resource] do |f|
                                   [{ list: 'ordered' }, { list: 'bullet' }],
                                   ['link'],
                                   ['clean']
-                                ]
+                                ],
                               },
                               placeholder: 'Какой же классный забег...',
-                              theme: 'snow'
-                            }
-                          }
+                              theme: 'snow',
+                            },
+                          },
                         }
     input :published, label: 'Опубликовать результаты на сайте' if !resource.published || current_user.admin?
   end

@@ -46,8 +46,8 @@ RSpec.describe '/admin/trophies' do
       {
         trophy: {
           badge_id: badge.id,
-          athlete_id: athlete.id
-        }
+          athlete_id: athlete.id,
+        },
       }
     end
 

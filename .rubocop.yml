@@ -1,4 +1,5 @@
 require:
+  - rubocop-factory_bot
   - rubocop-rails
   - rubocop-rake
   - rubocop-performance
@@ -34,7 +35,7 @@ Style/FrozenStringLiteralComment:
     - 'spec/**/*'
     - 'app/views/**/*.json.jbuilder'
 Style/TrailingCommaInHashLiteral:
-  Enabled: false
+  EnforcedStyleForMultiline: comma
 Style/NumericLiterals:
   Enabled: false
 

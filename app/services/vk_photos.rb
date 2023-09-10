@@ -6,7 +6,7 @@ class VkPhotos < ApplicationService
   API_QUERIES = {
     owner_id: "-#{ENV.fetch('VK_GROUP_ID', 1)}",
     access_token: ENV.fetch('VK_TOKEN', '').freeze,
-    v: '5.130'
+    v: '5.130',
   }.freeze
   ALBUMS_SET_SIZE = 3
   MAX_WIDTH = 800

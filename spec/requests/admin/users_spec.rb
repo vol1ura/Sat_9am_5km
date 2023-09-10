@@ -43,8 +43,8 @@ RSpec.describe '/admin/users' do
         user: {
           first_name: Faker::Name.first_name,
           password: user.password,
-          password_confirmation: user.password
-        }
+          password_confirmation: user.password,
+        },
       }
     end
 

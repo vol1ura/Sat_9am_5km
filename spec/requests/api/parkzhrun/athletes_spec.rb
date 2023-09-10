@@ -9,8 +9,8 @@ RSpec.describe '/api/parkzhrun/athletes' do
           last_name: Faker::Name.last_name,
           gender: %w[male female].sample,
           parkrun_id: Faker::Number.number(digits: 7),
-          parkzhrun_id: parkzhrun_code
-        }
+          parkzhrun_id: parkzhrun_code,
+        },
       }
     end
 
@@ -20,7 +20,7 @@ RSpec.describe '/api/parkzhrun/athletes' do
               params: athlete_attributes,
               headers: {
                 'Accept' => 'application/json',
-                'Authorization' => Faker::Crypto.sha256
+                'Authorization' => Faker::Crypto.sha256,
               }
         expect(response).to have_http_status :unauthorized
       end
@@ -30,7 +30,7 @@ RSpec.describe '/api/parkzhrun/athletes' do
       let(:valid_headers) do
         {
           'Accept' => 'application/json',
-          'Authorization' => Rails.application.credentials.parkzhrun_api_key
+          'Authorization' => Rails.application.credentials.parkzhrun_api_key,
         }
       end
 

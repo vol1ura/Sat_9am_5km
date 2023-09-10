@@ -20,8 +20,8 @@ RSpec.describe '/admin/contacts' do
       {
         contact: {
           contact_type: :vk,
-          link: Faker::Internet.url
-        }
+          link: Faker::Internet.url,
+        },
       }
     end
 
