@@ -13,7 +13,7 @@ RSpec.describe '/admin/activities/1/volunteers' do
     end
 
     it 'renders a successful response' do
-      create_list(:volunteer, 3, activity: activity)
+      create_list(:volunteer, 3, activity:)
       get admin_activity_volunteers_url(activity)
       expect(response).to be_successful
     end
@@ -58,7 +58,7 @@ RSpec.describe '/admin/activities/1/volunteers' do
   end
 
   describe 'PUT /admin/activities/1/volunteer/1' do
-    let(:volunteer) { create(:volunteer, activity: activity) }
+    let(:volunteer) { create(:volunteer, activity:) }
     let(:athlete) { create(:athlete) }
     let(:valid_attributes) do
       {
@@ -81,14 +81,14 @@ RSpec.describe '/admin/activities/1/volunteers' do
 
   describe 'GET /admin/activities/1/volunteers.csv' do
     it 'downloads csv file' do
-      create_list(:volunteer, 3, activity: activity)
+      create_list(:volunteer, 3, activity:)
       get admin_activity_volunteers_url(activity, format: :csv)
       expect(response).to be_successful
     end
   end
 
   describe 'POST /admin/activities/1/volunteers' do
-    let!(:volunteer) { create(:volunteer, activity: activity) }
+    let!(:volunteer) { create(:volunteer, activity:) }
     let(:other_activity) { create(:activity, date: activity.date) }
     let(:invalid_attributes) do
       {

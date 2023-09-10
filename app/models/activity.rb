@@ -30,7 +30,7 @@ class Activity < ApplicationRecord
   end
 
   def leader_result(male: true)
-    results.joins(:athlete).where(athlete: { male: male }).order(:position).first
+    results.joins(:athlete).where(athlete: { male: }).order(:position).first
   end
 
   def number

@@ -11,7 +11,7 @@ RSpec.describe AthleteAwardingJob do
       24.times do |idx|
         activity = create(:activity, event: event, date: idx.next.week.ago)
         create(:result, athlete: athlete, activity: activity, total_time: Result.total_time(19, idx))
-        create(:volunteer, athlete: athlete, activity: activity)
+        create(:volunteer, athlete:, activity:)
       end
     end
 
@@ -21,7 +21,7 @@ RSpec.describe AthleteAwardingJob do
 
     it 'creates new trophies' do
       create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(18, 30))
-      create(:volunteer, activity: activity, athlete: athlete)
+      create(:volunteer, activity:, athlete:)
       expect do
         described_class.perform_now(activity.id)
       end.to change(athlete.trophies, :count).by(4)

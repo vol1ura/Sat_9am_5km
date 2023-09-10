@@ -11,7 +11,7 @@ RSpec.describe '/events' do
   describe 'GET /volunteering' do
     it 'renders a successful response' do
       activity = create(:activity, date: Faker::Date.forward(days: 20))
-      create_list(:volunteer, 3, activity: activity)
+      create_list(:volunteer, 3, activity:)
       get volunteering_event_url(code_name: event.code_name)
       expect(response).to be_successful
     end

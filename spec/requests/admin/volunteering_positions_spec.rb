@@ -1,7 +1,7 @@
 RSpec.describe '/admin/volunteering_positions' do
   let(:user) { create(:user, :admin) }
   let(:event) { create(:event) }
-  let(:position) { create(:volunteering_position, event: event) }
+  let(:position) { create(:volunteering_position, event:) }
 
   before do
     FactoryBot.rewind_sequences
@@ -11,7 +11,7 @@ RSpec.describe '/admin/volunteering_positions' do
   describe 'GET /admin/volunteering_positions' do
     before do
       Volunteer.roles.keys.sample(3).each do |role|
-        create(:volunteering_position, event: event, role: role)
+        create(:volunteering_position, event:, role:)
       end
     end
 

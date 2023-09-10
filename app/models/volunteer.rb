@@ -27,7 +27,7 @@ class Volunteer < ApplicationRecord
 
   def cannot_be_assigned_on_more_than_one_position
     other_volunteerings =
-      Volunteer.joins(:activity).where.not(activity_id: activity_id).where(athlete_id: athlete_id, activity: { date: date })
+      Volunteer.joins(:activity).where.not(activity_id:).where(athlete_id: athlete_id, activity: { date: })
     errors.add(:athlete_id, I18n.t('errors.messages.more_than_one_volunteering')) if other_volunteerings.exists?
   end
 end

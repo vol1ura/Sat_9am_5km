@@ -67,7 +67,7 @@ class AthleteReuniter < ApplicationService
       if (athlete_trophy = athlete.trophies.find_by(badge_id: trophy.badge_id))
         athlete_trophy.update!(date: trophy.date) if trophy.date && trophy.date > athlete_trophy.date
       else
-        trophy.update!(athlete: athlete)
+        trophy.update!(athlete:)
       end
     end
   end

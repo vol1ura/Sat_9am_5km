@@ -11,7 +11,7 @@ RSpec.describe TelegramNotification::Badge::RageExpiration, type: :service do
 
   before do
     stub_const('TelegramNotification::Bot::TOKEN', bot_token)
-    create(:result, athlete: athlete, activity_params: { date: date })
+    create(:result, athlete: athlete, activity_params: { date: })
   end
 
   context 'when request to telegram successful' do

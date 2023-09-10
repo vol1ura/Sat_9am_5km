@@ -3,8 +3,8 @@ RSpec.describe TelegramNotification::AfterActivityJob do
   let(:athlete) { create(:athlete, user: create(:user)) }
 
   before do
-    create(:result, activity: activity, athlete: athlete)
-    create(:volunteer, activity: activity, athlete: athlete)
+    create(:result, activity:, athlete:)
+    create(:volunteer, activity:, athlete:)
     allow(TelegramNotification::AfterActivity::Result).to receive(:call)
     allow(TelegramNotification::AfterActivity::Volunteer).to receive(:call)
   end

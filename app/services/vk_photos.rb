@@ -45,7 +45,7 @@ class VkPhotos < ApplicationService
   def latest_album_photos
     all_albums = request('photos.getAlbums')
     album_id = all_albums.dig('response', 'items', rand(ALBUMS_SET_SIZE), 'id')
-    album_photos = request('photos.get', album_id: album_id)
+    album_photos = request('photos.get', album_id:)
     album_photos.dig('response', 'items')
   end
 

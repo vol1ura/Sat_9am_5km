@@ -8,9 +8,9 @@ RSpec.describe Parkzhrun::ActivityCreator, type: :service do
   end
 
   context 'when activity already exists' do
-    let(:activity) { create(:activity, event: event) }
+    let(:activity) { create(:activity, event:) }
 
-    before { create_list(:result, 3, activity: activity) }
+    before { create_list(:result, 3, activity:) }
 
     it 'skips activity processing' do
       expect { described_class.call(activity.date) }.not_to change(Result, :count)

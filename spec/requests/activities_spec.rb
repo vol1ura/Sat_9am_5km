@@ -9,7 +9,7 @@ RSpec.describe '/activities' do
 
   describe 'GET /show' do
     let(:activity) { create(:activity) }
-    let!(:result) { create(:result, activity: activity) }
+    let!(:result) { create(:result, activity:) }
 
     it 'renders a successful response' do
       get activity_url(activity)
