@@ -79,7 +79,7 @@ RSpec.describe '/admin/athletes' do
         {
           batch_action: :gender_set,
           batch_action_inputs: { gender: 'мужчина' }.to_json,
-          collection_selection: athletes.map(&:id)
+          collection_selection: athletes.map(&:id),
         }
       end
 
@@ -98,8 +98,8 @@ RSpec.describe '/admin/athletes' do
       {
         athlete: {
           name: Faker::Name.name,
-          result_id: result.id
-        }
+          result_id: result.id,
+        },
       }
     end
 

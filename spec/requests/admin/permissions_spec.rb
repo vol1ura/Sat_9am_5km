@@ -45,7 +45,7 @@ RSpec.describe '/admin/events' do
         permission: {
           action: Permission::ACTIONS.sample,
           subject_class: Permission::CLASSES.sample,
-        }
+        },
       }
     end
 

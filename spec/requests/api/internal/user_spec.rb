@@ -6,8 +6,8 @@ RSpec.describe '/api/internal/user' do
     {
       athlete: {
         name: Faker::Name.name,
-        parkrun_code: Faker::Number.number(digits: 7)
-      }
+        parkrun_code: Faker::Number.number(digits: 7),
+      },
     }
   end
 
@@ -20,8 +20,8 @@ RSpec.describe '/api/internal/user' do
           email: Faker::Internet.free_email,
           password: Faker::Internet.password(min_length: 6),
           telegram_id: Faker::Number.number(digits: 8),
-          telegram_user: Faker::Internet.username
-        }
+          telegram_user: Faker::Internet.username,
+        },
       }
     end
 
@@ -58,8 +58,8 @@ RSpec.describe '/api/internal/user' do
         user_id: user.id,
         user: {
           telegram_id: Faker::Number.number(digits: 8),
-          telegram_user: Faker::Internet.username
-        }
+          telegram_user: Faker::Internet.username,
+        },
       }
     end
 

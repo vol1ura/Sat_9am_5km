@@ -53,8 +53,8 @@ RSpec.describe '/admin/activities' do
           event_id: event.id,
           published: true,
           timer: File.open('spec/fixtures/files/parkrun_timer_results_ios.csv'),
-          scanner0: File.open('spec/fixtures/files/parkrun_scanner_results.csv')
-        }
+          scanner0: File.open('spec/fixtures/files/parkrun_scanner_results.csv'),
+        },
       }
     end
 

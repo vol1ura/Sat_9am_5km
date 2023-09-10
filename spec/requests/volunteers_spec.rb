@@ -29,8 +29,8 @@ RSpec.describe '/volunteer' do
         volunteer: {
           activity_id: activity.id,
           athlete_id: athlete.id,
-          role: Volunteer.roles.keys.sample
-        }
+          role: Volunteer.roles.keys.sample,
+        },
       }
     end
 
@@ -52,8 +52,8 @@ RSpec.describe '/volunteer' do
         volunteer: {
           activity_id: activity.id,
           athlete_id: athlete.id,
-          role: volunteer.role
-        }
+          role: volunteer.role,
+        },
       }
     end
 

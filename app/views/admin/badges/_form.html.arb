@@ -18,12 +18,12 @@ active_admin_form_for [:admin, resource] do |f|
                                  [{ list: 'ordered' }, { list: 'bullet' }],
                                  ['link'],
                                  ['clean']
-                               ]
+                               ],
                              },
                              placeholder: 'Нобходимо очень постараться...',
-                             theme: 'snow'
-                           }
-                         }
+                             theme: 'snow',
+                           },
+                         },
                        }
   end
 

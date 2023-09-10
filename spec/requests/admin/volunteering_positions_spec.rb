@@ -34,8 +34,8 @@ RSpec.describe '/admin/volunteering_positions' do
         volunteering_position: {
           role: :director,
           number: 1,
-          rank: 1
-        }
+          rank: 1,
+        },
       }
     end
 
@@ -50,8 +50,8 @@ RSpec.describe '/admin/volunteering_positions' do
     let(:valid_attributes) do
       {
         volunteering_position: {
-          number: position.number.next
-        }
+          number: position.number.next,
+        },
       }
     end
 

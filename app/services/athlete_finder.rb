@@ -4,12 +4,12 @@ class AthleteFinder < ApplicationService
   NAME_PATH = {
     parkrun_code: {
       url: 'https://www.parkrun.com.au/results/athleteresultshistory/?athleteNumber=%d',
-      xpath: '//div[@id="content"]/h2'
+      xpath: '//div[@id="content"]/h2',
     },
     fiveverst_code: {
       url: 'https://5verst.ru/userstats/%d/',
-      xpath: '//div[@class="entry-content the-content text-column"]/h3'
-    }
+      xpath: '//div[@class="entry-content the-content text-column"]/h3',
+    },
   }.freeze
   ANTI_BLOCK_PAUSE = 1.5
   private_constant :ANTI_BLOCK_PAUSE
