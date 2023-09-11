@@ -38,7 +38,7 @@ group :development, :test do
   gem 'bullet'
   gem 'bundler-audit'
   gem 'factory_bot_rails'
-  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'faker'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
