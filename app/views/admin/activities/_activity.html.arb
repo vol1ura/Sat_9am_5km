@@ -33,12 +33,5 @@ panel 'Волонтёры' do
 end
 
 panel 'Правки забега' do
-  table_for activity.own_and_associated_audits.includes(:user, :auditable).reorder(created_at: :desc) do
-    column :auditable
-    column :action
-    column :audited_changes
-    column :version
-    column :user
-    column :created_at
-  end
+  render partial: 'admin/audits_table', locals: { object: activity }
 end
