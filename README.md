@@ -9,11 +9,6 @@
 
 # Sat 9am 5km - run events system
 
-## TODO
-
-- [ ] Separate page with activities inside event
-- [ ] Event specific top menu
-
 ## Development
 
 Create `deploy/.env` and `config/database.yml` files:
@@ -22,7 +17,7 @@ cp ./deploy/.env.example ./deploy/.env
 cp ./config/database.yml.example ./config/database.yml
 ```
 
-To build project install `Docker`, `docker-compose` (use V2 on Apple chip) and execute
+To build project install `Docker` and execute
 ```shell
 make build
 make ash
@@ -30,7 +25,7 @@ make ash
 rails db:prepare
 rails db:environment:set RAILS_ENV=test
 # add secrets
-EDITOR=vim rails credentials:edit
+EDITOR=vim rails credentials:edit --environment test
 ```
 
 Now you can run it

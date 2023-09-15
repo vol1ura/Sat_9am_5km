@@ -33,6 +33,7 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.configure_rspec_metadata!
   c.filter_sensitive_data('<VK_TOKEN>') { ENV.fetch('VK_TOKEN', '') }
+  c.filter_sensitive_data('<PARKZHRUN_TOKEN>') { Rails.application.credentials.parkzhrun_auth_key }
 end
 
 RSpec.configure do |config|
