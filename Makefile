@@ -1,9 +1,9 @@
-WEB_CONTAINER := `docker-compose ps | grep web | cut -d ' ' -f1`
+WEB_CONTAINER := `docker compose ps | grep web | cut -d ' ' -f1`
 
 target: project
 
 project:
-	docker-compose ps | grep -E '.web.[1-9].*Up' || docker-compose up -d
+	docker compose ps | grep -E '.web.[1-9].*Up' || docker compose up -d
 
 bind: project
 	docker attach $(WEB_CONTAINER)
@@ -19,8 +19,8 @@ checkup:
 	rubocop --only Lint/Debugger
 
 build:
-	docker-compose run --rm web bundle lock
-	docker-compose build web
+	docker compose run --rm web bundle lock
+	docker compose build web
 	docker images --filter "dangling=true" -q | xargs docker rmi || echo "There were images tagged as <none> in use"
 
 clean_logs:
