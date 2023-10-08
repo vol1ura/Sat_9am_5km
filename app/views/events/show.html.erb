@@ -53,8 +53,8 @@
         </tbody>
       </table>
       <% if @total_activities > 15 %>
-        <div class="d-flex justify-content-center">
-          <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false">Показать все</button>
+        <div class="d-flex justify-content-center" data-controller="button">
+          <button class="btn btn-outline-primary" type="button" data-action="click->button#toggleName" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false">Показать все</button>
         </div>
       <% end %>
     <% end %>
