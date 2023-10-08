@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="protocol"
 export default class extends Controller {
   static targets = ["absolute", "male", "female"]
 

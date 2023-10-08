@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="table-head"
 export default class extends Controller {
   toggleSort(e) {
     e.target.closest('tr').querySelectorAll('i.bi').forEach(cell => {
