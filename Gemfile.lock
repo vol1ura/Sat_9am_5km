@@ -137,7 +137,7 @@ GEM
       rexml
     crass (1.0.6)
     dalli (3.2.5)
-    database_consistency (1.7.8)
+    database_consistency (1.7.21)
       activerecord (>= 3.2)
     date (3.3.3)
     devise (4.8.1)
@@ -219,7 +219,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.4)
-    minitest (5.19.0)
+    minitest (5.20.0)
     net-imap (0.3.7)
       date
       net-protocol
