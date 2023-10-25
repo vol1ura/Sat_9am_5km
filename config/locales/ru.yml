@@ -76,6 +76,7 @@ ru:
         name: название
       event:
         active: активен
+        country_code: страна
         code_name: 'кодовое имя'
         name: название
         main_picture_link: 'ссылка на баннер'
@@ -86,6 +87,10 @@ ru:
         visible_order: 'вес в ленте'
         created_at: создан
         updated_at: обновлён
+        country_codes:
+          ru: Россия
+          by: Беларусь
+          rs: Сербия
       result:
         position: место
         total_time: результат
