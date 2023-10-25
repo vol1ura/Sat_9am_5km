@@ -11,6 +11,8 @@ class Event < ApplicationRecord
 
   default_scope { order(:visible_order, :name) }
 
+  enum country_code: { ru: 'ru', by: 'by', rs: 'rs' }
+
   def self.authorized_for(user)
     return all if user.admin?
 
@@ -18,6 +20,6 @@ class Event < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[active code_name description name place town]
+    %w[active code_name description name place town country_code]
   end
 end

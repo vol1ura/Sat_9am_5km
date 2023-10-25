@@ -10,10 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_07_130603) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_190237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "country_code", ["ru", "by", "rs"]
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -117,6 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_130603) do
     t.string "main_picture_link"
     t.integer "visible_order"
     t.string "slogan"
+    t.enum "country_code", default: "ru", null: false, enum_type: "country_code"
     t.index ["code_name"], name: "index_events_on_code_name", unique: true
   end
 
