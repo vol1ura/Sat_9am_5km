@@ -63,7 +63,7 @@ RSpec.describe Athlete do
       end
 
       it 'returns athlete by sat_9am_5km code' do
-        code = athlete.id + Athlete::SAT_5AM_9KM_BORDER
+        code = athlete.id + Athlete::SAT_9AM_5KM_BORDER
         expect(described_class.find_or_scrape_by_code!(code)).to eq athlete
       end
     end

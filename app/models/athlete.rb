@@ -4,7 +4,7 @@ class Athlete < ApplicationRecord
   audited associated_with: :user, max_audits: 20
 
   PARKZHRUN_BORDER = 690_000_000
-  SAT_5AM_9KM_BORDER = 770_000_000
+  SAT_9AM_5KM_BORDER = 770_000_000
   FIVE_VERST_BORDER = 790_000_000
   RUN_PARK_BORDER = 7_000_000_000
   NOBODY = 'НЕИЗВЕСТНЫЙ'
@@ -14,7 +14,7 @@ class Athlete < ApplicationRecord
       @code_type ||=
         if code < PARKZHRUN_BORDER
           :parkrun_code
-        elsif code < SAT_5AM_9KM_BORDER
+        elsif code < SAT_9AM_5KM_BORDER
           :parkzhrun_code
         # elsif code > RUN_PARK_BORDER
         #   :runpark_code
@@ -26,7 +26,7 @@ class Athlete < ApplicationRecord
     end
 
     def id
-      @id ||= code.between?(SAT_5AM_9KM_BORDER, FIVE_VERST_BORDER) ? code - SAT_5AM_9KM_BORDER : code
+      @id ||= code.between?(SAT_9AM_5KM_BORDER, FIVE_VERST_BORDER) ? code - SAT_9AM_5KM_BORDER : code
     end
 
     def to_params
@@ -98,7 +98,7 @@ class Athlete < ApplicationRecord
   end
 
   def code
-    parkrun_code || fiveverst_code || (SAT_5AM_9KM_BORDER + id if id)
+    parkrun_code || fiveverst_code || (SAT_9AM_5KM_BORDER + id if id)
   end
 
   def award_by(trophy)
