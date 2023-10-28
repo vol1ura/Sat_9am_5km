@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTimestamps < ActiveRecord::Migration[7.0]
   def change
     current_time = Time.current

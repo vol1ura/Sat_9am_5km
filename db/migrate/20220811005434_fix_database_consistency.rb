@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixDatabaseConsistency < ActiveRecord::Migration[7.0]
   def up
     change_column :activities, :event_id, :bigint, null: false
