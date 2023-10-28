@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddEightYearsTsaritsynoAnniversaryBadge < ActiveRecord::Migration[7.0]
   def up
     Badge.find_or_create_by!(id: 31) do |badge|

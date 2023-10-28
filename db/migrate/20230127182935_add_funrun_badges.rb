@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFunrunBadges < ActiveRecord::Migration[7.0]
   def change
     Badge.find_or_create_by!(id: 23) do |badge|
