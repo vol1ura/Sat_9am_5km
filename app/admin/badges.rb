@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Badge do
-  actions :all, except: %i[new destroy]
+  actions :all, except: :destroy
 
   permit_params :name, :conditions, :received_date, :picture_link
 
