@@ -9,6 +9,10 @@ module ApplicationHelper
     content_for?(:"meta_#{tag}") ? content_for(:"meta_#{tag}") : default_text
   end
 
+  def top_level_domain
+    @top_level_domain ||= request.host.split('.').last
+  end
+
   def human_result_time(time)
     return 'xx:xx' unless time
 

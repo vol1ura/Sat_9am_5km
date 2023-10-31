@@ -19,6 +19,7 @@ Bundler.require(*Rails.groups)
 module Sat9am5km
   class Application < Rails::Application
     config.time_zone = ENV.fetch('TZ', 'Europe/Moscow')
+    config.i18n.available_locales = %i[ru rs en]
     config.i18n.default_locale = :ru
     config.load_defaults 7.0
 
