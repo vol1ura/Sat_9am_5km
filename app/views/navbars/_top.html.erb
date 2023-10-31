@@ -12,7 +12,7 @@
             <li class="nav-item dropdown">
               <%= link_to 'Мероприятия', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
               <ul class="dropdown-menu" aria-labelledby="eventDropdown">
-                <% Event.all.each do |event| %>
+                <% @country_events.each do |event| %>
                   <li><%= link_to event.name, event_path(event.code_name), class: 'dropdown-item' %></li>
                 <% end %>
               </ul>

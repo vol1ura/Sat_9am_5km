@@ -1,4 +1,4 @@
-ru:
+rs:
   admin:
     utilities:
       cache:
@@ -15,17 +15,17 @@ ru:
         <<: *upload_notices
     contacts:
       index:
-        title: 'Контакты %{event_name}'
+        title: 'Contacts %{event_name}'
     results:
       destroy:
-        result_destroyed: 'Позиция №%{position} удалена из протокола.'
+        result_destroyed: 'Position #%{position} was removed.'
     volunteering_positions:
       index:
         title: 'Волонтёрские позиции %{event_name}'
       create:
-        successful: 'Позиция успешно добавлена'
+        successful: 'Position was successfully created'
       update:
-        successful: 'Позиция успешно обновлена'
+        successful: 'Position was successfully updated'
     volunteers:
       index:
         title: 'Редактор волонтёров %{date}'
@@ -35,7 +35,7 @@ ru:
         successful: 'Данные о волонтёрстве %{volunteer_name} успешно обновлены'
   results:
     explanation:
-      title: 'Пояснения'
+      title: 'Explanations'
       unknown_athlete: 'Если участник отобразился как "НЕИЗВЕСТНЫЙ", значит не удалось автоматически заполнить его имя. Кликните по НЕИЗВЕСТНЫЙ и воспользуйтесь сайтом parkrun или 5вёрст чтобы по ID найти имя.'
       without_token: 'Если участник отобразился как "БЕЗ ТОКЕНА (создать)", значит он не отсканировался. Возможно, этот человек уже есть в базе и создавать новую запись НЕ НУЖНО - кликните по результату и в открывшейся форме введите parkrun ID.'
       delete_result: 'Удалить - удалит всю строку.'
@@ -44,17 +44,17 @@ ru:
       reset_athlete: 'Обнулить 🏃 - сбрасывает участника. В протоколе будет стоять Неизвестный.'
       insert_result: 'Добавить 🔝 - вставляет новый результат перед выбранной строкой.'
   active_admin:
-    dashboard: Главная
+    dashboard: Dashboard
     dashboard_welcome:
       call_to_action: 'В разделе Забеги можно загрузить данные со сканеров и секундомера (кнопка Создать Забег). Весь функционал виден и доступен только пользователям с правами администратора. Обратитесь к ним через телеграм-чат для настройки ваших прав.'
       info: Информация
       latest_activities: 'Недавно созданные забеги'
       upcoming_activities: 'Предстоящие забеги'
       change_log: Обновления
-    utilities: Инструменты
-    view: Открыть
-    edit: Изменить
-    delete: Удалить
+    utilities: Utilities
+    view: View
+    edit: Edit
+    delete: Delete
     delete_confirmation: "Вы уверены, что хотите удалить это?"
     successfully_deleted: "Успешно удалён %{obj}"
     new_model: "Создать %{model}"
@@ -168,13 +168,13 @@ ru:
       successful_roles_changed: 'Права успешно установлены.'
     page:
       index:
-        utilities: Инструменты
+        utilities: Utilities
         cache_clear:
-          title: 'Сброс кеша'
-          button: 'Сбросить кеш'
-          confirm: 'Уверены, что хотите сбросить кеш?'
+          title: 'Cache clear'
+          button: 'Clear'
+          confirm: 'Are you sure you want to clear cache?'
         badges:
-          title: Награды
+          title: Badges
 
     devise:
       username:
@@ -245,18 +245,18 @@ ru:
         edit_model: Изменить позицию
         delete_model: Удалить позицию
     scopes:
-      all: Все
-      admin: Админы
-      supervisors: Руководители
-      published: Опубликованы
-      unpublished: Не опубликованы
-      duplicates: Дубликаты?
-      active: Активны
-      inactive: Не активны
+      all: All
+      admin: Admins
+      supervisors: Supervisors
+      published: Published
+      unpublished: Not published
+      duplicates: Duplicates?
+      active: Active
+      inactive: Inactive
 
   ransack:
     predicates:
-      cont: содержит
-      eq: равно
-      start: начинается с
-      end: заканчивается на
+      cont: contains
+      eq: equals
+      start: starts with
+      end: ends with

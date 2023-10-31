@@ -10,7 +10,7 @@ ActiveAdmin.register_page 'Dashboard' do
           ul do
             Activity
               .includes(:event)
-              .where(date: Date.current..Date.current.end_of_week)
+              .where(date: Date.current..Date.current.end_of_week, event: { country_code: top_level_domain })
               .order('event.visible_order')
               .each do |activity|
                 li link_to_if(can?(:read, activity), human_activity_name(activity), admin_activity_path(activity))
@@ -20,9 +20,14 @@ ActiveAdmin.register_page 'Dashboard' do
 
         panel t('active_admin.dashboard_welcome.latest_activities') do
           ul do
-            Activity.includes(:event).order(created_at: :desc).first(10).each do |activity|
-              li link_to_if(can?(:read, activity), human_activity_name(activity), admin_activity_path(activity))
-            end
+            Activity
+              .includes(:event)
+              .where(event: { country_code: top_level_domain })
+              .order(created_at: :desc)
+              .first(10)
+              .each do |activity|
+                li link_to_if(can?(:read, activity), human_activity_name(activity), admin_activity_path(activity))
+              end
           end
         end
       end
@@ -53,8 +58,7 @@ ActiveAdmin.register_page 'Dashboard' do
             li 'Расширен функционал редактора протокола за счёт переноса функций со странички просмотра забега.'
             li 'Изменена форма редактирования результата. Можно вводить как parkrun, 5 вёрст id, так и id из базы сайта.'
             li <<~CHANGE
-              Добавлен автокомлит на страницу "Расписание волонтёров" (например,
-              #{volunteering_event_url(Event.take.code_name)}). Чтобы воспользоваться инструментом,
+              Добавлен автокомлит на страницу "Расписание волонтёров". Чтобы воспользоваться инструментом,
               предварительно нужно создать пустой предстоящий забег (можно сразу на 4 недели вперёд).
             CHANGE
             li 'Увеличен размер шрифтов.'

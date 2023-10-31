@@ -4,6 +4,7 @@ class ActivitiesController < ApplicationController
   def index
     @activities =
       Event
+        .where(country_code: top_level_domain)
         .unscope(:order)
         .filter_map { |event| event.activities.published.order(:date).last }
         .sort_by { |activity| [activity.date, -activity.event.visible_order.to_i] }

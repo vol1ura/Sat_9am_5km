@@ -54,8 +54,8 @@ jobs:
       TZ: "Europe/Moscow"
       COVERAGE: on
       BULLET_ENABLED: true
-      APP_HOST: "app.test.com"
-      APP_DOMAIN: "test.com"
+      APP_HOST: "test.ru"
+      APP_DOMAIN: "test.ru"
       VK_TOKEN: ${{ secrets.VK_TOKEN }}
       VK_GROUP_ID: 212432495
       BOT_TOKEN: "123456:test"
