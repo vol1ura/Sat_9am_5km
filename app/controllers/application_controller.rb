@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  TOP_LEVEL_DOMAIN_MAPPING = {
+    'rs' => :rs,
+    'by' => :by,
+  }.tap { |h| h.default = :ru }.freeze
+
   before_action :find_country_events
   around_action :switch_locale
 
@@ -25,6 +30,6 @@ class ApplicationController < ActionController::Base
   end
 
   def top_level_domain
-    @top_level_domain ||= request.host.split('.').last.to_sym
+    @top_level_domain ||= TOP_LEVEL_DOMAIN_MAPPING[request.host.split('.').last]
   end
 end
