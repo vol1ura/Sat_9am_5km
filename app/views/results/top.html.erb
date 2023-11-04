@@ -1,13 +1,13 @@
-<% head_info :title, 'Лучшие результаты' %>
+<% head_info :title, t('.top_results') %>
 
-<h4>Лучшие результаты</h4>
+<h4><%= t '.top_results' %></h4>
 
 <ul class="nav nav-tabs" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="male-tab" data-bs-toggle="tab" data-bs-target="#male-tab-pane" type="button" role="tab" aria-controls="male-tab-pane" aria-selected="false">Мужчины</button>
+    <button class="nav-link active" id="male-tab" data-bs-toggle="tab" data-bs-target="#male-tab-pane" type="button" role="tab" aria-controls="male-tab-pane" aria-selected="false"><%= t '.men' %></button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="female-tab" data-bs-toggle="tab" data-bs-target="#female-tab-pane" type="button" role="tab" aria-controls="female-tab-pane" aria-selected="false">Женщины</button>
+    <button class="nav-link" id="female-tab" data-bs-toggle="tab" data-bs-target="#female-tab-pane" type="button" role="tab" aria-controls="female-tab-pane" aria-selected="false"><%= t '.women' %></button>
   </li>
 </ul>
 
