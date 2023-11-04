@@ -465,6 +465,30 @@ ru:
   parkzhrun_mailer:
     success: 'Забег ПаркЖрун создан'
     error: 'Ошибка! Не удалось создать забег ПаркЖрун'
+  navbars:
+    top:
+      events: Мероприятия
+      results: Результаты
+      recent_results: Недавние результаты
+      club_ratings: Клубные рейтинги
+      top_results: Лучшие результаты
+      badges: Личные награды
+      rules: Правила
+      about: О нас
+      support: Поддержать проект
+      profile: Профиль
+      admin_panel: Админка
+      login: Войти
+      logout: Выход
+      search: Поиск
+      name_or_id: Фамилия или ID
+    bottom:
+      s95: Парковые забеги S95
+      slogan_html: 'Система независимых парковых забегов. Сделана бегунами для бегунов. Вы также можете <a href="%{link}">присоединиться</a> к нашим забегам, к разработке или редактированию контента.'
+      telegram_title: Новости проекта в Телеграм
+      vk_title: Группа в Контакте
+      send_email: Отправить нам email
+      github_title: Проект в GitHub
   pages:
     index:
       our_events: Наши мероприятия
