@@ -512,3 +512,14 @@ ru:
       volunteers: Волонтёры
       first_man: Первый
       first_woman: Первая
+    show:
+      short_report: Краткий отчёт
+      protocol: Протокол
+      common: Общий
+      men: Мужчины
+      women: Женщины
+      volunteers: Волонтёры
+      about_volunteers: 'Забег провела команда волонтёров:'
+      volunteer: Волонтёр
+      role: Роль
+      total_volunteering: всего волонтёрств %{count}
