@@ -465,3 +465,18 @@ ru:
   parkzhrun_mailer:
     success: 'Забег ПаркЖрун создан'
     error: 'Ошибка! Не удалось создать забег ПаркЖрун'
+  pages:
+    index:
+      our_events: Наши мероприятия
+      our_partners: Наши партнёры
+  results:
+    table:
+      time: Время
+      name: Имя
+      date: Дата
+      club: Клуб
+      event: Мероприятие
+    top:
+      top_results: Лучшие результаты
+      men: Мужчины
+      women: Женщины
