@@ -504,3 +504,11 @@ ru:
       top_results: Лучшие результаты
       men: Мужчины
       women: Женщины
+  activities:
+    index:
+      date: Дата
+      event: Мероприятие
+      athletes: Участники
+      volunteers: Волонтёры
+      first_man: Первый
+      first_woman: Первая

@@ -447,3 +447,11 @@ rs:
       top_results: Top results
       men: Men
       women: Women
+  activities:
+    index:
+      date: Date
+      event: Event
+      athletes: Athletes
+      volunteers: Volunteers
+      first_man: 1st man
+      first_woman: 1st woman
