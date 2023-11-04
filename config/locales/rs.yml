@@ -408,6 +408,30 @@ rs:
   parkzhrun_mailer:
     success: 'Забег ПаркЖрун создан'
     error: 'Ошибка! Не удалось создать забег ПаркЖрун'
+  navbars:
+    top:
+      events: Events
+      results: Results
+      recent_results: Recent results
+      club_ratings: Clubs
+      top_results: Top results
+      badges: Badges
+      rules: Rules
+      about: About
+      support: Support us
+      profile: Profile
+      admin_panel: Admin panel
+      login: Login
+      logout: Logout
+      search: Search
+      name_or_id: Name or ID
+    bottom:
+      s95: S95 park running
+      slogan_html: 'System of independent park run events. Made by runners for runners. You also can be free to <a href="%{link}">participate</a> in our runs, to development or content making.'
+      telegram_title: Project news in Telegram
+      vk_title: Vkontakte group
+      send_email: Send us email
+      github_title: Project in GitHub
   pages:
     index:
       our_events: Our events
