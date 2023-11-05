@@ -492,6 +492,13 @@ rs:
     index:
       our_events: Our events
       our_partners: Our partners
+    about:
+      description: S95 is an open system that unites independent park races, which are held according to the three postulates - Saturday, 9 am, 5 km.
+      how_to_join: 
+        title: Want to join S95?
+        body_html: 'The system currently displays the results of %{events_count} locations: %{events}. If you also want to join, write to us at <a href="mailto:%{info_email}" target="_blank" title="Send us an email">e-mail</a>, or ask questions at <a href= "%{telegram_group}" title="Our chat in telegram">telegram chat</a>.'
+      back: Back
+      forward: Forward
   results:
     table:
       time: Time
