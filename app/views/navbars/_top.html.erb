@@ -10,7 +10,7 @@
         <div class="navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <%= link_to 'Мероприятия', '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+              <%= link_to t('.events'), '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
               <ul class="dropdown-menu" aria-labelledby="eventDropdown">
                 <% @country_events.each do |event| %>
                   <li><%= link_to event.name, event_path(event.code_name), class: 'dropdown-item' %></li>
@@ -18,22 +18,22 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <%= link_to 'Результаты', '#', class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+              <%= link_to t('.results'), '#', class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
               <ul class="dropdown-menu" aria-labelledby="dataDropdown">
-                <li><%= link_to 'Недавние результаты', activities_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Клубные рейтинги', clubs_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Лучшие результаты', top_results_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Личные награды', badges_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.recent_results'), activities_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.club_ratings'), clubs_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.top_results'), top_results_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
               </ul>
             </li>
             <li class="nav-item">
-              <%= link_to 'Правила', page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" %>
+              <%= link_to t('.rules'), page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" %>
             </li>
             <li class="nav-item">
-              <%= link_to 'О нас', page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" %>
+              <%= link_to t('.about'), page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" %>
             </li>
             <li class="nav-item">
-              <%= link_to 'Поддержать проект', page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" %>
+              <%= link_to t('.support'), page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" %>
             </li>
           </ul>
         </div>
@@ -52,51 +52,51 @@
       <div class="offcanvas-body d-flex flex-column justify-content-between">
         <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
           <li class="nav-item">
-            <%= link_to 'Недавние результаты', activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" %>
+            <%= link_to t('.recent_results'), activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Клубы', clubs_path, class: "nav-link #{'active' if params[:controller] == 'clubs'}" %>
+            <%= link_to t('.club_ratings'), clubs_path, class: "nav-link #{'active' if params[:controller] == 'clubs'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Лучшие результаты', top_results_path, class: "nav-link #{'active' if params[:controller] == 'results'}" %>
+            <%= link_to t('.top_results'), top_results_path, class: "nav-link #{'active' if params[:controller] == 'results'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Личные награды', badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" %>
+            <%= link_to t('.badges'), badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Правила', page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" %>
+            <%= link_to t('.rules'), page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'О нас', page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" %>
+            <%= link_to t('.about'), page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Поддержать проект', page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" %>
+            <%= link_to t('.support'), page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" %>
           </li>
           <% if current_user %>
             <li class="nav-item dropdown mt-3">
               <%= link_to full_name(current_user), '#', class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
               <ul class="dropdown-menu" aria-labelledby="dataDropdown">
                 <% if athlete = current_user.athlete %>
-                  <li><%= link_to 'Профиль', athlete_path(athlete), class: 'dropdown-item' %></li>
+                  <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
                 <% end %>
                 <li><%#= link_to 'Настройки', edit_user_registration_path, class: 'dropdown-item' %></li>
                 <% if current_user.admin? || Permission.exists?(user: current_user) %>
-                  <li><%= link_to 'Админка', admin_root_path, class: 'dropdown-item' %></li>
+                  <li><%= link_to t('.admin_panel'), admin_root_path, class: 'dropdown-item' %></li>
                 <% end %>
-                <li><%= link_to 'Выход', destroy_user_session_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.logout'), destroy_user_session_path, class: 'dropdown-item' %></li>
               </ul>
             </li>
           <% else %>
             <li class="nav-item mt-3">
-              <%= link_to 'Войти', new_user_session_path, class: "nav-link #{'active' if params[:controller] == 'users/sessions'}" %>
+              <%= link_to t('.login'), new_user_session_path, class: "nav-link #{'active' if params[:controller] == 'users/sessions'}" %>
             </li>
           <% end %>
         </ul>
 
         <%= form_with url: athletes_path, method: :get, class: 'my-3', role: 'search' do |f| %>
           <div class="input-group">
-            <%= f.text_field :name, type: 'search', class: 'form-control', placeholder: 'Фамилия или ID', 'aria-label' => 'Search', autocomplete: 'off' %>
-            <%= f.submit 'Поиск', class: 'btn btn-outline-light' %>
+            <%= f.text_field :name, type: 'search', class: 'form-control', placeholder: t('.name_or_id'), 'aria-label' => 'Search', autocomplete: 'off' %>
+            <%= f.submit t('.search'), class: 'btn btn-outline-light' %>
           </div>
         <% end %>
       </div>

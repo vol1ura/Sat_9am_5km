@@ -1,16 +1,16 @@
-<% head_info :title, 'Недавние забеги' %>
-<h2>Недавние забеги</h2>
+<% head_info :title, t('navbars.top.recent_results') %>
+<h2><%= t 'navbars.top.recent_results' %></h2>
 
 <div class="table-responsive">
   <table id="activities" class="table table-striped">
     <thead>
       <tr>
-        <th>Дата</th>
-        <th>Мероприятие</th>
-        <th class="text-center">Участники</th>
-        <th class="text-center">Волонтёры</th>
-        <th>Первый</th>
-        <th>Первая</th>
+        <th><%= t '.date' %></th>
+        <th><%= t '.event' %></th>
+        <th class="text-center"><%= t '.athletes' %></th>
+        <th class="text-center"><%= t '.volunteers' %></th>
+        <th><%= t '.first_man' %></th>
+        <th><%= t '.first_woman' %></th>
       </tr>
     </thead>
     <tbody class="table-group-divider">

@@ -192,13 +192,13 @@ rs:
 
   date:
     abbr_day_names:
-      - Ne
-      - Po
-      - Ut
-      - Sr
-      - Če
-      - Pe
-      - Su
+    - Ne
+    - Po
+    - Ut
+    - Sr
+    - Če
+    - Pe
+    - Su
     abbr_month_names:
     -
     - jan.
@@ -393,25 +393,21 @@ rs:
             few: milijarde
             many: milijardi
             other: milijarde
-
           million:
             one: milion
             few: miliona
             many: miliona
             other: miliona
-
           quadrillion:
             one: kvadrilion
             few: kvadriliona
             many: kvadriliona
             other: kvadriliona
-
           thousand:
             one: hiljada
             few: hiljade
             many: hiljada
             other: hiljade
-
           trillion:
             one: trilion
             few: triliona
@@ -468,3 +464,85 @@ rs:
   parkzhrun_mailer:
     success: 'Trka ParkŽrun kreirana'
     error: 'Greška! Nije moguće kreirati trku ParkŽrun'
+  navbars:
+    top:
+      events: Events
+      results: Results
+      recent_results: Recent results
+      club_ratings: Clubs
+      top_results: Top results
+      badges: Badges
+      rules: Rules
+      about: About
+      support: Support us
+      profile: Profile
+      admin_panel: Admin panel
+      login: Login
+      logout: Logout
+      search: Search
+      name_or_id: Name or ID
+    bottom:
+      s95: S95 park running
+      slogan_html: 'System of independent park run events. Made by runners for runners. You also can be free to <a href="%{link}">participate</a> in our runs, to development or content making.'
+      telegram_title: Project news in Telegram
+      vk_title: Vkontakte group
+      send_email: Send us email
+      github_title: Project in GitHub
+  pages:
+    index:
+      our_events: Our events
+      our_partners: Our partners
+    about:
+      description: S95 is an open system that unites independent park races, which are held according to the three postulates - Saturday, 9 am, 5 km.
+      how_to_join:
+        title: Want to join S95?
+        body_html: 'The system currently displays the results of %{events_count} locations: %{events}. If you also want to join, write to us at <a href="mailto:%{info_email}" target="_blank" title="Send us an email">e-mail</a>, or ask questions at <a href= "%{telegram_group}" title="Our chat in telegram">telegram chat</a>.'
+      back: Back
+      forward: Forward
+  results:
+    table:
+      time: Time
+      name: Name
+      date: Date
+      club: Club
+      event: Event
+    top:
+      top_results: Top results
+      men: Men
+      women: Women
+  activities:
+    index:
+      date: Date
+      event: Event
+      athletes: Athletes
+      volunteers: Volunteers
+      first_man: 1st man
+      first_woman: 1st woman
+    show:
+      short_report: Brief
+      protocol: Protocol
+      common: Common
+      men: Men
+      women: Women
+      volunteers: Volunteers
+      about_volunteers: 'The race took place thanks to a team of volunteers:'
+      volunteer: Volunteer
+      role: Role
+      total_volunteering: total volunteering %{count}
+  events:
+    show:
+      our_contacts: Our contacts
+      results: Results
+      no_results_disclaimer: There are no downloaded or published results here yet.
+      show_more: Show more
+      show_less: Show less
+      how_participate: How to participate?
+      how_find_us: How to find us?
+      volunteers: Volunteers
+      attention: Attention!
+      opening_soon: Opening soon!
+      start_cancelled: The next start has been cancelled.
+      inactivity_disclaimer_html: 'Follow the news in <a href="%{link}" class="alert-link">Telegram channel</a>, and in the meantime, come to other <a href="/" class=" alert-link">our runs</a>.'
+      about_volunteers_html: 'All events are free and organized by volunteers. <a href="%{roster_link}">You can view available positions and also join the organizing team</a>.'
+      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Register</a> in our bot and come on Saturday morning. The distance can be run or walked. We welcome everyone, regardless of age and level of training.'
+      event_place: Event place

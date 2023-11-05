@@ -326,6 +326,7 @@ ru:
       exclusion: имеет зарезервированное значение
       greater_than: может иметь значение большее %{count}
       greater_than_or_equal_to: может иметь значение большее или равное %{count}
+      in: должен быть в %{count}
       inclusion: имеет непредусмотренное значение
       invalid: имеет неверное значение
       less_than: может иметь значение меньшее чем %{count}
@@ -464,3 +465,85 @@ ru:
   parkzhrun_mailer:
     success: 'Забег ПаркЖрун создан'
     error: 'Ошибка! Не удалось создать забег ПаркЖрун'
+  navbars:
+    top:
+      events: Мероприятия
+      results: Результаты
+      recent_results: Недавние забеги
+      club_ratings: Клубные рейтинги
+      top_results: Лучшие результаты
+      badges: Личные награды
+      rules: Правила
+      about: О нас
+      support: Поддержать проект
+      profile: Профиль
+      admin_panel: Админка
+      login: Войти
+      logout: Выход
+      search: Поиск
+      name_or_id: Фамилия или ID
+    bottom:
+      s95: Парковые забеги S95
+      slogan_html: 'Система независимых парковых забегов. Сделана бегунами для бегунов. Вы также можете <a href="%{link}">присоединиться</a> к нашим забегам, к разработке или редактированию контента.'
+      telegram_title: Новости проекта в Телеграм
+      vk_title: Группа в Контакте
+      send_email: Отправить нам email
+      github_title: Проект в GitHub
+  pages:
+    index:
+      our_events: Наши мероприятия
+      our_partners: Наши партнёры
+    about:
+      description: S95 - система, объединяющая независимые парковые забеги, которые проводятся по основным постулатам приостановленного в России паркрана (суббота, 9 утра, 5 км).
+      how_to_join: 
+        title: Хотите присоединиться к s95?
+        body_html: 'Сейчас в системе отображаются результаты %{events_count} локаций: %{events}, а также тематические забеги, как это было в парке Никола-Ленивец на фестивале SMF. Если вы тоже хотите присоединиться, пишите нам на <a href="mailto:%{info_email}" target="_blank" title="Отправить нам email">e-mail</a>, либо задавайте вопросы в <a href="%{telegram_group}" title="Наш чат в телеграме">телеграм-чате</a>.'
+      back: Назад
+      forward: Вперёд
+  results:
+    table:
+      time: Время
+      name: Имя
+      date: Дата
+      club: Клуб
+      event: Мероприятие
+    top:
+      top_results: Лучшие результаты
+      men: Мужчины
+      women: Женщины
+  activities:
+    index:
+      date: Дата
+      event: Мероприятие
+      athletes: Участники
+      volunteers: Волонтёры
+      first_man: Первый
+      first_woman: Первая
+    show:
+      short_report: Краткий отчёт
+      protocol: Протокол
+      common: Общий
+      men: Мужчины
+      women: Женщины
+      volunteers: Волонтёры
+      about_volunteers: 'Забег провела команда волонтёров:'
+      volunteer: Волонтёр
+      role: Роль
+      total_volunteering: всего волонтёрств %{count}
+  events:
+    show:
+      our_contacts: Наши контакты
+      results: Результаты
+      no_results_disclaimer: Пока ещё тут нет загруженных и опубликованных результатов.
+      show_more: Показать все
+      show_less: Свернуть
+      how_participate: Как принять участие?
+      how_find_us: Как нас найти?
+      volunteers: Волонтёры
+      attention: Внимание!
+      opening_soon: Скоро открытие!
+      start_cancelled: Ближайший старт отменён.
+      inactivity_disclaimer_html: 'Следите за новостями в <a href="%{link}" class="alert-link">телеграм-канале</a>, а пока приходите на другие <a href="/" class="alert-link">наши пробежки</a>.'
+      about_volunteers_html: 'Все мероприятия бесплатны и организуются силами волонтёров. <a href="%{roster_link}">Вы можете посмотреть свободные позиции и также присоединиться к команде организаторов</a>.'
+      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Зарегистрируйтесь</a> в нашем боте и приходите утром в субботу. Дистанцию можно пробежать или пройти пешком. У нас рады всем вне зависимости от возраста и уровня подготовки.'
+      event_place: Место мероприятия
