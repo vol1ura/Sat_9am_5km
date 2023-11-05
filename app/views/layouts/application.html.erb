@@ -14,7 +14,7 @@
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_importmap_tags %>
     <meta name='description' content='<%= yield_head_info(:description, 'Еженедельные субботние пробежки на 5км в парке') %>'>
-    <meta name='keywords' content='<%= yield_head_info(:keywords, 's95,sat,9am,5km,парковые пробежки,парковые забеги,бег,5 км,забег в Кузьминках,забег в Измайлово,забег в Царицыно,забег в Олимпийской Деревне,Иваново,Великий Новгород,Саранск,Ангарские Пруды,забег в Кусково,ParkЖRun,пакржрун,parkzhrun,забег в Твери,забег в Троицке,Forest Five,База Лесная,паркран,parkrun') %>'>
+    <meta name='keywords' content='<%= yield_head_info(:keywords, "s95,sat,9am,5km,парковые пробежки,парковые забеги,пробег,забег,спорт,паркран,parkrun,#{@country_events.pluck(:name).join(',')}") %>'>
     <% if Rails.env.production? %>
       <meta name="yandex-verification" content="21bc9bdf6099b4f1">
       <!-- Yandex.Metrika counter -->
