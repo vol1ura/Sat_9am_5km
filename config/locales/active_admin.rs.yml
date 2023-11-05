@@ -10,7 +10,7 @@ rs:
       create: &upload_notices
         success_upload: 'Kreirani zadaci za učitavanje podataka. U zavisnosti od broja učesnika koji nedostaju u bazi, prikupljanje informacija može potrajati neko vreme. Osvežite stranicu za 5-15 sekundi.'
         failed_upload: 'Greška! Nije moguće obraditi neke datoteke. Proverite format - samo CSV je dozvoljen.'
-        bad_timer_format: 'Greška! Nije moguće obraditi datoteku tajmera. Proverite da li su datoteke sa skenerima i tajmerom zamenjene.'
+        bad_timer_format: 'Greška! Nije moguće obraditi datoteku tajmera. Proverite da li su pomešane datoteke sa skenera i tajmera.'
       update:
         <<: *upload_notices
     contacts:
@@ -38,18 +38,18 @@ rs:
       title: 'Objašnjenja'
       unknown_athlete: 'Ako se učesnik prikaže kao "NEPOZNAT", to znači da njegovo ime nije automatski popunjeno. Kliknite na NEPOZNAT i koristite parkrun ili 5vrsta da biste pronašli ime prema ID-u.'
       without_token: 'Ako se učesnik prikaže kao "BEZ TOKENA (kreirati)", to znači da nije skeniran. Moguće je da je ta osoba već u bazi i da nije potrebno kreirati novi unos - kliknite na rezultat i u otvorenom obrascu unesite parkrun ID.'
-      delete_result: 'Ukloniti - će ukloniti celu liniju.'
-      delete_time: 'Ukloniti 🕑 - uklanja vreme u liniji, zamenjujući ga i svim sledećim vremenom iz sledeće linije. Poslednji učesnik će biti bez rezultata.'
-      delete_athlete: 'Ukloniti 🏃 - uklanja učesnika u liniji, zamenjujući ga i sve sledeće učesnike učesnikom iz sledeće linije. To jest, svi će se učesnici pomeriti za 1 poziciju, počevši od uklonjenog učesnika.'
+      delete_result: 'Ukloniti - ukloniće ceo red.'
+      delete_time: 'Ukloniti 🕑 - Uklanja vreme u redu, zamenjujući njega i sve naredne vremenom iz sledećeg reda. Poslednji učesnik će ostati bez rezultata.'
+      delete_athlete: 'Ukloniti 🏃 - uklanja učesnika iz reda, zamenjujući njega i sve naredne učesnike učesnikom iz sledećeg reda. To jest, svi učesnici se pomeraju za jednu poziciju, počevši od uklonjenog učesnika.'
       reset_athlete: 'Resetovati 🏃 - resetuje učesnika. U protokolu će pisati Nepoznat.'
-      insert_result: 'Dodati 🔝 - umeće novi rezultat pre odabrane linije.'
+      insert_result: 'Dodati 🔝 - umeće novi rezultat pre odabranog reda.'
   active_admin:
     dashboard: Kontrolna tabla
     dashboard_welcome:
-      call_to_action: 'U delu Zabegi možete učitati podatke sa skenerima i tajmera (dugme Kreirati Zabeg). Sva funkcionalnost je vidljiva i dostupna samo korisnicima sa administratorskim pravima. Obratite se njima putem telegram-čata za podešavanje vaših prava.'
+      call_to_action: 'U delu Trčanja možete učitati podatke sa skenera i tajmera (dugme Kreirati Trčanje). Sva funkcije su vidljive i dostupne samo korisnicima sa pravima administratora. Obratite se njima putem telegram-čata za podešavanje vaših prava.'
       info: Informacija
-      latest_activities: 'Nedavno kreirani zabegi'
-      upcoming_activities: 'Predstojeći zabegi'
+      latest_activities: 'Nedavno kreirana trčanja'
+      upcoming_activities: 'Predstojeća trčanja'
       change_log: Ažuriranja
     utilities: Alati
     view: Pregled
@@ -105,7 +105,7 @@ rs:
       multiple: "Rezultat: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> od <b>%{total}</b>"
       multiple_without_total: "Rezultat: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
       entry:
-        one: "zapisa"
+        one: "zapis"
         few: "zapisa"
         many: "zapisa"
         other: "zapisa"
