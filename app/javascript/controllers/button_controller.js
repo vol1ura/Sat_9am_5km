@@ -1,11 +1,20 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  toggleName(e) {
-    if(e.target.getAttribute('aria-expanded') === 'true') {
-      e.target.innerHTML = 'Свернуть'
+  static values = { 
+    show: String,
+    hide: String 
+  }
+
+  initialize() {
+    this.setName(this.element)
+  }
+
+  setName() {
+    if(this.element.getAttribute('aria-expanded') === 'true') {
+      this.element.innerHTML = this.hideValue
     } else {
-      e.target.innerHTML = 'Показать все'
+      this.element.innerHTML = this.showValue
     }
   }
 }

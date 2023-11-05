@@ -52,8 +52,18 @@
         </tbody>
       </table>
       <% if @total_activities > 15 %>
-        <div class="d-flex justify-content-center" data-controller="button">
-          <button class="btn btn-outline-primary" type="button" data-action="click->button#toggleName" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false"><%= t '.show_all' %></button>
+        <div class="d-flex justify-content-center">
+          <button
+            class="btn btn-outline-primary"
+            type="button"
+            data-controller="button"
+            data-action="click->button#setName"
+            data-button-show-value="<%= t '.show_more' %>"
+            data-button-hide-value="<%= t '.show_less' %>"
+            data-bs-toggle="collapse"
+            data-bs-target=".multi-collapse"
+            aria-expanded="false">
+          </button>
         </div>
       <% end %>
     <% end %>
