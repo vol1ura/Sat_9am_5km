@@ -106,14 +106,14 @@ rs:
         roles: &volunteer_roles
           director: Direktor
           marshal: Maršal
-          timer: Hronometar
+          timer: Tajmer
           photograph: Fotograf
           tokens: 'Dodela kartica pozicija'
           scanner: Skener
-          instructor: 'Uputstvo za početnike'
-          marking_maker: 'Označitelj staze'
-          event_closer: Pratioc trkača
-          marking_picker: 'Sakupljač oznaka'
+          instructor: 'Instruktor za početnike'
+          marking_maker: 'Markacija staze'
+          event_closer: Pratilac trkača
+          marking_picker: 'Sakupljač markacija'
           cards_sorter: 'Sortiranje kartica'
           bike_leader: 'Vodeći biciklista'
           pacemaker: Pejsmejker
@@ -180,7 +180,7 @@ rs:
         event:
           attributes:
             code_name:
-              invalid: 'samo mala latinska slova i simbol "_" umesto razmaka'
+              invalid: 'samo mala latinična slova i simbol "_" umesto razmaka'
         badge:
           attributes:
             picture_link:
@@ -401,10 +401,10 @@ rs:
             other: miliona
 
           quadrillion:
-            one: kvadrilijon
-            few: kvadrilijona
-            many: kvadrilijona
-            other: kvadrilijona
+            one: kvadrilion
+            few: kvadriliona
+            many: kvadriliona
+            other: kvadriliona
 
           thousand:
             one: hiljada
@@ -413,10 +413,10 @@ rs:
             other: hiljade
 
           trillion:
-            one: trilijon
-            few: trilijona
-            many: trilijona
-            other: trilijona
+            one: trilion
+            few: triliona
+            many: triliona
+            other: triliona
           unit: ''
       format:
         delimiter: ''
@@ -457,7 +457,7 @@ rs:
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
   views:
-    greeting: '%{name}, dobrodošli na S95!'
+    greeting: '%{name}, dobro došli na S95!!'
     update: 'Podaci ažurirani'
     pagination:
       previous: '←'
