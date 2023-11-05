@@ -466,83 +466,83 @@ rs:
     error: 'Greška! Nije moguće kreirati trku ParkŽrun'
   navbars:
     top:
-      events: Events
-      results: Results
-      recent_results: Recent results
-      club_ratings: Clubs
-      top_results: Top results
-      badges: Badges
-      rules: Rules
-      about: About
-      support: Support us
-      profile: Profile
-      admin_panel: Admin panel
-      login: Login
-      logout: Logout
-      search: Search
-      name_or_id: Name or ID
+      events: Događaji
+      results: Rezultati
+      recent_results: Skorašnji rezultati
+      club_ratings: Klubovi
+      top_results: Najbolji rezultati
+      badges: Bedževi
+      rules: Pravila
+      about: O nama
+      support: Podržite nas
+      profile: Profil
+      admin_panel: Administratorski panel
+      login: Prijava
+      logout: Odjava
+      search: Pretraži
+      name_or_id: Ime ili ID
     bottom:
-      s95: S95 park running
-      slogan_html: 'System of independent park run events. Made by runners for runners. You also can be free to <a href="%{link}">participate</a> in our runs, to development or content making.'
-      telegram_title: Project news in Telegram
-      vk_title: Vkontakte group
-      send_email: Send us email
-      github_title: Project in GitHub
+      s95: S95 park trčanje
+      slogan_html: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. I vi možete slobodno <a href="%{link}">učestvovati</a> u našim trkama, razvoju ili kreiranju sadržaja.'
+      telegram_title: Vesti o projektu na Telegramu
+      vk_title: Grupa na Vkontakte
+      send_email: Pošaljite nam email
+      github_title: Projekat na GitHubu
   pages:
     index:
-      our_events: Our events
-      our_partners: Our partners
+      our_events: Naši događaji
+      our_partners: Naši partneri
     about:
-      description: S95 is an open system that unites independent park races, which are held according to the three postulates - Saturday, 9 am, 5 km.
+      description: S95 je otvoren sistem koji objedinjuje nezavisne park trke, koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
       how_to_join:
-        title: Want to join S95?
-        body_html: 'The system currently displays the results of %{events_count} locations: %{events}. If you also want to join, write to us at <a href="mailto:%{info_email}" target="_blank" title="Send us an email">e-mail</a>, or ask questions at <a href= "%{telegram_group}" title="Our chat in telegram">telegram chat</a>.'
-      back: Back
-      forward: Forward
+        title: Želite da se pridružite S95?
+        body_html: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}. Ako i vi želite da se pridružite, pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">e-mail</a>, ili postavljajte pitanja u <a href= "%{telegram_group}" title="Naš chat u telegramu">telegram četu</a>.'
+      back: Nazad
+      forward: Napred
   results:
     table:
-      time: Time
-      name: Name
-      date: Date
-      club: Club
-      event: Event
+      time: Vreme
+      name: Ime
+      date: Datum
+      club: Klub
+      event: Događaj
     top:
-      top_results: Top results
-      men: Men
-      women: Women
+      top_results: Najbolji rezultati
+      men: Muškarci
+      women: Žene
   activities:
     index:
-      date: Date
-      event: Event
-      athletes: Athletes
-      volunteers: Volunteers
-      first_man: 1st man
-      first_woman: 1st woman
+      date: Datum
+      event: Događaj
+      athletes: Sportisti
+      volunteers: Volonteri
+      first_man: Prvi čovek
+      first_woman: Prva žena
     show:
-      short_report: Brief
-      protocol: Protocol
-      common: Common
-      men: Men
-      women: Women
-      volunteers: Volunteers
-      about_volunteers: 'The race took place thanks to a team of volunteers:'
-      volunteer: Volunteer
-      role: Role
-      total_volunteering: total volunteering %{count}
+      short_report: Kratak izveštaj
+      protocol: Protokol
+      common: Zajednički
+      men: Muškarci
+      women: Žene
+      volunteers: Volonteri
+      about_volunteers: 'Trka se odigrala zahvaljujući timu volontera:'
+      volunteer: Volonter
+      role: Uloga
+      total_volunteering: ukupno volontiranje %{count}
   events:
     show:
-      our_contacts: Our contacts
-      results: Results
-      no_results_disclaimer: There are no downloaded or published results here yet.
-      show_more: Show more
-      show_less: Show less
-      how_participate: How to participate?
-      how_find_us: How to find us?
-      volunteers: Volunteers
-      attention: Attention!
-      opening_soon: Opening soon!
-      start_cancelled: The next start has been cancelled.
-      inactivity_disclaimer_html: 'Follow the news in <a href="%{link}" class="alert-link">Telegram channel</a>, and in the meantime, come to other <a href="/" class=" alert-link">our runs</a>.'
-      about_volunteers_html: 'All events are free and organized by volunteers. <a href="%{roster_link}">You can view available positions and also join the organizing team</a>.'
-      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Register</a> in our bot and come on Saturday morning. The distance can be run or walked. We welcome everyone, regardless of age and level of training.'
-      event_place: Event place
+      our_contacts: Naši kontakti
+      results: Rezultati
+      no_results_disclaimer: Ovde još nema preuzetih ili objavljenih rezultata.
+      show_more: Prikaži više
+      show_less: Prikaži manje
+      how_participate: Kako učestvovati?
+      how_find_us: Kako nas pronaći?
+      volunteers: Volonteri
+      attention: Pažnja!
+      opening_soon: Uskoro otvaranje!
+      start_cancelled: Sledeći start je otkazan.
+      inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class=" alert-link">naše trke</a>.'
+      about_volunteers_html: 'Svi događaji su besplatni i organizovani od strane volontera. <a href="%{roster_link}">Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu</a>.'
+      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Registrujte se</a> u našem botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
+      event_place: Mesto događaja
