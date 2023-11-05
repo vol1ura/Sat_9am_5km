@@ -534,7 +534,8 @@ rs:
       our_contacts: Our contacts
       results: Results
       no_results_disclaimer: There are no downloaded or published results here yet.
-      show_all: Show all
+      show_more: Show more
+      show_less: Show less
       how_participate: How to participate?
       how_find_us: How to find us?
       volunteers: Volunteers
