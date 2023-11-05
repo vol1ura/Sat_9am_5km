@@ -522,3 +522,19 @@ rs:
       volunteer: Volunteer
       role: Role
       total_volunteering: total volunteering %{count}
+  events:
+    show:
+      our_contacts: Our contacts
+      results: Results
+      no_results_disclaimer: There are no downloaded or published results here yet.
+      show_all: Show all
+      how_participate: How to participate?
+      how_find_us: How to find us?
+      volunteers: Volunteers
+      attention: Attention!
+      opening_soon: Opening soon!
+      start_cancelled: The next start has been cancelled.
+      inactivity_disclaimer_html: 'Follow the news in <a href="%{link}" class="alert-link">Telegram channel</a>, and in the meantime, come to other <a href="/" class=" alert-link">our runs</a>.'
+      about_volunteers_html: 'All events are free and organized by volunteers. <a href="%{roster_link}">You can view available positions and also join the organizing team</a>.'
+      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Register</a> in our bot and come on Saturday morning. The distance can be run or walked. We welcome everyone, regardless of age and level of training.'
+      event_place: Event place
