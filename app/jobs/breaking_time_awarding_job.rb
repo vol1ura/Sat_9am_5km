@@ -55,6 +55,6 @@ class BreakingTimeAwardingJob < ApplicationJob
 
   # Threshold time. It is 00:00:00 for the first interval.
   def minutes_threshold(minutes)
-    Result.total_time(minutes.presence || 0, 0)
+    Result.total_time(minutes || 0, 0)
   end
 end
