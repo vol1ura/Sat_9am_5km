@@ -523,3 +523,19 @@ ru:
       volunteer: Волонтёр
       role: Роль
       total_volunteering: всего волонтёрств %{count}
+  events:
+    show:
+      our_contacts: Наши контакты
+      results: Результаты
+      no_results_disclaimer: Пока ещё тут нет загруженных и опубликованных результатов.
+      show_all: Показать все
+      how_participate: Как принять участие?
+      how_find_us: Как нас найти?
+      volunteers: Волонтёры
+      attention: Внимание!
+      opening_soon: Скоро открытие!
+      start_cancelled: Ближайший старт отменён.
+      inactivity_disclaimer_html: 'Следите за новостями в <a href="%{link}" class="alert-link">телеграм-канале</a>, а пока приходите на другие <a href="/" class="alert-link">наши пробежки</a>.'
+      about_volunteers_html: 'Все мероприятия бесплатны и организуются силами волонтёров. <a href="%{roster_link}">Вы можете посмотреть свободные позиции и также присоединиться к команде организаторов</a>.'
+      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Зарегистрируйтесь</a> в нашем боте и приходите утром в субботу. Дистанцию можно пробежать или пройти пешком. У нас рады всем вне зависимости от возраста и уровня подготовки.'
+      event_place: Место мероприятия

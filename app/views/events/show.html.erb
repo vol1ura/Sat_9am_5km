@@ -4,9 +4,8 @@
   <div class="alert alert-danger d-flex align-items-center" role="alert">
     <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
     <div>
-      <strong>Внимание!</strong> <%= @total_activities.zero? ? 'Скоро открытие!' : 'Ближайший старт отменён.' %>
-      Следите за новостями в <a href="https://t.me/s95news" class="alert-link">телеграм-канале</a>,
-      а пока приходите на другие <a href='/' class="alert-link">наши пробежки</a>.
+      <strong><%= t '.attention' %></strong> <%= @total_activities.zero? ? t('.opening_soon') : t('.start_cancelled') %>
+      <%= t '.inactivity_disclaimer_html', link: 'https://t.me/s95news' %>
     </div>
   </div>
 <% end %>
@@ -16,13 +15,13 @@
     <div class="position-absolute top-0 bg-dark bg-gradient bg-opacity-25 w-100 px-3 rounded-top">
       <h4 class="text-light"><%= @event.name %></h4>
     </div>
-    <%= event_main_image_tag @event, class: 'img-fluid rounded', alt: 'Место мероприятия', title: @event.name %>
+    <%= event_main_image_tag @event, class: 'img-fluid rounded', alt: t('.event_place'), title: @event.name %>
   </div>
 </div>
 
 <%= sanitized_text @event.description %>
 
-<h4>Наши контакты</h4>
+<h4><%= t '.our_contacts' %></h4>
 <div class="d-flex flex-wrap">
   <% @event.contacts.order(:contact_type).each do |contact| %>
     <%= link_to(contact.link.html_safe, target: '_blank', rel: 'noopener', class: 'me-2 me-sm-3 mb-2') do %>
@@ -31,21 +30,21 @@
   <% end %>
 </div>
 
-<h2>Результаты</h2>
+<h2><%= t '.results' %></h2>
 <div class="row">
   <div class="col-12">
     <% if @total_activities.zero? %>
-      <p>Пока ещё тут нет загруженных и опубликованных результатов.</p>
+      <p><%= t '.no_results_disclaimer' %></p>
     <% else %>
       <table class="table table-striped table-centered">
         <thead>
           <tr>
             <th>#</th>
-            <th>Дата</th>
-            <th>Участники</th>
-            <th>Волонтёры</th>
-            <th class="hidden-on-phone">Первый</th>
-            <th class="hidden-on-phone">Первая</th>
+            <th><%= t 'activities.index.date' %></th>
+            <th><%= t 'activities.index.athletes' %></th>
+            <th><%= t 'activities.index.volunteers' %></th>
+            <th class="hidden-on-phone"><%= t 'activities.index.first_man' %></th>
+            <th class="hidden-on-phone"><%= t 'activities.index.first_woman' %></th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -54,7 +53,7 @@
       </table>
       <% if @total_activities > 15 %>
         <div class="d-flex justify-content-center" data-controller="button">
-          <button class="btn btn-outline-primary" type="button" data-action="click->button#toggleName" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false">Показать все</button>
+          <button class="btn btn-outline-primary" type="button" data-action="click->button#toggleName" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false"><%= t '.show_all' %></button>
         </div>
       <% end %>
     <% end %>
@@ -63,24 +62,15 @@
 
 <div class="row mt-3">
   <div class="col-12 col-md-4">
-    <h3>Как принять участие?</h3>
-    <p>
-      <%= link_to 'Зарегистрируйтесь', 'https://t.me/sat9am5kmbot', target: '_blank', rel: 'noopener' %>
-      в нашем боте и приходите утром в субботу. Дистанцию можно пробежать или пройти пешком.
-      У нас рады всем вне зависимости от возраста и уровня подготовки.
-    </p>
+    <h3><%= t '.how_participate' %></h3>
+    <p><%= t '.about_participation_html', registration_link: 'https://t.me/sat9am5kmbot' %></p>
   </div>
   <div class="col-12 col-md-4">
-    <h3>Как нас найти?</h3>
-    <p>
-      <%= @event.place %>
-    </p>
+    <h3><%= t '.how_find_us' %></h3>
+    <p><%= @event.place %></p>
   </div>
   <div class="col-12 col-md-4">
-    <h3>Волонтёры</h3>
-    <p>
-      Все мероприятия бесплатны и организуются силами волонтёров.
-      <a href="<%= volunteering_event_path(@event.code_name) %>">Посмотреть свободные позиции и присоединиться к команде организаторов</a>.
-    </p>
+    <h3><%= t '.volunteers' %></h3>
+    <p><%= t '.about_volunteers_html', roster_link: volunteering_event_path(@event.code_name) %></p>
   </div>
 </div>
