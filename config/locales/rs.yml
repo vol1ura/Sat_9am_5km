@@ -496,7 +496,7 @@ rs:
       description: S95 je otvoren sistem koji objedinjuje nezavisne park trke, koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
       how_to_join:
         title: Želite da se pridružite S95?
-        body_html: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}. Ako i vi želite da se pridružite, pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">e-mail</a>, ili postavljajte pitanja u <a href= "%{telegram_group}" title="Naš chat u telegramu">telegram četu</a>.'
+        body_html: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}. Ako i vi želite da se pridružite, pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">e-mail</a>, ili postavite pitanja u <a href= "%{telegram_group}" title="Naš chat u telegramu">telegram četu</a>.'
       back: Nazad
       forward: Napred
   results:
@@ -525,10 +525,10 @@ rs:
       men: Muškarci
       women: Žene
       volunteers: Volonteri
-      about_volunteers: 'Trka se odigrala zahvaljujući timu volontera:'
+      about_volunteers: 'Trka se održala zahvaljujući timu volontera:'
       volunteer: Volonter
       role: Uloga
-      total_volunteering: ukupno volontiranje %{count}
+      total_volunteering: ukupno volontiranja %{count}
   events:
     show:
       our_contacts: Naši kontakti
