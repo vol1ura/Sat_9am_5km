@@ -2,261 +2,260 @@ rs:
   admin:
     utilities:
       cache:
-        clear_success: 'Кэш успешно очищен!'
-        clear_failed: 'Отмена! Кеш недавно уже был очищен. Повторите запрос позже.'
+        clear_success: 'Keš uspešno očišćen!'
+        clear_failed: 'Otkazano! Keš je nedavno već bio očišćen. Pokušajte ponovo kasnije.'
       award_funrun_badge:
-        performing: 'Запущена процедура награждения, это займёт некоторое время. Обновите страницу чуть позже, чтобы увидеть результаты.'
+        performing: 'Procedura nagrađivanja je pokrenuta, to će potrajati neko vreme. Osvežite stranicu kasnije da vidite rezultate.'
     activities:
       create: &upload_notices
-        success_upload: 'Созданы задания на загрузку данных. В зависимости от количества участников, отсутствующих в базе, получение сведений может занять какое-то время. Обновите страницу через 5-15 сек.'
-        failed_upload: 'Ошибка! Не удалось обработать некоторые файлы. Проверьте формат - допустим только CSV.'
-        bad_timer_format: 'Ошибка! Не удалось обработать файл секундомера. Проверьте, что файлы со сканера и секундомера не перепутаны.'
+        success_upload: 'Kreirani zadaci za učitavanje podataka. U zavisnosti od broja učesnika koji nedostaju u bazi, prikupljanje informacija može potrajati neko vreme. Osvežite stranicu za 5-15 sekundi.'
+        failed_upload: 'Greška! Nije moguće obraditi neke datoteke. Proverite format - samo CSV je dozvoljen.'
+        bad_timer_format: 'Greška! Nije moguće obraditi datoteku tajmera. Proverite da li su pomešane datoteke sa skenera i tajmera.'
       update:
         <<: *upload_notices
     contacts:
       index:
-        title: 'Contacts %{event_name}'
+        title: 'Kontakti %{event_name}'
     results:
       destroy:
-        result_destroyed: 'Position #%{position} was removed.'
+        result_destroyed: 'Pozicija #%{position} je uklonjena.'
     volunteering_positions:
       index:
-        title: 'Волонтёрские позиции %{event_name}'
+        title: 'Volonterske pozicije %{event_name}'
       create:
-        successful: 'Position was successfully created'
+        successful: 'Pozicija je uspešno kreirana'
       update:
-        successful: 'Position was successfully updated'
+        successful: 'Pozicija je uspešno ažurirana'
     volunteers:
       index:
-        title: 'Редактор волонтёров %{date}'
+        title: 'Editor volontera %{date}'
       create:
-        successful: 'Волонтёрство успешно добавлено'
+        successful: 'Volontiranje uspešno dodato'
       update:
-        successful: 'Данные о волонтёрстве %{volunteer_name} успешно обновлены'
+        successful: 'Podaci o volonteru %{volunteer_name} uspešno ažurirani'
   results:
     explanation:
-      title: 'Explanations'
-      unknown_athlete: 'Если участник отобразился как "НЕИЗВЕСТНЫЙ", значит не удалось автоматически заполнить его имя. Кликните по НЕИЗВЕСТНЫЙ и воспользуйтесь сайтом parkrun или 5вёрст чтобы по ID найти имя.'
-      without_token: 'Если участник отобразился как "БЕЗ ТОКЕНА (создать)", значит он не отсканировался. Возможно, этот человек уже есть в базе и создавать новую запись НЕ НУЖНО - кликните по результату и в открывшейся форме введите parkrun ID.'
-      delete_result: 'Удалить - удалит всю строку.'
-      delete_time: 'Удалить 🕑 - удаляет в строке время, заменяя его и все последующие на время из следующей строки. Последний участник окажется без результата.'
-      delete_athlete: 'Удалить 🏃 - удаляет в строке участника, заменяя его и всех последующих на участника из следующей строки. То есть произойдёт сдвиг всех участников на 1 позицию, начиная с удалённого участника.'
-      reset_athlete: 'Обнулить 🏃 - сбрасывает участника. В протоколе будет стоять Неизвестный.'
-      insert_result: 'Добавить 🔝 - вставляет новый результат перед выбранной строкой.'
+      title: 'Objašnjenja'
+      unknown_athlete: 'Ako se učesnik prikaže kao "NEPOZNAT", to znači da njegovo ime nije automatski popunjeno. Kliknite na NEPOZNAT i koristite parkrun ili 5vrsta da biste pronašli ime prema ID-u.'
+      without_token: 'Ako se učesnik prikaže kao "BEZ TOKENA (kreirati)", to znači da nije skeniran. Moguće je da je ta osoba već u bazi i da nije potrebno kreirati novi unos - kliknite na rezultat i u otvorenom obrascu unesite parkrun ID.'
+      delete_result: 'Ukloniti - ukloniće ceo red.'
+      delete_time: 'Ukloniti 🕑 - Uklanja vreme u redu, zamenjujući njega i sve naredne vremenom iz sledećeg reda. Poslednji učesnik će ostati bez rezultata.'
+      delete_athlete: 'Ukloniti 🏃 - uklanja učesnika iz reda, zamenjujući njega i sve naredne učesnike učesnikom iz sledećeg reda. To jest, svi učesnici se pomeraju za jednu poziciju, počevši od uklonjenog učesnika.'
+      reset_athlete: 'Resetovati 🏃 - resetuje učesnika. U protokolu će pisati Nepoznat.'
+      insert_result: 'Dodati 🔝 - umeće novi rezultat pre odabranog reda.'
   active_admin:
-    dashboard: Dashboard
+    dashboard: Kontrolna tabla
     dashboard_welcome:
-      call_to_action: 'В разделе Забеги можно загрузить данные со сканеров и секундомера (кнопка Создать Забег). Весь функционал виден и доступен только пользователям с правами администратора. Обратитесь к ним через телеграм-чат для настройки ваших прав.'
-      info: Информация
-      latest_activities: 'Недавно созданные забеги'
-      upcoming_activities: 'Предстоящие забеги'
-      change_log: Обновления
-    utilities: Utilities
-    view: View
-    edit: Edit
-    delete: Delete
-    delete_confirmation: "Вы уверены, что хотите удалить это?"
-    successfully_deleted: "Успешно удалён %{obj}"
-    new_model: "Создать %{model}"
-    edit_model: "Изменить %{model}"
-    delete_model: "Удалить %{model}"
-    details: "%{model} подробнее"
-    cancel: "Отмена"
-    empty: "Пусто"
-    previous: "Пред."
-    next: "След."
-    download: "Загрузка:"
-    has_many_new: "Добавить %{model}"
-    has_many_delete: "Удалить"
-    has_many_remove: "Убрать"
+      call_to_action: 'U delu Trčanja možete učitati podatke sa skenera i tajmera (dugme Kreirati Trčanje). Sva funkcije su vidljive i dostupne samo korisnicima sa pravima administratora. Obratite se njima putem telegram-čata za podešavanje vaših prava.'
+      info: Informacija
+      latest_activities: 'Nedavno kreirana trčanja'
+      upcoming_activities: 'Predstojeća trčanja'
+      change_log: Ažuriranja
+    utilities: Alati
+    view: Pregled
+    edit: Uredi
+    delete: Obriši
+    delete_confirmation: "Da li ste sigurni da želite da obrišete ovo?"
+    successfully_deleted: "Uspešno obrisano %{obj}"
+    new_model: "Kreiraj %{model}"
+    edit_model: "Uredi %{model}"
+    delete_model: "Obriši %{model}"
+    details: "%{model} detalji"
+    cancel: "Otkaži"
+    empty: "Prazno"
+    previous: "Preth."
+    next: "Sledeće"
+    download: "Preuzimanje:"
+    has_many_new: "Dodaj %{model}"
+    has_many_delete: "Obriši"
+    has_many_remove: "Ukloni"
     filters:
       buttons:
-        filter: "Фильтровать"
-        clear: "Очистить"
+        filter: "Filtriraj"
+        clear: "Očisti"
       predicates:
-        contains: "Содержит"
-        equals: "Равно"
-        starts_with: "Начинается с"
-        ends_with: "Заканчивается"
-        greater_than: "больше"
-        less_than: "меньше"
-        from: "От"
-        to: "До"
+        contains: "Sadrži"
+        equals: "Jednako"
+        starts_with: "Počinje sa"
+        ends_with: "Završava sa"
+        greater_than: "veće od"
+        less_than: "manje od"
+        from: "Od"
+        to: "Do"
     search_status:
-      headline: "Статус поиска:"
-      current_scope: "Область:"
-      current_filters: "Текущий фильтр:"
-      no_current_filters: "Ни один"
+      headline: "Status pretrage:"
+      current_scope: "Opseg:"
+      current_filters: "Trenutni filter:"
+      no_current_filters: "Nijedan"
     status_tag:
-      "yes": "Да"
-      "no": "Нет"
-      "unset": "Нет"
-    main_content: "Создайте %{model}#main_content для отображения содержимого."
-    logout: "Выйти"
-    powered_by: "Работает на %{active_admin} %{version}"
+      "yes": "Da"
+      "no": "Ne"
+      "unset": "Nije postavljeno"
+    main_content: "Kreirajte %{model}#main_content za prikaz sadržaja."
+    logout: "Odjavi se"
+    powered_by: "Pokreće %{active_admin} %{version}"
     sidebars:
-      filters: "Фильтры"
-      search_status: "Статус поиска"
+      filters: "Filteri"
+      search_status: "Status pretrage"
     pagination:
-      per_page: 'на странице'
-      empty: "%{model} не найдено"
-      one: "Результат: <b>1</b> %{model}"
-      one_page: "Результат: <b>%{n}</b> %{model}"
-      multiple: "Результат: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> из <b>%{total}</b>"
-      multiple_without_total: "Результат: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
+      per_page: 'po stranici'
+      empty: "%{model} nije pronađeno"
+      one: "Rezultat: <b>1</b> %{model}"
+      one_page: "Rezultat: <b>%{n}</b> %{model}"
+      multiple: "Rezultat: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> od <b>%{total}</b>"
+      multiple_without_total: "Rezultat: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
       entry:
-        one: "запись"
-        few: "записи"
-        many: "записей"
-        other: "записей"
-    any: "Любой"
+        one: "zapis"
+        few: "zapisa"
+        many: "zapisa"
+        other: "zapisa"
+    any: "Bilo koji"
     blank_slate:
-      content: "Пока нет %{resource_name}."
-      link: "Создать"
+      content: "Još uvek nema %{resource_name}."
+      link: "Kreiraj"
     dropdown_actions:
-      button_label: "Операции"
+      button_label: "Operacije"
     batch_actions:
-      button_label: "Групповые операции"
-      default_confirmation: "Вы уверены, что вы хотите это сделать?"
-      delete_confirmation: "Вы уверены, что хотите удалить %{plural_model}?"
+      button_label: "Grupne operacije"
+      default_confirmation: "Da li ste sigurni da želite to da uradite?"
+      delete_confirmation: "Da li ste sigurni da želite da obrišete %{plural_model}?"
       succesfully_destroyed:
-        one: "Успешно удалено: 1 %{model}"
-        few: "Успешно удалено: %{count} %{plural_model}"
-        many: "Успешно удалено: %{count} %{plural_model}"
-        other: "Успешно удалено: %{count} %{plural_model}"
-      selection_toggle_explanation: "(Отметить всё / Снять выделение)"
+        one: "Uspešno obrisano: 1 %{model}"
+        few: "Uspešno obrisano: %{count} %{plural_model}"
+        many: "Uspešno obrisano: %{count} %{plural_model}"
+        other: "Uspešno obrisano: %{count} %{plural_model}"
+      selection_toggle_explanation: "(Označi sve / Deselektuj)"
       action_label: "%{title}"
       labels:
-        destroy: "Удалить"
-        reunite: "Объединить"
-        gender_set: "Установить пол"
-        change_roles: "Сменить права"
+        destroy: "Obriši"
+        reunite: "Spoji"
+        gender_set: "Postavi pol"
+        change_roles: "Promeni uloge"
     comments:
-      created_at: "Дата создания"
-      resource_type: "Тип ресурса"
-      author_type: "Тип автора"
-      body: "Текст"
-      author: "Автор"
-      add: "Добавить Комментарий"
-      delete: "Удалить Комментарий"
-      delete_confirmation: "Вы уверены, что хотите удалить этот комментарий?"
-      resource: "Ресурс"
-      no_comments_yet: "Пока нет комментариев."
-      author_missing: "Аноним"
-      title_content: "Комментарии (%{count})"
+      created_at: "Datum kreiranja"
+      resource_type: "Tip resursa"
+      author_type: "Tip autora"
+      body: "Tekst"
+      author: "Autor"
+      add: "Dodaj Komentar"
+      delete: "Obriši Komentar"
+      delete_confirmation: "Da li ste sigurni da želite da obrišete ovaj komentar?"
+      resource: "Resurs"
+      no_comments_yet: "Još uvek nema komentara."
+      author_missing: "Anonimac"
+      title_content: "Komentari (%{count})"
       errors:
-        empty_text: "Комментарий не сохранен, текст не должен быть пустым."
+        empty_text: "Komentar nije sačuvan, tekst ne sme biti prazan."
     athletes:
-      confirm_reunite: "Действительно хотите объединить этих участников в одного?"
-      successful_reunite: "Участники были объединены."
-      failed_reunite: "Операция не выполнена. Участники не могут быть объединены."
-      confirm_gender_set: "Установить пол выбранным участникам?"
-      successful_gender_set: "Смена пола успешно произведена."
-      gender_set_failed: "Не удалось произвести смену пола."
-      cannot_delete_registered: "Действие отменено. Нельзя удалить зарегистрированного участника!"
-      cannot_delete_participant: "Действие отменено. Нельзя удалить участника, имеющего результаты!"
+      confirm_reunite: "Da li ste sigurni da želite da spojite ove učesnike u jednog?"
+      successful_reunite: "Učesnici su spojeni."
+      failed_reunite: "Operacija nije uspela. Učesnici ne mogu biti spojeni."
+      confirm_gender_set: "Postaviti pol izabranim učesnicima?"
+      successful_gender_set: "Uspešno promenjen pol."
+      gender_set_failed: "Neuspelo promena pola."
+      cannot_delete_registered: "Operacija poništena. Ne možete obrisati registrovanog učesnika!"
+      cannot_delete_participant: "Operacija poništena. Ne možete obrisati učesnika koji ima rezultate!"
     results:
-      cannot_link_athlete: 'Участник с указанными ID не найден. Проверьте номера или сначала создайте такого участника.'
-      cannot_move_result: 'Ошибка! Проверьте корректность позиций.'
-      drop_time_failed: 'Не удалось удалить время. Обновите страницу и попробуйте снова.'
-      drop_athlete_failed: 'Не удалось удалить участника. Обновите страницу и попробуйте снова.'
-      reset_athlete_failed: 'Не удалось сбросить участника. Обновите страницу и попробуйте снова.'
-      insert_result_failed: 'Не удалось добавить строчку. Обновите страницу и попробуйте снова.'
-      result_successfully_appended: 'Позиция №%{position} успешно добавлена в протокол.'
+      cannot_link_athlete: 'Učesnik sa navedenim ID nije pronađen. Proverite brojeve ili prvo kreirajte takvog učesnika.'
+      cannot_move_result: 'Greška! Proverite ispravnost pozicija.'
+      drop_time_failed: 'Neuspelo brisanje vremena. Osvežite stranicu i pokušajte ponovo.'
+      drop_athlete_failed: 'Neuspelo brisanje učesnika. Osvežite stranicu i pokušajte ponovo.'
+      reset_athlete_failed: 'Neuspelo resetovanje učesnika. Osvežite stranicu i pokušajte ponovo.'
+      insert_result_failed: 'Neuspelo dodavanje reda. Osvežite stranicu i pokušajte ponovo.'
+      result_successfully_appended: 'Pozicija №%{position} uspešno dodata u protokol.'
     users:
-      confirm_change_roles: 'Уверены, что хотите сменить права выбранных пользователей?'
-      successful_roles_changed: 'Права успешно установлены.'
+      confirm_change_roles: 'Da li ste sigurni da želite da promenite uloge izabranim korisnicima?'
+      successful_roles_changed: 'Uspšeno postavljene uloge.'
     page:
       index:
-        utilities: Utilities
+        utilities: Alati
         cache_clear:
-          title: 'Cache clear'
-          button: 'Clear'
-          confirm: 'Are you sure you want to clear cache?'
+          title: 'Očisti keš'
+          button: 'Očisti'
+          confirm: 'Da li ste sigurni da želite da očistite keš?'
         badges:
-          title: Badges
-
+          title: Značke
     devise:
       username:
-        title: "Имя пользователя"
+        title: "Korisničko ime"
       email:
-        title: "Эл. почта"
+        title: "Elektronska pošta"
       subdomain:
-        title: "Поддомен"
+        title: "Poddomen"
       password:
-        title: "Пароль"
+        title: "Lozinka"
       password_confirmation:
-        title: "Подтверждение пароля"
+        title: "Potvrda lozinke"
       sign_up:
-        title: "Зарегистрироваться"
-        submit: "Зарегистрироваться"
+        title: "Registruj se"
+        submit: "Registruj se"
       login:
-        title: "Войти"
-        remember_me: "Запомнить меня"
-        submit: "Войти"
+        title: "Prijavi se"
+        remember_me: "Zapamti me"
+        submit: "Prijavi se"
       reset_password:
-        title: "Забыли пароль?"
-        submit: "Сбросить пароль"
+        title: "Zaboravili ste lozinku?"
+        submit: "Resetuj lozinku"
       change_password:
-        title: "Изменение пароля"
-        submit: "Изменение пароля"
+        title: "Promena lozinke"
+        submit: "Promeni lozinku"
       unlock:
-        title: "Повторно отправить инструкции по разблокировке"
-        submit: "Повторно отправить инструкции по разблокировке"
+        title: "Ponovo pošalji instrukcije za otključavanje"
+        submit: "Ponovo pošalji instrukcije za otključavanje"
       resend_confirmation_instructions:
-        title: "Выслать повторно письмо с активацией"
-        submit: "Выслать повторно письмо с активацией"
+        title: "Ponovo pošalji mejl za aktivaciju"
+        submit: "Ponovo pošalji mejl za aktivaciju"
       links:
-        sign_up: "Зарегистрироваться"
-        sign_in: "Войти"
-        forgot_your_password: "Забыли пароль?"
-        sign_in_with_omniauth_provider: "Войти с помощью %{provider}"
-        resend_unlock_instructions: "Повторная отправка инструкций разблокировки"
-        resend_confirmation_instructions: "Повторная отправка инструкций подтверждения"
+        sign_up: "Registruj se"
+        sign_in: "Prijavi se"
+        forgot_your_password: "Zaboravili ste lozinku?"
+        sign_in_with_omniauth_provider: "Prijavite se preko %{provider}"
+        resend_unlock_instructions: "Ponovo pošalji instrukcije za otključavanje"
+        resend_confirmation_instructions: "Ponovo pošalji instrukcije za potvrdu"
     unsupported_browser:
-      headline: "Извините, но на сайте не поддерживаются старые версии Internet Explorer начиная с версии IE 8"
-      recommendation: "Мы рекомендуем обновить версию вашего браузера (<a href=\"http://windows.microsoft.com/ie\">Internet Explorer</a>, <a href=\"https://chrome.google.com/\">Google Chrome</a>, или <a href=\"https://mozilla.org/firefox/\">Firefox</a>)."
-      turn_off_compatibility_view: "Если вы используете IE 9 или новее, убедитесь, что <a href=\"https://support.microsoft.com/ru-ru/help/17471\">вы выключили опцию \"Просмотр в режиме совместимости\"</a>."
+      headline: "Nažalost, ovaj sajt ne podržava stare verzije Internet Explorer-a počevši od verzije IE 8"
+      recommendation: "Preporučujemo da ažurirate verziju vašeg pregledača (<a href=\"http://windows.microsoft.com/ie\">Internet Explorer</a>, <a href=\"https://chrome.google.com/\">Google Chrome</a>, ili <a href=\"https://mozilla.org/firefox/\">Firefox</a>)."
+      turn_off_compatibility_view: "Ako koristite IE 9 ili noviji, proverite da li ste isključili opciju <a href=\"https://support.microsoft.com/ru-ru/help/17471\">\"Prikaz u režimu kompatibilnosti\"</a>."
     access_denied:
-      message: "У вас нет прав на выполнение данного действия или для просмотра запрошенного ресурса."
+      message: "Nemate prava za izvršenje ovog postupka ili za pregled traženog resursa."
     index_list:
-      table: "Таблица"
-      block: "Список"
-      grid: "Сетка"
-      blog: "Блог"
+      table: "Tabela"
+      block: "Lista"
+      grid: "Grid"
+      blog: "Blog"
     resources:
       volunteer:
-        new_model: Добавить волонтёрство
-        edit_model: Изменить волонтёрство
-        delete_model: Удалить волонтёрство
+        new_model: Dodaj volontiranje
+        edit_model: Izmeni volontiranje
+        delete_model: Obriši volontiranje
       athlete:
-        new_model: Создать участника
-        edit_model: Изменить участника
-        delete_model: Удалить участника
+        new_model: Kreiraj učesnika
+        edit_model: Izmeni učesnika
+        delete_model: Obriši učesnika
       user:
-        new_model: Создать пользователя
-        edit_model: Изменить пользователя
+        new_model: Kreiraj korisnika
+        edit_model: Izmeni korisnika
       badge:
-        new_model: Создать награду
-        edit_model: Изменить награду
-        delete_model: Удалить награду
+        new_model: Kreiraj nagradu
+        edit_model: Izmeni nagradu
+        delete_model: Obriši nagradu
       volunteering_position:
-        new_model: Добавить позицию
-        edit_model: Изменить позицию
-        delete_model: Удалить позицию
+        new_model: Dodaj poziciju
+        edit_model: Izmeni poziciju
+        delete_model: Obriši poziciju
     scopes:
-      all: All
-      admin: Admins
-      supervisors: Supervisors
-      published: Published
-      unpublished: Not published
-      duplicates: Duplicates?
-      active: Active
-      inactive: Inactive
+      all: Svi
+      admin: Administratori
+      supervisors: Nadzornici
+      published: Objavljeno
+      unpublished: Neobjavljeno
+      duplicates: Duplikati?
+      active: Aktivno
+      inactive: Neaktivno
 
   ransack:
     predicates:
-      cont: contains
-      eq: equals
-      start: starts with
-      end: ends with
+      cont: sadrži
+      eq: jednako
+      start: počinje sa
+      end: završava sa
