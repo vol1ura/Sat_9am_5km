@@ -3,224 +3,224 @@ rs:
   activerecord:
     models:
       club:
-        one: club
-        other: Clubs
+        one: klub
+        other: Klubovi
       event:
-        one: event
-        other: Events
+        one: događaj
+        other: Događaji
       activity:
-        one: activity
-        other: Activities
+        one: aktivnost
+        other: Aktivnosti
       athlete:
-        one: athlete
-        other: Athletes
+        one: sportista
+        other: Sportisti
       result:
-        one: result
-        other: Results
+        one: rezultat
+        other: Rezultati
       volunteer:
-        one: волонтёр
-        other: Волонтёры
+        one: volonter
+        other: Volonteri
       volunteering_position:
-        one: позиция
-        few: позиций
-        many: позиции
-        other: Волонтёрская позиция
+        one: pozicija
+        few: pozicije
+        many: pozicija
+        other: Volonterske pozicije
       contact:
-        one: контакт
-        other: Контакты
+        one: kontakt
+        other: Kontakti
       badge:
-        one: награда
-        other: Награды
+        one: nagrada
+        other: Nagrade
       trophy:
-        one: достижение
-        other: Достижения
+        one: dostignuće
+        other: Dostignuća
       permission:
-        one: полномочия
-        other: Полномочия
+        one: ovlašćenje
+        other: Ovlašćenja
       user:
-        one: пользователь
-        few: пользователя
-        many: пользователей
-        other: Пользователи
+        one: korisnik
+        few: korisnika
+        many: korisnika
+        other: Korisnici
     attributes:
       user:
-        first_name: имя
-        last_name: фамилия
+        first_name: ime
+        last_name: prezime
         email: e-mail
-        role: роль
-        note: примечание
-        telegram_user: телеграм
-        athlete: участник
+        role: uloga
+        note: napomena
+        telegram_user: telegram
+        athlete: sportista
       permission:
-        event: мероприятие
-        user: пользователь
-        action: действие
-        subject_id: id элемента
-        subject_class: класс объектов
+        event: događaj
+        user: korisnik
+        action: akcija
+        subject_id: id elementa
+        subject_class: klasa objekata
       athlete:
-        name: Имя ФАМИЛИЯ
+        name: Ime PREZIME
         parkrun_code: 'parkrun ID'
-        fiveverst_code: '5В или RP ID'
+        fiveverst_code: '5V ili RP ID'
         parkzhrun_code: 'parkzhrun ID'
-        gender: пол
-        club: клуб
-        event: 'домашний забег'
-        male: мужчина
-        user: пользователь
+        gender: pol
+        club: klub
+        event: 'domaće trčanje'
+        male: muškarac
+        user: korisnik
       activity:
-        date: дата
-        published: опубликован?
-        description: описание
-        event_name: где?
+        date: datum
+        published: objavljeno?
+        description: opis
+        event_name: gde?
       club:
-        name: название
+        name: naziv
       event:
-        active: активен
-        country_code: страна
-        code_name: 'кодовое имя'
-        name: название
-        main_picture_link: 'ссылка на баннер'
-        town: город
-        place: 'как найти?'
-        slogan: девиз
-        description: описание
-        visible_order: 'вес в ленте'
-        created_at: создан
-        updated_at: обновлён
+        active: aktivan
+        country_code: država
+        code_name: 'nadimak'
+        name: naziv
+        main_picture_link: 'link za baner'
+        town: grad
+        place: 'kako pronaći?'
+        slogan: slogan
+        description: opis
+        visible_order: 'redosled prikaza'
+        created_at: kreiran
+        updated_at: ažuriran
         country_codes:
-          ru: Россия
-          by: Беларусь
-          rs: Сербия
+          ru: Rusija
+          by: Belorusija
+          rs: Srbija
       result:
-        position: место
-        total_time: результат
-        athlete: участник
-        user: пользователь
-        gender: пол
-        club: клуб
+        position: pozicija
+        total_time: vreme
+        athlete: sportista
+        user: korisnik
+        gender: pol
+        club: klub
       volunteer:
-        activity: забег
-        athlete: участник
-        name: 'имя волонтёра'
-        role: роль
+        activity: trčanje
+        athlete: sportista
+        name: 'ime volontera'
+        role: uloga
         roles: &volunteer_roles
-          director: Директор
-          marshal: Маршал
-          timer: Секундомер
-          photograph: Фотограф
-          tokens: 'Раздача карточек позиций'
-          scanner: Сканер
-          instructor: 'Инструктаж новичков'
-          marking_maker: 'Разметка трассы'
-          event_closer: Замыкающий
-          marking_picker: 'Сбор разметки'
-          cards_sorter: 'Сортировка карточек'
-          bike_leader: 'Ведущий велосипед'
-          pacemaker: Пейсмейкер
-          results_handler: 'Обработка результатов'
-          equipment_supplier: 'Доставка оборудования'
-          public_relations: 'Связи с общественностью'
-          warm_up: 'Проведение разминки'
-          other: 'Разное'
-          attendant: 'Сопровождающий'
-          finish_maker: 'Организация финиша'
-          volunteer_coordinator: 'Координатор волонтёров'
-          food_maker: 'Организация питания'
+          director: Direktor
+          marshal: Maršal
+          timer: Tajmer
+          photograph: Fotograf
+          tokens: 'Dodela kartica pozicija'
+          scanner: Skener
+          instructor: 'Instruktor za početnike'
+          marking_maker: 'Markacija staze'
+          event_closer: Pratilac trkača
+          marking_picker: 'Sakupljač markacija'
+          cards_sorter: 'Sortiranje kartica'
+          bike_leader: 'Vodeći biciklista'
+          pacemaker: Pejsmejker
+          results_handler: 'Obrada rezultata'
+          equipment_supplier: 'Dostava opreme'
+          public_relations: 'Odnosi s javnošću'
+          warm_up: 'Zagrevanje'
+          other: 'Ostalo'
+          attendant: 'Pratilac'
+          finish_maker: 'Organizacija cilja'
+          volunteer_coordinator: 'Koordinator volontera'
+          food_maker: 'Organizacija hrane'
       volunteering_position:
-        rank: ранг
-        number: количество
-        role: роль
+        rank: rang
+        number: broj
+        role: uloga
         roles:
           <<: *volunteer_roles
       contact:
-        new_model: 'Добавить контакт'
-        edit_model: 'Изменить контакт'
-        delete_model: 'Удалить контакт'
-        event: мероприятие
-        link: контакт
-        contact_type: 'тип контакта'
+        new_model: 'Dodaj kontakt'
+        edit_model: 'Izmeni kontakt'
+        delete_model: 'Obriši kontakt'
+        event: događaj
+        link: link
+        contact_type: 'vrsta kontakta'
         contact_types:
           email: e-mail
-          phone: телефон
-          tg_channel: 'телеграм канал'
-          tg_chat: 'телеграм чат'
-          vk: вконтакте
-          zen: дзен
-          instagram: инстаграм
-          facebook: фейсбук
-          strava: страва
-          map_link: 'карта и схема проезда'
-          parking: парковка
+          phone: telefon
+          tg_channel: 'telegram kanal'
+          tg_chat: 'telegram čet'
+          vk: vkontakte
+          zen: zen
+          instagram: instagram
+          facebook: fejsbuk
+          strava: strava
+          map_link: 'link za mapu i pravac'
+          parking: parking
       badge:
-        name: название
-        conditions: 'условия получения'
-        picture_link: 'путь к картинке'
-        received_date: 'дата получения'
-        kind: тип
+        name: naziv
+        conditions: 'uslovi za dobijanje'
+        picture_link: 'link za sliku'
+        received_date: 'datum prijema'
+        kind: vrsta
         kinds:
-          funrun: фан-ран
-          participating: участник
-          tourist: турист
+          funrun: zabavno trčanje
+          participating: učesnik
+          tourist: turista
           breaking: breaking
-          record: 'рекорд трассы'
-          rage: 'раж'
+          record: 'rekord staze'
+          rage: 'rang'
       trophy:
-        athlete: участник
-        date: 'дата получения'
-        info: доп.информация
-        updated_at: обновлён
+        athlete: sportista
+        date: 'datum prijema'
+        info: dod. informacije
+        updated_at: ažuriran
 
     errors:
       messages:
-        record_invalid: 'Возникли ошибки: %{errors}'
+        record_invalid: 'Pojavile su se greške: %{errors}'
         restrict_dependent_destroy:
-          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
-          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+          has_one: 'Ne može se obrisati zapis jer postoji zavisnost: %{record}'
+          has_many: 'Ne može se obrisati zapis jer postoje zavisnosti: %{record}'
       models:
         event:
           attributes:
             code_name:
-              invalid: 'только строчные латинские буквы и символ "_" вместо пробела'
+              invalid: 'samo mala latinična slova i simbol "_" umesto razmaka'
         badge:
           attributes:
             picture_link:
-              invalid: 'символы <, > и пробелы запрещены'
+              invalid: 'simboli <, > i razmaci nisu dozvoljeni'
         contact:
           attributes:
             link:
-              invalid: 'символы < и > запрещены'
+              invalid: 'simboli < i > su zabranjeni'
 
   date:
     abbr_day_names:
-    - Вс
-    - Пн
-    - Вт
-    - Ср
-    - Чт
-    - Пт
-    - Сб
+    - Ne
+    - Po
+    - Ut
+    - Sr
+    - Če
+    - Pe
+    - Su
     abbr_month_names:
     -
-    - янв.
-    - февр.
-    - марта
-    - апр.
-    - мая
-    - июня
-    - июля
-    - авг.
-    - сент.
-    - окт.
-    - нояб.
-    - дек.
+    - jan.
+    - feb.
+    - mart
+    - apr.
+    - maj
+    - jun
+    - jul
+    - avg.
+    - sep.
+    - okt.
+    - nov.
+    - dec.
     day_names:
-    - воскресенье
-    - понедельник
-    - вторник
-    - среда
-    - четверг
-    - пятница
-    - суббота
+    - nedelja
+    - ponedeljak
+    - utorak
+    - sreda
+    - četvrtak
+    - petak
+    - subota
     formats:
       default: "%-d %b %Y"
       long: "%d %B %Y"
@@ -228,18 +228,18 @@ rs:
       short: "%d.%m.%Y"
     month_names:
     -
-    - января
-    - февраля
-    - марта
-    - апреля
-    - мая
-    - июня
-    - июля
-    - августа
-    - сентября
-    - октября
-    - ноября
-    - декабря
+    - januar
+    - februar
+    - mart
+    - april
+    - maj
+    - jun
+    - jul
+    - avgust
+    - septembar
+    - oktobar
+    - novembar
+    - decembar
     order:
     - :day
     - :month
@@ -247,127 +247,127 @@ rs:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: около %{count} часа
-        few: около %{count} часов
-        many: около %{count} часов
-        other: около %{count} часа
+        one: oko %{count} sata
+        few: oko %{count} sata
+        many: oko %{count} sati
+        other: oko %{count} sata
       about_x_months:
-        one: около %{count} месяца
-        few: около %{count} месяцев
-        many: около %{count} месяцев
-        other: около %{count} месяца
+        one: oko %{count} meseca
+        few: oko %{count} meseca
+        many: oko %{count} meseci
+        other: oko %{count} meseca
       about_x_years:
-        one: около %{count} года
-        few: около %{count} лет
-        many: около %{count} лет
-        other: около %{count} лет
+        one: oko %{count} godine
+        few: oko %{count} godine
+        many: oko %{count} godina
+        other: oko %{count} godine
       almost_x_years:
-        one: почти 1 год
-        few: почти %{count} года
-        many: почти %{count} лет
-        other: почти %{count} лет
-      half_a_minute: полминуты
+        one: skoro 1 godina
+        few: skoro %{count} godine
+        many: skoro %{count} godina
+        other: skoro %{count} godine
+      half_a_minute: pola minute
       less_than_x_seconds:
-        one: меньше %{count} секунды
-        few: меньше %{count} секунд
-        many: меньше %{count} секунд
-        other: меньше %{count} секунды
+        one: manje od %{count} sekunde
+        few: manje od %{count} sekunde
+        many: manje od %{count} sekundi
+        other: manje od %{count} sekunde
       less_than_x_minutes:
-        one: меньше %{count} минуты
-        few: меньше %{count} минут
-        many: меньше %{count} минут
-        other: меньше %{count} минуты
+        one: manje od %{count} minute
+        few: manje od %{count} minute
+        many: manje od %{count} minuta
+        other: manje od %{count} minute
       over_x_years:
-        one: больше %{count} года
-        few: больше %{count} лет
-        many: больше %{count} лет
-        other: больше %{count} лет
+        one: više od %{count} godine
+        few: više od %{count} godine
+        many: više od %{count} godina
+        other: više od %{count} godine
       x_seconds:
-        one: "%{count} секунду"
-        few: "%{count} секунды"
-        many: "%{count} секунд"
-        other: "%{count} секунды"
+        one: "%{count} sekunda"
+        few: "%{count} sekunde"
+        many: "%{count} sekundi"
+        other: "%{count} sekunde"
       x_minutes:
-        one: "%{count} минуту"
-        few: "%{count} минуты"
-        many: "%{count} минут"
-        other: "%{count} минуты"
+        one: "%{count} minut"
+        few: "%{count} minute"
+        many: "%{count} minuta"
+        other: "%{count} minute"
       x_days:
-        one: "%{count} день"
-        few: "%{count} дня"
-        many: "%{count} дней"
-        other: "%{count} дня"
+        one: "%{count} dan"
+        few: "%{count} dana"
+        many: "%{count} dana"
+        other: "%{count} dana"
       x_months:
-        one: "%{count} месяц"
-        few: "%{count} месяца"
-        many: "%{count} месяцев"
-        other: "%{count} месяца"
+        one: "%{count} mesec"
+        few: "%{count} meseca"
+        many: "%{count} meseci"
+        other: "%{count} meseca"
       x_years:
-        one: "%{count} год"
-        few: "%{count} года"
-        many: "%{count} лет"
-        other: "%{count} года"
+        one: "%{count} godina"
+        few: "%{count} godine"
+        many: "%{count} godina"
+        other: "%{count} godine"
     prompts:
-      second: Second
-      minute: Minute
-      hour: Hour
-      day: Day
-      month: Month
-      year: Year
+      second: Sekunda
+      minute: Minut
+      hour: Sat
+      day: Dan
+      month: Mesec
+      year: Godina
   errors:
     format: "%{attribute} %{message}"
     messages:
-      accepted: нужно подтвердить
-      blank: не может быть пустым
-      confirmation: не совпадает со значением поля %{attribute}
-      empty: не может быть пустым
-      equal_to: может иметь лишь значение, равное %{count}
-      even: может иметь лишь четное значение
-      exclusion: имеет зарезервированное значение
-      greater_than: может иметь значение большее %{count}
-      greater_than_or_equal_to: может иметь значение большее или равное %{count}
-      inclusion: имеет непредусмотренное значение
-      invalid: имеет неверное значение
-      less_than: может иметь значение меньшее чем %{count}
-      less_than_or_equal_to: может иметь значение меньшее или равное %{count}
-      model_invalid: 'Возникли ошибки: %{errors}'
-      not_a_number: не является числом
-      not_an_integer: не является целым числом
-      odd: может иметь лишь нечетное значение
-      other_than: должно отличаться от %{count}
-      present: нужно оставить пустым
-      required: не может отсутствовать
-      taken: уже существует
-      more_than_one_volunteering: не может занимать более одной волонтёрской позиции в один день
+      accepted: mora biti prihvaćeno
+      blank: ne može biti prazno
+      confirmation: ne poklapa se sa vrednošću polja %{attribute}
+      empty: ne može biti prazno
+      equal_to: mora biti jednako %{count}
+      even: mora biti parno
+      exclusion: je rezervisana vrednost
+      greater_than: mora biti veće od %{count}
+      greater_than_or_equal_to: mora biti veće ili jednako %{count}
+      inclusion: nije u dozvoljenom opsegu
+      invalid: je nevažeće
+      less_than: mora biti manje od %{count}
+      less_than_or_equal_to: mora biti manje ili jednako %{count}
+      model_invalid: 'Došlo je do grešaka: %{errors}'
+      not_a_number: nije broj
+      not_an_integer: nije ceo broj
+      odd: mora biti neparno
+      other_than: mora biti različito od %{count}
+      present: mora biti prazno
+      required: obavezno
+      taken: zauzeto
+      more_than_one_volunteering: ne može obavljati više od jedne volonterske pozicije u istom danu
       too_long:
-        one: слишком большой длины (не может быть больше чем %{count} символ)
-        few: слишком большой длины (не может быть больше чем %{count} символа)
-        many: слишком большой длины (не может быть больше чем %{count} символов)
-        other: слишком большой длины (не может быть больше чем %{count} символа)
+        one: previše dugo (ne može biti duže od %{count} znaka)
+        few: previše dugo (ne može biti duže od %{count} znaka)
+        many: previše dugo (ne može biti duže od %{count} znakova)
+        other: previše dugo (ne može biti duže od %{count} znaka)
       too_short:
-        one: недостаточной длины (не может быть меньше %{count} символа)
-        few: недостаточной длины (не может быть меньше %{count} символов)
-        many: недостаточной длины (не может быть меньше %{count} символов)
-        other: недостаточной длины (не может быть меньше %{count} символа)
+        one: previše kratko (mora biti barem %{count} znak)
+        few: previše kratko (mora biti barem %{count} znaka)
+        many: previše kratko (mora biti barem %{count} znakova)
+        other: previše kratko (mora biti barem %{count} znaka)
       wrong_length:
-        one: неверной длины (может быть длиной ровно %{count} символ)
-        few: неверной длины (может быть длиной ровно %{count} символа)
-        many: неверной длины (может быть длиной ровно %{count} символов)
-        other: неверной длины (может быть длиной ровно %{count} символа)
+        one: pogrešna dužina (mora imati tačno %{count} znak)
+        few: pogrešna dužina (mora imati tačno %{count} znaka)
+        many: pogrešna dužina (mora imati tačno %{count} znakova)
+        other: pogrešna dužina (mora imati tačno %{count} znaka)
     template:
-      body: 'Проблемы возникли со следующими полями:'
+      body: 'Problemi su se pojavili u sledećim poljima: '
       header:
-        one: "%{model}: сохранение не удалось из-за %{count} ошибки"
-        few: "%{model}: сохранение не удалось из-за %{count} ошибок"
-        many: "%{model}: сохранение не удалось из-за %{count} ошибок"
-        other: "%{model}: сохранение не удалось из-за %{count} ошибки"
+        one: "%{model} ne može biti sačuvan zbog 1 greške"
+        few: "%{model} ne može biti sačuvan zbog %{count} greške"
+        many: "%{model} ne može biti sačuvan zbog %{count} grešaka"
+        other: "%{model} ne može biti sačuvan zbog %{count} greške"
   helpers:
     select:
-      prompt: 'Select: '
+      prompt: 'Odaberite: '
     submit:
-      create: Create %{model}
-      submit: Save %{model}
-      update: Save %{model}
+      create: Kreiraj %{model}
+      submit: Sačuvaj %{model}
+      update: Ažuriraj %{model}
   number:
     currency:
       format:
@@ -377,7 +377,7 @@ rs:
         separator: ","
         significant: false
         strip_insignificant_zeros: false
-        unit: rub.
+        unit: RSD
     format:
       delimiter: " "
       precision: 3
@@ -389,30 +389,30 @@ rs:
         format: "%n %u"
         units:
           billion:
-            one: billion
-            few: миллиардов
-            many: миллиардов
-            other: миллиардов
+            one: milijarda
+            few: milijarde
+            many: milijardi
+            other: milijarde
           million:
-            one: million
-            few: миллионов
-            many: миллионов
-            other: миллионов
+            one: milion
+            few: miliona
+            many: miliona
+            other: miliona
           quadrillion:
-            one: квадриллион
-            few: квадриллионов
-            many: квадриллионов
-            other: квадриллионов
+            one: kvadrilion
+            few: kvadriliona
+            many: kvadriliona
+            other: kvadriliona
           thousand:
-            one: thousand
-            few: тысяч
-            many: тысяч
-            other: тысяч
+            one: hiljada
+            few: hiljade
+            many: hiljada
+            other: hiljade
           trillion:
-            one: trillion
-            few: триллионов
-            many: триллионов
-            other: триллионов
+            one: trilion
+            few: triliona
+            many: triliona
+            other: triliona
           unit: ''
       format:
         delimiter: ''
@@ -423,16 +423,16 @@ rs:
         format: "%n %u"
         units:
           byte:
-            one: byte
-            few: байта
-            many: байт
-            other: байта
-          eb: ЭБ
-          gb: ГБ
-          kb: КБ
-          mb: МБ
-          pb: ПБ
-          tb: ТБ
+            one: bajt
+            few: bajta
+            many: bajtova
+            other: bajta
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
     percentage:
       format:
         delimiter: ''
@@ -442,19 +442,19 @@ rs:
         delimiter: ''
   support:
     array:
-      last_word_connector: " and "
-      two_words_connector: " and "
+      last_word_connector: " i "
+      two_words_connector: " i "
       words_connector: ", "
   time:
-    am: утра
-    pm: вечера
+    am: pre podne
+    pm: posle podne
     formats:
       default: "%d %b %Y, %H:%M:%S %z"
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
   views:
-    greeting: '%{name}, welcome on S95!'
-    update: 'Data updated'
+    greeting: '%{name}, dobro došli na S95!!'
+    update: 'Podaci ažurirani'
     pagination:
       previous: '←'
       first: '↞'
@@ -462,87 +462,87 @@ rs:
       last: '↠'
       truncate: '&hellip;'
   parkzhrun_mailer:
-    success: 'Забег ПаркЖрун создан'
-    error: 'Ошибка! Не удалось создать забег ПаркЖрун'
+    success: 'Trka ParkŽrun kreirana'
+    error: 'Greška! Nije moguće kreirati trku ParkŽrun'
   navbars:
     top:
-      events: Events
-      results: Results
-      recent_results: Recent results
-      club_ratings: Clubs
-      top_results: Top results
-      badges: Badges
-      rules: Rules
-      about: About
-      support: Support us
-      profile: Profile
-      admin_panel: Admin panel
-      login: Login
-      logout: Logout
-      search: Search
-      name_or_id: Name or ID
+      events: Događaji
+      results: Rezultati
+      recent_results: Skorašnji rezultati
+      club_ratings: Klubovi
+      top_results: Najbolji rezultati
+      badges: Bedževi
+      rules: Pravila
+      about: O nama
+      support: Podržite nas
+      profile: Profil
+      admin_panel: Administratorski panel
+      login: Prijava
+      logout: Odjava
+      search: Pretraži
+      name_or_id: Ime ili ID
     bottom:
-      s95: S95 park running
-      slogan_html: 'System of independent park run events. Made by runners for runners. You also can be free to <a href="%{link}">participate</a> in our runs, to development or content making.'
-      telegram_title: Project news in Telegram
-      vk_title: Vkontakte group
-      send_email: Send us email
-      github_title: Project in GitHub
+      s95: S95 park trčanje
+      slogan_html: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. I vi možete slobodno <a href="%{link}">učestvovati</a> u našim trkama, razvoju ili kreiranju sadržaja.'
+      telegram_title: Vesti o projektu na Telegramu
+      vk_title: Grupa na Vkontakte
+      send_email: Pošaljite nam email
+      github_title: Projekat na GitHubu
   pages:
     index:
-      our_events: Our events
-      our_partners: Our partners
+      our_events: Naši događaji
+      our_partners: Naši partneri
     about:
-      description: S95 is an open system that unites independent park races, which are held according to the three postulates - Saturday, 9 am, 5 km.
-      how_to_join: 
-        title: Want to join S95?
-        body_html: 'The system currently displays the results of %{events_count} locations: %{events}. If you also want to join, write to us at <a href="mailto:%{info_email}" target="_blank" title="Send us an email">e-mail</a>, or ask questions at <a href= "%{telegram_group}" title="Our chat in telegram">telegram chat</a>.'
-      back: Back
-      forward: Forward
+      description: S95 je otvoren sistem koji objedinjuje nezavisne park trke, koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
+      how_to_join:
+        title: Želite da se pridružite S95?
+        body_html: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}. Ako i vi želite da se pridružite, pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">e-mail</a>, ili postavite pitanja u <a href= "%{telegram_group}" title="Naš chat u telegramu">telegram četu</a>.'
+      back: Nazad
+      forward: Napred
   results:
     table:
-      time: Time
-      name: Name
-      date: Date
-      club: Club
-      event: Event
+      time: Vreme
+      name: Ime
+      date: Datum
+      club: Klub
+      event: Događaj
     top:
-      top_results: Top results
-      men: Men
-      women: Women
+      top_results: Najbolji rezultati
+      men: Muškarci
+      women: Žene
   activities:
     index:
-      date: Date
-      event: Event
-      athletes: Athletes
-      volunteers: Volunteers
-      first_man: 1st man
-      first_woman: 1st woman
+      date: Datum
+      event: Događaj
+      athletes: Sportisti
+      volunteers: Volonteri
+      first_man: Prvi čovek
+      first_woman: Prva žena
     show:
-      short_report: Brief
-      protocol: Protocol
-      common: Common
-      men: Men
-      women: Women
-      volunteers: Volunteers
-      about_volunteers: 'The race took place thanks to a team of volunteers:'
-      volunteer: Volunteer
-      role: Role
-      total_volunteering: total volunteering %{count}
+      short_report: Kratak izveštaj
+      protocol: Protokol
+      common: Zajednički
+      men: Muškarci
+      women: Žene
+      volunteers: Volonteri
+      about_volunteers: 'Trka se održala zahvaljujući timu volontera:'
+      volunteer: Volonter
+      role: Uloga
+      total_volunteering: ukupno volontiranja %{count}
   events:
     show:
-      our_contacts: Our contacts
-      results: Results
-      no_results_disclaimer: There are no downloaded or published results here yet.
-      show_more: Show more
-      show_less: Show less
-      how_participate: How to participate?
-      how_find_us: How to find us?
-      volunteers: Volunteers
-      attention: Attention!
-      opening_soon: Opening soon!
-      start_cancelled: The next start has been cancelled.
-      inactivity_disclaimer_html: 'Follow the news in <a href="%{link}" class="alert-link">Telegram channel</a>, and in the meantime, come to other <a href="/" class=" alert-link">our runs</a>.'
-      about_volunteers_html: 'All events are free and organized by volunteers. <a href="%{roster_link}">You can view available positions and also join the organizing team</a>.'
-      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Register</a> in our bot and come on Saturday morning. The distance can be run or walked. We welcome everyone, regardless of age and level of training.'
-      event_place: Event place
+      our_contacts: Naši kontakti
+      results: Rezultati
+      no_results_disclaimer: Ovde još nema preuzetih ili objavljenih rezultata.
+      show_more: Prikaži više
+      show_less: Prikaži manje
+      how_participate: Kako učestvovati?
+      how_find_us: Kako nas pronaći?
+      volunteers: Volonteri
+      attention: Pažnja!
+      opening_soon: Uskoro otvaranje!
+      start_cancelled: Sledeći start je otkazan.
+      inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class=" alert-link">naše trke</a>.'
+      about_volunteers_html: 'Svi događaji su besplatni i organizovani od strane volontera. <a href="%{roster_link}">Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu</a>.'
+      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Registrujte se</a> u našem botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
+      event_place: Mesto događaja
