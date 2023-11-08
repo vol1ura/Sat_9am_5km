@@ -464,6 +464,10 @@ rs:
   parkzhrun_mailer:
     success: 'Trka ParkŽrun kreirana'
     error: 'Greška! Nije moguće kreirati trku ParkŽrun'
+  country:
+    ru: Rusija
+    by: Belorusija
+    rs: Srbija
   navbars:
     top:
       events: Događaji
@@ -497,6 +501,9 @@ rs:
       how_to_join:
         title: Želite da se pridružite S95?
         body_html: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}. Ako i vi želite da se pridružite, pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">e-mail</a>, ili postavite pitanja u <a href= "%{telegram_group}" title="Naš chat u telegramu">telegram četu</a>.'
+      s95_abroad:
+        title: S95 races in other countries
+        body: Today our run events are held also in %{countries}. If you also want to open an event in your country, pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">e-mail</a>.
       back: Nazad
       forward: Napred
   results:
