@@ -7,7 +7,13 @@
 
 <h4><%= t '.how_to_join.title' %></h4>
 <p>
-  <%= t '.how_to_join.body_html', events_count: actual_events.size, events: actual_events.pluck(:name).join(', '), info_email: 'info@s95.ru', telegram_group: 'https://t.me/sat9am5km' %>
+  <%=
+    t '.how_to_join.body_html',
+      events_count: actual_events.size,
+      events: actual_events.pluck(:name).to_sentence,
+      info_email: 'info@s95.ru',
+      telegram_group: 'https://t.me/sat9am5km'
+  %>
 </p>
 
 <div class="row justify-content-sm-center">
@@ -31,3 +37,18 @@
     </div>
   </div>
 </div>
+
+<h4><%= t '.s95_abroad.title' %></h4>
+<p>
+  <%
+    sentence =
+      Event
+        .where.not(country_code: top_level_domain)
+        .unscope(:order)
+        .distinct(:country_code)
+        .pluck(:country_code)
+        .map { |code| link_to t("country.#{code}"), "https://s95.#{code}/", target: '_blank', rel: 'noopener' }
+        .to_sentence
+  %>
+  <%= raw t '.s95_abroad.body', countries: sentence, info_email: 'info@s95.ru' %>
+</p>
