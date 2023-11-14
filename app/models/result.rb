@@ -30,7 +30,7 @@ class Result < ApplicationRecord
         .group(athletes[:id]).as('t')
     joins(
       "INNER JOIN #{composed_table.to_sql} ON results.athlete_id = t.a_id AND results.total_time = t.min_tt"
-    ).order(:total_time, :position, :activity_id).first(limit)
+    ).order(:total_time, :position, :activity_id).limit(limit)
   end
 
   def swap_with_position!(target_position)
