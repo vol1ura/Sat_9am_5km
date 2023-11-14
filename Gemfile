@@ -17,7 +17,7 @@ gem 'barby', require: false
 gem 'bootstrap', '~> 5.3.1'
 gem 'cancancan', '~> 3.4'
 gem 'dalli'
-gem 'devise', '~> 4.8'
+gem 'devise', '~> 4.9'
 gem 'devise-i18n'
 gem 'hotwire-rails'
 gem 'jbuilder'
