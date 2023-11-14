@@ -1,7 +1,7 @@
-<% head_info :title, 'Клубы' %>
-<h2>Клубы</h2>
+<% head_info :title, t('navbars.top.club_ratings') %>
+<h2><%= t 'navbars.top.club_ratings' %></h2>
 
-<p>Вашего клуба нет в списке? Напишите нам <a href="mailto:info@s95.ru?subject=Добавить новый клуб" target="_blank" title="Отправить нам email">на почту</a> и мы добавим его.</p>
+<p><%= t '.how_to_add_new_club_html', mail: 'info@s95.ru' %></p>
 
 <table class="table table-striped">
   <thead data-controller="table-head">
