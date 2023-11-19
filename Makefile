@@ -3,16 +3,19 @@ WEB_CONTAINER := `docker compose ps | grep web | cut -d ' ' -f1`
 target: project
 
 project:
-	docker compose ps | grep -E '.web.[1-9].*Up' || docker compose up -d
+	docker compose ps | grep -E '.web.[1-9].*(Up|running)' || docker compose up -d
 
 bind: project
 	docker attach $(WEB_CONTAINER)
 
 rc: project
-	docker exec -it $(WEB_CONTAINER) rails console
+	docker compose exec -it web rails console
 
 ash: project
-	docker exec -it $(WEB_CONTAINER) ash
+	docker compose exec -it web ash
+
+psql: project
+	docker compose exec -it db psql -U postgres s95_dev
 
 checkup:
 	rubocop --display-only-fail-level-offenses --fail-level=error && \
@@ -21,7 +24,7 @@ checkup:
 build:
 	docker compose run --rm web bundle lock
 	docker compose build web
-	docker images --filter "dangling=true" -q | xargs docker rmi || echo "There were images tagged as <none> in use"
+	docker images --filter "dangling=true" -q | xargs docker rmi > /dev/null 2>&1 || echo "\nThere were images tagged as <none> in use"
 
 clean_logs:
 	rm ./log/capistrano.log
