@@ -461,6 +461,9 @@ rs:
   parkzhrun_mailer:
     success: 'Trka ParkŽrun kreirana'
     error: 'Greška! Nije moguće kreirati trku ParkŽrun'
+  button:
+    show_more: Prikaži više
+    show_less: Prikaži manje
   country:
     ru: Rusija
     by: Belorusija
@@ -562,8 +565,6 @@ rs:
       our_contacts: Naši kontakti
       results: Rezultati
       no_results_disclaimer: Ovde još nema preuzetih ili objavljenih rezultata.
-      show_more: Prikaži više
-      show_less: Prikaži manje
       how_participate: Kako učestvovati?
       how_find_us: Kako nas pronaći?
       volunteers: Volonteri

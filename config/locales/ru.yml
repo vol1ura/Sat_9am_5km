@@ -462,6 +462,9 @@ ru:
   parkzhrun_mailer:
     success: 'Забег ПаркЖрун создан'
     error: 'Ошибка! Не удалось создать забег ПаркЖрун'
+  button:
+    show_more: Показать все
+    show_less: Свернуть
   country:
     ru: Россия
     by: Беларусь
@@ -563,8 +566,6 @@ ru:
       our_contacts: Наши контакты
       results: Результаты
       no_results_disclaimer: Пока ещё тут нет загруженных и опубликованных результатов.
-      show_more: Показать все
-      show_less: Свернуть
       how_participate: Как принять участие?
       how_find_us: Как нас найти?
       volunteers: Волонтёры
