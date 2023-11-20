@@ -11,39 +11,6 @@
 <% if @total_results.zero? %>
   <p>Пока нет результатов.</p>
 <% else %>
-  <h2>Все забеги</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Дата</th>
-        <th>Время</th>
-        <th class="hidden-on-phone">Темп</th>
-        <th class="hidden-on-phone">Место</th>
-        <th>Мероприятие</th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <%= render partial: 'result', collection: @athlete.results.published.includes(activity: :event).order('activity.date DESC'), cached: true %>
-    </tbody>
-  </table>
-  <% if @athlete.results.published.size > 15 %>
-    <div class="d-flex justify-content-center">
-      <button
-        class="btn btn-outline-primary"
-        type="button"
-        data-controller="button"
-        data-action="click->button#setName"
-        data-button-show-value="<%= t 'button.show_more' %>"
-        data-button-hide-value="<%= t 'button.show_less' %>"
-        data-bs-toggle="collapse"
-        data-bs-target=".multi-collapse"
-        aria-expanded="false">
-      </button>
-    </div>
-  <% end %>
-
-  <h2>Общая статистика</h2>
   <div class="accordion accordion-flush" id="accordionPersonalBest" data-controller="athlete">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-totalResults">
@@ -84,7 +51,7 @@
         </button>
       </h2>
       <div id="flush-collapsePersonalBestAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-personalBestAbsolute" data-bs-parent="#accordionPersonalBest">
-        <div class="accordion-body">
+        <div class="accordion-body px-3">
           <div class="hstack">
             <div class="acc-li-s">
               <%= link_to l(@pb_by_time.activity.date), @pb_by_time.activity %>
@@ -106,7 +73,7 @@
       <div id="flush-collapseBestPositionAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-bestPositionAbsolute" data-bs-parent="#accordionPersonalBest">
         <div class="accordion-body">
           <ul class="list-group list-group-flush">
-            <% @pb_by_position.each do |pb| %>
+            <% @pb_by_position.includes(activity: :event).each do |pb| %>
               <li class="list-group-item">
                 <div class="hstack">
                   <div class="acc-li-s">
@@ -167,13 +134,13 @@
     <% end %>
     <% if @athlete.trophies.exists? %>
       <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-totalVolunteering">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalVolunteering" aria-expanded="false" aria-controls="flush-collapseTotalVolunteering">
+        <h2 class="accordion-header" id="flush-totalTrophies">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalTrophies" aria-expanded="false" aria-controls="flush-collapseTotalTrophies">
             <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.trophies.size %></span>
             всего наград
           </button>
         </h2>
-        <div id="flush-collapseTotalVolunteering" class="accordion-collapse collapse" aria-labelledby="flush-totalVolunteering" data-bs-parent="#accordionPersonalBest">
+        <div id="flush-collapseTotalTrophies" class="accordion-collapse collapse" aria-labelledby="flush-totalTrophies" data-bs-parent="#accordionPersonalBest">
           <div class="accordion-body">
             <div class="d-flex justify-content-start flex-wrap">
               <% @athlete.trophies.includes(:badge).each do |trophy| %>
@@ -198,6 +165,38 @@
       </div>
     <% end %>
   </div>
+
+  <h2 class="mt-3">Результаты</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Дата</th>
+        <th>Время</th>
+        <th class="hidden-on-phone">Темп</th>
+        <th class="hidden-on-phone">Место</th>
+        <th>Мероприятие</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <%= render partial: 'result', collection: @athlete.results.published.includes(activity: :event).order('activity.date DESC'), cached: true %>
+    </tbody>
+  </table>
+  <% if @athlete.results.published.size > 15 %>
+    <div class="d-flex justify-content-center">
+      <button
+        class="btn btn-outline-primary"
+        type="button"
+        data-controller="button"
+        data-action="click->button#setName"
+        data-button-show-value="<%= t 'button.show_more' %>"
+        data-button-hide-value="<%= t 'button.show_less' %>"
+        data-bs-toggle="collapse"
+        data-bs-target=".multi-collapse"
+        aria-expanded="false">
+      </button>
+    </div>
+  <% end %>
 <% end %>
 
 <h2>Волонтёрства</h2>

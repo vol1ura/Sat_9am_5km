@@ -13,7 +13,7 @@
           <% end %>
       </div>
     <% else %>
-      <%= Athlete::NOBODY %>
+      <%= t '.nobody' %>
     <% end %>
   </td>
   <td class="align-middle"><%= human_result_time(result.total_time) %></td>
