@@ -8,7 +8,7 @@ class AthleteFinder < ApplicationService
     },
     fiveverst_code: {
       url: 'https://5verst.ru/userstats/%d/',
-      xpath: '//div[@class="entry-content the-content text-column"]/h3',
+      xpath: '//div[@class="text-column"]/h4',
     },
   }.freeze
   ANTI_BLOCK_PAUSE = 1.5
