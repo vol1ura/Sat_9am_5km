@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
+  belongs_to :country
   has_many :activities, dependent: :destroy
   has_many :athletes, dependent: :nullify
   has_many :contacts, dependent: :destroy
@@ -11,15 +12,16 @@ class Event < ApplicationRecord
 
   default_scope { order(:visible_order, :name) }
 
-  enum country_code: { ru: 'ru', by: 'by', rs: 'rs' }
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[
+      active code_name country_id created_at description id main_picture_link
+      name place slogan town updated_at visible_order
+    ]
+  end
 
   def self.authorized_for(user)
     return all if user.admin?
 
     where(id: user.permissions.where(subject_class: 'Activity').select(:event_id))
-  end
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[active code_name description name place town country_code]
   end
 end

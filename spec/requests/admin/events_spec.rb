@@ -50,6 +50,7 @@ RSpec.describe '/admin/events' do
           code_name: Faker::Internet.slug(glue: '_'),
           town: Faker::Address.city,
           place: Faker::Address.street_name,
+          country_id: countries(:ru).id,
         },
       }
     end

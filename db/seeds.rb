@@ -10,17 +10,22 @@ if Rails.env.development?
     last_name: 'Doe'
   )
 end
+
+russia = Country.create!(code: 'ru')
+
 Event.create!(
   name: 'Кузьминки',
   code_name: 'kuzminki',
   town: 'Москва',
   place: 'парк Кузьминки',
-  description: 'Каждую субботу сбор в 8:45 возле сцены.'
+  description: 'Каждую субботу сбор в 8:45 возле сцены.',
+  country: russia,
 )
 Event.create!(
   name: 'Олимпийская деревня',
   code_name: 'olimpiyskaya_derevnya',
   town: 'Москва',
   place: 'парк Олимпийская Деревня',
-  description: 'Каждую субботу сбор в 8:45 где-то в парке.'
+  description: 'Каждую субботу сбор в 8:45 где-то в парке.',
+  country: russia,
 )

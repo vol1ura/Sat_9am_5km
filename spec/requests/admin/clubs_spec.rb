@@ -13,7 +13,12 @@ RSpec.describe '/admin/clubs' do
 
   describe 'POST /admin/clubs' do
     let(:valid_attributes) do
-      { club: { name: Faker::Team.name } }
+      {
+        club: {
+          name: Faker::Team.name,
+          country_id: countries(:ru).id,
+        },
+      }
     end
 
     it 'creates a new club' do

@@ -9,8 +9,9 @@ ActiveAdmin.register_page 'Dashboard' do
         panel t('active_admin.dashboard_welcome.upcoming_activities') do
           ul do
             Activity
+              .in_country(top_level_domain)
               .includes(:event)
-              .where(date: Date.current..Date.current.end_of_week, event: { country_code: top_level_domain })
+              .where(date: Date.current..Date.current.end_of_week)
               .order('event.visible_order')
               .each do |activity|
                 li link_to_if(can?(:read, activity), human_activity_name(activity), admin_activity_path(activity))
@@ -21,8 +22,8 @@ ActiveAdmin.register_page 'Dashboard' do
         panel t('active_admin.dashboard_welcome.latest_activities') do
           ul do
             Activity
+              .in_country(top_level_domain)
               .includes(:event)
-              .where(event: { country_code: top_level_domain })
               .order(created_at: :desc)
               .first(10)
               .each do |activity|

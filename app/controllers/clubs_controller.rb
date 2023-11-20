@@ -2,9 +2,22 @@
 
 class ClubsController < ApplicationController
   def index
-    @clubs = Athlete.joins(:club).group(:club).order(count_clubs: :desc).count(:clubs)
-    @count_results = Result.joins(:athlete).group(:club_id).count(:club_id)
-    @count_volunteering = Volunteer.joins(:athlete).group(:club_id).count(:club_id)
+    @clubs = Athlete
+      .joins(club: :country)
+      .where(country: { code: top_level_domain })
+      .group(:club)
+      .order(count_clubs: :desc)
+      .count(:clubs)
+    @count_results = Result
+      .joins(athlete: { club: :country })
+      .where(country: { code: top_level_domain })
+      .group(:club_id)
+      .count(:club_id)
+    @count_volunteering = Volunteer
+      .joins(athlete: { club: :country })
+      .where(country: { code: top_level_domain })
+      .group(:club_id)
+      .count(:club_id)
   end
 
   def show

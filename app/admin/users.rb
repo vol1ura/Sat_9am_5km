@@ -8,6 +8,7 @@ ActiveAdmin.register User do
   permit_params do
     permitted = %i[first_name last_name password password_confirmation email]
     permitted.push(:role, :note) if current_user.admin?
+    permitted
   end
 
   filter :email

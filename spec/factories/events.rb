@@ -5,5 +5,6 @@ FactoryBot.define do
     town { Faker::Address.city }
     place { Faker::Address.street_name }
     description { Faker::Lorem.paragraph }
+    country_id { 1 }
   end
 end

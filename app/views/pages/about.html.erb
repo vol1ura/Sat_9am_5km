@@ -42,11 +42,9 @@
 <p>
   <%
     sentence =
-      Event
-        .where.not(country_code: top_level_domain)
-        .unscope(:order)
-        .distinct(:country_code)
-        .pluck(:country_code)
+      Country
+        .where.not(code: top_level_domain)
+        .pluck(:code)
         .map { |code| link_to t("country.#{code}"), "https://s95.#{code}/", target: '_blank', rel: 'noopener' }
         .to_sentence
   %>
