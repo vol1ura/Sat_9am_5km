@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Event do
+  includes :country
+
   menu priority: 2
   actions :all, except: :destroy
 
   config.sort_order = 'visible_order_asc'
 
   permit_params(
-    :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order, :slogan, :country_code
+    :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order, :slogan, :country_id
   )
 
-  filter :country_code, as: :select, collection: Event.country_codes
+  filter :country
   filter :code_name
   filter :name
   filter :town
@@ -23,7 +25,7 @@ ActiveAdmin.register Event do
   index download_links: false do
     column :visible_order
     column :active
-    column :country_code
+    column :country
     column :code_name
     column :name
     column :town
@@ -35,7 +37,7 @@ ActiveAdmin.register Event do
   show do
     attributes_table do
       row :active
-      row :country_code
+      row :country
       row :code_name
       row :name
       row :town

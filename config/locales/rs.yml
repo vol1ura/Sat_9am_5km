@@ -74,9 +74,10 @@ rs:
         event_name: gde?
       club:
         name: naziv
+        country: država
       event:
         active: aktivan
-        country_code: država
+        country: država
         code_name: 'nadimak'
         name: naziv
         main_picture_link: 'link za baner'
@@ -87,10 +88,6 @@ rs:
         visible_order: 'redosled prikaza'
         created_at: kreiran
         updated_at: ažuriran
-        country_codes:
-          ru: Rusija
-          by: Belorusija
-          rs: Srbija
       result:
         position: pozicija
         total_time: vreme
