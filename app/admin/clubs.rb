@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Club do
   includes :country
+
   permit_params :name, :country_id
 
   actions :all, except: :show
