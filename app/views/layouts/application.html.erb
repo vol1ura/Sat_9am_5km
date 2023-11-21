@@ -15,7 +15,7 @@
     <%= javascript_importmap_tags %>
     <meta name='description' content='<%= yield_head_info(:description, 'Еженедельные субботние пробежки на 5км в парке') %>'>
     <meta name='keywords' content='<%= yield_head_info(:keywords, "s95,sat,9am,5km,парковые пробежки,парковые забеги,пробег,забег,спорт,паркран,parkrun,#{@country_events.pluck(:name).join(',')}") %>'>
-    <% if Rails.env.production? %>
+    <% if Rails.env.production? && top_level_domain == :ru %>
       <meta name="yandex-verification" content="21bc9bdf6099b4f1">
       <!-- Yandex.Metrika counter -->
       <script>
@@ -23,10 +23,10 @@
         m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
         ym(<%= ENV.fetch('YANDEX_METRIKA', 0) %>, "init", {
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true,
-              webvisor:true
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
         });
       </script>
       <!-- /Yandex.Metrika counter -->
