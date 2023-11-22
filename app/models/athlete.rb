@@ -51,7 +51,7 @@ class Athlete < ApplicationRecord
             allow_nil: true
   validates :fiveverst_code,
             uniqueness: true,
-            numericality: { only_integer: true, greater_than: FIVE_VERST_BORDER },
+            numericality: { only_integer: true, greater_than: FIVE_VERST_BORDER, less_than: RUN_PARK_BORDER },
             allow_nil: true
   validates :runpark_code,
             uniqueness: true,

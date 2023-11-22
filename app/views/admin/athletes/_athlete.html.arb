@@ -10,6 +10,7 @@ attributes_table_for athlete do
   row :club
   row :event
   row :user
+  row('сайт 🌳') { |a| athlete_external_link(a) }
 end
 
 results = athlete.results.includes(activity: :event).order('activities.date DESC')
