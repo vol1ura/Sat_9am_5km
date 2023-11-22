@@ -3,7 +3,7 @@
   event = result.activity.event
   total_time = result.total_time
 %>
-<tr class="result <%= 'collapse multi-collapse' if result_counter > 15 %>">
+<tr class="result <%= 'collapse multi-collapse' if result_counter > 14 %>">
   <td><%= @total_results - result_counter %></td>
   <td class="event-date" timestamp="<%= activity_date.to_datetime.to_i * 1000 %>">
     <%= link_to l(activity_date), result.activity %>

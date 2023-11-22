@@ -1,6 +1,6 @@
 <% male_leader_result = activity.leader_result %>
 <% female_leader_result = activity.leader_result(male: false) %>
-<tr class="<%= 'collapse multi-collapse' if activity_counter > 15 %>">
+<tr class="<%= 'collapse multi-collapse' if activity_counter > 14 %>">
   <td><%= @total_activities - activity_counter %></td>
   <td><%= link_to l(activity.date, format: :short), activity %></td>
   <td><%= @results_count[activity] %></td>

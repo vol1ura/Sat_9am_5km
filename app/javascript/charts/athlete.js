@@ -104,43 +104,46 @@ export default class AthleteCharts {
     return {
       chart: {
         height: 300,
-        width: "100%",
-        type: "area",
+        width: '100%',
+        type: 'area',
         animations: {
           initialAnimation: {
             enabled: false
           }
+        },
+        zoom: {
+          enabled: false
         }
       },
       fill: {
         type: 'gradient'
       },
       series: [{
-        name: "время",
-        data: data.points
+        name: 'время',
+        data: data.points.slice(0, 15)
       }],
       xaxis: {
         type: 'datetime'
       },
       yaxis: {
         labels: {
-          formatter: val => (val / 60).toFixed(0)
+          formatter: val => Math.floor(val / 60)
         }
       },
       tooltip: {
         shared: false,
         y: {
-          formatter: val => `${(val / 60).toFixed(0)}:${val % 60}`
+          formatter: val => `${Math.floor(val / 60)}:${('00' + val % 60).slice(-2)}`
         }
       },
       theme: {
         palette: 'palette2'
       },
       title: {
-        text: 'Динамика результатов',
+        text: 'Недавние результаты',
         align: 'center',
         style: {
-          fontSize: '14px'
+          fontSize: '12px'
         }
       },
       dataLabels: {
@@ -189,7 +192,7 @@ export default class AthleteCharts {
           text: 'Время (минуты)'
         },
         labels: {
-          formatter: val => (val / 60).toFixed(0)
+          formatter: val => Math.floor(val / 60)
         }
       },
       plotOptions: {
