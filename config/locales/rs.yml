@@ -59,9 +59,10 @@ rs:
         subject_class: klasa objekata
       athlete:
         name: Ime PREZIME
-        parkrun_code: 'parkrun ID'
-        fiveverst_code: '5V ili RP ID'
-        parkzhrun_code: 'parkzhrun ID'
+        parkrun_code: parkrun ID
+        fiveverst_code: 5 verst ID
+        runpark_code: RunPark ID
+        parkzhrun_code: parkzhrun ID
         gender: pol
         club: klub
         event: 'domaće trčanje'

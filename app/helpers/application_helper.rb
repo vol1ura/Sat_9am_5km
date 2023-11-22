@@ -55,8 +55,7 @@ module ApplicationHelper
   end
 
   def athlete_external_link(athlete)
-    return unless athlete && (athlete.parkrun_code || athlete.fiveverst_code)
-    return if athlete.fiveverst_code.to_i > Athlete::RUN_PARK_BORDER
+    return unless athlete && (athlete.parkrun_code || athlete.fiveverst_code || athlete.runpark_code)
 
     code_type = Athlete::PersonalCode.new(athlete.code).code_type
     url = format(AthleteFinder::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type))

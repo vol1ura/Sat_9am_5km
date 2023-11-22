@@ -3,7 +3,7 @@
 ActiveAdmin.register Athlete do
   includes :user, :club, :event
 
-  permit_params :parkrun_code, :fiveverst_code, :name, :male, :user_id, :club_id, :event_id
+  permit_params :parkrun_code, :fiveverst_code, :runpark_code, :name, :male, :user_id, :club_id, :event_id
 
   config.per_page = [20, 50, 100]
 
@@ -14,6 +14,7 @@ ActiveAdmin.register Athlete do
   filter :id
   filter :parkrun_code
   filter :fiveverst_code
+  filter :runpark_code
   filter :male, as: :select, collection: { men: true, women: false }
   filter :club
   filter :event
@@ -26,6 +27,7 @@ ActiveAdmin.register Athlete do
     column :id
     column :parkrun_code
     column :fiveverst_code
+    column :runpark_code
     column :gender
     column :club
     column :event

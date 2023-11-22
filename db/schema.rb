@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_17_170350) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_22_160221) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -50,12 +50,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_170350) do
     t.datetime "updated_at", null: false
     t.bigint "parkzhrun_code"
     t.bigint "event_id"
+    t.bigint "runpark_code"
     t.index ["club_id"], name: "index_athletes_on_club_id"
     t.index ["event_id"], name: "index_athletes_on_event_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
     t.index ["name"], name: "index_athletes_on_name", opclass: :gist_trgm_ops, using: :gist
     t.index ["parkrun_code"], name: "index_athletes_on_parkrun_code", unique: true
     t.index ["parkzhrun_code"], name: "index_athletes_on_parkzhrun_code", unique: true
+    t.index ["runpark_code"], name: "index_athletes_on_runpark_code", unique: true
     t.index ["user_id"], name: "index_athletes_on_user_id", unique: true
   end
 

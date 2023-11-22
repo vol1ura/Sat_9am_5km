@@ -5,6 +5,6 @@ json.athlete do
     json.extract! result.athlete, :id, :name, :parkrun_code, :gender
     json.club result.athlete.club&.name
   else
-    json.name Athlete::NOBODY
+    json.name 'НЕИЗВЕСТНЫЙ'
   end
 end
