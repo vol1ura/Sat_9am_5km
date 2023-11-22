@@ -4,6 +4,7 @@ attributes_table_for athlete do
   row :id
   row :parkrun_code
   row :fiveverst_code
+  row :runpark_code
   row :parkzhrun_code
   row :gender
   row :club

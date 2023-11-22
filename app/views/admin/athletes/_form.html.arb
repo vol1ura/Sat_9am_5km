@@ -18,6 +18,7 @@ active_admin_form_for [:admin, resource] do |f|
     input :name
     input :parkrun_code
     input :fiveverst_code
+    input :runpark_code
     input :club
     input :event
     input :male, as: :radio, collection: [['мужчина', true], ['женщина', false]], required: true, label: 'пол'

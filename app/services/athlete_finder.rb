@@ -10,6 +10,10 @@ class AthleteFinder < ApplicationService
       url: 'https://5verst.ru/userstats/%d/',
       xpath: '//div[@class="text-column"]/h4',
     },
+    runpark_code: {
+      url: 'https://runpark.ru/UserCard/A%d',
+      xpath: '//div[@class="container"]/div/h2',
+    },
   }.freeze
   ANTI_BLOCK_PAUSE = 1.5
   private_constant :ANTI_BLOCK_PAUSE

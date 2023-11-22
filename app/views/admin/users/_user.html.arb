@@ -9,7 +9,8 @@ attributes_table_for user do
   row :note if current_user.admin?
   row :created_at
   row('Номер паркран') { |u| u.athlete&.parkrun_code }
-  row('Номер 5 вёрст или RunPark') { |u| u.athlete&.fiveverst_code }
+  row('Номер 5 вёрст') { |u| u.athlete&.fiveverst_code }
+  row('Номер RunPark') { |u| u.athlete&.runpark_code }
   row('Пол') { |u| u.athlete&.gender }
   row('Клуб') { |u| u.athlete&.club&.name }
   row :athlete

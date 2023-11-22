@@ -7,7 +7,6 @@ class Athlete < ApplicationRecord
   SAT_9AM_5KM_BORDER = 770_000_000
   FIVE_VERST_BORDER = 790_000_000
   RUN_PARK_BORDER = 7_000_000_000
-  NOBODY = 'НЕИЗВЕСТНЫЙ'
 
   PersonalCode = Struct.new(:code) do
     def code_type
@@ -16,8 +15,8 @@ class Athlete < ApplicationRecord
           :parkrun_code
         elsif code < SAT_9AM_5KM_BORDER
           :parkzhrun_code
-        # elsif code > RUN_PARK_BORDER
-        #   :runpark_code
+        elsif code > RUN_PARK_BORDER
+          :runpark_code
         elsif code > FIVE_VERST_BORDER
           :fiveverst_code
         else
@@ -54,12 +53,15 @@ class Athlete < ApplicationRecord
             uniqueness: true,
             numericality: { only_integer: true, greater_than: FIVE_VERST_BORDER },
             allow_nil: true
+  validates :runpark_code,
+            uniqueness: true,
+            numericality: { only_integer: true, greater_than: RUN_PARK_BORDER },
+            allow_nil: true
   validates :parkzhrun_code,
             uniqueness: true,
             numericality: { only_integer: true, greater_than: PARKZHRUN_BORDER },
             allow_nil: true
 
-  before_validation :fill_blank_name, if: -> { name.blank? }
   before_save :remove_extra_spaces, if: :will_save_change_to_name?
 
   def self.duplicates
@@ -84,7 +86,7 @@ class Athlete < ApplicationRecord
     personal_code = PersonalCode.new(code)
     code_type = personal_code.code_type
     athlete = find_by(**personal_code.to_params)
-    return athlete if athlete && (athlete.name != NOBODY || code_type == :id)
+    return athlete if athlete && (athlete.name || code_type == :id)
     return create if code_type == :id
 
     athlete_name = AthleteFinder.call(personal_code)
@@ -94,11 +96,11 @@ class Athlete < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[club_id created_at event_id fiveverst_code id male name parkrun_code updated_at]
+    %w[club_id created_at event_id fiveverst_code id male name parkrun_code runpark_code updated_at]
   end
 
   def code
-    parkrun_code || fiveverst_code || (SAT_9AM_5KM_BORDER + id if id)
+    parkrun_code || fiveverst_code || runpark_code || (SAT_9AM_5KM_BORDER + id if id)
   end
 
   def award_by(trophy)
@@ -112,10 +114,6 @@ class Athlete < ApplicationRecord
   end
 
   private
-
-  def fill_blank_name
-    self.name = NOBODY
-  end
 
   def remove_extra_spaces
     trimmed_name = name.gsub(/\s+/, ' ').gsub(/^ | $|(?<= ) /, '')

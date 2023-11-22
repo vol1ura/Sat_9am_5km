@@ -7,7 +7,8 @@ active_admin_form_for [:admin, activity, resource] do |f|
       panel 'Редактирование результата' do
         li f.object.athlete&.name || 'Участник не привязан'
         li "Parkrun ID: #{f.object.athlete&.parkrun_code || 'не указан'}"
-        li "5В или RP ID: #{f.object.athlete&.fiveverst_code || 'не указан'}"
+        li "5 вёрст ID: #{f.object.athlete&.fiveverst_code || 'не указан'}"
+        li "Runpark ID: #{f.object.athlete&.runpark_code || 'не указан'}"
         li "Забег: #{f.object.activity.event_name}"
         li "Дата забега: #{f.object.date}"
       end
@@ -15,8 +16,9 @@ active_admin_form_for [:admin, activity, resource] do |f|
     column do
       para 'Заполните одно и ТОЛЬКО одно из полей, другое поле очистите.'
       f.inputs 'Parkrun или 5вёрст ID участника (только цифры, без буквы "A")' do
+        code = f.object.athlete&.parkrun_code || f.object.athlete&.fiveverst_code || f.object&.runpark_code
         number_field_tag :code,
-                         params[:code].presence || f.object.athlete&.parkrun_code || f.object.athlete&.fiveverst_code,
+                         params[:code].presence || code,
                          placeholder: 'Штрихкод ID', style: 'width: 10rem; margin-left: 1rem;'
       end
       panel 'Имя участника' do

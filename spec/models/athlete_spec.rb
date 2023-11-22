@@ -8,11 +8,6 @@ RSpec.describe Athlete do
     expect(another_athlete).not_to be_valid
   end
 
-  it 'fills blank names' do
-    athlete = build(:athlete, name: nil)
-    expect { athlete.save }.to change(athlete, :name).to(Athlete::NOBODY)
-  end
-
   it 'removes extra spaces from name' do
     athlete = build(:athlete, name: ' Test  TEST ')
     expect { athlete.save }.to change(athlete, :name).to('Test TEST')
@@ -69,16 +64,22 @@ RSpec.describe Athlete do
     end
 
     context 'when such athlete is not exists in the database' do
-      it 'parses parkrun site to find athlete', vcr: true do
-        athlete = create(:athlete, name: Athlete::NOBODY, parkrun_code: 875743)
+      it 'parses parkrun site to find athlete', :vcr do
+        athlete = create(:athlete, name: nil, parkrun_code: 875743)
         described_class.find_or_scrape_by_code!(athlete.parkrun_code)
         expect(athlete.reload.name).to eq 'Юрий ВОЛОДИН'
       end
 
-      it 'parses 5 verst site to find athlete', vcr: true do
-        athlete = create(:athlete, name: Athlete::NOBODY, fiveverst_code: 790069891)
+      it 'parses 5 verst site to find athlete', :vcr do
+        athlete = create(:athlete, name: nil, fiveverst_code: 790069891)
         described_class.find_or_scrape_by_code!(athlete.fiveverst_code)
         expect(athlete.reload.name).to eq 'Даниил ЯШНИКОВ'
+      end
+
+      it 'parses runpark site to find athlete', :vcr do
+        athlete = create(:athlete, name: nil, fiveverst_code: nil, runpark_code: 7000998502)
+        described_class.find_or_scrape_by_code!(athlete.runpark_code)
+        expect(athlete.reload.name).to eq 'Ксения Кузьмина'
       end
     end
   end
