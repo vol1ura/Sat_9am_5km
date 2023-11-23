@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.0'
+ruby '3.2.2'
 
 gem 'importmap-rails', '~> 1.2'
 gem 'sassc-rails'
