@@ -4,7 +4,7 @@ lock '~> 3.17'
 set :user, ENV['DEPLOY_USER']
 
 set :rbenv_type, :user
-set :rbenv_ruby, '3.1.0'
+set :rbenv_ruby, '3.2.2'
 
 set :application, ENV['APP_NAME']
 

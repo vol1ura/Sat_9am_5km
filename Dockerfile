@@ -1,4 +1,4 @@
-FROM ruby:3.1.0-alpine
+FROM ruby:3.2.2-alpine
 
 RUN apk add --update \
   build-base postgresql-dev nodejs yarn \
