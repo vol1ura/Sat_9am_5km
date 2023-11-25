@@ -118,6 +118,11 @@ export default class AthleteCharts {
       fill: {
         type: 'gradient'
       },
+      plotOptions: {
+        area: {
+          fillTo: 'end',
+        }
+      },
       series: [{
         name: 'время',
         data: data.points.slice(0, 15)
@@ -126,12 +131,14 @@ export default class AthleteCharts {
         type: 'datetime'
       },
       yaxis: {
+        reversed: true,
         labels: {
           formatter: val => Math.floor(val / 60)
         }
       },
       tooltip: {
         shared: false,
+        followCursor: true,
         y: {
           formatter: val => `${Math.floor(val / 60)}:${('00' + val % 60).slice(-2)}`
         }
