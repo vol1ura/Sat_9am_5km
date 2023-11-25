@@ -12,7 +12,7 @@ class Activity < ApplicationRecord
   has_many :athletes, through: :results
   has_many :volunteers, dependent: :destroy, inverse_of: :activity
 
-  before_save :set_date, if: %i[will_save_change_to_published? published]
+  before_save :set_date
   after_commit :postprocessing, if: %i[saved_change_to_published? published]
 
   scope :published, -> { where(published: true) }
