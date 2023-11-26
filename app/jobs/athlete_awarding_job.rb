@@ -3,8 +3,6 @@
 class AthleteAwardingJob < ApplicationJob
   queue_as :default
 
-  RAGE_BADGE_LIMIT = 3
-
   def perform(activity_id)
     @activity = Activity.find activity_id
     return unless @activity.published
@@ -55,7 +53,7 @@ class AthleteAwardingJob < ApplicationJob
     threshold_awarding(athlete, :participating, 'athlete', results.size)
     events_count = results.joins(activity: :event).select('events.id').distinct.count
     threshold_awarding(athlete, :tourist, 'athlete', events_count)
-    award_by_rage_badge(athlete, results.last(RAGE_BADGE_LIMIT).pluck(:total_time).compact)
+    award_by_rage_badge(athlete)
     athlete.save!
   end
 
@@ -84,11 +82,10 @@ class AthleteAwardingJob < ApplicationJob
     trophy.save!
   end
 
-  def award_by_rage_badge(athlete, last_total_times)
-    return if last_total_times.size < RAGE_BADGE_LIMIT
-
+  def award_by_rage_badge(athlete)
     rage_badge = Badge.rage_kind.take!
-    if last_total_times.each_cons(2).all? { |prev_time, next_time| prev_time >= next_time }
+
+    if athlete.award_by_rage_badge?
       athlete.award_by Trophy.new(badge: rage_badge, date: activity_date)
     else
       athlete.trophies.where(badge: rage_badge).destroy_all

@@ -8,6 +8,8 @@ class Athlete < ApplicationRecord
   FIVE_VERST_BORDER = 790_000_000
   RUN_PARK_BORDER = 7_000_000_000
 
+  RAGE_BADGE_LIMIT = 3
+
   PersonalCode = Struct.new(:code) do
     def code_type
       @code_type ||=
@@ -105,6 +107,13 @@ class Athlete < ApplicationRecord
 
   def award_by(trophy)
     trophies << trophy unless trophies.exists?(badge_id: trophy.badge_id)
+  end
+
+  def award_by_rage_badge?
+    last_total_times = results.published.order('activity.date DESC').limit(RAGE_BADGE_LIMIT).pluck(:total_time).compact
+
+    last_total_times.size == RAGE_BADGE_LIMIT &&
+      last_total_times.each_cons(2).all? { |next_time, prev_time| next_time < prev_time }
   end
 
   def gender
