@@ -63,7 +63,7 @@ RSpec/ExampleLength:
     - 'spec/system/**/*'
 
 AllCops:
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.2
   Exclude:
     - 'tmp/**/*'
     - 'bin/**/*'
