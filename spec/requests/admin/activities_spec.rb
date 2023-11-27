@@ -51,6 +51,7 @@ RSpec.describe '/admin/activities' do
       {
         activity: {
           event_id: event.id,
+          date: Date.yesterday.strftime('%Y-%m-%d'),
           published: true,
           timer: File.open('spec/fixtures/files/parkrun_timer_results_ios.csv'),
           scanner0: File.open('spec/fixtures/files/parkrun_scanner_results.csv'),
