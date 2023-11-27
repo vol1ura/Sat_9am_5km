@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_22_160221) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_28_163829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_160221) do
   end
 
   create_table "activities", force: :cascade do |t|
-    t.date "date"
+    t.date "date", null: false
     t.text "description"
     t.boolean "published", default: false, null: false
     t.bigint "event_id", null: false

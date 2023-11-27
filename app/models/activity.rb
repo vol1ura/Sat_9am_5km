@@ -12,7 +12,8 @@ class Activity < ApplicationRecord
   has_many :athletes, through: :results
   has_many :volunteers, dependent: :destroy, inverse_of: :activity
 
-  before_save :set_date
+  validates :date, presence: true
+
   after_commit :postprocessing, if: %i[saved_change_to_published? published]
 
   scope :published, -> { where(published: true) }
@@ -39,10 +40,6 @@ class Activity < ApplicationRecord
   end
 
   private
-
-  def set_date
-    self.date = Date.current unless date
-  end
 
   def postprocessing
     AthleteAwardingJob.perform_later(id) if volunteers.exists?
