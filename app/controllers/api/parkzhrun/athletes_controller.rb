@@ -8,7 +8,7 @@ module API
         athlete.update!(athlete_params)
         head :ok
       rescue ActiveRecord::RecordNotFound => e
-        Rails.logger.error e.inspect
+        logger.error e.inspect
         render json: { errors: "Couldn't find Athlete with parkzhrun_id='#{params[:id]}'" }, status: :not_found
       rescue ActiveRecord::RecordInvalid => e
         Rollbar.error e
@@ -30,8 +30,12 @@ module API
           options[:name] = "#{parkzhrun_athlete_params[:first_name]} #{parkzhrun_athlete_params[:last_name].upcase}"
         end
         options[:male] = parkzhrun_athlete_params[:gender] == 'male' if parkzhrun_athlete_params[:gender]
-        # options[:parkrun_code] = parkzhrun_athlete_params[:parkrun_id] if parkzhrun_athlete_params[:parkrun_id]
-        # options[:fiveverst_code] = parkzhrun_athlete_params[:five_verst_id] if parkzhrun_athlete_params[:five_verst_id]
+        if (parkrun_code = parkzhrun_athlete_params[:parkrun_id]) && !Athlete.exists?(parkrun_code:)
+          options[:parkrun_code] = parkrun_code
+        end
+        if (fiveverst_code = parkzhrun_athlete_params[:five_verst_id]) && !Athlete.exists?(fiveverst_code:)
+          options[:fiveverst_code] = fiveverst_code
+        end
 
         options
       end
