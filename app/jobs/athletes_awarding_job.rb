@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AthleteAwardingJob < ApplicationJob
+class AthletesAwardingJob < ApplicationJob
   queue_as :default
 
   def perform(activity_id)

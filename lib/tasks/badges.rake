@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 namespace :badges do
-  desc 'Awardings for last week'
+  desc 'Awarding for last week'
   task weekly_awarding: :environment do
     Activity.published.where(date: Date.current.all_week).find_each do |activity|
-      AthleteAwardingJob.perform_now(activity.id)
+      AthletesAwardingJob.perform_now(activity.id)
     end
     BreakingTimeAwardingJob.perform_now
   end
