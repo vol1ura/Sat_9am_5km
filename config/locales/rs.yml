@@ -539,6 +539,9 @@ rs:
       top_results: Najbolji rezultati
       men: Muškarci
       women: Žene
+  athletes:
+    show:
+      nobody: UNKNOWN
   activities:
     index:
       date: Datum
@@ -559,7 +562,6 @@ rs:
       role: Uloga
       total_volunteering: ukupno volontiranja %{count}
     result:
-      nobody: UNKNOWN
       total_runs_html: '%{count}&nbsp;runs'
       total_volunteering_html: '%{count}&nbsp;volunteering'
   clubs:

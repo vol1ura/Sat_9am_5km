@@ -32,7 +32,8 @@
       впервые на забеге <%= @activity.event_name %> <i class="bi bi-heart-fill"></i>
     </li>
   <% end %>
-  <% if (s95_first_run_count = @first_run_count - @results_count.count { |_, c| c == 1 }).positive? %>
+  <% s95_first_run_count = @results_count.count { |_, c| c == 1 } %>
+  <% if s95_first_run_count.positive? %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= s95_first_run_count %></span>
       из них впервые на S95 <i class="bi bi-heart-fill text-danger"></i>
