@@ -15,12 +15,23 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.published.find(params[:id])
-    @results_count =
-      Result.published.joins(athlete: :activities).where(athlete: { activities: @activity }).group(:athlete).count
-    @volunteering_count_a =
-      Volunteer.published.joins(athlete: :activities).where(athlete: { activities: @activity }).group(:athlete).count
-    @volunteering_count_v =
-      Volunteer.published.group(:athlete).having(athlete_id: @activity.volunteers.select(:athlete_id)).count
+
     @results = @activity.results.includes(athlete: :club).order(:position)
+
+    @results_count = counters(model: Result, table: :results)
+    @volunteering_r_count = counters(model: Volunteer, table: :results)
+    @volunteering_v_count = counters(model: Volunteer, table: :volunteers)
+    @personal_best_count = @activity.results.where(personal_best: true).size
+    @first_run_count = @activity.results.where(first_run: true).size
+  end
+
+  private
+
+  def counters(model:, table:)
+    model
+      .published
+      .where(athlete_id: @activity.send(table).select(:athlete_id), activity: { date: ..@activity.date })
+      .group(:athlete_id)
+      .count
   end
 end
