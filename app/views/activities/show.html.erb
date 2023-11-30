@@ -15,6 +15,31 @@
   <%= sanitized_text @activity.description %>
 <% end %>
 
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill"><%= @results.size %></span>
+    участников забега
+  </li>
+  <% if @personal_best_count.positive? %>
+    <li class="list-group-item">
+      <span class="badge bg-primary rounded-pill"><%= @personal_best_count %></span>
+      число личных рекордов <i class="bi bi-lightning-fill"></i>
+    </li>
+  <% end %>
+  <% if @first_run_count.positive? %>
+    <li class="list-group-item">
+      <span class="badge bg-primary rounded-pill"><%= @first_run_count %></span>
+      впервые на забеге <%= @activity.event_name %> <i class="bi bi-heart-fill"></i>
+    </li>
+  <% end %>
+  <% if (s95_first_run_count = @first_run_count - @results_count.count { |_, c| c == 1 }).positive? %>
+    <li class="list-group-item">
+      <span class="badge bg-primary rounded-pill"><%= s95_first_run_count %></span>
+      из них впервые на S95 <i class="bi bi-heart-fill text-danger"></i>
+    </li>
+  <% end %>
+</ul>
+
 <h4><%= t '.protocol' %></h4>
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
@@ -54,7 +79,7 @@
             <%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %>
           </div>
           <div class="athlete-details fw-lighter">
-            <%= t '.total_volunteering', count: @volunteering_count_v[volunteer.athlete] %>
+            <%= t '.total_volunteering', count: @volunteering_v_count[volunteer.athlete_id] %>
           </div>
         </td>
         <td class="align-middle"><%= human_volunteer_role volunteer.role %></td>

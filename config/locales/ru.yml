@@ -561,6 +561,8 @@ ru:
       total_volunteering: всего волонтёрств %{count}
     result:
       nobody: НЕИЗВЕСТНЫЙ
+      total_runs_html: 'забегов&nbsp;%{count}'
+      total_volunteering_html: 'волонтёрств&nbsp;%{count}'
   clubs:
     index:
       how_to_add_new_club_html: 'Вашего клуба нет в списке? Напишите нам <a href="mailto:%{mail}?subject=Добавить новый клуб" target="_blank" title="Отправить нам email">на почту</a> и мы добавим его.'
