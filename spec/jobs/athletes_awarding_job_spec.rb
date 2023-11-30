@@ -1,4 +1,4 @@
-RSpec.describe AthleteAwardingJob do
+RSpec.describe AthletesAwardingJob do
   fixtures :badges
 
   let(:athlete) { create(:athlete) }

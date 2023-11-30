@@ -42,7 +42,8 @@ class Activity < ApplicationRecord
   private
 
   def postprocessing
-    AthleteAwardingJob.perform_later(id) if volunteers.exists?
+    ResultsProcessingJob.perform_later(id)
+    AthletesAwardingJob.perform_later(id) if volunteers.exists?
     BreakingTimeAwardingJob.perform_later if results.exists?
     TelegramNotification::AfterActivityJob.perform_later(id)
     ClearCache.call
