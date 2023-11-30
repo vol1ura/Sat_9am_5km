@@ -540,6 +540,9 @@ ru:
       top_results: Лучшие результаты
       men: Мужчины
       women: Женщины
+  athletes:
+    show:
+      nobody: НЕИЗВЕСТНЫЙ
   activities:
     index:
       date: Дата
@@ -560,7 +563,6 @@ ru:
       role: Роль
       total_volunteering: всего волонтёрств %{count}
     result:
-      nobody: НЕИЗВЕСТНЫЙ
       total_runs_html: 'забегов&nbsp;%{count}'
       total_volunteering_html: 'волонтёрств&nbsp;%{count}'
   clubs:
