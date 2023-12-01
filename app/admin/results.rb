@@ -13,12 +13,16 @@ ActiveAdmin.register Result do
 
   permit_params :total_time, :position, :athlete_id
 
-  index download_links: false, title: -> { "Редактор протокола #{@activity.date ? l(@activity.date) : '(нет даты)'}" } do
+  index(
+    download_links: false,
+    title: -> { "Редактор протокола #{@activity.date ? l(@activity.date) : '(нет даты)'}" },
+    row_class: ->(r) { 'error' unless r.correct? },
+  ) do
     selectable_column
     column :position
     column :athlete do |r|
       if r.athlete
-        link_to r.athlete.name, admin_athlete_path(r.athlete), target: '_blank', rel: 'noopener'
+        link_to r.athlete.name.presence || 'БЕЗ ИМЕНИ', admin_athlete_path(r.athlete), target: '_blank', rel: 'noopener'
       else
         link_to 'БЕЗ ТОКЕНА (создать)', new_admin_athlete_path(result_id: r.id), target: '_blank', rel: 'noopener'
       end

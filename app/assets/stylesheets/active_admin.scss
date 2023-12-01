@@ -74,3 +74,11 @@ body {
   max-height: 200px;
   object-fit: scale-down;
 }
+
+tr.odd, tr.even {
+  &.error {
+      td.col-athlete, td.col-total_time, td.col-gender {
+          background-color: #e61ccc5f;
+      }
+  }
+}

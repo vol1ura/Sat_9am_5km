@@ -33,6 +33,12 @@ class Result < ApplicationRecord
       .order(:total_time, :position, :activity_id).limit(limit)
   end
 
+  def correct?
+    return false unless total_time
+
+    athlete.nil? || (athlete.name.present? && !athlete.male.nil?)
+  end
+
   def swap_with_position!(target_position)
     current_athlete = athlete
     target_result = Result.find_by!(position: target_position, activity: activity)
