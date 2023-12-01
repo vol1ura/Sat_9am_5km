@@ -7,10 +7,6 @@ class Country < ApplicationRecord
 
   validates :code, presence: true, uniqueness: true
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[code created_at id updated_at]
-  end
-
   def name
     I18n.t("country.#{code}")
   end

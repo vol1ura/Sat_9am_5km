@@ -9,7 +9,15 @@ RSpec.describe AthleteReuniter, type: :service do
     let(:collection) { Athlete.where(id: ids) }
 
     it 'returns true' do
-      expect(described_class.call(collection, ids)).to be_truthy
+      expect(described_class.call(collection, ids)).to be true
+    end
+
+    context 'when some modified attribute was ignored' do
+      before { stub_const('AthleteReuniter::SKIPPED_ATTRIBUTES', []) }
+
+      it 'returns false' do
+        expect(described_class.call(collection, ids)).to be false
+      end
     end
   end
 end
