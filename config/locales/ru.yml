@@ -322,13 +322,13 @@ ru:
       equal_to: может иметь лишь значение, равное %{count}
       even: может иметь лишь четное значение
       exclusion: имеет зарезервированное значение
-      greater_than: может иметь значение большее %{count}
-      greater_than_or_equal_to: может иметь значение большее или равное %{count}
+      greater_than: должно иметь значение большее %{count}
+      greater_than_or_equal_to: должно иметь значение большее или равное %{count}
       in: должен быть в %{count}
       inclusion: имеет непредусмотренное значение
       invalid: имеет неверное значение
-      less_than: может иметь значение меньшее чем %{count}
-      less_than_or_equal_to: может иметь значение меньшее или равное %{count}
+      less_than: должно иметь значение меньшее чем %{count}
+      less_than_or_equal_to: должно иметь значение меньшее или равное %{count}
       model_invalid: 'Возникли ошибки: %{errors}'
       not_a_number: не является числом
       not_an_integer: не является целым числом
