@@ -24,7 +24,7 @@
 <h4><%= t '.our_contacts' %></h4>
 <div class="d-flex flex-wrap">
   <% @event.contacts.order(:contact_type).each do |contact| %>
-    <%= link_to(contact.link.html_safe, target: '_blank', rel: 'noopener', class: 'me-2 me-sm-3 mb-2') do %>
+    <%= external_link_to(contact.link.html_safe, class: 'me-2 me-sm-3 mb-2') do %>
       <% image_tag "social/#{contact.contact_type}.png", class: 'img-social', title: I18n.t("activerecord.attributes.contact.contact_types.#{contact.contact_type}") %>
     <% end %>
   <% end %>

@@ -466,6 +466,10 @@ ru:
   button:
     show_more: Показать все
     show_less: Свернуть
+  common:
+    without_token: БЕЗ ТОКЕНА (создать)
+    without_name: БЕЗ ИМЕНИ
+    open_link: открыть
   country:
     ru: Россия
     by: Беларусь

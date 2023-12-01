@@ -45,7 +45,7 @@
       Country
         .where.not(code: top_level_domain)
         .pluck(:code)
-        .map { |code| link_to t("country.#{code}"), "https://s95.#{code}/", target: '_blank', rel: 'noopener' }
+        .map { |code| external_link_to t("country.#{code}"), "https://s95.#{code}/" }
         .to_sentence
   %>
   <%= raw t '.s95_abroad.body', countries: sentence, info_email: 'info@s95.ru' %>

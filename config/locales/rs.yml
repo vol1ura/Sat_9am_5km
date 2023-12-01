@@ -465,6 +465,10 @@ rs:
   button:
     show_more: Prikaži više
     show_less: Prikaži manje
+  common:
+    without_token: WITHOUT TOKEN (create)
+    without_name: WITHOUT NAME
+    open_link: open
   country:
     ru: Rusija
     by: Belorusija
