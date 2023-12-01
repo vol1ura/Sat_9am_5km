@@ -6,11 +6,11 @@
 
 <h2 class="mt-4"><%= t '.our_partners' %></h2>
 <div class="d-flex">
-  <%= link_to 'https://t.me/parkrun', target: '_blank', rel: 'noopener' do %>
+  <%= external_link_to 'https://t.me/parkrun' do %>
     <% image_tag 'partners/pro_parkrun.svg', class: 'img-partner' %>
   <% end %>
   <% if top_level_domain == :ru %>
-    <%= link_to 'https://go.grigri.ru/s95', target: '_blank', rel: 'noopener' do %>
+    <%= external_link_to 'https://go.grigri.ru/s95' do %>
       <% image_tag 'partners/grigri.png', class: 'img-partner' %>
     <% end %>
   <% end %>

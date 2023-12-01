@@ -22,15 +22,13 @@ ActiveAdmin.register Result do
     column :position
     column :athlete do |r|
       if r.athlete
-        link_to r.athlete.name.presence || 'БЕЗ ИМЕНИ', admin_athlete_path(r.athlete), target: '_blank', rel: 'noopener'
+        external_link_to r.athlete.name.presence || t('common.without_name'), admin_athlete_path(r.athlete)
       else
-        link_to 'БЕЗ ТОКЕНА (создать)', new_admin_athlete_path(result_id: r.id), target: '_blank', rel: 'noopener'
+        external_link_to t('common.without_token'), new_admin_athlete_path(result_id: r.id)
       end
     end
     column :total_time do |r|
-      link_to human_result_time(r.total_time),
-              edit_admin_activity_result_path(r.activity, r),
-              target: '_blank', rel: 'noopener'
+      external_link_to human_result_time(r.total_time), edit_admin_activity_result_path(r.activity, r)
     end
     column('Изменение позиции') do |r|
       render partial: 'up_down', locals: { activity: r.activity, result: r } if can?(:manage, r)

@@ -59,13 +59,17 @@ module ApplicationHelper
 
     code_type = Athlete::PersonalCode.new(athlete.code).code_type
     url = format(AthleteFinder::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type))
-    link_to 'открыть', url, target: '_blank', rel: 'noopener'
+    external_link_to t('common.open_link'), url
   end
 
   def telegram_link(user)
     return unless user&.telegram_user
 
-    link_to "@#{user.telegram_user}", "https://t.me/#{user.telegram_user}", target: '_blank', rel: 'noopener'
+    external_link_to "@#{user.telegram_user}", "https://t.me/#{user.telegram_user}"
+  end
+
+  def external_link_to(title = nil, options = nil, html_options = {}, &)
+    link_to title, options, html_options.merge(target: '_blank', rel: 'noopener'), &
   end
 
   def full_name(user)

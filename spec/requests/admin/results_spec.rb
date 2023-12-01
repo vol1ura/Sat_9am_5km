@@ -18,7 +18,7 @@ RSpec.describe '/admin/results' do
     it 'renders athlete without tokens' do
       result = create(:result, activity: activity, athlete: nil)
       get admin_activity_results_url(activity)
-      expect(response.body).to include 'БЕЗ ТОКЕНА (создать)', new_admin_athlete_path(result_id: result.id)
+      expect(response.body).to include I18n.t('common.without_token'), new_admin_athlete_path(result_id: result.id)
     end
   end
 
