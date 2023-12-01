@@ -1,0 +1,27 @@
+<script>
+  function validateProtocol() {
+    const rows = $('tr[id*="result_"]')
+    Array.prototype.forEach.call(rows, (row, idx) => {
+      const position_cell = $(row).find('td.col-position')
+      if(parseInt(position_cell.html()) === idx + 1) {
+        position_cell.removeClass('error')
+      } else {
+        position_cell.addClass('error')
+      }
+
+      const next_row = rows[idx+1]
+      if(!next_row) { return }
+
+      total_time_cell = $(row).find('td.col-total_time')
+      next_total_time = $(next_row).find('td.col-total_time').html()
+
+      if(total_time_cell.html() <= next_total_time) {
+        total_time_cell.removeClass('error')
+      } else {
+        total_time_cell.addClass('error')
+      }
+    })
+  }
+
+  $(window).on('load', validateProtocol)
+</script>
