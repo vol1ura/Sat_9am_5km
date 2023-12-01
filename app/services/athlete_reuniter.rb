@@ -14,9 +14,8 @@ class AthleteReuniter < ApplicationService
     return false if @collection.where.not(user_id: nil).size > 1
     return false unless athlete
 
-    grab_modified_attributes_from_collection
-    check_modified_fields
-    replace_all_by_one
+    grab_modified_attributes_from_collection!
+    replace_all_by_one!
     ClearCache.call
     true
   rescue StandardError => e
@@ -30,40 +29,35 @@ class AthleteReuniter < ApplicationService
     @athlete ||= @collection.where.not(user_id: nil).take || @collection.where.not(name: nil).take
   end
 
-  def grab_modified_attributes_from_collection
+  def grab_modified_attributes_from_collection!
     MODIFIED_ATTRIBUTES.each do |attr|
       athlete.public_send "#{attr}=", athlete.send(attr) || @collection.where.not(attr => nil).take&.send(attr)
       unmodified_attributes.delete(attr)
     end
+
+    return if unmodified_attributes.empty?
+
+    raise "AthleteReuniter skips modification of public attribute(s): #{unmodified_attributes.join(', ')}"
   end
 
   def unmodified_attributes
     @unmodified_attributes ||= athlete.attribute_names - SKIPPED_ATTRIBUTES
   end
 
-  def check_modified_fields
-    return if unmodified_attributes.empty?
-
-    message = "AthleteReuniter skips modification of public attribute(s): #{unmodified_attributes}"
-    raise message if Rails.env.test?
-
-    Rollbar.warn message
-  end
-
-  def replace_all_by_one
+  def replace_all_by_one!
     ActiveRecord::Base.transaction do
       # rubocop:disable Rails/SkipsModelValidations
       Result.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
       Volunteer.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
-      update_all_trophies
+      update_all_trophies!
       @collection.where.not(id: athlete.id).destroy_all
       athlete.save!
       # rubocop:enable Rails/SkipsModelValidations
     end
   end
 
-  def update_all_trophies
-    Trophy.where(athlete_id: @ids).each do |trophy|
+  def update_all_trophies!
+    Trophy.where(athlete_id: @ids).find_each do |trophy|
       if (athlete_trophy = athlete.trophies.find_by(badge_id: trophy.badge_id))
         athlete_trophy.update!(date: trophy.date) if trophy.date && trophy.date > athlete_trophy.date
       else
