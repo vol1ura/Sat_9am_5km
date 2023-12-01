@@ -16,7 +16,7 @@ module TelegramNotification
           text: text,
           disable_web_page_preview: true,
           parse_mode: 'Markdown',
-          reply_markup: Bot::MAIN_KEYBOARD
+          reply_markup: Bot::MAIN_KEYBOARD,
         )
       rescue StandardError => e
         Rollbar.error e

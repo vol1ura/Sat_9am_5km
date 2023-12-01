@@ -15,7 +15,7 @@ active_admin_form_for [:admin, activity, resource] do |f|
     end
     column do
       para 'Заполните одно и ТОЛЬКО одно из полей, другое поле очистите.'
-      f.inputs 'Parkrun или 5вёрст ID участника (только цифры, без буквы "A")' do
+      f.inputs 'Parkrun, RunPark или 5вёрст ID участника (только цифры, без буквы "A")' do
         code = f.object.athlete&.parkrun_code || f.object.athlete&.fiveverst_code || f.object.athlete&.runpark_code
         number_field_tag :code,
                          params[:code].presence || code,

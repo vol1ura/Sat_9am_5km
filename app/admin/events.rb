@@ -9,7 +9,7 @@ ActiveAdmin.register Event do
   config.sort_order = 'visible_order_asc'
 
   permit_params(
-    :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order, :slogan, :country_id
+    :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order, :slogan, :country_id,
   )
 
   filter :country

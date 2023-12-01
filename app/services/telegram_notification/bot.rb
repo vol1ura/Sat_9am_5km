@@ -18,7 +18,7 @@ module TelegramNotification
       Net::HTTP.post(
         URI("https://api.telegram.org/bot#{TOKEN}/#{@method}"),
         @payload.to_json,
-        HEADERS
+        HEADERS,
       ).body
     end
   end
