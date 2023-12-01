@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+collection = activity.results.includes(athlete: :club).order(:position)
+
 panel 'Детали забега' do
   attributes_table_for activity do
     row 'Забег', &:event_name
@@ -11,10 +13,7 @@ panel 'Детали забега' do
 end
 
 panel 'Протокол' do
-  table_for(
-    activity.results.includes(athlete: :club).order(:position),
-    row_class: ->(r) { 'error' unless r.correct? },
-  ) do
+  table_for collection, row_class: ->(r) { 'athlete-error' unless r.correct? } do
     column :position
     column :athlete
     column(:total_time) { |r| human_result_time(r.total_time) }
@@ -38,3 +37,5 @@ end
 panel 'Правки забега' do
   render partial: 'admin/audits_table', locals: { object: activity }
 end
+
+render partial: 'protocol_validation' if collection.exists?

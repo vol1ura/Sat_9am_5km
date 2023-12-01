@@ -16,7 +16,7 @@ ActiveAdmin.register Result do
   index(
     download_links: false,
     title: -> { "Редактор протокола #{@activity.date ? l(@activity.date) : '(нет даты)'}" },
-    row_class: ->(r) { 'error' unless r.correct? },
+    row_class: ->(r) { 'athlete-error' unless r.correct? },
   ) do
     selectable_column
     column :position

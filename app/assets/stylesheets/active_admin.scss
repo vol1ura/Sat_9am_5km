@@ -13,6 +13,7 @@ $link-color: #144469 !default;
 $text-color: #0f0f0f !default;
 $error-color: #e61ccc !default;
 $breadcrumbs-color: $link-color !default;
+$table-error-color: lighten($error-color, 25%);
 
 // Active Admin's got SASS!
 @import "active_admin/mixins";
@@ -76,9 +77,14 @@ body {
 }
 
 tr.odd, tr.even {
-  &.error {
-      td.col-athlete, td.col-total_time, td.col-gender {
-          background-color: #e61ccc5f;
-      }
+  &.athlete-error {
+    td.col-athlete {
+      background-color: $table-error-color;
+    }
+  }
+  td.col-position, td.col-total_time {
+    &.error {
+      background-color: $table-error-color;
+    }
   }
 }
