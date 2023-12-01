@@ -7,8 +7,8 @@ RSpec.describe TelegramNotification::Badge::BreakingTimeExpiration, type: :servi
     create(
       :trophy,
       athlete: create(:athlete, user: create(:user)),
-      badge: Badge.breaking_kind.where("(info->'male')::boolean = ?", true).take,
-      date: BreakingTimeAwardingJob::EXPIRATION_PERIOD.months.ago
+      badge: Badge.breaking_kind.find_by("(info->'male')::boolean = ?", true),
+      date: BreakingTimeAwardingJob::EXPIRATION_PERIOD.months.ago,
     )
   end
   let(:bot_token) { '123456:aaabbb' }

@@ -40,8 +40,17 @@ RSpec.describe '/api/parkzhrun/athletes' do
         athlete.reload
         expect(athlete.male).to eq(athlete_attributes.dig(:athlete, :gender) == 'male')
         expect(athlete.name).to eq(
-          "#{athlete_attributes.dig(:athlete, :first_name)} #{athlete_attributes.dig(:athlete, :last_name).upcase}"
+          "#{athlete_attributes.dig(:athlete, :first_name)} #{athlete_attributes.dig(:athlete, :last_name).upcase}",
         )
+      end
+
+      it 'renders error with invalid five verst code' do
+        patch(
+          api_parkzhrun_athlete_url(parkzhrun_code),
+          params: athlete_attributes.deep_merge(athlete: { five_verst_id: 1 }),
+          headers: valid_headers,
+        )
+        expect(response).to have_http_status :unprocessable_entity
       end
 
       it 'renders not found for invalid id' do

@@ -35,7 +35,7 @@ module Parkzhrun
           position: result['position'],
           total_time: Result.total_time(*result['total_time'].split(':').map(&:to_i)),
           athlete: AthleteFinder.call(result['athlete_id']),
-          activity: activity
+          activity: activity,
         )
       end
     end
@@ -45,7 +45,7 @@ module Parkzhrun
         volunteer = Volunteer.new(
           role: result['role_id'].to_i,
           athlete: AthleteFinder.call(result['volunteer_id']),
-          activity: activity
+          activity: activity,
         )
         Rollbar.warn "Can't add volunteer to Parkzhrun activity #{activity.id}" unless volunteer.save
       end

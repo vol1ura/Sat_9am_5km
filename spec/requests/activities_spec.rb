@@ -21,7 +21,7 @@ RSpec.describe '/activities' do
       expect(response.parsed_body.dig('results', 0)).to eq(
         'total_time' => result.total_time.strftime('%M:%S'),
         'position' => result.position,
-        'athlete' => %w[id name parkrun_code gender].index_with { |field| result.athlete.public_send(field) }
+        'athlete' => %w[id name parkrun_code gender].index_with { |field| result.athlete.public_send(field) },
       )
     end
   end

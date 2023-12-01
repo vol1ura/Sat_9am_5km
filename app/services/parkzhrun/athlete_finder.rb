@@ -16,7 +16,7 @@ module Parkzhrun
         male: athlete_info['gender'] == 'male',
         parkrun_code: athlete_info['parkrun_id'],
         fiveverst_code: athlete_info['five_verst_id'],
-        **personal_code.to_params
+        **personal_code.to_params,
       )
     end
 

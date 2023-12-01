@@ -62,7 +62,7 @@ RSpec.describe ApplicationHelper do
         :athlete,
         parkrun_code: nil,
         fiveverst_code: nil,
-        runpark_code: (7 * (10**9)) + Faker::Number.number(digits: 5)
+        runpark_code: (7 * (10**9)) + Faker::Number.number(digits: 5),
       )
       expect(helper.athlete_external_link(athlete)).to match(%r{https://runpark.ru/UserCard/A#{athlete.fiveverst_code}})
     end
@@ -79,7 +79,7 @@ RSpec.describe ApplicationHelper do
         '<script>test</script>',
         Faker::Internet.url(host: 'example.com', path: '/foobar.html'),
         target: '_blank',
-        rel: 'noopener'
+        rel: 'noopener',
       )
       expect(link_tag).to include 'test', 'target="_blank"', 'rel="noopener"'
       expect(link_tag).not_to include '<script>', '</script>'
