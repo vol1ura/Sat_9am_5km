@@ -27,7 +27,7 @@
     </li>
   <% end %>
   <% s95_first_run_count = @results_count.count { |_, c| c == 1 } %>
-  <% if @first_run_count.positive? %>
+  <% if @first_run_count > s95_first_run_count %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= @first_run_count - s95_first_run_count %></span>
       впервые на забеге <%= @activity.event_name %> <i class="bi bi-heart-fill"></i>
