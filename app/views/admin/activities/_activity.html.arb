@@ -11,16 +11,19 @@ panel 'Детали забега' do
 end
 
 panel 'Протокол' do
-  table_for activity.results.includes(athlete: :club).order(:position) do
+  table_for(
+    activity.results.includes(athlete: :club).order(:position),
+    row_class: ->(r) { 'error' unless r.correct? },
+  ) do
     column :position
     column :athlete
-    column('сайт 🌳') { |r| athlete_external_link(r.athlete) }
     column(:total_time) { |r| human_result_time(r.total_time) }
     column(:gender) do |r|
       if (athlete = r.athlete)
         athlete.gender || render(partial: 'gender_links', locals: { result: r, activity: activity })
       end
     end
+    column('Инфа по ID') { |r| athlete_external_link(r.athlete) }
     column(:club) { |r| r.athlete&.club&.name }
   end
 end
