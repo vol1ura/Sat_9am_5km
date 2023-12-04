@@ -5,29 +5,27 @@
   </button>
 </h1>
 
-<% if @total_results.zero? %>
-  <p>Пока нет результатов.</p>
-<% else %>
-  <div class="accordion accordion-flush" id="accordionPersonalBest" data-controller="athlete">
-    <% if @athlete.club %>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-club">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseClub" aria-expanded="false" aria-controls="flush-collapseClub">
-            <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.club.name %></span>
-            клуб
-          </button>
-        </h2>
-        <div id="flush-collapseClub" class="accordion-collapse collapse" aria-labelledby="flush-club" data-bs-parent="#accordionPersonalBest">
-          <div class="accordion-body">
-            Посмотреть статистику клуба <%= link_to @athlete.club.name, @athlete.club %>.
-          </div>
+<div class="accordion accordion-flush" id="accordionPersonalBest" data-controller="athlete">
+  <% if @athlete.club %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-club">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseClub" aria-expanded="false" aria-controls="flush-collapseClub">
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.club.name %></span>
+          клуб
+        </button>
+      </h2>
+      <div id="flush-collapseClub" class="accordion-collapse collapse" aria-labelledby="flush-club" data-bs-parent="#accordionPersonalBest">
+        <div class="accordion-body">
+          Посмотреть статистику клуба <%= link_to @athlete.club.name, @athlete.club %>.
         </div>
       </div>
-    <% end %>
+    </div>
+  <% end %>
+  <% if @total_results.positive? %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-totalResults">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalResults" aria-expanded="false" aria-controls="flush-collapseTotalResults">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.results.published.size %></span>
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @total_results %></span>
           всего пробежек
         </button>
       </h2>
@@ -39,82 +37,84 @@
         </div>
       </div>
     </div>
-    <% if @total_vol.positive? %>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-totalVolunteering">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalVolunteering" aria-expanded="false" aria-controls="flush-collapseTotalVolunteering">
-            <span class="badge text-bg-ligth bg-primary me-3"><%= @total_vol %></span>
-            всего волонтёрств
-          </button>
-        </h2>
-        <div id="flush-collapseTotalVolunteering" class="accordion-collapse collapse" aria-labelledby="flush-totalVolunteering" data-bs-parent="#accordionPersonalBest">
-          <div class="accordion-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <div class="hstack">
-                  <div class="acc-li-s">Волонтёрский h-индекс</div>
-                  <div class="mx-3">
-                    <abbr title="Индекс равен h, если есть как минимум h позиций, на каждой из которых было как минимум h волонтёрств." class="initialism">
-                      <%= @volunteering.group(:role).reorder(count_all: :desc).count.values.map.with_index.take_while { |count, idx| count > idx }.size %>
-                    </abbr>
-                  </div>
+  <% end %>
+  <% if @total_vol.positive? %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-totalVolunteering">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalVolunteering" aria-expanded="false" aria-controls="flush-collapseTotalVolunteering">
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @total_vol %></span>
+          всего волонтёрств
+        </button>
+      </h2>
+      <div id="flush-collapseTotalVolunteering" class="accordion-collapse collapse" aria-labelledby="flush-totalVolunteering" data-bs-parent="#accordionPersonalBest">
+        <div class="accordion-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="hstack">
+                <div class="acc-li-s">Волонтёрский h-индекс</div>
+                <div class="mx-3">
+                  <abbr title="Индекс равен h, если есть как минимум h позиций, на каждой из которых было как минимум h волонтёрств." class="initialism">
+                    <%= @volunteering.group(:role).reorder(count_all: :desc).count.values.map.with_index.take_while { |count, idx| count > idx }.size %>
+                  </abbr>
                 </div>
-              </li>
-              <li class="list-group-item">
-                <div class="hstack">
-                  <div class="acc-li-s">Коэффициент волонтёра</div>
-                  <div class="mx-3">
-                    <abbr title="Число волонтёрств  на каждые 10 пробежек" class="initialism">
-                      <% if @total_results.zero? %>
-                        <i class="bi bi-infinity"></i>
-                      <% else %>
-                        <%= (@total_vol * 10.0 / @total_results).round(1) %>
-                      <% end %>
-                    </abbr>
-                  </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="hstack">
+                <div class="acc-li-s">Коэффициент волонтёра</div>
+                <div class="mx-3">
+                  <abbr title="Число волонтёрств  на каждые 10 пробежек" class="initialism">
+                    <% if @total_results.zero? %>
+                      <i class="bi bi-infinity"></i>
+                    <% else %>
+                      <%= (@total_vol * 10.0 / @total_results).round(1) %>
+                    <% end %>
+                  </abbr>
                 </div>
-              </li>
-            </ul>
-          </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-    <% end %>
-    <% if @athlete.trophies.exists? %>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-totalTrophies">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalTrophies" aria-expanded="false" aria-controls="flush-collapseTotalTrophies">
-            <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.trophies.size %></span>
-            всего наград
-          </button>
-        </h2>
-        <div id="flush-collapseTotalTrophies" class="accordion-collapse collapse" aria-labelledby="flush-totalTrophies" data-bs-parent="#accordionPersonalBest">
-          <div class="accordion-body">
-            <div class="d-flex justify-content-start flex-wrap">
-              <% @athlete.trophies.includes(:badge).each do |trophy| %>
-                <div class="p-1">
-                  <%
-                    trophy_link = link_to badge_path(trophy.badge) do
-                      image_tag trophy.badge.picture_link, class: 'trophy'
-                    end
-                  %>
-                  <% if trophy.badge.record_kind? %>
-                    <% trophy.info['data'].each do |record_data| %>
-                      <%= trophy_link %>
-                    <% end %>
-                  <% else %>
+    </div>
+  <% end %>
+  <% if @total_trophies.positive? %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-totalTrophies">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalTrophies" aria-expanded="false" aria-controls="flush-collapseTotalTrophies">
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @total_trophies %></span>
+          всего наград
+        </button>
+      </h2>
+      <div id="flush-collapseTotalTrophies" class="accordion-collapse collapse" aria-labelledby="flush-totalTrophies" data-bs-parent="#accordionPersonalBest">
+        <div class="accordion-body">
+          <div class="d-flex justify-content-start flex-wrap">
+            <% @athlete.trophies.includes(:badge).each do |trophy| %>
+              <div class="p-1">
+                <%
+                  trophy_link = link_to badge_path(trophy.badge) do
+                    image_tag trophy.badge.picture_link, class: 'trophy'
+                  end
+                %>
+                <% if trophy.badge.record_kind? %>
+                  <% trophy.info['data'].each do |record_data| %>
                     <%= trophy_link %>
                   <% end %>
-                </div>
-              <% end %>
-            </div>
+                <% else %>
+                  <%= trophy_link %>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
-    <% end %>
+    </div>
+  <% end %>
+  <% if @total_results.positive? %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-totalEvents">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.results.published.select(:event_id).distinct.count %></span>
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @total_events %></span>
           посещённые мероприятия
         </button>
       </h2>
@@ -128,36 +128,54 @@
       </div>
     </div>
     <div class="accordion-item">
+      <% pb_result = @pb_by_time.first %>
       <h2 class="accordion-header" id="flush-personalBestAbsolute">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= human_result_time @pb_by_time.total_time %></span>
+          <span class="badge text-bg-ligth bg-primary me-3"><%= human_result_time pb_result.total_time %></span>
           лучший результат
         </button>
       </h2>
       <div id="flush-collapsePersonalBestAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-personalBestAbsolute" data-bs-parent="#accordionPersonalBest">
-        <div class="accordion-body px-3">
-          <div class="hstack">
-            <div class="acc-li-s">
-              <%= link_to l(@pb_by_time.activity.date), @pb_by_time.activity %>
-            </div>
-            <div class="ms-3">
-              <%= link_to @pb_by_time.activity.event_name, event_path(@pb_by_time.activity.event.code_name) %>
-            </div>
-          </div>
+        <div class="accordion-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ЛР</th>
+                <th>Δ</th>
+                <th>Дата</th>
+                <th>Мероприятие</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @pb_by_time.includes(activity: :event).to_a.push(nil).each_cons(2) do |pb, pb_prev| %>
+                <tr>
+                  <td><%= human_result_time pb.total_time %></td>
+                  <td>
+                    <% if pb_prev %>
+                      <% delta = (pb_prev.total_time - pb.total_time).to_i %>
+                      <%= format('%d:%02d', delta / 60, delta % 60) %>
+                    <% end %>
+                  </td>
+                  <td><%= link_to l(pb.activity.date), pb.activity %></td>
+                  <td><%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-bestPositionAbsolute">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @pb_by_position.take.position %></span>
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @best_position %></span>
           лучшее место
         </button>
       </h2>
       <div id="flush-collapseBestPositionAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-bestPositionAbsolute" data-bs-parent="#accordionPersonalBest">
         <div class="accordion-body">
           <ul class="list-group list-group-flush">
-            <% @pb_by_position.includes(activity: :event).each do |pb| %>
+            <% @pb_by_position.each do |pb| %>
               <li class="list-group-item">
                 <div class="hstack">
                   <div class="acc-li-s">
@@ -176,8 +194,12 @@
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
+</div>
 
+<% if @total_results.zero? %>
+  <p>Пока нет результатов.</p>
+<% else %>
   <h2 class="mt-3">Результаты</h2>
   <table class="table table-striped">
     <thead>
@@ -194,21 +216,7 @@
       <%= render partial: 'result', collection: @athlete.results.published.includes(activity: :event).order('activity.date DESC') %>
     </tbody>
   </table>
-  <% if @athlete.results.published.size > 15 %>
-    <div class="d-flex justify-content-center">
-      <button
-        class="btn btn-outline-primary"
-        type="button"
-        data-controller="button"
-        data-action="click->button#setName"
-        data-button-show-value="<%= t 'button.show_more' %>"
-        data-button-hide-value="<%= t 'button.show_less' %>"
-        data-bs-toggle="collapse"
-        data-bs-target=".multi-collapse"
-        aria-expanded="false">
-      </button>
-    </div>
-  <% end %>
+  <%= render partial: '/expand_button' if @total_results > 15 %>
 <% end %>
 
 <h2>Волонтёрства</h2>

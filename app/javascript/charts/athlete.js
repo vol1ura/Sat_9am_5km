@@ -6,7 +6,7 @@ export default class AthleteCharts {
   get #eventsData() {
     const events = {}
     this.rows.forEach(row => {
-      const event = row.querySelector(".event-name").textContent
+      const event = row.querySelector("td.event-name").textContent
       events[event] = 1 + (events[event] || 0)
     })
     return events
@@ -15,9 +15,9 @@ export default class AthleteCharts {
   get #eventsResultsData() {
     const data = {}
     this.rows.forEach(row => {
-      const event = row.querySelector(".event-name").textContent
-      const timestamp = Number(row.querySelector(".total-time").getAttribute("min"))
-      data[event] = data[event] ? [...data[event], timestamp] : [timestamp]
+      const event = row.querySelector("td.event-name").textContent
+      const total_time = Number(row.querySelector("td.total-time").dataset.min)
+      data[event] = data[event] ? [...data[event], total_time] : [total_time]
     })
 
     const asc = arr => arr.sort((a, b) => a - b)
@@ -46,21 +46,23 @@ export default class AthleteCharts {
     return data
   }
 
-  get #resultsData() {
+  #resultsData(max_count) {
     const points = []
     const labels = []
-    this.rows.forEach(row => {
-      const time_cell = row.querySelector(".total-time")
+
+    Array.prototype.slice.call(this.rows, 0, max_count).forEach(row => {
+      const time_cell = row.querySelector("td.total-time")
       labels.push(time_cell.textContent)
       points.push([
-        Number(row.querySelector(".event-date").getAttribute("timestamp")),
-        Number(time_cell.getAttribute("min"))
+        Number(time_cell.dataset.timestamp),
+        Number(time_cell.dataset.min)
       ])
     })
+
     return { points, labels }
   }
 
-  get eventsChartOptions() {
+  eventsChartOptions(title) {
     const events = this.#eventsData
     return {
       series: [{
@@ -72,7 +74,7 @@ export default class AthleteCharts {
         height: 300
       },
       title: {
-        text: 'Количество забегов',
+        text: title,
         align: 'center'
       },
       plotOptions: {
@@ -99,8 +101,8 @@ export default class AthleteCharts {
     }
   }
 
-  get resultsChartOptions() {
-    const data = this.#resultsData
+  resultsChartOptions(title, { max_count = undefined } = {}) {
+    const data = this.#resultsData(max_count)
     return {
       chart: {
         height: 300,
@@ -125,13 +127,14 @@ export default class AthleteCharts {
       },
       series: [{
         name: 'время',
-        data: data.points.slice(0, 15)
+        data: data.points
       }],
       xaxis: {
         type: 'datetime'
       },
       yaxis: {
         reversed: true,
+        opposite: true,
         labels: {
           formatter: val => Math.floor(val / 60)
         }
@@ -147,11 +150,8 @@ export default class AthleteCharts {
         palette: 'palette2'
       },
       title: {
-        text: 'Недавние результаты',
+        text: title,
         align: 'center',
-        style: {
-          fontSize: '12px'
-        }
       },
       dataLabels: {
         enabled: true,
@@ -160,7 +160,7 @@ export default class AthleteCharts {
     }
   }
 
-  get eventsWhiskersOptions() {
+  eventsWhiskersOptions(title) {
     const data = this.#eventsResultsData
     return {
       series: [
@@ -191,7 +191,7 @@ export default class AthleteCharts {
         }
       },
       title: {
-        text: 'Статистика',
+        text: title,
         align: 'center'
       },
       yaxis: {

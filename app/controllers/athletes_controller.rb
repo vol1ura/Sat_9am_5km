@@ -19,11 +19,16 @@ class AthletesController < ApplicationController
   def show
     @athlete = Athlete.find(params[:id])
     results = @athlete.results.published
-    @pb_by_time = results.order(:total_time).first
-    @pb_by_position = results.joins(:activity).where(position: results.minimum(:position)).order(date: :desc)
     @total_results = results.size
+    if @total_results.positive?
+      @pb_by_time = results.where(personal_best: true).order(date: :desc)
+      @best_position = results.minimum(:position)
+      @pb_by_position = results.includes(activity: :event).where(position: @best_position).order(date: :desc)
+      @total_events = results.select(:event_id).distinct.count
+    end
     @volunteering = @athlete.volunteering
     @total_vol = @volunteering.size
+    @total_trophies = @athlete.trophies.size
     @barcode = BarcodePrinter.call(@athlete)
   end
 end
