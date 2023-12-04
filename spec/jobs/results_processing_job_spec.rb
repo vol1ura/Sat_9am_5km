@@ -1,7 +1,9 @@
 RSpec.describe ResultsProcessingJob do
   let(:activity) { create(:activity, date: Date.current) }
   let(:athlete) { create(:athlete) }
-  let!(:result) { create(:result, activity: activity, athlete: athlete, position: 1) }
+  let!(:result) do
+    create(:result, activity: activity, athlete: athlete, position: 1, personal_best: false, first_run: false)
+  end
 
   before do
     create(:result, activity_params: { date: Date.yesterday }, athlete: athlete, position: 2)
