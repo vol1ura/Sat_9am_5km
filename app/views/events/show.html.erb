@@ -1,4 +1,5 @@
-<% head_info :title, @event.name %>
+<% head_info :title, t('.title', event: @event.name) %>
+<% head_info :description, strip_tags(@event.description).squish %>
 
 <% unless @event.active %>
   <div class="alert alert-danger d-flex align-items-center" role="alert">
