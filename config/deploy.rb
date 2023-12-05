@@ -39,3 +39,4 @@ set :sidekiq_default_hooks, false
 after 'deploy:starting', 'sidekiq:quiet'
 after 'deploy:started', 'sidekiq:stop'
 after 'deploy:published', 'sidekiq:start'
+after 'deploy:published', 'sitemap:refresh'

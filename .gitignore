@@ -16,6 +16,7 @@
 !/tmp/pids/.keep
 
 /public/assets
+/public/sitemaps
 /vendor/*
 !/vendor/.keep
 !/vendor/javascript/.keep

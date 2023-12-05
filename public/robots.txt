@@ -3,4 +3,3 @@ User-agent: *
 Disallow: /admin
 Disallow: /athletes/
 Disallow: /volunteering
-Disallow: /sitemap*
