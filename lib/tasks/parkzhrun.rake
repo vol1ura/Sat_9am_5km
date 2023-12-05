@@ -3,8 +3,7 @@
 namespace :parkzhrun do
   desc 'create Parkzhrun activity'
   task create_activity: :environment do
-    Parkzhrun::ActivityCreator.call(1.day.ago)
-    ParkzhrunMailer.success.deliver_later
+    ParkzhrunMailer.success.deliver_later if Parkzhrun::ActivityCreator.call(1.day.ago)
   rescue StandardError => e
     Rollbar.error e
     ParkzhrunMailer.error.deliver_later

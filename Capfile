@@ -27,6 +27,7 @@ require 'capistrano/rbenv'
 require 'capistrano/puma'
 require 'capistrano/sidekiq'
 require 'capistrano/sitemap_generator'
+require 'whenever/capistrano'
 
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Nginx

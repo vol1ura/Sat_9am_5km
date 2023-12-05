@@ -57,6 +57,8 @@ jobs:
       BULLET_ENABLED: true
       APP_HOST: "test.ru"
       APP_DOMAIN: "test.ru"
+      ADMIN_EMAIL: "admin@test.ru"
+      INFO_EMAIL: "info@test.ru"
       VK_TOKEN: ${{ secrets.VK_TOKEN }}
       VK_GROUP_ID: 212432495
       BOT_TOKEN: "123456:test"
