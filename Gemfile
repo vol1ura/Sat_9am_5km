@@ -26,6 +26,7 @@ gem 'pg', '~> 1.4'
 gem 'puma', '~> 5.6'
 gem 'rails_performance'
 gem 'sidekiq'
+gem 'sitemap_generator'
 gem 'sprockets-rails'
 
 gem 'hiredis-client'
