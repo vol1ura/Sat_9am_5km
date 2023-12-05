@@ -1,4 +1,5 @@
-<% head_info :title, @badge.name %>
+<% head_info :title, "#{@badge.name} #{'-' if params[:page]} #{params[:page]}".strip %>
+<% head_info :description, @badge.conditions %>
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">

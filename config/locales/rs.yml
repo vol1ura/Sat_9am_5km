@@ -512,6 +512,7 @@ rs:
       back: Nazad
       forward: Napred
     rules:
+      description: Brief rules for S95 participants, as well as frequently asked questions
       register_with_bot_html: 'Если вы не зарегистрированы, создайте профиль с помощью <a href="%{link}" target="_blank" rel="noopener">Телеграм-бота</a>. Вы получите ссылку на ваш профиль с персональным штрих-кодом.'
       come_to_s95_html: 'Самое главное - приходите в <strong>субботу</strong> в <strong>9 утра</strong> на одно из мероприятий и пробегите <strong>5 км</strong>.'
       scan_barcodes: На финише вам дадут карточку позиции. Отсканируйте персональный штрихкод и карточку позиции у волонтёра.
@@ -532,6 +533,11 @@ rs:
       about_things:
         question: Where can I leave my things while I'm running?
         answer: Usually, everyone leaves things on benches near the start and finish areas.
+    support:
+      description: 'You can support the Sat9am5km project in various ways: by volunteering, donating, or participating in the development of this website'
+    additional-events:
+      title: Additional events January 1
+      description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
   results:
     table:
       time: Vreme
@@ -548,6 +554,7 @@ rs:
       nobody: UNKNOWN
   activities:
     index:
+      description: Recent run results on S95 events
       date: Datum
       event: Događaj
       athletes: Sportisti
@@ -555,6 +562,8 @@ rs:
       first_man: Prvi čovek
       first_woman: Prva žena
     show:
+      title: 'Run results %{activity}'
+      description: 'Race protocol %{activity}, volunteer list and brief report about run'
       short_report: Kratak izveštaj
       protocol: Protokol
       common: Zajednički
@@ -570,9 +579,13 @@ rs:
       total_volunteering_html: '%{count}&nbsp;volunteering'
   clubs:
     index:
+      description: Table of clubs with statistics on the total number of participants, volunteers and runs
       how_to_add_new_club_html: 'Is your club not on the list? Write us <a href="mailto:%{mail}?subject=Add a new club" target="_blank" title="Send us an email">email</a> and we will add it.'
+    show:
+      description: 'Table of participants and statistics for the club %{club}'
   events:
     show:
+      title: 'Park trčanje na %{event}'
       our_contacts: Naši kontakti
       results: Rezultati
       no_results_disclaimer: Ovde još nema preuzetih ili objavljenih rezultata.
