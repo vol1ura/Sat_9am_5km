@@ -8,6 +8,7 @@
     <meta property="og:image" content="/<%= yield_head_info :og_image, 'android-chrome-192x192.png' %>">
     <meta property="og:image:type" content="image/png">
     <%= favicon_link_tag '/favicon.ico' %>
+    <%= favicon_link_tag '/apple-touch-icon-120x120.png', rel: 'apple-touch-icon', type: 'image/png' %>
     <%= favicon_link_tag '/apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '180x180' %>
     <%= favicon_link_tag '/favicon-32x32.png', rel: 'icon', type: 'image/png', sizes: '32x32' %>
     <%= favicon_link_tag '/favicon-16x16.png', rel: 'icon', type: 'image/png', sizes: '16x16' %>
@@ -15,6 +16,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application' %>
     <%= javascript_importmap_tags %>
+    <meta name="apple-mobile-web-app-title" content="Sat9am5km">
     <meta name='description' content='<%= yield_head_info(:description, 'Еженедельные субботние пробежки на 5км в парке') %>'>
     <meta name='keywords' content='<%= yield_head_info(:keywords, "s95,sat,9am,5km,парковые пробежки,парковые забеги,пробег,забег,спорт,паркран,parkrun,#{@country_events.pluck(:name).join(',')}") %>'>
     <% if Rails.env.production? %>
