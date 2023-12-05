@@ -1,5 +1,7 @@
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 User-agent: *
 Disallow: /admin
-Disallow: /athletes/
+Disallow: /athletes
 Disallow: /volunteering
+Disallow: /user/password
+Sitemap: <%= File.join root_url, 'sitemaps', top_level_domain.to_s, 'sitemap.xml.gz' %>

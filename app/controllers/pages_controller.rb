@@ -14,7 +14,7 @@ class PagesController < ApplicationController
   end
 
   def validate_page
-    path = Pathname.new(Rails.root + "app/views/pages/#{page_name}.html.erb")
+    path = Rails.root.join, 'app/views/pages', "#{page_name}.#{request.format.to_sym}.erb"
     render file: 'public/404.html', status: :not_found unless File.exist?(path)
   end
 end
