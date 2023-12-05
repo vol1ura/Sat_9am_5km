@@ -28,6 +28,7 @@ gem 'rails_performance'
 gem 'sidekiq'
 gem 'sitemap_generator'
 gem 'sprockets-rails'
+gem 'whenever', require: false
 
 gem 'hiredis-client'
 gem 'redis'

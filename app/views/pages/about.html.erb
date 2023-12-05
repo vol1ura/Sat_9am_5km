@@ -11,7 +11,7 @@
     t '.how_to_join.body_html',
       events_count: actual_events.size,
       events: actual_events.pluck(:name).to_sentence,
-      info_email: 'info@s95.ru',
+      info_email: ENV['INFO_EMAIL'],
       telegram_group: 'https://t.me/sat9am5km'
   %>
 </p>
@@ -48,5 +48,5 @@
         .map { |code| external_link_to t("country.#{code}"), "https://s95.#{code}/" }
         .to_sentence
   %>
-  <%= raw t '.s95_abroad.body', countries: sentence, info_email: 'info@s95.ru' %>
+  <%= raw t '.s95_abroad.body', countries: sentence, info_email: ENV['INFO_EMAIL'] %>
 </p>

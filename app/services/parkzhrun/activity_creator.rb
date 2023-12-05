@@ -9,7 +9,7 @@ module Parkzhrun
     def call
       if activity.results.exists?
         Rails.logger.warn("Parkzrun activity #{date_param} already exists")
-        return
+        return false
       end
 
       activity.transaction do
