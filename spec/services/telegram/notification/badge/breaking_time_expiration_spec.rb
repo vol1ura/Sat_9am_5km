@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TelegramNotification::Badge::BreakingTimeExpiration, type: :service do
+RSpec.describe Telegram::Notification::Badge::BreakingTimeExpiration, type: :service do
   fixtures :badges
 
   let(:trophy) do
@@ -14,7 +14,7 @@ RSpec.describe TelegramNotification::Badge::BreakingTimeExpiration, type: :servi
   let(:bot_token) { '123456:aaabbb' }
   let!(:request) { stub_request(:post, %r{https://api\.telegram\.org/bot#{bot_token}/sendMessage}) }
 
-  before { stub_const('TelegramNotification::Bot::TOKEN', bot_token) }
+  before { stub_const('Telegram::Bot::TOKEN', bot_token) }
 
   context 'when request to telegram successful' do
     it 'informs athlete' do
