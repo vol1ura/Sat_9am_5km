@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module TelegramNotification
+module Telegram
   class Bot < ApplicationService
     TOKEN = ENV.fetch('BOT_TOKEN')
     HEADERS = { 'Content-Type' => 'application/json' }.freeze
     MAIN_KEYBOARD = {
-      keyboard: [['ℹ️ штрих-код', '❓ справка']],
+      keyboard: [['ℹ️ QR-код', '❓ справка']],
       resize_keyboard: true,
     }.freeze
 
@@ -19,7 +19,7 @@ module TelegramNotification
         URI("https://api.telegram.org/bot#{TOKEN}/#{@method}"),
         @payload.to_json,
         HEADERS,
-      ).body
+      ).is_a?(Net::HTTPSuccess)
     end
   end
 end

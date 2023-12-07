@@ -26,11 +26,15 @@ every 1.day, at: '2' do
 end
 
 every :thursday, at: '19' do
-  rake 'badges:notify_rage_badges_expiration'
+  rake 'notification:rage_badges_expiration'
 end
 
-every :saturday, at: '19' do
-  rake 'badges:notify_breaking_time_badges_expiration'
+every :friday, at: '10' do
+  rake 'notification:invite_newbies'
+end
+
+every :saturday, at: '18' do
+  rake 'notification:breaking_time_badges_expiration'
 end
 
 every :saturday, at: '23' do
@@ -38,12 +42,12 @@ every :saturday, at: '23' do
 end
 
 every :sunday, at: '5' do
-  rake 'parkzhrun:create_activity'
+  rake 'processing:parkzhrun'
 end
 
 every :sunday, at: '5:10' do
-  rake 'badges:weekly_awarding'
-  rake 'activities:processing'
+  rake 'processing:awarding'
+  rake 'processing:results'
 end
 
 every :sunday, at: '5:20' do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TelegramNotification::Badge::RageExpiration, type: :service do
+RSpec.describe Telegram::Notification::Badge::RageExpiration, type: :service do
   fixtures :badges
 
   let(:athlete) { create(:athlete, user: create(:user)) }
@@ -10,7 +10,7 @@ RSpec.describe TelegramNotification::Badge::RageExpiration, type: :service do
   let!(:request) { stub_request(:post, %r{https://api\.telegram\.org/bot#{bot_token}/sendMessage}) }
 
   before do
-    stub_const('TelegramNotification::Bot::TOKEN', bot_token)
+    stub_const('Telegram::Bot::TOKEN', bot_token)
     create(:result, athlete: athlete, activity_params: { date: })
   end
 
