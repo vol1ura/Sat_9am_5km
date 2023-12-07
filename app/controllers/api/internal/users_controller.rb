@@ -9,7 +9,7 @@ module API
           @user.skip_confirmation!
           @user.confirm
           @user.save!
-          link_user_to_athlete
+          link_user_to_athlete!
         end
 
         render json: { message: 'Регистрация успешно завершена.' }
@@ -19,7 +19,7 @@ module API
         @user = User.find(params[:user_id])
         @user.transaction do
           @user.update!(user_params)
-          link_user_to_athlete
+          link_user_to_athlete!
         end
 
         render json: { message: 'Участник успешно привязан.' }
@@ -41,10 +41,10 @@ module API
       end
 
       def athlete_params
-        params.require(:athlete).permit(:name, :male, :parkrun_code, :fiveverst_code)
+        params.require(:athlete).permit(:name, :male, :parkrun_code, :fiveverst_code, :runpark_code)
       end
 
-      def link_user_to_athlete
+      def link_user_to_athlete!
         if params[:athlete_id]
           @athlete = Athlete.find(params[:athlete_id])
           @athlete.update!(user: @user)
