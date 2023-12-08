@@ -224,19 +224,19 @@
   <p>Пока не было волонтёрств.</p>
 <% else %>
   <div class="accordion accordion-flush" id="accordionRoles">
-    <% @athlete.volunteering.pluck(:role).uniq.each do |role| %>
-      <% volunteering = @athlete.volunteering.includes(activity: :event).where(role: role) %>
+    <% @volunteering.pluck(:role).uniq.each do |role| %>
+      <% volunteering_in_role = @volunteering.includes(activity: :event).where(role:) %>
       <div class="accordion-item">
         <h2 id="flush-heading-<%= role %>" class="accordion-header">
           <button class="accordion-button collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<%= role %>" aria-expanded="false" aria-controls="flush-collapse-<%= role %>">
-            <span class="badge text-bg-ligth bg-primary me-3"><%= volunteering.size %></span>
+            <span class="badge text-bg-ligth bg-primary me-3"><%= volunteering_in_role.size %></span>
             <%= human_volunteer_role role %>
           </button>
         </h2>
         <div id="flush-collapse-<%= role %>" class="accordion-collapse collapse" aria-labelledby="flush-heading-<%= role %>" data-bs-parent="#accordionRoles">
           <div class="accordion-body">
             <ul class="list-group list-group-flush">
-              <% volunteering.each do |vol| %>
+              <% volunteering_in_role.each do |vol| %>
                 <li class="list-group-item">
                   <div class="hstack">
                     <div class="acc-li-s">
