@@ -31,7 +31,7 @@ badge_7:
   kind: 10
   info:
     threshold: 25
-    type: 'athlete'
+    type: 'result'
 badge_8:
   id: 8
   name: '50 runs'
@@ -39,7 +39,7 @@ badge_8:
   kind: 10
   info:
     threshold: 50
-    type": 'athlete'
+    type": 'result'
 badge_9:
   id: 9
   name: '100 runs'
@@ -47,7 +47,7 @@ badge_9:
   kind: 10
   info:
     threshold: 100
-    type: 'athlete'
+    type: 'result'
 badge_10:
   id: 10
   name: '25 volunteering'
@@ -135,7 +135,7 @@ badge_20:
   kind: 20
   info:
     threshold: 5
-    type: 'athlete'
+    type: 'result'
 badge_21:
   id: 21
   name: 'record female'
@@ -170,4 +170,52 @@ badge_33:
   kind: 20
   info:
     threshold: 10
-    type: 'athlete'
+    type: 'result'
+badge_39:
+  id: 39
+  name: 'Home 25'
+  picture_link: 'badges/25_home_runs.png'
+  kind: 11
+  info:
+    threshold: 25
+    type: 'result'
+badge_40:
+  id: 40
+  name: 'Home 50'
+  picture_link: 'badges/50_home_runs.png'
+  kind: 11
+  info:
+    threshold: 50
+    type: 'result'
+badge_41:
+  id: 41
+  name: 'Home 100'
+  picture_link: 'badges/100_home_runs.png'
+  kind: 11
+  info:
+    threshold: 100
+    type: 'result'
+badge_42:
+  id: 42
+  name: 'Home v25'
+  picture_link: 'badges/25_home_runs.png'
+  kind: 11
+  info:
+    threshold: 25
+    type: 'volunteer'
+badge_43:
+  id: 43
+  name: 'Home v50'
+  picture_link: 'badges/50_home_runs.png'
+  kind: 11
+  info:
+    threshold: 50
+    type: 'volunteer'
+badge_44:
+  id: 44
+  name: 'Home v100'
+  picture_link: 'badges/100_home_runs.png'
+  kind: 11
+  info:
+    threshold: 100
+    type: 'volunteer'

@@ -12,7 +12,7 @@ class FunrunAwardingJob < ApplicationJob
       .or(Athlete.where(id: activity.volunteers.select(:athlete_id)))
       .find_each do |athlete|
         athlete.trophies.create badge: badge, date: activity.date
-        Rollbar.error(athlete.errors.inspect) unless athlete.valid?
+        Rollbar.warn(athlete.errors.inspect) unless athlete.valid?
       end
   end
 end

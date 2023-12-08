@@ -65,6 +65,7 @@ class Athlete < ApplicationRecord
             allow_nil: true
 
   before_save :remove_extra_spaces, if: :will_save_change_to_name?
+  after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
 
   def self.duplicates
     sql = <<~SQL.squish
@@ -105,10 +106,6 @@ class Athlete < ApplicationRecord
     parkrun_code || fiveverst_code || runpark_code || (SAT_9AM_5KM_BORDER + id if id)
   end
 
-  def award_by(trophy)
-    trophies << trophy unless trophies.exists?(badge_id: trophy.badge_id)
-  end
-
   def award_by_rage_badge?
     last_total_times = results.published.order('activity.date DESC').limit(RAGE_BADGE_LIMIT).pluck(:total_time).compact
 
@@ -127,5 +124,10 @@ class Athlete < ApplicationRecord
   def remove_extra_spaces
     trimmed_name = name.gsub(/\s+/, ' ').gsub(/^ | $|(?<= ) /, '')
     self.name = trimmed_name unless name == trimmed_name
+  end
+
+  def refresh_home_trophies
+    trophies.joins(:badge).where(badge: { kind: :home_participating }).destroy_all
+    HomeBadgeAwardingJob.perform_later if event_id
   end
 end
