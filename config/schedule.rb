@@ -3,8 +3,9 @@
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
 
+set :bundle_command, '~/.rbenv/shims/bundle exec'
 set :path, File.join(ENV['APP_DEPLOY_PATH'], 'current')
-set :output, -> { '2>&1 | logger -t whenever_cron' }
+set :output, 'log/cron.log'
 set :chronic_options, hours24: true
 
 # Example:
