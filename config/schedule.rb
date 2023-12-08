@@ -46,11 +46,15 @@ every :sunday, at: '5' do
   rake 'processing:parkzhrun'
 end
 
-every :sunday, at: '5:10' do
+every :sunday, at: '5:05' do
   rake 'processing:awarding'
   rake 'processing:results'
 end
 
-every :sunday, at: '5:20' do
+every :sunday, at: '5:15' do
+  rake 'processing:home_badge_awarding'
+end
+
+every :sunday, at: '5:30' do
   rake 'sitemap:refresh'
 end
