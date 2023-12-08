@@ -8,21 +8,27 @@ require:
 # METRICS
 Metrics/AbcSize:
   Max: 35
+  Exclude:
+   - 'db/**/*'
 Metrics/CyclomaticComplexity:
   Max: 8
 Metrics/PerceivedComplexity:
   Max: 8
 Metrics/MethodLength:
   Max: 16
+  Exclude:
+   - 'db/**/*'
 Metrics/ClassLength:
   Exclude:
     - 'app/models/**/*'
+    - 'db/**/*'
 Metrics/BlockLength:
   Exclude:
     - 'app/admin/**/*'
     - 'app/views/admin/**/*'
     - 'lib/tasks/**/*'
     - 'spec/**/*'
+    - 'db/**/*'
 
 # STYLE
 Style/Documentation:
@@ -70,6 +76,6 @@ AllCops:
     - 'tmp/**/*'
     - 'bin/**/*'
     - 'config/**/*'
-    - 'db/**/*'
-    - '.pryrc'
+    - 'db/schema.rb'
+    - 'db/**/*' # TODO: remove this item
   NewCops: enable

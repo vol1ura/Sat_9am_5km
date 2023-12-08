@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class AddFlagsToResults < ActiveRecord::Migration[7.0]
-  FLAGS_COLUMNS = %i[personal_best first_run]
+  FLAGS_COLUMNS = %i[personal_best first_run].freeze
+
   def up
     FLAGS_COLUMNS.each do |column|
       add_column :results, column, :boolean, null: false, default: false

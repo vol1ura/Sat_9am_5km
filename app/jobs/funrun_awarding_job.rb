@@ -8,14 +8,11 @@ class FunrunAwardingJob < ApplicationJob
     activity = Activity.published.find activity_id
     badge = Badge.funrun_kind.find badge_id
 
-    activity.athletes.each do |athlete|
-      athlete.award_by Trophy.new(badge: badge, date: activity.date)
-      Rollbar.error(athlete.errors.inspect) unless athlete.save
-    end
-
-    activity.volunteers.each do |volunteer|
-      volunteer.athlete.award_by Trophy.new(badge: badge, date: activity.date)
-      Rollbar.error(volunteer.athlete.errors.inspect) unless volunteer.athlete.save
-    end
+    Athlete.where(id: activity.results.select(:athlete_id))
+      .or(Athlete.where(id: activity.volunteers.select(:athlete_id)))
+      .find_each do |athlete|
+        athlete.trophies.create badge: badge, date: activity.date
+        Rollbar.error(athlete.errors.inspect) unless athlete.valid?
+      end
   end
 end
