@@ -34,7 +34,7 @@ Rollbar.configure do |config|
 
   # Enable asynchronous reporting (uses girl_friday or Threading if girl_friday
   # is not installed)
-  config.use_async = true
+  # config.use_async = true
   # Supply your own async handler:
   # config.async_handler = Proc.new { |payload|
   #  Thread.new { Rollbar.process_from_async_handler(payload) }
@@ -46,7 +46,8 @@ Rollbar.configure do |config|
   # Enable delayed reporting (using Sidekiq)
   # config.use_sidekiq
   # You can supply custom Sidekiq options:
-  # config.use_sidekiq 'queue' => 'low'
+  config.use_sidekiq 'queue' => 'low'
+  config.async_json_payload = true
 
   # If your application runs behind a proxy server, you can set proxy parameters here.
   # If https_proxy is set in your environment, that will be used. Settings here have precedence.
