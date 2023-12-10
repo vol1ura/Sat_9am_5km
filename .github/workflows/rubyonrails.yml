@@ -56,7 +56,6 @@ jobs:
       COVERAGE: on
       BULLET_ENABLED: true
       APP_HOST: "test.ru"
-      APP_DOMAIN: "test.ru"
       ADMIN_EMAIL: "admin@test.ru"
       INFO_EMAIL: "info@test.ru"
       VK_TOKEN: ${{ secrets.VK_TOKEN }}
