@@ -30,7 +30,7 @@ module Sat9am5km
     config.action_mailer.smtp_settings = {
       **Rails.application.credentials.mailer,
       authentication: :plain,
-      domain: ENV.fetch('APP_DOMAIN'),
+      domain: ENV.fetch('APP_HOST'),
       enable_starttls_auto: true
     }
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"

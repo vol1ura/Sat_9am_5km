@@ -46,6 +46,10 @@ Style/HashSyntax:
   EnforcedShorthandSyntax: consistent
 Style/NumericLiterals:
   Enabled: false
+Style/FetchEnvVar:
+  AllowedVars:
+    - 'DEV_TELEGRAM_ID'
+    - 'VK_TOKEN'
 
 # LAYOUT
 Layout/LineLength:

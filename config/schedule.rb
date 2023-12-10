@@ -1,8 +1,3 @@
-# Use this file to easily define all of your cron jobs.
-#
-# It's helpful, but not entirely necessary to understand cron before proceeding.
-# http://en.wikipedia.org/wiki/Cron
-
 set :bundle_command, '~/.rbenv/shims/bundle exec'
 set :path, File.join(ENV['APP_DEPLOY_PATH'], 'current')
 set :output, 'log/cron.log'
@@ -16,14 +11,10 @@ set :chronic_options, hours24: true
 #   rake "some:great:rake:task"
 # end
 #
-# every 4.days do
-#   runner "AnotherModel.prune_old_records"
-# end
-
 # Learn more: http://github.com/javan/whenever
 
 every 1.day, at: '2' do
-  command "$HOME/db_backups/sendmail.sh #{ENV['ADMIN_EMAIL']}"
+  command "$HOME/db_backups/sendmail.sh #{ENV.fetch('ADMIN_EMAIL')}"
 end
 
 every :thursday, at: '19' do
@@ -39,7 +30,7 @@ every :saturday, at: '18' do
 end
 
 every :saturday, at: '23' do
-  command "$HOME/db_backups/weekly.sh #{ENV['INFO_EMAIL']}"
+  command "$HOME/db_backups/weekly.sh #{ENV.fetch('INFO_EMAIL')}"
 end
 
 every :sunday, at: '5' do

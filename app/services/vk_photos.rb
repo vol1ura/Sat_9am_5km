@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require 'net/http'
-
 class VkPhotos < ApplicationService
   API_QUERIES = {
-    owner_id: "-#{ENV.fetch('VK_GROUP_ID', 1)}",
-    access_token: ENV.fetch('VK_TOKEN', '').freeze,
+    owner_id: "-#{ENV.fetch('VK_GROUP_ID', 1)}".freeze,
+    access_token: ENV['VK_TOKEN'],
     v: '5.130',
   }.freeze
   ALBUMS_SET_SIZE = 3
