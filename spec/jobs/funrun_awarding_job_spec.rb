@@ -13,7 +13,7 @@ RSpec.describe FunrunAwardingJob do
     expect do
       described_class.perform_now(activity.id, badge.id)
     end
-      .to change(athlete.trophies, :count).by(1)
-      .and change(volunteer.trophies, :count).by(1)
+      .to change { athlete.trophies.exists?(badge:) }.to(true)
+      .and change { volunteer.trophies.exists?(badge:) }.to(true)
   end
 end
