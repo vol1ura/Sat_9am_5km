@@ -23,6 +23,7 @@ Country.find_each do |country|
     # Add all events:
     country.events.find_each do |event|
       add event_path(event.code_name), lastmod: event.updated_at, priority: 0.9
+      add volunteering_event_path(event.code_name)
     end
     #
     # Add activities
