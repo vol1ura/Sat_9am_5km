@@ -7,9 +7,13 @@ RSpec.describe '/admin/athletes' do
   end
 
   describe 'GET /admin/athletes' do
-    it 'renders a successful response' do
+    before do
       create_list(:athlete, 3)
+
       get admin_athletes_url
+    end
+
+    it 'renders a successful response' do
       expect(response).to be_successful
     end
   end
@@ -31,11 +35,15 @@ RSpec.describe '/admin/athletes' do
   end
 
   describe 'GET /admin/athletes/find_duplicates' do
-    it 'renders a successful response' do
+    before do
       create(:athlete, name: 'Doe JOHN', parkrun_code: nil)
       create(:athlete, name: 'John Doe', parkrun_code: nil)
       create(:athlete, name: 'John Doe'.swapcase, fiveverst_code: nil)
+
       get admin_athletes_url(scope: :duplicates)
+    end
+
+    it 'renders a successful response' do
       expect(response).to be_successful
       expect(response.body).to include 'John Doe', 'Doe JOHN'
     end
@@ -45,6 +53,7 @@ RSpec.describe '/admin/athletes' do
     before do
       user.admin!
       Bullet.unused_eager_loading_enable = false
+
       post batch_action_admin_athletes_url, params: batch_params
     end
 
@@ -114,6 +123,7 @@ RSpec.describe '/admin/athletes' do
   describe 'DELETE /admin/athletes/1' do
     before do
       user.admin!
+
       delete admin_athlete_url(athlete)
     end
 

@@ -65,9 +65,11 @@ ru:
         parkzhrun_code: parkzhrun ID
         gender: пол
         club: клуб
-        event: 'домашний забег'
+        event: домашний забег
         male: мужчина
         user: пользователь
+        registered: зарег.
+        id_info: Инфа по ID
       activity:
         date: дата
         published: опубликован?
@@ -586,7 +588,7 @@ ru:
       description: 'Таблица участников и статистика по клубу %{club}'
   events:
     show:
-      title: 'Парковые забеги в %{event}'
+      title: 'Парковые забеги | %{event}'
       our_contacts: Наши контакты
       results: Результаты
       no_results_disclaimer: Пока ещё тут нет загруженных и опубликованных результатов.

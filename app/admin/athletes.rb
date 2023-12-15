@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Athlete do
-  includes :user, :club, :event
+  includes :club, :event
 
   permit_params :parkrun_code, :fiveverst_code, :runpark_code, :name, :male, :user_id, :club_id, :event_id
 
@@ -31,7 +31,7 @@ ActiveAdmin.register Athlete do
     column :gender
     column :club
     column :event
-    column :user
+    column(:registered) { |a| a.user_id.present? }
     actions
   end
 
