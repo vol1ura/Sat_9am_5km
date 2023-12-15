@@ -65,9 +65,11 @@ rs:
         parkzhrun_code: parkzhrun ID
         gender: pol
         club: klub
-        event: 'domaće trčanje'
+        event: domaće trčanje
         male: muškarac
         user: korisnik
+        registered: registered
+        id_info: ID info
       activity:
         date: datum
         published: objavljeno?
@@ -585,7 +587,7 @@ rs:
       description: 'Table of participants and statistics for the club %{club}'
   events:
     show:
-      title: 'Park trčanje na %{event}'
+      title: 'Park trčanje | %{event}'
       our_contacts: Naši kontakti
       results: Rezultati
       no_results_disclaimer: Ovde još nema preuzetih ili objavljenih rezultata.

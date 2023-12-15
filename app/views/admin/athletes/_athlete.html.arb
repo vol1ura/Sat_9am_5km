@@ -9,8 +9,12 @@ attributes_table_for athlete do
   row :gender
   row :club
   row :event
-  row :user
-  row('сайт 🌳') { |a| athlete_external_link(a) }
+  if current_user.admin?
+    row :user
+  else
+    row(:registered) { |a| a.user_id.present? }
+  end
+  row(:id_info) { |a| athlete_external_link(a) }
 end
 
 results = athlete.results.includes(activity: :event).order('activities.date DESC')
