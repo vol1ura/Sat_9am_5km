@@ -601,3 +601,10 @@ rs:
       about_volunteers_html: 'Svi događaji su besplatni i organizovani od strane volontera. <a href="%{roster_link}">Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu</a>.'
       about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Registrujte se</a> u našem botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
       event_place: Mesto događaja
+    volunteering:
+      title: График волонтёрств | %{event}
+      description: 'Информация о волонтёрстве. Таблица с графиком волонтёрств и обязательными позициями для забега "%{event}".'
+      main_title: График волонтёрств
+      main_page: Main
+      role: Role
+      volunteer: Volunteer

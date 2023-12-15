@@ -1,16 +1,19 @@
+<% head_info :title, t('.title', event: @event.name) %>
+<% head_info :description, t('.description', event: @event.name) %>
+
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <%= link_to 'Главная', root_path %>
+      <%= link_to t('.main_page'), root_path %>
     </li>
     <li class="breadcrumb-item">
       <%= link_to @event.name, event_path(@event.code_name) %>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">График волонтёрств</li>
+    <li class="breadcrumb-item active" aria-current="page"><%= t '.main_title' %></li>
   </ol>
 </nav>
 
-<h1>График волонтёрств</h1>
+<h1><%= t '.main_title' %></h1>
 
 <p>
   Мы будем очень признательны вам, если вы сможете оказать нам волонтёрскую помощь. Вы можете выбрать для себя
@@ -42,8 +45,8 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Роль</th>
-            <th>Волонтёр</th>
+            <th><%= t '.role' %></th>
+            <th><%= t '.volunteer' %></th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
