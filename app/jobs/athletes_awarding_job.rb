@@ -52,7 +52,7 @@ class AthletesAwardingJob < ApplicationJob
 
     award_by_record_badge!(record_badge, best_result)
   rescue StandardError => e
-    Rollbar.error e
+    Rollbar.error e, activity_id: @activity.id
   end
   # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
@@ -73,7 +73,7 @@ class AthletesAwardingJob < ApplicationJob
 
     rage_badge_awarding!(athlete) if badge_type == 'result'
   rescue StandardError => e
-    Rollbar.error e
+    Rollbar.error e, activity_id: @activity.id, athlete_id: athlete.id
   end
 
   def activity_date

@@ -1,10 +1,6 @@
 Rollbar.configure do |config|
-  # Without configuration, Rollbar is enabled in all environments.
-  # To disable in specific environments, set config.enabled=false.
-
   config.access_token = ENV['ROLLBAR_ACCESS_TOKEN']
 
-  # Here we'll disable in 'test' and 'development':
   config.enabled = false unless Rails.env.production?
 
   # By default, Rollbar will try to call the `current_user` controller method
@@ -12,10 +8,8 @@ Rollbar.configure do |config|
   # method to fetch this property. To customize:
   # config.person_method = "my_current_user"
   # config.person_id_method = "my_id"
-
-  # Additionally, you may specify the following:
-  # config.person_username_method = "username"
-  # config.person_email_method = "email"
+  config.person_username_method = 'last_name'
+  config.person_email_method = 'email'
 
   # If you want to attach custom data to all exception and message reports,
   # provide a lambda like the following. It should return a hash.
@@ -27,13 +21,15 @@ Rollbar.configure do |config|
   # via the rollbar interface.
   # Valid levels: 'critical', 'error', 'warning', 'info', 'debug', 'ignore'
   # 'ignore' will cause the exception to not be reported at all.
-  # config.exception_level_filters.merge!('MyCriticalException' => 'critical')
+  config.exception_level_filters.merge!(
+    'ActiveRecord::RecordNotFound' => 'ignore',
+    'ActionController::RoutingError' => 'ignore'
+  )
   #
   # You can also specify a callable, which will be called with the exception instance.
   # config.exception_level_filters.merge!('MyCriticalException' => lambda { |e| 'critical' })
 
-  # Enable asynchronous reporting (uses girl_friday or Threading if girl_friday
-  # is not installed)
+  # Enable asynchronous reporting (uses girl_friday or Threading if girl_friday is not installed)
   # config.use_async = true
   # Supply your own async handler:
   # config.async_handler = Proc.new { |payload|

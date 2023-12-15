@@ -11,7 +11,7 @@ module Telegram
         def call
           notify(@user.telegram_id)
         rescue StandardError => e
-          Rollbar.error e
+          Rollbar.error e, user_id: @user.id
         end
 
         private

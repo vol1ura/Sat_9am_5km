@@ -13,7 +13,7 @@ module Telegram
 
           notify(telegram_id, disable_web_page_preview: true)
         rescue StandardError => e
-          Rollbar.error e
+          Rollbar.error e, telegram_id: telegram_id, trophy_id: @trophy.id
         end
 
         private

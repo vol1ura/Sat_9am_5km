@@ -19,7 +19,7 @@ class AthleteReuniter < ApplicationService
     ClearCache.call
     true
   rescue StandardError => e
-    Rollbar.error e
+    Rollbar.error e, ids: @ids.inspect
     false
   end
 
