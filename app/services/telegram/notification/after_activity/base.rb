@@ -13,7 +13,7 @@ module Telegram
 
           @entity.update!(informed: true) if notify(telegram_id, disable_web_page_preview: true)
         rescue StandardError => e
-          Rollbar.error e
+          Rollbar.error e, telegram_id: telegram_id, entity_id: @entity.id, entity_class: @entity.class
         end
 
         private

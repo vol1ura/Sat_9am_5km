@@ -28,7 +28,7 @@ class AthleteFinder < ApplicationService
     name_element = parsed_data.xpath(NAME_PATH.dig(@code_type, :xpath))
     name_element.text.split(' - ').first
   rescue StandardError => e
-    Rollbar.error e
+    Rollbar.error e, code: @code
     nil
   end
 

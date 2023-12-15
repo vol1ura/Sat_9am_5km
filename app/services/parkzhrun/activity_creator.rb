@@ -47,7 +47,7 @@ module Parkzhrun
           athlete: AthleteFinder.call(result['volunteer_id']),
           activity: activity,
         )
-        Rollbar.warn "Can't add volunteer to Parkzhrun activity #{activity.id}" unless volunteer.save
+        Rollbar.warn("Can't add volunteer to Parkzhrun activity", activity_id: activity.id) unless volunteer.save
       end
     end
   end
