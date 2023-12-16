@@ -54,7 +54,7 @@
           <li class="nav-item">
             <%= link_to t('.recent_results'), activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" %>
           </li>
-          <% if top_level_domain == :ru %>
+          <% if %i[ru by].include?(top_level_domain) %>
             <li class="nav-item">
               <%= link_to '1 января', page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" %>
             </li>

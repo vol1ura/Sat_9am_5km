@@ -11,22 +11,15 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <tr>
-          <td><%= link_to 'Ангарские пруды', event_path('angarskie_prudy') %></td>
-          <td>10:00</td>
-        </tr>
-        <tr>
-          <td><%= link_to 'Кузьминки', event_path('kuzminki') %></td>
-          <td>10:00</td>
-        </tr>
-        <tr>
-          <td><%= link_to 'Кусково', event_path('kuskovo') %></td>
-          <td>10:00</td>
-        </tr>
-        <tr>
-          <td><%= link_to 'Олимпийская деревня', event_path('olimpiyskaya_derevnya') %></td>
-          <td>11:00</td>
-        </tr>
+        <% CSV.foreach(File.join(__dir__, 'additional_events.csv'), headers: true, header_converters: :symbol) do |row| %>
+          <% next unless row[:domain] == top_level_domain.to_s %>
+
+          <% event = Event.find_by!(code_name: row[:event_code]) %>
+          <tr>
+            <td><%= link_to event.name, event_path(event.code_name) %></td>
+            <td><%= row[:time] %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
