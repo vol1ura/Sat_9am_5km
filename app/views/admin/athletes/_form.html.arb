@@ -15,7 +15,7 @@ active_admin_form_for [:admin, resource] do |f|
 
   f.inputs do
     hidden_field :result_id, value: params[:result_id] if params[:result_id].present?
-    input :name
+    input :name, input_html: { disabled: f.object.user_id.present? }
     input :parkrun_code
     input :fiveverst_code
     input :runpark_code

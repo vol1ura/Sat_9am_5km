@@ -46,7 +46,7 @@ ActiveAdmin.register Athlete do
 
   controller do
     def destroy
-      if resource.user.present?
+      if resource.user_id
         flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_registered')
       elsif resource.results.exists? || resource.volunteering.exists?
         flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_participant')

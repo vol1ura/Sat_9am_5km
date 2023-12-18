@@ -4,7 +4,7 @@ module API
   module Internal
     class AthletesController < ApplicationController
       def update
-        @athlete = Athlete.joins(:user).where(user: { telegram_id: params[:telegram_id] }).take!
+        @athlete = Athlete.joins(:user).find_by!(user: { telegram_id: params[:telegram_id] })
 
         if @athlete.update(athlete_params)
           head :ok
