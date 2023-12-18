@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     namespace :api, defaults: { format: :json } do
       namespace :internal do
         resource :user, only: %i[create update]
-        post 'badges/refresh_home_badges', to: 'badges#refresh_home_badges'
+        resource :athlete, only: :update
       end
       namespace :parkzhrun do
         resources :athletes, only: :update

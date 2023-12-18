@@ -12,7 +12,7 @@ module API
           link_user_to_athlete!
         end
 
-        render json: { message: 'Регистрация успешно завершена.' }
+        head :created
       end
 
       def update
@@ -22,7 +22,7 @@ module API
           link_user_to_athlete!
         end
 
-        render json: { message: 'Участник успешно привязан.' }
+        head :ok
       end
 
       rescue_from ActiveRecord::RecordInvalid do |e|
