@@ -13,12 +13,12 @@ RSpec.describe HomeBadgeAwardingJob do
   end
 
   it 'performs immediately' do
-    expect { described_class.perform_later }.to have_enqueued_job.on_queue('low').at(:no_wait)
+    expect { described_class.perform_later(athlete.id) }.to have_enqueued_job.on_queue('low').at(:no_wait)
   end
 
   it 'creates home event trophies' do
     expect do
-      described_class.perform_now
+      described_class.perform_now(athlete.id)
     end.to change { athlete.trophies.exists?(badge_id: 39) }.to(true)
       .and change { athlete.trophies.exists?(badge_id: 42) }.to(true)
   end

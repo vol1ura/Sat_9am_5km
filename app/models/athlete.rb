@@ -128,6 +128,6 @@ class Athlete < ApplicationRecord
 
   def refresh_home_trophies
     trophies.joins(:badge).where(badge: { kind: :home_participating }).destroy_all
-    HomeBadgeAwardingJob.perform_later if event_id
+    HomeBadgeAwardingJob.perform_later(id) if event_id
   end
 end
