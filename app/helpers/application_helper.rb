@@ -71,8 +71,4 @@ module ApplicationHelper
   def external_link_to(title = nil, options = nil, html_options = {}, &)
     link_to title, options, html_options.merge(target: '_blank', rel: 'noopener'), &
   end
-
-  def full_name(user)
-    "#{user.first_name} #{user.last_name}"
-  end
 end
