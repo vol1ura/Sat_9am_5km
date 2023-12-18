@@ -18,11 +18,23 @@ class User < ApplicationRecord
 
   enum role: { admin: 0 }
 
+  before_save :update_athlete_name, if: proc { will_save_change_to_first_name? || will_save_change_to_last_name? }
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[email first_name last_name role telegram_user]
   end
 
   def volunteering_position_permission
     permissions.find_by(subject_class: 'VolunteeringPosition', action: %w[manage update])
+  end
+
+  def full_name
+    "#{first_name} #{last_name.upcase}"
+  end
+
+  private
+
+  def update_athlete_name
+    athlete.name = full_name if athlete
   end
 end

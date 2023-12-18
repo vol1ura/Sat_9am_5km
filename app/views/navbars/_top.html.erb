@@ -79,7 +79,17 @@
           </li>
           <% if current_user %>
             <li class="nav-item dropdown mt-3">
-              <%= link_to full_name(current_user), '#', class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' %>
+              <%=
+                link_to(
+                  current_user.full_name,
+                  '#',
+                  class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}",
+                  id: 'dataDropdown',
+                  role: 'button',
+                  'data-bs-toggle' => 'dropdown',
+                  'aria-expanded' => 'false'
+                )
+              %>
               <ul class="dropdown-menu" aria-labelledby="dataDropdown">
                 <% if athlete = current_user.athlete %>
                   <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
