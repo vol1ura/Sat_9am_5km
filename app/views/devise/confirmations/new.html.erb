@@ -1,3 +1,5 @@
+<% head_info :title, 'Выслать инструкции для подтверждения e-mail' %>
+<% head_info :description, 'Получение инструкции для подтверждения e-mail' %>
 <h2>Выслать инструкции для подтверждения e-mail</h2>
 
 <%= form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'row' }, data: { turbo: false } do |f| %>
