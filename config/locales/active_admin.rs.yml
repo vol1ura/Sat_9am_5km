@@ -1,5 +1,10 @@
 rs:
   admin:
+    athletes:
+      results:
+        title: Published results
+      volunteering:
+        title: Published volunteering
     utilities:
       cache:
         clear_success: 'Keš uspešno očišćen!'

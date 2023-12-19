@@ -70,6 +70,8 @@ rs:
         user: korisnik
         registered: registered
         id_info: ID info
+        results: Results
+        volunteering: Volunteering
       activity:
         date: datum
         published: objavljeno?
@@ -149,24 +151,25 @@ rs:
           instagram: instagram
           facebook: fejsbuk
           strava: strava
-          map_link: 'link za mapu i pravac'
+          map_link: link za mapu i pravac
           parking: parking
       badge:
         name: naziv
-        conditions: 'uslovi za dobijanje'
-        picture_link: 'link za sliku'
-        received_date: 'datum prijema'
+        conditions: uslovi za dobijanje
+        picture_link: link za sliku
+        received_date: datum prijema
         kind: vrsta
         kinds:
           funrun: zabavno trčanje
           participating: učesnik
+          home_participating: better at home
           tourist: turista
           breaking: breaking
-          record: 'rekord staze'
-          rage: 'rang'
+          record: rekord staze
+          rage: rang
       trophy:
         athlete: sportista
-        date: 'datum prijema'
+        date: datum prijema
         info: dod. informacije
         updated_at: ažuriran
 
@@ -471,6 +474,9 @@ rs:
     without_token: WITHOUT TOKEN (create)
     without_name: WITHOUT NAME
     open_link: open
+    gender: Pol
+    man: Čovek
+    woman: Žena
   country:
     ru: Rusija
     by: Belorusija

@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+table_for volunteering do
+  column('Забег') { |v| link_to human_activity_name(v.activity), admin_activity_path(v.activity) }
+  column('Роль') { |v| human_volunteer_role v.role }
+end

@@ -1,5 +1,10 @@
 ru:
   admin:
+    athletes:
+      results:
+        title: Опубликованные результаты
+      volunteering:
+        title: Опубликованные волонтёрства
     utilities:
       cache:
         clear_success: 'Кэш успешно очищен!'

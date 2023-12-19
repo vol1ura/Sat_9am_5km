@@ -15,23 +15,6 @@ attributes_table_for athlete do
     row(:registered) { |a| a.user_id.present? }
   end
   row(:id_info) { |a| athlete_external_link(a) }
-end
-
-results = athlete.results.includes(activity: :event).order('activities.date DESC')
-
-panel "Забеги участника (всего #{results.size})" do
-  table_for results do
-    column('Забег') { |r| link_to human_activity_name(r.activity), admin_activity_path(r.activity) }
-    column :position
-    column('Результат') { |r| human_result_time r.total_time }
-  end
-end
-
-volunteering = athlete.volunteering.includes(activity: :event)
-
-panel "Волонтёрства участника (всего #{volunteering.size})" do
-  table_for volunteering do
-    column('Забег') { |v| link_to human_activity_name(v.activity), admin_activity_path(v.activity) }
-    column('Роль') { |v| human_volunteer_role v.role }
-  end
+  row(:results) { |a| link_to "смотреть таблицу (всего #{a.results.published.size})", results_admin_athlete_path(a) }
+  row(:volunteering) { |a| link_to "смотреть таблицу (всего #{a.volunteering.size})", volunteering_admin_athlete_path(a) }
 end
