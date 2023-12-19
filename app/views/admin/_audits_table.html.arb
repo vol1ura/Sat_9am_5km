@@ -5,6 +5,6 @@ table_for object.own_and_associated_audits.includes(:user, :auditable).reorder(c
   column :action
   column :audited_changes
   column :version
-  column(:user) { |a| link_to full_name(a.user), admin_user_path(a.user) if a.user }
+  column(:user) { |a| link_to a.user.full_name, admin_user_path(a.user) if a.user }
   column :created_at
 end
