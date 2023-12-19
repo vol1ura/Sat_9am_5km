@@ -70,6 +70,8 @@ ru:
         user: пользователь
         registered: зарег.
         id_info: Инфа по ID
+        results: Забеги
+        volunteering: Волонтёрства
       activity:
         date: дата
         published: опубликован?
@@ -149,24 +151,25 @@ ru:
           instagram: инстаграм
           facebook: фейсбук
           strava: страва
-          map_link: 'карта и схема проезда'
+          map_link: карта и схема проезда
           parking: парковка
       badge:
         name: название
-        conditions: 'условия получения'
-        picture_link: 'путь к картинке'
-        received_date: 'дата получения'
+        conditions: условия получения
+        picture_link: путь к картинке
+        received_date: дата получения
         kind: тип
         kinds:
           funrun: фан-ран
           participating: участник
+          home_participating: лучше дома
           tourist: турист
-          breaking: breaking
-          record: 'рекорд трассы'
-          rage: 'раж'
+          breaking: прорыв
+          record: рекорд трассы
+          rage: раж
       trophy:
         athlete: участник
-        date: 'дата получения'
+        date: дата получения
         info: доп.информация
         updated_at: обновлён
 
@@ -472,6 +475,9 @@ ru:
     without_token: БЕЗ ТОКЕНА (создать)
     without_name: БЕЗ ИМЕНИ
     open_link: открыть
+    gender: Пол
+    man: Мужчина
+    woman: Женщина
   country:
     ru: Россия
     by: Беларусь

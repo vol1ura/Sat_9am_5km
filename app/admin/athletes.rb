@@ -15,7 +15,12 @@ ActiveAdmin.register Athlete do
   filter :parkrun_code
   filter :fiveverst_code
   filter :runpark_code
-  filter :male, as: :select, collection: { men: true, women: false }
+  filter(
+    :male,
+    as: :select,
+    label: I18n.t('common.gender'),
+    collection: { I18n.t('common.man') => true, I18n.t('common.woman') => false },
+  )
   filter :club
   filter :event
   filter :created_at
@@ -74,5 +79,15 @@ ActiveAdmin.register Athlete do
     collection = batch_action_collection.where(id: ids)
     collection.update_all(male: inputs[:gender] == 'мужчина') # rubocop:disable Rails/SkipsModelValidations
     redirect_to collection_path, notice: I18n.t('active_admin.athletes.successful_gender_set')
+  end
+
+  member_action :results, method: :get do
+    @results = resource.results.published.includes(activity: :event).order('activity.date DESC')
+    @page_title = t '.title'
+  end
+
+  member_action :volunteering, method: :get do
+    @volunteering = resource.volunteering.includes(activity: :event)
+    @page_title = t '.title'
   end
 end
