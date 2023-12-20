@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
-
-gem 'importmap-rails', '~> 1.2'
-gem 'sassc-rails'
 
 gem 'rails', '~> 7.0.4'
 
@@ -14,20 +10,24 @@ gem 'activeadmin'
 gem 'activeadmin_quill_editor'
 gem 'audited'
 gem 'barby', require: false
+gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.3.1'
 gem 'cancancan', '~> 3.4'
 gem 'dalli'
 gem 'devise', '~> 4.8'
 gem 'devise-i18n'
 gem 'hotwire-rails'
+gem 'importmap-rails', '~> 1.2'
 gem 'jbuilder'
 gem 'nokogiri'
 gem 'pg', '~> 1.4'
 gem 'puma'
 gem 'rails_performance'
+gem 'sassc-rails'
 gem 'sidekiq'
 gem 'sitemap_generator'
 gem 'sprockets-rails'
+gem 'turbo-rails'
 gem 'whenever', require: false
 
 gem 'hiredis-client'
