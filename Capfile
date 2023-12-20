@@ -30,7 +30,6 @@ require 'capistrano/sitemap_generator'
 require 'whenever/capistrano'
 
 install_plugin Capistrano::Puma
-install_plugin Capistrano::Puma::Nginx
 install_plugin Capistrano::Puma::Systemd
 install_plugin Capistrano::Sidekiq
 install_plugin Capistrano::Sidekiq::Systemd

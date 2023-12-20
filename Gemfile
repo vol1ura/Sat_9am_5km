@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.2.2'
 
-gem 'rails', '~> 7.0.4'
+gem 'rails', '~> 7.1.2'
 
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
@@ -65,7 +65,7 @@ group :development do
 
   # Deploy
   gem 'capistrano', '~> 3.17', require: false
-  gem 'capistrano3-puma', require: false
+  gem 'capistrano3-puma', '6.0.0.beta.1', require: false
   gem 'capistrano-rails', '~> 1.6', require: false
   gem 'capistrano-rbenv', '~> 2.2', require: false
   gem 'capistrano-sidekiq', '~> 2.3', require: false
