@@ -20,10 +20,12 @@ module Telegram
         @routes ||= Rails.application.routes.url_helpers
       end
 
+      # :nocov:
       # Notification message
       def text
         raise NotImplementedError, "Method 'text' must be implemented in the final class"
       end
+      # :nocov:
     end
   end
 end
