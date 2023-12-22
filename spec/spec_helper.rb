@@ -16,6 +16,7 @@
 if ENV['COVERAGE'] == 'on'
   require 'simplecov'
   SimpleCov.start 'rails' do
+    enable_coverage :branch
     add_group 'ActiveAdmin', 'app/admin'
     add_group 'Services', 'app/services'
     add_filter '/spec/'
