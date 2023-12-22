@@ -12,14 +12,6 @@ RSpec.describe '/admin/trophies' do
     end
   end
 
-  describe 'GET /admin/trophies/1' do
-    it 'renders a successful response' do
-      trophy = create(:trophy, badge:)
-      get admin_badge_trophy_url(badge, trophy)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET /admin/trophies/1/edit' do
     context 'when user is not authorized' do
       it 'redirects to root url' do

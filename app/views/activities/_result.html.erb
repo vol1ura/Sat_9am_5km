@@ -3,7 +3,7 @@
   <td>
     <% if result.athlete_id %>
       <div>
-        <%= link_to result.athlete.name.presence || t('athletes.show.nobody'), result.athlete, class: 'athlete-link' %>
+        <%= link_to result.athlete.name.presence || t('common.nobody'), result.athlete, class: 'athlete-link' %>
       </div>
       <div class="athlete-details fw-lighter">
         <%= t '.total_runs_html', count: @results_count[result.athlete_id] %>
@@ -13,7 +13,7 @@
         <% end %>
       </div>
     <% else %>
-      <%= t 'athletes.show.nobody' %>
+      <%= t 'common.nobody' %>
     <% end %>
   </td>
   <td class="align-middle text-end">
