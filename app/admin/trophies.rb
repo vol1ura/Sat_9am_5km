@@ -5,6 +5,8 @@ ActiveAdmin.register Trophy do
 
   includes :athlete
 
+  actions :all, except: :show
+
   permit_params :badge_id, :athlete_id, :date
 
   config.filters = false

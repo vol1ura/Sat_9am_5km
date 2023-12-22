@@ -3,6 +3,8 @@
 ActiveAdmin.register Permission do
   belongs_to :user
 
+  actions :all, except: :show
+
   config.filters = false
 
   permit_params :event_id, :action, :subject_class, :subject_id
