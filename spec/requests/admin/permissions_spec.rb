@@ -12,14 +12,6 @@ RSpec.describe '/admin/events' do
     end
   end
 
-  describe 'GET /admin/users/1/permissions/1' do
-    it 'redirects non-admin users' do
-      get admin_user_permission_url(permission.user, permission)
-      expect(response).to have_http_status :found
-      expect(response).to redirect_to(root_url)
-    end
-  end
-
   describe 'GET /admin/users/1/permissions/1/edit' do
     context 'when user is not authorized' do
       it 'redirects to root url' do

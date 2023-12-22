@@ -473,6 +473,7 @@ rs:
   common:
     without_token: WITHOUT TOKEN (create)
     without_name: WITHOUT NAME
+    nobody: UNKNOWN
     open_link: open
     gender: Pol
     man: Čovek
@@ -559,7 +560,7 @@ rs:
       women: Žene
   athletes:
     show:
-      nobody: UNKNOWN
+      description: 'Athlete profile %{athlete_name}: results, statistics and volunteering'
   activities:
     index:
       description: Recent run results on S95 events

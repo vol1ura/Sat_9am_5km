@@ -1,5 +1,9 @@
+<% athlete_name = @athlete.name || t('common.nobody') %>
+<% head_info :title, athlete_name %>
+<% head_info :description, t('.description', athlete_name:) %>
+
 <h1>
-  <%= @athlete.name || t('.nobody') %>
+  <%= athlete_name %>
   <button type="button" class="btn btn-outline-primary btn-light float-end float-md-none ms-md-3 mb-2" data-bs-toggle="modal" data-bs-target="#barcodeModal">
     <i class="bi bi-upc-scan"></i>
   </button>

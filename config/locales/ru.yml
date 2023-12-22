@@ -474,6 +474,7 @@ ru:
   common:
     without_token: БЕЗ ТОКЕНА (создать)
     without_name: БЕЗ ИМЕНИ
+    nobody: НЕИЗВЕСТНЫЙ
     open_link: открыть
     gender: Пол
     man: Мужчина
@@ -560,7 +561,7 @@ ru:
       women: Женщины
   athletes:
     show:
-      nobody: НЕИЗВЕСТНЫЙ
+      description: 'Профиль участника %{athlete_name}: результаты, статистика и волонтёрства'
   activities:
     index:
       description: Недавние результаты забегов S95
