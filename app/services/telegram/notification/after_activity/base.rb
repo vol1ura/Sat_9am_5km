@@ -20,8 +20,8 @@ module Telegram
 
         def text
           <<~TEXT.squish
-            С итоговым протоколом вы можете ознакомиться на [нашем сайте](#{routes.activity_url(activity)}).
-            Все ваши результаты и статистика доступны по [ссылке](#{routes.athlete_url(@entity.athlete)}).
+            С итоговым протоколом вы можете ознакомиться на [нашем сайте](#{activity_url(activity, host:)}).
+            Все ваши результаты и статистика доступны по [ссылке](#{athlete_url(@entity.athlete, host:)}).
           TEXT
         end
 
@@ -31,6 +31,10 @@ module Telegram
 
         def activity
           @activity ||= @entity.activity
+        end
+
+        def host
+          @host ||= "s95.#{activity.event.country.code}"
         end
       end
     end

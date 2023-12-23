@@ -9,6 +9,8 @@ module Telegram
         end
 
         def call
+          return unless @user.telegram_id
+
           notify(@user.telegram_id)
         rescue StandardError => e
           Rollbar.error e, user_id: @user.id
@@ -17,9 +19,12 @@ module Telegram
         private
 
         def text
+          activity = @user.athlete.results.first.activity
+          host = "s95.#{activity.event.country.code}"
+
           <<~TEXT
             Привет, #{@user.first_name}.
-            В прошлую субботу вы впервые [посетили пробежку S95](#{routes.activity_url(@user.athlete.results.first.activity)}).
+            В прошлую субботу вы впервые [посетили пробежку S95](#{activity_url(activity, host:)}).
             Надеемся, что вам всё понравилось и вы придёте завтра вновь. \
             Напоминаем, что наши забеги проводятся еженедельно независимо от времени года и погоды. \
             Вы можете пробежать, пройти или помочь с организацией.

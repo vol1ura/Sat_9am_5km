@@ -23,7 +23,11 @@ module Telegram
         end
 
         def text
-          "Все ваши награды и результаты можно посмотреть [тут](#{routes.athlete_url(athlete)})."
+          "Все ваши награды и результаты можно посмотреть [тут](#{athlete_url(athlete, host:)})."
+        end
+
+        def host
+          @host ||= "s95.#{athlete.event&.country&.code || 'ru'}"
         end
       end
     end

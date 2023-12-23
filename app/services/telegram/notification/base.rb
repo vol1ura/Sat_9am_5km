@@ -3,6 +3,8 @@
 module Telegram
   module Notification
     class Base < ApplicationService
+      include Rails.application.routes.url_helpers
+
       private
 
       def notify(telegram_id, **)
@@ -14,10 +16,6 @@ module Telegram
           reply_markup: Telegram::Bot::MAIN_KEYBOARD,
           **,
         )
-      end
-
-      def routes
-        @routes ||= Rails.application.routes.url_helpers
       end
 
       # :nocov:
