@@ -9,7 +9,7 @@ module Telegram
         def text
           <<~TEXT
             Привет, #{athlete.user.first_name}.
-            Через неделю истекает срок действия вашей [награды](#{routes.badge_url(@trophy.badge)}) за скорость.
+            Через неделю истекает срок действия вашей [награды](#{badge_url(@trophy.badge, host:)}) за скорость.
             Попробуйте удержать её!
 
             #{super}
