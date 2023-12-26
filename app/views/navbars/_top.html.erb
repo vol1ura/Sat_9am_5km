@@ -54,11 +54,9 @@
           <li class="nav-item">
             <%= link_to t('.recent_results'), activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" %>
           </li>
-          <% if %i[ru by].include?(top_level_domain) %>
-            <li class="nav-item">
-              <%= link_to '1 января', page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" %>
-            </li>
-          <% end %>
+          <li class="nav-item">
+            <%= link_to t('.1_january'), page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" %>
+          </li>
           <li class="nav-item">
             <%= link_to t('.club_ratings'), clubs_path, class: "nav-link #{'active' if params[:controller] == 'clubs'}" %>
           </li>
@@ -94,7 +92,7 @@
                 <% if athlete = current_user.athlete %>
                   <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
                 <% end %>
-                <li><%#= link_to 'Настройки', edit_user_registration_path, class: 'dropdown-item' %></li>
+                <!--<li><%#= link_to 'Настройки', edit_user_registration_path, class: 'dropdown-item' %></li>-->
                 <% if current_user.admin? || Permission.exists?(user: current_user) %>
                   <li><%= link_to t('.admin_panel'), admin_root_path, class: 'dropdown-item' %></li>
                 <% end %>

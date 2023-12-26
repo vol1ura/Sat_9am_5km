@@ -1,13 +1,13 @@
-<% head_info :title, t('.title') %>
+<% head_info :title, t('.title_html') %>
 <% head_info :description, t('.description') %>
-<h1>Дополнительные старты 1&nbsp;января&nbsp;2024&nbsp;года</h1>
+<h1><%= t '.title_html' %></h1>
 <div class="row">
   <div class="col-md-6 offset-md-2">
     <table class="table">
       <thead>
         <tr>
-          <td>Мероприятие</td>
-          <td>Время</td>
+          <td><%= t 'activities.index.event' %></td>
+          <td><%= t 'activities.index.date' %></td>
         </tr>
       </thead>
       <tbody class="table-group-divider">
