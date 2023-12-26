@@ -487,6 +487,7 @@ rs:
       events: Događaji
       results: Rezultati
       recent_results: Skorašnji rezultati
+      1_january: 1 januar
       club_ratings: Klubovi
       top_results: Najbolji rezultati
       badges: Bedževi
@@ -545,7 +546,7 @@ rs:
     support:
       description: 'You can support the Sat9am5km project in various ways: by volunteering, donating, or participating in the development of this website'
     additional-events:
-      title: Additional events January 1
+      title_html: 'Additional events 1&nbsp;januar&nbsp;2024'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
   results:
     table:

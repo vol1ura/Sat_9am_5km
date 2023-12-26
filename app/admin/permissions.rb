@@ -3,6 +3,8 @@
 ActiveAdmin.register Permission do
   belongs_to :user
 
+  includes :event
+
   actions :all, except: :show
 
   config.filters = false
