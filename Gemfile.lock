@@ -109,7 +109,8 @@ GEM
     bootstrap (5.3.2)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
-    brakeman (6.1.0)
+    brakeman (6.1.1)
+      racc
     browser (5.3.1)
     builder (3.2.4)
     bullet (7.1.4)
@@ -241,7 +242,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
-    net-imap (0.4.8)
+    net-imap (0.4.9)
       date
       net-protocol
     net-pop (0.1.2)
