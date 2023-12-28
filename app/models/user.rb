@@ -21,7 +21,7 @@ class User < ApplicationRecord
   before_save :update_athlete_name, if: proc { will_save_change_to_first_name? || will_save_change_to_last_name? }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[email first_name last_name role telegram_user]
+    %w[email first_name last_name telegram_user]
   end
 
   def volunteering_position_permission
