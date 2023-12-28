@@ -13,10 +13,7 @@ class Event < ApplicationRecord
   default_scope { order(:visible_order, :name) }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[
-      active code_name country_id created_at description id main_picture_link
-      name place slogan town updated_at visible_order
-    ]
+    %w[code_name country_id name place town]
   end
 
   def self.authorized_for(user)
