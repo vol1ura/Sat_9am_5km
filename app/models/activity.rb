@@ -22,7 +22,7 @@ class Activity < ApplicationRecord
   delegate :name, to: :event, prefix: true
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[date event_id published]
+    %w[date event_id]
   end
 
   def volunteers_roster
