@@ -4,12 +4,13 @@
 %>
 <% if @badge.record_kind? %>
   <% trophy.info['data'].each do |record| %>
+    <% next unless (event_name = Event.unscope(:order).joins(:country).where(id: record['event_id'], country: { code: top_level_domain }).pluck(:name).first) %>
     <tr>
       <td><%= link_to athlete.name, athlete %></td>
-      <td><%= Event.find(record['event_id']).name %></td>
-      <% record_result = Result.find(record['result_id']) %>
-      <td><%= human_result_time record_result.total_time %></td>
-      <td class="hidden-on-phone"><%= l record_result.date %></td>
+      <td><%= event_name %></td>
+      <% record_result = Result.joins(:activity).where(id: record['result_id']).select(:total_time, :date).take! %>
+      <td><%= human_result_time record_result[:total_time] %></td>
+      <td class="hidden-on-phone"><%= l record_result[:date] %></td>
       <td class="hidden-on-phone"><%= athlete.club&.name %></td>
     </tr>
   <% end %>
