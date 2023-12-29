@@ -4,7 +4,7 @@
 %>
 <% if @badge.record_kind? %>
   <% trophy.info['data'].each do |record| %>
-    <% next unless (event_name = Event.unscope(:order).joins(:country).where(id: record['event_id'], country: { code: top_level_domain }).pluck(:name).first) %>
+    <% next unless (event_name = Event.unscope(:order).in_country(top_level_domain).find_by(id: record['event_id'])&.name) %>
     <tr>
       <td><%= link_to athlete.name, athlete %></td>
       <td><%= event_name %></td>

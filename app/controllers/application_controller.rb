@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_country_events
-    @country_events = Event.joins(:country).where(country: { code: top_level_domain })
+    @country_events = Event.in_country(top_level_domain)
   end
 
   def top_level_domain
