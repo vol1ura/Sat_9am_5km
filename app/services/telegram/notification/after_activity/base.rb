@@ -34,7 +34,7 @@ module Telegram
         end
 
         def host
-          @host ||= "s95.#{activity.event.country.code}"
+          @host ||= activity.event.country.host
         end
       end
     end

@@ -20,7 +20,7 @@ module Telegram
 
         def text
           activity = @user.athlete.results.first.activity
-          host = "s95.#{activity.event.country.code}"
+          host = activity.event.country.host
 
           <<~TEXT
             Привет, #{@user.first_name}.

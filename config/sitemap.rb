@@ -1,5 +1,5 @@
 Country.find_each do |country|
-  SitemapGenerator::Sitemap.default_host = "https://s95.#{country.code}"
+  SitemapGenerator::Sitemap.default_host = "https://#{country.host}"
   SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/#{country.code}"
   SitemapGenerator::Sitemap.compress = false
 

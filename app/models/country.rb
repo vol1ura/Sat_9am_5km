@@ -10,4 +10,8 @@ class Country < ApplicationRecord
   def name
     I18n.t("country.#{code}")
   end
+
+  def host
+    "s95.#{code}"
+  end
 end
