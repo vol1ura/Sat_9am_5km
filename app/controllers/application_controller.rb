@@ -17,8 +17,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  rescue_from(ActionDispatch::Http::MimeNegotiation::InvalidType) { head :unsupported_media_type }
-
   private
 
   def switch_locale(&)
