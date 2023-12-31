@@ -1,0 +1,17 @@
+<% head_info :title, t('.top_volunteers') %>
+
+<h4><%= t '.top_volunteers' %></h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th><%= t '.name' %></th>
+      <th class="hidden-on-phone"><%= t '.club' %></th>
+      <th><%= t '.count' %></th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <%= render partial: 'volunteer', collection: @volunteers %>
+  </tbody>
+</table>

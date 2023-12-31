@@ -23,6 +23,7 @@
                 <li><%= link_to t('.recent_results'), activities_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.club_ratings'), clubs_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.top_results'), top_results_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.top_volunteers'), top_volunteers_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
               </ul>
             </li>
@@ -62,6 +63,9 @@
           </li>
           <li class="nav-item">
             <%= link_to t('.top_results'), top_results_path, class: "nav-link #{'active' if params[:controller] == 'results'}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to t('.top_volunteers'), top_volunteers_path, class: "nav-link #{'active' if params[:action] == 'top' && params[:controller] == 'volunteers'}" %>
           </li>
           <li class="nav-item">
             <%= link_to t('.badges'), badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" %>
