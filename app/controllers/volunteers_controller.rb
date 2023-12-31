@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VolunteersController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: :top
 
   def new
     @volunteer = Volunteer.new(activity_id: params[:activity_id], role: params[:role])
@@ -9,6 +9,10 @@ class VolunteersController < ApplicationController
   end
 
   def edit; end
+
+  def top
+    @volunteers = Volunteer.published.group(:athlete).order(Arel.sql('COUNT(*) DESC')).limit(50).count
+  end
 
   def create
     render(@volunteer.save ? 'cell_name' : 'edit')

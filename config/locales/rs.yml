@@ -490,6 +490,7 @@ rs:
       1_january: 1 januar
       club_ratings: Klubovi
       top_results: Najbolji rezultati
+      top_volunteers: Volunteers top
       badges: Bedževi
       rules: Pravila
       about: O nama
@@ -559,6 +560,12 @@ rs:
       top_results: Najbolji rezultati
       men: Muškarci
       women: Žene
+  volunteers:
+    top:
+      top_volunteers: Volunteers top
+      name: Ime
+      club: Klub
+      count: Volunteering
   athletes:
     show:
       description: 'Athlete profile %{athlete_name}: results, statistics and volunteering'

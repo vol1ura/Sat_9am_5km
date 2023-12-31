@@ -491,6 +491,7 @@ ru:
       1_january: 1 января
       club_ratings: Клубные рейтинги
       top_results: Лучшие результаты
+      top_volunteers: Топ волонтёров
       badges: Личные награды
       rules: Правила
       about: О нас
@@ -560,6 +561,12 @@ ru:
       top_results: Лучшие результаты
       men: Мужчины
       women: Женщины
+  volunteers:
+    top:
+      top_volunteers: Рейтинг волонтёров
+      name: Имя
+      club: Клуб
+      count: Волонтёрства
   athletes:
     show:
       description: 'Профиль участника %{athlete_name}: результаты, статистика и волонтёрства'
