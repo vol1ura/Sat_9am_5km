@@ -52,7 +52,7 @@ active_admin_form_for [:admin, resource] do |f|
 
   f.inputs 'Загрузите файлы со сканеров (только CSV)' do
     Activity::MAX_SCANNERS.times do |i|
-      input "scanner#{i}".to_sym, as: :file, label: "Файл со сканера #{i + 1}"
+      input "scanner#{i}", as: :file, label: "Файл со сканера #{i + 1}"
     end
   end
 
