@@ -32,7 +32,7 @@ ActiveAdmin.register Activity do
     if activity.valid?
       TimerParser.call(activity, params[:activity][:timer])
       Activity::MAX_SCANNERS.times do |scanner_number|
-        ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}".to_sym])
+        ScannerParser.call(activity, params[:activity]["scanner#{scanner_number}"])
       end
       flash[:notice] = t('.success_upload') if params[:activity][:timer] || params[:activity][:scanner0]
     end
