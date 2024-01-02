@@ -55,9 +55,9 @@
           <li class="nav-item">
             <%= link_to t('.recent_results'), activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" %>
           </li>
-          <li class="nav-item">
-            <%= link_to t('.1_january'), page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" %>
-          </li>
+          <!--<li class="nav-item">
+            <%#= link_to t('.1_january'), page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" %>
+          </li>-->
           <li class="nav-item">
             <%= link_to t('.club_ratings'), clubs_path, class: "nav-link #{'active' if params[:controller] == 'clubs'}" %>
           </li>
