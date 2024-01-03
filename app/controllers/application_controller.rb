@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  TOP_LEVEL_DOMAIN_MAPPING = {
-    'rs' => :rs,
-    'by' => :by,
-  }.tap { |h| h.default = :ru }.freeze
-
   before_action :find_country_events
   around_action :switch_locale
 
@@ -20,16 +15,17 @@ class ApplicationController < ActionController::Base
   private
 
   def switch_locale(&)
-    locale = I18n.available_locales.include?(top_level_domain) ? top_level_domain : I18n.default_locale
-
-    I18n.with_locale(locale, &)
+    I18n.with_locale(domain_locale, &)
   end
 
   def find_country_events
-    @country_events = Event.in_country(top_level_domain)
+    @country_events = Event.in_country(domain_locale)
   end
 
-  def top_level_domain
-    @top_level_domain ||= TOP_LEVEL_DOMAIN_MAPPING[request.host.split('.').last]
+  def domain_locale
+    return @domain_locale if @domain_locale
+
+    top_level_domain = request.host.split('.').last.to_sym
+    @domain_locale = I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale
   end
 end

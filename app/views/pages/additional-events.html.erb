@@ -12,7 +12,7 @@
       </thead>
       <tbody class="table-group-divider">
         <% CSV.foreach(File.join(__dir__, 'additional_events.csv'), headers: true, header_converters: :symbol) do |row| %>
-          <% next unless row[:domain] == top_level_domain.to_s %>
+          <% next unless row[:domain] == top_level_domain %>
 
           <% event = Event.find_by!(code_name: row[:event_code]) %>
           <tr>
