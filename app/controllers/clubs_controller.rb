@@ -4,18 +4,18 @@ class ClubsController < ApplicationController
   def index
     @clubs = Athlete
       .joins(club: :country)
-      .where(country: { code: top_level_domain })
+      .where(country: { code: domain_locale })
       .group(:club)
       .order(count_clubs: :desc)
       .count(:clubs)
     @count_results = Result
       .joins(athlete: { club: :country })
-      .where(country: { code: top_level_domain })
+      .where(country: { code: domain_locale })
       .group(:club_id)
       .count(:club_id)
     @count_volunteering = Volunteer
       .joins(athlete: { club: :country })
-      .where(country: { code: top_level_domain })
+      .where(country: { code: domain_locale })
       .group(:club_id)
       .count(:club_id)
   end

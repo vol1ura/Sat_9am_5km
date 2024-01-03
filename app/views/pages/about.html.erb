@@ -41,12 +41,12 @@
 <h4><%= t '.s95_abroad.title' %></h4>
 <p>
   <%
-    sentence =
+    countries_links =
       Country
         .where.not(code: top_level_domain)
         .pluck(:code)
         .map { |code| external_link_to t("country.#{code}"), "https://s95.#{code}/" }
         .to_sentence
   %>
-  <%= raw t '.s95_abroad.body', countries: sentence, info_email: ENV['INFO_EMAIL'] %>
+  <%= raw t '.s95_abroad.body', countries: countries_links, info_email: ENV['INFO_EMAIL'] %>
 </p>
