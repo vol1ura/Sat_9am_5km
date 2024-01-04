@@ -15,6 +15,6 @@ class PagesController < ApplicationController
 
   def validate_page
     path = Rails.root.join 'app/views/pages', "#{page_name}.#{request.format.to_sym}.erb"
-    render file: 'public/404.html', status: :not_found unless File.exist?(path)
+    render file: 'public/404.html', status: :not_found if page_name.start_with?('_') || !File.exist?(path)
   end
 end
