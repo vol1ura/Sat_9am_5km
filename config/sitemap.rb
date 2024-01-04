@@ -14,14 +14,12 @@ Country.find_each do |country|
     # Add '/pages'
     Dir.glob('app/views/pages/*.html.erb').each do |file|
       page = File.basename(file, '.html.erb')
-      next if page.starts_with? '_'
-
-      add page_path(page)
+      add page_path(page) if page.starts_with? '_'
     end
-    # Add '/top_results'
-    add top_results_path, priority: 0.75
-    # Add '/volunteers/top'
-    add top_volunteers_path, priority: 0.9
+    # Add '/ratings' endpoints
+    add results_ratings_path, priority: 0.75
+    add volunteers_ratings_path, priority: 0.9
+    #
     # Add all events:
     country.events.find_each do |event|
       add event_path(event.code_name), lastmod: event.updated_at, priority: 0.9

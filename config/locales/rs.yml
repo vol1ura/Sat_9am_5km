@@ -550,19 +550,21 @@ rs:
       title_html: 'Additional events 1&nbsp;januar&nbsp;2024'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
   results:
+  ratings:
     table:
       time: Vreme
       name: Ime
       date: Datum
       club: Klub
       event: Događaj
-    top:
-      top_results: Najbolji rezultati
+    results:
+      title: Najbolji rezultati
+      description: Top 50 results on all events for man and woman
       men: Muškarci
       women: Žene
-  volunteers:
-    top:
-      top_volunteers: Volunteers top
+    volunteers:
+      title: Volunteers top
+      description: Top 50 volunteers on all events
       name: Ime
       club: Klub
       count: Volunteering

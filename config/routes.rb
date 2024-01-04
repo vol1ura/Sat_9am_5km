@@ -9,16 +9,19 @@ Rails.application.routes.draw do
   end
   resources :activities, only: %i[index show]
   resources :athletes, only: %i[index show]
-  resources :volunteers, only: %i[new edit create update] do
-    get :top, on: :collection
-  end
+  resources :volunteers, only: %i[new edit create update]
   resources :badges, only: %i[index show]
   resources :clubs, only: %i[index show] do
     get :last_week, on: :member
   end
+  resources :ratings, only: [] do
+    collection do
+      get :results
+      get :volunteers
+    end
+  end
   resource :user, only: :update
   get '/pages/:page', to: 'pages#show', as: :page
-  get '/top_results', to: 'results#top'
   ActiveAdmin.routes(self)
   devise_for :users,
     {
