@@ -11,13 +11,16 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <% CSV.foreach(File.join(__dir__, 'additional_events.csv'), headers: true, header_converters: :symbol) do |row| %>
-          <% next unless row[:domain] == top_level_domain %>
-
-          <% event = Event.find_by!(code_name: row[:event_code]) %>
+        <%
+          event_data =
+            CSV
+              .read(File.join(__dir__, 'additional_events.csv'), headers: true, header_converters: :symbol)
+              .each_with_object({}) { |row, obj| obj[row[:code_name]] = row[:time] if row[:domain].to_sym == top_level_domain }
+        %>
+        <% @country_events.where(code_name: event_data.keys).find_each do |event| %>
           <tr>
             <td><%= link_to event.name, event_path(event.code_name) %></td>
-            <td><%= row[:time] %></td>
+            <td><%= event_data[event.code_name] %></td>
           </tr>
         <% end %>
       </tbody>

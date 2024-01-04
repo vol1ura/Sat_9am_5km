@@ -15,15 +15,11 @@ class ApplicationController < ActionController::Base
   private
 
   def switch_locale(&)
-    I18n.with_locale(domain_locale, &)
+    I18n.with_locale(I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale, &)
   end
 
   def find_country_events
-    @country_events = Event.in_country(domain_locale)
-  end
-
-  def domain_locale
-    @domain_locale ||= I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale
+    @country_events = Event.in_country(top_level_domain)
   end
 
   def top_level_domain
