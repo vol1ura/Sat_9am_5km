@@ -23,9 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   def domain_locale
-    return @domain_locale if @domain_locale
+    @domain_locale ||= I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale
+  end
 
-    top_level_domain = request.host.split('.').last.to_sym
-    @domain_locale = I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale
+  def top_level_domain
+    @top_level_domain ||= request.host.split('.').last.to_sym
   end
 end

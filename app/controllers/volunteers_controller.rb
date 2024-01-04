@@ -11,7 +11,15 @@ class VolunteersController < ApplicationController
   def edit; end
 
   def top
-    @volunteers = Volunteer.published.group(:athlete).order(Arel.sql('COUNT(*) DESC')).limit(50).count
+    athlete_ids =
+      Volunteer
+        .published
+        .joins(activity: { event: :country })
+        .where(country: { code: top_level_domain })
+        .select(:athlete_id)
+        .distinct(:athlete_id)
+    @volunteers =
+      Volunteer.published.where(athlete_id: athlete_ids).group(:athlete).order(Arel.sql('COUNT(*) DESC')).limit(50).count
   end
 
   def create
