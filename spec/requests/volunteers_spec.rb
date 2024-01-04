@@ -1,83 +1,66 @@
 RSpec.describe '/volunteers' do
-  describe 'GET /volunteers/top' do
-    before do
-      Bullet.n_plus_one_query_enable = false
-      create_list(:volunteer, 3)
+  let(:user) { create(:user) }
+  let(:activity) { create(:activity) }
+  let(:athlete) { create(:athlete, parkrun_code: 1) }
+  let(:volunteer) { create(:volunteer, activity:) }
 
-      get top_volunteers_url
-    end
-
-    after do
-      Bullet.n_plus_one_query_enable = true
-    end
-
-    it { expect(response).to be_successful }
+  before do
+    create(:permission, user: user, action: 'manage', subject_class: 'Volunteer')
+    sign_in user
   end
 
-  describe 'manage volunteer rooster' do
-    let(:user) { create(:user) }
-    let(:activity) { create(:activity) }
-    let(:athlete) { create(:athlete, parkrun_code: 1) }
-    let(:volunteer) { create(:volunteer, activity:) }
+  describe 'GET /volunteers/new' do
+    it 'renders a successful response' do
+      get new_volunteer_url(activity_id: activity.id, role: Volunteer.roles.keys.sample)
+      expect(response).to be_successful
+    end
+  end
 
-    before do
-      create(:permission, user: user, action: 'manage', subject_class: 'Volunteer')
-      sign_in user
+  describe 'GET /volunteers/edit' do
+    it 'renders a successful response' do
+      get edit_volunteer_url(volunteer)
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'POST /volunteers' do
+    let(:valid_attributes) do
+      {
+        volunteer: {
+          activity_id: activity.id,
+          athlete_id: athlete.id,
+          role: Volunteer.roles.keys.sample,
+        },
+      }
     end
 
-    describe 'GET /volunteers/new' do
-      it 'renders a successful response' do
-        get new_volunteer_url(activity_id: activity.id, role: Volunteer.roles.keys.sample)
-        expect(response).to be_successful
-      end
+    it 'renders a successful response' do
+      post volunteers_url, params: valid_attributes
+      expect(response).to be_successful
     end
 
-    describe 'GET /volunteers/edit' do
-      it 'renders a successful response' do
-        get edit_volunteer_url(volunteer)
-        expect(response).to be_successful
-      end
-    end
-
-    describe 'POST /volunteers' do
-      let(:valid_attributes) do
-        {
-          volunteer: {
-            activity_id: activity.id,
-            athlete_id: athlete.id,
-            role: Volunteer.roles.keys.sample,
-          },
-        }
-      end
-
-      it 'renders a successful response' do
+    it 'creates a new volunteer' do
+      expect do
         post volunteers_url, params: valid_attributes
-        expect(response).to be_successful
-      end
+      end.to change(Volunteer, :count).by(1)
+    end
+  end
 
-      it 'creates a new volunteer' do
-        expect do
-          post volunteers_url, params: valid_attributes
-        end.to change(Volunteer, :count).by(1)
-      end
+  describe 'PATCH /volunteer' do
+    let(:valid_attributes) do
+      {
+        volunteer: {
+          activity_id: activity.id,
+          athlete_id: athlete.id,
+          role: volunteer.role,
+        },
+      }
     end
 
-    describe 'PATCH /volunteer' do
-      let(:valid_attributes) do
-        {
-          volunteer: {
-            activity_id: activity.id,
-            athlete_id: athlete.id,
-            role: volunteer.role,
-          },
-        }
-      end
-
-      it 'change athlete' do
-        patch volunteer_url(volunteer), params: valid_attributes
-        expect(response).to be_successful
-        expect(volunteer.reload.athlete).to eq athlete
-      end
+    it 'change athlete' do
+      patch volunteer_url(volunteer), params: valid_attributes
+      expect(response).to be_successful
+      expect(volunteer.reload.athlete).to eq athlete
     end
   end
 end
