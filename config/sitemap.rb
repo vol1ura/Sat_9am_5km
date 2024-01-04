@@ -20,6 +20,8 @@ Country.find_each do |country|
     end
     # Add '/top_results'
     add top_results_path, priority: 0.75
+    # Add '/volunteers/top'
+    add top_volunteers_path, priority: 0.9
     # Add all events:
     country.events.find_each do |event|
       add event_path(event.code_name), lastmod: event.updated_at, priority: 0.9
