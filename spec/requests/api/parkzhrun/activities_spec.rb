@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/api/parkzhrun/activities' do
   describe 'POST /api/parkzhrun/activities' do
     let(:activity_attributes) { { date: '2023-03-25' } }

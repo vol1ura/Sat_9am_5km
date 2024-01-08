@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/admin/athletes' do
   let(:user) { create(:user) }
 

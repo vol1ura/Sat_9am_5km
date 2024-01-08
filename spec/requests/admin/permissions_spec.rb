@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/admin/events' do
   let(:user) { create(:user) }
   let(:permission) { create(:permission) }

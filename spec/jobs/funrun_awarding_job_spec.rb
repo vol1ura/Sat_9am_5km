@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe FunrunAwardingJob do
   let(:activity) { create(:activity) }
   let(:athlete) { create(:athlete) }

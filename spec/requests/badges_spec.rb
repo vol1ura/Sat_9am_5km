@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/badges' do
   describe 'GET /badges' do
     it 'renders a successful response' do

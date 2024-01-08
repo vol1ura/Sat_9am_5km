@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe ParkzhrunMailer do
   let(:recepients) { %w[to1@example.org to2@example.org] }
 

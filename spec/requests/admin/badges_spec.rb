@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/admin/badges' do
   let(:user) { create(:user, :admin) }
 

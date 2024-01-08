@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Telegram::Notification::AfterActivityJob do
   let(:activity) { create(:activity) }
   let(:athlete) { create(:athlete, user: create(:user)) }

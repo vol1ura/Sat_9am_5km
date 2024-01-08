@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/api/parkzhrun/athletes' do
   describe 'PUT /api/parkzhrun/athlete' do
     let!(:athlete) { create(:athlete, parkzhrun_code: parkzhrun_code, male: nil) }

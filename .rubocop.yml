@@ -36,7 +36,6 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Exclude:
     - 'config.ru'
-    - 'spec/**/*'
     - 'app/views/**/*.json.jbuilder'
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
@@ -67,12 +66,8 @@ Lint/MissingSuper:
 # RSpec
 RSpec/MultipleExpectations:
   Max: 4
-  Exclude:
-    - 'spec/system/**/*'
 RSpec/ExampleLength:
   Max: 10
-  Exclude:
-    - 'spec/system/**/*'
 
 AllCops:
   TargetRubyVersion: 3.2

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe BreakingTimeAwardingJob do
   fixtures :badges
 

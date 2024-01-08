@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/admin/activities/1/volunteers' do
   let(:user) { create(:user) }
   let(:activity) { create(:activity) }

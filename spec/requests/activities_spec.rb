@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/activities' do
   describe 'GET /index' do
     it 'renders a successful response' do

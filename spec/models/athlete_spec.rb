@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Athlete do
   it { is_expected.to be_valid }
 
