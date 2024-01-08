@@ -112,8 +112,10 @@ nav.pagination {
 
 .img-partner {
   height: 150px;
+  margin-right: 10px;
   @include media(phoneScreen) {
     height: 90px;
+    margin-right: 5px;
   }
 }
 .img-partner:hover {

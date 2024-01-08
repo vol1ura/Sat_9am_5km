@@ -14,4 +14,9 @@
       <% image_tag 'partners/grigri.png', class: 'img-partner' %>
     <% end %>
   <% end %>
+  <% if %i[ru by].include?(top_level_domain) %>
+    <%= external_link_to "https://invitro.#{top_level_domain}" do %>
+      <% image_tag 'partners/invitro.png', class: 'img-partner' %>
+    <% end %>
+  <% end %>
 </div>
