@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def top_level_domain
-    @top_level_domain ||= request.host.split('.').last
+    @top_level_domain ||= request.host.split('.').last.to_sym
   end
 
   def human_result_time(time)
