@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe ApplicationHelper do
   describe '#human_result_time' do
     context 'when time is nil' do

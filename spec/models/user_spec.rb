@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe User do
   describe 'validation' do
     subject(:user) { described_class.new }

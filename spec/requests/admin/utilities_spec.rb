@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/admin/utilities' do
   let(:user) { create(:user, :admin) }
   let(:badge) { create(:badge, kind: :funrun) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/api/internal/user' do
   let(:headers) do
     { 'Accept' => 'application/json' }

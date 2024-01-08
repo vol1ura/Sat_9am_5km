@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe AddAthleteToResultJob do
   let(:activity_id) { create(:activity).id }
   let(:result) { create(:result, activity_id:) }

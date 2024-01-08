@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Trophy do
   let(:badge) { create(:badge) }
   let(:some_athlete) { create(:athlete) }

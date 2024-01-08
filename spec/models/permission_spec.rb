@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Permission do
   describe 'validations' do
     it { is_expected.not_to be_valid }

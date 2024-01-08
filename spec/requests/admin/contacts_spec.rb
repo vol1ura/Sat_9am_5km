@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/admin/contacts' do
   let(:user) { create(:user, :admin) }
   let(:event) { create(:event) }

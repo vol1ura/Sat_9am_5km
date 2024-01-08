@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/athletes' do
   describe 'GET /athletes' do
     before { create_list(:athlete, 3) }

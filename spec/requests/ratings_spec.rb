@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'ratings' do
   describe 'GET /ratings/results' do
     before do

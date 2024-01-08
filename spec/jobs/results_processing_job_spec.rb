@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe ResultsProcessingJob do
   let(:activity) { create(:activity, date: Date.current) }
   let(:athlete) { create(:athlete) }

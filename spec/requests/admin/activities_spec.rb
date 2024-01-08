@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe '/admin/activities' do
   let(:user) { create(:user) }
   let(:event) { create(:event) }
