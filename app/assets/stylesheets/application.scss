@@ -121,5 +121,8 @@ nav.pagination {
 .img-partner:hover {
   opacity: 0.85;
 }
+.img-partner:last-child {
+  margin-right: 0;
+}
 
 @import "web/**/*";

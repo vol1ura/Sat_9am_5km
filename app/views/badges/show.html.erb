@@ -15,7 +15,7 @@
 
 <div class="row g-0">
   <div class="col-sm-4 col-md-3 p-3 d-flex justify-content-center align-items-start">
-    <%= image_tag @badge.picture_link, class: 'img-badge' %>
+    <%= image_tag @badge.picture_link, class: 'img-badge', alt: @badge.name %>
   </div>
   <div class="col-sm-8 col-md-9">
     <h2><%= @badge.name %></h2>
