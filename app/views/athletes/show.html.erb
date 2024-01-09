@@ -97,7 +97,7 @@
               <div class="p-1">
                 <%
                   trophy_link = link_to badge_path(trophy.badge) do
-                    image_tag trophy.badge.picture_link, class: 'trophy'
+                    image_tag trophy.badge.picture_link, class: 'trophy', alt: trophy.badge.name
                   end
                 %>
                 <% if trophy.badge.record_kind? %>

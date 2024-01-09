@@ -72,6 +72,6 @@ ActiveAdmin.register Event do
   end
 
   sidebar 'Предпросмотр', only: :show do
-    image_tag resource.main_picture_link, class: 'img-badge' if resource.main_picture_link
+    image_tag resource.main_picture_link, class: 'img-badge', alt: resource.place if resource.main_picture_link
   end
 end

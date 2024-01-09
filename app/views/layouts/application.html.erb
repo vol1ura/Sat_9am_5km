@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="<%= top_level_domain %>">
   <head>
     <title>
       <%= yield_head_info(:title, 'Парковые забеги') %> | Sat9am5km
@@ -22,7 +22,7 @@
     <% if Rails.env.production? %>
       <meta name="yandex-verification" content="<%= Rails.application.credentials.yandex.webmaster[top_level_domain] %>">
       <!-- Yandex.Metrika counter -->
-      <script type="text/javascript">
+      <script>
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}

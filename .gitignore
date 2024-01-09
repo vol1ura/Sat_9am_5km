@@ -1,32 +1,31 @@
 # Ignore bundler config.
-/.bundle
+.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
-/.vscode
-.DS_Store
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
+.vscode/
 .byebug_history
 
 # Ignore pidfiles, but keep the directory.
-/tmp/pids/*
-!/tmp/pids/
-!/tmp/pids/.keep
+tmp/pids/*
+!tmp/pids/.keep
 
-/public/assets
-/public/sitemaps
-/vendor/*
-!/vendor/.keep
-!/vendor/javascript/.keep
-/coverage
+public/assets/
+public/sitemaps/
+vendor/*
+!vendor/.keep
+!vendor/javascript/.keep
+coverage/
 .reek.yml
-/config/database.yml
-/spec/requests/requests.http
+config/database.yml
+spec/requests/requests.http
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
-/deploy/*
-!/deploy/.env.example
-!/deploy/sidekiq.service.example
+config/master.key
+deploy/*
+!deploy/.env.example
+!deploy/sidekiq.service.example
+
