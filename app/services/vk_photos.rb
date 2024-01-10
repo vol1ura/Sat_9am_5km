@@ -16,9 +16,11 @@ class VkPhotos < ApplicationService
   end
 
   def call
-    random_photos = filter_landscape(latest_album_photos).sample(@num)
-    random_photos.map do |photo|
-      photo['sizes'].filter { |p| p['width'] < MAX_WIDTH }.max_by { |p| p['width'] }['url']
+    Rails.cache.fetch('vk_photo_url_list', expires_in: 3.hours) do
+      random_photos = latest_landscape_photos.sample(@num)
+      random_photos.map do |photo|
+        photo['sizes'].max_by { |p| p['width'] > MAX_WIDTH ? 0 : p['width'] }['url']
+      end
     end
   rescue StandardError => e
     Rollbar.error e
@@ -40,15 +42,15 @@ class VkPhotos < ApplicationService
     JSON.parse(response.body)
   end
 
-  def latest_album_photos
+  def latest_photos
     all_albums = request('photos.getAlbums')
     album_id = all_albums.dig('response', 'items', rand(ALBUMS_SET_SIZE), 'id')
     album_photos = request('photos.get', album_id:)
     album_photos.dig('response', 'items')
   end
 
-  def filter_landscape(photos)
-    (photos || []).filter do |photo|
+  def latest_landscape_photos
+    (latest_photos || []).filter do |photo|
       photo_params = photo.dig('sizes', 0)
       photo_params['width'] > photo_params['height']
     end
