@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
 class VkPhotos < ApplicationService
-  API_QUERIES = {
-    owner_id: "-#{ENV.fetch('VK_GROUP_ID', 1)}".freeze,
-    access_token: ENV['VK_TOKEN'],
-    v: '5.130',
-  }.freeze
-  ALBUMS_SET_SIZE = 3
+  API_URL = "https://api.vk.com/method/photos.get?#{URI.encode_www_form(
+    {
+      owner_id: "-#{ENV.fetch('VK_GROUP_ID', 1)}",
+      album_id: ENV.fetch('VK_ALBUM_ID', 1),
+      access_token: ENV['VK_TOKEN'],
+      v: '5.130',
+    },
+  )}".freeze
   MAX_WIDTH = 800
 
-  private_constant :API_QUERIES, :ALBUMS_SET_SIZE, :MAX_WIDTH
+  private_constant :API_URL, :MAX_WIDTH
 
   def initialize(num)
     @num = num
@@ -17,8 +19,7 @@ class VkPhotos < ApplicationService
 
   def call
     Rails.cache.fetch('vk_photo_url_list', expires_in: 3.hours) do
-      random_photos = latest_landscape_photos.sample(@num)
-      random_photos.map do |photo|
+      album_landscape_photos.sample(@num).map do |photo|
         photo['sizes'].max_by { |p| p['width'] > MAX_WIDTH ? 0 : p['width'] }['url']
       end
     end
@@ -29,28 +30,13 @@ class VkPhotos < ApplicationService
 
   private
 
-  def api_uri(method, options = {})
-    uri = URI("https://api.vk.com/method/#{method}")
-    params = API_QUERIES.merge(options)
-    uri.query = URI.encode_www_form(params)
-    uri
+  def album_photos
+    response = Net::HTTP.get_response(URI(API_URL))
+    JSON.parse(response.body).dig('response', 'items')
   end
 
-  def request(...)
-    uri = api_uri(...)
-    response = Net::HTTP.get_response(uri)
-    JSON.parse(response.body)
-  end
-
-  def latest_photos
-    all_albums = request('photos.getAlbums')
-    album_id = all_albums.dig('response', 'items', rand(ALBUMS_SET_SIZE), 'id')
-    album_photos = request('photos.get', album_id:)
-    album_photos.dig('response', 'items')
-  end
-
-  def latest_landscape_photos
-    (latest_photos || []).filter do |photo|
+  def album_landscape_photos
+    (album_photos || []).filter do |photo|
       photo_params = photo.dig('sizes', 0)
       photo_params['width'] > photo_params['height']
     end
