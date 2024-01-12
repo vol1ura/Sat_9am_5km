@@ -134,7 +134,7 @@ RSpec.describe '/admin/athletes' do
 
       it 'destroy athlete' do
         expect(response).to redirect_to admin_athletes_url
-        expect(Athlete).not_to be_exists(id: athlete.id)
+        expect(Athlete).not_to exist(id: athlete.id)
       end
     end
 
