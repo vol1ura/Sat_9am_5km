@@ -58,7 +58,7 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   config.cache_store = :mem_cache_store, 'localhost:11211', { pool: { size: 10, timeout: 5 } }
-  config.session_store :cache_store, expire_after: 1.month
+  config.session_store :cookie_store, expire_after: 1.month
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter = :sidekiq

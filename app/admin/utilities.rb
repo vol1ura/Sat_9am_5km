@@ -7,6 +7,33 @@ ActiveAdmin.register_page 'Utilities' do
     tabs do
       tab t('.cache_clear.title') do
         para "Кеш можно сбрасывать не чаще, чем раз в #{ClearCache::TIME_THRESHOLD.in_minutes.ceil} минут."
+        table do
+          tr do
+            th 'Metric'
+            th 'Value'
+          end
+          stats = defined?(Rails.cache.stats) ? Rails.cache.stats.first.last : {}
+          tr do
+            td 'Connections:'
+            td stats['curr_connections']
+          end
+          tr do
+            td 'Cache hits:'
+            td stats['get_hits']
+          end
+          tr do
+            td 'Cache misses:'
+            td stats['get_misses']
+          end
+          tr do
+            td 'Cache flushes:'
+            td stats['cmd_flush']
+          end
+          tr do
+            td 'Memory:'
+            td "#{(stats['bytes_read'].to_f / 1.megabyte).round} Mb"
+          end
+        end
         para button_to t('.cache_clear.button'),
                        admin_utilities_cache_path,
                        method: :delete,
