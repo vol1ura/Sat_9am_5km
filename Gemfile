@@ -13,6 +13,7 @@ gem 'barby', require: false
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.3.1'
 gem 'cancancan', '~> 3.4'
+gem 'connection_pool'
 gem 'dalli'
 gem 'devise', '~> 4.8'
 gem 'devise-i18n'

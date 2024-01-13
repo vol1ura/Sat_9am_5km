@@ -487,6 +487,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.2)
   capistrano-sidekiq (~> 2.3)
   capistrano3-puma (= 6.0.0.beta.1)
+  connection_pool
   dalli
   database_consistency
   devise (~> 4.8)
