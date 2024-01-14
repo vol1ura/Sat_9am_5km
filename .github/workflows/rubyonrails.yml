@@ -30,7 +30,9 @@ jobs:
         with:
           ruby-version: 3.2.2
       - name: Install packages
-        run: bundle
+        run: |
+          bundle config set --local only test
+          bundle install
       - name: Lint Ruby files
         run: rubocop --fail-fast
 
