@@ -9,7 +9,6 @@ gem 'rails', '~> 7.1.2'
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
 gem 'audited'
-gem 'barby', require: false
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.3.1'
 gem 'cancancan', '~> 3.4'
@@ -24,6 +23,7 @@ gem 'nokogiri'
 gem 'pg', '~> 1.4'
 gem 'puma'
 gem 'rails_performance'
+gem 'rqrcode', require: false
 gem 'sassc-rails'
 gem 'sidekiq'
 gem 'sitemap_generator'

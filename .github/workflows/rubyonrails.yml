@@ -32,7 +32,7 @@ jobs:
       - name: Install packages
         run: bundle
       - name: Lint Ruby files
-        run: rubocop --parallel
+        run: rubocop --fail-fast
 
   test:
     needs:

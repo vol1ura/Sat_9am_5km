@@ -1,25 +1,24 @@
 # frozen_string_literal: true
 
-require 'barby'
-require 'barby/barcode/code_128'
-require 'barby/outputter/svg_outputter'
+require 'rqrcode'
 
-# Outputs athlete parkrun barcode in SVG format
+# Outputs athlete QR-code in SVG format
 class BarcodePrinter < ApplicationService
+  OPTIONS = {
+    color: '2a2951',
+    fill: :white,
+    shape_rendering: 'optimizeSpeed',
+    module_size: 8,
+    offset: 8,
+    standalone: true,
+    use_path: true,
+  }.freeze
+
   def initialize(athlete)
     @code = "A#{athlete.code}"
-    @barcode = Barby::Code128.new(@code)
   end
 
   def call
-    outputter.xdim = 2
-    outputter.title = @code
-    outputter.to_svg
-  end
-
-  private
-
-  def outputter
-    @outputter ||= Barby::SvgOutputter.new(@barcode)
+    RQRCode::QRCode.new(@code).as_svg(OPTIONS)
   end
 end
