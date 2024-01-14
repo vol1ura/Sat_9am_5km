@@ -11,11 +11,13 @@ threads min_threads_count, max_threads_count
 # Specifies the `worker_timeout` threshold that Puma will use to wait before
 # terminating a worker in development environments.
 #
-worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
-
-# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-#
-port ENV.fetch("PORT") { 3000 }
+if ENV.fetch("RAILS_ENV", "development") == "development"
+  worker_timeout 3600
+  # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
+  port ENV.fetch("PORT") { 3000 }
+else
+  bind "unix://#{ENV.fetch('APP_DEPLOY_PATH')}/shared/tmp/sockets/s95-puma.sock"
+end
 
 # Specifies the `environment` that Puma will run in.
 #
