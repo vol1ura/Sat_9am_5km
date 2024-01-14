@@ -15,6 +15,7 @@ class Activity < ApplicationRecord
   validates :date, presence: true
 
   after_commit :postprocessing, if: %i[saved_change_to_published? published]
+  after_touch :postprocessing, if: :published
 
   scope :published, -> { where(published: true) }
   scope :in_country, ->(country_code) { joins(event: :country).where(country: { code: country_code }) }
