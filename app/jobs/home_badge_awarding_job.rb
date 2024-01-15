@@ -24,7 +24,7 @@ class HomeBadgeAwardingJob < ApplicationJob
 
   def athlete_ids_ds(type, min_events_count:, max_events_count:)
     type
-      .titleize
+      .camelize
       .constantize
       .published
       .joins(:athlete)
@@ -39,9 +39,9 @@ class HomeBadgeAwardingJob < ApplicationJob
       .send(Badge::ASSOCIATION_TYPE_MAPPING[badge.info['type']])
       .published
       .where(activity: { event: athlete.event })
-      .order('activity.date')
-      .limit(badge.info['threshold'])
-      .last
-      .date
+      .reorder('activity.date')
+      .select('activity.date')
+      .offset(badge.info['threshold'].pred)
+      .first[:date]
   end
 end
