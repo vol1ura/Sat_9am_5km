@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_15_065416) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_17_185443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -98,8 +98,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_15_065416) do
   create_table "clubs", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "country_id", null: false
+    t.index "lower((name)::text)", name: "index_clubs_on_lower_name", unique: true
     t.index ["country_id"], name: "index_clubs_on_country_id"
-    t.index ["name"], name: "index_clubs_on_name", unique: true
   end
 
   create_table "contacts", force: :cascade do |t|
