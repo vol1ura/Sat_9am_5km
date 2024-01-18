@@ -5,7 +5,7 @@ active_admin_form_for [:admin, resource] do |f|
 
   f.inputs 'Фан-ран награда' do
     input :name
-    input :received_date, required: true
+    input :received_date, required: true if resource.funrun_kind?
     input :picture_link, input_html: { value: resource.picture_link || 'badges/default.png' }
     input :conditions, as: :quill_editor,
                        label: 'условия получения',
