@@ -32,6 +32,8 @@ ActiveAdmin.register Volunteer do
     end
   end
 
+  after_save { |volunteer| volunteer.activity.postprocessing }
+
   index download_links: [:csv], title: -> { t '.title', date: @activity.date ? l(@activity.date) : '(нет даты)' } do
     selectable_column
     column :athlete
