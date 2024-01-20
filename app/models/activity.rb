@@ -14,8 +14,7 @@ class Activity < ApplicationRecord
 
   validates :date, presence: true
 
-  after_commit :postprocessing, if: %i[saved_change_to_published? published]
-  after_touch :postprocessing, if: :published
+  after_commit :postprocessing, if: :saved_change_to_published?
 
   scope :published, -> { where(published: true) }
   scope :in_country, ->(country_code) { joins(event: :country).where(country: { code: country_code }) }
@@ -40,9 +39,9 @@ class Activity < ApplicationRecord
     event.activities.where(date: ..date).size
   end
 
-  private
-
   def postprocessing
+    return unless published
+
     ResultsProcessingJob.perform_later(id)
     AthletesAwardingJob.perform_later(id) if volunteers.exists?
     BreakingTimeAwardingJob.perform_later if results.exists?
