@@ -31,7 +31,7 @@ active_admin_form_for [:admin, resource] do |f|
                         }
     input :main_picture_link
     input :slogan
-    input :visible_order
+    input :visible_order, input_html: { inputmode: 'numeric' }
   end
 
   f.actions
