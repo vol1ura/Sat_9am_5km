@@ -36,7 +36,7 @@ class Activity < ApplicationRecord
   end
 
   def number
-    event.activities.where(date: ..date).size
+    event.activities.published.where(date: ...date).size.next
   end
 
   def postprocessing
