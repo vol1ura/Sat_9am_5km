@@ -53,7 +53,7 @@ ActiveAdmin.register Athlete do
     def destroy
       if resource.user_id
         flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_registered')
-      elsif resource.results.exists? || resource.volunteering.exists?
+      elsif resource.results.exists? || Volunteer.exists?(athlete: resource)
         flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_participant')
       else
         flash[:notice] = I18n.t('active_admin.successfully_deleted', obj: resource.name)
