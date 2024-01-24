@@ -110,19 +110,31 @@ nav.pagination {
   opacity: 0.85;
 }
 
-.img-partner {
-  height: 150px;
-  margin-right: 10px;
-  @include media(phoneScreen) {
-    height: 90px;
-    margin-right: 5px;
+.partners {
+  display: flex;
+
+  a {
+    margin-right: 12px;
+    @include media(phoneScreen) {
+      margin-right: 6px;
+    }
+
+    .img-partner {
+      height: 150px;
+      @include media(phoneScreen) {
+        height: 90px;
+      }
+
+      :hover {
+        opacity: 0.85;
+      }
+    }
+  }
+
+  a:last-child {
+    margin-right: 0;
   }
 }
-.img-partner:hover {
-  opacity: 0.85;
-}
-.img-partner:last-child {
-  margin-right: 0;
-}
+
 
 @import "web/**/*";

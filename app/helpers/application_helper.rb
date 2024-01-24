@@ -69,6 +69,6 @@ module ApplicationHelper
   end
 
   def external_link_to(title = nil, options = nil, html_options = {}, &)
-    link_to title, options, html_options.merge(target: '_blank', rel: 'noopener'), &
+    link_to title, *[options, html_options.merge(target: '_blank', rel: 'noopener')].compact, &
   end
 end
