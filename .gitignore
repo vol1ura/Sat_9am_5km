@@ -15,6 +15,7 @@ tmp/pids/*
 
 public/assets/
 public/sitemaps/
+storage/
 vendor/*
 !vendor/.keep
 !vendor/javascript/.keep
@@ -28,4 +29,3 @@ config/master.key
 deploy/*
 !deploy/.env.example
 !deploy/sidekiq.service.example
-
