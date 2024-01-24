@@ -80,6 +80,8 @@ rs:
       club:
         name: naziv
         country: država
+        logo: logo
+        description: description
       event:
         active: aktivan
         country: država

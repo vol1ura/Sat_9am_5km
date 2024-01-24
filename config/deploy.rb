@@ -20,7 +20,7 @@ set :deploy_to, ENV['APP_DEPLOY_PATH']
 append :linked_files, 'config/master.key'
 
 # Default value for linked_dirs is []
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets' # , 'public/system', 'tmp/webpacker', 'public/system', 'vendor/javascript', 'storage'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'storage' # , 'public/system', 'tmp/webpacker', 'public/system', 'vendor/javascript'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

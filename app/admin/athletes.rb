@@ -29,7 +29,7 @@ ActiveAdmin.register Athlete do
   index download_links: false do
     selectable_column
     column :name
-    column :id
+    id_column
     column :parkrun_code
     column :fiveverst_code
     column :runpark_code

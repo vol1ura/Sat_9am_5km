@@ -80,6 +80,8 @@ ru:
       club:
         name: название
         country: страна
+        logo: логотип
+        description: описание
       event:
         active: активен
         country: страна
