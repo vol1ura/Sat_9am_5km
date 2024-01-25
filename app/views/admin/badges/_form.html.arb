@@ -8,7 +8,6 @@ active_admin_form_for [:admin, resource] do |f|
     input :received_date, required: true if resource.funrun_kind?
     input :picture_link, input_html: { value: resource.picture_link || 'badges/default.png' }
     input :conditions, as: :quill_editor,
-                       label: 'условия получения',
                        required: true,
                        input_html: {
                          data: {

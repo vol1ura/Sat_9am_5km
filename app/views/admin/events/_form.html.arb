@@ -11,7 +11,6 @@ active_admin_form_for [:admin, resource] do |f|
     input :town
     input :place
     input :description, as: :quill_editor,
-                        label: 'описание',
                         input_html: {
                           data: {
                             options: {
