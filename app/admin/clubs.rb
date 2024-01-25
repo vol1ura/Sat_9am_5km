@@ -15,6 +15,7 @@ ActiveAdmin.register Club do
     id_column
     column(:logo) { |c| image_tag c.logo.variant(resize_to_limit: [60, 60]) if c.logo.attached? }
     column :name
+    column(:description) { |c| sanitized_text c.description&.truncate(160) }
     column :country
     actions
   end
