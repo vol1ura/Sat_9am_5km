@@ -7,17 +7,13 @@ active_admin_form_for [:admin, resource] do |f|
     f.inputs 'Выберите мероприятие' do
       input :event_id, as: :select, label: 'Мероприятие', collection: Event.authorized_for(current_user).pluck(:name, :id)
     end
-
-    unless resource.date && resource.results.exists?
-      f.inputs 'Укажите дату, если хотите создать забег для формирования команды волонтёров' do
-        input :date, as: :datepicker, datepicker_options: { min_date: '-1D', max_date: '+2M' }
-      end
-    end
   end
 
   f.inputs 'Сведения о забеге' do
+    unless resource.date && resource.results.exists?
+      input :date, as: :datepicker, datepicker_options: { min_date: '-1D', max_date: '+2M' }
+    end
     input :description, as: :quill_editor,
-                        label: 'Описание',
                         input_html: {
                           data: {
                             options: {
@@ -43,6 +39,7 @@ active_admin_form_for [:admin, resource] do |f|
   if resource.results.exists?
     panel 'Внимание!' do
       para 'Файл с секундомера уже загружен. Если его нужно загрузить повторно, сначала очистите все результаты забега.'
+      para 'Загрузить дополнительные файлы со сканера можно сразу или позже.'
     end
   else
     f.inputs 'Загрузите файл с секундомера (только CSV)' do

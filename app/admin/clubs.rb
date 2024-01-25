@@ -19,33 +19,5 @@ ActiveAdmin.register Club do
     actions
   end
 
-  form do |f|
-    f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs do
-      f.input :country
-      f.input :name
-      f.input :description, as: :quill_editor,
-                            label: 'Описание',
-                            input_html: {
-                              data: {
-                                options: {
-                                  modules: {
-                                    toolbar: [
-                                      %w[bold italic strike],
-                                      %w[blockquote code-block],
-                                      [{ list: 'ordered' }, { list: 'bullet' }],
-                                      ['link'],
-                                      ['clean']
-                                    ],
-                                  },
-                                  placeholder: 'Какой же классный клуб...',
-                                  theme: 'snow',
-                                },
-                              },
-                            }
-      f.input :logo, as: :file
-    end
-
-    f.actions
-  end
+  form partial: 'form'
 end
