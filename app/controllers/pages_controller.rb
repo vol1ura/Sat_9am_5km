@@ -10,11 +10,11 @@ class PagesController < ApplicationController
   private
 
   def page_name
-    @page_name ||= params[:page]&.delete_prefix('_') || 'index'
+    @page_name ||= params[:page]&.to_s&.delete_prefix('_') || 'index'
   end
 
   def validate_page
-    return if Dir['app/views/pages/*'].any? { |f| f.include?("/#{page_name}.#{request.format.to_sym}.") }
+    return if Dir['app/views/pages/*'].any? { |f| f.include?("/#{page_name}.#{request.format.to_sym || 'html'}.") }
 
     render file: 'public/404.html', status: :not_found
   end
