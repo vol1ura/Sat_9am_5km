@@ -4,7 +4,7 @@ class AthleteFinder < ApplicationService
   NAME_PATH = {
     parkrun_code: {
       url: 'https://www.parkrun.com.au/results/athleteresultshistory/?athleteNumber=%d',
-      xpath: '//div[@id="content"]/h2',
+      xpath: '//div[@id="content"]/h2/text()',
     },
     fiveverst_code: {
       url: 'https://5verst.ru/userstats/%d/',
@@ -26,7 +26,7 @@ class AthleteFinder < ApplicationService
   def call
     parsed_data = Nokogiri::HTML.parse(fetch)
     name_element = parsed_data.xpath(NAME_PATH.dig(@code_type, :xpath))
-    name_element.text.split(' - ').first
+    name_element.text.tr("\u00A0", ' ').split(' - ').first.strip
   rescue StandardError => e
     Rollbar.error e, code: @code
     nil

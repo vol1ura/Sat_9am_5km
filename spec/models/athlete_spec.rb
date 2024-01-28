@@ -65,20 +65,20 @@ RSpec.describe Athlete do
       end
     end
 
-    context 'when such athlete is not exists in the database' do
-      it 'parses parkrun site to find athlete', :vcr do
+    context 'when such athlete is not exists in the database', vcr: ENV['CI'] ? {} : { re_record_interval: 1.month } do
+      it 'parses parkrun site to find athlete' do
         athlete = create(:athlete, name: nil, parkrun_code: 875743)
         described_class.find_or_scrape_by_code!(athlete.parkrun_code)
         expect(athlete.reload.name).to eq 'Юрий ВОЛОДИН'
       end
 
-      it 'parses 5 verst site to find athlete', :vcr do
+      it 'parses 5 verst site to find athlete' do
         athlete = create(:athlete, name: nil, fiveverst_code: 790069891)
         described_class.find_or_scrape_by_code!(athlete.fiveverst_code)
         expect(athlete.reload.name).to eq 'Даниил ЯШНИКОВ'
       end
 
-      it 'parses runpark site to find athlete', :vcr do
+      it 'parses runpark site to find athlete' do
         athlete = create(:athlete, name: nil, fiveverst_code: nil, runpark_code: 7000998502)
         described_class.find_or_scrape_by_code!(athlete.runpark_code)
         expect(athlete.reload.name).to eq 'Ксения Кузьмина'
