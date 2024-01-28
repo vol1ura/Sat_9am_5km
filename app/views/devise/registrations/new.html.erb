@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :email %> <em>(будет выслана ссылка для подтверждения)</em><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email' %>
+    <%= f.email_field :email, autofocus: true, autocomplete: :email, inputmode: :email  %>
   </div>
 
   <div class="field">

@@ -6,7 +6,7 @@
   <%= render 'devise/shared/error_messages', resource: resource %>
   <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
     <div class="input-group">
-      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Ваш e-mail' %>
+      <%= f.email_field :email, autofocus: true, autocomplete: :email, class: 'form-control', placeholder: 'Ваш e-mail', inputmode: :email %>
       <%= f.submit 'Сбросить пароль', class: 'btn btn-outline-secondary' %>
     </div>
   </div>
