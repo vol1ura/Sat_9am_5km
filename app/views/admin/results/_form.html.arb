@@ -30,11 +30,7 @@ active_admin_form_for [:admin, activity, resource] do |f|
     column do
       para 'Внимание! При изменении здесь времени, место изменено НЕ будет!'
       f.inputs 'Результат (Часы:Минуты:Секунды)' do
-        time_select_options = { include_seconds: true, ignore_date: true }
-        time_select_options[:selected] = Result.total_time(0, 0) if f.object.new_record?
-        div style: 'padding-left: 3rem;' do
-          f.time_select :total_time, **time_select_options
-        end
+        input :total_time, as: :time_select, include_seconds: true, ignore_date: true, include_blank: false
       end
     end
     column do

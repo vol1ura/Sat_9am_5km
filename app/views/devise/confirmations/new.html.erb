@@ -6,7 +6,17 @@
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class="col-sm-12 col-lg-6 mb-3">
     <div class="input-group">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control', placeholder: 'Ваш e-mail' %>
+      <%=
+        f.email_field(
+          :email,
+          autofocus: true,
+          autocomplete: :email,
+          inputmode: :email,
+          value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+          class: 'form-control',
+          placeholder: 'Ваш e-mail',
+        )
+      %>
       <%= f.submit 'Выслать подтверждение', class: 'btn btn-outline-secondary' %>
     </div>
   </div>
