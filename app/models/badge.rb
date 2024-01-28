@@ -14,7 +14,8 @@ class Badge < ApplicationRecord
   validates :picture_link, presence: true, format: { with: /\A[^<>\s]+\z/ }
 
   enum kind: {
-    funrun: 0, participating: 10, home_participating: 11, tourist: 20, breaking: 30, rage: 40, record: 100
+    funrun: 0, participating: 10, home_participating: 11, jubilee_participating: 12,
+    tourist: 20, breaking: 30, rage: 40, record: 100
   }, _suffix: true
 
   def self.dataset_of(kind:, type:)

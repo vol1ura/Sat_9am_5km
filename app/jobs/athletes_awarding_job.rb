@@ -16,6 +16,8 @@ class AthletesAwardingJob < ApplicationJob
     @activity.volunteers.includes(:athlete).find_each do |volunteer|
       award_athlete(volunteer.athlete, badge_type: 'volunteer')
     end
+
+    award_by_jubilee_participating_kind_badges
   end
 
   private
@@ -109,5 +111,11 @@ class AthletesAwardingJob < ApplicationJob
 
     athlete.trophies.where(badge: badges_dataset.where.not(id: badge.id)).destroy_all
     athlete.trophies.create! badge: badge, date: activity_date
+  end
+
+  def award_by_jubilee_participating_kind_badges
+    return unless (badge = Badge.jubilee_participating_kind.find_by("(info->'threshold')::integer = ?", @activity.number))
+
+    FunrunAwardingJob.perform_later @activity.id, badge.id
   end
 end
