@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::Badge::BreakingTimeExpiration, type: :service do
-  fixtures :badges
-
-  let(:trophy) do
+  let(:breaking_trophy) do
     create(
       :trophy,
       athlete: create(:athlete, user: create(:user)),
-      badge: Badge.breaking_kind.find_by("(info->'male')::boolean = ?", true),
+      badge: create(:badge, info: { male: true, min: 18 }, kind: :breaking),
       date: BreakingTimeAwardingJob::EXPIRATION_PERIOD.months.ago,
     )
   end
@@ -18,7 +16,7 @@ RSpec.describe Telegram::Notification::Badge::BreakingTimeExpiration, type: :ser
 
   context 'when request to telegram successful' do
     it 'informs athlete' do
-      described_class.call(trophy)
+      described_class.call(breaking_trophy)
       expect(request).to have_been_requested
     end
   end
@@ -27,7 +25,7 @@ RSpec.describe Telegram::Notification::Badge::BreakingTimeExpiration, type: :ser
     before { request.to_raise(StandardError) }
 
     it 'not informs athlete' do
-      described_class.call(trophy)
+      described_class.call(breaking_trophy)
       expect(request).to have_been_requested
     end
   end

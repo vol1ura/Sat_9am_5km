@@ -158,7 +158,7 @@ ru:
       badge:
         name: название
         conditions: условия получения
-        picture_link: путь к картинке
+        image: изображение
         received_date: дата получения
         kind: тип
         kinds:
@@ -187,10 +187,6 @@ ru:
           attributes:
             code_name:
               invalid: 'только строчные латинские буквы и символ "_" вместо пробела'
-        badge:
-          attributes:
-            picture_link:
-              invalid: 'символы <, > и пробелы запрещены'
         contact:
           attributes:
             link:

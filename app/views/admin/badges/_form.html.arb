@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
 active_admin_form_for [:admin, resource] do |f|
-  f.semantic_errors(*f.object.errors.attribute_names)
-
   f.inputs 'Фан-ран награда' do
     input :name
-    input :received_date, required: true if resource.funrun_kind?
-    input :picture_link, input_html: { value: resource.picture_link || 'badges/default.png' }
+    input :received_date, required: true if f.object.funrun_kind?
     input :conditions, as: :quill_editor,
                        required: true,
                        input_html: {
@@ -26,6 +23,7 @@ active_admin_form_for [:admin, resource] do |f|
                            },
                          },
                        }
+    input :image, as: :file, required: true if f.object.funrun_kind?
   end
 
   f.actions

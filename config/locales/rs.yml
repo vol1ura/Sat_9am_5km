@@ -158,7 +158,7 @@ rs:
       badge:
         name: naziv
         conditions: uslovi za dobijanje
-        picture_link: link za sliku
+        image: picture
         received_date: datum prijema
         kind: vrsta
         kinds:
@@ -187,10 +187,6 @@ rs:
           attributes:
             code_name:
               invalid: 'samo mala latinična slova i simbol "_" umesto razmaka'
-        badge:
-          attributes:
-            picture_link:
-              invalid: 'simboli <, > i razmaci nisu dozvoljeni'
         contact:
           attributes:
             link:

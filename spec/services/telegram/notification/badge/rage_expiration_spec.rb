@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::Badge::RageExpiration, type: :service do
-  fixtures :badges
-
   let(:athlete) { create(:athlete, user: create(:user)) }
   let(:date) { Date.current.prev_week(:saturday) }
-  let(:trophy) { create(:trophy, athlete: athlete, badge: Badge.rage_kind.take, date: date) }
+  let(:rage_trophy) do
+    create(
+      :trophy,
+      athlete: athlete,
+      badge: create(:badge, kind: :rage),
+      date: date,
+    )
+  end
   let(:bot_token) { '123456:aaabbb' }
   let!(:request) { stub_request(:post, %r{https://api\.telegram\.org/bot#{bot_token}/sendMessage}) }
 
@@ -16,7 +21,7 @@ RSpec.describe Telegram::Notification::Badge::RageExpiration, type: :service do
 
   context 'when request to telegram successful' do
     it 'informs athlete' do
-      described_class.call(trophy)
+      described_class.call(rage_trophy)
       expect(request).to have_been_requested
     end
   end
@@ -25,7 +30,7 @@ RSpec.describe Telegram::Notification::Badge::RageExpiration, type: :service do
     before { request.to_raise(StandardError) }
 
     it 'not informs athlete' do
-      described_class.call(trophy)
+      described_class.call(rage_trophy)
       expect(request).to have_been_requested
     end
   end

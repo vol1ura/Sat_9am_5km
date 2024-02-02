@@ -50,6 +50,9 @@ Style/FetchEnvVar:
     - 'DEV_TELEGRAM_ID'
     - 'VK_TOKEN'
 
+Naming/VariableNumber:
+  CheckSymbols: false
+
 # LAYOUT
 Layout/LineLength:
   Max: 124
