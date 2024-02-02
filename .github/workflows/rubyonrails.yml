@@ -64,6 +64,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@main
+      - name: Install dependencies
+        run: sudo apt-get install -y libvips
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:

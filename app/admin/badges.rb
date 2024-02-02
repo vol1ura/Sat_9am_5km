@@ -3,7 +3,7 @@
 ActiveAdmin.register Badge do
   actions :all, except: :destroy
 
-  permit_params :name, :conditions, :received_date, :picture_link
+  permit_params :name, :conditions, :received_date, :image
 
   filter :kind, as: :select, collection: Badge.kinds
   filter :name
@@ -24,7 +24,6 @@ ActiveAdmin.register Badge do
       row(:kind) { |b| kind_of_badge b }
       row :name
       row :received_date
-      row :picture_link
       row(:conditions) { |b| sanitized_text b.conditions }
     end
   end
@@ -34,6 +33,6 @@ ActiveAdmin.register Badge do
   sidebar 'Управление наградой', only: :show do
     para link_to 'Обладатели', admin_badge_trophies_path(resource)
     h3 'Предпросмотр'
-    image_tag resource.picture_link, class: 'img-badge'
+    image_tag resource.image.variant(:web), class: 'img-badge' if resource.image.attached?
   end
 end

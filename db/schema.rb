@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_23_184414) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_29_191826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -114,7 +114,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_184414) do
   create_table "badges", force: :cascade do |t|
     t.string "name", null: false
     t.text "conditions"
-    t.string "picture_link", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "received_date"

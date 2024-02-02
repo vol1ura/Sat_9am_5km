@@ -17,7 +17,7 @@
 
 <div class="d-flex">
   <div class="flex-shrink-0">
-    <%= image_tag @club.logo.variant(:thumb), class: 'img-fluid rounded-start', alt: @club.name if @club.logo.attached? %>
+    <%= image_tag @club.logo.variant(:web), class: 'img-fluid', alt: @club.name if @club.logo.attached? %>
   </div>
   <div class="flex-grow-1 ms-3">
     <%= sanitized_text @club.description %>

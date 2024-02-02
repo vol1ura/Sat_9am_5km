@@ -1,15 +1,25 @@
 # frozen_string_literal: true
 
 RSpec.describe AthletesAwardingJob do
-  fixtures :badges
-
   let(:athlete) { create(:athlete) }
+
+  before do
+    create(:badge, kind: :rage)
+    create(:badge, kind: :record, info: { male: true })
+    create(:badge, kind: :tourist, info: { threshold: 5, type: 'result' })
+    create(:badge, kind: :tourist, info: { threshold: 5, type: 'volunteer' })
+  end
 
   context 'with participants badges' do
     let(:event) { create(:event) }
     let(:activity) { create(:activity, date: Time.zone.today, event: event) }
 
     before do
+      [25, 50, 100].each do |threshold|
+        create(:participating_badge, threshold:)
+        create(:participating_badge, threshold: threshold, type: 'volunteer')
+      end
+
       24.times do |idx|
         activity = create(:activity, event: event, date: idx.next.week.ago)
         create(:result, athlete: athlete, activity: activity, total_time: Result.total_time(19, idx))
@@ -24,13 +34,13 @@ RSpec.describe AthletesAwardingJob do
     it 'creates new trophies' do
       create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(18, 30))
       create(:volunteer, activity:, athlete:)
+
       expect do
         described_class.perform_now(activity.id)
       end.to change(athlete.trophies, :count).by(4)
-        .and change(Trophy.where(badge_id: 7), :count).by(1)
-        .and change(Trophy.where(badge_id: 10), :count).by(1)
-        .and change(Trophy.where(badge_id: 22), :count).by(1)
-        .and change(Trophy.where(badge_id: 25), :count).by(1)
+      expect(athlete.trophies.joins(:badge).pluck(:kind)).to contain_exactly(
+        'record', 'rage', 'participating', 'participating',
+      )
     end
   end
 
@@ -40,21 +50,24 @@ RSpec.describe AthletesAwardingJob do
         total_time = Result.total_time(19, 10 - idx)
         create(:result, athlete: athlete, total_time: total_time, activity_params: { date: idx.weeks.ago })
       end
-      last_activity_id = athlete.results.joins(:activity).order('activities.date').last.activity_id
+
       expect do
-        described_class.perform_now(last_activity_id)
-      end.to change(athlete.reload.trophies, :count).by(2)
-        .and change(Trophy.where(badge_id: 20), :count).by(1)
-        .and change(Trophy.where(badge_id: 22), :count).by(1)
+        described_class.perform_now(
+          athlete.results.joins(:activity).order('activities.date').last.activity_id,
+        )
+      end.to change(athlete.trophies, :count).by(2)
+      expect(athlete.trophies.joins(:badge).pluck(:kind)).to contain_exactly('tourist', 'record')
     end
 
     it 'creates volunteer badge' do
       5.times do |idx|
         create(:volunteer, athlete: athlete, activity_params: { date: idx.weeks.ago })
       end
-      last_activity_id = athlete.volunteering.reorder('activity.date').last.activity_id
+
       expect do
-        described_class.perform_now(last_activity_id)
+        described_class.perform_now(
+          athlete.volunteering.reorder('activity.date').last.activity_id,
+        )
       end.to change(athlete.trophies, :count).by(1)
     end
   end

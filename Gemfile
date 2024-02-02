@@ -8,6 +8,7 @@ gem 'rails', '~> 7.1.2'
 
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
+gem 'active_storage_validations'
 gem 'audited'
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.3.1'
@@ -25,6 +26,7 @@ gem 'pg', '~> 1.4'
 gem 'puma'
 gem 'rails_performance'
 gem 'rqrcode', require: false
+gem 'ruby-vips', '>= 2.1.0'
 gem 'sassc-rails'
 gem 'sidekiq'
 gem 'sitemap_generator'

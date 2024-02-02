@@ -10,8 +10,17 @@ class Badge < ApplicationRecord
   has_many :trophies, dependent: :destroy
   has_many :athletes, through: :trophies
 
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true
+    attachable.variant :web, resize_to_limit: [200, 200], preprocessed: true
+  end
+
   validates :kind, :name, presence: true
-  validates :picture_link, presence: true, format: { with: /\A[^<>\s]+\z/ }
+  validates :image, attached: true,
+                    content_type: :png,
+                    aspect_ratio: :square,
+                    dimension: { width: { in: 200..400 } },
+                    size: { less_than: 250.kilobytes }
 
   enum kind: {
     funrun: 0, participating: 10, home_participating: 11, jubilee_participating: 12,
