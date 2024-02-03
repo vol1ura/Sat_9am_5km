@@ -1,6 +1,7 @@
 set :bundle_command, '~/.rbenv/shims/bundle exec'
 set :path, File.join(ENV['APP_DEPLOY_PATH'], 'current')
 set :output, File.join(ENV['APP_DEPLOY_PATH'], 'shared/log/cron.log')
+
 set :chronic_options, hours24: true
 
 # Example:
@@ -15,6 +16,7 @@ set :chronic_options, hours24: true
 
 every 1.day, at: '2' do
   command "$HOME/db_backups/sendmail.sh #{ENV.fetch('ADMIN_EMAIL')}"
+  command "$HOME/backup_storage.sh"
 end
 
 every :thursday, at: '19' do
