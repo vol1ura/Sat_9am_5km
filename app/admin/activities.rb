@@ -5,7 +5,7 @@ ActiveAdmin.register Activity do
 
   permit_params :description, :published, :event_id, :date
 
-  menu priority: 3
+  menu priority: 2
 
   filter :date
   filter :event, label: 'Забег', collection: proc { Event.authorized_for(current_user) }
