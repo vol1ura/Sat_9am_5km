@@ -133,17 +133,27 @@ RSpec.describe '/admin/results' do
   end
 
   context 'without manage permission' do
-    describe 'DELETE /admin/activities/1/results/1/drop_time' do
+    let(:result) { results.second }
+
+    describe 'DELETE /admin/activities/1/results/2/drop_time' do
       it 'renders alert' do
-        delete drop_time_admin_activity_result_url(activity, results.first, format: :js)
+        delete drop_time_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'Не удалось'
       end
     end
 
-    describe 'DELETE /admin/activities/1/results/1/drop_athlete' do
+    describe 'DELETE /admin/activities/1/results/2/drop_athlete' do
       it 'renders alert' do
-        delete drop_athlete_admin_activity_result_url(activity, results.first, format: :js)
+        delete drop_athlete_admin_activity_result_url(activity, result, format: :js)
+        expect(response).to be_successful
+        expect(response.body).to include 'Не удалось'
+      end
+    end
+
+    describe 'DELETE /admin/activities/1/results/2/reset_athlete' do
+      it 'renders alert' do
+        delete reset_athlete_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'Не удалось'
       end
@@ -151,36 +161,36 @@ RSpec.describe '/admin/results' do
 
     describe 'PUT /admin/activities/1/results/2/up' do
       it 'renders alert' do
-        put up_admin_activity_result_url(activity, results.second, format: :js)
+        put up_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'Проверьте корректность'
       end
     end
 
-    describe 'PUT /admin/activities/1/results/1/down' do
+    describe 'PUT /admin/activities/1/results/2/down' do
       it 'renders alert' do
-        put down_admin_activity_result_url(activity, results.first, format: :js)
+        put down_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'Проверьте корректность'
       end
     end
 
-    describe 'POST /admin/activities/1/results/1/insert_above' do
+    describe 'POST /admin/activities/1/results/2/insert_above' do
       it 'redirects to results' do
-        post insert_above_admin_activity_result_url(activity, results.first)
+        post insert_above_admin_activity_result_url(activity, result)
         expect(response).to redirect_to admin_activity_results_path(activity)
       end
 
       it 'appends new result' do
         expect do
-          post insert_above_admin_activity_result_url(activity, results.first)
+          post insert_above_admin_activity_result_url(activity, result)
         end.not_to change(activity.results, :count)
       end
     end
 
-    describe 'PATCH /admin/activities/1/results/1/gender_set' do
+    describe 'PATCH /admin/activities/1/results/2/gender_set' do
       it 'renders alert' do
-        patch gender_set_admin_activity_result_url(activity, results.first, male: true, format: :js)
+        patch gender_set_admin_activity_result_url(activity, result, male: true, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'У вас нет прав'
       end
