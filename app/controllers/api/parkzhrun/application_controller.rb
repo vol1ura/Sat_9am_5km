@@ -3,6 +3,7 @@
 module API
   module Parkzhrun
     class ApplicationController < ActionController::API
+      respond_to :json
       before_action :authorize_request
 
       private

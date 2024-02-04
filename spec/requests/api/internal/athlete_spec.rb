@@ -62,5 +62,11 @@ RSpec.describe '/api/internal/athlete' do
 
       it_behaves_like 'have http status', :not_found
     end
+
+    context 'with invalid params' do
+      let(:request_params) { { telegram_id: user.telegram_id } }
+
+      it_behaves_like 'have http status', :bad_request
+    end
   end
 end
