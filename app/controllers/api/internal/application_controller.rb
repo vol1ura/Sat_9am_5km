@@ -3,6 +3,7 @@
 module API
   module Internal
     class ApplicationController < ActionController::API
+      respond_to :json
       before_action :authorize_request
       around_action :switch_locale
 

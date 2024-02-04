@@ -4,13 +4,9 @@ module API
   module Internal
     class AthletesController < ApplicationController
       def update
-        @athlete = Athlete.joins(:user).find_by!(user: { telegram_id: params[:telegram_id] })
-
-        if @athlete.update(athlete_params)
-          head :ok
-        else
-          render json: { errors: @athlete.errors.full_messages }, status: :unprocessable_entity
-        end
+        athlete = Athlete.joins(:user).find_by!(user: { telegram_id: params[:telegram_id] })
+        athlete.update!(athlete_params)
+        head :ok
       end
 
       rescue_from(ActiveRecord::InvalidForeignKey) { head :not_acceptable }
