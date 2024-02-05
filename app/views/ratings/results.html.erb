@@ -13,9 +13,9 @@
 
 <div class="tab-content">
   <div class="tab-pane fade show active" id="male-tab-pane" role="tabpanel" aria-labelledby="male-tab" tabindex="0">
-    <%= render partial: 'table', locals: { results: @male_results } %>
+    <%= render partial: 'results_table', locals: { results: @male_results } %>
   </div>
   <div class="tab-pane fade" id="female-tab-pane" role="tabpanel" aria-labelledby="female-tab" tabindex="1">
-    <%= render partial: 'table', locals: { results: @female_results } %>
+    <%= render partial: 'results_table', locals: { results: @female_results } %>
   </div>
 </div>
