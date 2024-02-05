@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
   resources :ratings, only: [] do
     collection do
+      get :athletes
       get :results
       get :volunteers
     end

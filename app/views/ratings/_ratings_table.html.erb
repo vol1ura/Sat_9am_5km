@@ -1,0 +1,13 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th><%= t '.name' %></th>
+      <th><%= t '.count' %></th>
+      <th class="hidden-on-phone"><%= t '.club' %></th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <%= render partial: 'row', collection: collection %>
+  </tbody>
+</table>

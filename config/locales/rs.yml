@@ -489,7 +489,8 @@ rs:
       1_january: 1 januar
       club_ratings: Klubovi
       top_results: Najbolji rezultati
-      top_volunteers: Top volunteers
+      top_athletes: Athletes rating
+      top_volunteers: Volunteers rating
       badges: Bedževi
       rules: Pravila
       about: O nama
@@ -548,25 +549,28 @@ rs:
     additional-events:
       title_html: 'Additional events 1&nbsp;januar&nbsp;2024'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
-  results:
   ratings:
-    table:
+    ratings_table:
+      name: Ime
+      count: Count
+      club: Klub
+    results_table:
       time: Vreme
       name: Ime
       date: Datum
       club: Klub
       event: Događaj
+    athletes:
+      title: Athletes rating
+      description: Топ 50 athletes with count of all runs
     results:
       title: Najbolji rezultati
       description: Top 50 results on all events for man and woman
       men: Muškarci
       women: Žene
     volunteers:
-      title: Top volunteers
-      description: Top 50 volunteers on all events
-      name: Ime
-      club: Klub
-      count: Volunteering
+      title: Volunteers rating
+      description: Top 50 participants with count of all volunteering
   athletes:
     show:
       description: 'Athlete profile %{athlete_name}: results, statistics and volunteering'
