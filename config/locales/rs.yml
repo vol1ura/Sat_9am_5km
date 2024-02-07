@@ -106,6 +106,7 @@ rs:
         activity: trčanje
         athlete: sportista
         name: 'ime volontera'
+        comment: comment
         role: uloga
         roles: &volunteer_roles
           director: Direktor

@@ -7,7 +7,7 @@ ActiveAdmin.register Volunteer do
 
   includes :athlete
 
-  permit_params :role, :activity_id, :athlete_id
+  permit_params :role, :activity_id, :athlete_id, :comment
 
   config.sort_order = 'id_asc'
   config.filters = false
@@ -34,10 +34,11 @@ ActiveAdmin.register Volunteer do
 
   after_save { |volunteer| volunteer.activity.postprocessing }
 
-  index download_links: [:csv], title: -> { t '.title', date: @activity.date ? l(@activity.date) : '(нет даты)' } do
+  index download_links: [:csv], title: -> { t '.title', date: l(@activity.date) } do
     selectable_column
     column :athlete
     column(:role) { |v| human_volunteer_role v.role }
+    column :comment
     actions
   end
 

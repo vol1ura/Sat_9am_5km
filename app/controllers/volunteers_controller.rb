@@ -21,6 +21,6 @@ class VolunteersController < ApplicationController
   private
 
   def resource_params
-    params.require(:volunteer).permit(:athlete_id, :activity_id, :role)
+    params.require(:volunteer).permit(:athlete_id, :activity_id, :role, :comment)
   end
 end
