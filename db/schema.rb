@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_29_191826) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_06_175426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -241,6 +241,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_191826) do
     t.boolean "informed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "comment"
     t.index ["activity_id", "athlete_id"], name: "index_volunteers_on_activity_id_and_athlete_id", unique: true
     t.index ["athlete_id"], name: "index_volunteers_on_athlete_id"
   end

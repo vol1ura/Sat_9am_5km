@@ -31,6 +31,7 @@ panel 'Волонтёры' do
   table_for activity.volunteers_roster.includes(:athlete) do
     column :name
     column(:role) { |v| human_volunteer_role v.role }
+    column :comment
   end
 end
 

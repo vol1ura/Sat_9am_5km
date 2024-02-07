@@ -106,6 +106,7 @@ ru:
         activity: забег
         athlete: участник
         name: 'имя волонтёра'
+        comment: комментарий
         role: роль
         roles: &volunteer_roles
           director: Директор

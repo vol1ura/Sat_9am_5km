@@ -51,11 +51,17 @@
         </thead>
         <tbody class="table-group-divider">
           <% @event.volunteering_positions.each do |position| %>
-            <% volunteers = activity.volunteers.includes(:athlete).public_send("#{position.role}_role").to_a %>
+            <% volunteers = activity.volunteers.includes(:athlete).public_send("#{position.role}_role").order(:comment).to_a %>
             <% [position.number, volunteers.size].max.times.each do |i| %>
+              <% volunteer = volunteers[i] %>
               <tr>
-                <td><%= human_volunteer_role position.role %></td>
-                <td><%= render partial: 'cell', locals: { volunteer: volunteers[i], role: position.role, activity: activity } %></td>
+                <td>
+                  <%= human_volunteer_role position.role %>
+                  <% if volunteer&.comment && %w[marshal pacemaker other].include?(position.role) %>
+                    (<%= volunteer.comment %>)
+                  <% end %>
+                </td>
+                <td><%= render partial: 'cell', locals: { volunteer: volunteer, role: position.role, activity: activity } %></td>
               </tr>
             <% end %>
           <% end %>
