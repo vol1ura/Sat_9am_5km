@@ -1,3 +1,4 @@
+<% head_info :og_image, polymorphic_url(@badge.image.variant(:web)) %>
 <% head_info :title, "#{@badge.name} #{'-' if params[:page]} #{params[:page]}".strip %>
 <% head_info :description, @badge.conditions %>
 
