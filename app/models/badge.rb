@@ -20,7 +20,7 @@ class Badge < ApplicationRecord
                     content_type: :png,
                     aspect_ratio: :square,
                     dimension: { width: { in: 200..400 } },
-                    size: { less_than: 250.kilobytes }
+                    size: { less_than: 300.kilobytes }
 
   enum kind: {
     funrun: 0, participating: 10, home_participating: 11, jubilee_participating: 12,
