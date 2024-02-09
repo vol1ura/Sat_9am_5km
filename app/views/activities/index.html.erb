@@ -4,12 +4,18 @@
 
 <div class="table-responsive">
   <table id="activities" class="table table-striped">
-    <thead>
+    <thead data-controller="table-head">
       <tr>
         <th><%= t '.date' %></th>
         <th><%= t '.event' %></th>
-        <th class="text-center"><%= t '.athletes' %></th>
-        <th class="text-center"><%= t '.volunteers' %></th>
+        <th class="text-center">
+          <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="bi bi-caret-up"></i></span>
+          <%= t '.athletes' %>
+        </th>
+        <th class="text-center">
+          <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="bi bi-caret-up"></i></span>
+          <%= t '.volunteers' %>
+        </th>
         <th><%= t '.first_man' %></th>
         <th><%= t '.first_woman' %></th>
       </tr>
