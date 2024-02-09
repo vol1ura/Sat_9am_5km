@@ -1,4 +1,4 @@
-<% head_info :og_image, polymorphic_url(@club.logo.variant(:web)) if @club.logo.attached? %>
+<% head_info :og_image, url_for(@club.logo) if @club.logo.attached? %>
 <% head_info :title, @club.name %>
 <% head_info :description, t('.description', club: @club.name) %>
 
