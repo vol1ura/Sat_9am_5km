@@ -16,7 +16,7 @@ export default class extends Controller {
         }
         this.sortTable(
           e.target.closest('table'),
-          this.currentColumnIndex(e.target.closest('td')),
+          this.currentColumnIndex(e.target.closest('th')),
           sort_direction
         )
         return
