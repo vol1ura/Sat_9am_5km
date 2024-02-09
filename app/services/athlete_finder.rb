@@ -26,7 +26,7 @@ class AthleteFinder < ApplicationService
   def call
     parsed_data = Nokogiri::HTML.parse(fetch)
     name_element = parsed_data.xpath(NAME_PATH.dig(@code_type, :xpath))
-    name_element.text.tr("\u00A0", ' ').split(' - ').first.strip
+    name_element.text.tr("\u00A0", ' ').split(' - ').first&.strip
   rescue StandardError => e
     Rollbar.error e, code: @code
     nil
