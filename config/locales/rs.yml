@@ -525,10 +525,10 @@ rs:
       forward: Napred
     rules:
       description: Brief rules for S95 participants, as well as frequently asked questions
-      register_with_bot_html: 'Если вы не зарегистрированы, создайте профиль с помощью <a href="%{link}" target="_blank" rel="noopener">Телеграм-бота</a>. Вы получите ссылку на ваш профиль с персональным штрих-кодом.'
-      come_to_s95_html: 'Самое главное - приходите в <strong>субботу</strong> в <strong>9 утра</strong> на одно из мероприятий и пробегите <strong>5 км</strong>.'
-      scan_barcodes: На финише вам дадут карточку позиции. Отсканируйте персональный штрихкод и карточку позиции у волонтёра.
-      return_position_card: Сдайте карточку позиции.
+      register_with_bot_html: 'If you are not registered, create a profile using <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a>. You will receive a link to your profile with a personal qr-code.'
+      come_to_s95_html: 'The most important thing is to come to one of our events on <strong>Saturday</strong> at <strong>9 am</strong> and run <strong>5 km</strong>.'
+      scan_barcodes: At the finish you will receive a position card. Scan the personal qr-code and position card with the volunteer.
+      return_position_card: Hand over the position card.
       faq: FAQ
       about_markers:
         question: Will there be any markers or signs along the route?
