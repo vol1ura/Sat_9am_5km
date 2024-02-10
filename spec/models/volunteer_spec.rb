@@ -6,6 +6,11 @@ RSpec.describe Volunteer do
 
     it { is_expected.not_to be_valid }
 
+    it 'strips comment before validation' do
+      volunteer.comment = ' test '
+      expect { volunteer.valid? }.to change(volunteer, :comment).to('test')
+    end
+
     it 'valid with activity, athlete and role' do
       volunteer.role = 0
       volunteer.athlete = build :athlete

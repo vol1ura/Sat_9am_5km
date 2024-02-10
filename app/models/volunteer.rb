@@ -35,6 +35,6 @@ class Volunteer < ApplicationRecord
   end
 
   def strip_comment
-    self.comment = comment.strip.presence
+    self.comment = comment&.strip.presence
   end
 end
