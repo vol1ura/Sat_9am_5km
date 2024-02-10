@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
+  ALLOWED_PAGES = %w[index about rules support additional-events privacy-policy robots].freeze
+
   before_action :validate_page
 
   def show
@@ -10,12 +12,10 @@ class PagesController < ApplicationController
   private
 
   def page_name
-    @page_name ||= params[:page]&.to_s&.delete_prefix('_') || 'index'
+    @page_name ||= params[:page]&.to_s || 'index'
   end
 
   def validate_page
-    return if Dir['app/views/pages/*'].any? { |f| f.include?("/#{page_name}.#{request.format.to_sym || 'html'}.") }
-
-    render file: 'public/404.html', status: :not_found
+    render file: 'public/404.html', status: :not_found if ALLOWED_PAGES.exclude?(page_name)
   end
 end

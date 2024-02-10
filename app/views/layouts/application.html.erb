@@ -18,7 +18,7 @@
     <%= javascript_importmap_tags %>
     <meta name="apple-mobile-web-app-title" content="Sat9am5km">
     <meta name='description' content='<%= yield_head_info(:description, 'Еженедельные субботние пробежки на 5км в парке') %>'>
-    <meta name='keywords' content='<%= yield_head_info(:keywords, "s95,sat,9am,5km,парковые пробежки,парковые забеги,пробег,забег,спорт,паркран,parkrun,#{@country_events.pluck(:name).join(',')}") %>'>
+    <meta name='keywords' content='<%= yield_head_info(:keywords, "s95,sat,9am,5km,парковые пробежки,парковые забеги,пробег,забег,спорт,паркран,parkrun,#{@country_events.map(&:name).join(',')}") %>'>
     <% if Rails.env.production? %>
       <meta name="yandex-verification" content="<%= Rails.application.credentials.yandex.webmaster[top_level_domain] %>">
       <!-- Yandex.Metrika counter -->
