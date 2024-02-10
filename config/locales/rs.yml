@@ -575,6 +575,30 @@ rs:
   athletes:
     show:
       description: 'Athlete profile %{athlete_name}: results, statistics and volunteering'
+      club: club
+      show_club_html: 'Show club statistics %{link}.'
+      total_results: total runs
+      total_volunteering: total volunteering
+      volunteering_h_index: Volunteering h-index
+      volunteering_h_index_explanation: The index is equal to h if there are at least h positions, each of which had at least h volunteering
+      volunteering_coefficient: Volunteering coefficient
+      volunteering_coefficient_explanation: Volunteering count for every 10 runs
+      total_trophies: total trophies
+      total_events: attended events
+      personal_best: personal best (PB)
+      best_position: best place
+      no_results: No results yet.
+      no_volunteering: No volunteering yet.
+      results: Results
+      volunteering: Volunteering
+      close: Close
+      table:
+        pb: PB
+        date: Date
+        time: Time
+        pace: Pace
+        place: Place
+        event: Event
   activities:
     index:
       description: Recent run results on S95 events

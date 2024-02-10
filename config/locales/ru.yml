@@ -576,6 +576,30 @@ ru:
   athletes:
     show:
       description: 'Профиль участника %{athlete_name}: результаты, статистика и волонтёрства'
+      club: клуб
+      show_club_html: 'Посмотреть статистику клуба %{link}.'
+      total_results: всего пробежек
+      total_volunteering: всего волонтёрств
+      volunteering_h_index: Волонтёрский h-индекс
+      volunteering_h_index_explanation: Индекс равен h, если есть как минимум h позиций, на каждой из которых было как минимум h волонтёрств
+      volunteering_coefficient: Коэффициент волонтёра
+      volunteering_coefficient_explanation: Число волонтёрств  на каждые 10 пробежек
+      total_trophies: всего наград
+      total_events: посещённые мероприятия
+      personal_best: личный рекорд (ЛР)
+      best_position: лучшее место
+      no_results: Пока нет результатов.
+      no_volunteering: Пока не было волонтёрств.
+      results: Результаты
+      volunteering: Волонтёрства
+      close: Закрыть
+      table:
+        pb: ЛР
+        date: Дата
+        time: Время
+        pace: Темп
+        place: Место
+        event: Мероприятие
   activities:
     index:
       description: Недавние результаты забегов S95
