@@ -10,7 +10,7 @@ RSpec.describe '/api/internal/athlete' do
   end
 
   describe 'PUT /api/internal/athlete' do
-    before { put api_internal_athlete_path, params: request_params, headers: { 'Accept' => 'application/json' } }
+    before { put api_internal_athlete_path, params: request_params, as: :json }
 
     context 'when set club' do
       let(:club) { create(:club) }

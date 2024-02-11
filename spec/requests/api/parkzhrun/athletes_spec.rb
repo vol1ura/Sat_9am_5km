@@ -18,26 +18,23 @@ RSpec.describe '/api/parkzhrun/athletes' do
 
     context 'when header api key is invalid' do
       it 'returns unauthorized response' do
-        patch api_parkzhrun_athlete_url(parkzhrun_code),
-              params: athlete_attributes,
-              headers: {
-                'Accept' => 'application/json',
-                'Authorization' => Faker::Crypto.sha256,
-              }
+        patch(
+          api_parkzhrun_athlete_url(parkzhrun_code),
+          params: athlete_attributes,
+          headers: { 'Authorization' => Faker::Crypto.sha256 },
+          as: :json,
+        )
         expect(response).to have_http_status :unauthorized
       end
     end
 
     context 'with valid header api key' do
       let(:valid_headers) do
-        {
-          'Accept' => 'application/json',
-          'Authorization' => Rails.application.credentials.parkzhrun_api_key,
-        }
+        { 'Authorization' => Rails.application.credentials.parkzhrun_api_key }
       end
 
       it 'renders successful response' do
-        patch api_parkzhrun_athlete_url(parkzhrun_code), params: athlete_attributes, headers: valid_headers
+        patch api_parkzhrun_athlete_url(parkzhrun_code), params: athlete_attributes, headers: valid_headers, as: :json
         expect(response).to be_successful
         athlete.reload
         expect(athlete.male).to eq(athlete_attributes.dig(:athlete, :gender) == 'male')
@@ -51,12 +48,13 @@ RSpec.describe '/api/parkzhrun/athletes' do
           api_parkzhrun_athlete_url(parkzhrun_code),
           params: athlete_attributes.deep_merge(athlete: { five_verst_id: 1 }),
           headers: valid_headers,
+          as: :json,
         )
         expect(response).to have_http_status :unprocessable_entity
       end
 
       it 'renders not found for invalid id' do
-        patch api_parkzhrun_athlete_url(1), params: athlete_attributes, headers: valid_headers
+        patch api_parkzhrun_athlete_url(1), params: athlete_attributes, headers: valid_headers, as: :json
         expect(response).to have_http_status :not_found
       end
     end
