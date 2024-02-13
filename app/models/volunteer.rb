@@ -7,7 +7,7 @@ class Volunteer < ApplicationRecord
   belongs_to :athlete, touch: true
 
   validates :role, presence: true
-  validates :comment, length: { in: 4..25 }, allow_nil: true
+  validates :comment, length: { in: 4..40 }, allow_nil: true
   validates :athlete_id, uniqueness: { scope: :activity_id }
   validate :cannot_be_assigned_on_more_than_one_position
 
