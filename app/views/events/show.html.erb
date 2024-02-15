@@ -3,7 +3,7 @@
 
 <% unless @event.active %>
   <div class="alert alert-danger d-flex align-items-center" role="alert">
-    <i class="bi bi-exclamation-triangle-fill"></i>&nbsp;
+    <i class="fa-solid fa-triangle-exclamation"></i>&nbsp;
     <div>
       <strong><%= t '.attention' %></strong> <%= @total_activities.zero? ? t('.opening_soon') : t('.start_cancelled') %>
       <%= t '.inactivity_disclaimer_html', link: 'https://t.me/s95news' %>
