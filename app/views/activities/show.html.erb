@@ -26,20 +26,20 @@
   <% if @personal_best_count.positive? %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= @personal_best_count %></span>
-      число личных рекордов <i class="bi bi-lightning-fill"></i>
+      число личных рекордов <i class="fa-solid fa-bolt"></i>
     </li>
   <% end %>
   <% s95_first_run_count = @results_count.count { |_, c| c == 1 } %>
   <% if @first_run_count > s95_first_run_count %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= @first_run_count - s95_first_run_count %></span>
-      впервые на забеге <%= @activity.event_name %> <i class="bi bi-heart-fill"></i>
+      впервые на забеге <%= @activity.event_name %>&nbsp;<i class="fa-solid fa-heart"></i>
     </li>
   <% end %>
   <% if s95_first_run_count.positive? %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= s95_first_run_count %></span>
-      впервые на забеге S95 <i class="bi bi-heart-fill text-danger"></i>
+      впервые на забеге S95&nbsp;<i class="fa-solid fa-heart text-danger"></i>
     </li>
   <% end %>
 </ul>

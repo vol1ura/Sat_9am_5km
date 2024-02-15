@@ -8,7 +8,7 @@ $light: #f0f0f0;
 $dark: #0f0f0f;
 
 @import "bootstrap";
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
+@import "font-awesome";
 
 @mixin media($query) {
   @if $query == phoneScreen {
@@ -68,7 +68,7 @@ h1, h2, h3, h4, h5, h6 {
 .sort-arrow {
   cursor: pointer;
   color: $secondary;
-  i.bi:hover {
+  i.fa:hover {
     color: $primary;
   }
 }

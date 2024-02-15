@@ -2,17 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   toggleSort(e) {
-    e.target.closest('tr').querySelectorAll('i.bi').forEach(cell => {
-      cell.classList.remove('bi-caret-up', 'bi-caret-down')
+    e.target.closest('tr').querySelectorAll('i.fa').forEach(cell => {
+      cell.classList.remove('fa-angle-up', 'fa-angle-down')
       if (cell == e.target) {
         let sort_direction = 'asc'
-        if (cell.classList.contains('bi-caret-up-fill')) {
-          cell.classList.remove('bi-caret-up-fill')
-          cell.classList.add('bi-caret-down-fill')
+        if (cell.classList.contains('fa-caret-up')) {
+          cell.classList.remove('fa-caret-up')
+          cell.classList.add('fa-caret-down')
           sort_direction = 'desc'
         } else {
-          cell.classList.remove('bi-caret-down-fill')
-          cell.classList.add('bi-caret-up-fill')
+          cell.classList.remove('fa-caret-down')
+          cell.classList.add('fa-caret-up')
         }
         this.sortTable(
           e.target.closest('table'),
@@ -21,8 +21,8 @@ export default class extends Controller {
         )
         return
       }
-      cell.classList.remove('bi-caret-down-fill', 'bi-caret-up-fill')
-      cell.classList.add('bi-caret-up')
+      cell.classList.remove('fa-caret-down', 'fa-caret-up')
+      cell.classList.add('fa-angle-up')
     })
   }
 

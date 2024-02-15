@@ -18,10 +18,10 @@
   </td>
   <td class="align-middle text-end">
     <% if result.personal_best %>
-      <i class="bi bi-lightning-fill" title="Личный рекорд!"></i>
+      <i class="fa-solid fa-bolt" title="Личный рекорд!"></i>
     <% end %>
     <% if result.first_run %>
-      <i class="bi bi-heart-fill <%= 'text-danger' if @results_count[result.athlete_id] == 1 %>" title="Первый забег!"></i>
+      <i class="fa-solid fa-heart <%= 'text-danger' if @results_count[result.athlete_id] == 1 %>" title="Первый забег!"></i>
     <% end %>
     <%= human_result_time(result.total_time) %>
   </td>
