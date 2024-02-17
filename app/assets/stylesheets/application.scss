@@ -100,14 +100,14 @@ nav.pagination {
   }
 }
 
-.img-social {
-  width: 60px;
+.fa-stack.contact {
+  font-size: 30px;
   @include media(phoneScreen) {
-    width: 50px;
+    font-size: 25px;
   }
-}
-.img-social:hover {
-  opacity: 0.85;
+  :hover {
+    opacity: 0.85;
+  }
 }
 
 .partners {
