@@ -1,27 +1,27 @@
 <nav class="navbar bg-light bd-footer mt-4">
-  <div class="container">
+  <div class="container-lg">
     <div class="row pt-2">
-      <div class="col-7 col-md-3 pt-2">
-        <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="/" aria-label="Sat9am5km">
+      <div class="col-7 col-md-3">
+        <a class="d-inline-flex align-items-center mb-2 link-dark" href="/" aria-label="Sat9am5km">
           <span class="fs-5"><%= t '.s95' %></span>
         </a>
       </div>
       <div class="col-12 col-md-6 footer-text">
         <p class="fw-light"><%= t '.slogan_html', link: page_path(page: :about) %></p>
       </div>
-      <div class="col-5 col-md-3 social-links mt-1">
-        <div class="btn-group float-end" role="group" aria-label="Main contacts">
-          <a class="btn btn-outline-secondary" href="https://t.me/s95news" target="_blank" rel="license noopener" title="<%= t '.telegram_title' %>">
+      <div class="col-5 col-md-3 social-links">
+        <div class="float-end">
+          <a href="https://t.me/s95news" target="_blank" rel="license noopener" title="<%= t '.telegram_title' %>">
             <i class="fa-brands fa-telegram"></i>
           </a>
-          <a class="btn btn-outline-secondary" href="https://vk.com/s95ru" target="_blank" title="<%= t '.vk_title' %>">
+          <a href="https://vk.com/s95ru" target="_blank" title="<%= t '.vk_title' %>">
             <i class="fa-brands fa-vk"></i>
           </a>
-          <a class="btn btn-outline-secondary" href="mailto:<%= ENV['INFO_EMAIL'] %>" target="_blank" title="<%= t '.send_email' %>" rel="noopener">
+          <a href="mailto:<%= ENV['INFO_EMAIL'] %>" target="_blank" title="<%= t '.send_email' %>" rel="noopener">
             <i class="fa fa-envelope-open"></i>
           </a>
-          <a class="btn btn-outline-secondary" href="https://github.com/vol1ura/Sat_9am_5km" target="_blank" rel="license noopener" title="<%= t '.github_title' %>">
-            <i class="fa-brands fa-github-alt"></i>
+          <a href="https://github.com/vol1ura/Sat_9am_5km" target="_blank" rel="license noopener" title="<%= t '.github_title' %>">
+            <i class="fa-brands fa-github"></i>
           </a>
         </div>
       </div>
