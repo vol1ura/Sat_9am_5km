@@ -19,7 +19,9 @@
 
 <p>
   Забеги прошедшей недели, в которых принимали участие как бегуны либо как волонтёры члены клуба <%= @club.name %>.
-  В субботу некоторые забеги могут быть ещё не загружены, поэтому информация может быть не полной.
+  <% if Date.current.saturday? %>
+    В субботу некоторые забеги могут быть ещё не загружены, поэтому информация может быть не полной.
+  <% end %>
 </p>
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
@@ -35,8 +37,8 @@
   </li>
 </ul>
 
-<div class="tab-content" data-controller="protocol">
-  <div class="tab-pane fade show active" id="results-tab-pane" role="tabpanel" aria-labelledby="results-tab" tabindex="0" data-protocol-target="results">
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="results-tab-pane" role="tabpanel" aria-labelledby="results-tab" tabindex="0">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -63,7 +65,7 @@
       </tbody>
     </table>
   </div>
-  <div class="tab-pane fade" id="volunteerings-tab-pane" role="tabpanel" aria-labelledby="volunteerings-tab" tabindex="0" data-protocol-target="volunteerings">
+  <div class="tab-pane fade" id="volunteerings-tab-pane" role="tabpanel" aria-labelledby="volunteerings-tab" tabindex="1">
     <table class="table table-striped">
       <thead>
         <tr>
