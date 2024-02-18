@@ -514,13 +514,24 @@ rs:
       our_events: Naši događaji
       our_partners: Naši partneri
     about:
-      description: S95 je otvoren sistem koji objedinjuje nezavisne park trke, koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
+      description: S95 je otvoren platform koji objedinjuje nezavisne park trke, koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
+      events: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}.'
       how_to_join:
-        title: Želite da se pridružite S95?
-        body_html: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}. Ako i vi želite da se pridružite, pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">e-mail</a>, ili postavite pitanja u <a href= "%{telegram_group}" title="Naš chat u telegramu">telegram četu</a>.'
+        title: Želite da se pridružite platform S95?
+        body_html: >
+          <p>In short, there is needed your desire.</p>
+          <p>
+            In more detail, you need:
+            <ul>
+              <li>safe and comfortable route</li>
+              <li>a team that ready to handle runs every saturday all year round</li>
+              <li>a desire to make everyone healthier and happier</li>
+            </ul>
+          </p>
+          <p>Are you ready? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> and soon jogging will appear in your park.</p>
       s95_abroad:
         title: S95 races in other countries
-        body: Today our run events are held also in %{countries}. If you also want to open an event in your country, pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">e-mail</a>.
+        body: Today our run events are held also in %{countries}. All results are in one system saved and you can see it in athlete profiles.
       back: Nazad
       forward: Napred
     rules:

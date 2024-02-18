@@ -4,17 +4,21 @@
 <h2><%= t 'navbars.top.about' %></h2>
 
 <p><%= t '.description' %></p>
+<p><%= t '.events', events_count: actual_events.size, events: actual_events.pluck(:name).to_sentence %></p>
 
 <h4><%= t '.how_to_join.title' %></h4>
-<p>
-  <%=
-    t '.how_to_join.body_html',
-      events_count: actual_events.size,
-      events: actual_events.pluck(:name).to_sentence,
-      info_email: ENV['INFO_EMAIL'],
-      telegram_group: 'https://t.me/sat9am5km'
-  %>
-</p>
+<%= t '.how_to_join.body_html', info_email: ENV['INFO_EMAIL'] %>
+
+<h4><%= t '.s95_abroad.title' %></h4>
+<%
+  countries_links =
+    Country
+      .where.not(code: top_level_domain)
+      .pluck(:code)
+      .map { |code| external_link_to t("country.#{code}"), "https://s95.#{code}/" }
+      .to_sentence
+%>
+<p><%= raw t '.s95_abroad.body', countries: countries_links %></p>
 
 <div class="row justify-content-sm-center">
   <div class="col-12 col-sm-10 col-md-8 col-lg-6">
@@ -37,16 +41,3 @@
     </div>
   </div>
 </div>
-
-<h4><%= t '.s95_abroad.title' %></h4>
-<p>
-  <%
-    countries_links =
-      Country
-        .where.not(code: top_level_domain)
-        .pluck(:code)
-        .map { |code| external_link_to t("country.#{code}"), "https://s95.#{code}/" }
-        .to_sentence
-  %>
-  <%= raw t '.s95_abroad.body', countries: countries_links, info_email: ENV['INFO_EMAIL'] %>
-</p>
