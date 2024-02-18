@@ -11,6 +11,7 @@ class FunrunAwardingJob < ApplicationJob
 
     Athlete.where(id: activity.results.select(:athlete_id))
       .or(Athlete.where(id: activity.volunteers.select(:athlete_id)))
+      .where.not(id: badge.trophies.select(:athlete_id))
       .find_each do |athlete|
         athlete.trophies.create badge: badge, date: activity.date
         unless athlete.valid?
