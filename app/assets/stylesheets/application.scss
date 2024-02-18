@@ -27,11 +27,29 @@ body {
 .bd-footer {
   a {
     text-decoration: none;
-    color: var(--bs-body-color);
   }
-  a:hover {
-    text-decoration: underline;
-    color: inherit;
+
+  .footer-text a:hover {
+      text-decoration: underline;
+      color: inherit;
+  }
+
+  .social-links {
+    a {
+      margin-right: 8px;
+    }
+    a:hover {
+      opacity: 0.85;
+    }
+    a:last-child {
+      margin-right: 0;
+    }
+    i {
+       font-size: 2em;
+       @include media(phoneScreen) {
+         font-size: 1.6em;
+       }
+     }
   }
 
   @include media(phoneScreen) {
