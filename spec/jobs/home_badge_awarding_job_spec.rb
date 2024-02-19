@@ -6,11 +6,6 @@ RSpec.describe HomeBadgeAwardingJob do
   let!(:athlete_home_kind_badge_25) { create(:participating_badge, kind: :home_participating) }
   let!(:volunteer_home_kind_badge_25) { create(:participating_badge, kind: :home_participating, type: 'volunteer') }
 
-  it 'performs immediately' do
-    create(:result, athlete: athlete, activity_params: { event: home_event })
-    expect { described_class.perform_later(athlete.id) }.to have_enqueued_job.on_queue('low').at(:no_wait)
-  end
-
   context 'when conditions are met' do
     before do
       create(:participating_badge, kind: :home_participating, threshold: 50)

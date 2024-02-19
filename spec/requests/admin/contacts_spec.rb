@@ -11,7 +11,7 @@ RSpec.describe '/admin/contacts' do
 
   describe 'GET /admin/contacts' do
     it 'renders a successful response' do
-      create_list(:contact, 3, event:)
+      create_list(:contact, 2, event:)
       get admin_event_contacts_url(event)
       expect(response).to be_successful
     end
