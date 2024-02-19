@@ -25,4 +25,6 @@ class ApplicationController < ActionController::Base
   def top_level_domain
     @top_level_domain ||= request.host.split('.').last.to_sym
   end
+
+  helper_method :top_level_domain
 end
