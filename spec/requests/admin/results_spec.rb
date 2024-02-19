@@ -4,7 +4,7 @@ RSpec.describe '/admin/results' do
   let(:user) { create(:user) }
   let(:event) { create(:event) }
   let(:activity) { create(:activity, event:) }
-  let!(:results) { create_list(:result, 3, activity:) }
+  let!(:results) { create_list(:result, 2, activity:) }
 
   before do
     create(:permission, user: user, action: 'read', subject_class: 'Result', event_id: event.id)

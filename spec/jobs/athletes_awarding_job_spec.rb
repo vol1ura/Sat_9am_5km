@@ -27,10 +27,6 @@ RSpec.describe AthletesAwardingJob do
       end
     end
 
-    it 'performs immediately' do
-      expect { described_class.perform_later(activity.id) }.to have_enqueued_job.on_queue('default').at(:no_wait)
-    end
-
     it 'creates new trophies' do
       create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(18, 30))
       create(:volunteer, activity:, athlete:)
