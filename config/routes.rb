@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   resource :user, only: :update
   get '/pages/:page', to: 'pages#show', as: :page
   ActiveAdmin.routes(self)
-  devise_for :users,
+  devise_for(
+    :users,
     {
       path: :user,
       controllers: {
@@ -39,21 +40,22 @@ Rails.application.routes.draw do
         sign_out: 'logout'
       },
       sign_out_via: [:delete, :get]
-    }
+    },
+  )
 
-    namespace :api, defaults: { format: :json } do
-      namespace :internal do
-        resource :user, only: %i[create update]
-        resource :athlete, only: :update
-      end
-      namespace :parkzhrun do
-        resources :athletes, only: :update
-        resources :activities, only: :create
-      end
+  namespace :api, defaults: { format: :json } do
+    namespace :internal do
+      resource :user, only: %i[create update]
+      resource :athlete, only: :update
     end
+    namespace :parkzhrun do
+      resources :athletes, only: :update
+      resources :activities, only: :create
+    end
+  end
 
-    authenticate :user, ->(user) { user.admin? } do
-      mount Sidekiq::Web => '/sidekiq' if Rails.env.production?
-      mount RailsPerformance::Engine => '/app_performance'
-    end
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq' if Rails.env.production?
+    mount RailsPerformance::Engine => '/app_performance'
+  end
 end
