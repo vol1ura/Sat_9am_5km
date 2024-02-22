@@ -1,0 +1,9 @@
+<%=
+  turbo_frame_tag "volunteer-#{idx}" do
+    if volunteer
+      link_to_if can?(:manage, volunteer) && can?(:update, activity), volunteer.name, edit_volunteer_path(volunteer, idx:)
+    elsif can?(:create, Volunteer) && can?(:update, activity)
+      link_to 'добавить', new_volunteer_path(activity_id: activity.id, role: role, idx: idx)
+    end
+  end
+%>

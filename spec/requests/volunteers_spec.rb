@@ -37,13 +37,13 @@ RSpec.describe '/volunteers' do
     end
 
     it 'renders a successful response' do
-      post volunteers_url, params: valid_attributes
+      post volunteers_url, params: valid_attributes, as: :turbo_stream
       expect(response).to be_successful
     end
 
     it 'creates a new volunteer' do
       expect do
-        post volunteers_url, params: valid_attributes
+        post volunteers_url, params: valid_attributes, as: :turbo_stream
       end.to change(Volunteer, :count).by(1)
     end
   end
@@ -60,7 +60,7 @@ RSpec.describe '/volunteers' do
     end
 
     it 'change athlete' do
-      patch volunteer_url(volunteer), params: valid_attributes
+      patch volunteer_url(volunteer), params: valid_attributes, as: :turbo_stream
       expect(response).to be_successful
       expect(volunteer.reload.athlete).to eq athlete
     end
