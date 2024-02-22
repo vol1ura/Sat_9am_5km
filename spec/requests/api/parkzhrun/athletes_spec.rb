@@ -2,7 +2,6 @@
 
 RSpec.describe '/api/parkzhrun/athletes' do
   describe 'PUT /api/parkzhrun/athlete' do
-    let!(:athlete) { create(:athlete, parkzhrun_code: parkzhrun_code, male: nil) }
     let(:parkzhrun_code) { Faker::Number.number(digits: 5) + Athlete::PARKZHRUN_BORDER }
     let(:athlete_attributes) do
       {
@@ -29,6 +28,7 @@ RSpec.describe '/api/parkzhrun/athletes' do
     end
 
     context 'with valid header api key' do
+      let!(:athlete) { create(:athlete, parkzhrun_code: parkzhrun_code, male: nil) }
       let(:valid_headers) do
         { 'Authorization' => Rails.application.credentials.parkzhrun_api_key }
       end

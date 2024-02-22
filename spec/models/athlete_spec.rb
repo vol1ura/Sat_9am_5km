@@ -18,21 +18,21 @@ RSpec.describe Athlete do
   describe '#gender' do
     context 'when male is true' do
       it 'returns "мужчина"' do
-        athlete = create(:athlete, male: true)
+        athlete = build_stubbed(:athlete, male: true)
         expect(athlete.gender).to eq 'мужчина'
       end
     end
 
     context 'when male is false' do
       it 'returns "женщина"' do
-        athlete = create(:athlete, male: false)
+        athlete = build_stubbed(:athlete, male: false)
         expect(athlete.gender).to eq 'женщина'
       end
     end
 
     context 'when male is nil' do
       it 'returns nil' do
-        athlete = create(:athlete, male: nil)
+        athlete = build_stubbed(:athlete, male: nil)
         expect(athlete.gender).to be_nil
       end
     end

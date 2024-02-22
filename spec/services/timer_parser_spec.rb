@@ -1,24 +1,25 @@
 # frozen_string_literal: true
 
 RSpec.describe TimerParser, type: :service do
+  subject(:timer_parser) { described_class.call(activity, file_timer) }
+
   let(:activity) { create(:activity) }
 
-  context 'when argument is nil' do
-    it 'returns nil' do
-      expect(described_class.call(activity, nil)).to be_nil
-    end
+  context 'without file' do
+    let(:file_timer) { nil }
+
+    it { is_expected.to be_nil }
   end
 
   context 'with valid timer file on iOS' do
     let(:file_timer) { File.open('spec/fixtures/files/parkrun_timer_results_ios.csv') }
 
     it 'appends result to activity' do
-      expect { described_class.call(activity, file_timer) }.to change(activity.results, :size).to(5)
+      expect { timer_parser }.to change(activity.results, :size).to(5)
     end
 
     it 'change activity date according to timer file' do
-      date = Date.parse('04/06/2022')
-      expect { described_class.call(activity, file_timer) }.to change(activity, :date).to(date)
+      expect { timer_parser }.to change(activity, :date).to(Date.parse('04/06/2022'))
     end
   end
 
@@ -26,7 +27,7 @@ RSpec.describe TimerParser, type: :service do
     let(:file_timer) { File.open('spec/fixtures/files/parkrun_timer_results_ios_zero.csv') }
 
     it 'appends result to activity' do
-      expect { described_class.call(activity, file_timer) }.to change(activity.results, :size).to(5)
+      expect { timer_parser }.to change(activity.results, :size).to(5)
     end
   end
 
@@ -34,12 +35,11 @@ RSpec.describe TimerParser, type: :service do
     let(:file_timer) { File.open('spec/fixtures/files/parkrun_timer_results_android.csv') }
 
     it 'appends result to activity' do
-      expect { described_class.call(activity, file_timer) }.to change(activity.results, :size).to(6)
+      expect { timer_parser }.to change(activity.results, :size).to(6)
     end
 
     it 'change activity date according to timer file' do
-      date = Date.parse('26/03/2022')
-      expect { described_class.call(activity, file_timer) }.to change(activity, :date).to(date)
+      expect { timer_parser }.to change(activity, :date).to(Date.parse('26/03/2022'))
     end
   end
 end
