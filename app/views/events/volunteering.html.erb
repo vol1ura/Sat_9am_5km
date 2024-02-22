@@ -53,15 +53,13 @@
           <% @event.volunteering_positions.each do |position| %>
             <% volunteers = activity.volunteers.includes(:athlete).public_send("#{position.role}_role").order(:comment).to_a %>
             <% [position.number, volunteers.size].max.times.each do |i| %>
-              <% volunteer = volunteers[i] %>
+              <%
+                volunteer = volunteers[i]
+                idx = "#{position.role}-#{i}-#{activity.id}"
+              %>
               <tr>
-                <td>
-                  <%= human_volunteer_role position.role %>
-                  <% if volunteer&.comment && %w[marshal pacemaker other].include?(position.role) %>
-                    (<%= volunteer.comment %>)
-                  <% end %>
-                </td>
-                <td><%= render partial: 'cell', locals: { volunteer: volunteer, role: position.role, activity: activity } %></td>
+                <td><%= render partial: 'role', locals: { volunteer: volunteer, role: position.role, idx: idx } %></td>
+                <td><%= render partial: 'volunteer', locals: { volunteer: volunteer, role: position.role, idx: idx, activity: activity } %></td>
               </tr>
             <% end %>
           <% end %>

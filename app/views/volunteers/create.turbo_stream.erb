@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "volunteer-#{@idx}", partial: 'volunteer' %>
+<%= turbo_stream.replace "role-#{@idx}", partial: 'events/role', locals: { volunteer: @volunteer, role: @volunteer.role, idx: @idx } %>

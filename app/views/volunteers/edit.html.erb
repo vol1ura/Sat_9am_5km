@@ -1,7 +1,8 @@
-<%= turbo_frame_tag @volunteer.activity do %>
+<%= turbo_frame_tag "volunteer-#{@idx}" do %>
   <%= form_with model: @volunteer, html: { 'data-controller' => 'autocomplete', 'data-autocomplete-url-value' => athletes_path(format: :json) } do |f| %>
     <%= f.hidden_field :role %>
     <%= f.hidden_field :activity_id %>
+    <%= hidden_field_tag :idx, @idx %>
     <%= f.hidden_field :athlete_id, 'data-autocomplete-target' => 'hidden' %>
     <div class="row g-2">
       <div class="col-md">
@@ -16,11 +17,12 @@
           %>
         </div>
       </div>
+      <% is_athlete_invalid = @volunteer.errors.key?(:athlete) %>
       <div class="col-sm position-relative volunteers-autocomplete">
         <div class="input-group input-group-sm">
           <%=
             text_field_tag :name, @volunteer&.name,
-                           class: 'form-control',
+                           class: "form-control #{'is-invalid' if is_athlete_invalid}",
                            placeholder: 'Начните вводить имя...',
                            autocomplete: 'off',
                            'aria-label' => 'Athlete name',
@@ -30,6 +32,9 @@
           <button class="btn btn-outline-secondary" type="submit">
             <i class="fa-solid fa-user-plus text-primary"></i>
           </button>
+          <% if is_athlete_invalid %>
+            <div class="invalid-feedback"><%= @volunteer.errors[:athlete].join(', ') %></div>
+          <% end %>
         </div>
         <ul class="list-group list-group-flush position-absolute w-100 shadow rounded-bottom" data-autocomplete-target="results" data-action="click->autocomplete#select"></ul>
       </div>

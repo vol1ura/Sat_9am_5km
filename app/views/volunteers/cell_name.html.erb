@@ -1,6 +1,0 @@
-<%=
-  turbo_frame_tag @volunteer.activity do
-    comment = " (#{@volunteer.comment})" if @volunteer.comment.present?
-    link_to "#{@volunteer.name}#{comment}", edit_volunteer_path(@volunteer)
-  end
-%>
