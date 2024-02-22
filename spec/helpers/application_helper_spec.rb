@@ -37,7 +37,7 @@ RSpec.describe ApplicationHelper do
 
   describe '#human_activity_name' do
     it 'returns formatted string' do
-      activity = create(:activity)
+      activity = build_stubbed(:activity)
       expect(helper.human_activity_name(activity)).to match(/\d\d? [а-я]+\.? \d{4} - .+/)
     end
   end
@@ -70,7 +70,7 @@ RSpec.describe ApplicationHelper do
     end
 
     it 'returns nil' do
-      athlete = create(:athlete, parkrun_code: nil, fiveverst_code: nil)
+      athlete = build_stubbed(:athlete, parkrun_code: nil, fiveverst_code: nil)
       expect(helper.athlete_external_link(athlete)).to be_nil
     end
   end
