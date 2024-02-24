@@ -11,7 +11,7 @@ ActiveAdmin.register_page 'Dashboard' do
             Activity
               .in_country(top_level_domain)
               .includes(:event)
-              .where(date: Date.current..Date.current.end_of_week)
+              .where(date: Date.current..Date.current.end_of_week, published: false)
               .order('event.visible_order')
               .each do |activity|
                 li link_to_if(can?(:read, activity), human_activity_name(activity), admin_activity_path(activity))
@@ -38,6 +38,7 @@ ActiveAdmin.register_page 'Dashboard' do
         end
         panel t('active_admin.dashboard_welcome.change_log') do
           ul do
+            li 'Поиск по клубам в селекторе на форме редактирования участника'
             li 'Возможность добавлять комментарий к волонтёрской позиции и отображение его в ростере.'
             li 'Подсветка строк с некорректными результатами в редакторе протокола и при просмотре забега.'
             li 'Добавлено отдельное поле RunPark ID. Ссылка в протоколе ведёт на сайт RunPark`а.'

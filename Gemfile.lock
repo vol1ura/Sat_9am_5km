@@ -64,6 +64,10 @@ GEM
       kaminari (>= 1.2.1)
       railties (>= 6.1)
       ransack (>= 4.0)
+    activeadmin-searchable_select (1.8.0)
+      activeadmin (>= 1.x, < 4)
+      jquery-rails (>= 3.0, < 5)
+      select2-rails (~> 4.0)
     activeadmin_quill_editor (1.1.0)
       activeadmin (>= 2.0, < 4)
     activejob (7.1.2)
@@ -429,6 +433,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    select2-rails (4.0.13)
     sidekiq (7.2.0)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -491,6 +496,7 @@ PLATFORMS
 DEPENDENCIES
   active_storage_validations
   activeadmin
+  activeadmin-searchable_select
   activeadmin_quill_editor
   audited
   bcrypt_pbkdf (~> 1.0)
