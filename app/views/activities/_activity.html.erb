@@ -5,6 +5,8 @@
   <td><%= link_to activity.event_name, event_path(activity.event.code_name) %></td>
   <td class="text-center"><%= @results_count[activity.id] %></td>
   <td class="text-center"><%= @volunteers_count[activity.id] || 0 %></td>
-  <td><%= "#{male_leader_result.athlete.name} (#{human_result_time(male_leader_result.total_time)})" if male_leader_result&.athlete %></td>
-  <td><%= "#{female_leader_result.athlete.name} (#{human_result_time(female_leader_result.total_time)})" if female_leader_result&.athlete %></td>
+  <td><%= male_leader_result&.athlete&.name %></td>
+  <td><%= human_result_time(male_leader_result&.total_time) %></td>
+  <td><%= female_leader_result&.athlete&.name %></td>
+  <td><%= human_result_time(female_leader_result&.total_time) %></td>
 </tr>
