@@ -33,7 +33,6 @@ gem 'sassc-rails'
 gem 'sidekiq'
 gem 'sitemap_generator'
 gem 'sprockets-rails'
-gem 'turbo-rails'
 gem 'whenever', require: false
 
 gem 'hiredis-client'
