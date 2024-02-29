@@ -4,8 +4,7 @@ class AthletesAwardingJob < ApplicationJob
   queue_as :default
 
   def perform(activity_id)
-    @activity = Activity.find activity_id
-    return unless @activity.published
+    @activity = Activity.published.find activity_id
 
     [true, false].each { |male| process_event_records(male:) }
 
@@ -86,6 +85,10 @@ class AthletesAwardingJob < ApplicationJob
     @event_id ||= @activity.event_id
   end
 
+  def rage_badge
+    @rage_badge ||= Badge.rage_kind.sole
+  end
+
   def award_by_record_badge!(badge, result)
     trophy = Trophy.find_or_initialize_by(badge: badge, athlete_id: result.athlete_id)
     trophy.update!(info: { data: [{ event_id: event_id, result_id: result.id }] }) and return if trophy.data.blank?
@@ -96,8 +99,6 @@ class AthletesAwardingJob < ApplicationJob
   end
 
   def rage_badge_awarding!(athlete)
-    rage_badge = Badge.rage_kind.take!
-
     if athlete.award_by_rage_badge?
       athlete.trophies.create!(badge: rage_badge, date: activity_date) unless athlete.trophies.exists?(badge: rage_badge)
     else

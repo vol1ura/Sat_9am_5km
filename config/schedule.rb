@@ -40,8 +40,11 @@ every :sunday, at: '5' do
 end
 
 every :sunday, at: '5:05' do
-  rake 'processing:awarding'
   rake 'processing:results'
+end
+
+every :sunday, at: '5:10' do
+  rake 'processing:awarding'
 end
 
 every :sunday, at: '5:15' do

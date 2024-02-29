@@ -107,10 +107,21 @@ class Athlete < ApplicationRecord
   end
 
   def award_by_rage_badge?
-    last_total_times = results.published.order('activity.date DESC').limit(RAGE_BADGE_LIMIT).pluck(:total_time).compact
+    last_total_times = results.published.order(date: :desc).limit(RAGE_BADGE_LIMIT).pluck(:total_time).compact
 
     last_total_times.size == RAGE_BADGE_LIMIT &&
       last_total_times.each_cons(2).all? { |next_time, prev_time| next_time < prev_time }
+  end
+
+  def award_by_five_plus_badge?
+    initial_date = Date.current.saturday? ? Date.current : Date.tomorrow.prev_week(:saturday)
+    Activity
+      .where(id: results.select(:activity_id))
+      .or(Activity.where(id: Volunteer.where(athlete: self).select(:activity_id)))
+      .where(date: Array.new(5) { |k| initial_date - k.weeks })
+      .published
+      .distinct
+      .count == 5
   end
 
   def gender

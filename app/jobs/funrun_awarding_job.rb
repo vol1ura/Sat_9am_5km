@@ -9,14 +9,16 @@ class FunrunAwardingJob < ApplicationJob
     badge = Badge.find badge_id
     return unless badge.funrun_kind? || badge.jubilee_participating_kind?
 
-    Athlete.where(id: activity.results.select(:athlete_id))
-      .or(Athlete.where(id: activity.volunteers.select(:athlete_id)))
-      .where.not(id: badge.trophies.select(:athlete_id))
-      .find_each do |athlete|
-        athlete.trophies.create badge: badge, date: activity.date
-        unless athlete.valid?
-          Rollbar.error 'Awarding failed', errors: athlete.errors.inspect, athlete_id: athlete.id, badge_id: badge.id
-        end
-      end
+    activity.participants.where.not(id: badge.trophies.select(:athlete_id)).find_each do |athlete|
+      athlete.trophies.create badge: badge, date: activity.date
+      next if athlete.valid?
+
+      Rollbar.error(
+        "Awarding by '#{badge.kind}' badge failed",
+        errors: athlete.errors.inspect,
+        athlete_id: athlete.id,
+        badge_id: badge.id,
+      )
+    end
   end
 end

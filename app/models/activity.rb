@@ -31,6 +31,10 @@ class Activity < ApplicationRecord
       .order(:rank)
   end
 
+  def participants
+    Athlete.where(id: results.select(:athlete_id)).or(Athlete.where(id: volunteers.select(:athlete_id))).distinct
+  end
+
   def leader_result(male: true)
     results.joins(:athlete).where(athlete: { male: }).order(:position).first
   end
@@ -43,8 +47,9 @@ class Activity < ApplicationRecord
     return unless published
 
     ResultsProcessingJob.perform_later(id)
-    AthletesAwardingJob.perform_later(id) if volunteers.exists?
+    AthletesAwardingJob.perform_later(id)
     BreakingTimeAwardingJob.perform_later if results.exists?
+    FivePlusAwardingJob.perform_later(id)
     Telegram::Notification::AfterActivityJob.perform_later(id)
     ClearCache.call
   end
