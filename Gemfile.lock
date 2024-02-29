@@ -484,7 +484,7 @@ GEM
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    yard (0.9.34)
+    yard (0.9.35)
     zeitwerk (2.6.13)
 
 PLATFORMS
