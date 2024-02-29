@@ -24,7 +24,7 @@ class Badge < ApplicationRecord
 
   enum kind: {
     funrun: 0, participating: 10, home_participating: 11, jubilee_participating: 12,
-    tourist: 20, breaking: 30, rage: 40, record: 100
+    tourist: 20, breaking: 30, rage: 40, five_plus: 41, record: 100
   }, _suffix: true
 
   def self.dataset_of(kind:, type:)

@@ -12,6 +12,7 @@ namespace :processing do
   task awarding: :environment do
     Activity.published.where(date: Date.current.all_week).find_each do |activity|
       AthletesAwardingJob.perform_now(activity.id)
+      FivePlusAwardingJob.perform_now(activity.id, with_expiration: true)
     end
     BreakingTimeAwardingJob.perform_now
   end
