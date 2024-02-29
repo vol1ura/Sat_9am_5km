@@ -19,6 +19,10 @@ every 1.day, at: '2' do
   command "$HOME/backup_storage.sh"
 end
 
+every 1.month, at: '6' do
+  rake 'processing:set_five_plus_trophy_dates'
+end
+
 every :thursday, at: '19' do
   rake 'notification:rage_badges_expiration'
 end
