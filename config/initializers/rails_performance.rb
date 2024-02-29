@@ -9,7 +9,7 @@ RailsPerformance.setup do |config|
   config.http_basic_authentication_enabled = false
 
   config.ignored_endpoints = [
-    'ActiveStorage::DiskController#show',
+    'ActiveStorage::DiskController#show', 'ActiveStorage::Representations::RedirectController#show',
     'RailsPerformance::RailsPerformanceController#index', 'RailsPerformance::RailsPerformanceController#custom',
     'RailsPerformance::RailsPerformanceController#recent', 'RailsPerformance::RailsPerformanceController#slow',
     'RailsPerformance::RailsPerformanceController#requests', 'RailsPerformance::RailsPerformanceController#rake',
