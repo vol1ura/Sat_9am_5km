@@ -1,4 +1,4 @@
-<nav class="navbar bg-primary navbar-dark sticky-top mb-3">
+<nav class="navbar bg-<%= Date.current.saturday? ? 'danger' : 'primary' %> navbar-dark sticky-top mb-3">
   <div class="container-fluid">
     <%=
       link_to root_path, class: 'navbar-brand' do
@@ -44,7 +44,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-primary" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas offcanvas-end text-bg-<%= Date.current.saturday? ? 'danger' : 'primary' %>" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
           <%= link_to 'Sat 9am 5km', root_path, class: 'link-light text-decoration-none' %>
