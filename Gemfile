@@ -26,6 +26,7 @@ gem 'jbuilder'
 gem 'nokogiri'
 gem 'pg', '~> 1.4'
 gem 'puma'
+gem 'rack-attack'
 gem 'rails_performance'
 gem 'rqrcode', require: false
 gem 'ruby-vips', '>= 2.1.0'

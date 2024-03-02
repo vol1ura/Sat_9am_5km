@@ -302,6 +302,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.3)
     rack (3.0.9.1)
+    rack-attack (6.7.0)
+      rack (>= 1.0, < 4)
     rack-mini-profiler (3.3.0)
       rack (>= 1.2.0)
     rack-session (2.0.0)
@@ -531,6 +533,7 @@ DEPENDENCIES
   pry-doc
   pry-rails
   puma
+  rack-attack
   rack-mini-profiler
   rails (~> 7.1.2)
   rails_performance
