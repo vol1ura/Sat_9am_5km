@@ -6,8 +6,8 @@
 <p><%= t '.description' %></p>
 <p><%= t '.events', events_count: actual_events.size, events: actual_events.pluck(:name).to_sentence %></p>
 
-<h4><%= t '.how_to_join.title' %></h4>
-<%= t '.how_to_join.body_html', info_email: ENV['INFO_EMAIL'] %>
+<h4><%= t '.join_us.title' %></h4>
+<%= t '.join_us.body_html', info_email: ENV['INFO_EMAIL'] %>
 
 <h4><%= t '.s95_abroad.title' %></h4>
 <%
