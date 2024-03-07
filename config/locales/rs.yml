@@ -171,6 +171,7 @@ rs:
           breaking: breaking
           record: rekord staze
           rage: rang
+          five_plus: five plus
       trophy:
         athlete: sportista
         date: datum prijema
@@ -516,7 +517,7 @@ rs:
     about:
       description: S95 je otvoren platform koji objedinjuje nezavisne park trke, koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
       events: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}.'
-      how_to_join:
+      join_us:
         title: Želite da se pridružite platform S95?
         body_html: >
           <p>In short, there is needed your desire.</p>

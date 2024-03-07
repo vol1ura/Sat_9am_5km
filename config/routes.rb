@@ -39,7 +39,7 @@ Rails.application.routes.draw do
         sign_in: 'login',
         sign_out: 'logout'
       },
-      sign_out_via: [:delete, :get]
+      sign_out_via: %i[delete get]
     },
   )
 
