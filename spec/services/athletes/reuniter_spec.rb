@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe AthleteReuniter, type: :service do
+RSpec.describe Athletes::Reuniter, type: :service do
   context 'when reunite athletes with trophies' do
     let(:badge) { create(:badge) }
     let(:trophy) { create(:trophy) }
@@ -13,7 +13,7 @@ RSpec.describe AthleteReuniter, type: :service do
     end
 
     context 'when some modified attribute was ignored' do
-      before { stub_const('AthleteReuniter::SKIPPED_ATTRIBUTES', []) }
+      before { stub_const('Athletes::Reuniter::SKIPPED_ATTRIBUTES', []) }
 
       it 'returns false' do
         expect(described_class.call(collection, ids)).to be false

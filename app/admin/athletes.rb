@@ -65,7 +65,7 @@ ActiveAdmin.register Athlete do
 
   batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
                          if: proc { can? :manage, Athlete } do |ids|
-    if AthleteReuniter.call(batch_action_collection.where(id: ids), ids)
+    if Athletes::Reuniter.call(batch_action_collection.where(id: ids), ids)
       flash[:notice] = I18n.t('active_admin.athletes.successful_reunite')
     else
       flash[:alert] = I18n.t('active_admin.athletes.failed_reunite')
