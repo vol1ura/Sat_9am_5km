@@ -1,7 +1,0 @@
-<% athlete = row.first %>
-<tr>
-  <td><%= row_counter.next %></td>
-  <td><%= link_to athlete.name, athlete, class: 'athlete-link' %></td>
-  <td><%= row.last %></td>
-  <td class="hidden-on-phone"><%= link_to athlete.club.name, athlete.club if athlete.club %></td>
-</tr>

@@ -2,4 +2,20 @@
 <% head_info :description, t('.description') %>
 <h4><%= t '.title' %></h4>
 <p><%= t '.description' %></p>
-<%= render partial: 'ratings_table', locals: { collection: @athletes } %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th><%= t '.name' %></th>
+        <th><%= t '.count' %></th>
+        <th><%= t '.r_index' %></th>
+        <th><%= t '.uniq_events' %></th>
+        <th class="hidden-on-phone"><%= t '.club' %></th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <%= render partial: 'runner', collection: @athletes %>
+    </tbody>
+  </table>
+</div>
