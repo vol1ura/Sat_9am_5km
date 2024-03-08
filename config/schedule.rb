@@ -58,3 +58,7 @@ end
 every :sunday, at: '5:30' do
   rake 'sitemap:refresh'
 end
+
+every :sunday, at: '5:40' do
+  runner 'AthleteStatsUpdateJob.perform_later'
+end

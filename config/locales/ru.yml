@@ -564,10 +564,6 @@ ru:
       title_html: Дополнительные старты 1&nbsp;января&nbsp;2024&nbsp;года
       description: Обычно, мы проводим забеги только в субботу, но 1 января мы делаем исключение и проводим дополнительный забег. На странице можно посмотреть время и мероприятие, где вы можете пробежать 1 января
   ratings:
-    ratings_table:
-      name: Имя
-      count: Количество
-      club: Клуб
     results_table:
       time: Время
       name: Имя
@@ -577,6 +573,11 @@ ru:
     athletes:
       title: Рейтинг участников
       description: Топ 50 участников по общему количеству пробежек
+      name: Имя
+      count: Пробежек
+      club: Клуб
+      r_index: r-индекс
+      uniq_events: уникальных парков
     results:
       title: Лучшие результаты
       description: Топ 50 результатов по всем забегам для мужчин и женщин
@@ -585,6 +586,11 @@ ru:
     volunteers:
       title: Рейтинг волонтёров
       description: Топ 50 участников по общему количеству волонтёрств
+      name: Имя
+      count: Волонтёрств
+      club: Клуб
+      v_index: v-индекс
+      uniq_events: уникальных парков
   athletes:
     show:
       description: 'Профиль участника %{athlete_name}: результаты, статистика и волонтёрства'
@@ -592,8 +598,8 @@ ru:
       show_club_html: 'Посмотреть статистику клуба %{link}.'
       total_results: всего пробежек
       total_volunteering: всего волонтёрств
-      volunteering_h_index: Волонтёрский h-индекс
-      volunteering_h_index_explanation: Индекс равен h, если есть как минимум h позиций, на каждой из которых было как минимум h волонтёрств
+      v_index: v-индекс
+      v_index_explanation: Индекс равен v, если есть как минимум v позиций (ролей), на каждой из которых было как минимум v волонтёрств
       volunteering_coefficient: Коэффициент волонтёра
       volunteering_coefficient_explanation: Число волонтёрств  на каждые 10 пробежек
       total_trophies: всего наград

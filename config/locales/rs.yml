@@ -563,10 +563,6 @@ rs:
       title_html: 'Additional events 1&nbsp;januar&nbsp;2024'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
   ratings:
-    ratings_table:
-      name: Ime
-      count: Count
-      club: Klub
     results_table:
       time: Vreme
       name: Ime
@@ -576,6 +572,11 @@ rs:
     athletes:
       title: Athletes rating
       description: Топ 50 athletes with count of all runs
+      name: Ime
+      count: Runs
+      club: Klub
+      r_index: r-index
+      uniq_events: uniq parks
     results:
       title: Najbolji rezultati
       description: Top 50 results on all events for man and woman
@@ -584,6 +585,11 @@ rs:
     volunteers:
       title: Volunteers rating
       description: Top 50 participants with count of all volunteering
+      name: Ime
+      count: Volunteering
+      club: Klub
+      v_index: v-index
+      uniq_events: уникальных парков
   athletes:
     show:
       description: 'Athlete profile %{athlete_name}: results, statistics and volunteering'
@@ -591,8 +597,8 @@ rs:
       show_club_html: 'Show club statistics %{link}.'
       total_results: total runs
       total_volunteering: total volunteering
-      volunteering_h_index: Volunteering h-index
-      volunteering_h_index_explanation: The index is equal to h if there are at least h positions, each of which had at least h volunteering
+      v_index: v-index
+      v_index_explanation: The index is equal to v if there are at least v positions (roles), each of which had at least v volunteering
       volunteering_coefficient: Volunteering coefficient
       volunteering_coefficient_explanation: Volunteering count for every 10 runs
       total_trophies: total trophies

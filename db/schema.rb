@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_06_175426) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_02_191049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_06_175426) do
     t.bigint "parkzhrun_code"
     t.bigint "event_id"
     t.bigint "runpark_code"
+    t.jsonb "stats", default: {}, null: false
     t.index ["club_id"], name: "index_athletes_on_club_id"
     t.index ["event_id"], name: "index_athletes_on_event_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
@@ -86,6 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_06_175426) do
     t.index ["parkrun_code"], name: "index_athletes_on_parkrun_code", unique: true
     t.index ["parkzhrun_code"], name: "index_athletes_on_parkzhrun_code", unique: true
     t.index ["runpark_code"], name: "index_athletes_on_runpark_code", unique: true
+    t.index ["stats"], name: "index_athletes_on_stats", using: :gin
     t.index ["user_id"], name: "index_athletes_on_user_id", unique: true
   end
 
