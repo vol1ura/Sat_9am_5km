@@ -54,7 +54,7 @@ module ApplicationHelper
     return unless athlete && (athlete.parkrun_code || athlete.fiveverst_code || athlete.runpark_code)
 
     code_type = Athlete::PersonalCode.new(athlete.code).code_type
-    url = format(AthleteFinder::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type))
+    url = format(Athletes::Finder::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type))
     external_link_to t('common.open_link'), url
   end
 

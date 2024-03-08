@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe AthleteFinder, type: :service do
+RSpec.describe Athletes::Finder, type: :service do
   context 'when argument is nil' do
     let(:parkrun_code) { Faker::Number.number(digits: 7) }
 
