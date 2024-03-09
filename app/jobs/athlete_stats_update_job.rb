@@ -5,7 +5,7 @@ class AthleteStatsUpdateJob < ApplicationJob
 
   def perform(athlete_ids = nil)
     dataset = Athlete.all
-    dataset = dataset.where(athlete_id: athlete_ids) if athlete_ids
+    dataset = dataset.where(id: athlete_ids) if athlete_ids
 
     dataset.find_each do |athlete|
       Athletes::StatsUpdate.call(athlete)
