@@ -572,9 +572,14 @@ rs:
     athletes:
       title: Athletes rating
       description: Топ 50 athletes with count of all runs
+      description_html: >
+        <p>Топ 50 участников по общему количеству пробежек</p>
+        <ul>
+          <li><strong>r-индекс</strong> - значение, которое равно r, если участник пробежал в r парках, причём в каждом из них хотя бы r раз</li>
+          <li><strong>уникальных парков</strong> - количество посещённых парков в качестве бегуна</li>
+        </ul>
       name: Ime
       count: Runs
-      club: Klub
       r_index: r-index
       uniq_events: uniq parks
     results:
@@ -585,9 +590,14 @@ rs:
     volunteers:
       title: Volunteers rating
       description: Top 50 participants with count of all volunteering
+      description_html: >
+        <p>Топ 50 участников по общему количеству волонтёрств</p>
+        <ul>
+          <li><strong>v-индекс</strong> - значение, которое равно v, если участник был волонтёром на v различных позициях (ролях), на каждой из которых хотя бы v раз</li>
+          <li><strong>уникальных парков</strong> - количество посещённых парков в качестве волонтёра</li>
+        </ul>
       name: Ime
       count: Volunteering
-      club: Klub
       v_index: v-index
       uniq_events: уникальных парков
   athletes:
