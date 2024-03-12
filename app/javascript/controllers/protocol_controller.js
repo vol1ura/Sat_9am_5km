@@ -5,12 +5,12 @@ export default class extends Controller {
 
   initialize() {
     this.maleTarget.innerHTML = this.absoluteTarget.innerHTML
-    this.filterTableByMale(this.maleTarget, 'true')
+    this.#filterTableByMale(this.maleTarget, 'true')
     this.femaleTarget.innerHTML = this.absoluteTarget.innerHTML
-    this.filterTableByMale(this.femaleTarget, 'false')
+    this.#filterTableByMale(this.femaleTarget, 'false')
   }
 
-  filterTableByMale(table, is_male) {
+  #filterTableByMale(table, is_male) {
     let new_position = 0
     table.querySelectorAll('tbody tr').forEach(row => {
       if (row.dataset.male !== is_male) {
