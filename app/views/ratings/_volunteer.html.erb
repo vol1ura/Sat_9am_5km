@@ -1,8 +1,0 @@
-<% athlete = volunteer.first %>
-<tr>
-  <td><%= volunteer_counter.next %></td>
-  <td><%= link_to athlete.name, athlete, class: 'athlete-link' %></td>
-  <td><%= volunteer.last %></td>
-  <td><%= athlete.stats.dig('volunteering', 'v_index') || 0 %></td>
-  <td><%= athlete.stats.dig('volunteering', 'uniq_events') || 0 %></td>
-</tr>

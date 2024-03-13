@@ -563,43 +563,37 @@ rs:
       title_html: 'Additional events 1&nbsp;januar&nbsp;2024'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
   ratings:
+    index:
+      description: To view the top 50 participants, select one of indicators below. The information on this page is updated regularly, but it may sometimes be slightly different from what is current. You can always check the current values in the athlete's profile.
+      results:
+        title: Athletes rating
+        description:
+          count: Total number of runs scored. In case of equal value, the one with more volunteering will be higher in the rating.
+          h_index: Running h-index - a value that is equal to h if the participant ran in h parks, and in each of them at least h times. In case of equal value, the participant with more races will be higher in the ranking.
+          uniq_events: Unique parks - number of parks visited as a runner. In case of equal values, the participant with more races will be higher in the ranking.
+      volunteers:
+        title: Volunteers rating
+        description:
+          count: Total number of volunteers. In the event of a tie, the one with more scored runs will be ranked higher.
+          h_index: Volunteer h-index - a value that is equal to h if the participant was a volunteer in h different positions (roles), in each of which at least h times. In case of equal values, the participant with a greater number of volunteers will be higher in the rating.
+          uniq_events: Unique parks - number of parks visited as a volunteer. In case of equal values, the participant with a greater number of volunteers will be higher in the rating.
+    ratings_table:
+      name: Ime
+      club: Klub
+      count: Count
+      h_index: h-index
+      uniq_events: Uniq parks
+    results:
+      title: Najbolji rezultati
+      description: Top 50 results on all events for man and woman
+      men: Muškarci
+      women: Žene
     results_table:
       time: Vreme
       name: Ime
       date: Datum
       club: Klub
       event: Događaj
-    athletes:
-      title: Athletes rating
-      description: Топ 50 athletes with count of all runs
-      description_html: >
-        <p>Топ 50 участников по общему количеству пробежек</p>
-        <ul>
-          <li><strong>r-индекс</strong> - значение, которое равно r, если участник пробежал в r парках, причём в каждом из них хотя бы r раз</li>
-          <li><strong>уникальных парков</strong> - количество посещённых парков в качестве бегуна</li>
-        </ul>
-      name: Ime
-      count: Runs
-      r_index: r-index
-      uniq_events: uniq parks
-    results:
-      title: Najbolji rezultati
-      description: Top 50 results on all events for man and woman
-      men: Muškarci
-      women: Žene
-    volunteers:
-      title: Volunteers rating
-      description: Top 50 participants with count of all volunteering
-      description_html: >
-        <p>Топ 50 участников по общему количеству волонтёрств</p>
-        <ul>
-          <li><strong>v-индекс</strong> - значение, которое равно v, если участник был волонтёром на v различных позициях (ролях), на каждой из которых хотя бы v раз</li>
-          <li><strong>уникальных парков</strong> - количество посещённых парков в качестве волонтёра</li>
-        </ul>
-      name: Ime
-      count: Volunteering
-      v_index: v-index
-      uniq_events: уникальных парков
   athletes:
     show:
       description: 'Athlete profile %{athlete_name}: results, statistics and volunteering'
@@ -607,8 +601,8 @@ rs:
       show_club_html: 'Show club statistics %{link}.'
       total_results: total runs
       total_volunteering: total volunteering
-      v_index: v-index
-      v_index_explanation: The index is equal to v if there are at least v positions (roles), each of which had at least v volunteering
+      h_index: h-index
+      h_index_explanation: The index is equal to h if there are at least h positions (roles), each of which had at least h volunteering
       volunteering_coefficient: Volunteering coefficient
       volunteering_coefficient_explanation: Volunteering count for every 10 runs
       total_trophies: total trophies
