@@ -1,0 +1,20 @@
+<% head_info :title, t(".#{@rating_type}.title") %>
+<% head_info :description, t('.description') %>
+<h4><%= t ".#{@rating_type}.title" %></h4>
+<p><%= t '.description' %></p>
+<%=
+  form_with(
+    url: ratings_path,
+    data: { controller: 'rating', action: 'change->rating#select', turbo_stream: true },
+    method: :get,
+  ) do |form|
+%>
+  <%= form.hidden_field :rating_type, value: @rating_type %>
+  <% RatingsController::RATINGS.each do |order| %>
+    <div class="form-check">
+      <%= form.radio_button :order, order, checked: order == @order, class: 'form-check-input' %>
+      <%= form.label order, t(".#{@rating_type}.description.#{order}"), class: 'form-check-label' %>
+    </div>
+  <% end %>
+<% end %>
+<%= render 'ratings_table' %>

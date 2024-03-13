@@ -1,16 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe 'ratings' do
-  describe 'GET /ratings/athletes' do
+  describe 'GET /ratings?rating_type=results' do
     before do
-      Bullet.n_plus_one_query_enable = false
       create_list(:result, 2)
 
-      get athletes_ratings_url
-    end
-
-    after do
-      Bullet.n_plus_one_query_enable = true
+      get ratings_url(rating_type: 'results')
     end
 
     it { expect(response).to be_successful }
@@ -29,16 +24,11 @@ RSpec.describe 'ratings' do
     it { expect(response).to be_successful }
   end
 
-  describe 'GET /ratings/volunteers' do
+  describe 'GET /ratings?rating_type=volunteers' do
     before do
-      Bullet.n_plus_one_query_enable = false
       create_list(:volunteer, 2)
 
-      get volunteers_ratings_url
-    end
-
-    after do
-      Bullet.n_plus_one_query_enable = true
+      get ratings_url(rating_type: 'volunteers')
     end
 
     it { expect(response).to be_successful }

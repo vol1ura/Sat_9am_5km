@@ -16,15 +16,17 @@ module Athletes
 
     def stats
       data = {}
-      if published_results.exists?
+      if (results_count = published_results.size).positive?
         data[:results] = {
-          r_index: h_index(published_results, :event_id),
+          count: results_count,
+          h_index: h_index(published_results, :event_id),
           uniq_events: uniq_events(published_results),
         }
       end
-      if published_volunteering.exists?
-        data[:volunteering] = {
-          v_index: h_index(published_volunteering, :role),
+      if (volunteering_count = published_volunteering.size).positive?
+        data[:volunteers] = {
+          count: volunteering_count,
+          h_index: h_index(published_volunteering, :role),
           uniq_events: uniq_events(published_volunteering),
         }
       end

@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 class RatingsController < ApplicationController
-  def athletes
-    @athletes = ratings_for(Result)
-  end
+  RATINGS = %w[count h_index uniq_events].freeze
 
-  def volunteers
-    @volunteers = ratings_for(Volunteer)
+  def index
+    @rating_type = params[:rating_type] == 'volunteers' ? 'volunteers' : 'results'
+    @order = RATINGS.include?(params[:order]) ? params[:order] : 'count'
+    @athletes = athletes_dataset
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('ratings_table', partial: 'ratings_table') }
+    end
   end
 
   def results
@@ -17,13 +22,24 @@ class RatingsController < ApplicationController
 
   private
 
-  def ratings_for(model)
-    athlete_ids = country_dataset_for(model).select(:athlete_id).distinct(:athlete_id)
-    @volunteers =
-      model.published.where(athlete_id: athlete_ids).group(:athlete).order(Arel.sql('COUNT(*) DESC')).limit(50).count
-  end
-
   def country_dataset_for(model)
     model.published.joins(activity: { event: :country }).where(country: { code: top_level_domain })
+  end
+
+  def athletes_dataset
+    athlete_ids =
+      country_dataset_for(@rating_type.singularize.camelize.constantize).select(:athlete_id).distinct(:athlete_id)
+    second_order_type =
+      if @order == 'count'
+        @rating_type == 'results' ? 'volunteers' : 'results'
+      else
+        @rating_type
+      end
+    sort_order_sql =
+      "stats #> '{#{@rating_type},#{@order}}' DESC NULLS LAST," \
+      "stats #> '{#{second_order_type},count}' DESC NULLS LAST," \
+      'name'
+
+    Athlete.includes(:club).where(id: athlete_ids).order(Arel.sql(sort_order_sql)).limit(50)
   end
 end

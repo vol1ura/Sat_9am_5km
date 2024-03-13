@@ -14,12 +14,8 @@ Rails.application.routes.draw do
   resources :clubs, only: %i[index show] do
     get :last_week, on: :member
   end
-  resources :ratings, only: [] do
-    collection do
-      get :athletes
-      get :results
-      get :volunteers
-    end
+  resources :ratings, only: :index do
+    get :results, on: :collection
   end
   resource :user, only: :update
   get '/pages/:page', to: 'pages#show', as: :page

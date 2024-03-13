@@ -23,8 +23,8 @@
                 <li><%= link_to t('.recent_results'), activities_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.club_ratings'), clubs_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.top_results'), results_ratings_path, class: 'dropdown-item' %></li>
-                <li><%= link_to t('.top_athletes'), athletes_ratings_path, class: 'dropdown-item' %></li>
-                <li><%= link_to t('.top_volunteers'), volunteers_ratings_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.top_athletes'), ratings_path(rating_type: 'results'), class: 'dropdown-item' %></li>
+                <li><%= link_to t('.top_volunteers'), ratings_path(rating_type: 'volunteers'), class: 'dropdown-item' %></li>
                 <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
               </ul>
             </li>
@@ -66,10 +66,10 @@
             <%= link_to t('.top_results'), results_ratings_path, class: "nav-link #{'active' if params[:action] == 'results' && params[:controller] == 'ratings'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.top_athletes'), athletes_ratings_path, class: "nav-link #{'active' if params[:action] == 'athletes' && params[:controller] == 'ratings'}" %>
+            <%= link_to t('.top_athletes'), ratings_path(rating_type: 'results'), class: "nav-link #{'active' if params[:action] == 'athletes' && params[:controller] == 'ratings'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.top_volunteers'), volunteers_ratings_path, class: "nav-link #{'active' if params[:action] == 'volunteers' && params[:controller] == 'ratings'}" %>
+            <%= link_to t('.top_volunteers'), ratings_path(rating_type: 'volunteers'), class: "nav-link #{'active' if params[:action] == 'volunteers' && params[:controller] == 'ratings'}" %>
           </li>
           <li class="nav-item">
             <%= link_to t('.badges'), badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" %>

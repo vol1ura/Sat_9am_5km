@@ -55,9 +55,9 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <div class="hstack">
-                <div class="acc-li-s"><%= t '.v_index' %></div>
+                <div class="acc-li-s"><%= t '.h_index' %></div>
                 <div class="mx-3">
-                  <abbr title="<%= t '.v_index_explanation' %>" class="initialism">
+                  <abbr title="<%= t '.h_index_explanation' %>" class="initialism">
                     <%= @volunteering.group(:role).reorder(count_all: :desc).count.values.map.with_index.take_while { |count, idx| count > idx }.size %>
                   </abbr>
                 </div>
