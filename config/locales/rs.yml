@@ -674,3 +674,8 @@ rs:
       main_page: Main
       role: Role
       volunteer: Volunteer
+  users:
+    field:
+      edit: Edit
+    edit:
+      save: Save
