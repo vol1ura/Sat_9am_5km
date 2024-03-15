@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def update
     @field = user_params.keys.first
     if @field && current_user.update(user_params.slice(@field))
-      render partial: 'field', locals: { field: @field, value: current_user.public_send(@field) }
+      render partial: 'field', locals: { field: @field }
     else
       render 'edit'
     end

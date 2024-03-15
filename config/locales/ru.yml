@@ -675,3 +675,8 @@ ru:
       main_page: Главная
       role: Роль
       volunteer: Волонтёр
+  users:
+    field:
+      edit: Изменить
+    edit:
+      save: Сохранить
