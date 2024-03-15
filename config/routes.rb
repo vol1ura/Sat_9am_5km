@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :ratings, only: :index do
     get :results, on: :collection
   end
-  resource :user, only: :update
+  resource :user, only: %i[show edit update]
   get '/pages/:page', to: 'pages#show', as: :page
   ActiveAdmin.routes(self)
   devise_for(

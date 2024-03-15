@@ -458,7 +458,6 @@ rs:
       short: "%d %b, %H:%M"
   views:
     greeting: '%{name}, dobro došli na S95!!'
-    update: 'Podaci ažurirani'
     pagination:
       previous: '←'
       first: '↞'

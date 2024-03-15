@@ -1,25 +1,29 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  PERMITTED_PARAMS = %w[first_name last_name].freeze
+
   before_action :authenticate_user!
-  before_action :allow_without_password, only: :update
+
+  def show; end
+
+  def edit
+    @field = params[:field]
+    redirect_to user_path unless PERMITTED_PARAMS.include?(@field)
+  end
 
   def update
-    redirect_to edit_user_registration_path and return unless current_user.update(user_params)
-
-    redirect_to athlete_path(current_user.athlete), notice: t('views.update')
+    @field = user_params.keys.first
+    if @field && current_user.update(user_params.slice(@field))
+      render partial: 'field', locals: { field: @field, value: current_user.public_send(@field) }
+    else
+      render 'edit'
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, athlete_attributes: %i[club_id])
-  end
-
-  def allow_without_password
-    return unless params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-
-    params[:user].delete(:password)
-    params[:user].delete(:password_confirmation)
+    @user_params ||= params.require(:user).permit(*PERMITTED_PARAMS)
   end
 end

@@ -459,7 +459,6 @@ ru:
       short: "%d %b, %H:%M"
   views:
     greeting: '%{name}, приветствуем в S95!'
-    update: 'Данные обновлены'
     pagination:
       previous: '←'
       first: '↞'
