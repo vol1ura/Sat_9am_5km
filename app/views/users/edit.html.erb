@@ -1,0 +1,16 @@
+<%= turbo_frame_tag @field do %>
+  <%= form_with model: current_user, url: user_path, class: 'position-relative' do |form| %>
+    <% is_user_invalid = current_user.errors.key?(@field) %>
+    <div class="hstack gap-1">
+      <%= form.text_field @field, class: "form-control #{'is-invalid' if is_user_invalid}", required: true %>
+      <button class="ms-auto btn btn-outline-secondary" type="submit" title="Сохранить">
+        <i class="fa-solid fa-user-plus text-primary"></i>
+      </button>
+      <% if is_user_invalid %>
+        <div class="invalid-tooltip d-block">
+          <%= current_user.errors[@field].join(', ') %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

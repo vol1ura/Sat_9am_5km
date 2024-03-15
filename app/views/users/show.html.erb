@@ -1,0 +1,19 @@
+<h2>Настройки</h2>
+
+<div class="row mb-3">
+  <div class="col-4 col-lg-2 text-capitalize fw-bold">
+    <%= t('activerecord.attributes.user.first_name') %>
+  </div>
+  <div class="col-8 col-lg-4">
+    <%= render 'field', field: 'first_name', value: current_user.first_name %>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-4 col-lg-2 text-capitalize fw-bold">
+    <%= t('activerecord.attributes.user.last_name') %>
+  </div>
+  <div class="col-8 col-lg-4">
+    <%= render 'field', field: 'last_name', value: current_user.last_name %>
+  </div>
+</div>
