@@ -675,6 +675,9 @@ rs:
       role: Role
       volunteer: Volunteer
   users:
+    show:
+      title: Settings
+      description: 'Settings for %{user_name}'
     field:
       edit: Edit
     edit:

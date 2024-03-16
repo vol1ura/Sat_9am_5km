@@ -1,4 +1,6 @@
-<h2>Настройки</h2>
+<% head_info :title, t('.title') %>
+<% head_info :description, t('.description', user_name: current_user.full_name) %>
+<h2><%= t '.title' %></h2>
 
 <% UsersController::PERMITTED_PARAMS.each do |field| %>
   <div class="row align-items-center mb-3">
