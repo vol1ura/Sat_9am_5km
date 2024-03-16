@@ -676,6 +676,9 @@ ru:
       role: Роль
       volunteer: Волонтёр
   users:
+    show:
+      title: Настройки
+      description: 'Настройки для пользователя %{user_name}'
     field:
       edit: Изменить
     edit:
