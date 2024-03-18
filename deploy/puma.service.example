@@ -1,0 +1,29 @@
+[Unit]
+Description=Puma HTTP Server for s95 (production)
+After=network.target
+Requires=puma.socket
+
+[Service]
+# If your Puma process locks up, systemd's watchdog will restart it within seconds.
+WatchdogSec=10
+Type=notify
+
+User=deploy
+
+WorkingDirectory=/path/to/app/current
+
+ExecStart=/bin/bash -lc '/home/<user>/.rbenv/bin/rbenv exec bundle exec puma -C ./config/puma.rb'
+ExecStop=/bin/bash -lc '/home/<user>/.rbenv/bin/rbenv exec bundle exec pumactl stop -S /path/to/app/shared/tmp/pids/puma.state'
+ExecReload=/bin/bash -lc '/home/<user>/.rbenv/bin/rbenv exec bundle exec pumactl phased-restart -S /path/to/app/shared/tmp/pids/puma.state -P /path/to/app/shared/tmp/pids/puma.pid'
+
+StandardOutput=append:/path/to/app/shared/log/puma.access.log
+StandardError=append:/path/to/app/shared/log/puma.error.log
+#PIDFile=/path/to/app/shared/tmp/pids/puma.pid
+
+Restart=always
+#RestartSec=1
+
+SyslogIdentifier=puma
+
+[Install]
+WantedBy=multi-user.target

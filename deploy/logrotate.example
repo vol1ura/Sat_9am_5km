@@ -1,0 +1,7 @@
+# /etc/logrotate.d/s95
+/path/to/app/current/log/*.log {
+  monthly
+  dateext
+  rotate 1
+  create 0640 deploy deploy
+}
