@@ -1,0 +1,23 @@
+[Unit]
+Description=Puma HTTP Server Accept Sockets for s95 (production)
+
+[Socket]
+#ListenStream=/path/to/app/shared/tmp/sockets/s95-puma.sock
+ListenStream=0.0.0.0:3000
+
+# Don't let systemd accept the request, wait for Puma to do that.
+# Systemd will start the puma service upon first request if it wasn't started.
+#
+# You might also want to set your Nginx upstream to have a fail_timeout large enough to accomodate your app's
+# startup time.
+Accept=no
+# Enable this if you're using Puma with the "low_latency" option, read more in Puma DSL docs and systemd docs:
+# https://www.freedesktop.org/software/systemd/man/latest/systemd.socket.html#NoDelay=
+#NoDelay=true
+ReusePort=true
+Backlog=1024
+
+SyslogIdentifier=puma_socket
+
+[Install]
+WantedBy=sockets.target
