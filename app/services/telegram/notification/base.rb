@@ -15,7 +15,7 @@ module Telegram
           parse_mode: 'Markdown',
           reply_markup: Telegram::Bot::MAIN_KEYBOARD,
           **,
-        )
+        ).is_a?(Net::HTTPSuccess)
       end
 
       # :nocov:
