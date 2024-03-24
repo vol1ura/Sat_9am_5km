@@ -19,7 +19,7 @@ module Telegram
         URI("https://api.telegram.org/bot#{TOKEN}/#{@method}"),
         @payload.to_json,
         HEADERS,
-      ).is_a?(Net::HTTPSuccess)
+      )
     end
   end
 end
