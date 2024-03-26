@@ -16,9 +16,6 @@ tmp/pids/*
 public/assets/
 public/sitemaps/
 storage/
-vendor/*
-!vendor/.keep
-!vendor/javascript/.keep
 coverage/
 .reek.yml
 config/database.yml

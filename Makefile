@@ -31,3 +31,5 @@ clean_logs:
 	touch ./log/capistrano.log
 	rm ./log/bullet.log
 	touch ./log/bullet.log
+
+.PHONY: project bind rc ash psql checkup build clean_logs
