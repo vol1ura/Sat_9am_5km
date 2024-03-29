@@ -1,14 +1,25 @@
 <% head_info :title, t('.title') %>
 <% head_info :description, t('.description', user_name: current_user.full_name) %>
-<h2><%= t '.title' %></h2>
-
-<% UsersController::PERMITTED_PARAMS.each do |field| %>
-  <div class="row align-items-center mb-3">
-    <div class="col-4 col-lg-2 text-capitalize fw-bold">
-      <%= t("activerecord.attributes.user.#{field}") %>
+<h2 class="mb-4"><%= t '.title' %></h2>
+<%= turbo_frame_tag current_user do %>
+  <div class="row">
+    <div class="col-6 col-sm-auto">
+      <% if current_user.image.attached? %>
+        <%= image_tag current_user.image.variant(:web), class: 'rounded-circle border border-primary border-opacity-10' %>
+      <% else %>
+        <%= image_tag 'person.jpg', class: 'rounded-circle border border-primary border-opacity-10' %>
+      <% end %>
     </div>
-    <div class="col-8 col-lg-4">
-      <%= render 'field', field: field %>
+    <div class="col-6 col-sm-4">
+      <div class="d-flex flex-column">
+        <div class="fs-2"><%= current_user.first_name %></div>
+        <div class="fs-2"><%= current_user.last_name %></div>
+        <div class="mt-3">
+          <%= link_to edit_user_path, class: 'icon-link btn btn-outline-primary', title: 'Изменить' do %>
+            <i class="fa-solid fa-pen-to-square"></i> Изменить
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

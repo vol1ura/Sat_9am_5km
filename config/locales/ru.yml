@@ -51,6 +51,7 @@ ru:
         note: примечание
         telegram_user: телеграм
         athlete: участник
+        image: изображение
       permission:
         event: мероприятие
         user: пользователь

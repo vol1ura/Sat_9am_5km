@@ -12,9 +12,17 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :athlete, reject_if: :all_blank
   has_many :permissions, dependent: :destroy
 
+  has_one_attached :image do |attachable|
+    attachable.variant :web, resize_to_fill: [150, 150]
+  end
+
   validates :first_name, presence: true, format: { with: /\A[a-zа-яё]{2,}\z/i }
   validates :last_name, presence: true, format: { with: /\A[a-zа-яё]{2,}(-[a-zа-яё]{2,})?\z/i }
   validates :telegram_id, uniqueness: true, allow_nil: true
+  validates :image,
+            content_type: %i[png jpg jpeg],
+            dimension: { min: 200..200 },
+            size: { less_than: 512.kilobytes }
 
   enum role: { admin: 0 }
 

@@ -23,6 +23,10 @@ every 1.month, at: '6' do
   rake 'processing:set_five_plus_trophy_dates'
 end
 
+every 1.month, at: '1' do
+  rake 'processing:purge_unattached_files'
+end
+
 every :thursday, at: '19' do
   rake 'notification:rage_badges_expiration'
 end
