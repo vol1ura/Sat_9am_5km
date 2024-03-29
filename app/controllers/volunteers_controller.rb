@@ -12,11 +12,11 @@ class VolunteersController < ApplicationController
   def edit; end
 
   def create
-    render 'edit' unless @volunteer.save
+    render :edit unless @volunteer.save
   end
 
   def update
-    render(@volunteer.update(resource_params) ? 'create' : 'edit')
+    render(@volunteer.update(resource_params) ? :create : :edit)
   end
 
   private

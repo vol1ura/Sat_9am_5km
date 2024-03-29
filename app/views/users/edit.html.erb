@@ -1,16 +1,43 @@
-<%= turbo_frame_tag @field do %>
-  <%= form_with model: current_user, url: user_path, class: 'position-relative' do |form| %>
-    <% is_user_invalid = current_user.errors.key?(@field) %>
-    <div class="hstack gap-1">
-      <%= form.text_field @field, class: "form-control #{'is-invalid' if is_user_invalid}", required: true %>
-      <button class="ms-auto btn btn-outline-secondary" type="submit" title="<%= t '.save' %>">
-        <i class="fa-solid fa-user-plus text-primary"></i>
-      </button>
-      <% if is_user_invalid %>
-        <div class="invalid-tooltip d-block">
-          <%= current_user.errors[@field].join(', ') %>
+<%= turbo_frame_tag current_user do %>
+  <%= form_with model: current_user, url: user_path do |form| %>
+    <div class="row">
+      <div class="col-12 col-sm-8 col-md-4">
+        <div class="d-flex flex-column">
+          <div>
+            <%= form.label :first_name, class: 'col-form-label text-capitalize fw-light' %>
+            <% is_first_name_invalid = current_user.errors.key?(:first_name) %>
+            <%= form.text_field :first_name, class: "form-control #{'is-invalid' if is_first_name_invalid}", required: true %>
+            <% if is_first_name_invalid %>
+              <div class="invalid-feedback d-block"><%= current_user.errors[:first_name].join(', ') %></div>
+            <% end %>
+          </div>
+          <div class="mt-2">
+            <%= form.label :last_name, class: 'form-label text-capitalize fw-light' %>
+            <% is_last_name_invalid = current_user.errors.key?(:last_name) %>
+            <%= form.text_field :last_name, class: "form-control #{'is-invalid' if is_last_name_invalid}", required: true %>
+            <% if is_last_name_invalid %>
+              <div class="invalid-feedback d-block"><%= current_user.errors[:last_name].join(', ') %></div>
+            <% end %>
+          </div>
+          <div class="mt-2">
+            <%= form.label :image, class: 'form-label text-capitalize fw-light' %>
+            <%= form.file_field :image, class: 'form-control' %>
+            <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
+          </div>
+          <div class="mt-2 form-check form-switch">
+            <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch' %>
+            <%= label_tag :delete_image, 'Удалить фото', class: 'form-check-label' %>
+          </div>
+          <div class="mt-5">
+            <button class="me-1 btn btn-primary" type="submit" title="<%= t '.save' %>">
+              <i class="fa-regular fa-circle-down"></i> <%= t '.save' %>
+            </button>
+            <%= link_to user_path, class: 'btn btn-outline-primary float-end' do %>
+              <i class="fa-regular fa-circle-xmark"></i> Отменить
+            <% end %>
+          </div>
         </div>
-      <% end %>
+      </div>
     </div>
   <% end %>
 <% end %>

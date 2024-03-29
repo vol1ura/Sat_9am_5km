@@ -45,4 +45,9 @@ namespace :processing do
     Rollbar.error e
     ParkzhrunMailer.error.deliver_later
   end
+
+  desc 'Purges unattached Active Storage blobs'
+  task purge_unattached_files: :environment do
+    ActiveStorage::Blob.unattached.where(created_at: ..2.days.ago).find_each(&:purge_later)
+  end
 end

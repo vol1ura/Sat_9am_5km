@@ -2,11 +2,16 @@
 <% head_info :title, athlete_name %>
 <% head_info :description, t('.description', athlete_name:) %>
 
-<h1>
-  <%= athlete_name %>
-  <button type="button" class="btn btn-outline-primary btn-light float-end float-md-none ms-md-3 mb-2" data-bs-toggle="modal" data-bs-target="#barcodeModal">
-    <i class="fa-solid fa-qrcode" title="QR"></i>
-  </button>
+<h1 class="row">
+  <div class="col-6">
+    <%= athlete_name %>
+  </div>
+  <div class="ms-auto col-auto position-relative">
+    <%= image_tag user_image_url(@athlete.user), class: 'rounded-circle border border-primary border-opacity-10' %>
+    <a href="#" class="btn btn-outline-primary rounded-circle position-absolute top-0 end-0 me-2" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
+      <i class="fa-solid fa-qrcode" title="QR"></i>
+    </a>
+  </div>
 </h1>
 
 <div class="accordion accordion-flush" id="accordionPersonalBest" data-controller="athlete">
@@ -220,7 +225,7 @@
       <%= render partial: 'result', collection: @athlete.results.published.includes(activity: :event).order('activity.date DESC') %>
     </tbody>
   </table>
-  <%= render partial: '/expand_button' if @total_results > 15 %>
+  <%= render '/expand_button' if @total_results > 15 %>
 <% end %>
 
 <h2><%= t '.volunteering' %></h2>
