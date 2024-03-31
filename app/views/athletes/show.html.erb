@@ -2,9 +2,9 @@
 <% head_info :title, athlete_name %>
 <% head_info :description, t('.description', athlete_name:) %>
 
-<h1 class="row">
+<div class="row">
   <div class="col-6">
-    <%= athlete_name %>
+    <h1 class="mt-2"><%= athlete_name %></h1>
   </div>
   <div class="ms-auto col-auto position-relative">
     <%= image_tag user_image_url(@athlete.user), class: 'rounded-circle border border-primary border-opacity-10' %>
@@ -12,15 +12,15 @@
       <i class="fa-solid fa-qrcode" title="QR"></i>
     </a>
   </div>
-</h1>
+</div>
 
 <div class="accordion accordion-flush" id="accordionPersonalBest" data-controller="athlete">
   <% if @athlete.club %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-club">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseClub" aria-expanded="false" aria-controls="flush-collapseClub">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @athlete.club.name %></span>
-          <%= t '.club' %>
+          <span class="badge text-bg-ligth bg-primary me-3"><i class="fa-solid fa-people-group"></i></span>
+          <%= @athlete.club.name %>
         </button>
       </h2>
       <div id="flush-collapseClub" class="accordion-collapse collapse" aria-labelledby="flush-club" data-bs-parent="#accordionPersonalBest">

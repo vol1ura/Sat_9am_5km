@@ -598,8 +598,7 @@ ru:
   athletes:
     show:
       description: 'Профиль участника %{athlete_name}: результаты, статистика и волонтёрства'
-      club: клуб
-      show_club_html: 'Посмотреть статистику клуба %{link}.'
+      show_club_html: 'Посмотреть статистику клуба %{link}'
       total_results: всего пробежек
       total_volunteering: всего волонтёрств
       h_index: h-индекс

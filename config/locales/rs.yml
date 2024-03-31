@@ -596,8 +596,7 @@ rs:
   athletes:
     show:
       description: 'Athlete profile %{athlete_name}: results, statistics and volunteering'
-      club: club
-      show_club_html: 'Show club statistics %{link}.'
+      show_club_html: 'Show club statistics %{link}'
       total_results: total runs
       total_volunteering: total volunteering
       h_index: h-index
