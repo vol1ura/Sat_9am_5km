@@ -4,7 +4,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <%= link_to 'Главная', root_path %>
+      <%= link_to t('.main_page'), root_path %>
     </li>
     <li class="breadcrumb-item">
       <%= link_to @activity.event_name, event_path(@activity.event.code_name) %>
@@ -21,25 +21,25 @@
 <ul class="list-group list-group-flush">
   <li class="list-group-item">
     <span class="badge bg-primary rounded-pill"><%= @results.size %></span>
-    участников забега
+    <%= t '.total_runners_count' %>
   </li>
   <% if @personal_best_count.positive? %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= @personal_best_count %></span>
-      число личных рекордов <i class="fa-solid fa-bolt"></i>
+      <%= t '.personal_bests_count' %>&nbsp;<i class="fa-solid fa-bolt"></i>
     </li>
   <% end %>
   <% s95_first_run_count = @results_count.count { |_, c| c == 1 } %>
   <% if @first_run_count > s95_first_run_count %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= @first_run_count - s95_first_run_count %></span>
-      впервые на забеге <%= @activity.event_name %>&nbsp;<i class="fa-solid fa-heart"></i>
+      <%= t '.first_runners_count' %> <%= @activity.event_name %>&nbsp;<i class="fa-solid fa-heart"></i>
     </li>
   <% end %>
   <% if s95_first_run_count.positive? %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= s95_first_run_count %></span>
-      впервые на забеге S95&nbsp;<i class="fa-solid fa-heart text-danger"></i>
+      <%= t '.first_s95_count' %>&nbsp;<i class="fa-solid fa-heart text-danger"></i>
     </li>
   <% end %>
 </ul>
