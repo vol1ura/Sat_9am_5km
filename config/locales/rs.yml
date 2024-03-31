@@ -632,7 +632,12 @@ rs:
     show:
       title: 'Run results %{activity}'
       description: 'Race protocol %{activity}, volunteer list and brief report about run'
+      main_page: Main
       short_report: Kratak izveštaj
+      total_runners_count: race participants
+      personal_bests_count: number of personal bests
+      first_runners_count: first time on event
+      first_s95_count: first time on S95
       protocol: Protokol
       common: Zajednički
       men: Muškarci
@@ -642,6 +647,13 @@ rs:
       volunteer: Volonter
       role: Uloga
       total_volunteering: ukupno volontiranja %{count}
+    protocol:
+      position_short: Pos.
+      position_full: Place
+      athlete: Athlete
+      time: Time
+      pace: Pace
+      club: Club
     result:
       total_runs_html: '%{count}&nbsp;runs'
       total_volunteering_html: '%{count}&nbsp;volunteering'
