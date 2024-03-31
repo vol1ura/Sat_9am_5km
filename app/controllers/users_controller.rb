@@ -9,7 +9,12 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      current_user.image.purge if params[:delete_image]
+      if params[:delete_image]
+        current_user.image.purge
+      else
+        CompressUserImageJob.perform_later current_user.id
+      end
+
       redirect_to user_path
     else
       render :edit

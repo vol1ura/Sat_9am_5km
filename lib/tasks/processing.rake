@@ -50,4 +50,11 @@ namespace :processing do
   task purge_unattached_files: :environment do
     ActiveStorage::Blob.unattached.where(created_at: ..2.days.ago).find_each(&:purge_later)
   end
+
+  desc 'Compress user images'
+  task compress_user_images: :environment do
+    User.find_each do |user|
+      Users::ImageCompressor.call(user)
+    end
+  end
 end
