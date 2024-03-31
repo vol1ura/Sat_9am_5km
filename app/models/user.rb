@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :permissions, dependent: :destroy
 
   has_one_attached :image do |attachable|
-    attachable.variant :web, resize_to_fill: [150, 150]
+    attachable.variant :web, resize_to_fill: [150, 150], preprocessed: true
   end
 
   validates :first_name, presence: true, format: { with: /\A[a-zа-яё]{2,}\z/i }
@@ -22,7 +22,7 @@ class User < ApplicationRecord
   validates :image,
             content_type: %i[png jpg jpeg],
             dimension: { min: 200..200 },
-            size: { less_than: 512.kilobytes }
+            size: { less_than: 10.megabytes }
 
   enum role: { admin: 0 }
 
