@@ -16,4 +16,36 @@ RSpec.describe '/user' do
       expect(response).to redirect_to root_path
     end
   end
+
+  context 'with authenticated user' do
+    before { sign_in user }
+
+    describe 'GET /user' do
+      before { get user_url }
+
+      it { expect(response).to be_successful }
+    end
+
+    describe 'GET /user/edit' do
+      before { get edit_user_url }
+
+      it { expect(response).to be_successful }
+    end
+
+    describe 'POST /user' do
+      it 'updates user attributes' do
+        expect { patch user_url, params: { user: { first_name: 'Tester' } } }
+          .to change(user, :first_name).to('Tester')
+
+        expect(CompressUserImageJob).to have_been_enqueued
+        expect(response).to redirect_to user_path
+      end
+
+      it 'does not enqueued job to compress image' do
+        patch user_url, params: { delete_image: '1', user: user.attributes.slice('first_name', 'last_name') }
+        expect(CompressUserImageJob).not_to have_been_enqueued
+        expect(response).to redirect_to user_path
+      end
+    end
+  end
 end

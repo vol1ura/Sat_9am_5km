@@ -4,18 +4,24 @@ RSpec.describe '/athletes' do
   describe 'GET /athletes' do
     before { create_list(:athlete, 3) }
 
-    it 'renders a successful response for name search' do
-      create(:athlete, name: 'SOME Test')
-      create(:athlete, name: 'Some Other')
-      get athletes_url(name: 'Some')
-      expect(response).to be_successful
+    context 'when athletes have same name' do
+      before do
+        Bullet.n_plus_one_query_enable = false
+        create(:athlete, name: 'SOME Test')
+        create(:athlete, name: 'Some Other')
+
+        get athletes_url(name: 'Some')
+      end
+
+      after { Bullet.n_plus_one_query_enable = true }
+
+      it 'renders a successful response for name search' do
+        expect(response).to be_successful
+      end
     end
 
     context 'with single search result' do
       let!(:athlete) { create(:athlete, parkrun_code: 111_111) }
-
-      before { Bullet.unused_eager_loading_enable = false }
-      after { Bullet.unused_eager_loading_enable = true }
 
       it 'renders a successful response for ID search' do
         get athletes_url(name: 111_111)
