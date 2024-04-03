@@ -226,10 +226,10 @@ rs:
     - petak
     - subota
     formats:
-      default: "%-d %b %Y"
-      long: "%d %B %Y"
+      default: "%d.%m.%Y"
+      long: "%d %B %Y g."
       brief: "%d %B"
-      short: "%d.%m.%Y"
+      short: "%-d %b %Y"
     month_names:
     -
     - januar

@@ -38,7 +38,7 @@ RSpec.describe ApplicationHelper do
   describe '#human_activity_name' do
     it 'returns formatted string' do
       activity = build_stubbed(:activity)
-      expect(helper.human_activity_name(activity)).to match(/\d\d? [а-я]+\.? \d{4} - .+/)
+      expect(helper.human_activity_name(activity)).to match(/\d\d\.\d\d\.\d{4} - .+/)
     end
   end
 
