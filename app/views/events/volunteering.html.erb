@@ -49,7 +49,7 @@
             <th><%= t '.volunteer' %></th>
           </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody class="table-group-divider" data-turbo-prefetch="false">
           <% @event.volunteering_positions.each do |position| %>
             <% volunteers = activity.volunteers.includes(:athlete).public_send("#{position.role}_role").order(:comment).to_a %>
             <% [position.number, volunteers.size].max.times.each do |i| %>
