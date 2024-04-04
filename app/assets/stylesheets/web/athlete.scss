@@ -8,3 +8,11 @@
     margin-left: 2vw;
   }
 }
+
+.avatar {
+  @extend .rounded-circle;
+  @extend .border;
+  @extend .border-primary;
+  @extend .border-opacity-25;
+  width: 150px;
+}

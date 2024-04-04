@@ -4,11 +4,7 @@
 <%= turbo_frame_tag current_user do %>
   <div class="row">
     <div class="col-6 col-sm-auto">
-      <% if current_user.image.attached? %>
-        <%= image_tag current_user.image.variant(:web), class: 'rounded-circle border border-primary border-opacity-10' %>
-      <% else %>
-        <%= image_tag 'person.jpg', class: 'rounded-circle border border-primary border-opacity-10' %>
-      <% end %>
+      <%= image_tag user_image_url(current_user), class: 'avatar' %>
     </div>
     <div class="col-6 col-sm-4">
       <div class="d-flex flex-column">
