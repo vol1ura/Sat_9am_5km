@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :permissions, dependent: :destroy
 
   has_one_attached :image do |attachable|
-    attachable.variant :web, resize_to_fill: [200, 200], preprocessed: true
+    attachable.variant :web, resize_to_fill: [200, 200]
   end
 
   validates :first_name, presence: true, format: { with: /\A[a-zа-яё]{2,}\z/i }
