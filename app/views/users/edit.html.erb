@@ -26,14 +26,14 @@
           </div>
           <div class="mt-2 form-check form-switch">
             <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch' %>
-            <%= label_tag :delete_image, 'Удалить фото', class: 'form-check-label' %>
+            <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
           </div>
           <div class="mt-5">
             <button class="me-1 btn btn-primary" type="submit" title="<%= t '.save' %>">
               <i class="fa-regular fa-circle-down"></i> <%= t '.save' %>
             </button>
             <%= link_to user_path, class: 'btn btn-outline-primary float-end' do %>
-              <i class="fa-regular fa-circle-xmark"></i> Отменить
+              <i class="fa-regular fa-circle-xmark"></i> <%= t '.cancel' %>
             <% end %>
           </div>
         </div>

@@ -689,7 +689,10 @@ rs:
     show:
       title: Settings
       description: 'Settings for %{user_name}'
+      edit: Edit
     field:
       edit: Edit
     edit:
+      delete_image: Delete image
       save: Save
+      cancel: Cancel

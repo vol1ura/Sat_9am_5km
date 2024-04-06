@@ -1,0 +1,9 @@
+ru:
+  devise:
+    shared:
+      links:
+        sign_in: Войти
+    sessions:
+      new:
+        title: Вход
+        submit: Войти
