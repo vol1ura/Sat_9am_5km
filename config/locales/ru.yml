@@ -691,7 +691,10 @@ ru:
     show:
       title: Настройки
       description: 'Настройки для пользователя %{user_name}'
+      edit: Изменить
     field:
       edit: Изменить
     edit:
+      delete_image: Удалить фото
       save: Сохранить
+      cancel: Отменить

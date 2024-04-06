@@ -11,8 +11,8 @@
         <div class="fs-2"><%= current_user.first_name %></div>
         <div class="fs-2"><%= current_user.last_name %></div>
         <div class="mt-3">
-          <%= link_to edit_user_path, class: 'icon-link btn btn-outline-primary', title: 'Изменить' do %>
-            <i class="fa-solid fa-pen-to-square"></i> Изменить
+          <%= link_to edit_user_path, class: 'icon-link btn btn-outline-primary', title: t('.edit') do %>
+            <i class="fa-solid fa-pen-to-square"></i> <%= t '.edit' %>
           <% end %>
         </div>
       </div>

@@ -1,17 +1,17 @@
 <%= render '/flash' %>
-<h2>Вход</h2>
+<h2><%= t '.title' %></h2>
 
 <div class="row mb-3">
   <div class="col-sm-6">
     <%= form_for resource, as: resource_name, url: session_path(resource_name), data: { turbo: false } do |f| %>
       <div class="row mb-3">
-        <%= f.label :email, 'Ваш e-mail', class: 'col-sm-4 col-form-label' %>
+        <%= f.label :email, class: 'col-sm-4 col-form-label' %>
         <div class="col-sm-8 col-md-6">
           <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: :email, inputmode: :email %>
         </div>
       </div>
       <div class="row mb-3">
-        <%= f.label :password, 'Пароль', class: 'col-sm-4 col-form-label' %>
+        <%= f.label :password, class: 'col-sm-4 col-form-label' %>
         <div class="col-sm-8 col-md-6">
           <%= f.password_field :password, class: 'form-control', autocomplete: 'current-password' %>
         </div>
@@ -26,7 +26,7 @@
           </div>
         </div>
       <% end %>
-      <%= f.submit 'Войти', class: 'btn btn-primary mb-3' %>
+      <%= f.submit t('.submit'), class: 'btn btn-primary mb-3' %>
     <% end %>
   </div>
   <div class="col-sm-6">
