@@ -660,6 +660,10 @@ rs:
     index:
       description: Table of clubs with statistics on the total number of participants, volunteers and runs
       how_to_add_new_club_html: 'Is your club not on the list? Write us <a href="mailto:%{mail}?subject=Add a new club" target="_blank" title="Send us an email">email</a> and we will add it.'
+      name: Name
+      athletes: athletes
+      results: results
+      volunteering: volunteering
     show:
       description: 'Table of participants and statistics for the club %{club}'
   events:
