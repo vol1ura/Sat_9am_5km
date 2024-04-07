@@ -1,5 +1,5 @@
 <div class="col">
-  <div class="card <%= event.active ? 'border-primary' : 'border-danger' %> h-100">
+  <div class="card text-bg-light <%= event.active ? 'border-primary' : 'border-danger' %> h-100">
     <%= event_main_image_tag event, class: 'card-img-top', alt: event.name, loading: 'lazy' %>
     <div class="position-absolute top-0 bg-dark bg-gradient bg-opacity-25 w-100 px-3">
       <h4 class="text-light"><%= event.name %></h4>
