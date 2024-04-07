@@ -9,6 +9,6 @@ describe Users::ImageCompressor do
   end
 
   it 'compress image' do
-    expect(user.reload.image.byte_size).to be < 30.kilobytes
+    expect(user.reload.image.byte_size).to be < 50.kilobytes
   end
 end

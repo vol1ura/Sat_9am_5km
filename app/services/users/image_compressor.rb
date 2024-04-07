@@ -18,7 +18,7 @@ module Users
       compressed_image_file = ImageProcessing::Vips
         .source(image_file)
         .resize_to_fill(MAX_DIMENSION, MAX_DIMENSION)
-        .saver(quality: 90, compression: :lzw)
+        .saver(quality: 95, compression: :lzw)
         .call
 
       if compressed_image_file.size <= MAX_SIZE
