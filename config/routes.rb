@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   default_url_options host: ENV.fetch('APP_HOST')
 
   root 'pages#show'
+  get '/pages/:page', to: 'pages#show', as: :page
+
   resources :events, param: :code_name, only: :show do
     get :volunteering, on: :member
   end
@@ -17,9 +19,12 @@ Rails.application.routes.draw do
   resources :ratings, only: :index do
     get :results, on: :collection
   end
+
   resource :user, only: %i[show edit update]
-  get '/pages/:page', to: 'pages#show', as: :page
+  resolve('User') { [:user] }
+
   ActiveAdmin.routes(self)
+
   devise_for(
     :users,
     {
