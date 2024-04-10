@@ -37,7 +37,11 @@ set :sidekiq_service_unit_user, :system
 set :sidekiq_default_hooks, false
 
 after 'deploy:starting', 'sidekiq:quiet'
-after 'deploy:started', 'sidekiq:stop'
+after 'deploy:updated', 'sidekiq:stop'
+after 'deploy:reverted', 'sidekiq:stop'
 after 'deploy:published', 'sidekiq:start'
+
+after 'deploy:finished', 'puma:restart'
+
 after 'deploy:updated',  'sitemap:refresh'
 after 'deploy:reverted', 'sitemap:refresh'
