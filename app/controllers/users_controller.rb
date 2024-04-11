@@ -11,8 +11,8 @@ class UsersController < ApplicationController
     if current_user.update(user_params)
       if params[:delete_image]
         current_user.image.purge
-      else
-        CompressUserImageJob.perform_later current_user.id
+      elsif current_user.image.attached?
+        CompressUserImageJob.set(wait: 1.minute).perform_later current_user.id
       end
 
       redirect_to user_path

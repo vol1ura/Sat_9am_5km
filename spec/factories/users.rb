@@ -13,7 +13,14 @@ FactoryBot.define do
       role { :admin }
     end
 
-    after :build, &:skip_confirmation_notification!
+    transient do
+      with_avatar { false }
+    end
+
+    after(:build) do |user, evaluator|
+      user.skip_confirmation_notification!
+      user.image.attach(io: File.open('spec/fixtures/files/default.png'), filename: 'avatar.png') if evaluator.with_avatar
+    end
 
     after :create, &:confirm
   end

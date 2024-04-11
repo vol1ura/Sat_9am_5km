@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe '/user' do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, with_avatar: true) }
 
   describe 'GET /user/sign_up' do
     it 'renders successful response' do
@@ -18,7 +18,14 @@ RSpec.describe '/user' do
   end
 
   context 'with authenticated user' do
-    before { sign_in user }
+    before do
+      sign_in user
+      Bullet.n_plus_one_query_enable = false if defined?(Bullet)
+    end
+
+    after do
+      Bullet.n_plus_one_query_enable = true if defined?(Bullet)
+    end
 
     describe 'GET /user' do
       before { get user_url }
