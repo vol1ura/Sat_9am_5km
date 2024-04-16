@@ -36,7 +36,7 @@ active_admin_form_for [:admin, activity, resource] do |f|
     column do
       para 'Внимание! При изменении здесь номера, время изменено НЕ будет!'
       f.inputs do
-        f.input :position, required: true, input_html: { inputmode: 'numeric' }
+        input :position, required: true, input_html: { inputmode: 'numeric' }
       end
     end
   end

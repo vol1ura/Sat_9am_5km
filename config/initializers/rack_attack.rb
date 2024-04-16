@@ -11,4 +11,10 @@ class Rack::Attack
       req.ip if req.path.start_with?('/activities') || req.path.start_with?('/athletes')
     end
   end
+
+  blocklist('fail2ban pentesters') do |req|
+    Rack::Attack::Fail2Ban.filter("pentesters-#{req.ip}", maxretry: 3, findtime: 10.minutes, bantime: 1.day) do
+      CGI.unescape(req.query_string) =~ %r{/etc/passwd} || req.path.end_with?('.php')
+    end
+  end
 end
