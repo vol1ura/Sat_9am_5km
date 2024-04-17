@@ -18,3 +18,16 @@ attributes_table_for athlete do
   row(:results) { |a| link_to "смотреть таблицу (всего #{a.results.published.size})", results_admin_athlete_path(a) }
   row(:volunteering) { |a| link_to "смотреть таблицу (всего #{a.volunteering.size})", volunteering_admin_athlete_path(a) }
 end
+
+panel 'Предстоящие волонтёрства' do
+  dataset =
+    athlete
+      .volunteering
+      .includes(activity: :event)
+      .where(activity: { date: Date.current.. })
+      .rewhere(activity: { published: false })
+  table_for dataset do
+    column('Забег') { |v| link_to human_activity_name(v.activity), admin_activity_path(v.activity) }
+    column('Роль') { |v| human_volunteer_role v.role }
+  end
+end
