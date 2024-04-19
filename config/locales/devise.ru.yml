@@ -3,6 +3,10 @@ ru:
     shared:
       links:
         sign_in: Войти
+        registration: Зарегистрироваться с помощью Telegram-бота
+        password: Забыли пароль?
+        confirmation: Не получили ссылку для подтверждения?
+        unlock: Не получили ссылку для разблокировки?
     sessions:
       new:
         title: Вход

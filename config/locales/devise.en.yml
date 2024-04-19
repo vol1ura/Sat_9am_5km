@@ -2,6 +2,13 @@
 
 en:
   devise:
+    shared:
+      links:
+        sign_in: Sign in
+        registration: Register using Telegram bot
+        password: Forgot your password?
+        confirmation: Didn't receive a confirmation link?
+        unlock: Didn't receive the unlock link?
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
