@@ -3,6 +3,10 @@ rs:
     shared:
       links:
         sign_in: Sign in
+        registration: Register using Telegram bot
+        password: Forgot your password?
+        confirmation: Didn't receive a confirmation link?
+        unlock: Didn't receive the unlock link?
     confirmations:
       confirmed: 'Vаš nаlog je uspešno potvrđen, sаdа ste prijаvljeni nа sistem.'
       send_instructions: 'Uskoro ćete dobiti email sа uputstvimа kаko dа potvrdite vаš nаlog.'
