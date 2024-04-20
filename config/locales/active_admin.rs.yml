@@ -196,7 +196,6 @@ rs:
         submit: "Registruj se"
       login:
         title: "Prijavi se"
-        remember_me: "Zapamti me"
         submit: "Prijavi se"
       reset_password:
         title: "Zaboravili ste lozinku?"

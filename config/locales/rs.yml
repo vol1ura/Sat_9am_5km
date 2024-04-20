@@ -1,4 +1,3 @@
----
 rs:
   activerecord:
     models:
@@ -51,6 +50,8 @@ rs:
         note: napomena
         telegram_user: telegram
         athlete: sportista
+        password: lozinka
+        remember_me: Zapamti me
       permission:
         event: događaj
         user: korisnik
