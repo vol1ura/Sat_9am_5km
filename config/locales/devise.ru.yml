@@ -11,3 +11,10 @@ ru:
       new:
         title: Вход
         submit: Войти
+    confirmations:
+      new:
+        confirmation_instructions:
+          title: Выслать инструкции для подтверждения e-mail
+          description: Получение инструкции для подтверждения e-mail
+        your_email: Ваш e-mail
+        send_confirmation: Выслать подтверждение

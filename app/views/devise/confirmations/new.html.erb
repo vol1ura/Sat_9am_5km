@@ -1,6 +1,6 @@
-<% head_info :title, 'Выслать инструкции для подтверждения e-mail' %>
-<% head_info :description, 'Получение инструкции для подтверждения e-mail' %>
-<h2>Выслать инструкции для подтверждения e-mail</h2>
+<% head_info :title, t('.confirmation_instructions.title') %>
+<% head_info :description, t('.confirmation_instructions.description') %>
+<h2><%= t '.confirmation_instructions.title' %></h2>
 
 <%= form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'row' }, data: { turbo: false } do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -14,10 +14,10 @@
           inputmode: :email,
           value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
           class: 'form-control',
-          placeholder: 'Ваш e-mail',
+          placeholder: t('.your_email'),
         )
       %>
-      <%= f.submit 'Выслать подтверждение', class: 'btn btn-outline-secondary' %>
+      <%= f.submit t('.send_confirmation'), class: 'btn btn-outline-secondary' %>
     </div>
   </div>
 <% end %>

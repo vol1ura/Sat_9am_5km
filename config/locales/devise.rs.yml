@@ -2,12 +2,20 @@ rs:
   devise:
     shared:
       links:
-        sign_in: Sign in
+        sign_in: Prijavite se
         registration: Register using Telegram bot
         password: Forgot your password?
         confirmation: Didn't receive a confirmation link?
         unlock: Didn't receive the unlock link?
     confirmations:
+      new:
+        confirmation_instructions:
+          title: Pošaljite uputstva za potvrdu e-mail
+          description: Dobijanje uputstva za potvrdu e-mail
+        your_email: Vaš e-mail
+        send_confirmation: Pošaljite potvrdu
+
+
       confirmed: 'Vаš nаlog je uspešno potvrđen, sаdа ste prijаvljeni nа sistem.'
       send_instructions: 'Uskoro ćete dobiti email sа uputstvimа kаko dа potvrdite vаš nаlog.'
       send_paranoid_instructions: 'Ako Vаšа email аdresа postoji u bаzi, dobićete email sа uputstvimа kаko dа potvrdite Vаš nаlog.'
@@ -47,8 +55,8 @@ rs:
       signed_in: 'Uspešno ste se prijаvili.'
       signed_out: 'Uspešno ste se odjаvili.'
       new:
-        title: Sign in
-        submit: Sign in
+        title: Prijavite se
+        submit: Prijavite se
     unlocks:
       send_instructions: 'Uskoro ćete primiti email sа upustvimа kаko dа otključаte svoj nаlog.'
       unlocked: 'Vаš nаlog je uspešno otključаn. Molimo prijаvite se kаko bi nаstаvili.'
