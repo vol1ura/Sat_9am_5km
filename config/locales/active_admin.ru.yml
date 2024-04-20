@@ -195,10 +195,6 @@ ru:
       sign_up:
         title: "Зарегистрироваться"
         submit: "Зарегистрироваться"
-      login:
-        title: "Войти"
-        remember_me: "Запомнить меня"
-        submit: "Войти"
       reset_password:
         title: "Забыли пароль?"
         submit: "Сбросить пароль"
