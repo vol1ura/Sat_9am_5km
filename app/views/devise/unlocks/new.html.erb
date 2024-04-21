@@ -1,14 +1,14 @@
-<% head_info :title, 'Выслать инструкцию по разблокировке' %>
-<% head_info :description, 'Получение инструкции по разблокировке' %>
-<h2>Выслать инструкцию по разблокировке</h2>
+<% head_info :title, t('.title') %>
+<% head_info :description, t('.description') %>
+<h2><%= t '.title' %></h2>
 
 <%= form_for resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'row' }, data: { turbo: false } do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>
 
   <div class="col-sm-12 col-lg-6 mb-3">
     <div class="input-group">
-      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Ваш e-mail'  %>
-      <%= f.submit 'Выслать инструкцию', class: 'btn btn-outline-secondary' %>
+      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: t('.your_email') %>
+      <%= f.submit t('.send_instruction'), class: 'btn btn-outline-secondary' %>
     </div>
   </div>
 <% end %>

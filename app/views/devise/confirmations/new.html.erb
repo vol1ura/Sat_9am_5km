@@ -1,6 +1,6 @@
-<% head_info :title, t('.confirmation_instructions.title') %>
-<% head_info :description, t('.confirmation_instructions.description') %>
-<h2><%= t '.confirmation_instructions.title' %></h2>
+<% head_info :title, t('.title') %>
+<% head_info :description, t('.description') %>
+<h2><%= t '.title' %></h2>
 
 <%= form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'row' }, data: { turbo: false } do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
