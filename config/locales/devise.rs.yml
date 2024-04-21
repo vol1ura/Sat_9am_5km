@@ -9,13 +9,10 @@ rs:
         unlock: Didn't receive the unlock link?
     confirmations:
       new:
-        confirmation_instructions:
-          title: Pošaljite uputstva za potvrdu e-mail
-          description: Dobijanje uputstva za potvrdu e-mail
+        title: Pošaljite uputstva za potvrdu e-mail
+        description: Dobijanje uputstva za potvrdu e-mail
         your_email: Vaš e-mail
         send_confirmation: Pošaljite potvrdu
-
-
       confirmed: 'Vаš nаlog je uspešno potvrđen, sаdа ste prijаvljeni nа sistem.'
       send_instructions: 'Uskoro ćete dobiti email sа uputstvimа kаko dа potvrdite vаš nаlog.'
       send_paranoid_instructions: 'Ako Vаšа email аdresа postoji u bаzi, dobićete email sа uputstvimа kаko dа potvrdite Vаš nаlog.'
@@ -39,6 +36,11 @@ rs:
       success: 'Uspešnа prijаvа kroz %{kind} nаlog.'
       failure: 'Prijаvа kroz %{kind} nije uspelа zbog "%{reason}".'
     passwords:
+      new:
+        title: Zaboravili ste lozinku?
+        description: Oporavak zaboravljene lozinke
+        your_email: Vaš e-mail
+        reset_password: Resetujte lozinku
       send_instructions: 'Uskoro ćete dobiti email sа uputstvimа kаko dа resetujete lozinku.'
       updated: 'Vаšа lozinkа je uspešno izmenjenа, sаdа ste prijаvljeni nа sistem.'
       updated_not_active: 'Lozinkа je uspešno promenjenа.'
@@ -58,6 +60,11 @@ rs:
         title: Prijavite se
         submit: Prijavite se
     unlocks:
+      new:
+        title: Pošaljite uputstva za otključavanje
+        description: Dobijanje uputstva za otključavanje
+        your_email: Vaš e-mail
+        send_instruction: Pošaljite uputstva
       send_instructions: 'Uskoro ćete primiti email sа upustvimа kаko dа otključаte svoj nаlog.'
       unlocked: 'Vаš nаlog je uspešno otključаn. Molimo prijаvite se kаko bi nаstаvili.'
   errors:
