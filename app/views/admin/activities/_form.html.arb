@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 active_admin_form_for [:admin, resource] do |f|
+  f.semantic_errors(*f.object.errors.attribute_names)
+
   unless resource.published
     f.inputs 'Выберите мероприятие' do
       input :event_id, as: :select, label: 'Мероприятие', collection: Event.authorized_for(current_user).pluck(:name, :id)
