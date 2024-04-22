@@ -472,10 +472,10 @@ rs:
     show_more: Prikaži više
     show_less: Prikaži manje
   common:
-    without_token: WITHOUT TOKEN (create)
-    without_name: WITHOUT NAME
-    nobody: UNKNOWN
-    open_link: open
+    without_token: BEZ TOKENA (napravi)
+    without_name: BEZ IMENA
+    nobody: NEPOZNATO
+    open_link: otvori
     gender: Pol
     man: Čovek
     woman: Žena
@@ -515,29 +515,29 @@ rs:
       our_events: Naši događaji
       our_partners: Naši partneri
     about:
-      description: S95 je otvoren platform koji objedinjuje nezavisne park trke, koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
+      description: S95 je otvorena platforma koja objedinjuje nezavisne park trke koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
       events: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}.'
       join_us:
-        title: Želite da se pridružite platform S95?
+        title: Želite da se pridružite platformi S95?
         body_html: >
-          <p>In short, there is needed your desire.</p>
+          <p>Ukratko, potrebna je samo volja.</p>
           <p>
-            In more detail, you need:
+            Detaljnije, potrebni su:
             <ul>
-              <li>safe and comfortable route</li>
-              <li>a team that ready to handle runs every saturday all year round</li>
-              <li>a desire to make everyone healthier and happier</li>
+              <li>bezbedna i stazasafe and comfortable route</li>
+              <li>tim koji je voljan da organizuje trke svake subote tokom cele godine</li>
+              <li>zelja da se pomogne svima da budu zdraviji i srećniji</li>
             </ul>
           </p>
-          <p>Are you ready? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> and soon jogging will appear in your park.</p>
+          <p>Da li ste spremni? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> i uskoro će se trčati i u vašem parku.</p>
       s95_abroad:
-        title: S95 races in other countries
-        body: Today our run events are held also in %{countries}. All results are in one system saved and you can see it in athlete profiles.
+        title: S95 trke u drugim zemljama
+        body: Danas se naše trke organizuju i u %{countries}. Svi rezultati se čuvaju u jednom sistemu odakle ćete imati uvid u profile atletiča.
       back: Nazad
       forward: Napred
     rules:
       description: Brief rules for S95 participants, as well as frequently asked questions
-      register_with_bot_html: 'If you are not registered, create a profile using <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a>. You will receive a link to your profile with a personal qr-code.'
+      register_with_bot_html: 'If you are not registered, create a profile using <a href='%{link}' target='_blank' rel='noopener'>Telegram bot</a>. You will receive a link to your profile with a personal qr-code.'
       come_to_s95_html: 'The most important thing is to come to one of our events on <strong>Saturday</strong> at <strong>9 am</strong> and run <strong>5 km</strong>.'
       scan_barcodes: At the finish you will receive a position card. Scan the personal qr-code and position card with the volunteer.
       return_position_card: Hand over the position card.
@@ -547,7 +547,7 @@ rs:
         answer: The track is well marked with orange cones, there is also a marshal at the turn (if there is one), and most likely you will be surrounded by other participants when running.
       about_registering:
         question: Do I need to register to participate in the run?
-        answer_html: 'It is not necessary, but it is advisable to go through the registration procedure using our telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. As a result, you will have a personal barcode, which you will subsequently show to the volunteer. In addition, the bot will send notifications with the results of the run.'
+        answer_html: 'It is not necessary, but it is advisable to go through the registration procedure using our telegram bot <a href='%{link}' target='_blank' rel='noopener'>%{bot_nick}</a>. As a result, you will have a personal barcode, which you will subsequently show to the volunteer. In addition, the bot will send notifications with the results of the run.'
       about_participation:
         question: 'Is it possible to just show up at 8:45 to run together?'
         answer: 'Yes, you can just come and run. Registration does not necessary, it is only to save your result in the protocol. If you do not register, you will be listed in the protocol as “Unknown”.'
@@ -660,13 +660,13 @@ rs:
   clubs:
     index:
       description: Table of clubs with statistics on the total number of participants, volunteers and runs
-      how_to_add_new_club_html: 'Is your club not on the list? Write us <a href="mailto:%{mail}?subject=Add a new club" target="_blank" title="Send us an email">email</a> and we will add it.'
-      name: Name
-      athletes: athletes
-      results: results
-      volunteering: volunteering
+      how_to_add_new_club_html: 'Is your club not on the list? Write us <a href='mailto:%{mail}?subject=Add a new club' target='_blank' title='Send us an email'>email</a> and we will add it.'
+      name: Ime
+      athletes: atletičari
+      results: rezultati
+      volunteering: volonterstvo
     show:
-      description: 'Table of participants and statistics for the club %{club}'
+      description: 'Tabela učesnika i statistika za klub %{club}'
   events:
     show:
       title: 'Park trčanje | %{event}'
@@ -679,25 +679,25 @@ rs:
       attention: Pažnja!
       opening_soon: Uskoro otvaranje!
       start_cancelled: Sledeći start je otkazan.
-      inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class=" alert-link">naše trke</a>.'
-      about_volunteers_html: 'Svi događaji su besplatni i organizovani od strane volontera. <a href="%{roster_link}">Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu</a>.'
-      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Registrujte se</a> u našem botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
+      inactivity_disclaimer_html: 'Pratite vesti u <a href='%{link}' class='alert-link'>Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href='/' class=' alert-link'>naše trke</a>.'
+      about_volunteers_html: 'Svi događaji su besplatni i organizovani od strane volontera. <a href='%{roster_link}'>Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu</a>.'
+      about_participation_html: '<a href='%{registration_link}' target='_blank' rel='noopener'>Registrujte se</a> u našem botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
       event_place: Mesto događaja
     volunteering:
-      title: График волонтёрств | %{event}
-      description: 'Информация о волонтёрстве. Таблица с графиком волонтёрств и обязательными позициями для забега "%{event}".'
-      main_title: График волонтёрств
+      title: Grafik volontiranja | %{event}
+      description: 'Информация о волонтёрстве. Таблица с графиком волонтёрств и обязательными позициями для забега '%{event}'.'
+      main_title: Grafik volontiranja
       main_page: Main
-      role: Role
-      volunteer: Volunteer
+      role: Uloga
+      volunteer: Volonter
   users:
     show:
-      title: Settings
-      description: 'Settings for %{user_name}'
-      edit: Edit
+      title: Podešavanja
+      description: 'Podešavanja za %{user_name}'
+      edit: Izmeni
     field:
-      edit: Edit
+      edit: Izmeni
     edit:
-      delete_image: Delete image
-      save: Save
-      cancel: Cancel
+      delete_image: Obriši sliku
+      save: Sačuvaj
+      cancel: Otkaži
