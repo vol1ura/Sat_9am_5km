@@ -1,38 +1,38 @@
-<% head_info :title, "Активность участников #{@club.name}" %>
+<% head_info :title, t('.title', club: @club.name) %>
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <%= link_to 'Главная', root_path %>
+      <%= link_to t('.main'), root_path %>
     </li>
     <li class="breadcrumb-item">
-      <%= link_to 'Клубы', clubs_path %>
+      <%= link_to t('.clubs'), clubs_path %>
     </li>
     <li class="breadcrumb-item">
       <%= link_to @club.name, club_path(@club) %>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">Активность участников</li>
+    <li class="breadcrumb-item active" aria-current="page"><%= t '.participants_activity' %></li>
   </ol>
 </nav>
 
-<h2>Активность участников</h2>
+<h2><%= t '.participants_activity' %></h2>
 
 <p>
-  Забеги прошедшей недели, в которых принимали участие как бегуны либо как волонтёры члены клуба <%= @club.name %>.
+  <%= t '.description', club: @club.name %>
   <% if Date.current.saturday? %>
-    В субботу некоторые забеги могут быть ещё не загружены, поэтому информация может быть не полной.
+    <%= t '.disclaimer' %>
   <% end %>
 </p>
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="results-tab" data-bs-toggle="tab" data-bs-target="#results-tab-pane" type="button" role="tab" aria-controls="results-tab-pane" aria-selected="true">
-      Забеги
+      <%= t '.activities' %>
     </button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="volunteerings-tab" data-bs-toggle="tab" data-bs-target="#volunteerings-tab-pane" type="button" role="tab" aria-controls="volunteerings-tab-pane" aria-selected="false">
-      Волонтёрства
+      <%= t '.volunteering' %>
     </button>
   </li>
 </ul>
@@ -42,9 +42,9 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Место</th>
-          <th>Имя</th>
-          <th>Результат</th>
+          <th><%= t '.position' %></th>
+          <th><%= t '.name' %></th>
+          <th><%= t '.total_time' %></th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
@@ -69,8 +69,8 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Имя</th>
-          <th>Роль</th>
+          <th><%= t '.name' %></th>
+          <th><%= t '.role' %></th>
         </tr>
       </thead>
       <tbody class="table-group-divider">

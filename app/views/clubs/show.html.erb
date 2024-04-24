@@ -27,34 +27,37 @@
 
 <ul class="list-group list-group-flush">
   <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @athletes.size %></span> количество участников
+    <span class="badge bg-primary rounded-pill me-3"><%= @athletes.size %></span>
+    <%= t '.athletes_count' %>
   </li>
   <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @total_results_count %></span> количество забегов
+    <span class="badge bg-primary rounded-pill me-3"><%= @total_results_count %></span>
+    <%= t '.results_count' %>
   </li>
   <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @total_volunteering_count %></span> количество волонтёрств
+    <span class="badge bg-primary rounded-pill me-3"><%= @total_volunteering_count %></span>
+    <%= t '.volunteering_count' %>
   </li>
   <li class="list-group-item">
-    <%= link_to 'Активность участников клуба на последней неделе', last_week_club_path(@club) %>
+    <%= link_to t('.last_week_activities'), last_week_club_path(@club) %>
   </li>
 </ul>
 
 <table class="table table-striped">
   <thead data-controller="table-head">
     <tr>
-      <th>Имя</th>
+      <th><%= t '.name' %></th>
       <th>
         <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        Забеги
+        <%= t '.activities' %>
       </th>
       <th class="hidden-on-phone">
         <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        Волонтёрства
+        <%= t '.volunteering' %>
       </th>
       <th>
         <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        Лучшее время
+        <%= t '.personal_best' %>
       </th>
     </tr>
   </thead>

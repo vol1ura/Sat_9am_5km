@@ -667,6 +667,27 @@ rs:
       volunteering: volonterstvo
     show:
       description: 'Tabela učesnika i statistika za klub %{club}'
+      athletes_count: broj učesnika
+      results_count: broj trka
+      volunteering_count: broj volontiranje
+      last_week_activities: Aktivnosti članova kluba u poslednjoj nedelji
+      name: Ime
+      activities: Trke
+      volunteering: Volontiranje
+      personal_best: Najbolje vreme
+    last_week:
+      title: 'Aktivnost učesnika %{club}'
+      main: Glavnaя
+      clubs: Klubovi
+      participants_activity: Aktivnost učesnika
+      description: 'Trke prošle nedelje, u kojima su učestvovali kao trkači ili kao volonteri članovi kluba %{club}.'
+      disclaimer: U subotu neke trke možda još nisu učitane, tako da informacije mogu biti nepotpune.
+      activities: Trke
+      volunteering: Volontiranje
+      position: Pozicija
+      name: Ime
+      total_time: Rezultat
+      role: Uloga
   events:
     show:
       title: 'Park trčanje | %{event}'
