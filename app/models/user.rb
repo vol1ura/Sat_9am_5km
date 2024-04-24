@@ -16,8 +16,8 @@ class User < ApplicationRecord
     attachable.variant :web, resize_to_fill: [200, 200]
   end
 
-  validates :first_name, presence: true, format: { with: /\A[[:alpha:]]{2,}\z/ }
-  validates :last_name, presence: true, format: { with: /\A[[:alpha:]]{2,}(-[[:alpha:]]{2,})?\z/ }
+  validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+\z/ }
+  validates :last_name, presence: true, format: { with: /\A[[:alpha:]]+([-' ][[:alpha:]]{2,})?\z/ }
   validates :telegram_id, uniqueness: true, allow_nil: true
   validates :image,
             content_type: %i[png jpg jpeg],
