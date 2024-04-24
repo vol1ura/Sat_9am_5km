@@ -667,6 +667,27 @@ ru:
       volunteering: волонтёрства
     show:
       description: 'Таблица участников и статистика по клубу %{club}'
+      athletes_count: количество участников
+      results_count: количество забегов
+      volunteering_count: количество волонтёрств
+      last_week_activities: Активность участников клуба на последней неделе
+      name: Имя
+      activities: Забеги
+      volunteering: Волонтёрства
+      personal_best: Лучшее время
+    last_week:
+      title: 'Активность участников %{club}'
+      main: Главная
+      clubs: Клубы
+      participants_activity: Активность участников
+      description: 'Забеги прошедшей недели, в которых принимали участие как бегуны либо как волонтёры члены клуба %{club}.'
+      disclaimer: В субботу некоторые забеги могут быть ещё не загружены, поэтому информация может быть не полной.
+      activities: Забеги
+      volunteering: Волонтёрства
+      position: Место
+      name: Имя
+      total_time: Результат
+      role: Роль
   events:
     show:
       title: 'Парковые забеги | %{event}'
