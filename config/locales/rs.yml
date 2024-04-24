@@ -472,10 +472,10 @@ rs:
     show_more: Prikaži više
     show_less: Prikaži manje
   common:
-    without_token: WITHOUT TOKEN (create)
-    without_name: WITHOUT NAME
-    nobody: UNKNOWN
-    open_link: open
+    without_token: BEZ TOKENA (napravi)
+    without_name: BEZ IMENA
+    nobody: NEPOZNATO
+    open_link: otvori
     gender: Pol
     man: Čovek
     woman: Žena
@@ -515,29 +515,29 @@ rs:
       our_events: Naši događaji
       our_partners: Naši partneri
     about:
-      description: S95 je otvoren platform koji objedinjuje nezavisne park trke, koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
+      description: S95 je otvorena platforma koja objedinjuje nezavisne park trke koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
       events: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}.'
       join_us:
-        title: Želite da se pridružite platform S95?
+        title: Želite da se pridružite platformi S95?
         body_html: >
-          <p>In short, there is needed your desire.</p>
+          <p>Ukratko, potrebna je samo volja.</p>
           <p>
-            In more detail, you need:
+            Detaljnije, potrebni su:
             <ul>
-              <li>safe and comfortable route</li>
-              <li>a team that ready to handle runs every saturday all year round</li>
-              <li>a desire to make everyone healthier and happier</li>
+              <li>bezbedna i pristupačna staza</li>
+              <li>tim koji je voljan da organizuje trke svake subote tokom cele godine</li>
+              <li>zelja da se pomogne svima da budu zdraviji i srećniji</li>
             </ul>
           </p>
-          <p>Are you ready? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> and soon jogging will appear in your park.</p>
+          <p>Da li ste spremni? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> i uskoro će se trčati i u vašem parku.</p>
       s95_abroad:
-        title: S95 races in other countries
-        body: Today our run events are held also in %{countries}. All results are in one system saved and you can see it in athlete profiles.
+        title: S95 trke u drugim zemljama
+        body: Danas se naše trke organizuju i u %{countries}. Svi rezultati se čuvaju u jednom sistemu odakle ćete imati uvid u profile atletiča.
       back: Nazad
       forward: Napred
     rules:
       description: Brief rules for S95 participants, as well as frequently asked questions
-      register_with_bot_html: 'If you are not registered, create a profile using <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a>. You will receive a link to your profile with a personal qr-code.'
+      register_with_bot_html: 'If you are not registered, create a profile using <a href="%{link}"" target="_blank" rel="noopener">Telegram bot</a>. You will receive a link to your profile with a personal qr-code.'
       come_to_s95_html: 'The most important thing is to come to one of our events on <strong>Saturday</strong> at <strong>9 am</strong> and run <strong>5 km</strong>.'
       scan_barcodes: At the finish you will receive a position card. Scan the personal qr-code and position card with the volunteer.
       return_position_card: Hand over the position card.
@@ -585,7 +585,7 @@ rs:
       uniq_events: Uniq parks
     results:
       title: Najbolji rezultati
-      description: Top 50 results on all events for man and woman
+      description: Najboljih 50 rezultata na svim događajima za muškarce i žene
       men: Muškarci
       women: Žene
     results_table:
@@ -596,33 +596,33 @@ rs:
       event: Događaj
   athletes:
     show:
-      description: 'Athlete profile %{athlete_name}: results, statistics and volunteering'
-      show_club_html: 'Show club statistics %{link}'
-      total_results: total runs
-      total_volunteering: total volunteering
+      description: 'Profil atletičara %{athlete_name}: rezultati, statistike i volontiranje'
+      show_club_html: 'Prikaži statistike kluba %{link}'
+      total_results: ukupno trčanja
+      total_volunteering: ukupno volontiranja
       h_index: h-index
       h_index_explanation: The index is equal to h if there are at least h positions (roles), each of which had at least h volunteering
-      volunteering_coefficient: Volunteering coefficient
-      volunteering_coefficient_explanation: Volunteering count for every 10 runs
-      total_trophies: total trophies
-      total_events: attended events
-      personal_best: personal best (PB)
-      best_position: best place
-      no_results: No results yet.
-      no_volunteering: No volunteering yet.
-      results: Results
-      volunteering: Volunteering
-      close: Close
+      volunteering_coefficient: Koeficijent volontiranja
+      volunteering_coefficient_explanation: Broj volontiranja za svakih 10 trčanja
+      total_trophies: ukupno trofeja
+      total_events: učestvovano na događaja
+      personal_best: lični rekord (PB)
+      best_position: najbolje mesto
+      no_results: Bez rezultata do sada.
+      no_volunteering: Bez volontiranja do sada.
+      results: Rezultati
+      volunteering: Volonterstvo
+      close: Zatvori
       table:
         pb: PB
-        date: Date
-        time: Time
-        pace: Pace
-        place: Place
-        event: Event
+        date: Datum
+        time: Vreme
+        pace: Tempo
+        place: Mesto
+        event: Događaj
   activities:
     index:
-      description: Recent run results on S95 events
+      description: Skorašnji rezultati sa S95 trka
       date: Datum
       event: Događaj
       athletes: Sportisti
@@ -630,14 +630,14 @@ rs:
       first_man: Prvi čovek
       first_woman: Prva žena
     show:
-      title: 'Run results %{activity}'
-      description: 'Race protocol %{activity}, volunteer list and brief report about run'
+      title: 'Rezultati trke %{activity}'
+      description: 'Protokol trke %{activity}, lista volontera i kratki izveštaj o trci'
       main_page: Main
       short_report: Kratak izveštaj
-      total_runners_count: race participants
-      personal_bests_count: number of personal bests
-      first_runners_count: first time on event
-      first_s95_count: first time on S95
+      total_runners_count: učesnika trke
+      personal_bests_count: broj ličnih rekorda
+      first_runners_count: prvi put na događaju
+      first_s95_count: prvi put na S95
       protocol: Protokol
       common: Zajednički
       men: Muškarci
@@ -648,25 +648,25 @@ rs:
       role: Uloga
       total_volunteering: ukupno volontiranja %{count}
     protocol:
-      position_short: Pos.
-      position_full: Place
-      athlete: Athlete
-      time: Time
-      pace: Pace
-      club: Club
+      position_short: Poz.
+      position_full: Pozicija
+      athlete: Atleta
+      time: Vreme
+      pace: Tempo
+      club: Klub
     result:
-      total_runs_html: '%{count}&nbsp;runs'
-      total_volunteering_html: '%{count}&nbsp;volunteering'
+      total_runs_html: '%{count}&nbsp;trčanja'
+      total_volunteering_html: '%{count}&nbsp;volonterstvo'
   clubs:
     index:
-      description: Table of clubs with statistics on the total number of participants, volunteers and runs
-      how_to_add_new_club_html: 'Is your club not on the list? Write us <a href="mailto:%{mail}?subject=Add a new club" target="_blank" title="Send us an email">email</a> and we will add it.'
-      name: Name
-      athletes: athletes
-      results: results
-      volunteering: volunteering
+      description: Tabela klubova sa statistikom o ukupnom broju učesnika, volontera i trčanja
+      how_to_add_new_club_html: 'Da li vaš klub nije na listi? Pišite nam na <a href="mailto:%{mail}?subject=Add a new club" target="_blank" title="Pošaljite nam email">email</a> i dodaćemo ga.'
+      name: Ime
+      athletes: atletičari
+      results: rezultati
+      volunteering: volonterstvo
     show:
-      description: 'Table of participants and statistics for the club %{club}'
+      description: 'Tabela učesnika i statistika za klub %{club}'
   events:
     show:
       title: 'Park trčanje | %{event}'
@@ -679,25 +679,25 @@ rs:
       attention: Pažnja!
       opening_soon: Uskoro otvaranje!
       start_cancelled: Sledeći start je otkazan.
-      inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class=" alert-link">naše trke</a>.'
+      inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class="alert-link">naše trke</a>.'
       about_volunteers_html: 'Svi događaji su besplatni i organizovani od strane volontera. <a href="%{roster_link}">Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu</a>.'
       about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Registrujte se</a> u našem botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
       event_place: Mesto događaja
     volunteering:
-      title: График волонтёрств | %{event}
-      description: 'Информация о волонтёрстве. Таблица с графиком волонтёрств и обязательными позициями для забега "%{event}".'
-      main_title: График волонтёрств
+      title: Grafik volontiranja | %{event}
+      description: 'Informacije o volontiranju. Tabela sa rasporedom volontiranja i potrebnim pozicijama za trku "%{event}".'
+      main_title: Grafik volontiranja
       main_page: Main
-      role: Role
-      volunteer: Volunteer
+      role: Uloga
+      volunteer: Volonter
   users:
     show:
-      title: Settings
-      description: 'Settings for %{user_name}'
-      edit: Edit
+      title: Podešavanja
+      description: 'Podešavanja za %{user_name}'
+      edit: Izmeni
     field:
-      edit: Edit
+      edit: Izmeni
     edit:
-      delete_image: Delete image
-      save: Save
-      cancel: Cancel
+      delete_image: Obriši sliku
+      save: Sačuvaj
+      cancel: Otkaži
