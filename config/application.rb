@@ -41,6 +41,7 @@ module Sat9am5km
       enable_starttls_auto: true
     }
     config.action_mailer.preview_paths << "#{Rails.root}/spec/mailers/previews"
+
     config.active_storage.service = :local
   end
 end
