@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RatingsController < ApplicationController
-  RATINGS = %w[count h_index uniq_events].freeze
+  RATINGS = %w[count h_index uniq_events trophies].freeze
 
   def index
     @rating_type = params[:rating_type] == 'volunteers' ? 'volunteers' : 'results'
