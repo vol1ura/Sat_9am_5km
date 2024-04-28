@@ -571,18 +571,21 @@ rs:
           count: Total number of runs scored. In case of equal value, the one with more volunteering will be higher in the rating.
           h_index: Running h-index - a value that is equal to h if the participant ran in h parks, and in each of them at least h times. In case of equal value, the participant with more races will be higher in the ranking.
           uniq_events: Unique parks - number of parks visited as a runner. In case of equal values, the participant with more races will be higher in the ranking.
+          trophies: Broj znački. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa velikim brojem trka.
       volunteers:
         title: Volunteers rating
         description:
           count: Total number of volunteers. In the event of a tie, the one with more scored runs will be ranked higher.
           h_index: Volunteer h-index - a value that is equal to h if the participant was a volunteer in h different positions (roles), in each of which at least h times. In case of equal values, the participant with a greater number of volunteers will be higher in the rating.
           uniq_events: Unique parks - number of parks visited as a volunteer. In case of equal values, the participant with a greater number of volunteers will be higher in the rating.
+          trophies: Broj znački. U slučaju jednakih vrednosti, viši rang će imati učesnika sa velikim brojem volontiranje.
     ratings_table:
       name: Ime
       club: Klub
       count: Count
       h_index: h-index
       uniq_events: Uniq parks
+      trophies: Značke
     results:
       title: Najbolji rezultati
       description: Najboljih 50 rezultata na svim događajima za muškarce i žene
