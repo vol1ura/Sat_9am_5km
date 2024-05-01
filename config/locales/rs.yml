@@ -598,6 +598,13 @@ rs:
       club: Klub
       event: Događaj
   athletes:
+    index:
+      title: Rezultati pretrage
+      description: Rezultati pretrage po imenu člana ili po njegovom ID (S95, parkrun, 5 verst, RunPark, ParkZhrun)
+      name: Ime
+      club: Klub
+      athletes_count: Ukupno pronađeno %{count} čl.
+      nothing_found: Nažalost, ništa nije pronađeno.
     show:
       description: 'Profil atletičara %{athlete_name}: rezultati, statistike i volontiranje'
       show_club_html: 'Prikaži statistike kluba %{link}'
