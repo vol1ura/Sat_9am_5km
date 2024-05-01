@@ -598,6 +598,13 @@ ru:
       club: Клуб
       event: Мероприятие
   athletes:
+    index:
+      title: Результаты поиска
+      description: Результаты поиска по имени участника, либо по его ID (S95, parkrun, 5 вёрст, RunPark, ParkZhrun)
+      name: Имя
+      club: Клуб
+      athletes_count: Всего найдено %{count} уч.
+      nothing_found: К сожалению, ничего не найдено.
     show:
       description: 'Профиль участника %{athlete_name}: результаты, статистика и волонтёрства'
       show_club_html: 'Посмотреть статистику клуба %{link}'

@@ -6,14 +6,11 @@ RSpec.describe '/athletes' do
 
     context 'when athletes have same name' do
       before do
-        Bullet.n_plus_one_query_enable = false
         create(:athlete, name: 'SOME Test')
         create(:athlete, name: 'Some Other')
 
         get athletes_url(name: 'Some')
       end
-
-      after { Bullet.n_plus_one_query_enable = true }
 
       it 'renders a successful response for name search' do
         expect(response).to be_successful

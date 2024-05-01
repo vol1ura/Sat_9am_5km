@@ -2,7 +2,7 @@
 
 class AthletesController < ApplicationController
   def index
-    query = params[:name].to_s.strip
+    query = params[:name].to_s.gsub(/[^[:alnum:][:blank:]]/, '').strip
     criteria = Athlete.order(:event_id)
     @athletes =
       if query.length < 3
@@ -11,7 +11,7 @@ class AthletesController < ApplicationController
         personal_code = Athlete::PersonalCode.new(query.to_i)
         criteria.where(personal_code.code_type => personal_code.id)
       else
-        criteria.where('name ILIKE :query', query: "%#{Athlete.sanitize_sql_like(query)}%")
+        criteria.where('name ~* :query', query:)
       end
     redirect_to athlete_path(@athletes.take) if request.format.html? && @athletes.size == 1
   end
