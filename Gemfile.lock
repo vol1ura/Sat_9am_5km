@@ -184,7 +184,7 @@ GEM
     faker (3.3.1)
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
-    font-awesome-sass (6.5.1)
+    font-awesome-sass (6.5.2)
       sassc (~> 2.0)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
