@@ -13,7 +13,7 @@
   <% RatingsController::RATINGS.each do |order| %>
     <div class="form-check">
       <%= form.radio_button :order, order, checked: order == @order, class: 'form-check-input' %>
-      <%= form.label order, t(".#{@rating_type}.description.#{order}"), class: 'form-check-label' %>
+      <%= form.label "order_#{order}", t(".#{@rating_type}.description.#{order}"), class: 'form-check-label' %>
     </div>
   <% end %>
 <% end %>
