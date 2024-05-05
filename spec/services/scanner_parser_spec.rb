@@ -18,7 +18,7 @@ RSpec.describe ScannerParser, type: :service do
 
     it 'scheduled job' do
       described_class.call(activity, file_scanner)
-      expect(AddAthleteToResultJob).to have_received(:perform_later).at_least(:once)
+      expect(AddAthleteToResultJob).to have_received(:perform_later).exactly(5).times
     end
   end
 end

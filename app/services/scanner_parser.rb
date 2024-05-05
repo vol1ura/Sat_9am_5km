@@ -10,8 +10,7 @@ class ScannerParser < ApplicationService
     return unless @scanner_file
 
     table[1..].each do |row|
-      code, position, = row
-      next unless code&.match?(/^A\d+/) && position&.match?(/^P\d+/)
+      next unless row in [/^A\d+/ => code, /^P\d+/ => position, *]
 
       AddAthleteToResultJob.perform_later(@activity_id, code, position)
     end
