@@ -16,6 +16,7 @@ rs:
         success_upload: 'Kreirani zadaci za učitavanje podataka. U zavisnosti od broja učesnika koji nedostaju u bazi, prikupljanje informacija može potrajati neko vreme. Osvežite stranicu za 5-15 sekundi.'
         failed_upload: 'Greška! Nije moguće obraditi neke datoteke. Proverite format - samo CSV je dozvoljen.'
         bad_timer_format: 'Greška! Nije moguće obraditi datoteku tajmera. Proverite da li su pomešane datoteke sa skenera i tajmera.'
+        bad_data: 'Greška u validaciji podataka u priloženim datotekama! Proverite njihovu ispravnost i pokušajte ponovo.'
       update:
         <<: *upload_notices
     contacts:

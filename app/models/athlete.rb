@@ -64,7 +64,7 @@ class Athlete < ApplicationRecord
             numericality: { only_integer: true, greater_than: PARKZHRUN_BORDER },
             allow_nil: true
 
-  before_save :remove_extra_spaces, if: :will_save_change_to_name?
+  before_save :remove_name_extra_spaces, if: :will_save_change_to_name?
   after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
 
   def self.duplicates
@@ -132,7 +132,7 @@ class Athlete < ApplicationRecord
 
   private
 
-  def remove_extra_spaces
+  def remove_name_extra_spaces
     trimmed_name = name.gsub(/\s+/, ' ').gsub(/^ | $|(?<= ) /, '')
     self.name = trimmed_name unless name == trimmed_name
   end

@@ -41,6 +41,8 @@ ActiveAdmin.register Activity do
     flash[:alert] = t('.failed_upload')
   rescue TimerParser::FormatError
     flash[:alert] = t('.bad_timer_format')
+  rescue ActiveRecord::RecordInvalid
+    flash[:alert] = t('.bad_data')
   end
 
   action_item :results, only: %i[show edit] do
