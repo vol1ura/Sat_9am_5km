@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if current_user.update(user_params)
       if params[:delete_image]
         current_user.image.purge
-      elsif current_user.image.attached?
+      elsif params[:user][:image] && current_user.image.attached?
         CompressUserImageJob.set(wait: 1.minute).perform_later current_user.id
       end
 
@@ -24,6 +24,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :image)
+    params.require(:user).permit(:first_name, :last_name, :image, athlete_attributes: %i[id event_id])
   end
 end

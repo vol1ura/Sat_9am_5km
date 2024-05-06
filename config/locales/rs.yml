@@ -67,6 +67,7 @@ rs:
         gender: pol
         club: klub
         event: domaće trčanje
+        event_id: domaće trčanje
         male: muškarac
         user: korisnik
         registered: registered
