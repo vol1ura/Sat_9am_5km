@@ -1,4 +1,4 @@
-<% actual_events = @country_events.where.not(id: 4) %>
+<% actual_events = @country_events.without_friends %>
 <% head_info :title, t('navbars.top.about') %>
 <% head_info :description, t('.description') %>
 <h2><%= t 'navbars.top.about' %></h2>

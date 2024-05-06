@@ -66,6 +66,7 @@ ru:
         gender: пол
         club: клуб
         event: домашний забег
+        event_id: домашний забег
         male: мужчина
         user: пользователь
         registered: зарег.

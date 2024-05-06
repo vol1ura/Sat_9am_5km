@@ -44,6 +44,20 @@ RSpec.describe '/user' do
         expect { patch user_url, params: { user: { first_name: 'Tester' } } }
           .to change(user, :first_name).to('Tester')
 
+        expect(CompressUserImageJob).not_to have_been_enqueued
+        expect(response).to redirect_to user_path
+      end
+
+      it 'enqueues job' do
+        patch(
+          user_url,
+          params: {
+            user: {
+              image: Rack::Test::UploadedFile.new(File.open('spec/fixtures/files/default.png')),
+            },
+          },
+        )
+
         expect(CompressUserImageJob).to have_been_enqueued
         expect(response).to redirect_to user_path
       end
