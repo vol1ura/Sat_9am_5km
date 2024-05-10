@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Athlete do
   includes :club, :event
-
+  batch_action :destroy, false
   permit_params :parkrun_code, :fiveverst_code, :runpark_code, :name, :male, :user_id, :club_id, :event_id
 
   config.per_page = [20, 50, 100]
