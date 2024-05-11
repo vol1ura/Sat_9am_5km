@@ -11,6 +11,7 @@ class EventsController < ApplicationController
 
   def volunteering
     @activities = Activity.where(event: @event, date: Date.current..).order(:date).limit(4)
+    @tg_chat = @event.contacts.find_by(contact_type: :tg_chat)
   end
 
   private
