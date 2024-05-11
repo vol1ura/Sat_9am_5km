@@ -718,8 +718,12 @@ rs:
     volunteering:
       title: Grafik volontiranja | %{event}
       description: 'Informacije o volontiranju. Tabela sa rasporedom volontiranja i potrebnim pozicijama za trku "%{event}".'
+      acknowledgements: Bili bismo vam veoma zahvalni ako nam možete pružiti volontersku pomoć. Možete odabrati zanimljivu i jaku aktivnost za svakoga koja će vam omogućiti da se otkrijete, podržite prijatelje, odlično se zabavite.
+      about_roster_html: 'Ispod možete pogledati listu <em>obaveznih pozicija</em>, kao i videti koje su već izabrane.'
+      how_to_participate_html: 'Da biste se prijavili, samo napišite u naš <a href="%{tg_chat_link}" target="_blank" rel="noopener" >Telegram Chat</a>.'
+      additional_positions: Osim toga, ponekad rukovodioci trka donose odluku o regrutovanju dodatnih volontera - pratite vesti ili pitajte direktno u ćaskanju.
       main_title: Grafik volontiranja
-      main_page: Main
+      main_page: Glavna
       role: Uloga
       volunteer: Volonter
   users:

@@ -15,19 +15,15 @@
 
 <h1><%= t '.main_title' %></h1>
 
-<p>
-  Мы будем очень признательны вам, если вы сможете оказать нам волонтёрскую помощь. Вы можете выбрать для себя
-  интересное и посильное любому занятие, которое позволит раскрыть себя, поддержать друзей, отлично провести время.
-</p>
+<p><%= t '.acknowledgements' %></p>
 <p>
   <% unless @activities.empty? %>
-    Ниже вы можете посмотреть список <em>обязательных позиций</em>, а также увидеть какие из них уже выбраны.
+    <%= t '.about_roster_html' %>
   <% end %>
-  <% if (tg_chat = @event.contacts.find_by(contact_type: :tg_chat)) %>
-    Чтобы записаться, просто напишите в наш <%= sanitized_link_to('телеграм чат', tg_chat.link, target: '_blank', rel: 'noopener') %>.
+  <% if @tg_chat %>
+    <%= t '.how_to_participate_html', tg_chat_link: @tg_chat.link %>
   <% end %>
-  Помимо этого, иногда руководители забегов принимают решение о наборе дополнительных волонтёров -
-  следите за новостями, либо спрашивайте непосредственно в чате.
+  <%= t '.additional_positions' %>
 </p>
 
 <ul class="nav nav-tabs" id="protocol" role="tablist">
