@@ -2,7 +2,7 @@
   <%= form_with model: current_user do |form| %>
     <div class="row">
       <div class="col-12 col-sm-8 col-md-4">
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column" data-controller="form">
           <div>
             <%= form.label :first_name, class: 'col-form-label text-capitalize fw-light' %>
             <% is_first_name_invalid = current_user.errors.key?(:first_name) %>
@@ -25,14 +25,14 @@
               <%= athlete_form.collection_select :event_id, Event.in_country(top_level_domain).without_friends, :id, :name, { include_blank: true }, class: 'form-control' %>
             <% end %>
           </div>
-          <div class="mt-2">
+          <div class="mt-4 form-check form-switch">
+            <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
+            <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
+          </div>
+          <div class="mt-2" data-form-target="input">
             <%= form.label :image, class: 'form-label text-capitalize fw-light' %>
             <%= form.file_field :image, class: 'form-control' %>
             <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
-          </div>
-          <div class="mt-2 form-check form-switch">
-            <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch' %>
-            <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
           </div>
           <div class="mt-5">
             <button class="me-1 btn btn-primary" type="submit" title="<%= t '.save' %>">

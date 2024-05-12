@@ -5,7 +5,7 @@
 <%=
   form_with(
     url: ratings_path,
-    data: { controller: 'rating', action: 'change->rating#select', turbo_stream: true },
+    data: { controller: 'form', action: 'change->form#submit', turbo_stream: true },
     method: :get,
   ) do |form|
 %>
