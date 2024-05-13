@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="<%= top_level_domain %>">
   <head>
-    <title><%= yield_head_info(:title, 'Парковые забеги') %> | Sat9am5km</title>
+    <title><%= yield_head_info(:title, 'Парковые забеги') %> | S95</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta property="og:image" content="<%= yield_head_info :og_image, '/favicon-192x192.png' %>">
     <meta property="og:image:width" content="150">
@@ -16,7 +16,7 @@
     <%= javascript_importmap_tags %>
     <meta name="apple-mobile-web-app-title" content="Sat9am5km">
     <meta name='description' content='<%= yield_head_info(:description, 'Еженедельные субботние пробежки на 5км в парке') %>'>
-    <meta name='keywords' content='<%= yield_head_info(:keywords, "s95,sat,9am,5km,парковые пробежки,парковые забеги,пробег,забег,спорт,паркран,parkrun,#{@country_events.map(&:name).join(',')}") %>'>
+    <meta name='keywords' content='<%= yield_head_info(:keywords, "s95,sat9am5km,sat,9am,5km,5км,бег,парк,run,park,суббота,saturday,утро,парковые пробежки,парковые забеги,пробег,забег,спорт,волонтерство,друзья,знакомства,семья,досуг,дети,паркран,parkrun,#{@country_events.map(&:name).join(',')}") %>'>
     <% if Rails.env.production? %>
       <meta name="yandex-verification" content="<%= Rails.application.credentials.yandex.webmaster[top_level_domain] %>">
       <!-- Yandex.Metrika counter -->
