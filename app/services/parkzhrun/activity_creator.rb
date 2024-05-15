@@ -8,7 +8,7 @@ module Parkzhrun
 
     def call
       if activity.results.exists?
-        Rails.logger.warn("Parkzrun activity on #{@date} already exists")
+        Rails.logger.warn("ParkZhrun activity on #{@date} already exists")
         return false
       end
 
@@ -26,24 +26,24 @@ module Parkzhrun
     end
 
     def create_results
-      Client.fetch('results', @date).each do |result|
+      Client.fetch(:results, @date).each do |result|
         Result.create!(
-          position: result['position'],
-          total_time: Result.total_time(*result['total_time'].split(':').map(&:to_i)),
-          athlete: AthleteFinder.call(result['athlete_id']),
+          position: result[:position],
+          total_time: Result.total_time(*result[:total_time].split(':').map(&:to_i)),
+          athlete: AthleteFinder.call(result[:athlete_id]),
           activity: activity,
         )
       end
     end
 
     def create_volunteers
-      Client.fetch('volunteers', @date).each do |result|
+      Client.fetch(:volunteers, @date).each do |result|
         volunteer = Volunteer.new(
-          role: result['role_id'].to_i,
-          athlete: AthleteFinder.call(result['volunteer_id']),
+          role: result[:role_id].to_i,
+          athlete: AthleteFinder.call(result[:volunteer_id]),
           activity: activity,
         )
-        Rollbar.warn("Can't add volunteer to Parkzhrun activity", activity_id: activity.id) unless volunteer.save
+        Rollbar.warn("Can't add volunteer to ParkZhrun activity", activity_id: activity.id) unless volunteer.save
       end
     end
   end

@@ -7,9 +7,9 @@ module Parkzhrun
         "https://parkzhrun.ru/wp-json/api/v1/#{resource}/#{param}",
         'Authorization' => Rails.application.credentials.parkzhrun_auth_key,
       )
-      raise "Parkzhrun request failed: #{response.message}" unless response.is_a?(Net::HTTPSuccess)
+      raise "ParkZhrun request failed: #{response.message}" unless response.is_a?(Net::HTTPSuccess)
 
-      JSON.parse(response.body)[resource]
+      JSON.parse(response.body, symbolize_names: true)[resource]
     end
   end
 end
