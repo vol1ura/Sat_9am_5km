@@ -53,7 +53,7 @@ namespace :processing do
 
   desc 'Compress user images'
   task compress_user_images: :environment do
-    User.find_each do |user|
+    User.joins(:image_attachment).find_each do |user|
       Users::ImageCompressor.call(user)
     end
   end
