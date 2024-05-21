@@ -80,7 +80,7 @@ jobs:
         run: bundle exec rspec
       - name: Test & publish code coverage
         if: github.ref == 'refs/heads/master'
-        uses: paambaati/codeclimate-action@v5
+        uses: paambaati/codeclimate-action@v6
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
         with:
