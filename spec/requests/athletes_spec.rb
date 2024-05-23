@@ -40,4 +40,13 @@ RSpec.describe '/athletes' do
       expect(response).to be_successful
     end
   end
+
+  describe 'GET /athletes/1/best_result' do
+    it 'renders a successful response' do
+      athlete = create(:athlete)
+      create_list(:result, 2, athlete:)
+      get "/athletes/#{athlete.code}/best_result"
+      expect(response).to be_successful
+    end
+  end
 end
