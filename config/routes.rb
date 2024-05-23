@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       sign_out_via: %i[delete get]
     },
   )
+  get '/athletes/:code/best_result', to: 'athletes#best_result', defaults: { format: :json }
 
   namespace :api, defaults: { format: :json } do
     namespace :internal do

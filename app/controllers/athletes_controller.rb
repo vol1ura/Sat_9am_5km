@@ -8,8 +8,7 @@ class AthletesController < ApplicationController
       if query.length < 3
         Athlete.none
       elsif query.match?(/^\d+$/)
-        personal_code = Athlete::PersonalCode.new(query.to_i)
-        criteria.where(personal_code.code_type => personal_code.id)
+        criteria.where(**Athlete::PersonalCode.new(query.to_i).to_params)
       else
         criteria.search_by_name(query)
       end
@@ -30,5 +29,15 @@ class AthletesController < ApplicationController
     @total_vol = @volunteering.size
     @total_trophies = @athlete.trophies.size
     @barcode = BarcodePrinter.call(@athlete)
+  end
+
+  def best_result
+    since_date = params.key?(:since_date) ? Date.parse(params[:since_date]) : Date.new(2022)
+    @athlete = Athlete.find_by!(**Athlete::PersonalCode.new(params[:code].to_i).to_params)
+    @result = @athlete.results.published.where(activity: { date: since_date.. }).order(:total_time).first
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'athlete not found' }, status: :not_found
+  rescue StandardError => e
+    render json: { error: e.message }, status: :unprocessable_entity
   end
 end
