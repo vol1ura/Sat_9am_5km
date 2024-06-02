@@ -5,6 +5,10 @@ rs:
         title: Published results
       volunteering:
         title: Published volunteering
+      destroy:
+        successfully_deleted: 'Uspešno obrisano %{obj}'
+        cannot_delete_registered: 'Operacija poništena. Ne možete obrisati registrovanog učesnika!'
+        cannot_delete_participant: 'Operacija poništena. Ne možete obrisati učesnika koji ima rezultate!'
     utilities:
       cache:
         clear_success: 'Keš uspešno očišćen!'
@@ -19,6 +23,8 @@ rs:
         bad_data: 'Greška u validaciji podataka u priloženim datotekama! Proverite njihovu ispravnost i pokušajte ponovo.'
       update:
         <<: *upload_notices
+      destroy:
+        forbidden_for_published: 'Deleting of published protocol is forbidden! Contact the administrators.'
     contacts:
       index:
         title: 'Kontakti %{event_name}'
@@ -62,7 +68,6 @@ rs:
     edit: Uredi
     delete: Obriši
     delete_confirmation: "Da li ste sigurni da želite da obrišete ovo?"
-    successfully_deleted: "Uspešno obrisano %{obj}"
     new_model: "Kreiraj %{model}"
     edit_model: "Uredi %{model}"
     delete_model: "Obriši %{model}"
@@ -159,8 +164,6 @@ rs:
       confirm_gender_set: "Postaviti pol izabranim učesnicima?"
       successful_gender_set: "Uspešno promenjen pol."
       gender_set_failed: "Neuspelo promena pola."
-      cannot_delete_registered: "Operacija poništena. Ne možete obrisati registrovanog učesnika!"
-      cannot_delete_participant: "Operacija poništena. Ne možete obrisati učesnika koji ima rezultate!"
     results:
       cannot_link_athlete: 'Učesnik sa navedenim ID nije pronađen. Proverite brojeve ili prvo kreirajte takvog učesnika.'
       cannot_move_result: 'Greška! Proverite ispravnost pozicija.'
