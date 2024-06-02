@@ -5,6 +5,10 @@ ru:
         title: Опубликованные результаты
       volunteering:
         title: Опубликованные волонтёрства
+      destroy:
+        successfully_deleted: 'Успешно удалён %{obj}'
+        cannot_delete_registered: 'Действие отменено. Нельзя удалить зарегистрированного участника!'
+        cannot_delete_participant: 'Действие отменено. Нельзя удалить участника, имеющего результаты!'
     utilities:
       cache:
         clear_success: 'Кэш успешно очищен!'
@@ -19,6 +23,8 @@ ru:
         bad_data: 'Ошибка валидации данных в прикреплённых файлах! Проверьте их корректность и попробуйте ещё раз.'
       update:
         <<: *upload_notices
+      destroy:
+        forbidden_for_published: 'Удаление опубликованного протокола запрещено! Свяжитесь с администраторами.'
     contacts:
       index:
         title: 'Контакты %{event_name}'
@@ -62,7 +68,6 @@ ru:
     edit: Изменить
     delete: Удалить
     delete_confirmation: "Вы уверены, что хотите удалить это?"
-    successfully_deleted: "Успешно удалён %{obj}"
     new_model: "Создать %{model}"
     edit_model: "Изменить %{model}"
     delete_model: "Удалить %{model}"
@@ -153,14 +158,12 @@ ru:
       errors:
         empty_text: "Комментарий не сохранен, текст не должен быть пустым."
     athletes:
-      confirm_reunite: "Действительно хотите объединить этих участников в одного?"
+      confirm_reunite: "Объединить этих участников в одного?"
       successful_reunite: "Участники были объединены."
       failed_reunite: "Операция не выполнена. Участники не могут быть объединены."
       confirm_gender_set: "Установить пол выбранным участникам?"
       successful_gender_set: "Смена пола успешно произведена."
       gender_set_failed: "Не удалось произвести смену пола."
-      cannot_delete_registered: "Действие отменено. Нельзя удалить зарегистрированного участника!"
-      cannot_delete_participant: "Действие отменено. Нельзя удалить участника, имеющего результаты!"
     results:
       cannot_link_athlete: 'Участник с указанными ID не найден. Проверьте номера или сначала создайте такого участника.'
       cannot_move_result: 'Ошибка! Проверьте корректность позиций.'

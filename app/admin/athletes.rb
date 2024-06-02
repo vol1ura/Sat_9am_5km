@@ -52,14 +52,15 @@ ActiveAdmin.register Athlete do
   controller do
     def destroy
       if resource.user_id
-        flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_registered')
+        flash[:error] = t '.cannot_delete_registered'
       elsif resource.results.exists? || Volunteer.exists?(athlete: resource)
-        flash[:alert] = I18n.t('active_admin.athletes.cannot_delete_participant')
+        flash[:error] = t '.cannot_delete_participant'
       else
-        flash[:notice] = I18n.t('active_admin.successfully_deleted', obj: resource.name)
-        resource.destroy
+        flash[:notice] = t '.successfully_deleted', obj: resource.name
+        return super
       end
-      redirect_to collection_path
+
+      redirect_to resource_path
     end
   end
 
@@ -68,7 +69,7 @@ ActiveAdmin.register Athlete do
     if Athletes::Reuniter.call(batch_action_collection.where(id: ids), ids)
       flash[:notice] = I18n.t('active_admin.athletes.successful_reunite')
     else
-      flash[:alert] = I18n.t('active_admin.athletes.failed_reunite')
+      flash[:error] = I18n.t('active_admin.athletes.failed_reunite')
     end
     redirect_to collection_path(scope: :duplicates)
   end
