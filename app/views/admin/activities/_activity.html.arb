@@ -15,6 +15,7 @@ end
 panel 'Протокол' do
   table_for collection, row_class: ->(r) { 'athlete-error' unless r.correct? } do
     column :position
+    column('QR-ID') { |r| r.athlete&.code }
     column :athlete
     column(:total_time) { |r| human_result_time(r.total_time) }
     column(:gender) do |r|
@@ -29,8 +30,9 @@ end
 
 panel 'Волонтёры' do
   table_for activity.volunteers_roster.includes(:athlete) do
-    column :name
     column(:role) { |v| human_volunteer_role v.role }
+    column('QR-ID') { |r| r.athlete.code }
+    column :name
     column :comment
   end
 end
