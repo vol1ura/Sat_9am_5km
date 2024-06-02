@@ -28,6 +28,15 @@ ActiveAdmin.register Activity do
 
   form title: 'Загрузка забега', multipart: true, partial: 'form'
 
+  controller do
+    def destroy
+      return super unless resource.published?
+
+      flash[:error] = t '.forbidden_for_published'
+      redirect_to resource_path
+    end
+  end
+
   after_save do |activity|
     if activity.valid?
       TimerParser.call(activity, params[:activity][:timer])
@@ -38,11 +47,11 @@ ActiveAdmin.register Activity do
     end
   rescue CSV::MalformedCSVError => e
     Rollbar.error e
-    flash[:alert] = t('.failed_upload')
+    flash[:error] = t('.failed_upload')
   rescue TimerParser::FormatError
-    flash[:alert] = t('.bad_timer_format')
+    flash[:error] = t('.bad_timer_format')
   rescue ActiveRecord::RecordInvalid
-    flash[:alert] = t('.bad_data')
+    flash[:error] = t('.bad_data')
   end
 
   action_item :results, only: %i[show edit] do
