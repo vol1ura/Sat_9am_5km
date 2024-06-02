@@ -140,7 +140,7 @@ RSpec.describe '/admin/athletes' do
 
     shared_examples 'not destroy athlete' do
       it 'not destroy athlete' do
-        expect(response).to redirect_to admin_athletes_url
+        expect(response).to redirect_to admin_athlete_url(athlete)
         expect(athlete.reload).not_to be_nil
       end
     end
