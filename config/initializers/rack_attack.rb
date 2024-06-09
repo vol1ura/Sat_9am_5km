@@ -7,7 +7,7 @@ class Rack::Attack
   #        30 requests in 27 seconds
   #        40 requests in 81 seconds
   (1..4).each do |level|
-    throttle('req/ip', limit: 10 * level, period: (3**level).seconds) do |req|
+    throttle("req/ip-#{level}", limit: 10 * level, period: (3**level).seconds) do |req|
       req.ip if req.path.start_with?('/activities') || req.path.start_with?('/athletes') || req.path.start_with?('/user')
     end
   end
