@@ -31,8 +31,8 @@ end
 panel 'Волонтёры' do
   table_for activity.volunteers_roster.includes(:athlete) do
     column(:role) { |v| human_volunteer_role v.role }
-    column('QR-ID') { |r| r.athlete.code }
-    column :name
+    column('QR-ID') { |v| v.athlete.code }
+    column(:name) { |v| link_to v.name, admin_athlete_path(v.athlete) }
     column :comment
   end
 end
