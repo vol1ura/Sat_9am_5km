@@ -15,15 +15,14 @@ end
 panel 'Протокол' do
   table_for collection, row_class: ->(r) { 'athlete-error' unless r.correct? } do
     column :position
-    column('QR-ID') { |r| r.athlete&.code }
+    column('QR-ID') { |r| athlete_code_id r.athlete }
     column :athlete
-    column(:total_time) { |r| human_result_time(r.total_time) }
+    column(:total_time) { |r| human_result_time r.total_time }
     column(:gender) do |r|
       if (athlete = r.athlete)
         athlete.gender || render(partial: 'gender_links', locals: { result: r, activity: activity })
       end
     end
-    column('Инфа по ID') { |r| athlete_external_link(r.athlete) }
     column(:club) { |r| r.athlete&.club&.name }
   end
 end
@@ -31,7 +30,7 @@ end
 panel 'Волонтёры' do
   table_for activity.volunteers_roster.includes(:athlete) do
     column(:role) { |v| human_volunteer_role v.role }
-    column('QR-ID') { |v| v.athlete.code }
+    column('QR-ID') { |v| athlete_code_id v.athlete }
     column(:name) { |v| link_to v.name, admin_athlete_path(v.athlete) }
     column :comment
   end

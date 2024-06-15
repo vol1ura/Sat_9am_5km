@@ -14,7 +14,7 @@ attributes_table_for athlete do
   else
     row(:registered) { |a| a.user_id.present? }
   end
-  row(:id_info) { |a| athlete_external_link(a) }
+  row(:id_info) { |a| athlete_code_id a }
   row(:results) { |a| link_to "смотреть таблицу (всего #{a.results.published.size})", results_admin_athlete_path(a) }
   row(:volunteering) { |a| link_to "смотреть таблицу (всего #{a.volunteering.size})", volunteering_admin_athlete_path(a) }
 end
