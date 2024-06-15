@@ -50,12 +50,13 @@ module ApplicationHelper
     image_tag event.main_picture_link || 'events/placeholder_big.jpg', **options
   end
 
-  def athlete_external_link(athlete)
-    return unless athlete && (athlete.parkrun_code || athlete.fiveverst_code || athlete.runpark_code)
+  def athlete_code_id(athlete)
+    code = athlete&.code
+    return code unless athlete && (athlete.parkrun_code || athlete.fiveverst_code || athlete.runpark_code)
 
-    code_type = Athlete::PersonalCode.new(athlete.code).code_type
+    code_type = Athlete::PersonalCode.new(code).code_type
     url = format(Athletes::Finder::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type))
-    external_link_to t('common.open_link'), url
+    external_link_to code, url
   end
 
   def telegram_link(user)
