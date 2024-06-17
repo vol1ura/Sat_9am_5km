@@ -47,7 +47,7 @@ module ApplicationHelper
   end
 
   def event_main_image_tag(event, options = {})
-    image_tag event.main_picture_link || 'events/placeholder_big.jpg', **options
+    image_tag event.main_picture_link || '/events/placeholder_big.jpg', **options
   end
 
   def athlete_code_id(athlete)
