@@ -70,6 +70,6 @@ module ApplicationHelper
   end
 
   def user_image_url(user)
-    user&.image&.attached? ? user.image.variant(:web) : 'person.jpg'
+    user&.image&.attached? ? user.image.variant(:web) : '/person.jpg'
   end
 end
