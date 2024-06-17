@@ -28,7 +28,7 @@ RSpec.describe 'ratings' do
     before do
       create_list(:volunteer, 2)
 
-      get ratings_url(rating_type: 'volunteers')
+      get ratings_url(rating_type: 'volunteers', order: 'h_index')
     end
 
     it { expect(response).to be_successful }
