@@ -7,16 +7,16 @@
 <h2 class="mt-4"><%= t '.our_partners' %></h2>
 <div class="partners">
   <%= external_link_to 'https://t.me/parkrun' do %>
-    <% image_tag '/partners/pro_parkrun.svg', class: 'img-partner', alt: 'Pro parkrun' %>
+    <% image_tag '/images/partners/pro_parkrun.svg', class: 'img-partner', alt: 'Pro parkrun' %>
   <% end %>
   <% if top_level_domain == :ru %>
     <%= external_link_to 'https://go.grigri.ru/s95' do %>
-      <% image_tag '/partners/grigri.png', class: 'img-partner', alt: 'Gri' %>
+      <% image_tag '/images/partners/grigri.png', class: 'img-partner', alt: 'Gri' %>
     <% end %>
   <% end %>
   <% if %i[ru by].include?(top_level_domain) %>
     <%= external_link_to "https://invitro.#{top_level_domain}" do %>
-      <% image_tag '/partners/invitro.png', class: 'img-partner', alt: 'Invitro' %>
+      <% image_tag '/images/partners/invitro.png', class: 'img-partner', alt: 'Invitro' %>
     <% end %>
   <% end %>
 </div>
