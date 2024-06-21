@@ -19,6 +19,7 @@ Metrics/MethodLength:
   Exclude:
    - 'db/**/*'
 Metrics/ClassLength:
+  Max: 150
   Exclude:
     - 'app/models/**/*'
     - 'db/**/*'

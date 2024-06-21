@@ -11,27 +11,23 @@ module Athletes
       process_volunteering
 
       @athlete.without_auditing do
-        @athlete.update!(stats:)
+        @athlete.save!
       end
     end
 
     private
-
-    def stats
-      @stats ||= {}
-    end
 
     def process_results
       published_results = @athlete.results.published
       results_count = published_results.size
       return if results_count.zero?
 
-      stats[:results] = {
-        count: results_count,
-        h_index: h_index(published_results, :event_id),
-        uniq_events: uniq_events(published_results),
-        trophies: trophies_count,
-      }
+      (@athlete.stats['results'] ||= {}).merge!(
+        'count' => results_count,
+        'h_index' => h_index(published_results, :event_id),
+        'uniq_events' => uniq_events(published_results),
+        'trophies' => trophies_count,
+      )
     end
 
     def process_volunteering
@@ -39,12 +35,12 @@ module Athletes
       volunteering_count = published_volunteering.size
       return if volunteering_count.zero?
 
-      stats[:volunteers] = {
-        count: volunteering_count,
-        h_index: h_index(published_volunteering, :role),
-        uniq_events: uniq_events(published_volunteering),
-        trophies: trophies_count,
-      }
+      (@athlete.stats['volunteers'] ||= {}).merge!(
+        'count' => volunteering_count,
+        'h_index' => h_index(published_volunteering, :role),
+        'uniq_events' => uniq_events(published_volunteering),
+        'trophies' => trophies_count,
+      )
     end
 
     def uniq_events(dataset)
