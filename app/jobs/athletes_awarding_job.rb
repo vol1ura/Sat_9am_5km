@@ -3,6 +3,8 @@
 class AthletesAwardingJob < ApplicationJob
   queue_as :default
 
+  ALL_SECONDS = 60.times.to_a.freeze
+
   def perform(activity_id)
     @activity = Activity.published.find activity_id
 
@@ -72,7 +74,10 @@ class AthletesAwardingJob < ApplicationJob
     events_count = dataset.joins(activity: :event).select('events.id').distinct.count
     threshold_awarding!(athlete, kind: :tourist, type: badge_type, value: events_count)
 
-    rage_badge_awarding!(athlete) if badge_type == 'result'
+    if badge_type == 'result'
+      rage_badge_awarding!(athlete)
+      minute_bingo_awarding!(athlete)
+    end
   rescue StandardError => e
     Rollbar.error e, activity_id: @activity.id, athlete_id: athlete.id
   end
@@ -87,6 +92,10 @@ class AthletesAwardingJob < ApplicationJob
 
   def rage_badge
     @rage_badge ||= Badge.rage_kind.sole
+  end
+
+  def minute_bingo_badge
+    @minute_bingo_badge ||= Badge.minute_bingo_kind.sole
   end
 
   def award_by_record_badge!(badge, result)
@@ -104,6 +113,17 @@ class AthletesAwardingJob < ApplicationJob
     else
       athlete.trophies.where(badge: rage_badge).destroy_all
     end
+  end
+
+  def minute_bingo_awarding!(athlete)
+    return if athlete.trophies.exists?(badge: minute_bingo_badge)
+
+    tt_sec = @activity.results.where(athlete_id: athlete.id).pick(:total_time).sec
+    athlete_seconds = athlete.stats.dig('results', 'seconds') || []
+    if athlete_seconds.exclude?(tt_sec)
+      athlete.update!(stats: athlete.stats.deep_merge('results' => { 'seconds' => athlete_seconds.push(tt_sec).sort }))
+    end
+    athlete.trophies.create! badge: minute_bingo_badge, date: activity_date if (ALL_SECONDS - athlete_seconds).empty?
   end
 
   def threshold_awarding!(athlete, kind:, type:, value:)
