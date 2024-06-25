@@ -121,7 +121,8 @@ class Athlete < ApplicationRecord
       .where(date: Array.new(5) { |k| initial_date - k.weeks })
       .published
       .distinct
-      .count == 5
+      .limit(5)
+      .size == 5
   end
 
   def gender
