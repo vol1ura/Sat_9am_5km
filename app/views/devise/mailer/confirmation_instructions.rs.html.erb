@@ -1,0 +1,15 @@
+<p>Zdravo!</p>
+
+<p>Možete potvrditi svoj email (<%= @email %>) prateći sledeću vezu:</p>
+
+<p><%= link_to 'potvrdi Moj nalog', confirmation_url(@resource, confirmation_token: @token, host: 's95.rs') %></p>
+
+<p>
+  Dobili ste ovu e-poštu jer je vaša adresa uneta prilikom registracije na veb lokaciji <%= link_to 'Sat 9am 5km', root_url(host: 's95.rs') %>.
+  Ako to niste bili vi, samo zanemarite datu poruku.
+</p>
+
+<p>
+  S poštovanjem,
+  tim S95
+</p>

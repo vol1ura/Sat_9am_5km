@@ -1,0 +1,14 @@
+<p>Zdravo <%= @resource.email %>!</p>
+
+<p>Vaš nalog je blokiran zbog prekoračenja broja neuspelih pokušaja prijave.</p>
+
+<p>
+  Kliknite na sledeću vezu da biste je deblokirali:
+  <br>
+  <%= link_to 'Deblokiraj nalog', unlock_url(@resource, unlock_token: @token, host: 's95.rs') %>
+</p>
+
+<p>
+  S poštovanjem,
+  tim S95
+</p>
