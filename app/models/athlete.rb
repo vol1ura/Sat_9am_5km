@@ -120,8 +120,8 @@ class Athlete < ApplicationRecord
       .or(Activity.where(id: Volunteer.where(athlete: self).select(:activity_id)))
       .where(date: Array.new(5) { |k| initial_date - k.weeks })
       .published
+      .select(:date)
       .distinct
-      .limit(5)
       .size == 5
   end
 
