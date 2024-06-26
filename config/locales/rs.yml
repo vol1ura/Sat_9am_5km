@@ -52,6 +52,7 @@ rs:
         athlete: sportista
         password: lozinka
         remember_me: Zapamti me
+        image: slika
       permission:
         event: događaj
         user: korisnik
@@ -161,7 +162,7 @@ rs:
       badge:
         name: naziv
         conditions: uslovi za dobijanje
-        image: picture
+        image: slika
         received_date: datum prijema
         kind: vrsta
         kinds:
@@ -499,6 +500,7 @@ rs:
       about: O nama
       support: Podržite nas
       profile: Profil
+      settings: Podešavanja
       admin_panel: Administratorski panel
       login: Prijava
       logout: Odjava
@@ -678,6 +680,8 @@ rs:
       volunteering: volonterstvo
     show:
       description: 'Tabela učesnika i statistika za klub %{club}'
+      main_page: Glavnaя
+      clubs: Klubovi
       athletes_count: broj učesnika
       results_count: broj trka
       volunteering_count: broj volontiranje

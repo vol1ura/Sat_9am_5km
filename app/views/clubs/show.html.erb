@@ -5,10 +5,10 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <%= link_to 'Главная', root_path %>
+      <%= link_to t('.main_page'), root_path %>
     </li>
     <li class="breadcrumb-item">
-      <%= link_to 'Клубы', clubs_path %>
+      <%= link_to t('.clubs'), clubs_path %>
     </li>
     <li class="breadcrumb-item active" aria-current="page"><%= @club.name %></li>
   </ol>

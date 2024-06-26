@@ -499,6 +499,7 @@ ru:
       about: О нас
       support: Поддержать проект
       profile: Профиль
+      settings: Настройки
       admin_panel: Админка
       login: Войти
       logout: Выход
@@ -678,6 +679,8 @@ ru:
       volunteering: волонтёрства
     show:
       description: 'Таблица участников и статистика по клубу %{club}'
+      main_page: Главная
+      clubs: Клубы
       athletes_count: количество участников
       results_count: количество забегов
       volunteering_count: количество волонтёрств

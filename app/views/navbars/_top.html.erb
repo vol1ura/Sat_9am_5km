@@ -100,7 +100,7 @@
                 <% if athlete = current_user.athlete %>
                   <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
                 <% end %>
-                <li><%= link_to 'Настройки', user_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.settings'), user_path, class: 'dropdown-item' %></li>
                 <% if current_user.admin? || Permission.exists?(user: current_user) %>
                   <li><%= link_to t('.admin_panel'), admin_root_path, class: 'dropdown-item' %></li>
                 <% end %>
