@@ -31,3 +31,9 @@ panel 'Предстоящие волонтёрства' do
     column('Роль') { |v| human_volunteer_role v.role }
   end
 end
+
+if !athlete.user_id && current_user.admin?
+  panel 'Правки' do
+    render partial: 'admin/audits_table', locals: { object: athlete }
+  end
+end
