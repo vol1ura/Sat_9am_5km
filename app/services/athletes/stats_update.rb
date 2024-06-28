@@ -9,10 +9,7 @@ module Athletes
     def call
       process_results
       process_volunteering
-
-      @athlete.without_auditing do
-        @athlete.save!
-      end
+      @athlete.save!
     end
 
     private
