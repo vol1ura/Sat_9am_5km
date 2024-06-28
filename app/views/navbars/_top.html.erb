@@ -52,50 +52,69 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body d-flex flex-column justify-content-between">
-        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-start flex-grow-1 fa-ul pe-3">
           <li class="nav-item">
-            <%= link_to t('.recent_results'), activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" %>
+            <%= link_to activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-square-poll-horizontal"></i></span><%= t '.recent_results' %>
+            <% end %>
           </li>
           <!--<li class="nav-item">
             <%#= link_to t('.1_january'), page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" %>
           </li>-->
           <li class="nav-item">
-            <%= link_to t('.club_ratings'), clubs_path, class: "nav-link #{'active' if params[:controller] == 'clubs'}" %>
+            <%= link_to clubs_path, class: "nav-link #{'active' if params[:controller] == 'clubs'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-people-group"></i></span><%= t '.club_ratings' %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.top_results'), results_ratings_path, class: "nav-link #{'active' if params[:action] == 'results' && params[:controller] == 'ratings'}" %>
+            <%= link_to results_ratings_path, class: "nav-link #{'active' if params[:action] == 'results' && params[:controller] == 'ratings'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-trophy"></i></span><%= t '.top_results' %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.top_athletes'), ratings_path(rating_type: 'results'), class: "nav-link #{'active' if params[:action] == 'athletes' && params[:controller] == 'ratings'}" %>
+            <%= link_to ratings_path(rating_type: 'results'), class: "nav-link #{'active' if params[:rating_type] == 'results' && params[:controller] == 'ratings'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-table"></i></span><%= t '.top_athletes' %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.top_volunteers'), ratings_path(rating_type: 'volunteers'), class: "nav-link #{'active' if params[:action] == 'volunteers' && params[:controller] == 'ratings'}" %>
+            <%= link_to ratings_path(rating_type: 'volunteers'), class: "nav-link #{'active' if params[:rating_type] == 'volunteers' && params[:controller] == 'ratings'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-table"></i></span><%= t '.top_volunteers' %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.badges'), badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" %>
+            <%= link_to badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-award"></i></span><%= t '.badges' %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.rules'), page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" %>
+            <%= link_to page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-clipboard"></i></span><%= t '.rules' %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.about'), page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" %>
+            <%= link_to page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-users"></i></span><%= t '.about' %>
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to t('.support'), page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" %>
+            <%= link_to page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" do %>
+              <span class="fa-li"><i class="fa-regular fa-handshake"></i></span><%= t '.support' %>
+            <% end %>
           </li>
           <% if current_user %>
             <li class="nav-item dropdown mt-3">
               <%=
                 link_to(
-                  current_user.full_name,
                   '#',
-                  class: "nav-link dropdown-toggle #{'active' if %w[activities clubs].include?(params[:controller])}",
+                  class: "nav-link dropdown-toggle #{'active' if (params[:controller] == 'users' && params[:action] == 'show') || (params[:controller] == 'athletes' && params[:id].to_i == current_user.athlete&.id )}",
                   id: 'dataDropdown',
                   role: 'button',
                   'data-bs-toggle' => 'dropdown',
                   'aria-expanded' => 'false'
-                )
+                ) do
               %>
+                <span class="fa-li"><i class="fa-solid fa-user"></i></span><%= current_user.full_name %>
+              <% end %>
               <ul class="dropdown-menu" aria-labelledby="dataDropdown">
                 <% if athlete = current_user.athlete %>
                   <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
@@ -104,7 +123,7 @@
                 <% if current_user.admin? || Permission.exists?(user: current_user) %>
                   <li><%= link_to t('.admin_panel'), admin_root_path, class: 'dropdown-item' %></li>
                 <% end %>
-                <li><%= link_to t('.logout'), destroy_user_session_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.logout'), destroy_user_session_path, class: 'dropdown-item', 'data-turbo-prefetch' => 'false' %></li>
               </ul>
             </li>
           <% else %>
