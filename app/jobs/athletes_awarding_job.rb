@@ -36,15 +36,24 @@ class AthletesAwardingJob < ApplicationJob
     Trophy.transaction do
       trophies.each do |trophy|
         record_data = trophy.data.find { |d| d['event_id'] == event_id }
-        record_result = Result.find(record_data['result_id'])
+        unless (record_result = Result.find_by(id: record_data['result_id']))
+          record_result =
+            Result
+              .published
+              .joins(:athlete)
+              .where(activity: { event_id: }, athlete: { male: })
+              .order(total_time: :asc, date: :desc, position: :asc)
+              .first
+          trophy.update!(athlete_id: record_result.athlete_id)
+          award_by_record_badge!(record_badge, record_result) and next
+        end
         next if best_result.total_time > record_result.total_time || best_result.date < record_result.date
 
         award_best_result ||= true
         trophy.data.delete(record_data)
         if best_result.athlete_id == record_result.athlete_id
           trophy.data << { event_id: event_id, result_id: best_result.id }
-          trophy.save!
-          next
+          trophy.save! and next
         end
         trophy.destroy and next if trophy.data.empty?
 
@@ -100,8 +109,7 @@ class AthletesAwardingJob < ApplicationJob
 
   def award_by_record_badge!(badge, result)
     trophy = Trophy.find_or_initialize_by(badge: badge, athlete_id: result.athlete_id)
-    trophy.update!(info: { data: [{ event_id: event_id, result_id: result.id }] }) and return if trophy.data.blank?
-
+    trophy.info = { data: [] } unless trophy.data
     trophy.data.delete_if { |d| d['event_id'] == event_id }
     trophy.data << { event_id: event_id, result_id: result.id }
     trophy.save!
