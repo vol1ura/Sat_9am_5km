@@ -115,7 +115,7 @@ GEM
     bigdecimal (3.1.8)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
-    bootstrap (5.3.2)
+    bootstrap (5.3.3)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
     brakeman (6.1.2)
@@ -512,7 +512,7 @@ DEPENDENCIES
   audited
   bcrypt_pbkdf (~> 1.0)
   bootsnap
-  bootstrap (~> 5.3.1)
+  bootstrap (~> 5.3.3)
   brakeman
   bullet
   bundler-audit
