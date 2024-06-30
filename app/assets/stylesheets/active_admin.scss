@@ -18,8 +18,8 @@ $table-error-color: lighten($error-color, 25%);
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "active_admin/base";
-@import 'activeadmin/quill_editor/quill.snow';
-@import 'activeadmin/quill_editor_input';
+@import "activeadmin/quill_editor/quill.snow";
+@import "activeadmin/quill_editor_input";
 @import "active_admin/searchable_select";
 
 // Overriding any non-variable Sass must be done after the fact.
@@ -77,13 +77,15 @@ body {
   object-fit: scale-down;
 }
 
-tr.odd, tr.even {
+tr.odd,
+tr.even {
   &.athlete-error {
     td.col-athlete {
       background-color: $table-error-color;
     }
   }
-  td.col-position, td.col-total_time {
+  td.col-position,
+  td.col-total_time {
     &.error {
       background-color: $table-error-color;
     }
