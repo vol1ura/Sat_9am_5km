@@ -12,7 +12,9 @@ $dark: #0f0f0f;
 
 @mixin media($query) {
   @if $query == phoneScreen {
-    @media (max-width: 768px) { @content; }
+    @media (max-width: 768px) {
+      @content;
+    }
   }
 }
 
@@ -30,8 +32,8 @@ body {
   }
 
   .footer-text a:hover {
-      text-decoration: underline;
-      color: inherit;
+    text-decoration: underline;
+    color: inherit;
   }
 
   .social-links {
@@ -45,11 +47,11 @@ body {
       margin-right: 0;
     }
     i {
-       font-size: 2em;
-       @include media(phoneScreen) {
-         font-size: 1.6em;
-       }
-     }
+      font-size: 2em;
+      @include media(phoneScreen) {
+        font-size: 1.6em;
+      }
+    }
   }
 
   @include media(phoneScreen) {
@@ -62,7 +64,12 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: $primary;
   margin-top: 0.5rem;
 }
@@ -72,8 +79,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .table.table-centered {
-  th, tr {
-  @extend .text-center;
+  th,
+  tr {
+    @extend .text-center;
   }
 }
 
@@ -153,6 +161,5 @@ nav.pagination {
     margin-right: 0;
   }
 }
-
 
 @import "web/**/*";
