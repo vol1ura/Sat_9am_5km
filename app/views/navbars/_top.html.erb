@@ -41,7 +41,7 @@
         </div>
       </div>
     </nav>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end text-bg-primary" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -107,7 +107,7 @@
                 link_to(
                   '#',
                   class: "nav-link dropdown-toggle #{'active' if (params[:controller] == 'users' && params[:action] == 'show') || (params[:controller] == 'athletes' && params[:id].to_i == current_user.athlete&.id )}",
-                  id: 'dataDropdown',
+                  id: 'dataUserDropdown',
                   role: 'button',
                   'data-bs-toggle' => 'dropdown',
                   'data-dropdown-target' => 'toggle',
@@ -116,7 +116,7 @@
               %>
                 <span class="fa-li"><i class="fa-solid fa-user"></i></span><%= current_user.full_name %>
               <% end %>
-              <ul class="dropdown-menu" aria-labelledby="dataDropdown" data-dropdown-target="menu">
+              <ul class="dropdown-menu" aria-labelledby="dataUserDropdown" data-dropdown-target="menu">
                 <% if athlete = current_user.athlete %>
                   <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
                 <% end %>
