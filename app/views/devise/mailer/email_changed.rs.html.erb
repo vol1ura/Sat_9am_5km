@@ -1,9 +1,9 @@
 <p>Zdravo!</p>
 
 <% if @resource.try(:unconfirmed_email?) %>
-  <p>Vaš email je promenjen u <%= @resource.unconfirmed_email %>.</p>
+  <p>Vaš e-mail je promenjen u <%= @resource.unconfirmed_email %>.</p>
 <% else %>
-  <p>Vaš email je promenjen u <%= @resource.email %>.</p>
+  <p>Vaš e-mail je promenjen u <%= @resource.email %>.</p>
 <% end %>
 
 <p>
