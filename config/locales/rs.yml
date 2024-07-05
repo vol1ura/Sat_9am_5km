@@ -562,6 +562,22 @@ rs:
         answer: Usually, everyone leaves things on benches near the start and finish areas.
     support:
       description: 'You can support the Sat9am5km project in various ways: by volunteering, donating, or participating in the development of this website'
+      title: Želite da podržite projekat?
+      how_to_support: >
+        Prijatelji, naši događaji su potpuno besplatni i sprovode ih volonterske snage.
+        Međutim, ako želite i možete podržati naš projekat, onda ćemo biti srećni zbog bilo kakve materijalne pomoći.
+        Da biste to uradili, kontaktirajte organizatore događaja kojima želite da pružite podršku putem kontakata na stranici događaja.
+      about_volunteering: Ali ne zaboravite da je najveća pomoć volontiranje.
+      site_development: Razvoj sajta
+      add_new_issues_html: >
+        Imate li ideju kako poboljšati ovaj sajt?
+        Kod sistema je otvoren na <a href="%{github_repo}" target="_blank" rel="noopener">GitHub</a>.
+        Predložite svoje ideje i napišite primedbe u <a href="%{github_issues}" target="_blank" rel="noopener">Issues</a>.
+        Da biste to uradili, registrujte se za <a href="https://github.com/" target="_blank" rel="noopener">Github</a>, stavite zvezdu na naš projekat
+        i napravite novo izdanje gde opišite šta želite (in english).
+      how_to_contribute: Želite sami da izvršite promene? Nema problema - nagnite spremište prema sebi, kreirajte i zapišite granu sa svojim izmenama, a zatim otvorite zahtev za povlačenje.
+      small_changes: Male promene je najlakše izvršiti direktno u pregledaču u Githubovom vizuelnom uređivaču!
+      best_regards: S ljubavlju, S95.
     additional-events:
       title_html: 'Additional events 1&nbsp;januar&nbsp;2024'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
