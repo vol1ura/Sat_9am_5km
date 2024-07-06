@@ -1,4 +1,22 @@
 <script>
+  function parseTimeString(timeStr) {
+    const timeParts = timeStr.split(':')
+    let seconds = 0
+
+    if (timeParts.length === 2) {
+        // Format 'MM:SS'
+        seconds += parseInt(timeParts[0]) * 60 // Minutes
+        seconds += parseInt(timeParts[1]) // Seconds
+    } else if (timeParts.length === 3) {
+        // Format 'HH:MM:SS'
+        seconds += parseInt(timeParts[0]) * 3600 // Hours
+        seconds += parseInt(timeParts[1]) * 60 // Minutes
+        seconds += parseInt(timeParts[0]) // Seconds
+    }
+
+    return seconds
+  }
+
   function validateProtocol() {
     const rows = $('tr[id*="result_"]')
     Array.prototype.forEach.call(rows, (row, idx) => {
@@ -15,7 +33,7 @@
       total_time_cell = $(row).find('td.col-total_time')
       next_total_time = $(next_row).find('td.col-total_time').html()
 
-      if(total_time_cell.html() <= next_total_time) {
+      if(parseTimeString(total_time_cell.html()) <= parseTimeString(next_total_time)) {
         total_time_cell.removeClass('error')
       } else {
         total_time_cell.addClass('error')
