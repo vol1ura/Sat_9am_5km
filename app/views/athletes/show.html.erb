@@ -1,4 +1,8 @@
-<% athlete_name = @athlete.name || t('common.nobody') %>
+<%
+  athlete_name = @athlete.name || t('common.nobody')
+  seconds_in_results = @athlete.stats.dig('results', 'seconds') || []
+  seconds_in_results_count = seconds_in_results.size
+%>
 <% head_info :title, athlete_name %>
 <% head_info :description, t('.description', athlete_name:) %>
 
@@ -7,7 +11,7 @@
     <h1 class="mt-2"><%= athlete_name %></h1>
   </div>
   <div class="ms-auto col-auto position-relative">
-    <%= image_tag user_image_url(@athlete.user), class: 'avatar' %>
+    <%= image_tag user_image_url(@athlete.user), class: 'avatar', title: athlete_name %>
     <a href="#" class="btn btn-outline-primary rounded-circle position-absolute top-0 end-0 me-2" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
       <i class="fa-solid fa-qrcode" title="QR"></i>
     </a>
@@ -87,7 +91,7 @@
       </div>
     </div>
   <% end %>
-  <% if @total_trophies.positive? %>
+  <% if @total_results.positive? %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-totalTrophies">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalTrophies" aria-expanded="false" aria-controls="flush-collapseTotalTrophies">
@@ -98,11 +102,14 @@
       <div id="flush-collapseTotalTrophies" class="accordion-collapse collapse" aria-labelledby="flush-totalTrophies" data-bs-parent="#accordionPersonalBest">
         <div class="accordion-body">
           <div class="d-flex justify-content-start flex-wrap">
+            <% if seconds_in_results_count < 60 %>
+              <%= render 'minute_bingo', seconds_in_results_count: %>
+            <% end %>
             <% @athlete.trophies.includes(badge: { image_attachment: :blob }).each do |trophy| %>
               <div class="p-1">
                 <%
                   trophy_link = link_to badge_path(trophy.badge) do
-                    image_tag trophy.badge.image.variant(:thumb), class: 'trophy', alt: trophy.badge.name
+                    image_tag trophy.badge.image.variant(:thumb), class: 'trophy', title: trophy.badge.name
                   end
                 %>
                 <% if trophy.badge.record_kind? %>
@@ -275,6 +282,32 @@
       </div>
       <div class="modal-body d-flex justify-content-center">
         <div><%== @barcode %></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= t '.close' %></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal 60 seconds -->
+<div class="modal fade" id="minuteBingoModal" tabindex="-1" aria-labelledby="minuteBingoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="minuteBingoModalLabel"><%= t '.mission_minute_bingo' %></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="mx-auto">
+          <% 6.times.each do |row| %>
+            <tr>
+              <% 10.times.each do |col| %>
+                <% x = row * 10 + col %>
+                <td class="text-<%= seconds_in_results.include?(x) ? 'primary' : 'light' %>"><%= format '%02d', x %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= t '.close' %></button>
