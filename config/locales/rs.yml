@@ -642,6 +642,7 @@ rs:
       results: Rezultati
       volunteering: Volonterstvo
       close: Zatvori
+      mission_minute_bingo: Misija "60 sekundi bingo!"
       table:
         pb: PB
         date: Datum
@@ -649,6 +650,9 @@ rs:
         pace: Tempo
         place: Mesto
         event: Događaj
+    minute_bingo:
+      from_minute: od 60 sekundi
+      catch_them_all: skupite sve
   activities:
     index:
       description: Skorašnji rezultati sa S95 trka

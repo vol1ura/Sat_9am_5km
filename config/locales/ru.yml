@@ -642,6 +642,7 @@ ru:
       results: Результаты
       volunteering: Волонтёрства
       close: Закрыть
+      mission_minute_bingo: Миссия "60 секунд бинго!"
       table:
         pb: ЛР
         date: Дата
@@ -649,6 +650,9 @@ ru:
         pace: Темп
         place: Место
         event: Мероприятие
+    minute_bingo:
+      from_minute: из 60 секунд
+      catch_them_all: собери все
   activities:
     index:
       description: Недавние результаты забегов S95

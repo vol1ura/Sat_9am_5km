@@ -8,7 +8,84 @@
   max-width: 100px;
 }
 
+@mixin circle($size) {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - #{$size/2});
+  top: calc(50% - #{$size/2});
+  width: $size;
+  height: $size;
+}
+
+.progress-pie-badge {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background-color: $light;
+  position: relative;
+  &.ppb-gt-50 {
+    background-color: $info;
+  }
+}
+.ppb-progress {
+  @include circle(92px);
+  clip: rect(0, 92px, 92px, 46px);
+  .ppb-progress-fill {
+    @include circle(92px);
+    clip: rect(0, 46px, 92px, 0);
+    background: $info;
+  }
+  .ppb-gt-50 & {
+    clip: rect(0, 46px, 92px, 0);
+    .ppb-progress-fill {
+      clip: rect(0, 92px, 92px, 46px);
+      background: $light;
+    }
+  }
+}
+.ppb-info {
+  @include circle(80px);
+  background: #fff;
+  text-align: center;
+  display: table;
+  span {
+    display: block;
+    font-size: 10px;
+    font-weight: bold;
+    color: $primary;
+  }
+}
+.ppb-info-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 @include media(phoneScreen) {
+  .progress-pie-badge {
+    width: 70px;
+    height: 70px;
+  }
+  .ppb-progress {
+    @include circle(70px);
+    clip: rect(0, 70px, 70px, 30px);
+    .ppb-progress-fill {
+      @include circle(70px);
+      clip: rect(0, 30px, 70px, 0);
+    }
+    .ppb-gt-50 & {
+      clip: rect(0, 30px, 70px, 0);
+      .ppb-progress-fill {
+        clip: rect(0, 70px, 70px, 30px);
+      }
+    }
+  }
+  .ppb-info {
+    @include circle(60px);
+    span {
+      font-size: 9px;
+    }
+  }
   .trophy {
     max-width: 75px;
   }
