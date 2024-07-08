@@ -679,7 +679,7 @@ rs:
       about_volunteers: 'Trka se održala zahvaljujući timu volontera:'
       volunteer: Volonter
       role: Uloga
-      total_volunteering: ukupno volontiranja %{count}
+      total_volunteering: volontiranja %{count}
     protocol:
       position_short: Poz.
       position_full: Pozicija
