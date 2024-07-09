@@ -61,6 +61,11 @@
   vertical-align: middle;
 }
 
+#minuteBingoModal table {
+  border-collapse: separate;
+  border-spacing: 4px 0;
+}
+
 @include media(phoneScreen) {
   .progress-pie-badge {
     width: 70px;
