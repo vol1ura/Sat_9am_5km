@@ -1,23 +1,17 @@
 <% head_info :title, t('navbars.top.badges') %>
 <h2><%= t 'navbars.top.badges' %></h2>
-<p>
-  Участвуйте в наших мероприятиях, выполняйте условия и получайте награды.
-  Все значки отобразятся на странице вашего профиля. Постепенно их количество будет пополняться.
-</p>
-<p>
-  Мы стараемся придумывать награды, чтобы поощрить как быстрых бегунов, так и обычных участников,
-  которые регулярно посещают наши мероприятия.
-</p>
+<p><%= t '.how_to_get' %></p>
+<p><%= t '.about_badges' %></p>
 
 <ul class="nav nav-tabs" id="badges" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="achievement-tab" data-bs-toggle="tab" data-bs-target="#achievement-tab-pane" type="button" role="tab" aria-controls="achievement-tab-pane" aria-selected="true">
-      Достижения
+      <%= t '.achievements' %>
     </button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="funrun-tab" data-bs-toggle="tab" data-bs-target="#funrun-tab-pane" type="button" role="tab" aria-controls="funrun-tab-pane" aria-selected="false">
-      Тематические
+      <%= t '.thematic' %>
     </button>
   </li>
 </ul>

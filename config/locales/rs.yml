@@ -690,6 +690,12 @@ rs:
     result:
       total_runs_html: '%{count}&nbsp;trčanja'
       total_volunteering_html: '%{count}&nbsp;volonterstvo'
+  badges:
+    index:
+      how_to_get: Učestvujte u našim aktivnostima, ispunite uslove i osvojite nagrade. Sve ikone će se prikazati na vašoj stranici profila. Postepeno će se njihov broj dopunjavati.
+      about_badges: Trudimo se da smislimo nagrade kako bismo ohrabrili brze trkače i redovne učesnike koji redovno prisustvuju našim događajima.
+      achievements: Dostignuća
+      thematic: Tematske
   clubs:
     index:
       description: Tabela klubova sa statistikom o ukupnom broju učesnika, volontera i trčanja
