@@ -18,6 +18,7 @@ module Athletes
       grab_modified_attributes_from_collection!
       replace_all_by_one!
       StatsUpdate.call(athlete)
+      schedule_telegram_notification
       ClearCache.call
       true
     rescue StandardError => e
@@ -66,6 +67,13 @@ module Athletes
           trophy.update!(athlete:)
         end
       end
+    end
+
+    def schedule_telegram_notification
+      return unless athlete.user_id
+
+      inform_date = Date.current.noon.future? ? Date.current.noon : Date.tomorrow + 10.hours
+      Telegram::Notification::AfterReuniteJob.set(wait_until: inform_date).perform_later(athlete.user_id)
     end
   end
 end
