@@ -5,7 +5,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <%= link_to 'Главная', root_path %>
+      <%= link_to t('.main_page'), root_path %>
     </li>
     <li class="breadcrumb-item">
       <%= link_to t('navbars.top.badges'), badges_path %>
@@ -22,7 +22,7 @@
     <h2><%= @badge.name %></h2>
     <p class="card-text"><%= sanitized_text @badge.conditions %></p>
     <% if @badge.funrun_kind? && @badge.received_date %>
-      <p class="text-muted">Дата мероприятия: <%= l @badge.received_date %></p>
+      <p class="text-muted"><%= t '.event_date' %>: <%= l @badge.received_date %></p>
     <% end %>
   </div>
 </div>
@@ -31,15 +31,15 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <td>Участник</td>
+        <td><%= t '.athlete' %></td>
         <% if @badge.record_kind? %>
-          <td>Забег</td>
-          <td>Результат</td>
+          <td><%= t '.event' %></td>
+          <td><%= t '.result' %></td>
           <td class="hidden-on-phone">Дата</td>
         <% elsif !@badge.funrun_kind? %>
-          <td>Дата получения</td>
+          <td><%= t '.received_date' %></td>
         <% end %>
-        <td class="<%= 'hidden-on-phone' unless @badge.funrun_kind? %>">Клуб</td>
+        <td class="<%= 'hidden-on-phone' unless @badge.funrun_kind? %>"><%= t '.club' %></td>
       </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -48,7 +48,7 @@
   </table>
   <%= paginate @trophies %>
 <% elsif @badge.funrun_kind? %>
-  <p>Скоро!</p>
+  <p><%= t '.soon' %></p>
 <% else %>
-  <p>Пока ещё ни у кого нет этой награды.</p>
+  <p><%= t '.nobody_has' %></p>
 <% end %>
