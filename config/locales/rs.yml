@@ -696,6 +696,16 @@ rs:
       about_badges: Trudimo se da smislimo nagrade kako bismo ohrabrili brze trkače i redovne učesnike koji redovno prisustvuju našim događajima.
       achievements: Dostignuća
       thematic: Tematske
+    show:
+      main_page: Glavnaя
+      event_date: Datum događaja
+      athlete: Učesnik
+      event: Trka
+      club: Klub
+      result: Rezultat
+      received_date: Datum prijema
+      soon: Uskoro!
+      nobody_has: Još niko nema tu nagradu.
   clubs:
     index:
       description: Tabela klubova sa statistikom o ukupnom broju učesnika, volontera i trčanja
