@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/pages/:page', to: 'pages#show', as: :page
 
   resources :events, param: :code_name, only: :show do
+    get :search, on: :collection
     get :volunteering, on: :member
   end
   resources :activities, only: %i[index show]
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   resources :volunteers, only: %i[new edit create update]
   resources :badges, only: %i[index show]
   resources :clubs, only: %i[index show] do
+    get :search, on: :collection
     get :last_week, on: :member
   end
   resources :ratings, only: :index do

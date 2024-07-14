@@ -1,7 +1,18 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :find_event
+  before_action :find_event, except: :search
+
+  def search
+    @events =
+      Event
+        .in_country(top_level_domain)
+        .without_friends
+        .where('name ILIKE ?', "#{params[:q]}%")
+        .page(params[:page])
+        .per(20)
+    render turbo_stream: helpers.async_combobox_options(@events, next_page: @events.last_page? ? nil : @events.next_page)
+  end
 
   def show
     @total_activities = @event.activities.published.size

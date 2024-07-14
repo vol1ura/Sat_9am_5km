@@ -67,6 +67,7 @@ rs:
         parkzhrun_code: parkzhrun ID
         gender: pol
         club: klub
+        club_id: klub
         event: domaće trčanje
         event_id: domaće trčanje
         male: muškarac

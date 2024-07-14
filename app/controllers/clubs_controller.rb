@@ -20,6 +20,18 @@ class ClubsController < ApplicationController
       .count(:club_id)
   end
 
+  def search
+    @clubs =
+      Club
+        .joins(:country)
+        .where(country: { code: top_level_domain })
+        .where('name ILIKE ?', "%#{params[:q]}%")
+        .order(:name)
+        .page(params[:page])
+        .per(20)
+    render turbo_stream: helpers.async_combobox_options(@clubs, next_page: @clubs.last_page? ? nil : @clubs.next_page)
+  end
+
   def show
     @club = Club.find(params[:id])
     @count_results =

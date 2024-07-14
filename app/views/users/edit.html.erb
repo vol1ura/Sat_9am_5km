@@ -19,12 +19,16 @@
               <div class="invalid-feedback d-block"><%= current_user.errors[:last_name].join(', ') %></div>
             <% end %>
           </div>
-          <div class="mt-2">
-            <%= form.fields_for :athlete do |athlete_form| %>
+          <%= form.fields_for :athlete do |athlete_form| %>
+            <div class="mt-2">
               <%= athlete_form.label :event_id, class: 'form-label text-capitalize fw-light' %>
-              <%= athlete_form.collection_select :event_id, Event.in_country(top_level_domain).without_friends, :id, :name, { include_blank: true }, class: 'form-control' %>
-            <% end %>
-          </div>
+              <%= athlete_form.combobox :event_id, search_events_path, id: 'event-id-box' %>
+            </div>
+            <div class="mt-2">
+              <%= athlete_form.label :club_id, class: 'form-label text-capitalize fw-light' %>
+              <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
+            </div>
+          <% end %>
           <div class="mt-4 form-check form-switch">
             <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
             <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>

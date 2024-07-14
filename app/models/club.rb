@@ -15,4 +15,8 @@ class Club < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[name country_id]
   end
+
+  def to_combobox_display
+    name
+  end
 end

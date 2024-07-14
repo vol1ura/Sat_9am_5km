@@ -222,6 +222,10 @@ GEM
       rails (>= 6.0.0)
       stimulus-rails
       turbo-rails
+    hotwire_combobox (0.3.1)
+      rails (>= 7.0.7.2)
+      stimulus-rails (>= 1.2)
+      turbo-rails (>= 1.2)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -558,6 +562,7 @@ DEPENDENCIES
   font-awesome-sass
   hiredis-client
   hotwire-rails
+  hotwire_combobox
   image_processing
   importmap-rails (~> 1.2)
   jbuilder
