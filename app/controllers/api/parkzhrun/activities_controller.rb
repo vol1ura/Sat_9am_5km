@@ -4,7 +4,7 @@ module API
   module Parkzhrun
     class ActivitiesController < ApplicationController
       def create
-        ::Parkzhrun::ActivityCreator.call(Date.parse(params[:date]))
+        ::Parkzhrun::ActivityCreator.call params[:date]
         head :created
       rescue StandardError => e
         Rollbar.error e
