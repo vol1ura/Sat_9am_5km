@@ -40,7 +40,7 @@ namespace :processing do
 
   desc 'create Parkzhrun activity'
   task parkzhrun: :environment do
-    ParkzhrunMailer.success.deliver_later if Parkzhrun::ActivityCreator.call(1.day.ago)
+    ParkzhrunMailer.success.deliver_later if Parkzhrun::ActivityCreator.call(1.day.ago.strftime('%Y-%m-%d'))
   rescue StandardError => e
     Rollbar.error e
     ParkzhrunMailer.error.deliver_later
