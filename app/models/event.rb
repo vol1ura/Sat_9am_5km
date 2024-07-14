@@ -24,4 +24,8 @@ class Event < ApplicationRecord
 
     where(id: user.permissions.where(subject_class: 'Activity').select(:event_id))
   end
+
+  def to_combobox_display
+    name
+  end
 end
