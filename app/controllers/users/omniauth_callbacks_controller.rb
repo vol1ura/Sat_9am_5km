@@ -1,24 +1,28 @@
 # frozen_string_literal: true
 
 module Users
+  # More info at:
+  # https://github.com/heartcombo/devise#omniauth
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    # You should configure your model like this:
-    # devise :omniauthable, omniauth_providers: [:twitter]
+    # GET|POST /users/auth/telegram/callback
+    def telegram
+      @user = User.find_by telegram_id: request.env['omniauth.auth']['uid']
 
-    # You should also create an action method in this controller like this:
-    # def twitter
-    # end
+      if @user
+        sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+        set_flash_message(:notice, :success, kind: 'Telegram') if is_navigational_format?
+      else
+        redirect_to new_user_registration_url
+      end
+    end
 
-    # More info at:
-    # https://github.com/heartcombo/devise#omniauth
+    def failure
+      Rollbar.warn('OAuth error', params)
+      redirect_to new_user_session_url, alert: t('.auth_error')
+    end
 
-    # GET|POST /resource/auth/twitter
+    # GET|POST /resource/auth/telegram
     # def passthru
-    #   super
-    # end
-
-    # GET|POST /users/auth/twitter/callback
-    # def failure
     #   super
     # end
 

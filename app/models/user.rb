@@ -6,7 +6,10 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :registerable
+  devise(
+    :database_authenticatable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :registerable,
+    :omniauthable, omniauth_providers: %i[telegram],
+  )
 
   has_one :athlete, dependent: :nullify
   accepts_nested_attributes_for :athlete, reject_if: :all_blank

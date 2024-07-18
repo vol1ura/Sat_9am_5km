@@ -768,6 +768,8 @@ rs:
       role: Uloga
       volunteer: Volonter
   users:
+    omniauth_callbacks:
+      auth_error: Login failed
     show:
       title: Podešavanja
       description: 'Podešavanja za %{user_name}'

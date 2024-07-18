@@ -1,34 +1,32 @@
 <ul class="fa-ul">
   <% if devise_mapping.registerable? && controller_name != 'registrations' %>
     <li class="pb-2"><span class="fa-li"><i class="fa-solid fa-robot"></i></span>
-      <%= link_to t('.registration'), new_user_registration_path %><br>
+      <%= link_to t('.registration'), new_user_registration_path %>
     </li>
   <% end %>
   <% if controller_name != 'sessions' %>
     <li><span class="fa-li"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
-      <%= link_to t('.sign_in'), new_user_session_path %><br>
+      <%= link_to t('.sign_in'), new_user_session_path %>
     </li>
   <% end %>
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
     <li><span class="fa-li"><i class="fa-solid fa-key"></i></span>
-      <%= link_to t('.password'), new_user_password_path %><br>
+      <%= link_to t('.password'), new_user_password_path %>
     </li>
   <% end %>
   <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <li><span class="fa-li"><i class="fa-solid fa-check-double"></i></span>
-      <%= link_to t('.confirmation'), new_user_confirmation_path %><br>
+      <%= link_to t('.confirmation'), new_user_confirmation_path %>
     </li>
   <% end %>
   <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
     <li><span class="fa-li"><i class="fa-solid fa-lock-open"></i></span>
-      <%= link_to t('.unlock'), new_user_unlock_path %><br>
+      <%= link_to t('.unlock'), new_user_unlock_path %>
     </li>
   <% end %>
-  <% if devise_mapping.omniauthable? %>
-    <% resource_class.omniauth_providers.each do |provider| %>
-      <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>
-        <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), method: :post %><br>
-      </li>
-    <% end %>
+  <% if top_level_domain == :ru %>
+    <div class="mt-3">
+      <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="sat9am5kmbot" data-size="large" data-radius="5" data-auth-url="<%= user_telegram_omniauth_callback_url %>" data-request-access="write"></script>
+    </div>
   <% end %>
 </ul>
