@@ -768,6 +768,8 @@ ru:
       role: Роль
       volunteer: Волонтёр
   users:
+    omniauth_callbacks:
+      auth_error: Не удалось выполнить вход. Убедитесь, что вы действительно зарегистрированы
     show:
       title: Настройки
       description: 'Настройки для пользователя %{user_name}'
