@@ -67,4 +67,30 @@ RSpec.describe '/admin/activities' do
       expect(ScannerParser).to have_received(:call).exactly(Activity::MAX_SCANNERS).times
     end
   end
+
+  describe 'DELETE /admin/activities/1' do
+    let(:activity) { create(:activity, published:, event:) }
+
+    before do
+      user.admin!
+      delete admin_activity_url(activity)
+    end
+
+    context 'when not published' do
+      let(:published) { false }
+
+      it 'redirects to index' do
+        expect(response).to redirect_to admin_activities_url
+      end
+    end
+
+    context 'when published' do
+      let(:published) { true }
+
+      it 'redirects to resource' do
+        expect(flash[:error]).to include 'Удаление опубликованного протокола запрещено'
+        expect(response).to redirect_to admin_activity_url(activity)
+      end
+    end
+  end
 end
