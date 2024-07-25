@@ -28,8 +28,10 @@ export default class extends Controller {
 
   sortTable(table, column_idx, sort_direction) {
     const result = Array.prototype.slice.call(table.querySelectorAll('tbody>tr')).sort((a, b) => {
-      let val1 = a.querySelector(`td:nth-child(${column_idx + 1})`).innerHTML
-      let val2 = b.querySelector(`td:nth-child(${column_idx + 1})`).innerHTML
+      const el1 = a.querySelector(`td:nth-child(${column_idx + 1})`)
+      const el2 = b.querySelector(`td:nth-child(${column_idx + 1})`)
+      let val1 = el1.getAttribute('sort_by') || el1.innerHTML
+      let val2 = el2.getAttribute('sort_by') || el2.innerHTML
       if (isNaN(val1) || isNaN(val2)) {
         return (sort_direction == 'desc' ? 1 : -1) * val1.localeCompare(val2)
       }

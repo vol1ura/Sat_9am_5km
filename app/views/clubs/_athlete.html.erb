@@ -2,5 +2,6 @@
   <td><%= link_to athlete.name, athlete %></td>
   <td><%= @count_results.fetch(athlete.id, 0) %></td>
   <td class="hidden-on-phone"><%= @count_volunteering.fetch(athlete.id, 0) %></td>
-  <td><%= human_result_time athlete.results.published.minimum(:total_time) %></td>
+  <% total_time = athlete.results.published.minimum(:total_time) %>
+  <td sort_by="<%= total_time&.to_i %>"><%= human_result_time total_time %></td>
 </tr>
