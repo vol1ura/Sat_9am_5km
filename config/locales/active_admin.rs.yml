@@ -172,6 +172,8 @@ rs:
       reset_athlete_failed: 'Neuspelo resetovanje učesnika. Osvežite stranicu i pokušajte ponovo.'
       insert_result_failed: 'Neuspelo dodavanje reda. Osvežite stranicu i pokušajte ponovo.'
       result_successfully_appended: 'Pozicija №%{position} uspešno dodata u protokol.'
+    newsletters:
+      notified: 'Na vaš Telegram je poslat uzorak biltena'
     users:
       confirm_change_roles: 'Da li ste sigurni da želite da promenite uloge izabranim korisnicima?'
       successful_roles_changed: 'Uspšeno postavljene uloge.'
@@ -247,6 +249,10 @@ rs:
         new_model: Kreiraj nagradu
         edit_model: Izmeni nagradu
         delete_model: Obriši nagradu
+      newsletter:
+        new_model: Napravite bilten
+        edit_model: Uredi
+        delete_model: Izbriši
       volunteering_position:
         new_model: Dodaj poziciju
         edit_model: Izmeni poziciju

@@ -13,7 +13,7 @@ module Telegram
           chat_id: Rails.env.development? ? ENV['DEV_TELEGRAM_ID'] : telegram_id,
           text: text,
           parse_mode: 'Markdown',
-          reply_markup: Telegram::Bot::MAIN_KEYBOARD,
+          reply_markup: Bot::MAIN_KEYBOARD,
           **,
         ).is_a?(Net::HTTPSuccess)
       end

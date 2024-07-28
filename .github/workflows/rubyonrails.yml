@@ -65,7 +65,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@main
       - name: Install dependencies
-        run: sudo apt-get install -y libvips
+        run: sudo apt-get update && sudo apt-get install -y libvips
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
@@ -80,7 +80,7 @@ jobs:
         run: bundle exec rspec
       - name: Test & publish code coverage
         if: github.ref == 'refs/heads/master'
-        uses: paambaati/codeclimate-action@v6
+        uses: paambaati/codeclimate-action@v8
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
         with:
