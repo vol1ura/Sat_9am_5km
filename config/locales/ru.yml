@@ -30,6 +30,9 @@ ru:
       badge:
         one: награда
         other: Награды
+      newsletter:
+        one: рассылка
+        other: Рассылки
       trophy:
         one: достижение
         other: Достижения
@@ -97,6 +100,11 @@ ru:
         visible_order: 'вес в ленте'
         created_at: создан
         updated_at: обновлён
+      newsletter:
+        body: текст
+        picture_link: ссылка на картинку
+        created_at: создана
+        updated_at: обновлена
       result:
         position: место
         total_time: результат

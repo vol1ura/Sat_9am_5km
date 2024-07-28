@@ -30,6 +30,9 @@ rs:
       badge:
         one: nagrada
         other: Nagrade
+      newsletter:
+        one: bilten
+        other: Bilteni
       trophy:
         one: dostignuće
         other: Dostignuća
@@ -99,6 +102,11 @@ rs:
         visible_order: 'redosled prikaza'
         created_at: kreiran
         updated_at: ažuriran
+      newsletter:
+        body: text
+        picture_link: link do slike
+        created_at: stvorena
+        updated_at: ažurirano
       result:
         position: pozicija
         total_time: vreme

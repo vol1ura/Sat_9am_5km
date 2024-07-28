@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_19_195147) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_26_083119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -161,6 +161,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_195147) do
     t.bigint "country_id", null: false
     t.index ["code_name"], name: "index_events_on_code_name", unique: true
     t.index ["country_id"], name: "index_events_on_country_id"
+  end
+
+  create_table "newsletters", force: :cascade do |t|
+    t.text "body", null: false
+    t.string "picture_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "permissions", force: :cascade do |t|
