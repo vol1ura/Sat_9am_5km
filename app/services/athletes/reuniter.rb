@@ -16,6 +16,7 @@ module Athletes
       return false unless athlete
 
       grab_modified_attributes_from_collection!
+      update_results_seconds
       replace_all_by_one!
       StatsUpdate.call(athlete)
       schedule_telegram_notification
@@ -45,6 +46,11 @@ module Athletes
 
     def unmodified_attributes
       @unmodified_attributes ||= athlete.attribute_names - SKIPPED_ATTRIBUTES
+    end
+
+    def update_results_seconds
+      athlete_seconds = @collection.pluck(:stats).sum([]) { |s| s.dig('results', 'seconds') || [] }.uniq.sort
+      athlete.stats.deep_merge!('results' => { 'seconds' => athlete_seconds })
     end
 
     def replace_all_by_one!
