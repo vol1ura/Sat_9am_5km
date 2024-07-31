@@ -16,4 +16,12 @@ ActiveAdmin.register Contact do
     column :link
     actions
   end
+
+  form do |f|
+    f.inputs do
+      f.input :contact_type
+      f.input :link
+    end
+    f.actions
+  end
 end

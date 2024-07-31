@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Club do
+  menu priority: 70
   includes :country, logo_attachment: :blob
 
   permit_params :name, :country_id, :logo, :description

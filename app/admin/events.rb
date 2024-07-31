@@ -3,7 +3,7 @@
 ActiveAdmin.register Event do
   includes :country
 
-  menu priority: 3
+  menu priority: 90
   actions :all, except: :destroy
 
   config.sort_order = 'visible_order_asc'
