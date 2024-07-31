@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Badge do
+  menu priority: 80
   actions :all, except: :destroy
 
   permit_params :name, :conditions, :received_date, :image

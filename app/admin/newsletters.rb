@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Newsletter do
+  menu priority: 99
   permit_params :body, :picture_link
 
   config.filters = false
