@@ -4,7 +4,7 @@
 <%= turbo_frame_tag current_user do %>
   <div class="row">
     <div class="col-6 col-sm-auto">
-      <%= image_tag user_image_url(current_user), class: 'avatar' %>
+      <%= image_tag user_image_path(current_user), class: 'avatar' %>
     </div>
     <div class="col-6 col-sm-4">
       <div class="d-flex flex-column">

@@ -11,7 +11,7 @@
     <h1 class="mt-2"><%= athlete_name %></h1>
   </div>
   <div class="ms-auto col-auto position-relative">
-    <%= image_tag user_image_url(@athlete.user), class: 'avatar', title: athlete_name %>
+    <%= image_tag user_image_path(@athlete.user), class: 'avatar', title: athlete_name %>
     <a href="#" class="btn btn-outline-primary rounded-circle position-absolute top-0 end-0 me-2" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
       <i class="fa-solid fa-qrcode" title="QR"></i>
     </a>

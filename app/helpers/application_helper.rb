@@ -66,10 +66,15 @@ module ApplicationHelper
   end
 
   def external_link_to(title = nil, options = nil, html_options = {}, &)
-    link_to title, *[options, html_options.merge(target: '_blank', rel: 'noopener')].compact, &
+    target_options = { target: '_blank', rel: 'noopener' }
+    if block_given?
+      link_to title, html_options.merge(target_options), &
+    else
+      link_to title, options, **html_options.merge(target_options)
+    end
   end
 
-  def user_image_url(user)
+  def user_image_path(user)
     user&.image&.attached? ? user.image.variant(:web) : '/images/person.jpg'
   end
 end
