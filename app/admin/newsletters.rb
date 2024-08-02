@@ -24,13 +24,13 @@ ActiveAdmin.register Newsletter do
     end
   end
 
-  member_action :notify, method: :get do
+  member_action :notify, method: :post do
     Telegram::Notification::Newsletter.call(resource, current_user)
     redirect_to admin_newsletter_path(resource), notice: I18n.t('active_admin.newsletters.notified')
   end
 
   action_item :notify, only: :show do
-    link_to 'Отправить себе', notify_admin_newsletter_path(resource)
+    link_to 'Отправить себе', notify_admin_newsletter_path(resource), method: :post
   end
 
   sidebar :markdown_help, only: %i[show edit] do
