@@ -5,6 +5,7 @@ RSpec.describe AthletesAwardingJob do
 
   before do
     create(:badge, kind: :rage)
+    create(:badge, kind: :minute_bingo)
     create(:badge, kind: :record, info: { male: true })
     create(:badge, kind: :tourist, info: { threshold: 5, type: 'result' })
     create(:badge, kind: :tourist, info: { threshold: 5, type: 'volunteer' })
@@ -13,12 +14,14 @@ RSpec.describe AthletesAwardingJob do
   context 'with participants badges' do
     let(:event) { create(:event) }
     let(:activity) { create(:activity, date: Time.zone.today, event: event) }
+    let(:jubilee_badge) { create(:participating_badge, threshold: 25, kind: :jubilee_participating, type: nil) }
 
     before do
       [25, 50, 100].each do |threshold|
         create(:participating_badge, threshold:)
         create(:participating_badge, threshold: threshold, type: 'volunteer')
       end
+      allow(FunrunAwardingJob).to receive(:perform_later).with(activity.id, jubilee_badge.id)
 
       24.times do |idx|
         activity = create(:activity, event: event, date: idx.next.week.ago)
@@ -37,6 +40,7 @@ RSpec.describe AthletesAwardingJob do
       expect(athlete.trophies.joins(:badge).pluck(:kind)).to contain_exactly(
         'record', 'rage', 'participating', 'participating',
       )
+      expect(FunrunAwardingJob).to have_received(:perform_later).once
     end
   end
 
