@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Users
-  # More info at:
   # https://github.com/heartcombo/devise#omniauth
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # GET|POST /users/auth/telegram/callback
