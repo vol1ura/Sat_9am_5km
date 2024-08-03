@@ -91,7 +91,7 @@
       </div>
     </div>
   <% end %>
-  <% if @total_results.positive? %>
+  <% if @total_trophies.positive? %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-totalTrophies">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalTrophies" aria-expanded="false" aria-controls="flush-collapseTotalTrophies">
@@ -102,7 +102,7 @@
       <div id="flush-collapseTotalTrophies" class="accordion-collapse collapse" aria-labelledby="flush-totalTrophies" data-bs-parent="#accordionPersonalBest">
         <div class="accordion-body">
           <div class="d-flex justify-content-start flex-wrap">
-            <% if seconds_in_results_count < 60 %>
+            <% if @total_results.positive? && seconds_in_results_count < 60 %>
               <%= render 'minute_bingo', seconds_in_results_count: %>
             <% end %>
             <% @athlete.trophies.includes(badge: { image_attachment: :blob }).each do |trophy| %>
