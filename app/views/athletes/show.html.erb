@@ -147,7 +147,7 @@
       <% pb_result = @pb_by_time.first %>
       <h2 class="accordion-header" id="flush-personalBestAbsolute">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= human_result_time pb_result.total_time %></span>
+          <span class="badge text-bg-ligth bg-primary me-3"><%= pb_result ? human_result_time(pb_result.total_time) : '?' %></span>
           <%= t '.personal_best' %>
         </button>
       </h2>

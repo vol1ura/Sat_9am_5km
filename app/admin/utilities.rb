@@ -50,7 +50,9 @@ ActiveAdmin.register_page 'Utilities' do
   end
 
   page_action :award_funrun_badge, method: :post do
-    FunrunAwardingJob.perform_later(params[:activity_id], params[:badge_id])
+    job_args = params.values_at(:activity_id, :badge_id)
+    FunrunAwardingJob.perform_later(*job_args)
+    FunrunAwardingJob.set(wait: 12.hours).perform_later(*job_args)
     redirect_to admin_badge_trophies_path(params[:badge_id]), notice: t('.performing')
   end
 
