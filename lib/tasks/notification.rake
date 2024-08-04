@@ -19,7 +19,7 @@ namespace :notification do
 
   desc 'Notify about breaking time badge expiration'
   task breaking_time_badges_expiration: :environment do
-    threshold_date = BreakingTimeAwardingJob::EXPIRATION_PERIOD.months.ago.to_date + 1.week
+    threshold_date = BreakingTimeAwardingJob::EXPIRATION_PERIOD.ago.to_date + 1.week
     Trophy.where(badge: Badge.breaking_kind, date: ..threshold_date).find_each do |trophy|
       Telegram::Notification::Badge::BreakingTimeExpiration.call(trophy)
     end

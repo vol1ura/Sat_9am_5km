@@ -6,7 +6,7 @@ RSpec.describe Telegram::Notification::Badge::BreakingTimeExpiration, type: :ser
       :trophy,
       athlete: create(:athlete, user: create(:user)),
       badge: create(:badge, info: { male: true, min: 18 }, kind: :breaking),
-      date: BreakingTimeAwardingJob::EXPIRATION_PERIOD.months.ago,
+      date: BreakingTimeAwardingJob::EXPIRATION_PERIOD.ago,
     )
   end
   let(:bot_token) { '123456:aaabbb' }

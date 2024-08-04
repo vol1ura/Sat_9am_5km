@@ -3,7 +3,7 @@
 class BreakingTimeAwardingJob < ApplicationJob
   queue_as :default
 
-  EXPIRATION_PERIOD = 3 # In months
+  EXPIRATION_PERIOD = 3.months
 
   def perform
     expire_badges
@@ -19,7 +19,7 @@ class BreakingTimeAwardingJob < ApplicationJob
       accomplished_athlete_ids =
         Result
           .joins(:activity, athlete: :trophies)
-          .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
+          .where(activity: { date: EXPIRATION_PERIOD.ago.. })
           .where(total_time: ...minutes_threshold(badge.info['min']))
           .where(athlete: { trophies: { badge: } }).select(:athlete_id)
       Trophy.where(badge:).where.not(athlete_id: accomplished_athlete_ids).destroy_all
@@ -34,7 +34,7 @@ class BreakingTimeAwardingJob < ApplicationJob
       next_badges = badges.where("(info->'min')::integer > ?", time_threshold)
       Result
         .joins(:activity, :athlete)
-        .where(activity: { date: EXPIRATION_PERIOD.months.ago.. })
+        .where(activity: { date: EXPIRATION_PERIOD.ago.. })
         .where(total_time: minutes_threshold(prev_badges.last&.info&.dig('min'))...minutes_threshold(time_threshold))
         .where(athlete: { male: })
         .order(:date)

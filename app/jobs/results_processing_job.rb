@@ -10,7 +10,7 @@ class ResultsProcessingJob < ApplicationJob
 
     activity.results.where.not(athlete: nil).includes(:athlete).find_each do |result|
       past_results =
-        result.athlete.results.published.where('activity.date < ?', activity.date).pluck(:total_time, :event_id)
+        result.athlete.results.published.where(activity: { date: ...activity.date }).pluck(:total_time, :event_id)
 
       next result.update!(personal_best: true, first_run: true) if past_results.empty?
 
