@@ -34,6 +34,10 @@ module ApplicationHelper
     I18n.t("activerecord.attributes.volunteer.roles.#{role}")
   end
 
+  def human_contact_type(type)
+    I18n.t("activerecord.attributes.contact.contact_types.#{type}")
+  end
+
   def kind_of_badge(badge)
     I18n.t("activerecord.attributes.badge.kinds.#{badge.kind}")
   end
@@ -68,7 +72,7 @@ module ApplicationHelper
   def external_link_to(title = nil, options = nil, html_options = {}, &)
     target_options = { target: '_blank', rel: 'noopener' }
     if block_given?
-      link_to title, html_options.merge(target_options), &
+      link_to title, (options || {}).merge(target_options), &
     else
       link_to title, options, **html_options.merge(target_options)
     end

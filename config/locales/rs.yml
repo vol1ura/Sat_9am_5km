@@ -158,17 +158,17 @@ rs:
         link: link
         contact_type: 'vrsta kontakta'
         contact_types:
-          email: e-mail
-          phone: telefon
-          tg_channel: 'telegram kanal'
-          tg_chat: 'telegram čet'
-          vk: vkontakte
-          zen: zen
-          instagram: instagram
-          facebook: fejsbuk
-          strava: strava
-          map_link: link za mapu i pravac
-          parking: parking
+          email: E-mail
+          phone: Telefon
+          tg_channel: Telegram kanal
+          tg_chat: Telegram čet
+          vk: VKontakte
+          zen: Zen
+          instagram: Instagram
+          facebook: Facebook
+          strava: Strava
+          map_link: Link za mapu i pravac
+          parking: Parking
       badge:
         name: naziv
         conditions: uslovi za dobijanje
@@ -520,7 +520,7 @@ rs:
       s95: S95 park trčanje
       slogan_html: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. I vi možete slobodno <a href="%{link}">učestvovati</a> u našim trkama, razvoju ili kreiranju sadržaja.'
       telegram_title: Vesti o projektu na Telegramu
-      vk_title: Grupa na Vkontakte
+      vk_title: Grupa VKontakte
       send_email: Pošaljite nam email
       github_title: Projekat na GitHubu
   pages:
