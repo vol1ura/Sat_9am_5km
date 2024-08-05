@@ -12,7 +12,7 @@ ActiveAdmin.register Contact do
   index download_links: false, title: -> { t '.title', event_name: @event.name } do
     selectable_column
 
-    column :contact_type
+    column(:contact_type) { |c| human_contact_type(c.contact_type) }
     column :link
     actions
   end
