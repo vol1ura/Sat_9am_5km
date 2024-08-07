@@ -6,7 +6,7 @@ class Club < ApplicationRecord
 
   has_one_attached :logo do |attachable|
     attachable.variant :thumb, resize_to_limit: [60, 60]
-    attachable.variant :web, resize_to_limit: [150, 150], preprocessed: true
+    attachable.variant :web, resize_to_limit: [300, 300], preprocessed: true
   end
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
