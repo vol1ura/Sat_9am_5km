@@ -16,11 +16,9 @@
 
 <h2><%= @club.name %></h2>
 
-<div class="d-flex">
-  <div class="flex-shrink-0">
-    <%= image_tag @club.logo.variant(:web), class: 'img-fluid rounded', alt: @club.name if @club.logo.attached? %>
-  </div>
-  <div class="flex-grow-1 ms-3">
+<div class="row">
+  <div class="col-12">
+    <%= image_tag @club.logo.variant(:web), class: 'img-club', alt: @club.name if @club.logo.attached? %>
     <%= sanitized_text @club.description %>
   </div>
 </div>
