@@ -394,8 +394,8 @@ GEM
       i18n
     rdoc (6.7.0)
       psych (>= 4.0.0)
-    redis (5.1.0)
-      redis-client (>= 0.17.0)
+    redis (5.2.0)
+      redis-client (>= 0.22.0)
     redis-client (0.22.1)
       connection_pool
     redis-namespace (1.11.0)
