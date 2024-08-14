@@ -15,7 +15,6 @@ class FivePlusAwardingJob < ApplicationJob
         "Awarding by '5+' badge failed",
         errors: athlete.errors.inspect,
         athlete_id: athlete.id,
-        badge_id: five_plus_badge.id,
       )
     end
   end

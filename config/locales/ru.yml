@@ -175,6 +175,7 @@ ru:
         kind: тип
         kinds:
           funrun: фан-ран
+          full_profile: полный комплект
           participating: участник
           home_participating: лучше дома
           jubilee_participating: юбилейный

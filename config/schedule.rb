@@ -19,6 +19,10 @@ every 1.day, at: '2' do
   command "$HOME/backup_storage.sh"
 end
 
+every 1.day, at: '23:30' do
+  runner 'FullProfileAwardingJob.perform_later'
+end
+
 every 1.month, at: '6' do
   rake 'processing:set_five_plus_trophy_dates'
 end

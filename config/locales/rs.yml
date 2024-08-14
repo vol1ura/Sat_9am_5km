@@ -177,15 +177,16 @@ rs:
         kind: vrsta
         kinds:
           funrun: zabavno trčanje
+          full_profile: kompletan set
           participating: učesnik
-          home_participating: better at home
-          jubilee_participating: jubilee
+          home_participating: kuće su bolje
+          jubilee_participating: jubilej
           tourist: turista
           breaking: breaking
           record: rekord staze
           rage: rang
-          five_plus: five plus
-          minute_bingo: minute bingo
+          five_plus: pet plus
+          minute_bingo: minutni bingo
       trophy:
         athlete: sportista
         date: datum prijema
