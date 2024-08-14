@@ -23,7 +23,7 @@ class Badge < ApplicationRecord
                     size: { less_than: 300.kilobytes }
 
   enum kind: {
-    funrun: 0, participating: 10, home_participating: 11, jubilee_participating: 12,
+    funrun: 0, full_profile: 1, participating: 10, home_participating: 11, jubilee_participating: 12,
     tourist: 20, breaking: 30, rage: 40, five_plus: 41, minute_bingo: 50, record: 100
   }, _suffix: true
 
