@@ -105,7 +105,7 @@
             <% if @total_results.positive? && seconds_in_results_count < 60 %>
               <%= render 'minute_bingo', seconds_in_results_count: %>
             <% end %>
-            <% @athlete.trophies.includes(badge: { image_attachment: :blob }).each do |trophy| %>
+            <% @athlete.trophies.includes(badge: { image_attachment: :blob }).order('date ASC NULLS FIRST').each do |trophy| %>
               <div class="p-1">
                 <%
                   trophy_link = link_to badge_path(trophy.badge) do
