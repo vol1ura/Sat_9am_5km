@@ -72,6 +72,8 @@ RSpec/MultipleExpectations:
   Max: 4
 RSpec/ExampleLength:
   Max: 10
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
 
 AllCops:
   TargetRubyVersion: 3.2
