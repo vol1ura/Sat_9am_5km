@@ -84,13 +84,22 @@ export default class AthleteCharts {
         }
       },
       dataLabels: {
-        enabled: false
+        enabled: true,
+        offsetY: 10,
+        style: {
+          colors: ['#333']
+        }
       },
       legend: {
         show: false
       },
       xaxis: {
-        categories: Object.keys(events)
+        categories: Object.keys(events),
+        labels: {
+          hideOverlappingLabels: false,
+          rotateAlways: true
+        }
+
       },
       yaxis: {
         tickAmount: 1
@@ -193,6 +202,12 @@ export default class AthleteCharts {
       title: {
         text: title,
         align: 'center'
+      },
+      xaxis: {
+        labels: {
+          hideOverlappingLabels: false,
+          rotateAlways: true
+        }
       },
       yaxis: {
         title: {
