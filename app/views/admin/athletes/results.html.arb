@@ -4,4 +4,5 @@ table_for results do
   column('Забег') { |r| link_to human_activity_name(r.activity), admin_activity_path(r.activity) }
   column :position
   column('Результат') { |r| human_result_time r.total_time }
+  column('Опубликован?') { |r| r.activity.published }
 end
