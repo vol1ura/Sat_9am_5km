@@ -16,7 +16,7 @@ attributes_table_for athlete do
   end
   row(:id_info) { |a| athlete_code_id a }
   row(:profile) { |a| link_to athlete_url(a), a }
-  row(:results) { |a| link_to "смотреть таблицу (всего #{a.results.published.size})", results_admin_athlete_path(a) }
+  row(:results) { |a| link_to "смотреть таблицу (всего #{a.results.size} в т.ч. неопуб.)", results_admin_athlete_path(a) }
   row(:volunteering) { |a| link_to "смотреть таблицу (всего #{a.volunteering.size})", volunteering_admin_athlete_path(a) }
 end
 

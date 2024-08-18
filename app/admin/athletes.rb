@@ -83,7 +83,7 @@ ActiveAdmin.register Athlete do
   end
 
   member_action :results, method: :get do
-    @results = resource.results.published.includes(activity: :event).order('activity.date DESC')
+    @results = resource.results.includes(activity: :event).order('activity.date DESC')
     @page_title = t '.title'
   end
 
