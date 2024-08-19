@@ -2,7 +2,7 @@ rs:
   admin:
     athletes:
       results:
-        title: Published results
+        title: All results
       volunteering:
         title: Published volunteering
       destroy:
@@ -25,6 +25,11 @@ rs:
         <<: *upload_notices
       destroy:
         forbidden_for_published: 'Deleting of published protocol is forbidden! Contact the administrators.'
+      publish:
+        confirm: Make sure that the protocol does not contain errors. Publish it on the website?
+        successfully_published: The protocol has been successfully published on the website
+        empty_protocol: There are no results in the protocol
+        incorrect_protocol: The protocol contains errors. Please correct them before publishing
     contacts:
       index:
         title: 'Kontakti %{event_name}'

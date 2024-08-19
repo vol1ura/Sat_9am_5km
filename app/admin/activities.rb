@@ -61,4 +61,27 @@ ActiveAdmin.register Activity do
   action_item :volunteers, only: %i[show edit] do
     link_to 'Редактор волонтёров', admin_activity_volunteers_path(resource)
   end
+
+  action_item :publish, only: :show do
+    next if resource.published || !resource.correct?
+
+    link_to(
+      'Опубликовать',
+      publish_admin_activity_path(resource),
+      method: :put,
+      data: { confirm: t('admin.activities.publish.confirm') },
+    )
+  end
+
+  member_action :publish, method: :put do
+    if resource.results.empty?
+      flash[:error] = t '.empty_protocol'
+    elsif resource.correct?
+      resource.update!(published: true)
+      flash[:notice] = t '.successfully_published'
+    else
+      flash[:error] = t '.incorrect_protocol'
+    end
+    redirect_to admin_activity_path(resource)
+  end
 end
