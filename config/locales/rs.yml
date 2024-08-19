@@ -85,6 +85,7 @@ rs:
         published: objavljeno?
         description: opis
         event_name: gde?
+        correct?: correct?
       club:
         name: naziv
         country: država

@@ -44,6 +44,21 @@ class Activity < ApplicationRecord
     event.activities.published.where(date: ...date).size.next
   end
 
+  def correct?
+    subquery = results.left_joins(:athlete).select(
+      'position, LEAD(position, 1) OVER (ORDER BY position) AS next_position, ' \
+      'total_time, LEAD(total_time, 1) OVER (ORDER BY position) AS next_total_time, ' \
+      'athlete_id, name, male',
+    ).to_sql
+    Result
+      .from("(#{subquery}) AS ext_results")
+      .where(
+        'total_time IS NULL OR next_position != position + 1 OR total_time > next_total_time OR ' \
+        '(athlete_id IS NOT NULL AND (name IS NULL OR male IS NULL))',
+      )
+      .empty?
+  end
+
   def postprocessing
     return unless published
 

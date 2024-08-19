@@ -2,7 +2,7 @@ ru:
   admin:
     athletes:
       results:
-        title: Опубликованные результаты
+        title: Все результаты
       volunteering:
         title: Опубликованные волонтёрства
       destroy:
@@ -25,6 +25,11 @@ ru:
         <<: *upload_notices
       destroy:
         forbidden_for_published: 'Удаление опубликованного протокола запрещено! Свяжитесь с администраторами.'
+      publish:
+        confirm: Убедитесь, что протокол не содержит ошибок. Опубликовать на сайте?
+        successfully_published: Протокол успешно опубликован на сайте
+        empty_protocol: В протоколе нет результатов
+        incorrect_protocol: Протокол содержит ошибки. Пожалуйста исправьте их перед публикацией
     contacts:
       index:
         title: 'Контакты %{event_name}'

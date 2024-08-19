@@ -83,6 +83,7 @@ ru:
         published: опубликован?
         description: описание
         event_name: где?
+        correct?: корректен?
       club:
         name: название
         country: страна
