@@ -69,12 +69,10 @@ RSpec.describe '/admin/activities' do
   end
 
   describe 'DELETE /admin/activities/1' do
+    let(:user) { create(:user, :admin) }
     let(:activity) { create(:activity, published:, event:) }
 
-    before do
-      user.admin!
-      delete admin_activity_url(activity)
-    end
+    before { delete admin_activity_url(activity) }
 
     context 'when not published' do
       let(:published) { false }
@@ -90,6 +88,27 @@ RSpec.describe '/admin/activities' do
       it 'redirects to resource' do
         expect(flash[:error]).to include 'Удаление опубликованного протокола запрещено'
         expect(response).to redirect_to admin_activity_url(activity)
+      end
+    end
+  end
+
+  describe 'PUT /admin/activities/1/publish' do
+    let(:user) { create(:user, :admin) }
+    let(:activity) { create(:activity, published: false) }
+
+    it 'redirects to resource with alert' do
+      put publish_admin_activity_url(activity)
+      expect(flash[:error]).to include 'В протоколе нет результатов'
+      expect(response).to redirect_to admin_activity_url(activity)
+    end
+
+    context 'with results' do
+      it 'publishes protocol and redirects to resource' do
+        create_list(:result, 2, activity:)
+        put publish_admin_activity_url(activity)
+        expect(flash[:notice]).to include 'Протокол успешно опубликован на сайте'
+        expect(response).to redirect_to admin_activity_url(activity)
+        expect(activity.reload.published).to be true
       end
     end
   end
