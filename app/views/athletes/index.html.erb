@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody class="table-group-divider">
-      <% @athletes.includes(:club).limit(100).each do |athlete| %>
+      <% @athletes.includes(:club).each do |athlete| %>
         <tr>
           <td><%= link_to athlete.name, athlete %></td>
           <td><%= athlete.club&.name %></td>
