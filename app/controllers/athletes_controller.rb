@@ -3,7 +3,7 @@
 class AthletesController < ApplicationController
   def index
     query = params[:name].to_s.gsub(/[^[:alnum:][:blank:]]/, '').strip
-    criteria = Athlete.order(:event_id)
+    criteria = Athlete.order(:event_id).limit(100)
     @athletes =
       if query.length < 3
         Athlete.none
@@ -11,9 +11,9 @@ class AthletesController < ApplicationController
         personal_code = Athlete::PersonalCode.new(query.to_i)
         criteria.where(personal_code.code_type => personal_code.id)
       else
-        criteria.where('name ~* :query', query:)
+        criteria.search_by_name(query)
       end
-    redirect_to athlete_path(@athletes.take) if request.format.html? && @athletes.size == 1
+    redirect_to athlete_path(@athletes.take) if request.format.html? && @athletes.length == 1
   end
 
   def show

@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Athlete < ApplicationRecord
+  include PgSearch::Model
+
+  pg_search_scope :search_by_name, against: :name, using: {
+    trigram: { threshold: 0.7, word_similarity: true },
+  }
+
   audited associated_with: :user, max_audits: 20, except: [:stats]
 
   PARKZHRUN_BORDER = 690_000_000
