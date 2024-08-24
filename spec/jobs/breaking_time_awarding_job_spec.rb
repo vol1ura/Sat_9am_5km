@@ -32,6 +32,6 @@ RSpec.describe BreakingTimeAwardingJob do
   it 'adds new trophy' do
     create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(17, 59))
 
-    expect { described_class.perform_now }.to change(athlete.trophies, :count).by(1)
+    expect { described_class.perform_now(activity.id) }.to change(athlete.trophies, :count).by(1)
   end
 end
