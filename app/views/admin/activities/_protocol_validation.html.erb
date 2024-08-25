@@ -30,13 +30,13 @@
       const next_row = rows[idx+1]
       if(!next_row) { return }
 
-      total_time_cell = $(row).find('td.col-total_time')
-      next_total_time = $(next_row).find('td.col-total_time').html()
+      const current_total_time = $(row).find('td.col-total_time').html()
+      const next_total_time_cell = $(next_row).find('td.col-total_time')
 
-      if(parseTimeString(total_time_cell.html()) <= parseTimeString(next_total_time)) {
-        total_time_cell.removeClass('error')
+      if(parseTimeString(current_total_time) <= parseTimeString(next_total_time_cell.html())) {
+        next_total_time_cell.removeClass('error')
       } else {
-        total_time_cell.addClass('error')
+        next_total_time_cell.addClass('error')
       }
     })
   }
