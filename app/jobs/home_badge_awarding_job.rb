@@ -13,8 +13,10 @@ class HomeBadgeAwardingJob < ApplicationJob
         athlete_ids = athlete_ids.where(athlete_id:) if athlete_id
 
         Athlete.where(id: athlete_ids).where.not(id: badge.trophies.select(:athlete_id)).find_each do |athlete|
-          athlete.trophies.where(badge: badges_dataset.where.not(id: badge.id)).destroy_all
-          athlete.trophies.create!(badge: badge, date: date_of_awarding(athlete, badge))
+          athlete.transaction do
+            athlete.trophies.where(badge: badges_dataset.where.not(id: badge.id)).destroy_all
+            athlete.trophies.create! badge: badge, date: date_of_awarding(athlete, badge)
+          end
         end
       end
     end
