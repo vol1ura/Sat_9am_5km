@@ -138,8 +138,10 @@ class AthletesAwardingJob < ApplicationJob
     badges_dataset = Badge.dataset_of(kind:, type:).where("(info->'threshold')::integer <= ?", value)
     return unless (badge = badges_dataset.last) && !athlete.trophies.exists?(badge:)
 
-    athlete.trophies.where(badge: badges_dataset.where.not(id: badge.id)).destroy_all
-    athlete.trophies.create! badge: badge, date: activity_date
+    athlete.transaction do
+      athlete.trophies.where(badge: badges_dataset.where.not(id: badge.id)).destroy_all
+      athlete.trophies.create! badge: badge, date: activity_date
+    end
   end
 
   def award_by_jubilee_participating_kind_badges
