@@ -66,7 +66,7 @@ class Activity < ApplicationRecord
     AthletesAwardingJob.perform_later(id)
     BreakingTimeAwardingJob.perform_later(id)
     FivePlusAwardingJob.perform_later(id)
-    AthleteStatsUpdateJob.perform_later(participants.ids)
+    AthleteStatsUpdateJob.set(wait: 10.minutes).perform_later(participants.ids)
     Telegram::Notification::AfterActivityJob.perform_later(id)
     ClearCache.call
   end
