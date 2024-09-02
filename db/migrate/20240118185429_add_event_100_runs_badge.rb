@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddEvent100RunsBadge < ActiveRecord::Migration[7.1]
   def up
     Badge.find_or_create_by!(id: 46) do |badge|

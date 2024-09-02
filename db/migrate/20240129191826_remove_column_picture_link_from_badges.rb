@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveColumnPictureLinkFromBadges < ActiveRecord::Migration[7.1]
   def up
     Badge.find_each do |badge|
