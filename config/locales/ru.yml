@@ -242,7 +242,7 @@ ru:
     formats:
       default: "%d.%m.%Y"
       long: "%d %B %Y г."
-      brief: "%d %B"
+      brief: "%-d %B"
       short: "%-d %b %Y"
     month_names:
     -
