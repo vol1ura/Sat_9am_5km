@@ -17,7 +17,7 @@
           %>
         </div>
       </div>
-      <% is_athlete_invalid = @volunteer.errors.key?(:athlete) %>
+      <% is_athlete_invalid = @volunteer.errors.present? %>
       <div class="col-sm position-relative volunteers-autocomplete">
         <div class="input-group input-group-sm">
           <%=
@@ -33,7 +33,7 @@
             <i class="fa-solid fa-user-plus text-primary"></i>
           </button>
           <% if is_athlete_invalid %>
-            <div class="invalid-feedback"><%= @volunteer.errors[:athlete].join(', ') %></div>
+            <div class="invalid-feedback"><%= @volunteer.errors.messages.values.flatten.join(', ') %></div>
           <% end %>
         </div>
         <ul class="list-group list-group-flush position-absolute w-100 shadow rounded-bottom" data-autocomplete-target="results" data-action="click->autocomplete#select"></ul>
