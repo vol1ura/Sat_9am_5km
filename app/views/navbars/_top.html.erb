@@ -138,7 +138,7 @@
 
         <%= form_with url: athletes_path, method: :get, class: 'my-3', role: 'search' do |f| %>
           <div class="input-group">
-            <%= f.text_field :name, type: 'search', class: 'form-control', placeholder: t('.name_or_id'), 'aria-label' => 'Search', autocomplete: 'off' %>
+            <%= f.text_field :q, type: 'search', class: 'form-control', placeholder: t('.name_or_id'), 'aria-label' => 'Search', autocomplete: 'off' %>
             <%= f.submit t('.search'), class: 'btn btn-outline-light' %>
           </div>
         <% end %>
