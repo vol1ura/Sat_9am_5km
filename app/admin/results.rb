@@ -67,7 +67,6 @@ ActiveAdmin.register Result do
   after_save { |result| result.activity.postprocessing if result.athlete_id }
 
   after_destroy do |result|
-    collection.where('position > ?', result.position).update_all('position = position - 1') # rubocop:disable Rails/SkipsModelValidations
     flash[:notice] = t('.result_destroyed', position: result.position)
   end
 
