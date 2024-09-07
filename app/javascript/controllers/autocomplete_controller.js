@@ -42,7 +42,7 @@ export default class extends Controller {
   handle_search() {
     clearTimeout(this.timeout)
     this.timeout = setTimeout(() => {
-      fetch(`${this.urlValue}?name=${this.inputTarget.value}`)
+      fetch(`${this.urlValue}?q=${this.inputTarget.value}`)
         .then(response => response.json())
         .then(data => this.fillDropDown(data.athletes))
     }, 350)

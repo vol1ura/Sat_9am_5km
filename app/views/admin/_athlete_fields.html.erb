@@ -64,7 +64,7 @@ $(function () {
 })
 
 function findAthletes(element, query) {
-  fetch('/athletes.json?name=' + query)
+  fetch(`/athletes.json?q=${query}`)
     .then(response => response.json())
     .then(data => {
       list = ''
