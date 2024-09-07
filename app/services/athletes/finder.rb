@@ -13,7 +13,7 @@ module Athletes
       },
       runpark_code: {
         url: 'https://runpark.ru/UserCard/A%d',
-        xpath: '//div[@class="container"]/div/h2',
+        xpath: '//body/div/div/h2',
       },
     }.freeze
     ANTI_BLOCK_PAUSE = 1.5
