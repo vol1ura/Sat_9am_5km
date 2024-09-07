@@ -49,7 +49,7 @@ RSpec.describe Athlete do
 
   describe '#find_or_scrape_by_code!' do
     context 'when such athlete exists in the database' do
-      let(:athlete) { create(:athlete) }
+      let(:athlete) { create(:athlete, runpark_code: 7000998502) }
 
       it 'returns athlete by parkrun code' do
         expect(described_class.find_or_scrape_by_code!(athlete.parkrun_code)).to eq athlete
@@ -62,6 +62,10 @@ RSpec.describe Athlete do
       it 'returns athlete by sat_9am_5km code' do
         code = athlete.id + Athlete::SAT_9AM_5KM_BORDER
         expect(described_class.find_or_scrape_by_code!(code)).to eq athlete
+      end
+
+      it 'returns athlete by runpark code' do
+        expect(described_class.find_or_scrape_by_code!(athlete.runpark_code)).to eq athlete
       end
     end
 
