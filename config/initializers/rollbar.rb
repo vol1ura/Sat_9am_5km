@@ -8,7 +8,7 @@ Rollbar.configure do |config|
   # method to fetch this property. To customize:
   # config.person_method = "my_current_user"
   # config.person_id_method = "my_id"
-  config.person_username_method = 'last_name'
+  config.person_username_method = 'full_name'
   config.person_email_method = 'email'
 
   # If you want to attach custom data to all exception and message reports,
@@ -28,6 +28,9 @@ Rollbar.configure do |config|
   #
   # You can also specify a callable, which will be called with the exception instance.
   # config.exception_level_filters.merge!('MyCriticalException' => lambda { |e| 'critical' })
+
+  # Enable the Rails 7 error reporter. https://edgeguides.rubyonrails.org/error_reporting.html
+  # config.enable_rails_error_subscriber = true
 
   # Enable asynchronous reporting (uses girl_friday or Threading if girl_friday is not installed)
   # config.use_async = true
