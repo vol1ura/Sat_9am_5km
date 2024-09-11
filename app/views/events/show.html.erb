@@ -6,7 +6,7 @@
     <i class="fa-solid fa-triangle-exclamation"></i>&nbsp;
     <div>
       <strong><%= t '.attention' %></strong> <%= @total_activities.zero? ? t('.opening_soon') : t('.start_cancelled') %>
-      <%= t '.inactivity_disclaimer_html', link: 'https://t.me/s95news' %>
+      <%= t '.inactivity_disclaimer_html', link: Rails.configuration.telegram[top_level_domain] %>
     </div>
   </div>
 <% end %>
