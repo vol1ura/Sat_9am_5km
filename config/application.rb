@@ -43,5 +43,7 @@ module Sat9am5km
     config.action_mailer.preview_paths << "#{Rails.root}/spec/mailers/previews"
 
     config.active_storage.service = :local
+
+    config.telegram = config_for(:telegram)
   end
 end
