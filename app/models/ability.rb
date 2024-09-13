@@ -6,6 +6,7 @@ class Ability
   def initialize(user)
     return unless user
     can(:manage, :all) and return if user.admin?
+    return if user.permissions.blank?
 
     @user = user
     base_permissions
