@@ -39,7 +39,7 @@
   <% if s95_first_run_count.positive? %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= s95_first_run_count %></span>
-      <%= t '.first_s95_count' %>&nbsp;<i class="fa-solid fa-heart text-danger"></i>
+      <%= t '.first_s95_count' %>&nbsp;<i class="fa-solid fa-heart text-success"></i>
     </li>
   <% end %>
 </ul>
@@ -86,7 +86,12 @@
             <%= t '.total_volunteering', count: @volunteering_v_count[volunteer.athlete_id] %>
           </div>
         </td>
-        <td class="align-middle"><%= human_volunteer_role volunteer.role %></td>
+        <td class="align-middle">
+          <%= human_volunteer_role volunteer.role %>
+          <% if @volunteering_v_count[volunteer.athlete_id] == 1 %>
+            <i class="fa-solid fa-heart text-danger" title="Первое волонтёрство!"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
