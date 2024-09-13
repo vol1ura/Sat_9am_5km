@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rqrcode'
-
 # Outputs athlete QR-code in SVG format
 class BarcodePrinter < ApplicationService
   OPTIONS = {

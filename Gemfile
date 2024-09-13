@@ -34,7 +34,7 @@ gem 'pg_search'
 gem 'puma'
 gem 'rack-attack'
 gem 'rails_performance'
-gem 'rqrcode', require: false
+gem 'rqrcode'
 gem 'ruby-vips', '>= 2.1.0'
 gem 'sidekiq'
 gem 'sitemap_generator'
