@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.2.2'
 
-gem 'rails', '~> 7.1.2'
+gem 'rails', '~> 7.2.1'
 
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
@@ -38,7 +38,6 @@ gem 'rqrcode'
 gem 'ruby-vips', '>= 2.1.0'
 gem 'sidekiq'
 gem 'sitemap_generator'
-gem 'sprockets-rails'
 gem 'whenever', require: false
 
 gem 'hiredis-client'
