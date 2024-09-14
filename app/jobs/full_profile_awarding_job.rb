@@ -14,6 +14,7 @@ class FullProfileAwardingJob < ApplicationJob
     @badge ||= Badge.full_profile_kind.sole
   end
 
+  # athletes with images
   def athletes_dataset
     Athlete.joins(user: :image_attachment)
   end

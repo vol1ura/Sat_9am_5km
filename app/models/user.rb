@@ -27,7 +27,7 @@ class User < ApplicationRecord
             dimension: { min: 200..200 },
             size: { less_than: 10.megabytes }
 
-  enum role: { admin: 0 }
+  enum :role, { admin: 0 }, validate: { allow_nil: true }
 
   before_save :update_athlete_name, if: proc { will_save_change_to_first_name? || will_save_change_to_last_name? }
 

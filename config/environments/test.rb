@@ -17,6 +17,7 @@ Rails.application.configure do
       Bullet.bullet_logger = true
       Bullet.raise         = true # raise an error if n+1 query occurs
       Bullet.add_safelist type: :counter_cache, class_name: 'Athlete', association: :audits
+      Bullet.add_safelist type: :unused_eager_loading, class_name: 'ActiveStorage::Attachment', association: :blob
     end
   end
 
@@ -41,6 +42,9 @@ Rails.application.configure do
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 
+  # Store uploaded files on the local file system in a temporary directory.
+  config.active_storage.service = :test
+
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
@@ -52,7 +56,7 @@ Rails.application.configure do
 
   # Unlike controllers, the mailer instance doesn't have any context about the
   # incoming request so you'll need to provide the :host parameter yourself.
-  config.action_mailer.default_url_options = { host: 'localhost:3000', protocol: 'http' }
+  config.action_mailer.default_url_options = { host: "www.example.com" }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
@@ -67,9 +71,6 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   config.i18n.raise_on_missing_translations = true
-
-  config.active_job.queue_adapter = :test
-  config.active_storage.service = :test
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true

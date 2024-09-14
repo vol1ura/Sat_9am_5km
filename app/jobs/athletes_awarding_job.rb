@@ -29,7 +29,7 @@ class AthletesAwardingJob < ApplicationJob
     return unless best_result
 
     record_badge = Badge.record_kind.find_by("(info->'male')::boolean = ?", male)
-    trophies = Trophy.where(badge: record_badge).where("info @@ '$.data[*].event_id == ?'", event_id)
+    trophies = Trophy.where(badge: record_badge).where("info @@ '$.data[*].event_id == #{event_id}'")
     award_by_record_badge!(record_badge, best_result) and return if trophies.empty?
 
     award_best_result = false
