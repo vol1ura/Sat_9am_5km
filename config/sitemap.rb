@@ -22,8 +22,9 @@ Country.find_each do |country|
     add ratings_path(rating_type: 'volunteers'), priority: 0.9
     #
     # Add all events:
+    saturday_date = Date.current.saturday? ? Date.current : Date.tomorrow.prev_week(:saturday)
     country.events.find_each do |event|
-      add event_path(event.code_name), lastmod: event.updated_at, priority: 0.9
+      add event_path(event.code_name), lastmod: saturday_date, priority: 0.99
       add volunteering_event_path(event.code_name)
     end
     #

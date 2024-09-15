@@ -48,7 +48,7 @@ module Sat9am5km
       domain: ENV.fetch('APP_HOST'),
       enable_starttls_auto: true
     }
-    config.action_mailer.preview_paths << "#{Rails.root}/spec/mailers/previews"
+    config.action_mailer.preview_paths << File.join(Rails.root, 'spec/mailers/previews')
 
     config.active_storage.service = :local
 
