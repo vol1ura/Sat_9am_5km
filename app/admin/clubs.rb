@@ -15,7 +15,7 @@ ActiveAdmin.register Club do
     selectable_column
     id_column
     column(:logo) { |c| image_tag c.logo.variant(:thumb) if c.logo.attached? }
-    column :name
+    column(:name) { |c| link_to c.name, c }
     column(:description) { |c| sanitized_text c.description&.truncate(160) }
     column :country
     actions

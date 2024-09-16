@@ -1,4 +1,4 @@
-<tr data-male="<%= result.athlete&.male %>">
+<%= tag.tr data: { male: result.athlete&.male } do %>
   <td class="position align-middle"><%= result.position %></td>
   <td>
     <% if result.athlete_id %>
@@ -21,7 +21,7 @@
       <i class="fa-solid fa-bolt" title="Личный рекорд!"></i>
     <% end %>
     <% if result.first_run %>
-      <i class="fa-solid fa-heart <%= 'text-success' if @results_count[result.athlete_id] == 1 %>" title="Первый забег!"></i>
+      <%= tag.i class: ['fa-solid fa-heart', 'text-success' => @results_count[result.athlete_id] == 1], title: 'Первый забег!' %>
     <% end %>
     <%= human_result_time(result.total_time) %>
   </td>
@@ -30,4 +30,4 @@
     <% club = result.athlete&.club %>
     <%= link_to club.name, club if club %>
   </td>
-</tr>
+<% end %>

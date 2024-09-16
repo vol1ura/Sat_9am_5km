@@ -11,9 +11,9 @@
       </div>
       <div class="col-5 col-md-3 social-links">
         <div class="float-end">
-          <a href="<%= Rails.configuration.telegram[top_level_domain] %>" target="_blank" rel="license noopener" title="<%= t '.telegram_title' %>">
+          <%= link_to Rails.configuration.telegram[top_level_domain], target: '_blank', rel: 'license noopener', title: t('.telegram_title') do %>
             <i class="fa-brands fa-telegram"></i>
-          </a>
+          <% end %>
           <a href="https://vk.com/s95ru" target="_blank" rel="noopener" title="<%= t '.vk_title' %>">
             <i class="fa-brands fa-vk"></i>
           </a>
