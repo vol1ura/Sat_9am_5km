@@ -20,6 +20,8 @@
     <% unless @badge.funrun_kind? %>
       <td><%= l date if date %></td>
     <% end %>
-    <td class="<%= 'hidden-on-phone' unless @badge.funrun_kind? %>"><%= athlete.club&.name %></td>
+    <%= tag.td class: ('hidden-on-phone' unless @badge.funrun_kind?) do %>
+      <%= athlete.club&.name %>
+    <% end %>
   </tr>
 <% end %>

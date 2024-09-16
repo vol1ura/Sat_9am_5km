@@ -39,7 +39,9 @@
         <% elsif !@badge.funrun_kind? %>
           <td><%= t '.received_date' %></td>
         <% end %>
-        <td class="<%= 'hidden-on-phone' unless @badge.funrun_kind? %>"><%= t '.club' %></td>
+        <% tag.td class: ('hidden-on-phone' unless @badge.funrun_kind?) do %>
+          <%= t '.club' %>
+        <% end %>
       </tr>
     </thead>
     <tbody class="table-group-divider">

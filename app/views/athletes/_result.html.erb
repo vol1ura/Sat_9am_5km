@@ -3,16 +3,13 @@
   event = result.activity.event
   total_time = result.total_time
 %>
-<tr class="result <%= 'collapse multi-collapse' if result_counter > 14 %>">
+<%= tag.tr class: ['result', 'collapse multi-collapse' => result_counter > 14] do %>
   <td><%= @total_results - result_counter %></td>
   <td><%= link_to l(activity_date), result.activity %></td>
-  <td
-    class="total-time"
-    data-min="<%= time_to_sec(total_time) %>"
-    data-timestamp="<%= activity_date.to_datetime.to_i * 1000 %>">
-      <%= human_result_time(total_time) %>
-  </td>
+  <%= tag.td class: 'total-time', data: { min: time_to_sec(total_time), timestamp: activity_date.to_datetime.to_i * 1000 } do %>
+    <%= human_result_time(total_time) %>
+  <% end %>
   <td class="hidden-on-phone"><%= human_result_pace(total_time) %></td>
   <td class="hidden-on-phone"><%= result.position %></td>
   <td class="event-name"><%= link_to event.name, event_path(event.code_name) %></td>
-</tr>
+<% end %>
