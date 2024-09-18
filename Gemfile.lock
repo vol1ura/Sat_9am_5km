@@ -107,7 +107,7 @@ GEM
       execjs (~> 2)
     base64 (0.2.0)
     bcrypt (3.1.20)
-    bcrypt_pbkdf (1.1.0)
+    bcrypt_pbkdf (1.1.1)
     bigdecimal (3.1.8)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
@@ -544,7 +544,7 @@ DEPENDENCIES
   activeadmin-searchable_select
   activeadmin_quill_editor
   audited
-  bcrypt_pbkdf (~> 1.0)
+  bcrypt_pbkdf (~> 1.1)
   bootsnap
   bootstrap (~> 5.3.3)
   brakeman
