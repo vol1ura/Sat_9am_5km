@@ -67,7 +67,7 @@ class Athlete < ApplicationRecord
             allow_nil: true
   validates :parkzhrun_code,
             uniqueness: true,
-            numericality: { only_integer: true, greater_than: PARKZHRUN_BORDER },
+            numericality: { only_integer: true, greater_than: PARKZHRUN_BORDER, less_than: SAT_9AM_5KM_BORDER },
             allow_nil: true
 
   before_save :remove_name_extra_spaces, if: :will_save_change_to_name?
