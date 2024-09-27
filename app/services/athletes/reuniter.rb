@@ -35,7 +35,7 @@ module Athletes
 
     def grab_modified_attributes_from_collection!
       MODIFIED_ATTRIBUTES.each do |attr|
-        athlete.public_send :"#{attr}=", athlete.send(attr) || @collection.where.not(attr => nil).take&.send(attr)
+        athlete.public_send(:"#{attr}=", @collection.where.not(attr => nil).take&.send(attr)) unless athlete.send(attr)
         unmodified_attributes.delete(attr)
       end
 
