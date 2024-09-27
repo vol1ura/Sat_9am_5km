@@ -9,7 +9,7 @@ module Athletes
       },
       fiveverst_code: {
         url: 'https://5verst.ru/userstats/%d/',
-        xpath: '//div[@class="text-column"]/h4',
+        xpath: '//div[@class="text-column"]/h1',
       },
       runpark_code: {
         url: 'https://runpark.ru/UserCard/A%d',
