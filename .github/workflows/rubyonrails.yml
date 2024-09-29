@@ -61,6 +61,9 @@ jobs:
       ADMIN_EMAIL: "admin@test.ru"
       INFO_EMAIL: "info@test.ru"
       BOT_TOKEN: "123456:test"
+      VK_TOKEN: ${{ secrets.VK_TOKEN }}
+      VK_ALBUM_ID: 300954831
+      VK_GROUP_ID: 220002708
     steps:
       - name: Checkout code
         uses: actions/checkout@main
@@ -80,7 +83,7 @@ jobs:
         run: bundle exec rspec
       - name: Test & publish code coverage
         if: github.ref == 'refs/heads/master'
-        uses: paambaati/codeclimate-action@v8
+        uses: paambaati/codeclimate-action@v9
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
         with:
