@@ -73,22 +73,35 @@ RSpec.describe '/user' do
   context 'when unauthenticated user' do
     describe 'POST /user/auth/telegram' do
       let(:telegram_id) { 1234567 }
+      let(:auth_hash) { OmniAuth::AuthHash.new(uid: telegram_id.to_s) }
 
       before do
         OmniAuth.config.test_mode = true
-        OmniAuth.config.add_mock(:telegram, { uid: telegram_id.to_s })
+        OmniAuth.config.mock_auth[:telegram] = auth_hash
       end
 
       it 'redirects to new registration url unregistered user' do
         post user_telegram_omniauth_callback_url
-        expect(response).to redirect_to(new_user_registration_url)
+        expect(response).to redirect_to new_user_registration_url
       end
 
-      it 'returns success for registered user' do
-        create(:user, telegram_id:)
-        post user_telegram_omniauth_callback_url
-        expect(response).to redirect_to(root_url)
-        expect(flash[:notice]).to include('Telegram')
+      context 'with registered user' do
+        before { create(:user, telegram_id:) }
+
+        it 'returns success' do
+          post user_telegram_omniauth_callback_url
+          expect(response).to redirect_to root_url
+          expect(flash[:notice]).to include 'Telegram'
+        end
+      end
+
+      context 'with failure' do
+        let(:auth_hash) { :invalid_credentials }
+
+        it 'redirects to login path' do
+          expect { post user_telegram_omniauth_callback_url }.to output.to_stdout_from_any_process
+          expect(response).to redirect_to new_user_session_url
+        end
       end
     end
   end

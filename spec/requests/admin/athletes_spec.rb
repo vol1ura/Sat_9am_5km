@@ -36,6 +36,17 @@ RSpec.describe '/admin/athletes' do
     end
   end
 
+  describe 'GET /admin/athletes/1/results' do
+    let(:result) { create(:result) }
+
+    before { create(:permission, user: user, action: 'manage', subject_class: 'Athlete') }
+
+    it 'renders a successful response' do
+      get results_admin_athlete_url(result.athlete)
+      expect(response).to be_successful
+    end
+  end
+
   describe 'GET /admin/athletes/find_duplicates' do
     before do
       create(:athlete, name: 'Doe JOHN', parkrun_code: nil)

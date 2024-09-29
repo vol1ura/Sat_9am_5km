@@ -74,6 +74,8 @@ RSpec/ExampleLength:
   Max: 10
 RSpec/MultipleMemoizedHelpers:
   Max: 10
+RSpec/NestedGroups:
+  Max: 4
 
 AllCops:
   TargetRubyVersion: 3.2
