@@ -114,7 +114,7 @@ GEM
     bootstrap (5.3.3)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
-    brakeman (6.1.2)
+    brakeman (6.2.2)
       racc
     browser (6.0.0)
     builder (3.3.0)
