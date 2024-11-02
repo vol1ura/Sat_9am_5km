@@ -315,9 +315,13 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.8)
+    pg_query (5.1.0)
+      google-protobuf (>= 3.22.3)
     pg_search (2.3.7)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
+    pghero (3.6.1)
+      activerecord (>= 6.1)
     popper_js (2.11.8)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -577,7 +581,9 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   omniauth-telegram
   pg
+  pg_query
   pg_search
+  pghero
   pry-byebug
   pry-doc
   pry-rails

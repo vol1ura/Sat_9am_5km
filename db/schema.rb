@@ -181,6 +181,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_09_193441) do
     t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "user"
+    t.text "query"
+    t.bigint "query_hash"
+    t.float "total_time"
+    t.bigint "calls"
+    t.datetime "captured_at", precision: nil
+    t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
+  end
+
   create_table "results", force: :cascade do |t|
     t.integer "position"
     t.time "total_time"
