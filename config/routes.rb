@@ -62,5 +62,6 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => 'sidekiq' if Rails.env.production?
     mount RailsPerformance::Engine => 'app_performance'
+    mount PgHero::Engine => 'pg_stats'
   end
 end
