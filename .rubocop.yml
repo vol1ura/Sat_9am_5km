@@ -67,6 +67,13 @@ Lint/MissingSuper:
   Exclude:
     - 'app/services/**/*'
 
+# Rails
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'db/**/*'
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+
 # RSpec
 RSpec/MultipleExpectations:
   Max: 4

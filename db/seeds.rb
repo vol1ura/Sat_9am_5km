@@ -5,9 +5,9 @@ if Rails.env.development?
     email: 'admin@test.com',
     password: '111111',
     password_confirmation: '111111',
-    role: :admin,
+    role: 0,
     first_name: 'John',
-    last_name: 'Doe'
+    last_name: 'Doe',
   )
 end
 

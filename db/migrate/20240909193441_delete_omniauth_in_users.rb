@@ -2,7 +2,8 @@
 
 class DeleteOmniauthInUsers < ActiveRecord::Migration[7.1]
   def change
-    remove_column :users, :provider, :string
-    remove_column :users, :uid, :string
+    change_table :users, bulk: true do |t|
+      t.remove :uid, :provider, type: :string
+    end
   end
 end

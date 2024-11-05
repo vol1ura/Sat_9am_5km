@@ -34,7 +34,7 @@ class CreateCountries < ActiveRecord::Migration[7.0]
     create_enum :country_code, Country.pluck(:code)
     add_column :events, :country_code, :country_code, null: false, default: 'ru'
 
-    Country.all.each do |country|
+    Country.find_each do |country|
       country.events.update_all(country_code: country.code)
     end
 
