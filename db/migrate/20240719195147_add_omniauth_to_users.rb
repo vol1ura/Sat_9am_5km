@@ -2,7 +2,9 @@
 
 class AddOmniauthToUsers < ActiveRecord::Migration[7.1]
   def change
-    add_column :users, :provider, :string
-    add_column :users, :uid, :string
+    change_table :users, bulk: true do |t|
+      t.column :provider, :string
+      t.column :uid, :string
+    end
   end
 end
