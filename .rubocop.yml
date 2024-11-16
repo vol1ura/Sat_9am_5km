@@ -91,5 +91,4 @@ AllCops:
     - 'bin/**/*'
     - 'config/**/*'
     - 'db/schema.rb'
-    - 'db/**/*' # TODO: remove this item
   NewCops: enable
