@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_02_164731) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_16_081433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -88,7 +88,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_02_164731) do
     t.index ["parkrun_code"], name: "index_athletes_on_parkrun_code", unique: true
     t.index ["parkzhrun_code"], name: "index_athletes_on_parkzhrun_code", unique: true
     t.index ["runpark_code"], name: "index_athletes_on_runpark_code", unique: true
-    t.index ["stats"], name: "index_athletes_on_stats", using: :gin
     t.index ["user_id"], name: "index_athletes_on_user_id", unique: true
   end
 
@@ -108,7 +107,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_02_164731) do
     t.string "request_uuid"
     t.datetime "created_at"
     t.index ["associated_type", "associated_id"], name: "associated_index"
-    t.index ["auditable_type", "auditable_id", "version"], name: "auditable_index"
+    t.index ["auditable_id", "auditable_type", "version"], name: "auditable_index"
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
@@ -122,7 +121,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_02_164731) do
     t.date "received_date"
     t.integer "kind", default: 0, null: false
     t.jsonb "info", default: "{}", null: false
-    t.index ["info"], name: "index_badges_on_info", using: :gin
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -173,12 +171,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_02_164731) do
 
   create_table "permissions", force: :cascade do |t|
     t.bigint "event_id"
-    t.bigint "subject_id"
-    t.string "subject_class"
-    t.string "action"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "subject_id"
+    t.string "subject_class"
+    t.string "action"
     t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 

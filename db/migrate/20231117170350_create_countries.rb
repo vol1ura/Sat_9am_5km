@@ -12,7 +12,7 @@ class CreateCountries < ActiveRecord::Migration[7.0]
     add_reference :events, :country
     add_reference :clubs, :country
 
-    Event.unscope(:order).distinct(:country_code).pluck(:country_code).each do |country_code|
+    Event.unscope(:order).distinct.pluck(:country_code).each do |country_code|
       country = Country.find_or_create_by!(code: country_code)
       Event.where(country_code:).update_all(country_id: country.id)
     end

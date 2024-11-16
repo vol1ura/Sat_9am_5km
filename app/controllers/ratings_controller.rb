@@ -27,8 +27,7 @@ class RatingsController < ApplicationController
   end
 
   def athletes_dataset
-    athlete_ids =
-      country_dataset_for(@rating_type.singularize.camelize.constantize).select(:athlete_id).distinct(:athlete_id)
+    athlete_ids = country_dataset_for(@rating_type.singularize.camelize.constantize).select(:athlete_id).distinct
     second_order_type =
       if @order == 'count'
         @rating_type == 'results' ? 'volunteers' : 'results'
@@ -36,8 +35,8 @@ class RatingsController < ApplicationController
         @rating_type
       end
     sort_order_sql =
-      "stats #> '{#{@rating_type},#{@order}}' DESC NULLS LAST," \
-      "stats #> '{#{second_order_type},count}' DESC NULLS LAST," \
+      "(stats #> '{#{@rating_type},#{@order}}')::integer DESC NULLS LAST," \
+      "(stats #> '{#{second_order_type},count}')::integer DESC NULLS LAST," \
       'name'
 
     Athlete.includes(:club).where(id: athlete_ids).order(Arel.sql(sort_order_sql)).limit(50)
