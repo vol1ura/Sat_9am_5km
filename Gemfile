@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.2.2'
 
-gem 'rails', '~> 7.2.1'
+gem 'rails', '~> 8.0.0'
 
 gem 'activeadmin'
 gem 'activeadmin_quill_editor'
