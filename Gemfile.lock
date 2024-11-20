@@ -49,7 +49,7 @@ GEM
       activemodel (>= 6.1.4)
       activestorage (>= 6.1.4)
       activesupport (>= 6.1.4)
-    activeadmin (3.2.3)
+    activeadmin (3.2.5)
       arbre (~> 1.2, >= 1.2.1)
       csv
       formtastic (>= 3.1)
@@ -396,7 +396,7 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    rdoc (6.7.0)
+    rdoc (6.8.1)
       psych (>= 4.0.0)
     redis (5.3.0)
       redis-client (>= 0.22.0)
@@ -509,7 +509,7 @@ GEM
     stringio (3.1.2)
     thor (1.3.2)
     tilt (2.4.0)
-    timeout (0.4.1)
+    timeout (0.4.2)
     turbo-rails (2.0.6)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
