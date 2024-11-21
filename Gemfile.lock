@@ -317,7 +317,7 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.8)
+    pg (1.5.9)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
     pg_search (2.3.7)
