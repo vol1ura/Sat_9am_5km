@@ -18,7 +18,7 @@ module Athletes
       grab_modified_attributes_from_collection!
       update_results_seconds
       replace_all_by_one!
-      StatsUpdate.call(athlete)
+      AthleteStatsUpdateJob.perform_later(athlete.id)
       schedule_telegram_notification
       ClearCache.call
       true

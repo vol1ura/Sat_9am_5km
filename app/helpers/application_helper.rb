@@ -74,7 +74,7 @@ module ApplicationHelper
     if block_given?
       link_to title, (options || {}).merge(target_options), &
     else
-      link_to title, options, **html_options.merge(target_options)
+      link_to title, options, **html_options, **target_options
     end
   end
 
