@@ -10,13 +10,6 @@ RSpec.describe '/user' do
     end
   end
 
-  describe 'POST /user/login' do
-    it 'redirects to root page after successful login' do
-      post user_session_url, params: { user: { email: user.email, password: user.password } }
-      expect(response).to redirect_to root_path
-    end
-  end
-
   context 'with authenticated user' do
     before do
       sign_in user
@@ -71,6 +64,37 @@ RSpec.describe '/user' do
   end
 
   context 'when unauthenticated user' do
+    describe 'POST /user/login' do
+      it 'redirects to root page after successful login' do
+        post user_session_url, params: { user: { email: user.email, password: user.password } }
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    describe 'GET /user/login' do
+      before { get new_user_session_url }
+
+      it { expect(response).to be_successful }
+    end
+
+    describe 'GET /user/password/new' do
+      before { get new_user_password_url }
+
+      it { expect(response).to be_successful }
+    end
+
+    describe 'GET /user/confirmation/new' do
+      before { get new_user_confirmation_url }
+
+      it { expect(response).to be_successful }
+    end
+
+    describe 'GET /user/unlock/new' do
+      before { get new_user_unlock_url }
+
+      it { expect(response).to be_successful }
+    end
+
     describe 'POST /user/auth/telegram' do
       let(:telegram_id) { 1234567 }
       let(:auth_hash) { OmniAuth::AuthHash.new(uid: telegram_id.to_s) }
