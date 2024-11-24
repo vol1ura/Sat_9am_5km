@@ -216,7 +216,7 @@ GEM
     has_scope (0.8.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
-    hashdiff (1.1.0)
+    hashdiff (1.1.2)
     hashie (5.0.0)
     hiredis-client (0.22.2)
       redis-client (= 0.22.2)
@@ -342,7 +342,7 @@ GEM
       pry (>= 0.13.0)
     psych (5.2.0)
       stringio
-    public_suffix (6.0.0)
+    public_suffix (6.0.1)
     puma (6.4.3)
       nio4r (~> 2.0)
     racc (1.8.1)
@@ -530,7 +530,7 @@ GEM
       base64
     warden (1.2.9)
       rack (>= 2.0.9)
-    webmock (3.23.1)
+    webmock (3.24.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
