@@ -17,7 +17,11 @@
       <% image_tag '/images/partners/run_union.png', class: 'img-partner', alt: 'Союз любителей бега' %>
     <% end %>
   <% end %>
-  <% if %i[ru by].include?(top_level_domain) %>
+  <% if top_level_domain == :rs %>
+    <%= external_link_to "https://www.instagram.com/grnhs_serbia/" do %>
+      <% image_tag '/images/partners/grnhs_serbia.svg', class: 'img-partner', alt: 'Green House' %>
+    <% end %>
+  <% else %>
     <%= external_link_to "https://invitro.#{top_level_domain}" do %>
       <% image_tag '/images/partners/invitro.png', class: 'img-partner', alt: 'Invitro' %>
     <% end %>
