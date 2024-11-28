@@ -2,7 +2,7 @@ FROM ruby:3.2.2-alpine
 
 RUN apk --no-cache add \
     build-base postgresql-dev nodejs yarn \
-    tzdata vim openssh memcached vips-dev
+    tzdata vim openssh vips-dev
 
 # Russian locale settings
 ENV LANG ru_RU.UTF-8

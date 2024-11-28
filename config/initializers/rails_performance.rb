@@ -14,4 +14,8 @@ RailsPerformance.setup do |config|
     'RailsPerformance::RailsPerformanceController#sidekiq', 'RailsPerformance::RailsPerformanceController#summary',
     'RailsPerformance::RailsPerformanceController#resources'
   ]
+
+  config.custom_data_proc = proc do |env|
+    { user_agent: Rack::Request.new(env).env['HTTP_USER_AGENT'] }
+  end
 end if defined?(RailsPerformance)
