@@ -21,7 +21,7 @@ services:
       - ./deploy/.env
 
   db:
-    image: postgres:14.3-alpine
+    image: postgres:17.2-alpine
     volumes:
       - postgres:/var/lib/postgresql/data
       - ./tmp:/tmp
