@@ -1,29 +1,43 @@
 # frozen_string_literal: true
 
 active_admin_form_for [:admin, resource] do |f|
-  f.inputs 'Фан-ран награда' do
+  if f.object.funrun_kind?
+    f.inputs 'Страна (опционально)' do
+      select_tag(
+        :country_code,
+        options_from_collection_for_select(Country.all, :code, :name, f.object.country_code),
+        include_blank: true,
+        style: 'width: 10rem; margin-left: 1rem;',
+      )
+    end
+  end
+
+  f.inputs "#{t('activerecord.attributes.badge.kind')}: #{kind_of_badge(f.object)}" do
     input :name
     input :received_date, required: true if f.object.funrun_kind?
-    input :conditions, as: :quill_editor,
-                       required: true,
-                       input_html: {
-                         data: {
-                           options: {
-                             modules: {
-                               toolbar: [
-                                 %w[bold italic strike],
-                                 %w[blockquote code-block],
-                                 [{ list: 'ordered' }, { list: 'bullet' }],
-                                 ['link'],
-                                 ['clean']
-                               ],
-                             },
-                             placeholder: 'Необходимо очень постараться...',
-                             theme: 'snow',
-                           },
-                         },
-                       }
-    input :image, as: :file, input_html: { accept: 'image/png' }, required: true if f.object.funrun_kind?
+    input(
+      :conditions,
+      as: :quill_editor,
+      required: true,
+      input_html: {
+        data: {
+          options: {
+            modules: {
+              toolbar: [
+                %w[bold italic strike],
+                %w[blockquote code-block],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link'],
+                ['clean']
+              ],
+            },
+            placeholder: 'Необходимо очень постараться...',
+            theme: 'snow',
+          },
+        },
+      },
+    )
+    input :image, as: :file, input_html: { accept: 'image/png' }, required: true
   end
 
   f.actions

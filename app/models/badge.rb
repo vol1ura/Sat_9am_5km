@@ -27,6 +27,8 @@ class Badge < ApplicationRecord
     tourist: 20, breaking: 30, rage: 40, five_plus: 41, minute_bingo: 50, record: 100
   }, suffix: true
 
+  store_accessor :info, :country_code
+
   def self.dataset_of(kind:, type:)
     public_send(:"#{kind}_kind").where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
   end

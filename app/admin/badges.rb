@@ -24,12 +24,25 @@ ActiveAdmin.register Badge do
     attributes_table do
       row(:kind) { |b| kind_of_badge b }
       row :name
-      row :received_date
+      if badge.funrun_kind?
+        row :received_date
+        row(:country) { |b| t("country.#{b.country_code}") if b.country_code }
+      end
       row(:conditions) { |b| sanitized_text b.conditions }
     end
   end
 
   form partial: 'form'
+
+  before_save do |badge|
+    next unless badge.funrun_kind?
+
+    if params[:country_code].present? && Country.exists?(code: params[:country_code])
+      badge.country_code = params[:country_code]
+    elsif params.key? :country_code
+      badge.info.delete('country_code')
+    end
+  end
 
   sidebar 'Управление наградой', only: :show do
     para link_to 'Обладатели', admin_badge_trophies_path(resource)

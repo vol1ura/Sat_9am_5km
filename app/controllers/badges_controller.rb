@@ -3,7 +3,11 @@
 class BadgesController < ApplicationController
   def index
     badges_dataset = Badge.includes(image_attachment: :blob)
-    @funrun_badges = badges_dataset.funrun_kind.order(received_date: :desc)
+    @funrun_badges =
+      badges_dataset
+        .funrun_kind
+        .where("info->>'country_code' IS NULL OR info->>'country_code' = ?", top_level_domain)
+        .order(received_date: :desc)
     @not_funrun_badges = badges_dataset.not_funrun_kind.order(kind: :asc, created_at: :desc)
   end
 
