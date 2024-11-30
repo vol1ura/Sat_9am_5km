@@ -175,6 +175,7 @@ rs:
         conditions: uslovi za dobijanje
         image: slika
         received_date: datum prijema
+        country: država
         kind: vrsta
         kinds:
           funrun: zabavno trčanje

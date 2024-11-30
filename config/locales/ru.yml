@@ -173,6 +173,7 @@ ru:
         conditions: условия получения
         image: изображение
         received_date: дата получения
+        country: страна
         kind: тип
         kinds:
           funrun: фан-ран
