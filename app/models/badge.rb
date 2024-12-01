@@ -29,11 +29,13 @@ class Badge < ApplicationRecord
 
   store_accessor :info, :country_code
 
+  translates :conditions
+
   def self.dataset_of(kind:, type:)
     public_send(:"#{kind}_kind").where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[conditions kind name received_date]
+    %w[kind name received_date]
   end
 end

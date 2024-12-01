@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_29_130439) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_01_145320) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -115,12 +115,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_29_130439) do
 
   create_table "badges", force: :cascade do |t|
     t.string "name", null: false
-    t.text "conditions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "received_date"
     t.integer "kind", default: 0, null: false
     t.jsonb "info", default: {}, null: false
+    t.jsonb "conditions_translations"
   end
 
   create_table "clubs", force: :cascade do |t|
