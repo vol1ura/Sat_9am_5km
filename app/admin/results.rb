@@ -20,21 +20,59 @@ ActiveAdmin.register Result do
   ) do
     selectable_column
     column :position
-    column :athlete do |r|
-      if r.athlete
-        external_link_to r.athlete.name.presence || t('common.without_name'), admin_athlete_path(r.athlete)
+    column :athlete do |result|
+      if result.athlete
+        external_link_to result.athlete.name.presence || t('common.without_name'), admin_athlete_path(result.athlete)
       else
-        external_link_to t('common.without_token'), new_admin_athlete_path(result_id: r.id)
+        external_link_to t('common.without_token'), new_admin_athlete_path(result_id: result.id)
       end
     end
-    column :total_time do |r|
-      external_link_to human_result_time(r.total_time), edit_admin_activity_result_path(r.activity, r)
+    column :total_time do |result|
+      external_link_to human_result_time(result.total_time), edit_admin_activity_result_path(result.activity, result)
     end
-    column('Изменение позиции') do |r|
-      render partial: 'up_down', locals: { activity: r.activity, result: r } if can?(:manage, r)
+    column('Изменение позиции') do |result|
+      render partial: 'up_down', locals: { activity: result.activity, result: result } if can?(:manage, result)
     end
-    actions do |r|
-      render partial: 'shifts', locals: { activity: r.activity, result: r } if can?(:manage, r)
+    actions(dropdown: true) do |result|
+      next unless can?(:manage, result)
+
+      activity = result.activity
+
+      item(
+        'Удалить 🔝',
+        drop_admin_activity_result_path(activity, result),
+        method: :delete,
+        data: { confirm: "Удалить строчку №#{result.position} со сдвигом?" },
+      )
+      item(
+        'Удалить 🕑',
+        drop_time_admin_activity_result_path(activity, result),
+        remote: true,
+        method: :delete,
+        data: { confirm: 'Удалить время со сдвигом?' },
+      )
+      item(
+        'Удалить 🏃',
+        drop_athlete_admin_activity_result_path(activity, result),
+        remote: true,
+        method: :delete,
+        data: { confirm: 'Удалить участника со сдвигом?' },
+      )
+      if result.athlete_id
+        item(
+          'Обнулить 🏃',
+          reset_athlete_admin_activity_result_path(activity, result),
+          remote: true,
+          method: :put,
+          data: { confirm: 'Сбросить участника на Неизвестного?' },
+        )
+      end
+      item(
+        'Добавить 🔝',
+        insert_above_admin_activity_result_path(activity, result),
+        method: :post,
+        data: { confirm: "Вставить новый результат перед #{result.position} позицией?" },
+      )
     end
   end
 
@@ -43,6 +81,7 @@ ActiveAdmin.register Result do
       li I18n.t('.results.explanation.unknown_athlete')
       li I18n.t('.results.explanation.without_token')
       li I18n.t('.results.explanation.delete_result')
+      li I18n.t('.results.explanation.drop_result')
       li I18n.t('.results.explanation.delete_time')
       li I18n.t('.results.explanation.delete_athlete')
       li I18n.t('.results.explanation.reset_athlete')
@@ -94,7 +133,15 @@ ActiveAdmin.register Result do
     render js: "alert('#{t 'active_admin.results.drop_athlete_failed'}')"
   end
 
-  member_action :reset_athlete, method: :delete, if: proc { can? :manage, Result } do
+  member_action :drop, method: :delete, if: proc { can? :manage, Result } do
+    resource.transaction do
+      collection.where('position > ?', resource.position).update_all('position = position - 1') # rubocop:disable Rails/SkipsModelValidations
+      resource.destroy
+    end
+    redirect_to collection_path, notice: t('active_admin.results.result_successfully_deleted')
+  end
+
+  member_action :reset_athlete, method: :put, if: proc { can? :manage, Result } do
     resource.update!(athlete_id: nil)
   rescue StandardError
     render js: "alert('#{t 'active_admin.results.reset_athlete_failed'}')"

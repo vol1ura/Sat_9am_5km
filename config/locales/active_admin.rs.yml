@@ -56,6 +56,7 @@ rs:
       unknown_athlete: 'Ako se učesnik prikaže kao "NEPOZNAT", to znači da njegovo ime nije automatski popunjeno. Kliknite na NEPOZNAT i koristite parkrun ili 5vrsta da biste pronašli ime prema ID-u.'
       without_token: 'Ako se učesnik prikaže kao "BEZ TOKENA (kreirati)", to znači da nije skeniran. Moguće je da je ta osoba već u bazi i da nije potrebno kreirati novi unos - kliknite na rezultat i u otvorenom obrascu unesite parkrun ID.'
       delete_result: 'Ukloniti - ukloniće ceo red.'
+      drop_result: 'Ukloniti 🔝 - uklonite presek sa ponovnim brojanjem sledećih pozicija.'
       delete_time: 'Ukloniti 🕑 - Uklanja vreme u redu, zamenjujući njega i sve naredne vremenom iz sledećeg reda. Poslednji učesnik će ostati bez rezultata.'
       delete_athlete: 'Ukloniti 🏃 - uklanja učesnika iz reda, zamenjujući njega i sve naredne učesnike učesnikom iz sledećeg reda. To jest, svi učesnici se pomeraju za jednu poziciju, počevši od uklonjenog učesnika.'
       reset_athlete: 'Resetovati 🏃 - resetuje učesnika. U protokolu će pisati Nepoznat.'
@@ -177,6 +178,7 @@ rs:
       reset_athlete_failed: 'Neuspelo resetovanje učesnika. Osvežite stranicu i pokušajte ponovo.'
       insert_result_failed: 'Neuspelo dodavanje reda. Osvežite stranicu i pokušajte ponovo.'
       result_successfully_appended: 'Pozicija №%{position} uspešno dodata u protokol.'
+      result_successfully_deleted: 'Odsek je uspešno uklonjen, pozicije su preračunate.'
     newsletters:
       notified: 'Na vaš Telegram je poslat uzorak biltena'
     users:
