@@ -4,7 +4,7 @@ ActiveAdmin.register Badge do
   menu priority: 80
   actions :all, except: :destroy
 
-  permit_params :name, :conditions, :received_date, :image
+  permit_params :name, :received_date, :image, { conditions_translations: I18n.available_locales }
 
   filter :kind, as: :select, collection: Badge.kinds
   filter :name
@@ -35,12 +35,12 @@ ActiveAdmin.register Badge do
   form partial: 'form'
 
   before_save do |badge|
-    next unless badge.funrun_kind?
-
-    if params[:country_code].present? && Country.exists?(code: params[:country_code])
-      badge.country_code = params[:country_code]
-    elsif params.key? :country_code
-      badge.info.delete('country_code')
+    if badge.funrun_kind?
+      if params[:country_code].present? && Country.exists?(code: params[:country_code])
+        badge.country_code = params[:country_code]
+      elsif params.key? :country_code
+        badge.info.delete('country_code')
+      end
     end
   end
 

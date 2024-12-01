@@ -15,7 +15,7 @@ active_admin_form_for [:admin, resource] do |f|
   f.inputs "#{t('activerecord.attributes.badge.kind')}: #{kind_of_badge(f.object)}" do
     input :name
     input :received_date, required: true if f.object.funrun_kind?
-    input(
+    localized_input(
       :conditions,
       as: :quill_editor,
       required: true,
