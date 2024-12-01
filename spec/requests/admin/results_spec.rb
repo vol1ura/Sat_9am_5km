@@ -51,8 +51,16 @@ RSpec.describe '/admin/results' do
       end
     end
 
+    describe 'DELETE /admin/activities/1/results/1/drop' do
+      it 'removes result with next positions recalculation' do
+        last_result_position = results.last.position
+        delete drop_admin_activity_result_url(activity, results.first)
+        expect(results.last.reload.position).to eq last_result_position.pred
+      end
+    end
+
     describe 'DELETE /admin/activities/1/results/1/drop_time' do
-      it 'change result total_time to next result total_time' do
+      it 'changes result total_time to next result total_time' do
         second_time = results.second.total_time
         delete drop_time_admin_activity_result_url(activity, results.first, format: :js)
         expect(results.first.reload.total_time.strftime('%H:%M:%S')).to eq second_time.strftime('%H:%M:%S')
@@ -61,7 +69,7 @@ RSpec.describe '/admin/results' do
     end
 
     describe 'DELETE /admin/activities/1/results/1/drop_athlete' do
-      it 'change result total_time to next result total_time' do
+      it 'changes result athlete to next result athlete' do
         second_athlete = results.second.athlete
         delete drop_athlete_admin_activity_result_url(activity, results.first, format: :js)
         expect(results.first.reload.athlete).to eq second_athlete
@@ -69,15 +77,15 @@ RSpec.describe '/admin/results' do
       end
     end
 
-    describe 'DELETE /admin/activities/1/results/1/reset_athlete' do
+    describe 'PUT /admin/activities/1/results/1/reset_athlete' do
       it 'removes athlete from result' do
-        delete reset_athlete_admin_activity_result_url(activity, results.first, format: :js)
+        put reset_athlete_admin_activity_result_url(activity, results.first, format: :js)
         expect(results.first.reload.athlete).to be_nil
       end
     end
 
     describe 'DELETE /admin/activities/1/results' do
-      it 'properly remove result' do
+      it 'properly removes result' do
         expect do
           delete admin_activity_result_url(activity, results.second)
         end.to change { activity.results.order(:position).last.position }.by(-1)
@@ -85,7 +93,7 @@ RSpec.describe '/admin/results' do
     end
 
     describe 'PUT /admin/activities/1/results/2/up' do
-      it 'swap athletes' do
+      it 'swaps athletes' do
         first_athlete = results.first.athlete
         second_athlete = results.second.athlete
         put up_admin_activity_result_url(activity, results.second, format: :js)
@@ -95,7 +103,7 @@ RSpec.describe '/admin/results' do
     end
 
     describe 'PUT /admin/activities/1/results/1/down' do
-      it 'swap athletes' do
+      it 'swaps athletes' do
         first_athlete = results.first.athlete
         second_athlete = results.second.athlete
         put down_admin_activity_result_url(activity, results.first, format: :js)
@@ -151,9 +159,9 @@ RSpec.describe '/admin/results' do
       end
     end
 
-    describe 'DELETE /admin/activities/1/results/2/reset_athlete' do
+    describe 'PUT /admin/activities/1/results/2/reset_athlete' do
       it 'renders alert' do
-        delete reset_athlete_admin_activity_result_url(activity, result, format: :js)
+        put reset_athlete_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'Не удалось'
       end
