@@ -4,7 +4,12 @@ ActiveAdmin.register Badge do
   menu priority: 80
   actions :all, except: :destroy
 
-  permit_params :name, :received_date, :image, { conditions_translations: I18n.available_locales }
+  permit_params(
+    :image,
+    :received_date,
+    { name_translations: I18n.available_locales },
+    { conditions_translations: I18n.available_locales },
+  )
 
   filter :kind, as: :select, collection: Badge.kinds
   filter :name
