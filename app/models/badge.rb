@@ -15,7 +15,8 @@ class Badge < ApplicationRecord
     attachable.variant :web, resize_to_limit: [200, 200], preprocessed: true
   end
 
-  validates :kind, :name, presence: true
+  validates :kind, :name, :conditions, presence: true
+
   validates :image, attached: true,
                     content_type: :png,
                     aspect_ratio: :square,
@@ -29,7 +30,7 @@ class Badge < ApplicationRecord
 
   store_accessor :info, :country_code
 
-  translates :conditions
+  translates :name, :conditions
 
   def self.dataset_of(kind:, type:)
     public_send(:"#{kind}_kind").where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))

@@ -12,9 +12,9 @@ active_admin_form_for [:admin, resource] do |f|
     end
   end
 
-  f.inputs "#{t('activerecord.attributes.badge.kind')}: #{kind_of_badge(f.object)}" do
-    input :name
-    input :received_date, required: true if f.object.funrun_kind?
+  f.inputs 'Обязательные параметры' do
+    input :kind, input_html: { disabled: true }
+    localized_input :name
     localized_input(
       :conditions,
       as: :quill_editor,
@@ -37,6 +37,7 @@ active_admin_form_for [:admin, resource] do |f|
         },
       },
     )
+    input :received_date, required: true if f.object.funrun_kind?
     input :image, as: :file, input_html: { accept: 'image/png' }, required: true
   end
 
