@@ -3,12 +3,11 @@
   seconds_in_results = @athlete.stats.dig('results', 'seconds') || []
   seconds_in_results_count = seconds_in_results.size
 %>
-<% head_info :title, athlete_name %>
 <% head_info :description, t('.description', athlete_name:) %>
 
 <div class="row">
   <div class="col-6">
-    <h1 class="mt-2"><%= athlete_name %></h1>
+    <h1 class="mt-2"><%= head_info :title, athlete_name %></h1>
   </div>
   <div class="ms-auto col-auto position-relative">
     <%= image_tag user_image_path(@athlete.user), class: 'avatar', title: athlete_name %>

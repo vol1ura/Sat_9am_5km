@@ -1,6 +1,5 @@
-<% head_info :title, t(".#{@rating_type}.title") %>
 <% head_info :description, t('.description') %>
-<h4><%= t ".#{@rating_type}.title" %></h4>
+<h4><%= head_info :title, t(".#{@rating_type}.title") %></h4>
 <p><%= t '.description' %></p>
 <%=
   form_with(

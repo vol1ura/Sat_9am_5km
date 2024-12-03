@@ -1,6 +1,5 @@
-<% head_info :title, t('.title') %>
 <% head_info :description, t('.description') %>
-<h2><%= t '.title' %></h2>
+<h2><%= head_info :title, t('.title') %></h2>
 
 <%= form_for resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'row' }, data: { turbo: false } do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>

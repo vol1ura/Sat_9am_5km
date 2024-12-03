@@ -1,7 +1,5 @@
-<% head_info :title, t('.title') %>
 <% head_info :description, t('.description') %>
-
-<h2><%= t '.title' %></h2>
+<h2><%= head_info :title, t('.title') %></h2>
 <% if @athletes.size.positive? %>
   <table class="table table-striped">
     <thead>
