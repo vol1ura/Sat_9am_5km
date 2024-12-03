@@ -3,6 +3,7 @@
 module ApplicationHelper
   def head_info(tag, text)
     content_for :"meta_#{tag}", text
+    text
   end
 
   def yield_head_info(tag, default_text = '')

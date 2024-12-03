@@ -1,6 +1,5 @@
-<% head_info :title, t('.title') %>
 <% head_info :description, t('.description', user_name: current_user.full_name) %>
-<h2 class="mb-4"><%= t '.title' %></h2>
+<h2 class="mb-4"><%= head_info :title, t('.title') %></h2>
 <%= turbo_frame_tag current_user do %>
   <div class="row">
     <div class="col-6 col-sm-auto">
