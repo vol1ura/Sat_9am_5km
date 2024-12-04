@@ -280,3 +280,7 @@ rs:
       eq: jednako
       start: počinje sa
       end: završava sa
+
+  formtastic:
+    create: 'Kreiraj'
+    update: 'Ažuriranje'
