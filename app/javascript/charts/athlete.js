@@ -1,26 +1,26 @@
 export default class AthleteCharts {
   constructor(rows) {
-    this.rows = rows
+    this.rows = rows;
   }
 
   get #eventsData() {
-    const events = {}
+    const events = {};
     this.rows.forEach(row => {
-      const event = row.querySelector("td.event-name").textContent
-      events[event] = 1 + (events[event] || 0)
-    })
-    return events
+      const event = row.querySelector("td.event-name").textContent;
+      events[event] = 1 + (events[event] || 0);
+    });
+    return events;
   }
 
   get #eventsResultsData() {
-    const data = {}
+    const data = {};
     this.rows.forEach(row => {
-      const event = row.querySelector("td.event-name").textContent
-      const total_time = Number(row.querySelector("td.total-time").dataset.min)
-      data[event] = data[event] ? [...data[event], total_time] : [total_time]
-    })
+      const event = row.querySelector("td.event-name").textContent;
+      const total_time = Number(row.querySelector("td.total-time").dataset.min);
+      data[event] = data[event] ? [...data[event], total_time] : [total_time];
+    });
 
-    const asc = arr => arr.sort((a, b) => a - b)
+    const asc = arr => arr.sort((a, b) => a - b);
     const quantile = (arr, q) => {
       const sorted = asc(arr);
       const pos = (sorted.length - 1) * q;
@@ -31,39 +31,43 @@ export default class AthleteCharts {
       } else {
         return sorted[base];
       }
-    }
+    };
 
     Object.keys(data).forEach(event => {
-      const results = data[event]
+      const results = data[event];
       data[event] = [
         Math.min(...results),
-        quantile(results, .25),
-        quantile(results, .50),
-        quantile(results, .75),
+        quantile(results, 0.25),
+        quantile(results, 0.50),
+        quantile(results, 0.75),
         Math.max(...results)
-      ]
-    })
-    return data
+      ];
+    });
+    return data;
   }
 
   #resultsData(max_count) {
-    const points = []
-    const labels = []
+    const points = [];
+    const labels = [];
 
     Array.prototype.slice.call(this.rows, 0, max_count).forEach(row => {
-      const time_cell = row.querySelector("td.total-time")
-      labels.push(time_cell.textContent)
+      const time_cell = row.querySelector("td.total-time");
+      labels.push(time_cell.textContent);
       points.push([
         Number(time_cell.dataset.timestamp),
         Number(time_cell.dataset.min)
-      ])
-    })
+      ]);
+    });
 
-    return { points, labels }
+    return { points, labels };
+  }
+
+  #secondsFormatter(seconds) {
+    return `${Math.floor(seconds / 60)}:${('00' + seconds % 60).slice(-2)}`;
   }
 
   eventsChartOptions(title) {
-    const events = this.#eventsData
+    const events = this.#eventsData;
     return {
       series: [{
         name: 'забегов',
@@ -107,11 +111,11 @@ export default class AthleteCharts {
       theme: {
         palette: 'palette2'
       }
-    }
+    };
   }
 
   resultsChartOptions(title, { max_count = undefined } = {}) {
-    const data = this.#resultsData(max_count)
+    const data = this.#resultsData(max_count);
     return {
       chart: {
         height: 300,
@@ -145,14 +149,14 @@ export default class AthleteCharts {
         reversed: true,
         opposite: true,
         labels: {
-          formatter: val => Math.floor(val / 60)
+          formatter: this.#secondsFormatter
         }
       },
       tooltip: {
         shared: false,
         followCursor: true,
         y: {
-          formatter: val => `${Math.floor(val / 60)}:${('00' + val % 60).slice(-2)}`
+          formatter: this.#secondsFormatter
         }
       },
       theme: {
@@ -170,7 +174,7 @@ export default class AthleteCharts {
   }
 
   eventsWhiskersOptions(title) {
-    const data = this.#eventsResultsData
+    const data = this.#eventsResultsData;
     return {
       series: [
         {
@@ -179,7 +183,7 @@ export default class AthleteCharts {
             return {
               x: event,
               y: data[event]
-            }
+            };
           })
         }
       ],
@@ -211,11 +215,14 @@ export default class AthleteCharts {
       },
       yaxis: {
         title: {
-          text: 'Время (минуты)'
+          text: 'Время'
         },
         labels: {
-          formatter: val => Math.floor(val / 60)
+          formatter: this.#secondsFormatter
         }
+      },
+      tooltip: {
+        enabled: false
       },
       plotOptions: {
         boxPlot: {
