@@ -605,7 +605,7 @@ DEPENDENCIES
   rack-attack
   rack-mini-profiler
   rails (~> 8.0.0)
-  rails_performance (= 1.4.1)
+  rails_performance
   redis
   rollbar
   rqrcode

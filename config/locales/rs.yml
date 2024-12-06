@@ -573,6 +573,9 @@ rs:
       about_things:
         question: Where can I leave my things while I'm running?
         answer: Usually, everyone leaves things on benches near the start and finish areas.
+      personal_info:
+        question: Slučajno sam pogrešio u imenu prilikom registracije. Kako ispraviti?
+        answer_html: Idite na <a href="/user">Podešavanja</a> (može zahtevati prijavu i lozinku) i izvršite potrebne promene.
     support:
       description: 'You can support the Sat9am5km project in various ways: by volunteering, donating, or participating in the development of this website'
       title: Želite da podržite projekat?

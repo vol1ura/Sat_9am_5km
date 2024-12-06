@@ -12,7 +12,7 @@ module Athletes
     end
 
     def call
-      return false if @collection.where.not(user_id: nil).size > 1
+      return false if @collection.where.not(user_id: nil).many?
       return false unless athlete
 
       grab_modified_attributes_from_collection!
