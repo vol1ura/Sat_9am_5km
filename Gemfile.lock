@@ -244,7 +244,7 @@ GEM
       has_scope (>= 0.6)
       railties (>= 6.0)
       responders (>= 2)
-    io-console (0.7.2)
+    io-console (0.8.0)
     irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
@@ -271,7 +271,7 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     language_server-protocol (3.17.0.3)
-    logger (1.6.1)
+    logger (1.6.2)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -285,7 +285,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
-    minitest (5.25.2)
+    minitest (5.25.3)
     msgpack (1.7.2)
     net-imap (0.5.1)
       date
@@ -344,7 +344,8 @@ GEM
       yard (~> 0.9.11)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
-    psych (5.2.0)
+    psych (5.2.1)
+      date
       stringio
     public_suffix (6.0.1)
     puma (6.4.3)
@@ -385,7 +386,7 @@ GEM
     rails-html-sanitizer (1.6.1)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
-    rails_performance (1.4.1.alpha1)
+    rails_performance (1.4.1)
       browser
       railties
       redis
@@ -410,7 +411,7 @@ GEM
     redis-client (0.22.2)
       connection_pool
     regexp_parser (2.9.2)
-    reline (0.5.11)
+    reline (0.5.12)
       io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
@@ -481,7 +482,7 @@ GEM
       ffi (~> 1.9)
     sassc-embedded (1.77.1)
       sass-embedded (~> 1.77)
-    securerandom (0.3.2)
+    securerandom (0.4.0)
     select2-rails (4.0.13)
     sidekiq (7.3.2)
       concurrent-ruby (< 2)
@@ -604,7 +605,7 @@ DEPENDENCIES
   rack-attack
   rack-mini-profiler
   rails (~> 8.0.0)
-  rails_performance (= 1.4.1.alpha1)
+  rails_performance (= 1.4.1)
   redis
   rollbar
   rqrcode
