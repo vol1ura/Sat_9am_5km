@@ -145,6 +145,7 @@ rs:
           finish_maker: 'Organizacija cilja'
           volunteer_coordinator: 'Koordinator volontera'
           food_maker: 'Organizacija hrane'
+          videographer: Videograf
       volunteering_position:
         rank: rang
         number: broj
@@ -761,16 +762,18 @@ rs:
       our_contacts: Naši kontakti
       results: Rezultati
       no_results_disclaimer: Ovde još nema preuzetih ili objavljenih rezultata.
+      description: Opšte informacije
       how_participate: Kako učestvovati?
+      about_participation: 'Registrujte se u našem telegram-botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
+      registration: Registracija u telegramu
       how_find_us: Kako nas pronaći?
       volunteers: Volonteri
       attention: Pažnja!
       opening_soon: Uskoro otvaranje!
       start_cancelled: Sledeći start je otkazan.
       inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class="alert-link">naše trke</a>.'
-      about_volunteers_html: 'Svi događaji su besplatni i organizovani od strane volontera. <a href="%{roster_link}">Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu</a>.'
-      about_participation_html: '<a href="%{registration_link}" target="_blank" rel="noopener">Registrujte se</a> u našem botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
-      event_place: Mesto događaja
+      about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu'
+      place: Mesto događaja
     volunteering:
       title: Grafik volontiranja | %{event}
       description: 'Informacije o volontiranju. Tabela sa rasporedom volontiranja i potrebnim pozicijama za trku "%{event}".'

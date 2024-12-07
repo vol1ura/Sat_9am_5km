@@ -1,9 +1,18 @@
 <% head_info :title, t('.title', event: @event.name) %>
 <% head_info :description, strip_tags(@event.description).squish %>
 
+<div class="row mb-3 mt-n3 mt-sm-0 px-0 px-sm-2">
+  <div class="col-12 col-xxl-10 offset-xxl-1 position-relative px-0">
+    <div class="img-event-shadow position-absolute top-0 w-100 px-3">
+      <h4 class="text-light"><%= @event.name %></h4>
+    </div>
+    <%= event_main_image_tag @event, class: 'img-event', alt: t('.place'), title: @event.name %>
+  </div>
+</div>
+
 <% unless @event.active %>
   <div class="alert alert-danger d-flex align-items-center" role="alert">
-    <i class="fa-solid fa-triangle-exclamation"></i>&nbsp;
+    <i class="fa-solid fa-triangle-exclamation fs-1 me-1"></i>&nbsp;
     <div>
       <strong><%= t '.attention' %></strong> <%= @total_activities.zero? ? t('.opening_soon') : t('.start_cancelled') %>
       <%= t '.inactivity_disclaimer_html', link: Rails.configuration.telegram[top_level_domain] %>
@@ -11,30 +20,56 @@
   </div>
 <% end %>
 
-<div class="row mb-3 px-3">
-  <div class="col-12 col-xxl-10 mx-auto position-relative px-0">
-    <div class="position-absolute top-0 bg-dark bg-gradient bg-opacity-25 w-100 px-3 rounded-top">
-      <h4 class="text-light"><%= @event.name %></h4>
+<div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+  <div class="col">
+    <div class="card border-primary border-opacity-25 shadow h-100">
+      <h4 class="card-header mt-0"><%= t '.description' %></h4>
+      <div class="card-body">
+        <p class="card-text"><%= sanitized_text @event.description %></p>
+      </div>
     </div>
-    <%= event_main_image_tag @event, class: 'img-fluid rounded', alt: t('.event_place'), title: @event.name %>
   </div>
-</div>
-
-<%= sanitized_text @event.description %>
-
-<h4><%= t '.our_contacts' %></h4>
-<div class="d-flex flex-wrap">
-  <% @event.contacts.order(:contact_type).each do |contact| %>
-    <%=
-      external_link_to(
-        contact.link.html_safe,
-        class: 'mb-2',
-        title: human_contact_type(contact.contact_type),
-      ) do
-    %>
-      <%= render "events/contacts/#{contact.contact_type}" %>
-    <% end %>
-  <% end %>
+  <div class="col">
+    <div class="card border-primary border-opacity-25 shadow h-100">
+      <h4 class="card-header mt-0"><%= t '.how_participate' %></h4>
+      <div class="card-body">
+        <p class="card-text"><%= t '.about_participation' %></p>
+        <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card border-primary border-opacity-25 shadow h-100">
+      <h4 class="card-header mt-0"><%= t '.volunteers' %></h4>
+      <div class="card-body">
+        <p class="card-text"><%= t '.about_volunteers' %></p>
+        <%= link_to 'Посмотреть', volunteering_event_path(@event.code_name), class: 'btn btn-outline-primary' %>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card border-primary border-opacity-25 shadow h-100">
+      <h4 class="card-header mt-0"><%= t '.our_contacts' %></h4>
+      <div class="card-body">
+        <p class="card-text"><strong><%= t '.place' %>:</strong> <%= @event.place %></p>
+        <p class="card-text">
+          <div class="d-flex flex-wrap">
+            <% @event.contacts.order(:contact_type).each do |contact| %>
+              <%=
+                external_link_to(
+                  contact.link.html_safe,
+                  class: 'mb-2',
+                  title: human_contact_type(contact.contact_type),
+                ) do
+              %>
+                <%= render "events/contacts/#{contact.contact_type}" %>
+              <% end %>
+            <% end %>
+          </div>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <h2><%= t '.results' %></h2>
@@ -60,20 +95,5 @@
       </table>
       <%= render partial: '/expand_button' if @total_activities > 15 %>
     <% end %>
-  </div>
-</div>
-
-<div class="row mt-3">
-  <div class="col-12 col-md-4">
-    <h3><%= t '.how_participate' %></h3>
-    <p><%= t '.about_participation_html', registration_link: 'https://t.me/sat9am5kmbot' %></p>
-  </div>
-  <div class="col-12 col-md-4">
-    <h3><%= t '.how_find_us' %></h3>
-    <p><%= @event.place %></p>
-  </div>
-  <div class="col-12 col-md-4">
-    <h3><%= t '.volunteers' %></h3>
-    <p><%= t '.about_volunteers_html', roster_link: volunteering_event_path(@event.code_name) %></p>
   </div>
 </div>
