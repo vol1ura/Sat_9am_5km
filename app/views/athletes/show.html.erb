@@ -240,11 +240,11 @@
 <% else %>
   <div class="accordion accordion-flush" id="accordionRoles">
     <% @volunteering.pluck(:role).uniq.each do |role| %>
-      <% volunteering_in_role = @volunteering.includes(activity: :event).where(role:).load %>
+      <% volunteering_in_role = @volunteering.includes(activity: :event).where(role:) %>
       <div class="accordion-item">
         <h2 id="flush-heading-<%= role %>" class="accordion-header">
           <button class="accordion-button collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<%= role %>" aria-expanded="false" aria-controls="flush-collapse-<%= role %>">
-            <span class="badge text-bg-ligth bg-primary me-3"><%= volunteering_in_role.size %></span>
+            <span class="badge text-bg-ligth bg-primary me-3"><%= volunteering_in_role.load.size %></span>
             <%= human_volunteer_role role %>
           </button>
         </h2>
