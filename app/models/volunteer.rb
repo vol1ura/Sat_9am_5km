@@ -20,7 +20,7 @@ class Volunteer < ApplicationRecord
     instructor: 6, marking_maker: 7, event_closer: 8, marking_picker: 9, cards_sorter: 10,
     bike_leader: 11, pacemaker: 12, results_handler: 13, equipment_supplier: 14, public_relations: 15,
     warm_up: 16, other: 17, attendant: 18, finish_maker: 19, volunteer_coordinator: 20,
-    food_maker: 21
+    food_maker: 21, videographer: 22
   }, suffix: true
 
   delegate :date, to: :activity, allow_nil: true
