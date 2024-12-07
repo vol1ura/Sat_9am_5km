@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-table_for object.own_and_associated_audits.includes(:user, :auditable).reorder(created_at: :desc) do
+table_for object.own_and_associated_audits.includes(:user, auditable: :athlete).reorder(created_at: :desc) do
   column :auditable
   column :action
   column :audited_changes

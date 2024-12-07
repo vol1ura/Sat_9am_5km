@@ -20,7 +20,7 @@
 
 <ul class="list-group list-group-flush">
   <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill"><%= @results.size %></span>
+    <span class="badge bg-primary rounded-pill"><%= @results.load.size %></span>
     <%= t '.total_runners_count' %>
   </li>
   <% if @personal_best_count.positive? %>

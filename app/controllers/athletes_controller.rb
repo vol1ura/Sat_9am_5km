@@ -12,7 +12,7 @@ class AthletesController < ApplicationController
       else
         criteria.search_by_name(query)
       end
-    redirect_to athlete_path(@athletes.take) if request.format.html? && @athletes.length == 1
+    redirect_to athlete_path(@athletes.take) if request.format.html? && @athletes.load.one?
   end
 
   def show
