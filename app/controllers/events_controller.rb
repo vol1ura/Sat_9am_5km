@@ -18,6 +18,8 @@ class EventsController < ApplicationController
     @total_activities = @event.activities.published.size
     @results_count = Result.published.where(activity: { event: @event }).group(:activity).count
     @volunteers_count = Volunteer.joins(:activity).where(activity: { event: @event }).group(:activity).count
+    @almost_jubilee_by_results = @event.almost_jubilee_athletes_dataset 'results'
+    @almost_jubilee_by_volunteers = @event.almost_jubilee_athletes_dataset 'volunteers'
   end
 
   def volunteering
