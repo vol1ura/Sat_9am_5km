@@ -25,6 +25,17 @@ class Event < ApplicationRecord
     where(id: user.permissions.where(subject_class: 'Activity').select(:event_id))
   end
 
+  def almost_jubilee_athletes_dataset(type, delta = 1, thresholds = nil)
+    thresholds ||= Badge.dataset_of(kind: :participating, type: type.singularize).pluck(:info).pluck('threshold')
+    ds =
+      athletes
+        .where("(stats->?->'count')::integer in (?)", type, thresholds.map { |x| x - delta })
+        .order(Arel.sql("stats->?->'count' DESC, created_at DESC", type))
+    return ds if delta > 1 || ds.present?
+
+    almost_jubilee_athletes_dataset(type, delta.next, thresholds)
+  end
+
   def to_combobox_display
     name
   end
