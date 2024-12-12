@@ -165,6 +165,20 @@ nav.pagination {
   }
 }
 
+.img-event-container {
+  @extend .card, .text-bg-light, .border-opacity-25, .shadow, .h-100;
+
+  .img-event {
+    border-radius: 0 !important;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .img-event {
+    transform: scale(1.03);
+  }
+}
+
+
 .img-club {
   @extend .float-start, .me-2, .my-2, .rounded;
   width: 150px;
