@@ -1,5 +1,6 @@
 <% head_info :title, t('.title', event: @event.name) %>
 <% head_info :description, t('.description', event: @event.name) %>
+<%= turbo_stream_from :volunteers_roster %>
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
