@@ -43,7 +43,7 @@
       <h4 class="card-header mt-0"><%= t '.volunteers' %></h4>
       <div class="card-body">
         <p class="card-text"><%= t '.about_volunteers' %></p>
-        <%= link_to 'Посмотреть', volunteering_event_path(@event.code_name), class: 'btn btn-outline-primary' %>
+        <%= link_to t('.show'), volunteering_event_path(@event.code_name), class: 'btn btn-outline-primary' %>
       </div>
     </div>
   </div>
@@ -73,19 +73,19 @@
   <% if @almost_jubilee_by_results.present? %>
     <div class="col">
       <div class="card border-primary border-opacity-25 shadow h-100">
-        <h4 class="card-header mt-0">Скоро юбилейные забеги</h4>
+        <h4 class="card-header mt-0"><%= t '.jubilee_by_results' %></h4>
         <div class="card-body">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Участник</th>
-                <th scope="col">Забегов</th>
+                <th scope="col"><%= t '.athlete' %></th>
+                <th scope="col"><%= t '.results_count' %></th>
               </tr>
             </thead>
             <tbody class="table-group-divider">
               <% @almost_jubilee_by_results.each do |athlete| %>
                 <tr>
-                  <th scope="row"><%= athlete.name %></th>
+                  <td><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %></td>
                   <td><%= athlete.stats['results']['count'] %></td>
                 </tr>
               <% end %>
@@ -98,19 +98,19 @@
   <% if @almost_jubilee_by_volunteers.present? %>
     <div class="col">
       <div class="card border-primary border-opacity-25 shadow h-100">
-        <h4 class="card-header mt-0">Скоро юбилейные волонтёрства</h4>
+        <h4 class="card-header mt-0"><%= t '.jubilee_by_volunteering' %></h4>
         <div class="card-body">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Участник</th>
-                <th scope="col">Волонтёрств</th>
+                <th scope="col"><%= t '.athlete' %></th>
+                <th scope="col"><%= t '.volunteering_count' %></th>
               </tr>
             </thead>
             <tbody class="table-group-divider">
               <% @almost_jubilee_by_volunteers.each do |athlete| %>
                 <tr>
-                  <th scope="row"><%= athlete.name %></th>
+                  <th scope="row"><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %></th>
                   <td><%= athlete.stats['volunteers']['count'] %></td>
                 </tr>
               <% end %>

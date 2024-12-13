@@ -760,6 +760,12 @@ ru:
     show:
       title: 'Парковые забеги | %{event}'
       our_contacts: Наши контакты
+      show: Посмотреть
+      jubilee_by_results: Скоро юбилейные забеги
+      athlete: Участник
+      results_count: Забегов
+      jubilee_by_volunteering: Скоро юбилейные волонтёрства
+      volunteering_count: Волонтёрств
       results: Результаты
       no_results_disclaimer: Пока ещё тут нет загруженных и опубликованных результатов.
       description: Общая информация
