@@ -12,6 +12,7 @@ class Volunteer < ApplicationRecord
   validate :cannot_be_assigned_on_more_than_one_position
 
   before_validation :strip_comment, if: :comment_changed?
+  after_commit :broadcast_refresh
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
 
@@ -36,5 +37,9 @@ class Volunteer < ApplicationRecord
 
   def strip_comment
     self.comment = comment&.strip.presence
+  end
+
+  def broadcast_refresh
+    broadcast_refresh_later_to :volunteers_roster
   end
 end
