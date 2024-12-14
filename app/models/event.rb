@@ -30,7 +30,7 @@ class Event < ApplicationRecord
     ds =
       athletes
         .where("(stats->?->'count')::integer in (?)", type, thresholds.map { |x| x - delta })
-        .order(Arel.sql("stats->?->'count' DESC, created_at DESC", type))
+        .order(Arel.sql("stats->?->'count' DESC, updated_at DESC", type))
     return ds if delta > 1 || ds.present?
 
     almost_jubilee_athletes_dataset(type, delta.next, thresholds)
