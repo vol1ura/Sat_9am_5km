@@ -35,6 +35,10 @@ every :thursday, at: '19' do
   rake 'notification:rage_badges_expiration'
 end
 
+every :friday, at: '1' do
+  rake 'pghero:clean_query_stats'
+end
+
 every :friday, at: '10' do
   rake 'notification:invite_newbies'
 end
