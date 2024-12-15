@@ -9,6 +9,14 @@
 
 # Sat 9am 5km - run events system
 
+### Maintenance
+
+Reset Postgres stats with:
+
+```sql
+SELECT pg_stat_statements_reset();
+```
+
 ## Development
 
 Create `deploy/.env` and `config/database.yml` files:
