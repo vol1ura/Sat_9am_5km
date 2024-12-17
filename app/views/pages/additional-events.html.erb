@@ -5,8 +5,8 @@
     <table class="table">
       <thead>
         <tr>
-          <td><%= t 'activities.index.event' %></td>
-          <td><%= t 'activities.index.date' %></td>
+          <th><%= t 'activities.index.event' %></th>
+          <th><%= t 'activities.index.date' %></th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
@@ -16,7 +16,7 @@
               .read(File.join(__dir__, 'additional_events.csv'), headers: true, header_converters: :symbol)
               .each_with_object({}) { |row, obj| obj[row[:code_name]] = row[:time] if row[:domain].to_sym == top_level_domain }
         %>
-        <% @country_events.where(code_name: event_data.keys).find_each do |event| %>
+        <% @country_events.where(code_name: event_data.keys).each do |event| %>
           <tr>
             <td><%= link_to event.name, event_path(event.code_name) %></td>
             <td><%= event_data[event.code_name] %></td>
