@@ -598,6 +598,7 @@ rs:
     additional-events:
       title_html: 'Additional events 1&nbsp;januar&nbsp;2025'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
+      time: Vreme
   ratings:
     index:
       description: To view the top 50 participants, select one of indicators below. The information on this page is updated regularly, but it may sometimes be slightly different from what is current. You can always check the current values in the athlete's profile.
