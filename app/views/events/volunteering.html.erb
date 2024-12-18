@@ -18,7 +18,7 @@
 
 <p><%= t '.acknowledgements' %></p>
 <p>
-  <% unless @activities.empty? %>
+  <% unless @activities.load.empty? %>
     <%= t '.about_roster_html' %>
   <% end %>
   <% if @tg_chat %>
