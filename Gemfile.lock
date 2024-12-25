@@ -196,7 +196,7 @@ GEM
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
-    font-awesome-sass (6.5.2)
+    font-awesome-sass (6.7.2)
       sassc (~> 2.0)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
