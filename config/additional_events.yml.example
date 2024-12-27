@@ -1,0 +1,6 @@
+shared:
+  year: 2025
+  events:
+    lensk: '10:00'
+    gomel: '11:00'
+    belgrade: '09:00'

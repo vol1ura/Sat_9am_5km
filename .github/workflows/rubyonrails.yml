@@ -75,7 +75,7 @@ jobs:
           ruby-version: 3.2.2
           bundler-cache: true
       - name: Set up database schema
-        run: bin/rails db:schema:load
+        run: cp config/additional_events.yml.example config/additional_events.yml && bin/rails db:schema:load
       - name: Check database consistency
         run: bundle exec database_consistency
       - name: Rspec tests
