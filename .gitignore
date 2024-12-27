@@ -23,6 +23,8 @@ spec/requests/requests.http
 
 # Ignore master key for decrypting credentials and more.
 config/master.key
+
+config/additional_events.csv
 deploy/*
 !deploy/.env.example
 !deploy/logrotate.example
