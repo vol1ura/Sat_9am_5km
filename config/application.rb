@@ -53,5 +53,6 @@ module Sat9am5km
     config.active_storage.service = :local
 
     config.telegram = config_for(:telegram)
+    config.additional_events = config_for(:additional_events)
   end
 end
