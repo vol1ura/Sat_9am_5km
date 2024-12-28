@@ -596,7 +596,7 @@ rs:
       small_changes: Male promene je najlakše izvršiti direktno u pregledaču u Githubovom vizuelnom uređivaču!
       best_regards: S ljubavlju, S95.
     additional-events:
-      title_html: 'Additional events 1&nbsp;januar&nbsp;2025'
+      title_html: 'Additional events 1&nbsp;januar&nbsp;%{year}'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
       time: Vreme
   ratings:

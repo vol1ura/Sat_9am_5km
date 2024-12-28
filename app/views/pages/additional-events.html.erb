@@ -1,5 +1,6 @@
 <% head_info :description, t('.description') %>
-<h1><%= head_info :title, t('.title_html') %></h1>
+<% additional_events = Rails.configuration.additional_events %>
+<h1><%= head_info :title, t('.title_html', year: additional_events[:year]) %></h1>
 <div class="row">
   <div class="col-md-6 offset-md-2">
     <table class="table">
@@ -10,16 +11,10 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <%
-          event_data =
-            CSV
-              .read(File.join(__dir__, 'additional_events.csv'), headers: true, header_converters: :symbol)
-              .each_with_object({}) { |row, obj| obj[row[:code_name]] = row[:time] if row[:domain].to_sym == top_level_domain }
-        %>
-        <% @country_events.where(code_name: event_data.keys).each do |event| %>
+        <% @country_events.where(code_name: additional_events[:events].keys).each do |event| %>
           <tr>
             <td><%= link_to event.name, event_path(event.code_name) %></td>
-            <td><%= event_data[event.code_name] %></td>
+            <td><%= additional_events[:events][event.code_name.to_sym] %></td>
           </tr>
         <% end %>
       </tbody>
