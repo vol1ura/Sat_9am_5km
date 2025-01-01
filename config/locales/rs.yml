@@ -708,6 +708,8 @@ rs:
     result:
       total_runs_html: '%{count}&nbsp;trčanja'
       total_volunteering_html: '%{count}&nbsp;volonterstvo'
+      first_run: Prvi trka!
+      personal_best: Liki rekord!
   badges:
     index:
       how_to_get: Učestvujte u našim aktivnostima, ispunite uslove i osvojite nagrade. Sve ikone će se prikazati na vašoj stranici profila. Postepeno će se njihov broj dopunjavati.

@@ -26,14 +26,14 @@
   <% if @personal_best_count.positive? %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= @personal_best_count %></span>
-      <%= t '.personal_bests_count' %>&nbsp;<i class="fa-solid fa-bolt"></i>
+      <%= t '.personal_bests_count' %>&nbsp;<i class="fa-solid fa-bolt text-primary"></i>
     </li>
   <% end %>
   <% s95_first_run_count = @results_count.count { |_, c| c == 1 } %>
   <% if @first_run_count > s95_first_run_count %>
     <li class="list-group-item">
       <span class="badge bg-primary rounded-pill"><%= @first_run_count - s95_first_run_count %></span>
-      <%= t '.first_runners_count' %> <%= @activity.event_name %>&nbsp;<i class="fa-solid fa-heart"></i>
+      <%= t '.first_runners_count' %> <%= @activity.event_name %>&nbsp;<i class="fa-solid fa-heart text-primary"></i>
     </li>
   <% end %>
   <% if s95_first_run_count.positive? %>

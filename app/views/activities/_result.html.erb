@@ -18,10 +18,15 @@
   </td>
   <td class="align-middle text-end">
     <% if result.personal_best %>
-      <i class="fa-solid fa-bolt" title="Личный рекорд!"></i>
+      <%= tag.i class: 'fa-solid fa-bolt text-primary', title: t('.personal_best') %>
     <% end %>
     <% if result.first_run %>
-      <%= tag.i class: ['fa-solid fa-heart', 'text-success' => @results_count[result.athlete_id] == 1], title: 'Первый забег!' %>
+      <%=
+        tag.i(
+          class: ['fa-solid fa-heart', @results_count[result.athlete_id] == 1 ? 'text-success' : 'text-primary'],
+          title: t('.first_run'),
+        )
+      %>
     <% end %>
     <%= human_result_time(result.total_time) %>
   </td>
