@@ -53,11 +53,11 @@
       </div>
       <div class="offcanvas-body d-flex flex-column justify-content-between">
         <ul class="navbar-nav justify-content-start flex-grow-1 fa-ul pe-3">
-          <li class="nav-item">
-            <%= link_to page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" do %>
+          <!--<li class="nav-item">
+            <%#= link_to page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" do %>
               <span class="fa-li"><i class="fa-solid fa-snowman"></i></span><%= t '.1_january' %>
-            <% end %>
-          </li>
+            <%# end %>
+          </li>-->
           <li class="nav-item">
             <%= link_to activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" do %>
               <span class="fa-li"><i class="fa-solid fa-square-poll-horizontal"></i></span><%= t '.recent_results' %>
