@@ -226,7 +226,7 @@ GEM
       rails (>= 6.0.0)
       stimulus-rails
       turbo-rails
-    hotwire_combobox (0.3.1)
+    hotwire_combobox (0.3.2)
       rails (>= 7.0.7.2)
       stimulus-rails (>= 1.2)
       turbo-rails (>= 1.2)
@@ -287,7 +287,7 @@ GEM
     mini_portile2 (2.8.8)
     minitest (5.25.4)
     msgpack (1.7.2)
-    net-imap (0.5.1)
+    net-imap (0.5.2)
       date
       net-protocol
     net-pop (0.1.2)
@@ -404,14 +404,14 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    rdoc (6.9.0)
+    rdoc (6.9.1)
       psych (>= 4.0.0)
     redis (5.3.0)
       redis-client (>= 0.22.0)
     redis-client (0.22.2)
       connection_pool
     regexp_parser (2.9.2)
-    reline (0.5.12)
+    reline (0.6.0)
       io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
@@ -584,7 +584,7 @@ DEPENDENCIES
   get_process_mem
   hiredis-client
   hotwire-rails
-  hotwire_combobox (= 0.3.1)
+  hotwire_combobox (= 0.3.2)
   image_processing
   importmap-rails (~> 1.2)
   jbuilder
