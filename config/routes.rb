@@ -57,6 +57,9 @@ Rails.application.routes.draw do
       resources :athletes, only: :update
       resources :activities, only: :create
     end
+    namespace :mobile do
+      get 'athletes/:code/info', to: 'athletes#info'
+    end
   end
 
   authenticate :user, ->(user) { user.admin? } do
