@@ -64,6 +64,7 @@ jobs:
       VK_TOKEN: ${{ secrets.VK_TOKEN }}
       VK_ALBUM_ID: 300954831
       VK_GROUP_ID: 220002708
+      MOBILE_API_KEY: '1234abcd'
     steps:
       - name: Checkout code
         uses: actions/checkout@main
