@@ -683,12 +683,14 @@ rs:
     show:
       title: 'Rezultati trke %{activity}'
       description: 'Protokol trke %{activity}, lista volontera i kratki izveštaj o trci'
-      main_page: Main
+      main_page: Glavna
       short_report: Kratak izveštaj
       total_runners_count: učesnika trke
       personal_bests_count: broj ličnih rekorda
       first_runners_count: prvi put na događaju
       first_s95_count: prvi put na S95
+      volunteers_count: koša volontera
+      first_volunteers_count: prvo volontiranje
       protocol: Protokol
       common: Zajednički
       men: Muškarci
@@ -697,7 +699,7 @@ rs:
       about_volunteers: 'Trka se održala zahvaljujući timu volontera:'
       volunteer: Volonter
       role: Uloga
-      total_volunteering: volontiranja %{count}
+      total_volunteering: 'volontiranja %{count}'
     protocol:
       position_short: Poz.
       position_full: Pozicija
@@ -717,7 +719,7 @@ rs:
       achievements: Dostignuća
       thematic: Tematske
     show:
-      main_page: Glavnaя
+      main_page: Glavna
       event_date: Datum događaja
       athlete: Učesnik
       event: Trka
@@ -736,7 +738,7 @@ rs:
       volunteering: volonterstvo
     show:
       description: 'Tabela učesnika i statistika za klub %{club}'
-      main_page: Glavnaя
+      main_page: Glavna
       clubs: Klubovi
       athletes_count: broj učesnika
       results_count: broj trka
@@ -748,7 +750,7 @@ rs:
       personal_best: Najbolje vreme
     last_week:
       title: 'Aktivnost učesnika %{club}'
-      main: Glavnaя
+      main: Glavna
       clubs: Klubovi
       participants_activity: Aktivnost učesnika
       description: 'Trke prošle nedelje, u kojima su učestvovali kao trkači ili kao volonteri članovi kluba %{club}.'

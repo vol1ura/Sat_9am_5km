@@ -42,6 +42,17 @@
       <%= t '.first_s95_count' %>&nbsp;<i class="fa-solid fa-heart text-success"></i>
     </li>
   <% end %>
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill"><%= @volunteers.load.size %></span>
+    <%= t '.volunteers_count' %>
+  </li>
+  <% first_volunteers_count = @volunteering_v_count.count { |_, c| c == 1 } %>
+  <% if first_volunteers_count.positive? %>
+    <li class="list-group-item">
+      <span class="badge bg-primary rounded-pill"><%= first_volunteers_count %></span>
+      <%= t '.first_volunteers_count' %>&nbsp;<i class="fa-solid fa-heart text-danger"></i>
+    </li>
+  <% end %>
 </ul>
 
 <h4><%= t '.protocol' %></h4>
@@ -76,7 +87,7 @@
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <% @activity.volunteers_roster.includes(:athlete).each do |volunteer| %>
+    <% @volunteers.each do |volunteer| %>
       <tr>
         <td>
           <div>

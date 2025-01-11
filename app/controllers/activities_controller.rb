@@ -23,6 +23,7 @@ class ActivitiesController < ApplicationController
     @volunteering_v_count = counters(model: Volunteer, table: :volunteers)
     @personal_best_count = @activity.results.where(personal_best: true).size
     @first_run_count = @activity.results.where(first_run: true).size
+    @volunteers = @activity.volunteers_roster.includes(:athlete)
   end
 
   private
