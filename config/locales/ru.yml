@@ -689,6 +689,8 @@ ru:
       personal_bests_count: число личных рекордов
       first_runners_count: впервые на забеге
       first_s95_count: впервые на забеге S95
+      volunteers_count: команда волонтёров
+      first_volunteers_count: первое волонтёрство
       protocol: Протокол
       common: Общий
       men: Мужчины
@@ -697,7 +699,7 @@ ru:
       about_volunteers: 'Забег провела команда волонтёров:'
       volunteer: Волонтёр
       role: Роль
-      total_volunteering: волонтёрств %{count}
+      total_volunteering: 'волонтёрств %{count}'
     protocol:
       position_short: Поз.
       position_full: Место
