@@ -129,7 +129,8 @@ class AthletesAwardingJob < ApplicationJob
     tt_sec = @activity.results.where(athlete_id: athlete.id).pick(:total_time).sec
     athlete_seconds = athlete.stats.dig('results', 'seconds') || []
     if athlete_seconds.exclude?(tt_sec)
-      athlete.update!(stats: athlete.stats.deep_merge('results' => { 'seconds' => athlete_seconds.push(tt_sec).sort }))
+      athlete_seconds << tt_sec
+      athlete.update!(stats: athlete.stats.deep_merge('results' => { 'seconds' => athlete_seconds.sort }))
     end
     athlete.trophies.create! badge: minute_bingo_badge, date: activity_date if (ALL_SECONDS - athlete_seconds).empty?
   end

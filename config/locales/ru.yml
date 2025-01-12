@@ -700,6 +700,7 @@ ru:
       volunteer: Волонтёр
       role: Роль
       total_volunteering: 'волонтёрств %{count}'
+      first_volunteering: 'Первое волонтёрство!'
     protocol:
       position_short: Поз.
       position_full: Место

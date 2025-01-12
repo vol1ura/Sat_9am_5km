@@ -88,19 +88,23 @@
   </thead>
   <tbody class="table-group-divider">
     <% @volunteers.each do |volunteer| %>
+      <% volunteering_count = @volunteering_v_count[volunteer.athlete_id] %>
       <tr>
         <td>
           <div>
             <%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %>
           </div>
           <div class="athlete-details fw-lighter">
-            <%= t '.total_volunteering', count: @volunteering_v_count[volunteer.athlete_id] %>
+            <%= t '.total_volunteering', count: volunteering_count %>
           </div>
         </td>
         <td class="align-middle">
           <%= human_volunteer_role volunteer.role %>
-          <% if @volunteering_v_count[volunteer.athlete_id] == 1 %>
-            <i class="fa-solid fa-heart text-danger" title="Первое волонтёрство!"></i>
+          <% case volunteering_count %>
+          <% when 1 %>
+            <%= tag.i class: 'fa-solid fa-heart text-danger', title: t('.first_volunteering') %>
+          <% when *Badge.participating_thresholds[:volunteer] %>
+            <%= render partial: '/badge_icon', locals: { label: volunteering_count, icon_class: 'text-danger' } %>
           <% end %>
         </td>
       </tr>

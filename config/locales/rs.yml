@@ -700,6 +700,7 @@ rs:
       volunteer: Volonter
       role: Uloga
       total_volunteering: 'volontiranja %{count}'
+      first_volunteering: 'Prvo volontirsko delanje!'
     protocol:
       position_short: Poz.
       position_full: Pozicija
