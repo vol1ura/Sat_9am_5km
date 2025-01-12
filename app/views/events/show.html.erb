@@ -143,7 +143,7 @@
           <%= render partial: 'activity', collection: @event.activities.published.order(date: :desc), cached: true %>
         </tbody>
       </table>
-      <%= render partial: '/expand_button' if @total_activities > 15 %>
+      <%= render '/expand_button' if @total_activities > 15 %>
     </div>
   </div>
 

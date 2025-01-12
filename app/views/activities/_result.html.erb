@@ -1,3 +1,5 @@
+<% results_count = @results_count[result.athlete_id] %>
+
 <%= tag.tr data: { male: result.athlete&.male } do %>
   <td class="position align-middle"><%= result.position %></td>
   <td>
@@ -6,7 +8,7 @@
         <%= link_to result.athlete.name.presence || t('common.nobody'), result.athlete, class: 'athlete-link' %>
       </div>
       <div class="athlete-details fw-lighter">
-        <%= t '.total_runs_html', count: @results_count[result.athlete_id] %>
+        <%= t '.total_runs_html', count: results_count %>
         <% if @volunteering_r_count[result.athlete_id] %>
           <div class="vr"></div>
           <%= t '.total_volunteering_html', count: @volunteering_r_count[result.athlete_id] %>
@@ -20,10 +22,13 @@
     <% if result.personal_best %>
       <%= tag.i class: 'fa-solid fa-bolt text-primary', title: t('.personal_best') %>
     <% end %>
+    <% if Badge.participating_thresholds[:result].include?(results_count) %>
+      <%= render partial: '/badge_icon', locals: { label: results_count, icon_class: 'text-primary' } %>
+    <% end %>
     <% if result.first_run %>
       <%=
         tag.i(
-          class: ['fa-solid fa-heart', @results_count[result.athlete_id] == 1 ? 'text-success' : 'text-primary'],
+          class: ['fa-solid fa-heart', results_count == 1 ? 'text-success' : 'text-primary'],
           title: t('.first_run'),
         )
       %>

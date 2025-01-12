@@ -36,6 +36,13 @@ class Badge < ApplicationRecord
     public_send(:"#{kind}_kind").where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
   end
 
+  def self.participating_thresholds
+    @participating_thresholds ||=
+      %i[result volunteer].index_with do |type|
+        dataset_of(kind: :participating, type: type).pluck(:info).pluck('threshold')
+      end
+  end
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[kind name received_date]
   end
