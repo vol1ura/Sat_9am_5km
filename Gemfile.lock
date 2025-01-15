@@ -112,7 +112,7 @@ GEM
     bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.1)
     benchmark (0.4.0)
-    bigdecimal (3.1.8)
+    bigdecimal (3.1.9)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
     bootstrap (5.3.3)
@@ -168,7 +168,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    database_consistency (1.7.26)
+    database_consistency (2.0.3)
       activerecord (>= 3.2)
     date (3.4.1)
     devise (4.9.4)
@@ -271,7 +271,7 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     language_server-protocol (3.17.0.3)
-    logger (1.6.3)
+    logger (1.6.5)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
