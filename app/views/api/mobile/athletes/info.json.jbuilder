@@ -1,7 +1,10 @@
 json.call(@athlete, :name, :male)
 json.home_event @athlete.event&.name
 json.volunteering do
-  json.stats @athlete.stats['volunteers']
+  json.stats do
+    json.general @athlete.stats['volunteers']
+    json.history @history_stats
+  end
   json.scheduled(
     @athlete
       .volunteering
