@@ -12,16 +12,16 @@
       <div class="col-5 col-md-3 social-links">
         <div class="float-end">
           <%= link_to Rails.configuration.telegram[top_level_domain], target: '_blank', rel: 'license noopener', title: t('.telegram_title') do %>
-            <i class="fa-brands fa-telegram"></i>
+            <i class="fa-brands fa-telegram" aria-label="Telegram"></i>
           <% end %>
           <a href="https://vk.com/s95ru" target="_blank" rel="noopener" title="<%= t '.vk_title' %>">
-            <i class="fa-brands fa-vk"></i>
+            <i class="fa-brands fa-vk" aria-label="VK"></i>
           </a>
           <a href="mailto:<%= ENV['INFO_EMAIL'] %>" target="_blank" title="<%= t '.send_email' %>" rel="noopener">
-            <i class="fa fa-envelope-open"></i>
+            <i class="fa fa-envelope-open" aria-label="Email info"></i>
           </a>
           <a href="https://github.com/vol1ura/Sat_9am_5km" target="_blank" rel="license noopener" title="<%= t '.github_title' %>">
-            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-github" aria-label="GitHub"></i>
           </a>
         </div>
       </div>

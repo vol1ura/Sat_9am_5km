@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="<%= top_level_domain %>">
   <head>
-    <title><%= yield_head_info :title, 'Парковые забеги' %> | S95</title>
+    <title><%= yield_head_info :title, 'Еженедельные парковые забеги на 5 километров' %> | S95</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta property="og:type" content="website">
+    <meta property="og:title" content="S95 — еженедельные бесплатные забеги на 5 километров">
+    <meta property="og:url" content="https://s95.<%= top_level_domain %>">
+    <meta property="twitter:site" content="@parkrunkuzminki">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="S95 — еженедельные бесплатные забеги на 5 километров">
+    <meta name="twitter:title" content="S95 — еженедельные бесплатные забеги на 5 километров">
     <meta name="twitter:image" content="<%= yield_head_info :og_image, '/favicon-192x192.png' %>">
     <meta property="og:image" content="<%= yield_head_info :og_image, '/favicon-192x192.png' %>">
     <meta property="og:image:width" content="300">
@@ -21,7 +26,7 @@
     <%= turbo_refresh_scroll_tag :preserve %>
     <meta name="apple-mobile-web-app-title" content="Sat9am5km">
     <meta name="description" content="<%= yield_head_info(:description, 'Еженедельные субботние пробежки на 5км в парке') %>">
-    <meta name="keywords" content="s95,sat9am5km,sat,9am,5km,5км,бег,парк,run,park,суббота,saturday,утро,парковые пробежки,парковые забеги,пробег,забег,спорт,волонтерство,друзья,знакомства,семья,досуг,паркран,parkrun">
+    <meta name="keywords" content="забеги,s95,sat9am5km,sat,9am,5km,5км,бег,парк,run,park,суббота,saturday,утро,парковые,пробежки,пробег,забег,спорт,волонтерство,друзья,знакомства,семья,досуг,паркран,parkrun">
     <% if Rails.env.production? %>
       <meta name="yandex-verification" content="<%= Rails.application.credentials.yandex.webmaster[top_level_domain] %>">
       <!-- Yandex.Metrika counter -->
