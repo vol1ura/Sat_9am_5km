@@ -4,7 +4,7 @@
       <%= event_main_image_tag event, class: 'img-event', alt: event.name, loading: 'lazy' %>
     </div>
     <%= tag.div class: ['position-absolute', 'top-0', 'bg-gradient', 'bg-opacity-25', 'w-100', 'px-3', 'card-img-top', event.active ? 'bg-dark' : 'bg-danger'] do %>
-      <h4 class="text-light"><%= event.name %></h4>
+      <h3 class="fs-4 text-light"><%= event.name %></h3>
     <% end %>
     <div class="card-body">
       <p class="card-text">
