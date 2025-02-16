@@ -93,6 +93,16 @@ h6 {
   }
 }
 
+@media (max-width: 415px) {
+  .cropped-on-phone {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ".";
+    max-width: 60px;
+  }
+}
+
 .sort-arrow {
   cursor: pointer;
   color: $secondary;
