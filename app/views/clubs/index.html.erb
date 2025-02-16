@@ -8,10 +8,12 @@
     <tr>
       <th><%= t '.name' %></th>
       <th>
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-caret-up"></i></span> <%= t '.athletes' %>
+        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-caret-up"></i></span>
+        <span class="cropped-on-phone"><%= t '.athletes' %></span>
       </th>
       <th>
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span> <%= t '.results' %>
+        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
+        <span class="cropped-on-phone"><%= t '.results' %></span>
       </th>
       <th class="hidden-on-phone">
         <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span> <%= t '.volunteering' %>
