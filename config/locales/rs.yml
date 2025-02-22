@@ -719,9 +719,11 @@ rs:
       about_badges: Trudimo se da smislimo nagrade kako bismo ohrabrili brze trkače i redovne učesnike koji redovno prisustvuju našim događajima.
       achievements: Dostignuća
       thematic: Tematske
+    badge:
+      event_date: 'Datum događaja: %{date}'
     show:
       main_page: Glavna
-      event_date: Datum događaja
+      event_date: 'Datum događaja: %{date}'
       athlete: Učesnik
       event: Trka
       club: Klub
@@ -766,26 +768,28 @@ rs:
     show:
       title: 'Park trčanje | %{event}'
       our_contacts: Naši kontakti
-      show: Prikaži
       jubilee_by_results: Uskoro jubilarne trke
-      athlete: Atleta
-      results_count: Trčanja
       jubilee_by_volunteering: Uskoro jubilarno volontiranje
-      volunteering_count: Volonterstvo
       results: Rezultati
       no_results_disclaimer: Ovde još nema preuzetih ili objavljenih rezultata.
       description: Opšte informacije
       how_participate: Kako učestvovati?
-      about_participation: 'Registrujte se u našem telegram-botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
-      registration: Registracija u telegramu
       how_find_us: Kako nas pronaći?
       volunteers: Volonteri
       attention: Pažnja!
       opening_soon: Uskoro otvaranje!
       start_cancelled: Sledeći start je otkazan.
       inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class="alert-link">naše trke</a>.'
-      about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu'
       place: Mesto događaja
+    card:
+      about_participation: 'Registrujte se u našem telegram-botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
+      registration: Registracija u telegramu
+      about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu'
+      show: Prikaži
+      place: Mesto događaja
+      athlete: Atleta
+      results_count: Trčanja
+      volunteering_count: Volonterstvo
     volunteering:
       title: Grafik volontiranja | %{event}
       description: 'Informacije o volontiranju. Tabela sa rasporedom volontiranja i potrebnim pozicijama za trku "%{event}".'
