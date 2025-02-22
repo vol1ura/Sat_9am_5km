@@ -68,7 +68,7 @@ every :sunday, at: '5:15' do
 end
 
 every :sunday, at: '5:30' do
-  rake 'sitemap:refresh'
+  rake 'sitemap:create'
 end
 
 every :sunday, at: '5:40' do
