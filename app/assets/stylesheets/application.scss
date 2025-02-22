@@ -188,7 +188,8 @@ nav.pagination {
   }
 
   &:hover {
-    @extend .shadow-lg, .border-opacity-50;
+    border-width: 0 !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4) !important;
 
     .img-scaled {
       transform: scale(1.03);
