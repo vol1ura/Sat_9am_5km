@@ -175,36 +175,29 @@ nav.pagination {
   }
 }
 
-.img-event-container {
-  @extend .card, .text-bg-light, .border-opacity-25, .shadow, .h-100;
-
-  .img-event {
-    border-radius: 0 !important;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover .img-event {
-    transform: scale(1.03);
-  }
-}
-
-
 .img-club {
   @extend .float-start, .me-2, .my-2, .rounded;
   width: 150px;
 }
 
-.img-event {
-  @extend .img-fluid, .rounded;
-  @media (max-width: 576px) {
-    border-radius: 0 !important;
-  }
-}
+.card-with-border {
+  @extend .card, .text-bg-light, .border-primary, .border-opacity-25, .shadow, .h-100;
 
-.img-event-shadow {
-  @extend .bg-dark, .bg-gradient, .bg-opacity-25, .rounded-top;
-  @media (max-width: 576px) {
-    border-radius: 0 !important;
+  .img-scaled {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    @extend .shadow-lg, .border-opacity-50;
+
+    .img-scaled {
+      transform: scale(1.03);
+    }
+  }
+
+  .card-body a:not(.stretched-link) {
+    position: relative;
+    z-index: 2;
   }
 }
 

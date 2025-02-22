@@ -21,104 +21,72 @@
 <% end %>
 
 <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
-  <div class="col">
-    <div class="card border-primary border-opacity-25 shadow h-100">
-      <h4 class="card-header mt-0"><%= t '.description' %></h4>
-      <div class="card-body">
-        <div class="card-text"><%= sanitized_text @event.description %></div>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card border-primary border-opacity-25 shadow h-100">
-      <h4 class="card-header mt-0"><%= t '.how_participate' %></h4>
-      <div class="card-body">
-        <p class="card-text"><%= t '.about_participation' %></p>
-        <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card border-primary border-opacity-25 shadow h-100">
-      <h4 class="card-header mt-0"><%= t '.volunteers' %></h4>
-      <div class="card-body">
-        <p class="card-text"><%= t '.about_volunteers' %></p>
-        <%= link_to t('.show'), volunteering_event_path(@event.code_name), class: 'btn btn-outline-primary' %>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card border-primary border-opacity-25 shadow h-100">
-      <h4 class="card-header mt-0"><%= t '.our_contacts' %></h4>
-      <div class="card-body">
-        <p class="card-text"><strong><%= t '.place' %>:</strong> <%= @event.place %></p>
-        <p class="card-text">
-          <div class="d-flex flex-wrap">
-            <% @event.contacts.order(:contact_type).each do |contact| %>
-              <%=
-                external_link_to(
-                  contact.link.html_safe,
-                  class: 'mb-2',
-                  title: human_contact_type(contact.contact_type),
-                ) do
-              %>
-                <%= render "events/contacts/#{contact.contact_type}" %>
-              <% end %>
-            <% end %>
-          </div>
-        </p>
-      </div>
-    </div>
-  </div>
-  <% if @almost_jubilee_by_results.present? %>
-    <div class="col">
-      <div class="card border-primary border-opacity-25 shadow h-100">
-        <h4 class="card-header mt-0"><%= t '.jubilee_by_results' %></h4>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col"><%= t '.athlete' %></th>
-                <th scope="col"><%= t '.results_count' %></th>
-              </tr>
-            </thead>
-            <tbody class="table-group-divider">
-              <% @almost_jubilee_by_results.each do |athlete| %>
-                <tr>
-                  <td><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %></td>
-                  <td><%= athlete.stats['results']['count'] %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+  <%= render 'card', header: t('.description') do %>
+    <div class="card-text"><%= sanitized_text @event.description %></div>
+  <% end %>
+  <%= render 'card', header: t('.how_participate') do %>
+    <p class="card-text"><%= t '.about_participation' %></p>
+    <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
+  <% end %>
+  <%= render 'card', header: t('.volunteers') do %>
+    <p class="card-text"><%= t '.about_volunteers' %></p>
+    <%= link_to t('.show'), volunteering_event_path(@event.code_name), class: 'btn btn-outline-primary' %>
+  <% end %>
+  <%= render 'card', header: t('.our_contacts') do %>
+    <p class="card-text"><strong><%= t '.place' %>:</strong> <%= @event.place %></p>
+    <div class="d-flex flex-wrap">
+      <% @event.contacts.order(:contact_type).each do |contact| %>
+        <%=
+          external_link_to(
+            contact.link.html_safe,
+            class: 'mb-2',
+            title: human_contact_type(contact.contact_type),
+          ) do
+        %>
+          <%= render "events/contacts/#{contact.contact_type}" %>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
+  <% if @almost_jubilee_by_results.present? %>
+    <%= render 'card', header: t('.jubilee_by_results') do %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"><%= t '.athlete' %></th>
+            <th scope="col"><%= t '.results_count' %></th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <% @almost_jubilee_by_results.each do |athlete| %>
+            <tr>
+              <td><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %></td>
+              <td><%= athlete.stats['results']['count'] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
   <% if @almost_jubilee_by_volunteers.present? %>
-    <div class="col">
-      <div class="card border-primary border-opacity-25 shadow h-100">
-        <h4 class="card-header mt-0"><%= t '.jubilee_by_volunteering' %></h4>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col"><%= t '.athlete' %></th>
-                <th scope="col"><%= t '.volunteering_count' %></th>
-              </tr>
-            </thead>
-            <tbody class="table-group-divider">
-              <% @almost_jubilee_by_volunteers.each do |athlete| %>
-                <tr>
-                  <th scope="row"><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %></th>
-                  <td><%= athlete.stats['volunteers']['count'] %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <%= render 'card', header: t('.jubilee_by_volunteering') do %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"><%= t '.athlete' %></th>
+            <th scope="col"><%= t '.volunteering_count' %></th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <% @almost_jubilee_by_volunteers.each do |athlete| %>
+            <tr>
+              <th scope="row"><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %></th>
+              <td><%= athlete.stats['volunteers']['count'] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   <% end %>
 </div>
 
@@ -148,45 +116,35 @@
   </div>
 
   <div class="row row-cols-1 row-cols-md-2 g-3 mt-3">
-    <div class="col">
-      <div class="card border-primary border-opacity-25 shadow h-100">
-        <h4 class="card-header mt-0">За всё время было</h4>
-        <div class="card-body">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <span class="badge bg-primary rounded-pill"><%= @total_activities %></span>
-              <%= 'проведено забегов' %>
-            </li>
-            <li class="list-group-item">
-              <span class="badge bg-primary rounded-pill"><%= @results_count.sum { |_, v| v } %></span>
-              <%= 'зафиксировано результатов' %>
-            </li>
-            <li class="list-group-item">
-              <span class="badge bg-primary rounded-pill"><%= @uniq_athletes_count %></span>
-              <%= 'всего уникальных участников' %>
-            </li>
-            <li class="list-group-item">
-              <span class="badge bg-primary rounded-pill"><%= @volunteers_count.sum { |_, v| v } %></span>
-              <%= 'всего волонтёрств' %>
-            </li>
-            <li class="list-group-item">
-              <span class="badge bg-primary rounded-pill"><%= @uniq_volunteers_count %></span>
-              <%= 'всего уникальных волонтёров' %>
-            </li>
-          </ul>
-        </div>
+    <%= render 'card', header: 'За всё время было' do %>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <span class="badge bg-primary rounded-pill"><%= @total_activities %></span>
+          <%= 'проведено забегов' %>
+        </li>
+        <li class="list-group-item">
+          <span class="badge bg-primary rounded-pill"><%= @results_count.sum { |_, v| v } %></span>
+          <%= 'зафиксировано результатов' %>
+        </li>
+        <li class="list-group-item">
+          <span class="badge bg-primary rounded-pill"><%= @uniq_athletes_count %></span>
+          <%= 'всего уникальных участников' %>
+        </li>
+        <li class="list-group-item">
+          <span class="badge bg-primary rounded-pill"><%= @volunteers_count.sum { |_, v| v } %></span>
+          <%= 'всего волонтёрств' %>
+        </li>
+        <li class="list-group-item">
+          <span class="badge bg-primary rounded-pill"><%= @uniq_volunteers_count %></span>
+          <%= 'всего уникальных волонтёров' %>
+        </li>
+      </ul>
+    <% end %>
+    <%= render 'card', header: 'Динамика мероприятия' do %>
+      <div class="row row-cols-2" data-controller="event">
+        <div class="col" data-event-target="results"></div>
+        <div class="col" data-event-target="volunteers"></div>
       </div>
-    </div>
-      <div class="col">
-      <div class="card border-primary border-opacity-25 shadow h-100">
-        <h4 class="card-header mt-0">Динамика мероприятия</h4>
-        <div class="card-body" data-controller="event">
-          <div class="row row-cols-2">
-            <div class="col" data-event-target="results"></div>
-            <div class="col" data-event-target="volunteers"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
 <% end %>

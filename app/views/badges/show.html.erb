@@ -22,7 +22,9 @@
     <h2><%= @badge.name %></h2>
     <p class="card-text"><%= sanitized_text @badge.conditions %></p>
     <% if @badge.funrun_kind? && @badge.received_date %>
-      <p class="text-muted"><%= t '.event_date' %>: <%= l @badge.received_date %></p>
+      <p class="text-muted">
+        <%= t '.event_date', date: l(@badge.received_date, format: :long) %>
+      </p>
     <% end %>
   </div>
 </div>

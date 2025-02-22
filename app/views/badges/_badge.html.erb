@@ -1,8 +1,8 @@
 <div class="col">
-  <div class="card text-bg-light mb-3 border-primary border-opacity-25 shadow h-100">
+  <div class="card-with-border mb-3">
     <div class="row g-0">
       <div class="col-sm-4 p-3 d-flex justify-content-center align-items-start">
-        <%= image_tag badge.image.variant(:web), class: 'img-badge', alt: badge.name, loading: 'lazy' %>
+        <%= image_tag badge.image.variant(:web), class: 'img-badge img-scaled', alt: badge.name, loading: 'lazy' %>
       </div>
       <div class="col-sm-8">
         <div class="card-body">
@@ -11,7 +11,11 @@
             <%= link_to sanitized_text(badge.conditions), badge, class: 'stretched-link text-decoration-none text-body' %>
           </p>
           <% if badge.received_date %>
-            <p class="card-text"><small class="text-muted">Дата получения: <%= l badge.received_date %> года</small></p>
+            <p class="card-text">
+              <small class="text-muted">
+                <%= t '.event_date', date: l(badge.received_date, format: :long) %>
+              </small>
+            </p>
           <% end %>
         </div>
       </div>
