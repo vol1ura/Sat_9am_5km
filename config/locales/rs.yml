@@ -528,9 +528,6 @@ rs:
       send_email: Pošaljite nam email
       github_title: Projekat na GitHubu
   pages:
-    index:
-      our_events: Naši događaji
-      our_partners: Naši partneri
     about:
       description: S95 je otvorena platforma koja objedinjuje nezavisne park trke koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
       events: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}.'
@@ -765,6 +762,9 @@ rs:
       total_time: Rezultat
       role: Uloga
   events:
+    index:
+      our_events: Naši događaji
+      our_partners: Naši partneri
     show:
       title: 'Park trčanje | %{event}'
       our_contacts: Naši kontakti
