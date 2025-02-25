@@ -4,6 +4,11 @@
   object-fit: scale-down;
 }
 
+.thumb-badge {
+  @extend .rounded;
+  height: 80px;
+}
+
 .trophy {
   max-width: 100px;
 }

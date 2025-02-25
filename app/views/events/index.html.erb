@@ -1,4 +1,27 @@
 <%= render '/flash' %>
+<% if @jubilee_events.present? || @funrun_badges.present? %>
+  <h2>Предстоящие события <%= l @next_saturday, format: :brief %></h2>
+  <ul class="list-group list-group-flush">
+    <% @jubilee_events.each do |event, activity_number| %>
+      <li class="list-group-item">
+        <span class="badge px-2 py-4 text-bg-light me-3">Забег №<%= activity_number %></span>
+        <%= link_to event.name, event, class: 'text-decoration-none fw-bold' %>
+      </li>
+    <% end %>
+    <% @funrun_badges.each do |badge| %>
+      <li class="list-group-item">
+        <div class="d-flex align-items-center">
+          <div class="flex-shrink-0">
+            <%= image_tag badge.image.variant(:thumb), class: 'thumb-badge', alt: badge.name %>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <%= link_to badge.name, badge, class: 'text-decoration-none fw-bold' %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 <h2><%= t '.our_events' %></h2>
 <div class="row row-cols-1 row-cols-md-2 g-3">
   <%= render partial: 'event', collection: @country_events, cached: true %>
