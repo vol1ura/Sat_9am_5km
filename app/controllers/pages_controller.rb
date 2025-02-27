@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  ALLOWED_PAGES = %w[index about rules support additional-events privacy-policy robots].freeze
+  ALLOWED_PAGES = %w[about rules support additional-events privacy-policy robots].freeze
 
   before_action :validate_page
 
@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   private
 
   def page_name
-    @page_name ||= params[:page]&.to_s || 'index'
+    @page_name ||= params[:page].to_s
   end
 
   def validate_page
