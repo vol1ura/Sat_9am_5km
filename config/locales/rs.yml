@@ -786,6 +786,8 @@ rs:
       start_cancelled: Sledeći start je otkazan.
       inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class="alert-link">naše trke</a>.'
       place: Mesto događaja
+      event_totals: Ukupno od početka
+      event_dynamics: Dinamika događaja
     card:
       about_participation: 'Registrujte se u našem telegram-botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
       registration: Registracija u telegramu
@@ -795,6 +797,12 @@ rs:
       athlete: Atleta
       results_count: Trčanja
       volunteering_count: Volonterstvo
+      totals:
+        activities: održanih trka
+        results: zabeleženi rezultati
+        athletes: ukupno jedinstvenih učesnika
+        volunteering: ukupno volonterstva
+        uniq_volunteers: ukupno jedinstvenih volontera
     volunteering:
       title: Grafik volontiranja | %{event}
       description: 'Informacije o volontiranju. Tabela sa rasporedom volontiranja i potrebnim pozicijama za trku "%{event}".'

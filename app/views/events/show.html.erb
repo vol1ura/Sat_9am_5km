@@ -116,31 +116,31 @@
   </div>
 
   <div class="row row-cols-1 row-cols-md-2 g-3 mt-3">
-    <%= render 'card', header: 'За всё время было' do %>
+    <%= render 'card', header: t('.event_totals') do %>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <span class="badge bg-primary rounded-pill"><%= @total_activities %></span>
-          <%= 'проведено забегов' %>
+          <%= t '.totals.activities' %>
         </li>
         <li class="list-group-item">
           <span class="badge bg-primary rounded-pill"><%= @results_count.sum { |_, v| v } %></span>
-          <%= 'зафиксировано результатов' %>
+          <%= t '.totals.results' %>
         </li>
         <li class="list-group-item">
           <span class="badge bg-primary rounded-pill"><%= @uniq_athletes_count %></span>
-          <%= 'всего уникальных участников' %>
+          <%= t '.totals.athletes' %>
         </li>
         <li class="list-group-item">
           <span class="badge bg-primary rounded-pill"><%= @volunteers_count.sum { |_, v| v } %></span>
-          <%= 'всего волонтёрств' %>
+          <%= t '.totals.volunteering' %>
         </li>
         <li class="list-group-item">
           <span class="badge bg-primary rounded-pill"><%= @uniq_volunteers_count %></span>
-          <%= 'всего уникальных волонтёров' %>
+          <%= t '.totals.uniq_volunteers' %>
         </li>
       </ul>
     <% end %>
-    <%= render 'card', header: 'Динамика мероприятия' do %>
+    <%= render 'card', header: t('.event_dynamics') do %>
       <div class="row row-cols-2" data-controller="event">
         <div class="col" data-event-target="results"></div>
         <div class="col" data-event-target="volunteers"></div>
