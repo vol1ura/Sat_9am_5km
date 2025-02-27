@@ -2,7 +2,7 @@
 <% head_info :description, t('.description') %>
 <h2><%= head_info :title, t('navbars.top.about') %></h2>
 
-<p><%= t '.description' %></p>
+<%= t '.description_html' %>
 <p><%= t '.events', events_count: actual_events.size, events: actual_events.to_sentence %></p>
 
 <h4><%= t '.join_us.title' %></h4>
