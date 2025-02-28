@@ -1,10 +1,13 @@
 .img-event {
-  @extend .img-fluid, .rounded;
-  border-radius: 0 !important;
+  @extend .img-fluid, .rounded, .w-100;
+  object-fit: fill;
+  @media (max-width: 576px) {
+    border-radius: 0 !important;
+  }
 }
 
 .img-event-shadow {
-  @extend .bg-dark, .bg-gradient, .bg-opacity-25, .rounded-top;
+  @extend .bg-dark, .bg-gradient, .bg-opacity-25, .rounded-top, .w-100;
   @media (max-width: 576px) {
     border-radius: 0 !important;
   }

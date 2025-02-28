@@ -1,7 +1,7 @@
 <div class="col">
   <%= tag.div class: ['card-with-border', event.active ? 'border-primary' : 'border-danger'] do %>
     <div class="overflow-hidden card-img-top">
-      <%= event_main_image_tag event, class: 'img-event img-scaled', alt: event.name, loading: 'lazy' %>
+      <%= event_main_image_tag event, class: 'img-fluid rounded-top img-scaled', alt: event.name, loading: 'lazy' %>
     </div>
     <%= tag.div class: ['position-absolute', 'top-0', 'bg-gradient', 'bg-opacity-25', 'w-100', 'px-3', 'card-img-top', event.active ? 'bg-dark' : 'bg-danger'] do %>
       <h3 class="fs-4 text-light"><%= event.name %></h3>

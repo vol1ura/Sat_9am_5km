@@ -522,7 +522,7 @@ rs:
       name_or_id: Ime ili ID
     bottom:
       s95: S95 park trčanje
-      slogan_html: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. I vi možete slobodno <a href="%{link}">učestvovati</a> u našim trkama, razvoju ili kreiranju sadržaja.'
+      slogan: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. I vi možete slobodno učestvovati u našim trkama, razvoju ili kreiranju sadržaja.'
       telegram_title: Vesti o projektu na Telegramu
       vk_title: Grupa VKontakte
       send_email: Pošaljite nam email
