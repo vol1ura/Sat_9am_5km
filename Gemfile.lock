@@ -493,8 +493,8 @@ GEM
       sass-embedded (~> 1.77)
     securerandom (0.4.1)
     select2-rails (4.0.13)
-    sidekiq (7.3.2)
-      concurrent-ruby (< 2)
+    sidekiq (7.3.9)
+      base64
       connection_pool (>= 2.3.0)
       logger
       rack (>= 2.2.4)
