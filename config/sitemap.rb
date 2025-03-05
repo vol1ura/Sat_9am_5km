@@ -14,7 +14,7 @@ Country.find_each do |country|
     # Add '/pages'
     Dir.glob('app/views/pages/*.html.erb').each do |file|
       page = File.basename(file, '.html.erb')
-      add page_path(page) unless page.starts_with? '_'
+      add page_path(page) if PagesController::ALLOWED_PAGES.include?(page)
     end
     # Add '/ratings' endpoints
     add results_ratings_path, priority: 0.75

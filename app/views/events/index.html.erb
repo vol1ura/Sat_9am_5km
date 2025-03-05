@@ -38,14 +38,14 @@
 <h2 class="mt-4"><%= t '.our_partners' %></h2>
 <section class="partners">
   <%= external_link_to 'https://t.me/parkrun' do %>
-    <% image_tag '/images/partners/pro_parkrun.png', class: 'img-partner', alt: 'Pro parkrun' %>
+    <% image_tag '/images/partners/pro_parkrun.png', class: 'img-partner', alt: 'Pro parkrun', loading: 'lazy' %>
   <% end %>
   <% if top_level_domain == :ru %>
     <%= external_link_to 'https://go.grigri.ru/s95' do %>
-      <% image_tag '/images/partners/grigri.png', class: 'img-partner', alt: 'Gri' %>
+      <% image_tag '/images/partners/grigri.png', class: 'img-partner', alt: 'Gri', loading: 'lazy' %>
     <% end %>
     <%= external_link_to 'https://rununion.ru/' do %>
-      <% image_tag '/images/partners/run_union.png', class: 'img-partner', alt: 'Союз любителей бега' %>
+      <% image_tag '/images/partners/run_union.png', class: 'img-partner', alt: 'Союз любителей бега', loading: 'lazy' %>
     <% end %>
   <% end %>
   <% if top_level_domain == :rs %>
@@ -54,7 +54,7 @@
     <% end %>
   <% else %>
     <%= external_link_to "https://invitro.#{top_level_domain}" do %>
-      <% image_tag '/images/partners/invitro.png', class: 'img-partner', alt: 'Invitro' %>
+      <% image_tag '/images/partners/invitro.png', class: 'img-partner', alt: 'Invitro', loading: 'lazy' %>
     <% end %>
   <% end %>
 </section>

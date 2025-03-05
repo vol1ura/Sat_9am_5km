@@ -14,7 +14,7 @@ ActiveAdmin.register Result do
   permit_params :total_time, :position, :athlete_id
 
   index(
-    download_links: false,
+    download_links: [:csv],
     title: -> { "Редактор протокола #{l(@activity.date)}" },
     row_class: ->(r) { 'athlete-error' unless r.correct? },
   ) do
@@ -74,6 +74,14 @@ ActiveAdmin.register Result do
         data: { confirm: "Вставить новый результат перед #{result.position} позицией?" },
       )
     end
+  end
+
+  csv do
+    column :position
+    column(:code) { |r| r.athlete&.code }
+    column(:athlete) { |r| r.athlete&.name }
+    column(:gender) { |r| r.athlete&.gender }
+    column(:total_time) { |r| human_result_time r.total_time }
   end
 
   sidebar I18n.t('.results.explanation.title'), only: :index do
