@@ -1,9 +1,10 @@
 require:
   - rubocop-factory_bot
-  - rubocop-rails
   - rubocop-rake
   - rubocop-performance
   - rubocop-rspec
+
+plugins: rubocop-rails
 
 # METRICS
 Metrics/AbcSize:
