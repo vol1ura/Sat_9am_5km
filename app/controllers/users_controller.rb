@@ -24,6 +24,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :image, athlete_attributes: %i[id event_id club_id])
+    params.expect(user: [:first_name, :last_name, :image, { athlete_attributes: %i[id event_id club_id] }])
   end
 end

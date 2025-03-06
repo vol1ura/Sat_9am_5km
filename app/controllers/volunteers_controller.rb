@@ -22,7 +22,7 @@ class VolunteersController < ApplicationController
   private
 
   def resource_params
-    params.require(:volunteer).permit(:athlete_id, :activity_id, :role, :comment)
+    params.expect(volunteer: %i[athlete_id activity_id role comment])
   end
 
   def set_idx
