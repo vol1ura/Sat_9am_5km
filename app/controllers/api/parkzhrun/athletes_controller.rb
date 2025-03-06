@@ -18,9 +18,8 @@ module API
       private
 
       def parkzhrun_athlete_params
-        @parkzhrun_athlete_params ||= params.require(:athlete).permit(
-          :first_name, :last_name, :patronymic, :date_of_birth, :gender,
-          :city, :club, :parkrun_id, :five_verst_id,
+        @parkzhrun_athlete_params ||= params.expect(
+          athlete: %i[first_name last_name patronymic date_of_birth gender city club parkrun_id five_verst_id],
         )
       end
 
