@@ -37,11 +37,11 @@ module API
       private
 
       def user_params
-        params.require(:user).permit(:email, :password, :first_name, :last_name, :telegram_id, :telegram_user)
+        params.expect(user: %i[email password first_name last_name telegram_id telegram_user])
       end
 
       def athlete_params
-        params.require(:athlete).permit(:name, :male, :parkrun_code, :fiveverst_code, :runpark_code)
+        params.expect(athlete: %i[name male parkrun_code fiveverst_code runpark_code])
       end
 
       def link_user_to_athlete!

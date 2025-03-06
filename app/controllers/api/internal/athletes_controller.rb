@@ -14,7 +14,7 @@ module API
       private
 
       def athlete_params
-        params.require(:athlete).permit(:club_id, :event_id)
+        params.expect(athlete: %i[club_id event_id])
       end
     end
   end
