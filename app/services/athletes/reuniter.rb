@@ -59,7 +59,7 @@ module Athletes
         Result.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
         Volunteer.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
         update_all_trophies!
-        @collection.where.not(id: athlete.id).destroy_all
+        @collection.excluding(athlete).destroy_all
         athlete.save!
         # rubocop:enable Rails/SkipsModelValidations
       end

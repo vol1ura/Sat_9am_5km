@@ -141,7 +141,7 @@ class AthletesAwardingJob < ApplicationJob
     return if athlete.trophies.exists?(badge:)
 
     athlete.transaction do
-      athlete.trophies.where(badge: badges_dataset.where.not(id: badge.id)).destroy_all
+      athlete.trophies.where(badge: badges_dataset.excluding(badge)).destroy_all
       athlete.trophies.create! badge: badge, date: activity_date
     end
   end
