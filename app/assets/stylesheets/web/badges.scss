@@ -9,6 +9,13 @@
   height: 80px;
 }
 
+.text-badge {
+  @extend .d-flex, .flex-column, .align-items-center, .justify-content-center, .bg-gradient, .border, .border-4, .rounded-circle, .text-light;
+  background-color: #688E26;
+  width: 80px;
+  height: 80px;
+}
+
 .trophy {
   max-width: 100px;
 }
