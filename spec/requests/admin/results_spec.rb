@@ -17,6 +17,11 @@ RSpec.describe '/admin/results' do
       expect(response).to be_successful
     end
 
+    it 'renders csv' do
+      get admin_activity_results_url(activity, format: :csv)
+      expect(response).to be_successful
+    end
+
     it 'renders athlete without tokens' do
       result = create(:result, activity: activity, athlete: nil)
       get admin_activity_results_url(activity)
