@@ -10,7 +10,7 @@
             <span class="badge px-2 py-4 text-bg-light">Забег №<%= activity_number %></span>
           </div>
           <div class="flex-grow-1 ms-3">
-            <%= link_to event.name, event, class: 'text-decoration-none fw-bold' %>
+            <%= link_to event.name, event_path(event.code_name), class: 'text-decoration-none fw-bold' %>
           </div>
         </div>
       </li>
