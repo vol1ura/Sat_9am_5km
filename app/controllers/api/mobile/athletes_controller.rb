@@ -27,10 +27,6 @@ module API
 
         @athlete = Athlete.find_by!(**Athlete::PersonalCode.new(code).to_params)
       end
-
-      def athlete_params
-        params.expect(athlete: %i[club_id event_id])
-      end
     end
   end
 end
