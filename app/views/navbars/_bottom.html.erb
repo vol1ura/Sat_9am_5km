@@ -1,15 +1,13 @@
-<nav class="navbar bg-light bd-footer mt-4">
+<nav class="navbar bg-light bd-footer mt-4 pb-3">
   <div class="container-lg">
     <div class="row pt-2">
       <div class="col-7 col-md-3">
-        <a class="d-inline-flex align-items-center mb-2 link-dark" href="/" aria-label="Sat9am5km">
-          <span class="fs-5"><%= t '.s95' %></span>
-        </a>
+        <a class="fs-5 mb-2 text-reset" href="/" aria-label="Sat9am5km"><%= t '.s95' %></a>
       </div>
-      <div class="col-12 col-md-6 footer-text">
-        <p class="fw-light"><%= t '.slogan' %></p>
+      <div class="col-12 col-md-6 footer-text fw-light">
+        <%= t '.slogan' %>
       </div>
-      <div class="col-5 col-md-3 social-links">
+      <div class="col-5 col-md-3 social-links ps-0 mt-1">
         <div class="float-end">
           <%= link_to Rails.configuration.telegram[top_level_domain], target: '_blank', rel: 'license noopener', title: t('.telegram_title') do %>
             <i class="fa-brands fa-telegram" role="img" aria-label="Telegram"></i>
