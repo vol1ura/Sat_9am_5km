@@ -1,0 +1,17 @@
+<% if @event.going_athletes.any? %>
+  <div class="card mb-3 going-athletes">
+    <div class="card-header">
+      <h5 class="card-title mb-0"><%= t 'events.show.going_athletes' %></h5>
+    </div>
+    <div class="card-body">
+      <div class="d-flex flex-wrap gap-2">
+        <% @event.going_athletes.includes(:user).each do |athlete| %>
+          <div class="d-flex align-items-center gap-2">
+            <%= image_tag user_image_path(athlete.user), class: 'rounded-circle', width: 32, height: 32, alt: athlete.name %>
+            <%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

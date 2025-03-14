@@ -1,0 +1,15 @@
+<% going_to_event_id = current_user&.athlete&.going_to_event_id %>
+<% if going_to_event_id.blank? %>
+  <%= button_to event_going_to_path(@event.code_name),
+                method: :post,
+                class: 'btn btn-outline-success' do %>
+    <%= t '.going' %>
+  <% end %>
+<% elsif going_to_event_id == @event.id %>
+  <%= button_to event_going_to_path(@event.code_name),
+                method: :delete,
+                class: 'btn btn-outline-danger',
+                form: { data: { turbo_confirm: t('.confirm_cancel') } } do %>
+    <%= t '.cancel' %>
+  <% end %>
+<% end %>
