@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
     get :volunteering, on: :member
+    resource :going_to, only: %i[create destroy]
   end
   resources :activities, only: %i[index show]
   resources :athletes, only: %i[index show]

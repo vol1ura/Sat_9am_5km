@@ -81,9 +81,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_194821) do
     t.bigint "event_id"
     t.bigint "runpark_code"
     t.jsonb "stats", default: {}, null: false
+    t.bigint "going_to_event_id"
     t.index ["club_id"], name: "index_athletes_on_club_id"
     t.index ["event_id"], name: "index_athletes_on_event_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
+    t.index ["going_to_event_id"], name: "index_athletes_on_going_to_event_id"
     t.index ["name"], name: "index_athletes_on_name", opclass: :gist_trgm_ops, using: :gist
     t.index ["parkrun_code"], name: "index_athletes_on_parkrun_code", unique: true
     t.index ["parkzhrun_code"], name: "index_athletes_on_parkzhrun_code", unique: true
@@ -269,6 +271,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_194821) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activities", "events"
   add_foreign_key "athletes", "clubs", on_delete: :nullify
+  add_foreign_key "athletes", "events", column: "going_to_event_id"
   add_foreign_key "athletes", "events", on_delete: :nullify
   add_foreign_key "athletes", "users", on_delete: :nullify
   add_foreign_key "clubs", "countries", on_delete: :cascade

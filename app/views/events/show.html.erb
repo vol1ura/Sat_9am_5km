@@ -24,7 +24,13 @@
   <% end %>
   <%= render 'card', header: t('.how_participate') do %>
     <p class="card-text"><%= t '.about_participation' %></p>
-    <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
+    <% if user_signed_in? %>
+      <div id="going_to_form">
+        <%= render 'going_tos/form' %>
+      </div>
+    <% else %>
+      <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
+    <% end %>
   <% end %>
   <%= render 'card', header: t('.volunteers') do %>
     <p class="card-text"><%= t '.about_volunteers' %></p>
@@ -86,6 +92,10 @@
       </table>
     <% end %>
   <% end %>
+</div>
+
+<div id="going_athletes">
+  <%= render 'going_athletes' %>
 </div>
 
 <h2><%= t '.results' %></h2>

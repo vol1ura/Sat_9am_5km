@@ -59,6 +59,8 @@ class Activity < ApplicationRecord
       .empty?
   end
 
+  private
+
   def postprocessing
     return unless published
 
@@ -69,5 +71,8 @@ class Activity < ApplicationRecord
     AthleteStatsUpdateJob.set(wait: 10.minutes).perform_later(participants.ids)
     Telegram::Notification::AfterActivityJob.perform_later(id)
     ClearCache.call
+
+    # Сбрасываем признак "Я иду" у всех участников после публикации активности
+    event.reset_going_athletes!
   end
 end

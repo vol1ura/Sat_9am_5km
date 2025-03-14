@@ -1,0 +1,7 @@
+<%= turbo_stream.replace 'going_to_form' do %>
+  <%= render 'form' %>
+<% end %>
+
+<%= turbo_stream.update 'going_athletes' do %>
+  <%= render 'events/going_athletes' %>
+<% end %>
