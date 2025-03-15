@@ -8,16 +8,50 @@
 <div class="row">
   <div class="col-6">
     <h1 class="mt-2"><%= head_info :title, athlete_name %></h1>
+    <%= render 'friendships/button', athlete: @athlete %>
   </div>
   <div class="ms-auto col-auto position-relative">
     <%= image_tag user_image_path(@athlete.user), class: 'avatar', title: athlete_name %>
-    <a href="#" class="btn btn-outline-primary rounded-circle position-absolute top-0 end-0 me-2" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
-      <i class="fa-solid fa-qrcode" title="QR"></i>
-    </a>
+    <div class="position-absolute top-0 end-0 me-2">
+      <a href="#" class="btn btn-outline-primary rounded-circle" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
+        <i class="fa-solid fa-qrcode" title="QR"></i>
+      </a>
+    </div>
   </div>
 </div>
 
 <div class="accordion accordion-flush" id="accordionPersonalBest" data-controller="athlete">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-friends">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFriends" aria-expanded="false" aria-controls="flush-collapseFriends">
+        <span class="badge text-bg-ligth bg-primary me-3" id="friends-counter"><%= @athlete.friends.size %></span>
+        <%= t '.friends' %>
+      </button>
+    </h2>
+    <div id="flush-collapseFriends" class="accordion-collapse collapse" aria-labelledby="flush-friends" data-bs-parent="#accordionPersonalBest">
+      <div class="accordion-body">
+        <div class="list-group list-group-flush" id="friends">
+          <%= render partial: 'friendships/friend', collection: @athlete.friends.includes(:user, :going_to_event), locals: { friendships_hash: @friendships_hash, is_friends_tab: true } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-followers">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFollowers" aria-expanded="false" aria-controls="flush-collapseFollowers">
+          <span class="badge text-bg-ligth bg-primary me-3" id="followers-counter"><%= @athlete.followers.size %></span>
+          <%= t '.followers' %>
+        </button>
+    </h2>
+    <div id="flush-collapseFollowers" class="accordion-collapse collapse" aria-labelledby="flush-followers" data-bs-parent="#accordionPersonalBest">
+      <div class="accordion-body">
+        <div class="list-group list-group-flush" id="followers">
+          <%= render partial: 'friendships/friend', collection: @athlete.followers.includes(:user, :going_to_event), locals: { friendships_hash: @friendships_hash, is_friends_tab: false } %>
+        </div>
+      </div>
+    </div>
+  </div>
   <% if @athlete.club %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-club">
@@ -288,6 +322,7 @@
     </div>
   </div>
 </div>
+
 <!-- Modal minute bingo -->
 <div class="modal fade" id="minuteBingoModal" tabindex="-1" aria-labelledby="minuteBingoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

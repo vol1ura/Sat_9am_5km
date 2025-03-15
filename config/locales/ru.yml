@@ -645,7 +645,7 @@ ru:
       athletes_count: Всего найдено %{count} уч.
       nothing_found: К сожалению, ничего не найдено.
     show:
-      description: 'Профиль участника %{athlete_name}: результаты, статистика и волонтёрства'
+      description: 'Профиль атлета %{athlete_name}'
       show_club_html: 'Посмотреть статистику клуба %{link}'
       total_results: всего пробежек
       total_volunteering: всего волонтёрств
@@ -670,6 +670,8 @@ ru:
         pace: Темп
         place: Место
         event: Мероприятие
+      friends: 'Друзья'
+      followers: 'В друзьях'
     minute_bingo:
       from_minute: из 60 секунд
       catch_them_all: собери все
@@ -771,7 +773,7 @@ ru:
       our_events: Наши мероприятия
       our_partners: Партнёры и совместные проекты
     show:
-      title: 'Парковые забеги | %{event}'
+      title: '%{event} | Парковые забеги'
       our_contacts: Наши контакты
       jubilee_by_results: Скоро юбилейные забеги
       jubilee_by_volunteering: Скоро юбилейные волонтёрства
@@ -827,3 +829,27 @@ ru:
       delete_image: Удалить фото
       save: Сохранить
       cancel: Отменить
+  going_tos:
+    create:
+      success: Вы успешно отметились как участник
+      error: Не удалось отметить вас как участника
+    destroy:
+      success: Вы отменили участие
+    form:
+      going: Иду!
+      cancel: Не пойду
+      confirm_cancel: Вы уверены, что хотите отменить участие в ближайшем забеге?
+  friendships:
+    button:
+      add_friend: 'Подписаться'
+      remove_friend: 'Отписаться'
+    friend:
+      going_to: 'Собирается в'
+    create:
+      success: 'Участник добавлен в друзья'
+      friends: 'Друзья'
+      followers: 'В друзьях'
+    destroy:
+      success: 'Участник удалён из друзей'
+      friends: 'Друзья'
+      followers: 'В друзьях'

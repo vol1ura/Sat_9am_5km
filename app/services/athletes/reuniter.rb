@@ -3,7 +3,9 @@
 module Athletes
   class Reuniter < ApplicationService
     SKIPPED_ATTRIBUTES = %w[id created_at updated_at name user_id stats].freeze
-    MODIFIED_ATTRIBUTES = %w[parkrun_code fiveverst_code parkzhrun_code runpark_code club_id event_id male].freeze
+    MODIFIED_ATTRIBUTES = %w[
+      parkrun_code fiveverst_code parkzhrun_code runpark_code club_id event_id going_to_event_id male
+    ].freeze
     private_constant :SKIPPED_ATTRIBUTES, :MODIFIED_ATTRIBUTES
 
     def initialize(collection, ids)

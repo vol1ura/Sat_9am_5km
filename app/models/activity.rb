@@ -69,5 +69,8 @@ class Activity < ApplicationRecord
     AthleteStatsUpdateJob.set(wait: 10.minutes).perform_later(participants.ids)
     Telegram::Notification::AfterActivityJob.perform_later(id)
     ClearCache.call
+
+    # TODO: extract this to a job
+    event.going_athletes.update_all(going_to_event_id: nil)
   end
 end

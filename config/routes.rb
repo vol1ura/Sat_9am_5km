@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
     get :volunteering, on: :member
+    resource :going_to, only: %i[create destroy]
   end
   resources :activities, only: %i[index show]
   resources :athletes, only: %i[index show]
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   resources :ratings, only: :index do
     get :results, on: :collection
   end
+  resources :friendships, only: %i[create destroy]
 
   resource :user, only: %i[show edit update]
   resolve('User') { [:user] }

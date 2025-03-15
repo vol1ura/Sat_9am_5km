@@ -44,6 +44,7 @@ class Athlete < ApplicationRecord
   belongs_to :club, optional: true
   belongs_to :user, optional: true
   belongs_to :event, optional: true
+  belongs_to :going_to_event, class_name: 'Event', optional: true
 
   has_many :trophies, dependent: :destroy
   has_many :badges, through: :trophies
@@ -52,6 +53,12 @@ class Athlete < ApplicationRecord
   has_many :events, through: :activities
   has_many :volunteering, -> { published.order(date: :desc) },
            dependent: :destroy, class_name: 'Volunteer', inverse_of: :athlete
+
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: :friend_id, dependent: :destroy,
+                                 inverse_of: :friend
+  has_many :followers, through: :inverse_friendships, source: :athlete
 
   validates :parkrun_code,
             uniqueness: true,
@@ -135,6 +142,22 @@ class Athlete < ApplicationRecord
     return if male.nil?
 
     male ? 'мужчина' : 'женщина'
+  end
+
+  def going_to_event?
+    going_to_event.present?
+  end
+
+  def friend?(other_athlete)
+    friends.include?(other_athlete)
+  end
+
+  def add_friend(other_athlete)
+    friends << other_athlete unless friend?(other_athlete)
+  end
+
+  def remove_friend(other_athlete)
+    friends.delete(other_athlete)
   end
 
   private
