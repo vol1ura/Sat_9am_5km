@@ -1,0 +1,24 @@
+<div class="modal fade" id="goingAthletesModal" tabindex="-1" aria-labelledby="goingAthletesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="goingAthletesModalLabel"><%= t 'events.show.going_athletes' %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% if @event.going_athletes.any? %>
+          <div class="d-flex flex-wrap gap-2">
+            <% @event.going_athletes.includes(:user).each do |athlete| %>
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <%= image_tag user_image_path(athlete.user), class: 'rounded-circle', width: 50, height: 50, alt: athlete.name %>
+                <%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-center text-muted"><%= t 'events.going_athletes.empty' %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

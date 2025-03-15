@@ -31,6 +31,16 @@
     <% else %>
       <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
     <% end %>
+    <div class="mt-3" id="going_athletes_button">
+      <% if @event.going_athletes.any? %>
+        <button type="button" class="btn btn-outline-primary position-relative" data-bs-toggle="modal" data-bs-target="#goingAthletesModal">
+          <%= t 'events.going_athletes.show_list' %>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <%= @event.going_athletes.count %>
+          </span>
+        </button>
+      <% end %>
+    </div>
   <% end %>
   <%= render 'card', header: t('.volunteers') do %>
     <p class="card-text"><%= t '.about_volunteers' %></p>
@@ -94,9 +104,7 @@
   <% end %>
 </div>
 
-<div id="going_athletes">
-  <%= render 'going_athletes' %>
-</div>
+<%= render 'going_athletes_modal' %>
 
 <h2><%= t '.results' %></h2>
 <% if @total_activities.zero? %>
@@ -109,10 +117,8 @@
           <tr>
             <th>#</th>
             <th><%= t 'activities.index.date' %></th>
-            <th><%= t 'activities.index.athletes' %></th>
-            <th><%= t 'activities.index.volunteers' %></th>
-            <th class="hidden-on-phone"><%= t 'activities.index.first_man' %></th>
-            <th class="hidden-on-phone"><%= t 'activities.index.first_woman' %></th>
+            <th><span class="cropped-on-phone"><%= t 'activities.index.athletes' %></span></th>
+            <th><span class="cropped-on-phone"><%= t 'activities.index.volunteers' %></span></th>
           </tr>
         </thead>
         <tbody class="table-group-divider">

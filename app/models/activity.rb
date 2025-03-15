@@ -72,7 +72,6 @@ class Activity < ApplicationRecord
     Telegram::Notification::AfterActivityJob.perform_later(id)
     ClearCache.call
 
-    # Сбрасываем признак "Я иду" у всех участников после публикации активности
-    event.reset_going_athletes!
+    event.going_athletes.update_all(going_to_event_id: nil)
   end
 end
