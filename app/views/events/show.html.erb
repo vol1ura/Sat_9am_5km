@@ -24,7 +24,13 @@
   <% end %>
   <%= render 'card', header: t('.how_participate') do %>
     <p class="card-text"><%= t '.about_participation' %></p>
-    <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
+    <% if user_signed_in? %>
+      <div id="going_to_form">
+        <%= render 'going_tos/form' %>
+      </div>
+    <% else %>
+      <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
+    <% end %>
   <% end %>
   <%= render 'card', header: t('.volunteers') do %>
     <p class="card-text"><%= t '.about_volunteers' %></p>
@@ -99,10 +105,8 @@
           <tr>
             <th>#</th>
             <th><%= t 'activities.index.date' %></th>
-            <th><%= t 'activities.index.athletes' %></th>
-            <th><%= t 'activities.index.volunteers' %></th>
-            <th class="hidden-on-phone"><%= t 'activities.index.first_man' %></th>
-            <th class="hidden-on-phone"><%= t 'activities.index.first_woman' %></th>
+            <th><span class="cropped-on-phone"><%= t 'activities.index.athletes' %></span></th>
+            <th><span class="cropped-on-phone"><%= t 'activities.index.volunteers' %></span></th>
           </tr>
         </thead>
         <tbody class="table-group-divider">

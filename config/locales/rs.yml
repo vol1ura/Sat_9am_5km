@@ -569,7 +569,7 @@ rs:
         answer_html: 'It is not necessary, but it is advisable to go through the registration procedure using our telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. As a result, you will have a personal barcode, which you will subsequently show to the volunteer. In addition, the bot will send notifications with the results of the run.'
       about_participation:
         question: 'Is it possible to just show up at 8:45 to run together?'
-        answer: 'Yes, you can just come and run. Registration does not necessary, it is only to save your result in the protocol. If you do not register, you will be listed in the protocol as “Unknown”.'
+        answer: 'Yes, you can just come and run. Registration does not necessary, it is only to save your result in the protocol. If you do not register, you will be listed in the protocol as "Unknown".'
       about_barcode:
         question: Can I use the parkrun barcode (5 verst, RunPark)?
         answer: Yes, you can come to our events with a barcode from a different system. However, your result will only be taken into account in the S95 system.
@@ -663,6 +663,8 @@ rs:
       volunteering: Volonterstvo
       close: Zatvori
       mission_minute_bingo: Misija "60 sekundi bingo!"
+      friends: Prijatelji
+      followers: Pratioci
       table:
         pb: PB
         date: Datum
@@ -715,6 +717,12 @@ rs:
       total_volunteering_html: '%{count}&nbsp;volonterstvo'
       first_run: Prvi trka!
       personal_best: Liki rekord!
+  friendships:
+    button:
+      remove_friend: Ukloni iz prijatelja
+      add_friend: Dodaj u prijatelje
+    friend:
+      going_to: Ide na trku
   badges:
     index:
       how_to_get: Učestvujte u našim aktivnostima, ispunite uslove i osvojite nagrade. Sve ikone će se prikazati na vašoj stranici profila. Postepeno će se njihov broj dopunjavati.
@@ -827,3 +835,13 @@ rs:
       delete_image: Obriši sliku
       save: Sačuvaj
       cancel: Otkaži
+  going_tos:
+    create:
+      success: Uspešno ste se označili kao učesnik
+      error: Nije moguće označiti vas kao učesnika
+    destroy:
+      success: Otkazali ste učešće
+    form:
+      going: Idem!
+      cancel: Otkaži učešće
+      confirm_cancel: Da li ste sigurni da želite da otkažete učešće?

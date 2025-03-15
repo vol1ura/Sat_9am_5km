@@ -6,6 +6,14 @@ class Event < ApplicationRecord
   has_many :athletes, dependent: :nullify
   has_many :contacts, dependent: :destroy
   has_many :volunteering_positions, dependent: :destroy
+  has_many(
+    :going_athletes,
+    -> { where.not(going_to_event_id: nil) },
+    class_name: 'Athlete',
+    foreign_key: :going_to_event_id,
+    dependent: :nullify,
+    inverse_of: false,
+  )
 
   validates :name, :code_name, :town, :place, presence: true
   validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ }

@@ -11,28 +11,34 @@ export default class extends Controller {
     Apex.chart = { locales: [ruLocale], defaultLocale: 'ru' }
     const athleteCharts = new AthleteCharts(document.querySelectorAll('tr.result'))
 
-    const eventsCountChart = new ApexCharts(
-      this.eventsCountTarget,
-      athleteCharts.eventsChartOptions('Количество забегов')
-    )
-    eventsCountChart.render()
+    if (this.hasResultsTarget) {
+      const resultsChart = new ApexCharts(
+        this.resultsTarget,
+        athleteCharts.resultsChartOptions('Недавние результаты', { max_count: 15 })
+      )
+      resultsChart.render()
+    }
 
-    const eventsWhiskersChart = new ApexCharts(
-      this.eventsWhiskersTarget,
-      athleteCharts.eventsWhiskersOptions('Статистика')
-    )
-    eventsWhiskersChart.render()
+    if (this.hasEventsCountTarget) {
+      const eventsCountChart = new ApexCharts(
+        this.eventsCountTarget,
+        athleteCharts.eventsChartOptions('Количество забегов')
+      )
+      eventsCountChart.render()
+    }
 
-    const resultsChart = new ApexCharts(
-      this.resultsTarget,
-      athleteCharts.resultsChartOptions('Недавние результаты', { max_count: 15 })
-    )
-    resultsChart.render()
+    if (this.hasEventsWhiskersTarget) {
+      const eventsWhiskersChart = new ApexCharts(
+        this.eventsWhiskersTarget,
+        athleteCharts.eventsWhiskersOptions('Статистика')
+      )
+      eventsWhiskersChart.render()
+    }
   }
 
   disconnect() {
-    this.resultsTarget.innerHTML = ''
-    this.eventsCountTarget.innerHTML = ''
-    this.eventsWhiskersTarget.innerHTML = ''
+    if (this.hasResultsTarget) this.resultsTarget.innerHTML = ''
+    if (this.hasEventsCountTarget) this.eventsCountTarget.innerHTML = ''
+    if (this.hasEventsWhiskersTarget) this.eventsWhiskersTarget.innerHTML = ''
   }
 }

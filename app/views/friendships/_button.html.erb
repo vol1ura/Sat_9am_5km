@@ -1,0 +1,19 @@
+<% if current_user&.athlete && current_user.athlete != athlete %>
+  <div id="friendship-button" class="friendship-button">
+    <% if current_user.athlete.friend?(athlete) %>
+      <% friendship = current_user.athlete.friendships.find_by(friend: athlete) %>
+      <%= button_to friendship_path(friendship, viewed_athlete_id: athlete.id), method: :delete,
+                    class: 'btn btn-outline-danger', form_class: 'd-inline-block',
+                    data: { turbo: true } do %>
+        <i class="fa-solid fa-user-minus"></i>
+        <%= t '.remove_friend' %>
+      <% end %>
+    <% else %>
+      <%= button_to friendships_path(friend_id: athlete), class: 'btn btn-outline-primary',
+                    form_class: 'd-inline-block', data: { turbo: true } do %>
+        <i class="fa-solid fa-user-plus"></i>
+        <%= t '.add_friend' %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
