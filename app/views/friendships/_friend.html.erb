@@ -1,0 +1,20 @@
+<div class="list-group-item d-flex justify-content-between align-items-center">
+  <div class="d-flex align-items-center gap-2">
+    <%= image_tag user_image_path(friend.user), class: 'rounded-circle', width: 50, height: 50, alt: friend.name %>
+    <div>
+      <%= link_to friend.name, athlete_path(friend), class: 'text-decoration-none' %>
+      <% if friend.going_to_event? %>
+        <span class="badge bg-success ms-2">
+          <%= t '.going_to' %> <%= friend.going_to_event.name %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  <% if current_user&.athlete == @athlete && local_assigns[:is_friends_tab] %>
+    <% if (friendship = friendships_hash[friend.id]) %>
+      <%= button_to friendship_path(friendship, viewed_athlete_id: @athlete.id), method: :delete, class: 'btn btn-sm btn-outline-danger', form_class: 'd-inline-block', data: { turbo: true } do %>
+        <i class="fa-solid fa-user-minus"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

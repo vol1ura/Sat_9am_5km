@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_16_194821) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_15_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -164,6 +164,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_194821) do
     t.index ["country_id"], name: "index_events_on_country_id"
   end
 
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "athlete_id", null: false
+    t.bigint "friend_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["athlete_id", "friend_id"], name: "index_friendships_on_athlete_id_and_friend_id", unique: true
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+  end
+
   create_table "newsletters", force: :cascade do |t|
     t.text "body", null: false
     t.string "picture_link"
@@ -271,12 +280,14 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_16_194821) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activities", "events"
   add_foreign_key "athletes", "clubs", on_delete: :nullify
-  add_foreign_key "athletes", "events", column: "going_to_event_id"
+  add_foreign_key "athletes", "events", column: "going_to_event_id", on_delete: :nullify
   add_foreign_key "athletes", "events", on_delete: :nullify
   add_foreign_key "athletes", "users", on_delete: :nullify
   add_foreign_key "clubs", "countries", on_delete: :cascade
   add_foreign_key "contacts", "events"
   add_foreign_key "events", "countries", on_delete: :cascade
+  add_foreign_key "friendships", "athletes"
+  add_foreign_key "friendships", "athletes", column: "friend_id"
   add_foreign_key "permissions", "users"
   add_foreign_key "results", "activities"
   add_foreign_key "results", "athletes", on_delete: :nullify
