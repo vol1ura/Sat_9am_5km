@@ -71,6 +71,6 @@ class Activity < ApplicationRecord
     ClearCache.call
 
     # TODO: extract this to a job
-    event.going_athletes.update_all(going_to_event_id: nil)
+    event.going_athletes.update_all(going_to_event_id: nil) # rubocop:disable Rails/SkipsModelValidations
   end
 end

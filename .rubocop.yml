@@ -47,6 +47,8 @@ Style/HashSyntax:
   EnforcedShorthandSyntax: consistent
 Style/NumericLiterals:
   Enabled: false
+Style/SafeNavigationChainLength:
+  Max: 3
 Style/FetchEnvVar:
   AllowedVars:
     - 'DEV_TELEGRAM_ID'
