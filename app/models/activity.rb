@@ -59,8 +59,6 @@ class Activity < ApplicationRecord
       .empty?
   end
 
-  private
-
   def postprocessing
     return unless published
 
