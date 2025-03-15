@@ -29,5 +29,6 @@ class AthletesController < ApplicationController
     @total_vol = @volunteering.size
     @total_trophies = @athlete.trophies.size
     @barcode = BarcodePrinter.call(@athlete)
+    @friendships_hash = current_user&.athlete&.friendships&.index_by(&:friend_id) || {}
   end
 end

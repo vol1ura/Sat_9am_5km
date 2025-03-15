@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :ratings, only: :index do
     get :results, on: :collection
   end
+  resources :friendships, only: %i[create destroy]
 
   resource :user, only: %i[show edit update]
   resolve('User') { [:user] }

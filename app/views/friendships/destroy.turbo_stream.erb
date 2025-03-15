@@ -1,0 +1,23 @@
+<%= turbo_stream.replace 'friendship-button' do %>
+  <%= render 'button', athlete: @viewed_athlete %>
+<% end %>
+
+<%= turbo_stream.update 'friends' do %>
+  <div class="list-group list-group-flush">
+    <%= render partial: 'friendships/friend', collection: @viewed_athlete.friends, locals: { friendships_hash: @friendships_hash, is_friends_tab: true } %>
+  </div>
+<% end %>
+
+<%= turbo_stream.update 'followers' do %>
+  <div class="list-group list-group-flush">
+    <%= render partial: 'friendships/friend', collection: @viewed_athlete.followers, locals: { friendships_hash: @friendships_hash, is_friends_tab: false } %>
+  </div>
+<% end %>
+
+<%= turbo_stream.update 'friends-counter' do %>
+  <%= @viewed_athlete.friends.size %>
+<% end %>
+
+<%= turbo_stream.update 'followers-counter' do %>
+  <%= @viewed_athlete.followers.size %>
+<% end %>
