@@ -72,6 +72,7 @@ class Activity < ApplicationRecord
     Telegram::Notification::AfterActivityJob.perform_later(id)
     ClearCache.call
 
+    # TODO: extract this to a job
     event.going_athletes.update_all(going_to_event_id: nil)
   end
 end
