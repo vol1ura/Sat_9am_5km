@@ -52,6 +52,6 @@ class EventsController < ApplicationController
   private
 
   def find_event
-    @event = Event.find_by!(code_name: params[:code_name])
+    @event = Event.find_by!(code_name: params[:code_name]&.downcase)
   end
 end

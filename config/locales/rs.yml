@@ -723,7 +723,7 @@ rs:
       remove_friend: Ukloni iz prijatelja
       add_friend: Dodaj u prijatelje
     friend:
-      going_to: Ide na trku
+      going_to: 'Ide na trku %{event}'
   badges:
     index:
       how_to_get: Učestvujte u našim aktivnostima, ispunite uslove i osvojite nagrade. Sve ikone će se prikazati na vašoj stranici profila. Postepeno će se njihov broj dopunjavati.
@@ -843,6 +843,9 @@ rs:
     destroy:
       success: Otkazali ste učešće
     form:
-      going: Idem!
-      cancel: Otkaži učešće
+      going: 'Pođem %{date}!'
+      cancel: 'Otkaži učešće %{date}'
       confirm_cancel: Da li ste sigurni da želite da otkažete učešće?
+      going_to_event: 'Ako želite da pođete na sledeću trku, možete da se označite sada. Tada će vaši prijatelji videti da idete na trku i, možda, pridruže se vama.'
+      already_going: 'Već ste označili da idete na sledeću trku. Ako želite da otkažete svoju odluku, možete to učiniti u bilo kom trenutku.'
+      reset_going_to: 'Ova oznaka će biti automatski obrisana posle učitavanja rezultata trke.'

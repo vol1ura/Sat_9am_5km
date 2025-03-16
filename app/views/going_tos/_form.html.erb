@@ -1,15 +1,18 @@
 <% going_to_event_id = current_user&.athlete&.going_to_event_id %>
 <% if going_to_event_id.blank? %>
+  <p><%= t '.going_to_event' %></p>
   <%= button_to event_going_to_path(@event.code_name),
                 method: :post,
                 class: 'btn btn-outline-success' do %>
-    <%= t '.going' %>
+    <%= t '.going', date: l(Date.current.next_occurring(:saturday), format: :brief) %>
   <% end %>
 <% elsif going_to_event_id == @event.id %>
+  <p><%= t '.already_going' %></p>
   <%= button_to event_going_to_path(@event.code_name),
                 method: :delete,
                 class: 'btn btn-outline-danger',
                 form: { data: { turbo_confirm: t('.confirm_cancel') } } do %>
-    <%= t '.cancel' %>
+    <%= t '.cancel', date: l(Date.current.next_occurring(:saturday), format: :brief) %>
   <% end %>
+  <p class="py-3 text-muted fw-light"><%= t '.reset_going_to' %></p>
 <% end %>
