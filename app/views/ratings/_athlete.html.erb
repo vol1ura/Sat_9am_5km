@@ -1,6 +1,0 @@
-<tr>
-  <td><%= athlete_counter.next %></td>
-  <td><%= link_to athlete.name, athlete, class: 'athlete-link', data: { turbo: false } %></td>
-  <td><%= athlete.stats.dig(@rating_type, @order) || 0 %></td>
-  <td class="hidden-on-phone"><%= link_to athlete.club.name, athlete.club, data: { turbo: false } if athlete.club %></td>
-</tr>

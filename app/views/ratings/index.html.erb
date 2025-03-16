@@ -1,19 +1,53 @@
 <% head_info :description, t('.description') %>
-<h4><%= head_info :title, t(".#{@rating_type}.title") %></h4>
-<p><%= t '.description' %></p>
-<%=
-  form_with(
-    url: ratings_path,
-    data: { controller: 'form', action: 'change->form#submit', turbo_stream: true },
-    method: :get,
-  ) do |form|
-%>
-  <%= form.hidden_field :rating_type, value: @rating_type %>
-  <% RatingsController::RATINGS.each do |order| %>
-    <div class="form-check">
-      <%= form.radio_button :order, order, checked: order == @order, class: 'form-check-input' %>
-      <%= form.label "order_#{order}", t(".#{@rating_type}.description.#{order}"), class: 'form-check-label' %>
-    </div>
-  <% end %>
-<% end %>
-<%= render 'ratings_table' %>
+<h2><%= head_info :title, t(".#{@rating_type}.title") %></h2>
+
+<div class="ratings-description mb-4">
+  <p><%= t '.description' %></p>
+  <div class="alert alert-info">
+    <h3 class="alert-heading"><%= t '.order_types' %></h3>
+    <% RatingsController::RATINGS.each do |order| %>
+      <p class="mb-2">
+        <strong><%= t(".#{order}") %>:</strong>
+        <%= t(".#{@rating_type}.description.#{order}") %>
+      </p>
+    <% end %>
+  </div>
+</div>
+
+<div data-controller="ratings"
+     data-ratings-rating-type-value="<%= @rating_type %>"
+     data-ratings-order-value="<%= @order %>">
+  <ul class="nav nav-tabs mb-3" role="tablist">
+    <% RatingsController::RATINGS.each do |order| %>
+      <li class="nav-item" role="presentation">
+        <%=
+          link_to(
+            t(".#{order}"),
+            "#",
+            class: "nav-link #{order == @order ? 'active' : ''} px-2",
+            data: { ratings_target: "tab", action: "click->ratings#switchTab", order: order },
+            role: "tab",
+          )
+        %>
+      </li>
+    <% end %>
+  </ul>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th><%= t '.name' %></th>
+        <th><%= t '.total' %></th>
+        <th class="hidden-on-phone"><%= t '.club' %></th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider" data-ratings-target="tbody">
+      <tr class="loading-indicator">
+        <td colspan="4" class="text-center p-3">
+          <%= render 'loading' %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
