@@ -21,7 +21,10 @@ Rails.application.routes.draw do
     get :last_week, on: :member
   end
   resources :ratings, only: :index do
-    get :results, on: :collection
+    collection do
+      get :results
+      get :table
+    end
   end
   resources :friendships, only: %i[create destroy]
 

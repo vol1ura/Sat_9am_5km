@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 class RatingsController < ApplicationController
-  RATINGS = %w[count h_index uniq_events trophies].freeze
+  before_action :set_rating_variables, only: %i[index table]
 
-  def index
-    @rating_type = params[:rating_type] == 'volunteers' ? 'volunteers' : 'results'
-    @order = RATINGS.include?(params[:order]) ? params[:order] : 'count'
+  RATINGS = %w[count h_index uniq_events trophies].freeze
+  PER_PAGE = 50
+
+  def index; end
+
+  def table
+    @page = (params[:page] || 1).to_i
     @athletes = athletes_dataset
 
-    respond_to do |format|
-      format.html
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('ratings_table', partial: 'ratings_table') }
-    end
+    render partial: 'table'
   end
 
   def results
@@ -27,7 +28,6 @@ class RatingsController < ApplicationController
   end
 
   def athletes_dataset
-    athlete_ids = country_dataset_for(@rating_type.singularize.camelize.constantize).select(:athlete_id).distinct
     second_order_type =
       if @order == 'count'
         @rating_type == 'results' ? 'volunteers' : 'results'
@@ -38,7 +38,16 @@ class RatingsController < ApplicationController
       "(stats #> '{#{@rating_type},#{@order}}')::integer DESC NULLS LAST," \
       "(stats #> '{#{second_order_type},count}')::integer DESC NULLS LAST," \
       'name'
+    Athlete
+      .includes(:club)
+      .where(id: country_dataset_for(@rating_type.singularize.camelize.constantize).select(:athlete_id).distinct)
+      .order(Arel.sql(sort_order_sql))
+      .offset((@page - 1) * PER_PAGE)
+      .limit(PER_PAGE)
+  end
 
-    Athlete.includes(:club).where(id: athlete_ids).order(Arel.sql(sort_order_sql)).limit(50)
+  def set_rating_variables
+    @rating_type = params[:rating_type] == 'volunteers' ? 'volunteers' : 'results'
+    @order = RATINGS.include?(params[:order]) ? params[:order] : 'count'
   end
 end

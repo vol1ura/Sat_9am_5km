@@ -603,28 +603,29 @@ rs:
       time: Vreme
   ratings:
     index:
-      description: To view the top 50 participants, select one of indicators below. The information on this page is updated regularly, but it may sometimes be slightly different from what is current. You can always check the current values in the athlete's profile.
-      results:
-        title: Athletes rating
-        description:
-          count: Total number of runs scored. In case of equal value, the one with more volunteering will be higher in the rating.
-          h_index: Running h-index - a value that is equal to h if the participant ran in h parks, and in each of them at least h times. In case of equal value, the participant with more races will be higher in the ranking.
-          uniq_events: Unique parks - number of parks visited as a runner. In case of equal values, the participant with more races will be higher in the ranking.
-          trophies: Broj znački. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa velikim brojem trka.
-      volunteers:
-        title: Volunteers rating
-        description:
-          count: Total number of volunteers. In the event of a tie, the one with more scored runs will be ranked higher.
-          h_index: Volunteer h-index - a value that is equal to h if the participant was a volunteer in h different positions (roles), in each of which at least h times. In case of equal values, the participant with a greater number of volunteers will be higher in the rating.
-          uniq_events: Unique parks - number of parks visited as a volunteer. In case of equal values, the participant with a greater number of volunteers will be higher in the rating.
-          trophies: Broj znački. U slučaju jednakih vrednosti, viši rang će imati učesnika sa velikim brojem volontiranje.
-    ratings_table:
-      name: Ime
+      description: Rejtinzi učesnika po različitim pokazateljima. Informacije na ovoj stranici se redovno ažuriraju, ali ponekad mogu biti malo drugačije od trenutnih. Uvek možete proveriti trenutne vrednosti u profilu sportiste.
+      order_types: Vrste rejtinga
+      name: Učesnik
+      count: Aktivnosti
       club: Klub
-      count: Count
-      h_index: h-index
-      uniq_events: Uniq parks
+      total: Ukupno
+      h_index: h-indeks
+      uniq_events: Jedinstveni parkovi
       trophies: Značke
+      results:
+        title: Rejting sportista
+        description:
+          count: Ukupan broj trka. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          h_index: Trkački h-indeks - vrednost koja je jednaka h ako je učesnik trkao u h parkovima, i u svakom od njih bar h puta. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          uniq_events: Jedinstveni parkovi - broj parkova posetjenih kao trkač. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          trophies: Broj znački. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+      volunteers:
+        title: Rejting volontera
+        description:
+          count: Ukupan broj volontera. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          h_index: Volonterski h-indeks - vrednost koja je jednaka h ako je učesnik bio volonter u h različitih pozicija (uloga), u svakoj od kojih bar h puta. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          uniq_events: Jedinstveni parkovi - broj parkova posetjenih kao volonter. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          trophies: Broj znački. U slučaju jednakih vrednosti, viši rang će imati učesnika sa velikim brojem volontiranje.
     results:
       title: Najbolji rezultati
       description: Najboljih 50 rezultata na svim događajima za muškarce i žene
