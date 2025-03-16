@@ -5,7 +5,7 @@
       <%= link_to friend.name, athlete_path(friend), class: 'text-decoration-none' %>
       <% if friend.going_to_event? %>
         <span class="badge bg-success ms-2">
-          <%= t '.going_to' %> <%= friend.going_to_event.name %>
+          <%= t '.going_to', event: friend.going_to_event.name %>
         </span>
       <% end %>
     </div>
