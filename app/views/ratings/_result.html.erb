@@ -1,5 +1,5 @@
 <tr>
-  <td><%= result_counter.next %></td>
+  <td><%= (@page - 1) * RatingsController::PER_PAGE + result_counter.next %></td>
   <td><%= human_result_time result.total_time %></td>
   <td><%= link_to result.athlete.name, result.athlete, class: 'athlete-link' %></td>
   <td><%= link_to l(result.date), result.activity %></td>

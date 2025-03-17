@@ -17,7 +17,7 @@ class Result < ApplicationRecord
     Time.zone.local(2000, 1, 1, hour, min, sec)
   end
 
-  def self.top(male:, limit:)
+  def self.top(male:)
     results = Arel::Table.new(:results)
     athletes = Arel::Table.new(:athletes)
     activities = Arel::Table.new(:activities)
@@ -30,7 +30,7 @@ class Result < ApplicationRecord
         .group(athletes[:id]).as('t')
 
     joins("INNER JOIN #{composed_table.to_sql} ON results.athlete_id = t.a_id AND results.total_time = t.min_tt")
-      .order(:total_time, :position, :activity_id).limit(limit)
+      .order(:total_time, :position, :activity_id)
   end
 
   def correct?

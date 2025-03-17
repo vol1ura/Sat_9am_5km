@@ -1,15 +1,23 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>#</th>
-      <th><%= t '.time' %></th>
-      <th><%= t '.name' %></th>
-      <th><%= t '.date' %></th>
-      <th class="hidden-on-phone"><%= t '.club' %></th>
-      <th class="hidden-on-phone"><%= t '.event' %></th>
+      <th scope="col">#</th>
+      <th scope="col"><%= t '.result' %></th>
+      <th scope="col"><%= t '.athlete' %></th>
+      <th scope="col"><%= t '.date' %></th>
+      <th scope="col" class="hidden-on-phone"><%= t '.club' %></th>
+      <th scope="col" class="hidden-on-phone"><%= t '.event' %></th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
     <%= render partial: 'result', collection: results, cached: true %>
   </tbody>
 </table>
+
+<% if results.size >= RatingsController::PER_PAGE %>
+  <div data-results-table-target="loadingSpinner" class="text-center my-3">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden"><%= t 'loading' %></span>
+    </div>
+  </div>
+<% end %>
