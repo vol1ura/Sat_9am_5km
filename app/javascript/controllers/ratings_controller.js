@@ -17,7 +17,7 @@ export default class extends Controller {
   setupInfiniteScroll() {
     const options = {
       root: null,
-      rootMargin: "0px",
+      rootMargin: "20px",
       threshold: 0.1
     }
 

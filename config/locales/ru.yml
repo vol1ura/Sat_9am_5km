@@ -632,8 +632,8 @@ ru:
       men: Мужчины
       women: Женщины
     results_table:
-      time: Время
-      name: Имя
+      athlete: Участник
+      result: Результат
       date: Дата
       club: Клуб
       event: Мероприятие
@@ -857,3 +857,4 @@ ru:
       success: 'Участник удалён из друзей'
       friends: 'Друзья'
       followers: 'В друзьях'
+  loading: Загрузка...

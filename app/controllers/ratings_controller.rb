@@ -2,6 +2,7 @@
 
 class RatingsController < ApplicationController
   before_action :set_rating_variables, only: %i[index table]
+  before_action :set_page, only: %i[table results_table]
 
   RATINGS = %w[count h_index uniq_events trophies].freeze
   PER_PAGE = 50
@@ -9,16 +10,18 @@ class RatingsController < ApplicationController
   def index; end
 
   def table
-    @page = (params[:page] || 1).to_i
     @athletes = athletes_dataset
 
     render partial: 'table'
   end
 
-  def results
+  def results; end
+
+  def results_table
     scope = country_dataset_for(Result).includes(athlete: :club, activity: :event)
-    @male_results = scope.top(male: true, limit: 50)
-    @female_results = scope.top(male: false, limit: 50)
+    @results = scope.top(male: params[:male] == 'true').offset((@page - 1) * PER_PAGE).limit(PER_PAGE)
+
+    render partial: 'results_table', locals: { results: @results }
   end
 
   private
@@ -49,5 +52,9 @@ class RatingsController < ApplicationController
   def set_rating_variables
     @rating_type = params[:rating_type] == 'volunteers' ? 'volunteers' : 'results'
     @order = RATINGS.include?(params[:order]) ? params[:order] : 'count'
+  end
+
+  def set_page
+    @page = (params[:page] || 1).to_i
   end
 end
