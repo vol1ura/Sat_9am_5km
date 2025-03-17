@@ -628,15 +628,14 @@ rs:
           trophies: Broj znački. U slučaju jednakih vrednosti, viši rang će imati učesnika sa velikim brojem volontiranje.
     results:
       title: Najbolji rezultati
-      description: Najboljih 50 rezultata na svim događajima za muškarce i žene
+      description: Najbolji rezultati učesnika trka
       men: Muškarci
       women: Žene
-    results_table:
-      time: Vreme
-      name: Ime
+      athlete: Učesnik
+      result: Vreme
       date: Datum
-      club: Klub
       event: Događaj
+      club: Klub
   athletes:
     index:
       title: Rezultati pretrage
@@ -849,3 +848,4 @@ rs:
       going_to_event: 'Ako želite da pođete na sledeću trku, možete da se označite sada. Tada će vaši prijatelji videti da idete na trku i, možda, pridruže se vama.'
       already_going: 'Već ste označili da idete na sledeću trku. Ako želite da otkažete svoju odluku, možete to učiniti u bilo kom trenutku.'
       reset_going_to: 'Ova oznaka će biti automatski obrisana posle učitavanja rezultata trke.'
+  loading: Učitavanje...
