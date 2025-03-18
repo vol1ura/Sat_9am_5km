@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     collection do
       get :results
       get :table
+      get :results_table
     end
   end
   resources :friendships, only: %i[create destroy]

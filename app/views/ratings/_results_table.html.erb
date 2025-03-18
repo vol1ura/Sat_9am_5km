@@ -1,15 +1,5 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th><%= t '.time' %></th>
-      <th><%= t '.name' %></th>
-      <th><%= t '.date' %></th>
-      <th class="hidden-on-phone"><%= t '.club' %></th>
-      <th class="hidden-on-phone"><%= t '.event' %></th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <%= render partial: 'result', collection: results, cached: true %>
-  </tbody>
-</table>
+<%= render partial: 'result', collection: results, cached: true %>
+
+<% if results.size >= RatingsController::PER_PAGE %>
+  <%= render 'loading_indicator', colspan: 6 %>
+<% end %>

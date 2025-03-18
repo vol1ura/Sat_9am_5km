@@ -14,9 +14,9 @@
   </div>
 </div>
 
-<div data-controller="ratings"
-     data-ratings-rating-type-value="<%= @rating_type %>"
-     data-ratings-order-value="<%= @order %>">
+<div data-controller="table"
+     data-table-rating-type-value="<%= @rating_type %>"
+     data-table-order-value="<%= @order %>">
   <ul class="nav nav-tabs mb-3" role="tablist">
     <% RatingsController::RATINGS.each do |order| %>
       <li class="nav-item" role="presentation">
@@ -25,7 +25,7 @@
             t(".#{order}"),
             "#",
             class: "nav-link #{order == @order ? 'active' : ''} px-2",
-            data: { ratings_target: "tab", action: "click->ratings#switchTab", order: order },
+            data: { table_target: "tab", action: "click->table#switchTab", order: order },
             role: "tab",
           )
         %>
@@ -42,12 +42,8 @@
         <th class="hidden-on-phone"><%= t '.club' %></th>
       </tr>
     </thead>
-    <tbody class="table-group-divider" data-ratings-target="tbody">
-      <tr class="loading-indicator">
-        <td colspan="4" class="text-center p-3">
-          <%= render 'loading' %>
-        </td>
-      </tr>
+    <tbody class="table-group-divider" data-table-target="content">
+      <%= render 'loading_indicator', colspan: 4 %>
     </tbody>
   </table>
 </div>
