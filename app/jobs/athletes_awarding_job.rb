@@ -10,11 +10,11 @@ class AthletesAwardingJob < ApplicationJob
 
     [true, false].each { |male| process_event_records(male:) }
 
-    @activity.athletes.find_each do |athlete|
+    @activity.athletes.includes(:event).find_each do |athlete|
       award_athlete(athlete, badge_type: 'result')
     end
 
-    @activity.volunteers.includes(:athlete).find_each do |volunteer|
+    @activity.volunteers.includes(athlete: :event).find_each do |volunteer|
       award_athlete(volunteer.athlete, badge_type: 'volunteer')
     end
 
