@@ -1,4 +1,4 @@
-<% @athletes.each_with_index do |athlete, index| %>
+<% athletes.each_with_index do |athlete, index| %>
   <tr>
     <td><%= (@page - 1) * RatingsController::PER_PAGE + index + 1 %></td>
     <td><%= link_to athlete.name, athlete, class: 'athlete-link', data: { turbo: false } %></td>
@@ -7,10 +7,6 @@
   </tr>
 <% end %>
 
-<% if @athletes.size >= RatingsController::PER_PAGE %>
-  <tr class="loading-indicator">
-    <td colspan="4" class="text-center p-3">
-      <%= render 'loading' %>
-    </td>
-  </tr>
+<% if athletes.size >= RatingsController::PER_PAGE %>
+  <%= render 'loading_indicator', colspan: 4 %>
 <% end %>

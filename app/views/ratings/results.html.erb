@@ -1,20 +1,74 @@
 <% head_info :description, t('.description') %>
-<h4><%= head_info :title, t('.title') %></h4>
+<h2><%= head_info :title, t('.title') %></h2>
 
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="male-tab" data-bs-toggle="tab" data-bs-target="#male-tab-pane" type="button" role="tab" aria-controls="male-tab-pane" aria-selected="false"><%= t '.men' %></button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="female-tab" data-bs-toggle="tab" data-bs-target="#female-tab-pane" type="button" role="tab" aria-controls="female-tab-pane" aria-selected="false"><%= t '.women' %></button>
-  </li>
-</ul>
+<div class="my-4" data-controller="table">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="male-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#male"
+        type="button"
+        role="tab"
+        aria-controls="male"
+        aria-selected="true"
+        data-action="shown.bs.tab->table#switchTab">
+        <%= t '.men' %>
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="female-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#female"
+        type="button"
+        role="tab"
+        aria-controls="female"
+        aria-selected="false"
+        data-action="shown.bs.tab->table#switchTab">
+        <%= t '.women' %>
+      </button>
+    </li>
+  </ul>
 
-<div class="tab-content">
-  <div class="tab-pane fade show active" id="male-tab-pane" role="tabpanel" aria-labelledby="male-tab" tabindex="0">
-    <%= render partial: 'results_table', locals: { results: @male_results } %>
-  </div>
-  <div class="tab-pane fade" id="female-tab-pane" role="tabpanel" aria-labelledby="female-tab" tabindex="0">
-    <%= render partial: 'results_table', locals: { results: @female_results } %>
+  <div class="card-body">
+    <div class="tab-content" id="results-content">
+      <div class="tab-pane fade show active" id="male" role="tabpanel" aria-labelledby="male-tab">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="pe-0 pe-md-2">#</th>
+              <th scope="col"><%= t '.result' %></th>
+              <th scope="col" class="ps-0 ps-md-2"><%= t '.athlete' %></th>
+              <th scope="col" class="ps-0 ps-md-2"><%= t '.date' %></th>
+              <th scope="col" class="hidden-on-phone"><%= t '.club' %></th>
+              <th scope="col" class="hidden-on-phone"><%= t '.event' %></th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider" data-table-target="content">
+            <%= render 'loading_indicator', colspan: 6 %>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="female" role="tabpanel" aria-labelledby="female-tab">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" class="pe-0 pe-md-2">#</th>
+              <th scope="col"><%= t '.result' %></th>
+              <th scope="col" class="ps-0 ps-md-2"><%= t '.athlete' %></th>
+              <th scope="col" class="ps-0 ps-md-2"><%= t '.date' %></th>
+              <th scope="col" class="hidden-on-phone"><%= t '.club' %></th>
+              <th scope="col" class="hidden-on-phone"><%= t '.event' %></th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider" data-table-target="content">
+            <%= render 'loading_indicator', colspan: 6 %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
