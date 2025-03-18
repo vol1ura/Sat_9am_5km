@@ -49,15 +49,15 @@ export default class extends Controller {
   }
 
   async switchTab(event) {
-    const tab = event.type === 'shown.bs.tab' ? event.target : event.currentTarget
+    const tab = event.currentTarget
 
-    if (!this.hasOrderValue) {
-      this.currentTabValue = tab.getAttribute('aria-controls')
-    } else {
+    if (this.hasOrderValue) {
       this.orderValue = tab.dataset.order
       const url = new URL(window.location)
       url.searchParams.set('order', this.orderValue)
       history.pushState({}, '', url)
+    } else {
+      this.currentTabValue = tab.getAttribute('aria-controls')
     }
 
     this.pageValue = 1
