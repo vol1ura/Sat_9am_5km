@@ -29,7 +29,7 @@ export default class extends Controller {
 
     const options = {
       root: null,
-      rootMargin: "100px",
+      rootMargin: "50px",
       threshold: 0.1
     }
 
@@ -129,7 +129,7 @@ export default class extends Controller {
   }
 
   async loadMore() {
-    if (this.loadingValue || !this.hasMoreValue || this.pageValue >= 20) { return }
+    if (this.loadingValue || !this.hasMoreValue) { return }
 
     this.pageValue++
     await this.loadPage()
