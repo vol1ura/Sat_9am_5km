@@ -9,7 +9,7 @@ class Volunteer < ApplicationRecord
   validates :role, presence: true
   validates :comment, length: { in: 4..40 }, allow_nil: true
   validates :athlete, uniqueness: { scope: :activity_id }
-  validate :cannot_be_assigned_on_more_than_one_position
+  validate :more_than_one_position
 
   before_validation :strip_comment, if: :comment_changed?
   after_commit :broadcast_refresh
@@ -29,10 +29,10 @@ class Volunteer < ApplicationRecord
 
   private
 
-  def cannot_be_assigned_on_more_than_one_position
+  def more_than_one_position
     other_volunteering =
       Volunteer.joins(:activity).where.not(activity_id:).where(athlete_id: athlete_id, activity: { date: })
-    errors.add(:athlete, I18n.t('errors.messages.more_than_one_volunteering')) if other_volunteering.exists?
+    errors.add(:athlete, :more_than_one_volunteering) if other_volunteering.exists?
   end
 
   def strip_comment
