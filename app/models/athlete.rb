@@ -152,14 +152,6 @@ class Athlete < ApplicationRecord
     friends.include?(other_athlete)
   end
 
-  def add_friend(other_athlete)
-    friends << other_athlete unless friend?(other_athlete)
-  end
-
-  def remove_friend(other_athlete)
-    friends.delete(other_athlete)
-  end
-
   private
 
   def remove_name_extra_spaces

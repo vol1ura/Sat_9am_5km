@@ -31,7 +31,13 @@
     <div id="flush-collapseFriends" class="accordion-collapse collapse" aria-labelledby="flush-friends" data-bs-parent="#accordionPersonalBest">
       <div class="accordion-body">
         <div class="list-group list-group-flush" id="friends">
-          <%= render partial: 'friendships/friend', collection: @athlete.friends.includes(:user, :going_to_event), locals: { friendships_hash: @friendships_hash, is_friends_tab: true } %>
+          <%=
+            render(
+              partial: 'friendships/friend',
+              collection: @athlete.friends.includes(:going_to_event, user: :image_attachment),
+              locals: { friendships_hash: @friendships_hash, is_friends_tab: true },
+            )
+          %>
         </div>
       </div>
     </div>
@@ -47,7 +53,13 @@
     <div id="flush-collapseFollowers" class="accordion-collapse collapse" aria-labelledby="flush-followers" data-bs-parent="#accordionPersonalBest">
       <div class="accordion-body">
         <div class="list-group list-group-flush" id="followers">
-          <%= render partial: 'friendships/friend', collection: @athlete.followers.includes(:user, :going_to_event), locals: { friendships_hash: @friendships_hash, is_friends_tab: false } %>
+          <%=
+            render(
+              partial: 'friendships/friend',
+              collection: @athlete.followers.includes(:going_to_event, user: :image_attachment),
+              locals: { friendships_hash: @friendships_hash, is_friends_tab: false },
+            )
+          %>
         </div>
       </div>
     </div>
