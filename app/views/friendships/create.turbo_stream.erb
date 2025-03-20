@@ -4,13 +4,21 @@
 
 <%= turbo_stream.update 'friends' do %>
   <div class="list-group list-group-flush">
-    <%= render partial: 'friendships/friend', collection: @viewed_athlete.friends, locals: { friendships_hash: @friendships_hash, is_friends_tab: true } %>
+    <%= render(
+      partial: 'friendships/friend',
+      collection: @viewed_athlete.friends.includes(:going_to_event, user: :image_attachment),
+      locals: { friendships_hash: @friendships_hash, is_friends_tab: true },
+    ) %>
   </div>
 <% end %>
 
 <%= turbo_stream.update 'followers' do %>
   <div class="list-group list-group-flush">
-    <%= render partial: 'friendships/friend', collection: @viewed_athlete.followers, locals: { friendships_hash: @friendships_hash, is_friends_tab: false } %>
+    <%= render(
+      partial: 'friendships/friend',
+      collection: @viewed_athlete.followers.includes(:going_to_event, user: :image_attachment),
+      locals: { friendships_hash: @friendships_hash, is_friends_tab: false },
+    ) %>
   </div>
 <% end %>
 

@@ -10,8 +10,7 @@ class FriendshipsController < ApplicationController
   before_action :set_friendships_hash
 
   def create
-    @athlete.add_friend(@friend)
-    @athlete.reload
+    @athlete.friends << @friend unless @athlete.friend?(@friend)
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to athlete_path(@friend), notice: t('.success') }
