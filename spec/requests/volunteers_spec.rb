@@ -2,13 +2,13 @@
 
 RSpec.describe '/volunteers' do
   let(:user) { create(:user) }
-  let(:activity) { create(:activity) }
+  let(:activity) { create(:activity, published: false) }
   let(:athlete) { create(:athlete, parkrun_code: 1) }
   let(:volunteer) { create(:volunteer, activity:) }
 
   before do
     create(:permission, user: user, action: 'manage', subject_class: 'Volunteer')
-    sign_in user
+    sign_in user, scope: :user
   end
 
   describe 'GET /volunteers/new' do
@@ -36,15 +36,11 @@ RSpec.describe '/volunteers' do
       }
     end
 
-    it 'renders a successful response' do
-      post volunteers_url, params: valid_attributes, as: :turbo_stream
-      expect(response).to be_successful
-    end
-
     it 'creates a new volunteer' do
       expect do
         post volunteers_url, params: valid_attributes, as: :turbo_stream
       end.to change(Volunteer, :count).by(1)
+      expect(response).to be_successful
     end
   end
 
@@ -63,6 +59,7 @@ RSpec.describe '/volunteers' do
       patch volunteer_url(volunteer), params: valid_attributes, as: :turbo_stream
       expect(response).to be_successful
       expect(volunteer.reload.athlete).to eq athlete
+      expect(volunteer.athlete.going_to_event_id).to eq activity.event_id
     end
   end
 end
