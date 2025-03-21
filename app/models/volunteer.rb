@@ -46,13 +46,17 @@ class Volunteer < ApplicationRecord
   end
 
   def update_athlete_going_to_event
+    return if activity.published || date > Date.current.next_occurring(:saturday)
+
     if athlete_id_previously_changed? && athlete_id_previously_was
       Athlete.find(athlete_id_previously_was).update(going_to_event_id: nil)
     end
-    athlete.update(going_to_event_id: activity.event_id) unless athlete.going_to_event_id == activity.event_id
+    athlete.update(going_to_event_id: activity.event_id) if athlete.going_to_event_id != activity.event_id
   end
 
   def reset_athlete_going_to_event
+    return if activity.published || date > Date.current.next_occurring(:saturday)
+
     athlete.update(going_to_event_id: nil) if athlete.going_to_event_id
   end
 end
