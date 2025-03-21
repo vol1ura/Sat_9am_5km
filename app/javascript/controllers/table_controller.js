@@ -57,6 +57,8 @@ export default class extends Controller {
       url.searchParams.set('order', this.orderValue)
       history.pushState({}, '', url)
     } else {
+      this.tabTargets.forEach(tab => tab.classList.remove('active'))
+      tab.classList.add('active')
       this.currentTabValue = tab.getAttribute('aria-controls')
     }
 
@@ -94,10 +96,7 @@ export default class extends Controller {
         target.innerHTML = ''
       }
 
-      const rows = Array.from(tempDiv.children)
-      const newLoadingIndicator = rows.find(row => row.classList?.contains('loading-indicator'))
-
-      const dataRows = rows.filter(row => !row.classList?.contains('loading-indicator'))
+      const dataRows = Array.from(tempDiv.children).filter(row => !row.classList?.contains('loading-indicator'))
 
       if (dataRows.length > 0) {
         dataRows.forEach(row => target.appendChild(row))
