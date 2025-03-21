@@ -12,6 +12,8 @@ class Volunteer < ApplicationRecord
   validate :more_than_one_position
 
   before_validation :strip_comment, if: :comment_changed?
+  after_save_commit :update_athlete_going_to_event
+  after_destroy_commit :reset_athlete_going_to_event
   after_commit :broadcast_refresh
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
@@ -41,5 +43,16 @@ class Volunteer < ApplicationRecord
 
   def broadcast_refresh
     broadcast_refresh_later_to :volunteers_roster
+  end
+
+  def update_athlete_going_to_event
+    if athlete_id_previously_changed? && athlete_id_previously_was
+      Athlete.find(athlete_id_previously_was).update(going_to_event_id: nil)
+    end
+    athlete.update(going_to_event_id: activity.event_id) unless athlete.going_to_event_id == activity.event_id
+  end
+
+  def reset_athlete_going_to_event
+    athlete.update(going_to_event_id: nil) if athlete.going_to_event_id
   end
 end
