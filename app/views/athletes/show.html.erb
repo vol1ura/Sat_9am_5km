@@ -34,8 +34,8 @@
           <%=
             render(
               partial: 'friendships/friend',
-              collection: @athlete.friends.includes(:going_to_event, user: :image_attachment),
-              locals: { friendships_hash: @friendships_hash, is_friends_tab: true },
+              collection: @athlete.friends.includes(:going_to_event, user: { image_attachment: :blob }),
+              locals: { is_friends_tab: true },
             )
           %>
         </div>
@@ -56,8 +56,8 @@
           <%=
             render(
               partial: 'friendships/friend',
-              collection: @athlete.followers.includes(:going_to_event, user: :image_attachment),
-              locals: { friendships_hash: @friendships_hash, is_friends_tab: false },
+              collection: @athlete.followers.includes(:going_to_event, user: { image_attachment: :blob }),
+              locals: { is_friends_tab: false },
             )
           %>
         </div>

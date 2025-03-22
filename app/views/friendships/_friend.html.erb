@@ -11,7 +11,7 @@
     </div>
   </div>
   <% if current_user&.athlete == @athlete && local_assigns[:is_friends_tab] %>
-    <% if (friendship = friendships_hash[friend.id]) %>
+    <% if (friendship = @friendships_hash[friend.id]) %>
       <%= button_to friendship_path(friendship, viewed_athlete_id: @athlete.id), method: :delete, class: 'btn btn-sm btn-outline-danger', form_class: 'd-inline-block', data: { turbo: true } do %>
         <i class="fa-solid fa-user-minus"></i>
       <% end %>
