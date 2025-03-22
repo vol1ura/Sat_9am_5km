@@ -16,7 +16,6 @@ class Activity < ApplicationRecord
   validates_associated :volunteers, if: :will_save_change_to_date?
 
   after_commit :postprocessing, if: :saved_change_to_published?
-  after_commit :reset_going_athletes, if: %i[saved_change_to_published? published?]
 
   scope :published, -> { where(published: true) }
   scope :in_country, ->(country_code) { joins(event: :country).where(country: { code: country_code }) }
@@ -70,11 +69,5 @@ class Activity < ApplicationRecord
     AthleteStatsUpdateJob.set(wait: 10.minutes).perform_later(participants.ids)
     Telegram::Notification::AfterActivityJob.perform_later(id)
     ClearCache.call
-  end
-
-  private
-
-  def reset_going_athletes
-    ResetGoingAthletesJob.perform_later(event_id)
   end
 end

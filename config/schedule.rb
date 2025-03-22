@@ -43,6 +43,10 @@ every :friday, at: '10' do
   rake 'notification:invite_newbies'
 end
 
+every :saturday, at: '0' do
+  runner 'ResetGoingAthletesJob.perform_later'
+end
+
 every :saturday, at: '18' do
   rake 'notification:breaking_time_badges_expiration'
 end

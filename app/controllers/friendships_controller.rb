@@ -45,6 +45,6 @@ class FriendshipsController < ApplicationController
   end
 
   def set_friendships_hash
-    @friendships_hash = @athlete.friendships.index_by(&:friend_id)
+    @friendships_hash = @athlete.friendships.pluck(:friend_id, :id).to_h
   end
 end
