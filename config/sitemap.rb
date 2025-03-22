@@ -18,8 +18,8 @@ Country.find_each do |country|
     end
     # Add '/ratings' endpoints
     add results_ratings_path, priority: 0.75
-    add ratings_path(rating_type: 'results'), priority: 0.9
-    add ratings_path(rating_type: 'volunteers'), priority: 0.9
+    add ratings_path(type: 'results'), priority: 0.9
+    add ratings_path(type: 'volunteers'), priority: 0.9
     #
     # Add all events:
     saturday_date = Date.current.saturday? ? Date.current : Date.tomorrow.prev_week(:saturday)
