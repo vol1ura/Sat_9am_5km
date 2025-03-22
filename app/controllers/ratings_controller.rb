@@ -58,7 +58,7 @@ class RatingsController < ApplicationController
   end
 
   def set_rating_variables
-    @rating_type = params[:rating_type] == 'volunteers' ? 'volunteers' : 'results'
+    @rating_type = params[:type] == 'volunteers' ? 'volunteers' : 'results'
     @order = RATINGS.include?(params[:order]) ? params[:order] : 'count'
   end
 

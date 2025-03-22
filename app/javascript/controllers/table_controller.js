@@ -6,18 +6,11 @@ export default class extends Controller {
     page: { type: Number, default: 1 },
     loading: { type: Boolean, default: false },
     hasMore: { type: Boolean, default: true },
-    currentTab: String,
-    order: String,
-    ratingType: String
+    url: String,
+    params: String
   }
 
   connect() {
-    if (!this.hasOrderValue) {
-      const activeTab = this.element.querySelector('.nav-link.active')
-      if (activeTab) {
-        this.currentTabValue = activeTab.getAttribute('aria-controls')
-      }
-    }
     this.setupInfiniteScroll()
     this.loadPage()
   }
@@ -41,26 +34,15 @@ export default class extends Controller {
       })
     }, options)
 
-    const target = this.getContentTarget()
-    const spinner = target.querySelector('.loading-indicator')
+    const spinner = this.contentTarget.querySelector('.loading-indicator')
     if (spinner) {
       this.observer.observe(spinner)
     }
   }
 
   async switchTab(event) {
-    const tab = event.currentTarget
-
-    if (this.hasOrderValue) {
-      this.orderValue = tab.dataset.order
-      const url = new URL(window.location)
-      url.searchParams.set('order', this.orderValue)
-      history.pushState({}, '', url)
-    } else {
-      this.tabTargets.forEach(tab => tab.classList.remove('active'))
-      tab.classList.add('active')
-      this.currentTabValue = tab.getAttribute('aria-controls')
-    }
+    this.tabTargets.forEach(tab => tab.classList.remove('active'))
+    event.currentTarget.classList.add('active')
 
     this.pageValue = 1
     this.loadingValue = false
@@ -73,18 +55,15 @@ export default class extends Controller {
     if (!this.hasMoreValue) return
 
     this.loadingValue = true
-    let url = ''
 
-    if (this.hasOrderValue) {
-      url = `/ratings/table?page=${this.pageValue}&rating_type=${this.ratingTypeValue}&order=${this.orderValue}`
-    } else {
-      url = `/ratings/results_table?page=${this.pageValue}&male=${this.currentTabValue === 'male'}`
-    }
+    const tabData = this.tabTargets.find(tab => tab.classList.contains('active')).dataset
+    const query_arr = this.paramsValue.split(',').map(param => `${param}=${tabData[param]}`)
+    const url = `${this.urlValue}?page=${this.pageValue}&${query_arr.join('&')}`
 
     try {
       const response = await fetch(url)
       const html = await response.text()
-      const target = this.getContentTarget()
+      const target = this.contentTarget
 
       const tempDiv = document.createElement('tbody')
       tempDiv.innerHTML = html
@@ -116,15 +95,6 @@ export default class extends Controller {
     } finally {
       this.loadingValue = false
     }
-  }
-
-  getContentTarget() {
-    if (this.hasOrderValue) {
-      return this.contentTarget
-    }
-    const activePane = this.element.querySelector('.tab-pane.show.active')
-    const content = activePane?.querySelector('[data-table-target="content"]')
-    return content || this.contentTargets[0]
   }
 
   async loadMore() {

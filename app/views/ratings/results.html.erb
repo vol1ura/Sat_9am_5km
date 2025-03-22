@@ -1,7 +1,11 @@
 <% head_info :description, t('.description') %>
 <h2><%= head_info :title, t('.title') %></h2>
 
-<div class="my-4" data-controller="table">
+<div
+  class="my-4"
+  data-controller="table"
+  data-table-url-value="/ratings/results_table"
+  data-table-params-value="male">
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item" role="presentation">
       <button
@@ -9,8 +13,8 @@
         type="button"
         role="tab"
         aria-controls="male"
-        aria-selected="true"
         data-table-target="tab"
+        data-male="true"
         data-action="click->table#switchTab">
         <%= t '.men' %>
       </button>
@@ -21,8 +25,8 @@
         type="button"
         role="tab"
         aria-controls="female"
-        aria-selected="false"
         data-table-target="tab"
+        data-male="false"
         data-action="click->table#switchTab">
         <%= t '.women' %>
       </button>

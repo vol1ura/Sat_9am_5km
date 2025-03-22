@@ -14,21 +14,21 @@
   </div>
 </div>
 
-<div data-controller="table"
-     data-table-rating-type-value="<%= @rating_type %>"
-     data-table-order-value="<%= @order %>">
+<div
+  data-controller="table"
+  data-table-url-value="/ratings/table"
+  data-table-params-value="order,type">
   <ul class="nav nav-tabs mb-3" role="tablist">
     <% RatingsController::RATINGS.each do |order| %>
       <li class="nav-item" role="presentation">
         <%=
-          link_to(
-            t(".#{order}"),
-            "#",
+          button_tag(
             class: "nav-link #{order == @order ? 'active' : ''} px-2",
-            data: { table_target: "tab", action: "click->table#switchTab", order: order },
-            role: "tab",
-          )
+            data: { table_target: "tab", action: "click->table#switchTab", order: order, type: @rating_type },
+          ) do
         %>
+          <%= t ".#{order}" %>
+        <% end %>
       </li>
     <% end %>
   </ul>

@@ -23,8 +23,8 @@
                 <li><%= link_to t('.recent_results'), activities_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.club_ratings'), clubs_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.top_results'), results_ratings_path, class: 'dropdown-item' %></li>
-                <li><%= link_to t('.top_athletes'), ratings_path(rating_type: 'results'), class: 'dropdown-item' %></li>
-                <li><%= link_to t('.top_volunteers'), ratings_path(rating_type: 'volunteers'), class: 'dropdown-item' %></li>
+                <li><%= link_to t('.top_athletes'), ratings_path(type: 'results'), class: 'dropdown-item' %></li>
+                <li><%= link_to t('.top_volunteers'), ratings_path(type: 'volunteers'), class: 'dropdown-item' %></li>
                 <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
               </ul>
             </li>
@@ -74,12 +74,12 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to ratings_path(rating_type: 'results'), class: "nav-link #{'active' if params[:rating_type] == 'results' && params[:controller] == 'ratings'}" do %>
+            <%= link_to ratings_path(type: 'results'), class: "nav-link #{'active' if params[:type] == 'results' && params[:controller] == 'ratings'}" do %>
               <span class="fa-li"><i class="fa-solid fa-table"></i></span><%= t '.top_athletes' %>
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to ratings_path(rating_type: 'volunteers'), class: "nav-link #{'active' if params[:rating_type] == 'volunteers' && params[:controller] == 'ratings'}" do %>
+            <%= link_to ratings_path(type: 'volunteers'), class: "nav-link #{'active' if params[:type] == 'volunteers' && params[:controller] == 'ratings'}" do %>
               <span class="fa-li"><i class="fa-solid fa-table"></i></span><%= t '.top_volunteers' %>
             <% end %>
           </li>
