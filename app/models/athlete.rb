@@ -148,8 +148,8 @@ class Athlete < ApplicationRecord
     going_to_event.present?
   end
 
-  def friend?(other_athlete)
-    friends.include?(other_athlete)
+  def friend?(friend)
+    friendships.exists?(friend_id: friend.id)
   end
 
   private
