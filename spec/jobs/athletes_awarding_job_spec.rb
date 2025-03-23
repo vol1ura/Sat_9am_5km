@@ -6,7 +6,6 @@ RSpec.describe AthletesAwardingJob do
 
   before do
     create(:badge, kind: :rage)
-    create(:badge, kind: :minute_bingo)
     create(:badge, kind: :tourist, info: { threshold: 5, type: 'result' })
     create(:badge, kind: :tourist, info: { threshold: 5, type: 'volunteer' })
   end

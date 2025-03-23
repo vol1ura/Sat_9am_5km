@@ -64,6 +64,7 @@ class Activity < ApplicationRecord
 
     ResultsProcessingJob.perform_later(id)
     AthletesAwardingJob.perform_later(id)
+    MinuteBingoAwardingJob.perform_later(id)
     BreakingTimeAwardingJob.perform_later(id)
     FivePlusAwardingJob.perform_later(id)
     AthleteStatsUpdateJob.set(wait: 10.minutes).perform_later(participants.ids)
