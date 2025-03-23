@@ -75,6 +75,10 @@ every :sunday, at: '5:30' do
   rake 'sitemap:create'
 end
 
-every :sunday, at: '5:40' do
+every :sunday, at: '5:35' do
+  runner 'MinuteBingoAwardingJob.perform_later'
+end
+
+every :sunday, at: '5:45' do
   runner 'AthleteStatsUpdateJob.perform_later'
 end
