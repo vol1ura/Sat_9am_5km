@@ -3,7 +3,7 @@
   date = trophy.date
 %>
 <% if @badge.record_kind? %>
-  <% trophy.info['data'].each do |record| %>
+  <% trophy.data.each do |record| %>
     <% next unless (event_name = @country_events.unscope(:order).find_by(id: record['event_id'])&.name) %>
     <tr>
       <td><%= link_to athlete.name, athlete %></td>

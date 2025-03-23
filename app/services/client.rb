@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'net/http'
-
 class Client
   DEFAULT_HEADERS = {
     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',

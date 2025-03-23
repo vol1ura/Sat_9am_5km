@@ -158,7 +158,7 @@
                   end
                 %>
                 <% if trophy.badge.record_kind? %>
-                  <% trophy.info['data'].each do |record_data| %>
+                  <% trophy.data.each do |record_data| %>
                     <%= trophy_link %>
                   <% end %>
                 <% else %>

@@ -5,7 +5,7 @@ RSpec.describe '/admin/athletes' do
 
   before do
     create(:permission, user: user, action: 'read', subject_class: 'Athlete')
-    sign_in user
+    sign_in user, scope: :user
   end
 
   describe 'GET /admin/athletes' do

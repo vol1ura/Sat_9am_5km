@@ -6,7 +6,7 @@ RSpec.describe '/admin/contacts' do
 
   before do
     FactoryBot.rewind_sequences
-    sign_in user
+    sign_in user, scope: :user
   end
 
   describe 'GET /admin/events/1/contacts' do
