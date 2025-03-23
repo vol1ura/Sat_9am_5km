@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
+    current_user.phone = nil if params[:delete_phone]
+
     if current_user.update(user_params)
       if params[:delete_image]
         current_user.image.purge

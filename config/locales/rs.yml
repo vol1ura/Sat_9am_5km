@@ -56,6 +56,7 @@ rs:
         password: lozinka
         remember_me: Zapamti me
         image: slika
+        phone: telefon
       permission:
         event: događaj
         user: korisnik
@@ -834,6 +835,8 @@ rs:
       edit: Izmeni
     edit:
       delete_image: Obriši sliku
+      delete_phone: Obriši broj telefona
+      phone_placeholder: Postavite u botu komandom /phone
       save: Sačuvaj
       cancel: Otkaži
   going_tos:

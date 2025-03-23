@@ -29,6 +29,17 @@
               <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
             </div>
           <% end %>
+          <% if current_user.phone.present? %>
+            <div class="mt-4 form-check form-switch">
+              <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
+              <%= label_tag :delete_phone, t('.delete_phone'), class: 'form-check-label' %>
+            </div>
+          <% end %>
+          <div class="mt-2">
+            <%= form.label :phone, class: 'form-label text-capitalize fw-light' %>
+            <%= form.text_field :phone, class: "form-control", disabled: true, placeholder: t('.phone_placeholder') %>
+          </div>
+
           <% if current_user.image.attached? %>
             <div class="mt-4 form-check form-switch">
               <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>

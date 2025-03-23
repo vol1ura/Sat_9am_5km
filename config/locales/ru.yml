@@ -53,7 +53,8 @@ ru:
         note: примечание
         telegram_user: телеграм
         athlete: участник
-        image: изображение
+        image: фото
+        phone: телефон
       permission:
         event: мероприятие
         user: пользователь
@@ -828,8 +829,10 @@ ru:
       edit: Изменить
     edit:
       delete_image: Удалить фото
+      delete_phone: Удалить номер телефона
+      phone_placeholder: Установите в боте командой /phone
       save: Сохранить
-      cancel: Отменить
+      cancel: Отмена
   going_tos:
     create:
       success: Вы успешно отметились как участник
