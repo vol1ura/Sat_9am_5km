@@ -4,7 +4,7 @@ RSpec.describe '/admin/trophies' do
   let(:user) { create(:user, :admin) }
   let(:badge) { create(:badge) }
 
-  before { sign_in user }
+  before { sign_in user, scope: :user }
 
   describe 'GET /admin/trophies' do
     it 'renders a successful response' do

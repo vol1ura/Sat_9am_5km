@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe '/admin/utilities' do
-  before { sign_in create(:user, :admin) }
+  before { sign_in create(:user, :admin), scope: :user }
 
   describe 'GET /admin/utilities' do
     it 'renders a successful response' do
