@@ -27,6 +27,7 @@ ActiveAdmin.register User do
     column :first_name
     column :last_name
     if current_user.admin?
+      column(:phone) { |user| user.phone.present? }
       column :note
       column :role
     end
