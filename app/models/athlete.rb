@@ -7,7 +7,7 @@ class Athlete < ApplicationRecord
     trigram: { threshold: 0.7, word_similarity: true },
   }
 
-  audited associated_with: :user, max_audits: 20, except: [:stats]
+  audited associated_with: :user, max_audits: 20, except: %i[stats going_to_event_id]
 
   PARKZHRUN_BORDER = 690_000_000
   SAT_9AM_5KM_BORDER = 770_000_000
