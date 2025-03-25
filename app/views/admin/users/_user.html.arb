@@ -4,6 +4,7 @@ attributes_table_for user do
   row :first_name
   row :last_name
   row :email
+  row(:phone) { |user| user.phone.present? }
   row(:telegram_user) { |user| telegram_link user }
   row :role
   row :note if current_user.admin?
