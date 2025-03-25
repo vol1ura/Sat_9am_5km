@@ -115,9 +115,13 @@ class AthletesAwardingJob < ApplicationJob
   end
 
   def threshold_awarding!(athlete, kind:, type:, value:)
-    badges_dataset = Badge.dataset_of(kind:, type:).where("(info->'threshold')::integer <= ?", value)
-    return unless (badge = badges_dataset.last)
+    badges_dataset = Badge.dataset_of(kind:, type:)
+    deserved_badges = badges_dataset.where("(info->'threshold')::integer <= ?", value)
+    return unless (badge = deserved_badges.last)
     return if athlete.trophies.exists?(badge:)
+
+    future_badges = badges_dataset.where("(info->'threshold')::integer > ?", value).unscope(:order)
+    return if athlete.trophies.exists?(badge: future_badges)
 
     athlete.transaction do
       athlete.trophies.where(badge: badges_dataset.excluding(badge)).destroy_all
