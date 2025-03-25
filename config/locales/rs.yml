@@ -477,7 +477,8 @@ rs:
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
   views:
-    greeting: '%{name}, dobro došli na S95!!'
+    greeting: '%{name}, dobro došli na S95!'
+    auth_link_invalid: 'Link za prijavu više nije validan'
     pagination:
       previous: '←'
       first: '↞'

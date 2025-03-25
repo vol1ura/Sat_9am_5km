@@ -25,6 +25,13 @@ module API
         head :ok
       end
 
+      def auth_link
+        user = User.find(params[:user_id])
+        user.generate_auth_token!
+
+        render json: { link: auth_link_url(token: user.auth_token) }
+      end
+
       rescue_from ActiveRecord::RecordInvalid do |e|
         Rollbar.error e
         errors = {}

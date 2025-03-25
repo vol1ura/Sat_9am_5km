@@ -477,6 +477,7 @@ ru:
       short: "%d %b, %H:%M"
   views:
     greeting: '%{name}, приветствуем в S95!'
+    auth_link_invalid: 'Ссылка недействительна или срок её действия истёк'
     pagination:
       previous: '←'
       first: '↞'
