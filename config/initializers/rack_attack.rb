@@ -16,6 +16,10 @@ class Rack::Attack
     req.ip if req.path.match?(%r{^/athletes[^/]})
   end
 
+  throttle("auth_links/ip", limit: 10, period: 1.minute) do |req|
+    req.ip if req.path.start_with?('/auth_links/')
+  end
+
   blocklist('pentesters block') do |req|
     %w[etc/passwd ../../].include?(CGI.unescape(req.path)) ||
       req.path.end_with?('.php') ||

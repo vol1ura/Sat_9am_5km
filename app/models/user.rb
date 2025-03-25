@@ -43,6 +43,22 @@ class User < ApplicationRecord
     "#{first_name} #{last_name.upcase}"
   end
 
+  def generate_auth_token!
+    self.auth_token = SecureRandom.hex(16)
+    self.auth_token_expires_at = 2.minutes.from_now
+    save!
+  end
+
+  def clear_auth_token!
+    self.auth_token = nil
+    self.auth_token_expires_at = nil
+    save!
+  end
+
+  def auth_token_valid?
+    auth_token && auth_token_expires_at&.future?
+  end
+
   private
 
   def update_athlete_name

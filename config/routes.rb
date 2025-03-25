@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end
   end
   resources :friendships, only: %i[create destroy]
+  resources :auth_links, only: :show, module: :users, as: :auth_links, param: :token
 
   resource :user, only: %i[show edit update]
   resolve('User') { [:user] }
@@ -56,7 +57,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :internal do
-      resource :user, only: %i[create update]
+      resource :user, only: %i[create update] do
+        post :auth_link, on: :member
+      end
       resource :athlete, only: :update
     end
     namespace :parkzhrun do
