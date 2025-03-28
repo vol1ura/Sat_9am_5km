@@ -24,7 +24,7 @@
   <% end %>
   <%= render 'card', header: t('.how_participate') do %>
     <p class="card-text"><%= t '.about_participation' %></p>
-    <% if user_signed_in? %>
+    <% if @event.active && user_signed_in? %>
       <div id="going_to_form">
         <%= render 'going_tos/form' %>
       </div>

@@ -8,12 +8,13 @@ class Event < ApplicationRecord
   has_many :volunteering_positions, dependent: :destroy
   has_many(
     :going_athletes,
-    -> { where.not(going_to_event_id: nil) },
     class_name: 'Athlete',
     foreign_key: :going_to_event_id,
     dependent: :nullify,
     inverse_of: false,
   )
+
+  after_update_commit :reset_going_athletes, if: -> { !active && saved_change_to_active? }
 
   validates :name, :code_name, :town, :place, presence: true
   validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ }
@@ -46,5 +47,9 @@ class Event < ApplicationRecord
 
   def to_combobox_display
     name
+  end
+
+  def reset_going_athletes
+    ResetGoingAthletesJob.perform_later(id)
   end
 end

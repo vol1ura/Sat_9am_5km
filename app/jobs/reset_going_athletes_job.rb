@@ -3,10 +3,12 @@
 class ResetGoingAthletesJob < ApplicationJob
   queue_as :low
 
-  def perform
-    Athlete
-      .where.not(going_to_event_id: nil)
-      .update_all(going_to_event_id: nil) # rubocop:disable Rails/SkipsModelValidations
+  def perform(event_id = nil)
+    dataset = Athlete.where.not(going_to_event_id: nil)
+    dataset = dataset.rewhere(going_to_event_id: event_id) if event_id
+    dataset.update_all(going_to_event_id: nil) # rubocop:disable Rails/SkipsModelValidations
+
+    return if event_id
 
     Volunteer
       .eager_load(:activity)
