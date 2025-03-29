@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div data-map-target="mapView" class="card shadow-sm">
+  <div data-map-target="mapView" class="card shadow rounded-0">
     <div id="map" style="height: 600px; width: 100%;"></div>
   </div>
 
@@ -18,7 +18,7 @@
           <div class="card h-100 <%= event['active'] ? 'border-primary' : 'border-danger' %>">
             <div class="card-body">
               <h3 class="card-title h5"><%= event['name'] %></h3>
-              <p class="card-text text-muted"><%= event['town'] %></p>
+              <p class="card-text text-muted"><%= event['slogan'] %></p>
               <%= link_to "Подробнее", event_path(event['code_name']), class: "btn btn-link p-0" %>
             </div>
           </div>
@@ -29,6 +29,7 @@
 </div>
 
 <% content_for :head do %>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV['YANDEX_MAPS_API_KEY'] %>&lang=ru_RU&onload=initYandexMaps" async defer></script>
   <script>
     window.initYandexMaps = function() {
       if (window.ymaps) {
@@ -38,5 +39,4 @@
       }
     }
   </script>
-  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV['YANDEX_MAPS_API_KEY'] %>&lang=ru_RU&onload=initYandexMaps" async defer></script>
 <% end %>
