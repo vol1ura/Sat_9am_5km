@@ -1,9 +1,9 @@
-<div class="container" data-controller="map" data-events="<%= @events.to_json %>">
+<div data-controller="map" data-events="<%= @events.to_json %>">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h2">Карта мероприятий</h1>
     <div class="btn-group">
-      <button data-action="map#showMap" class="btn btn-outline-primary">Карта</button>
-      <button data-action="map#showList" class="btn btn-outline-primary">Список</button>
+      <button data-action="map#showMap" data-map-target="mapButton" class="btn btn-primary">Карта</button>
+      <button data-action="map#showList" data-map-target="listButton" class="btn btn-outline-primary">Список</button>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
     <div class="row">
       <% @events.each do |event| %>
         <div class="col-md-4 mb-4">
-          <div class="card h-100">
+          <div class="card h-100 <%= event['active'] ? 'border-primary' : 'border-danger' %>">
             <div class="card-body">
               <h3 class="card-title h5"><%= event['name'] %></h3>
               <p class="card-text text-muted"><%= event['town'] %></p>

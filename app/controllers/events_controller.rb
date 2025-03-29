@@ -51,7 +51,7 @@ class EventsController < ApplicationController
 
   def map
     @events = Event.where('latitude IS NOT NULL AND longitude IS NOT NULL').map do |event|
-      event.as_json(only: %i[name town code_name]).merge(
+      event.as_json(only: %i[active name town code_name]).merge(
         latitude: event.latitude.to_f,
         longitude: event.longitude.to_f,
       )

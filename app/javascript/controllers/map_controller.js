@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["mapView", "listView"]
+  static targets = ["mapView", "listView", "mapButton", "listButton"]
 
   connect() {
     console.log('Map controller connected')
@@ -24,6 +24,10 @@ export default class extends Controller {
 
   showMap() {
     console.log('Showing map view')
+    this.mapButtonTarget.classList.add('btn-primary')
+    this.mapButtonTarget.classList.remove('btn-outline-primary')
+    this.listButtonTarget.classList.remove('btn-primary')
+    this.listButtonTarget.classList.add('btn-outline-primary')
     this.mapViewTarget.classList.remove('d-none')
     this.listViewTarget.classList.add('d-none')
 
@@ -35,6 +39,10 @@ export default class extends Controller {
 
   showList() {
     console.log('Showing list view')
+    this.mapButtonTarget.classList.remove('btn-primary')
+    this.mapButtonTarget.classList.add('btn-outline-primary')
+    this.listButtonTarget.classList.remove('btn-outline-primary')
+    this.listButtonTarget.classList.add('btn-primary')
     this.mapViewTarget.classList.add('d-none')
     this.listViewTarget.classList.remove('d-none')
   }
@@ -98,13 +106,13 @@ export default class extends Controller {
               <div>
                 <h5>${event.name}</h5>
                 <p class="py-1">${event.town}</p>
-                <a href="/events/${event.code_name}" class="btn btn-primary">Подробнее</a>
+                <a href="/events/${event.code_name}" class="btn btn-primary-outline">Подробнее</a>
               </div>
             `,
             hintContent: event.name
           },
           {
-            preset: 'islands#blueStretchyIcon'
+            preset: event.active ? 'islands#blueStretchyIcon' : 'islands#pinkStretchyIcon'
           }
         );
 
