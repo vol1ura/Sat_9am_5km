@@ -57,11 +57,33 @@ export default class extends Controller {
       // Устанавливаем минимальную высоту для контейнера
       mapElement.style.minHeight = '600px'
 
+      // Определяем начальные координаты (Москва)
+      const defaultCenter = [55.7558, 37.6173]
+      const defaultZoom = 5
+
+      // Создаем карту с начальными координатами
       this.map = new window.ymaps.Map('map', {
-        center: [55.7558, 37.6173], // Москва
-        zoom: 5,
+        center: defaultCenter,
+        zoom: defaultZoom,
         controls: ['zoomControl']
       });
+
+      // Пытаемся получить местоположение пользователя
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const userLocation = [position.coords.latitude, position.coords.longitude]
+            this.map.setCenter(userLocation, 10)
+          },
+          (error) => {
+            console.log('Ошибка получения местоположения:', error)
+            this.map.setCenter(defaultCenter, defaultZoom)
+          }
+        )
+      } else {
+        console.log('Геолокация не поддерживается браузером')
+        this.map.setCenter(defaultCenter, defaultZoom)
+      }
 
       console.log('Map instance created')
 
