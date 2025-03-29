@@ -98,6 +98,9 @@ ru:
         main_picture_link: 'ссылка на баннер'
         town: город
         place: 'как найти?'
+        latitude: 'широта'
+        longitude: 'долгота'
+        coordinates: 'координаты'
         slogan: девиз
         description: описание
         visible_order: 'вес в ленте'
@@ -504,6 +507,7 @@ ru:
   navbars:
     top:
       events: Мероприятия
+      map: Карта мероприятий
       results: Результаты
       recent_results: Недавние забеги
       1_january: 1 января

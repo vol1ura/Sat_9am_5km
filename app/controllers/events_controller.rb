@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :find_event, except: %i[index search]
+  before_action :find_event, except: %i[index search map]
 
   def index
     @local_events = Event.in_country(top_level_domain).unscope(:order)
@@ -47,6 +47,15 @@ class EventsController < ApplicationController
   def volunteering
     @activities = Activity.where(event: @event, date: Date.current..).order(:date).limit(4)
     @tg_chat = @event.contacts.find_by(contact_type: :tg_chat)
+  end
+
+  def map
+    @events = Event.where('latitude IS NOT NULL AND longitude IS NOT NULL').map do |event|
+      event.as_json(only: %i[name town code_name]).merge(
+        latitude: event.latitude.to_f,
+        longitude: event.longitude.to_f,
+      )
+    end
   end
 
   private
