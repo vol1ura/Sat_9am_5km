@@ -12,6 +12,8 @@
             <li class="nav-item dropdown" data-controller="dropdown">
               <%= link_to t('.events'), '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false', 'data-dropdown-target' => 'toggle' %>
               <ul class="dropdown-menu" aria-labelledby="eventDropdown" data-dropdown-target="menu">
+                <li><%= link_to t('.map'), map_events_path, class: 'dropdown-item' %></li>
+                <li><hr class="dropdown-divider"></li>
                 <% @country_events.each do |event| %>
                   <li><%= link_to event.name, event_path(event.code_name), class: 'dropdown-item' %></li>
                 <% end %>
@@ -58,6 +60,11 @@
               <span class="fa-li"><i class="fa-solid fa-snowman"></i></span><%= t '.1_january' %>
             <%# end %>
           </li>-->
+          <li class="nav-item">
+            <%= link_to map_events_path, class: "nav-link #{'active' if params[:controller] == 'events' && params[:action] == 'map'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-map-location-dot"></i></span><%= t '.map' %>
+            <% end %>
+          </li>
           <li class="nav-item">
             <%= link_to activities_path, class: "nav-link #{'active' if params[:controller] == 'activities'}" do %>
               <span class="fa-li"><i class="fa-solid fa-square-poll-horizontal"></i></span><%= t '.recent_results' %>

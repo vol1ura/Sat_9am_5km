@@ -9,7 +9,8 @@ ActiveAdmin.register Event do
   config.sort_order = 'visible_order_asc'
 
   permit_params(
-    :description, :active, :place, :name, :main_picture_link, :code_name, :town, :visible_order, :slogan, :country_id,
+    :description, :active, :place, :name, :main_picture_link, :code_name,
+    :town, :visible_order, :slogan, :country_id, :latitude, :longitude,
   )
 
   filter :country
@@ -42,6 +43,7 @@ ActiveAdmin.register Event do
       row :name
       row :town
       row :place
+      row(:coordinates) { |e| "#{e.latitude},#{e.longitude}" }
       row :main_picture_link
       row :slogan
       row :visible_order

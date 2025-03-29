@@ -1,0 +1,42 @@
+<div data-controller="map" data-events="<%= @events.to_json %>">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2">Карта мероприятий</h1>
+    <div class="btn-group">
+      <button data-action="map#showMap" data-map-target="mapButton" class="btn btn-primary">Карта</button>
+      <button data-action="map#showList" data-map-target="listButton" class="btn btn-outline-primary">Список</button>
+    </div>
+  </div>
+
+  <div data-map-target="mapView" class="card shadow rounded-0">
+    <div id="map" style="height: 600px; width: 100%;"></div>
+  </div>
+
+  <div data-map-target="listView" class="d-none">
+    <div class="row">
+      <% @events.each do |event| %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 <%= event['active'] ? 'border-primary' : 'border-danger' %>">
+            <div class="card-body">
+              <h3 class="card-title h5"><%= event['name'] %></h3>
+              <p class="card-text text-muted"><%= event['slogan'] %></p>
+              <%= link_to "Подробнее", event_path(event['code_name']), class: "btn btn-link p-0" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% content_for :head do %>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV['YANDEX_MAPS_API_KEY'] %>&lang=ru_RU&onload=initYandexMaps" async defer></script>
+  <script>
+    window.initYandexMaps = function() {
+      if (window.ymaps) {
+        window.ymaps.ready(function() {
+          window.dispatchEvent(new Event('yandex-maps-ready'));
+        });
+      }
+    }
+  </script>
+<% end %>

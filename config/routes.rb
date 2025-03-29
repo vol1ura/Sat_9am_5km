@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
+    get :map, on: :collection
     get :volunteering, on: :member
     resource :going_to, only: %i[create destroy]
   end
