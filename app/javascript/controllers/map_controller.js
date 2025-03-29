@@ -67,7 +67,7 @@ export default class extends Controller {
 
       // Определяем начальные координаты (Москва)
       const defaultCenter = [55.7558, 37.6173]
-      const defaultZoom = 5
+      const defaultZoom = 6
 
       // Создаем карту с начальными координатами
       this.map = new window.ymaps.Map('map', {
@@ -105,14 +105,14 @@ export default class extends Controller {
             balloonContent: `
               <div>
                 <h5>${event.name}</h5>
-                <p class="py-1">${event.town}</p>
-                <a href="/events/${event.code_name}" class="btn btn-primary-outline">Подробнее</a>
+                <p class="py-1 text-muted">${event.slogan}</p>
+                <a href="/events/${event.code_name}" class="btn btn-primary">Подробнее</a>
               </div>
             `,
             hintContent: event.name
           },
           {
-            preset: event.active ? 'islands#blueStretchyIcon' : 'islands#pinkStretchyIcon'
+            preset: event.active ? 'islands#redGovernmentCircleIcon' : 'islands#grayGovernmentCircleIcon'
           }
         );
 
