@@ -5,7 +5,6 @@ module Athletes
     NAME_PATH = {
       parkrun_code: {
         url: 'https://www.parkrun.com.au/results/athleteresultshistory/?athleteNumber=%d',
-        xpath: '//div[@id="content"]/h2/text()',
       },
       fiveverst_code: {
         url: 'https://5verst.ru/userstats/%d/',
@@ -25,9 +24,9 @@ module Athletes
     end
 
     def call
-      parsed_data = Nokogiri::HTML.parse(fetch)
-      name_element = parsed_data.xpath(NAME_PATH.dig(@code_type, :xpath))
-      name_element.text.tr("\u00A0", ' ').split(' - ').first&.strip
+      return unless (xpath = NAME_PATH.dig(@code_type, :xpath))
+
+      Nokogiri::HTML.parse(fetch).xpath(xpath).text.tr("\u00A0", ' ').strip
     rescue StandardError => e
       Rollbar.error e, code: @code
       nil
