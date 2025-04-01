@@ -106,7 +106,7 @@ class Athlete < ApplicationRecord
     return create if code_type == :id
 
     athlete_name = Athletes::Finder.call(personal_code)
-    athlete ||= find_or_initialize_by(name: athlete_name, code_type => nil)
+    athlete ||= new
     athlete.update!(name: athlete_name, **personal_code.to_params)
     athlete
   end
