@@ -45,9 +45,7 @@ class Event < ApplicationRecord
     almost_jubilee_athletes_dataset(type, delta.next)
   end
 
-  def to_combobox_display
-    name
-  end
+  def to_combobox_display = name
 
   def reset_going_athletes
     ResetGoingAthletesJob.perform_later(id)
