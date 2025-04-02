@@ -7,11 +7,7 @@ class Country < ApplicationRecord
 
   validates :code, presence: true, uniqueness: true
 
-  def name
-    I18n.t("country.#{code}")
-  end
+  def name = I18n.t("country.#{code}")
 
-  def host
-    "s95.#{code}"
-  end
+  def host = "s95.#{code}"
 end

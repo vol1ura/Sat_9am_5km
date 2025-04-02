@@ -39,9 +39,7 @@ class User < ApplicationRecord
     permissions.find_by(subject_class: 'VolunteeringPosition', action: %w[manage update])
   end
 
-  def full_name
-    "#{first_name} #{last_name.upcase}"
-  end
+  def full_name = "#{first_name} #{last_name.upcase}"
 
   def generate_auth_token!
     self.auth_token = SecureRandom.hex(16)

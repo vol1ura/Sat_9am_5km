@@ -16,7 +16,5 @@ class Club < ApplicationRecord
     %w[name country_id]
   end
 
-  def to_combobox_display
-    name
-  end
+  def to_combobox_display = name
 end
