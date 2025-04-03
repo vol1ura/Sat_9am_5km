@@ -18,7 +18,7 @@
 
 <p><%= t '.acknowledgements' %></p>
 <p>
-  <% unless @activities.load.empty? %>
+  <% unless @activities.empty? %>
     <%= t '.about_roster_html' %>
   <% end %>
   <% if @tg_chat %>
@@ -27,41 +27,46 @@
   <%= t '.additional_positions' %>
 </p>
 
-<ul class="nav nav-tabs" id="protocol" role="tablist">
-  <% @activities.each_with_index do |activity, idx| %>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link <%= 'active' if idx.zero? %>" id="tab-<%= idx %>" data-bs-toggle="tab" data-bs-target="#tab-<%= idx %>-pane" type="button" role="tab" aria-controls="tab-<%= idx %>-pane" aria-selected="true">
-        <%= l activity.date, format: :brief %>
-      </button>
-    </li>
-  <% end %>
-</ul>
-<div class="tab-content" id="protocolContent">
-  <% @activities.each_with_index do |activity, idx| %>
-    <div class="tab-pane fade show <%= 'active' if idx.zero? %>" id="tab-<%= idx %>-pane" role="tabpanel" aria-labelledby="tab-<%= idx %>" tabindex="0">
-      <table class="table">
-        <thead>
-          <tr>
-            <th><%= t '.role' %></th>
-            <th><%= t '.volunteer' %></th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider" data-turbo-prefetch="false">
-          <% @event.volunteering_positions.order(:rank).each do |position| %>
-            <% volunteers = activity.volunteers.includes(:athlete).public_send("#{position.role}_role").order(:comment).to_a %>
-            <% [position.number, volunteers.size].max.times.each do |i| %>
-              <%
-                volunteer = volunteers[i]
-                idx = "#{position.role}-#{i}-#{activity.id}"
-              %>
-              <tr>
-                <td><%= render partial: 'role', locals: { volunteer: volunteer, role: position.role, idx: idx } %></td>
-                <td><%= render partial: 'volunteer', locals: { volunteer: volunteer, role: position.role, idx: idx, activity: activity } %></td>
-              </tr>
-            <% end %>
+<% unless @activities.empty? %>
+  <ul class="nav nav-tabs" id="protocol" role="tablist">
+    <% @activities.each_with_index do |activity, idx| %>
+      <li class="nav-item" role="presentation">
+        <%=
+          link_to(
+            l(activity.date, format: :brief),
+            volunteering_event_path(@event.code_name, activity_id: activity.id),
+            class: "nav-link #{'active' if activity.id == @activity&.id || (idx.zero? && @activity.nil?)}",
+            role: "tab",
+          )
+        %>
+      </li>
+    <% end %>
+  </ul>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= t '.role' %></th>
+        <th><%= t '.volunteer' %></th>
+      </tr>
+    </thead>
+    <% if @activity %>
+      <tbody class="table-group-divider" data-turbo-prefetch="false">
+        <% all_volunteers = @activity.volunteers %>
+        <% @event.volunteering_positions.order(:rank).each do |position| %>
+          <% volunteers = all_volunteers.select { |v| v.role == position.role }.sort_by(&:comment) %>
+          <% [position.number, volunteers.size].max.times.each do |i| %>
+            <%
+              volunteer = volunteers[i]
+              idx = "#{position.role}-#{i}-#{@activity.id}"
+            %>
+            <tr>
+              <td><%= render partial: 'role', locals: { volunteer: volunteer, role: position.role, idx: idx } %></td>
+              <td><%= render partial: 'volunteer', locals: { volunteer: volunteer, role: position.role, idx: idx, activity: @activity } %></td>
+            </tr>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
-</div>
+        <% end %>
+      </tbody>
+    <% end %>
+  </table>
+<% end %>
