@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     end
   end
   resources :friendships, only: %i[create destroy]
-  resources :auth_links, only: :show, module: :users, as: :auth_links, param: :token
+  resources :auth_links, only: :show, module: :users, param: :token
 
   resource :user, only: %i[show edit update]
   resolve('User') { [:user] }
