@@ -54,7 +54,7 @@
       <tbody class="table-group-divider" data-turbo-prefetch="false">
         <% all_volunteers = @activity.volunteers %>
         <% @event.volunteering_positions.order(:rank).each do |position| %>
-          <% volunteers = all_volunteers.select { |v| v.role == position.role }.sort_by(&:comment) %>
+          <% volunteers = all_volunteers.select { |v| v.role == position.role }.sort_by { |v| v.comment.to_s } %>
           <% [position.number, volunteers.size].max.times.each do |i| %>
             <%
               volunteer = volunteers[i]
