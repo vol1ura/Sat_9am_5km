@@ -5,6 +5,8 @@ class PagesController < ApplicationController
 
   before_action :validate_page, except: [:index]
 
+  layout 'home', only: [:index]
+
   def index
     @local_events = Event.in_country(top_level_domain).unscope(:order)
     @next_saturday = Date.tomorrow.next_week.prev_week(:saturday)
