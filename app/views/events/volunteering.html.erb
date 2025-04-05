@@ -52,8 +52,12 @@
     </thead>
     <% if @activity %>
       <tbody class="table-group-divider" data-turbo-prefetch="false">
-        <% all_volunteers = @activity.volunteers.includes(:athlete) %>
-        <% @event.volunteering_positions.order(:rank).each do |position| %>
+        <%
+          all_volunteers = @activity.volunteers.includes(:athlete).to_a
+          volunteering_positions = @event.volunteering_positions.order(:rank).to_a
+          volunteering_positions_roles = volunteering_positions.map(&:role)
+        %>
+        <% volunteering_positions.each do |position| %>
           <% volunteers = all_volunteers.select { |v| v.role == position.role }.sort_by { |v| v.comment.to_s } %>
           <% [position.number, volunteers.size].max.times.each do |i| %>
             <%
@@ -65,6 +69,13 @@
               <td><%= render partial: 'volunteer', locals: { volunteer: volunteer, role: position.role, idx: idx, activity: @activity } %></td>
             </tr>
           <% end %>
+        <% end %>
+        <% all_volunteers.reject { |v| v.role.in?(volunteering_positions_roles) }.each do |volunteer| %>
+          <% idx = "#{volunteer.role}-#{volunteer.id}-#{@activity.id}" %>
+          <tr>
+            <td><%= render partial: 'role', locals: { volunteer: volunteer, role: volunteer.role, idx: idx } %></td>
+            <td><%= render partial: 'volunteer', locals: { volunteer: volunteer, role: volunteer.role, idx: idx, activity: @activity } %></td>
+          </tr>
         <% end %>
       </tbody>
     <% end %>
