@@ -1,58 +1,272 @@
 <%= render '/flash' %>
 
-<% if @jubilee_events.present? || @funrun_badges.present? %>
-  <h2><%= t '.upcoming_events', date: l(@next_saturday, format: :brief) %></h2>
-  <ul class="list-group list-group-flush">
-    <% @jubilee_events.each do |event, activity_number| %>
-      <li class="list-group-item">
-        <div class="d-flex align-items-center">
-          <div class="flex-shrink-0">
-            <div class="text-badge px-2 py-4">
-              <div class="fw-normal text-capitalize"><%= t 'activerecord.models.activity.one' %></div>
-              <div class="fw-bold fst-italic">№<%= activity_number %></div>
+<%# Hero Section %>
+<section class="hero-section py-5 text-white mt-n3">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-6">
+        <div class="placeholder-image">
+          <h1 class="display-4 fw-bold mb-4 text-white">Каждую субботу в 9:00!</h1>
+          <p class="lead mb-4">5 км для всех уровней подготовки, бесплатно. Присоединяйся!</p>
+          <div class="d-flex flex-wrap gap-3">
+            <%= link_to "Регистрация", new_user_session_path, class: "btn btn-danger btn-lg" %>
+            <%= link_to "Результаты", activities_path, class: "btn btn-outline-light btn-lg" %>
+            <%= link_to "Найти ближайший забег", events_path, class: "btn btn-outline-light btn-lg" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# How It Works Section %>
+<section class="how-it-works py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <h2 class="text-center mb-5">Как это работает?</h2>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-user-plus fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title">Регистрация</h5>
+            <p class="card-text">Создай профиль за 1 минуту в нашем Telegram-боте</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-map-marker-alt fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title">Выбери забег</h5>
+            <p class="card-text">Более 20 локаций в 3 странах</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-calendar-check fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title">Приходи в субботу</h5>
+            <p class="card-text">Старт в 9:00, дистанцию можно пробежать или пройти, можно помочь волонтёрством</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title">Следи за прогрессом</h5>
+            <p class="card-text">Результаты, награды, рейтинги - на нашем сайте</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Countdown Timer Section %>
+<section class="countdown-section py-4" style="background-color: #2c3e50;" data-controller="countdown">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center text-white">
+        <h3 class="mb-3">До следующего забега осталось:</h3>
+        <div class="countdown-timer d-flex justify-content-center gap-1 gap-md-4">
+          <div class="timer-item">
+            <span class="timer-number" data-countdown-target="days">00</span>
+            <span class="timer-label">дней</span>
+          </div>
+          <div class="timer-item">
+            <span class="timer-number" data-countdown-target="hours">00</span>
+            <span class="timer-label">часов</span>
+          </div>
+          <div class="timer-item">
+            <span class="timer-number" data-countdown-target="minutes">00</span>
+            <span class="timer-label">минут</span>
+          </div>
+          <div class="timer-item">
+            <span class="timer-number" data-countdown-target="seconds">00</span>
+            <span class="timer-label">секунд</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Why S95 Section %>
+<section class="why-s95 py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <h2 class="text-center mb-5">Почему S95?</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title">Для всех</h5>
+            <p class="card-text">Можно участвовать вместе с семьёй, друзьями, домашними питомцами</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title">Сообщество</h5>
+            <p class="card-text">Заходите в чаты мероприятий, находите друзей, общайтесь на чаепитиях после забегов</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-gift fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title">Бесплатно</h5>
+            <p class="card-text">Все мероприятия проводятся энтузиастами любителями бега и волонтёрами</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Stories Section %>
+<section class="stories-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">Истории участников</h2>
+    <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="2"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="story-card text-center mb-3">
+                <div class="story-image mb-4">
+                  <%#= image_tag '/images/stories/runner1.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
+                </div>
+                <blockquote class="blockquote">
+                  <p class="mb-4">"Бегаю с S95 уже год – улучшил результат с 35 до 20 минут! Нашел новых друзей и вдохновение для новых достижений."</p>
+                  <footer class="blockquote-footer">Андрей, Кузьминки</footer>
+                </blockquote>
+              </div>
             </div>
           </div>
-          <div class="flex-grow-1 ms-3">
-            <%= link_to event.name, event_path(event.code_name), class: 'text-decoration-none fw-bold' %>
+        </div>
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="story-card text-center mb-3">
+                <div class="story-image mb-4">
+                  <%#= image_tag '/images/stories/runner2.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
+                </div>
+                <blockquote class="blockquote">
+                  <p class="mb-4">"Пришла на S95 с подругой для поддержки, а теперь бегаю каждую субботу! Лучший способ начать выходной день."</p>
+                  <footer class="blockquote-footer">Мария, Печатники</footer>
+                </blockquote>
+              </div>
+            </div>
           </div>
         </div>
-      </li>
-    <% end %>
-    <% @funrun_badges.each do |badge| %>
-      <li class="list-group-item">
-        <div class="d-flex align-items-center">
-          <div class="flex-shrink-0">
-            <%= image_tag badge.image.variant(:thumb), class: 'thumb-badge', alt: 'FunRun badge' %>
-          </div>
-          <div class="flex-grow-1 ms-3">
-            <%= link_to badge.name, badge, class: 'text-decoration-none fw-bold' %>
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="story-card text-center mb-3">
+                <div class="story-image mb-4">
+                  <%#= image_tag '/images/stories/runner3.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
+                </div>
+                <blockquote class="blockquote">
+                  <p class="mb-4">"Бегаю с семьей – дети участвуют в детских забегах, а мы с женой бежим 5км. Отличный семейный досуг!"</p>
+                  <footer class="blockquote-footer">Максим, Кузьминки</footer>
+                </blockquote>
+              </div>
+            </div>
           </div>
         </div>
-      </li>
-    <% end %>
-  </ul>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#storiesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Предыдущий</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#storiesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Следующий</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<%# Events Section %>
+<% if @jubilee_events.present? || @funrun_badges.present? %>
+  <section class="events-section">
+    <div class="container">
+      <h2 class="text-center"><%= t '.upcoming_events', date: l(@next_saturday, format: :brief) %></h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <ul class="list-group list-group-flush">
+            <% @jubilee_events.each do |event, activity_number| %>
+              <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0">
+                    <div class="text-badge px-3 py-4">
+                      <div class="fw-normal text-capitalize"><%= t 'activerecord.models.activity.one' %></div>
+                      <div class="fw-bold fst-italic">№<%= activity_number %></div>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <%= link_to event.name, event_path(event.code_name), class: 'text-decoration-none fw-bold text-dark' %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+            <% @funrun_badges.each do |badge| %>
+              <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0">
+                    <%= image_tag badge.image.variant(:thumb), class: 'thumb-badge', alt: 'FunRun badge' %>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <%= link_to badge.name, badge, class: 'text-decoration-none fw-bold text-dark' %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 <% end %>
 
-<h2 class="mt-4"><%= t '.our_partners' %></h2>
-<section class="partners">
-  <%= external_link_to 'https://t.me/parkrun' do %>
-    <% image_tag '/images/partners/pro_parkrun.png', class: 'img-partner', alt: 'Pro parkrun', loading: 'lazy' %>
-  <% end %>
-  <% if top_level_domain == :ru %>
-    <%= external_link_to 'https://go.grigri.ru/s95' do %>
-      <% image_tag '/images/partners/grigri.svg', class: 'img-partner', alt: 'Gri', loading: 'lazy' %>
-    <% end %>
-    <%= external_link_to 'https://rununion.ru/' do %>
-      <% image_tag '/images/partners/run_union.png', class: 'img-partner', alt: 'Союз любителей бега', loading: 'lazy' %>
-    <% end %>
-  <% end %>
-  <% if top_level_domain == :rs %>
-    <%= external_link_to "https://www.instagram.com/grnhs_serbia/" do %>
-      <% image_tag '/images/partners/grnhs_serbia.svg', class: 'img-partner', alt: 'Green House' %>
-    <% end %>
-  <% else %>
-    <%= external_link_to "https://invitro.#{top_level_domain}" do %>
-      <% image_tag '/images/partners/invitro.svg', class: 'img-partner', alt: 'Invitro', loading: 'lazy' %>
-    <% end %>
-  <% end %>
+<%# Partners Section %>
+<section class="partners-section">
+  <div class="container">
+    <h2 class="text-center"><%= t '.our_partners' %></h2>
+    <div class="partners">
+      <%= external_link_to 'https://t.me/parkrun' do %>
+        <%= image_tag '/images/partners/pro_parkrun.png', class: 'img-partner', alt: 'Pro parkrun', loading: 'lazy' %>
+      <% end %>
+      <% if top_level_domain == :ru %>
+        <%= external_link_to 'https://go.grigri.ru/s95' do %>
+          <%= image_tag '/images/partners/grigri.svg', class: 'img-partner', alt: 'Gri', loading: 'lazy' %>
+        <% end %>
+        <%= external_link_to 'https://rununion.ru/' do %>
+          <%= image_tag '/images/partners/run_union.png', class: 'img-partner', alt: 'Союз любителей бега', loading: 'lazy' %>
+        <% end %>
+      <% end %>
+      <% if top_level_domain == :rs %>
+        <%= external_link_to "https://www.instagram.com/grnhs_serbia/" do %>
+          <%= image_tag '/images/partners/grnhs_serbia.svg', class: 'img-partner', alt: 'Green House' %>
+        <% end %>
+      <% else %>
+        <%= external_link_to "https://invitro.#{top_level_domain}" do %>
+          <%= image_tag '/images/partners/invitro.svg', class: 'img-partner', alt: 'Invitro', loading: 'lazy' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </section>
