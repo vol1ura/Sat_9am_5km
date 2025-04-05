@@ -1,63 +1,50 @@
 <%= render '/flash' %>
 
-<% if @jubilee_events.present? || @funrun_badges.present? %>
-  <h2>Предстоящие события <%= l @next_saturday, format: :brief %></h2>
-  <ul class="list-group list-group-flush">
-    <% @jubilee_events.each do |event, activity_number| %>
-      <li class="list-group-item">
-        <div class="d-flex align-items-center">
-          <div class="flex-shrink-0">
-            <div class="text-badge px-2 py-4">
-              <div class="fw-normal text-capitalize"><%= t 'activerecord.models.activity.one' %></div>
-              <div class="fw-bold fst-italic">№<%= activity_number %></div>
-            </div>
-          </div>
-          <div class="flex-grow-1 ms-3">
-            <%= link_to event.name, event_path(event.code_name), class: 'text-decoration-none fw-bold' %>
-          </div>
-        </div>
-      </li>
-    <% end %>
-    <% @funrun_badges.each do |badge| %>
-      <li class="list-group-item">
-        <div class="d-flex align-items-center">
-          <div class="flex-shrink-0">
-            <%= image_tag badge.image.variant(:thumb), class: 'thumb-badge', alt: 'FunRun badge' %>
-          </div>
-          <div class="flex-grow-1 ms-3">
-            <%= link_to badge.name, badge, class: 'text-decoration-none fw-bold' %>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<div data-controller="map">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><%= t '.our_events' %></h2>
+    <div class="btn-group">
+      <button data-action="map#showList" data-map-target="listButton" class="btn btn-primary">Список</button>
+      <button data-action="map#showMap" data-map-target="mapButton" class="btn btn-outline-primary">Карта</button>
+    </div>
+  </div>
 
-<h2><%= t '.our_events' %></h2>
-<div class="row row-cols-1 row-cols-md-2 g-3">
-  <%= render partial: 'event', collection: @country_events, cached: true %>
+  <div data-map-target="listView">
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+      <% @events.each do |event| %>
+        <div class="col">
+          <%= tag.div class: ['card-with-border', event.active ? 'border-primary' : 'border-danger'] do %>
+            <div class="overflow-hidden card-img-top">
+              <%= event_main_image_tag event, class: 'img-fluid rounded-top img-scaled', alt: event.name, loading: 'lazy' %>
+            </div>
+            <%= tag.div class: ['position-absolute', 'top-0', 'bg-gradient', 'bg-opacity-25', 'w-100', 'px-3', 'card-img-top', event.active ? 'bg-dark' : 'bg-danger'] do %>
+              <section class="fs-4 text-light"><%= event.name %></section>
+            <% end %>
+            <div class="card-body">
+              <p class="card-text">
+                <%= link_to event.slogan, event_path(event.code_name), class: 'stretched-link text-decoration-none text-body' %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div data-map-target="mapView" class="card shadow rounded-0 d-none">
+    <div id="map" style="height: 600px; width: 100%;"></div>
+  </div>
 </div>
 
-<h2 class="mt-4"><%= t '.our_partners' %></h2>
-<section class="partners">
-  <%= external_link_to 'https://t.me/parkrun' do %>
-    <% image_tag '/images/partners/pro_parkrun.png', class: 'img-partner', alt: 'Pro parkrun', loading: 'lazy' %>
-  <% end %>
-  <% if top_level_domain == :ru %>
-    <%= external_link_to 'https://go.grigri.ru/s95' do %>
-      <% image_tag '/images/partners/grigri.svg', class: 'img-partner', alt: 'Gri', loading: 'lazy' %>
-    <% end %>
-    <%= external_link_to 'https://rununion.ru/' do %>
-      <% image_tag '/images/partners/run_union.png', class: 'img-partner', alt: 'Союз любителей бега', loading: 'lazy' %>
-    <% end %>
-  <% end %>
-  <% if top_level_domain == :rs %>
-    <%= external_link_to "https://www.instagram.com/grnhs_serbia/" do %>
-      <% image_tag '/images/partners/grnhs_serbia.svg', class: 'img-partner', alt: 'Green House' %>
-    <% end %>
-  <% else %>
-    <%= external_link_to "https://invitro.#{top_level_domain}" do %>
-      <% image_tag '/images/partners/invitro.svg', class: 'img-partner', alt: 'Invitro', loading: 'lazy' %>
-    <% end %>
-  <% end %>
-</section>
+<% content_for :head do %>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV['YANDEX_MAPS_API_KEY'] %>&lang=<%= I18n.locale == :rs ? 'en_RU' : 'ru_RU' %>&onload=initYandexMaps" async defer></script>
+  <script>
+    window.initYandexMaps = function() {
+      if (window.ymaps) {
+        window.ymaps.ready(function() {
+          window.dispatchEvent(new Event('yandex-maps-ready'));
+        });
+      }
+    }
+  </script>
+<% end %>
