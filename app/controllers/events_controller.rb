@@ -45,12 +45,12 @@ class EventsController < ApplicationController
   end
 
   def volunteering
-    event_future_activities_dataset = @event.activities.where(date: Date.current..)
+    event_future_activities_dataset = @event.activities.where(date: Date.current.., published: false)
     @activities = event_future_activities_dataset.select(:id, :date).order(:date).limit(4).load
     @tg_chat = @event.contacts.find_by(contact_type: :tg_chat)
 
-    activity_id = params[:activity_id].presence || @activities.first&.id
-    @activity = event_future_activities_dataset.includes(volunteers: :athlete).find_by(id: activity_id) if activity_id
+    activity_id = params[:activity_id] || @activities.first&.id
+    @activity = event_future_activities_dataset.find_by(id: activity_id) if activity_id
   end
 
   def map
