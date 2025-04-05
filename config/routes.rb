@@ -3,13 +3,12 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   default_url_options host: ENV.fetch('APP_HOST')
 
-  root 'events#index'
+  root 'pages#index'
   get 'pages/:page', to: 'pages#show', as: :page
   get 'up', to: 'rails/health#show'
 
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
-    get :map, on: :collection
     get :volunteering, on: :member
     resource :going_to, only: %i[create destroy]
   end

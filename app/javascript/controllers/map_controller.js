@@ -4,10 +4,7 @@ export default class extends Controller {
   static targets = ["mapView", "listView", "mapButton", "listButton"]
 
   connect() {
-    console.log('Map controller connected')
-
-    // Показываем карту по умолчанию
-    this.showMap()
+    this.showList()
 
     // Ждем загрузки Яндекс.Карт API
     if (window.ymaps) {
@@ -23,7 +20,6 @@ export default class extends Controller {
   }
 
   showMap() {
-    console.log('Showing map view')
     this.mapButtonTarget.classList.add('btn-primary')
     this.mapButtonTarget.classList.remove('btn-outline-primary')
     this.listButtonTarget.classList.remove('btn-primary')
@@ -38,7 +34,6 @@ export default class extends Controller {
   }
 
   showList() {
-    console.log('Showing list view')
     this.mapButtonTarget.classList.remove('btn-primary')
     this.mapButtonTarget.classList.add('btn-outline-primary')
     this.listButtonTarget.classList.remove('btn-outline-primary')
@@ -47,7 +42,7 @@ export default class extends Controller {
     this.listViewTarget.classList.remove('d-none')
   }
 
-  initializeMap() {
+  async initializeMap() {
     try {
       console.log('Initializing map')
       const mapElement = document.getElementById('map')
@@ -55,21 +50,21 @@ export default class extends Controller {
         throw new Error('Map element not found')
       }
 
-      // Проверяем размеры контейнера
-      const container = mapElement.parentElement
-      console.log('Container dimensions:', {
-        width: container.offsetWidth,
-        height: container.offsetHeight
-      })
-
-      // Устанавливаем минимальную высоту для контейнера
       mapElement.style.minHeight = '600px'
 
-      // Определяем начальные координаты (Москва)
-      const defaultCenter = [55.7558, 37.6173]
-      const defaultZoom = 6
+      const defaultCenters = {
+        ru: [55.7558, 37.6173], // Москва
+        rs: [44.8206, 20.4622], // Белград
+        by: [53.9045, 27.5615]  // Минск
+      }
+      const defaultZooms = {
+        ru: 5, // Россия
+        rs: 8, // Сербия
+        by: 5  // Беларусь
+      }
+      const defaultCenter = defaultCenters[document.documentElement.lang] || defaultCenters.ru
+      const defaultZoom = defaultZooms[document.documentElement.lang] || defaultZooms.ru
 
-      // Создаем карту с начальными координатами
       this.map = new window.ymaps.Map('map', {
         center: defaultCenter,
         zoom: defaultZoom,
@@ -95,33 +90,42 @@ export default class extends Controller {
 
       console.log('Map instance created')
 
-      const events = JSON.parse(this.element.dataset.events)
-      console.log('Events loaded:', events.length)
+      // Получаем данные о событиях через AJAX
+      try {
+        const response = await fetch('/events.json?all=true')
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const events = await response.json()
+        console.log('Events loaded:', events.length)
 
-      events.forEach(event => {
-        const placemark = new window.ymaps.Placemark(
-          [event.latitude, event.longitude],
-          {
-            balloonContent: `
-              <div>
-                <h5>${event.name}</h5>
-                <p class="py-1 text-muted">${event.slogan}</p>
-                <a href="/events/${event.code_name}" class="btn btn-primary">Подробнее</a>
-              </div>
-            `,
-            hintContent: event.name
-          },
-          {
-            preset: event.active ? 'islands#redGovernmentCircleIcon' : 'islands#grayGovernmentCircleIcon'
-          }
-        );
+        events.forEach(event => {
+          const placemark = new window.ymaps.Placemark(
+            [event.latitude, event.longitude],
+            {
+              balloonContent: `
+                <div>
+                  <h5>${event.name}</h5>
+                  <p class="py-1 text-muted">${event.slogan}</p>
+                  <a href="/events/${event.code_name}" class="btn btn-primary">Подробнее</a>
+                </div>
+              `,
+              hintContent: event.name
+            },
+            {
+              preset: event.active ? 'islands#redGovernmentCircleIcon' : 'islands#grayGovernmentCircleIcon'
+            }
+          );
 
-        this.map.geoObjects.add(placemark);
-      });
+          this.map.geoObjects.add(placemark);
+        });
 
-      // Обновляем размер карты после добавления меток
-      this.map.container.fitToViewport()
-      console.log('Map initialization completed')
+        // Обновляем размер карты после добавления меток
+        this.map.container.fitToViewport()
+        console.log('Map initialization completed')
+      } catch (error) {
+        console.error('Ошибка при загрузке данных о событиях:', error)
+      }
     } catch (error) {
       console.error('Ошибка при инициализации карты:', error);
       console.error('Stack trace:', error.stack);
