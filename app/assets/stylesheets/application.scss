@@ -151,6 +151,8 @@ nav.pagination {
 .partners {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
+
 
   a {
     margin-right: 12px;
