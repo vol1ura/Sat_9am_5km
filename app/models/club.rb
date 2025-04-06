@@ -10,7 +10,7 @@ class Club < ApplicationRecord
   end
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates :logo, size: { less_than: 250.kilobytes }, dimension: { width: { in: 150..400 }, height: { in: 150..400 } }
+  validates :logo, size: { less_than: 250.kilobytes }, dimension: { width: { in: 150..650 }, height: { in: 150..650 } }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[name country_id]
