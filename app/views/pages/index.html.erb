@@ -27,37 +27,45 @@
     <h2 class="text-center mb-5">Как это работает?</h2>
     <div class="row g-4">
       <div class="col-md-3">
-        <div class="card h-100 border-0 shadow-sm">
+        <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-user-plus fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">Регистрация</h5>
+            <h5 class="card-title">
+              <%= link_to "Регистрация", new_user_session_path, class: "text-decoration-none stretched-link" %>
+            </h5>
             <p class="card-text">Создай профиль за 1 минуту в нашем Telegram-боте</p>
           </div>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card h-100 border-0 shadow-sm">
+        <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-map-marker-alt fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">Выбери забег</h5>
+            <h5 class="card-title">
+              <%= link_to "Выбери забег", events_path, class: "text-decoration-none stretched-link" %>
+            </h5>
             <p class="card-text">Более 20 локаций в 3 странах</p>
           </div>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card h-100 border-0 shadow-sm">
+        <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-calendar-check fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">Приходи в субботу</h5>
+            <h5 class="card-title">
+              <%= link_to "Приходи в субботу", page_path(page: 'rules'), class: "text-decoration-none stretched-link" %>
+            </h5>
             <p class="card-text">Старт в 9:00, дистанцию можно пробежать или пройти, можно помочь волонтёрством</p>
           </div>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="card h-100 border-0 shadow-sm">
+        <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">Следи за прогрессом</h5>
+            <h5 class="card-title">
+              <%= link_to "Следи за прогрессом", ratings_path, class: "text-decoration-none stretched-link" %>
+            </h5>
             <p class="card-text">Результаты, награды, рейтинги - на нашем сайте</p>
           </div>
         </div>
@@ -96,7 +104,7 @@
 </section>
 
 <%# Why S95 Section %>
-<section class="why-s95 py-5" style="background-color: #f8f9fa;">
+<section class="why-s95 py-5">
   <div class="container">
     <h2 class="text-center mb-5">Почему S95?</h2>
     <div class="row g-4">

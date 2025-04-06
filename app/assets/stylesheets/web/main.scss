@@ -4,6 +4,7 @@
   overflow: hidden;
   padding: 6rem 0;
   height: calc(100vh - 96px);
+  max-height: 1333px;
 
   &::before {
     content: '';
@@ -12,8 +13,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/images/hero-bg.jpg') no-repeat center center;
-    background-size: cover;
+    background: url('/images/hero-bg.webp') no-repeat center/cover;
     background-attachment: fixed;
     opacity: 0.5;
   }
@@ -41,6 +41,24 @@
 
   .container {
     max-width: 1200px;
+  }
+
+  h2 {
+    color: $primary;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: $primary;
+    }
   }
 
   .card {
@@ -303,7 +321,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/images/hero-bg.jpg') center/cover;
+    background: url('/images/hero-bg.webp') center/cover;
     opacity: 0.1;
   }
 
