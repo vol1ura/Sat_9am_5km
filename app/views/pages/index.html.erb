@@ -8,12 +8,16 @@
       </div>
       <div class="col-lg-6">
         <div class="placeholder-image">
-          <h1 class="display-4 fw-bold mb-4 text-white">Каждую субботу в 9:00!</h1>
-          <p class="lead mb-4">5 км для всех уровней подготовки, бесплатно. Присоединяйся!</p>
+          <h1 class="display-4 fw-bold mb-4 text-white"><%= t '.hero_title' %></h1>
+          <p class="lead mb-4"><%= t '.hero_subtitle' %></p>
           <div class="d-flex flex-wrap gap-3">
-            <%= link_to "Регистрация", new_user_session_path, class: "btn btn-danger btn-lg" %>
-            <%= link_to "Результаты", activities_path, class: "btn btn-outline-light btn-lg" %>
-            <%= link_to "Найти ближайший забег", events_path, class: "btn btn-outline-light btn-lg" %>
+            <% if current_user&.athlete %>
+              <%= link_to t('.my_profile'), athlete_path(current_user.athlete), class: 'btn btn-danger btn-lg' %>
+            <% else %>
+              <%= link_to t('.registration'), new_user_session_path, class: 'btn btn-danger btn-lg' %>
+            <% end %>
+            <%= link_to t('.results'), activities_path, class: 'btn btn-outline-light btn-lg' %>
+            <%= link_to t('.find_run'), events_path, class: 'btn btn-outline-light btn-lg' %>
           </div>
         </div>
       </div>
@@ -24,16 +28,16 @@
 <%# How It Works Section %>
 <section class="how-it-works py-5" style="background-color: #f8f9fa;">
   <div class="container">
-    <h2 class="text-center mb-5">Как это работает?</h2>
+    <h2 class="text-center mb-5"><%= t '.how_it_works.title' %></h2>
     <div class="row g-4">
       <div class="col-md-3">
         <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-user-plus fa-3x mb-3 text-primary"></i>
             <h5 class="card-title">
-              <%= link_to "Регистрация", new_user_session_path, class: "text-decoration-none stretched-link" %>
+              <%= link_to t('.how_it_works.registration.title'), new_user_session_path, class: 'text-decoration-none stretched-link' %>
             </h5>
-            <p class="card-text">Создай профиль за 1 минуту в нашем Telegram-боте</p>
+            <p class="card-text"><%= t '.how_it_works.registration.description' %></p>
           </div>
         </div>
       </div>
@@ -42,9 +46,9 @@
           <div class="card-body text-center">
             <i class="fas fa-map-marker-alt fa-3x mb-3 text-primary"></i>
             <h5 class="card-title">
-              <%= link_to "Выбери забег", events_path, class: "text-decoration-none stretched-link" %>
+              <%= link_to t('.how_it_works.choose_run.title'), events_path, class: 'text-decoration-none stretched-link' %>
             </h5>
-            <p class="card-text">Более 20 локаций в 3 странах</p>
+            <p class="card-text"><%= t '.how_it_works.choose_run.description' %></p>
           </div>
         </div>
       </div>
@@ -53,9 +57,9 @@
           <div class="card-body text-center">
             <i class="fas fa-calendar-check fa-3x mb-3 text-primary"></i>
             <h5 class="card-title">
-              <%= link_to "Приходи в субботу", page_path(page: 'rules'), class: "text-decoration-none stretched-link" %>
+              <%= link_to t('.how_it_works.come_saturday.title'), page_path(page: 'rules'), class: 'text-decoration-none stretched-link' %>
             </h5>
-            <p class="card-text">Старт в 9:00, дистанцию можно пробежать или пройти, можно помочь волонтёрством</p>
+            <p class="card-text"><%= t '.how_it_works.come_saturday.description' %></p>
           </div>
         </div>
       </div>
@@ -64,9 +68,9 @@
           <div class="card-body text-center">
             <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
             <h5 class="card-title">
-              <%= link_to "Следи за прогрессом", ratings_path, class: "text-decoration-none stretched-link" %>
+              <%= link_to t('.how_it_works.track_progress.title'), ratings_path, class: 'text-decoration-none stretched-link' %>
             </h5>
-            <p class="card-text">Результаты, награды, рейтинги - на нашем сайте</p>
+            <p class="card-text"><%= t '.how_it_works.track_progress.description' %></p>
           </div>
         </div>
       </div>
@@ -79,23 +83,23 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8 text-center text-white">
-        <h3 class="mb-3">До следующего забега осталось:</h3>
+        <h3 class="mb-3"><%= t '.countdown.title' %></h3>
         <div class="countdown-timer d-flex justify-content-center gap-1 gap-md-4">
           <div class="timer-item">
             <span class="timer-number" data-countdown-target="days">00</span>
-            <span class="timer-label">дней</span>
+            <span class="timer-label"><%= t '.countdown.days' %></span>
           </div>
           <div class="timer-item">
             <span class="timer-number" data-countdown-target="hours">00</span>
-            <span class="timer-label">часов</span>
+            <span class="timer-label"><%= t '.countdown.hours' %></span>
           </div>
           <div class="timer-item">
             <span class="timer-number" data-countdown-target="minutes">00</span>
-            <span class="timer-label">минут</span>
+            <span class="timer-label"><%= t '.countdown.minutes' %></span>
           </div>
           <div class="timer-item">
             <span class="timer-number" data-countdown-target="seconds">00</span>
-            <span class="timer-label">секунд</span>
+            <span class="timer-label"><%= t '.countdown.seconds' %></span>
           </div>
         </div>
       </div>
@@ -106,14 +110,14 @@
 <%# Why S95 Section %>
 <section class="why-s95 py-5">
   <div class="container">
-    <h2 class="text-center mb-5">Почему S95?</h2>
+    <h2 class="text-center mb-5"><%= t '.why_s95.title' %></h2>
     <div class="row g-4">
       <div class="col-md-4">
         <div class="card h-100 border-0 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-users fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">Для всех</h5>
-            <p class="card-text">Можно участвовать вместе с семьёй, друзьями, домашними питомцами</p>
+            <h5 class="card-title"><%= t '.why_s95.for_everyone.title' %></h5>
+            <p class="card-text"><%= t '.why_s95.for_everyone.description' %></p>
           </div>
         </div>
       </div>
@@ -121,8 +125,8 @@
         <div class="card h-100 border-0 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">Сообщество</h5>
-            <p class="card-text">Заходите в чаты мероприятий, находите друзей, общайтесь на чаепитиях после забегов</p>
+            <h5 class="card-title"><%= t '.why_s95.community.title' %></h5>
+            <p class="card-text"><%= t '.why_s95.community.description' %></p>
           </div>
         </div>
       </div>
@@ -130,8 +134,8 @@
         <div class="card h-100 border-0 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-gift fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">Бесплатно</h5>
-            <p class="card-text">Все мероприятия проводятся энтузиастами любителями бега и волонтёрами</p>
+            <h5 class="card-title"><%= t '.why_s95.free.title' %></h5>
+            <p class="card-text"><%= t '.why_s95.free.description' %></p>
           </div>
         </div>
       </div>
@@ -142,7 +146,7 @@
 <%# Stories Section %>
 <section class="stories-section py-5">
   <div class="container">
-    <h2 class="text-center mb-5">Истории участников</h2>
+    <h2 class="text-center mb-5"><%= t '.stories.title' %></h2>
     <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="0" class="active"></button>
@@ -158,8 +162,8 @@
                   <%#= image_tag '/images/stories/runner1.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
                 </div>
                 <blockquote class="blockquote">
-                  <p class="mb-4">"Бегаю с S95 уже год – улучшил результат с 35 до 20 минут! Нашел новых друзей и вдохновение для новых достижений."</p>
-                  <footer class="blockquote-footer">Андрей, Кузьминки</footer>
+                  <p class="mb-4"><%= t '.stories.story1.quote' %></p>
+                  <footer class="blockquote-footer"><%= t '.stories.story1.author' %></footer>
                 </blockquote>
               </div>
             </div>
@@ -173,8 +177,8 @@
                   <%#= image_tag '/images/stories/runner2.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
                 </div>
                 <blockquote class="blockquote">
-                  <p class="mb-4">"Пришла на S95 с подругой для поддержки, а теперь бегаю каждую субботу! Лучший способ начать выходной день."</p>
-                  <footer class="blockquote-footer">Мария, Печатники</footer>
+                  <p class="mb-4"><%= t '.stories.story2.quote' %></p>
+                  <footer class="blockquote-footer"><%= t '.stories.story2.author' %></footer>
                 </blockquote>
               </div>
             </div>
@@ -188,8 +192,8 @@
                   <%#= image_tag '/images/stories/runner3.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
                 </div>
                 <blockquote class="blockquote">
-                  <p class="mb-4">"Бегаю с семьей – дети участвуют в детских забегах, а мы с женой бежим 5км. Отличный семейный досуг!"</p>
-                  <footer class="blockquote-footer">Максим, Кузьминки</footer>
+                  <p class="mb-4"><%= t '.stories.story3.quote' %></p>
+                  <footer class="blockquote-footer"><%= t '.stories.story3.author' %></footer>
                 </blockquote>
               </div>
             </div>
@@ -198,11 +202,11 @@
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#storiesCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Предыдущий</span>
+        <span class="visually-hidden"><%= t '.stories.previous' %></span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#storiesCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Следующий</span>
+        <span class="visually-hidden"><%= t '.stories.next' %></span>
       </button>
     </div>
   </div>
