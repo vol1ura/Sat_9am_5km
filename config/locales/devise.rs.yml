@@ -59,6 +59,7 @@ rs:
       new:
         title: Prijavite se
         submit: Prijavite se
+        telegram_login_html: 'Ako ste već registrovan, možete dobiti jednokratnu vezu za prijavu u <a href="%{link}" class="text-reset" target="_blank">Telegram botu</a> pomoću komande <code>/login</code>'
     unlocks:
       new:
         title: Pošaljite uputstva za otključavanje
