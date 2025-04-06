@@ -1,53 +1,9 @@
 <!DOCTYPE html>
 <html lang="<%= top_level_domain %>">
-  <head>
-    <title><%= yield_head_info :title, 'Еженедельные парковые забеги на 5 километров' %> | S95</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="<%= yield_head_info :title, 'S95 — еженедельные бесплатные пробежки на 5 километров' %>">
-    <meta property="og:url" content="https://s95.<%= top_level_domain %>">
-    <meta property="twitter:site" content="@parkrunkuzminki">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="<%= yield_head_info :description, 'Еженедельные субботние пробежки на 5км в парке. Дистанцию можно пройти, пробежать, либо принять участие как волонтёр — уровень подготовки не важен. У нас вы найдёте новые знакомства и отличное настроение.' %>">
-    <meta name="twitter:title" content="<%= yield_head_info :title, 'S95 — еженедельные бесплатные забеги на 5 километров' %>">
-    <meta name="twitter:image" content="<%= yield_head_info :og_image, '/favicon-192x192.png' %>">
-    <meta property="og:image" content="<%= yield_head_info :og_image, '/favicon-192x192.png' %>">
-    <meta property="og:image:width" content="300">
-    <%= favicon_link_tag '/favicon.ico', rel: 'icon', sizes: '32x32' %>
-    <%= favicon_link_tag '/apple-touch-icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
-    <%= favicon_link_tag '/favicon-32x32.png', rel: 'icon', type: 'image/png', sizes: '32x32' %>
-    <%= favicon_link_tag '/favicon-16x16.png', rel: 'icon', type: 'image/png', sizes: '16x16' %>
-    <link rel="manifest" href="/manifest.webmanifest">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
-    <%= javascript_importmap_tags %>
-    <%= turbo_refresh_scroll_tag :preserve %>
-    <%= yield :head %>
-    <meta name="apple-mobile-web-app-title" content="Sat9am5km">
-    <meta name="description" content="<%= yield_head_info :description, 'Еженедельные субботние пробежки на 5км в парке. Дистанцию можно пройти, пробежать, либо принять участие как волонтёр — уровень подготовки не важен. У нас вы найдёте новые знакомства и отличное настроение.' %>">
-    <meta name="keywords" content="забеги,s95,sat9am5km,sat,9am,5km,5км,бег,парк,run,park,суббота,saturday,утро,парковые,пробежки,бесплатные,здоровье,пробег,забег,спорт,волонтерство,друзья,знакомства,семья,досуг,паркран,parkrun,рейтинг,rating">
-    <% if Rails.env.production? %>
-      <meta name="yandex-verification" content="<%= Rails.application.credentials.yandex.webmaster[top_level_domain] %>">
-      <!-- Yandex.Metrika counter -->
-      <script>
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-        ym(<%= Rails.application.credentials.yandex.metrika[top_level_domain] %>, "init", {
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true
-        });
-      </script>
-      <!-- /Yandex.Metrika counter -->
-    <% end %>
-  </head>
+  <%= render '/head' %>
   <body class="m-0 d-flex flex-column">
     <%= render 'navbars/top' %>
+    <%= render '/flash' %>
     <div class="container">
       <%= yield %>
     </div>
