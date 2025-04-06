@@ -11,6 +11,7 @@ ru:
       new:
         title: Вход
         submit: Войти
+        telegram_login_html: 'Если вы уже зарегистрированы, вы можете получить одноразовую ссылку для входа в <a href="%{link}" class="text-reset" target="_blank">Telegram боте</a> с помощью команды <code>/login</code>'
     confirmations:
       new:
         title: Выслать инструкции для подтверждения e-mail
