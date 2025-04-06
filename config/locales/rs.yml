@@ -533,8 +533,57 @@ rs:
       github_title: Projekat na GitHubu
   pages:
     index:
-      upcoming_events: 'Predstojeći događaji %{date}'
-      our_partners: Partneri i zajednički projekti
+      hero_title: "Svake subote u 9:00!"
+      hero_subtitle: "5 km za sve nivoe spremnosti, besplatno. Pridruži se!"
+      my_profile: "Moj profil"
+      registration: "Registracija"
+      results: "Rezultati"
+      find_run: "Pronađi najbližu trku"
+      how_it_works:
+        title: "Kako to radi?"
+        registration:
+          title: "Registracija"
+          description: "Napravi profil za 1 minut u našem Telegram botu"
+        choose_run:
+          title: "Izaberi trku"
+          description: "Više od 20 lokacija u 3 zemlje"
+        come_saturday:
+          title: "Dođi u subotu"
+          description: "Start u 9:00, distancu možeš pretrčati ili prehodati, možeš pomoći volontiranjem"
+        track_progress:
+          title: "Prati napredak"
+          description: "Rezultati, nagrade, rang liste - na našem sajtu"
+      countdown:
+        title: "Do sledeće trke ostalo je:"
+        days: "dana"
+        hours: "sati"
+        minutes: "minuta"
+        seconds: "sekundi"
+      why_s95:
+        title: "Zašto S95?"
+        for_everyone:
+          title: "Za sve"
+          description: "Možete učestvovati sa porodicom, prijateljima, kućnim ljubimcima"
+        community:
+          title: "Zajednica"
+          description: "Pridružite se chatovima događaja, pronađite prijatelje, družite se na čajankama posle trka"
+        free:
+          title: "Besplatno"
+          description: "Svi događaji se organizuju od strane entuzijasta ljubitelja trčanja i volontera"
+      stories:
+        title: "Priče učesnika"
+        previous: "Prethodni"
+        next: "Sledeći"
+        story1:
+          quote: "Trčim sa S95 već godinu dana – poboljšao sam rezultat sa 35 na 20 minuta! Pronašao sam nove prijatelje i inspiraciju za nova dostignuća."
+          author: "Andrej, Kuzminki"
+        story2:
+          quote: "Došla sam na S95 sa prijateljicom za podršku, a sada trčim svake subote! Najbolji način da započnem vikend."
+          author: "Marija, Pečatnici"
+        story3:
+          quote: "Trčim sa porodicom – deca učestvuju u dečjim trkama, a mi sa ženom trčimo 5km. Odličan porodični provod!"
+          author: "Maksim, Kuzminki"
+      our_partners: "Naši partneri"
     about:
       description: S95 je otvorena platforma koja objedinjuje nezavisne park trke koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
       description_html: >
