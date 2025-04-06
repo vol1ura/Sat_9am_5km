@@ -6,6 +6,13 @@
   height: calc(100vh - 96px);
   max-height: 1333px;
 
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+  }
+
   &::before {
     content: '';
     position: absolute;
