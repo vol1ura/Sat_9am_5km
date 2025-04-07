@@ -13,16 +13,16 @@
     min-height: 100%;
   }
 
-  &::before {
-    content: '';
+  .hero-bg-image {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('/images/hero-bg.webp') no-repeat center/cover;
-    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
     opacity: 0.5;
+    z-index: 0;
   }
 
   .container {
@@ -215,17 +215,6 @@
 
     &:hover i {
       transform: scale(1.1);
-    }
-
-    .card-title {
-      color: $primary;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .card-text {
-      color: $secondary;
-      font-size: 1.1rem;
     }
   }
 }
