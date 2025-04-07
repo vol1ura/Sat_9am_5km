@@ -1,5 +1,6 @@
 <%# Hero Section %>
 <section class="hero-section py-5 text-white mt-n3">
+  <img src="/images/hero-bg.webp" alt="" class="hero-bg-image">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6">
@@ -147,9 +148,9 @@
     <h2 class="text-center mb-5"><%= t '.stories.title' %></h2>
     <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="0" class="active" aria-label="To first slide"></button>
+        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="1" aria-label="To second slide"></button>
+        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="2" aria-label="To last slide"></button>
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
