@@ -553,12 +553,6 @@ rs:
         track_progress:
           title: "Prati napredak"
           description: "Rezultati, nagrade, rang liste - na našem sajtu"
-      countdown:
-        title: "Do sledeće trke ostalo je:"
-        days: "dana"
-        hours: "sati"
-        minutes: "minuta"
-        seconds: "sekundi"
       why_s95:
         title: "Zašto S95?"
         for_everyone:

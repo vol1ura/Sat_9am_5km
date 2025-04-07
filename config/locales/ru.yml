@@ -631,12 +631,6 @@ ru:
         track_progress:
           title: "Следи за прогрессом"
           description: "Результаты, награды, рейтинги - на нашем сайте"
-      countdown:
-        title: "До следующего забега осталось:"
-        days: "дней"
-        hours: "часов"
-        minutes: "минут"
-        seconds: "секунд"
       why_s95:
         title: "Почему S95?"
         for_everyone:
