@@ -15,7 +15,7 @@ class PagesController < ApplicationController
         .where(event: @local_events.without_friends, published: true, date: ...@next_saturday)
         .group(:event).count.filter_map do |event, activities_count|
           activity_number = activities_count.next
-          next unless (activity_number <= 40 && (activity_number % 10).zero?) || (activity_number % 50).zero?
+          next unless (activity_number <= 50 && (activity_number % 10).zero?) || (activity_number % 100).zero?
 
           [event, activity_number]
         end

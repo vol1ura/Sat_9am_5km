@@ -616,12 +616,12 @@ ru:
       my_profile: "Мой профиль"
       registration: "Регистрация"
       results: "Результаты"
-      find_run: "Найти ближайший забег"
+      find_event: "Найти ближайший забег"
       how_it_works:
         title: "Как это работает?"
         registration:
           title: "Регистрация"
-          description: "Создай профиль за 1 минуту в нашем Telegram-боте"
+          description: "Создай профиль за 1 минуту в нашем Telegram-боте @sat9am5kmbot"
         choose_run:
           title: "Выбери забег"
           description: "Более 20 локаций в 3 странах"
