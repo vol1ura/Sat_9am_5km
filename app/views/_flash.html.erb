@@ -1,9 +1,9 @@
 <% if alert %>
-  <div class="bg-danger p-3 mb-3 mt-n3 text-white position-relative d-flex align-items-center justify-content-center" role="alert">
+  <div class="alert alert-danger rounded-0 border-0 mb-3 mt-n3 position-relative d-flex align-items-center justify-content-center" role="alert">
     <i class="fa-solid fa-triangle-exclamation"></i>&nbsp;<%= alert %>
   </div>
 <% elsif notice %>
-  <div class="bg-success p-3 mb-3 mt-n3 text-white position-relative d-flex align-items-center justify-content-center" role="alert">
+  <div class="alert alert-success rounded-0 border-0 mb-3 mt-n3 position-relative d-flex align-items-center justify-content-center" role="alert">
     <i class="fa-solid fa-circle-exclamation"></i>&nbsp;<%= notice %>
   </div>
 <% end %>

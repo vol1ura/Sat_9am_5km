@@ -538,12 +538,12 @@ rs:
       my_profile: "Moj profil"
       registration: "Registracija"
       results: "Rezultati"
-      find_run: "Pronađi najbližu trku"
+      find_event: "Pronađi najbližu trku"
       how_it_works:
         title: "Kako to radi?"
         registration:
           title: "Registracija"
-          description: "Napravi profil za 1 minut u našem Telegram botu"
+          description: "Napravi profil za 1 minut u našem Telegram botu @sat9am5kmbot"
         choose_run:
           title: "Izaberi trku"
           description: "Više od 20 lokacija u 3 zemlje"

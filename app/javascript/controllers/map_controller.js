@@ -106,14 +106,14 @@ export default class extends Controller {
               balloonContent: `
                 <div>
                   <h5>${event.name}</h5>
-                  <p class="py-1 text-muted">${event.slogan}</p>
-                  <a href="/events/${event.code_name}" class="btn btn-primary">Подробнее</a>
+                  <p class="my-0 text-muted">${event.slogan}</p>
+                  <a href="/events/${event.code_name}" class="btn btn-outline-primary btn-sm my-2">Подробнее</a>
                 </div>
               `,
               hintContent: event.name
             },
             {
-              preset: event.active ? 'islands#redGovernmentCircleIcon' : 'islands#grayGovernmentCircleIcon'
+              preset: event.active ? 'islands#redRunCircleIcon' : 'islands#grayAttentionCircleIcon'
             }
           );
 
