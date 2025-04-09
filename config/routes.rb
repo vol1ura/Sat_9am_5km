@@ -4,9 +4,8 @@ Rails.application.routes.draw do
   default_url_options host: ENV.fetch('APP_HOST')
 
   root 'pages#index'
-  get 'pages/:page', to: 'pages#show', as: :page
-  get 'up', to: 'rails/health#show'
 
+  resources :pages, only: %i[index show], param: :page
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
     get :volunteering, on: :member
@@ -70,6 +69,8 @@ Rails.application.routes.draw do
       get 'athletes/:code/info', to: 'athletes#info'
     end
   end
+
+  get 'up', to: 'rails/health#show'
 
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => 'sidekiq' if Rails.env.production?
