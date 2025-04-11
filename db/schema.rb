@@ -160,8 +160,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_101552) do
     t.integer "visible_order"
     t.string "slogan"
     t.bigint "country_id", null: false
-    t.decimal "latitude"
-    t.decimal "longitude"
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.index ["code_name"], name: "index_events_on_code_name", unique: true
     t.index ["country_id"], name: "index_events_on_country_id"
   end
