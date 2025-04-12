@@ -2,14 +2,25 @@
 
 collection = activity.results.includes(athlete: :club).order(:position)
 
-panel 'Детали забега' do
-  attributes_table_for activity do
-    row 'Забег', &:event_name
-    row :date
-    row(:description) { |a| sanitized_text a.description }
-    row :correct?
-    row :published
-    row('Протокол на сайте') { |a| link_to activity_url(a), a } if activity.published
+columns do
+  column do
+    panel 'Детали забега' do
+      attributes_table_for activity do
+        row 'Забег', &:event_name
+        row :date
+        row(:description) { |a| sanitized_text a.description }
+        row :correct?
+        row :published
+        row('Протокол на сайте') { |a| link_to activity_url(a), a } if activity.published
+      end
+    end
+  end
+  column do
+    if can?(:manage, activity) && activity.token && activity.date.today?
+      panel 'QR-код забега' do
+        BarcodePrinter.call(activity.token, module_size: 5)
+      end
+    end
   end
 end
 

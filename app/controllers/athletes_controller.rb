@@ -28,7 +28,7 @@ class AthletesController < ApplicationController
     @volunteering = @athlete.volunteering
     @total_vol = @volunteering.size
     @total_trophies = @athlete.trophies.size
-    @barcode = BarcodePrinter.call(@athlete)
+    @barcode = BarcodePrinter.call("A#{@athlete.code}", module_size: 8)
     @friendships_hash = current_user&.athlete&.friendships&.pluck(:friend_id, :id).to_h
   end
 end
