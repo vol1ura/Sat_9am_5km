@@ -37,6 +37,10 @@ ActiveAdmin.register Activity do
     end
   end
 
+  before_create do |activity|
+    activity.token = SecureRandom.uuid
+  end
+
   after_save do |activity|
     if activity.valid?
       TimerParser.call(activity, params[:activity][:timer])
@@ -77,7 +81,7 @@ ActiveAdmin.register Activity do
     if resource.results.empty?
       flash[:error] = t '.empty_protocol'
     elsif resource.correct?
-      resource.update!(published: true)
+      resource.update!(published: true, token: nil)
       flash[:notice] = t '.successfully_published'
     else
       flash[:error] = t '.incorrect_protocol'

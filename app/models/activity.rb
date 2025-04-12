@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Activity < ApplicationRecord
-  audited
+  audited except: [:token]
   has_associated_audits
 
   MAX_SCANNERS = 5

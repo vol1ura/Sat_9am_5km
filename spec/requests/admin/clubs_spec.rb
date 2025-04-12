@@ -3,7 +3,7 @@
 RSpec.describe '/admin/clubs' do
   let(:user) { create(:user, :admin) }
 
-  before { sign_in user }
+  before { sign_in user, scope: :user }
 
   describe 'GET /admin/clubs' do
     it 'renders a successful response' do
