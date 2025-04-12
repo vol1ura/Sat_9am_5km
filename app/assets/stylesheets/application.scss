@@ -148,35 +148,6 @@ nav.pagination {
   }
 }
 
-.partners {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-
-
-  a {
-    margin-right: 12px;
-    @include media(phoneScreen) {
-      margin-right: 6px;
-    }
-
-    .img-partner {
-      height: 150px;
-      @include media(phoneScreen) {
-        height: 90px;
-      }
-
-      :hover {
-        opacity: 0.85;
-      }
-    }
-  }
-
-  a:last-child {
-    margin-right: 0;
-  }
-}
-
 .img-club {
   @extend .float-start, .me-2, .my-2, .rounded;
   width: 150px;
