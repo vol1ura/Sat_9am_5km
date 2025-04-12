@@ -877,6 +877,7 @@ ru:
       title: Настройки
       description: 'Настройки для пользователя %{user_name}'
       edit: Изменить
+      not_specified: не указан
     field:
       edit: Изменить
     edit:

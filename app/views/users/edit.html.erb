@@ -1,65 +1,61 @@
 <%= turbo_frame_tag current_user do %>
   <%= form_with model: current_user do |form| %>
-    <div class="row">
-      <div class="col-12 col-sm-8 col-md-4">
-        <div class="d-flex flex-column" data-controller="form">
-          <div>
-            <%= form.label :first_name, class: 'col-form-label text-capitalize fw-light' %>
-            <% is_first_name_invalid = current_user.errors.key?(:first_name) %>
-            <%= form.text_field :first_name, class: "form-control #{'is-invalid' if is_first_name_invalid}", required: true %>
-            <% if is_first_name_invalid %>
-              <div class="invalid-feedback d-block"><%= current_user.errors[:first_name].join(', ') %></div>
-            <% end %>
-          </div>
-          <div class="mt-2">
-            <%= form.label :last_name, class: 'form-label text-capitalize fw-light' %>
-            <% is_last_name_invalid = current_user.errors.key?(:last_name) %>
-            <%= form.text_field :last_name, class: "form-control #{'is-invalid' if is_last_name_invalid}", required: true %>
-            <% if is_last_name_invalid %>
-              <div class="invalid-feedback d-block"><%= current_user.errors[:last_name].join(', ') %></div>
-            <% end %>
-          </div>
-          <%= form.fields_for :athlete do |athlete_form| %>
-            <div class="mt-2">
-              <%= athlete_form.label :event_id, class: 'form-label text-capitalize fw-light' %>
-              <%= athlete_form.combobox :event_id, search_events_path, id: 'event-id-box' %>
-            </div>
-            <div class="mt-2">
-              <%= athlete_form.label :club_id, class: 'form-label text-capitalize fw-light' %>
-              <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
-            </div>
-          <% end %>
-          <% if current_user.phone.present? %>
-            <div class="mt-4 form-check form-switch">
-              <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
-              <%= label_tag :delete_phone, t('.delete_phone'), class: 'form-check-label' %>
-            </div>
-          <% end %>
-          <div class="mt-2">
-            <%= form.label :phone, class: 'form-label text-capitalize fw-light' %>
-            <%= form.text_field :phone, class: "form-control", disabled: true, placeholder: t('.phone_placeholder') %>
-          </div>
-
-          <% if current_user.image.attached? %>
-            <div class="mt-4 form-check form-switch">
-              <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
-              <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
-            </div>
-          <% end %>
-          <div class="mt-2" data-form-target="input">
-            <%= form.label :image, class: 'form-label text-capitalize fw-light' %>
-            <%= form.file_field :image, accept: 'image/jpeg,image/png', class: 'form-control' %>
-            <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
-          </div>
-          <div class="mt-5">
-            <button class="me-1 btn btn-outline-primary" type="submit" title="<%= t '.save' %>">
-              <i class="fa-regular fa-circle-down"></i> <%= t '.save' %>
-            </button>
-            <%= link_to user_path, class: 'btn btn-light float-end' do %>
-              <i class="fa-regular fa-circle-xmark"></i> <%= t '.cancel' %>
-            <% end %>
-          </div>
+    <div class="d-flex flex-column" data-controller="form">
+      <div>
+        <%= form.label :first_name, class: 'col-form-label text-capitalize fw-light' %>
+        <% is_first_name_invalid = current_user.errors.key?(:first_name) %>
+        <%= form.text_field :first_name, class: "form-control #{'is-invalid' if is_first_name_invalid}", required: true %>
+        <% if is_first_name_invalid %>
+          <div class="invalid-feedback d-block"><%= current_user.errors[:first_name].join(', ') %></div>
+        <% end %>
+      </div>
+      <div class="mt-2">
+        <%= form.label :last_name, class: 'form-label text-capitalize fw-light' %>
+        <% is_last_name_invalid = current_user.errors.key?(:last_name) %>
+        <%= form.text_field :last_name, class: "form-control #{'is-invalid' if is_last_name_invalid}", required: true %>
+        <% if is_last_name_invalid %>
+          <div class="invalid-feedback d-block"><%= current_user.errors[:last_name].join(', ') %></div>
+        <% end %>
+      </div>
+      <%= form.fields_for :athlete do |athlete_form| %>
+        <div class="mt-2">
+          <%= athlete_form.label :event_id, class: 'form-label text-capitalize fw-light' %>
+          <%= athlete_form.combobox :event_id, search_events_path, id: 'event-id-box' %>
         </div>
+        <div class="mt-2">
+          <%= athlete_form.label :club_id, class: 'form-label text-capitalize fw-light' %>
+          <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
+        </div>
+      <% end %>
+      <% if current_user.phone.present? %>
+        <div class="mt-4 form-check form-switch">
+          <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
+          <%= label_tag :delete_phone, t('.delete_phone'), class: 'form-check-label' %>
+        </div>
+      <% end %>
+      <div class="mt-2">
+        <%= form.label :phone, class: 'form-label text-capitalize fw-light' %>
+        <%= form.text_field :phone, class: "form-control", disabled: true, placeholder: t('.phone_placeholder') %>
+      </div>
+
+      <% if current_user.image.attached? %>
+        <div class="mt-4 form-check form-switch">
+          <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
+          <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
+        </div>
+      <% end %>
+      <div class="mt-2" data-form-target="input">
+        <%= form.label :image, class: 'form-label text-capitalize fw-light' %>
+        <%= form.file_field :image, accept: 'image/jpeg,image/png', class: 'form-control' %>
+        <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
+      </div>
+      <div class="my-5">
+        <button class="me-1 btn btn-outline-primary" type="submit" title="<%= t '.save' %>">
+          <i class="fa-regular fa-circle-down"></i> <%= t '.save' %>
+        </button>
+        <%= link_to user_path, class: 'btn btn-light float-end' do %>
+          <i class="fa-regular fa-circle-xmark"></i> <%= t '.cancel' %>
+        <% end %>
       </div>
     </div>
   <% end %>
