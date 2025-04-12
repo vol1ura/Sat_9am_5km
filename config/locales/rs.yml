@@ -878,6 +878,7 @@ rs:
       title: Podešavanja
       description: 'Podešavanja za %{user_name}'
       edit: Izmeni
+      not_specified: nije naveden
     field:
       edit: Izmeni
     edit:
