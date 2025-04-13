@@ -27,17 +27,6 @@
           <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
         </div>
       <% end %>
-      <% if current_user.phone.present? %>
-        <div class="mt-4 form-check form-switch">
-          <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
-          <%= label_tag :delete_phone, t('.delete_phone'), class: 'form-check-label' %>
-        </div>
-      <% end %>
-      <div class="mt-2">
-        <%= form.label :phone, class: 'form-label text-capitalize fw-light' %>
-        <%= form.text_field :phone, class: "form-control", disabled: true, placeholder: t('.phone_placeholder') %>
-      </div>
-
       <% if current_user.image.attached? %>
         <div class="mt-4 form-check form-switch">
           <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
@@ -49,6 +38,31 @@
         <%= form.file_field :image, accept: 'image/jpeg,image/png', class: 'form-control' %>
         <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
       </div>
+
+      <div class="mt-4">
+        <h5 class="fw-light"><%= t '.promotions.title' %></h5>
+        <% if current_user.phone %>
+            <% User::AVAILABLE_PROMOTIONS.each do |name| %>
+              <div class="form-check form-switch mt-3">
+                <%= check_box_tag "user[promotions][]",
+                                  name,
+                                  current_user.promotions.include?(name),
+                                  class: 'form-check-input',
+                                  role: 'switch',
+                                  'data-action' => 'change->form#showPromotionModal',
+                                  'data-promotion-key' => name %>
+                <%= label_tag "user[promotions][]", t(".promotions.#{name}"), class: 'form-check-label' %>
+              </div>
+            <% end %>
+          <div class="mt-4 form-check form-switch">
+            <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
+            <%= label_tag :delete_phone, t('.delete_phone', phone: current_user.phone), class: 'form-check-label text-danger' %>
+          </div>
+        <% else %>
+          <p><%= t '.add_phone', link: 'https://t.me/sat9am5kmbot' %></p>
+        <% end %>
+      </div>
+
       <div class="my-5">
         <button class="me-1 btn btn-outline-primary" type="submit" title="<%= t '.save' %>">
           <i class="fa-regular fa-circle-down"></i> <%= t '.save' %>
@@ -56,6 +70,21 @@
         <%= link_to user_path, class: 'btn btn-light float-end' do %>
           <i class="fa-regular fa-circle-xmark"></i> <%= t '.cancel' %>
         <% end %>
+      </div>
+
+      <div class="modal fade" id="promotionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="promotionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="promotionModalLabel"><%= t '.promotion_terms' %></h5>
+            </div>
+            <div class="modal-body" id="promotionTerms"></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= t '.disagree' %></button>
+              <button type="button" class="btn btn-primary" data-action="form#agreeToPromotion"><%= t '.agree' %></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>

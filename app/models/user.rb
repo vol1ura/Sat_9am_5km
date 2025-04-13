@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  audited max_audits: 20, only: %i[email role first_name last_name telegram_user]
+  AVAILABLE_PROMOTIONS = %w[spartacus].freeze
+
+  audited only: %i[email role first_name last_name telegram_user promotions]
   has_associated_audits
 
   # Include default devise modules. Others available are:
@@ -26,6 +28,7 @@ class User < ApplicationRecord
             content_type: %i[png jpg jpeg],
             dimension: { min: 200..200 },
             size: { less_than: 10.megabytes }
+  validate :promotions_must_be_available, if: :will_save_change_to_promotions?
 
   enum :role, { admin: 0 }, validate: { allow_nil: true }
 
@@ -61,5 +64,9 @@ class User < ApplicationRecord
 
   def update_athlete_name
     athlete.name = full_name if athlete
+  end
+
+  def promotions_must_be_available
+    errors.add(:promotions, :inclusion) unless (promotions - promotions_was).all? { |p| AVAILABLE_PROMOTIONS.include? p }
   end
 end

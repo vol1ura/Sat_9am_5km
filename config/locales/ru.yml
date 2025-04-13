@@ -882,10 +882,16 @@ ru:
       edit: Изменить
     edit:
       delete_image: Удалить фото
-      delete_phone: Удалить номер телефона
-      phone_placeholder: Установите в боте командой /phone
+      delete_phone: Удалить телефон +%{phone}
+      add_phone: 'Для участия в партнёрских программах необходимо добавить ваш номер телефона. Привязка и проверка телефона выполняются с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a> командой <code>/phone</code>'
       save: Сохранить
       cancel: Отмена
+      promotion_terms: Соглашение с условиями
+      promotions:
+        title: Партнерские программы
+        spartacus: Акция клуба болельщиков ФАНАТИК СКВАД
+      disagree: Не согласен
+      agree: Согласен
   going_tos:
     create:
       success: Вы успешно отметились как участник

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_11_175646) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_13_100001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -255,9 +255,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_11_175646) do
     t.string "phone"
     t.string "auth_token"
     t.datetime "auth_token_expires_at"
+    t.string "promotions", default: [], null: false, array: true
     t.index ["auth_token"], name: "index_users_on_auth_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["promotions"], name: "index_users_on_promotions", using: :gin
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

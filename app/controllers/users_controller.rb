@@ -2,14 +2,13 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :reset_attributes, only: :update
 
   def show; end
 
   def edit; end
 
   def update
-    current_user.phone = nil if params[:delete_phone]
-
     if current_user.update(user_params)
       if params[:delete_image]
         current_user.image.purge
@@ -25,7 +24,24 @@ class UsersController < ApplicationController
 
   private
 
+  def reset_attributes
+    if params[:delete_phone]
+      current_user.phone = nil
+      current_user.promotions = []
+    elsif params.dig(:user, :promotions).blank?
+      current_user.promotions = []
+    end
+  end
+
   def user_params
-    params.expect(user: [:first_name, :last_name, :image, { athlete_attributes: %i[id event_id club_id] }])
+    params.expect(
+      user: [
+        :first_name,
+        :last_name,
+        :image,
+        { promotions: [] },
+        { athlete_attributes: %i[id event_id club_id] }
+      ],
+    )
   end
 end
