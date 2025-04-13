@@ -549,7 +549,7 @@ rs:
           description: "Više od 20 lokacija u 3 zemlje"
         come_saturday:
           title: "Dođi u subotu"
-          description: "Start u 9:00, distancu možeš pretrčati ili prehodati, možeš pomoći volontiranjem"
+          description: "Start u 9:00, distancu možete preći tempom koji vam odgovara"
         track_progress:
           title: "Prati napredak"
           description: "Rezultati, nagrade, rang liste - na našem sajtu"
@@ -557,10 +557,10 @@ rs:
         title: "Zašto S95?"
         for_everyone:
           title: "Za sve"
-          description: "Možete učestvovati sa porodicom, prijateljima, kućnim ljubimcima"
+          description: "Možete učestvovati zajedno sa porodicom, prijateljima, kućnim ljubimcima. Možete trčati ili hodati, možete pomoći volontiranjem"
         community:
           title: "Zajednica"
-          description: "Pridružite se chatovima događaja, pronađite prijatelje, družite se na čajankama posle trka"
+          description: "Pronađite nove prijatelje, družite se na čajankama posle trka, pridružite se četovima događaja"
         free:
           title: "Besplatno"
           description: "Svi događaji se organizuju od strane entuzijasta ljubitelja trčanja i volontera"
@@ -577,7 +577,20 @@ rs:
         story3:
           quote: "Trčim sa porodicom – deca učestvuju u dečjim trkama, a mi sa ženom trčimo 5km. Odličan porodični provod!"
           author: "Maksim, Kuzminki"
-      our_partners: "Naši partneri"
+      volunteer_app:
+        title: Mobilna aplikacija Volonter S95
+        features:
+          timer:
+            title: Štoperica
+            description: Za volontere-meriče vremena sa mogućnošću brisanja pogrešnih merenja
+          scanner:
+            title: Skener
+            description: Super brz i precizan modul sa mogućnošću istovremenog skeniranja kartice učesnika i pozicije. Za evidenciju završenih učesnika
+          stats:
+            title: Lična statistika
+            description: Praćenje vaše volonterske aktivnosti
+        download_rustore: Preuzmi u RuStore
+      our_partners: Naši partneri
     about:
       description: S95 je otvorena platforma koja objedinjuje nezavisne park trke koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
       description_html: >
