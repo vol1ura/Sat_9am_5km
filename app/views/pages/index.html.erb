@@ -77,42 +77,6 @@
   </div>
 </section>
 
-<%# Why S95 Section %>
-<section class="why-s95 py-5">
-  <div class="container">
-    <h2 class="text-center mb-5"><%= t '.why_s95.title' %></h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-users fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title"><%= t '.why_s95.for_everyone.title' %></h5>
-            <p class="card-text"><%= t '.why_s95.for_everyone.description' %></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title"><%= t '.why_s95.community.title' %></h5>
-            <p class="card-text"><%= t '.why_s95.community.description' %></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-gift fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title"><%= t '.why_s95.free.title' %></h5>
-            <p class="card-text"><%= t '.why_s95.free.description' %></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <%# Stories Section %>
 <section class="stories-section py-5">
   <div class="container">
@@ -202,6 +166,42 @@
   </div>
 </section>
 
+<%# Why S95 Section %>
+<section class="why-s95 py-5">
+  <div class="container">
+    <h2 class="text-center mb-5"><%= t '.why_s95.title' %></h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title"><%= t '.why_s95.for_everyone.title' %></h5>
+            <p class="card-text"><%= t '.why_s95.for_everyone.description' %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title"><%= t '.why_s95.community.title' %></h5>
+            <p class="card-text"><%= t '.why_s95.community.description' %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-gift fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title"><%= t '.why_s95.free.title' %></h5>
+            <p class="card-text"><%= t '.why_s95.free.description' %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <%# Events Section %>
 <% if @jubilee_events.present? || @funrun_badges.present? %>
   <section class="events-section">
@@ -243,6 +243,58 @@
     </div>
   </section>
 <% end %>
+
+<%# Volunteer App Section %>
+<section class="volunteer-app-section py-5" style="background-color: #a6e9d5;">
+  <div class="container">
+    <h2 class="text-center mb-5"><%= t '.volunteer_app.title' %></h2>
+    <div class="row align-items-center g-4">
+      <div class="col-md-4">
+        <div class="app-screen-container text-center">
+          <%= image_tag '/images/mobile_app.png', class: 'img-fluid app-screen', alt: t('.volunteer_app.title'), style: 'max-height: 350px;' %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="px-2 px-md-0 mb-5">
+          <ul class="list-unstyled">
+            <li class="mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-stopwatch fa-2x text-primary me-3"></i>
+                <div>
+                  <h5 class="mb-1"><%= t '.volunteer_app.features.timer.title' %></h5>
+                  <p class="mb-0"><%= t '.volunteer_app.features.timer.description' %></p>
+                </div>
+              </div>
+            </li>
+            <li class="mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-qrcode fa-2x text-primary me-3"></i>
+                <div>
+                  <h5 class="mb-1"><%= t '.volunteer_app.features.scanner.title' %></h5>
+                  <p class="mb-0"><%= t '.volunteer_app.features.scanner.description' %></p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="d-flex align-items-center">
+                <i class="fas fa-chart-bar fa-2x text-primary me-3"></i>
+                <div>
+                  <h5 class="mb-1"><%= t '.volunteer_app.features.stats.title' %></h5>
+                  <p class="mb-0"><%= t '.volunteer_app.features.stats.description' %></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="download-options d-flex flex-wrap gap-4 align-items-center justify-content-center">
+          <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
+            <%= image_tag '/images/rustore_badge.svg', class: 'img-fluid', alt: t('.volunteer_app.download_rustore') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <%# Partners Section %>
 <section class="partners-section">
