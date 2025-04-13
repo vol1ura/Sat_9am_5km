@@ -606,7 +606,7 @@ rs:
       forward: Napred
     rules:
       description: Brief rules for S95 participants, as well as frequently asked questions
-      register_with_bot_html: 'If you are not registered, create a profile using <a href="%{link}"" target="_blank" rel="noopener">Telegram bot</a>. You will receive a link to your profile with a personal qr-code.'
+      register_with_bot_html: 'If you are not registered, create a profile using <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a>. You will receive a link to your profile with a personal qr-code.'
       come_to_s95_html: 'The most important thing is to come to one of our events on <strong>Saturday</strong> at <strong>9 am</strong> and run <strong>5 km</strong>.'
       scan_barcodes: At the finish you will receive a position card. Scan the personal qr-code and position card with the volunteer.
       return_position_card: Hand over the position card.
@@ -883,10 +883,16 @@ rs:
       edit: Izmeni
     edit:
       delete_image: Obriši sliku
-      delete_phone: Obriši broj telefona
-      phone_placeholder: Postavite u botu komandom /phone
+      delete_phone: Obriši telefon +%{phone}
+      add_phone: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'
       save: Sačuvaj
       cancel: Otkaži
+      promotion_terms: Saglasnost sa uslovima
+      promotions:
+        title: Partnerski programi
+        spartacus: Akcija kluba navijača FANAT1K SQUAD
+      disagree: Ne slažem se
+      agree: Slažem se
   going_tos:
     create:
       success: Uspešno ste se označili kao učesnik
