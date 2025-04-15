@@ -17,3 +17,15 @@
   width: 150px;
   height: 150px;
 }
+
+.avatar-100 {
+  @extend .avatar;
+  width: 100px;
+  height: 100px;
+}
+
+.avatar-50 {
+  @extend .avatar;
+  width: 50px;
+  height: 50px;
+}
