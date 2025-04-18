@@ -57,6 +57,8 @@ rs:
         remember_me: Zapamti me
         image: slika
         phone: telefon
+        emergency_contact_name: ime
+        emergency_contact_phone: telefon
       permission:
         event: događaj
         user: korisnik
@@ -892,12 +894,15 @@ rs:
       description: 'Podešavanja za %{user_name}'
       edit: Izmeni
       not_specified: nije naveden
+      emergency_contact: Hitna kontakt osoba
     field:
       edit: Izmeni
     edit:
       delete_image: Obriši sliku
-      delete_phone: Obriši telefon +%{phone}
+      delete_phone: Obriši telefon %{phone}
       add_phone: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'
+      phone_placeholder: '+0 000 000-00-00'
+      emergency_contact: Hitna kontakt osoba
       save: Sačuvaj
       cancel: Otkaži
       promotion_terms: Saglasnost sa uslovima

@@ -27,7 +27,7 @@ module API
 
       def auth_link
         user = User.find(params[:user_id])
-        user.generate_auth_token!
+        Users::AuthToken.new(user).generate!
 
         render json: { link: auth_link_url(token: user.auth_token) }
       end

@@ -55,6 +55,8 @@ ru:
         athlete: участник
         image: фото
         phone: телефон
+        emergency_contact_name: имя
+        emergency_contact_phone: телефон
       permission:
         event: мероприятие
         user: пользователь
@@ -891,12 +893,15 @@ ru:
       description: 'Настройки для пользователя %{user_name}'
       edit: Изменить
       not_specified: не указан
+      emergency_contact: Экстренный контакт
     field:
       edit: Изменить
     edit:
       delete_image: Удалить фото
-      delete_phone: Удалить телефон +%{phone}
+      delete_phone: Удалить телефон %{phone}
       add_phone: 'Для участия в партнёрских программах необходимо добавить ваш номер телефона. Привязка и проверка телефона выполняются с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a> командой <code>/phone</code>'
+      phone_placeholder: '+0 000 000-00-00'
+      emergency_contact: 'Экстренный контакт'
       save: Сохранить
       cancel: Отмена
       promotion_terms: Соглашение с условиями
