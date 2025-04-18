@@ -337,6 +337,7 @@ GEM
       activesupport (>= 6.1)
     pghero (3.6.1)
       activerecord (>= 6.1)
+    phonelib (0.10.7)
     popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
@@ -614,6 +615,7 @@ DEPENDENCIES
   pg_query
   pg_search
   pghero
+  phonelib
   pry-byebug
   pry-doc
   pry-rails

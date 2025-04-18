@@ -39,6 +39,8 @@ class UsersController < ApplicationController
         :first_name,
         :last_name,
         :image,
+        :emergency_contact_name,
+        :emergency_contact_phone,
         { promotions: [] },
         { athlete_attributes: %i[id event_id club_id] }
       ],

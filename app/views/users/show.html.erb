@@ -24,7 +24,7 @@
             </p>
             <p class="mb-2">
               <i class="fa-solid fa-phone text-primary me-3"></i>
-              <%= current_user.phone ? "+#{current_user.phone}" : t('.not_specified') %>
+              <%= current_user.phone ? human_phone(current_user.phone) : t('.not_specified') %>
             </p>
             <p class="mb-2">
               <i class="fa-solid fa-people-group text-primary me-3"></i>
@@ -34,6 +34,18 @@
               <i class="fa-solid fa-house text-primary me-3"></i>
               <%= current_user&.athlete&.event&.name || t('.not_specified') %>
             </p>
+            <div class="mt-3">
+              <h5 class="mb-3"><%= t '.emergency_contact' %></h5>
+              <p class="mb-2">
+                <i class="fa-solid fa-phone text-primary me-3"></i>
+                <% if current_user.emergency_contact_phone %>
+                  <%= human_phone current_user.emergency_contact_phone %>
+                  (<%= current_user.emergency_contact_name %>)
+                <% else %>
+                  <%= t '.not_specified' %>
+                <% end %>
+              </p>
+            </div>
           </div>
         </div>
         <div class="card-body">

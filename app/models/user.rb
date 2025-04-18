@@ -24,6 +24,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+\z/ }
   validates :last_name, presence: true, format: { with: /\A[[:alpha:]]+([-' ][[:alpha:]]{2,})?\z/ }
   validates :telegram_id, uniqueness: true, allow_nil: true
+  validates :emergency_contact_phone, phone: true, allow_nil: true
+  validates :emergency_contact_name, presence: true, if: -> { emergency_contact_phone }
   validates :image,
             content_type: %i[png jpg jpeg],
             dimension: { min: 200..200 },
@@ -32,6 +34,7 @@ class User < ApplicationRecord
 
   enum :role, { admin: 0 }, validate: { allow_nil: true }
 
+  before_validation :format_emergency_contact, if: :will_save_change_to_emergency_contact_phone?
   before_save :update_athlete_name, if: proc { will_save_change_to_first_name? || will_save_change_to_last_name? }
 
   def self.ransackable_attributes(_auth_object = nil)
@@ -44,26 +47,15 @@ class User < ApplicationRecord
 
   def full_name = "#{first_name} #{last_name.upcase}"
 
-  def generate_auth_token!
-    self.auth_token = SecureRandom.hex(16)
-    self.auth_token_expires_at = 2.minutes.from_now
-    save!
-  end
-
-  def clear_auth_token!
-    self.auth_token = nil
-    self.auth_token_expires_at = nil
-    save!
-  end
-
-  def auth_token_valid?
-    auth_token && auth_token_expires_at&.future?
-  end
-
   private
 
   def update_athlete_name
     athlete.name = full_name if athlete
+  end
+
+  def format_emergency_contact
+    self.emergency_contact_phone = Phonelib.parse(emergency_contact_phone).e164
+    self.emergency_contact_name = nil unless emergency_contact_phone
   end
 
   def promotions_must_be_available
