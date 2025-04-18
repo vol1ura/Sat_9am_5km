@@ -39,6 +39,10 @@ module ApplicationHelper
     I18n.t("activerecord.attributes.contact.contact_types.#{type}")
   end
 
+  def human_phone(phone)
+    Phonelib.parse(phone).full_international
+  end
+
   def kind_of_badge(badge)
     I18n.t("activerecord.attributes.badge.kinds.#{badge.kind}")
   end

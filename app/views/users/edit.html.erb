@@ -40,8 +40,30 @@
       </div>
 
       <div class="mt-4">
-        <h5 class="fw-light"><%= t '.promotions.title' %></h5>
-        <% if current_user.phone %>
+        <hr class="border border-primary opacity-25">
+        <h5 class="fw-light"><%= t '.emergency_contact' %></h5>
+        <div class="mb-2">
+          <% is_emergency_contact_name_invalid = current_user.errors.key?(:emergency_contact_name) %>
+          <%= form.label :emergency_contact_name, class: 'form-label text-capitalize fw-light' %>
+          <%= form.text_field :emergency_contact_name, class: "form-control #{'is-invalid' if is_emergency_contact_name_invalid}" %>
+          <% if is_emergency_contact_name_invalid %>
+            <div class="invalid-feedback d-block"><%= current_user.errors[:emergency_contact_name].join(', ') %></div>
+          <% end %>
+        </div>
+
+        <div>
+          <% is_emergency_contact_phone_invalid = current_user.errors.key?(:emergency_contact_phone) %>
+          <%= form.label :emergency_contact_phone, class: 'form-label text-capitalize fw-light' %>
+          <%= form.text_field :emergency_contact_phone, class: "form-control #{'is-invalid' if is_emergency_contact_phone_invalid}", placeholder: t('.phone_placeholder') %>
+          <% if is_emergency_contact_phone_invalid %>
+            <div class="invalid-feedback d-block"><%= current_user.errors[:emergency_contact_phone].join(', ') %></div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <hr class="border border-primary opacity-25">
+        <h5 class="fw-light"><%= t '.promotions.title' %></h5> <% if current_user.phone %>
             <% User::AVAILABLE_PROMOTIONS.each do |name| %>
               <div class="form-check form-switch mt-3">
                 <%= check_box_tag "user[promotions][]",
@@ -56,7 +78,7 @@
             <% end %>
           <div class="mt-4 form-check form-switch">
             <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
-            <%= label_tag :delete_phone, t('.delete_phone', phone: current_user.phone), class: 'form-check-label text-danger' %>
+            <%= label_tag :delete_phone, t('.delete_phone', phone: human_phone(current_user.phone)), class: 'form-check-label text-danger' %>
           </div>
         <% else %>
           <p><%= t '.add_phone', link: 'https://t.me/sat9am5kmbot' %></p>

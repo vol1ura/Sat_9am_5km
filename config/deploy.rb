@@ -40,6 +40,7 @@ after 'deploy:starting', 'sidekiq:quiet'
 after 'deploy:updated', 'sidekiq:stop'
 after 'deploy:reverted', 'sidekiq:stop'
 after 'deploy:published', 'sidekiq:start'
+after 'deploy:failed', 'sidekiq:restart'
 
 after 'deploy:finished', 'puma:restart'
 

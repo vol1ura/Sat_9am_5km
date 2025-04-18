@@ -17,6 +17,12 @@ attributes_table_for user do
   row :athlete
 end
 
+if current_user.admin? && user.emergency_contact_phone
+  panel 'Экстренный контакт' do
+    div "#{human_phone user.emergency_contact_phone} (#{user.emergency_contact_name})"
+  end
+end
+
 panel 'Правки' do
   render partial: 'admin/audits_table', locals: { object: user }
 end
