@@ -59,6 +59,7 @@ group :development, :test do
   gem 'bundler-audit'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'phonelib'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
