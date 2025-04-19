@@ -15,7 +15,7 @@ module Users
     end
 
     def valid?
-      @user.auth_token && @user.auth_token_expires_at&.future?
+      @user&.auth_token && @user.auth_token_expires_at&.future?
     end
   end
 end
