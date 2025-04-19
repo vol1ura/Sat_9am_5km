@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe '/user' do
-  let(:user) { create(:user, with_avatar: true) }
+  let(:user) { create(:user, with_avatar: true, phone: '79991234567') }
 
   describe 'GET /user/sign_up' do
     it 'renders successful response' do
@@ -12,7 +12,7 @@ RSpec.describe '/user' do
 
   context 'with authenticated user' do
     before do
-      sign_in user
+      sign_in user, scope: :user
       Bullet.n_plus_one_query_enable = false if defined?(Bullet)
     end
 
@@ -59,6 +59,11 @@ RSpec.describe '/user' do
         patch user_url, params: { delete_image: '1', user: user.attributes.slice('first_name', 'last_name') }
         expect(CompressUserImageJob).not_to have_been_enqueued
         expect(response).to redirect_to user_path
+      end
+
+      it 'deletes phone' do
+        patch user_url, params: { delete_phone: 'true', user: user.attributes.slice('first_name') }
+        expect(user.phone).to be_nil
       end
     end
   end
