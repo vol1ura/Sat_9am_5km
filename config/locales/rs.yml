@@ -914,7 +914,6 @@ rs:
   going_tos:
     create:
       success: Uspešno ste se označili kao učesnik
-      error: Nije moguće označiti vas kao učesnika
     destroy:
       success: Otkazali ste učešće
     form:
