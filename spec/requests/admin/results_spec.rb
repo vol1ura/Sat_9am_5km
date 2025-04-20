@@ -8,13 +8,15 @@ RSpec.describe '/admin/results' do
 
   before do
     create(:permission, user: user, action: 'read', subject_class: 'Result', event_id: event.id)
-    sign_in user
+    sign_in user, scope: :user
   end
 
   describe 'GET /admin/results' do
     it 'renders a successful response' do
+      create(:permission, user: user, action: 'manage', subject_class: 'Result', event_id: event.id)
       get admin_activity_results_url(activity)
       expect(response).to be_successful
+      expect(response.body).to include('Удалить 🕑')
     end
 
     it 'renders csv' do

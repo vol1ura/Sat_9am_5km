@@ -913,7 +913,6 @@ ru:
   going_tos:
     create:
       success: Вы успешно отметились как участник
-      error: Не удалось отметить вас как участника
     destroy:
       success: Вы отменили участие
     form:

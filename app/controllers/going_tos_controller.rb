@@ -6,30 +6,18 @@ class GoingTosController < ApplicationController
   before_action :find_athlete
 
   def create
-    if @athlete.update(going_to_event: @event)
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to @event, notice: t('.success') }
-      end
-    else
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('going_to_form', partial: 'form') }
-        format.html { redirect_to @event, alert: t('.error') }
-      end
+    @athlete.update!(going_to_event: @event)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @event, notice: t('.success') }
     end
   end
 
   def destroy
-    if @athlete.update(going_to_event: nil)
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to @event, notice: t('.success') }
-      end
-    else
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('going_to_form', partial: 'form') }
-        format.html { redirect_to @event, alert: t('.error') }
-      end
+    @athlete.update!(going_to_event: nil)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @event, notice: t('.success') }
     end
   end
 
