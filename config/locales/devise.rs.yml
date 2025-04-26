@@ -3,10 +3,18 @@ rs:
     shared:
       links:
         sign_in: Prijavite se
-        registration: Register using Telegram bot
-        password: Forgot your password?
-        confirmation: Didn't receive a confirmation link?
-        unlock: Didn't receive the unlock link?
+        registration: Registruj se pomoću Telegram bota
+        password: Zaboravili ste lozinku?
+        confirmation: Niste dobili link za potvrdu?
+        unlock: Niste dobili link za otključavanje?
+    sessions:
+      signed_in : Uspešno ste se prijavili na sajt
+      signed_out : Uspešno ste se odjavili sa sajta
+      new:
+        title: Prijavite se na sajt
+        description: Da bi se prijavili, koristite email i lozinku ili Telegram bot. Potrebno je samo da zatražite jednokratnu vezu za prijavu u botu komandom /login
+        submit: Prijavite se
+        telegram_login_html: 'Ako ste već registrovan, možete dobiti jednokratnu vezu za prijavu u <a href="%{link}" class="text-reset" target="_blank">Telegram botu</a> pomoću komande <code>/login</code>'
     confirmations:
       new:
         title: Pošaljite uputstva za potvrdu e-mail
@@ -53,13 +61,6 @@ rs:
       updated: 'Uspešno ste ažurirali svoj nalog.'
       update_needs_confirmation: 'Uspešno ste ažurirali svoj nalog, ali potrebno je da potvrdite Vašu novu email adresu. Molimo proverite Vaš email i kliknite na link za potvrdu Vaše nove email adrese.'
       destroyed: 'Doviđenja! Vaš nalog je uspešno otkazan. Nadamo se da ćemo Vas videti ponovo.'
-    sessions:
-      signed_in: 'Uspešno ste se prijavili.'
-      signed_out: 'Uspešno ste se odjavili.'
-      new:
-        title: Prijavite se
-        submit: Prijavite se
-        telegram_login_html: 'Ako ste već registrovan, možete dobiti jednokratnu vezu za prijavu u <a href="%{link}" class="text-reset" target="_blank">Telegram botu</a> pomoću komande <code>/login</code>'
     unlocks:
       new:
         title: Pošaljite uputstva za otključavanje

@@ -1,8 +1,12 @@
 # See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
 User-agent: *
+
+Clean-param: tpclid
+
 Disallow: /admin
 Disallow: /athletes
 Disallow: /volunteers
 Disallow: /user/auth/
+Disallow: /user/unlock
 Disallow: /user/password
 Sitemap: <%= File.join root_url, 'sitemap.xml' %>

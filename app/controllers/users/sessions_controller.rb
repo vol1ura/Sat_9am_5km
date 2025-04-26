@@ -10,12 +10,11 @@ module Users
     # end
 
     # POST /user/login
-    def create
-      super
-      flash[:notice] = t 'views.greeting', name: current_user.first_name
-    end
+    # def create
+    #   super
+    # end
 
-    # DELETE /urser/logout
+    # DELETE /user/logout
     # def destroy
     #   super
     # end

@@ -3,13 +3,16 @@ ru:
     shared:
       links:
         sign_in: Войти
-        registration: Зарегистрироваться с помощью Telegram-бота
+        registration: Зарегистрироваться с помощью Telegram бота
         password: Забыли пароль?
         confirmation: Не получили ссылку для подтверждения?
         unlock: Не получили ссылку для разблокировки?
     sessions:
+      signed_in : Вы успешно вошли на сайт
+      signed_out : Выход из системы успешно выполнен
       new:
-        title: Вход
+        title: Вход на сайт
+        description: Чтобы войти на сайт, можно использовать email и пароль или Telegram-бота. Достаточно просто запросить в боте одноразовую ссылку для входа командой /login
         submit: Войти
         telegram_login_html: 'Если вы уже зарегистрированы, вы можете получить одноразовую ссылку для входа в <a href="%{link}" class="text-reset" target="_blank">Telegram боте</a> с помощью команды <code>/login</code>'
     confirmations:
