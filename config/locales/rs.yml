@@ -876,8 +876,9 @@ rs:
         volunteering: ukupno volonterstva
         uniq_volunteers: ukupno jedinstvenih volontera
     volunteering:
-      title: Grafik volontiranja | %{event}
-      description: 'Informacije o volontiranju. Tabela sa rasporedom volontiranja i potrebnim pozicijama za trku "%{event}".'
+      title: Grafik volontiranja | %{event} | %{date}
+      description: 'Informacije o volontiranju. Tabela sa rasporedom volontiranja i potrebnim pozicijama za trku "%{event}" na %{date}.'
+      closest_date: najbliži datum
       acknowledgements: Bili bismo vam veoma zahvalni ako nam možete pružiti volontersku pomoć. Možete odabrati zanimljivu i jaku aktivnost za svakoga koja će vam omogućiti da se otkrijete, podržite prijatelje, odlično se zabavite.
       about_roster_html: 'Ispod možete pogledati listu <em>obaveznih pozicija</em>, kao i videti koje su već izabrane.'
       how_to_participate_html: 'Da biste se prijavili, samo napišite u naš <a href="%{tg_chat_link}" target="_blank" rel="noopener" >Telegram Chat</a>.'
