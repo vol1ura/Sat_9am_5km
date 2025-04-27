@@ -18,6 +18,7 @@ class Activity < ApplicationRecord
   after_commit :postprocessing, if: :saved_change_to_published?
 
   scope :published, -> { where(published: true) }
+  scope :unpublished, -> { where(published: false) }
   scope :in_country, ->(country_code) { joins(event: :country).where(country: { code: country_code }) }
 
   delegate :name, to: :event, prefix: true

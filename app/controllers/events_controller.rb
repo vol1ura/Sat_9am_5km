@@ -30,7 +30,7 @@ class EventsController < ApplicationController
   end
 
   def volunteering
-    event_future_activities_dataset = @event.activities.where(date: Date.current.., published: false)
+    event_future_activities_dataset = @event.activities.unpublished.where(date: Date.current..)
     @activities = event_future_activities_dataset.select(:id, :date).order(:date).limit(4).load
     @tg_chat = @event.contacts.find_by(contact_type: :tg_chat)
 

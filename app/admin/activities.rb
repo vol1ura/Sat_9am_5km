@@ -12,7 +12,7 @@ ActiveAdmin.register Activity do
 
   scope :all
   scope :published
-  scope(:unpublished) { |s| s.where(published: false) }
+  scope :unpublished
 
   config.batch_actions = false
   config.sort_order = 'date_desc'
