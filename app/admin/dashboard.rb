@@ -9,9 +9,10 @@ ActiveAdmin.register_page 'Dashboard' do
         panel t('active_admin.dashboard_welcome.upcoming_activities') do
           ul do
             Activity
+              .unpublished
               .in_country(top_level_domain)
               .includes(:event)
-              .where(date: Date.current..Date.tomorrow.end_of_week, published: false)
+              .where(date: Date.current..Date.tomorrow.end_of_week)
               .order(:date, :visible_order)
               .each do |activity|
                 li link_to_if(can?(:read, activity), human_activity_name(activity), admin_activity_path(activity))
