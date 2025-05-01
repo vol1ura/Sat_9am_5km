@@ -38,15 +38,6 @@ RSpec.describe Athlete do
     end
   end
 
-  describe '#duplicates' do
-    it 'finds duplicated athletes by name case insensitive' do
-      create(:athlete, name: 'Test Name', fiveverst_code: nil)
-      create(:athlete, name: 'Name Test', fiveverst_code: nil)
-      create(:athlete, name: 'test NAME', parkrun_code: nil)
-      expect(described_class.duplicates.size).to eq 3
-    end
-  end
-
   describe '#find_or_scrape_by_code!' do
     context 'when such athlete exists in the database' do
       let(:athlete) { create(:athlete, runpark_code: 7000998502) }

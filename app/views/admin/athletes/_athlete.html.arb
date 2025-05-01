@@ -20,6 +20,25 @@ attributes_table_for athlete do
   row(:volunteering) { |a| link_to "смотреть таблицу (всего #{a.volunteering.size})", volunteering_admin_athlete_path(a) }
 end
 
+panel 'Двойники по имени. ВНИМАНИЕ! Это могут быть разные люди!' do
+  dataset =
+    Athlete
+      .includes(:club, :event)
+      .where(id: Athletes::DuplicatesFinder.call(name: athlete.name))
+      .excluding(athlete)
+      .limit(20)
+  table_for dataset do
+    column :id
+    column(:registered) { |a| a.user_id.present? }
+    column(:name) { |a| link_to a.name, admin_athlete_path(a) }
+    column :club
+    column :event
+    column :parkrun_code
+    column :fiveverst_code
+    column :runpark_code
+  end
+end
+
 panel 'Предстоящие волонтёрства' do
   dataset =
     athlete

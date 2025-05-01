@@ -80,24 +80,6 @@ class Athlete < ApplicationRecord
   before_save :remove_name_extra_spaces, if: :will_save_change_to_name?
   after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
 
-  def self.duplicates
-    sql = <<~SQL.squish
-      SELECT id, parkrun_code, fiveverst_code, l_name FROM (
-        SELECT id, parkrun_code, fiveverst_code, l_name, COUNT(id) OVER (PARTITION BY l_name) AS cnt FROM (
-          SELECT *, array(SELECT unnest(string_to_array(LOWER(name), ' ')) ORDER BY 1) AS l_name FROM athletes
-        ) AS q1
-      ) AS q2
-      WHERE q2.cnt > 1
-    SQL
-    namesakes_ids =
-      find_by_sql(sql)
-        .pluck(:l_name, :id, :parkrun_code, :fiveverst_code)
-        .group_by(&:first)
-        .reject { |_, arr| arr.all?(&:third) || arr.all?(&:last) }
-        .flat_map { |_, arr| arr.map(&:second) }
-    where(id: namesakes_ids)
-  end
-
   def self.find_or_scrape_by_code!(code)
     personal_code = PersonalCode.new(code)
     code_type = personal_code.code_type
