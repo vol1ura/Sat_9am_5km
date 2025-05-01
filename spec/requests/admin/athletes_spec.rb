@@ -47,7 +47,7 @@ RSpec.describe '/admin/athletes' do
     end
   end
 
-  describe 'GET /admin/athletes/find_duplicates' do
+  describe 'GET /admin/athletes?scope=duplicates' do
     before do
       create(:athlete, name: 'Doe JOHN', parkrun_code: nil)
       create(:athlete, name: 'John Doe', parkrun_code: nil)
