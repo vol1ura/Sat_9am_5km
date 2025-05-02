@@ -37,10 +37,6 @@ ActiveAdmin.register Activity do
     end
   end
 
-  before_create do |activity|
-    activity.token = SecureRandom.uuid
-  end
-
   after_save do |activity|
     if activity.valid?
       TimerParser.call(activity, params[:activity][:timer])
@@ -58,7 +54,17 @@ ActiveAdmin.register Activity do
     flash[:error] = t('.bad_data')
   end
 
-  action_item :results, only: %i[show edit] do
+  action_item :toggle_mode, only: %i[show edit], if: proc { !resource.published } do
+    link_to(
+      resource.token ? 'Ручной режим' : 'Авто режим',
+      toggle_mode_admin_activity_path(resource),
+      method: :patch,
+      style: 'color: green',
+      data: { confirm: t("admin.activities.toggle_mode.#{resource.token ? 'manual' : 'auto'}.confirm") },
+    )
+  end
+
+  action_item :results, only: %i[show edit], if: proc { resource.token.nil? } do
     link_to 'Редактор результатов', admin_activity_results_path(resource)
   end
 
@@ -66,18 +72,17 @@ ActiveAdmin.register Activity do
     link_to 'Редактор волонтёров', admin_activity_volunteers_path(resource)
   end
 
-  action_item :publish, only: :show do
-    next if resource.published || !resource.correct?
-
+  action_item :publish, only: :show, if: proc { resource.token.nil? && !resource.published && resource.correct? } do
     link_to(
       'Опубликовать',
       publish_admin_activity_path(resource),
-      method: :put,
+      method: :patch,
+      style: 'color: #d63384',
       data: { confirm: t('admin.activities.publish.confirm') },
     )
   end
 
-  member_action :publish, method: :put do
+  member_action :publish, method: :patch do
     if resource.results.empty?
       flash[:error] = t '.empty_protocol'
     elsif resource.correct?
@@ -87,5 +92,10 @@ ActiveAdmin.register Activity do
       flash[:error] = t '.incorrect_protocol'
     end
     redirect_to admin_activity_path(resource)
+  end
+
+  member_action :toggle_mode, method: :patch do
+    resource.update!(token: resource.token ? nil : SecureRandom.uuid)
+    redirect_to admin_activity_path(resource), notice: t(".#{resource.token ? 'auto' : 'manual'}.success")
   end
 end

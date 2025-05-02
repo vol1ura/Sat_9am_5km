@@ -30,6 +30,13 @@ rs:
         successfully_published: The protocol has been successfully published on the website
         empty_protocol: There are no results in the protocol
         incorrect_protocol: The protocol contains errors. Please correct them before publishing
+      toggle_mode:
+        auto:
+          confirm: 'Da li želite da pređete u automatski režim? U tom režimu će biti omogućeno učitavanje podataka iz mobilne aplikacije'
+          success: 'Automatski režim je aktiviran. Nakon završetka trčanja skenirajte QR kod pomoću aplikacije Volontir S95'
+        manual:
+          confirm: 'Da li želite da pređete u režim ručnog uređivanja? Uklonjeni će biti podaci za učitavanje'
+          success: 'Režim ručnog uređivanja je aktiviran. Sada možete da uređujete i objavljujete protokol'
     contacts:
       index:
         title: 'Kontakti %{event_name}'
