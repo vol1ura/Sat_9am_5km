@@ -34,7 +34,12 @@ active_admin_form_for [:admin, resource] do |f|
     input :published, label: 'Опубликован на сайте' if resource.published && current_user.admin?
   end
 
-  unless resource.published
+  if resource.token
+    panel 'Внимание!' do
+      para 'Для загрузки файлов необходимо активировать ручной режим.'
+      para 'После этого выгрузка из приложения Волонтёр S95 будет не доступна.'
+    end
+  elsif !resource.published
     if resource.results.exists?
       panel 'Внимание!' do
         para 'Файл с секундомера уже загружен. Если его нужно загрузить повторно, сначала очистите все результаты забега.'

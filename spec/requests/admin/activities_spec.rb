@@ -6,7 +6,7 @@ RSpec.describe '/admin/activities' do
 
   before do
     create(:permission, user: user, action: 'read', subject_class: 'Activity', event: event)
-    sign_in user
+    sign_in user, scope: :user
   end
 
   describe 'GET /admin/activities' do
@@ -92,12 +92,12 @@ RSpec.describe '/admin/activities' do
     end
   end
 
-  describe 'PUT /admin/activities/1/publish' do
+  describe 'PATCH /admin/activities/1/publish' do
     let(:user) { create(:user, :admin) }
     let(:activity) { create(:activity, published: false) }
 
     it 'redirects to resource with alert' do
-      put publish_admin_activity_url(activity)
+      patch publish_admin_activity_url(activity)
       expect(flash[:error]).to include 'В протоколе нет результатов'
       expect(response).to redirect_to admin_activity_url(activity)
     end
@@ -105,11 +105,23 @@ RSpec.describe '/admin/activities' do
     context 'with results' do
       it 'publishes protocol and redirects to resource' do
         create_list(:result, 2, activity:)
-        put publish_admin_activity_url(activity)
+        patch publish_admin_activity_url(activity)
         expect(flash[:notice]).to include 'Протокол успешно опубликован на сайте'
         expect(response).to redirect_to admin_activity_url(activity)
         expect(activity.reload.published).to be true
       end
+    end
+  end
+
+  describe 'PATCH /admin/activities/1/toggle_mode' do
+    let(:user) { create(:user, :admin) }
+    let(:activity) { create(:activity, published: false) }
+
+    it 'toggles mode and redirects to resource' do
+      patch toggle_mode_admin_activity_url(activity)
+      expect(flash[:notice]).to include 'Автоматический режим активирован'
+      expect(response).to redirect_to admin_activity_url(activity)
+      expect(activity.reload.token).to be_present
     end
   end
 end
