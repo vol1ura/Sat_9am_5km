@@ -567,18 +567,14 @@ rs:
           title: "Besplatno"
           description: "Svi događaji se organizuju od strane entuzijasta ljubitelja trčanja i volontera"
       stories:
-        title: "Priče učesnika"
-        previous: "Prethodni"
-        next: "Sledeći"
-        story1:
-          quote: "Trčim sa S95 već godinu dana – poboljšao sam rezultat sa 35 na 20 minuta! Pronašao sam nove prijatelje i inspiraciju za nova dostignuća."
-          author: "Andrej, Kuzminki"
-        story2:
-          quote: "Došla sam na S95 sa prijateljicom za podršku, a sada trčim svake subote! Najbolji način da započnem vikend."
-          author: "Marija, Pečatnici"
-        story3:
-          quote: "Trčim sa porodicom – deca učestvuju u dečjim trkama, a mi sa ženom trčimo 5km. Odličan porodični provod!"
-          author: "Maksim, Kuzminki"
+        title: Priče učesnika
+        previous: Prethodni
+        next: Sledeći
+        content:
+          4029: Moj put u S95 — put od ljutitog odbijanja trčanja do prvih sportskih pobeda i samoostvarenja na organizacionom polju. Novi bolji život uz podršku velike brižne porodice. Više od subota. Više od trčanja.
+          6901: Za mene, naša trkačka zajednica je više od samog trčanja! To je zdrava atmosfera i podrška među potpuno različitim ljudima ujedinjenim jednim pokretom. I odličan bonus u vidu sjajnog sporednog efekta — dobrog zdravlja, vedrog duha i zategnute figure!
+          14500: Jednom, trčeći duž keja Pečatnikov, čula sam poziv "trči sa nama". Došla sam sledeće nedelje i moja subotnja jutra su osvojila redovna trčanja i volontiranja. Neizmerno sam srećna što sam pronašla trkačko društvo koje mi je toliko nedostajalo.
+          14089: Jedne subote sam došao u park ujutru, saznavši za trke sa plakata na tabli. Drugi put sam se vratio da volontiram i potrčim, a sledeći put sam poveo i sina. I sve to nas je toliko uvuklo da nas obojicu ne "pušta" do dan danas)
       volunteer_app:
         title: Mobilna aplikacija Volonter S95
         features:

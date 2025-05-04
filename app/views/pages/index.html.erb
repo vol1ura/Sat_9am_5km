@@ -81,78 +81,42 @@
 <section class="stories-section py-5">
   <div class="container">
     <h2 class="text-center mb-5"><%= t '.stories.title' %></h2>
-    <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel">
+    <%
+      stories = t '.stories.content'
+      athletes = Athlete.includes(:event, user: { image_attachment: :blob }).where(id: stories.keys).shuffle
+    %>
+    <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="0" class="active" aria-label="To first slide"></button>
-        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="1" aria-label="To second slide"></button>
-        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="2" aria-label="To third slide"></button>
-        <button type="button" data-bs-target="#storiesCarousel" data-bs-slide-to="3" aria-label="To last slide"></button>
+        <% athletes.each_with_index do |athlete, idx| %>
+          <button
+            type="button"
+            data-bs-target="#storiesCarousel"
+            data-bs-slide-to="<%= idx %>"
+            class="<%= 'active' if idx.zero? %>"
+            aria-label="<%= athlete.name %>">
+          </button>
+        <% end %>
       </div>
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="story-card text-center mb-3">
-                <div class="story-image mb-4">
-                  <%#= image_tag '/athletes/6901', class: 'rounded-circle', alt: 'Юлия Реуцкая', style: 'width: 150px; height: 150px; object-fit: cover;' %>
+        <% athletes.each_with_index do |athlete, idx| %>
+          <div class="carousel-item <%= 'active' if idx.zero? %>">
+            <div class="story-card m-3 h-100">
+              <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start">
+                <div class="flex-shrink-0 mb-3 mb-md-0 text-center">
+                  <%= image_tag user_image_path(athlete.user), class: 'avatar', alt: athlete.name %>
                 </div>
-                <blockquote class="blockquote">
-                  <p class="mb-4">
-                    Для меня наше беговое сообщество это больше чем просто бег!
-                    Это здоровая атмосфера и поддержка среди совершенно разных людей объединенных одним движением.
-                    И отличный бонус в виде классного побочного эффекта — хорошего самочувствия, бодрого духа и подтянутого тела!
-                  </p>
-                  <footer class="blockquote-footer">Юлия, Ангарские пруды</footer>
-                </blockquote>
+                <figure class="flex-grow-1 ms-md-3 mb-0">
+                  <blockquote class="blockquote">
+                    <p><%= stories[athlete.id] %></p>
+                  </blockquote>
+                  <figcaption class="blockquote-footer my-2 text-center text-md-start">
+                    <%= link_to athlete.name, athlete %>, <%= athlete.event.name %>
+                  </figcaption>
+                </figure>
               </div>
             </div>
           </div>
-        </div>
-        <div class="carousel-item">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="story-card text-center mb-3">
-                <div class="story-image mb-4">
-                  <%#= image_tag '/images/stories/runner1.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
-                </div>
-                <blockquote class="blockquote">
-                  <p class="mb-4"><%= t '.stories.story1.quote' %></p>
-                  <footer class="blockquote-footer"><%= t '.stories.story1.author' %></footer>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="story-card text-center mb-3">
-                <div class="story-image mb-4">
-                  <%#= image_tag '/images/stories/runner2.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
-                </div>
-                <blockquote class="blockquote">
-                  <p class="mb-4"><%= t '.stories.story2.quote' %></p>
-                  <footer class="blockquote-footer"><%= t '.stories.story2.author' %></footer>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="story-card text-center mb-3">
-                <div class="story-image mb-4">
-                  <%#= image_tag '/images/stories/runner3.jpg', class: 'rounded-circle', alt: 'Участник S95', style: 'width: 150px; height: 150px; object-fit: cover;' %>
-                </div>
-                <blockquote class="blockquote">
-                  <p class="mb-4"><%= t '.stories.story3.quote' %></p>
-                  <footer class="blockquote-footer"><%= t '.stories.story3.author' %></footer>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#storiesCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
@@ -220,7 +184,7 @@
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <%= link_to event.name, event_path(event.code_name), class: 'text-decoration-none fw-bold text-dark' %>
+                    <%= link_to event.name, event_path(event.code_name), class: 'stretched-link text-decoration-none fw-bold text-dark' %>
                   </div>
                 </div>
               </li>
@@ -232,7 +196,7 @@
                     <%= image_tag badge.image.variant(:thumb), class: 'thumb-badge', alt: 'FunRun badge' %>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <%= link_to badge.name, badge, class: 'text-decoration-none fw-bold text-dark' %>
+                    <%= link_to badge.name, badge, class: 'stretched-link text-decoration-none fw-bold text-dark' %>
                   </div>
                 </div>
               </li>
