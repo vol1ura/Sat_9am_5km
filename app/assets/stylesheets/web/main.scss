@@ -265,23 +265,11 @@
       transform: translateY(-5px);
     }
 
-    .story-image {
-      img {
-        border: 3px solid $primary;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
-    }
-
     blockquote {
       p {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: $primary;
         font-style: italic;
-      }
-
-      .blockquote-footer {
-        color: $secondary;
-        font-size: 1rem;
       }
     }
   }
