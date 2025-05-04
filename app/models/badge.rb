@@ -20,7 +20,7 @@ class Badge < ApplicationRecord
   validates :image, attached: true,
                     content_type: :png,
                     aspect_ratio: :square,
-                    dimension: { width: { in: 200..400 } },
+                    dimension: { width: { in: 200..800 } },
                     size: { less_than: 300.kilobytes }
 
   enum :kind, {

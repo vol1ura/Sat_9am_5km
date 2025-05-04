@@ -22,7 +22,7 @@ module Users
         .call
 
       if compressed_image_file.size <= MAX_SIZE
-        @user.image.attach(io: compressed_image_file, filename: "avatar#{File.extname(image_file)}")
+        @user.image.attach(io: compressed_image_file, filename: "avatar#{File.extname(compressed_image_file)}")
       else
         @user.image.purge
       end

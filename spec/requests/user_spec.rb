@@ -46,7 +46,7 @@ RSpec.describe '/user' do
           user_url,
           params: {
             user: {
-              image: Rack::Test::UploadedFile.new(File.open('spec/fixtures/files/default.png')),
+              image: Rack::Test::UploadedFile.new(File.open('spec/fixtures/files/default.png'), 'image/png'),
             },
           },
         )
