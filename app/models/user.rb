@@ -7,9 +7,9 @@ class User < ApplicationRecord
   has_associated_audits
 
   # Include default devise modules. Others available are:
-  # :timeoutable, :trackable
+  # :timeoutable, :trackable, :validatable
   devise(
-    :database_authenticatable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :registerable,
+    :database_authenticatable, :recoverable, :rememberable, :confirmable, :lockable, :registerable,
     :omniauthable, omniauth_providers: %i[telegram],
   )
 
@@ -23,7 +23,8 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+(-[[:alpha:]]{2,})?\z/ }
   validates :last_name, presence: true, format: { with: /\A[[:alpha:]]+([-' ][[:alpha:]]{2,})?\z/ }
-  validates :telegram_id, uniqueness: true, allow_nil: true
+  validates :email, :password, presence: true, if: -> { telegram_id.nil? }
+  validates :telegram_id, :email, :auth_token, uniqueness: true, allow_nil: true
   validates :emergency_contact_phone, phone: true, allow_nil: true
   validates :emergency_contact_name, presence: true, if: -> { emergency_contact_phone }
   validates :image,

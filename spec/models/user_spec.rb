@@ -20,5 +20,27 @@ RSpec.describe User do
       another_user = build(:user, email:)
       expect(another_user).not_to be_valid
     end
+
+    it 'valid with telegram_id but without email and password' do
+      user.first_name = Faker::Name.first_name
+      user.last_name = Faker::Name.last_name
+      user.telegram_id = Faker::Number.number(digits: 10)
+      expect(user).to be_valid
+    end
+
+    it 'invalid without email and telegram_id' do
+      user.first_name = Faker::Name.first_name
+      user.last_name = Faker::Name.last_name
+      expect(user).not_to be_valid
+      expect(user.errors[:email]).to include('не может быть пустым')
+    end
+
+    it 'invalid without password when email is present' do
+      user.first_name = Faker::Name.first_name
+      user.last_name = Faker::Name.last_name
+      user.email = Faker::Internet.email
+      expect(user).not_to be_valid
+      expect(user.errors[:password]).to include('не может быть пустым')
+    end
   end
 end

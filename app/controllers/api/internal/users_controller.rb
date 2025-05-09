@@ -6,23 +6,12 @@ module API
       def create
         @user = User.new(user_params)
         @user.transaction do
-          @user.skip_confirmation!
           @user.confirm
           @user.save!
           link_user_to_athlete!
         end
 
         head :created
-      end
-
-      def update
-        @user = User.find(params[:user_id])
-        @user.transaction do
-          @user.update!(user_params)
-          link_user_to_athlete!
-        end
-
-        head :ok
       end
 
       def auth_link
