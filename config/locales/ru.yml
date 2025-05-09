@@ -896,7 +896,7 @@ ru:
     edit:
       delete_image: Удалить фото
       delete_phone: Удалить телефон %{phone}
-      add_phone: 'Для участия в партнёрских программах необходимо добавить ваш номер телефона. Привязка и проверка телефона выполняются с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a> командой <code>/phone</code>'
+      add_phone_html: 'Для участия в партнёрских программах необходимо добавить ваш номер телефона. Привязка и проверка телефона выполняются с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a> командой <code>/phone</code>'
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: 'Экстренный контакт'
       save: Сохранить
