@@ -13,7 +13,7 @@ gem 'activeadmin-searchable_select'
 gem 'active_storage_validations'
 gem 'audited'
 gem 'bootsnap', require: false
-gem 'bootstrap', '~> 5.3.3'
+gem 'bootstrap', '~> 5.3.5'
 gem 'cancancan'
 gem 'connection_pool'
 gem 'dalli'
