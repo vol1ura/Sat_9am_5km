@@ -897,7 +897,7 @@ rs:
     edit:
       delete_image: Obriši sliku
       delete_phone: Obriši telefon %{phone}
-      add_phone: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'
+      add_phone_html: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Hitna kontakt osoba
       save: Sačuvaj
