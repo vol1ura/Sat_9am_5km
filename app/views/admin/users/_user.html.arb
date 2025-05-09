@@ -13,6 +13,7 @@ attributes_table_for user do
   row('Номер 5 вёрст') { |u| u.athlete&.fiveverst_code }
   row('Номер RunPark') { |u| u.athlete&.runpark_code }
   row('Пол') { |u| u.athlete&.gender }
+  row('Домашний забег') { |u| u.athlete&.event&.name }
   row('Клуб') { |u| u.athlete&.club&.name }
   row :athlete
 end
