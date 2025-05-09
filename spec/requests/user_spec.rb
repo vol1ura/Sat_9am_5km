@@ -70,6 +70,8 @@ RSpec.describe '/user' do
 
   context 'when unauthenticated user' do
     describe 'POST /user/login' do
+      let(:user) { create(:user, :with_email) }
+
       it 'redirects to root page after successful login' do
         post user_session_url, params: { user: { email: user.email, password: user.password } }
         expect(response).to redirect_to root_path
