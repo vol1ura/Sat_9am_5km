@@ -15,6 +15,8 @@ rs:
         other: Sportisti
       result:
         one: rezultat
+        few: rezultata
+        many: rezultata
         other: Rezultati
       volunteer:
         one: volonter
