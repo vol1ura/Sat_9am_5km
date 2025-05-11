@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  ALLOWED_PAGES = %w[about rules support additional-events privacy-policy robots 5za5].freeze
+  ALLOWED_PAGES = %w[about rules support additional-events privacy-policy robots 5za5 novi-sad-100].freeze
 
   before_action :validate_page, except: [:index]
 
