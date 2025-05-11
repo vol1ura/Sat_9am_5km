@@ -84,16 +84,15 @@ ActiveAdmin.register Result do
     column(:total_time) { |r| human_result_time r.total_time }
   end
 
-  sidebar I18n.t('.results.explanation.title'), only: :index do
+  sidebar I18n.t('.results.explanation.operations.title'), only: :index do
     ul do
-      li I18n.t('.results.explanation.unknown_athlete')
-      li I18n.t('.results.explanation.without_token')
-      li I18n.t('.results.explanation.delete_result')
-      li I18n.t('.results.explanation.drop_result')
-      li I18n.t('.results.explanation.delete_time')
-      li I18n.t('.results.explanation.delete_athlete')
-      li I18n.t('.results.explanation.reset_athlete')
-      li I18n.t('.results.explanation.insert_result')
+      I18n.t('.results.explanation.operations.items').each { |item| li item }
+    end
+  end
+
+  sidebar I18n.t('.results.explanation.important.title'), only: :index do
+    ul do
+      I18n.t('.results.explanation.important.items').each { |item| li item }
     end
   end
 
@@ -169,5 +168,24 @@ ActiveAdmin.register Result do
 
   action_item :activity, only: :index do
     link_to 'Просмотр забега', admin_activity_path(activity.id)
+  end
+
+  batch_action(
+    :destroy,
+    confirm: I18n.t('active_admin.results.batch_destroy_confirm'),
+    if: proc { !parent.published },
+  ) do |ids|
+    Result.without_auditing do
+      batch_action_collection.where(id: ids).destroy_all
+    end
+    redirect_to(
+      collection_path,
+      notice: t(
+        'active_admin.batch_actions.succesfully_destroyed',
+        count: ids.count,
+        model: t('activerecord.models.result.one'),
+        plural_model: t('activerecord.models.result.many'),
+      ),
+    )
   end
 end

@@ -59,15 +59,21 @@ rs:
         successful: 'Podaci o volonteru %{volunteer_name} uspešno ažurirani'
   results:
     explanation:
-      title: 'Objašnjenja'
-      unknown_athlete: 'Ako se učesnik prikaže kao "NEPOZNAT", to znači da njegovo ime nije automatski popunjeno. Kliknite na NEPOZNAT i koristite parkrun ili 5vrsta da biste pronašli ime prema ID-u.'
-      without_token: 'Ako se učesnik prikaže kao "BEZ TOKENA (kreirati)", to znači da nije skeniran. Moguće je da je ta osoba već u bazi i da nije potrebno kreirati novi unos - kliknite na rezultat i u otvorenom obrascu unesite parkrun ID.'
-      delete_result: 'Ukloniti - ukloniće ceo red.'
-      drop_result: 'Ukloniti 🔝 - uklonite presek sa ponovnim brojanjem sledećih pozicija.'
-      delete_time: 'Ukloniti 🕑 - Uklanja vreme u redu, zamenjujući njega i sve naredne vremenom iz sledećeg reda. Poslednji učesnik će ostati bez rezultata.'
-      delete_athlete: 'Ukloniti 🏃 - uklanja učesnika iz reda, zamenjujući njega i sve naredne učesnike učesnikom iz sledećeg reda. To jest, svi učesnici se pomeraju za jednu poziciju, počevši od uklonjenog učesnika.'
-      reset_athlete: 'Resetovati 🏃 - resetuje učesnika. U protokolu će pisati Nepoznat.'
-      insert_result: 'Dodati 🔝 - umeće novi rezultat pre odabranog reda.'
+      operations:
+        title: Objašnjenja
+        items:
+          - 'Ukloniti - ukloniće ceo red.'
+          - 'Ukloniti 🔝 - uklonite presek sa ponovnim brojanjem sledećih pozicija.'
+          - 'Ukloniti 🕑 - Uklanja vreme u redu, zamenjujući njega i sve naredne vremenom iz sledećeg reda. Poslednji učesnik će ostati bez rezultata.'
+          - 'Ukloniti 🏃 - uklanja učesnika iz reda, zamenjujući njega i sve naredne učesnike učesnikom iz sledećeg reda. To jest, svi učesnici se pomeraju za jednu poziciju, počevši od uklonjenog učesnika.'
+          - 'Resetovati 🏃 - resetuje učesnika. U protokolu će pisati Nepoznat.'
+          - 'Dodati 🔝 - umeće novi rezultat pre odabranog reda.'
+      important:
+        title: Pažnja!
+        items:
+          - 'Grupovno brisanje rezultata je moguće samo za neobjavljene rezultate. Nakon objavljivanja, svaka promena se vrši sa velikom pažnjom.'
+          - 'Ako se učesnik prikaže kao "Nepoznat", to znači da nije moguće automatski popuniti njegovo ime. Kliknite na Nepoznat i koristite sajt parkrun da nađete ime prema ID-u.'
+          - 'Ako se učesnik prikaže kao "BEZ TOKENA (kreirati)", to znači da nije skeniran. Moguće je da je ta osoba već u bazi i da nije potrebno kreirati novi unos - kliknite na rezultat i u otvorenom obrascu unesite parkrun ID.'
   active_admin:
     dashboard: Kontrolna tabla
     dashboard_welcome:
@@ -186,6 +192,7 @@ rs:
       insert_result_failed: 'Neuspelo dodavanje reda. Osvežite stranicu i pokušajte ponovo.'
       result_successfully_appended: 'Pozicija №%{position} uspešno dodata u protokol.'
       result_successfully_deleted: 'Odsek je uspešno uklonjen, pozicije su preračunate.'
+      batch_destroy_confirm: 'Da li ste sigurni da želite da obrišete izabrane rezultate?'
     newsletters:
       notified: 'Na vaš Telegram je poslat uzorak biltena'
     users:
