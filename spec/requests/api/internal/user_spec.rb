@@ -48,4 +48,15 @@ RSpec.describe '/api/internal/user' do
       end.to change(User, :count).by(1)
     end
   end
+
+  describe 'POST /api/internal/user/auth_link' do
+    let(:user) { create(:user) }
+
+    it 'return auth link' do
+      expect do
+        post auth_link_api_internal_user_url, params: { user_id: user.id }, as: :json
+      end.to change { user.reload.auth_token }.from(nil).to(String)
+      expect(response).to be_successful
+    end
+  end
 end
