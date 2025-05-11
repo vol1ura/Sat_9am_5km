@@ -42,5 +42,22 @@ RSpec.describe User do
       expect(user).not_to be_valid
       expect(user.errors[:password]).to include('не может быть пустым')
     end
+
+    it 'resets emergency_contact_name' do
+      user = create(
+        :user,
+        emergency_contact_phone: '+79261234567',
+        emergency_contact_name: Faker::Name.name,
+      )
+      user.emergency_contact_phone = nil
+      expect(user).to be_valid
+      expect(user.emergency_contact_name).to be_nil
+    end
+
+    it 'invalid with non existent promotion' do
+      user = create(:user)
+      user.promotions << :invalid
+      expect(user).not_to be_valid
+    end
   end
 end
