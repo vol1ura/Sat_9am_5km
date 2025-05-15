@@ -21,8 +21,7 @@ class Rack::Attack
   end
 
   blocklist('pentesters block') do |req|
-    %w[etc/passwd ../../].include?(CGI.unescape(req.path)) ||
-      req.path.end_with?('.php') ||
-      req.env['HTTP_ACCEPT'].to_s.include?('../../')
+    path = CGI.unescape(req.path)
+    %w[etc/passwd ../../ .php].any? { |pattern| path.include?(pattern) } || req.env['HTTP_ACCEPT'].to_s.include?('../../')
   end
 end

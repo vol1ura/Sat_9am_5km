@@ -15,12 +15,6 @@ Permission:
       enabled: false
 
 User:
-  email:
-    ColumnPresenceChecker:
-      enabled: false
-  password:
-    ColumnPresenceChecker:
-      enabled: false
   index_users_on_reset_password_token:
     UniqueIndexChecker:
       enabled: false
