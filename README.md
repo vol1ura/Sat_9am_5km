@@ -52,4 +52,5 @@ make
 - Sidekiq [WebUI](https://s95.ru/sidekiq) for admin users
 - Rails Performance [dev](http://localhost:3000/app_performance/) or [prod](https://s95.ru/app_performance/) for admin users
 - Postgres Performance [dev](http://localhost:3000/pg_stats) or [prod](https://s95.ru/pg_stats)
+- Active Storage Dashboard [dev](http://localhost:3000/storage) or [prod](https://s95.ru/storage)
 - Uptime monitor [UptimeRobot](https://dashboard.uptimerobot.com/monitors/797544445)

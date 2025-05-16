@@ -10,6 +10,7 @@ gem 'activeadmin'
 gem 'activeadmin-localize'
 gem 'activeadmin_quill_editor'
 gem 'activeadmin-searchable_select'
+gem 'active_storage_dashboard'
 gem 'active_storage_validations'
 gem 'audited'
 gem 'bootsnap', require: false
