@@ -76,5 +76,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => 'sidekiq' if Rails.env.production?
     mount RailsPerformance::Engine => 'app_performance'
     mount PgHero::Engine => 'pg_stats'
+    mount ActiveStorageDashboard::Engine => 'storage'
   end
 end
