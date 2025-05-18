@@ -489,9 +489,9 @@ rs:
       next: '→'
       last: '↠'
       truncate: '&hellip;'
-  parkzhrun_mailer:
-    success: 'Trka ParkŽrun kreirana'
-    error: 'Greška! Nije moguće kreirati trku ParkŽrun'
+  notification_mailer:
+    parkzhrun_error: 'Greška! Nije moguće kreirati trku ParkŽrun'
+    feedback: 'Novi odgovor na sajt S95'
   button:
     show_more: Prikaži više
     show_less: Prikaži manje
@@ -651,6 +651,12 @@ rs:
         Da biste to uradili, kontaktirajte organizatore događaja kojima želite da pružite podršku putem kontakata na stranici događaja.
       about_volunteering: Ali ne zaboravite da je najveća pomoć volontiranje.
       site_development: Razvoj sajta
+      feedback:
+        title: Povratne informacije i predlozi
+        description: Mi ćemo biti zahvalni bilo kakvim vašim povratnim informacijama i predlozima. Napišite ako ste naišli na bilo kakve probleme, želite da predložite novi funkcionalitet ili samo izrazite svoje mišljenje. Ukoliko želite, možete navesti kontakt za kontakt.
+        placeholder: Napišite svoje povratne informacije ili predlog (maksimalno 500 znakova)
+        submit: Pošalji
+        sent: Hvala na povratnim informacijama!
       add_new_issues_html: >
         Imate li ideju kako poboljšati ovaj sajt?
         Kod sistema je otvoren na <a href="%{github_repo}" target="_blank" rel="noopener">GitHub</a>.
