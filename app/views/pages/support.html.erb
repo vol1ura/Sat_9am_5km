@@ -4,6 +4,17 @@
 <p><%= t '.how_to_support' %></p>
 <p><%= t '.about_volunteering' %></p>
 
+<h4><%= t '.feedback.title' %></h4>
+<p><%= t '.feedback.description' %></p>
+<div class="card mb-4">
+  <div class="card-body">
+    <%= form_with url: submit_feedback_pages_path, local: true do |form| %>
+      <%= form.text_area :message, class: 'mb-3 form-control', placeholder: t('.feedback.placeholder'), maxlength: 500, rows: 7, required: true %>
+      <%= form.submit t('.feedback.submit'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
 <h4><%= t '.site_development' %></h4>
 <p>
   <%=

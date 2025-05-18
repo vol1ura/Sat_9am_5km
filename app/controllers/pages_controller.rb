@@ -3,7 +3,7 @@
 class PagesController < ApplicationController
   ALLOWED_PAGES = %w[about rules support additional-events privacy-policy robots 5za5 novi-sad-100].freeze
 
-  before_action :validate_page, except: [:index]
+  before_action :validate_page, except: %i[index submit_feedback]
 
   layout 'home', only: [:index]
 
@@ -29,6 +29,17 @@ class PagesController < ApplicationController
 
   def show
     render template: "pages/#{page_name}"
+  end
+
+  def submit_feedback
+    message = params[:message].to_s
+
+    if message.present? && message.length <= 500
+      NotificationMailer.with(message: message, user_id: current_user&.id).feedback.deliver_later
+      redirect_to page_path(page: 'support'), notice: t('pages.support.feedback.sent')
+    else
+      redirect_to page_path(page: 'support'), alert: t('pages.support.feedback.error')
+    end
   end
 
   private
