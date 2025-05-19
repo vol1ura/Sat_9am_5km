@@ -8,6 +8,11 @@
 <div class="row">
   <div class="col-6">
     <h1 class="mt-2"><%= head_info :title, athlete_name %></h1>
+    <% if @athlete.going_to_event? %>
+      <div class="badge bg-success mb-2">
+        <%= t 'friendships.friend.going_to', event: @athlete.going_to_event.name %>
+      </div>
+    <% end %>
     <%= render 'friendships/button', athlete: @athlete %>
   </div>
   <div class="ms-auto col-auto position-relative">
@@ -34,7 +39,7 @@
           <%=
             render(
               partial: 'friendships/friend',
-              collection: @athlete.friends.includes(:going_to_event, user: { image_attachment: :blob }),
+              collection: @athlete.friends.includes(:going_to_event, user: { image_attachment: :blob }).order(:name),
               locals: { is_friends_tab: true },
             )
           %>
@@ -56,7 +61,7 @@
           <%=
             render(
               partial: 'friendships/friend',
-              collection: @athlete.followers.includes(:going_to_event, user: { image_attachment: :blob }),
+              collection: @athlete.followers.includes(:going_to_event, user: { image_attachment: :blob }).order(:name),
               locals: { is_friends_tab: false },
             )
           %>
