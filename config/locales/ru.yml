@@ -946,8 +946,8 @@ ru:
       reset_going_to: 'Данная отметка будет автоматически сброшена в следующую субботу.'
   friendships:
     button:
-      add_friend: 'Подписаться'
-      remove_friend: 'Отписаться'
+      your_friend: Ваш друг
+      add_friend: Подписаться
     friend:
       going_to: 'Собирается в %{event}'
     create:
