@@ -5,7 +5,7 @@
 #   - systemctl enable sidekiq
 #   - systemctl {start,stop,restart} sidekiq
 #
-# This file corresponds to a single Sidekiq process.  Add multiple copies
+# This file corresponds to a single Sidekiq process. Add multiple copies
 # to run multiple processes (sidekiq-1, sidekiq-2, etc).
 #
 # Use `journalctl -u sidekiq -rn 100` to view the last 100 lines of log output.
