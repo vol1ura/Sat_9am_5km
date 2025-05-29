@@ -44,5 +44,5 @@ after 'deploy:failed', 'sidekiq:restart'
 
 after 'deploy:finished', 'puma:restart'
 
-after 'deploy:updated',  'sitemap:create'
+after 'deploy:updated', 'sitemap:create'
 after 'deploy:reverted', 'sitemap:create'

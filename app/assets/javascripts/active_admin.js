@@ -6,7 +6,7 @@
 $(document).ready(function() {
   $('.datepicker').datepicker(
     {
-    firstDay: 1,  // Monday
+    firstDay: 1, // Monday
     dateFormat: 'yy-mm-dd',
     showAnim: 'slideDown'
   });

@@ -743,7 +743,7 @@ ru:
       h_index: h-индекс
       h_index_explanation: Индекс равен h, если есть как минимум h позиций (ролей), на каждой из которых было как минимум h волонтёрств
       volunteering_coefficient: Коэффициент волонтёра
-      volunteering_coefficient_explanation: Число волонтёрств  на каждые 10 пробежек
+      volunteering_coefficient_explanation: Число волонтёрств на каждые 10 пробежек
       total_trophies: всего наград
       total_events: посещённые мероприятия
       personal_best: личный рекорд (ЛР)
