@@ -13,8 +13,8 @@ ru:
       new:
         title: Вход на сайт
         description: Чтобы войти на сайт, можно использовать email и пароль или Telegram-бота. Достаточно просто запросить в боте одноразовую ссылку для входа командой /login
-        submit: Войти
-        telegram_login_html: 'Если вы уже зарегистрированы, вы можете получить одноразовую ссылку для входа в <a href="%{link}" class="text-reset" target="_blank">Telegram боте</a> с помощью команды <code>/login</code>'
+        registration_html: 'Зарегистрироваться с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a>'
+        telegram_login_html: 'Если вы уже зарегистрированы, используйте для входа одноразовую ссылку, которую можно получить командой <code>/login</code> в <a href="%{link}" class="text-reset" target="_blank">Telegram боте</a>'
     confirmations:
       new:
         title: Выслать инструкции для подтверждения e-mail

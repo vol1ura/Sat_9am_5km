@@ -13,7 +13,7 @@ rs:
       new:
         title: Prijavite se na sajt
         description: Da bi se prijavili, koristite email i lozinku ili Telegram bot. Potrebno je samo da zatražite jednokratnu vezu za prijavu u botu komandom /login
-        submit: Prijavite se
+        registration_html: 'Registrujte se pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a>'
         telegram_login_html: 'Ako ste već registrovan, možete dobiti jednokratnu vezu za prijavu u <a href="%{link}" class="text-reset" target="_blank">Telegram botu</a> pomoću komande <code>/login</code>'
     confirmations:
       new:
