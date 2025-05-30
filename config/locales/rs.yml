@@ -537,6 +537,7 @@ rs:
       github_title: Projekat na GitHubu
   pages:
     index:
+      upcoming_events: 'Predstojeći događaji %{date}'
       hero_title: "Svake subote u 9:00!"
       hero_subtitle: "5 km za sve nivoe spremnosti, besplatno. Pridruži se!"
       my_profile: "Moj profil"
