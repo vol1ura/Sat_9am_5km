@@ -13,6 +13,7 @@ gem 'activeadmin-searchable_select'
 gem 'active_storage_dashboard'
 gem 'active_storage_validations'
 gem 'audited'
+gem 'autoprefixer-rails'
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.3.5'
 gem 'cancancan'
