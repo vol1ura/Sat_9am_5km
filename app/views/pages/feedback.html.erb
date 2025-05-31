@@ -1,0 +1,11 @@
+<h4><%= head_info :title, t('navbars.about_s95.feedback') %></h4>
+<p><%= head_info :description, t('.description') %></p>
+<div class="card mb-4">
+  <div class="card-body">
+    <%= form_with url: submit_feedback_pages_path, local: true do |form| %>
+      <%= form.text_area :message, class: 'mb-3 form-control', placeholder: t('.placeholder', max_length: PagesController::MAX_FEEDBACK_SIZE), maxlength: PagesController::MAX_FEEDBACK_SIZE, rows: 7, required: true %>
+      <%= form.submit t('.submit'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+<p><%= t '.other_contacts_html', our_email: ENV['INFO_EMAIL'] %></p>

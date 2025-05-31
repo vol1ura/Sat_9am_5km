@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  ALLOWED_PAGES = %w[about rules support additional-events privacy-policy robots 5za5].freeze
+  ALLOWED_PAGES = %w[about feedback joining rules support additional-events privacy-policy robots 5za5].freeze
+  MAX_FEEDBACK_SIZE = 950
 
   before_action :validate_page, except: %i[index submit_feedback]
 
@@ -34,7 +35,7 @@ class PagesController < ApplicationController
   def submit_feedback
     message = params[:message].to_s
 
-    if message.present? && message.length <= 500
+    if message.present? && message.length <= MAX_FEEDBACK_SIZE
       NotificationMailer.with(message: message, user_id: current_user&.id).feedback.deliver_later
       redirect_to page_path(page: 'support'), notice: t('pages.support.feedback.sent')
     else

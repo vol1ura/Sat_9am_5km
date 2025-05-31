@@ -9,15 +9,8 @@
       <div class="container">
         <div class="navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav">
-            <li class="nav-item dropdown" data-controller="dropdown">
-              <%= link_to t('.events'), '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'events'}", id: 'eventDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false', 'data-dropdown-target' => 'toggle' %>
-              <ul class="dropdown-menu" aria-labelledby="eventDropdown" data-dropdown-target="menu">
-                <li><%= link_to t('.our_events'), events_path, class: 'dropdown-item' %></li>
-                <li><hr class="dropdown-divider"></li>
-                <% @country_events.each do |event| %>
-                  <li><%= link_to event.name, event_path(event.code_name), class: 'dropdown-item' %></li>
-                <% end %>
-              </ul>
+            <li class="nav-item">
+              <%= link_to t('.events'), events_path, class: "nav-link #{'active' if params[:controller] == 'events'}" %>
             </li>
             <li class="nav-item dropdown" data-controller="dropdown">
               <%= link_to t('.results'), '#', class: "nav-link dropdown-toggle #{'active' if %w[activities clubs ratings].include?(params[:controller])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false', 'data-dropdown-target' => 'toggle' %>
@@ -30,15 +23,7 @@
                 <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
               </ul>
             </li>
-            <li class="nav-item">
-              <%= link_to t('.rules'), page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to t('.about'), page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to t('.support'), page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" %>
-            </li>
+            <%= render 'navbars/about_s95', with_icon: false %>
           </ul>
         </div>
       </div>
@@ -62,7 +47,7 @@
           </li>-->
           <li class="nav-item">
             <%= link_to events_path, class: "nav-link #{'active' if params[:controller] == 'events' && params[:action] == 'index'}" do %>
-              <span class="fa-li"><i class="fa-solid fa-map-location-dot"></i></span><%= t '.our_events' %>
+              <span class="fa-li"><i class="fa-solid fa-map-location-dot"></i></span><%= t '.events' %>
             <% end %>
           </li>
           <li class="nav-item">
@@ -95,21 +80,7 @@
               <span class="fa-li"><i class="fa-solid fa-award"></i></span><%= t '.badges' %>
             <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to page_path(page: :rules), class: "nav-link #{'active' if params[:page] == 'rules'}" do %>
-              <span class="fa-li"><i class="fa-solid fa-clipboard"></i></span><%= t '.rules' %>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to page_path(page: :about), class: "nav-link #{'active' if params[:page] == 'about'}" do %>
-              <span class="fa-li"><i class="fa-solid fa-users"></i></span><%= t '.about' %>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to page_path(page: :support), class: "nav-link #{'active' if params[:page] == 'support'}" do %>
-              <span class="fa-li"><i class="fa-regular fa-handshake"></i></span><%= t '.support' %>
-            <% end %>
-          </li>
+          <%= render 'navbars/about_s95', with_icon: true %>
           <% if current_user %>
             <li class="nav-item dropdown mt-3" data-controller="dropdown">
               <%=

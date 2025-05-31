@@ -509,7 +509,6 @@ rs:
   navbars:
     top:
       events: Događaji
-      our_events: Naši događaji
       results: Rezultati
       recent_results: Skorašnji rezultati
       1_january: 1 januar
@@ -518,9 +517,6 @@ rs:
       top_athletes: Athletes rating
       top_volunteers: Volunteers rating
       badges: Bedževi
-      rules: Pravila
-      about: O nama
-      support: Podržite nas
       profile: Profil
       settings: Podešavanja
       admin_panel: Administratorski panel
@@ -528,6 +524,13 @@ rs:
       logout: Odjava
       search: Pretraži
       name_or_id: Ime ili ID
+    about_s95:
+      title: O S95
+      rules: Pravila
+      about: O nama
+      support: Podržite projekat
+      feedback: Povratne informacije
+      joining: Želite S95 kod vas?
     bottom:
       s95: S95 park trčanje
       slogan: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. I vi možete slobodno učestvovati u našim trkama, razvoju ili kreiranju sadržaja.'
@@ -600,19 +603,6 @@ rs:
         <p>I najvažnije — S95 je dostupan svima. Nije bitno ko ste: maratonac sa stotinama medalja ili osoba koja je poslednji put trčala u školi na časovima fizičkog vaspitanja. Ovde nema naknade za učešće, samo „plata“ u vidu dobrog raspoloženja i osmeha. Stazu možete prošetati ili pretrčati tempom koji vam odgovara.</p>
         <p>Tako da, ako još uvek niste u toku, S95 nije samo skup simbola, to je stil života, subotnji ritual i prilika da započnete dan nečim zaista kul. Uzmite patike, pozovite prijatelje i pridružite se trkama gde svaki kilometar predstavlja korak ka novim poznanstvima, avanturama ili kul fotografiji za društvene mreže.</p>
       events: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}.'
-      join_us:
-        title: Želite da se pridružite platformi S95?
-        body_html: >
-          <p>Ukratko, potrebna je samo volja.</p>
-          <p>
-            Detaljnije, potrebni su:
-            <ul>
-              <li>bezbedna i pristupačna staza</li>
-              <li>tim koji je voljan da organizuje trke svake subote tokom cele godine</li>
-              <li>zelja da se pomogne svima da budu zdraviji i srećniji</li>
-            </ul>
-          </p>
-          <p>Da li ste spremni? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> i uskoro će se trčati i u vašem parku.</p>
       s95_abroad:
         title: S95 trke u drugim zemljama
         body: Danas se naše trke organizuju i u %{countries}. Svi rezultati se čuvaju u jednom sistemu odakle ćete imati uvid u profile atletiča.
@@ -652,12 +642,6 @@ rs:
         Da biste to uradili, kontaktirajte organizatore događaja kojima želite da pružite podršku putem kontakata na stranici događaja.
       about_volunteering: Ali ne zaboravite da je najveća pomoć volontiranje.
       site_development: Razvoj sajta
-      feedback:
-        title: Povratne informacije i predlozi
-        description: Mi ćemo biti zahvalni bilo kakvim vašim povratnim informacijama i predlozima. Napišite ako ste naišli na bilo kakve probleme, želite da predložite novi funkcionalitet ili samo izrazite svoje mišljenje. Ukoliko želite, možete navesti kontakt za kontakt.
-        placeholder: Napišite svoje povratne informacije ili predlog (maksimalno 500 znakova)
-        submit: Pošalji
-        sent: Hvala na povratnim informacijama!
       add_new_issues_html: >
         Imate li ideju kako poboljšati ovaj sajt?
         Kod sistema je otvoren na <a href="%{github_repo}" target="_blank" rel="noopener">GitHub</a>.
@@ -667,6 +651,47 @@ rs:
       how_to_contribute: Želite sami da izvršite promene? Nema problema - nagnite spremište prema sebi, kreirajte i zapišite granu sa svojim izmenama, a zatim otvorite zahtev za povlačenje.
       small_changes: Male promene je najlakše izvršiti direktno u pregledaču u Githubovom vizuelnom uređivaču!
       best_regards: S ljubavlju, S95.
+    feedback:
+      title: Povratne informacije i predlozi
+      description: Bili bismo zahvalni na svim vašim povratnim informacijama i predlozima. Pišite ako ste naišli na neke probleme, želite da ponudite svoju pomoć, ideju ili samo da se izjasnite. Po želji, možete navesti kontakt za komunikaciju u poruci.
+      other_contacts_html: Takođe možete poslati poruku na naš <a href="mailto:%{our_email}" target="_blank" title="Pošaljite nam email">email</a>. Ostale naše kontakte možete pronaći na dnu stranice, kao i na stranicama događaja.
+      placeholder: Vaša povratna informacija ili predlog (do %{max_length} karaktera)
+      submit: Pošalji
+      sent: Hvala na vašoj povratnoj informaciji!
+    joining:
+      title: Želite da pokrenete S95 u svom parku?
+      description: Objašnjavamo kako da započnete sa organizacijom S95 događaja u svom omiljenom parku.
+      body_html: >
+        <p>Ovaj odeljak je za one koji su spremni da pretvore svoj omiljeni park u mesto gde se svake subote okupljaju ljubitelji trčanja i dobrog raspoloženja.</p>
+
+        <h3>Zašto S95?</h3>
+        <p>
+          <ol>
+            <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su prikupljeni u jednom sistemu</li>
+            <li>Imamo motivacionu sistem nagrada i izazova — dobijajte dostignuća ne samo za visoke rezultate, već i samo za učešće i lični napredak</li>
+            <li>Naša platforma nije samo o trčanju, već i o druženju, kao i o društvenoj misiji: aktivno razvijamo volontiranje, družimo se, nalazimo nove prijatelje</li>
+            <li>Jednostavna i brza registracija novih učesnika pomoću Telegram-bota, svi podaci su uvek pri ruci</li>
+            <li>Koristimo moderne tehnologije i pristupe: mnoštvo različitih statistika i rangiranja, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku</li>
+            <li>Imamo sopstvenu jedinstvenu mobilnu aplikaciju za organizaciju trka</li>
+            <li>Naš sistem je potpuno otvoren i koristi OpenSource tehnologije — svako može predložiti poboljšanja i učiniti platformu još boljom</li>
+          </ol>
+        </p>
+
+        <h3>Plan akcije</h3>
+        <p>Pre nego što pošaljete prijavu, pogledajte odeljak <a href="/events">Naši događaji</a> — možda već postoje naše trke u vašoj blizini. U tom slučaju, pridružite se lokalnom timu i pomozite u razvoju trkačke zajednice u vašem kraju.</p>
+        <p>
+          Ako u blizini nema S95 trka, a vi gorite željom da postanete pionir pokreta, potrebno vam je:
+          <ul>
+            <li>bezbedna i pogodna staza (bez preseka sa automobilskim putevima i opasnih delova)</li>
+            <li>tim entuzijasta, spremnih da se budi subotom ranije od budilnika</li>
+            <li>malo organizacionih sposobnosti i puno ljubavi prema trčanju</li>
+          </ul>
+        </p>
+        <p>Od trenutka slanja prijave do prvog tehničkog starta može proći neko vreme, ali S95 tim će učiniti sve što je moguće da vaš park što pre ispuni subotnji trkački duh!</p>
+        <p>Spremni da postanete deo pokreta koji menja subotnja jutra na bolje? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> sa oznakom "Otvoriti S95" i hajde da zajedno stvaramo nove trkačke tradicije!</p>
+
+
+
     additional-events:
       title_html: 'Additional events 1&nbsp;januar&nbsp;%{year}'
       description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
