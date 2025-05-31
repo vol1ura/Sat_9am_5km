@@ -1,14 +1,11 @@
 <% actual_events = @country_events.without_friends.pluck(:name) %>
 <% head_info :description, t('.description') %>
-<h2><%= head_info :title, t('navbars.top.about') %></h2>
+<h2><%= head_info :title, t('navbars.about_s95.about') %></h2>
 
 <%= t '.description_html' %>
 <p><%= t '.events', events_count: actual_events.size, events: actual_events.to_sentence %></p>
 
-<h4><%= t '.join_us.title' %></h4>
-<%= t '.join_us.body_html', info_email: ENV['INFO_EMAIL'] %>
-
-<h4><%= t '.s95_abroad.title' %></h4>
+<h3><%= t '.s95_abroad.title' %></h3>
 <%
   countries_links =
     Country
