@@ -7,7 +7,7 @@ RSpec.describe NotificationMailer do
     it 'renders the mail' do
       expect(mail.subject).to eq('Новый отзыв на сайте S95')
       expect(mail.body).to match('User ID: 1').and match('test message')
-      expect(mail.to).to eq([ENV.fetch('ADMIN_EMAIL')])
+      expect(mail.to).to eq(described_class::RECIPIENTS)
     end
   end
 
@@ -16,7 +16,7 @@ RSpec.describe NotificationMailer do
 
     it 'renders the mail' do
       expect(mail.subject).to eq('Ошибка! Не удалось создать забег ПаркЖрун')
-      expect(mail.to).to eq([ENV.fetch('ADMIN_EMAIL'), ENV.fetch('INFO_EMAIL')])
+      expect(mail.to).to eq(described_class::RECIPIENTS)
       expect(mail.body.encoded).to match('произошла ошибка')
     end
   end
