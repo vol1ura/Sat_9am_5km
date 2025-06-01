@@ -28,6 +28,40 @@
         </div>
       </div>
     </nav>
+
+    <% if current_user %>
+      <div class="dropdown dropstart ms-auto me-3">
+        <%=
+          link_to(
+            '#',
+            class: "nav-link dropdown-toggle",
+            role: 'button',
+            'data-bs-toggle' => 'dropdown',
+            'aria-expanded' => 'false'
+          ) do
+        %>
+          <%= image_tag user_image_path(current_user), class: 'avatar-50 border border-light border-3', alt: current_user.full_name %>
+        <% end %>
+        <ul class="dropdown-menu">
+          <% if athlete = current_user.athlete %>
+            <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
+          <% end %>
+          <li><%= link_to t('.settings'), user_path, class: 'dropdown-item' %></li>
+          <% if current_user.admin? || Permission.exists?(user: current_user) %>
+            <li><%= link_to t('.admin_panel'), admin_root_path, class: 'dropdown-item' %></li>
+          <% end %>
+          <li><hr class="dropdown-divider"></li>
+          <li><%= link_to t('.logout'), destroy_user_session_path, class: 'dropdown-item text-danger', 'data-turbo-prefetch' => 'false' %></li>
+        </ul>
+      </div>
+    <% else %>
+      <div class="dropdown ms-auto me-3">
+        <%= link_to new_user_session_path, class: "btn btn-outline-danger" do %>
+          <i class="fa-solid fa-arrow-right-to-bracket me-2"></i><%= t '.login' %>
+        <% end %>
+      </div>
+    <% end %>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -81,39 +115,6 @@
             <% end %>
           </li>
           <%= render 'navbars/about_s95', with_icon: true %>
-          <% if current_user %>
-            <li class="nav-item dropdown mt-3" data-controller="dropdown">
-              <%=
-                link_to(
-                  '#',
-                  class: "nav-link dropdown-toggle #{'active' if (params[:controller] == 'users' && params[:action] == 'show') || (params[:controller] == 'athletes' && params[:id].to_i == current_user.athlete&.id )}",
-                  id: 'dataUserDropdown',
-                  role: 'button',
-                  'data-bs-toggle' => 'dropdown',
-                  'data-dropdown-target' => 'toggle',
-                  'aria-expanded' => 'false'
-                ) do
-              %>
-                <span class="fa-li"><i class="fa-solid fa-user"></i></span><%= current_user.full_name %>
-              <% end %>
-              <ul class="dropdown-menu" aria-labelledby="dataUserDropdown" data-dropdown-target="menu">
-                <% if athlete = current_user.athlete %>
-                  <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
-                <% end %>
-                <li><%= link_to t('.settings'), user_path, class: 'dropdown-item' %></li>
-                <% if current_user.admin? || Permission.exists?(user: current_user) %>
-                  <li><%= link_to t('.admin_panel'), admin_root_path, class: 'dropdown-item' %></li>
-                <% end %>
-                <li><%= link_to t('.logout'), destroy_user_session_path, class: 'dropdown-item', 'data-turbo-prefetch' => 'false' %></li>
-              </ul>
-            </li>
-          <% else %>
-            <li class="nav-item mt-3">
-              <%= link_to new_user_session_path, class: "btn btn-outline-light" do %>
-                <i class="fa-solid fa-arrow-right-to-bracket me-2"></i><%= t '.login' %>
-              <% end %>
-            </li>
-          <% end %>
         </ul>
 
         <%= form_with url: athletes_path, method: :get, class: 'my-3', role: 'search' do |f| %>
