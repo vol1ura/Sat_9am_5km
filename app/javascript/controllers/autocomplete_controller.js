@@ -52,10 +52,14 @@ export default class extends Controller {
     this.resultsTarget.innerHTML = ''
     athletes.forEach((athlete, i) => {
       if (i >= 10) return
-      const home_event = athlete.home_event ? ` (${athlete.home_event})` : ''
-      const list_item = `<li class="list-group-item" athlete_id="${athlete.id}" name="${athlete.name}"><span class="badge bg-secondary">A${athlete.code}</span> ${athlete.name}${home_event}</li>`
+      const list_item = `<li class="list-group-item" athlete_id="${athlete.id}" name="${athlete.name}"><span class="badge bg-secondary">A${athlete.code}</span> ${athlete.name}${this.additionalData(athlete)}</li>`
       this.resultsTarget.insertAdjacentHTML('beforeend', list_item)
     })
+  }
+
+  additionalData(athlete) {
+    const data = athlete.home_event || athlete.club
+    return data ? ` (${data})` : ''
   }
 
   closeAutoComplete() {
