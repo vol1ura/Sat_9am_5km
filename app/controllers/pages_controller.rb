@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   ALLOWED_PAGES = %w[about feedback joining rules support additional-events privacy-policy robots 5za5].freeze
   MAX_FEEDBACK_SIZE = 950
 
-  before_action :validate_page, except: %i[index submit_feedback]
+  before_action :validate_page, only: :show
 
   layout 'home', only: [:index]
 
