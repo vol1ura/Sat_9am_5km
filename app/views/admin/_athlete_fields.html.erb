@@ -70,8 +70,7 @@ function findAthletes(element, query) {
       list = ''
       data.athletes.forEach((athlete, idx) => {
         if (idx >= 10) return;
-        home_event = athlete.home_event ? ` (${athlete.home_event})` : ''
-        list += `<li id="${athlete.id}" name="${athlete.name}"><b>A${athlete.code}</b> ${athlete.name}${home_event}</li>`
+        list += `<li id="${athlete.id}" name="${athlete.name}"><b>A${athlete.code}</b> ${athlete.name}${additionalData(athlete)}</li>`
       })
       element.html(`<ul>${list}</ul>`)
       return true
@@ -80,5 +79,10 @@ function findAthletes(element, query) {
       console.warn('Cannot find any athlete', err)
       return []
     })
+}
+
+function additionalData(athlete) {
+  data = athlete.home_event || athlete.club
+  return data ? ` (${data})` : ''
 }
 </script>
