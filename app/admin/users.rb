@@ -22,9 +22,9 @@ ActiveAdmin.register User do
 
   index download_links: false do
     selectable_column
-    column(:telegram_user) { |user| telegram_link user }
     column :first_name
     column :last_name
+    column(:telegram_user) { |user| telegram_link user }
     if current_user.admin?
       column(:phone) { |user| user.phone.present? }
       column :note

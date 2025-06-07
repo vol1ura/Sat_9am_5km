@@ -11,8 +11,8 @@ class Badge < ApplicationRecord
   has_many :athletes, through: :trophies
 
   has_one_attached :image do |attachable|
-    attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true
-    attachable.variant :web, resize_to_limit: [200, 200], preprocessed: true
+    attachable.variant :thumb, resize_to_limit: [150, 150], preprocessed: true
+    attachable.variant :web, resize_to_limit: [300, 300], preprocessed: true
   end
 
   validates :kind, :name, :conditions, presence: true
