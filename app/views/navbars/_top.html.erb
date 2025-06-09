@@ -29,7 +29,7 @@
       </div>
     </nav>
 
-    <% if current_user %>
+    <% if user_signed_in? %>
       <div class="dropdown ms-auto me-3">
         <%=
           link_to(
