@@ -97,17 +97,18 @@ ru:
       event:
         active: активен
         country: страна
-        code_name: 'кодовое имя'
+        code_name: кодовое имя
         name: название
-        main_picture_link: 'ссылка на баннер'
+        main_picture_link: ссылка на баннер
         town: город
         place: 'как найти?'
-        latitude: 'широта'
-        longitude: 'долгота'
-        coordinates: 'координаты'
+        latitude: широта
+        longitude: долгота
+        coordinates: координаты
+        timezone: зона
         slogan: девиз
         description: описание
-        visible_order: 'вес в ленте'
+        visible_order: вес в ленте
         created_at: создан
         updated_at: обновлён
       newsletter:

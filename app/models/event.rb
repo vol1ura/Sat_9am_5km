@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
+  AVAILABLE_TIMEZONES = ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name }.freeze
+
   belongs_to :country
   has_many :activities, dependent: :destroy
   has_many :athletes, dependent: :nullify
@@ -18,6 +20,7 @@ class Event < ApplicationRecord
 
   validates :name, :code_name, :town, :place, presence: true
   validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ }
+  validates :timezone, presence: true, inclusion: { in: AVAILABLE_TIMEZONES }
 
   default_scope { order(:visible_order, :name) }
 
@@ -25,7 +28,7 @@ class Event < ApplicationRecord
   scope :without_friends, -> { where.not(id: 4) }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[code_name country_id name place town]
+    %w[code_name country_id name town]
   end
 
   def self.authorized_for(user)

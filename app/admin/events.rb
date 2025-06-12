@@ -10,14 +10,13 @@ ActiveAdmin.register Event do
 
   permit_params(
     :description, :active, :place, :name, :main_picture_link, :code_name,
-    :town, :visible_order, :slogan, :country_id, :latitude, :longitude,
+    :town, :visible_order, :slogan, :country_id, :latitude, :longitude, :timezone,
   )
 
   filter :country
   filter :code_name
   filter :name
   filter :town
-  filter :place
 
   scope :all
   scope(:active) { |s| s.where(active: true) }
@@ -44,6 +43,7 @@ ActiveAdmin.register Event do
       row :town
       row :place
       row(:coordinates) { |e| "#{e.latitude},#{e.longitude}" }
+      row :timezone
       row :main_picture_link
       row :slogan
       row :visible_order
