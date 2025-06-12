@@ -38,10 +38,10 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs do
-      f.input :email
       f.input :first_name
       f.input :last_name
       if current_user == f.object || f.object.new_record?
+        f.input :email
         f.input :password
         f.input :password_confirmation
       end

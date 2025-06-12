@@ -99,14 +99,18 @@ rs:
       event:
         active: aktivan
         country: država
-        code_name: 'nadimak'
+        code_name: nadimak
         name: naziv
-        main_picture_link: 'link za baner'
+        main_picture_link: link za baner
         town: grad
         place: 'kako pronaći?'
+        latitude: širina
+        longitude: dužina
+        coordinates: koordinate
+        timezone: zona
         slogan: slogan
         description: opis
-        visible_order: 'redosled prikaza'
+        visible_order: redosled prikaza
         created_at: kreiran
         updated_at: ažuriran
       newsletter:
