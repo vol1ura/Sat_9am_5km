@@ -43,8 +43,8 @@ every :friday, at: '10' do
   rake 'notification:invite_newbies'
 end
 
-every :saturday, at: '0' do
-  runner 'ResetGoingAthletesJob.perform_later'
+every :friday, at: '11' do
+  rake 'processing:schedule_renew_going_to_events'
 end
 
 every :saturday, at: '18' do
