@@ -31,4 +31,13 @@ namespace :notification do
       Telegram::Notification::Badge::RageExpiration.call(trophy)
     end
   end
+
+  desc 'Notify volunteers before activity'
+  task volunteers: :environment do
+    Event.find_each do |event|
+      time_current = event.timezone_object.now
+      closest_friday = time_current.friday? ? time_current : time_current.next_occurring(:friday)
+      Telegram::Notification::VolunteerJob.set(wait_until: closest_friday.change(hour: 18)).perform_later(event.id)
+    end
+  end
 end
