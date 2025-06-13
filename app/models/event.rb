@@ -37,6 +37,10 @@ class Event < ApplicationRecord
     where(id: user.permissions.where(subject_class: 'Activity').select(:event_id))
   end
 
+  def timezone_object
+    ActiveSupport::TimeZone[timezone]
+  end
+
   def almost_jubilee_athletes_dataset(type, delta = 1)
     thresholds = Badge.participating_thresholds[type.singularize.to_sym].map { |x| x - delta }
     ds =
@@ -50,7 +54,9 @@ class Event < ApplicationRecord
 
   def to_combobox_display = name
 
+  private
+
   def reset_going_athletes
-    ResetGoingAthletesJob.perform_later(id)
+    RenewGoingToEventJob.perform_later(id)
   end
 end
