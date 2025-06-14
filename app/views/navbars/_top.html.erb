@@ -40,7 +40,7 @@
             'aria-expanded' => 'false'
           ) do
         %>
-          <%= image_tag user_image_path(current_user), class: 'avatar-50 border border-light border-3', alt: current_user.full_name %>
+          <%= image_tag user_image_path(current_user), class: 'avatar-50 border border-light border-3', alt: current_user.first_name %>
         <% end %>
         <ul class="dropdown-menu dropdown-menu-end">
           <% if athlete = current_user.athlete %>

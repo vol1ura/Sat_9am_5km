@@ -6,7 +6,13 @@ active_admin_form_for [:admin, resource] do |f|
   f.inputs 'Координаты и временная зона' do
     input :latitude
     input :longitude
-    input :timezone, as: :searchable_select, include_blank: false, collection: Event::AVAILABLE_TIMEZONES
+    input(
+      :timezone,
+      as: :searchable_select,
+      include_blank: false,
+      collection:
+        ActiveSupport::TimeZone.all.map { |tz| ["#{tz.tzinfo.name} (UTC#{tz.formatted_offset})", tz.tzinfo.name] },
+    )
   end
 
   f.inputs 'Основные параметры' do
