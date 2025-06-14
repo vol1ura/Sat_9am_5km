@@ -1,6 +1,6 @@
 <% head_info :description, t('.description') %>
 <% additional_events = Rails.configuration.additional_events %>
-<h1><%= head_info :title, t('.title_html', year: additional_events[:year]) %></h1>
+<h2><%= head_info :title, t('.title_html', year: additional_events[:year]) %></h2>
 <div class="row">
   <div class="col-md-6 offset-md-2">
     <table class="table">

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
-  AVAILABLE_TIMEZONES = ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name }.freeze
+  AVAILABLE_TIMEZONES = ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name }.uniq.freeze
 
   belongs_to :country
   has_many :activities, dependent: :destroy
