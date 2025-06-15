@@ -77,8 +77,7 @@ ActiveAdmin.register Athlete do
   batch_action :gender_set, confirm: I18n.t('active_admin.athletes.confirm_gender_set'),
                             if: proc { can? :manage, Athlete },
                             form: { gender: %w[мужчина женщина] } do |ids, inputs|
-    collection = batch_action_collection.where(id: ids)
-    collection.update_all(male: inputs[:gender] == 'мужчина') # rubocop:disable Rails/SkipsModelValidations
+    batch_action_collection.where(id: ids).update_all male: inputs[:gender] == 'мужчина'
     redirect_to collection_path, notice: I18n.t('active_admin.athletes.successful_gender_set')
   end
 

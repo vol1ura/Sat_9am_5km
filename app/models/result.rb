@@ -67,8 +67,8 @@ class Result < ApplicationRecord
 
   def insert_new_result_above!
     transaction do
-      activity.results.where(position: position..).update_all('position = position + 1') # rubocop:disable Rails/SkipsModelValidations
-      activity.results.create!(position:)
+      activity.results.where(position: position..).update_all 'position = position + 1'
+      activity.results.create! position:
     end
   end
 end

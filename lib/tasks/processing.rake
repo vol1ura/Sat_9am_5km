@@ -10,7 +10,7 @@ namespace :processing do
       model
         .published
         .where(activity: { date: ...Date.current.prev_week(:saturday) }, informed: false)
-        .update_all(informed: true) # rubocop:disable Rails/SkipsModelValidations
+        .update_all(informed: true)
     end
   end
 

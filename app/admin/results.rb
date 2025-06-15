@@ -142,7 +142,7 @@ ActiveAdmin.register Result do
 
   member_action :drop, method: :delete, if: proc { can? :manage, Result } do
     resource.transaction do
-      collection.where('position > ?', resource.position).update_all('position = position - 1') # rubocop:disable Rails/SkipsModelValidations
+      collection.where('position > ?', resource.position).update_all 'position = position - 1'
       resource.destroy
     end
     redirect_to collection_path, notice: t('active_admin.results.result_successfully_deleted')

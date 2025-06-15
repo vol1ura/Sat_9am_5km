@@ -1,10 +1,11 @@
 require:
   - rubocop-factory_bot
   - rubocop-rake
-  - rubocop-performance
   - rubocop-rspec
 
-plugins: rubocop-rails
+plugins:
+  - rubocop-rails
+  - rubocop-performance
 
 # METRICS
 Metrics/AbcSize:
@@ -72,6 +73,8 @@ Lint/MissingSuper:
 
 # Rails
 Rails/SkipsModelValidations:
+  AllowedMethods:
+    - 'update_all'
   Exclude:
     - 'db/**/*'
 Rails/CreateTableWithTimestamps:

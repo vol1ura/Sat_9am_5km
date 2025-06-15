@@ -57,13 +57,11 @@ module Athletes
 
     def replace_all_by_one!
       ActiveRecord::Base.transaction do
-        # rubocop:disable Rails/SkipsModelValidations
         Result.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
         Volunteer.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
         update_all_trophies!
         @collection.excluding(athlete).destroy_all
         athlete.save!
-        # rubocop:enable Rails/SkipsModelValidations
       end
     end
 

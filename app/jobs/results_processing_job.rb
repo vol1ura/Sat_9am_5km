@@ -6,7 +6,7 @@ class ResultsProcessingJob < ApplicationJob
   def perform(activity_id)
     activity = Activity.published.find activity_id
 
-    activity.results.where('personal_best = TRUE OR first_run = TRUE').update_all(personal_best: false, first_run: false) # rubocop:disable Rails/SkipsModelValidations
+    activity.results.where('personal_best = TRUE OR first_run = TRUE').update_all personal_best: false, first_run: false
 
     activity.results.where.not(athlete: nil).includes(:athlete).find_each do |result|
       past_results =
