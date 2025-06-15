@@ -55,6 +55,8 @@ ActiveAdmin.register Activity do
   end
 
   action_item :toggle_mode, only: %i[show edit], if: proc { !resource.published } do
+    return if !resource.token && !resource.results.empty?
+
     link_to(
       resource.token ? 'Ручной режим' : 'Авто режим',
       toggle_mode_admin_activity_path(resource),
@@ -96,6 +98,7 @@ ActiveAdmin.register Activity do
 
   member_action :toggle_mode, method: :patch do
     resource.update!(token: resource.token ? nil : SecureRandom.uuid)
-    redirect_to admin_activity_path(resource), notice: t(".#{resource.token ? 'auto' : 'manual'}.success")
+    redirect_path = request.referer&.end_with?('edit') ? edit_admin_activity_path(resource) : admin_activity_path(resource)
+    redirect_to redirect_path, notice: t(".#{resource.token ? 'auto' : 'manual'}.success")
   end
 end

@@ -69,6 +69,8 @@ Rails.application.routes.draw do
     end
     namespace :mobile do
       get 'athletes/:code/info', to: 'athletes#info'
+      post 'activities/stopwatch', to: 'activities#stopwatch'
+      post 'activities/scanner', to: 'activities#scanner'
     end
   end
 
