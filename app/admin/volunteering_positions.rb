@@ -14,7 +14,7 @@ ActiveAdmin.register VolunteeringPosition do
     [
       link_to('главная', admin_root_path),
       link_to(event.name, admin_event_path(event)),
-      link_to('волонтёрские позиции', admin_event_volunteering_positions_path(event))
+      link_to('волонтёрские позиции', admin_event_volunteering_positions_path(event)),
     ]
   end
 

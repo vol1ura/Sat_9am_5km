@@ -4,7 +4,7 @@ RSpec.describe '/api/mobile/activities' do
   let!(:activity) { create(:activity, published: false, token: SecureRandom.uuid) }
   let(:token) { activity.token }
   let(:bearer_token) { 'valid_token' }
-  let(:request!) { post api_url, params: request_params, headers: { Authorization: "Bearer #{bearer_token}" } }
+  let(:request!) { post api_url, params: request_params, headers: { Authorization: "Bearer #{bearer_token}" }, as: :json }
 
   before { stub_const('API::Mobile::ApplicationController::AUTHORIZATION_HEADER', 'Bearer valid_token') }
 
@@ -15,15 +15,15 @@ RSpec.describe '/api/mobile/activities' do
     context 'with valid parameters' do
       it 'creates new results if they do not exist' do
         expect { request! }.to change(activity.results, :count).by(1)
-        expect(activity.results.last.total_time.strftime('%H:%M:%S')).to eq '00:17:42'
         expect(response).to have_http_status(:ok)
+        expect(activity.results.last.total_time.strftime('%H:%M:%S')).to eq '00:17:42'
       end
 
       it 'updates existing results if total_time is nil' do
-        result = create(:result, activity: activity, total_time: nil)
+        result = create(:result, activity: activity, total_time: nil, position: 1)
         expect { request! }.not_to change(activity.results, :count)
+        expect(response).to have_http_status :ok
         expect(result.reload.total_time.strftime('%H:%M:%S')).to eq '00:17:42'
-        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.describe '/api/mobile/activities' do
 
       it 'returns an error' do
         request!
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status :not_found
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe '/api/mobile/activities' do
 
       it 'returns an error' do
         request!
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status :unauthorized
       end
     end
   end
@@ -50,9 +50,7 @@ RSpec.describe '/api/mobile/activities' do
   describe '/scanner' do
     let(:api_url) { api_mobile_activities_scanner_url }
 
-    before do
-      allow(AddAthleteToResultJob).to receive(:perform_later)
-    end
+    before { allow(AddAthleteToResultJob).to receive :perform_later }
 
     context 'with valid parameters' do
       let(:request_params) do
@@ -69,7 +67,7 @@ RSpec.describe '/api/mobile/activities' do
         request!
         expect(AddAthleteToResultJob).to have_received(:perform_later).with(activity.id, 'A123456', 'P1234').once
         expect(AddAthleteToResultJob).to have_received(:perform_later).with(activity.id, 'A789012', 'P5678').once
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status :ok
       end
     end
 
@@ -78,7 +76,7 @@ RSpec.describe '/api/mobile/activities' do
 
       it 'returns an error' do
         request!
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status :not_found
       end
     end
   end

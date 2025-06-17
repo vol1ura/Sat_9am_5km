@@ -16,7 +16,7 @@ active_admin_form_for [:admin, resource] do |f|
                                   %w[blockquote code-block],
                                   [{ list: 'ordered' }, { list: 'bullet' }],
                                   ['link'],
-                                  ['clean']
+                                  ['clean'],
                                 ],
                               },
                               placeholder: 'Какой же классный клуб...',
