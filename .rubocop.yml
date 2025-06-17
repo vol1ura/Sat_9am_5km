@@ -44,6 +44,8 @@ Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
 Style/HashSyntax:
   EnforcedShorthandSyntax: consistent
 Style/NumericLiterals:
