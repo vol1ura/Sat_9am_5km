@@ -54,9 +54,11 @@ ActiveAdmin.register Activity do
     flash[:error] = t('.bad_data')
   end
 
-  action_item :toggle_mode, only: %i[show edit], if: proc { !resource.published } do
-    return if !resource.token && !resource.results.empty?
-
+  action_item(
+    :toggle_mode,
+    only: %i[show edit],
+    if: proc { !resource.published && (resource.token || resource.results.empty?) },
+  ) do
     link_to(
       resource.token ? 'Ручной режим' : 'Авто режим',
       toggle_mode_admin_activity_path(resource),
