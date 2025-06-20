@@ -10,6 +10,14 @@ module Telegram
         @user = volunteer.athlete.user
       end
 
+      def call
+        return unless @user&.telegram_id
+
+        notify(@user.telegram_id)
+      rescue StandardError => e
+        Rollbar.error e, user_id: @user.id, volunteer_id: @volunteer.id
+      end
+
       private
 
       def text
