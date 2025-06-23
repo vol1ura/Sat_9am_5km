@@ -78,6 +78,7 @@ class Athlete < ApplicationRecord
             allow_nil: true
 
   before_save :remove_name_extra_spaces, if: :will_save_change_to_name?
+  before_destroy(prepend: true) { results.update_all personal_best: false, first_run: false }
   after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
 
   def self.find_or_scrape_by_code!(code)
