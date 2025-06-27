@@ -46,8 +46,9 @@ module Telegram
 
       def director_info
         return 'пока нет' unless @director
+        return @director.name unless @director.user&.telegram_user
 
-        "[#{@director.full_name}](#{"https://t.me/#{@director.telegram_user}" if @director.telegram_user})"
+        "[#{@director.user.full_name}](https://t.me/#{@director.user.telegram_user})"
       end
     end
   end

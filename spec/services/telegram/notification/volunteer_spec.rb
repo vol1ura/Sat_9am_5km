@@ -5,7 +5,7 @@ RSpec.describe Telegram::Notification::Volunteer do
   let(:athlete) { create(:athlete, user:) }
   let(:activity) { create(:activity, event:) }
   let(:volunteer) { create(:volunteer, athlete:, activity:) }
-  let(:director) { create(:user) }
+  let(:director) { create(:athlete) }
   let(:event) { create(:event) }
   let(:bot_token) { '123456:aaabbb' }
   let(:request) { stub_request(:post, %r{https://api\.telegram\.org/bot#{bot_token}/sendMessage}) }

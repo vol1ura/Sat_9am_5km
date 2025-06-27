@@ -12,9 +12,9 @@ module Telegram
         activity = event.activities.find_by date: event.timezone_object.today.next_occurring(:saturday)
         return unless activity
 
-        director = activity.volunteers.find_by(role: :director)&.athlete&.user
+        director = activity.volunteers.find_by(role: :director)&.athlete
 
-        activity.volunteers.includes(athlete: :user, activity: :event).find_each do |volunteer|
+        activity.volunteers.includes(athlete: :user).find_each do |volunteer|
           Volunteer.call volunteer, director, event
         end
       end
