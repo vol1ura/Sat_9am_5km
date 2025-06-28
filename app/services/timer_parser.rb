@@ -10,31 +10,30 @@ class TimerParser < ApplicationService
 
   def call
     return unless @timer_file
-    return if @activity.results.exists?
-    raise FormatError if table.dig(0, 0) != 'STARTOFEVENT'
+    raise FormatError, table.first.inspect if table.dig(0, 0) != 'STARTOFEVENT'
 
-    @activity.transaction do
-      @activity.date = Date.parse(table.dig(0, 1)) # Date of event is the second column of first row
-      process_table
-      @activity.save!
-    end
+    @activity.update! date: Date.parse(table.dig(0, 1)) # Date of event is the second column of first row
+    TimerProcessingJob.perform_later @activity.id, timer_data
   end
 
   private
 
   def table
-    @table ||= CSV.parse(@timer_file.read, headers: false)
+    @table ||= CSV.parse @timer_file.read, headers: false
   end
 
-  def process_table
-    column_correction = 1
-    Result.without_auditing do
-      table[1..].each do |row|
-        break if row.first == 'ENDOFEVENT'
-        column_correction -= 1 and next if row.third.blank? || row.third.include?('00:00:00')
+  def timer_data
+    position_correction = 1
+    table[1..].each_with_object([]) do |row, data|
+      break data if row.first == 'ENDOFEVENT'
 
-        @activity.results << Result.new(position: row.first.to_i + column_correction, total_time: row.last)
+      if row.third.blank? || row.third.include?('00:00:00')
+        position_correction -= 1
+        next
       end
+      raise FormatError, row.inspect unless row.third&.match?(/\d+/) && row.third.match?(/\d\d:\d\d:\d\d/)
+
+      data << { position: row.first.to_i + position_correction, total_time: row.third.strip }
     end
   end
 end

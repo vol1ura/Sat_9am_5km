@@ -4,8 +4,6 @@ class Activity < ApplicationRecord
   audited except: [:token]
   has_associated_audits
 
-  MAX_SCANNERS = 5
-
   belongs_to :event
 
   has_many :results, dependent: :destroy

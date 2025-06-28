@@ -39,19 +39,18 @@ ActiveAdmin.register Activity do
 
   after_save do |activity|
     if activity.valid?
-      TimerParser.call(activity, params[:activity][:timer])
-      Activity::MAX_SCANNERS.times do |number|
-        ScannerParser.call(activity, params[:activity]["scanner#{number}"])
-      end
-      flash[:notice] = t('.success_upload') if params[:activity][:timer] || params[:activity][:scanner0]
+      TimerParser.call activity, params[:activity][:timer]
+      scanners = params[:activity][:scanners].compact_blank
+      scanners.each { |file| ScannerParser.call activity, file }
+      flash[:notice] = t '.success_upload' if params[:activity][:timer] || scanners.any?
     end
   rescue CSV::MalformedCSVError => e
     Rollbar.error e
-    flash[:error] = t('.failed_upload')
-  rescue TimerParser::FormatError
-    flash[:error] = t('.bad_timer_format')
+    flash[:error] = t '.failed_upload'
+  rescue TimerParser::FormatError => e
+    flash[:error] = t '.bad_timer_format', message: e.message
   rescue ActiveRecord::RecordInvalid
-    flash[:error] = t('.bad_data')
+    flash[:error] = t '.bad_data'
   end
 
   action_item(

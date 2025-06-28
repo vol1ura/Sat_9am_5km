@@ -8,29 +8,15 @@ module API
       # Data format json:
       # { "token": string, "date": date, "results": [{ "position": number, "total_time": "HH:MM:SS" }, ...] }
       def stopwatch
-        @activity.transaction do
-          @activity.without_auditing do
-            params[:results].each do |result_params|
-              results = @activity.results.where position: result_params[:position]
-              if results.empty?
-                @activity.results.create! position: result_params[:position], total_time: result_params[:total_time]
-              else
-                results.where(total_time: nil).update_all total_time: result_params[:total_time]
-              end
-            end
-          end
-        end
-
+        @activity.update! date: params[:date] if params[:date]
+        TimerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position total_time]])
         head :ok
       end
 
       # Data format json:
       # { "token": string, "results": [{ "position": "P1234", "code": "A123456" }, ...] }
       def scanner
-        params[:results].each do |result_params|
-          AddAthleteToResultJob.perform_later @activity.id, *result_params.values_at(:code, :position)
-        end
-
+        ScannerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position code]])
         head :ok
       end
 
