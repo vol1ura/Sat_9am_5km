@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe ScannerProcessingJob do
-  let(:activity) { create(:activity) }
+  let(:activity) { create(:activity, published: false) }
   let(:result) { create(:result, activity: activity, athlete: result_athlete) }
   let(:athlete) { create(:athlete) }
 

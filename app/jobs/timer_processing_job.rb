@@ -5,6 +5,7 @@ class TimerProcessingJob < ApplicationJob
 
   def perform(activity_id, data)
     activity = Activity.find activity_id
+    return if activity.published
 
     Result.without_auditing do
       activity.with_lock('FOR UPDATE NOWAIT') do
