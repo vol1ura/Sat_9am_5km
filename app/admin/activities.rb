@@ -40,7 +40,7 @@ ActiveAdmin.register Activity do
   after_save do |activity|
     if activity.valid?
       TimerParser.call activity, params[:activity][:timer]
-      scanners = params[:activity][:scanners].compact_blank
+      scanners = params[:activity][:scanners]&.compact_blank || []
       scanners.each { |file| ScannerParser.call activity, file }
       flash[:notice] = t '.success_upload' if params[:activity][:timer] || scanners.any?
     end
