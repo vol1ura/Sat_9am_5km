@@ -10,27 +10,33 @@ active_admin_form_for [:admin, resource] do |f|
   end
 
   f.inputs 'Сведения о забеге' do
-    unless resource.date && resource.results.exists?
-      input :date, as: :datepicker, datepicker_options: { min_date: '-1D', max_date: '+2M' }
-    end
-    input :description, as: :quill_editor,
-                        input_html: {
-                          data: {
-                            options: {
-                              modules: {
-                                toolbar: [
-                                  %w[bold italic strike],
-                                  %w[blockquote code-block],
-                                  [{ list: 'ordered' }, { list: 'bullet' }],
-                                  ['link'],
-                                  ['clean'],
-                                ],
-                              },
-                              placeholder: 'Какой же классный забег...',
-                              theme: 'snow',
-                            },
-                          },
-                        }
+    input(
+      :date,
+      as: :datepicker,
+      datepicker_options: { min_date: '-2D', max_date: '+3M' },
+      input_html: { disabled: resource.results.exists? },
+    )
+    input(
+      :description,
+      as: :quill_editor,
+      input_html: {
+        data: {
+          options: {
+            modules: {
+              toolbar: [
+                %w[bold italic strike],
+                %w[blockquote code-block],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link'],
+                ['clean'],
+              ],
+            },
+            placeholder: 'Какой же классный забег...',
+            theme: 'snow',
+          },
+        },
+      },
+    )
     input :published, label: 'Опубликован на сайте' if resource.published && current_user.admin?
   end
 
@@ -42,18 +48,27 @@ active_admin_form_for [:admin, resource] do |f|
   elsif !resource.published
     if resource.results.exists?
       panel 'Внимание!' do
-        para 'Файл с секундомера уже загружен. Если его нужно загрузить повторно, сначала очистите все результаты забега.'
+        para 'Загрузить файл с секундомера можно только один раз.'
         para 'Загрузить дополнительные файлы со сканера можно сразу или позже.'
       end
-    else
-      f.inputs 'Загрузите файл с секундомера (только CSV)' do
-        input :timer, as: :file, label: 'Файл с секундомера', input_html: { accept: 'text/csv,.csv' }
-      end
     end
-
-    f.inputs 'Загрузите файлы со сканеров (только CSV)' do
-      Activity::MAX_SCANNERS.times do |i|
-        input "scanner#{i}", as: :file, label: "Файл со сканера #{i + 1}", input_html: { accept: 'text/csv,.csv' }
+    columns do
+      unless resource.results.where.not(total_time: nil).exists?
+        column do
+          f.inputs 'Файл с секундомера (только CSV)' do
+            input :timer, as: :file, label: 'Файл', input_html: { accept: 'text/csv,.csv' }
+          end
+        end
+      end
+      column do
+        f.inputs 'Загрузите файлы со сканеров (только CSV)' do
+          input(
+            :scanners,
+            as: :file,
+            label: 'Файлы (можно выбрать несколько)',
+            input_html: { accept: 'text/csv,.csv', multiple: true },
+          )
+        end
       end
     end
   end

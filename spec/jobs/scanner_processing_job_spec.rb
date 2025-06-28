@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe AddAthleteToResultJob do
+RSpec.describe ScannerProcessingJob do
   let(:activity) { create(:activity) }
   let(:result) { create(:result, activity: activity, athlete: result_athlete) }
   let(:athlete) { create(:athlete) }
 
-  before { described_class.perform_now(activity.id, "A#{athlete.parkrun_code}", "P#{result.position}") }
+  before do
+    described_class.perform_now(activity.id, [{ code: "A#{athlete.parkrun_code}", position: "P#{result.position}" }])
+  end
 
   context 'without athlete' do
     let(:result_athlete) { nil }

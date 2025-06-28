@@ -9,16 +9,12 @@ class ScannerParser < ApplicationService
   def call
     return unless @scanner_file
 
-    table[1..].each do |row|
+    scanner_data = CSV.parse(@scanner_file.read, headers: false)[1..].filter_map do |row|
       next unless row in [/^A\d+/ => code, /^P\d+/ => position, *]
 
-      AddAthleteToResultJob.perform_later(@activity_id, code, position)
+      { code:, position: }
     end
-  end
 
-  private
-
-  def table
-    @table ||= CSV.parse(@scanner_file.read, headers: false)
+    ScannerProcessingJob.perform_later @activity_id, scanner_data
   end
 end

@@ -55,8 +55,8 @@ RSpec.describe '/admin/activities' do
           event_id: event.id,
           date: Date.yesterday.strftime('%Y-%m-%d'),
           published: true,
-          timer: File.open('spec/fixtures/files/parkrun_timer_results_ios.csv'),
-          scanner0: File.open('spec/fixtures/files/parkrun_scanner_results.csv'),
+          timer: Rack::Test::UploadedFile.new('spec/fixtures/files/parkrun_timer_results_ios.csv', 'text/csv'),
+          scanners: [Rack::Test::UploadedFile.new('spec/fixtures/files/parkrun_scanner_results.csv', 'text/csv')],
         },
       }
     end
@@ -64,7 +64,7 @@ RSpec.describe '/admin/activities' do
     it 'calls TimerParser and ScannerParser' do
       post admin_activities_url, params: valid_attributes
       expect(TimerParser).to have_received(:call).once
-      expect(ScannerParser).to have_received(:call).exactly(Activity::MAX_SCANNERS).times
+      expect(ScannerParser).to have_received(:call).once
     end
   end
 

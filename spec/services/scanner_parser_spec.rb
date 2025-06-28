@@ -12,13 +12,11 @@ RSpec.describe ScannerParser, type: :service do
   context 'with valid scanner file' do
     let(:file_scanner) { File.open('spec/fixtures/files/parkrun_scanner_results.csv') }
 
-    before do
-      allow(AddAthleteToResultJob).to receive(:perform_later)
-    end
+    before { allow(ScannerProcessingJob).to receive(:perform_later) }
 
     it 'scheduled job' do
       described_class.call(activity, file_scanner)
-      expect(AddAthleteToResultJob).to have_received(:perform_later).exactly(5).times
+      expect(ScannerProcessingJob).to have_received(:perform_later).once
     end
   end
 end
