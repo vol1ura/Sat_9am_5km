@@ -79,16 +79,14 @@ jobs:
         run: cp config/additional_events.yml.example config/additional_events.yml && bin/rails db:schema:load
       - name: Check database consistency
         run: bundle exec database_consistency
-      - name: Rspec tests
-        if: github.ref != 'refs/heads/master'
+      - name: Run tests
         run: bundle exec rspec
-      - name: Test & publish code coverage
+      - name: Upload coverage reports
         if: github.ref == 'refs/heads/master'
-        uses: paambaati/codeclimate-action@v9
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE }}
+        uses: qltysh/qlty-action/coverage@v1
         with:
-          coverageCommand: bundle exec rspec
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/.resultset.json
 
   deploy:
     if: github.ref == 'refs/heads/master'

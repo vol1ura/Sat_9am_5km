@@ -18,6 +18,7 @@
 if ENV['COVERAGE'] == 'on'
   require 'simplecov'
   SimpleCov.start 'rails' do
+    formatter SimpleCov::Formatter::SimpleFormatter if ENV['CI']
     enable_coverage :branch
     add_group 'ActiveAdmin', 'app/admin'
     add_group 'Services', 'app/services'
