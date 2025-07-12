@@ -7,7 +7,9 @@
 
 <% paragraphs.zip(VkPhotos.call(paragraphs.size)).each do |paragraph, photo| %>
   <p><%= paragraph %></p>
-  <p class="text-center"><%= image_tag photo, class: 'img-fluid',  alt: 'S95', loading: 'lazy' %></p>
+  <% if photo %>
+    <p class="text-center"><%= image_tag photo, class: 'img-fluid',  alt: 'S95', loading: 'lazy' %></p>
+  <% end %>
 <% end %>
 
 <p><%= t '.events', events_count: actual_events.size, events: actual_events.to_sentence %></p>
