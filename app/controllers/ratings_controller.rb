@@ -7,6 +7,13 @@ class RatingsController < ApplicationController
   RATINGS = %w[count h_index uniq_events trophies].freeze
   PER_PAGE = 50
   MAX_PAGE = 20
+  RANKING_SQL =
+    <<~SQL.squish
+      ROW_NUMBER() OVER (
+        PARTITION BY results.athlete_id
+        ORDER BY results.total_time ASC, results.id DESC
+      ) AS rn
+    SQL
 
   def index; end
 
@@ -53,8 +60,19 @@ class RatingsController < ApplicationController
   def results_dataset
     return Result.none if @page > MAX_PAGE
 
-    scope = country_dataset_for(Result).includes(athlete: :club, activity: :event)
-    scope.top(male: params[:male] == 'true').offset((@page - 1) * PER_PAGE).limit(PER_PAGE)
+    Result.from(
+      country_dataset_for(Result)
+        .joins(:athlete)
+        .where(athlete: { male: params[:male] == 'true' })
+        .select('results.*', RANKING_SQL),
+      :ranked_results,
+    )
+      .where('ranked_results.rn = 1')
+      .order('ranked_results.total_time ASC, ranked_results.position ASC, ranked_results.activity_id ASC')
+      .select('ranked_results.*')
+      .preload(athlete: :club, activity: :event)
+      .offset((@page - 1) * PER_PAGE)
+      .limit(PER_PAGE)
   end
 
   def set_rating_variables
