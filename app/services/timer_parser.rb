@@ -31,7 +31,7 @@ class TimerParser < ApplicationService
         position_correction -= 1
         next
       end
-      raise FormatError, row.inspect unless row.third&.match?(/\d+/) && row.third.match?(/\d\d:\d\d:\d\d/)
+      raise FormatError, row.inspect unless row.first&.match?(/\A\d+\z/) && row.third.match?(/\d?\d:\d\d:\d\d\z/)
 
       data << { position: row.first.to_i + position_correction, total_time: row.third.strip }
     end
