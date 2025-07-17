@@ -743,7 +743,7 @@ ru:
       athletes_count: Всего найдено %{count} уч.
       nothing_found: К сожалению, ничего не найдено.
     show:
-      description: 'Профиль атлета %{athlete_name}'
+      description: 'Профиль участника %{athlete_name}'
       show_club_html: 'Посмотреть статистику клуба %{link}'
       total_results: всего пробежек
       total_volunteering: всего волонтёрств

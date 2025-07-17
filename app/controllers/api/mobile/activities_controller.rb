@@ -6,10 +6,10 @@ module API
       before_action :find_activity!
 
       # Data format json:
-      # { "token": string, "date": date, "results": [{ "position": number, "total_time": "HH:MM:SS" }, ...] }
+      # { "token": string, "results": [{ "position": number, "total_time": "HH:MM:SS" }, ...] }
       def stopwatch
-        @activity.update! date: params[:date] if params[:date]
         TimerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position total_time]])
+        notify_volunteers(:timer)
         head :ok
       end
 
@@ -17,6 +17,7 @@ module API
       # { "token": string, "results": [{ "position": "P1234", "code": "A123456" }, ...] }
       def scanner
         ScannerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position code]])
+        notify_volunteers(:scanner)
         head :ok
       end
 
@@ -24,6 +25,14 @@ module API
 
       def find_activity!
         @activity = Activity.unpublished.find_by!(token: params[:token])
+      end
+
+      def notify_volunteers(role)
+        Telegram::Notification::ActivityAlertJob.perform_later(
+          @activity.id,
+          [:director, :results_handler, role],
+          render_to_string(partial: role.to_s, formats: :text),
+        )
       end
     end
   end
