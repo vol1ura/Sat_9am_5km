@@ -34,14 +34,6 @@ services:
     volumes:
       - redis:/data
 
-  adminer:
-    image: adminer:latest
-    restart: unless-stopped
-    ports:
-      - '3003:8080'
-    environment:
-      ADMINER_DESIGN: mvt
-
 volumes:
   postgres:
   redis:
