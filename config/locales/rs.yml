@@ -662,7 +662,9 @@ rs:
       other_contacts_html: Takođe možete poslati poruku na naš <a href="mailto:%{our_email}" target="_blank" title="Pošaljite nam email">email</a>. Ostale naše kontakte možete pronaći na dnu stranice, kao i na stranicama događaja.
       placeholder: Vaša povratna informacija ili predlog (do %{max_length} karaktera)
       submit: Pošalji
+    submit_feedback:
       sent: Hvala na vašoj povratnoj informaciji!
+      error: Greška! Dužina poruke mora biti od 1 do 950 karaktera.
     joining:
       title: Želite da pokrenete S95 u svom parku?
       description: Objašnjavamo kako da započnete sa organizacijom S95 događaja u svom omiljenom parku.

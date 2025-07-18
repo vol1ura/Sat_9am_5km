@@ -37,9 +37,9 @@ class PagesController < ApplicationController
 
     if message.present? && message.length <= MAX_FEEDBACK_SIZE
       NotificationMailer.with(message: message, user_id: current_user&.id).feedback.deliver_later
-      redirect_to page_path(page: 'support'), notice: t('pages.support.feedback.sent')
+      redirect_to page_path(page: 'feedback'), notice: t('.sent')
     else
-      redirect_to page_path(page: 'support'), alert: t('pages.support.feedback.error')
+      redirect_to page_path(page: 'feedback'), alert: t('.error')
     end
   end
 
