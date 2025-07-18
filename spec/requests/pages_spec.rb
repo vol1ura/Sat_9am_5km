@@ -45,4 +45,33 @@ RSpec.describe '/pages' do
       end
     end
   end
+
+  describe 'POST /submit_feedback' do
+    let(:message) { 'Great site!' }
+
+    before do
+      allow(NotificationMailer).to receive_message_chain(:with, :feedback, :deliver_later) # rubocop:disable RSpec/MessageChain
+      post submit_feedback_pages_url, params: { message: }
+    end
+
+    context 'when message is valid' do
+      it 'sends feedback and redirects with notice' do
+        expect(NotificationMailer).to have_received(:with).with(hash_including(message:)).once
+        expect(response).to redirect_to(page_path(page: 'feedback'))
+        follow_redirect!
+        expect(response.body).to include(I18n.t('pages.submit_feedback.sent'))
+      end
+    end
+
+    context 'when message is too long' do
+      let(:message) { 'a' * 1000 }
+
+      it 'does not send feedback and redirects with alert' do
+        expect(NotificationMailer).not_to have_received(:with)
+        expect(response).to redirect_to(page_path(page: 'feedback'))
+        follow_redirect!
+        expect(response.body).to include(I18n.t('pages.submit_feedback.error'))
+      end
+    end
+  end
 end
