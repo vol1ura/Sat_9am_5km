@@ -43,6 +43,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def app
+    send_file 'public/app-release.apk', type: 'application/vnd.android.package-archive', disposition: 'attachment'
+  end
+
   private
 
   def page_name

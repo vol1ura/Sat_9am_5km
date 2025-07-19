@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :pages, only: %i[index show], param: :page do
-    post :submit_feedback, on: :collection
+    collection do
+      get :app
+      post :submit_feedback
+    end
   end
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
