@@ -239,6 +239,15 @@
                 </div>
               </div>
             </li>
+            <li class="mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-cloud-arrow-up fa-2x text-primary me-3"></i>
+                <div>
+                  <h5 class="mb-1"><%= t '.volunteer_app.features.upload.title' %></h5>
+                  <p class="mb-0"><%= t '.volunteer_app.features.upload.description' %></p>
+                </div>
+              </div>
+            </li>
             <li>
               <div class="d-flex align-items-center">
                 <i class="fas fa-chart-bar fa-2x text-primary me-3"></i>
@@ -250,9 +259,12 @@
             </li>
           </ul>
         </div>
-        <div class="download-options d-flex flex-wrap gap-4 align-items-center justify-content-center">
+        <div class="d-flex gap-4 align-items-center justify-content-center">
           <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
-            <%= image_tag '/images/rustore_badge.svg', class: 'img-fluid', alt: t('.volunteer_app.download_rustore') %>
+            <%= image_tag '/images/rustore_badge.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
+          <% end %>
+          <%= link_to app_pages_path, class: 'btn btn-outline-dark px-2 rounded-1 app-button', data: { turbo_prefetch: false } do %>
+            <i class="fa-brands fa-android"></i> <%= t('.volunteer_app.download_apk_html') %>
           <% end %>
         </div>
       </div>
