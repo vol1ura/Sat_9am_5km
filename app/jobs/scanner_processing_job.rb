@@ -28,7 +28,7 @@ class ScannerProcessingJob < ApplicationJob
     result.without_auditing do
       unless result.update(athlete:)
         message = alert_message result_params
-        Telegram::Notification::ActivityAlertJob.perform_later @activity.id, %i[director results_handler], message
+        Telegram::Notification::ActivityAlertJob.perform_later @activity.id, %w[director results_handler], message
         Rollbar.error 'Result processing failed', activity_id: @activity.id, message: message, errors: result.errors.inspect
       end
     end
