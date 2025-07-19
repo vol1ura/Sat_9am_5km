@@ -9,7 +9,7 @@ module API
       # { "token": string, "results": [{ "position": number, "total_time": "HH:MM:SS" }, ...] }
       def stopwatch
         TimerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position total_time]])
-        notify_volunteers(:timer)
+        notify_volunteers('timer')
         head :ok
       end
 
@@ -17,7 +17,7 @@ module API
       # { "token": string, "results": [{ "position": "P1234", "code": "A123456" }, ...] }
       def scanner
         ScannerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position code]])
-        notify_volunteers(:scanner)
+        notify_volunteers('scanner')
         head :ok
       end
 
@@ -30,8 +30,8 @@ module API
       def notify_volunteers(role)
         Telegram::Notification::ActivityAlertJob.perform_later(
           @activity.id,
-          [:director, :results_handler, role],
-          render_to_string(partial: role.to_s, formats: :text),
+          ['director', 'results_handler', role],
+          render_to_string(partial: role, formats: :text).to_str,
         )
       end
     end
