@@ -28,7 +28,7 @@ class Activity < ApplicationRecord
   def volunteers_roster
     volunteers
       .joins("LEFT JOIN volunteering_positions vp ON vp.event_id = #{event_id} AND vp.role = volunteers.role")
-      .order(:rank)
+      .order(:rank, :role)
   end
 
   def participants
