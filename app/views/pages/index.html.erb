@@ -7,7 +7,7 @@
       </div>
       <div class="col-lg-6">
         <div class="placeholder-image">
-          <h1 class="display-4 fw-bold mb-4 text-white"><%= t '.hero_title' %></h1>
+          <h2 class="display-4 fw-bold mb-4 text-white"><%= t '.hero_title' %></h2>
           <p class="lead mb-4"><%= t '.hero_subtitle' %></p>
           <div class="d-flex flex-wrap gap-3">
             <% if current_user&.athlete %>
@@ -33,9 +33,9 @@
         <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-user-plus fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">
+            <h3 class="h5 card-title">
               <%= link_to t('.how_it_works.registration.title'), 'https://t.me/sat9am5kmbot', target: '_blank', class: 'text-decoration-none stretched-link text-reset' %>
-            </h5>
+            </h3>
             <p class="card-text"><%= t '.how_it_works.registration.description' %></p>
           </div>
         </div>
@@ -44,9 +44,9 @@
         <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-map-marker-alt fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">
+            <h3 class="h5 card-title">
               <%= link_to t('.how_it_works.choose_run.title'), events_path, class: 'text-decoration-none stretched-link text-reset' %>
-            </h5>
+            </h3>
             <p class="card-text"><%= t '.how_it_works.choose_run.description' %></p>
           </div>
         </div>
@@ -55,9 +55,9 @@
         <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-calendar-check fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">
+            <h3 class="h5 card-title">
               <%= link_to t('.how_it_works.come_saturday.title'), page_path(page: 'rules'), class: 'text-decoration-none stretched-link text-reset' %>
-            </h5>
+            </h3>
             <p class="card-text"><%= t '.how_it_works.come_saturday.description' %></p>
           </div>
         </div>
@@ -66,9 +66,9 @@
         <div class="card h-100 border-0 shadow-sm position-relative">
           <div class="card-body text-center">
             <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title">
+            <h3 class="h5 card-title">
               <%= link_to t('.how_it_works.track_progress.title'), ratings_path, class: 'text-decoration-none stretched-link text-reset' %>
-            </h5>
+            </h3>
             <p class="card-text"><%= t '.how_it_works.track_progress.description' %></p>
           </div>
         </div>
@@ -103,7 +103,7 @@
             <div class="story-card m-3 h-100">
               <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start">
                 <div class="flex-shrink-0 mb-3 mb-md-0 text-center">
-                  <%= image_tag user_image_path(athlete.user), class: 'avatar', alt: athlete.name %>
+                  <%= image_tag user_image_path(athlete.user), class: 'avatar', alt: athlete.name, loading: 'lazy' %>
                 </div>
                 <figure class="flex-grow-1 ms-md-3 mb-0">
                   <blockquote class="blockquote">
@@ -139,7 +139,7 @@
         <div class="card h-100 border-0 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-users fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title"><%= t '.why_s95.for_everyone.title' %></h5>
+            <h3 class="h5 card-title"><%= t '.why_s95.for_everyone.title' %></h3>
             <p class="card-text"><%= t '.why_s95.for_everyone.description' %></p>
           </div>
         </div>
@@ -148,7 +148,7 @@
         <div class="card h-100 border-0 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title"><%= t '.why_s95.community.title' %></h5>
+            <h3 class="h5 card-title"><%= t '.why_s95.community.title' %></h3>
             <p class="card-text"><%= t '.why_s95.community.description' %></p>
           </div>
         </div>
@@ -157,7 +157,7 @@
         <div class="card h-100 border-0 shadow-sm">
           <div class="card-body text-center">
             <i class="fas fa-gift fa-3x mb-3 text-primary"></i>
-            <h5 class="card-title"><%= t '.why_s95.free.title' %></h5>
+            <h3 class="h5 card-title"><%= t '.why_s95.free.title' %></h3>
             <p class="card-text"><%= t '.why_s95.free.description' %></p>
           </div>
         </div>
@@ -225,7 +225,7 @@
               <div class="d-flex align-items-center">
                 <i class="fas fa-stopwatch fa-2x text-primary me-3"></i>
                 <div>
-                  <h5 class="mb-1"><%= t '.volunteer_app.features.timer.title' %></h5>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.timer.title' %></h3>
                   <p class="mb-0"><%= t '.volunteer_app.features.timer.description' %></p>
                 </div>
               </div>
@@ -234,7 +234,7 @@
               <div class="d-flex align-items-center">
                 <i class="fas fa-qrcode fa-2x text-primary me-3"></i>
                 <div>
-                  <h5 class="mb-1"><%= t '.volunteer_app.features.scanner.title' %></h5>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.scanner.title' %></h3>
                   <p class="mb-0"><%= t '.volunteer_app.features.scanner.description' %></p>
                 </div>
               </div>
@@ -243,7 +243,7 @@
               <div class="d-flex align-items-center">
                 <i class="fas fa-cloud-arrow-up fa-2x text-primary me-3"></i>
                 <div>
-                  <h5 class="mb-1"><%= t '.volunteer_app.features.upload.title' %></h5>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.upload.title' %></h3>
                   <p class="mb-0"><%= t '.volunteer_app.features.upload.description' %></p>
                 </div>
               </div>
@@ -252,7 +252,7 @@
               <div class="d-flex align-items-center">
                 <i class="fas fa-chart-bar fa-2x text-primary me-3"></i>
                 <div>
-                  <h5 class="mb-1"><%= t '.volunteer_app.features.stats.title' %></h5>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.stats.title' %></h3>
                   <p class="mb-0"><%= t '.volunteer_app.features.stats.description' %></p>
                 </div>
               </div>
