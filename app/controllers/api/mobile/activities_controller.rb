@@ -21,6 +21,31 @@ module API
         head :ok
       end
 
+      # Data format json:
+      # {
+      #   "token": string,
+      #   "results": [{ "position": number, "total_time": "HH:MM:SS.MM" }, ...],
+      #   "activityStartTime": timestamp
+      # }
+      def live
+        return head :unprocessable_entity unless @activity.date.today?
+
+        results = params[:results] || []
+        results.each { |result| result.expect(:position, :total_time) } if results.any?
+
+        event = @activity.event
+        event.update!(live_results: { results: results, start_time: params.expect(:activityStartTime) })
+
+        event.broadcast_replace_later_to(
+          "live_results_from_#{event.code_name}",
+          target: 'live_results_frame',
+          partial: 'events/live_results_frame',
+          locals: { live_results: event.live_results || {} },
+        )
+
+        head :ok
+      end
+
       private
 
       def find_activity!

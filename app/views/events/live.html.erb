@@ -1,0 +1,19 @@
+<% head_info :title, t('.title', event: @event.name) %>
+<% head_info :description, t('.description', event: @event.name) %>
+
+<%= turbo_stream_from "live_results_from_#{@event.code_name}" %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to t('.main_page'), root_path %></li>
+    <li class="breadcrumb-item"><%= link_to @event.name, event_path(@event.code_name) %></li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <%= t('.live_results') %>
+      <i class="fa-solid fa-satellite-dish text-danger ms-1" style="animation: blink 1s infinite;"></i>
+    </li>
+  </ol>
+</nav>
+
+<div class="alert alert-info"><%= t('.disclaimer') %></div>
+
+<%= render 'live_results_frame', live_results: @event.live_results || {} %>

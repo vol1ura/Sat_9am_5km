@@ -38,6 +38,8 @@ class EventsController < ApplicationController
     @activity = event_future_activities_dataset.find_by(id: activity_id) if activity_id
   end
 
+  def live; end
+
   private
 
   def find_event

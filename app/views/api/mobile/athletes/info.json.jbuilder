@@ -12,6 +12,6 @@ json.volunteering do
       .where(activity: { date: Date.current.. })
       .rewhere(activity: { published: false })
       .reorder(:date)
-      .map { |v| { event_name: v.activity.event_name, date: v.date.to_s, role: v.role } },
+      .map { |v| { event_name: v.activity.event_name, date: v.date.to_s, role: v.role, town: v.activity.town } },
   )
 end

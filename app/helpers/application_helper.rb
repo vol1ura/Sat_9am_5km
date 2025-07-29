@@ -20,6 +20,15 @@ module ApplicationHelper
     (((time.hour * 60) + time.min) * 60) + time.sec
   end
 
+  def calculate_time_gap(current_time, reference_time)
+    return if current_time.blank? || reference_time.blank?
+
+    gap_sec = Time.zone.parse(current_time).to_i - Time.zone.parse(reference_time).to_i
+    return if gap_sec.negative?
+
+    format('+%<min>d:%<sec>02d', min: gap_sec / 60, sec: gap_sec % 60)
+  end
+
   def human_result_pace(time, distance = 5)
     return unless time
 

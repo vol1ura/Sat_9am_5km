@@ -1,0 +1,14 @@
+<% leader_time = results.first&.dig('total_time') %>
+
+<% results.each_with_index do |result, index| %>
+  <tr>
+    <td class="position"><%= result['position'] %></td>
+    <td class="time"><%= result['total_time'].sub(/\.\d{2}$/, '') %></td>
+    <td class="text-muted">
+      <% unless index.zero? %>
+        <div class="fs-small"><%= calculate_time_gap(result['total_time'], results[index - 1]['total_time']) %></div>
+        <div class="fs-small">(1) <%= calculate_time_gap(result['total_time'], leader_time) %></div>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
