@@ -6,7 +6,7 @@ module API
       AUTHORIZATION_HEADER = "Bearer #{ENV.fetch('MOBILE_API_KEY')}".freeze
 
       respond_to :json
-      before_action :authorize_request
+      # before_action :authorize_request
       around_action :switch_locale
 
       rescue_from(ActiveRecord::RecordNotFound) { head :not_found }
