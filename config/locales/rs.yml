@@ -594,13 +594,16 @@ rs:
             description: Za volontere-meriče vremena sa mogućnošću brisanja pogrešnih merenja
           scanner:
             title: Skener
-            description: Super brz i precizan modul sa mogućnošću istovremenog skeniranja kartice učesnika i pozicije. Za evidenciju završenih učesnika
+            description: Super brz i precizan modul sa mogućnošću istovremenog skeniranja kartice učesnika i pozicije
           upload:
             title: Učitavanje u sistem
             description: Rezultati trka se učitavaju u sistem direktno iz aplikacije. Da biste protokole objavljivali brže i jednostavnije
           stats:
             title: Lična statistika
             description: Praćenje vaše volonterske aktivnosti
+          live_results:
+            title: Online transkripcija
+            description: Transkripcija rezultata trke na sajtu po redosledu dolaska u cilj
         download_rustore: Preuzmi u RuStore
         download_apk_html: Preuzmi <b>APK</b>
       our_partners: Naši partneri

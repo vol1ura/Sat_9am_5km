@@ -85,7 +85,7 @@
       stories = t '.stories.content'
       athletes = Athlete.includes(:event, user: { image_attachment: :blob }).where(id: stories.keys).shuffle
     %>
-    <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div id="storiesCarousel" class="carousel carousel-dark slide">
       <div class="carousel-indicators">
         <% athletes.each_with_index do |athlete, idx| %>
           <button
@@ -119,11 +119,11 @@
         <% end %>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#storiesCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden"><%= t '.stories.previous' %></span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#storiesCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden"><%= t '.stories.next' %></span>
       </button>
     </div>
@@ -209,19 +209,25 @@
 <% end %>
 
 <%# Volunteer App Section %>
-<section class="volunteer-app-section py-5" style="background-color: #a6e9d5;">
+<section class="volunteer-app-section py-5" data-controller="carousel">
   <div class="container">
     <h2 class="text-center mb-5"><%= t '.volunteer_app.title' %></h2>
     <div class="row align-items-center g-4">
       <div class="col-md-4">
         <div class="app-screen-container text-center">
-          <%= image_tag '/images/mobile_app.png', class: 'img-fluid app-screen', alt: t('.volunteer_app.title'), style: 'max-height: 350px;' %>
+          <%= image_tag '/images/mobile_app_1.png',
+                        class: 'img-fluid app-screen',
+                        alt: t('.volunteer_app.title'),
+                        data: { carousel_target: 'image' } %>
         </div>
       </div>
       <div class="col-md-8">
         <div class="px-2 px-md-0 mb-5">
           <ul class="list-unstyled">
-            <li class="mb-3">
+            <li class="mb-3 app-feature-item feature-active"
+                data-carousel-target="feature"
+                data-index="0"
+                data-action="click->carousel#showSlide">
               <div class="d-flex align-items-center">
                 <i class="fas fa-stopwatch fa-2x text-primary me-3"></i>
                 <div>
@@ -230,7 +236,10 @@
                 </div>
               </div>
             </li>
-            <li class="mb-3">
+            <li class="mb-3 app-feature-item"
+                data-carousel-target="feature"
+                data-index="1"
+                data-action="click->carousel#showSlide">
               <div class="d-flex align-items-center">
                 <i class="fas fa-qrcode fa-2x text-primary me-3"></i>
                 <div>
@@ -239,7 +248,10 @@
                 </div>
               </div>
             </li>
-            <li class="mb-3">
+            <li class="mb-3 app-feature-item"
+                data-carousel-target="feature"
+                data-index="2"
+                data-action="click->carousel#showSlide">
               <div class="d-flex align-items-center">
                 <i class="fas fa-cloud-arrow-up fa-2x text-primary me-3"></i>
                 <div>
@@ -248,7 +260,22 @@
                 </div>
               </div>
             </li>
-            <li>
+            <li class="mb-3 app-feature-item"
+                data-carousel-target="feature"
+                data-index="3"
+                data-action="click->carousel#showSlide">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-satellite-dish fa-2x text-primary me-3"></i>
+                <div>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.live_results.title' %></h3>
+                  <p class="mb-0"><%= t '.volunteer_app.features.live_results.description' %></p>
+                </div>
+              </div>
+            </li>
+            <li class="app-feature-item"
+                data-carousel-target="feature"
+                data-index="4"
+                data-action="click->carousel#showSlide">
               <div class="d-flex align-items-center">
                 <i class="fas fa-chart-bar fa-2x text-primary me-3"></i>
                 <div>
