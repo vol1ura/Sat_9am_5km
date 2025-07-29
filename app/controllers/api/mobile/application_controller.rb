@@ -19,11 +19,11 @@ module API
         I18n.with_locale(locale, &)
       end
 
-      def authorize_request
-        return if request.headers['Authorization'] == AUTHORIZATION_HEADER
+      # def authorize_request
+      #   return if request.headers['Authorization'] == AUTHORIZATION_HEADER
 
-        head :unauthorized
-      end
+      #   head :unauthorized
+      # end
     end
   end
 end
