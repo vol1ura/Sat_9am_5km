@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
     get :volunteering, on: :member
+    get :live, on: :member
     resource :going_to, only: %i[create destroy]
   end
   resources :activities, only: %i[index show]
@@ -73,6 +74,7 @@ Rails.application.routes.draw do
     namespace :mobile do
       get 'athletes/:code/info', to: 'athletes#info'
       post 'activities/stopwatch', to: 'activities#stopwatch'
+      post 'activities/live', to: 'activities#live'
       post 'activities/scanner', to: 'activities#scanner'
     end
   end

@@ -175,4 +175,13 @@ nav.pagination {
   }
 }
 
+.fs-small {
+  font-size: 0.85em;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
 @import "web/**/*";

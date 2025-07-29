@@ -898,6 +898,21 @@ rs:
       place: Mesto događaja
       event_totals: Ukupno od početka
       event_dynamics: Dinamika događaja
+      live_streaming: Online rezultati
+      live_streaming_description: Rezultati se redovno ažuriraju u realnom vremenu
+    live:
+      title: 'Online rezultati - %{event}'
+      description: 'Rezultati trke %{event} u realnom vremenu'
+      main_page: Glavna
+      live_results: Online rezultati
+      timer: Sekundomer
+      disclaimer: Rezultati na ovoj stranici su preliminarni i mogu biti izmenjeni nakon provjere sa finiširanim učesnicima
+    live_results_frame:
+      position: Mesto
+      time: Vreme
+      gap: Odmak
+      waiting_for_results: Čekanje rezultata...
+      results_will_appear: Rezultati će se pojaviti ovde tokom trke
     card:
       about_participation: 'Registrujte se u našem telegram-botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
       registration: Registracija u telegramu

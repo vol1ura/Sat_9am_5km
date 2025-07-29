@@ -1,0 +1,42 @@
+<%= turbo_frame_tag 'live_results_frame' do %>
+  <div class="card border-primary border-opacity-25 shadow h-100">
+    <div class="card-header">
+      <section class="fs-5 card-title mb-0">
+        <i class="fa-solid fa-stopwatch text-primary"></i>
+        <% if live_results.key?('start_time') %>
+          <span class="text-primary ms-2 font-monospace"
+                data-controller="live-timer"
+                data-live-timer-start-time-value="<%= live_results['start_time'] %>"
+                data-live-timer-target="time">
+            --:--:--
+          </span>
+        <% else %>
+          <span class="text-primary ms-2 font-monospace">--:--:--</span>
+        <% end %>
+      </section>
+    </div>
+
+    <div class="card-body">
+      <% if live_results.key?('results') %>
+        <table class="table table-striped align-middle">
+          <thead>
+            <tr>
+              <th scope="col"><%= t('.position') %></th>
+              <th scope="col"><%= t('.time') %></th>
+              <th scope="col"><%= t('.gap') %></th>
+            </tr>
+          </thead>
+          <tbody id="live-results" class="table-group-divider">
+            <%= render 'events/live_results', results: live_results['results'] %>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="text-center py-4">
+          <i class="fa-solid fa-stopwatch fa-3x text-muted mb-3"></i>
+          <h5><%= t('.waiting_for_results') %></h5>
+          <p class="text-muted"><%= t('.results_will_appear') %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
