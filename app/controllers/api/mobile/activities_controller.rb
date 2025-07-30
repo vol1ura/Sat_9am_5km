@@ -28,9 +28,9 @@ module API
       #   "activityStartTime": timestamp
       # }
       def live
-        return head :unprocessable_entity unless @activity.date.today?
+        return head :unprocessable_entity unless @activity.date.today? && params.key?(:results)
 
-        results = params[:results] || []
+        results = params[:results]
         results.each { |result| result.expect(:position, :total_time) } if results.any?
 
         event = @activity.event
@@ -40,7 +40,7 @@ module API
           "live_results_from_#{event.code_name}",
           target: 'live_results_frame',
           partial: 'events/live_results_frame',
-          locals: { live_results: event.live_results || {} },
+          locals: { live_results: event.live_results },
         )
 
         head :ok

@@ -4,30 +4,24 @@
 RSpec.describe '/api/mobile/athletes' do
   describe 'GET /:code/info' do
     let(:athlete) { create(:athlete) }
-    let(:bearer_token) { 'valid_token' }
-
-    before do
-      stub_const('API::Mobile::ApplicationController::AUTHORIZATION_HEADER', 'Bearer valid_token')
-      get api_mobile_url(athlete.code), headers: { Authorization: "Bearer #{bearer_token}" }
-    end
-
-    # context 'with invalid bearer token' do
-    #   let(:bearer_token) { 'invalid_token' }
-
-    #   it { expect(response).to have_http_status(:unauthorized) }
-    # end
-
-    it 'returns the athlete history stats' do
-      expect(response).to be_successful
-      expect(response.parsed_body).to include(
+    let!(:volunteer) { create(:volunteer, athlete: athlete, activity_params: { date: Date.tomorrow, published: false }) }
+    let(:expected_result) do
+      {
         'name' => athlete.name,
         'male' => athlete.male,
         'home_event' => nil,
         'volunteering' => include(
-          'scheduled' => [],
+          'scheduled' => [include('event_name', 'date', 'role', 'town')],
           'stats' => { 'general' => nil, 'history' => {} },
         ),
-      )
+      }
+    end
+
+    before { get api_mobile_url(athlete.code) }
+
+    it 'returns the athlete history stats' do
+      expect(response).to be_successful
+      expect(response.parsed_body).to include(expected_result)
     end
   end
 end
