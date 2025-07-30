@@ -75,8 +75,11 @@ jobs:
         with:
           ruby-version: 3.2.2
           bundler-cache: true
-      - name: Set up database schema
-        run: cp config/additional_events.yml.example config/additional_events.yml && bin/rails db:schema:load
+      - name: Set up files and database schema
+        run: |
+          cp config/additional_events.yml.example config/additional_events.yml
+          touch public/app-release.apk
+          bin/rails db:schema:load
       - name: Check database consistency
         run: bundle exec database_consistency
       - name: Run tests

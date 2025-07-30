@@ -74,4 +74,11 @@ RSpec.describe '/pages' do
       end
     end
   end
+
+  describe 'GET /app' do
+    it 'sends app file' do
+      get app_pages_url
+      expect(response).to be_successful
+    end
+  end
 end
