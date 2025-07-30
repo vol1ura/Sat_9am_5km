@@ -87,4 +87,14 @@ RSpec.describe ApplicationHelper do
       expect(link_tag).not_to include '<script>', '</script>'
     end
   end
+
+  describe '#calculate_time_gap' do
+    it 'returns nil if one of the times is blank' do
+      expect(helper.calculate_time_gap('', '00:00:01')).to be_nil
+    end
+
+    it 'returns time gap' do
+      expect(helper.calculate_time_gap('00:02:10', '00:01:40')).to eq('+0:30')
+    end
+  end
 end
