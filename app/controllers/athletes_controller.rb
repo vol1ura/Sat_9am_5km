@@ -30,5 +30,6 @@ class AthletesController < ApplicationController
     @total_trophies = @athlete.trophies.size
     @barcode = BarcodePrinter.call("A#{@athlete.code}", module_size: 8)
     @friendships_hash = current_user&.athlete&.friendships&.pluck(:friend_id, :id).to_h
+    @time_predictions = Athletes::TimePredictor.call(@athlete)
   end
 end

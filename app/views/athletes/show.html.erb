@@ -193,6 +193,38 @@
         </div>
       </div>
     </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-bestPositionAbsolute">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
+          <span class="badge text-bg-ligth bg-primary me-3"><%= @best_position %></span>
+          <%= t '.best_position' %>
+        </button>
+      </h2>
+      <div id="flush-collapseBestPositionAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-bestPositionAbsolute" data-bs-parent="#accordionPersonalBest">
+        <div class="accordion-body">
+          <ul class="list-group list-group-flush">
+            <% @pb_by_position.each do |pb| %>
+              <li class="list-group-item">
+                <div class="hstack">
+                  <div class="acc-li-s">
+                    <%= link_to l(pb.activity.date), pb.activity %>
+                  </div>
+                  <div class="mx-3">
+                    <%= human_result_time pb.total_time %>
+                  </div>
+                  <div>
+                    <%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
     <div class="accordion-item">
       <% pb_result = @pb_by_time.first %>
       <h2 class="accordion-header" id="flush-personalBestAbsolute">
@@ -231,35 +263,78 @@
         </div>
       </div>
     </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-bestPositionAbsolute">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @best_position %></span>
-          <%= t '.best_position' %>
-        </button>
-      </h2>
-      <div id="flush-collapseBestPositionAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-bestPositionAbsolute" data-bs-parent="#accordionPersonalBest">
-        <div class="accordion-body">
-          <ul class="list-group list-group-flush">
-            <% @pb_by_position.each do |pb| %>
-              <li class="list-group-item">
-                <div class="hstack">
-                  <div class="acc-li-s">
-                    <%= link_to l(pb.activity.date), pb.activity %>
-                  </div>
-                  <div class="mx-3">
-                    <%= human_result_time pb.total_time %>
-                  </div>
-                  <div>
-                    <%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %>
-                  </div>
-                </div>
-              </li>
+
+    <% if @athlete.personal_record_10k || @athlete.personal_record_half_marathon || @athlete.personal_record_marathon || @time_predictions.any? %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-personalRecords">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalRecords" aria-expanded="false" aria-controls="flush-collapsePersonalRecords">
+            <span class="badge text-bg-ligth bg-primary me-3 position-relative">
+              <i class="fa-solid fa-trophy"></i>
+              <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </span>
+            <%= t '.personal_records_section' %>
+          </button>
+        </h2>
+        <div id="flush-collapsePersonalRecords" class="accordion-collapse collapse" aria-labelledby="flush-personalRecords" data-bs-parent="#accordionPersonalBest">
+          <div class="accordion-body">
+            <% if @athlete.personal_record_10k || @athlete.personal_record_half_marathon || @athlete.personal_record_marathon %>
+              <ul class="list-group list-group-flush mb-4">
+                <% if @athlete.personal_record_10k %>
+                  <li class="list-group-item">
+                    <div class="hstack">
+                      <div class="acc-li-s"><%= t '.personal_record_10k' %></div>
+                      <div class="mx-3"><%= @athlete.personal_record_10k %></div>
+                    </div>
+                  </li>
+                <% end %>
+                <% if @athlete.personal_record_half_marathon %>
+                  <li class="list-group-item">
+                    <div class="hstack">
+                      <div class="acc-li-s"><%= t '.personal_record_half_marathon' %></div>
+                      <div class="mx-3"><%= @athlete.personal_record_half_marathon %></div>
+                    </div>
+                  </li>
+                <% end %>
+                <% if @athlete.personal_record_marathon %>
+                  <li class="list-group-item">
+                    <div class="hstack">
+                      <div class="acc-li-s"><%= t '.personal_record_marathon' %></div>
+                      <div class="mx-3"><%= @athlete.personal_record_marathon %></div>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="text-muted"><%= t '.no_personal_records' %></p>
             <% end %>
-          </ul>
+            <% if @time_predictions.any? %>
+              <h6 class="fw-light mb-3"><%= t '.time_predictions_section' %></h6>
+              <p class="text-muted small mb-3"><%= t '.prediction_hint' %></p>
+              <ul class="list-group list-group-flush">
+                <% @time_predictions.each do |distance, predicted_time| %>
+                  <li class="list-group-item">
+                    <div class="hstack">
+                      <div class="acc-li-s">
+                        <%= case distance
+                            when 10 then t('.personal_record_10k')
+                            when 21.1 then t('.personal_record_half_marathon')
+                            when 42.2 then t('.personal_record_marathon')
+                            end %>
+                      </div>
+                      <div class="mx-3 text-muted"><%= human_result_time(predicted_time) %></div>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="text-muted"><%= t '.no_predictions' %></p>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 

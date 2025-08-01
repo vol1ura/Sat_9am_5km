@@ -42,7 +42,10 @@ class UsersController < ApplicationController
         :emergency_contact_name,
         :emergency_contact_phone,
         { promotions: [] },
-        { athlete_attributes: %i[id event_id club_id] },
+        {
+          athlete_attributes:
+            %i[id event_id club_id personal_record_10k personal_record_half_marathon personal_record_marathon],
+        },
       ],
     )
   end

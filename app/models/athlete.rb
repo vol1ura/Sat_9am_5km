@@ -7,7 +7,7 @@ class Athlete < ApplicationRecord
     trigram: { threshold: 0.7, word_similarity: true },
   }
 
-  audited associated_with: :user, max_audits: 20, except: %i[stats going_to_event_id]
+  audited associated_with: :user, max_audits: 20, except: %i[stats going_to_event_id personal_bests]
 
   PARKZHRUN_BORDER = 690_000_000
   SAT_9AM_5KM_BORDER = 770_000_000
@@ -76,6 +76,7 @@ class Athlete < ApplicationRecord
             uniqueness: true,
             numericality: { only_integer: true, greater_than: PARKZHRUN_BORDER, less_than: SAT_9AM_5KM_BORDER },
             allow_nil: true
+  validate :personal_bests_format
 
   before_save :remove_name_extra_spaces, if: :will_save_change_to_name?
   before_destroy(prepend: true) { results.update_all personal_best: false, first_run: false }
@@ -96,6 +97,30 @@ class Athlete < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[club_id event_id id male name parkrun_code fiveverst_code runpark_code updated_at created_at]
+  end
+
+  def personal_record_10k
+    parse_personal_best('10k')
+  end
+
+  def personal_record_10k=(value)
+    set_personal_best('10k', value)
+  end
+
+  def personal_record_half_marathon
+    parse_personal_best('half_marathon')
+  end
+
+  def personal_record_half_marathon=(value)
+    set_personal_best('half_marathon', value)
+  end
+
+  def personal_record_marathon
+    parse_personal_best('marathon')
+  end
+
+  def personal_record_marathon=(value)
+    set_personal_best('marathon', value)
   end
 
   def code
@@ -145,5 +170,42 @@ class Athlete < ApplicationRecord
   def refresh_home_trophies
     trophies.joins(:badge).where(badge: { kind: :home_participating }).destroy_all
     HomeBadgeAwardingJob.perform_later(id) if event_id
+  end
+
+  def personal_bests_format
+    return unless personal_bests.is_a?(Hash)
+
+    personal_bests.each do |distance, time_string|
+      next if time_string.blank?
+
+      begin
+        time_value = Time.zone.parse("2000-01-01 #{time_string}")
+        next if time_value.hour < 12 && time_value.min < 60 && time_value.sec < 60
+      rescue ArgumentError
+        # Parsing error
+      end
+
+      errors.add(:personal_bests, "Неверный формат времени для дистанции #{distance}")
+    end
+  end
+
+  def parse_personal_best(distance)
+    /\A\d\d:\d\d:\d\d/.match(personal_bests[distance]).to_a.first
+  end
+
+  def set_personal_best(distance, value)
+    self.personal_bests = personal_bests.dup
+
+    if value.blank?
+      personal_bests.delete(distance)
+    else
+      personal_bests[distance] =
+        case value
+        when Time
+          value.strftime('%H:%M:%S')
+        when String
+          value
+        end
+    end
   end
 end

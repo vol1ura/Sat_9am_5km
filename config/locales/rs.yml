@@ -761,7 +761,7 @@ rs:
       volunteering_coefficient_explanation: Broj volontiranja za svakih 10 trčanja
       total_trophies: ukupno trofeja
       total_events: učestvovano na događaja
-      personal_best: lični rekord (PB)
+      personal_best: lični rekord S95 (PB)
       best_position: najbolje mesto
       no_results: Bez rezultata do sada.
       no_volunteering: Bez volontiranja do sada.
@@ -778,6 +778,14 @@ rs:
         pace: Tempo
         place: Mesto
         event: Događaj
+      personal_records_section: Lični rekordi na drugim dužinama
+      time_predictions_section: Prognoza rezultata
+      personal_record_10k: 10 km
+      personal_record_half_marathon: 21.1 km
+      personal_record_marathon: 42.2 km
+      prediction_hint: Prognoza na osnovu najboljeg rezultata na 5 km za posljednje 3 mjeseca u S95 događajima. Rezultat je moguć samo ako su ispunjeni uslovi za treninge, odgovarajuće za određenu dužinu.
+      no_personal_records: Lični rekordi nisu navedeni
+      no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
     minute_bingo:
       from_minute: od 60 sekundi
       catch_them_all: skupite sve
@@ -960,6 +968,12 @@ rs:
       add_phone_html: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Hitna kontakt osoba
+      personal_photo: Slika
+      personal_records: Lični rekordi
+      personal_record_10k: 10 km
+      personal_record_half_marathon: 21.1 km
+      personal_record_marathon: 42.2 km
+      personal_record_format_hint: HH:MM:SS
       save: Sačuvaj
       cancel: Otkaži
       promotion_terms: Saglasnost sa uslovima
