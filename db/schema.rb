@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_26_120000) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_27_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -83,6 +83,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_26_120000) do
     t.bigint "runpark_code"
     t.jsonb "stats", default: {}, null: false
     t.bigint "going_to_event_id"
+    t.jsonb "personal_bests", default: {}, null: false
     t.index ["club_id"], name: "index_athletes_on_club_id"
     t.index ["event_id"], name: "index_athletes_on_event_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true

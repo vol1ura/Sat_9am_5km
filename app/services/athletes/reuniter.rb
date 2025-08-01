@@ -2,7 +2,7 @@
 
 module Athletes
   class Reuniter < ApplicationService
-    SKIPPED_ATTRIBUTES = %w[id created_at updated_at name user_id stats].freeze
+    SKIPPED_ATTRIBUTES = %w[id created_at updated_at name user_id stats personal_bests].freeze
     MODIFIED_ATTRIBUTES = %w[
       parkrun_code fiveverst_code parkzhrun_code runpark_code club_id event_id going_to_event_id male
     ].freeze

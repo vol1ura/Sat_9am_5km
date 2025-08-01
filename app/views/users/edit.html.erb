@@ -26,20 +26,62 @@
           <%= athlete_form.label :club_id, class: 'form-label text-capitalize fw-light' %>
           <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
         </div>
-      <% end %>
-      <% if current_user.image.attached? %>
-        <div class="mt-4 form-check form-switch">
-          <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
-          <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
+        <div class="mt-2">
+          <h5 class="fw-light"><%= t '.personal_records' %></h5>
+          <div class="input-group mt-2">
+            <span class="input-group-text"><i class="fa-solid fa-stopwatch text-secondary"></i></span>
+            <%=
+              athlete_form.text_field :personal_record_10k,
+              id: 'personal-record-10k-input',
+              class: 'form-control',
+              pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
+              placeholder: t('.personal_record_format_hint'),
+              inputmode: 'numeric',
+              data: { controller: 'time-input' }
+            %>
+            <span class="input-group-text text-primary font-monospace">&nbsp;&nbsp;<%= t('.personal_record_10k') %></span>
+          </div>
+          <div class="input-group mt-2">
+            <span class="input-group-text"><i class="fa-solid fa-stopwatch text-secondary"></i></span>
+            <%=
+              athlete_form.text_field :personal_record_half_marathon,
+              class: 'form-control',
+              pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
+              placeholder: t('.personal_record_format_hint'),
+              inputmode: 'numeric',
+              data: { controller: 'time-input' }
+            %>
+            <span class="input-group-text text-primary font-monospace"><%= t('.personal_record_half_marathon') %></span>
+          </div>
+          <div class="input-group mt-2">
+            <span class="input-group-text"><i class="fa-solid fa-stopwatch text-secondary"></i></span>
+            <%=
+              athlete_form.text_field :personal_record_marathon,
+              class: 'form-control',
+              pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
+              placeholder: t('.personal_record_format_hint'),
+              inputmode: 'numeric',
+              data: { controller: 'time-input' }
+            %>
+            <span class="input-group-text text-primary font-monospace"><%= t('.personal_record_marathon') %></span>
+          </div>
         </div>
       <% end %>
-      <div class="mt-2" data-form-target="input">
-        <%= form.label :image, class: 'form-label text-capitalize fw-light' %>
-        <%= form.file_field :image, accept: 'image/jpeg,image/png,image/webp', class: 'form-control' %>
-        <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
+      <div class="mt-2">
+        <h5 class="fw-light"><%= t '.personal_photo' %></h5>
+        <% if current_user.image.attached? %>
+          <div class="form-check form-switch">
+            <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
+            <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
+          </div>
+        <% end %>
+        <div class="mt-2" data-form-target="input">
+          <%= form.label :image, class: 'form-label text-capitalize fw-light' %>
+          <%= form.file_field :image, accept: 'image/jpeg,image/png,image/webp', class: 'form-control' %>
+          <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
+        </div>
       </div>
-
-      <div class="mt-4">
+      <div class="mt-2">
         <hr class="border border-primary opacity-25">
         <h5 class="fw-light"><%= t '.emergency_contact' %></h5>
         <div class="mb-2">
@@ -61,21 +103,22 @@
         </div>
       </div>
 
-      <div class="mt-4">
+      <div class="mt-2">
         <hr class="border border-primary opacity-25">
-        <h5 class="fw-light"><%= t '.promotions.title' %></h5> <% if current_user.phone %>
-            <% User::AVAILABLE_PROMOTIONS.each do |name| %>
-              <div class="form-check form-switch mt-3">
-                <%= check_box_tag "user[promotions][]",
-                                  name,
-                                  current_user.promotions.include?(name),
-                                  class: 'form-check-input',
-                                  role: 'switch',
-                                  'data-action' => 'change->form#showPromotionModal',
-                                  'data-promotion-key' => name %>
-                <%= label_tag "user[promotions][]", t(".promotions.#{name}"), class: 'form-check-label' %>
-              </div>
-            <% end %>
+        <h5 class="fw-light"><%= t '.promotions.title' %></h5>
+        <% if current_user.phone %>
+          <% User::AVAILABLE_PROMOTIONS.each do |name| %>
+            <div class="form-check form-switch mt-3">
+              <%= check_box_tag "user[promotions][]",
+                                name,
+                                current_user.promotions.include?(name),
+                                class: 'form-check-input',
+                                role: 'switch',
+                                'data-action' => 'change->form#showPromotionModal',
+                                'data-promotion-key' => name %>
+              <%= label_tag "user[promotions][]", t(".promotions.#{name}"), class: 'form-check-label' %>
+            </div>
+          <% end %>
           <div class="mt-4 form-check form-switch">
             <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
             <%= label_tag :delete_phone, t('.delete_phone', phone: human_phone(current_user.phone)), class: 'form-check-label text-danger' %>

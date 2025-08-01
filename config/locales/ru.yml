@@ -762,7 +762,7 @@ ru:
       volunteering_coefficient_explanation: Число волонтёрств на каждые 10 пробежек
       total_trophies: всего наград
       total_events: посещённые мероприятия
-      personal_best: личный рекорд (ЛР)
+      personal_best: личный рекорд S95 (ЛР)
       best_position: лучшее место
       no_results: Пока нет результатов.
       no_volunteering: Пока не было волонтёрств.
@@ -777,8 +777,16 @@ ru:
         pace: Темп
         place: Место
         event: Мероприятие
-      friends: 'Друзья'
-      followers: 'В друзьях'
+      friends: Друзья
+      followers: В друзьях
+      personal_records_section: личные рекорды на других дистанциях
+      time_predictions_section: Прогноз результатов
+      personal_record_10k: 10 км
+      personal_record_half_marathon: Полумарафон
+      personal_record_marathon: Марафон
+      prediction_hint: Прогноз на основе лучшего результата на 5 км за последние 3 месяца в мероприятиях S95. Результат возможен только при условии выполнения тренировок, соответствующих конкретной дистанции
+      no_personal_records: Личные рекорды не указаны
+      no_predictions: Недостаточно данных для прогноза (нужно минимум 3 результата за последние 3 месяца)
     minute_bingo:
       from_minute: из 60 секунд
       catch_them_all: собери все
@@ -955,6 +963,12 @@ ru:
       add_phone_html: 'Для участия в партнёрских программах необходимо добавить ваш номер телефона. Привязка и проверка телефона выполняются с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a> командой <code>/phone</code>'
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: 'Экстренный контакт'
+      personal_photo: Фотография
+      personal_records: 'Личные рекорды'
+      personal_record_10k: '10 км'
+      personal_record_half_marathon: '21.1 км'
+      personal_record_marathon: '42.2 км'
+      personal_record_format_hint: 'ЧЧ:ММ:СС'
       save: Сохранить
       cancel: Отмена
       promotion_terms: Соглашение с условиями
