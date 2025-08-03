@@ -30,7 +30,10 @@ ActiveAdmin.register Activity do
 
   controller do
     def destroy
-      return super unless resource.published?
+      unless resource.published?
+        resource.clear_live_results! if resource.token
+        return super
+      end
 
       flash[:error] = t '.forbidden_for_published'
       redirect_to resource_path
@@ -99,7 +102,7 @@ ActiveAdmin.register Activity do
 
   member_action :toggle_mode, method: :patch do
     resource.update!(token: resource.token ? nil : SecureRandom.uuid)
-    resource.event.update!(live_results: nil)
+    resource.clear_live_results!
     redirect_path = request.referer&.end_with?('edit') ? edit_admin_activity_path(resource) : admin_activity_path(resource)
     redirect_to redirect_path, notice: t(".#{resource.token ? 'auto' : 'manual'}.success")
   end

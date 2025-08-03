@@ -58,6 +58,10 @@ class Activity < ApplicationRecord
       .empty?
   end
 
+  def clear_live_results!
+    event.update!(live_results: nil) if date.today?
+  end
+
   def postprocessing
     return unless published
 

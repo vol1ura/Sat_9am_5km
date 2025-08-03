@@ -9,9 +9,13 @@ module Telegram
         end
 
         def call
-          return unless !@entity.informed && (telegram_id = athlete&.user&.telegram_id)
+          return unless (telegram_id = athlete&.user&.telegram_id)
 
-          @entity.update!(informed: true) if notify(telegram_id, disable_web_page_preview: true)
+          @entity.with_lock do
+            return if @entity.informed
+
+            @entity.update!(informed: true) if notify(telegram_id, disable_web_page_preview: true)
+          end
         rescue StandardError => e
           Rollbar.error e, telegram_id: telegram_id, entity_id: @entity.id, entity_class: @entity.class
         end
