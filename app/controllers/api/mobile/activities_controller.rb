@@ -4,6 +4,7 @@ module API
   module Mobile
     class ActivitiesController < ApplicationController
       before_action :find_activity!
+      before_action :check_activity_date!
 
       # Data format json:
       # { "token": string, "results": [{ "position": number, "total_time": "HH:MM:SS" }, ...] }
@@ -28,7 +29,7 @@ module API
       #   "activityStartTime": timestamp
       # }
       def live
-        return head :unprocessable_entity unless @activity.date.today? && params.key?(:results)
+        return head :unprocessable_entity unless params.key?(:results)
 
         results = params[:results]
         results.each { |result| result.expect(:position, :total_time) } if results.any?
@@ -50,6 +51,10 @@ module API
 
       def find_activity!
         @activity = Activity.unpublished.find_by!(token: params[:token])
+      end
+
+      def check_activity_date!
+        head :unprocessable_entity unless @activity.date.today?
       end
 
       def notify_volunteers(role)
