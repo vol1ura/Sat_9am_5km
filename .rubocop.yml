@@ -11,7 +11,7 @@ plugins:
 Metrics/AbcSize:
   Max: 35
   Exclude:
-   - 'db/**/*'
+   - db/**/*
 Metrics/CyclomaticComplexity:
   Max: 8
 Metrics/PerceivedComplexity:
@@ -19,27 +19,27 @@ Metrics/PerceivedComplexity:
 Metrics/MethodLength:
   Max: 16
   Exclude:
-   - 'db/**/*'
+   - db/**/*
 Metrics/ClassLength:
   Max: 150
   Exclude:
-    - 'app/models/**/*'
-    - 'db/**/*'
+    - app/models/**/*
+    - db/**/*
 Metrics/BlockLength:
   Exclude:
-    - 'app/admin/**/*'
-    - 'app/views/admin/**/*'
-    - 'lib/tasks/**/*'
-    - 'spec/**/*'
-    - 'db/**/*'
+    - app/admin/**/*
+    - app/views/admin/**/*
+    - lib/tasks/**/*
+    - spec/**/*
+    - db/**/*
 
 # STYLE
 Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
   Exclude:
-    - 'config.ru'
-    - 'app/views/**/*.json.jbuilder'
+    - config.ru
+    - app/views/**/*.json.jbuilder
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 Style/TrailingCommaInArguments:
@@ -54,8 +54,8 @@ Style/SafeNavigationChainLength:
   Max: 3
 Style/FetchEnvVar:
   AllowedVars:
-    - 'DEV_TELEGRAM_ID'
-    - 'VK_TOKEN'
+    - DEV_TELEGRAM_ID
+    - VK_TOKEN
 
 Naming/VariableNumber:
   CheckSymbols: false
@@ -71,14 +71,14 @@ Layout/MultilineMethodCallIndentation:
 # LINT
 Lint/MissingSuper:
   Exclude:
-    - 'app/services/**/*'
+    - app/services/**/*
 
 # Rails
 Rails/SkipsModelValidations:
   AllowedMethods:
-    - 'update_all'
+    - update_all
   Exclude:
-    - 'db/**/*'
+    - db/**/*
 Rails/CreateTableWithTimestamps:
   Enabled: false
 
@@ -95,8 +95,8 @@ RSpec/NestedGroups:
 AllCops:
   TargetRubyVersion: 3.2
   Exclude:
-    - 'tmp/**/*'
-    - 'bin/**/*'
-    - 'config/**/*'
-    - 'db/schema.rb'
+    - tmp/**/*
+    - bin/**/*
+    - config/**/*
+    - db/schema.rb
   NewCops: enable

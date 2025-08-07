@@ -9,7 +9,7 @@
 
 # Sat 9am 5km - run events system
 
-### Maintenance
+## Maintenance
 
 Reset Postgres stats with:
 
@@ -40,6 +40,7 @@ rspec
 ```
 
 Now you can run it
+
 ```shell
 make
 ```
