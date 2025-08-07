@@ -17,19 +17,10 @@ class AthletesController < ApplicationController
 
   def show
     @athlete = Athlete.find(params[:id])
-    results = @athlete.results.published
-    @total_results = results.size
-    if @total_results.positive?
-      @pb_by_time = results.where(personal_best: true).order(date: :desc)
-      @best_position = results.minimum(:position)
-      @pb_by_position = results.includes(activity: :event).where(position: @best_position).order(date: :desc)
-      @total_events = results.select(:event_id).distinct.count
-    end
+    @total_results = @athlete.results.published.size
     @volunteering = @athlete.volunteering
     @total_vol = @volunteering.size
-    @total_trophies = @athlete.trophies.size
     @barcode = BarcodePrinter.call("A#{@athlete.code}", module_size: 8)
-    @friendships_hash = current_user&.athlete&.friendships&.pluck(:friend_id, :id).to_h
     @time_predictions = Athletes::TimePredictor.call(@athlete)
   end
 end

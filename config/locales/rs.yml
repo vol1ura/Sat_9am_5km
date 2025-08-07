@@ -787,6 +787,14 @@ rs:
       prediction_hint: Prognoza na osnovu najboljeg rezultata na 5 km za posljednje 3 mjeseca u S95 događajima. Rezultat je moguć samo ako su ispunjeni uslovi za treninge, odgovarajuće za određenu dužinu.
       no_personal_records: Lični rekordi nisu navedeni
       no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
+    statistics:
+      total_events:
+        finishes: Trčanja
+        volunteering: Volontiranje
+        event: Događaj
+        count: Broj
+        best_position: Najbolje mesto
+        best_time: Najbolje vreme
     minute_bingo:
       from_minute: od 60 sekundi
       catch_them_all: skupite sve

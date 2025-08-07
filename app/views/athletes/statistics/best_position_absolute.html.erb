@@ -1,0 +1,31 @@
+<%= turbo_frame_tag 'best_position_absolute' do %>
+  <% if @best_position %>
+    <h2 class="accordion-header" id="flush-bestPositionAbsolute">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
+        <span class="badge text-light bg-primary me-3"><%= @best_position %></span>
+        <%= t 'athletes.show.best_position' %>
+      </button>
+    </h2>
+    <div id="flush-collapseBestPositionAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-bestPositionAbsolute" data-bs-parent="#accordionPersonalBest">
+      <div class="accordion-body">
+        <ul class="list-group list-group-flush">
+          <% @pb_by_position.each do |pb| %>
+            <li class="list-group-item">
+              <div class="hstack">
+                <div class="acc-li-s">
+                  <%= link_to l(pb.activity.date), pb.activity %>
+                </div>
+                <div class="mx-3">
+                  <%= human_result_time pb.total_time %>
+                </div>
+                <div>
+                  <%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<% end %>
