@@ -1,9 +1,9 @@
-name: "CI-CD"
+name: CI-CD
 on:
   push:
-    branches: [ "master" ]
+    branches: [master]
   pull_request:
-    branches: [ "master" ]
+    branches: [master]
 jobs:
   security:
     runs-on: ubuntu-22.04
@@ -45,7 +45,7 @@ jobs:
       postgres:
         image: postgres:17.2-alpine
         ports:
-          - "5432:5432"
+          - 5432:5432
         env:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
@@ -53,18 +53,17 @@ jobs:
     env:
       CI: true
       RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-      TZ: "Europe/Moscow"
+      DATABASE_URL: postgres://rails:password@localhost:5432/rails_test
+      TZ: Europe/Moscow
       COVERAGE: on
       BULLET_ENABLED: true
-      APP_HOST: "test.ru"
-      ADMIN_EMAIL: "admin@test.ru"
-      INFO_EMAIL: "info@test.ru"
-      BOT_TOKEN: "123456:test"
+      APP_HOST: test.ru
+      ADMIN_EMAIL: admin@test.ru
+      INFO_EMAIL: info@test.ru
+      BOT_TOKEN: 123456:test
       VK_TOKEN: ${{ secrets.VK_TOKEN }}
       VK_ALBUM_ID: 300954831
       VK_GROUP_ID: 220002708
-      MOBILE_API_KEY: '1234abcd'
     steps:
       - name: Checkout code
         uses: actions/checkout@main
