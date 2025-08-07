@@ -18,7 +18,19 @@ Rails.application.routes.draw do
     resource :going_to, only: %i[create destroy]
   end
   resources :activities, only: %i[index show]
-  resources :athletes, only: %i[index show]
+  resources :athletes, only: %i[index show] do
+    resources :statistics, module: :athletes, only: [] do
+      collection do
+        get :friends
+        get :followers
+        get :total_events
+        get :total_trophies
+        get :total_results
+        get :personal_best_absolute
+        get :best_position_absolute
+      end
+    end
+  end
   resources :volunteers, only: %i[new edit create update]
   resources :badges, only: %i[index show]
   resources :clubs, only: %i[index show] do

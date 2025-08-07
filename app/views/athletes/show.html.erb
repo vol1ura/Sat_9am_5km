@@ -25,55 +25,33 @@
   </div>
 </div>
 
-<div class="accordion accordion-flush" id="accordionPersonalBest" data-controller="athlete">
+<div class="accordion accordion-flush" id="accordionPersonalBest">
   <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-friends">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFriends" aria-expanded="false" aria-controls="flush-collapseFriends">
-        <span class="badge text-bg-ligth bg-primary me-3" id="friends-counter"><%= @athlete.friends.size %></span>
-        <%= t '.friends' %>
-      </button>
-    </h2>
-    <div id="flush-collapseFriends" class="accordion-collapse collapse" aria-labelledby="flush-friends" data-bs-parent="#accordionPersonalBest">
-      <div class="accordion-body">
-        <div class="list-group list-group-flush" id="friends">
-          <%=
-            render(
-              partial: 'friendships/friend',
-              collection: @athlete.friends.includes(:going_to_event, user: { image_attachment: :blob }).order(:name),
-              locals: { is_friends_tab: true },
-            )
-          %>
-        </div>
-      </div>
-    </div>
+    <%= turbo_frame_tag 'friends', src: friends_athlete_statistics_path(@athlete) do %>
+      <h2 class="accordion-header" id="flush-friends">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFriends" aria-expanded="false" aria-controls="flush-collapseFriends">
+          <span class="badge text-light bg-primary me-3" id="friends-counter">&nbsp</span>
+          <%= t('.friends') %>
+        </button>
+      </h2>
+    <% end %>
   </div>
 
   <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-followers">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFollowers" aria-expanded="false" aria-controls="flush-collapseFollowers">
-          <span class="badge text-bg-ligth bg-primary me-3" id="followers-counter"><%= @athlete.followers.size %></span>
-          <%= t '.followers' %>
+    <%= turbo_frame_tag 'followers', src: followers_athlete_statistics_path(@athlete) do %>
+      <h2 class="accordion-header" id="flush-followers">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFollowers" aria-expanded="false" aria-controls="flush-collapseFollowers">
+          <span class="badge text-light bg-primary me-3" id="followers-counter">&nbsp</span>
+          <%= t('.followers') %>
         </button>
-    </h2>
-    <div id="flush-collapseFollowers" class="accordion-collapse collapse" aria-labelledby="flush-followers" data-bs-parent="#accordionPersonalBest">
-      <div class="accordion-body">
-        <div class="list-group list-group-flush" id="followers">
-          <%=
-            render(
-              partial: 'friendships/friend',
-              collection: @athlete.followers.includes(:going_to_event, user: { image_attachment: :blob }).order(:name),
-              locals: { is_friends_tab: false },
-            )
-          %>
-        </div>
-      </div>
-    </div>
+      </h2>
+    <% end %>
   </div>
   <% if @athlete.club %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-club">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseClub" aria-expanded="false" aria-controls="flush-collapseClub">
-          <span class="badge text-bg-ligth bg-primary me-3"><i class="fa-solid fa-people-group"></i></span>
+          <span class="badge text-light bg-primary me-3"><i class="fa-solid fa-people-group"></i></span>
           <%= @athlete.club.name %>
         </button>
       </h2>
@@ -86,26 +64,21 @@
   <% end %>
   <% if @total_results.positive? %>
     <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-totalResults">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalResults" aria-expanded="false" aria-controls="flush-collapseTotalResults">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @total_results %></span>
-          <%= t '.total_results' %>
-        </button>
-      </h2>
-      <div id="flush-collapseTotalResults" class="accordion-collapse collapse" aria-labelledby="flush-totalResults" data-bs-parent="#accordionPersonalBest">
-        <div class="accordion-body">
-          <div class="d-flex flex-wrap justify-content-around">
-            <div class="col-12 col-md-10 col-xl-8" data-athlete-target="results"></div>
-          </div>
-        </div>
-      </div>
+      <%= turbo_frame_tag 'total_results', src: total_results_athlete_statistics_path(@athlete) do %>
+        <h2 class="accordion-header" id="flush-totalResults">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalResults" aria-expanded="false" aria-controls="flush-collapseTotalResults">
+            <span class="badge text-light bg-primary me-3">&nbsp</span>
+            <%= t('.total_results') %>
+          </button>
+        </h2>
+      <% end %>
     </div>
   <% end %>
   <% if @total_vol.positive? %>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-totalVolunteering">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalVolunteering" aria-expanded="false" aria-controls="flush-collapseTotalVolunteering">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @total_vol %></span>
+          <span class="badge text-light bg-primary me-3"><%= @total_vol %></span>
           <%= t '.total_volunteering' %>
         </button>
       </h2>
@@ -141,134 +114,55 @@
       </div>
     </div>
   <% end %>
-  <% if @total_trophies.positive? %>
-    <div class="accordion-item">
+  <div class="accordion-item">
+    <%= turbo_frame_tag 'total_trophies', src: total_trophies_athlete_statistics_path(@athlete) do %>
       <h2 class="accordion-header" id="flush-totalTrophies">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalTrophies" aria-expanded="false" aria-controls="flush-collapseTotalTrophies">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @total_trophies %></span>
-          <%= t '.total_trophies' %>
+          <span class="badge text-light bg-primary me-3">&nbsp</span>
+          <%= t('.total_trophies') %>
         </button>
       </h2>
-      <div id="flush-collapseTotalTrophies" class="accordion-collapse collapse" aria-labelledby="flush-totalTrophies" data-bs-parent="#accordionPersonalBest">
-        <div class="accordion-body">
-          <div class="d-flex justify-content-start flex-wrap">
-            <% if @total_results.positive? && seconds_in_results_count < 60 %>
-              <%= render 'minute_bingo', seconds_in_results_count: %>
-            <% end %>
-            <% @athlete.trophies.includes(badge: { image_attachment: :blob }).order('date ASC NULLS FIRST').each do |trophy| %>
-              <div class="p-1">
-                <%
-                  trophy_link = link_to badge_path(trophy.badge) do
-                    image_tag trophy.badge.image.variant(:thumb), class: 'trophy', title: trophy.badge.name
-                  end
-                %>
-                <% if trophy.badge.record_kind? %>
-                  <% trophy.data.each do |record_data| %>
-                    <%= trophy_link %>
-                  <% end %>
-                <% else %>
-                  <%= trophy_link %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
   <% if @total_results.positive? %>
     <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-totalEvents">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @total_events %></span>
-          <%= t '.total_events' %>
-        </button>
-      </h2>
-      <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordionPersonalBest">
-        <div class="accordion-body">
-          <div class="d-flex flex-wrap justify-content-around">
-            <div class="col-12 col-md-6 col-xl-4" data-athlete-target="eventsCount"></div>
-            <div class="col-12 col-md-6 col-xl-4" data-athlete-target="eventsWhiskers"></div>
-          </div>
-        </div>
-      </div>
+      <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete) do %>
+        <h2 class="accordion-header" id="flush-totalEvents">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
+            <span class="badge text-light bg-primary me-3">&nbsp</span>
+            <%= t('.total_events') %>
+          </button>
+        </h2>
+      <% end %>
     </div>
 
     <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-bestPositionAbsolute">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= @best_position %></span>
-          <%= t '.best_position' %>
-        </button>
-      </h2>
-      <div id="flush-collapseBestPositionAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-bestPositionAbsolute" data-bs-parent="#accordionPersonalBest">
-        <div class="accordion-body">
-          <ul class="list-group list-group-flush">
-            <% @pb_by_position.each do |pb| %>
-              <li class="list-group-item">
-                <div class="hstack">
-                  <div class="acc-li-s">
-                    <%= link_to l(pb.activity.date), pb.activity %>
-                  </div>
-                  <div class="mx-3">
-                    <%= human_result_time pb.total_time %>
-                  </div>
-                  <div>
-                    <%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %>
-                  </div>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
+      <%= turbo_frame_tag 'best_position_absolute', src: best_position_absolute_athlete_statistics_path(@athlete) do %>
+        <h2 class="accordion-header" id="flush-bestPositionAbsolute">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
+            <span class="badge text-light bg-primary me-3">&nbsp</span>
+            <%= t('.best_position') %>
+          </button>
+        </h2>
+      <% end %>
     </div>
 
-
     <div class="accordion-item">
-      <% pb_result = @pb_by_time.first %>
-      <h2 class="accordion-header" id="flush-personalBestAbsolute">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
-          <span class="badge text-bg-ligth bg-primary me-3"><%= pb_result ? human_result_time(pb_result.total_time) : '?' %></span>
-          <%= t '.personal_best' %>
-        </button>
-      </h2>
-      <div id="flush-collapsePersonalBestAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-personalBestAbsolute" data-bs-parent="#accordionPersonalBest">
-        <div class="accordion-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th><%= t '.table.pb' %></th>
-                <th>Δ</th>
-                <th><%= t '.table.date' %></th>
-                <th><%= t '.table.event' %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @pb_by_time.includes(activity: :event).to_a.push(nil).each_cons(2) do |pb, pb_prev| %>
-                <tr>
-                  <td><%= human_result_time pb.total_time %></td>
-                  <td>
-                    <% if pb_prev %>
-                      <% delta = (pb_prev.total_time - pb.total_time).to_i %>
-                      <%= format('%d:%02d', delta / 60, delta % 60) %>
-                    <% end %>
-                  </td>
-                  <td><%= link_to l(pb.activity.date), pb.activity %></td>
-                  <td><%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <%= turbo_frame_tag 'personal_best_absolute', src: personal_best_absolute_athlete_statistics_path(@athlete) do %>
+        <h2 class="accordion-header" id="flush-personalBestAbsolute">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
+            <span class="badge text-light bg-primary me-3">&nbsp</span>
+            <%= t('.personal_best') %>
+          </button>
+        </h2>
+      <% end %>
     </div>
 
     <% if @athlete.personal_record_10k || @athlete.personal_record_half_marathon || @athlete.personal_record_marathon || @time_predictions.any? %>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-personalRecords">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalRecords" aria-expanded="false" aria-controls="flush-collapsePersonalRecords">
-            <span class="badge text-bg-ligth bg-primary me-3 position-relative">
+            <span class="badge text-light bg-primary me-3 position-relative">
               <i class="fa-solid fa-trophy"></i>
               <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                 <span class="visually-hidden">New alerts</span>
@@ -339,7 +233,7 @@
 </div>
 
 <% if @total_results.zero? %>
-  <p><%= t '.no_results' %></p>
+  <p class="my-3"><%= t '.no_results' %></p>
 <% else %>
   <h2 class="mt-3"><%= t '.results' %></h2>
   <table class="table table-striped">
@@ -370,7 +264,7 @@
       <div class="accordion-item">
         <h2 id="flush-heading-<%= role %>" class="accordion-header">
           <button class="accordion-button collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<%= role %>" aria-expanded="false" aria-controls="flush-collapse-<%= role %>">
-            <span class="badge text-bg-ligth bg-primary me-3"><%= volunteering_in_role.load.size %></span>
+            <span class="badge text-light bg-primary me-3"><%= volunteering_in_role.load.size %></span>
             <%= human_volunteer_role role %>
           </button>
         </h2>

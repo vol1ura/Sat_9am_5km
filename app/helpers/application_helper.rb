@@ -11,9 +11,19 @@ module ApplicationHelper
   end
 
   def human_result_time(time)
-    return 'xx:xx' unless time
+    return 'xx:xx' if time.blank?
 
-    time.strftime(time.hour.zero? ? '%M:%S' : '%H:%M:%S')
+    time_obj =
+      case time
+      when Numeric
+        Time.zone.at(time.round)
+      when String
+        Time.zone.at(time.to_f.round)
+      else
+        time
+      end
+
+    time_obj.strftime(time_obj.hour.zero? ? '%M:%S' : '%H:%M:%S')
   end
 
   def time_to_sec(time)

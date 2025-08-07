@@ -6,7 +6,7 @@ import { rsLocale } from 'charts/rs'
 
 // Connects to data-controller="athlete"
 export default class extends Controller {
-  static targets = ['results', 'eventsCount', 'eventsWhiskers']
+  static targets = ['results']
 
   connect() {
     Apex.chart = {
@@ -22,27 +22,9 @@ export default class extends Controller {
       )
       resultsChart.render()
     }
-
-    if (this.hasEventsCountTarget) {
-      const eventsCountChart = new ApexCharts(
-        this.eventsCountTarget,
-        athleteCharts.eventsChartOptions('Количество забегов')
-      )
-      eventsCountChart.render()
-    }
-
-    if (this.hasEventsWhiskersTarget) {
-      const eventsWhiskersChart = new ApexCharts(
-        this.eventsWhiskersTarget,
-        athleteCharts.eventsWhiskersOptions('Статистика')
-      )
-      eventsWhiskersChart.render()
-    }
   }
 
   disconnect() {
     if (this.hasResultsTarget) this.resultsTarget.innerHTML = ''
-    if (this.hasEventsCountTarget) this.eventsCountTarget.innerHTML = ''
-    if (this.hasEventsWhiskersTarget) this.eventsWhiskersTarget.innerHTML = ''
   }
 }
