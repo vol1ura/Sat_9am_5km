@@ -11,7 +11,7 @@ export default class extends Controller {
     this.imageTarget.style.opacity = '0.5'
 
     setTimeout(() => {
-      this.imageTarget.src = `/images/mobile_app_${this.currentIndex + 1}.png`
+      this.imageTarget.src = `/images/app/mobile_app_${this.currentIndex + 1}.png`
       this.imageTarget.style.opacity = '1'
 
       this.featureTargets.forEach((feature, index) => {
