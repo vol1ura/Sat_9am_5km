@@ -605,6 +605,7 @@ rs:
             title: Online transkripcija
             description: Transkripcija rezultata trke na sajtu po redosledu dolaska u cilj
         download_rustore: Preuzmi u RuStore
+        download_app_gallery: Preuzmi u App Gallery
         download_apk_html: Preuzmi <b>APK</b>
       our_partners: Naši partneri
     about:

@@ -215,7 +215,7 @@
     <div class="row align-items-center g-4">
       <div class="col-md-4">
         <div class="app-screen-container text-center">
-          <%= image_tag '/images/mobile_app_1.png',
+          <%= image_tag '/images/app/mobile_app_1.png',
                         class: 'img-fluid app-screen',
                         alt: t('.volunteer_app.title'),
                         data: { carousel_target: 'image' } %>
@@ -286,11 +286,16 @@
             </li>
           </ul>
         </div>
-        <div class="d-flex gap-4 align-items-center justify-content-center">
-          <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
-            <%= image_tag '/images/rustore_badge.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
+        <div class="d-flex gap-4 align-items-center justify-content-center flex-wrap">
+          <%= external_link_to 'https://appgallery.huawei.com/app/C114915605' do %>
+            <%= image_tag "/images/app/app-gallery.svg", class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_gallery') %>
           <% end %>
-          <%= link_to app_pages_path, class: 'btn btn-outline-dark px-2 rounded-1 app-button', data: { turbo_prefetch: false } do %>
+          <% if top_level_domain == :ru %>
+            <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
+              <%= image_tag '/images/app/ru-store.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
+            <% end %>
+          <% end %>
+          <%= link_to app_pages_path, class: 'btn btn-dark px-2 rounded-3 app-button', data: { turbo_prefetch: false } do %>
             <i class="fa-brands fa-android"></i> <%= t('.volunteer_app.download_apk_html') %>
           <% end %>
         </div>
