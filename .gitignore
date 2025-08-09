@@ -17,7 +17,6 @@ public/assets/
 public/sitemaps/
 storage/
 coverage/
-config/database.yml
 spec/requests/requests.http
 
 # Ignore master key for decrypting credentials and more.
