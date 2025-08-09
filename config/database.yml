@@ -1,0 +1,17 @@
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  database: s95_dev
+  host: db
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 3) %>
+  username: postgres
+  password: 123456
+test:
+  <<: *default
+  database: s95_test
+production:
+  <<: *default
+  database: s95
+  host: /var/run/postgresql
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
