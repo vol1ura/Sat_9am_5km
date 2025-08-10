@@ -42,6 +42,7 @@
                 <tr>
                   <th class="fs-small-sm"><%= t('.event') %></th>
                   <th class="fs-small-sm"><%= t('.count') %></th>
+                  <th class="fs-small-sm"><%= t('.roles') %></th>
                 </tr>
               </thead>
               <tbody class="table-group-divider">
@@ -49,6 +50,7 @@
                   <tr>
                     <td><%= volunteering.event_name %></td>
                     <td><%= volunteering.vol_count %></td>
+                    <td><%= volunteering.unique_roles_count %></td>
                   </tr>
                 <% end %>
               </tbody>
