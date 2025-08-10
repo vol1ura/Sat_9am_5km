@@ -896,6 +896,8 @@ ru:
       role: Роль
   events:
     index:
+      list: Список
+      map: Карта
       our_events: Наши мероприятия
     show:
       title: '%{event} | Парковые забеги'
