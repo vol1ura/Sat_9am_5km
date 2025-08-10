@@ -1,6 +1,6 @@
 .position {
   color: $primary !important;
-  @extend .fs-3;
+  @extend .fs-3, .pe-0, .pe-sm-2;
 }
 
 .athlete-link {

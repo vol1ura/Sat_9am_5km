@@ -12,7 +12,15 @@
   </div>
   <% if current_user&.athlete == @athlete && local_assigns[:is_friends_tab] %>
     <% if (friendship_id = @friendships_hash[friend.id]) %>
-      <%= button_to friendship_path(friendship_id, viewed_athlete_id: @athlete.id), method: :delete, class: 'btn btn-sm btn-outline-danger', form_class: 'd-inline-block', data: { turbo: true } do %>
+      <%=
+        button_to(
+          friendship_path(friendship_id, viewed_athlete_id: @athlete.id),
+          method: :delete,
+          class: 'btn btn-sm btn-outline-danger',
+          form_class: 'd-inline-block',
+          data: { turbo: true, turbo_confirm: t('.confirm_unfriend') },
+        ) do
+      %>
         <i class="fa-solid fa-user-minus"></i>
       <% end %>
     <% end %>

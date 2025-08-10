@@ -4,7 +4,7 @@
   <td class="position align-middle"><%= result.position %></td>
   <td>
     <% if result.athlete_id %>
-      <div>
+      <div class="fs-small-sm">
         <%= link_to result.athlete.name.presence || t('common.nobody'), result.athlete, class: 'athlete-link' %>
       </div>
       <div class="athlete-details fw-lighter">
