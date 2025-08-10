@@ -177,6 +177,14 @@ nav.pagination {
 
 .fs-small {
   font-size: 0.85em;
+
+  &-sm {
+    font-size: var(--bs-body-font-size);
+
+    @include media(phoneScreen) {
+      font-size: 0.85em;
+    }
+  }
 }
 
 @keyframes blink {

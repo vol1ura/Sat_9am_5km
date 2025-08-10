@@ -780,12 +780,14 @@ rs:
         place: Mesto
         event: Događaj
       personal_records_section: Lični rekordi na drugim dužinama
-      time_predictions_section: Prognoza rezultata
+      distance: Dužina
+      personal_record: PB
+      predicted_time: Prognoza
       personal_record_10k: 10 km
-      personal_record_half_marathon: 21.1 km
-      personal_record_marathon: 42.2 km
-      prediction_hint: Prognoza na osnovu najboljeg rezultata na 5 km za posljednje 3 mjeseca u S95 događajima. Rezultat je moguć samo ako su ispunjeni uslovi za treninge, odgovarajuće za određenu dužinu.
-      no_personal_records: Lični rekordi nisu navedeni
+      personal_record_half_marathon: Polmaraton
+      personal_record_marathon: Maraton
+      prediction_hint: Prognoza na osnovu najboljeg rezultata u S95 događajima za posljednje 3 mjeseca. Rezultat je moguć samo ako su ispunjeni uslovi za treninge, odgovarajuće za određenu dužinu.
+      no_personal_records: Lični rekordi nisu navedeni.
       no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
     statistics:
       total_events:

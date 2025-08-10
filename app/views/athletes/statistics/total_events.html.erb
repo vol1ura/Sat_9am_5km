@@ -7,49 +7,55 @@
   </h2>
   <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordionPersonalBest">
     <div class="accordion-body">
-      <% if @results_by_event.present? %>
-        <h5><%= t('.finishes') %></h5>
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th><%= t('.event') %></th>
-              <th><%= t('.count') %></th>
-              <th><%= t('.best_position') %></th>
-              <th><%= t('.best_time') %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @results_by_event.each do |result| %>
-              <tr>
-                <td><%= result.event_name %></td>
-                <td><%= result.results_count %></td>
-                <td><%= result.best_position %></td>
-                <td><%= human_result_time(result.best_time) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
+      <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+        <% if @results_by_event.present? %>
+          <div class="col">
+            <table class="table caption-top">
+              <caption><%= t('.finishes') %></caption>
+              <thead>
+                <tr>
+                  <th class="fs-small-sm"><%= t('.event') %></th>
+                  <th class="fs-small-sm"><%= t('.count') %></th>
+                  <th class="fs-small-sm"><%= t('.best_position') %></th>
+                  <th class="fs-small-sm"><%= t('.best_time') %></th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <% @results_by_event.each do |result| %>
+                  <tr>
+                    <td><%= result.event_name %></td>
+                    <td><%= result.results_count %></td>
+                    <td><%= result.best_position %></td>
+                    <td><%= human_result_time(result.best_time) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
 
-      <% if @volunteering_by_event.present? %>
-        <h5><%= t('.volunteering') %></h5>
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th><%= t('.event') %></th>
-              <th><%= t('.count') %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @volunteering_by_event.each do |volunteering| %>
-              <tr>
-                <td><%= volunteering.event_name %></td>
-                <td><%= volunteering.vol_count %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
+        <% if @volunteering_by_event.present? %>
+          <div class="col">
+            <table class="table caption-top">
+              <caption><%= t('.volunteering') %></caption>
+              <thead>
+                <tr>
+                  <th class="fs-small-sm"><%= t('.event') %></th>
+                  <th class="fs-small-sm"><%= t('.count') %></th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <% @volunteering_by_event.each do |volunteering| %>
+                  <tr>
+                    <td><%= volunteering.event_name %></td>
+                    <td><%= volunteering.vol_count %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>

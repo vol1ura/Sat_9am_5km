@@ -173,58 +173,42 @@
         </h2>
         <div id="flush-collapsePersonalRecords" class="accordion-collapse collapse" aria-labelledby="flush-personalRecords" data-bs-parent="#accordionPersonalBest">
           <div class="accordion-body">
-            <% if @athlete.personal_record_10k || @athlete.personal_record_half_marathon || @athlete.personal_record_marathon %>
-              <ul class="list-group list-group-flush mb-4">
-                <% if @athlete.personal_record_10k %>
-                  <li class="list-group-item">
-                    <div class="hstack">
-                      <div class="acc-li-s"><%= t '.personal_record_10k' %></div>
-                      <div class="mx-3"><%= @athlete.personal_record_10k %></div>
-                    </div>
-                  </li>
+            <table class="table">
+              <caption>
+                <% unless @athlete.personal_record_10k || @athlete.personal_record_half_marathon || @athlete.personal_record_marathon %>
+                  <%= t '.no_personal_records' %>
                 <% end %>
-                <% if @athlete.personal_record_half_marathon %>
-                  <li class="list-group-item">
-                    <div class="hstack">
-                      <div class="acc-li-s"><%= t '.personal_record_half_marathon' %></div>
-                      <div class="mx-3"><%= @athlete.personal_record_half_marathon %></div>
-                    </div>
-                  </li>
+                <% if @time_predictions.any? %>
+                  <%= t '.prediction_hint' %>
+                <% else %>
+                  <%= t '.no_predictions' %>
                 <% end %>
-                <% if @athlete.personal_record_marathon %>
-                  <li class="list-group-item">
-                    <div class="hstack">
-                      <div class="acc-li-s"><%= t '.personal_record_marathon' %></div>
-                      <div class="mx-3"><%= @athlete.personal_record_marathon %></div>
-                    </div>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              <p class="text-muted"><%= t '.no_personal_records' %></p>
-            <% end %>
-            <% if @time_predictions.any? %>
-              <h6 class="fw-light mb-3"><%= t '.time_predictions_section' %></h6>
-              <p class="text-muted small mb-3"><%= t '.prediction_hint' %></p>
-              <ul class="list-group list-group-flush">
-                <% @time_predictions.each do |distance, predicted_time| %>
-                  <li class="list-group-item">
-                    <div class="hstack">
-                      <div class="acc-li-s">
-                        <%= case distance
-                            when 10 then t('.personal_record_10k')
-                            when 21.1 then t('.personal_record_half_marathon')
-                            when 42.2 then t('.personal_record_marathon')
-                            end %>
-                      </div>
-                      <div class="mx-3 text-muted"><%= human_result_time(predicted_time) %></div>
-                    </div>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              <p class="text-muted"><%= t '.no_predictions' %></p>
-            <% end %>
+              </caption>
+              <thead>
+                <tr>
+                  <th class="fs-small-sm"><%= t '.distance' %></th>
+                  <th class="fs-small-sm"><%= t '.personal_record' %></th>
+                  <th class="fs-small-sm"><%= t '.predicted_time' %></th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr>
+                  <td><%= t '.personal_record_10k' %></td>
+                  <td><%= @athlete.personal_record_10k %></td>
+                  <td><%= human_result_time @time_predictions[10] %></td>
+                </tr>
+                <tr>
+                  <td><%= t '.personal_record_half_marathon' %></td>
+                  <td><%= @athlete.personal_record_half_marathon %></td>
+                  <td><%= human_result_time @time_predictions[21.1] %></td>
+                </tr>
+                <tr>
+                  <td><%= t '.personal_record_marathon' %></td>
+                  <td><%= @athlete.personal_record_marathon %></td>
+                  <td><%= human_result_time @time_predictions[42.2] %></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
