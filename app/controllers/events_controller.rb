@@ -27,6 +27,8 @@ class EventsController < ApplicationController
     @uniq_volunteers_count = Volunteer.published.where(activity: { event: @event }).select(:athlete_id).distinct.count
     @almost_jubilee_by_results = @event.almost_jubilee_athletes_dataset 'results'
     @almost_jubilee_by_volunteers = @event.almost_jubilee_athletes_dataset 'volunteers'
+    @first_male_by_activity_id = @event.leader_results_dataset(male: true).preload(:athlete).index_by(&:activity_id)
+    @first_female_by_activity_id = @event.leader_results_dataset(male: false).preload(:athlete).index_by(&:activity_id)
   end
 
   def volunteering

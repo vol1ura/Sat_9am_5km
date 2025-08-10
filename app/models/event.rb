@@ -52,6 +52,15 @@ class Event < ApplicationRecord
     almost_jubilee_athletes_dataset(type, delta.next)
   end
 
+  def leader_results_dataset(male:)
+    Result
+      .published
+      .joins(:athlete)
+      .where(activity: { event_id: id }, athlete: { male: })
+      .select('DISTINCT ON (results.activity_id) results.*')
+      .order('results.activity_id, results.position')
+  end
+
   def to_combobox_display = name
 
   private
