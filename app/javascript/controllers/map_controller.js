@@ -27,7 +27,6 @@ export default class extends Controller {
     this.mapViewTarget.classList.remove('d-none')
     this.listViewTarget.classList.add('d-none')
 
-    // Обновляем размер карты при переключении на карту
     if (this.map) {
       this.map.container.fitToViewport()
     }
@@ -79,18 +78,17 @@ export default class extends Controller {
             this.map.setCenter(userLocation, 10)
           },
           (error) => {
-            console.log('Ошибка получения местоположения:', error)
+            console.log('Error getting location:', error.message)
             this.map.setCenter(defaultCenter, defaultZoom)
           }
         )
       } else {
-        console.log('Геолокация не поддерживается браузером')
+        console.log('Geolocation is not supported by this browser')
         this.map.setCenter(defaultCenter, defaultZoom)
       }
 
       console.log('Map instance created')
 
-      // Получаем данные о событиях через AJAX
       try {
         const response = await fetch('/events.json?all=true')
         if (!response.ok) {
@@ -120,14 +118,13 @@ export default class extends Controller {
           this.map.geoObjects.add(placemark);
         });
 
-        // Обновляем размер карты после добавления меток
         this.map.container.fitToViewport()
         console.log('Map initialization completed')
       } catch (error) {
-        console.error('Ошибка при загрузке данных о событиях:', error)
+        console.error('Error loading events data:', error)
       }
     } catch (error) {
-      console.error('Ошибка при инициализации карты:', error);
+      console.error('Error initializing map:', error);
       console.error('Stack trace:', error.stack);
     }
   }
