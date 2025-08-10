@@ -27,7 +27,7 @@
 
 <div class="accordion accordion-flush" id="accordionPersonalBest">
   <div class="accordion-item">
-    <%= turbo_frame_tag 'friends', src: friends_athlete_statistics_path(@athlete) do %>
+    <%= turbo_frame_tag 'friends_list', src: friends_athlete_statistics_path(@athlete) do %>
       <h2 class="accordion-header" id="flush-friends">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFriends" aria-expanded="false" aria-controls="flush-collapseFriends">
           <span class="badge text-light bg-primary me-3" id="friends-counter">&nbsp</span>
@@ -38,7 +38,7 @@
   </div>
 
   <div class="accordion-item">
-    <%= turbo_frame_tag 'followers', src: followers_athlete_statistics_path(@athlete) do %>
+    <%= turbo_frame_tag 'followers_list', src: followers_athlete_statistics_path(@athlete) do %>
       <h2 class="accordion-header" id="flush-followers">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFollowers" aria-expanded="false" aria-controls="flush-collapseFollowers">
           <span class="badge text-light bg-primary me-3" id="followers-counter">&nbsp</span>
