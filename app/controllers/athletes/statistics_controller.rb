@@ -16,16 +16,15 @@ module Athletes
       @results_by_event = results_ds
         .joins(activity: :event)
         .group('events.id, events.name')
-        .select(
-          'events.name as event_name, COUNT(results.id) as results_count,
-          MIN(results.position) as best_position, MIN(EXTRACT(EPOCH FROM results.total_time)) as best_time',
-        )
+        .select('events.name as event_name, COUNT(results.id) as results_count,
+                 MIN(results.position) as best_position, MIN(EXTRACT(EPOCH FROM results.total_time)) as best_time')
         .order('events.visible_order')
 
       @volunteering_by_event = volunteering_ds
         .joins(activity: :event)
         .group('events.id, events.name')
-        .select('events.name as event_name, COUNT(volunteers.id) as vol_count')
+        .select('events.name as event_name, COUNT(volunteers.id) as vol_count,
+                 COUNT(DISTINCT volunteers.role) as unique_roles_count')
         .order('events.visible_order')
 
       @total_events_count = (results_ds.distinct.pluck(:event_id) + volunteering_ds.distinct.pluck(:event_id)).uniq.count

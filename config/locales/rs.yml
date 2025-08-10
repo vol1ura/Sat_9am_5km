@@ -795,6 +795,7 @@ rs:
         volunteering: Volontiranje
         event: Događaj
         count: Broj
+        roles: Uloge
         best_position: Najbolje mesto
         best_time: Najbolje vreme
     minute_bingo:
