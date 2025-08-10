@@ -831,6 +831,8 @@ ru:
       role: Роль
       total_volunteering: 'волонтёрств %{count}'
       first_volunteering: 'Первое волонтёрство!'
+      search_athlete_placeholder: 'Поиск участника...'
+      clear_search: 'Очистить поиск'
     protocol:
       position_short: Поз.
       position_full: Место
@@ -1008,6 +1010,7 @@ ru:
       add_friend: Подписаться
     friend:
       going_to: 'Собирается в %{event}'
+      confirm_unfriend: 'Исключить из друзей?'
     create:
       success: 'Участник добавлен в друзья'
       friends: 'Друзья'
