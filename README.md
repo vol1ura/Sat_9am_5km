@@ -49,7 +49,7 @@ make
 - Admin panel [http://localhost:3000/admin](http://localhost:3000/admin)
 - Email previews [http://localhost:3000/rails/mailers](http://localhost:3000/rails/mailers)
 - Database panel [http://localhost:3003](http://localhost:3003/?pgsql=db&username=postgres)
-- Bug tracker [Rollbar.com](https://rollbar.com/Urka/Sat_9am_5km/)
+- Bug tracker [Rollbar.com](https://app.rollbar.com/a/Urka/fix/items)
 - Sidekiq [WebUI](https://s95.ru/sidekiq) for admin users
 - Rails Performance [dev](http://localhost:3000/app_performance/) or [prod](https://s95.ru/app_performance/) for admin users
 - Postgres Performance [dev](http://localhost:3000/pg_stats) or [prod](https://s95.ru/pg_stats)
