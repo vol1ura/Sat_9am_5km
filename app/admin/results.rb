@@ -84,6 +84,14 @@ ActiveAdmin.register Result do
     column(:total_time) { |r| human_result_time r.total_time }
   end
 
+  sidebar 'Внимание!', only: :index, if: proc { Activity.published.exists?(params[:activity_id]) } do
+    div(
+      'Забег опубликован. Редактирование протокола сейчас может привести
+      к логическим ошибкам в статистике и некорректному награждению.',
+      class: 'warning-box',
+    )
+  end
+
   sidebar I18n.t('.results.explanation.operations.title'), only: :index do
     ul do
       I18n.t('.results.explanation.operations.items').each { |item| li item }
