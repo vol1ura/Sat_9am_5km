@@ -14,6 +14,7 @@ module Parkzhrun
       if find_athlete_by_info
         @athlete.parkrun_code ||= athlete_info[:parkrun_id]
         @athlete.fiveverst_code ||= athlete_info[:five_verst_id]
+        @athlete.runpark_code ||= athlete_info[:runpark_id]
         @athlete.parkzhrun_code ||= athlete_info[:parkzhrun_id]
         Rollbar.warn("Can't update athlete using ParkZhrun info", athlete_id: @athlete.id) unless @athlete.save
 
@@ -25,6 +26,7 @@ module Parkzhrun
         male: athlete_info[:gender] == 'male',
         parkrun_code: athlete_info[:parkrun_id],
         fiveverst_code: athlete_info[:five_verst_id],
+        runpark_code: athlete_info[:runpark_id],
         **personal_code.to_params,
       )
     end
@@ -39,6 +41,7 @@ module Parkzhrun
       @athlete = Athlete.find_by(id: athlete_info[:s95_id] - Athlete::SAT_9AM_5KM_BORDER) if athlete_info[:s95_id]
       @athlete ||= Athlete.find_by(parkrun_code: athlete_info[:parkrun_id]) if athlete_info[:parkrun_id]
       @athlete ||= Athlete.find_by(fiveverst_code: athlete_info[:five_verst_id]) if athlete_info[:five_verst_id]
+      @athlete ||= Athlete.find_by(runpark_code: athlete_info[:runpark_id]) if athlete_info[:runpark_id]
       @athlete
     end
 
