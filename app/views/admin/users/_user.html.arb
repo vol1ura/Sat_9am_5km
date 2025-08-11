@@ -22,7 +22,7 @@ if current_user.admin? && user.emergency_contact_phone
   panel 'Экстренный контакт' do
     div(
       "#{human_phone user.emergency_contact_phone} (#{user.emergency_contact_name})",
-      style: 'background-color: #fff3cd; padding: 1em; border-radius: 4px;',
+      class: 'warning-box',
     )
   end
 end

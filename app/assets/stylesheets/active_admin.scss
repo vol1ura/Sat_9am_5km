@@ -77,6 +77,12 @@ body {
   object-fit: scale-down;
 }
 
+.warning-box {
+  background-color: #fff3cd;
+  padding: 1em;
+  border-radius: 4px;
+}
+
 tr.odd,
 tr.even {
   &.athlete-error {
