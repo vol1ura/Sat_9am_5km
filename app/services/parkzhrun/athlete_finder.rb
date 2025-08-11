@@ -12,12 +12,7 @@ module Parkzhrun
       return @athlete if find_athlete_by_code
 
       if find_athlete_by_info
-        @athlete.parkrun_code ||= athlete_info[:parkrun_id]
-        @athlete.fiveverst_code ||= athlete_info[:five_verst_id]
-        @athlete.runpark_code ||= athlete_info[:runpark_id]
-        @athlete.parkzhrun_code ||= athlete_info[:parkzhrun_id]
-        Rollbar.warn("Can't update athlete using ParkZhrun info", athlete_id: @athlete.id) unless @athlete.save
-
+        update_athlete_by_info
         return @athlete
       end
 
@@ -35,6 +30,14 @@ module Parkzhrun
 
     def find_athlete_by_code
       @athlete = Athlete.find_by(**personal_code.to_params)
+    end
+
+    def update_athlete_by_info
+      @athlete.parkrun_code ||= athlete_info[:parkrun_id]
+      @athlete.fiveverst_code ||= athlete_info[:five_verst_id]
+      @athlete.runpark_code ||= athlete_info[:runpark_id]
+      @athlete.parkzhrun_code ||= athlete_info[:parkzhrun_id]
+      Rollbar.warn("Can't update athlete using ParkZhrun info", athlete_id: @athlete.id) unless @athlete.save
     end
 
     def find_athlete_by_info
