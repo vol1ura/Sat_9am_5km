@@ -13,13 +13,13 @@
             <li class="list-group-item">
               <div class="hstack">
                 <div class="acc-li-s">
-                  <%= link_to l(pb.activity.date), pb.activity %>
+                  <%= link_to l(pb.activity.date), pb.activity, data: { turbo: false } %>
                 </div>
                 <div class="mx-3">
                   <%= human_result_time pb.total_time %>
                 </div>
                 <div>
-                  <%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %>
+                  <%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name), data: { turbo: false } %>
                 </div>
               </div>
             </li>

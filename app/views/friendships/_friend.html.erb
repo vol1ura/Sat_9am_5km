@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center gap-2">
     <%= image_tag user_image_path(friend.user), class: 'avatar-50', alt: friend.name %>
     <div>
-      <%= link_to friend.name, athlete_path(friend), class: 'text-decoration-none me-2' %>
+      <%= link_to friend.name, athlete_path(friend), class: 'text-decoration-none me-2', data: { turbo: false } %>
       <% if friend.going_to_event? %>
         <span class="badge bg-success">
           <%= t '.going_to', event: friend.going_to_event.name %>
