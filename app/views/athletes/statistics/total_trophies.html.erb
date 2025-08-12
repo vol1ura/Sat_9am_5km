@@ -15,7 +15,7 @@
           <% @athlete.trophies.includes(badge: { image_attachment: :blob }).order('date ASC NULLS FIRST').each do |trophy| %>
             <div class="p-1">
               <%
-                trophy_link = link_to badge_path(trophy.badge) do
+                trophy_link = link_to badge_path(trophy.badge), data: { turbo: false } do
                   image_tag trophy.badge.image.variant(:thumb), class: 'trophy', title: trophy.badge.name
                 end
               %>

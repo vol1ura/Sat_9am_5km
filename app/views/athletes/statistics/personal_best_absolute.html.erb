@@ -27,8 +27,8 @@
                   <%= format('%d:%02d', delta / 60, delta % 60) %>
                 <% end %>
               </td>
-              <td><%= link_to l(pb.activity.date), pb.activity %></td>
-              <td><%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name) %></td>
+              <td><%= link_to l(pb.activity.date), pb.activity, data: { turbo: false } %></td>
+              <td><%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name), data: { turbo: false } %></td>
             </tr>
           <% end %>
         </tbody>
