@@ -3,9 +3,12 @@
 class Athlete < ApplicationRecord
   include PgSearch::Model
 
-  pg_search_scope :search_by_name, against: :name, using: {
-    trigram: { threshold: 0.7, word_similarity: true },
-  }
+  pg_search_scope(
+    :search_by_name,
+    against: :name,
+    using: { trigram: { threshold: 0.7, word_similarity: true } },
+    ranked_by: ':trigram',
+  )
 
   audited associated_with: :user, max_audits: 20, except: %i[stats going_to_event_id personal_bests]
 
