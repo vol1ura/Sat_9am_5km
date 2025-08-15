@@ -295,7 +295,7 @@
               <%= image_tag '/images/app/ru-store.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
             <% end %>
           <% end %>
-          <%= link_to app_pages_path, class: 'btn btn-dark px-2 rounded-3 app-button', data: { turbo_prefetch: false } do %>
+          <%= link_to app_pages_path, class: 'btn btn-dark px-2 rounded-3 border-0 app-button', data: { turbo_prefetch: false } do %>
             <i class="fa-brands fa-android"></i> <%= t('.volunteer_app.download_apk_html') %>
           <% end %>
         </div>

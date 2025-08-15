@@ -25,6 +25,8 @@ export default class extends Controller {
   }
 
   disconnect() {
-    if (this.hasResultsTarget) this.resultsTarget.innerHTML = ''
+    if (this.hasResultsTarget) {
+      this.resultsTarget.innerHTML = ''
+    }
   }
 }
