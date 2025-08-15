@@ -8,63 +8,45 @@ export default class extends Controller {
   static targets = ['data', 'chart']
 
   connect() {
-    const currentLocale = document.documentElement.lang === 'rs' ? rsLocale : ruLocale
-    this.months = currentLocale.options.shortMonths
     this.volunteeringChartRendered = false
 
     if (this.hasChartTarget) {
-      this.initializeVolunteeringChart()
-    }
-  }
-
-  initializeVolunteeringChart() {
-    // Проверяем, виден ли контейнер для диаграммы
-    const isVisible = this.chartTarget.offsetParent !== null;
-
-    if (isVisible && !this.volunteeringChartRendered) {
-      this.renderVolunteeringChart()
-    } else if (!isVisible) {
-      this.setupAccordionListener()
-    }
-  }
-
-  setupAccordionListener() {
-    const accordionCollapse = document.querySelector('#flush-collapseTotalVolunteering')
-
-    if (accordionCollapse) {
-      accordionCollapse.addEventListener('shown.bs.collapse', () => {
-        if (!this.volunteeringChartRendered) {
-          setTimeout(() => {
-            this.renderVolunteeringChart()
-          }, 100)
-        }
-      })
-    }
-  }
-
-  renderVolunteeringChart() {
-    if (this.volunteeringChartRendered || !this.hasChartTarget) {
-      return
-    }
-
-    if (this.dataTargets.length === 0) {
-      console.log('Нет данных о недавних волонтёрствах для отображения диаграммы')
-      return
-    }
-
-    try {
-      this.volunteeringChart = new ApexCharts(this.chartTarget, this.#chartOptions('Недавние волонтёрства', this.months))
-      this.volunteeringChart.render()
-      this.volunteeringChartRendered = true
-    } catch (error) {
-      console.error('Ошибка создания диаграммы волонтёрств:', error)
+      this.#initializeVolunteeringChart()
     }
   }
 
   disconnect() {
     if (this.hasChartTarget) {
       this.chartTarget.innerHTML = ''
-      this.volunteeringChart.destroy()
+    }
+  }
+
+  #initializeVolunteeringChart() {
+    const isVisible = this.chartTarget.offsetParent !== null;
+
+    if (isVisible && !this.volunteeringChartRendered) {
+      this.#renderVolunteeringChart()
+    } else if (!isVisible) {
+      const accordionCollapse = document.querySelector('#flush-collapseTotalVolunteering')
+      accordionCollapse?.addEventListener('shown.bs.collapse', this.#renderVolunteeringChart.bind(this))
+      }
+  }
+
+  #renderVolunteeringChart() {
+    if (this.volunteeringChartRendered || !this.hasChartTarget || this.dataTargets.length === 0) {
+      return
+    }
+
+    try {
+      const currentLocale = document.documentElement.lang === 'rs' ? rsLocale : ruLocale
+      this.volunteeringChart = new ApexCharts(
+        this.chartTarget,
+        this.#chartOptions('Недавние волонтёрства', currentLocale.options.shortMonths)
+      )
+      this.volunteeringChart.render()
+      this.volunteeringChartRendered = true
+    } catch (error) {
+      console.error('Ошибка создания диаграммы волонтёрств:', error)
     }
   }
 
