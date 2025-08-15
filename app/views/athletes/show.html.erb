@@ -110,6 +110,27 @@
               </div>
             </li>
           </ul>
+          <div class="mt-2 d-flex flex-wrap justify-content-around" data-controller="volunteer">
+            <table class="d-none">
+              <%
+                history_stats = @athlete.volunteering.where(activity: { date: 5.months.ago.beginning_of_month.. }).unscope(:order).group(:role, Arel.sql("date_part('month', date)")).count.each_with_object({}) do |(k, v), h|
+                  h[k.first] ||= Array.new(6, 0)
+                  h[k.first][5 - ((Date.current.mon - k.last) % 12)] = v
+                end
+              %>
+              <tbody>
+                <% history_stats.each do |role, stats| %>
+                  <tr data-volunteer-target="data">
+                    <th><%= human_volunteer_role role %></th>
+                    <% stats.each do |stat| %>
+                      <td><%= stat %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="col-12 col-md-10 col-xl-8" data-volunteer-target="chart"></div>
+          </div>
         </div>
       </div>
     </div>
