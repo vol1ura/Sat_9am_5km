@@ -1,0 +1,38 @@
+<%= turbo_frame_tag 'dashboard' do %>
+  <div
+    class="my-3"
+    data-controller="dashboard"
+    data-dashboard-target="container"
+    data-dashboard-total-results-value="<%= @total_results.count %>"
+    data-dashboard-personal-bests-value="<%= @personal_bests_count %>"
+    data-dashboard-first-runs-value="<%= @first_runs_count %>"
+    data-dashboard-total-volunteers-value="<%= @total_volunteers.count %>"
+    data-dashboard-first-time-volunteers-value="<%= @first_time_volunteers_count %>"
+    data-dashboard-total-male-value="<%= @gender_stats['male'] || 0 %>"
+    data-dashboard-total-female-value="<%= @gender_stats['female'] || 0 %>"
+    data-dashboard-total-unknown-value="<%= @gender_stats['unknown'] || 0 %>">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card-with-border">
+          <div class="card-body">
+            <div data-dashboard-target="participantsContainer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-with-border">
+          <div class="card-body">
+            <div data-dashboard-target="volunteersContainer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-with-border">
+          <div class="card-body">
+            <div data-dashboard-target="genderContainer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -154,15 +154,16 @@ nav.pagination {
 }
 
 .card-with-border {
-  @extend .card, .text-bg-light, .border-primary, .border-opacity-25, .shadow, .h-100;
+  @extend .card, .text-bg-light, .bg-opacity-50, .border-primary, .border-opacity-25, .h-100;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: box-shadow 0.15s ease-in-out;
 
   .img-scaled {
     transition: transform 0.3s ease;
   }
 
   &:hover {
-    border-width: 0 !important;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
     .img-scaled {
       transform: scale(1.03);
