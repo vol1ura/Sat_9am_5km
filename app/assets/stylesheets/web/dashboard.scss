@@ -1,0 +1,117 @@
+// Стили для дашборда активностей
+.dashboard {
+  margin-bottom: 2rem;
+
+  h3 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: box-shadow 0.15s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+  }
+
+  #participants-chart,
+  #volunteers-chart,
+  #gender-chart {
+    min-height: 200px;
+    overflow: visible;
+
+    .apexcharts-title-text {
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      color: #333 !important;
+      line-height: 1.2 !important;
+      word-wrap: break-word !important;
+      text-align: center !important;
+    }
+
+    .apexcharts-pie-label {
+      fill: #333 !important;
+      font-weight: 600 !important;
+    }
+
+    .apexcharts-legend-text {
+      color: #333 !important;
+      font-size: 13px !important;
+    }
+  }
+
+  // Адаптивность для мобильных устройств
+  @media (max-width: 768px) {
+    .row {
+      .col-md-4 {
+        margin-bottom: 1rem;
+      }
+    }
+
+    #participants-chart,
+    #volunteers-chart,
+    #gender-chart {
+      .apexcharts-title-text {
+        font-size: 13px !important;
+        line-height: 1.3 !important;
+      }
+    }
+  }
+
+  // Дополнительная адаптивность для очень узких экранов
+  @media (max-width: 576px) {
+    #participants-chart,
+    #volunteers-chart,
+    #gender-chart {
+      .apexcharts-title-text {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+      }
+    }
+  }
+
+  // Стили для состояния загрузки
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 280px;
+    color: #666;
+    font-size: 14px;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+  }
+
+  // Стили для ошибок
+  .alert {
+    margin: 1rem 0;
+
+    .fa {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
