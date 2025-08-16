@@ -26,7 +26,40 @@ class ActivitiesController < ApplicationController
     @volunteers = @activity.volunteers_roster.includes(:athlete)
   end
 
+  def dashboard
+    @total_results = Result.joins(:activity).where(activity: weekly_activities)
+    @personal_bests_count = @total_results.where(personal_best: true).count
+    @first_runs_count = @total_results.where(first_run: true).count
+
+    @total_volunteers = Volunteer.joins(:activity).where(activity: weekly_activities)
+    @first_time_volunteers_count = count_first_time_volunteers(@total_volunteers)
+
+    @gender_stats = @total_results
+      .left_joins(:athlete)
+      .group("CASE WHEN athletes.male IS TRUE THEN 'male' WHEN athletes.male IS FALSE THEN 'female' ELSE 'unknown' END")
+      .count
+  end
+
   private
+
+  def weekly_activities
+    @weekly_activities ||=
+      begin
+        today = Date.current
+        last_saturday = today.saturday? ? today : today.prev_occurring(:saturday)
+
+        Activity.published.joins(:event).where(event: @country_events, date: last_saturday..)
+      end
+  end
+
+  def count_first_time_volunteers(current_volunteers)
+    Volunteer
+      .where(athlete_id: current_volunteers.select(:athlete_id))
+      .group(:athlete_id)
+      .having('count(athlete_id) = 1')
+      .count
+      .size
+  end
 
   def counters(model:, table:)
     model

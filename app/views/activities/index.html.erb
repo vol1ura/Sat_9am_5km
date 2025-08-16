@@ -30,3 +30,12 @@
     </tbody>
   </table>
 </div>
+
+<h3 class="mt-2">Статистика за последнюю неделю</h3>
+<%= turbo_frame_tag 'dashboard', src: dashboard_activities_path, loading: 'lazy' do %>
+  <div class="my-3 d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+<% end %>

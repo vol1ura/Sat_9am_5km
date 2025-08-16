@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get :live, on: :member
     resource :going_to, only: %i[create destroy]
   end
-  resources :activities, only: %i[index show]
+  resources :activities, only: %i[index show] do
+    get :dashboard, on: :collection
+  end
   resources :athletes, only: %i[index show] do
     resources :statistics, module: :athletes, only: [] do
       collection do
