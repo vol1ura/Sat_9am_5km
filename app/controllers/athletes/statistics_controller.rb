@@ -51,6 +51,11 @@ module Athletes
       @pb_by_position = results.includes(activity: :event).where(position: @best_position).order(date: :desc)
     end
 
+    def volunteering_chart
+      @volunteering = @athlete.volunteering.unscope(:order)
+      @total_results = @athlete.results.published.size
+    end
+
     private
 
     def set_athlete
