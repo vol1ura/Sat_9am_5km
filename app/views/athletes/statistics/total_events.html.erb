@@ -1,63 +1,53 @@
 <%= turbo_frame_tag 'total_events' do %>
-  <h2 class="accordion-header" id="flush-totalEvents">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
-      <span class="badge text-light bg-primary me-3"><%= @total_events_count %></span>
-      <%= t 'athletes.show.total_events' %>
-    </button>
-  </h2>
-  <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordionPersonalBest">
-    <div class="accordion-body">
-      <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
-        <% if @results_by_event.present? %>
-          <div class="col">
-            <table class="table caption-top">
-              <caption><%= t('.finishes') %></caption>
-              <thead>
-                <tr>
-                  <th class="fs-small-sm"><%= t('.event') %></th>
-                  <th class="fs-small-sm"><%= t('.count') %></th>
-                  <th class="fs-small-sm"><%= t('.best_position') %></th>
-                  <th class="fs-small-sm"><%= t('.best_time') %></th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                <% @results_by_event.each do |result| %>
-                  <tr>
-                    <td><%= result.event_name %></td>
-                    <td><%= result.results_count %></td>
-                    <td><%= result.best_position %></td>
-                    <td><%= human_result_time(result.best_time) %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        <% end %>
-
-        <% if @volunteering_by_event.present? %>
-          <div class="col">
-            <table class="table caption-top">
-              <caption><%= t('.volunteering') %></caption>
-              <thead>
-                <tr>
-                  <th class="fs-small-sm"><%= t('.event') %></th>
-                  <th class="fs-small-sm"><%= t('.count') %></th>
-                  <th class="fs-small-sm"><%= t('.roles') %></th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                <% @volunteering_by_event.each do |volunteering| %>
-                  <tr>
-                    <td><%= volunteering.event_name %></td>
-                    <td><%= volunteering.vol_count %></td>
-                    <td><%= volunteering.unique_roles_count %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        <% end %>
+  <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+    <% if @results_by_event.present? %>
+      <div class="col">
+        <table class="table caption-top">
+          <caption><%= t('.finishes') %></caption>
+          <thead>
+            <tr>
+              <th class="fs-small-sm"><%= t('.event') %></th>
+              <th class="fs-small-sm"><%= t('.count') %></th>
+              <th class="fs-small-sm"><%= t('.best_position') %></th>
+              <th class="fs-small-sm"><%= t('.best_time') %></th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <% @results_by_event.each do |result| %>
+              <tr>
+                <td><%= result.event_name %></td>
+                <td><%= result.results_count %></td>
+                <td><%= result.best_position %></td>
+                <td><%= human_result_time(result.best_time) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-    </div>
+    <% end %>
+
+    <% if @volunteering_by_event.present? %>
+      <div class="col">
+        <table class="table caption-top">
+          <caption><%= t('.volunteering') %></caption>
+          <thead>
+            <tr>
+              <th class="fs-small-sm"><%= t('.event') %></th>
+              <th class="fs-small-sm"><%= t('.count') %></th>
+              <th class="fs-small-sm"><%= t('.roles') %></th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <% @volunteering_by_event.each do |volunteering| %>
+              <tr>
+                <td><%= volunteering.event_name %></td>
+                <td><%= volunteering.vol_count %></td>
+                <td><%= volunteering.unique_roles_count %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
   </div>
 <% end %>

@@ -9,35 +9,32 @@ module Athletes
       @pb_by_time = results.where(personal_best: true).order(date: :desc)
     end
 
-    def total_events
-      results_ds = @athlete.results.published
-      volunteering_ds = @athlete.volunteering.unscope(:order)
+    def total_results; end
 
-      @results_by_event = results_ds
+    def total_events
+      @results_by_event = @athlete
+        .results
+        .published
         .joins(activity: :event)
         .group('events.id, events.name')
         .select('events.name as event_name, COUNT(results.id) as results_count,
-                 MIN(results.position) as best_position, MIN(EXTRACT(EPOCH FROM results.total_time)) as best_time')
+                  MIN(results.position) as best_position, MIN(EXTRACT(EPOCH FROM results.total_time)) as best_time')
         .order('events.visible_order')
 
-      @volunteering_by_event = volunteering_ds
+      @volunteering_by_event = @athlete
+        .volunteering
+        .unscope(:order)
         .joins(activity: :event)
         .group('events.id, events.name')
         .select('events.name as event_name, COUNT(volunteers.id) as vol_count,
-                 COUNT(DISTINCT volunteers.role) as unique_roles_count')
+                  COUNT(DISTINCT volunteers.role) as unique_roles_count')
         .order('events.visible_order')
-
-      @total_events_count = (results_ds.distinct.pluck(:event_id) + volunteering_ds.distinct.pluck(:event_id)).uniq.count
     end
 
     def total_trophies
       @total_trophies = @athlete.trophies.size
       @total_results = @athlete.results.published.size
       @seconds_in_results = @athlete.stats.dig('results', 'seconds') || []
-    end
-
-    def total_results
-      @total_results = @athlete.results.published.size
     end
 
     def followers
