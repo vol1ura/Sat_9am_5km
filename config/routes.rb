@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         get :total_results
         get :personal_best_absolute
         get :best_position_absolute
+        get :volunteering_chart
       end
     end
   end

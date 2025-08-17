@@ -756,10 +756,6 @@ rs:
       show_club_html: 'Prikaži statistike kluba %{link}'
       total_results: ukupno trčanja
       total_volunteering: ukupno volontiranja
-      h_index: h-index
-      h_index_explanation: The index is equal to h if there are at least h positions (roles), each of which had at least h volunteering
-      volunteering_coefficient: Koeficijent volontiranja
-      volunteering_coefficient_explanation: Broj volontiranja za svakih 10 trčanja
       total_trophies: ukupno trofeja
       total_events: učestvovano na događaja
       personal_best: lični rekord S95 (PB)
@@ -790,6 +786,11 @@ rs:
       no_personal_records: Lični rekordi nisu navedeni.
       no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
     statistics:
+      volunteering_chart:
+        h_index: h-indeks
+        h_index_explanation: Indeks je jednak h ako postoji bar h pozicija (uloge), u svakoj od kojih je bar h puta volontiranje
+        volunteering_coefficient: Koeficijent volontiranja
+        volunteering_coefficient_explanation: Broj volontiranja za svakih 10 trčanja
       total_events:
         finishes: Trčanja
         volunteering: Volontiranje

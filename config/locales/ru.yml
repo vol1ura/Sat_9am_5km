@@ -757,10 +757,6 @@ ru:
       show_club_html: 'Посмотреть статистику клуба %{link}'
       total_results: всего пробежек
       total_volunteering: всего волонтёрств
-      h_index: h-индекс
-      h_index_explanation: Индекс равен h, если есть как минимум h позиций (ролей), на каждой из которых было как минимум h волонтёрств
-      volunteering_coefficient: Коэффициент волонтёра
-      volunteering_coefficient_explanation: Число волонтёрств на каждые 10 пробежек
       total_trophies: всего наград
       total_events: посещённые мероприятия
       personal_best: личный рекорд S95 (ЛР)
@@ -791,6 +787,11 @@ ru:
       no_personal_records: Личные рекорды не указаны.
       no_predictions: Недостаточно данных для прогноза (нужно минимум 3 результата за последние 3 месяца)
     statistics:
+      volunteering_chart:
+        h_index: h-индекс
+        h_index_explanation: Индекс равен h, если есть как минимум h позиций (ролей), на каждой из которых было как минимум h волонтёрств
+        volunteering_coefficient: Коэффициент волонтёра
+        volunteering_coefficient_explanation: Число волонтёрств на каждые 10 пробежек
       total_events:
         finishes: Финиши
         volunteering: Волонтёрства

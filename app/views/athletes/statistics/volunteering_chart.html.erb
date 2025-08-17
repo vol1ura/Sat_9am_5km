@@ -1,0 +1,63 @@
+<%= turbo_frame_tag 'volunteering_chart' do %>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <div class="hstack">
+        <div class="acc-li-s"><%= t '.h_index' %></div>
+        <div class="mx-3">
+          <abbr title="<%= t '.h_index_explanation' %>" class="initialism">
+            <%=
+              @volunteering
+                .group(:role)
+                .order(count_all: :desc)
+                .count
+                .values
+                .map
+                .with_index
+                .take_while { |count, idx| count > idx }
+                .size
+            %>
+          </abbr>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="hstack">
+        <div class="acc-li-s"><%= t '.volunteering_coefficient' %></div>
+        <div class="mx-3">
+          <abbr title="<%= t '.volunteering_coefficient_explanation' %>" class="initialism">
+            <% if @total_results.zero? %>
+              <i class="fa-solid fa-infinity"></i>
+            <% else %>
+              <%= (@volunteering.count * 10.0 / @total_results).round(1) %>
+            <% end %>
+          </abbr>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="mt-2 d-flex flex-wrap justify-content-around" data-controller="volunteer">
+    <table class="d-none">
+      <%
+        history_stats = @volunteering
+          .where(activity: { date: 5.months.ago.beginning_of_month.. })
+          .group(:role, Arel.sql("date_part('month', date)"))
+          .count
+          .each_with_object({}) do |(k, v), h|
+            h[k.first] ||= Array.new(6, 0)
+            h[k.first][5 - ((Date.current.mon - k.last) % 12)] = v
+          end
+      %>
+      <tbody>
+        <% history_stats.each do |role, values| %>
+          <tr data-volunteer-target="data">
+            <th><%= human_volunteer_role role %></th>
+            <% values.each do |value| %>
+              <td><%= value %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="col-12 col-md-10 col-xl-8" data-volunteer-target="chart"></div>
+  </div>
+<% end %>
