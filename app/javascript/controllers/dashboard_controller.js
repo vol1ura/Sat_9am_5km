@@ -3,7 +3,7 @@ import DashboardCharts from 'charts/dashboard'
 
 // Connects to data-controller="dashboard"
 export default class extends Controller {
-  static targets = ['container', 'participantsContainer', 'volunteersContainer', 'genderContainer']
+  static targets = ['container', 'participants', 'volunteers', 'gender']
   static values = {
     totalResults: Number,
     personalBests: Number,
@@ -13,6 +13,7 @@ export default class extends Controller {
     totalMale: Number,
     totalFemale: Number,
     totalUnknown: Number,
+    error: String,
   }
 
   connect() {
@@ -27,11 +28,8 @@ export default class extends Controller {
         this.totalFemaleValue,
         this.totalUnknownValue,
       )
-      dashboardCharts.initializeCharts(
-        this.participantsContainerTarget,
-        this.volunteersContainerTarget,
-        this.genderContainerTarget
-      )
+
+      dashboardCharts.initializeCharts(this.participantsTarget, this.volunteersTarget, this.genderTarget)
     } catch (error) {
       console.error('Error showing dashboard data:', error)
       this.#showError()
@@ -39,14 +37,14 @@ export default class extends Controller {
   }
 
   disconnect() {
-    if (this.hasParticipantsContainerTarget) {
-      this.participantsContainerTarget.innerHTML = ''
+    if (this.hasParticipantsTarget) {
+      this.participantsTarget.innerHTML = ''
     }
-    if (this.hasVolunteersContainerTarget) {
-      this.volunteersContainerTarget.innerHTML = ''
+    if (this.hasVolunteersTarget) {
+      this.volunteersTarget.innerHTML = ''
     }
-    if (this.hasGenderContainerTarget) {
-      this.genderContainerTarget.innerHTML = ''
+    if (this.hasGenderTarget) {
+      this.genderTarget.innerHTML = ''
     }
   }
 
@@ -55,7 +53,7 @@ export default class extends Controller {
       this.containerTarget.innerHTML = `
         <div class="alert alert-warning" role="alert">
           <i class="fa fa-exclamation-triangle"></i>
-          Не удалось загрузить данные дашборда. Попробуйте обновить страницу.
+          ${this.errorValue}
         </div>
       `
     }

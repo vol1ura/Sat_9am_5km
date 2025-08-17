@@ -10,26 +10,27 @@
     data-dashboard-first-time-volunteers-value="<%= @first_time_volunteers_count %>"
     data-dashboard-total-male-value="<%= @gender_stats['male'] || 0 %>"
     data-dashboard-total-female-value="<%= @gender_stats['female'] || 0 %>"
-    data-dashboard-total-unknown-value="<%= @gender_stats['unknown'] || 0 %>">
+    data-dashboard-total-unknown-value="<%= @gender_stats['unknown'] || 0 %>"
+    data-dashboard-error-value="<%= t '.error' %>">
     <div class="row g-3">
       <div class="col-md-4">
         <div class="card-with-border">
           <div class="card-body">
-            <div data-dashboard-target="participantsContainer"></div>
+            <div data-dashboard-target="participants"></div>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card-with-border">
           <div class="card-body">
-            <div data-dashboard-target="volunteersContainer"></div>
+            <div data-dashboard-target="volunteers"></div>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card-with-border">
           <div class="card-body">
-            <div data-dashboard-target="genderContainer"></div>
+            <div data-dashboard-target="gender"></div>
           </div>
         </div>
       </div>

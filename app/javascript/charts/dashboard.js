@@ -1,5 +1,40 @@
 import ApexCharts from 'apexcharts'
 
+const translations = {
+  ru: {
+    participants: 'Участники',
+    totalResults: 'Всего участников',
+    personalBests: 'Личные рекорды',
+    others: 'Остальные',
+    newcomers: 'Впервые',
+    newcomersS95: 'Впервые на S95',
+    volunteers: 'Волонтёры',
+    totalVolunteers: 'Всего волонтеров',
+    gender: 'Распределение по полу',
+    male: 'Мужчины',
+    female: 'Женщины',
+    unknown: 'Неизвестные',
+    noData: 'Пока нет данных за эту неделю',
+    people: 'чел.',
+  },
+  rs: {
+    participants: 'Učesnici',
+    totalResults: 'Ukupno rezultata',
+    personalBests: 'Osobni rekordi',
+    others: 'Ostali',
+    newcomers: 'Prvi put',
+    newcomersS95: 'Prvi put na S95',
+    volunteers: 'Vladeoci',
+    totalVolunteers: 'Ukupno vladeoci',
+    gender: 'Raspored po polu',
+    male: 'Muškarci',
+    female: 'Žene',
+    unknown: 'Nepoznati',
+    noData: 'Nema podataka za ovu nedelju',
+    people: 'osoba',
+  }
+}
+
 export default class DashboardCharts {
   constructor(totalResults, personalBests, firstRuns, totalVolunteers, firstTimeVolunteers, totalMale, totalFemale, totalUnknown) {
     this.totalResults = totalResults;
@@ -13,6 +48,8 @@ export default class DashboardCharts {
   }
 
   initializeCharts(participantsContainer, volunteersContainer, genderContainer) {
+    this.t = translations[document.documentElement.lang === 'rs' ? 'rs' : 'ru'];
+
     if (participantsContainer) {
       const participantsChart = new ApexCharts(participantsContainer, this.#participantsChartOptions());
       participantsChart.render();
@@ -29,7 +66,69 @@ export default class DashboardCharts {
     }
   }
 
-  #getBasePieChartOptions(title, series, labels) {
+  #participantsChartOptions() {
+    const newcomers = this.firstRuns;
+    const personalBestsExcludingNewcomers = Math.max(0, this.personalBests - this.firstRuns);
+    const others = Math.max(0, this.totalResults - this.firstRuns - personalBestsExcludingNewcomers);
+
+    const series = [];
+    const labels = [];
+
+    if (newcomers) {
+      series.push(newcomers);
+      labels.push(this.t.newcomersS95);
+    }
+    if (personalBestsExcludingNewcomers) {
+      series.push(personalBestsExcludingNewcomers);
+      labels.push(this.t.personalBests);
+    }
+    if (others) {
+      series.push(others);
+      labels.push(this.t.others);
+    }
+
+    if (series.length === 0) {
+      return this.#emptyChartOptions(this.t.participants, this.t.noData);
+    } else {
+      return this.#basePieChartOptions(`${this.t.totalResults}: ${this.totalResults}`, series, labels);
+    }
+  }
+
+  #volunteersChartOptions() {
+    const newcomerVolunteers = this.firstTimeVolunteers;
+    const experiencedVolunteers = Math.max(0, this.totalVolunteers - this.firstTimeVolunteers);
+
+    const series = [];
+    const labels = [];
+
+    if (newcomerVolunteers) {
+      series.push(newcomerVolunteers);
+      labels.push(this.t.newcomers);
+    }
+    if (experiencedVolunteers) {
+      series.push(experiencedVolunteers);
+      labels.push(this.t.others);
+    }
+
+    if (series.length === 0) {
+      return this.#emptyChartOptions(this.t.volunteers, this.t.noData);
+    } else {
+      return this.#basePieChartOptions(`${this.t.totalVolunteers}: ${this.totalVolunteers}`, series, labels);
+    }
+  }
+
+  #genderChartOptions() {
+    const series = [this.totalMale, this.totalFemale];
+    const labels = [this.t.male, this.t.female];
+    if (this.totalUnknown) {
+      series.push(this.totalUnknown);
+      labels.push(this.t.unknown);
+    }
+
+    return this.#basePieChartOptions(this.t.gender, series, labels);
+  }
+
+  #basePieChartOptions(title, series, labels) {
     return {
       chart: {
         height: 200,
@@ -56,7 +155,7 @@ export default class DashboardCharts {
       },
       tooltip: {
         y: {
-          formatter: val => `${val} чел.`
+          formatter: val => `${val} ${this.t.people}`
         }
       },
       theme: {
@@ -65,72 +164,8 @@ export default class DashboardCharts {
     };
   }
 
-  #participantsChartOptions() {
-    const newcomers = this.firstRuns;
-    const personalBestsExcludingNewcomers = Math.max(0, this.personalBests - this.firstRuns);
-    const others = Math.max(0, this.totalResults - this.firstRuns - personalBestsExcludingNewcomers);
-
-    const seriesData = [];
-    const labelsData = [];
-
-    if (newcomers > 0) {
-      seriesData.push(newcomers);
-      labelsData.push('Впервые на S95');
-    }
-    if (personalBestsExcludingNewcomers > 0) {
-      seriesData.push(personalBestsExcludingNewcomers);
-      labelsData.push('Личные рекорды');
-    }
-    if (others > 0) {
-      seriesData.push(others);
-      labelsData.push('Остальные');
-    }
-
-    const series = seriesData;
-    const labels = labelsData;
-
-    if (series.length === 0) {
-      return this.#getEmptyChartOptions('Участники', 'Пока нет данных за эту неделю');
-    }
-
-    return this.#getBasePieChartOptions(`Всего участников: ${this.totalResults}`, series, labels);
-  }
-
-  #volunteersChartOptions() {
-    const newcomerVolunteers = this.firstTimeVolunteers;
-    const experiencedVolunteers = Math.max(0, this.totalVolunteers - this.firstTimeVolunteers);
-
-    const seriesData = [];
-    const labelsData = [];
-
-    if (newcomerVolunteers > 0) {
-      seriesData.push(newcomerVolunteers);
-      labelsData.push('Впервые');
-    }
-    if (experiencedVolunteers > 0) {
-      seriesData.push(experiencedVolunteers);
-      labelsData.push('Остальные');
-    }
-
-    const series = seriesData;
-    const labels = labelsData;
-
-    if (series.length === 0) {
-      return this.#getEmptyChartOptions('Волонтёры', 'Пока нет данных за эту неделю');
-    }
-
-    return this.#getBasePieChartOptions(`Всего волонтеров: ${this.totalVolunteers}`, series, labels);
-  }
-
-  #genderChartOptions() {
-    const series = [this.totalMale, this.totalFemale, this.totalUnknown];
-    const labels = ['Мужчины', 'Женщины', 'Неизвестные'];
-
-    return this.#getBasePieChartOptions('Распределение по полу', series, labels);
-  }
-
-  #getEmptyChartOptions(title, message) {
-    const baseOptions = this.#getBasePieChartOptions(title, [1], [message]);
+  #emptyChartOptions(title, message) {
+    const baseOptions = this.#basePieChartOptions(title, [1], [message]);
 
     return {
       ...baseOptions,

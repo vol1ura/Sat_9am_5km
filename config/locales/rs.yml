@@ -810,6 +810,9 @@ rs:
       volunteers: Volonteri
       first_man: Prvi čovek
       first_woman: Prva žena
+      dashboard: Statistika u poslednjoj nedelji
+    dashboard:
+      error: Neuspešno učitavanje statistike u poslednjoj nedelji. Pokušajte ponovno.
     show:
       title: 'Rezultati trke %{activity}'
       description: 'Protokol trke %{activity}, lista volontera i kratki izveštaj o trci'
