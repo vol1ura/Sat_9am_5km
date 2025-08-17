@@ -21,7 +21,7 @@ export default class extends Controller {
           feature.classList.remove('feature-active')
         }
       })
-    }, 250)
+    }, 200)
   }
 
   showSlide(event) {

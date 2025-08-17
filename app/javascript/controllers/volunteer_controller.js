@@ -46,7 +46,7 @@ export default class extends Controller {
       this.volunteeringChart.render()
       this.volunteeringChartRendered = true
     } catch (error) {
-      console.error('Ошибка создания диаграммы волонтёрств:', error)
+      console.error('Error creating volunteering chart:', error)
     }
   }
 

@@ -1,6 +1,6 @@
 import ApexCharts from 'apexcharts'
-import { ruLocale } from './ru'
-import { rsLocale } from './rs'
+import { ruLocale } from 'charts/ru'
+import { rsLocale } from 'charts/rs'
 
 const translations = {
   ru: {
