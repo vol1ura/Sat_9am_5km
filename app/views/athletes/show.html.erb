@@ -27,25 +27,35 @@
 
 <div class="accordion accordion-flush" id="accordionPersonalBest">
   <div class="accordion-item">
-    <%= turbo_frame_tag 'friends_list', src: friends_athlete_statistics_path(@athlete) do %>
-      <h2 class="accordion-header" id="flush-friends">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFriends" aria-expanded="false" aria-controls="flush-collapseFriends">
-          <span class="badge text-light bg-primary me-3" id="friends-counter">&nbsp</span>
-          <%= t('.friends') %>
-        </button>
-      </h2>
-    <% end %>
+    <h2 class="accordion-header" id="flush-friends">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFriends" aria-expanded="false" aria-controls="flush-collapseFriends">
+        <span class="badge text-light bg-primary me-3" id="friends-counter"><%= @athlete.friends.size %></span>
+        <%= t('.friends') %>
+      </button>
+    </h2>
+    <div id="flush-collapseFriends" class="accordion-collapse collapse" aria-labelledby="flush-friends" data-bs-parent="#accordionPersonalBest">
+      <div class="accordion-body">
+        <%= turbo_frame_tag 'friends_list', src: friends_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+          <%= render '/loading_indicator' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="accordion-item">
-    <%= turbo_frame_tag 'followers_list', src: followers_athlete_statistics_path(@athlete) do %>
-      <h2 class="accordion-header" id="flush-followers">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFollowers" aria-expanded="false" aria-controls="flush-collapseFollowers">
-          <span class="badge text-light bg-primary me-3" id="followers-counter">&nbsp</span>
-          <%= t('.followers') %>
-        </button>
-      </h2>
-    <% end %>
+    <h2 class="accordion-header" id="flush-followers">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFollowers" aria-expanded="false" aria-controls="flush-collapseFollowers">
+        <span class="badge text-light bg-primary me-3" id="followers-counter"><%= @athlete.followers.size %></span>
+        <%= t('.followers') %>
+      </button>
+    </h2>
+    <div id="flush-collapseFollowers" class="accordion-collapse collapse" aria-labelledby="flush-followers" data-bs-parent="#accordionPersonalBest">
+      <div class="accordion-body">
+        <%= turbo_frame_tag 'followers_list', src: followers_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+          <%= render '/loading_indicator' %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <% if @athlete.club %>
     <div class="accordion-item">
