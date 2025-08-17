@@ -1,6 +1,33 @@
+import ApexCharts from 'apexcharts'
+import { ruLocale } from './ru'
+import { rsLocale } from './rs'
+
+const translations = {
+  ru: {
+    recentResults: 'Недавние результаты',
+    time: 'время',
+  },
+  rs: {
+    recentResults: 'Nedavni rezultati',
+    time: 'vreme',
+  }
+}
+
 export default class AthleteCharts {
   constructor(rows) {
     this.rows = rows;
+    this.currentLocale = document.documentElement.lang === 'rs' ? 'rs' : 'ru';
+    this.t = translations[this.currentLocale];
+  }
+
+  render(container) {
+    Apex.chart = {
+      locales: [ruLocale, rsLocale],
+      defaultLocale: this.currentLocale,
+    }
+
+    const resultsChart = new ApexCharts(container, this.#resultsChartOptions(this.t.recentResults, { max_count: 15 }));
+    resultsChart.render();
   }
 
   #resultsData(max_count) {
@@ -8,7 +35,7 @@ export default class AthleteCharts {
     const labels = [];
 
     Array.prototype.slice.call(this.rows, 0, max_count).forEach(row => {
-      const time_cell = row.querySelector("td.total-time");
+      const time_cell = row.querySelector('td.total-time');
       labels.push(time_cell.textContent);
       points.push([
         Number(time_cell.dataset.timestamp),
@@ -23,7 +50,7 @@ export default class AthleteCharts {
     return `${Math.floor(seconds / 60)}:${('00' + seconds % 60).slice(-2)}`;
   }
 
-  resultsChartOptions(title, { max_count = undefined } = {}) {
+  #resultsChartOptions(title, { max_count = undefined } = {}) {
     const data = this.#resultsData(max_count);
     return {
       chart: {
@@ -48,7 +75,7 @@ export default class AthleteCharts {
         }
       },
       series: [{
-        name: 'время',
+        name: this.t.time,
         data: data.points
       }],
       xaxis: {
