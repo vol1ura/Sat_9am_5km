@@ -31,6 +31,10 @@ every 1.month, at: '1' do
   rake 'processing:purge_unattached_files'
 end
 
+every 3.months, at: '1' do
+  command "rm -rf #{File.join ENV.fetch('APP_DEPLOY_PATH'), 'shared/tmp/cache/bootsnap/*'}"
+end
+
 every :thursday, at: '19' do
   rake 'notification:rage_badges_expiration'
 end
