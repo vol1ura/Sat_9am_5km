@@ -59,7 +59,7 @@ rs:
         successful: 'Podaci o volonteru %{volunteer_name} uspešno ažurirani'
   results:
     explanation:
-      operations:
+      actions:
         title: Objašnjenja
         items:
           - 'Ukloniti - ukloniće ceo red.'
@@ -68,6 +68,11 @@ rs:
           - 'Ukloniti 🏃 - uklanja učesnika iz reda, zamenjujući njega i sve naredne učesnike učesnikom iz sledećeg reda. To jest, svi učesnici se pomeraju za jednu poziciju, počevši od uklonjenog učesnika.'
           - 'Resetovati 🏃 - resetuje učesnika. U protokolu će pisati Nepoznat.'
           - 'Dodati 🔝 - umeće novi rezultat pre odabranog reda.'
+      batch_actions:
+        title: Grupne operacije
+        items:
+          - 'Ukloniti - obriše red bez ponovnog brojanja pozicija'
+          - 'Promeni vreme - promeni vreme za odabrane rezultate'
       important:
         title: Pažnja!
         items:
@@ -154,13 +159,15 @@ rs:
         few: "Uspešno obrisano: %{count} %{plural_model}"
         many: "Uspešno obrisano: %{count} %{plural_model}"
         other: "Uspešno obrisano: %{count} %{plural_model}"
+      successfully_moved_time: "Promena vremena (%{sign}%{delta}sek) za %{count} rezultata"
       selection_toggle_explanation: "(Označi sve / Deselektuj)"
       action_label: "%{title}"
       labels:
-        destroy: "Obriši"
-        reunite: "Spoji"
-        gender_set: "Postavi pol"
-        change_roles: "Promeni uloge"
+        destroy: Obriši
+        reunite: Spoji
+        gender_set: Postavi pol
+        change_roles: Promeni uloge
+        move_time: Promeni vreme
     comments:
       created_at: "Datum kreiranja"
       resource_type: "Tip resursa"
@@ -193,6 +200,7 @@ rs:
       result_successfully_appended: 'Pozicija №%{position} uspešno dodata u protokol.'
       result_successfully_deleted: 'Odsek je uspešno uklonjen, pozicije su preračunate.'
       batch_destroy_confirm: 'Da li ste sigurni da želite da obrišete izabrane rezultate?'
+      batch_move_time_confirm: 'Da li ste sigurni da želite da promenite vreme za izabrane rezultate?'
     newsletters:
       notified: 'Na vaš Telegram je poslat uzorak biltena'
     users:

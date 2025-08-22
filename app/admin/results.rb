@@ -92,9 +92,15 @@ ActiveAdmin.register Result do
     )
   end
 
-  sidebar I18n.t('.results.explanation.operations.title'), only: :index do
+  sidebar I18n.t('.results.explanation.actions.title'), only: :index do
     ul do
-      I18n.t('.results.explanation.operations.items').each { |item| li item }
+      I18n.t('.results.explanation.actions.items').each { |item| li item }
+    end
+  end
+
+  sidebar I18n.t('.results.explanation.batch_actions.title'), only: :index do
+    ul do
+      I18n.t('.results.explanation.batch_actions.items').each { |item| li item }
     end
   end
 
@@ -187,12 +193,37 @@ ActiveAdmin.register Result do
       batch_action_collection.where(id: ids).destroy_all
     end
     redirect_to(
-      collection_path,
+      collection_path(parent),
       notice: t(
         'active_admin.batch_actions.succesfully_destroyed',
         count: ids.count,
         model: t('activerecord.models.result.one'),
         plural_model: t('activerecord.models.result.many'),
+      ),
+    )
+  end
+
+  batch_action(
+    :move_time,
+    confirm: I18n.t('active_admin.results.batch_move_time_confirm'),
+    if: proc { !parent.published },
+    form: {
+      type: [%w[Добавить up], %w[Отнять down]],
+      minutes: 60.times.map,
+      seconds: 60.times.map,
+    },
+  ) do |ids, inputs|
+    sign = inputs[:type] == 'up' ? '+' : '-'
+    delta = (inputs[:minutes].to_i * 60) + inputs[:seconds].to_i
+    Result.where(id: ids).update_all("total_time = total_time #{sign} INTERVAL '#{delta} seconds'")
+
+    redirect_to(
+      collection_path(parent),
+      notice: I18n.t(
+        'active_admin.results.batch_actions.successfully_moved_time',
+        sign: sign,
+        delta: delta,
+        count: ids.count,
       ),
     )
   end
