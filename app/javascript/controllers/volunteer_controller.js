@@ -95,6 +95,9 @@ export default class extends Controller {
         },
       },
       xaxis: { categories },
+      yaxis: {
+        forceNiceScale: true,
+      },
       legend: {
         position: 'right',
         offsetY: 40
