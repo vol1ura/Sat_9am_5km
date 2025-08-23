@@ -1,0 +1,387 @@
+<% head_info :title, 'Бег, спасающий жизни - благотворительное мероприятие и забег в Кузьминках' %>
+<% head_info :description, 'Ежегодное мероприятие в Кузьминках, которое проводится в рамках пробежки С95. Главная цель – информирование участников о донорстве костного мозга и вступление участников в регистр потенциальных доноров.' %>
+<% head_info :og_image, '/images/donor.webp' %>
+
+<!-- Hero Section -->
+<div class="mb-4 mb-md-5 mt-n3" style="background: linear-gradient(135deg, #2a2951 0%, #a6e9d5 100%); padding: 60px 0; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(42, 41, 81, 0.7);"></div>
+  <div class="container position-relative" style="z-index: 2;">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <h1 class="display-3 fw-bold text-white mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+          <i class="fas fa-heart text-danger me-3"></i>&nbsp;Бег, спасающий жизни
+        </h1>
+        <p class="h5 text-white mb-4">
+          Ежегодное мероприятие в Кузьминках, которое проводится в рамках пробежки С95
+        </p>
+        <p class="h5 text-white">
+          Главная цель – информирование участников о донорстве костного мозга
+          и вступление участников в регистр потенциальных доноров
+        </p>
+        <div class="mt-4 d-flex gap-3 flex-wrap justify-content-center">
+          <span class="badge bg-light text-dark" style="font-size: 1rem;">
+            <i class="fas fa-calendar-alt text-info"></i> 6 сентября 2025
+          </span>
+          <a class="badge bg-light text-dark text-decoration-none" style="font-size: 1rem;" href="https://yandex.ru/maps/-/CHh4UY2G" target="_blank">
+            <i class="fas fa-map-marker-alt text-success"></i> Парк Кузьминки
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Decorative elements -->
+  <div style="position: absolute; top: 20px; right: 20px; opacity: 0.1;">
+    <i class="fas fa-running" style="font-size: 8rem; color: white;"></i>
+  </div>
+  <div style="position: absolute; bottom: 20px; left: 20px; opacity: 0.1;">
+    <i class="fas fa-hands-helping" style="font-size: 6rem; color: white;"></i>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-6">
+
+      <!-- Hero Image -->
+      <div class="text-center mb-4 mb-md-5">
+        <div class="position-relative d-inline-block" style="border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <%= image_tag '/images/donor.webp',
+              alt: 'Бег, спасающий жизни',
+              class: 'img-fluid',
+              style: 'border-radius: 20px; width: 100%; object-fit: cover;' %>
+          <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(45deg, rgba(42, 41, 81, 0.1) 0%, rgba(166, 233, 213, 0.1) 100%); border-radius: 20px;"></div>
+          <div class="position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(transparent, rgba(0,0,0,0.5)); border-radius: 0 0 20px 20px;">
+            <p class="text-white mb-0 fw-bold">Бег, спасающий жизни - больше, чем спорт</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date and Location Card -->
+      <div class="card shadow mb-4 mb-md-5" style="border-radius: 20px; background: linear-gradient(145deg,rgb(229, 249, 248) 0%, #ffffff 100%);">
+        <div class="card-body p-4">
+          <h2 class="h3 mb-4 text-center text-info">
+            <i class="fas fa-info-circle me-2"></i>
+            Дата и место проведения
+          </h2>
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center p-3 rounded h-100" style="background: linear-gradient(135deg, #009DAC 0%,rgb(32, 192, 201) 100%); color: white;">
+                <div class="me-3" style="font-size: 2rem;">
+                  <i class="fas fa-calendar-check"></i>
+                </div>
+                <div>
+                  <h5 class="mb-1 text-white">Дата проведения</h5>
+                  <p class="mb-0 fw-bold text-white">6 сентября 2025 года</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center p-3 rounded h-100 position-relative" style="background: linear-gradient(135deg, #198754 0%, #20c997 100%); color: white;">
+                <div class="me-3" style="font-size: 2rem;">
+                  <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div>
+                  <h5 class="mb-1 text-white">Локация</h5>
+                  <a class="mb-0 fw-bold text-white text-decoration-none stretched-link" href="https://yandex.ru/maps/-/CHh4UY2G" target="_blank">Парк Кузьминки (главная сцена)</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Program Timeline -->
+      <div class="card shadow mb-4 mb-md-5" style="border-radius: 20px; background: linear-gradient(145deg,rgb(244, 243, 250) 0%, #ffffff 100%);">
+        <div class="card-body p-4">
+          <h2 class="h3 mb-4 text-center text-dark">
+            <i class="fas fa-clock text-primary me-2"></i>
+            Программа мероприятия
+          </h2>
+
+          <div class="timeline" style="position: relative;">
+            <div style="position: absolute; left: 30px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, #2a2951, #a6e9d5);"></div>
+
+            <div class="timeline-item mb-4" style="position: relative; padding-left: 70px;">
+              <div style="position: absolute; left: 18px; top: 5px; width: 25px; height: 25px; background: #2a2951; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-users text-white" style="font-size: 0.7rem;"></i>
+              </div>
+              <div class="p-3 rounded shadow-sm" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%); border-left: 4px solid #2a2951;">
+                <h5 class="fw-bold text-primary mb-1">8:30</h5>
+                <p class="mb-0">Сбор участников</p>
+              </div>
+            </div>
+
+            <div class="timeline-item mb-4" style="position: relative; padding-left: 70px;">
+              <div style="position: absolute; left: 18px; top: 5px; width: 25px; height: 25px; background: #198754; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-dumbbell text-white" style="font-size: 0.7rem;"></i>
+              </div>
+              <div class="p-3 rounded shadow-sm" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%); border-left: 4px solid #198754;">
+                <h5 class="fw-bold text-success mb-1">8:45</h5>
+                <p class="mb-0">Разминка и брифинг</p>
+              </div>
+            </div>
+
+            <div class="timeline-item mb-4" style="position: relative; padding-left: 70px;">
+              <div style="position: absolute; left: 18px; top: 5px; width: 25px; height: 25px; background: #2a2951; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-flag text-white" style="font-size: 0.7rem;"></i>
+              </div>
+              <div class="p-3 rounded shadow-sm" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%); border-left: 4px solid #2a2951;">
+                <h5 class="fw-bold text-primary mb-1">9:00</h5>
+                <p class="mb-0 fw-bold">Старт забега</p>
+              </div>
+            </div>
+
+            <div class="timeline-item mb-4" style="position: relative; padding-left: 70px;">
+              <div style="position: absolute; left: 18px; top: 5px; width: 25px; height: 25px; background: #198754; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-flag-checkered text-white" style="font-size: 0.7rem;"></i>
+              </div>
+              <div class="p-3 rounded shadow-sm" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%); border-left: 4px solid #198754;">
+                <h5 class="fw-bold text-success mb-1">10:00</h5>
+                <p class="mb-0">Ориентировочный финиш замыкающих</p>
+              </div>
+            </div>
+
+            <div class="timeline-item mb-4" style="position: relative; padding-left: 70px;">
+              <div style="position: absolute; left: 18px; top: 5px; width: 25px; height: 25px; background: #2a2951; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-microphone text-white" style="font-size: 0.7rem;"></i>
+              </div>
+              <div class="p-3 rounded shadow-sm" style="background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 100%); border-left: 4px solid #2a2951;">
+                <h5 class="fw-bold text-primary mb-1">10:15</h5>
+                <p class="mb-0">Лекция "тема уточняется" (ведущий: <em>уточняется</em>)</p>
+              </div>
+            </div>
+
+            <div class="timeline-item mb-4" style="position: relative; padding-left: 70px;">
+              <div style="position: absolute; left: 18px; top: 5px; width: 25px; height: 25px; background: #d63384; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-heart text-white" style="font-size: 0.7rem;"></i>
+              </div>
+              <div class="p-3 rounded shadow-sm" style="background: linear-gradient(135deg, #ffe6f0 0%, #ffffff 100%); border-left: 4px solid #d63384;">
+                <h5 class="fw-bold text-danger mb-1">10:00 - 12:00</h5>
+                <p class="mb-0 fw-bold">Типирование на вступление в реестр доноров костного мозга</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to Participate -->
+      <div class="card shadow mb-4 mb-md-5" style="border-radius: 20px; background: linear-gradient(135deg, #e8f5f0 0%, #ffffff 100%);">
+        <div class="card-body p-4">
+          <h2 class="h3 mb-4 text-center text-success">
+            <i class="fas fa-shoe-prints me-2"></i>
+            Как участвовать
+          </h2>
+
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="p-4 rounded shadow-sm h-100" style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border: 2px solid #a6e9d5;">
+                <div class="text-center mb-3">
+                  <i class="fas fa-running text-success" style="font-size: 3rem;"></i>
+                </div>
+                <h4 class="text-center mb-3 text-success">Пробежка или прогулка</h4>
+                <p class="text-center mb-0">
+                  Дистанцию можно пробежать в любом комфортном темпе или пройти,
+                  если вы только делаете первые шаги в беге и 5 километров – это слишком сложно.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-4 rounded shadow-sm h-100" style="background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); border: 2px solid #2a2951;">
+                <div class="text-center mb-3">
+                  <i class="fab fa-telegram-plane text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h4 class="text-center mb-3" style="color: #2a2951;">Регистрация</h4>
+                <p class="text-center mb-3">
+                  Для попадания в протокол забега нужно зарегистрироваться в телеграм-боте
+                  (это делается один раз на все наши мероприятия).
+                </p>
+                <div class="text-center">
+                  <%= link_to '@sat9am5kmbot', 'https://t.me/sat9am5kmbot',
+                      target: '_blank',
+                      class: 'btn btn-primary btn-lg fw-bold',
+                      style: 'background: linear-gradient(135deg, #2a2951 0%, #4a5568 100%); border: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(42, 41, 81, 0.3); transition: all 0.3s ease;' %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 rounded" style="background: linear-gradient(135deg, #fecba1 0%, #fff3e0 100%); border-left: 5px solid #fecba1;">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-qrcode text-warning me-3" style="font-size: 2rem;"></i>
+              <div>
+                <h5 class="mb-1 text-dark">После финиша</h5>
+                <p class="mb-0">Предъявите волонтёру QR-код, полученный в боте. Так ваше имя будет в списке финишёров и вы увидите свой результат.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partners and Organizers -->
+      <div class="card shadow mb-4 mb-md-5" style="border-radius: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
+        <div class="card-body p-4">
+          <h2 class="h3 mb-4 text-center text-primary">
+            <i class="fas fa-handshake me-2"></i>
+            Организаторы и партнёры
+          </h2>
+          <p class="text-center mb-4 text-muted">Забег проводится и поддерживается:</p>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center p-3 rounded shadow-sm h-100" style="background: linear-gradient(135deg, #2a2951 0%, #4a5568 100%); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-home text-white me-3" style="font-size: 1.5rem;"></i>
+                <div>
+                  <%= link_to 'Платформа С95', root_path, target: '_blank', class: 'text-white fw-bold text-decoration-none stretched-link' %>
+                  <br><small class="text-light">Организатор</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="d-flex align-items-center p-3 rounded shadow-sm h-100" style="background: linear-gradient(135deg,rgb(29, 29, 29) 0%,rgb(169, 168, 168) 100%); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fab fa-telegram-plane text-white me-3" style="font-size: 1.5rem;"></i>
+                <div>
+                  <%= link_to 'Миссия 42.2', 'https://t.me/mission_42_2', target: '_blank', class: 'text-white fw-bold text-decoration-none stretched-link' %>
+                  <br><small class="text-light">Беговой клуб</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="d-flex align-items-center p-3 rounded shadow-sm h-100" style="background: linear-gradient(135deg, #198754 0%, #20c997 100%); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-tree text-white me-3" style="font-size: 1.5rem;"></i>
+                <div>
+                  <%= link_to 'Администрация парка Кузьминки-Люблино', 'https://park-kuzminki.ru/', target: '_blank', class: 'text-white fw-bold text-decoration-none stretched-link' %>
+                  <br><small class="text-light">Место проведения</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="d-flex align-items-center p-3 rounded shadow-sm h-100" style="background: linear-gradient(135deg, #d63384 0%, #e91e63 100%); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-heartbeat text-white me-3" style="font-size: 1.5rem;"></i>
+                <div>
+                  <%= link_to 'НМИЦ Гематологии', 'https://blood.ru/', target: '_blank', class: 'text-white fw-bold text-decoration-none stretched-link' %>
+                  <br><small class="text-light">Медицинский партнер</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="d-flex align-items-center justify-content-center p-3 rounded shadow-sm" style="background: linear-gradient(135deg, #fecba1 0%, #ffd54f 100%); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-balance-scale text-dark me-3" style="font-size: 1.5rem;"></i>
+                <div class="text-center">
+                  <%= link_to 'Юридическая фирма White Stone', 'https://www.wst.one/', target: '_blank', class: 'text-dark fw-bold text-decoration-none stretched-link' %>
+                  <br><small class="text-muted">Информационная и юридическая поддержка</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About S95 Movement -->
+      <div class="card shadow mb-4 mb-md-5" style="border-radius: 20px; background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%); border: 2px solid #2a2951;">
+        <div class="card-body p-4 text-center">
+          <div class="mb-4">
+            <i class="fas fa-globe text-primary" style="font-size: 4rem;"></i>
+          </div>
+          <h2 class="h3 mb-4 text-primary">
+            <i class="fas fa-users me-2"></i>
+            О движении С95
+          </h2>
+          <p class="lead mb-4" style="line-height: 1.8; color: #495057;">
+            Как и любая благотворительность – мы <strong>не разовая акция</strong>, а регулярное мероприятие,
+            проводимое каждую субботу почти в <span class="badge bg-primary px-2 py-1">30 парках</span>
+            России, Белоруссии и Сербии.
+          </p>
+          <p class="mb-4" style="color: #6c757d;">
+            Выбрать ближайший парк можно на карте и присоединиться к пробежкам или волонтёрству в любое время.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <%= link_to events_path,
+                class: 'btn btn-lg fw-bold',
+                style: 'background: linear-gradient(135deg, #2a2951 0%, #4a5568 100%); color: white; border: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(42, 41, 81, 0.3); transition: all 0.3s ease; padding: 12px 30px;' do %>
+              <i class="fas fa-map-marked-alt me-2"></i>
+              Мероприятия
+            <% end %>
+            <a href="#results" class="btn btn-lg fw-bold" style="background: linear-gradient(135deg, #d63384 0%,rgba(214, 51, 132, 0.76) 100%); color: white; border: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3); transition: all 0.3s ease; padding: 12px 30px;">
+              <i class="fas fa-chart-bar me-2"></i>
+              Результаты
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div id="results" class="card shadow mb-4 mb-md-5" style="border-radius: 20px; background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%); border: 3px solid #d63384; overflow: hidden;">
+        <div class="card-body p-0">
+          <div class="p-3 text-center text-white position-relative" style="background: linear-gradient(135deg, #d63384 0%, #rgba(214, 51, 132, 0.95) 50%, #rgba(214, 51, 132, 0.9) 100%); overflow: hidden;">
+            <div class="position-relative" style="z-index: 2;">
+              <h2 class="h2 mb-2 fw-bold text-dark">
+                Результаты в прошлые годы
+              </h2>
+              <p class="mb-0 lead text-dark">Бег, спасающий жизни</p>
+            </div>
+          </div>
+
+          <!-- 2024 Results -->
+          <div class="p-3">
+            <div class="text-center mb-4">
+              <h3 class="display-6 fw-bold text-danger">2024 год</h3>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="text-center p-4 rounded shadow-sm h-100" style="background: linear-gradient(135deg, #2a2951 0%, #4a5568 100%); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                  <div class="mb-3">
+                    <i class="fas fa-running text-white" style="font-size: 3rem;"></i>
+                  </div>
+                  <div class="display-3 fw-bold text-white mb-2">250</div>
+                  <h5 class="text-white mb-0">Участников</h5>
+                  <small class="text-light">присоединились к забегу</small>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="text-center p-4 rounded shadow-sm h-100" style="background: linear-gradient(135deg, #198754 0%, #20c997 100%); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                  <div class="mb-3">
+                    <i class="fas fa-hands-helping text-white" style="font-size: 3rem;"></i>
+                  </div>
+                  <div class="display-3 fw-bold text-white mb-2">42</div>
+                  <h5 class="text-white mb-0">Волонтёров</h5>
+                  <small class="text-light">помогали в организации</small>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="text-center p-4 rounded shadow-sm h-100" style="background: linear-gradient(135deg,rgb(210, 65, 138) 0%, #d63384 100%); transition: transform 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                  <div class="position-relative" style="z-index: 2;">
+                    <div class="mb-3">
+                      <i class="fas fa-heart text-white" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="display-3 fw-bold text-white mb-2">38</div>
+                    <h5 class="text-white mb-0">Новых доноров</h5>
+                    <small class="text-light">вступили в реестр</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Impact Statement -->
+            <div class="mt-4 p-4 rounded text-center" style="background: linear-gradient(135deg, #fecba1 0%, #fff3e0 100%); border: 2px solid #fecba1;">
+              <div class="mb-2">
+                <i class="fas fa-heartbeat text-danger" style="font-size: 2rem;"></i>
+              </div>
+              <h4 style="color: #2a2951;">38 потенциальных спасателей жизни!</h4>
+              <p class="mb-0" style="color: #6c757d;">
+                Каждый новый донор костного мозга может спасти жизнь человека, страдающего от заболевания крови
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

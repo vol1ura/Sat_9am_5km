@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  ALLOWED_PAGES = %w[about feedback joining rules support additional-events privacy-policy robots 5za5].freeze
+  ALLOWED_PAGES = %w[about feedback joining rules support additional-events privacy-policy robots 5za5 donor].freeze
   MAX_FEEDBACK_SIZE = 950
 
   before_action :validate_page, only: :show
 
-  layout 'home', only: [:index]
+  layout :page_layout
 
   def index
     @local_events = Event.in_country(top_level_domain).unscope(:order)
@@ -55,5 +55,9 @@ class PagesController < ApplicationController
 
   def validate_page
     render file: 'public/404.html', status: :not_found if ALLOWED_PAGES.exclude?(page_name)
+  end
+
+  def page_layout
+    params[:action] == 'index' || page_name == 'donor' ? 'home' : 'application'
   end
 end
