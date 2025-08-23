@@ -2,8 +2,8 @@
 Description=Puma HTTP Server Accept Sockets for s95 (production)
 
 [Socket]
-#ListenStream=/path/to/app/shared/tmp/sockets/s95-puma.sock
-ListenStream=0.0.0.0:3000
+ListenStream=/path/to/app/shared/tmp/sockets/puma.sock
+#ListenStream=0.0.0.0:3000
 
 # Don't let systemd accept the request, wait for Puma to do that.
 # Systemd will start the puma service upon first request if it wasn't started.
