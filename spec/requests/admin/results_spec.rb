@@ -3,7 +3,7 @@
 RSpec.describe '/admin/results' do
   let(:user) { create(:user) }
   let(:event) { create(:event) }
-  let(:activity) { create(:activity, event:) }
+  let(:activity) { create(:activity, event: event, date: 1.week.ago) }
   let!(:results) { create_list(:result, 2, activity:) }
 
   before do

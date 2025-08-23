@@ -2,11 +2,11 @@
 
 RSpec.describe '/admin/activities/1/volunteers' do
   let(:user) { create(:user) }
-  let(:activity) { create(:activity) }
+  let(:activity) { create(:activity, date: 1.week.ago) }
 
   before do
     create(:permission, user: user, action: 'manage', subject_class: 'Volunteer', event_id: activity.event_id)
-    sign_in user
+    sign_in user, scope: :user
   end
 
   describe 'GET /admin/activities/1/volunteers' do

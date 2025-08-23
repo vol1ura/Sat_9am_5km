@@ -14,7 +14,7 @@ active_admin_form_for [:admin, resource] do |f|
       :date,
       as: :datepicker,
       datepicker_options: { min_date: '-2D', max_date: '+3M' },
-      input_html: { disabled: resource.results.exists? },
+      input_html: { disabled: resource.published || resource.results.exists? },
     )
     input(
       :description,

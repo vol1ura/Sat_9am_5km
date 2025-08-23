@@ -24,6 +24,9 @@ class Ability
     @user.permissions.each do |permission|
       can permission.action.to_sym, permission.subject_class.constantize, permission.params
     end
+    cannot :manage, Result, activity: { published: true, date: ..2.weeks.ago }
+    cannot :manage, Volunteer, activity: { published: true, date: ..2.weeks.ago }
+    cannot :update, Activity, published: true, date: ..2.weeks.ago
     cannot :destroy, Activity, published: true
     cannot :destroy, Athlete
   end
