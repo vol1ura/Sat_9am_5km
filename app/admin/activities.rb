@@ -70,11 +70,11 @@ ActiveAdmin.register Activity do
     )
   end
 
-  action_item :results, only: %i[show edit], if: proc { resource.token.nil? } do
+  action_item :results, only: %i[show edit], if: proc { resource.token.nil? && can?(:update, resource) } do
     link_to 'Редактор результатов', admin_activity_results_path(resource)
   end
 
-  action_item :volunteers, only: %i[show edit] do
+  action_item :volunteers, only: %i[show edit], if: proc { can?(:update, resource) } do
     link_to 'Редактор волонтёров', admin_activity_volunteers_path(resource)
   end
 
