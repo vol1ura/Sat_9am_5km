@@ -7,7 +7,7 @@ RSpec.describe '/volunteers' do
   let(:volunteer) { create(:volunteer, activity:) }
 
   before do
-    create(:permission, user: user, action: 'manage', subject_class: 'Volunteer')
+    create(:permission, user: user, action: 'manage', subject_class: 'Volunteer', event: activity.event)
     sign_in user, scope: :user
   end
 

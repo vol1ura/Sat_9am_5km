@@ -52,6 +52,9 @@ rs:
         last_name: prezime
         email: e-mail
         role: uloga
+        roles:
+          super_admin: glavni admin
+          admin: admin
         note: napomena
         telegram_user: telegram
         athlete: sportista
@@ -65,7 +68,6 @@ rs:
         event: događaj
         user: korisnik
         action: akcija
-        subject_id: id elementa
         subject_class: klasa objekata
       athlete:
         name: Ime PREZIME

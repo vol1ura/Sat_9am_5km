@@ -33,7 +33,7 @@ class User < ApplicationRecord
             size: { less_than: 10.megabytes }
   validate :promotions_must_be_available, if: :will_save_change_to_promotions?
 
-  enum :role, { admin: 0 }, validate: { allow_nil: true }
+  enum :role, { super_admin: 0, admin: 1 }, validate: { allow_nil: true }
 
   before_validation :format_emergency_contact, if: :will_save_change_to_emergency_contact_phone?
   before_save :update_athlete_name, if: proc { will_save_change_to_first_name? || will_save_change_to_last_name? }
@@ -42,11 +42,9 @@ class User < ApplicationRecord
     %w[email first_name last_name telegram_user]
   end
 
-  def volunteering_position_permission
-    permissions.find_by(subject_class: 'VolunteeringPosition', action: %w[manage update])
-  end
-
   def full_name = "#{first_name} #{last_name.upcase}"
+
+  def admin? = super || super_admin?
 
   private
 

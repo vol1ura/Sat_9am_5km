@@ -9,7 +9,7 @@ ActiveAdmin.register Permission do
 
   config.filters = false
 
-  permit_params :event_id, :action, :subject_class, :subject_id
+  permit_params :event_id, :action, :subject_class
 
   index download_links: false
 
@@ -18,8 +18,7 @@ ActiveAdmin.register Permission do
     f.inputs do
       f.input :subject_class, as: :select, collection: Permission::CLASSES
       f.input :action, as: :select, collection: Permission::ACTIONS
-      f.input :event
-      f.input :subject_id
+      f.input :event, as: :searchable_select
     end
     f.actions
   end

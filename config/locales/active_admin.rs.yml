@@ -288,7 +288,8 @@ rs:
         delete_model: Obriši poziciju
     scopes:
       all: Svi
-      admin: Administratori
+      admin: Admins
+      super_admin: Glavni admins
       supervisors: Nadzornici
       published: Objavljeno
       unpublished: Neobjavljeno

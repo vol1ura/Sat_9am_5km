@@ -287,6 +287,7 @@ ru:
     scopes:
       all: Все
       admin: Админы
+      super_admin: Главные админы
       supervisors: Руководители
       published: Опубликованы
       unpublished: Не опубликованы

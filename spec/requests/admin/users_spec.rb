@@ -5,7 +5,7 @@ RSpec.describe '/admin/users' do
 
   before do
     user.admin!
-    sign_in user
+    sign_in user, scope: :user
   end
 
   describe 'GET /admin/users' do
@@ -24,7 +24,14 @@ RSpec.describe '/admin/users' do
   end
 
   describe 'PATCH /admin/users/1/edit' do
-    it 'renders full form' do
+    it 'renders form without role field' do
+      get edit_admin_user_url(user)
+      expect(response).to be_successful
+      expect(response.body).not_to include 'user[role]'
+    end
+
+    it 'renders form with role field for super admin' do
+      user.super_admin!
       get edit_admin_user_url(user)
       expect(response).to be_successful
       expect(response.body).to include 'user[role]'

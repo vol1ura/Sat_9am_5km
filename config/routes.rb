@@ -96,7 +96,7 @@ Rails.application.routes.draw do
 
   get 'up', to: 'rails/health#show'
 
-  authenticate :user, ->(user) { user.admin? } do
+  authenticate :user, ->(user) { user.super_admin? } do
     mount Sidekiq::Web => 'sidekiq' if Rails.env.production?
     mount RailsPerformance::Engine => 'app_performance'
     mount PgHero::Engine => 'pg_stats'

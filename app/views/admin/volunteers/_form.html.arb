@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, activity, resource] do |f|
-  f.semantic_errors(*f.object.errors.attribute_names)
+active_admin_form_for [:admin, activity, resource] do |form|
+  form.semantic_errors(*form.object.errors.attribute_names)
+
   inputs 'Выберите участника и волонтёрскую роль', style: 'max-width: 500px;' do
+    render partial: '/admin/athlete_fields', locals: { resource:, form: }
     input :role
     input :comment, required: false
-    render partial: '/admin/athlete_fields', locals: { resource: resource, form: f }
   end
   actions
 end

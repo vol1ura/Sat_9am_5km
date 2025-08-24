@@ -18,6 +18,7 @@ ActiveAdmin.register User do
 
   scope :all
   scope :admin
+  scope :super_admin, if: -> { current_user.super_admin? }
   scope(:supervisors) { |scope| scope.joins(:permissions).distinct }
 
   index download_links: false do
@@ -28,8 +29,8 @@ ActiveAdmin.register User do
     if current_user.admin?
       column(:phone) { |user| user.phone.present? }
       column :note
-      column :role
     end
+    column :role if current_user.super_admin?
     column :created_at
     actions
   end
@@ -45,15 +46,13 @@ ActiveAdmin.register User do
         f.input :password
         f.input :password_confirmation
       end
-      if current_user.admin?
-        f.input :role
-        f.input :note
-      end
+      f.input :role if current_user.super_admin?
+      f.input :note if current_user.admin?
     end
     f.actions
   end
 
-  action_item :permissions, only: %i[show edit], if: proc { can? :manage, Permission } do
+  action_item :permissions, only: %i[show edit], if: proc { current_user.admin? } do
     link_to 'Полномочия', admin_user_permissions_path(resource)
   end
 
