@@ -18,7 +18,7 @@ ActiveAdmin.register Volunteer do
       if current_user.admin?
         end_of_association_chain
       else
-        event_ids = current_user.permissions.where(subject_class: 'Volunteer').pluck(:event_id).compact
+        event_ids = current_user.permissions.where(subject_class: 'Volunteer').select(:event_id).distinct
         end_of_association_chain.joins(:activity).where(activity: { event_id: event_ids })
       end
     end
@@ -54,8 +54,14 @@ ActiveAdmin.register Volunteer do
     link_to 'Просмотр забега', admin_activity_path(activity.id)
   end
 
-  action_item :volunteering_positions, only: :index, if: proc { current_user.volunteering_position_permission } do
-    link_to 'Настройка позиций',
-            admin_event_volunteering_positions_path(current_user.volunteering_position_permission.event)
-  end
+  action_item(
+    :volunteering_positions,
+    only: :index,
+    if: proc do
+      current_user.admin? ||
+        current_user
+          .permissions
+          .exists?(event_id: activity.event_id, subject_class: 'VolunteeringPosition', action: %w[manage update])
+    end,
+  ) { link_to 'Настройка позиций', admin_event_volunteering_positions_path(activity.event) }
 end

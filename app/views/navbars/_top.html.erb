@@ -47,7 +47,7 @@
             <li><%= link_to t('.profile'), athlete_path(athlete), class: 'dropdown-item' %></li>
           <% end %>
           <li><%= link_to t('.settings'), user_path, class: 'dropdown-item' %></li>
-          <% if current_user.admin? || Permission.exists?(user: current_user) %>
+          <% if current_user.admin? || current_user.permissions.any? %>
             <li><%= link_to t('.admin_panel'), admin_root_path, class: 'dropdown-item' %></li>
           <% end %>
           <li><hr class="dropdown-divider"></li>

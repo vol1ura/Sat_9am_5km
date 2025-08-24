@@ -52,6 +52,9 @@ ru:
         last_name: фамилия
         email: e-mail
         role: роль
+        roles:
+          super_admin: главный админ
+          admin: админ
         note: примечание
         telegram_user: телеграм
         athlete: участник
@@ -63,7 +66,6 @@ ru:
         event: мероприятие
         user: пользователь
         action: действие
-        subject_id: id элемента
         subject_class: класс объектов
       athlete:
         name: Имя ФАМИЛИЯ

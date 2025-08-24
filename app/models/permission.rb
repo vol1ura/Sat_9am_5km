@@ -9,17 +9,4 @@ class Permission < ApplicationRecord
 
   validates :action, inclusion: ACTIONS
   validates :subject_class, inclusion: CLASSES
-
-  def params
-    options = {}
-    options[:id] = subject_id if subject_id
-    return options unless event_id
-
-    case subject_class
-    when 'Activity' then options[:event_id] = event_id
-    when 'Result' then options[:activity] = { event_id: }
-    end
-
-    options
-  end
 end

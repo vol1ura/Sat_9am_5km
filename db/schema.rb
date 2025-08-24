@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_27_130000) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_083457) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -188,7 +188,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_27_130000) do
 
   create_table "permissions", force: :cascade do |t|
     t.bigint "event_id"
-    t.bigint "subject_id"
     t.string "subject_class"
     t.string "action"
     t.bigint "user_id", null: false
