@@ -78,6 +78,7 @@ ru:
         club_id: клуб
         event: домашний забег
         event_id: домашний забег
+        going_to_event: собирается в
         male: мужчина
         user: пользователь
         registered: зарег.
@@ -85,6 +86,8 @@ ru:
         profile: Профиль на сайте
         results: Забеги
         volunteering: Волонтёрства
+        created_at: создан
+        updated_at: обновлён
       activity:
         date: дата
         published: опубликован?

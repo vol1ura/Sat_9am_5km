@@ -80,6 +80,7 @@ rs:
         club_id: klub
         event: domaće trčanje
         event_id: domaće trčanje
+        going_to_event: idu u
         male: muškarac
         user: korisnik
         registered: registered
@@ -87,6 +88,8 @@ rs:
         profile: Site profile
         results: Results
         volunteering: Volunteering
+        created_at: kreiran
+        updated_at: ažuriran
       activity:
         date: datum
         published: objavljeno?
