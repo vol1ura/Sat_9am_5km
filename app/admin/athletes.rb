@@ -23,6 +23,7 @@ ActiveAdmin.register Athlete do
   )
   filter :club, as: :searchable_select
   filter :event, as: :searchable_select
+  filter :going_to_event, as: :searchable_select
   filter :created_at
   filter :updated_at
 

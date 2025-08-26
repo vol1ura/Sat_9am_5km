@@ -3,7 +3,7 @@
 module Athletes
   # Pete Riegel's formula https://www.omnicalculator.com/sports/race-predictor
   class TimePredictor < ApplicationService
-    COEFFICIENTS = [10, 21.1, 42.2].index_with { |x| (x / 5)**1.08 }.freeze
+    COEFFICIENTS = [10, 21.1, 42.2].index_with { |x| (x / 5)**1.07 }.freeze
 
     def initialize(athlete)
       @athlete = athlete
