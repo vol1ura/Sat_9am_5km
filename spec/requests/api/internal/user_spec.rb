@@ -32,7 +32,7 @@ RSpec.describe '/api/internal/user' do
       post api_internal_user_path,
            params: user_attributes.merge(athlete_attributes).merge(user: { first_name: 'John', last_name: 'Doe' }),
            as: :json
-      expect(response).to have_http_status :unprocessable_entity
+      expect(response).to have_http_status :unprocessable_content
     end
 
     it 'creates user with athlete' do

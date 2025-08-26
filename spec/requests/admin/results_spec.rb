@@ -145,6 +145,22 @@ RSpec.describe '/admin/results' do
         expect(athlete.reload.male).to be_truthy
       end
     end
+
+    describe 'POST /admin/activities/:activity_id/results/batch_action' do
+      let(:valid_attributes) do
+        {
+          batch_action: :move_time,
+          batch_action_inputs: { type: 'down', minutes: 1, seconds: 10 }.to_json,
+          collection_selection: results.pluck(:id),
+        }
+      end
+
+      it 'renders a successful response' do
+        post batch_action_admin_activity_results_url(activity, params: valid_attributes)
+        expect(response).to redirect_to admin_activity_results_path(activity)
+        expect(flash[:notice]).to include 'Произведён сдвиг времени (-70сек) для 2 результатов'
+      end
+    end
   end
 
   context 'without manage permission' do

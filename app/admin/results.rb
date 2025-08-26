@@ -220,7 +220,7 @@ ActiveAdmin.register Result do
     redirect_to(
       collection_path(parent),
       notice: I18n.t(
-        'active_admin.results.batch_actions.successfully_moved_time',
+        'active_admin.batch_actions.successfully_moved_time',
         sign: sign,
         delta: delta,
         count: ids.count,

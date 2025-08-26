@@ -36,7 +36,7 @@ RSpec.describe '/api/parkzhrun/activities' do
 
       it 'renders not found for invalid id' do
         post api_parkzhrun_activities_url, params: activity_attributes, headers: headers, as: :json
-        expect(response).to have_http_status :unprocessable_entity
+        expect(response).to have_http_status :unprocessable_content
       end
     end
   end
