@@ -50,7 +50,7 @@ RSpec.describe '/api/parkzhrun/athletes' do
           headers: valid_headers,
           as: :json,
         )
-        expect(response).to have_http_status :unprocessable_entity
+        expect(response).to have_http_status :unprocessable_content
       end
 
       it 'renders not found for invalid id' do

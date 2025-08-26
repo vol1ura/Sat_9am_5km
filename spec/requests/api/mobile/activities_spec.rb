@@ -73,13 +73,13 @@ RSpec.describe '/api/mobile/activities' do
     context 'when activity is not today' do
       let(:activity_date) { Date.yesterday }
 
-      it { expect(response).to have_http_status :unprocessable_entity }
+      it { expect(response).to have_http_status :unprocessable_content }
     end
 
     context 'when results are not present' do
       let(:request_params) { { token: } }
 
-      it { expect(response).to have_http_status :unprocessable_entity }
+      it { expect(response).to have_http_status :unprocessable_content }
     end
 
     context 'with invalid token' do

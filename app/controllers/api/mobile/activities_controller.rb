@@ -29,7 +29,7 @@ module API
       #   "activityStartTime": timestamp
       # }
       def live
-        return head :unprocessable_entity unless params.key?(:results)
+        return head :unprocessable_content unless params.key?(:results)
 
         results = params[:results]
         results.each { |result| result.expect(:position, :total_time) } if results.any?
@@ -54,7 +54,7 @@ module API
       end
 
       def check_activity_date!
-        head :unprocessable_entity unless @activity.date.today?
+        head :unprocessable_content unless @activity.date.today?
       end
 
       def notify_volunteers(role)

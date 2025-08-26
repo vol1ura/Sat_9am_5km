@@ -12,7 +12,7 @@ module API
         render json: { errors: "Couldn't find Athlete with parkzhrun_id='#{params[:id]}'" }, status: :not_found
       rescue ActiveRecord::RecordInvalid => e
         Rollbar.error e
-        render json: { errors: e.message }, status: :unprocessable_entity
+        render json: { errors: e.message }, status: :unprocessable_content
       end
 
       private

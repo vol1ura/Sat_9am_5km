@@ -8,7 +8,7 @@ module API
         head :created
       rescue StandardError => e
         Rollbar.error e
-        render json: { error: "Can't create activity" }, status: :unprocessable_entity
+        render json: { error: "Can't create activity" }, status: :unprocessable_content
       end
     end
   end
