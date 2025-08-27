@@ -19,6 +19,20 @@ RSpec.describe ApplicationHelper do
         expect(helper.human_result_time(Result.total_time(1, 2, 17))).to eq '01:02:17'
       end
     end
+
+    context 'when time is numeric value' do
+      it 'represent time in human format' do
+        time = Result.total_time(17, 30).to_f
+        expect(helper.human_result_time(time)).to eq '17:30'
+      end
+    end
+
+    context 'when time in string' do
+      it 'represent time in human format' do
+        time = Result.total_time(17, 30).to_f.to_s
+        expect(helper.human_result_time(time)).to eq '17:30'
+      end
+    end
   end
 
   describe '#human_result_pace' do

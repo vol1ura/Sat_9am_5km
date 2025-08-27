@@ -26,7 +26,7 @@ RSpec.describe '/ratings' do
   describe 'GET /table?type=volunteers' do
     before do
       create_list(:volunteer, 2)
-      get table_ratings_url(type: 'volunteers', order: 'h_index')
+      get table_ratings_url(type: 'volunteers', order: 'count')
     end
 
     it { expect(response).to be_successful }
