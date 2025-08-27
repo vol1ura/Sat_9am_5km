@@ -20,4 +20,11 @@ RSpec.describe Event do
       expect(event.to_combobox_display).to eq(event.name)
     end
   end
+
+  describe '#after_update_commit' do
+    it 'schedules RenewGoingToEventJob' do
+      event = create(:event)
+      expect { event.update(active: false) }.to have_enqueued_job(RenewGoingToEventJob).with(event.id)
+    end
+  end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  actions :all, except: :destroy
+  actions :all, except: %i[new create destroy]
 
   menu if: proc { current_user.admin? }
 

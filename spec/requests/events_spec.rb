@@ -27,4 +27,16 @@ RSpec.describe '/events' do
       expect(response).to be_successful
     end
   end
+
+  describe 'GET /search' do
+    it 'returns turbo stream with matched clubs within current TLD' do
+      msk_event = create(:event, name: 'Bitza')
+      get search_events_url(q: 'bitz'), headers: { 'Host' => 'test.ru', 'Accept' => 'text/vnd.turbo-stream.html' }
+
+      expect(response).to be_successful
+      expect(response.media_type).to eq('text/vnd.turbo-stream.html')
+      expect(response.body).to include(msk_event.name)
+      expect(response.body).not_to include(event.name)
+    end
+  end
 end
