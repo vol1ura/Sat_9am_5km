@@ -13,7 +13,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.4.5
           bundler-cache: true
       - name: Security audit dependencies
         run: bundle exec bundler-audit --update
@@ -28,7 +28,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.4.5
       - name: Install packages
         run: |
           bundle config set --local only test
@@ -72,7 +72,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.4.5
           bundler-cache: true
       - name: Set up files and database schema
         run: |
@@ -101,7 +101,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.4.5
           bundler-cache: true
       - name: Deploy
         uses: miloserdow/capistrano-deploy@master

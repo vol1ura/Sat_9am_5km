@@ -210,13 +210,16 @@ GEM
       ffi (~> 1.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-protobuf (4.29.2)
+    google-protobuf (4.32.0)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.2-aarch64-linux)
+    google-protobuf (4.32.0-aarch64-linux-musl)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.2-x86_64-linux)
+    google-protobuf (4.32.0-x86_64-linux-gnu)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.32.0-x86_64-linux-musl)
       bigdecimal
       rake (>= 13)
     has_scope (0.8.2)
@@ -333,7 +336,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
-    pg_query (6.0.0)
+    pg_query (6.1.0)
       google-protobuf (>= 3.25.3)
     pg_search (2.3.7)
       activerecord (>= 6.1)
@@ -352,7 +355,7 @@ GEM
     pry-byebug (3.11.0)
       byebug (~> 12.0)
       pry (>= 0.13, < 0.16)
-    pry-doc (1.5.0)
+    pry-doc (1.6.0)
       pry (~> 0.11)
       yard (~> 0.9.11)
     pry-rails (0.3.11)
@@ -572,7 +575,7 @@ GEM
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    yard (0.9.36)
+    yard (0.9.37)
     zeitwerk (2.7.3)
 
 PLATFORMS
@@ -659,7 +662,7 @@ DEPENDENCIES
   whenever
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.4.5p51
 
 BUNDLED WITH
    2.4.10
