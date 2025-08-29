@@ -55,3 +55,25 @@ make
 - Postgres Performance [dev](http://localhost:3000/pg_stats) or [prod](https://s95.ru/pg_stats)
 - Active Storage Dashboard [dev](http://localhost:3000/storage) or [prod](https://s95.ru/storage)
 - Uptime monitor [UptimeRobot](https://dashboard.uptimerobot.com/monitors/797544445)
+
+## Server setup
+
+To install web application on Ubuntu server run
+
+1. Install dependencies:
+```
+sudo apt-get install -y libyaml-dev
+```
+
+2. Install Rust to build Ruby with YJIT on the next step
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+3. Install or update `rbenv` using [rbenv-installer](https://github.com/rbenv/rbenv-installer#rbenv-installer):
+
+4. Then install Ruby
+```
+rbenv install 3.4.5
+rbenv global 3.4.5
+```

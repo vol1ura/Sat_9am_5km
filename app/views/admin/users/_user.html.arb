@@ -6,9 +6,11 @@ attributes_table_for user do
   row :email
   row(:phone) { |user| user.phone.present? }
   row(:telegram_user) { |user| telegram_link user }
-  row :role
-  row :note if current_user.admin?
   row :created_at
+  if current_user.admin?
+    row :role
+    row :note
+  end
   row('Номер паркран') { |u| u.athlete&.parkrun_code }
   row('Номер 5 вёрст') { |u| u.athlete&.fiveverst_code }
   row('Номер RunPark') { |u| u.athlete&.runpark_code }

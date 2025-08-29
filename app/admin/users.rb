@@ -11,10 +11,10 @@ ActiveAdmin.register User do
     permitted
   end
 
-  filter :email
-  filter :telegram_user
   filter :first_name
   filter :last_name
+  filter :telegram_user
+  filter :email
 
   scope :all
   scope :admin
