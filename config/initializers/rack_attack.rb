@@ -4,12 +4,13 @@ class Rack::Attack
   # Throttle requests by IP
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
-  # Allows 9 requests in 3  seconds
-  #        18 requests in 9  seconds
-  #        27 requests in 27 seconds
-  #        36 requests in 81 seconds
-  (1..4).each do |level|
-    throttle("req/ip-#{level}", limit: 9 * level, period: (3**level).seconds) do |req|
+  [
+    [8, 4],
+    [16, 15],
+    [32, 60],
+    [64, 180]
+  ].each do |limit, period|
+    throttle("req/ip-#{limit}", limit: limit, period: period.seconds) do |req|
       next if req.path.include?('/statistics/')
 
       req.ip if req.path.start_with?('/activities') || req.path.start_with?('/athletes/') || req.path.start_with?('/user')

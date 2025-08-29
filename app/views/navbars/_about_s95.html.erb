@@ -1,12 +1,12 @@
 <li class="nav-item dropdown" data-controller="dropdown">
   <% about_s95_pages = %w[rules about support feedback joining] %>
-  <%= link_to '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'pages' && about_s95_pages.include?(params[:page])}", id: 'dataDropdown', role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false', 'data-dropdown-target' => 'toggle' do %>
+  <%= link_to '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'pages' && about_s95_pages.include?(params[:page])}", role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false', 'data-dropdown-target' => 'toggle' do %>
     <% if with_icon %>
       <span class="fa-li"><i class="fa-solid fa-circle-info"></i></span>
     <% end %>
     <%= t('.title') %>
   <% end %>
-  <ul class="dropdown-menu" aria-labelledby="dataDropdown" data-dropdown-target="menu">
+  <ul class="dropdown-menu" data-dropdown-target="menu">
     <% about_s95_pages.each do |page| %>
       <li><%= link_to t(".#{page}"), page_path(page:), class: "dropdown-item #{'active' if params[:page] == page}" %></li>
     <% end %>
