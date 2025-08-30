@@ -2,7 +2,14 @@
   <% if @best_position %>
     <h2 class="accordion-header" id="flush-bestPositionAbsolute">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
-        <span class="badge text-light bg-primary me-3"><%= @best_position %></span>
+        <span class="badge text-light bg-primary me-3 position-relative">
+          <%= @best_position %>
+          <% if @pb_by_position.load.first.created_at > 6.days.ago.beginning_of_day %>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+              <span class="visually-hidden">New personal bests</span>
+            </span>
+          <% end %>
+        </span>
         <%= t 'athletes.show.best_position' %>
       </button>
     </h2>

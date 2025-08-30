@@ -7,7 +7,7 @@
       <div class="p-1">
         <%
           trophy_link = link_to badge_path(trophy.badge), data: { turbo: false } do
-            image_tag trophy.badge.image.variant(:thumb), class: 'trophy', title: trophy.badge.name
+            image_tag trophy.badge.image.variant(:thumb), class: 'trophy', title: trophy.badge.name, alt: trophy.badge.name
           end
         %>
         <% if trophy.badge.record_kind? %>
