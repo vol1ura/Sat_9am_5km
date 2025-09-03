@@ -15,16 +15,33 @@ class ApplicationController < ActionController::Base
   private
 
   def switch_locale(&)
-    I18n.with_locale(I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale, &)
+    I18n.with_locale(current_locale, &)
   end
 
   def find_country_events
     @country_events = Event.in_country(top_level_domain)
   end
 
+  def current_locale
+    requested = params[:lang]&.to_s&.downcase&.to_sym
+    if requested && I18n.available_locales.include?(requested)
+      requested
+    else
+      domain_locale
+    end
+  end
+
+  def domain_locale
+    I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale
+  end
+
   def top_level_domain
     @top_level_domain ||= request.host.split('.').last.to_sym
   end
 
-  helper_method :top_level_domain
+  def default_url_options
+    super.merge(lang: current_locale == domain_locale ? nil : current_locale)
+  end
+
+  helper_method :top_level_domain, :domain_locale, :current_locale
 end
