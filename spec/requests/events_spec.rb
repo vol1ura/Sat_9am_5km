@@ -29,7 +29,7 @@ RSpec.describe '/events' do
   end
 
   describe 'GET /search' do
-    it 'returns turbo stream with matched clubs within current TLD' do
+    it 'returns turbo stream with matched clubs within current top level domain' do
       msk_event = create(:event, name: 'Bitza')
       get search_events_url(q: 'bitz'), headers: { 'Host' => 'test.ru', 'Accept' => 'text/vnd.turbo-stream.html' }
 
