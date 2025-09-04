@@ -535,6 +535,7 @@ ru:
       logout: Выход
       search: Поиск
       name_or_id: Фамилия или ID
+      language: Язык
     about_s95:
       title: Про S95
       rules: Правила

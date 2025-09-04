@@ -535,6 +535,7 @@ rs:
       logout: Odjava
       search: Pretraži
       name_or_id: Ime ili ID
+      language: Jezik
     about_s95:
       title: O S95
       rules: Pravila

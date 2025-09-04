@@ -1,10 +1,3 @@
-<%
-  locales = {
-    ru: { title: 'Русский', flag: '🇷🇺' },
-    rs: { title: 'Srpski', flag: '🇷🇸' },
-  }
-%>
-
 <nav class="navbar bg-primary navbar-dark sticky-top mb-3">
   <div class="container-fluid">
     <%=
@@ -37,8 +30,8 @@
     </nav>
 
     <div class="ms-auto me-2">
-      <a href="#" class="btn btn-sm fs-5 p-1" data-bs-toggle="modal" data-bs-target="#langModal" aria-label="Language">
-        <%= locales.dig(current_locale, :flag) || '🏳️' %>
+      <a href="#" class="btn btn-sm fs-6 p-1" data-bs-toggle="modal" data-bs-target="#langModal" aria-label="Language">
+        <i class="fa-solid fa-globe text-light"></i>
       </a>
     </div>
 
@@ -143,17 +136,18 @@
   <div class="modal-dialog modal-sm modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
+        <h2 class="fs-5 modal-title" id="langModalLabel"><%= t '.language' %></h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="list-group list-group-flush">
-          <% locales.each do |locale, locale_data| %>
+          <% [[:ru, 'Русский', '🇷🇺'], [:rs, 'Srpski', '🇷🇸']].each do |locale, title, flag| %>
             <% opts = { only_path: true, params: request.query_parameters.except(:lang) } %>
             <% opts[:lang] = (locale == domain_locale ? nil : locale) %>
             <%= link_to opts, class: 'list-group-item d-flex justify-content-between align-items-center' do %>
               <div class="me-auto">
-                <span class="me-2"><%= locale_data[:flag] %></span>
-                <%= locale_data[:title] %>
+                <span class="me-2"><%= flag %></span>
+                <%= title %>
               </div>
               <% if current_locale == locale %>
                 <div class="me-2">
