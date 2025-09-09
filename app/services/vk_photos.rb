@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VkPhotos < ApplicationService
-  API_URL = "https://api.vk.com/method/photos.get?#{URI.encode_www_form(
+  API_URL = "https://api.vk.ru/method/photos.get?#{URI.encode_www_form(
     {
       owner_id: "-#{ENV.fetch('VK_GROUP_ID', 1)}",
       album_id: ENV.fetch('VK_ALBUM_ID', 1),
