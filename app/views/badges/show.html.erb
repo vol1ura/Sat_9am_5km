@@ -37,7 +37,7 @@
         <td><%= t '.athlete' %></td>
         <% if @badge.record_kind? %>
           <td><%= t '.event' %></td>
-          <td><%= t '.result' %></td>
+          <td class="px-0 px-sm-2"><%= t '.result' %></td>
           <td class="hidden-on-phone">Дата</td>
         <% elsif !@badge.funrun_kind? %>
           <td><%= t '.received_date' %></td>
@@ -51,7 +51,7 @@
       <%= render partial: 'trophy', collection: @trophies %>
     </tbody>
   </table>
-  <%= paginate @trophies %>
+  <%= paginate @trophies, window: 2 %>
 <% elsif @badge.funrun_kind? %>
   <p><%= t '.soon' %></p>
 <% else %>
