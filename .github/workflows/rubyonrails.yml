@@ -114,3 +114,12 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           APP_DEPLOY_PATH: ${{ secrets.APP_DEPLOY_PATH }}
+      - name: Notify deploy to Rollbar
+        uses: rollbar/github-deploy-action@2.1.2
+        id: rollbar_deploy
+        with:
+          environment: 'production'
+          version: ${{ github.sha }}
+        env:
+          ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
+          ROLLBAR_USERNAME: ${{ secrets.ROLLBAR_USERNAME }}
