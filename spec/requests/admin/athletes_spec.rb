@@ -159,19 +159,19 @@ RSpec.describe '/admin/athletes' do
     context 'with registered athlete' do
       let(:athlete) { create(:athlete, user_id: user.id) }
 
-      include_examples 'not destroy athlete'
+      it_behaves_like 'not destroy athlete'
     end
 
     context 'when athlete with results' do
       let(:athlete) { create(:result).athlete }
 
-      include_examples 'not destroy athlete'
+      it_behaves_like 'not destroy athlete'
     end
 
     context 'when athlete with volunteering' do
       let(:athlete) { create(:volunteer).athlete }
 
-      include_examples 'not destroy athlete'
+      it_behaves_like 'not destroy athlete'
     end
   end
 end

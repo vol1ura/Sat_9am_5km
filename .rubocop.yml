@@ -59,6 +59,8 @@ Style/FetchEnvVar:
 
 Naming/VariableNumber:
   CheckSymbols: false
+Naming/PredicateMethod:
+  Enabled: false
 
 # LAYOUT
 Layout/LineLength:
