@@ -21,6 +21,9 @@ Rails.application.configure do
   # Compress CSS using a preprocessor.
   config.assets.css_compressor = :sass
 
+  config.assets.js_compressor = :terser
+  config.assets.terser = { output: { comments: :none } }
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
