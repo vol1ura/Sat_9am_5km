@@ -50,6 +50,7 @@ module Sat9am5km
     }
     config.action_mailer.preview_paths << File.join(Rails.root, 'spec/mailers/previews')
 
+    config.action_view.frozen_string_literal = true
     config.active_storage.service = :local
 
     config.telegram = config_for(:telegram)

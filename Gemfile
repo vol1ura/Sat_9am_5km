@@ -49,6 +49,7 @@ gem 'sidekiq'
 gem 'sitemap_generator'
 gem 'sys-cpu'
 gem 'sys-filesystem'
+gem 'terser'
 gem 'whenever', require: false
 
 gem 'hiredis-client'

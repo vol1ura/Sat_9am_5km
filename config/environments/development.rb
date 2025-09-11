@@ -74,6 +74,7 @@ Rails.application.configure do
 
   config.generators do |g|
     g.test_framework :rspec
+    g.helper false
   end
 
   # Raises error for missing translations.
