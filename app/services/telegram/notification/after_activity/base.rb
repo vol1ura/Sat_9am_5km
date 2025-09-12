@@ -14,7 +14,8 @@ module Telegram
           @entity.with_lock do
             return if @entity.informed
 
-            @entity.update!(informed: true) if notify(telegram_id, disable_web_page_preview: true)
+            notify!(telegram_id, disable_web_page_preview: true)
+            @entity.update!(informed: true)
           end
         rescue StandardError => e
           Rollbar.error e, telegram_id: telegram_id, entity_id: @entity.id, entity_class: @entity.class

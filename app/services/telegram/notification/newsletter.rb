@@ -11,7 +11,14 @@ module Telegram
       def call
         return unless @user&.telegram_id
 
-        notify(Rails.env.local? ? ENV['DEV_TELEGRAM_ID'] : @user.telegram_id)
+        Telegram::Bot.call(
+          @newsletter.picture_link.present? ? 'sendPhoto' : 'sendMessage',
+          **api_method_params,
+          chat_id: Rails.env.local? ? ENV['DEV_TELEGRAM_ID'] : @user.telegram_id,
+          parse_mode: 'Markdown',
+          disable_web_page_preview: true,
+          reply_markup: Bot::MAIN_KEYBOARD,
+        )
       rescue StandardError => e
         Rollbar.error e, user_id: @user.id, newsletter_id: @newsletter.id
       end
@@ -25,18 +32,6 @@ module Telegram
           photo: @newsletter.picture_link,
           caption: @newsletter.body,
         }
-      end
-
-      def notify(telegram_id)
-        response = Telegram::Bot.call(
-          @newsletter.picture_link.present? ? 'sendPhoto' : 'sendMessage',
-          **api_method_params,
-          chat_id: telegram_id,
-          parse_mode: 'Markdown',
-          disable_web_page_preview: true,
-          reply_markup: Bot::MAIN_KEYBOARD,
-        )
-        raise "Notification failed. Response: #{response.body}" unless response.is_a?(Net::HTTPSuccess)
       end
     end
   end

@@ -22,7 +22,7 @@ RSpec.describe Telegram::Notification::User::NewRunner, type: :service do
 
     it 'not informs athlete' do
       described_class.call(user)
-      expect(request).to have_been_requested
+      expect(request).to have_been_requested.times(3)
     end
   end
 end

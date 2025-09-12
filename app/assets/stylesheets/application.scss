@@ -156,7 +156,7 @@ nav.pagination {
 .card-with-border {
   @extend .card, .text-bg-light, .bg-opacity-50, .border-primary, .border-opacity-25, .h-100;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  transition: box-shadow 0.15s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
 
   .img-scaled {
     transition: transform 0.3s ease;

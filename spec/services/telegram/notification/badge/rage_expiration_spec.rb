@@ -31,7 +31,7 @@ RSpec.describe Telegram::Notification::Badge::RageExpiration, type: :service do
 
     it 'not informs athlete' do
       described_class.call(rage_trophy)
-      expect(request).to have_been_requested
+      expect(request).to have_been_requested.times(3)
     end
   end
 end
