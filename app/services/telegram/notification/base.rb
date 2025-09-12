@@ -7,7 +7,7 @@ module Telegram
 
       private
 
-      def notify(telegram_id, **)
+      def notify!(telegram_id, **)
         Telegram::Bot.call(
           'sendMessage',
           chat_id: Rails.env.development? ? ENV['DEV_TELEGRAM_ID'] : telegram_id,
@@ -15,7 +15,7 @@ module Telegram
           parse_mode: 'Markdown',
           reply_markup: Bot::MAIN_KEYBOARD,
           **,
-        ).is_a?(Net::HTTPSuccess)
+        )
       end
 
       # :nocov:

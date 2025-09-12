@@ -33,7 +33,7 @@ RSpec.describe Telegram::Notification::Newsletter, type: :service do
 
     it 'does not send newsletter' do
       described_class.call(newsletter, user)
-      expect(request).to have_been_requested
+      expect(request).to have_been_requested.times(3)
       expect(Rollbar).to have_received(:error).once
     end
   end

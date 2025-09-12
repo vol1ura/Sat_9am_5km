@@ -26,7 +26,7 @@ RSpec.describe Telegram::Notification::Badge::BreakingTimeExpiration, type: :ser
 
     it 'not informs athlete' do
       described_class.call(breaking_trophy)
-      expect(request).to have_been_requested
+      expect(request).to have_been_requested.times(3)
     end
   end
 end

@@ -15,11 +15,19 @@ module Telegram
     end
 
     def call
-      Net::HTTP.post(
-        URI("https://api.telegram.org/bot#{TOKEN}/#{@method}"),
-        @payload.to_json,
-        HEADERS,
-      )
+      retry_count = 0
+      uri = URI("https://api.telegram.org/bot#{TOKEN}/#{@method}")
+
+      begin
+        response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, open_timeout: 60, read_timeout: 60) do |http|
+          http.post(uri, @payload.to_json, HEADERS)
+        end
+
+        raise "Notification failed. Response: #{response.body}" unless response.is_a?(Net::HTTPSuccess)
+      rescue StandardError => e
+        Rails.logger.error "Notification failed. Response: #{e.message}"
+        (retry_count += 1) < 3 ? retry : raise
+      end
     end
   end
 end

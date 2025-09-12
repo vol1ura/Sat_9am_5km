@@ -118,7 +118,7 @@ jobs:
         uses: rollbar/github-deploy-action@2.1.2
         id: rollbar_deploy
         with:
-          environment: 'production'
+          environment: production
           version: ${{ github.sha }}
         env:
           ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}

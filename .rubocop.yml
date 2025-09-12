@@ -1,11 +1,10 @@
-require:
+plugins:
   - rubocop-factory_bot
+  - rubocop-performance
+  - rubocop-rails
   - rubocop-rake
   - rubocop-rspec
-
-plugins:
-  - rubocop-rails
-  - rubocop-performance
+  - rubocop-rspec_rails
 
 # METRICS
 Metrics/AbcSize:
@@ -59,8 +58,6 @@ Style/FetchEnvVar:
 
 Naming/VariableNumber:
   CheckSymbols: false
-Naming/PredicateMethod:
-  Enabled: false
 
 # LAYOUT
 Layout/LineLength:

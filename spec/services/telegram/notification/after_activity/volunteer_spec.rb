@@ -20,7 +20,7 @@ RSpec.describe Telegram::Notification::AfterActivity::Volunteer, type: :service 
 
     it 'not informs athlete' do
       described_class.call(result)
-      expect(request).to have_been_requested
+      expect(request).to have_been_requested.times(3)
       expect(result.reload).not_to be_informed
     end
   end
