@@ -1,0 +1,18 @@
+.article {
+  section {
+    p,
+    ul,
+    ol {
+      margin-bottom: 0.75rem;
+    }
+
+    ul li + li,
+    ol li + li {
+      margin-top: 0.25rem;
+    }
+  }
+
+  hr {
+    margin: 1.25rem 0;
+  }
+}

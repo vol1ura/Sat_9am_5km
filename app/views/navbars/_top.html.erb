@@ -21,6 +21,7 @@
                 <li><%= link_to t('.top_athletes'), ratings_path(type: 'results'), class: 'dropdown-item' %></li>
                 <li><%= link_to t('.top_volunteers'), ratings_path(type: 'volunteers'), class: 'dropdown-item' %></li>
                 <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
+                <li><%= link_to t('.articles'), articles_path, class: 'dropdown-item' %></li>
               </ul>
             </li>
             <%= render 'navbars/about_s95', with_icon: false %>
@@ -116,6 +117,11 @@
           <li class="nav-item">
             <%= link_to badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" do %>
               <span class="fa-li"><i class="fa-solid fa-award"></i></span><%= t '.badges' %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to articles_path, class: "nav-link #{'active' if params[:controller] == 'articles'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-newspaper"></i></span><%= t '.articles' %>
             <% end %>
           </li>
           <%= render 'navbars/about_s95', with_icon: true %>
