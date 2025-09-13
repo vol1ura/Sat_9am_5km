@@ -1,0 +1,30 @@
+<% content_for :title, t('.title') %>
+<% content_for :description, t('.description') %>
+
+<div class="container my-4 articles-list">
+  <h1 class="mb-4"><%= t '.title' %></h1>
+
+  <div class="row g-3">
+    <div class="col-12 col-md-6">
+      <div class="card-with-border h-100">
+        <div class="card-body d-flex flex-column">
+          <h3 class="card-title mb-2">
+            <%= link_to t('.first_run.title'), article_path(page: 'first-run'), class: 'card-title-link stretched-link' %>
+          </h3>
+          <p class="card-text text-muted mb-0"><%= t('.first_run.description') %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div class="card-with-border h-100">
+        <div class="card-body d-flex flex-column">
+          <h3 class="card-title mb-2 text-secondary">
+            <%= t('.smart_watches.title') %>
+          </h3>
+          <p class="card-text text-muted mb-0"><%= t('.smart_watches.description') %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

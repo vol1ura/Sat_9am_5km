@@ -528,6 +528,7 @@ rs:
       top_athletes: Athletes rating
       top_volunteers: Volunteers rating
       badges: Bedževi
+      articles: Članci
       profile: Profil
       settings: Podešavanja
       admin_panel: Administratorski panel
@@ -550,6 +551,16 @@ rs:
       vk_title: Grupa VKontakte
       send_email: Pošaljite nam email
       github_title: Projekat na GitHubu
+  articles:
+    index:
+      title: Članci
+      description: Saveti o treninzima, opremi, tehnici i pripremi pre starta za početnike u trčanju
+      first_run:
+        title: 'Kako istrčati svojih prvih 5 km: saveti za početnike'
+        description: Saveti o treninzima, opremi, tehnici i pripremi pre starta za početnike u trčanju
+      smart_watches:
+        title: 'Sporazni sati: vaš digitalni trener'
+        description: Kako koristiti pulsove zone, automatske odsečke i metrike da bi istrčali 5 km po nauki.
   pages:
     index:
       upcoming_events: 'Predstojeći događaji %{date}'

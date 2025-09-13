@@ -1,0 +1,11 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <% Array(items).each do |item| %>
+      <% if item[:current] || item[:path].blank? %>
+        <li class="breadcrumb-item active" aria-current="page"><%= item[:name] %></li>
+      <% else %>
+        <li class="breadcrumb-item"><%= link_to item[:name], item[:path] %></li>
+      <% end %>
+    <% end %>
+  </ol>
+</nav>
