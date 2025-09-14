@@ -1,0 +1,109 @@
+<% content_for :title, 'Kako težina utiče na rezultat u trčanju' %>
+<% content_for :description, 'Pojednostavljeno: smanjenje mase može poboljšati procenjeno vreme finiša. Kalkulator pokazuje procenu promene vremena na distancama 5, 10, 21.1 i 42.2 km.' %>
+
+<div class="container my-3 article" data-controller="weight-time">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8">
+      <%= render partial: 'shared/breadcrumbs', locals: { items: [ { name: t('activities.show.main_page'), path: root_path }, { name: 'Članci', path: articles_path }, { name: 'Težina i rezultat', current: true } ] } %>
+
+      <header class="h2 mb-3">Kako težina utiče na rezultate u trčanju</header>
+
+      <section class="mb-3">
+        <p>
+          Smanjenje viška telesne mase može pozitivno uticati na brzinu, ali to nije uvek tačno. Ako se smanjuje funkcionalna masa (mišići),
+          rezultat se može, naprotiv, pogoršati. Ispod je pojednostavljen kalkulator po motivima pristupa Džeka Danijelsa (autor knjige "Daniels' Running Formula"): pod ostalim istim uslovima promena mase
+          utiče na proračunatu brzinu i, shodno tome, na vreme finiša.
+        </p>
+        <p class="mb-0 text-muted">
+          Važno: ovo su približne procene za ravan profil staze. Kalkulator ne uzima u obzir uzrast, visinu i pol, kao ni nivo utreniranosti.
+        </p>
+      </section>
+
+      <section class="card text-bg-light bg-opacity-50 border-primary border-opacity-25 mb-4">
+        <div class="card-header mt-0">
+          <section class="fs-5 card-title mb-0">Uticaj težine na rezultat</section>
+        </div>
+        <div class="card-body">
+          <div class="row g-3 align-items-end">
+            <div class="col-12 col-md-4">
+              <label for="distance" class="form-label">Distanca</label>
+              <select id="distance" class="form-select" data-weight-time-target="distance">
+                <option value="5000">5 km</option>
+                <option value="10000">10 km</option>
+                <option value="21100">21.1 km</option>
+                <option value="42195">42.2 km</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="weightKg" class="form-label">Vaša trenutna težina (kg)</label>
+              <input id="weightKg" type="number" step="0.1" min="20" max="200" class="form-control" placeholder="npr. 72.5" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="weight">
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="finishTime" class="form-label">Vaše vreme na izabranoj distanci</label>
+              <input id="finishTime" type="text" class="form-control" placeholder="hh:mm:ss" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="time">
+            </div>
+          </div>
+
+          <hr>
+
+          <div>
+            <p class="text-muted mb-2">Procena vremena na distanci pri promeni težine.</p>
+            <div class="">
+              <table class="table table-sm align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Težina (kg)</th>
+                    <th scope="col">Prognoza rezultata</th>
+                    <th scope="col">Promena (sek)</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider" data-weight-time-target="tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3>Kako ovo radi</h3>
+        <p>
+          Džek Danijels u svom sistemu stavlja akcenat na vezu između težine, potrošnje kiseonika i trkačke performanse.
+          Ključna ideja je da promena težine utiče na vrednost VDOT (pokazatelj trkačke forme), koji
+          dalje određuje trenažne tempoe i potencijalne rezultate na trkama.
+        </p>
+        <p>
+          VO₂max (maksimalna potrošnja kiseonika) izražava se u mililitrima kiseonika po kilogramu telesne mase u minutu.
+          Dakle, ako se telesna masa smanji, a apsolutna potrošnja kiseonika ostane ista, VO₂max raste.
+        </p>
+        <p>
+          VDOT je proračunati pokazatelj, ekvivalentan VO₂max, koji Danijels koristi za određivanje trenažnih tempa i prognoziranje rezultata. On se zasniva na vašim trenutnim rezultatima na trkama.
+          Ako smanjite težinu bez gubitka opšte aerobne forme, vaš VDOT bi trebalo da poraste, što teoretski omogućava da trčite brže.
+        </p>
+        <p>Ako odlučite da korigujete svoju težinu, u nastavku dajemo nekoliko praktičnih saveta i na šta da obratite pažnju.</p>
+      </section>
+
+      <section>
+        <h3>Važna ograničenja i napomene</h3>
+        <ul>
+          <li><strong>Kvalitet težine.</strong> Veoma je važno da gubitak težine dolazi od masnog tkiva, a ne mišićne mase. Gubitak mišića dovodi do smanjenja snage i lošijeg rezultata.</li>
+          <li><strong>Aerobna baza.</strong> Kalkulator ne uzima u obzir da sam proces mršavljenja (kalorijski deficit) može privremeno smanjiti vašu sposobnost i energiju na treninzima.</li>
+          <li><strong>Distanca.</strong> Uticaj težine je izraženiji na dužim distancama (maraton, ultra), gde treba „nositi" sebe mnogo kilometara, a slabiji na kraćim, gde je važna apsolutna snaga.</li>
+          <li><strong>Individualnost.</strong> Ekonomičnost trčanja je različita kod svakoga. Dva trkača sa istom težinom i VO₂max mogu pokazati različita vremena zbog različite tehnike.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>Praktični saveti</h3>
+        <ul>
+          <li><strong>Postepenost.</strong> Ciljajte da smanjujete višak težine uz uravnoteženu ishranu i trening.</li>
+          <li><strong>Stroge dijete.</strong> Izbegavajte ih; često smanjuju radnu sposobnost i usporavaju napredak u trčanju.</li>
+          <li><strong>Trening snage.</strong> Uključite ga u plan da sačuvate mišićnu masu, naročito nogu i trupa.</li>
+          <li><strong>Oslonite se na osećaj i rezultate.</strong> Redovno se testirajte na kontrolnoj distanci, na primer na našim trčanjima na 5 km, kako biste procenili realan napredak.</li>
+          <li><strong>Odredite svoju optimalnu težinu.</strong> Eksperimentišite i pronađite težinu pri kojoj se osećate snažno, energično i pokazujete najbolje rezultate.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
