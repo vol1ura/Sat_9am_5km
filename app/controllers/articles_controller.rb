@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  ALLOWED_PAGES = %w[first-run].freeze
+  ALLOWED_PAGES = %w[first-run weight-and-time].freeze
 
   before_action :validate_page, only: :show
 

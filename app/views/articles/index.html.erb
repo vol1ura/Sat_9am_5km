@@ -16,13 +16,26 @@
       </div>
     </div>
 
+<!--
     <div class="col-12 col-md-6">
       <div class="card-with-border h-100">
         <div class="card-body d-flex flex-column">
           <h3 class="card-title mb-2 text-secondary">
-            <%= t('.smart_watches.title') %>
+            <%= link_to t('.smart_watches.title'), article_path(page: 'smart-watches'), class: 'card-title-link stretched-link' %>
           </h3>
           <p class="card-text text-muted mb-0"><%= t('.smart_watches.description') %></p>
+        </div>
+      </div>
+    </div>
+-->
+
+    <div class="col-12 col-md-6">
+      <div class="card-with-border h-100">
+        <div class="card-body d-flex flex-column">
+          <h3 class="card-title mb-2 text-secondary">
+            <%= link_to t('.weight_and_time.title'), article_path(page: 'weight-and-time'), class: 'card-title-link stretched-link' %>
+          </h3>
+          <p class="card-text text-muted mb-0"><%= t('.weight_and_time.description') %></p>
         </div>
       </div>
     </div>

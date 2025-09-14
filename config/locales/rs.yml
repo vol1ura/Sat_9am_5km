@@ -561,6 +561,9 @@ rs:
       smart_watches:
         title: 'Sporazni sati: vaš digitalni trener'
         description: Kako koristiti pulsove zone, automatske odsečke i metrike da bi istrčali 5 km po nauki.
+      weight_and_time:
+        title: Kako težina utiče na rezultate u trčanju
+        description: Ocena promene vremena završetka pri promeni mase i kalkulator ocene vremena u zavisnosti od težine
   pages:
     index:
       upcoming_events: 'Predstojeći događaji %{date}'
