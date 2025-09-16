@@ -22,10 +22,12 @@ module Telegram
         response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, open_timeout: 60, read_timeout: 60) do |http|
           http.post(uri, @payload.to_json, HEADERS)
         end
+        return if response.is_a?(Net::HTTPSuccess)
 
-        raise "Notification failed. Response: #{response.body}" unless response.is_a?(Net::HTTPSuccess)
+        parsed_body = JSON.parse(response.body, symbolize_names: true)
+        raise "Telegram request failed. #{parsed_body[:description]}" if parsed_body[:error_code] != 403
       rescue StandardError => e
-        Rails.logger.error "Notification failed. Response: #{e.message}"
+        Rails.logger.error e.message
         (retry_count += 1) < 3 ? retry : raise
       end
     end
