@@ -1,7 +1,7 @@
 <% content_for :title, 'Kako težina utiče na rezultat u trčanju' %>
 <% content_for :description, 'Pojednostavljeno: smanjenje mase može poboljšati procenjeno vreme finiša. Kalkulator pokazuje procenu promene vremena na distancama 5, 10, 21.1 i 42.2 km.' %>
 
-<div class="container my-3 article" data-controller="weight-time">
+<div class="container my-3 article">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10 col-xl-8">
       <%= render partial: 'shared/breadcrumbs', locals: { items: [ { name: t('activities.show.main_page'), path: root_path }, { name: 'Članci', path: articles_path }, { name: 'Težina i rezultat', current: true } ] } %>
@@ -19,7 +19,7 @@
         </p>
       </section>
 
-      <section class="card text-bg-light bg-opacity-50 border-primary border-opacity-25 mb-4">
+      <section class="card text-bg-light bg-opacity-50 border-primary border-opacity-25 mb-4" data-controller="weight-time">
         <div class="card-header mt-0">
           <section class="fs-5 card-title mb-0">Uticaj težine na rezultat</section>
         </div>
@@ -27,7 +27,7 @@
           <div class="row g-3 align-items-end">
             <div class="col-12 col-md-4">
               <label for="distance" class="form-label">Distanca</label>
-              <select id="distance" class="form-select" data-weight-time-target="distance">
+              <select id="distance" class="form-select" data-action="change->weight-time#clear" data-weight-time-target="distance">
                 <option value="5000">5 km</option>
                 <option value="10000">10 km</option>
                 <option value="21100">21.1 km</option>
@@ -37,12 +37,12 @@
 
             <div class="col-12 col-md-4">
               <label for="weightKg" class="form-label">Vaša trenutna težina (kg)</label>
-              <input id="weightKg" type="number" step="0.1" min="20" max="200" class="form-control" placeholder="npr. 72.5" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="weight">
+              <input id="weightKg" type="number" step="0.1" min="20" max="200" class="form-control" placeholder="npr. 72.5" inputmode="numeric" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="weight">
             </div>
 
             <div class="col-12 col-md-4">
               <label for="finishTime" class="form-label">Vaše vreme na izabranoj distanci</label>
-              <input id="finishTime" type="text" class="form-control" placeholder="hh:mm:ss" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="time">
+              <input id="finishTime" type="text" class="form-control" placeholder="hh:mm:ss" inputmode="numeric" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="time" data-controller="time-input">
             </div>
           </div>
 
@@ -56,7 +56,7 @@
                   <tr>
                     <th scope="col">Težina (kg)</th>
                     <th scope="col">Prognoza rezultata</th>
-                    <th scope="col">Promena (sek)</th>
+                    <th scope="col">Promena</th>
                   </tr>
                 </thead>
                 <tbody class="table-group-divider" data-weight-time-target="tbody"></tbody>

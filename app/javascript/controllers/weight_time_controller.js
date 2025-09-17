@@ -8,23 +8,28 @@ export default class extends Controller {
     this.recalculate()
   }
 
+  clear() {
+    this.tbodyTarget.innerHTML = ""
+  }
+
   recalculate() {
     const distanceMeters = this.#toNumber(this.distanceTarget?.value)
     const weightKg = this.#toNumber(this.weightTarget?.value)
     const baseTimeStr = (this.timeTarget?.value || "").trim()
 
     if (!distanceMeters || !weightKg || !this.#isValidTime(baseTimeStr)) {
-      this.tbodyTarget.innerHTML = ""
+      this.clear()
       return
     }
+    if (baseTimeStr.length < 8) return
 
     const baseTimeSec = this.#timeToSeconds(baseTimeStr)
     const rows = []
 
     const deltas = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
     deltas.forEach((delta) => {
-      const newWeight = weightKg + delta
-      const newTime = baseTimeSec * ((newWeight / weightKg)**0.82)
+      const newWeight = Math.round((weightKg + delta) * 10) / 10
+      const newTime = baseTimeSec * ((newWeight / weightKg)**((distanceMeters * 0.00000027) + 0.81865573))
       const timeDelta = newTime - baseTimeSec
       rows.push({ weight: newWeight, timeDelta: (timeDelta > 0 ? '+' : '') + timeDelta.toFixed(0), timeStr: this.#secondsToHMS(newTime) })
     })
@@ -34,7 +39,7 @@ export default class extends Controller {
 
   #renderRows(rows) {
     const html = rows
-      .map((r) => `<tr><td>${r.weight}</td><td>${r.timeStr}</td><td>${r.timeDelta}</td></tr>`)
+      .map((r) => `<tr><td>${r.weight}</td><td>${r.timeStr}</td><td>${this.#secondsToHMS(r.timeDelta)}</td></tr>`)
       .join("")
     this.tbodyTarget.innerHTML = html
   }
@@ -64,12 +69,13 @@ export default class extends Controller {
   }
 
   #secondsToHMS(sec) {
-    const s = Math.round(sec)
+    const sign = sec < 0 ? "-" : ""
+    const s = Math.round(Math.abs(sec))
     const h = Math.floor(s / 3600)
     const m = Math.floor((s % 3600) / 60)
     const ss = s % 60
     const mm = m.toString().padStart(2, "0")
     const sss = ss.toString().padStart(2, "0")
-    return h ? `${h}:${mm}:${sss}` : `${mm}:${sss}`
+    return h ? `${sign}${h}:${mm}:${sss}` : `${sign}${mm}:${sss}`
   }
 }
