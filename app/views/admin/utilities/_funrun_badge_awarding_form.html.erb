@@ -1,7 +1,14 @@
 <%= form_with url: admin_utilities_award_funrun_badge_path do |f| %>
   <div style="margin-bottom: 12px">
     <%= f.label :badge_id, 'Бейдж' %>
-    <%= f.collection_select :badge_id, Badge.funrun_kind.order(received_date: :desc).first(5), :id, :name %>
+    <%=
+      f.collection_select(
+        :badge_id,
+        Badge.funrun_kind.where(received_date: 2.weeks.ago..).order(received_date: :desc),
+        :id,
+        :name,
+      )
+    %>
   </div>
   <div style="margin-bottom: 24px">
     <%= f.label :activity_id, 'Забег' %>
