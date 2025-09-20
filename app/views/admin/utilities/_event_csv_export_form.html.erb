@@ -1,0 +1,15 @@
+<%= form_with url: admin_utilities_export_event_csv_path do |f| %>
+  <div style="margin-bottom: 12px">
+    <%= f.label :event_id, 'Мероприятие' %>
+    <%=
+      f.collection_select(
+        :event_id,
+        Event.order(:visible_order, :name),
+        :id,
+        :name,
+        include_blank: true,
+      )
+    %>
+  </div>
+  <%= f.submit 'Запросить', data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
+<% end %>

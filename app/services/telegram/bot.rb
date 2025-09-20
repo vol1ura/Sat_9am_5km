@@ -3,7 +3,6 @@
 module Telegram
   class Bot < ApplicationService
     TOKEN = ENV.fetch('BOT_TOKEN')
-    HEADERS = { 'Content-Type' => 'application/json' }.freeze
     MAIN_KEYBOARD = {
       keyboard: [['ℹ️ QR-код', '❓ справка']],
       resize_keyboard: true,
@@ -16,12 +15,9 @@ module Telegram
 
     def call
       retry_count = 0
-      uri = URI("https://api.telegram.org/bot#{TOKEN}/#{@method}")
 
       begin
-        response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, open_timeout: 60, read_timeout: 60) do |http|
-          http.post(uri, @payload.to_json, HEADERS)
-        end
+        response = send_request
         return if response.is_a?(Net::HTTPSuccess)
 
         parsed_body = JSON.parse(response.body, symbolize_names: true)
@@ -29,6 +25,25 @@ module Telegram
       rescue StandardError => e
         Rails.logger.error e.message
         (retry_count += 1) < 3 ? retry : raise
+      end
+    end
+
+    private
+
+    def uri
+      @uri ||= URI("https://api.telegram.org/bot#{TOKEN}/#{@method}")
+    end
+
+    def send_request
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, open_timeout: 60, read_timeout: 60) do |http|
+        req = Net::HTTP::Post.new(uri)
+        if @payload.key?(:form_data)
+          req.set_form(@payload[:form_data], 'multipart/form-data')
+        else
+          req['Content-Type'] = 'application/json'
+          req.body = @payload.to_json
+        end
+        http.request(req)
       end
     end
   end
