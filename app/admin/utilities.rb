@@ -5,6 +5,20 @@ ActiveAdmin.register_page 'Utilities' do
 
   content title: proc { t '.utilities' } do
     tabs do
+      tab 'Отчёты' do
+        panel 'Выгрузка данных по выбранному мероприятию' do
+          para 'Будет сформирован CSV файл с отчётом по всем результатам и волонтёрствам на выбранном мероприятии.'
+          render partial: 'event_csv_export_form'
+        end
+      end
+
+      tab t('.badges.title') do
+        panel 'Установка фан-ран бейджа' do
+          para 'Внимание! Будут награждены все участники и волонтёры выбранного забега.'
+          render partial: 'funrun_badge_awarding_form'
+        end
+      end
+
       tab t('.cache_clear.title') do
         para "Кеш можно сбрасывать не чаще, чем раз в #{ClearCache::TIME_THRESHOLD.in_minutes.ceil} минут."
         table do
@@ -39,13 +53,6 @@ ActiveAdmin.register_page 'Utilities' do
                        method: :delete,
                        data: { confirm: t('.cache_clear.confirm') }
       end
-
-      tab t('.badges.title') do
-        panel 'Установка фан-ран бейджа' do
-          para 'Внимание! Будут награждены все участники и волонтёры выбранного забега.'
-          render partial: 'funrun_badge_awarding_form'
-        end
-      end
     end
   end
 
@@ -61,6 +68,16 @@ ActiveAdmin.register_page 'Utilities' do
       flash[:notice] = t('.clear_success')
     else
       flash[:alert] = t('.clear_failed')
+    end
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_event_csv, method: :post do
+    if (event_id = params[:event_id]).present?
+      EventAthletesCsvExportJob.perform_later(event_id.to_i, current_user.id)
+      flash[:notice] = t '.reports.task_queued'
+    else
+      flash[:alert] = t '.reports.event_not_selected'
     end
     redirect_to admin_utilities_path
   end

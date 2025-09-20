@@ -10,6 +10,9 @@ rs:
         cannot_delete_registered: 'Operacija poništena. Ne možete obrisati registrovanog učesnika!'
         cannot_delete_participant: 'Operacija poništena. Ne možete obrisati učesnika koji ima rezultate!'
     utilities:
+      reports:
+        task_queued: 'Zadatak za kreiranje fajla je postavljen u red. Očekujte poruku u Telegram-u.'
+        event_not_selected: 'Merejment nije izabran'
       cache:
         clear_success: 'Keš uspešno očišćen!'
         clear_failed: 'Otkazano! Keš je nedavno već bio očišćen. Pokušajte ponovo kasnije.'
