@@ -56,7 +56,7 @@ class EventAthletesCsvExportJob < ApplicationJob
         'document',
         file,
         {
-          filename: "event_#{@event.code_name}_athletes_#{Time.zone.now.to_i}.csv",
+          filename: "#{@event.code_name}_participants_#{Time.zone.now.to_i}.csv",
           content_type: 'text/csv',
         },
       ],

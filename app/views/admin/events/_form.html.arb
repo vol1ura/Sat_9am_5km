@@ -19,7 +19,7 @@ active_admin_form_for [:admin, resource] do |f|
     input :active, input_html: { style: 'margin-bottom: 20px;' }
     input :country, include_blank: false
     input :name
-    input :code_name if resource.new_record?
+    input :code_name if resource.new_record? || current_user.super_admin?
     input :town
     input :place
     input :description, as: :quill_editor,

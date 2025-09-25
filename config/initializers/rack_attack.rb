@@ -1,7 +1,4 @@
 class Rack::Attack
-  FRAUD_PATTERNS_REGEXP = Regexp.union(%w[etc/passwd ../../ .php .env]).freeze
-  BLACKLIST_IPS = ENV['BLACKLIST_IPS'].to_s.split(',').freeze
-
   # Throttle requests by IP
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
@@ -26,11 +23,7 @@ class Rack::Attack
     req.ip if req.path.start_with?('/auth_links/')
   end
 
-  throttle('pentesters/ip', limit: 2, period: 5.minutes) do |req|
-    req.ip if CGI.unescape(req.path).match?(FRAUD_PATTERNS_REGEXP)
-  end
-
   blocklist('pentesters block') do |req|
-    req.env['HTTP_ACCEPT'].to_s.include?('../../') || BLACKLIST_IPS.include?(req.ip)
+    req.env['HTTP_ACCEPT'].to_s.include?('../../')
   end
 end
