@@ -5,6 +5,7 @@
   padding: 6rem 0;
   height: calc(100vh - 96px);
   max-height: 1333px;
+  min-height: 320px;
 
   @include media(phoneScreen) {
     height: calc(100vh - 160px);
@@ -30,11 +31,11 @@
   .placeholder-image {
     position: relative;
     z-index: 1;
-    backdrop-filter: blur(8px);
-    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%);
     border-radius: 15px;
     padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
@@ -343,7 +344,7 @@
 }
 
 .volunteer-app-section {
-  background-color: #a6e9d5;
+  background: linear-gradient(135deg, #e9f9f5 0%, #d0f0e7 100%);
 }
 
 .app-screen {
