@@ -91,6 +91,8 @@ ActiveAdmin.register Activity do
   member_action :publish, method: :patch do
     if resource.results.empty?
       flash[:error] = t '.empty_protocol'
+    elsif resource.doubled_results.exists?
+      flash[:error] = t '.has_doubled_results'
     elsif resource.correct?
       resource.update!(published: true, token: nil)
       flash[:notice] = t '.successfully_published'
