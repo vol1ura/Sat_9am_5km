@@ -16,7 +16,7 @@ RSpec.describe '/admin/utilities' do
     it 'renders a successful response' do
       expect do
         post admin_utilities_award_funrun_badge_url, params: { activity_id: 1, badge_id: badge.id }
-      end.to have_enqueued_job.on_queue('default').at(:no_wait)
+      end.to have_enqueued_job.on_queue('default').twice
       expect(response).to redirect_to admin_badge_trophies_path(badge.id)
     end
   end

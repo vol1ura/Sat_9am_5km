@@ -14,8 +14,8 @@ class EventAthletesCsvExportJob < ApplicationJob
   rescue StandardError => e
     Rollbar.error e, user_id: @user.id, event_id: @event.id
   ensure
-    tempfile.close
-    tempfile.unlink
+    tempfile&.close
+    tempfile&.unlink
   end
 
   private
