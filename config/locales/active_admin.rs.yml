@@ -33,6 +33,7 @@ rs:
         successfully_published: The protocol has been successfully published on the website
         empty_protocol: There are no results in the protocol
         incorrect_protocol: The protocol contains errors. Please correct them before publishing
+        has_doubled_results: 'Neke učesnike već imaju objavljene rezultate u drugim lokacijama u ovaj dan.'
       toggle_mode:
         auto:
           confirm: 'Da li želite da pređete u automatski režim? U tom režimu će biti omogućeno učitavanje podataka iz mobilne aplikacije'

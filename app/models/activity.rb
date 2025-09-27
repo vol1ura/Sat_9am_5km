@@ -58,6 +58,14 @@ class Activity < ApplicationRecord
       .empty?
   end
 
+  def doubled_results
+    return Result.none if date.strftime('%-d.%-m') == '1.1'
+
+    Result
+      .where(athlete_id: results.select(:athlete_id))
+      .where(activity_id: Activity.published.where(date:).where.not(id:).select(:id))
+  end
+
   def clear_live_results!
     event.update!(live_results: nil) if date.today?
   end

@@ -10,6 +10,11 @@ columns do
         row :date
         row(:description) { |a| sanitized_text a.description }
         row :correct?
+        if activity.doubled_results.exists?
+          row('Участники с дублями') do |a|
+            Athlete.where(id: a.doubled_results.select(:athlete_id)).pluck(:name).join(', ')
+          end
+        end
         row :published
         row('Протокол на сайте') { |a| link_to activity_url(a), a } if activity.published
       end
