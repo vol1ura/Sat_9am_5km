@@ -2,7 +2,7 @@
 
 RSpec.describe '/volunteers' do
   let(:user) { create(:user) }
-  let(:activity) { create(:activity, published: false) }
+  let(:activity) { create(:activity, published: false, date: Date.tomorrow) }
   let(:athlete) { create(:athlete, parkrun_code: 1) }
   let(:volunteer) { create(:volunteer, activity:) }
 

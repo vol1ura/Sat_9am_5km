@@ -29,6 +29,7 @@ if ENV['COVERAGE'] == 'on'
   end
 end
 
+require 'csv'
 require 'vcr'
 require 'webmock/rspec'
 

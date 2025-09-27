@@ -56,9 +56,12 @@ ActiveAdmin.register User do
     link_to 'Полномочия', admin_user_permissions_path(resource)
   end
 
-  batch_action :change_roles, confirm: I18n.t('active_admin.users.confirm_change_roles'),
-                              if: proc { can? :manage, User },
-                              form: { role: [nil, *User.roles.keys] } do |ids, inputs|
+  batch_action(
+    :change_roles,
+    confirm: I18n.t('active_admin.users.confirm_change_roles'),
+    if: proc { current_user.admin? },
+    form: { role: [nil, 'admin'] },
+  ) do |ids, inputs|
     batch_action_collection.where(id: ids).update_all role: inputs[:role]
     redirect_to collection_path, notice: I18n.t('active_admin.users.successful_roles_changed')
   end
