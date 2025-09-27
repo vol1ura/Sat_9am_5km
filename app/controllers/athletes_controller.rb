@@ -2,7 +2,7 @@
 
 class AthletesController < ApplicationController
   def index
-    query = params[:q].to_s.gsub(/[^[:alnum:][:blank:]]/, '').strip
+    query = params[:q].to_s.gsub(/[^[:alnum:][:blank:]\-']/, '').strip
     criteria = Athlete.order(:event_id).limit(100)
     @athletes =
       if query.length < 3
