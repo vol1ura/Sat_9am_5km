@@ -18,12 +18,12 @@
   data-controller="table"
   data-table-url-value="/ratings/table"
   data-table-params-value="order,type">
-  <ul class="nav nav-tabs mb-3" role="tablist">
+  <ul class="nav nav-pills nav-justified mb-3 flex-nowrap overflow-x-auto" role="tablist">
     <% RatingsController::RATINGS.each do |order| %>
       <li class="nav-item" role="presentation">
         <%=
           button_tag(
-            class: "nav-link #{order == @order ? 'active' : ''} px-2",
+            class: "nav-link #{order == @order ? 'active' : ''} px-2 text-nowrap",
             data: { table_target: "tab", action: "click->table#switchTab", order: order, type: @rating_type },
           ) do
         %>

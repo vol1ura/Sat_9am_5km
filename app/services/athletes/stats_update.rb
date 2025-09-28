@@ -24,6 +24,7 @@ module Athletes
         'h_index' => h_index(published_results, :event_id),
         'uniq_events' => uniq_events(published_results),
         'trophies' => trophies_count,
+        'longest_streak' => longest_weekly_streak(published_results.pluck(:date)),
       )
     end
 
@@ -37,6 +38,7 @@ module Athletes
         'h_index' => h_index(published_volunteering, :role),
         'uniq_events' => uniq_events(published_volunteering),
         'trophies' => trophies_count,
+        'longest_streak' => longest_weekly_streak(published_volunteering.pluck(:date)),
       )
     end
 
@@ -50,6 +52,29 @@ module Athletes
 
     def trophies_count
       @trophies_count ||= @athlete.trophies.count
+    end
+
+    def longest_weekly_streak(dates)
+      return 0 if dates.empty?
+
+      week_counts = Hash.new(0)
+      dates.each { |date| week_counts[date.to_date.beginning_of_week(:monday)] += 1 }
+
+      longest = 0
+      current = 0
+      previous_week = nil
+
+      week_counts.keys.sort.each do |week_start|
+        if previous_week && week_start == previous_week + 7
+          current += week_counts[week_start]
+        else
+          current = week_counts[week_start]
+        end
+        longest = [longest, current].max
+        previous_week = week_start
+      end
+
+      longest
     end
   end
 end

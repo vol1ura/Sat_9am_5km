@@ -4,7 +4,7 @@ class RatingsController < ApplicationController
   before_action :set_rating_variables, only: %i[index table]
   before_action :set_page, only: %i[table results_table]
 
-  RATINGS = %w[count h_index uniq_events trophies].freeze
+  RATINGS = %w[count h_index uniq_events longest_streak trophies].freeze
   PER_PAGE = 50
   MAX_PAGE = 20
   RANKING_SQL =
