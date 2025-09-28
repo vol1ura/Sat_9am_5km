@@ -8,12 +8,14 @@ RSpec.describe Athletes::StatsUpdate, type: :service do
         'results' => {
           'count' => 1,
           'h_index' => 1,
+          'longest_streak' => 1,
           'trophies' => 1,
           'uniq_events' => 1,
         },
         'volunteers' => {
           'count' => 1,
           'h_index' => 1,
+          'longest_streak' => 1,
           'trophies' => 1,
           'uniq_events' => 1,
         },
