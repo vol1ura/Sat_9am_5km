@@ -40,4 +40,31 @@ namespace :notification do
       Telegram::Notification::VolunteerJob.set(wait_until: closest_friday.change(hour: 18)).perform_later(event.id)
     end
   end
+
+  desc 'Notify about doubled results'
+  task doubled_results: :environment do
+    doubled_results =
+      Result
+        .published
+        .where.not(athlete_id: nil)
+        .where.not('EXTRACT(MONTH FROM date) = 1 AND EXTRACT(DAY FROM date) = 1')
+        .group(:athlete_id, :date).having('COUNT(results.id) >= 2')
+        .select(:athlete_id, :date)
+    next if doubled_results.load.empty?
+
+    message =
+      "Athletes with doubled results:\n#{doubled_results.map { |r| "ID=#{r[:athlete_id]} on #{r[:date]}" }.join("\n")}"
+
+    User.super_admin.find_each { |user| Telegram::Notification::User::Message.call(user, message) }
+  end
+
+  desc 'Notify about incorrect activities'
+  task incorrect_activities: :environment do
+    incorrect_activities = Activity.published.reject(&:correct?)
+    next if incorrect_activities.empty?
+
+    message = "Incorrect activities:\n#{incorrect_activities.map { |a| "ID=#{a.id} on #{a.date}" }.join("\n")}"
+
+    User.super_admin.find_each { |user| Telegram::Notification::User::Message.call(user, message) }
+  end
 end
