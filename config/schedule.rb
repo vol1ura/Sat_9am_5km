@@ -90,3 +90,11 @@ end
 every :sunday, at: '5:45' do
   runner 'AthleteStatsUpdateJob.perform_later'
 end
+
+every :sunday, at: '12' do
+  rake 'notification:doubled_results'
+end
+
+every :sunday, at: '12:05' do
+  rake 'notification:incorrect_activities'
+end
