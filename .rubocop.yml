@@ -98,4 +98,5 @@ AllCops:
     - bin/**/*
     - config/**/*
     - db/schema.rb
+    - vendor/**/*
   NewCops: enable
