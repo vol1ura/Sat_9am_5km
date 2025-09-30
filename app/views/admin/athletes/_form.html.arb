@@ -20,7 +20,7 @@ active_admin_form_for [:admin, resource] do |f|
     input :fiveverst_code, input_html: { inputmode: 'numeric' }
     input :runpark_code, input_html: { inputmode: 'numeric' }
     input :club, as: :searchable_select
-    input :event, as: :searchable_select
+    input :event, as: :searchable_select, collection: Event.without_friends
     input :male, as: :radio, collection: [['мужчина', true], ['женщина', false]], required: true, label: 'пол'
   end
 
