@@ -17,5 +17,12 @@ RSpec.describe Volunteer do
       volunteer.activity = build :activity
       expect(volunteer).to be_valid
     end
+
+    it 'invalid with running role and no result' do
+      volunteer.role = 'event_closer'
+      volunteer.athlete = build :athlete
+      volunteer.activity = create :activity
+      expect(volunteer).not_to be_valid
+    end
   end
 end

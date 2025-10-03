@@ -34,6 +34,7 @@ rs:
         empty_protocol: There are no results in the protocol
         incorrect_protocol: The protocol contains errors. Please correct them before publishing
         has_doubled_results: 'Neke učesnike već imaju objavljene rezultate u drugim lokacijama u ovaj dan.'
+        has_incorrect_running_volunteers: 'Neke volontere na trčanim pozicijama nemaju rezultate. Popravite ih pre objavljivanja.'
       toggle_mode:
         auto:
           confirm: 'Da li želite da pređete u automatski režim? U tom režimu će biti omogućeno učitavanje podataka iz mobilne aplikacije'

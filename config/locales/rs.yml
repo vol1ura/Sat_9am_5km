@@ -376,6 +376,7 @@ rs:
       taken: zauzeto
       more_than_one_volunteering: ne može obavljati više od jedne volonterske pozicije u istom danu
       more_than_one_trophy: ne može imati više od jedne nagrade istog tipa
+      incorrect_running_role: ne može obavljati poziciju koja zahteva rezultate trke jer nema rezultata u protoku
       too_long:
         one: previše dugo (ne može biti duže od %{count} znaka)
         few: previše dugo (ne može biti duže od %{count} znaka)

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :volunteer do
-    role { Volunteer.roles.keys.sample }
+    role { (Volunteer.roles.keys - Volunteer::RUNNING_ROLES).sample }
     athlete
 
     transient do

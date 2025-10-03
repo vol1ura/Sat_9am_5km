@@ -93,6 +93,8 @@ ActiveAdmin.register Activity do
       flash[:error] = t '.empty_protocol'
     elsif resource.doubled_results.exists?
       flash[:error] = t '.has_doubled_results'
+    elsif resource.incorrect_running_volunteers.exists?
+      flash[:error] = t '.has_incorrect_running_volunteers'
     elsif resource.correct?
       resource.update!(published: true, token: nil)
       flash[:notice] = t '.successfully_published'
