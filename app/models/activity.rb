@@ -66,6 +66,14 @@ class Activity < ApplicationRecord
       .where(activity_id: Activity.published.where(date:).where.not(id:).select(:id))
   end
 
+  def incorrect_running_volunteers
+    return Volunteer.none if results.empty?
+
+    volunteers
+      .where(role: %w[event_closer pacemaker attendant])
+      .where.not(athlete_id: results.where.not(athlete_id: nil).select(:athlete_id))
+  end
+
   def clear_live_results!
     event.update!(live_results: nil) if date.today?
   end
