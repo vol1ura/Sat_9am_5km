@@ -55,16 +55,41 @@ namespace :notification do
     message =
       "Athletes with doubled results:\n#{doubled_results.map { |r| "ID=#{r[:athlete_id]} on #{r[:date]}" }.join("\n")}"
 
-    User.super_admin.find_each { |user| Telegram::Notification::User::Message.call(user, message) }
+    User.where(role: %i[super_admin admin]).find_each { |user| Telegram::Notification::User::Message.call(user, message) }
   end
 
   desc 'Notify about incorrect activities'
   task incorrect_activities: :environment do
     incorrect_activities = Activity.published.reject(&:correct?)
-    next if incorrect_activities.empty?
 
-    message = "Incorrect activities:\n#{incorrect_activities.map { |a| "ID=#{a.id} on #{a.date}" }.join("\n")}"
+    incorrect_activities.each do |activity|
+      message = "*Warning!* Protocol of activity ID=#{activity.id} at #{activity.date} is incorrect.\nPlease fix it."
+      [
+        *User.where(role: %i[super_admin admin]),
+        *activity.volunteers.where(role: %i[director result_handler]),
+      ]
+        .compact
+        .each { |user| Telegram::Notification::User::Message.call(user, message) }
+    end
+  end
 
-    User.super_admin.find_each { |user| Telegram::Notification::User::Message.call(user, message) }
+  desc 'Notify about incorrect running volunteers'
+  task incorrect_running_volunteers: :environment do
+    incorrect_running_volunteers = Activity.published.where(date: 4.years.ago..).map(&:incorrect_running_volunteers).flatten
+
+    incorrect_running_volunteers.each do |volunteer|
+      message = <<~MESSAGE
+        *Warning!* Activity ID=#{volunteer.activity_id} at #{volunteer.activity.date} has running volunteer
+        *#{volunteer.athlete.name}* (ID=#{volunteer.athlete.code})
+        without result in protocol. Please fix it.
+      MESSAGE
+      [
+        *User.where(role: %i[super_admin admin]),
+        volunteer.athlete.user,
+        *volunteer.activity.volunteers.where(role: %i[director result_handler]),
+      ]
+        .compact
+        .each { |user| Telegram::Notification::User::Message.call(user, message) }
+    end
   end
 end

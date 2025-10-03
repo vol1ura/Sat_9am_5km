@@ -9,7 +9,7 @@ class Volunteer < ApplicationRecord
   validates :role, presence: true
   validates :comment, length: { in: 4..40 }, allow_nil: true
   validates :athlete, uniqueness: { scope: :activity_id }
-  validate :more_than_one_position
+  validate :more_than_one_volunteering
 
   before_validation :strip_comment, if: :comment_changed?
   after_save_commit :update_athlete_going_to_event
@@ -31,7 +31,7 @@ class Volunteer < ApplicationRecord
 
   private
 
-  def more_than_one_position
+  def more_than_one_volunteering
     other_volunteering =
       Volunteer.joins(:activity).where.not(activity_id:).where(athlete_id: athlete_id, activity: { date: })
     errors.add(:athlete, :more_than_one_volunteering) if other_volunteering.exists?

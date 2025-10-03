@@ -86,7 +86,7 @@ body {
 tr.odd,
 tr.even {
   &.athlete-error {
-    td.col-athlete {
+    td.col-athlete, td.col-name, td.col-role {
       background-color: $table-error-color;
     }
   }

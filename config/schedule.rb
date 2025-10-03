@@ -98,3 +98,7 @@ end
 every :sunday, at: '12:05' do
   rake 'notification:incorrect_activities'
 end
+
+every :sunday, at: '12:10' do
+  rake 'notification:incorrect_running_volunteers'
+end

@@ -34,9 +34,7 @@ RSpec.describe '/admin/activities/1/volunteers' do
   describe 'POST, PUT /admin/activities/1/volunteers' do
     let(:athlete) { create(:athlete) }
     let(:valid_attributes) do
-      {
-        volunteer: { athlete_id: athlete.id, role: Volunteer.roles.keys.sample },
-      }
+      { volunteer: { athlete_id: athlete.id, role: Volunteer.roles.keys.sample } }
     end
 
     it 'redirects unauthorized user' do
