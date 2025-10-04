@@ -19,6 +19,75 @@ ActiveAdmin.register_page 'Utilities' do
         end
       end
 
+      tab t('.analytics.title') do
+        stats_for = lambda do |model|
+          Activity
+            .published
+            .where(date: 12.months.ago.beginning_of_month..Date.current.end_of_month)
+            .joins(model)
+            .group("DATE_TRUNC('month', activities.date)")
+            .order(month: :desc)
+            .select(
+              "DATE_TRUNC('month', activities.date) AS month,
+              COUNT(DISTINCT activities.id) AS activities_count,
+              COUNT(#{model}.id) AS total_count,
+              ROUND(COUNT(#{model}.id)::numeric / COUNT(DISTINCT activities.id), 1) AS avg_count",
+            )
+        end
+
+        panel t('.analytics.volunteers.title') do
+          table do
+            thead do
+              tr do
+                th t('.analytics.month')
+                th t('.analytics.activities_count')
+                th t('.analytics.volunteers.count')
+                th t('.analytics.volunteers.avg_count')
+              end
+            end
+            tbody do
+              stats_for.call(:volunteers).each do |stat|
+                tr do
+                  td do
+                    month_date = stat.month.to_date
+                    "#{I18n.t('date.month_names')[month_date.month]} #{month_date.year}"
+                  end
+                  td stat.activities_count
+                  td stat.total_count
+                  td stat.avg_count
+                end
+              end
+            end
+          end
+        end
+
+        panel t('.analytics.results.title') do
+          table do
+            thead do
+              tr do
+                th t('.analytics.month')
+                th t('.analytics.activities_count')
+                th t('.analytics.results.count')
+                th t('.analytics.results.avg_count')
+              end
+            end
+            tbody do
+              stats_for.call(:results).each do |stat|
+                tr do
+                  td do
+                    month_date = stat.month.to_date
+                    "#{I18n.t('date.month_names')[month_date.month]} #{month_date.year}"
+                  end
+                  td stat.activities_count
+                  td stat.total_count
+                  td stat.avg_count
+                end
+              end
+            end
+          end
+        end
+      end
+
       tab t('.cache_clear.title') do
         para "Кеш можно сбрасывать не чаще, чем раз в #{ClearCache::TIME_THRESHOLD.in_minutes.ceil} минут."
         table do

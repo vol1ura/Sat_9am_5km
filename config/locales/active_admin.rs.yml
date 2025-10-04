@@ -213,6 +213,18 @@ rs:
     page:
       index:
         utilities: Alati
+        analytics:
+          title: 'Analitika'
+          month: 'Mesec'
+          activities_count: 'Trčanja'
+          volunteers:
+            title: 'Dinamika volontera za poslednje 12 meseci'
+            count: 'Volontera'
+            avg_count: 'Srednje broj volontera'
+          results:
+            title: 'Dinamika učesnika za poslednje 12 meseci'
+            count: 'Učesnika'
+            avg_count: 'Srednje broj učesnika'
         cache_clear:
           title: 'Očisti keš'
           button: 'Očisti'
