@@ -13,10 +13,13 @@ module Users
 
     def call
       return unless @user.image.attached?
-      return if Vips::Image.new_from_file(image_file.path).size.max <= MAX_DIMENSION && image_file.size <= MAX_SIZE
+
+      download_image_file
+      return unless @image_file
+      return if Vips::Image.new_from_file(@image_file.path).size.max <= MAX_DIMENSION && @image_file.size <= MAX_SIZE
 
       compressed_image_file = ImageProcessing::Vips
-        .source(image_file)
+        .source(@image_file)
         .resize_to_fill(MAX_DIMENSION, MAX_DIMENSION)
         .saver(quality: 95, compression: :lzw)
         .call
@@ -27,20 +30,27 @@ module Users
         @user.image.purge
       end
     ensure
-      image_file.close
-      image_file.unlink
+      cleanup_temp_file
     end
 
     private
 
-    def image_file
-      return @image_file if @image_file
+    def download_image_file
+      return if @image_file
 
       @image_file = Tempfile.new
       @image_file.binmode
       @image_file.write(@user.image.download)
       @image_file.rewind
-      @image_file
+    rescue ActiveStorage::FileNotFoundError => e
+      Rails.logger.warn("Failed to download image for user #{@user.id}: #{e.message}")
+      cleanup_temp_file
+      @image_file = nil
+    end
+
+    def cleanup_temp_file
+      @image_file&.close
+      @image_file&.unlink
     end
   end
 end
