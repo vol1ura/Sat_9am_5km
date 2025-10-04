@@ -213,6 +213,18 @@ ru:
     page:
       index:
         utilities: Инструменты
+        analytics:
+          title: 'Аналитика'
+          month: 'Месяц'
+          activities_count: 'Забегов'
+          volunteers:
+            title: 'Динамика волонтёров за последние 12 месяцев'
+            count: 'Волонтёров'
+            avg_count: 'Ср. количество волонтёров'
+          results:
+            title: 'Динамика участников за последние 12 месяцев'
+            count: 'Участников'
+            avg_count: 'Ср. количество участников'
         cache_clear:
           title: 'Сброс кеша'
           button: 'Сбросить кеш'
