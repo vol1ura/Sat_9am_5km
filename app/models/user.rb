@@ -38,6 +38,10 @@ class User < ApplicationRecord
   before_validation :format_emergency_contact, if: :will_save_change_to_emergency_contact_phone?
   before_save :update_athlete_name, if: proc { will_save_change_to_first_name? || will_save_change_to_last_name? }
 
+  scope :protocol_responsible, lambda { |activity|
+    joins(:athlete).where(athlete: { id: activity.volunteers.where(role: %i[director result_handler]).select(:athlete_id) })
+  }
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[email first_name last_name telegram_user]
   end
