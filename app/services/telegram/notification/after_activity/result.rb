@@ -8,15 +8,17 @@ module Telegram
 
         def text
           <<~TEXT
-            #{athlete.user.first_name}, поздравляем вас с участием в #{activity.number}-м забеге S95 #{activity.event_name}.
-            Вы финишировали на #{@entity.position}-м месте в общем зачёте с результатом #{total_time}.
-            Общее число принявших участие в забеге спортсменов составило #{activity.results.count}.
+            #{country.localized(
+              'notification.after_activity.result',
+              first_name: athlete.user.first_name,
+              number: activity.number,
+              event_name: activity.event_name,
+              position: @entity.position,
+              total_time: ApplicationController.helpers.human_result_time(@entity.total_time),
+              count: activity.results.count,
+            )}
             #{super}
           TEXT
-        end
-
-        def total_time
-          ApplicationController.helpers.human_result_time(@entity.total_time)
         end
       end
     end

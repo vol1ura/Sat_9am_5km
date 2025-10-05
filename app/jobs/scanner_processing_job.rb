@@ -35,11 +35,10 @@ class ScannerProcessingJob < ApplicationJob
   end
 
   def alert_message(result_params)
-    <<~TEXT
-      Внимание!
-      В данных сканера содержатся ошибки, поэтому результат *#{result_params[:position]}* не может быть сохранён.
-      Пожалуйста, проверьте позицию *#{result_params[:position]}*, а также участника с ID *#{result_params[:code]}* \
-      на дублирование в протоколе и файлах сканера.
-    TEXT
+    @activity.event.country.localized(
+      'notification.scanner_processing',
+      position: result_params[:position],
+      code: result_params[:code],
+    )
   end
 end

@@ -8,17 +8,13 @@ module Telegram
 
         def text
           activity = @user.athlete.results.first.activity
-          host = activity.event.country.host
+          country = activity.event.country
 
-          <<~TEXT
-            Привет, #{@user.first_name}.
-            В прошлую субботу вы впервые [посетили пробежку S95](#{activity_url(activity, host:)}).
-            Надеемся, что вам всё понравилось и вы придёте завтра вновь. \
-            Напоминаем, что наши забеги проводятся еженедельно независимо от времени года и погоды. \
-            Вы можете пробежать, пройти или помочь с организацией.
-
-            Увидимся в субботу!
-          TEXT
+          country.localized(
+            'notification.user.new_runner',
+            first_name: @user.first_name,
+            activity_url: activity_url(activity, host: country.host),
+          )
         end
       end
     end

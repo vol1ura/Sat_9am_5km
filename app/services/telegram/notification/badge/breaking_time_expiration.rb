@@ -8,10 +8,11 @@ module Telegram
 
         def text
           <<~TEXT
-            Привет, #{athlete.user.first_name}.
-            Через неделю истекает срок действия вашей [награды](#{badge_url(@trophy.badge, host:)}) за скорость.
-            Попробуйте удержать её!
-
+            #{country.localized(
+              'notification.badge.breaking_time_expiration',
+              first_name: athlete.user.first_name,
+              badge_url: badge_url(@trophy.badge, host: country.host),
+            )}
             #{super}
           TEXT
         end

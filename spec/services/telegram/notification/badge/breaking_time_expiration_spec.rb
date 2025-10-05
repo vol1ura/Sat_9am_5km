@@ -12,7 +12,10 @@ RSpec.describe Telegram::Notification::Badge::BreakingTimeExpiration, type: :ser
   let(:bot_token) { '123456:aaabbb' }
   let!(:request) { stub_request(:post, %r{https://api\.telegram\.org/bot#{bot_token}/sendMessage}) }
 
-  before { stub_const('Telegram::Bot::TOKEN', bot_token) }
+  before do
+    stub_const('Telegram::Bot::TOKEN', bot_token)
+    create(:result, athlete: breaking_trophy.athlete, activity_params: { date: breaking_trophy.date })
+  end
 
   context 'when request to telegram successful' do
     it 'informs athlete' do

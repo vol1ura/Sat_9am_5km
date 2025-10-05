@@ -24,10 +24,11 @@ module Telegram
         private
 
         def text
-          <<~TEXT.squish
-            С итоговым протоколом вы можете ознакомиться на [нашем сайте](#{activity_url(activity, host:)}).
-            Все ваши результаты и статистика доступны по [ссылке](#{athlete_url(@entity.athlete, host:)}).
-          TEXT
+          country.localized(
+            'notification.after_activity.base',
+            activity_url: activity_url(activity, host: country.host),
+            athlete_url: athlete_url(@entity.athlete, host: country.host),
+          )
         end
 
         def athlete
@@ -38,8 +39,8 @@ module Telegram
           @activity ||= @entity.activity
         end
 
-        def host
-          @host ||= activity.event.country.host
+        def country
+          @country ||= activity.event.country
         end
       end
     end

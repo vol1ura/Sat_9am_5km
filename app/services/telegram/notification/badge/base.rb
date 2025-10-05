@@ -23,11 +23,11 @@ module Telegram
         end
 
         def text
-          "Все ваши награды и результаты можно посмотреть [тут](#{athlete_url(athlete, host:)})."
+          country.localized('notification.badge.base', athlete_url: athlete_url(athlete, host: country.host))
         end
 
-        def host
-          @host ||= "s95.#{athlete.event&.country&.code || 'ru'}"
+        def country
+          @country ||= athlete.results.published.last.activity&.event&.country || Country.default
         end
       end
     end
