@@ -7,27 +7,31 @@ module Telegram
         private
 
         def text
-          athlete = @user.athlete
+          no_value = country.localized 'notification.common.no_value'
 
-          <<~TEXT
-            Здравствуйте, #{@user.first_name}.
+          country.localized(
+            'notification.user.reunite',
+            first_name: @user.first_name,
+            full_name: @user.full_name,
+            gender: athlete.gender,
+            club: athlete.club&.name || no_value,
+            home_event: athlete.event&.name || no_value,
+            parkrun_code: athlete.parkrun_code || no_value,
+            fiveverst_code: athlete.fiveverst_code || no_value,
+            runpark_code: athlete.runpark_code || no_value,
+          )
+        end
 
-            Похоже, в нашей базе было несколько профилей, принадлежащих вам \
-            (например, вас когда-то могли внести вручную). \
-            Бот объединил их в один в автоматическом режиме и ваши данные могли немного обновиться.
+        def athlete
+          @athlete ||= @user.athlete
+        end
 
-            Пожалуйста проверьте корректность данных и _обновите ваш QR-код_ с помощью команды /qrcode
+        def country
+          return @country if @country
 
-            #{@user.full_name}
-            *Пол:* #{athlete.gender}
-            *Клуб:* #{athlete.club&.name || 'нет'}
-            *Домашний забег:* #{athlete.event&.name || 'нет'}
-            *Parkrun ID:* #{athlete.parkrun_code || 'нет'}
-            *5 вёрст ID:* #{athlete.fiveverst_code || 'нет'}
-            *RunPark ID:* #{athlete.runpark_code || 'нет'}
-
-            В случае обнаружения неточностей, сообщите об этом волонтёрам вашего забега или напишите @vol1ura
-          TEXT
+          athlete_event = athlete.event
+          athlete_event ||= (athlete.results.published.last || athlete.volunteering.last)&.activity&.event
+          @country = athlete_event&.country || Country.default
         end
       end
     end

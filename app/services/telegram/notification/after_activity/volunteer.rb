@@ -8,12 +8,14 @@ module Telegram
 
         def text
           <<~TEXT
-            #{athlete.user.first_name}, привет!
-            Благодарим вас за волонтёрство на #{activity.number}-м забеге S95 #{activity.event_name}.
-            Забеги S95 целиком зависят от вклада волонтёров, и мы очень признательны вам за помощь.
+            #{country.localized(
+              'notification.after_activity.volunteer',
+              first_name: athlete.user.first_name,
+              number: activity.number,
+              event_name: activity.event_name,
+            )}
             #{super}
-            С любовью,
-            команда S95.
+            #{country.localized 'notification.common.signature'}
           TEXT
         end
       end

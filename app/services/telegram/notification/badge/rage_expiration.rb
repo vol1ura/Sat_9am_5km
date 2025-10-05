@@ -8,17 +8,14 @@ module Telegram
 
         def text
           <<~TEXT
-            Привет, #{athlete.user.first_name}!
-            В прошлую субботу вы получили [Раж значок](#{badge_url(@trophy.badge, host:)}) \
-            за непрерывное улучшение результатов. Попробуйте удержать его! \
-            Для этого на любом следующем забеге вам надо показать результат быстрее #{last_total_time}.
-
+            #{country.localized(
+              'notification.badge.rage_expiration',
+              first_name: athlete.user.first_name,
+              badge_url: badge_url(@trophy.badge, host: country.host),
+              last_total_time: athlete.results.published.order('activity.date').last.total_time.strftime('%M:%S'),
+            )}
             #{super}
           TEXT
-        end
-
-        def last_total_time
-          athlete.results.published.order('activity.date').last.total_time.strftime('%M:%S')
         end
       end
     end

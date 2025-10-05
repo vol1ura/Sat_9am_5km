@@ -27,25 +27,18 @@ module Telegram
           host: @event.country.host,
         )
 
-        <<~TEXT
-          #{@user.first_name}, добрый вечер!
-
-          Мы благодарны, что вы согласились быть волонтёром завтра на забеге S95.
-          Пожалуйста, приходите заранее и одевайтесь по погоде.
-
-          *Забег:* [#{@event.name}](#{roster_link})
-          *Директор:* #{director_info}
-          *Ваша позиция:* #{ApplicationController.helpers.human_volunteer_role @volunteer.role}
-
-          Если у вас изменились обстоятельства или вы обнаружили неточность, сообщите, пожалуйста, директору либо в чат забега.
-
-          С уважением,
-          команда S95
-        TEXT
+        @event.country.localized(
+          'notification.volunteer_info',
+          first_name: @user.first_name,
+          event_name: @event.name,
+          roster_link: roster_link,
+          director_info: director_info,
+          volunteer_role: ApplicationController.helpers.human_volunteer_role(@volunteer.role),
+        )
       end
 
       def director_info
-        return 'пока нет' unless @director
+        return @event.country.localized('notification.common.not_yet') unless @director
         return @director.name unless @director.user&.telegram_user
 
         "[#{@director.user.full_name}](https://t.me/#{@director.user.telegram_user})"

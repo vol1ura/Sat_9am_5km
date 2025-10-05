@@ -7,7 +7,13 @@ class Country < ApplicationRecord
 
   validates :code, presence: true, uniqueness: true
 
-  def name = I18n.t("country.#{code}")
+  def self.default = find_by code: 'ru'
+
+  def name = I18n.t "country.#{code}"
 
   def host = "s95.#{code}"
+
+  def localized(key, **)
+    I18n.t(key, locale: I18n.available_locales.include?(code.to_sym) ? code.to_sym : I18n.default_locale, **)
+  end
 end

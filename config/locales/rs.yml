@@ -1041,3 +1041,70 @@ rs:
       already_going: 'Već ste označili da idete na sledeću trku. Ako želite da otkažete svoju odluku, možete to učiniti u bilo kom trenutku.'
       reset_going_to: 'Ova oznaka će biti automatski obrisana u sledećoj suboti.'
   loading: Učitavanje...
+  notification:
+    common:
+      signature: |
+        S ljubavlju,
+        S95 tim.
+      not_yet: još nije
+      no_value: nema
+    after_activity:
+      base: Možete pogledati konačni protokol na [našem sajtu](%{activity_url}). Svi vaši rezultati i statistika su dostupni na [linku](%{athlete_url}).
+      result: |
+        %{first_name}, čestitamo vam na učešću u %{number}. trci S95 %{event_name}.
+        Završili ste na %{position}. mestu u generalnom plasmanu sa vremenom %{total_time}.
+        Ukupan broj učesnika koji su učestvovali u trci je %{count}.
+      volunteer: |
+        %{first_name}, zdravo!
+        Zahvaljujemo vam na volontiranju u %{number}. trci S95 %{event_name}.
+        Trke S95 u potpunosti zavise od volontera, i mi smo vam veoma zahvalni za pomoć.
+    badge:
+      base: Sve vaše nagrade i rezultate možete pogledati [ovde](%{athlete_url}).
+      rage_expiration: |
+        Zdravo, %{first_name}!
+        Prošle subote ste dobili [Rang značku](%{badge_url}) za kontinuirano poboljšanje rezultata. Pokušajte da je zadržite! Za to vam je potrebno da pokažete rezultat brži od %{last_total_time} na bilo kojoj sledećoj trci.
+      breaking_time_expiration: |
+        Zdravo, %{first_name}.
+        Za nedelju dana ističe vaša [nagrada](%{badge_url}) za brzinu.
+        Pokušajte da je zadržite!
+    user:
+      new_runner: |
+        Zdravo, %{first_name}.
+        Prošle subote ste prvi put [posetili S95 trčanje](%{activity_url}).
+        Nadamo se da vam se sve svidelo i da ćete doći ponovo sutra. Podsetimo vas da se naše trke održavaju nedeljno bez obzira na godišnje doba i vreme. Možete trčati, hodati ili pomoći sa organizacijom.
+
+        Vidimo se u subotu!
+      reunite: |
+        Pozdrav, %{first_name}.
+
+        Izgleda da je u našoj bazi bilo više profila koji pripadaju vama (na primer, možda ste ranije bili uneti ručno). Bot ih je automatski spojio u jedan i vaši podaci su možda malo ažurirani.
+
+        Molimo vas da proverite tačnost podataka i _ažurirajte vaš QR kod_ komandom /qrcode
+
+        %{full_name}
+        *Pol:* %{gender}
+        *Klub:* %{club}
+        *Domaća trka:* %{home_event}
+        *Parkrun ID:* %{parkrun_code}
+        *5 verst ID:* %{fiveverst_code}
+        *RunPark ID:* %{runpark_code}
+
+        U slučaju otkrivanja netačnosti, prijavite to volonterima vaše trke ili pišite @vol1ura
+    volunteer_info: |
+      %{first_name}, dobro veče!
+
+      Zahvalni smo što ste pristali da budete volonter sutra na S95 trci.
+      Molimo vas da dođete ranije i da se obučete prema vremenu.
+
+      *Trka:* [%{event_name}](%{roster_link})
+      *Direktor:* %{director_info}
+      *Vaša pozicija:* %{volunteer_role}
+
+      Ako su se vaše okolnosti promenile ili ste otkrili netačnost, molimo vas da obavestite direktora ili u četu trke.
+
+      S poštovanjem,
+      S95 tim
+    scanner_processing: |
+      Pažnja!
+      Podaci skenera sadrže greške, stoga rezultat *%{position}* ne može biti sačuvan.
+      Molimo vas da proverite poziciju *%{position}*, kao i učesnika sa ID *%{code}* za dupliranje u protokolu i fajlovima skenera.
