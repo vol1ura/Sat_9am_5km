@@ -66,7 +66,7 @@ namespace :notification do
       message = "*Warning!* Protocol of activity ID=#{activity.id} at #{activity.date} is incorrect.\nPlease fix it."
       [
         *User.where(role: %i[super_admin admin]),
-        *activity.volunteers.where(role: %i[director result_handler]),
+        *User.protocol_responsible(activity),
       ]
         .compact
         .each { |user| Telegram::Notification::User::Message.call(user, message) }
@@ -75,7 +75,7 @@ namespace :notification do
 
   desc 'Notify about incorrect running volunteers'
   task incorrect_running_volunteers: :environment do
-    incorrect_running_volunteers = Activity.published.where(date: 4.years.ago..).map(&:incorrect_running_volunteers).flatten
+    incorrect_running_volunteers = Activity.published.where(date: 2.weeks.ago..).map(&:incorrect_running_volunteers).flatten
 
     incorrect_running_volunteers.each do |volunteer|
       message = <<~MESSAGE
@@ -85,8 +85,8 @@ namespace :notification do
       MESSAGE
       [
         *User.where(role: %i[super_admin admin]),
+        *User.protocol_responsible(volunteer.activity),
         volunteer.athlete.user,
-        *volunteer.activity.volunteers.where(role: %i[director result_handler]),
       ]
         .compact
         .each { |user| Telegram::Notification::User::Message.call(user, message) }
