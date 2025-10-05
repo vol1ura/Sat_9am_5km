@@ -1,9 +1,16 @@
 # frozen_string_literal: true
 
 RSpec.describe '/admin/utilities' do
-  before { sign_in create(:user, :admin), scope: :user }
+  let(:user) { create(:user, :admin) }
+
+  before { sign_in user, scope: :user }
 
   describe 'GET /admin/utilities' do
+    before do
+      create(:result, activity_params: { date: 1.month.ago })
+      create(:volunteer, activity_params: { date: 10.months.ago })
+    end
+
     it 'renders a successful response' do
       get admin_utilities_url
       expect(response).to be_successful
@@ -43,6 +50,24 @@ RSpec.describe '/admin/utilities' do
         expect(flash[:alert]).to be_present
         expect(response).to redirect_to admin_utilities_url
       end
+    end
+  end
+
+  describe 'POST /admin/utilities/export_event_csv' do
+    let!(:event_id) { create(:event).id }
+
+    it 'enqueues csv export job' do
+      post admin_utilities_export_event_csv_url, params: { event_id: }
+      expect(response).to redirect_to admin_utilities_url
+      expect(flash[:notice]).to include('Ждите отчёт в Telegram')
+      expect(EventAthletesCsvExportJob).to have_been_enqueued.with(event_id, user.id)
+    end
+
+    it 'does not enqueue csv export job if event is not selected' do
+      post admin_utilities_export_event_csv_url
+      expect(response).to redirect_to admin_utilities_url
+      expect(flash[:alert]).to include('Мероприятие не выбрано')
+      expect(EventAthletesCsvExportJob).not_to have_been_enqueued
     end
   end
 end
