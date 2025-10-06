@@ -492,10 +492,10 @@ ru:
     greeting: '%{name}, приветствуем в S95!'
     auth_link_invalid: 'Ссылка недействительна или срок её действия истёк'
     pagination:
-      previous: '←'
-      first: '↞'
-      next: '→'
-      last: '↠'
+      previous: '◀️'
+      first: '⏮️'
+      next: '▶️'
+      last: '⏭️'
       truncate: '&hellip;'
   notification_mailer:
     parkzhrun_error: 'Ошибка! Не удалось создать забег ПаркЖрун'
