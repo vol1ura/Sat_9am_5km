@@ -493,10 +493,10 @@ rs:
     greeting: '%{name}, dobro došli na S95!'
     auth_link_invalid: 'Link za prijavu više nije validan'
     pagination:
-      previous: '←'
-      first: '↞'
-      next: '→'
-      last: '↠'
+      previous: '◀️'
+      first: '⏮️'
+      next: '▶️'
+      last: '⏭️'
       truncate: '&hellip;'
   notification_mailer:
     parkzhrun_error: 'Greška! Nije moguće kreirati trku ParkŽrun'
