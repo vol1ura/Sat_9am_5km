@@ -10,6 +10,6 @@ class NotificationMailer < ApplicationMailer
   def feedback
     @message = params[:message]
     @user_id = params[:user_id]
-    mail(to: RECIPIENTS, subject: t('.feedback'))
+    mail(to: RECIPIENTS, subject: t('.feedback'), &:text)
   end
 end
