@@ -31,18 +31,5 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'storage' # 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-set :sidekiq_service_unit_name, 'sidekiq'
-set :sidekiq_service_unit_user, :system
-# set :sidekiq_config, 'config/sidekiq.yml'
-set :sidekiq_default_hooks, false
-
-after 'deploy:starting', 'sidekiq:quiet'
-after 'deploy:updated', 'sidekiq:stop'
-after 'deploy:reverted', 'sidekiq:stop'
-after 'deploy:published', 'sidekiq:start'
-after 'deploy:failed', 'sidekiq:restart'
-
-after 'deploy:finished', 'puma:restart'
-
 after 'deploy:updated', 'sitemap:create'
 after 'deploy:reverted', 'sitemap:create'

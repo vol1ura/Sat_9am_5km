@@ -16,20 +16,18 @@ set :rails_env, 'production'
 set :stage, :production
 
 # Puma configuration
-set :systemctl_user, :system
-set :puma_threads,    [5, 10]
-# set :puma_workers,    2
-set :puma_conf,       "#{release_path}/config/puma.rb"
-# set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_access_log, "#{shared_path}/log/puma.error.log"
-set :puma_error_log,  "#{shared_path}/log/puma.access.log"
+set :puma_systemctl_user, :system
+set :puma_access_log, "#{shared_path}/log/puma.access.log"
+set :puma_error_log,  "#{shared_path}/log/puma.error.log"
 # set :puma_preload_app, true
-# set :puma_worker_timeout, nil
-set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 set :puma_enable_socket_service, true
-set :puma_phased_restart, true
+
+# Sidekiq configuration
+set :sidekiq_service_unit_name, 'sidekiq'
+set :sidekiq_systemctl_user, :system
+set :sidekiq_roles, %w[app]
+# set :sidekiq_config, 'config/sidekiq.yml'
+set :sidekiq_default_hooks, true
 
 # Custom SSH Options
 # ==================
