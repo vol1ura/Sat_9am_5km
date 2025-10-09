@@ -35,7 +35,7 @@ every 4.months, at: '1' do
   command "rm -rf #{File.join ENV.fetch('APP_DEPLOY_PATH'), 'shared/tmp/cache/bootsnap/*'}"
 end
 
-every :thursday, at: '19' do
+every :thursday, at: '18' do
   rake 'notification:rage_badges_expiration'
 end
 

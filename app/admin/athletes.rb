@@ -45,6 +45,10 @@ ActiveAdmin.register Athlete do
 
   form partial: 'form'
 
+  sidebar 'Фото', only: %i[show edit], if: proc { resource.user&.image&.attached? } do
+    image_tag resource.user.image.variant(:web), class: 'img-badge'
+  end
+
   before_create do |athlete|
     result_id = params.dig(:athlete, :result_id)
     athlete.results << Result.find(result_id) if result_id

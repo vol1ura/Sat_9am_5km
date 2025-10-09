@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action :find_country_events
   around_action :switch_locale
+  before_action :find_country_events
 
   def access_denied(_)
     message = t 'active_admin.access_denied.message'
