@@ -51,6 +51,9 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+  sidebar 'Фото', only: %i[show edit], if: proc { resource.image.attached? } do
+    image_tag resource.image.variant(:web), class: 'img-badge'
+  end
 
   action_item :permissions, only: %i[show edit], if: proc { current_user.admin? } do
     link_to 'Полномочия', admin_user_permissions_path(resource)

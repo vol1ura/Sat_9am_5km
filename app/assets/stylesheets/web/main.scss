@@ -5,10 +5,10 @@
   padding: 6rem 0;
   height: calc(100vh - 96px);
   max-height: 1333px;
-  min-height: 380px;
+  min-height: 560px;
 
   @include media(phoneScreen) {
-    height: calc(100vh - 160px);
+    height: calc(100vh - 170px);
   }
 
   .hero-bg-image {
