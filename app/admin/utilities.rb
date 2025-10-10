@@ -21,71 +21,40 @@ ActiveAdmin.register_page 'Utilities' do
 
       tab t('.analytics.title') do
         stats_for = lambda do |model|
-          Activity
-            .published
-            .where(date: 12.months.ago.beginning_of_month..Date.current.end_of_month)
-            .joins(model)
-            .group("DATE_TRUNC('month', activities.date)")
-            .order(month: :desc)
-            .select(
-              "DATE_TRUNC('month', activities.date) AS month,
-              COUNT(DISTINCT activities.id) AS activities_count,
-              COUNT(#{model}.id) AS total_count,
-              ROUND(COUNT(#{model}.id)::numeric / COUNT(DISTINCT activities.id), 1) AS avg_count",
-            )
+          date_range = 12.months.ago.beginning_of_month..Date.current.end_of_month
+          Activity.find_by_sql(
+            <<~SQL.squish,
+              WITH first_#{model} AS (
+                SELECT
+                  #{model}.athlete_id,
+                  MIN(activities.date) as first_date
+                FROM #{model}
+                JOIN activities ON #{model}.activity_id = activities.id
+                WHERE activities.published = true
+                GROUP BY #{model}.athlete_id
+              )
+              SELECT
+                DATE_TRUNC('month', activities.date) AS month,
+                COUNT(DISTINCT activities.id) AS activities_count,
+                COUNT(#{model}.id) AS total_count,
+                ROUND(COUNT(#{model}.id)::numeric / COUNT(DISTINCT activities.id), 1) AS avg_count,
+                COUNT(DISTINCT CASE
+                  WHEN activities.date = first_#{model}.first_date
+                  THEN #{model}.athlete_id
+                END) AS newbies_count
+              FROM activities
+              INNER JOIN #{model} ON #{model}.activity_id = activities.id
+              INNER JOIN first_#{model} ON first_#{model}.athlete_id = #{model}.athlete_id
+              WHERE activities.published = true
+                AND activities.date #{date_range.to_fs(:db)}
+              GROUP BY DATE_TRUNC('month', activities.date)
+              ORDER BY month DESC
+            SQL
+          )
         end
 
-        panel t('.analytics.volunteers.title') do
-          table do
-            thead do
-              tr do
-                th t('.analytics.month')
-                th t('.analytics.activities_count')
-                th t('.analytics.volunteers.count')
-                th t('.analytics.volunteers.avg_count')
-              end
-            end
-            tbody do
-              stats_for.call(:volunteers).each do |stat|
-                tr do
-                  td do
-                    month_date = stat.month.to_date
-                    "#{I18n.t('date.month_names')[month_date.month]} #{month_date.year}"
-                  end
-                  td stat.activities_count
-                  td stat.total_count
-                  td stat.avg_count
-                end
-              end
-            end
-          end
-        end
-
-        panel t('.analytics.results.title') do
-          table do
-            thead do
-              tr do
-                th t('.analytics.month')
-                th t('.analytics.activities_count')
-                th t('.analytics.results.count')
-                th t('.analytics.results.avg_count')
-              end
-            end
-            tbody do
-              stats_for.call(:results).each do |stat|
-                tr do
-                  td do
-                    month_date = stat.month.to_date
-                    "#{I18n.t('date.month_names')[month_date.month]} #{month_date.year}"
-                  end
-                  td stat.activities_count
-                  td stat.total_count
-                  td stat.avg_count
-                end
-              end
-            end
-          end
-        end
+        render 'stats', model: :results, stats_for: stats_for
+        render 'stats', model: :volunteers, stats_for: stats_for
       end
 
       tab t('.cache_clear.title') do
@@ -117,10 +86,12 @@ ActiveAdmin.register_page 'Utilities' do
             td "#{(stats['bytes_read'].to_f / 1.megabyte).round} Mb"
           end
         end
-        para button_to t('.cache_clear.button'),
-                       admin_utilities_cache_path,
-                       method: :delete,
-                       data: { confirm: t('.cache_clear.confirm') }
+        para button_to(
+          t('.cache_clear.button'),
+          admin_utilities_cache_path,
+          method: :delete,
+          data: { confirm: t('.cache_clear.confirm') },
+        )
       end
     end
   end

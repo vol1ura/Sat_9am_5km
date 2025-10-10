@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+panel t(".#{model}.title") do
+  table do
+    thead do
+      tr do
+        th t('.month')
+        th t('.activities_count')
+        th t(".#{model}.count")
+        th t(".#{model}.avg_count")
+        th t(".#{model}.newbies_count")
+      end
+    end
+    tbody do
+      stats_for.call(model).each do |stat|
+        tr do
+          td do
+            month_date = stat.month.to_date
+            "#{I18n.t('date.month_names')[month_date.month]} #{month_date.year}"
+          end
+          td stat.activities_count
+          td stat.total_count
+          td stat.avg_count
+          td stat.newbies_count
+        end
+      end
+    end
+  end
+end
