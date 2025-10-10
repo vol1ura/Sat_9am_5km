@@ -18,6 +18,20 @@ rs:
         clear_failed: 'Otkazano! Keš je nedavno već bio očišćen. Pokušajte ponovo kasnije.'
       award_funrun_badge:
         performing: 'Procedura nagrađivanja je pokrenuta, to će potrajati neko vreme. Osvežite stranicu kasnije da vidite rezultate.'
+      stats:
+        title: Statistika
+        month: Mesec
+        activities_count: Trčanja
+        volunteers:
+          title: Dinamika volontera za poslednje 12 meseci
+          count: Volontera
+          avg_count: Srednje broj volontera
+          newbies_count: Novih volontera
+        results:
+          title: Dinamika učesnika za poslednje 12 meseci
+          count: Učesnika
+          avg_count: Srednje broj učesnika
+          newbies_count: Novih učesnika
     activities:
       create: &upload_notices
         success_upload: 'Kreirani zadaci za učitavanje podataka. U zavisnosti od broja učesnika koji nedostaju u bazi, prikupljanje informacija može potrajati neko vreme. Osvežite stranicu za 5-15 sekundi.'
@@ -215,16 +229,6 @@ rs:
         utilities: Alati
         analytics:
           title: 'Analitika'
-          month: 'Mesec'
-          activities_count: 'Trčanja'
-          volunteers:
-            title: 'Dinamika volontera za poslednje 12 meseci'
-            count: 'Volontera'
-            avg_count: 'Srednje broj volontera'
-          results:
-            title: 'Dinamika učesnika za poslednje 12 meseci'
-            count: 'Učesnika'
-            avg_count: 'Srednje broj učesnika'
         cache_clear:
           title: 'Očisti keš'
           button: 'Očisti'
