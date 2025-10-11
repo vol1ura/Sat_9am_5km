@@ -40,7 +40,7 @@ ActiveAdmin.register VolunteeringPosition do
     f.inputs do
       f.input :rank
       f.input :number
-      f.input :role
+      f.input :role, as: :searchable_select
     end
     f.actions
   end
