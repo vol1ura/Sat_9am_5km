@@ -24,5 +24,14 @@ active_admin_form_for [:admin, resource] do |f|
     input :male, as: :radio, collection: [['мужчина', true], ['женщина', false]], required: true, label: 'пол'
   end
 
+  if resource.user_id.present?
+    panel 'Внимание - участник привязан к пользователю' do
+      div(class: 'warning-box') do
+        para 'Пожалуйста, вносите изменения (например, клуб или домашний забег) ТОЛЬКО с согласия пользователя!!!'
+        para 'Зарегистрированные пользователи могут и должны вносить изменения в данные самостоятельно.'
+      end
+    end
+  end
+
   f.actions
 end
