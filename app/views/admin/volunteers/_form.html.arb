@@ -5,7 +5,7 @@ active_admin_form_for [:admin, activity, resource] do |form|
 
   inputs 'Выберите участника и волонтёрскую роль', style: 'max-width: 500px;' do
     render partial: '/admin/athlete_fields', locals: { resource:, form: }
-    input :role
+    input :role, as: :searchable_select
     input :comment, required: false
   end
   actions
