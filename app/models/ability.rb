@@ -48,5 +48,6 @@ class Ability
     cannot :update, Activity, published: true, date: ..2.weeks.ago
     cannot :destroy, Activity, published: true
     cannot :destroy, Athlete
+    cannot :destroy, Club
   end
 end
