@@ -21,13 +21,12 @@ ActiveAdmin.register_page 'Utilities' do
 
       tab t('.analytics.title') do
         stats_for = lambda do |model|
-          date_range = 12.months.ago.beginning_of_month..Date.current.end_of_month
           Activity.find_by_sql(
             <<~SQL.squish,
               WITH first_#{model} AS (
                 SELECT
                   #{model}.athlete_id,
-                  MIN(activities.date) as first_date
+                  MIN(activities.date) as date
                 FROM #{model}
                 JOIN activities ON #{model}.activity_id = activities.id
                 WHERE activities.published = true
@@ -39,14 +38,14 @@ ActiveAdmin.register_page 'Utilities' do
                 COUNT(#{model}.id) AS total_count,
                 ROUND(COUNT(#{model}.id)::numeric / COUNT(DISTINCT activities.id), 1) AS avg_count,
                 COUNT(DISTINCT CASE
-                  WHEN activities.date = first_#{model}.first_date
+                  WHEN activities.date = first_#{model}.date
                   THEN #{model}.athlete_id
                 END) AS newbies_count
               FROM activities
               INNER JOIN #{model} ON #{model}.activity_id = activities.id
               INNER JOIN first_#{model} ON first_#{model}.athlete_id = #{model}.athlete_id
               WHERE activities.published = true
-                AND activities.date #{date_range.to_fs(:db)}
+                AND activities.date BETWEEN DATE_TRUNC('month', current_date - interval '12 months') AND current_date
               GROUP BY DATE_TRUNC('month', activities.date)
               ORDER BY month DESC
             SQL

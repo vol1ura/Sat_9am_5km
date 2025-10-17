@@ -1,6 +1,6 @@
 ---
 :verbose: false
-:concurrency: 5
+:concurrency: 3
 :timeout: 25
 :max_retries: 5
 
