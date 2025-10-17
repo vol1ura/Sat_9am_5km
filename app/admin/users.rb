@@ -51,6 +51,7 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+
   sidebar 'Фото', only: %i[show edit], if: proc { resource.image.attached? } do
     image_tag resource.image.variant(:web), class: 'img-badge'
   end
