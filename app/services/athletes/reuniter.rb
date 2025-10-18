@@ -38,7 +38,7 @@ module Athletes
     def grab_modified_attributes_from_collection!
       MODIFIED_ATTRIBUTES.each do |attr|
         athlete.public_send(:"#{attr}=", @collection.where.not(attr => nil).take&.send(attr)) unless athlete.send(attr)
-        unmodified_attributes.delete(attr)
+        unmodified_attributes.delete attr
       end
 
       return if unmodified_attributes.empty?
@@ -52,7 +52,7 @@ module Athletes
 
     def update_results_seconds
       athlete_seconds = @collection.pluck(:stats).sum([]) { |s| s.dig('results', 'seconds') || [] }.uniq.sort
-      athlete.stats.deep_merge!('results' => { 'seconds' => athlete_seconds })
+      athlete.stats.deep_merge! 'results' => { 'seconds' => athlete_seconds }
     end
 
     def replace_all_by_one!
@@ -60,6 +60,7 @@ module Athletes
         Result.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
         Volunteer.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
         update_all_trophies!
+        update_personal_bests!
         @collection.excluding(athlete).destroy_all
         athlete.save!
       end
@@ -70,8 +71,14 @@ module Athletes
         if (athlete_trophy = athlete.trophies.find_by(badge_id: trophy.badge_id))
           athlete_trophy.update!(date: trophy.date) if trophy.date && trophy.date > athlete_trophy.date
         else
-          trophy.update!(athlete:)
+          trophy.update! athlete:
         end
+      end
+    end
+
+    def update_personal_bests!
+      athlete.results.published.order(:date).select(:activity_id).each do |result|
+        ResultsProcessingJob.perform_later result.activity_id
       end
     end
 
@@ -79,7 +86,7 @@ module Athletes
       return unless athlete.user_id
 
       inform_date = Date.current.noon.future? ? Date.current.noon : Date.tomorrow + 10.hours
-      Telegram::Notification::AfterReuniteJob.set(wait_until: inform_date).perform_later(athlete.user_id)
+      Telegram::Notification::AfterReuniteJob.set(wait_until: inform_date).perform_later athlete.user_id
     end
   end
 end
