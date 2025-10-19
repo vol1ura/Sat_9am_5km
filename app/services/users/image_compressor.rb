@@ -2,10 +2,15 @@
 
 module Users
   class ImageCompressor < ApplicationService
-    MAX_DIMENSION = 300
     MAX_SIZE = 512.kilobytes
+    MAX_DIMENSION = 300
+    COMPRESSION_OPTIONS = {
+      resize_to_fill: [MAX_DIMENSION, MAX_DIMENSION],
+      convert: 'webp',
+      saver: { quality: 95 },
+    }.freeze
 
-    private_constant :MAX_SIZE, :MAX_DIMENSION
+    private_constant :MAX_SIZE, :COMPRESSION_OPTIONS
 
     def initialize(user)
       @user = user
@@ -18,11 +23,7 @@ module Users
       return unless @image_file
       return if Vips::Image.new_from_file(@image_file.path).size.max <= MAX_DIMENSION && @image_file.size <= MAX_SIZE
 
-      compressed_image_file = ImageProcessing::Vips
-        .source(@image_file)
-        .resize_to_fill(MAX_DIMENSION, MAX_DIMENSION)
-        .saver(quality: 95, compression: :lzw)
-        .call
+      compressed_image_file = ImageProcessing::Vips.source(@image_file).apply(COMPRESSION_OPTIONS).call
 
       if compressed_image_file.size <= MAX_SIZE
         @user.image.attach(io: compressed_image_file, filename: "avatar#{File.extname(compressed_image_file)}")
