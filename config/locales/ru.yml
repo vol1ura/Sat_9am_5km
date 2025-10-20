@@ -527,6 +527,7 @@ ru:
       top_results: Лучшие результаты
       top_athletes: Рейтинг участников
       top_volunteers: Рейтинг волонтёров
+      duels: Беговые дуэли
       badges: Личные награды
       articles: Статьи
       profile: Профиль
@@ -801,6 +802,9 @@ ru:
         event: Мероприятие
       friends: Друзья
       followers: В друзьях
+      duels: Дуэли
+      duels_description: Сравнивайте свои результаты с друзьями на одинаковых забегах
+      view_duels: Посмотреть дуэли
       personal_records_section: личные рекорды на других дистанциях
       distance: Дистанция
       personal_record: ЛР
@@ -828,6 +832,59 @@ ru:
     minute_bingo:
       from_minute: из 60 секунд
       catch_them_all: собери все
+    duels:
+      no_access: У вас нет доступа к этой странице
+      no_friends: Добавьте друзей, чтобы увидеть дуэли!
+      index:
+        title: 'Беговые дуэли %{athlete_name}'
+        description: 'Дружеские дуэли %{athlete_name} с другими участниками'
+        header: Беговые дуэли
+        subheader: Сравнивайте свои результаты с друзьями на совместных забегах - беговых дуэлях
+        duels_count:
+          one: "%{count} дуэль"
+          few: "%{count} дуэли"
+          many: "%{count} дуэлей"
+          other: "%{count} дуэлей"
+        my_wins: Мои победы
+        friend_wins: Победы друга
+        win_rate: Процент побед
+        recent_duels: Последние дуэли
+        view_all: Смотреть все
+        no_duels: Пока нет совместных забегов
+        no_duels_description: Участвуйте в забегах вместе с друзьями, чтобы увидеть здесь дуэли!
+        find_friends: Найти друзей
+      show:
+        title: 'Беговые дуэли %{athlete_name} против %{friend_name}'
+        description: 'История совместных забегов между %{athlete_name} и %{friend_name}'
+        header: 'Совместные забеги с %{friend_name}'
+        duels: Беговые дуэли
+        back_to_all: Ко всем дуэлям
+        total_duels: Всего дуэлей
+        my_wins: Мои победы
+        friend_wins: Победы друга
+        win_rate: Процент побед
+        your_friend: Ваш друг
+        duel_history: История дуэлей
+        no_duels: Совместных забегов нет
+        no_duels_with_friend: 'У вас пока нет совместных забегов с %{friend_name}'
+      duel:
+        victory: Победа
+        defeat: Поражение
+        you: Вы
+        position: Место
+        time: Время
+        view_activity: Посмотреть протокол
+        time_difference: Разность времени
+        position_difference: Разность мест
+        position_singular: место
+        position_plural: мест
+      duel_compact:
+        you_won: Вы выиграли
+        friend_won: Друг выиграл
+      friend_stats:
+        dominating: Побеждаете
+        competitive: Равная борьба
+        struggling: Отстаёте
   activities:
     index:
       description: Недавние результаты забегов S95

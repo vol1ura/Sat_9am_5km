@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get :dashboard, on: :collection
   end
   resources :athletes, only: %i[index show] do
+    resources :duels, module: :athletes, only: %i[index show]
     resources :statistics, module: :athletes, only: [] do
       collection do
         get :friends

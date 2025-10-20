@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-between align-items-center py-1 border-bottom border-light">
+  <div class="small">
+    <strong><%= l duel[:date] %></strong>
+    <span class="text-muted">
+      <%= link_to duel[:event].name, event_path(duel[:event].code_name), class: 'text-decoration-none text-muted' %>
+    </span>
+  </div>
+
+  <div class="d-flex align-items-center gap-2">
+    <% if duel[:winner] == :user %>
+      <span class="badge bg-success-subtle text-success">
+        <i class="fa-solid fa-trophy me-1"></i>
+        <%= t '.you_won' %>
+      </span>
+    <% else %>
+      <span class="badge bg-danger-subtle text-danger">
+        <i class="fa-solid fa-flag me-1"></i>
+        <%= t '.friend_won' %>
+      </span>
+    <% end %>
+
+    <% if duel[:time_difference] %>
+      <small class="text-muted">
+        <%= human_result_time duel[:time_difference] %>
+      </small>
+    <% end %>
+  </div>
+</div>
