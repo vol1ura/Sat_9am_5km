@@ -1,0 +1,17 @@
+<% win_rate = stats[:user_win_rate] %>
+<% if win_rate > 60 %>
+  <span class="badge bg-success">
+    <i class="fa-solid fa-crown me-1"></i>
+    <%= t('.dominating') %>
+  </span>
+<% elsif win_rate > 40 %>
+  <span class="badge bg-warning">
+    <i class="fa-solid fa-handshake me-1"></i>
+    <%= t('.competitive') %>
+  </span>
+<% else %>
+  <span class="badge bg-danger">
+    <i class="fa-solid fa-flag me-1"></i>
+    <%= t('.struggling') %>
+  </span>
+<% end %>

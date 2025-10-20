@@ -1,0 +1,113 @@
+<%
+  athlete_name = @athlete.name || t('common.nobody')
+  friend_name = @friend.name || t('common.nobody')
+%>
+<% head_info :title, t('.title', athlete_name: athlete_name, friend_name: friend_name) %>
+<% head_info :description, t('.description', athlete_name: athlete_name, friend_name: friend_name) %>
+
+<div class="row">
+  <div class="col-12">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to t('.duels'), athlete_duels_path(@athlete), class: 'text-decoration-none' %>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <%= friend_name %>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="mb-0">
+        <i class="fa-solid fa-people-arrows me-2"></i>
+        <%= t '.header', friend_name: %>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<% if @friend_duels %>
+  <!-- Общая статистика -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-4 col-md-3">
+              <div class="h3 text-primary mb-0"><%= @friend_duels[:stats][:total_duels] %></div>
+              <small class="text-muted"><%= t('.total_duels') %></small>
+            </div>
+            <div class="col-4 col-md-3">
+              <div class="h3 text-success mb-0"><%= @friend_duels[:stats][:user_wins] %></div>
+              <small class="text-muted"><%= t('.my_wins') %></small>
+            </div>
+            <div class="col-4 col-md-3">
+              <div class="h3 text-danger mb-0"><%= @friend_duels[:stats][:friend_wins] %></div>
+              <small class="text-muted"><%= t('.friend_wins') %></small>
+            </div>
+            <div class="col-md-3 col-12 mt-2 mt-md-0">
+              <div class="h3 text-primary mb-0">
+                <%= @friend_duels[:stats][:user_win_rate] %>%
+              </div>
+              <small class="text-muted"><%= t('.win_rate') %></small>
+              <div class="progress mt-2" style="height: 8px;">
+                <div class="progress-bar bg-success" style="width: <%= @friend_duels[:stats][:user_win_rate] %>%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Участники дуэли -->
+  <div class="row mb-4 g-4">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <%= image_tag user_image_path(@athlete.user), class: 'avatar-100 mb-3' %>
+          <h5><%= @athlete.name %></h5>
+          <div class="mt-2">
+            <%= render 'friend_stats', stats: @friend_duels[:stats] %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <%= image_tag user_image_path(@friend.user), class: 'avatar-100 mb-3' %>
+          <h5>
+            <%= link_to @friend.name, athlete_path(@friend), class: 'text-decoration-none' %>
+          </h5>
+          <p class="text-muted mb-0"><%= t '.your_friend' %></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- История дуэлей -->
+  <div class="row">
+    <div class="col-12">
+      <h3 class="mb-3">
+        <i class="fa-solid fa-history me-2"></i>
+        <%= t('.duel_history') %>
+      </h3>
+
+      <% @friend_duels[:duels].each do |duel| %>
+        <%= render 'duel', duel: duel %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="text-center py-5">
+    <i class="fa-solid fa-crossed-swords text-muted display-1"></i>
+    <h3 class="mt-3 text-muted"><%= t('.no_duels') %></h3>
+    <p class="text-muted">
+      <%= t('.no_duels_with_friend', friend_name: friend_name) %>
+    </p>
+    <%= link_to t('.back_to_all'), athlete_duels_path(@athlete), class: 'btn btn-primary' %>
+  </div>
+<% end %>
