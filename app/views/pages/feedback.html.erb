@@ -6,7 +6,7 @@
       <%= form.text_area :message, class: 'mb-3 form-control', placeholder: t('.placeholder', max_length: PagesController::MAX_FEEDBACK_SIZE), maxlength: PagesController::MAX_FEEDBACK_SIZE, rows: 7, required: true %>
 
       <div class="d-none" aria-hidden="true">
-        <%= form.text_field :website, autocomplete: 'off' %>
+        <%= form.text_field :contact, autocomplete: 'off' %>
       </div>
 
       <%= form.submit t('.submit'), class: 'btn btn-primary' %>
