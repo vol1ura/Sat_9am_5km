@@ -35,7 +35,7 @@ class PagesController < ApplicationController
   def submit_feedback
     message = params[:message].to_s
 
-    if params[:website].blank? && message.present? && message.length <= MAX_FEEDBACK_SIZE
+    if params[:contact].blank? && message.present? && message.length <= MAX_FEEDBACK_SIZE
       NotificationMailer.with(message: message, user_id: current_user&.id).feedback.deliver_later
       redirect_to page_path(page: 'feedback'), notice: t('.sent')
     else
