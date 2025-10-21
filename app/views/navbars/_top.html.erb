@@ -1,3 +1,4 @@
+<% path_for_duels = current_user&.athlete ? athlete_duels_path(current_user.athlete) : new_user_session_path %>
 <nav class="navbar bg-primary navbar-dark sticky-top mb-3">
   <div class="container-fluid">
     <%=
@@ -21,9 +22,7 @@
                 <li><%= link_to t('.top_results'), results_ratings_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.top_athletes'), ratings_path(type: 'results'), class: 'dropdown-item' %></li>
                 <li><%= link_to t('.top_volunteers'), ratings_path(type: 'volunteers'), class: 'dropdown-item' %></li>
-                <% if current_user&.athlete&.friends&.any? %>
-                  <li><%= link_to t('.duels'), athlete_duels_path(current_user.athlete), class: 'dropdown-item' %></li>
-                <% end %>
+                <li><%= link_to t('.duels'), path_for_duels, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.articles'), articles_path, class: 'dropdown-item' %></li>
               </ul>
@@ -118,13 +117,11 @@
               <span class="fa-li"><i class="fa-solid fa-table"></i></span><%= t '.top_volunteers' %>
             <% end %>
           </li>
-          <% if current_user&.athlete&.friends&.any? %>
-            <li class="nav-item">
-              <%= link_to athlete_duels_path(current_user.athlete), class: "nav-link #{'active' if params[:controller] == 'duels'}" do %>
-                <span class="fa-li"><i class="fa-solid fa-people-arrows"></i></span><%= t '.duels' %>
-              <% end %>
-            </li>
-          <% end %>
+          <li class="nav-item">
+            <%= link_to path_for_duels, class: "nav-link #{'active' if params[:controller] == 'duels'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-people-arrows"></i></span><%= t '.duels' %>
+            <% end %>
+          </li>
           <li class="nav-item">
             <%= link_to badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" do %>
               <span class="fa-li"><i class="fa-solid fa-award"></i></span><%= t '.badges' %>

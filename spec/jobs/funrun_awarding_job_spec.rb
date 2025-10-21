@@ -4,7 +4,7 @@ RSpec.describe FunrunAwardingJob do
   let(:activity) { create(:activity) }
   let(:athlete) { create(:athlete) }
   let(:volunteer) { create(:athlete) }
-  let(:badge) { create(:badge) }
+  let(:badge) { create(:badge, kind: :funrun, received_date: activity.date) }
 
   before do
     create(:result, activity:, athlete:)

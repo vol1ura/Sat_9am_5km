@@ -8,21 +8,20 @@ module Athletes
     before_action :ensure_athlete_has_friends
 
     def index
-      @friend_id = params[:friend_id]
-      @duels_data = Athletes::DuelsService.call(@current_athlete, friend_id: @friend_id)
+      @duels_data = Athletes::DuelsService.call @current_athlete
       @friends = @current_athlete.friends.includes(:user, :event)
     end
 
     def show
-      @friend = Athlete.find(params[:id])
-      @duels_data = Athletes::DuelsService.call(@current_athlete, friend_id: @friend.id)
+      @friend = Athlete.find params[:id]
+      @duels_data = Athletes::DuelsService.call @current_athlete, friend_id: @friend.id
       @friend_duels = @duels_data[@friend]
     end
 
     private
 
     def set_athlete
-      @athlete = Athlete.find(params[:athlete_id])
+      @athlete = Athlete.find params[:athlete_id]
       @current_athlete = current_user.athlete
     end
 
