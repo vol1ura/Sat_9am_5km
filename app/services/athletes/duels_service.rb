@@ -4,7 +4,7 @@ module Athletes
   class DuelsService < ApplicationService
     def initialize(athlete, friend_id: nil, limit: 50)
       @athlete = athlete
-      @friend_id = friend_id
+      @friend_id = friend_id&.to_i
       @limit = limit
     end
 
@@ -21,7 +21,6 @@ module Athletes
       duels = []
       Result
         .published
-        .joins(activity: :event)
         .joins(:athlete)
         .includes(activity: :event, athlete: { user: :image_attachment })
         .where(athlete: friends_scope)
@@ -38,14 +37,9 @@ module Athletes
     end
 
     def friends_scope
-      friend_ids =
-        if @friend_id.present?
-          [@friend_id.to_i].select { |id| @athlete.friends.ids.include?(id) }
-        else
-          @athlete.friends.ids
-        end
-
-      Athlete.where(id: [friend_ids, @athlete.id].flatten)
+      friend_ids = @athlete.friends.ids
+      friend_ids = [@friend_id].select { |id| friend_ids.include? id } if @friend_id
+      Athlete.where(id: [*friend_ids, @athlete.id])
     end
 
     def create_duel_data(user_result, friend_result)
@@ -60,22 +54,16 @@ module Athletes
         friend_result: friend_result,
         winner: user_result.position < friend_result.position ? :user : :friend,
         time_difference: calculate_time_difference(user_result, friend_result),
-        position_difference: calculate_position_difference(user_result, friend_result),
+        position_difference: (friend_result.position - user_result.position).abs,
       }
     end
 
     def calculate_time_difference(user_result, friend_result)
-      return nil unless user_result.total_time && friend_result.total_time
+      return unless user_result.total_time && friend_result.total_time
 
       diff_seconds = (friend_result.total_time - user_result.total_time).abs.to_i
 
       Result.total_time(0, 0) + diff_seconds.seconds
-    end
-
-    def calculate_position_difference(user_result, friend_result)
-      return nil unless user_result.position && friend_result.position
-
-      (friend_result.position - user_result.position).abs
     end
 
     def group_and_sort_duels(duels)
