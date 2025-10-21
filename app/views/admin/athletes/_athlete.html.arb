@@ -18,6 +18,7 @@ attributes_table_for athlete do
   row(:profile) { |a| link_to athlete_url(a), a }
   row(:results) { |a| link_to "смотреть таблицу (всего #{a.results.size} в т.ч. неопуб.)", results_admin_athlete_path(a) }
   row(:volunteering) { |a| link_to "смотреть таблицу (всего #{a.volunteering.size})", volunteering_admin_athlete_path(a) }
+  row(:trophies) { |a| link_to "смотреть таблицу (всего #{a.trophies.size})", trophies_admin_athlete_path(a) }
 end
 
 panel 'Двойники по имени. ВНИМАНИЕ! Это могут быть разные люди!' do

@@ -5,6 +5,8 @@ ru:
         title: Все результаты
       volunteering:
         title: Опубликованные волонтёрства
+      trophies:
+        title: Все награды
       destroy:
         successfully_deleted: 'Успешно удалён %{obj}'
         cannot_delete_registered: 'Действие отменено. Нельзя удалить зарегистрированного участника!'

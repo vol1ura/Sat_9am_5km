@@ -5,6 +5,8 @@ rs:
         title: All results
       volunteering:
         title: Published volunteering
+      trophies:
+        title: All trophies
       destroy:
         successfully_deleted: 'Uspešno obrisano %{obj}'
         cannot_delete_registered: 'Operacija poništena. Ne možete obrisati registrovanog učesnika!'
