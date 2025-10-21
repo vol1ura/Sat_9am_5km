@@ -88,6 +88,7 @@ rs:
         profile: Site profile
         results: Results
         volunteering: Volunteering
+        trophies: Dostignuća
         created_at: kreiran
         updated_at: ažuriran
       activity:

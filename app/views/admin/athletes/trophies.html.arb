@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+table_for trophies do
+  column('Награда') { |t| link_to_if can?(:read, t.badge), t.badge.name, admin_badge_path(t.badge) }
+  column('Тип награды') { |t| kind_of_badge t.badge }
+  column('Дата получения') { |t| t.badge.received_date || t.created_at }
+  column('Действие') { |t| link_to 'Изменить', edit_admin_badge_trophy_path(t.badge, t) } if can? :update, Trophy
+end

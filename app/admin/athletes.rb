@@ -95,4 +95,9 @@ ActiveAdmin.register Athlete do
     @volunteering = resource.volunteering.includes(activity: :event)
     @page_title = t '.title'
   end
+
+  member_action :trophies, method: :get do
+    @trophies = resource.trophies.includes(:badge).order(created_at: :desc)
+    @page_title = t '.title'
+  end
 end
