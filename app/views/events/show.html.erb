@@ -129,7 +129,13 @@
               </td>
             </tr>
           <% end %>
-          <%= render partial: 'activity', collection: @event.activities.published.order(date: :desc), cached: true %>
+          <%=
+            render(
+              partial: 'activity',
+              collection: @event.activities.published.order(date: :desc),
+              cached: ->(activity) { locale_cache_key(activity) },
+            )
+          %>
         </tbody>
       </table>
       <%= render '/expand_button' if @total_activities > 15 %>

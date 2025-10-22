@@ -26,7 +26,7 @@
       </tr>
     </thead>
     <tbody class="table-group-divider">
-      <%= render @activities, cached: true %>
+      <%= render @activities, cached: ->(activity) { locale_cache_key(activity) } %>
     </tbody>
   </table>
 </div>

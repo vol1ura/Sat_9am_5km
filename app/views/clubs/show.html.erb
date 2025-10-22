@@ -59,6 +59,6 @@
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <%= render partial: 'athlete', collection: @athletes, cached: true %>
+    <%= render partial: 'athlete', collection: @athletes, cached: ->(athlete) { locale_cache_key(athlete) } %>
   </tbody>
 </table>
