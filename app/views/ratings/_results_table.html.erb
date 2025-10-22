@@ -1,4 +1,4 @@
-<%= render partial: 'result', collection: results, cached: true %>
+<%= render partial: 'result', collection: results, cached: ->(result) { locale_cache_key(result) } %>
 
 <% if results.size >= RatingsController::PER_PAGE %>
   <%= render 'loading_indicator', colspan: 6 %>

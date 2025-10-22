@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def locale_cache_key(*cache_key_parts)
+    [I18n.locale, *cache_key_parts]
+  end
+
   def head_info(tag, text)
     content_for :"meta_#{tag}", text
     text
