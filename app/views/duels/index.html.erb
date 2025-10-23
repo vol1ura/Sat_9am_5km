@@ -1,5 +1,6 @@
-<% head_info :title, t('.title', athlete_name: @athlete.name) %>
-<% head_info :description, t('.description', athlete_name: @athlete.name) %>
+<% athlete_name = @athlete&.name || t('common.nobody') %>
+<% head_info :title, t('.title', athlete_name: athlete_name) %>
+<% head_info :description, t('.description', athlete_name: athlete_name) %>
 
 <div class="row">
   <div class="col-12">
@@ -26,7 +27,7 @@
               </div>
             </div>
             <div class="ms-1 text-end">
-              <%= link_to t('.view_all'), athlete_duel_path(@athlete, friend), class: 'btn btn-sm btn-outline-primary text-nowrap' %>
+              <%= link_to t('.view_all'), duel_path(friend), class: 'btn btn-sm btn-outline-primary text-nowrap' %>
             </div>
           </div>
 

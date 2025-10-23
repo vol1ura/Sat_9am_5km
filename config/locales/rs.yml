@@ -518,6 +518,58 @@ rs:
     ru: Rusija
     by: Belorusija
     rs: Srbija
+  duels:
+    no_athlete_access: Za pregled dueli potrebno je kreirati profil sportiste
+    no_friends: Dodajte prijatelje da biste videli duele!
+    index:
+      title: 'Trkački dueli %{athlete_name}'
+      description: 'Prijateljski dueli %{athlete_name} sa drugim učesnicima'
+      header: Trkački dueli
+      subheader: Poredite svoje rezultate sa prijateljima na zajedničkim trkama - trkačkim duelima. Pogledajte kada i gde ste učestvovali zajedno.
+      duels_count:
+        one: "%{count} duel"
+        few: "%{count} dueli"
+        many: "%{count} dueli"
+        other: "%{count} dueli"
+      my_wins: Moje pobede
+      friend_wins: Pobede prijatelja
+      win_rate: Procenat pobeda
+      recent_duels: Poslednji dueli
+      view_all: Pogledaj sve
+      no_duels: Nema zajedničkih trka još uvek
+      no_duels_description: Učestvujte u trkama zajedno sa prijateljima da biste ovde videli duele!
+      find_friends: Pronađi prijatelje
+    show:
+      title: 'Trkački dueli %{athlete_name} protiv %{friend_name}'
+      description: 'Istorija zajedničkih trka između %{athlete_name} i %{friend_name}'
+      header: 'Zajedničke trke sa %{friend_name}'
+      duels: Trkački dueli
+      back_to_all: Nazad na sve duele
+      total_duels: Ukupno dueli
+      my_wins: Moje pobede
+      friend_wins: Pobede prijatelja
+      win_rate: Procenat pobeda
+      your_friend: Vaš prijatelj
+      duel_history: Istorija dueli
+      no_duels: Nema zajedničkih trka
+      no_duels_with_friend: 'Još uvek nemate zajedničke trke sa %{friend_name}'
+    duel:
+      victory: Pobeda
+      defeat: Poraz
+      you: Vi
+      position: Mesto
+      time: Vreme
+      time_difference: Razlika u vremenu
+      position_difference: Razlika u mestima
+      position_singular: mesto
+      position_plural: mesta
+    duel_compact:
+      you_won: Pobedili ste
+      friend_won: Prijatelj je pobedio
+    friend_stats:
+      dominating: Pobedujete
+      competitive: Ravna borba
+      struggling: Zaostajete
   navbars:
     top:
       events: Događaji
@@ -832,59 +884,6 @@ rs:
     minute_bingo:
       from_minute: od 60 sekundi
       catch_them_all: skupite sve
-    duels:
-      no_access: Nemate pristup ovoj stranici
-      no_friends: Dodajte prijatelje da biste videli duele!
-      index:
-        title: 'Trkački dueli %{athlete_name}'
-        description: 'Prijateljski dueli %{athlete_name} sa drugim učesnicima'
-        header: Trkački dueli
-        subheader: Poredite svoje rezultate sa prijateljima na zajedničkim trkama - trkačkim duelima
-        duels_count:
-          one: "%{count} duel"
-          few: "%{count} dueli"
-          many: "%{count} dueli"
-          other: "%{count} dueli"
-        my_wins: Moje pobede
-        friend_wins: Pobede prijatelja
-        win_rate: Procenat pobeda
-        recent_duels: Poslednji dueli
-        view_all: Pogledaj sve
-        no_duels: Nema zajedničkih trka još uvek
-        no_duels_description: Učestvujte u trkama zajedno sa prijateljima da biste ovde videli duele!
-        find_friends: Pronađi prijatelje
-      show:
-        title: 'Trkački dueli %{athlete_name} protiv %{friend_name}'
-        description: 'Istorija zajedničkih trka između %{athlete_name} i %{friend_name}'
-        header: 'Zajedničke trke sa %{friend_name}'
-        duels: Trkački dueli
-        back_to_all: Nazad na sve duele
-        total_duels: Ukupno dueli
-        my_wins: Moje pobede
-        friend_wins: Pobede prijatelja
-        win_rate: Procenat pobeda
-        your_friend: Vaš prijatelj
-        duel_history: Istorija dueli
-        no_duels: Nema zajedničkih trka
-        no_duels_with_friend: 'Još uvek nemate zajedničke trke sa %{friend_name}'
-      duel:
-        victory: Pobeda
-        defeat: Poraz
-        you: Vi
-        position: Mesto
-        time: Vreme
-        view_activity: Pogledaj protokol
-        time_difference: Razlika u vremenu
-        position_difference: Razlika u mestima
-        position_singular: mesto
-        position_plural: mesta
-      duel_compact:
-        you_won: Pobedili ste
-        friend_won: Prijatelj je pobedio
-      friend_stats:
-        dominating: Pobedujete
-        competitive: Ravna borba
-        struggling: Zaostajete
   activities:
     index:
       description: Skorašnji rezultati sa S95 trka
