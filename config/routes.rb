@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   resources :activities, only: %i[index show] do
     get :dashboard, on: :collection
   end
+  scope path: 'athletes' do
+    resources :duels, only: %i[index show]
+  end
   resources :athletes, only: %i[index show] do
-    resources :duels, module: :athletes, only: %i[index show]
     resources :statistics, module: :athletes, only: [] do
       collection do
         get :friends

@@ -10,7 +10,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <%= link_to t('.duels'), athlete_duels_path(@athlete), class: 'text-decoration-none' %>
+          <%= link_to t('.duels'), duels_path, class: 'text-decoration-none' %>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
           <%= friend_name %>
@@ -66,8 +66,8 @@
     <div class="col-md-6">
       <div class="card h-100">
         <div class="card-body text-center">
-          <%= image_tag user_image_path(@athlete.user), class: 'avatar-100 mb-3' %>
-          <h5><%= @athlete.name %></h5>
+          <%= image_tag user_image_path(@athlete&.user), class: 'avatar-100 mb-3' if @athlete&.user %>
+          <h5><%= @athlete&.name || t('common.nobody') %></h5>
           <div class="mt-2">
             <%= render 'friend_stats', stats: @friend_duels[:stats] %>
           </div>
@@ -108,6 +108,6 @@
     <p class="text-muted">
       <%= t('.no_duels_with_friend', friend_name: friend_name) %>
     </p>
-    <%= link_to t('.back_to_all'), athlete_duels_path(@athlete), class: 'btn btn-primary' %>
+    <%= link_to t('.back_to_all'), duels_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
