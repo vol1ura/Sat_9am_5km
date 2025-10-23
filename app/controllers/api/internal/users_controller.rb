@@ -18,7 +18,7 @@ module API
         user = User.find(params[:user_id])
         Users::AuthToken.new(user).generate!
 
-        render json: { link: auth_link_url(token: user.auth_token) }
+        render json: { link: auth_link_url(token: user.auth_token, host: "s95.#{params[:locale]}") }
       end
 
       rescue_from ActiveRecord::RecordInvalid do |e|

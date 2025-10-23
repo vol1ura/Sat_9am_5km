@@ -54,7 +54,7 @@ RSpec.describe '/api/internal/user' do
 
     it 'return auth link' do
       expect do
-        post auth_link_api_internal_user_url, params: { user_id: user.id }, as: :json
+        post auth_link_api_internal_user_url, params: { user_id: user.id, locale: 'ru' }, as: :json
       end.to change { user.reload.auth_token }.from(nil).to(String)
       expect(response).to be_successful
     end
