@@ -519,25 +519,24 @@ ru:
     rs: Сербия
   duels:
     no_athlete_access: Для просмотра дуэлей необходимо создать профиль атлета
-    no_friends: Добавьте друзей, чтобы увидеть совместные забеги!
     index:
       title: 'Беговые дуэли %{athlete_name}'
       description: 'Дружеские дуэли %{athlete_name} с другими участниками'
       header: Беговые дуэли
       subheader: Сравнивайте свои результаты с друзьями на совместных забегах - беговых дуэлях. Смотрите когда и где вы участвовали вместе.
       duels_count:
-        one: "%{count} дуэль"
-        few: "%{count} дуэли"
-        many: "%{count} дуэлей"
-        other: "%{count} дуэлей"
+        one: '%{count} дуэль'
+        few: '%{count} дуэли'
+        many: '%{count} дуэлей'
+        other: '%{count} дуэлей'
       my_wins: Мои победы
       friend_wins: Победы друга
       win_rate: Процент побед
       recent_duels: Последние дуэли
       view_all: Смотреть все
       no_duels: Пока нет совместных забегов
-      no_duels_description: Участвуйте в забегах вместе с друзьями, чтобы увидеть здесь дуэли!
-      find_friends: Найти друзей
+      no_duels_description: Добавляйте друзей и участвуйте с ними в забегах, чтобы увидеть здесь сравнение результатов!
+      profile: Мой профиль
     show:
       title: 'Беговые дуэли %{athlete_name} против %{friend_name}'
       description: 'История совместных забегов между %{athlete_name} и %{friend_name}'
