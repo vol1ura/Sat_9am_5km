@@ -9,7 +9,7 @@ module Athletes
     end
 
     def call
-      return [] unless @athlete&.friends&.any?
+      return [] if friend_ids.empty?
 
       duels = find_duels
       group_and_sort_duels(duels)
@@ -22,7 +22,7 @@ module Athletes
       Result
         .published
         .joins(:athlete)
-        .includes(activity: :event, athlete: { user: :image_attachment })
+        .includes(activity: :event, athlete: { user: { image_attachment: :blob } })
         .where(athlete: friends_scope)
         .group_by(&:activity_id)
         .each_value do |results|
@@ -37,9 +37,12 @@ module Athletes
     end
 
     def friends_scope
-      friend_ids = @athlete.friends.ids
-      friend_ids = [@friend_id].select { |id| friend_ids.include? id } if @friend_id
-      Athlete.where(id: [*friend_ids, @athlete.id])
+      scoped_friend_ids = @friend_id ? [@friend_id].select { |id| friend_ids.include?(id) } : friend_ids
+      Athlete.where(id: [*scoped_friend_ids, @athlete.id])
+    end
+
+    def friend_ids
+      @friend_ids ||= Friendship.where(athlete_id: @athlete.id).pluck(:friend_id)
     end
 
     def create_duel_data(user_result, friend_result)

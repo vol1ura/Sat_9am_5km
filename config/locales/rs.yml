@@ -520,25 +520,24 @@ rs:
     rs: Srbija
   duels:
     no_athlete_access: Za pregled dueli potrebno je kreirati profil sportiste
-    no_friends: Dodajte prijatelje da biste videli duele!
     index:
       title: 'Trkački dueli %{athlete_name}'
       description: 'Prijateljski dueli %{athlete_name} sa drugim učesnicima'
       header: Trkački dueli
       subheader: Poredite svoje rezultate sa prijateljima na zajedničkim trkama - trkačkim duelima. Pogledajte kada i gde ste učestvovali zajedno.
       duels_count:
-        one: "%{count} duel"
-        few: "%{count} dueli"
-        many: "%{count} dueli"
-        other: "%{count} dueli"
+        one: '%{count} duel'
+        few: '%{count} dueli'
+        many: '%{count} dueli'
+        other: '%{count} dueli'
       my_wins: Moje pobede
       friend_wins: Pobede prijatelja
       win_rate: Procenat pobeda
       recent_duels: Poslednji dueli
       view_all: Pogledaj sve
       no_duels: Nema zajedničkih trka još uvek
-      no_duels_description: Učestvujte u trkama zajedno sa prijateljima da biste ovde videli duele!
-      find_friends: Pronađi prijatelje
+      no_duels_description: Dodajte prijatelje i učestvujte u trkama zajedno da biste ovde videli poredjenje rezultata!
+      profile: Moj profil
     show:
       title: 'Trkački dueli %{athlete_name} protiv %{friend_name}'
       description: 'Istorija zajedničkih trka između %{athlete_name} i %{friend_name}'
