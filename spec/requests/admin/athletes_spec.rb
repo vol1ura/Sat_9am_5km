@@ -47,6 +47,28 @@ RSpec.describe '/admin/athletes' do
     end
   end
 
+  describe 'GET /admin/athletes/1/volunteering' do
+    let(:volunteer) { create(:volunteer) }
+
+    before { create(:permission, user: user, action: 'manage', subject_class: 'Athlete') }
+
+    it 'renders a successful response' do
+      get volunteering_admin_athlete_url(volunteer.athlete)
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET /admin/athletes/1/trophies' do
+    let(:trophy) { create(:trophy) }
+
+    before { create(:permission, user: user, action: 'manage', subject_class: 'Athlete') }
+
+    it 'renders a successful response' do
+      get trophies_admin_athlete_url(trophy.athlete)
+      expect(response).to be_successful
+    end
+  end
+
   describe 'GET /admin/athletes?scope=duplicates' do
     before do
       create(:athlete, name: 'Doe JOHN', parkrun_code: nil)
