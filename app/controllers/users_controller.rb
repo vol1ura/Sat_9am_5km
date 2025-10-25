@@ -44,7 +44,7 @@ class UsersController < ApplicationController
         { promotions: [] },
         {
           athlete_attributes:
-            %i[id event_id club_id personal_record_10k personal_record_half_marathon personal_record_marathon],
+            %i[id event_id club_id personal_best_10k personal_best_half_marathon personal_best_marathon],
         },
       ],
     )

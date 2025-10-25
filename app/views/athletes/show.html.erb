@@ -169,22 +169,22 @@
       <% end %>
     </div>
 
-    <% if @athlete.personal_record_10k || @athlete.personal_record_half_marathon || @athlete.personal_record_marathon || @time_predictions.any? %>
+    <% if @athlete.personal_best_10k || @athlete.personal_best_half_marathon || @athlete.personal_best_marathon || @time_predictions.any? %>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-personalRecords">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalRecords" aria-expanded="false" aria-controls="flush-collapsePersonalRecords">
             <span class="badge text-light bg-primary me-3">
               <i class="fa-solid fa-trophy"></i>
             </span>
-            <%= t '.personal_records_section' %>
+            <%= t '.personal_bests_section' %>
           </button>
         </h2>
         <div id="flush-collapsePersonalRecords" class="accordion-collapse collapse" aria-labelledby="flush-personalRecords" data-bs-parent="#accordionPersonalBest">
           <div class="accordion-body">
             <table class="table">
               <caption>
-                <% unless @athlete.personal_record_10k || @athlete.personal_record_half_marathon || @athlete.personal_record_marathon %>
-                  <%= t '.no_personal_records' %>
+                <% unless @athlete.personal_best_10k || @athlete.personal_best_half_marathon || @athlete.personal_best_marathon %>
+                  <%= t '.no_personal_bests' %>
                 <% end %>
                 <% if @time_predictions.any? %>
                   <%= t '.prediction_hint' %>
@@ -195,24 +195,24 @@
               <thead>
                 <tr>
                   <th class="fs-small-sm"><%= t '.distance' %></th>
-                  <th class="fs-small-sm"><%= t '.personal_record' %></th>
+                  <th class="fs-small-sm"><%= t '.personal_best' %></th>
                   <th class="fs-small-sm"><%= t '.predicted_time' %></th>
                 </tr>
               </thead>
               <tbody class="table-group-divider">
                 <tr>
-                  <td><%= t '.personal_record_10k' %></td>
-                  <td><%= @athlete.personal_record_10k %></td>
+                  <td><%= t '.personal_best_10k' %></td>
+                  <td><%= @athlete.personal_best_10k %></td>
                   <td><%= human_result_time @time_predictions[10] %></td>
                 </tr>
                 <tr>
-                  <td><%= t '.personal_record_half_marathon' %></td>
-                  <td><%= @athlete.personal_record_half_marathon %></td>
+                  <td><%= t '.personal_best_half_marathon' %></td>
+                  <td><%= @athlete.personal_best_half_marathon %></td>
                   <td><%= human_result_time @time_predictions[21.1] %></td>
                 </tr>
                 <tr>
-                  <td><%= t '.personal_record_marathon' %></td>
-                  <td><%= @athlete.personal_record_marathon %></td>
+                  <td><%= t '.personal_best_marathon' %></td>
+                  <td><%= @athlete.personal_best_marathon %></td>
                   <td><%= human_result_time @time_predictions[42.2] %></td>
                 </tr>
               </tbody>
