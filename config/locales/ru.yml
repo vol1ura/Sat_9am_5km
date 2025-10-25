@@ -857,15 +857,15 @@ ru:
       duels: Дуэли
       duels_description: Сравнивайте свои результаты с друзьями на одинаковых забегах
       view_duels: Посмотреть дуэли
-      personal_records_section: личные рекорды на других дистанциях
+      personal_bests_section: личные рекорды на других дистанциях
       distance: Дистанция
-      personal_record: ЛР
+      personal_best: ЛР
       predicted_time: Прогноз
-      personal_record_10k: 10 км
-      personal_record_half_marathon: Полумарафон
-      personal_record_marathon: Марафон
+      personal_best_10k: 10 км
+      personal_best_half_marathon: Полумарафон
+      personal_best_marathon: Марафон
       prediction_hint: Прогноз даётся на основе лучшего результата в забегах S95 за последние 3 месяца. Результат возможен только при условии выполнения тренировок, соответствующих конкретной дистанции
-      no_personal_records: Личные рекорды не указаны.
+      no_personal_bests: Личные рекорды не указаны.
       no_predictions: Недостаточно данных для прогноза (нужно минимум 3 результата за последние 3 месяца)
     statistics:
       volunteering_chart:
@@ -1065,11 +1065,11 @@ ru:
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: 'Экстренный контакт'
       personal_photo: Фотография
-      personal_records: 'Личные рекорды'
-      personal_record_10k: '10 км'
-      personal_record_half_marathon: '21.1 км'
-      personal_record_marathon: '42.2 км'
-      personal_record_format_hint: 'ЧЧ:ММ:СС'
+      personal_bests: 'Личные рекорды'
+      personal_best_10k: '10 км'
+      personal_best_half_marathon: '21.1 км'
+      personal_best_marathon: '42.2 км'
+      personal_best_format_hint: 'ЧЧ:ММ:СС'
       save: Сохранить
       cancel: Отмена
       promotion_terms: Соглашение с условиями

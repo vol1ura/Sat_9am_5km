@@ -18,6 +18,7 @@ class Athlete < ApplicationRecord
   RUN_PARK_BORDER = 7_000_000_000
 
   RAGE_BADGE_LIMIT = 3
+  PERSONAL_BEST_DISTANCES = %i[10k half_marathon marathon].freeze
 
   PersonalCode = Struct.new(:code) do
     def code_type
@@ -85,6 +86,8 @@ class Athlete < ApplicationRecord
   before_destroy(prepend: true) { results.update_all personal_best: false, first_run: false }
   after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
 
+  store_accessor :personal_bests, *PERSONAL_BEST_DISTANCES, prefix: :personal_best
+
   def self.find_or_scrape_by_code!(code)
     personal_code = PersonalCode.new(code)
     code_type = personal_code.code_type
@@ -102,30 +105,6 @@ class Athlete < ApplicationRecord
     %w[
       club_id event_id id male name parkrun_code fiveverst_code runpark_code updated_at created_at going_to_event_id
     ]
-  end
-
-  def personal_record_10k
-    parse_personal_best('10k')
-  end
-
-  def personal_record_10k=(value)
-    set_personal_best('10k', value)
-  end
-
-  def personal_record_half_marathon
-    parse_personal_best('half_marathon')
-  end
-
-  def personal_record_half_marathon=(value)
-    set_personal_best('half_marathon', value)
-  end
-
-  def personal_record_marathon
-    parse_personal_best('marathon')
-  end
-
-  def personal_record_marathon=(value)
-    set_personal_best('marathon', value)
   end
 
   def code
@@ -178,39 +157,11 @@ class Athlete < ApplicationRecord
   end
 
   def personal_bests_format
-    return unless personal_bests.is_a?(Hash)
-
-    personal_bests.each do |distance, time_string|
-      next if time_string.blank?
-
-      begin
-        time_value = Time.zone.parse("2000-01-01 #{time_string}")
-        next if time_value.hour < 12 && time_value.min < 60 && time_value.sec < 60
-      rescue ArgumentError
-        # Parsing error
+    personal_bests.symbolize_keys.each do |distance, time_string|
+      unless distance.in?(PERSONAL_BEST_DISTANCES) &&
+             (time_string.blank? || time_string.match?(/\A[01][0-9]:[0-5][0-9]:[0-5][0-9]\z/))
+        errors.add(:"personal_best_#{distance}", :invalid)
       end
-
-      errors.add(:personal_bests, "Неверный формат времени для дистанции #{distance}")
-    end
-  end
-
-  def parse_personal_best(distance)
-    /\A\d\d:\d\d:\d\d/.match(personal_bests[distance]).to_a.first
-  end
-
-  def set_personal_best(distance, value)
-    self.personal_bests = personal_bests.dup
-
-    if value.blank?
-      personal_bests.delete(distance)
-    else
-      personal_bests[distance] =
-        case value
-        when Time
-          value.strftime('%H:%M:%S')
-        when String
-          value
-        end
     end
   end
 end

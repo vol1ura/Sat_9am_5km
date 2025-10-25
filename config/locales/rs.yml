@@ -856,15 +856,15 @@ rs:
         pace: Tempo
         place: Mesto
         event: Događaj
-      personal_records_section: Lični rekordi na drugim dužinama
+      personal_bests_section: Lični rekordi na drugim dužinama
       distance: Dužina
-      personal_record: PB
+      personal_best: PB
       predicted_time: Prognoza
-      personal_record_10k: 10 km
-      personal_record_half_marathon: Polmaraton
-      personal_record_marathon: Maraton
+      personal_best_10k: 10 km
+      personal_best_half_marathon: Polmaraton
+      personal_best_marathon: Maraton
       prediction_hint: Prognoza na osnovu najboljeg rezultata u S95 događajima za posljednje 3 mjeseca. Rezultat je moguć samo ako su ispunjeni uslovi za treninge, odgovarajuće za određenu dužinu.
-      no_personal_records: Lični rekordi nisu navedeni.
+      no_personal_bests: Lični rekordi nisu navedeni.
       no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
     statistics:
       volunteering_chart:
@@ -1071,11 +1071,11 @@ rs:
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Hitna kontakt osoba
       personal_photo: Slika
-      personal_records: Lični rekordi
-      personal_record_10k: 10 km
-      personal_record_half_marathon: 21.1 km
-      personal_record_marathon: 42.2 km
-      personal_record_format_hint: HH:MM:SS
+      personal_bests: Lični rekordi
+      personal_best_10k: 10 km
+      personal_best_half_marathon: 21.1 km
+      personal_best_marathon: 42.2 km
+      personal_best_format_hint: HH:MM:SS
       save: Sačuvaj
       cancel: Otkaži
       promotion_terms: Saglasnost sa uslovima

@@ -27,43 +27,49 @@
           <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
         </div>
         <div class="mt-2">
-          <h5 class="fw-light"><%= t '.personal_records' %></h5>
+          <h5 class="fw-light"><%= t '.personal_bests' %></h5>
           <div class="input-group mt-2">
-            <span class="input-group-text"><i class="fa-solid fa-stopwatch text-secondary"></i></span>
+            <span class="input-group-text">
+              <%= tag.i class: ['fa-solid fa-stopwatch', current_user.athlete.errors.key?(:personal_best_10k) ? 'text-danger' : 'text-secondary'] %>
+            </span>
             <%=
-              athlete_form.text_field :personal_record_10k,
+              athlete_form.text_field :personal_best_10k,
               id: 'personal-record-10k-input',
               class: 'form-control',
               pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
-              placeholder: t('.personal_record_format_hint'),
+              placeholder: t('.personal_best_format_hint'),
               inputmode: 'numeric',
               data: { controller: 'time-input' }
             %>
-            <span class="input-group-text text-primary font-monospace">&nbsp;&nbsp;<%= t('.personal_record_10k') %></span>
+            <span class="input-group-text text-primary font-monospace">&nbsp;&nbsp;<%= t '.personal_best_10k' %></span>
           </div>
           <div class="input-group mt-2">
-            <span class="input-group-text"><i class="fa-solid fa-stopwatch text-secondary"></i></span>
+            <span class="input-group-text">
+              <%= tag.i class: ['fa-solid fa-stopwatch', current_user.athlete.errors.key?(:personal_best_half_marathon) ? 'text-danger' : 'text-secondary'] %>
+            </span>
             <%=
-              athlete_form.text_field :personal_record_half_marathon,
+              athlete_form.text_field :personal_best_half_marathon,
               class: 'form-control',
               pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
-              placeholder: t('.personal_record_format_hint'),
+              placeholder: t('.personal_best_format_hint'),
               inputmode: 'numeric',
               data: { controller: 'time-input' }
             %>
-            <span class="input-group-text text-primary font-monospace"><%= t('.personal_record_half_marathon') %></span>
+            <span class="input-group-text text-primary font-monospace"><%= t '.personal_best_half_marathon' %></span>
           </div>
           <div class="input-group mt-2">
-            <span class="input-group-text"><i class="fa-solid fa-stopwatch text-secondary"></i></span>
+            <span class="input-group-text">
+              <%= tag.i class: ['fa-solid fa-stopwatch', current_user.athlete.errors.key?(:personal_best_marathon) ? 'text-danger' : 'text-secondary'] %>
+            </span>
             <%=
-              athlete_form.text_field :personal_record_marathon,
+              athlete_form.text_field :personal_best_marathon,
               class: 'form-control',
               pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
-              placeholder: t('.personal_record_format_hint'),
+              placeholder: t('.personal_best_format_hint'),
               inputmode: 'numeric',
               data: { controller: 'time-input' }
             %>
-            <span class="input-group-text text-primary font-monospace"><%= t('.personal_record_marathon') %></span>
+            <span class="input-group-text text-primary font-monospace"><%= t '.personal_best_marathon' %></span>
           </div>
         </div>
       <% end %>
