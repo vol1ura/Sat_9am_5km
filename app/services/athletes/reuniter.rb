@@ -20,7 +20,8 @@ module Athletes
       grab_modified_attributes_from_collection!
       update_results_seconds
       replace_all_by_one!
-      AthleteStatsUpdateJob.perform_later(athlete.id)
+      AthleteStatsUpdateJob.perform_later athlete.id
+      AthletePersonalBestsUpdateJob.perform_later athlete.id
       schedule_telegram_notification
       ClearCache.call
       true
@@ -60,7 +61,6 @@ module Athletes
         Result.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
         Volunteer.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
         update_all_trophies!
-        update_personal_bests!
         @collection.excluding(athlete).destroy_all
         athlete.save!
       end
@@ -73,12 +73,6 @@ module Athletes
         else
           trophy.update! athlete:
         end
-      end
-    end
-
-    def update_personal_bests!
-      athlete.results.published.order(:date).select(:activity_id).each do |result|
-        ResultsProcessingJob.perform_later result.activity_id
       end
     end
 
