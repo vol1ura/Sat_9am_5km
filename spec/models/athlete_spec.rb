@@ -10,6 +10,17 @@ RSpec.describe Athlete do
     expect(another_athlete).not_to be_valid
   end
 
+  it 'invalid with incorrect format of personal bests' do
+    athlete = build(:athlete, personal_bests: { '10k' => '17:00', 'half_marathon' => '1:12:00', 'marathon' => '03:70:00' })
+    expect(athlete).not_to be_valid
+    expect(athlete.errors).to include(:personal_best_10k, :personal_best_half_marathon, :personal_best_marathon)
+  end
+
+  it 'valid with correct format of personal bests' do
+    athlete = build(:athlete, personal_bests: { 'half_marathon' => '01:19:59', 'marathon' => '03:01:00' })
+    expect(athlete).to be_valid
+  end
+
   it 'removes extra spaces from name' do
     athlete = build(:athlete, name: ' Test  TEST ')
     expect { athlete.save }.to change(athlete, :name).to('Test TEST')

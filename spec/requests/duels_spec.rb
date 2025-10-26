@@ -5,7 +5,7 @@ RSpec.describe '/duels' do
 
   before { sign_in user, scope: :user }
 
-  describe 'GET /index' do
+  describe 'GET /duels' do
     let(:athlete) { create(:athlete, user:) }
 
     before { create_list(:friendship, 2, athlete:) }
@@ -16,7 +16,7 @@ RSpec.describe '/duels' do
     end
   end
 
-  describe 'GET /show' do
+  describe 'GET /duels/:id' do
     let(:athlete) { create(:athlete, user:) }
     let(:friend) { create(:athlete) }
 

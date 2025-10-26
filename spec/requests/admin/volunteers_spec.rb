@@ -66,16 +66,11 @@ RSpec.describe '/admin/activities/1/volunteers' do
       }
     end
 
-    before do
-      put admin_activity_volunteer_url(activity, volunteer), params: valid_attributes
-    end
+    before { put admin_activity_volunteer_url(activity, volunteer), params: valid_attributes }
 
     it 'updates athlete in volunteer' do
-      expect(volunteer.reload.athlete).to eq athlete
-    end
-
-    it 'redirects to the volunteers index page of current activity' do
       expect(response).to redirect_to(admin_activity_volunteers_url(activity))
+      expect(volunteer.reload.athlete).to eq athlete
     end
   end
 
