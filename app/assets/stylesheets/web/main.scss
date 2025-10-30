@@ -302,7 +302,30 @@
 }
 
 .app-button {
-  height: 40px !important;
+  height: 48px !important;
+  width: auto !important;
+  max-height: 48px;
+  min-height: 48px;
+  display: inline-block;
+  object-fit: contain;
+  vertical-align: middle;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+}
+
+/* Make sure img tags with .app-button scale nicely */
+img.app-button {
+  height: 48px !important;
+  max-height: 48px;
+  min-height: 48px;
+  width: auto !important;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .app-feature-item {
@@ -344,7 +367,7 @@
 }
 
 .volunteer-app-section {
-  background: linear-gradient(135deg, #e9f9f5 0%, #d0f0e7 100%);
+  background: linear-gradient(135deg, #fff5f8 0%, #ffe9f0 100%);
 }
 
 .app-screen {
