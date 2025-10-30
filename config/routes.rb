@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     get :dashboard, on: :collection
   end
   scope path: 'athletes' do
-    resources :duels, only: %i[index show]
+    resources :duels, only: %i[index show] do
+      get :protocol, on: :collection
+    end
   end
   resources :athletes, only: %i[index show] do
     resources :statistics, module: :athletes, only: [] do

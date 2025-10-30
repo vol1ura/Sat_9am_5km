@@ -1,0 +1,86 @@
+<% head_info :title, t('.title') %>
+
+<div class="row">
+  <div class="col-12">
+    <h1 class="mt-2"><%= t '.header' %></h1>
+    <p class="text-muted fs-4 fw-semibold mb-1"><%= l @target_date %></p>
+    <p><%= t '.description' %></p>
+  </div>
+</div>
+
+<% unless @has_friends %>
+  <div class="text-center py-5">
+    <i class="fa-solid fa-people-arrows text-muted display-1"></i>
+    <h3 class="mt-3 text-muted"><%= t '.no_friends' %></h3>
+    <p class="text-muted"><%= t '.no_friends_description' %></p>
+    <%= link_to t('.profile'), athlete_path(@athlete), class: 'btn btn-primary' %>
+  </div>
+  <% return %>
+<% end %>
+
+<% if @not_published_yet %>
+  <div class="alert alert-info" role="alert">
+    <%= t '.not_published_yet' %>
+  </div>
+<% end %>
+
+<% if @my_result.nil? && @target_date != Date.current %>
+  <div class="alert alert-warning" role="alert">
+    <%= t '.you_did_not_participate' %>
+  </div>
+<% end %>
+
+<% if @results.present? %>
+  <div class="table-responsive mb-4">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"></th>
+          <th scope="col"><%= t '.athlete' %></th>
+          <th scope="col"><%= t '.result' %></th>
+          <th scope="col"><%= t '.event' %></th>
+          <th scope="col"><%= t '.club' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @results.each_with_index do |res, idx| %>
+          <%= tag.tr class: (res.athlete_id == @athlete.id ? 'table-primary' : nil) do %>
+            <td><%= idx + 1 %></td>
+            <td>
+              <%= image_tag user_image_path(res.athlete&.user), class: 'avatar-50' %>
+            </td>
+            <td>
+              <% if res.athlete_id %>
+                <%= link_to res.athlete.name.presence || t('common.nobody'), athlete_path(res.athlete), class: 'athlete-link' %>
+              <% else %>
+                <%= t 'common.nobody' %>
+              <% end %>
+            </td>
+            <td><%= human_result_time(res.total_time) %></td>
+            <td><%= res.activity.event.name %></td>
+            <td><%= res.athlete&.club&.name %></td>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
+<% if @volunteers_by_role.present? %>
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0"><%= t '.volunteers_title' %></h5>
+    </div>
+    <div class="card-body">
+      <% Volunteer.roles.sort_by { |_k, v| v }.each do |role_key, _val| %>
+        <% vols = @volunteers_by_role[role_key] %>
+        <% next unless vols.present? %>
+        <div class="mb-2">
+          <strong><%= human_volunteer_role(role_key) %>:</strong>
+          <%= safe_join(vols.map { |v| link_to v.athlete.name, athlete_path(v.athlete) }, ', '.html_safe) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
