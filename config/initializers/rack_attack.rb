@@ -11,7 +11,8 @@ class Rack::Attack
     throttle("req/ip-#{limit}", limit: limit, period: period.seconds) do |req|
       next if req.path.include?('/statistics/')
 
-      req.ip if req.path.start_with?('/activities') || req.path.start_with?('/athletes/') || req.path.start_with?('/user')
+      req.ip if req.path.start_with?('/activities') || req.path.start_with?('/athletes/') ||
+        req.path.start_with?('/user') || req.path == '/pages/submit_feedback'
     end
   end
 
