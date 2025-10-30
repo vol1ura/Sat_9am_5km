@@ -293,8 +293,9 @@
               <%= image_tag '/images/app/ru-store.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
             <% end %>
           <% end %>
-          <%= link_to '/app-release.apk', download: 'sat_9am_5km.apk', data: { turbo_prefetch: false } do %>
-            <%= image_tag '/images/app/APK NEW.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_apk_html') %>
+          <%= link_to app_pages_path, class: 'btn btn-outline-dark px-2 rounded-1 app-button', data: { turbo_prefetch: false } do %>
+            <%= image_tag '/images/app/APK NEW.svg', class: 'img-fluid', style: 'height: 24px; width: auto; margin-right: 8px;', alt: '' %>
+            <%= t('.volunteer_app.download_apk_html') %>
           <% end %>
         </div>
       </div>
