@@ -21,6 +21,7 @@
                 <li><%= link_to t('.top_results'), results_ratings_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.top_athletes'), ratings_path(type: 'results'), class: 'dropdown-item' %></li>
                 <li><%= link_to t('.top_volunteers'), ratings_path(type: 'volunteers'), class: 'dropdown-item' %></li>
+                <li><%= link_to t('.friends_protocol'), protocol_duels_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.duels'), duels_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
                 <li><%= link_to t('.articles'), articles_path, class: 'dropdown-item' %></li>
@@ -114,6 +115,11 @@
           <li class="nav-item">
             <%= link_to ratings_path(type: 'volunteers'), class: "nav-link #{'active' if params[:type] == 'volunteers' && params[:controller] == 'ratings'}" do %>
               <span class="fa-li"><i class="fa-solid fa-table"></i></span><%= t '.top_volunteers' %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to protocol_duels_path, class: "nav-link #{'active' if params[:controller] == 'duels' && params[:action] == 'protocol'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-list-check"></i></span><%= t '.friends_protocol' %>
             <% end %>
           </li>
           <li class="nav-item">
