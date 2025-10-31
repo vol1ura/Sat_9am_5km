@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_083457) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_29_135353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -147,6 +147,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_083457) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_countries_on_code", unique: true, include: ["id"]
+  end
+
+  create_table "crystal_ownerships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "crystal_id", null: false
+    t.string "unique_token"
+    t.datetime "issued_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crystal_id"], name: "index_crystal_ownerships_on_crystal_id"
+    t.index ["unique_token"], name: "index_crystal_ownerships_on_unique_token", unique: true
+    t.index ["user_id"], name: "index_crystal_ownerships_on_user_id"
+  end
+
+  create_table "crystals", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "image_url"
+    t.string "series"
+    t.integer "total_quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -298,6 +320,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_083457) do
   add_foreign_key "athletes", "users", on_delete: :nullify
   add_foreign_key "clubs", "countries", on_delete: :cascade
   add_foreign_key "contacts", "events"
+  add_foreign_key "crystal_ownerships", "crystals"
+  add_foreign_key "crystal_ownerships", "users"
   add_foreign_key "events", "countries", on_delete: :cascade
   add_foreign_key "friendships", "athletes"
   add_foreign_key "friendships", "athletes", column: "friend_id"

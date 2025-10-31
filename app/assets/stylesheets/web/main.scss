@@ -40,16 +40,12 @@
 
     h2 {
       font-weight: 800;
-      letter-spacing: -0.03em;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       line-height: 1.1;
     }
 
     .lead {
       font-size: 1.15rem;
-      font-weight: 400;
       line-height: 1.6;
-      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     }
   }
 }
@@ -69,7 +65,6 @@
     padding-bottom: 1rem;
     font-weight: 700;
     font-size: 2.5rem;
-    letter-spacing: -0.02em;
 
     @include media(phoneScreen) {
       font-size: 2rem;
@@ -93,15 +88,12 @@
     .card-title {
       font-weight: 600;
       font-size: 1.25rem;
-      letter-spacing: -0.01em;
     }
 
     .card-text {
       font-size: 1rem;
       line-height: 1.65;
       color: rgba(0, 0, 0, 0.7);
-      font-weight: 400;
-      letter-spacing: -0.005em;
     }
 
     &:hover {
@@ -168,7 +160,6 @@
 
     a {
       font-weight: 600;
-      letter-spacing: -0.01em;
     }
   }
 }
@@ -188,7 +179,6 @@
     padding-bottom: 1rem;
     font-weight: 700;
     font-size: 2.5rem;
-    letter-spacing: -0.02em;
 
     @include media(phoneScreen) {
       font-size: 2rem;
@@ -252,7 +242,6 @@
     padding-bottom: 1rem;
     font-weight: 700;
     font-size: 2.5rem;
-    letter-spacing: -0.02em;
 
     @include media(phoneScreen) {
       font-size: 2rem;
@@ -278,15 +267,12 @@
     .card-title {
       font-weight: 600;
       font-size: 1.25rem;
-      letter-spacing: -0.01em;
     }
 
     .card-text {
       font-size: 1rem;
       line-height: 1.65;
       color: rgba(0, 0, 0, 0.7);
-      font-weight: 400;
-      letter-spacing: -0.005em;
     }
 
     &:hover {
@@ -320,7 +306,6 @@
     padding-bottom: 1rem;
     font-weight: 700;
     font-size: 2.5rem;
-    letter-spacing: -0.02em;
 
     @include media(phoneScreen) {
       font-size: 2rem;
@@ -355,15 +340,12 @@
         color: $primary;
         font-style: italic;
         line-height: 1.75;
-        font-weight: 400;
-        letter-spacing: -0.01em;
       }
     }
 
     .blockquote-footer {
       font-weight: 500;
       font-size: 1rem;
-      letter-spacing: -0.005em;
     }
   }
 
@@ -472,7 +454,7 @@ img.app-button {
 }
 
 .volunteer-app-section {
-  background: linear-gradient(135deg, #f8f3ff 0%, #ffe8f5 50%, #fff4e6 100%);
+  background: linear-gradient(135deg, #a3c8ff 0%, #a3c8ff 50%, #a3c8ff 100%);
   position: relative;
   overflow: hidden;
 
@@ -485,9 +467,7 @@ img.app-button {
     color: $primary;
     font-weight: 700;
     font-size: 2.5rem;
-    letter-spacing: -0.02em;
     margin-bottom: 3rem;
-    text-shadow: 0 2px 10px rgba(42, 41, 81, 0.08);
 
     @include media(phoneScreen) {
       font-size: 2rem;
@@ -497,7 +477,6 @@ img.app-button {
   h3 {
     font-weight: 600;
     font-size: 1.15rem;
-    letter-spacing: -0.01em;
     color: darken($primary, 5%);
   }
 
@@ -505,8 +484,6 @@ img.app-button {
     font-size: 1rem;
     line-height: 1.65;
     color: rgba(0, 0, 0, 0.7);
-    font-weight: 400;
-    letter-spacing: -0.005em;
   }
 
   .btn-outline-dark {

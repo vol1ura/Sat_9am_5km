@@ -1,4 +1,4 @@
-FROM ruby:3.4.5-alpine
+FROM ruby:3.4.1
 
 RUN apk --no-cache add \
     build-base postgresql-dev nodejs yarn \
