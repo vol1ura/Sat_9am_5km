@@ -24,7 +24,7 @@ class GoingTosController < ApplicationController
   private
 
   def find_event
-    @event = Event.where(active: true).find_by!(code_name: params[:event_code_name])
+    @event = Event.active.find_by!(code_name: params[:event_code_name])
   end
 
   def find_athlete
