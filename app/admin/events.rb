@@ -19,7 +19,7 @@ ActiveAdmin.register Event do
   filter :town
 
   scope :all
-  scope(:active) { |s| s.where(active: true) }
+  scope :active
   scope(:inactive) { |s| s.where(active: false) }
 
   index download_links: false do

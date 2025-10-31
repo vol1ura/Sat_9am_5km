@@ -24,6 +24,7 @@ class Event < ApplicationRecord
 
   default_scope { order(:visible_order, :name) }
 
+  scope :active, -> { where(active: true) }
   scope :in_country, ->(country_code) { joins(:country).where(country: { code: country_code }) }
   scope :without_friends, -> { where.not(id: [4, 31]) }
 

@@ -541,7 +541,7 @@ ru:
       title: 'Беговые дуэли %{athlete_name} против %{friend_name}'
       description: 'История совместных забегов между %{athlete_name} и %{friend_name}'
       header: 'Совместные забеги с %{friend_name}'
-      duels: Беговые дуэли
+      duels: Дружеские дуэли
       back_to_all: Ко всем дуэлям
       total_duels: Всего дуэлей
       my_wins: Мои победы
@@ -594,7 +594,7 @@ ru:
       top_athletes: Рейтинг участников
       top_volunteers: Рейтинг волонтёров
       friends_protocol: Дружеский протокол
-      duels: Беговые дуэли
+      duels: Дружеские дуэли
       badges: Личные награды
       articles: Статьи
       profile: Профиль

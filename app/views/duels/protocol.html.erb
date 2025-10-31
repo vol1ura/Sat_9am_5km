@@ -1,4 +1,5 @@
 <% head_info :title, t('.title') %>
+<% head_info :description, t('.description') %>
 
 <div class="row">
   <div class="col-12">
@@ -18,13 +19,13 @@
   <% return %>
 <% end %>
 
-<% if @not_published_yet %>
+<% if @target_date != Date.current && @results.blank? %>
   <div class="alert alert-info" role="alert">
     <%= t '.not_published_yet' %>
   </div>
 <% end %>
 
-<% if @my_result.nil? && @target_date != Date.current %>
+<% if @target_date != Date.current && @results.find { |r| r.athlete_id == @athlete.id }.nil? && @volunteers.find { |v| v.athlete_id == @athlete.id }.nil? %>
   <div class="alert alert-warning" role="alert">
     <%= t '.you_did_not_participate' %>
   </div>
@@ -32,7 +33,7 @@
 
 <% if @results.present? %>
   <div class="table-responsive mb-4">
-    <table class="table table-hover align-middle">
+    <table class="table table-striped align-middle">
       <thead>
         <tr>
           <th scope="col">#</th>

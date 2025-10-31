@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   layout :page_layout
 
   def index
-    @local_events = Event.in_country(top_level_domain).unscope(:order)
+    @local_events = Event.active.in_country(top_level_domain).unscope(:order)
     @next_saturday = Date.tomorrow.next_week.prev_week(:saturday)
     @jubilee_events =
       Activity
