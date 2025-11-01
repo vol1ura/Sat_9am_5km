@@ -572,7 +572,7 @@ rs:
     protocol:
       title: Prijateljski protokol
       header: Prijateljski protokol
-      description: 'Ovde su prikazani vaši i rezultati vaših prijatelja za poslednju subotu na svim S95 lokacijama. Rezultati su poređani od vremena završetka ka najgorem, a pri istom vremenu više je učesnik sa boljim mestom. Ispod su navedeni prijatelji koji su volontirali tog dana.'
+      description: Ovde su prikazani vaši i rezultati vaših prijatelja za poslednju subotu na svim S95 lokacijama. Rezultati su poređani od vremena završetka ka najgorem, a pri istom vremenu više je učesnik sa boljim mestom. Ispod su navedeni prijatelji koji su volontirali tog dana.
       not_published_yet: Protokoli još nisu objavljeni.
       you_did_not_participate: Niste učestvovali prošle subote.
       no_friends: Još uvek nemate prijatelja
@@ -580,6 +580,7 @@ rs:
       profile: Moj profil
       athlete: Učesnik
       result: Rezultat
+      pace: Tempo
       event: Događaj
       club: Klub
       volunteers_title: Prijatelji volonteri
