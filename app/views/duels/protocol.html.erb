@@ -3,8 +3,8 @@
 
 <div class="row">
   <div class="col-12">
-    <h1 class="mt-2"><%= t '.header' %></h1>
-    <p class="text-muted fs-4 fw-semibold mb-1"><%= l @target_date %></p>
+    <h2 class="mt-2"><%= t '.header' %></h2>
+    <p class="text-muted fs-4 fw-semibold mb-1"><%= l @target_date, format: :long %></p>
     <p><%= t '.description' %></p>
   </div>
 </div>
@@ -12,7 +12,7 @@
 <% unless @has_friends %>
   <div class="text-center py-5">
     <i class="fa-solid fa-people-arrows text-muted display-1"></i>
-    <h3 class="mt-3 text-muted"><%= t '.no_friends' %></h3>
+    <h4 class="mt-3 text-muted"><%= t '.no_friends' %></h4>
     <p class="text-muted"><%= t '.no_friends_description' %></p>
     <%= link_to t('.profile'), athlete_path(@athlete), class: 'btn btn-primary' %>
   </div>
@@ -39,28 +39,36 @@
           <th scope="col">#</th>
           <th scope="col"></th>
           <th scope="col"><%= t '.athlete' %></th>
-          <th scope="col"><%= t '.result' %></th>
+          <th scope="col" class="text-end"><%= t '.result' %></th>
+          <th scope="col" class="text-center"><%= t '.pace' %></th>
           <th scope="col"><%= t '.event' %></th>
           <th scope="col"><%= t '.club' %></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table-group-divider">
         <% @results.each_with_index do |res, idx| %>
-          <%= tag.tr class: (res.athlete_id == @athlete.id ? 'table-primary' : nil) do %>
-            <td><%= idx + 1 %></td>
+          <%= tag.tr class: (res.athlete_id == @athlete.id ? 'table-success' : nil) do %>
+            <td class="position align-middle"><%= idx + 1 %></td>
             <td>
               <%= image_tag user_image_path(res.athlete&.user), class: 'avatar-50' %>
             </td>
             <td>
-              <% if res.athlete_id %>
-                <%= link_to res.athlete.name.presence || t('common.nobody'), athlete_path(res.athlete), class: 'athlete-link' %>
-              <% else %>
-                <%= t 'common.nobody' %>
-              <% end %>
+              <%= link_to res.athlete.name, res.athlete, class: 'athlete-link' %>
             </td>
-            <td><%= human_result_time(res.total_time) %></td>
-            <td><%= res.activity.event.name %></td>
-            <td><%= res.athlete&.club&.name %></td>
+            <td class="text-end">
+              <% if res.personal_best %>
+                <%= tag.i class: 'fa-solid fa-bolt text-primary', title: t('activities.result.personal_best') %>
+              <% end %>
+              <%= human_result_time res.total_time %>
+            </td>
+            <td class="text-center">
+              <%= human_result_pace res.total_time %>
+            </td>
+            <td><%= link_to res.activity.event.name, res.activity %></td>
+            <td>
+              <% club = res.athlete&.club %>
+              <%= link_to club&.name, club if club %>
+            </td>
           <% end %>
         <% end %>
       </tbody>
@@ -71,15 +79,17 @@
 <% if @volunteers_by_role.present? %>
   <div class="card">
     <div class="card-header">
-      <h5 class="mb-0"><%= t '.volunteers_title' %></h5>
+      <h4 class="mb-0"><%= t '.volunteers_title' %></h4>
     </div>
     <div class="card-body">
-      <% Volunteer.roles.sort_by { |_k, v| v }.each do |role_key, _val| %>
-        <% vols = @volunteers_by_role[role_key] %>
-        <% next unless vols.present? %>
+      <% Volunteer.roles.each_key do |role| %>
+        <% volunteers = @volunteers_by_role[role] %>
+        <% next unless volunteers.present? %>
         <div class="mb-2">
-          <strong><%= human_volunteer_role(role_key) %>:</strong>
-          <%= safe_join(vols.map { |v| link_to v.athlete.name, athlete_path(v.athlete) }, ', '.html_safe) %>
+          <strong><%= human_volunteer_role(role) %>:</strong>
+          <% volunteers.each do |volunteer| %>
+            <%= link_to volunteer.athlete.name, volunteer.athlete %>
+          <% end %>
         </div>
       <% end %>
     </div>

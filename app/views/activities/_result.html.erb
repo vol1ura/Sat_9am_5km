@@ -33,9 +33,9 @@
         )
       %>
     <% end %>
-    <%= human_result_time(result.total_time) %>
+    <%= human_result_time result.total_time %>
   </td>
-  <td class="align-middle text-end"><%= human_result_pace(result.total_time) %></td>
+  <td class="align-middle text-end"><%= human_result_pace result.total_time %></td>
   <td class="hidden-on-phone align-middle">
     <% club = result.athlete&.club %>
     <%= link_to club.name, club if club %>
