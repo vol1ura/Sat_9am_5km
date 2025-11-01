@@ -30,9 +30,7 @@ RSpec.describe '/api/parkzhrun/activities' do
     end
 
     context 'when creation of activity failed' do
-      before do
-        allow(Parkzhrun::ActivityCreator).to receive(:call).and_raise(StandardError)
-      end
+      before { allow(Parkzhrun::ActivityCreator).to receive(:call).and_raise(StandardError) }
 
       it 'renders not found for invalid id' do
         post api_parkzhrun_activities_url, params: activity_attributes, headers: headers, as: :json
