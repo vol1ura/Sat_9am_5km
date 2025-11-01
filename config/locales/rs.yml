@@ -636,7 +636,7 @@ rs:
   pages:
     index:
       upcoming_events: 'Predstojeći događaji %{date}'
-      hero_title: "Svake subote u 9:00!"
+      hero_title: "Svake subote u 09:00!"
       hero_subtitle: "5 km za sve nivoe spremnosti, besplatno. Pridruži se!"
       my_profile: "Moj profil"
       registration: "Registracija"
@@ -646,13 +646,13 @@ rs:
         title: "Kako to radi?"
         registration:
           title: "Registracija"
-          description: "Napravi profil za 1 minut u našem Telegram botu @sat9am5kmbot"
+          description: "Napravi profil u našem Telegram botu @sat9am5kmbot"
         choose_run:
           title: "Izaberi trku"
           description: "Više od 20 lokacija u 3 zemlje"
         come_saturday:
           title: "Dođi u subotu"
-          description: "Start u 9:00, distancu možete preći tempom koji vam odgovara"
+          description: "Start u 09:00, distancu možete preći ili proći"
         track_progress:
           title: "Prati napredak"
           description: "Rezultati, nagrade, rang liste - na našem sajtu"
@@ -678,23 +678,23 @@ rs:
           14089: Jedne subote sam došao u park ujutru, saznavši za trke sa plakata na tabli. Drugi put sam se vratio da volontiram i potrčim, a sledeći put sam poveo i sina. I sve to nas je toliko uvuklo da nas obojicu ne "pušta" do dan danas)
           7736: Ovo više nije samo zajednica, nije samo subota - ovo je ogromna pozitivna energija od ljudi koji se sreću da zajedno pretrče 5 km. Tokom ove trke saznajemo sve vesti jedni o drugima, slavimo rođendane, planiramo trkačku godinu. Trčanje sam počela pre 4 godine, nisam se bavila nikakvim sportom u mladosti. Sve je počelo od normalnog lekara koji nakon operacije nije zabranio, već savetovao trčanje. Čini se da je to bila moja tačka od koje sam uronila u trkačku zajednicu i upoznala predivne ljude. Uskoro ću slaviti svoju 100-tu trku u subotu i, znate li šta to znači?! To je NEVEROVATNO. Ne verujete? Dođite!
       volunteer_app:
-        title: Mobilna aplikacija Volonter S95
+        title: Aplikacija Volonter S95
         features:
           timer:
             title: Štoperica
-            description: Za volontere-meriče vremena sa mogućnošću brisanja pogrešnih merenja
+            description: Za volontere-meriče vremena sa brisanjem pogrešnih merenja
           scanner:
             title: Skener
-            description: Super brz i precizan modul sa mogućnošću istovremenog skeniranja kartice učesnika i pozicije
+            description: Super brz i precizan modul sa istovremenim skeniranjem kartice učesnika i pozicije
           upload:
-            title: Učitavanje u sistem
-            description: Rezultati trka se učitavaju u sistem direktno iz aplikacije. Da biste protokole objavljivali brže i jednostavnije
+            title: Učitavanje rezultata
+            description: Rezultati trka se učitavaju u sistem direktno iz aplikacije
           stats:
             title: Lična statistika
             description: Praćenje vaše volonterske aktivnosti
           live_results:
             title: Online transkripcija
-            description: Transkripcija rezultata trke na sajtu po redosledu dolaska u cilj
+            description: Rezultati trke na sajtu po redosledu dolaska u cilj
         download_rustore: Preuzmi u RuStore
         download_app_gallery: Preuzmi u App Gallery
         download_apk_html: Preuzmi <b>APK</b>
