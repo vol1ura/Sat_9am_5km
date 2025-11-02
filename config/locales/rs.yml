@@ -260,7 +260,7 @@ rs:
     - subota
     formats:
       default: "%d.%m.%Y"
-      long: "%d %B %Y"
+      long: "%-d %B %Y"
       brief: "%-d %B"
       short: "%-d %b %Y"
     month_names:

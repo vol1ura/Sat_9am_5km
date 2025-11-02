@@ -123,7 +123,7 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to duels_path, class: "nav-link #{'active' if params[:controller] == 'duels'}" do %>
+            <%= link_to duels_path, class: "nav-link #{'active' if params[:controller] == 'duels' && params[:action].in?(%w[index show])}" do %>
               <span class="fa-li"><i class="fa-solid fa-people-arrows"></i></span><%= t '.duels' %>
             <% end %>
           </li>

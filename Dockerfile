@@ -2,7 +2,7 @@ FROM ruby:3.4.5-alpine
 
 RUN apk --no-cache add \
     build-base postgresql-dev nodejs yarn \
-    tzdata vim openssh vips-dev yaml-dev
+    tzdata vim openssh vips-dev yaml-dev curl
 
 # Russian locale settings
 ENV LANG ru_RU.UTF-8
@@ -19,4 +19,8 @@ WORKDIR /usr/src
 COPY . .
 
 EXPOSE 3000
+
+HEALTHCHECK --interval=600s --timeout=30s --start-period=30s --retries=3 \
+  CMD curl -f http://localhost:3000/up || exit 1
+
 CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
