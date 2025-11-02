@@ -39,7 +39,7 @@ ActiveAdmin.register Result do
       activity = result.activity
 
       item(
-        'Удалить 🔝',
+        'Удалить 🆙',
         drop_admin_activity_result_path(activity, result),
         method: :delete,
         data: { confirm: "Удалить строчку №#{result.position} со сдвигом?" },

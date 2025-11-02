@@ -83,7 +83,7 @@ rs:
         title: Objašnjenja
         items:
           - 'Ukloniti - ukloniće ceo red.'
-          - 'Ukloniti 🔝 - uklonite presek sa ponovnim brojanjem sledećih pozicija.'
+          - 'Ukloniti 🆙 - uklonite presek sa ponovnim brojanjem sledećih pozicija (pomeraju se na jednu poziciju naviše).'
           - 'Ukloniti 🕑 - Uklanja vreme u redu, zamenjujući njega i sve naredne vremenom iz sledećeg reda. Poslednji učesnik će ostati bez rezultata.'
           - 'Ukloniti 🏃 - uklanja učesnika iz reda, zamenjujući njega i sve naredne učesnike učesnikom iz sledećeg reda. To jest, svi učesnici se pomeraju za jednu poziciju, počevši od uklonjenog učesnika.'
           - 'Resetovati 🏃 - resetuje učesnika. U protokolu će pisati Nepoznat.'
