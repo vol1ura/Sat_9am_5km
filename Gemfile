@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.4.5'
 
-gem 'rails', '~> 8.0.0'
+gem 'rails', '~> 8.1.1'
 
 gem 'activeadmin'
 gem 'activeadmin-localize'
@@ -17,7 +17,7 @@ gem 'autoprefixer-rails'
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.3.5'
 gem 'cancancan'
-gem 'connection_pool'
+gem 'connection_pool', '~> 2.5'
 gem 'dalli'
 gem 'dartsass-sprockets'
 gem 'devise', '~> 4.8'
