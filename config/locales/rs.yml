@@ -979,6 +979,7 @@ rs:
       athletes: atletičari
       results: rezultati
       volunteering: volonterstvo
+      search_placeholder: Pretraga kluba...
     show:
       description: 'Tabela učesnika i statistika za klub %{club}'
       main_page: Glavna

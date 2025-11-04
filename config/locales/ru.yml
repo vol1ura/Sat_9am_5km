@@ -973,6 +973,7 @@ ru:
       athletes: участники
       results: результаты
       volunteering: волонтёрства
+      search_placeholder: Поиск клуба...
     show:
       description: 'Таблица участников и статистика по клубу %{club}'
       main_page: Главная

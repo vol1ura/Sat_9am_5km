@@ -1,6 +1,6 @@
 <tr>
-  <td><%= link_to club.first.name, club.first %></td>
-  <td><%= club.last %></td>
-  <td><%= @count_results.fetch(club.first.id, 0) %></td>
-  <td class="hidden-on-phone"><%= @count_volunteering.fetch(club.first.id, 0) %></td>
+  <td><%= link_to club.name, club %></td>
+  <td><%= @count_athletes.fetch(club.id, 0) %></td>
+  <td><%= @count_results.fetch(club.id, 0) %></td>
+  <td><%= @count_volunteering.fetch(club.id, 0) %></td>
 </tr>
