@@ -2,12 +2,18 @@
 
 class ClubsController < ApplicationController
   def index
-    @clubs = Athlete
-      .joins(club: :country)
+    @q = Club
+      .joins(:country)
       .where(country: { code: top_level_domain })
-      .group(:club)
-      .order(count_clubs: :desc)
-      .count(:clubs)
+      .ransack(params[:q])
+    @q.sorts = 'athletes_count desc' if @q.sorts.empty?
+    @clubs = @q.result.page(params[:page]).per(25)
+    @count_athletes =
+      Athlete
+        .joins(club: :country)
+        .where(country: { code: top_level_domain })
+        .group(:club_id)
+        .count(:club_id)
     @count_results = group_and_count_clubs_for Result
     @count_volunteering = group_and_count_clubs_for Volunteer
   end

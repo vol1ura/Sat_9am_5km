@@ -656,6 +656,7 @@ DEPENDENCIES
   rails (~> 8.0.0)
   rails-i18n
   rails_performance
+  ransack
   redis
   rollbar
   rqrcode

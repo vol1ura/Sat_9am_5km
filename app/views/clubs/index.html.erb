@@ -3,24 +3,36 @@
 
 <p><%= t '.how_to_add_new_club_html', mail: ENV['INFO_EMAIL'] %></p>
 
-<table class="table table-striped">
-  <thead data-controller="table-head">
-    <tr>
-      <th><%= t '.name' %></th>
-      <th>
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-caret-up"></i></span>
-        <span class="cropped-on-phone"><%= t '.athletes' %></span>
-      </th>
-      <th>
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        <span class="cropped-on-phone"><%= t '.results' %></span>
-      </th>
-      <th class="hidden-on-phone">
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span> <%= t '.volunteering' %>
-      </th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <%= render partial: 'club', collection: @clubs %>
-  </tbody>
-</table>
+<div class="row mb-3">
+  <%= search_form_for @q, url: clubs_path, method: :get, html: { class: 'col-12 col-md-6 col-lg-4' } do |f| %>
+    <div class="input-group">
+      <%= f.search_field :name_i_cont, class: 'form-control', placeholder: t('.search_placeholder') %>
+      <%= button_tag type: 'submit', class: 'btn btn-outline-secondary' do %>
+        <i class="fa-solid fa-magnifying-glass text-primary"></i>
+      <% end %>
+      <%= link_to clubs_path, class: 'btn btn-outline-secondary' do %>
+        <i class="fa-solid fa-times"></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sort_link @q, :name, t('.name') %></th>
+        <th><%= sort_link @q, :athletes_count, t('.athletes') %></th>
+        <th><%= sort_link @q, :results_count, t('.results') %></th>
+        <th><%= sort_link @q, :volunteering_count, t('.volunteering') %></th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <%= render partial: 'club', collection: @clubs %>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-3">
+  <%= paginate @clubs %>
+</div>
