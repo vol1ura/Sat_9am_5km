@@ -970,9 +970,9 @@ ru:
       description: Таблица клубов со статистиков по общему количеству участников, волонтёрств и забегов
       how_to_add_new_club_html: 'Вашего клуба нет в списке? Напишите нам <a href="mailto:%{mail}?subject=Добавить%20новый%20клуб" target="_blank" title="Отправить нам email">на почту</a> и мы добавим его.'
       name: Название
-      athletes: участники
-      results: результаты
-      volunteering: волонтёрства
+      athletes: Участники
+      results: Результаты
+      volunteering: Волонтёрства
       search_placeholder: Поиск клуба...
     show:
       description: 'Таблица участников и статистика по клубу %{club}'
