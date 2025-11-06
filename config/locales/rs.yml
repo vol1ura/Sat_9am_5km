@@ -976,9 +976,9 @@ rs:
       description: Tabela klubova sa statistikom o ukupnom broju učesnika, volontera i trčanja
       how_to_add_new_club_html: 'Da li vaš klub nije na listi? Pišite nam na <a href="mailto:%{mail}?subject=Add a new club" target="_blank" title="Pošaljite nam email">email</a> i dodaćemo ga.'
       name: Ime
-      athletes: atletičari
-      results: rezultati
-      volunteering: volonterstvo
+      athletes: Atletičari
+      results: Rezultati
+      volunteering: Volonterstvo
       search_placeholder: Pretraga kluba...
     show:
       description: 'Tabela učesnika i statistika za klub %{club}'

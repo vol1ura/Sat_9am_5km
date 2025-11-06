@@ -34,15 +34,15 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <td><%= t '.athlete' %></td>
+        <th><%= t '.athlete' %></th>
         <% if @badge.record_kind? %>
-          <td><%= t '.event' %></td>
-          <td class="px-0 px-sm-2"><%= t '.result' %></td>
-          <td class="hidden-on-phone">Дата</td>
+          <th><%= t '.event' %></th>
+          <th class="px-0 px-sm-2"><%= t '.result' %></th>
+          <th class="hidden-on-phone">Дата</th>
         <% elsif !@badge.funrun_kind? %>
-          <td><%= t '.received_date' %></td>
+          <th><%= t '.received_date' %></th>
         <% end %>
-        <% tag.td class: ('hidden-on-phone' unless @badge.funrun_kind?) do %>
+        <%= tag.th class: ('hidden-on-phone' unless @badge.funrun_kind?) do %>
           <%= t '.club' %>
         <% end %>
       </tr>
