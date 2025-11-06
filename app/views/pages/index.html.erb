@@ -284,17 +284,17 @@
             </li>
           </ul>
         </div>
-        <div class="d-flex gap-4 align-items-center justify-content-center flex-wrap">
+        <div class="d-flex gap-4 align-items-center justify-content-start flex-wrap">
           <%= external_link_to 'https://appgallery.huawei.com/app/C114915605' do %>
-            <%= image_tag "/images/app/#{top_level_domain == :rs ? 'app-gallery-rs.png' : 'app-gallery-ru.svg'}", class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_gallery') %>
+            <%= image_tag "/images/app/#{top_level_domain == :rs ? 'app-gallery-rs.png' : 'app-gallery-ru-new.svg'}", class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_gallery') %>
           <% end %>
           <% if top_level_domain == :ru %>
             <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
-              <%= image_tag '/images/app/ru-store.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
+              <%= image_tag '/images/app/ru-store-new.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
             <% end %>
           <% end %>
-          <%= link_to app_pages_path, class: 'btn btn-dark px-2 rounded-3 border-0 app-button', data: { turbo_prefetch: false } do %>
-            <i class="fa-brands fa-android"></i> <%= t('.volunteer_app.download_apk_html') %>
+          <%= link_to app_pages_path, class: 'text-decoration-none', data: { turbo_prefetch: false } do %>
+            <%= image_tag '/images/app/apk-new.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_apk_html') %>
           <% end %>
         </div>
       </div>
