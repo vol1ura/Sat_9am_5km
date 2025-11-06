@@ -9,6 +9,8 @@
 
 # Sat 9am 5km - run events system
 
+> 📖 **Документация на русском языке**: [README_RU.md](README_RU.md) | [API](docs/API.md) | [Архитектура](docs/ARCHITECTURE.md) | [Развертывание](docs/DEPLOYMENT.md)
+
 ## Maintenance
 
 Reset Postgres stats with:
