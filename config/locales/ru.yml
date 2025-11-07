@@ -747,7 +747,7 @@ ru:
         title: "Как это работает?"
         registration:
           title: "Регистрация"
-          description: "Создай профиль в нашем Telegram-боте @sat9am5km"
+          description: "Создай профиль в нашем Telegram-боте @sat9am5kmbot"
         choose_run:
           title: "Выбери забег"
           description: "Более 20 локаций в 3 странах"
