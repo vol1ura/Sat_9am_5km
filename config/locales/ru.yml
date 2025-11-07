@@ -293,7 +293,7 @@ ru:
         other: около %{count} месяца
       about_x_years:
         one: около %{count} года
-        few: около %{count} года
+        few: около %{count} лет
         many: около %{count} лет
         other: около %{count} лет
       almost_x_years:
