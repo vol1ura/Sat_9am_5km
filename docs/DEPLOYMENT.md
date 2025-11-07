@@ -36,12 +36,7 @@ sudo apt-get install -y \
   libvips-dev
 ```
 
-### Установка Rust (для Ruby YJIT)
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
-```
+# Установка Rust (для Ruby YJIT)
 
 ### Установка rbenv
 
