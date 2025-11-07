@@ -795,7 +795,7 @@ ru:
             description: Отслеживание вашей волонтёрской активности
           live_results:
             title: Онлайн-трансляция
-            description: Результатов забега на сайт в реальном времени
+            description: Результаты забега на сайт в реальном времени
         download_rustore: Скачать в RuStore
         download_app_gallery: Скачать в App Gallery
         download_apk_html: Скачать <b>APK</b>
