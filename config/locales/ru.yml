@@ -219,7 +219,7 @@ ru:
         event:
           attributes:
             code_name:
-              invalid: 'только строчные латинские буквы и символ "_" вместо пробела'
+              invalid: 'Только строчные латинские буквы и символ "_" вместо пробела'
         contact:
           attributes:
             link:
