@@ -740,14 +740,14 @@ ru:
       hero_title: "Каждую субботу в 9:00!"
       hero_subtitle: "5 км для всех уровней подготовки, бесплатно. Присоединяйся!"
       my_profile: "Мой профиль"
-      registration: "Регистрация"
+      registration: "Зарегистрируйся"
       results: "Результаты"
       find_event: "Найти ближайший забег"
       how_it_works:
         title: "Как это работает?"
         registration:
           title: "Регистрация"
-          description: "Создай профиль в нашем Telegram-боте @sat9am5kmbot"
+          description: "Создай профиль в нашем Telegram-боте @sat9am5km"
         choose_run:
           title: "Выбери забег"
           description: "Более 20 локаций в 3 странах"
@@ -786,7 +786,7 @@ ru:
             description: С возможностью удаления ошибочных отсечек
           scanner:
             title: Сканер
-            description: Супер быстрый и точный модуль с одновременным захватом карточки участника и позиции
+            description: С одновременным захватом карточки участника и позиции
           upload:
             title: Загрузка результатов
             description: Напрямую из приложения в систему
@@ -795,7 +795,7 @@ ru:
             description: Отслеживание вашей волонтёрской активности
           live_results:
             title: Онлайн-трансляция
-            description: Результаты забега на сайте по мере финиша участников
+            description: Результатов забега на сайт в реальном времени
         download_rustore: Скачать в RuStore
         download_app_gallery: Скачать в App Gallery
         download_apk_html: Скачать <b>APK</b>
