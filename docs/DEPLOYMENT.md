@@ -84,8 +84,8 @@ gem install bundler --version=2.4.10
 psql --version
 
 # Создание пользователя и базы данных
-sudo -u postgres createuser -s deploy
-sudo -u postgres createdb s95_production
+sudo -u postgres createuser deploy
+sudo -u postgres createdb s95_production -O deploy
 ```
 
 ### Установка Redis
