@@ -1,4 +1,6 @@
-<svg width="123" height="40" viewBox="0 0 123 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="123" height="40" viewBox="0 0 123 40" fill="none" xmlns="http://www.w3.org/2000/svg"
+	preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+	image-rendering="optimizeQuality" color-rendering="optimizeQuality">
 <path d="M0 8C0 3.58172 3.58172 0 8 0H115C119.418 0 123 3.58172 123 8V32C123 36.4183 119.418 40 115 40H8C3.58172 40 0 36.4183 0 32V8Z" fill="#282B30"/>
 <g clip-path="url(#clip0_175_40364)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M14.734 8C9.80341 8 8 9.80309 8 14.7327V25.2673C8 30.1969 9.80341 32 14.734 32H25.2628C30.1932 32 32 30.1969 32 25.2673V14.7327C32 9.80309 30.1966 8 25.266 8H14.734Z" fill="#C8102E"/>

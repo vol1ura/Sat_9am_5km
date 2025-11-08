@@ -303,6 +303,10 @@
 
 .app-button {
   height: 40px !important;
+  // Improve perceived sharpness for rasterized render paths in some browsers/CDNs
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor; // IE fallback (no-op elsewhere)
 }
 
 .app-feature-item {
