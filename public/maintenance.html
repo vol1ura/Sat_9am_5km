@@ -36,9 +36,11 @@
         <p class="sr-only">Статус работ обновляется автоматически.</p>
         <p>Если вам срочно нужна помощь, свяжитесь с администрацией через <a href="mailto:admin@s95.ru">admin@s95.ru</a> (только для экстренных случаев).</p>
 
-        <p>Последнее обновление: <time id="last-updated">—</time></p>
+  <p>Последнее обновление: <time id="last-updated">—</time></p>
 
-        <p class="meta">Следите за статусом сервиса на <a class="status-link" href="https://status.s95.ru" target="_blank" rel="noopener noreferrer">status.s95.ru</a></p>
+  <p>Ожидаемое восстановление: <strong id="eta">примерно 30 минут</strong></p>
+
+  <p class="meta">Следите за статусом сервиса на <span class="status-link">status.s95.ru</span></p>
       </section>
 
       <footer class="meta">
@@ -48,15 +50,26 @@
   </main>
 
   <script>
-    // Показываем текущее локальное время как простое "last updated" (не изменяет серверный статус)
+    // Показываем текущее локальное время как простое "last updated" и рассчитываем ETA (~30 минут)
     (function(){
       try{
         const t = document.getElementById('last-updated');
-        if(!t) return;
-        const now = new Date();
-        const opts = {year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'};
-        t.textContent = now.toLocaleString('ru-RU', opts);
-      }catch(e){console.warn(e)}
+        const e = document.getElementById('eta');
+        if(t){
+          const now = new Date();
+          const opts = {year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'};
+          t.textContent = now.toLocaleString('ru-RU', opts);
+        }
+        // Простая локальная ETA: сейчас + 30 минут (показываем текст и локальное время восстановления)
+        if(e){
+          const etaMinutes = 30;
+          const restore = new Date(Date.now() + etaMinutes * 60 * 1000);
+          const opts2 = {hour:'2-digit',minute:'2-digit'};
+          e.textContent = `примерно ${etaMinutes} минут (≈ ${restore.toLocaleTimeString('ru-RU', opts2)})`;
+        }
+      }catch(err){
+        console.warn(err);
+      }
     })();
   </script>
 </body>
