@@ -6,17 +6,70 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Техническое обслуживание — S95</title>
   <style>
-    :root{--bg:#f3f4f6;--card:#ffffff;--accent:#2a2951;--error:#ff411e;--text:#222}
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:2rem}
-    .card{width:100%;max-width:640px;background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.08);overflow:hidden}
-    .card header{background:linear-gradient(90deg,#fff 0%, #fafafa 100%);border-top:6px solid var(--accent);padding:1.25rem 1.5rem}
-    .card header h1{margin:0;font-size:1.125rem;color:var(--error);display:flex;gap:.75rem;align-items:center}
-    .card .content{padding:1.25rem 1.5rem;line-height:1.5;color:#333}
-    .card .meta{padding:0 1.5rem 1.5rem;font-size:.95rem;color:#555}
-    .status-link{display:inline-block;margin-top:.5rem;padding:.35rem .6rem;border-radius:6px;background:#eef2ff;color:#223; text-decoration:none;border:1px solid #dbeafe}
+    :root {
+      --bg: linear-gradient(120deg,#e0e7ff 0%,#f3f4f6 100%);
+      --card: #fff;
+      --accent: #2a2951;
+      --error: #ff411e;
+      --text: #222;
+      --shadow: 0 8px 32px rgba(44,62,80,.12);
+      --primary: #6366f1;
+      --list-bg: #f6f8fa;
+    }
+    html,body {
+      height:100%;margin:0;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.5s;
+    }
+    .wrap {
+      min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;
+      animation: fadein 1.2s;
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: none; }
+    }
+    .card {
+      width:100%;max-width:420px;background:var(--card);border-radius:18px;
+      box-shadow: var(--shadow);overflow:hidden;position:relative;
+      border: 1px solid #e5e7eb;
+      animation: fadein 1.2s;
+    }
+    .card header {
+      background:linear-gradient(90deg,#fff 0%, #f3f4f6 100%);
+      border-top:7px solid var(--primary);
+      padding:1.5rem 1.5rem 1rem 1.5rem;
+      display:flex;align-items:center;gap:1rem;
+    }
+    .card header h1 {
+      margin:0;font-size:1.15rem;color:var(--error);font-weight:600;letter-spacing:.01em;
+      display:flex;align-items:center;gap:.75rem;
+    }
+    .card .content {
+      padding:1.25rem 1.5rem;line-height:1.6;color:#333;
+    }
+    .card .meta {
+      padding:0 1.5rem 1.5rem;font-size:.97rem;color:#555;
+      text-align:center;
+    }
+    ul.reason-list {
+      background:var(--list-bg);border-radius:10px;padding:1em 1.2em;margin:1em 0 1.5em 0;
+      box-shadow:0 2px 8px rgba(44,62,80,.07);
+      font-size:1rem;
+      list-style:square inside;
+    }
+    ul.reason-list li {
+      margin-bottom:.5em;padding-left:.2em;color:#2a2951;
+      font-weight:500;
+      transition:color .2s;
+    }
+    ul.reason-list li:hover {
+      color:var(--primary);
+    }
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    @media(max-width:480px){.card{margin:0 0.5rem}}
+    @media(max-width:600px){.card{margin:0 .5rem}}
   </style>
 </head>
 <body>
@@ -35,14 +88,13 @@
         <p>В данный момент мы проводим плановые работы на сервере. Сайт временно недоступен. Мы стараемся минимизировать время простоя и вернёмся в ближайшее время.</p>
         <p class="sr-only">Статус работ обновляется автоматически.</p>
         <p>Возможные причины недоступности сайта:</p>
-        <ul style="text-align:left;max-width:500px;margin:0 auto 1em;padding-left:1.2em;">
+        <ul class="reason-list">
           <li>Плановые технические работы</li>
           <li>Обновление программного обеспечения</li>
           <li>Кратковременные перебои в работе сервера</li>
           <li>Работы по обеспечению безопасности</li>
         </ul>
         <p>Последнее обновление: <time id="last-updated">—</time></p>
-        <p>Ожидаемое восстановление: <strong id="eta">примерно 30 минут</strong></p>
       </section>
 
       <footer class="meta">
@@ -52,22 +104,14 @@
   </main>
 
   <script>
-    // Показываем текущее локальное время как простое "last updated" и рассчитываем ETA (~30 минут)
+    // Показываем текущее локальное время как простое "last updated"
     (function(){
       try{
         const t = document.getElementById('last-updated');
-        const e = document.getElementById('eta');
         if(t){
           const now = new Date();
           const opts = {year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'};
           t.textContent = now.toLocaleString('ru-RU', opts);
-        }
-        // Простая локальная ETA: сейчас + 30 минут (показываем текст и локальное время восстановления)
-        if(e){
-          const etaMinutes = 30;
-          const restore = new Date(Date.now() + etaMinutes * 60 * 1000);
-          const opts2 = {hour:'2-digit',minute:'2-digit'};
-          e.textContent = `примерно ${etaMinutes} минут (≈ ${restore.toLocaleTimeString('ru-RU', opts2)})`;
         }
       }catch(err){
         console.warn(err);
