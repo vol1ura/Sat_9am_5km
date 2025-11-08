@@ -301,8 +301,10 @@
   }
 }
 
-.app-button {
-  height: 40px !important;
+img.app-button {
+  max-height: 40px;
+  width: auto;
+  height: auto;
   // Improve perceived sharpness for rasterized render paths in some browsers/CDNs
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
