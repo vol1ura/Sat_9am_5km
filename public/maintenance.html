@@ -1,73 +1,63 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <title>Технические работы</title>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Техническое обслуживание — S95</title>
   <style>
-  .default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
-
-  .default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  .default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #2a2951 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .default-error-page h1 {
-    font-size: 100%;
-    color: #FF411E;
-    line-height: 1.5em;
-  }
-
-  .default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    :root{--bg:#f3f4f6;--card:#ffffff;--accent:#2a2951;--error:#ff411e;--text:#222}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:2rem}
+    .card{width:100%;max-width:640px;background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.08);overflow:hidden}
+    .card header{background:linear-gradient(90deg,#fff 0%, #fafafa 100%);border-top:6px solid var(--accent);padding:1.25rem 1.5rem}
+    .card header h1{margin:0;font-size:1.125rem;color:var(--error);display:flex;gap:.75rem;align-items:center}
+    .card .content{padding:1.25rem 1.5rem;line-height:1.5;color:#333}
+    .card .meta{padding:0 1.5rem 1.5rem;font-size:.95rem;color:#555}
+    .status-link{display:inline-block;margin-top:.5rem;padding:.35rem .6rem;border-radius:6px;background:#eef2ff;color:#223; text-decoration:none;border:1px solid #dbeafe}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:480px){.card{margin:0 0.5rem}}
   </style>
 </head>
+<body>
+  <main class="wrap" role="main">
+    <article class="card" aria-labelledby="maint-title">
+      <header>
+        <h1 id="maint-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path fill="#ff6b45" d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zM8.002 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+          Техническое обслуживание сервера
+        </h1>
+      </header>
 
-<body class="default-error-page">
-  <div class="dialog">
-    <div>
-      <h1>
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16" role="img" aria-label="Error">
-          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-        </svg>
-        Техническое обслуживание сервера
-      </h1>
-      <p>Извините за неудобства</p>
-      <p>Сайт временно недоступен</p>
-    </div>
-    <p>С уважением, команда S95</p>
-  </div>
+      <section class="content" aria-live="polite">
+        <p>В данный момент мы проводим плановые работы на сервере. Сайт временно недоступен. Мы стараемся минимизировать время простоя и вернёмся в ближайшее время.</p>
+        <p class="sr-only">Статус работ обновляется автоматически.</p>
+        <p>Если вам срочно нужна помощь, свяжитесь с администрацией через <a href="mailto:admin@s95.ru">admin@s95.ru</a> (только для экстренных случаев).</p>
+
+        <p>Последнее обновление: <time id="last-updated">—</time></p>
+
+        <p class="meta">Следите за статусом сервиса на <a class="status-link" href="https://status.s95.ru" target="_blank" rel="noopener noreferrer">status.s95.ru</a></p>
+      </section>
+
+      <footer class="meta">
+        <p>Спасибо за понимание — команда S95</p>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    // Показываем текущее локальное время как простое "last updated" (не изменяет серверный статус)
+    (function(){
+      try{
+        const t = document.getElementById('last-updated');
+        if(!t) return;
+        const now = new Date();
+        const opts = {year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'};
+        t.textContent = now.toLocaleString('ru-RU', opts);
+      }catch(e){console.warn(e)}
+    })();
+  </script>
 </body>
 </html>
