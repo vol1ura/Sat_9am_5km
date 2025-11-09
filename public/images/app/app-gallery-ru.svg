@@ -5,8 +5,8 @@
     <path fill-rule="evenodd" clip-rule="evenodd" d="M18.4687 21.9195H19.4322L18.9488 20.7953L18.4687 21.9195ZM18.2314 22.486L17.9455 23.1401H17.2947L18.6787 20.0002H19.2412L20.6196 23.1401H19.9514L19.6692 22.486H18.2314ZM28.7043 23.1378H29.3333V20H28.7043V23.1378ZM26.2007 21.7899H27.3602V21.2177H26.2007V20.5746H27.8839V20.0023H25.5718V23.1399H27.9444V22.5676H26.2007V21.7899ZM23.7013 22.1606L22.9882 20H22.4678L21.7546 22.1606L21.0606 20.0017H20.382L21.4772 23.1419H22.0048L22.7191 21.0792L23.4334 23.1419H23.9656L25.058 20.0017H24.3969L23.7013 22.1606ZM16.3345 21.7986C16.3345 22.3093 16.0808 22.5823 15.6202 22.5823C15.157 22.5823 14.902 22.3014 14.902 21.7768V20.0021H14.2645V21.7986C14.2645 22.6822 14.7556 23.1889 15.6115 23.1889C16.4759 23.1889 16.9714 22.6726 16.9714 21.7723V20.0002H16.3345V21.7986ZM12.7435 20.0002H13.3807V23.1421H12.7435V21.8661H11.3041V23.1421H10.6666V20.0002H11.3041V21.2675H12.7435V20.0002Z" fill="white"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M20 16C17.7942 16 16 14.2056 16 12H16.565C16.565 13.8939 18.1061 15.4348 20 15.4348C21.8939 15.4348 23.435 13.8939 23.435 12H24C24 14.2056 22.2056 16 20 16Z" fill="white"/>
   </g>
-  <text x="46" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="10" font-weight="500" fill="white"оскачайте из</text>
-  <text x="46" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="10" font-weight="700" fill="white">AppGallery</text>
+  <text x="46" y="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="9" font-weight="500" fill="white">Skachajte iz</text>
+  <text x="46" y="34" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="9" font-weight="700" fill="white">AppGallery</text>
   <defs>
     <clipPath id="clip0_175_40364">
       <rect width="24" height="24" fill="white" transform="translate(8 8)"/>
