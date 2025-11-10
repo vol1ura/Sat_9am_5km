@@ -17,9 +17,11 @@ active_admin_form_for [:admin, activity, resource] do |f|
       para 'Заполните одно и ТОЛЬКО одно из полей, другое поле очистите.'
       f.inputs 'Parkrun, RunPark или 5вёрст ID участника (только цифры, без буквы "A")' do
         code = f.object.athlete&.parkrun_code || f.object.athlete&.fiveverst_code || f.object.athlete&.runpark_code
-        number_field_tag :code,
-                         params[:code].presence || code,
-                         placeholder: 'Штрихкод ID', style: 'width: 10rem; margin-left: 1rem;', inputmode: 'numeric'
+        number_field_tag(
+          :code,
+          params[:code].presence || code,
+          placeholder: 'Штрих-код ID', style: 'width: 10rem; margin-left: 1rem;', inputmode: 'numeric',
+        )
       end
       panel 'Имя участника' do
         render partial: '/admin/athlete_fields', locals: { resource: f.object.athlete, form: f }

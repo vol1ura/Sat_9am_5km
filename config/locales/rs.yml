@@ -682,22 +682,22 @@ rs:
         features:
           timer:
             title: Štoperica
-            description: Za volontere-meriče vremena sa brisanjem pogrešnih merenja
+            description: za volontere-meriče vremena sa brisanjem pogrešnih merenja
           scanner:
             title: Skener
-            description: Super brz i precizan modul sa istovremenim skeniranjem kartice učesnika i pozicije
+            description: super brz i precizan modul sa istovremenim skeniranjem kartice učesnika i pozicije
           upload:
             title: Učitavanje rezultata
-            description: Rezultati trka se učitavaju u sistem direktno iz aplikacije
+            description: rezultati trka se učitavaju u sistem direktno iz aplikacije
           stats:
             title: Lična statistika
-            description: Praćenje vaše volonterske aktivnosti
+            description: praćenje vaše volonterske aktivnosti
           live_results:
             title: Online transkripcija
-            description: Rezultati trke na sajtu po redosledu dolaska u cilj
+            description: rezultati trke na sajtu u realnom vremenu
         download_rustore: Preuzmi u RuStore
         download_app_gallery: Preuzmi u App Gallery
-        download_apk_html: Preuzmi <b>APK</b>
+        download_apk: Preuzmi APK fajl
       our_partners: Naši partneri
     about:
       description: S95 je otvorena platforma koja objedinjuje nezavisne park trke koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
