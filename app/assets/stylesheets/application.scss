@@ -81,6 +81,22 @@ h6 {
   margin-top: 0.5rem;
 }
 
+// Headings weight tuning for Manrope: bold for main titles, semi-bold for subheads
+h1,
+h2 {
+  font-weight: 800; // extra-bold for top-level headings
+}
+
+h3,
+h4 {
+  font-weight: 700; // bold for mid-level headings
+}
+
+h5,
+h6 {
+  font-weight: 600; // semi-bold for smaller headings
+}
+
 .card-title-link {
   text-decoration: none;
 }
