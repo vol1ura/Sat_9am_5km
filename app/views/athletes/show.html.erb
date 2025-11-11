@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-6">
-    <h1 class="mt-2"><%= head_info :title, athlete_name %></h1>
+    <h2 class="h1 mt-2"><%= head_info :title, athlete_name %></h2>
     <% if @athlete.going_to_event? %>
       <div class="badge bg-success mb-2">
         <%= t 'friendships.friend.going_to', event: @athlete.going_to_event.name %>

@@ -149,8 +149,14 @@ nav.pagination {
 }
 
 .img-club {
-  @extend .float-start, .me-2, .my-2, .rounded;
+  @extend .float-end, .ms-2, .my-2, .rounded;
   width: 150px;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.club-description p {
+  margin-bottom: 0;
 }
 
 .card-with-border {
