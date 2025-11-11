@@ -13,13 +13,13 @@
   </ol>
 </nav>
 
-<h2><%= head_info :title, @club.name %></h2>
+<div class="d-flex">
+  <h2 class="h1 mt-2"><%= head_info :title, @club.name %></h2>
+  <%= image_tag @club.logo.variant(:web), class: 'img-club ms-auto', alt: @club.name if @club.logo.attached? %>
+</div>
 
-<div class="row">
-  <div class="col-12">
-    <%= image_tag @club.logo.variant(:web), class: 'img-club', alt: @club.name if @club.logo.attached? %>
-    <%= sanitized_text @club.description %>
-  </div>
+<div class="club-description">
+  <%= sanitized_text @club.description %>
 </div>
 
 <ul class="list-group list-group-flush">
