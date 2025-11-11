@@ -9,11 +9,6 @@ $dark: #0f0f0f;
 
 $enable-negative-margins: true;
 
-// Manrope font import and Bootstrap font overrides
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
-$font-family-sans-serif: "Manrope", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
-$font-family-base: $font-family-sans-serif;
-
 @import "bootstrap";
 @import "font-awesome";
 
