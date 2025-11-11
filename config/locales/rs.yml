@@ -83,11 +83,11 @@ rs:
         going_to_event: idu u
         male: muškarac
         user: korisnik
-        registered: registered
-        id_info: ID info
-        profile: Site profile
-        results: Results
-        volunteering: Volunteering
+        registered: registrovan
+        id_info: Informacije o ID-u
+        profile: Profil sajta
+        results: Rezultati
+        volunteering: Volontiranje
         trophies: Dostignuća
         created_at: kreiran
         updated_at: ažuriran
@@ -96,12 +96,12 @@ rs:
         published: objavljeno?
         description: opis
         event_name: gde?
-        correct?: correct?
+        correct?: ispravno?
       club:
         name: naziv
         country: država
         logo: logo
-        description: description
+        description: opis
       event:
         active: aktivan
         country: država
@@ -592,8 +592,8 @@ rs:
       1_january: 1 januar
       club_ratings: Klubovi
       top_results: Najbolji rezultati
-      top_athletes: Athletes rating
-      top_volunteers: Volunteers rating
+      top_athletes: Rejting sportista
+      top_volunteers: Rejting volontera
       friends_protocol: Prijateljski protokol
       duels: Trkački dueli
       badges: Bedževi
@@ -713,32 +713,32 @@ rs:
       back: Nazad
       forward: Napred
     rules:
-      description: Brief rules for S95 participants, as well as frequently asked questions
-      register_with_bot_html: 'If you are not registered, create a profile using <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a>. You will receive a link to your profile with a personal qr-code.'
-      come_to_s95_html: 'The most important thing is to come to one of our events on <strong>Saturday</strong> at <strong>9 am</strong> and run <strong>5 km</strong>.'
-      scan_barcodes: At the finish you will receive a position card. Scan the personal qr-code and position card with the volunteer.
-      return_position_card: Hand over the position card.
-      faq: FAQ
+      description: Kratka pravila za učesnike S95, kao i često postavljana pitanja
+      register_with_bot_html: 'Ako niste registrovani, kreirajte profil koristeći <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a>. Dobićete link do vašeg profila sa ličnim QR kodom.'
+      come_to_s95_html: 'Najvažnije je doći na jedan od naših događaja u <strong>subotu</strong> u <strong>9 ujutru</strong> i pretrčati <strong>5 km</strong>.'
+      scan_barcodes: Na cilju ćete dobiti karticu pozicije. Skenirajte lični QR kod i karticu pozicije kod volontera.
+      return_position_card: Predajte karticu pozicije.
+      faq: Često postavljana pitanja
       about_markers:
-        question: Will there be any markers or signs along the route?
-        answer: The track is well marked with orange cones, there is also a marshal at the turn (if there is one), and most likely you will be surrounded by other participants when running.
+        question: Da li će biti markera ili znakova duž rute?
+        answer: Staza je dobro obeležena narandžastim čunjevima, postoji i maršal na skretanju (ako ga ima), i najverovatnije ćete biti okruženi drugim učesnicima tokom trčanja.
       about_registering:
-        question: Do I need to register to participate in the run?
-        answer_html: 'It is not necessary, but it is advisable to go through the registration procedure using our telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. As a result, you will have a personal barcode, which you will subsequently show to the volunteer. In addition, the bot will send notifications with the results of the run.'
+        question: Da li je potrebno da se registrujem za učešće u trci?
+        answer_html: 'Nije obavezno, ali je preporučljivo da prođete proceduru registracije koristeći naš telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. Kao rezultat, imaćete lični bar kod, koji ćete naknadno pokazati volonteru. Pored toga, bot će slati obaveštenja sa rezultatima trke.'
       about_participation:
-        question: 'Is it possible to just show up at 8:45 to run together?'
-        answer: 'Yes, you can just come and run. Registration does not necessary, it is only to save your result in the protocol. If you do not register, you will be listed in the protocol as "Unknown".'
+        question: 'Da li je moguće samo doći u 8:45 da trčimo zajedno?'
+        answer: 'Da, možete samo doći i trčati. Registracija nije obavezna, služi samo za čuvanje vašeg rezultata u protokolu. Ako se ne registrujete, bićete navedeni u protokolu kao "Nepoznat".'
       about_barcode:
-        question: Can I use the parkrun barcode (5 verst, RunPark)?
-        answer: Yes, you can come to our events with a barcode from a different system. However, your result will only be taken into account in the S95 system.
+        question: Mogu li koristiti parkrun bar kod (5 verst, RunPark)?
+        answer: Da, možete doći na naše događaje sa bar kodom iz drugog sistema. Međutim, vaš rezultat će biti uzet u obzir samo u S95 sistemu.
       about_things:
-        question: Where can I leave my things while I'm running?
-        answer: Usually, everyone leaves things on benches near the start and finish areas.
+        question: Gde mogu ostaviti stvari dok trčim?
+        answer: Obično svi ostavljaju stvari na klupama u blizini startnih i ciljnih zona.
       personal_info:
         question: Slučajno sam pogrešio u imenu prilikom registracije. Kako ispraviti?
         answer_html: Idite na <a href="/user">Podešavanja</a> (može zahtevati prijavu i lozinku) i izvršite potrebne promene.
     support:
-      description: 'You can support the Sat9am5km project in various ways: by volunteering, donating, or participating in the development of this website'
+      description: 'Projekat Sat9am5km možete podržati na različite načine: volontiranjem, donacijama ili učešćem u razvoju ovog sajta'
       title: Želite da podržite projekat?
       how_to_support: >
         Prijatelji, naši događaji su potpuno besplatni i sprovode ih volonterske snage.
@@ -751,7 +751,7 @@ rs:
         Kod sistema je otvoren na <a href="%{github_repo}" target="_blank" rel="noopener">GitHub</a>.
         Predložite svoje ideje i napišite primedbe u <a href="%{github_issues}" target="_blank" rel="noopener">Issues</a>.
         Da biste to uradili, registrujte se za <a href="https://github.com/" target="_blank" rel="noopener">Github</a>, stavite zvezdu na naš projekat
-        i napravite novo izdanje gde opišite šta želite (in english).
+        i napravite novo izdanje gde opišite šta želite (na engleskom).
       how_to_contribute: Želite sami da izvršite promene? Nema problema - nagnite spremište prema sebi, kreirajte i zapišite granu sa svojim izmenama, a zatim otvorite zahtev za povlačenje.
       small_changes: Male promene je najlakše izvršiti direktno u pregledaču u Githubovom vizuelnom uređivaču!
       best_regards: S ljubavlju, S95.
@@ -796,8 +796,8 @@ rs:
         <p>Od trenutka slanja prijave do prvog tehničkog starta može proći neko vreme, ali S95 tim će učiniti sve što je moguće da vaš park što pre ispuni subotnji trkački duh!</p>
         <p>Spremni da postanete deo pokreta koji menja subotnja jutra na bolje? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> sa oznakom "Otvoriti S95" i hajde da zajedno stvaramo nove trkačke tradicije!</p>
     additional-events:
-      title_html: 'Additional events 1&nbsp;januar&nbsp;%{year}'
-      description: Usually we only make runs on Saturday, but on January 1st we make an exception and hold an additional race. On this page you can see the time and event where you can run on January 1
+      title_html: 'Dodatni događaji 1.&nbsp;januar&nbsp;%{year}'
+      description: Obično trke organizujemo samo subotom, ali 1. januara pravimo izuzetak i održavamo dodatnu trku. Na ovoj stranici možete videti vreme i događaj gde možete trčati 1. januara.
       time: Vreme
   ratings:
     index:
@@ -1072,7 +1072,7 @@ rs:
       volunteer: Volonter
   users:
     omniauth_callbacks:
-      auth_error: Login failed
+      auth_error: Prijava neuspešna
     show:
       title: Podešavanja
       description: 'Podešavanja za %{user_name}'
