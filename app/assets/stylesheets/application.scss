@@ -48,6 +48,10 @@ h6 {
   font-weight: 700;
 }
 
+h2 {
+  font-weight: 900;
+}
+
 .card-title-link {
   text-decoration: none;
 }
@@ -173,6 +177,10 @@ nav.pagination {
 
 h2.hero-title-extra-bold {
   font-weight: 900;
+}
+
+.fw-bold {
+  font-weight: 900 !important;
 }
 
 @import "web/**/*";
