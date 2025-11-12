@@ -14,27 +14,57 @@ $enable-negative-margins: true;
 @import "bootstrap";
 @import "font-awesome";
 
-@mixin media($breakpoint) {
-  @if $breakpoint == phone {
-    @media (max-width: 768px) {
-      @content;
-    }
-  }
+@mixin media($query) {
+  @if $query == phoneScreen {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
 }
 
 body {
-  min-height: 100vh;
-  font-family: 'Manrope', sans-serif;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a {
-  font-family: 'Inter', sans-serif;
+.spacer {
+  flex: 1 0 auto;
+}
+
+.bd-footer {
+  a {
+    text-decoration: none;
+  }
+
+  .footer-text a:hover {
+    text-decoration: underline;
+    color: inherit;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 8px;
+
+    a:hover {
+      opacity: 0.85;
+    }
+
+    i {
+      font-size: 2em;
+      @include media(phoneScreen) {
+        font-size: 1.6em;
+      }
+    }
+  }
+
+  @include media(phoneScreen) {
+    .social-links {
+      order: 2;
+    }
+    .footer-text {
+      order: 3;
+    }
+  }
 }
 
 h1,
@@ -43,144 +73,126 @@ h3,
 h4,
 h5,
 h6 {
-  color: $primary;
-  margin-top: 0.5rem;
-  font-weight: 700;
-}
-
-h2 {
-  font-weight: 900;
+  color: $primary;
+  margin-top: 0.5rem;
 }
 
 .card-title-link {
-  text-decoration: none;
+  text-decoration: none;
 }
 
 .table.table-centered {
-  th,
-  tr {
-    @extend .text-center;
-  }
+  th,
+  tr {
+    @extend .text-center;
+  }
 }
 
-@include media(phone) {
-  .hidden-on-phone {
-    display: none;
-  }
+@include media(phoneScreen) {
+  .hidden-on-phone {
+    display: none;
+  }
 }
 
 @media (max-width: 415px) {
-  .cropped-on-phone {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ".";
-    max-width: 60px;
-  }
+  .cropped-on-phone {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60px;
+  }
 }
 
 .sort-arrow {
-  cursor: pointer;
-  color: $secondary;
-  i.fa:hover {
-    color: $primary;
-  }
+  cursor: pointer;
+  color: $secondary;
+  i.fa:hover {
+    color: $primary;
+  }
 }
 
 nav.pagination {
-  span {
-    border-width: 1px 0 1px 1px;
-    border-style: solid;
-    border-color: $secondary;
-    padding: 4px 8px;
-    @extend .position-relative;
-  }
-  a {
-    text-decoration: none;
-    @extend .stretched-link;
-  }
-  span:hover {
-    background-color: $light;
-  }
-  .current {
-    background-color: $light;
-  }
-  span:first-child {
-    border-radius: 5px 0 0 5px;
-  }
-  span:last-child {
-    border-radius: 0 5px 5px 0;
-    border-width: 1px;
-  }
+  span {
+    border-width: 1px 0 1px 1px;
+    border-style: solid;
+    border-color: $secondary;
+    padding: 4px 8px;
+    @extend .position-relative;
+  }
+  a {
+    text-decoration: none;
+    @extend .stretched-link;
+  }
+  span:hover {
+    background-color: $light;
+  }
+  .current {
+    background-color: $light;
+  }
+  span:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+  span:last-child {
+    border-radius: 0 5px 5px 0;
+    border-width: 1px;
+  }
 }
 
 .fa-stack.contact {
-  font-size: 30px;
-  @include media(phone) {
-    font-size: 25px;
-  }
-  :hover {
-    opacity: 0.85;
-  }
+  font-size: 30px;
+  @include media(phoneScreen) {
+    font-size: 25px;
+  }
+  :hover {
+    opacity: 0.85;
+  }
 }
 
 .img-club {
-  @extend .float-end, .ms-2, .my-2, .rounded;
-  width: 150px;
-  max-height: 150px;
-  object-fit: contain;
-}
-
-.club-description p {
-  margin-bottom: 0;
+  @extend .float-start, .me-2, .my-2, .rounded;
+  width: 150px;
 }
 
 .card-with-border {
-  @extend .card, .text-bg-light, .bg-opacity-50, .border-primary, .border-opacity-25, .h-100;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  transition: box-shadow 0.3s ease-in-out;
+  @extend .card, .text-bg-light, .bg-opacity-50, .border-primary, .border-opacity-25, .h-100;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: box-shadow 0.3s ease-in-out;
 
-  .img-scaled {
-    transition: transform 0.3s ease;
-  }
+  .img-scaled {
+    transition: transform 0.3s ease;
+  }
 
-  &:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  &:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
-    .img-scaled {
-      transform: scale(1.03);
-    }
-  }
+    .img-scaled {
+      transform: scale(1.03);
+    }
+  }
 
-  .card-body a:not(.stretched-link) {
-    position: relative;
-    z-index: 2;
-  }
+  .card-body a:not(.stretched-link) {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .fs-small {
-  font-size: 0.85em;
+  font-size: 0.85em;
 
-  &-sm {
-    font-size: var(--bs-body-font-size);
+  &-sm {
+    font-size: var(--bs-body-font-size);
 
-    @include media(phone) {
-      font-size: 0.85em;
-    }
-  }
+    @include media(phoneScreen) {
+      font-size: 0.85em;
+    }
+  }
 }
 
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0.3; }
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
 }
 
-h2.hero-title-extra-bold {
-  font-weight: 900;
-}
-
-.fw-bold {
-  font-weight: 900 !important;
-}
-
+@import "web/index";
 @import "web/**/*";
