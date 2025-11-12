@@ -11,7 +11,7 @@ class FixDatabaseConsistency < ActiveRecord::Migration[7.0]
       t.change :link, :string, null: false
     end
     change_table :events, bulk: true do |t|
-      t.change :name, :integer, null: false
+      t.change :name, :string, null: false
       t.change :code_name, :string, null: false
       t.change :town, :string, null: false
       t.change :place, :string, null: false
@@ -35,7 +35,7 @@ class FixDatabaseConsistency < ActiveRecord::Migration[7.0]
       t.change :link, :string, null: true
     end
     change_table :events, bulk: true do |t|
-      t.change :name, :integer, null: true
+      t.change :name, :string, null: true
       t.change :code_name, :string, null: true
       t.change :town, :string, null: true
       t.change :place, :string, null: true
