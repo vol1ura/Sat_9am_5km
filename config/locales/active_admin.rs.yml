@@ -2,11 +2,11 @@ rs:
   admin:
     athletes:
       results:
-        title: All results
+        title: Svi rezultati
       volunteering:
-        title: Published volunteering
+        title: Objavljeno volontiranje
       trophies:
-        title: All trophies
+        title: Sva dostignuća
       destroy:
         successfully_deleted: 'Uspešno obrisano %{obj}'
         cannot_delete_registered: 'Operacija poništena. Ne možete obrisati registrovanog učesnika!'
@@ -43,12 +43,12 @@ rs:
       update:
         <<: *upload_notices
       destroy:
-        forbidden_for_published: 'Deleting of published protocol is forbidden! Contact the administrators.'
+        forbidden_for_published: 'Brisanje objavljenog protokola je zabranjeno! Kontaktirajte administratore.'
       publish:
-        confirm: Make sure that the protocol does not contain errors. Publish it on the website?
-        successfully_published: The protocol has been successfully published on the website
-        empty_protocol: There are no results in the protocol
-        incorrect_protocol: The protocol contains errors. Please correct them before publishing
+        confirm: Uverite se da protokol ne sadrži greške. Objaviti ga na sajtu?
+        successfully_published: Protokol je uspešno objavljen na sajtu
+        empty_protocol: Nema rezultata u protokolu
+        incorrect_protocol: Protokol sadrži greške. Molimo ispravite ih pre objavljivanja
         has_doubled_results: 'Neke učesnike već imaju objavljene rezultate u drugim lokacijama u ovaj dan.'
       toggle_mode:
         auto:
