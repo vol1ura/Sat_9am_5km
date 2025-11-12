@@ -2,67 +2,67 @@
 <% head_info :description, t('.description', club: @club.name) %>
 
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to t('.main_page'), root_path %>
-    </li>
-    <li class="breadcrumb-item">
-      <%= link_to t('.clubs'), clubs_path %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @club.name %></li>
-  </ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to t('.main_page'), root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to t('.clubs'), clubs_path %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @club.name %></li>
+  </ol>
 </nav>
 
 <div class="d-flex">
-  <h2 class="h1 mt-2 me-1 text-break"><%= head_info :title, @club.name %></h2>
-  <% if @club.logo.attached? %>
-    <div class="ms-auto float-end my-2">
-      <%= image_tag @club.logo.variant(:web), class: 'img-club', alt: @club.name %>
-    </div>
-  <% end %>
+  <h2 class="h1 mt-2 me-1 text-break"><%= head_info :title, @club.name %></h2>
+  <% if @club.logo.attached? %>
+    <div class="ms-auto float-end my-2">
+      <%= image_tag @club.logo.variant(:web), class: 'img-club', alt: @club.name %>
+    </div>
+  <% end %>
 </div>
 
 <div class="club-description">
-  <%= sanitized_text @club.description %>
+  <%= sanitized_text @club.description if @club.description.present? %>
 </div>
 
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @athletes.load.size %></span>
-    <%= t '.athletes_count' %>
-  </li>
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @total_results_count %></span>
-    <%= t '.results_count' %>
-  </li>
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @total_volunteering_count %></span>
-    <%= t '.volunteering_count' %>
-  </li>
-  <li class="list-group-item">
-    <%= link_to t('.last_week_activities'), last_week_club_path(@club) %>
-  </li>
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill me-3"><%= @athletes.load.size %></span>
+    <%= t '.athletes_count' %>
+  </li>
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill me-3"><%= @total_results_count %></span>
+    <%= t '.results_count' %>
+  </li>
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill me-3"><%= @total_volunteering_count %></span>
+    <%= t '.volunteering_count' %>
+  </li>
+  <li class="list-group-item">
+    <%= link_to t('.last_week_activities'), last_week_club_path(@club) %>
+  </li>
 </ul>
 
 <table class="table table-striped">
-  <thead data-controller="table-head">
-    <tr>
-      <th><%= t '.name' %></th>
-      <th>
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        <%= t '.activities' %>
-      </th>
-      <th class="hidden-on-phone">
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        <%= t '.volunteering' %>
-      </th>
-      <th>
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        <%= t '.personal_best' %>
-      </th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <%= render partial: 'athlete', collection: @athletes, cached: ->(athlete) { locale_cache_key(athlete) } %>
-  </tbody>
+  <thead data-controller="table-head">
+    <tr>
+      <th><%= t '.name' %></th>
+      <th>
+        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
+        <%= t '.activities' %>
+      </th>
+      <th class="hidden-on-phone">
+        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
+        <%= t '.volunteering' %>
+      </th>
+      <th>
+        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
+        <%= t '.personal_best' %>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <%= render partial: 'athlete', collection: @athletes, cached: ->(athlete) { locale_cache_key(athlete) } %>
+  </tbody>
 </table>
