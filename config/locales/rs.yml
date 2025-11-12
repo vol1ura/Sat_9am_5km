@@ -883,6 +883,9 @@ rs:
       no_personal_bests: Lični rekordi nisu navedeni.
       no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
     statistics:
+      friends:
+        no_friends: Još uvek nema prijatelja
+        no_friends_description: Dodajte prijatelje da biste ih videli ovde
       volunteering_chart:
         h_index: h-indeks
         h_index_explanation: Indeks je jednak h ako postoji bar h pozicija (uloge), u svakoj od kojih je bar h puta volontiranje

@@ -884,6 +884,9 @@ ru:
       no_personal_bests: Личные рекорды не указаны.
       no_predictions: Недостаточно данных для прогноза (нужно минимум 3 результата за последние 3 месяца)
     statistics:
+      friends:
+        no_friends: Друзей пока нет
+        no_friends_description: Добавляйте друзей, чтобы видеть их здесь
       volunteering_chart:
         h_index: h-индекс
         h_index_explanation: Индекс равен h, если есть как минимум h позиций (ролей), на каждой из которых было как минимум h волонтёрств
