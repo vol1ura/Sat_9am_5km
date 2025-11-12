@@ -14,8 +14,12 @@
 </nav>
 
 <div class="d-flex">
-  <h2 class="h1 mt-2"><%= head_info :title, @club.name %></h2>
-  <%= image_tag @club.logo.variant(:web), class: 'img-club ms-auto', alt: @club.name if @club.logo.attached? %>
+  <h2 class="h1 mt-2 me-1 text-break"><%= head_info :title, @club.name %></h2>
+  <% if @club.logo.attached? %>
+    <div class="ms-auto float-end my-2">
+      <%= image_tag @club.logo.variant(:web), class: 'img-club', alt: @club.name %>
+    </div>
+  <% end %>
 </div>
 
 <div class="club-description">

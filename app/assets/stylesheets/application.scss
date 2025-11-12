@@ -149,10 +149,13 @@ nav.pagination {
 }
 
 .img-club {
-  @extend .float-end, .ms-2, .my-2, .rounded;
+  @extend .rounded;
   width: 150px;
   max-height: 150px;
   object-fit: contain;
+  @include media(phoneScreen) {
+    width: 100px;
+  }
 }
 
 .club-description p {
