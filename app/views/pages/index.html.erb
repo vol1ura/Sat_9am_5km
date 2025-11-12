@@ -1,325 +1,328 @@
-$primary: #2a2951;
-$secondary: #a0a0a0;
-$success: #198754;
-$danger: #d63384;
-$warning: #fecba1;
-$info: #009dac;
-$light: #f0f0f0;
-$dark: #0f0f0f;
+<%# Hero Section %>
+<section class="hero-section py-4 py-sm-5 text-white mt-n3">
+  <img src="/images/hero-bg.webp" alt="" class="hero-bg-image">
+  <div class="container">
+    <div class="row align-items-center justify-content-end">
+      <div class="col-lg-7 col-xl-6">
+        <div class="placeholder-image">
+          <h2 class="display-4 fw-bold mb-2 text-white"><%= t '.hero_title' %></h2>
+          <p class="lead mb-4 fw-bold"><%= t '.hero_subtitle' %></p>
+          <div class="d-flex flex-wrap gap-3">
+            <% if current_user&.athlete %>
+              <%= link_to t('.my_profile'), athlete_path(current_user.athlete), class: 'btn btn-danger btn-lg' %>
+            <% else %>
+              <%= link_to t('.registration'), new_user_session_path, class: 'btn btn-danger btn-lg' %>
+            <% end %>
+            <%= link_to t('.results'), activities_path, class: 'btn btn-outline-light btn-lg' %>
+            <%= link_to t('.find_event'), events_path, class: 'btn btn-outline-light btn-lg' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-$enable-negative-margins: true;
+<%# How It Works Section %>
+<section class="how-it-works py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <h2 class="text-center mb-5"><%= t '.how_it_works.title' %></h2>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="card h-100 border-0 shadow-sm position-relative">
+          <div class="card-body text-center">
+            <i class="fas fa-user-plus fa-3x mb-3 text-primary"></i>
+            <h3 class="h5 card-title">
+              <%= link_to t('.how_it_works.registration.title'), 'https://t.me/sat9am5kmbot', class: 'text-decoration-none stretched-link text-reset', target: '_blank', rel: 'noopener' %>
+            </h3>
+            <p class="card-text"><%= t '.how_it_works.registration.description' %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 border-0 shadow-sm position-relative">
+          <div class="card-body text-center">
+            <i class="fas fa-map-marker-alt fa-3x mb-3 text-primary"></i>
+            <h3 class="h5 card-title">
+              <%= link_to t('.how_it_works.choose_run.title'), events_path, class: 'text-decoration-none stretched-link text-reset' %>
+            </h3>
+            <p class="card-text"><%= t '.how_it_works.choose_run.description' %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 border-0 shadow-sm position-relative">
+          <div class="card-body text-center">
+            <i class="fas fa-calendar-check fa-3x mb-3 text-primary"></i>
+            <h3 class="h5 card-title">
+              <%= link_to t('.how_it_works.come_saturday.title'), page_path(page: 'rules'), class: 'text-decoration-none stretched-link text-reset' %>
+            </h3>
+            <p class="card-text"><%= t '.how_it_works.come_saturday.description' %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 border-0 shadow-sm position-relative">
+          <div class="card-body text-center">
+            <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+            <h3 class="h5 card-title">
+              <%= link_to t('.how_it_works.track_progress.title'), ratings_path, class: 'text-decoration-none stretched-link text-reset' %>
+            </h3>
+            <p class="card-text"><%= t '.how_it_works.track_progress.description' %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-@import "bootstrap";
-@import "font-awesome";
+<%# Stories Section %>
+<section class="stories-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-5"><%= t '.stories.title' %></h2>
+    <%
+      stories = t '.stories.content'
+      athletes = Athlete.includes(:event, user: { image_attachment: :blob }).where(id: stories.keys).shuffle
+    %>
+    <div id="storiesCarousel" class="carousel carousel-dark slide">
+      <div class="carousel-indicators">
+        <% athletes.each_with_index do |athlete, idx| %>
+          <button
+            type="button"
+            data-bs-target="#storiesCarousel"
+            data-bs-slide-to="<%= idx %>"
+            class="<%= 'active' if idx.zero? %>"
+            aria-label="<%= athlete.name %>">
+          </button>
+        <% end %>
+      </div>
+      <div class="carousel-inner">
+        <% athletes.each_with_index do |athlete, idx| %>
+          <div class="carousel-item <%= 'active' if idx.zero? %>">
+            <div class="story-card m-3 h-100">
+              <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start">
+                <div class="flex-shrink-0 mb-3 mb-md-0 text-center">
+                  <%= image_tag user_image_path(athlete.user), class: 'avatar', alt: athlete.name, loading: 'lazy' %>
+                </div>
+                <figure class="flex-grow-1 ms-md-3 mb-0">
+                  <blockquote class="blockquote">
+                    <p><%= stories[athlete.id] %></p>
+                  </blockquote>
+                  <figcaption class="blockquote-footer my-2 text-center text-md-start">
+                    <%= link_to athlete.name, athlete %>, <%= athlete.event.name %>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#storiesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden"><%= t '.stories.previous' %></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#storiesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden"><%= t '.stories.next' %></span>
+      </button>
+    </div>
+  </div>
+</section>
 
-@mixin media($query) {
-  @if $query == phoneScreen {
-    @media (max-width: 768px) {
-      @content;
-    }
-  }
-}
+<%# Why S95 Section %>
+<section class="why-s95 py-5">
+  <div class="container">
+    <h2 class="text-center mb-5"><%= t '.why_s95.title' %></h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+            <h3 class="h5 card-title"><%= t '.why_s95.for_everyone.title' %></h3>
+            <p class="card-text"><%= t '.why_s95.for_everyone.description' %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
+            <h3 class="h5 card-title"><%= t '.why_s95.community.title' %></h3>
+            <p class="card-text"><%= t '.why_s95.community.description' %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-gift fa-3x mb-3 text-primary"></i>
+            <h3 class="h5 card-title"><%= t '.why_s95.free.title' %></h3>
+            <p class="card-text"><%= t '.why_s95.free.description' %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-body {
-  min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-}
+<%# Events Section %>
+<% if @jubilee_events.present? || @funrun_badges.present? %>
+  <section class="events-section">
+    <div class="container">
+      <h2 class="text-center"><%= t '.upcoming_events', date: l(@next_saturday, format: :brief) %></h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <ul class="list-group list-group-flush">
+            <% @funrun_badges.each do |badge| %>
+              <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0">
+                    <%= image_tag badge.image.variant(:thumb), class: 'thumb-badge', alt: 'FunRun badge' %>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <%= link_to badge.name, badge, class: 'stretched-link text-decoration-none fw-bold text-dark' %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+            <% @jubilee_events.each do |event, activity_number| %>
+              <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0">
+                    <div class="text-badge px-3 py-4">
+                      <div class="fw-normal text-capitalize"><%= t 'activerecord.models.activity.one' %></div>
+                      <div class="fw-bold fst-italic">№<%= activity_number %></div>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <%= link_to event.name, event_path(event.code_name), class: 'stretched-link text-decoration-none fw-bold text-dark' %>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
 
-.spacer {
-  flex: 1 0 auto;
-}
+<%# Volunteer App Section %>
+<section class="volunteer-app-section py-5" data-controller="carousel">
+  <div class="container">
+    <h2 class="text-center mb-5"><%= t '.volunteer_app.title' %></h2>
+    <div class="row align-items-center g-4">
+      <div class="col-md-4">
+        <div class="app-screen-container text-center">
+          <%= image_tag '/images/app/mobile_app_1.png',
+                        class: 'img-fluid app-screen',
+                        alt: t('.volunteer_app.title'),
+                        data: { carousel_target: 'image' } %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="px-2 px-md-0 mb-5">
+          <ul class="list-unstyled">
+            <li class="mb-3 app-feature-item feature-active"
+                data-carousel-target="feature"
+                data-index="0"
+                data-action="click->carousel#showSlide">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-stopwatch fa-2x text-primary me-3"></i>
+                <div>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.timer.title' %></h3>
+                  <p class="mb-0"><%= t '.volunteer_app.features.timer.description' %></p>
+                </div>
+              </div>
+            </li>
+            <li class="mb-3 app-feature-item"
+                data-carousel-target="feature"
+                data-index="1"
+                data-action="click->carousel#showSlide">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-qrcode fa-2x text-primary me-3"></i>
+                <div>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.scanner.title' %></h3>
+                  <p class="mb-0"><%= t '.volunteer_app.features.scanner.description' %></p>
+                </div>
+              </div>
+            </li>
+            <li class="mb-3 app-feature-item"
+                data-carousel-target="feature"
+                data-index="2"
+                data-action="click->carousel#showSlide">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-cloud-arrow-up fa-2x text-primary me-3"></i>
+                <div>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.upload.title' %></h3>
+                  <p class="mb-0"><%= t '.volunteer_app.features.upload.description' %></p>
+                </div>
+              </div>
+            </li>
+            <li class="mb-3 app-feature-item"
+                data-carousel-target="feature"
+                data-index="3"
+                data-action="click->carousel#showSlide">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-satellite-dish fa-2x text-primary me-3"></i>
+                <div>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.live_results.title' %></h3>
+                  <p class="mb-0"><%= t '.volunteer_app.features.live_results.description' %></p>
+                </div>
+              </div>
+            </li>
+            <li class="app-feature-item"
+                data-carousel-target="feature"
+                data-index="4"
+                data-action="click->carousel#showSlide">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-chart-bar fa-2x text-primary me-3"></i>
+                <div>
+                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.stats.title' %></h3>
+                  <p class="mb-0"><%= t '.volunteer_app.features.stats.description' %></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex gap-4 align-items-center justify-content-center justify-content-md-start flex-wrap">
+          <%= external_link_to 'https://appgallery.huawei.com/app/C114915605' do %>
+            <%= image_tag "/images/app/#{top_level_domain == :rs ? 'app-gallery-rs.png' : 'app-gallery-ru.svg'}", class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_gallery') %>
+          <% end %>
+          <% if top_level_domain == :ru %>
+            <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
+              <%= image_tag '/images/app/ru-store.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
+            <% end %>
+          <% end %>
+          <%= link_to app_pages_path, class: 'text-decoration-none', data: { turbo_prefetch: false } do %>
+            <%= image_tag '/images/app/apk.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_apk') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-.bd-footer {
-  a {
-    text-decoration: none;
-  }
-
-  .footer-text a:hover {
-    text-decoration: underline;
-    color: inherit;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 8px;
-
-    a:hover {
-      opacity: 0.85;
-    }
-
-    i {
-      font-size: 2em;
-      @include media(phoneScreen) {
-        font-size: 1.6em;
-      }
-    }
-  }
-
-  @include media(phoneScreen) {
-    .social-links {
-      order: 2;
-    }
-    .footer-text {
-      order: 3;
-    }
-  }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: $primary;
-  margin-top: 0.5rem;
-}
-
-.card-title-link {
-  text-decoration: none;
-}
-
-.table.table-centered {
-  th,
-  tr {
-    @extend .text-center;
-  }
-}
-
-@include media(phoneScreen) {
-  .hidden-on-phone {
-    display: none;
-  }
-}
-
-@media (max-width: 415px) {
-  .cropped-on-phone {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 60px;
-  }
-}
-
-.sort-arrow {
-  cursor: pointer;
-  color: $secondary;
-  i.fa:hover {
-    color: $primary;
-  }
-}
-
-nav.pagination {
-  span {
-    border-width: 1px 0 1px 1px;
-    border-style: solid;
-    border-color: $secondary;
-    padding: 4px 8px;
-    @extend .position-relative;
-  }
-  a {
-    text-decoration: none;
-    @extend .stretched-link;
-  }
-  span:hover {
-    background-color: $light;
-  }
-  .current {
-    background-color: $light;
-  }
-  span:first-child {
-    border-radius: 5px 0 0 5px;
-  }
-  span:last-child {
-    border-radius: 0 5px 5px 0;
-    border-width: 1px;
-  }
-}
-
-.fa-stack.contact {
-  font-size: 30px;
-  @include media(phoneScreen) {
-    font-size: 25px;
-  }
-  :hover {
-    opacity: 0.85;
-  }
-}
-
-.img-club {
-  @extend .float-start, .me-2, .my-2, .rounded;
-  width: 150px;
-}
-
-.card-with-border {
-  @extend .card, .text-bg-light, .bg-opacity-50, .border-primary, .border-opacity-25, .h-100;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  transition: box-shadow 0.3s ease-in-out;
-
-  .img-scaled {
-    transition: transform 0.3s ease;
-  }
-
-  &:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-
-    .img-scaled {
-      transform: scale(1.03);
-    }
-  }
-
-  .card-body a:not(.stretched-link) {
-    position: relative;
-    z-index: 2;
-  }
-}
-
-.fs-small {
-  font-size: 0.85em;
-
-  &-sm {
-    font-size: var(--bs-body-font-size);
-
-    @include media(phoneScreen) {
-      font-size: 0.85em;
-    }
-  }
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0.3; }
-}
-
-.hero-section {
-  position: relative;
-  overflow: hidden;
-
-  .hero-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: -1;
-  }
-
-  .container {
-    position: relative;
-    z-index: 1;
-  }
-}
-
-.story-card {
-  padding: 1.5rem;
-  background-color: #f8f9fa;
-  border-radius: 0.5rem;
-}
-
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.events-section {
-  .thumb-badge {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    border-radius: 0.25rem;
-  }
-
-  .text-badge {
-    width: 60px;
-    height: 60px;
-    background-color: $light;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 0.8rem;
-    line-height: 1.2;
-  }
-}
-
-.volunteer-app-section {
-  .app-screen-container {
-    max-width: 300px;
-    margin: auto;
-  }
-
-  .app-screen {
-    border-radius: 1.25rem;
-    box-shadow: 0 0.5rem 1rem rgba($dark, 0.15);
-  }
-
-  .app-feature-item {
-    cursor: pointer;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s ease-in-out;
-
-    &:hover {
-      background-color: $light;
-    }
-
-    &.feature-active {
-      background-color: #e9ecef;
-    }
-  }
-
-  .app-button {
-    height: 40px;
-    @include media(phoneScreen) {
-      height: 35px;
-    }
-  }
-}
-
-.partners-section {
-  padding: 3rem 0;
-  background-color: #f8f9fa;
-
-  .partners {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem 2.5rem;
-  }
-
-  .img-partner {
-    max-height: 45px;
-    max-width: 150px;
-    object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: all 0.3s ease;
-
-    &:hover {
-      filter: grayscale(0%);
-      opacity: 1;
-      transform: scale(1.05);
-    }
-  }
-}
-
-@import "web/index";
+<%# Partners Section %>
+<section class="partners-section">
+  <div class="container">
+    <h2 class="text-center"><%= t '.our_partners' %></h2>
+    <div class="partners">
+      <%= external_link_to 'https://t.me/parkrun' do %>
+        <%= image_tag '/images/partners/pro_parkrun.png', class: 'img-partner', alt: 'Pro parkrun', loading: 'lazy' %>
+      <% end %>
+      <% if top_level_domain == :ru %>
+        <%= external_link_to 'https://go.grigri.ru/s95' do %>
+          <%= image_tag '/images/partners/grigri.svg', class: 'img-partner', alt: 'Gri', loading: 'lazy' %>
+        <% end %>
+        <%= external_link_to 'https://rununion.ru/' do %>
+          <%= image_tag '/images/partners/run_union.png', class: 'img-partner', alt: 'Союз любителей бега', loading: 'lazy' %>
+        <% end %>
+      <% end %>
+      <% if top_level_domain == :rs %>
+        <%= external_link_to "https://www.instagram.com/grnhs_serbia/" do %>
+          <%= image_tag '/images/partners/grnhs_serbia.svg', class: 'img-partner', alt: 'Green House' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
