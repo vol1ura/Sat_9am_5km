@@ -5,8 +5,8 @@
     <div class="row align-items-center justify-content-end">
       <div class="col-lg-7 col-xl-6">
         <div class="placeholder-image">
-          <h2 class="display-4 fw-bold mb-4 text-white"><%= t '.hero_title' %></h2>
-          <p class="lead mb-4"><%= t '.hero_subtitle' %></p>
+          <h2 class="display-4 fw-bold mb-2 text-white"><%= t '.hero_title' %></h2>
+          <p class="lead mb-4 fs-5"><%= t '.hero_subtitle' %></p>
           <div class="d-flex flex-wrap gap-3">
             <% if current_user&.athlete %>
               <%= link_to t('.my_profile'), athlete_path(current_user.athlete), class: 'btn btn-danger btn-lg' %>
