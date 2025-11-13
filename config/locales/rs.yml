@@ -994,6 +994,7 @@ rs:
       athletes_count: broj učesnika
       results_count: broj trka
       volunteering_count: broj volontiranje
+      best_results: Lični rekordi učesnika
       last_week_activities: Aktivnosti članova kluba u poslednjoj nedelji
       name: Ime
       activities: Trke

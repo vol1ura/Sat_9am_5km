@@ -40,6 +40,11 @@
     <%= t '.volunteering_count' %>
   </li>
   <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill me-3"><i class="fa-solid fa-trophy"></i></span>
+    <%= link_to t('.best_results'), results_ratings_path(club_id: @club.id) %>
+  </li>
+  <li class="list-group-item">
+    <span class="badge bg-primary rounded-pill me-3"><i class="fa-solid fa-running"></i></span>
     <%= link_to t('.last_week_activities'), last_week_club_path(@club) %>
   </li>
 </ul>
