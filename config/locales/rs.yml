@@ -744,6 +744,7 @@ rs:
         Prijatelji, naši događaji su potpuno besplatni i sprovode ih volonterske snage.
         Međutim, ako želite i možete podržati naš projekat, onda ćemo biti srećni zbog bilo kakve materijalne pomoći.
         Da biste to uradili, kontaktirajte organizatore događaja kojima želite da pružite podršku putem kontakata na stranici događaja.
+        Sastavljene sredstva će biti korišćene za kupovinu volonterskih majica, razmetničkih štampica i drugih neophodnih predmeta za organizaciju trka.
       about_volunteering: Ali ne zaboravite da je najveća pomoć volontiranje.
       site_development: Razvoj sajta
       add_new_issues_html: >
@@ -829,7 +830,7 @@ rs:
           trophies: Broj znački. U slučaju jednakih vrednosti, viši rang će imati učesnika sa velikim brojem volontiranje.
     results:
       title: Najbolji rezultati
-      description: Najbolji rezultati učesnika trka
+      description: Tabela sa najboljim rezultatima učesnika S95. Ako želite da dobijete rejting za konkretno događaj, izaberite ga u polju "Pretraga po događaju". Na isti način možete dobiti rejting za željeni klub, ili kombinaciju nekoliko parametara. Pri pretragi po imenu, prikazuje se i apsolutno mesto učesnika (tj. mesto u rejtingu bez filtera po imenu).
       men: Muškarci
       women: Žene
       athlete: Učesnik
@@ -837,6 +838,12 @@ rs:
       date: Datum
       event: Događaj
       club: Klub
+      abs: Abs.
+      name_placeholder: Pretraga po imenu
+      club_placeholder: Pretraga po klubu
+      event_placeholder: Pretraga po događaju
+      search_button: Traži
+      reset_button: Reset
   athletes:
     index:
       title: Rezultati pretrage

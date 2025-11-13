@@ -51,6 +51,17 @@ export default class extends Controller {
     await this.loadPage()
   }
 
+  setGender(event) {
+    const gender = event.currentTarget.dataset.gender
+    const genderInput = document.getElementById('gender-input')
+    const resetLink = document.getElementById('results-reset')
+    genderInput.value = gender
+
+    const url = new URL(resetLink.href, window.location.origin)
+    url.searchParams.set('gender', gender)
+    resetLink.href = url.pathname + url.search
+  }
+
   async loadPage() {
     if (!this.hasMoreValue) return
 
@@ -58,6 +69,15 @@ export default class extends Controller {
 
     const tabData = this.tabTargets.find(tab => tab.classList.contains('active')).dataset
     const query_arr = this.paramsValue.split(',').map(param => `${param}=${tabData[param]}`)
+
+    const urlParams = new URLSearchParams(window.location.search)
+    const tabParamNames = this.paramsValue.split(',')
+    urlParams.forEach((value, key) => {
+      if (!tabParamNames.includes(key) && key !== 'page') {
+        query_arr.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      }
+    })
+
     const url = `${this.urlValue}?page=${this.pageValue}&${query_arr.join('&')}`
 
     try {
