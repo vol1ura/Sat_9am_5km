@@ -18,6 +18,11 @@ RUN bundle install
 WORKDIR /usr/src
 COPY . .
 
+RUN addgroup -S app && adduser -S app -G app && \
+  chown -R app:app /usr/src /tmp
+
+USER app
+
 EXPOSE 3000
 
 HEALTHCHECK --interval=600s --timeout=30s --start-period=30s --retries=3 \
