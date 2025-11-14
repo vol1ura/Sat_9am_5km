@@ -1,9 +1,9 @@
-import { Controller } from '@hotwired/stimulus'
-import DashboardCharts from 'charts/dashboard'
+import { Controller } from '@hotwired/stimulus';
+import DashboardCharts from 'charts/dashboard';
 
 // Connects to data-controller="dashboard"
 export default class extends Controller {
-  static targets = ['container', 'participants', 'volunteers', 'gender']
+  static targets = ['container', 'participants', 'volunteers', 'gender'];
   static values = {
     totalResults: Number,
     personalBests: Number,
@@ -14,7 +14,7 @@ export default class extends Controller {
     totalFemale: Number,
     totalUnknown: Number,
     error: String,
-  }
+  };
 
   connect() {
     try {
@@ -27,24 +27,24 @@ export default class extends Controller {
         this.totalMaleValue,
         this.totalFemaleValue,
         this.totalUnknownValue,
-      )
+      );
 
-      dashboardCharts.initializeCharts(this.participantsTarget, this.volunteersTarget, this.genderTarget)
+      dashboardCharts.initializeCharts(this.participantsTarget, this.volunteersTarget, this.genderTarget);
     } catch (error) {
-      console.error('Error showing dashboard data:', error)
-      this.#showError()
+      console.error('Error showing dashboard data:', error);
+      this.#showError();
     }
   }
 
   disconnect() {
     if (this.hasParticipantsTarget) {
-      this.participantsTarget.innerHTML = ''
+      this.participantsTarget.innerHTML = '';
     }
     if (this.hasVolunteersTarget) {
-      this.volunteersTarget.innerHTML = ''
+      this.volunteersTarget.innerHTML = '';
     }
     if (this.hasGenderTarget) {
-      this.genderTarget.innerHTML = ''
+      this.genderTarget.innerHTML = '';
     }
   }
 
@@ -55,7 +55,7 @@ export default class extends Controller {
           <i class="fa fa-exclamation-triangle"></i>
           ${this.errorValue}
         </div>
-      `
+      `;
     }
   }
 }

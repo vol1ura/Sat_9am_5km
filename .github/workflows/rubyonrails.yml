@@ -33,7 +33,7 @@ jobs:
       - name: Lint Ruby files
         run: bundle exec rubocop --fail-fast -c .rubocop.yml
 
-  lint-scss:
+  lint-bundle:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
@@ -45,14 +45,14 @@ jobs:
           cache: 'yarn'
       - name: Install yarn dependencies
         run: yarn install --frozen-lockfile
-      - name: Lint SCSS files
-        run: yarn lint:scss
+      - name: Lint SCSS and JavaScript files
+        run: yarn lint
 
   test:
     needs:
       - security
       - lint-ruby
-      - lint-scss
+      - lint-bundle
     runs-on: ubuntu-22.04
     services:
       postgres:

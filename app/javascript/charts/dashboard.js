@@ -1,4 +1,4 @@
-import ApexCharts from 'apexcharts'
+import ApexCharts from 'apexcharts';
 
 const translations = {
   ru: {
@@ -33,7 +33,7 @@ const translations = {
     noData: 'Nema podataka za ovu nedelju',
     people: 'osoba',
   }
-}
+};
 
 export default class DashboardCharts {
   constructor(totalResults, personalBests, firstRuns, totalVolunteers, firstTimeVolunteers, totalMale, totalFemale, totalUnknown) {
