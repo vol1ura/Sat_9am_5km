@@ -10,10 +10,13 @@ ENV LANG ru_RU.UTF-8
 # ENV LC_ALL ru_RU.UTF-8
 
 WORKDIR /tmp
-RUN gem install bundler --version=2.4.10 --no-doc && \
-    bundle config set force_ruby_platform true
+RUN gem install bundler --version=2.4.10 --no-doc
 COPY Gemfile* .
-RUN bundle install
+# Ensure the lockfile contains linux-musl and linux platforms so native gems
+# (nokogiri, pg, ffi, google-protobuf, sass-embedded, etc.) are installed
+# for the container architecture during image build.
+RUN bundle lock --add-platform x86_64-linux-musl aarch64-linux-musl && \
+  bundle install --jobs=4 --retry=3
 
 WORKDIR /usr/src
 COPY . .
