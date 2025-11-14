@@ -4,7 +4,7 @@ RUN apk --no-cache add \
     build-base postgresql-dev nodejs yarn \
     tzdata vim openssh vips-dev yaml-dev curl
 
-# Russian locale settings
+# ru locale settings
 ENV LANG ru_RU.UTF-8
 # ENV LANGUAGE ru_RU.UTF-8
 # ENV LC_ALL ru_RU.UTF-8
