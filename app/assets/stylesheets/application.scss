@@ -7,9 +7,9 @@ $info: #009dac;
 $light: #f0f0f0;
 $dark: #0f0f0f;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2family=Manrope:wght@900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Manrope:wght@900&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap';
 
 
 $enable-negative-margins: true;
@@ -20,7 +20,7 @@ $enable-negative-margins: true;
 @import "web/*";
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, sans-serif;
   min-height: 100vh;
 }
 
@@ -95,7 +95,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Manrope', sans-serif;
+  font-family: Manrope, sans-serif;
   font-weight: 900;
   color: $primary;
   margin-top: 0.5rem;
