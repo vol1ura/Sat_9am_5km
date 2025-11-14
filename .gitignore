@@ -13,6 +13,7 @@ tmp/*
 tmp/pids/*
 !tmp/pids/.keep
 
+node_modules/
 public/assets/
 public/sitemaps/
 storage/

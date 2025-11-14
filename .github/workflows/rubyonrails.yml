@@ -20,7 +20,7 @@ jobs:
       - name: Security audit application code
         run: bundle exec brakeman -q -w2
 
-  lint:
+  lint-ruby:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
@@ -33,10 +33,26 @@ jobs:
       - name: Lint Ruby files
         run: bundle exec rubocop --fail-fast -c .rubocop.yml
 
+  lint-scss:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'yarn'
+      - name: Install yarn dependencies
+        run: yarn install --frozen-lockfile
+      - name: Lint SCSS files
+        run: yarn lint:scss
+
   test:
     needs:
       - security
-      - lint
+      - lint-ruby
+      - lint-scss
     runs-on: ubuntu-22.04
     services:
       postgres:

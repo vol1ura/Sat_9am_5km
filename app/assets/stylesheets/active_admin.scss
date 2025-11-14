@@ -1,19 +1,21 @@
 // Sass variable overrides must be declared before loading up Active Admin's styles.
-//
+
 // To view the variables that Active Admin provides, take a look at
 // `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
 // Active Admin source.
-//
+
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
+@use "sass:color";
+
 $primary-color: #2a2951 !default;
 $secondary-color: #a0a0a0 !default;
-$table-stripe-color: lighten($primary-color, 70%) !default;
+$table-stripe-color: color.adjust($primary-color, $lightness: 70%) !default;
 $link-color: #144469 !default;
 $text-color: #0f0f0f !default;
 $error-color: #d63384 !default;
 $breadcrumbs-color: $link-color !default;
-$table-error-color: lighten($error-color, 25%);
+$table-error-color: color.adjust($error-color, $lightness: 25%);
 
 // Active Admin's got SASS!
 @import "active_admin/mixins";
@@ -22,10 +24,7 @@ $table-error-color: lighten($error-color, 25%);
 @import "activeadmin/quill_editor_input";
 @import "active_admin/searchable_select";
 
-// Overriding any non-variable Sass must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
+
 body {
   font-size: 82%;
 }
@@ -40,17 +39,16 @@ body {
   top: 100%;
   left: 0;
   right: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
   box-shadow: 0 0 10px #818181;
-}
-
-.suggestions li:first-child {
-  border-top: none !important;
 }
 
 .suggestions li {
   padding: 5px 10px;
+}
+
+.suggestions li:first-child {
+  border-top: none !important;
 }
 
 .suggestions li:hover {

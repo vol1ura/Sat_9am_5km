@@ -6,11 +6,13 @@
 
 .thumb-badge {
   @extend .rounded;
+
   height: 80px;
 }
 
 .text-badge {
   @extend .d-flex, .flex-column, .align-items-center, .justify-content-center, .bg-gradient, .border, .border-4, .rounded-circle, .text-light;
+
   background-color: #be2270;
   width: 80px;
   height: 80px;
@@ -36,31 +38,40 @@
   border-radius: 50%;
   background-color: $light;
   position: relative;
+
   &.ppb-gt-50 {
     background-color: $info;
   }
 }
+
 .ppb-progress {
   @include circle(92px);
-  clip: rect(0, 92px, 92px, 46px);
+
+  clip-path: inset(0 0 0 50%);
+
   .ppb-progress-fill {
     @include circle(92px);
-    clip: rect(0, 46px, 92px, 0);
+
+    clip-path: inset(0 50% 0 0);
     background: $info;
   }
+
   .ppb-gt-50 & {
-    clip: rect(0, 46px, 92px, 0);
+    clip-path: inset(0 50% 0 0);
+
     .ppb-progress-fill {
-      clip: rect(0, 92px, 92px, 46px);
+      clip-path: inset(0 0 0 50%);
       background: $light;
     }
   }
 }
 .ppb-info {
   @include circle(80px);
+
   background: #fff;
   text-align: center;
   display: table;
+
   span {
     display: block;
     font-size: 10px;
@@ -73,7 +84,7 @@
   vertical-align: middle;
 }
 
-#minuteBingoModal table {
+#minute-bingo-modal table {
   border-collapse: separate;
   border-spacing: 4px 0;
 }
@@ -85,15 +96,19 @@
   }
   .ppb-progress {
     @include circle(70px);
-    clip: rect(0, 70px, 70px, 30px);
+
+    clip-path: inset(0 0 0 50%);
+
     .ppb-progress-fill {
       @include circle(70px);
-      clip: rect(0, 30px, 70px, 0);
+
+      clip-path: inset(0 50% 0 0);
     }
+
     .ppb-gt-50 & {
-      clip: rect(0, 30px, 70px, 0);
+      clip-path: inset(0 50% 0 0);
       .ppb-progress-fill {
-        clip: rect(0, 70px, 70px, 30px);
+        clip-path: inset(0 0 0 50%);
       }
     }
   }
@@ -106,7 +121,7 @@
   .trophy {
     max-width: 75px;
   }
-  #accordionPersonalBest .accordion-body {
+  #accordion-personal-statistics .accordion-body {
     padding: 10px 7px;
   }
 }
