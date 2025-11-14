@@ -2,7 +2,7 @@
   min-width: 150px;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .acc-li-s {
     min-width: 200px;
     margin-left: 2vw;
@@ -11,18 +11,21 @@
 
 .avatar {
   @extend .rounded-circle, .border, .border-primary, .border-opacity-25;
+
   width: 150px;
   height: 150px;
 }
 
 .avatar-100 {
   @extend .avatar;
+
   width: 100px;
   height: 100px;
 }
 
 .avatar-50 {
   @extend .avatar;
+
   width: 50px;
   height: 50px;
 }

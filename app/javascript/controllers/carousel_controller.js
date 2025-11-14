@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   updateDisplay() {
-    this.imageTarget.style.opacity = '0.5'
+    this.imageTarget.style.opacity = '0.75'
 
     setTimeout(() => {
       this.imageTarget.src = `/images/app/mobile_app_${this.currentIndex + 1}.png`

@@ -1,0 +1,12 @@
+{
+  "name": "s95",
+  "version": "1.0.0",
+  "scripts": {
+    "lint:scss": "stylelint 'app/assets/stylesheets/**/*.scss'",
+    "lint:scss:fix": "stylelint 'app/assets/stylesheets/**/*.scss' --fix"
+  },
+  "devDependencies": {
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard-scss": "^16.0.0"
+  }
+}
