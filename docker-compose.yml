@@ -6,9 +6,8 @@ services:
     volumes:
       - .:/usr/src
       - ./deploy/.ssh:/root/.ssh
-    tmpfs:
-      - /usr/src/tmp/pids
-      - /usr/src/tmp/cache
+      - web_tmp:/usr/src/tmp
+      - web_log:/usr/src/log
     tty: true
     stdin_open: true
     ports:
@@ -37,3 +36,5 @@ services:
 volumes:
   postgres:
   redis:
+  web_tmp:
+  web_log:
