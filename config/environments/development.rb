@@ -8,9 +8,12 @@ Rails.application.configure do
     config.after_initialize do
       Bullet.enable        = true
       Bullet.alert         = true
-      Bullet.bullet_logger = true
+  # avoid separate bullet.log  inside the mounted /usr/src/log
+  
+  Bullet.bullet_logger = Rails.logger
       Bullet.console       = true
       Bullet.rails_logger  = true
+  #  Rails.logger instead of Bullet.bullet_logger
       Bullet.add_footer    = true
       Bullet.add_safelist type: :unused_eager_loading, class_name: 'ActiveStorage::Attachment', association: :blob
     end

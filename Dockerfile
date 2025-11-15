@@ -20,7 +20,7 @@ WORKDIR /usr/src
 COPY . .
 
 RUN addgroup -S app && adduser -S app -G app && \
-  RUN chown -R app:app /usr/src /tmp /usr/local/bundle
+  chown -R app:app /usr/src /tmp /usr/local/bundle
 
 
 USER app
