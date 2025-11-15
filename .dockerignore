@@ -5,6 +5,7 @@ log/
 .git/
 .vscode/
 deploy/
+!deploy/entrypoint.sh
 spec/requests/requests.http
 .dockerignore
 .byebug_history

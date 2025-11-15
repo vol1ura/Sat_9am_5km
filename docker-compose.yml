@@ -18,6 +18,9 @@ services:
     # command: bundle exec rdebug-ide --debug --host 0.0.0.0 --port 1234 -- bin/rails server -p 3000 -b 0.0.0.0
     env_file:
       - ./deploy/.env
+    entrypoint: ["/usr/local/bin/entrypoint.sh"]
+    user: root
+    command: ["rails","server","-b","0.0.0.0","-p","3000"]
 
   db:
     image: postgres:17.2-alpine

@@ -1,8 +1,8 @@
 FROM ruby:3.4.5-alpine
 
 RUN apk --no-cache add \
-    build-base postgresql-dev nodejs yarn \
-    tzdata vim openssh vips-dev yaml-dev curl
+  build-base postgresql-dev nodejs yarn \
+  tzdata vim openssh vips-dev yaml-dev curl su-exec
 
 # ru locale settings
 ENV LANG ru_RU.UTF-8
@@ -21,6 +21,9 @@ COPY . .
 
 RUN addgroup -S app && adduser -S app -G app && \
   chown -R app:app /usr/src /tmp /usr/local/bundle
+
+COPY deploy/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 
 USER app
