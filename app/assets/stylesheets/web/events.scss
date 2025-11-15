@@ -1,8 +1,10 @@
 .img-event-container {
   @extend .mb-3, .mt-n3, .mt-sm-0, .position-relative;
+
   margin-left: -12px;
   margin-right: -12px;
-  @media (min-width: 576px) {
+
+  @media (width >= 576px) {
     margin-left: 0;
     margin-right: 0;
   }
@@ -10,15 +12,18 @@
 
 .img-event {
   @extend .img-fluid, .rounded, .w-100;
+
   object-fit: fill;
-  @media (max-width: 575px) {
+
+  @media (width <= 575px) {
     border-radius: 0 !important;
   }
 }
 
 .img-event-shadow {
   @extend .bg-dark, .bg-gradient, .bg-opacity-25, .rounded-top, .w-100;
-  @media (max-width: 575px) {
+
+  @media (width <= 575px) {
     border-radius: 0 !important;
   }
 }

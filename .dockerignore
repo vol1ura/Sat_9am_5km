@@ -1,6 +1,7 @@
 coverage/
 tmp/
 log/
+node_modules/
 
 .git/
 .vscode/
