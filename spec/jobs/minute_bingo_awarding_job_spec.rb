@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe MinuteBingoAwardingJob do
   let!(:badge) { create(:badge, kind: :minute_bingo) }

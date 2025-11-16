@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 ActiveAdmin.register_page 'Utilities' do
   menu priority: 100, label: proc { t 'active_admin.utilities' }

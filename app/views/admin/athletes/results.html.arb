@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 table_for results do
   column('Забег') { |r| link_to human_activity_name(r.activity), admin_activity_path(r.activity) }

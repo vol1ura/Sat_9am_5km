@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 namespace :db do
   desc 'Create and download database backup'

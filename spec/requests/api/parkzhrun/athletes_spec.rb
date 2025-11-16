@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe '/api/parkzhrun/athletes' do
   describe 'PUT /api/parkzhrun/athlete' do

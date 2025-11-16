@@ -1,4 +1,4 @@
-yandex.com, 109153863, DIRECT
+﻿yandex.com, 109153863, DIRECT
 improvedigital.com, 2031, RESELLER
 betweendigital.com, 43554, RESELLER
 uis.mobfox.com, 165, RESELLER

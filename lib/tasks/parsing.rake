@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 namespace :db do
   # rake db:parse_parkrun_codes[kuzminki_db.csv]

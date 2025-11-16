@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::Badge::RageExpiration, type: :service do
   let(:athlete) { create(:athlete, user: create(:user)) }

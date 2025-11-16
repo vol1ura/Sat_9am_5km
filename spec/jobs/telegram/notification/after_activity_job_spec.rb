@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::AfterActivityJob do
   it 'performs immediately' do

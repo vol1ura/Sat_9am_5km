@@ -1,4 +1,4 @@
-RailsPerformance.setup do |config|
+﻿RailsPerformance.setup do |config|
   config.enabled = ENV['RAILS_PERFORMANCE_ENABLED'] == 'true'
 
   config.redis = Redis.new url: ENV.fetch('REDIS_URL', 'redis://127.0.0.1:6379/2')

@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class AthletesAwardingJob < ApplicationJob
   queue_as :default

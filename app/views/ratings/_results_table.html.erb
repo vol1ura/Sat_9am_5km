@@ -1,4 +1,4 @@
-<%= render partial: 'result', collection: results %>
+﻿<%= render partial: 'result', collection: results %>
 
 <% if results.size >= RatingsController::PER_PAGE %>
   <%= render 'loading_indicator', colspan: @with_absolute_position ? 7 : 6 %>

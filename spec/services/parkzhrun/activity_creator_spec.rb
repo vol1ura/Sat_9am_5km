@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Parkzhrun::ActivityCreator, type: :service do
   subject(:service) { described_class.call(date) }

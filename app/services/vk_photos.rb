@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class VkPhotos < ApplicationService
   API_URL = "https://api.vk.ru/method/photos.get?#{URI.encode_www_form(

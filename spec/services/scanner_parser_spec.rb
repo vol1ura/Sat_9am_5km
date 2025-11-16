@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe ScannerParser, type: :service do
   let(:activity) { build(:activity) }

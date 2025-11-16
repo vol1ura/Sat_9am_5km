@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe BarcodePrinter, type: :service do
   it 'returns svg xml document' do

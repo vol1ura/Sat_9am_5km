@@ -1,4 +1,4 @@
-export const rsLocale = {
+﻿export const rsLocale = {
   'name': 'rs',
   'options': {
     'months': [

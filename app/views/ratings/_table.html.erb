@@ -1,4 +1,4 @@
-<% athletes.each_with_index do |athlete, index| %>
+﻿<% athletes.each_with_index do |athlete, index| %>
   <tr>
     <td><%= (@page - 1) * RatingsController::PER_PAGE + index + 1 %></td>
     <td><%= link_to athlete.name, athlete, class: 'athlete-link', data: { turbo: false } %></td>

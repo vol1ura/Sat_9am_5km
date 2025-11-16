@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class EventsController < ApplicationController
   before_action :find_event, except: %i[index search]

@@ -1,4 +1,4 @@
-<% male_leader_result = @first_male_by_activity_id[activity.id] %>
+﻿<% male_leader_result = @first_male_by_activity_id[activity.id] %>
 <% female_leader_result = @first_female_by_activity_id[activity.id] %>
 <%= tag.tr class: activity_counter > 14 ? 'collapse multi-collapse' : 'not-collapse' do %>
   <td><%= @total_activities - activity_counter %></td>

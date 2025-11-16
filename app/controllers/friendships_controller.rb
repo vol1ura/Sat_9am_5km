@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 # Controller for managing friendships between athletes
 class FriendshipsController < ApplicationController

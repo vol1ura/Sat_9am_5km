@@ -1,4 +1,4 @@
-import { Controller } from '@hotwired/stimulus';
+﻿import { Controller } from '@hotwired/stimulus';
 
 // Stimulus controller: calculates estimated finish time vs weight changes
 export default class extends Controller {

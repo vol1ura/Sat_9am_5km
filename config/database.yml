@@ -1,4 +1,4 @@
-development: &default
+﻿development: &default
   adapter: postgresql
   encoding: unicode
   database: s95_dev

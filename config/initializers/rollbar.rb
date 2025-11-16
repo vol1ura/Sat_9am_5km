@@ -1,4 +1,4 @@
-Rollbar.configure do |config|
+﻿Rollbar.configure do |config|
   config.access_token = ENV['ROLLBAR_ACCESS_TOKEN']
 
   config.enabled = false if Rails.env.local?

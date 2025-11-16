@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class OptimizeActiveStorageAttachmentsIndex < ActiveRecord::Migration[7.2]
   def change

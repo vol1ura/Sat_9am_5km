@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class AddFlagsToResults < ActiveRecord::Migration[7.0]
   FLAGS_COLUMNS = %i[personal_best first_run].freeze

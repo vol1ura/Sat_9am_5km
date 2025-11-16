@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::AfterActivity::Volunteer, type: :service do
   let(:result) { create(:result, athlete: create(:athlete, user: create(:user))) }

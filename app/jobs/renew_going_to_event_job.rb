@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class RenewGoingToEventJob < ApplicationJob
   queue_as :low

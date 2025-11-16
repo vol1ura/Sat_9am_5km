@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class MakeIndexClubsOnNameCaseInsensitive < ActiveRecord::Migration[7.1]
   def change

@@ -1,4 +1,4 @@
-import { Controller } from '@hotwired/stimulus';
+﻿import { Controller } from '@hotwired/stimulus';
 import AthleteCharts from 'charts/athlete';
 
 // Connects to data-controller="athlete"

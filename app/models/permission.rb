@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class Permission < ApplicationRecord
   ACTIONS = %w[read create update destroy manage].freeze

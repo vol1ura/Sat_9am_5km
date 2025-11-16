@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::User::NewRunner, type: :service do
   let(:user) { create(:user) }

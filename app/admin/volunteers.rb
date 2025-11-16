@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 ActiveAdmin.register Volunteer do
   belongs_to :activity

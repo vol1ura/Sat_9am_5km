@@ -1,4 +1,4 @@
-//= require arctic_admin/base
+﻿//= require arctic_admin/base
 //= require active_admin/quill.min
 //= require active_admin/select2.min
 //= require activeadmin/quill_editor_input

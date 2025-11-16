@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 module ApplicationHelper
   def locale_cache_key(*cache_key_parts)

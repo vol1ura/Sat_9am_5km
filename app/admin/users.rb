@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 ActiveAdmin.register User do
   actions :all, except: %i[new create destroy]

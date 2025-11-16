@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class FivePlusAwardingJob < ApplicationJob
   queue_as :low

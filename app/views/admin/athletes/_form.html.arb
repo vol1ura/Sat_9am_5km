@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 active_admin_form_for [:admin, resource] do |f|
   panel 'Внимание!' do

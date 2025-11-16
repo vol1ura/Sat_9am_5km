@@ -1,4 +1,4 @@
-export const ruLocale = {
+﻿export const ruLocale = {
   'name': 'ru',
   'options': {
     'months': [

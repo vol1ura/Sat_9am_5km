@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe HomeBadgeAwardingJob do
   let(:home_event) { create(:event) }

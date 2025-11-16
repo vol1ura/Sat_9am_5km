@@ -1,4 +1,4 @@
-# /etc/logrotate.d/s95
+﻿# /etc/logrotate.d/s95
 /path/to/app/current/log/*.log {
   monthly
   dateext

@@ -1,4 +1,4 @@
-# config valid for current version and patch releases of Capistrano
+﻿# config valid for current version and patch releases of Capistrano
 lock '~> 3.19'
 
 set :user, ENV['DEPLOY_USER']

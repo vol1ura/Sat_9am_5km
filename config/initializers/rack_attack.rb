@@ -1,4 +1,4 @@
-class Rack::Attack
+﻿class Rack::Attack
   # Throttle requests by IP
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"

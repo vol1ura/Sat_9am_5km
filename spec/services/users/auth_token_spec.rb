@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Users::AuthToken do
   subject(:service) { described_class.new(user) }

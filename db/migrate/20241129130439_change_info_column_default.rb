@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class ChangeInfoColumnDefault < ActiveRecord::Migration[8.0]
   def change

@@ -1,4 +1,4 @@
-<div class="card mb-3 <%= duel[:winner] == :user ? 'border-success' : 'border-danger' %>">
+﻿<div class="card mb-3 <%= duel[:winner] == :user ? 'border-success' : 'border-danger' %>">
   <div class="card-header d-flex justify-content-between align-items-center py-2">
     <h5 class="d-flex flex-column align-items-center gap-2">
       <%= link_to duel[:event].name, activity_path(duel[:activity]), class: 'text-decoration-none my-0' %>

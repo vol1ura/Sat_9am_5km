@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe '/api/internal/athlete' do
   let(:user) { create(:user) }

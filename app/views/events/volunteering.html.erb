@@ -1,4 +1,4 @@
-<% closest_date = @activity&.date ? l(@activity.date, format: :brief) : t('.closest_date') %>
+﻿<% closest_date = @activity&.date ? l(@activity.date, format: :brief) : t('.closest_date') %>
 <% head_info :title, t('.title', event: @event.name, date: closest_date) %>
 <% head_info :description, t('.description', event: @event.name, date: closest_date) %>
 <%= turbo_stream_from :volunteers_roster %>

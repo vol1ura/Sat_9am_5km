@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::Badge::BreakingTimeExpiration, type: :service do
   let(:breaking_trophy) do

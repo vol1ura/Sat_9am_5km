@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class AddEightYearsTsaritsynoAnniversaryBadge < ActiveRecord::Migration[7.0]
   def up

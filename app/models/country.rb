@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class Country < ApplicationRecord
   has_many :clubs, dependent: :destroy

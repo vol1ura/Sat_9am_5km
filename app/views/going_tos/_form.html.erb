@@ -1,4 +1,4 @@
-<% going_to_event_id = current_user&.athlete&.going_to_event_id %>
+﻿<% going_to_event_id = current_user&.athlete&.going_to_event_id %>
 <% if going_to_event_id.blank? && current_user&.athlete %>
   <p><%= t '.going_to_event' %></p>
   <%= button_to event_going_to_path(@event.code_name),

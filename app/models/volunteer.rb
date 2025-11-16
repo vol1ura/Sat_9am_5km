@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class Volunteer < ApplicationRecord
   audited associated_with: :activity, except: :informed

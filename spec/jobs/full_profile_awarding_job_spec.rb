@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe FullProfileAwardingJob do
   let!(:athlete_with_full_profile) { create(:athlete, event: event, user: create(:user, with_avatar: true)) }

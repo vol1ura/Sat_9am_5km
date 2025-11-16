@@ -1,4 +1,4 @@
-export default {
+﻿export default {
   extends: ['stylelint-config-standard-scss'],
   rules: {
     // Allow nested selectors for BEM-like patterns

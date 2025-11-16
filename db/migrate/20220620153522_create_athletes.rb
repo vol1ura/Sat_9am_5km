@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class CreateAthletes < ActiveRecord::Migration[7.0]
   def change

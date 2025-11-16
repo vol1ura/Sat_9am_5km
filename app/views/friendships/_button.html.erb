@@ -1,4 +1,4 @@
-<% if current_user&.athlete && current_user.athlete != athlete %>
+﻿<% if current_user&.athlete && current_user.athlete != athlete %>
   <div id="friendship-button">
     <% if current_user.athlete.friend?(athlete) %>
       <div class="badge bg-success mb-2">

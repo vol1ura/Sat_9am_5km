@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 # Clears rails cache
 class ClearCache < ApplicationService

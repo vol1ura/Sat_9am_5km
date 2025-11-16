@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 # Outputs QR-code in SVG format
 class BarcodePrinter < ApplicationService

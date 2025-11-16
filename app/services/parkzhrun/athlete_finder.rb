@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 module Parkzhrun
   # Find or create athlete by parkzhrun code

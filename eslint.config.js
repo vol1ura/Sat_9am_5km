@@ -1,4 +1,4 @@
-export default [
+﻿export default [
   {
     files: ['app/javascript/**/*.js'],
     languageOptions: {

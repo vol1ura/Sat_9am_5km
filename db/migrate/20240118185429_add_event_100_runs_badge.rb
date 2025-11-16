@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class AddEvent100RunsBadge < ActiveRecord::Migration[7.1]
   def up

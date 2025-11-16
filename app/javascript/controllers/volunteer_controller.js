@@ -1,4 +1,4 @@
-import { Controller } from '@hotwired/stimulus';
+﻿import { Controller } from '@hotwired/stimulus';
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
 import { rsLocale } from 'charts/rs';

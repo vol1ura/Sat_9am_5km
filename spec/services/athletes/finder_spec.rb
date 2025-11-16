@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Athletes::Finder, type: :service do
   context 'when argument is nil' do

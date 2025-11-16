@@ -1,4 +1,4 @@
-plugins:
+﻿plugins:
   - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rails

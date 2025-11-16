@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "volunteer-#{@idx}" do %>
+﻿<%= turbo_frame_tag "volunteer-#{@idx}" do %>
   <%= form_with model: @volunteer, html: { 'data-controller' => 'autocomplete', 'data-autocomplete-url-value' => athletes_path(format: :json) } do |f| %>
     <%= f.hidden_field :role %>
     <%= f.hidden_field :activity_id %>

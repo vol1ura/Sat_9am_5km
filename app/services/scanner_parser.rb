@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class ScannerParser < ApplicationService
   def initialize(activity, scanner_file)

@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "role-#{idx}" do %>
+﻿<%= turbo_frame_tag "role-#{idx}" do %>
   <%= human_volunteer_role role %>
   <% if volunteer&.comment && %w[marshal pacemaker other].include?(role) %>
     (<%= volunteer.comment %>)

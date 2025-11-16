@@ -1,4 +1,4 @@
-# This example file is based on https://github.com/mperham/sidekiq/tree/main/examples/systemd
+﻿# This example file is based on https://github.com/mperham/sidekiq/tree/main/examples/systemd
 # To run this as a system service copy file into /lib/systemd/system (Ubuntu).
 # scp sidekiq.service root@host_ip:/lib/systemd/system
 # Then run:

@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class Result < ApplicationRecord
   audited associated_with: :activity, except: %i[informed personal_best first_run]

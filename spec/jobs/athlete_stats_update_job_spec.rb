@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe AthleteStatsUpdateJob do
   let(:athlete) { create(:athlete) }

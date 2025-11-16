@@ -1,4 +1,4 @@
-ActiveAdmin.setup do |config|
+﻿ActiveAdmin.setup do |config|
   # == Site Title
   #
   # Set the title that is displayed on the main layout

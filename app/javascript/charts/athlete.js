@@ -1,4 +1,4 @@
-import ApexCharts from 'apexcharts';
+﻿import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
 import { rsLocale } from 'charts/rs';
 

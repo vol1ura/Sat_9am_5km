@@ -1,4 +1,4 @@
-[![Quality&Tests](https://github.com/vol1ura/Sat_9am_5km/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/vol1ura/Sat_9am_5km/actions/workflows/rubyonrails.yml)
+﻿[![Quality&Tests](https://github.com/vol1ura/Sat_9am_5km/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/vol1ura/Sat_9am_5km/actions/workflows/rubyonrails.yml)
 [![CodeQL](https://github.com/vol1ura/Sat_9am_5km/actions/workflows/codeql.yml/badge.svg)](https://github.com/vol1ura/Sat_9am_5km/actions/workflows/codeql.yml)
 [![Code Coverage](https://qlty.sh/gh/vol1ura/projects/Sat_9am_5km/coverage.svg)](https://qlty.sh/gh/vol1ura/projects/Sat_9am_5km)
 [![Maintainability](https://qlty.sh/gh/vol1ura/projects/Sat_9am_5km/maintainability.svg)](https://qlty.sh/gh/vol1ura/projects/Sat_9am_5km)

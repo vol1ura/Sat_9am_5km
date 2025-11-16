@@ -1,4 +1,4 @@
-set :bundle_command, '~/.rbenv/shims/bundle exec'
+﻿set :bundle_command, '~/.rbenv/shims/bundle exec'
 set :path, File.join(ENV['APP_DEPLOY_PATH'], 'current')
 set :output, File.join(ENV['APP_DEPLOY_PATH'], 'shared/log/cron.log')
 

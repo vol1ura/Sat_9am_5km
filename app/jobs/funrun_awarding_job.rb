@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 # Award by funrun or jubilee badge on published activity
 class FunrunAwardingJob < ApplicationJob

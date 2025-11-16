@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 class RatingsController < ApplicationController
   before_action :set_rating_variables, only: %i[index table]

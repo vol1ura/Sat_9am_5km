@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 module Users
   # https://github.com/heartcombo/devise#omniauth

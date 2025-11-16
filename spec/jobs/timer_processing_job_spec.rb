@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe TimerProcessingJob do
   subject(:perform_job) { described_class.perform_now activity.id, [{ position: 1, total_time: '00:17:42' }] }

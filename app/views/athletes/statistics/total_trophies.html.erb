@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'total_trophies' do %>
+﻿<%= turbo_frame_tag 'total_trophies' do %>
   <div class="d-flex justify-content-start flex-wrap">
     <% if @total_results.positive? && @seconds_in_results.size < 60 %>
       <%= render 'athletes/minute_bingo', seconds_in_results_count: @seconds_in_results.size %>

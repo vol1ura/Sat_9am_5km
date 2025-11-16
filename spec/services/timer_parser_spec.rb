@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe TimerParser, type: :service do
   subject(:timer_parser) { described_class.call(activity, file_timer) }

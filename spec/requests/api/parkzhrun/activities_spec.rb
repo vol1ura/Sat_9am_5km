@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe '/api/parkzhrun/activities' do
   describe 'POST /api/parkzhrun/activities' do

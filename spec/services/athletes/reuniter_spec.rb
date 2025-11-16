@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe Athletes::Reuniter, type: :service do
   context 'when reunite athletes with trophies' do

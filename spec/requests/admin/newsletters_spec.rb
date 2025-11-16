@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe '/admin/newsletters' do
   let(:user) { create(:user, :admin) }

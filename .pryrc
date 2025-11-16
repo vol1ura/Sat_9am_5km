@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 # Hit Enter to repeat last command
 Pry::Commands.command(/^$/, 'repeat last command') do

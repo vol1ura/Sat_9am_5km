@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe '/user' do
   let(:user) { create(:user, with_avatar: true, phone: '79991234567') }

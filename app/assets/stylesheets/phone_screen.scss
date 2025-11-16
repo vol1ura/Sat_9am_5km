@@ -1,4 +1,4 @@
-@mixin media($query) {
+﻿@mixin media($query) {
   @if $query == phoneScreen {
     @media (width <= 768px) {
       @content;

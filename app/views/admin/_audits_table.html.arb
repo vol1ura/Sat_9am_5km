@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 table_for object.own_and_associated_audits.includes(:user, auditable: :athlete).reorder(created_at: :desc) do
   column :auditable

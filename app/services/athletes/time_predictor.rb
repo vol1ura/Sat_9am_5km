@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 module Athletes
   # Pete Riegel's formula https://www.omnicalculator.com/sports/race-predictor

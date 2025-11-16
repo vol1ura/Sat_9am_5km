@@ -1,4 +1,4 @@
-WEB_CONTAINER := `docker compose ps | grep web | cut -d ' ' -f1`
+﻿WEB_CONTAINER := `docker compose ps | grep web | cut -d ' ' -f1`
 
 target: project
 

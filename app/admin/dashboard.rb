@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { t 'active_admin.dashboard' }

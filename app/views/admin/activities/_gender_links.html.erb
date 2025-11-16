@@ -1,3 +1,3 @@
-<%= link_to 'Муж.', gender_set_admin_activity_result_path(activity, result, male: true, format: :js), remote: true, method: :patch, data: { confirm: "Сделать #{result.athlete.name} мужчиной?" } %>
+﻿<%= link_to 'Муж.', gender_set_admin_activity_result_path(activity, result, male: true, format: :js), remote: true, method: :patch, data: { confirm: "Сделать #{result.athlete.name} мужчиной?" } %>
 <span style="color: #e61ccc;">-&starf;-</span>
 <%= link_to 'Жен.', gender_set_admin_activity_result_path(activity, result, male: false, format: :js), remote: true, method: :patch, data: { confirm: "Сделать #{result.athlete.name} женщиной?" } %>

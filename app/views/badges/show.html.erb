@@ -1,4 +1,4 @@
-<% head_info :og_image, url_for(@badge.image) %>
+﻿<% head_info :og_image, url_for(@badge.image) %>
 <% info_suffix = " - ##{params[:page].to_i}" if params[:page].to_i.positive? %>
 <% head_info :title, "#{@badge.name}#{info_suffix}" %>
 <% head_info :description, "#{strip_tags(@badge.conditions)}#{info_suffix}".squish %>

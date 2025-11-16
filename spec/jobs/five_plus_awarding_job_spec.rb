@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe FivePlusAwardingJob do
   let(:initial_date) { Date.current.saturday? ? Date.current : Date.tomorrow.prev_week(:saturday) }

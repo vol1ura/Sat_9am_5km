@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+﻿# frozen_string_literal: true
 
 RSpec.describe '/api/mobile/activities' do
   let!(:activity) { create(:activity, published: false, token: SecureRandom.uuid, date: activity_date) }

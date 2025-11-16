@@ -1,4 +1,4 @@
-import { Controller } from '@hotwired/stimulus';
+﻿import { Controller } from '@hotwired/stimulus';
 import EventCharts from 'charts/event';
 
 // Connects to data-controller="event"
