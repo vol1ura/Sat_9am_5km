@@ -4,10 +4,15 @@
       <%= render 'athletes/minute_bingo', seconds_in_results_count: @seconds_in_results.size %>
     <% end %>
     <% @athlete.trophies.includes(badge: { image_attachment: :blob }).order('date ASC NULLS FIRST').each do |trophy| %>
-      <div class="p-1">
+      <div class="p-1 trophy-container">
         <%
           trophy_link = link_to badge_path(trophy.badge), data: { turbo: false } do
-            image_tag trophy.badge.image.variant(:thumb), class: 'trophy', title: trophy.badge.name, alt: trophy.badge.name
+            image_tag(
+              trophy.badge.image.variant(:thumb),
+              class: ['trophy', ('active' if trophy.created_at > 6.days.ago.beginning_of_day)].compact.join(' '),
+              title: trophy.badge.name,
+              alt: trophy.badge.name,
+            )
           end
         %>
         <% if trophy.badge.record_kind? %>

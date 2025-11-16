@@ -1,7 +1,7 @@
-import { Controller } from '@hotwired/stimulus'
-import ApexCharts from 'apexcharts'
-import { ruLocale } from 'charts/ru'
-import { rsLocale } from 'charts/rs'
+import { Controller } from '@hotwired/stimulus';
+import ApexCharts from 'apexcharts';
+import { ruLocale } from 'charts/ru';
+import { rsLocale } from 'charts/rs';
 
 // Connects to data-controller="volunteer"
 export default class extends Controller {

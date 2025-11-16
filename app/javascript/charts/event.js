@@ -1,6 +1,6 @@
-import ApexCharts from 'apexcharts'
-import { ruLocale } from 'charts/ru'
-import { rsLocale } from 'charts/rs'
+import ApexCharts from 'apexcharts';
+import { ruLocale } from 'charts/ru';
+import { rsLocale } from 'charts/rs';
 
 const translations = {
   ru: {
@@ -13,27 +13,27 @@ const translations = {
     volunteers: 'Vlontori',
     count: 'Broj',
   },
-}
+};
 
 export default class EventCharts {
   constructor(rows) {
     this.rows = rows;
     this.eventsData = {};
-    this.currentLocale = document.documentElement.lang === 'rs' ? 'rs' : 'ru'
-    this.t = translations[this.currentLocale]
+    this.currentLocale = document.documentElement.lang === 'rs' ? 'rs' : 'ru';
+    this.t = translations[this.currentLocale];
 
-    Apex.chart = { locales: [ruLocale, rsLocale], defaultLocale: this.currentLocale }
+    Apex.chart = { locales: [ruLocale, rsLocale], defaultLocale: this.currentLocale };
   }
 
   initializeCharts(resultsTarget, volunteersTarget) {
     if (resultsTarget) {
-      const chart = new ApexCharts(resultsTarget, this.#chartOptions('results-count-chart', this.t.participants, 'results_count'))
-      chart.render()
+      const chart = new ApexCharts(resultsTarget, this.#chartOptions('results-count-chart', this.t.participants, 'results_count'));
+      chart.render();
     }
 
     if (volunteersTarget) {
-      const chart = new ApexCharts(volunteersTarget, this.#chartOptions('volunteers-count-chart', this.t.volunteers, 'volunteers_count'))
-      chart.render()
+      const chart = new ApexCharts(volunteersTarget, this.#chartOptions('volunteers-count-chart', this.t.volunteers, 'volunteers_count'));
+      chart.render();
     }
   }
 
