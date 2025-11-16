@@ -169,7 +169,9 @@ ActiveAdmin.setup do |config|
   # Add additional meta tags to the head element of active admin pages.
   #
   # Add tags to all pages logged in users see:
-  config.meta_tags = { author: 'Volodin Y.V.' }
+  meta_tags_options = { viewport: 'width=device-width, initial-scale=1', author: 'Volodin Y.V.' }
+  config.meta_tags = meta_tags_options
+  config.meta_tags_for_logged_out_pages = meta_tags_options
 
   # By default, sign up/sign in/recover password pages are excluded
   # from showing up in search engine results by adding a robots meta
@@ -205,6 +207,12 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   #   config.register_javascript 'my_javascript.js'
+  # Ensure Active Admin loads the packaged admin manifests (which import Arctic Admin)
+  # These files are precompiled and scoped to the admin layout only.
+  config.register_stylesheet 'active_admin.css'
+  config.register_javascript 'active_admin.js'
+  # Load SortableJS for drag/drop ordering in admin (used by Results protocol editor)
+  config.register_javascript 'https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js'
 
   # == CSV options
   #
