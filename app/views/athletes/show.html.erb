@@ -5,9 +5,9 @@
 %>
 <% head_info :description, t('.description', athlete_name:) %>
 
-<div class="row">
-  <div class="col-6">
-    <h2 class="h1 mt-2"><%= head_info :title, athlete_name %></h2>
+<div class="d-flex">
+  <div class="flex-grow-1">
+    <h2 class="h1 mt-2 text-break"><%= head_info :title, athlete_name %></h2>
     <% if @athlete.going_to_event? %>
       <div class="badge bg-success mb-2">
         <%= t 'friendships.friend.going_to', event: @athlete.going_to_event.name %>
@@ -15,10 +15,10 @@
     <% end %>
     <%= render 'friendships/button', athlete: @athlete %>
   </div>
-  <div class="ms-auto col-auto position-relative">
+  <div class="position-relative">
     <%= image_tag user_image_path(@athlete.user), class: 'avatar', title: athlete_name %>
-    <div class="position-absolute top-0 end-0 me-2">
-      <a href="#" class="btn btn-outline-primary rounded-circle" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
+    <div class="position-absolute top-0 end-0">
+      <a href="#" class="btn btn-light rounded-circle border-primary" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
         <i class="fa-solid fa-qrcode" title="QR"></i>
       </a>
     </div>

@@ -14,6 +14,11 @@
 
   width: 150px;
   height: 150px;
+
+  @include media(phoneScreen) {
+    width: 125px;
+    height: 125px;
+  }
 }
 
 .avatar-100 {
