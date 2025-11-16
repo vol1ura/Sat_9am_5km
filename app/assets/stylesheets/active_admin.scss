@@ -1,22 +1,3 @@
-// --- MERGED: keep ActiveAdmin variable overrides from master, and Arctic
-// admin specific rules from the feature branch. This combined file resolves
-// the PR conflict by preserving the intent of the Arctic migration while
-// keeping useful variable overrides that were present on `origin/master`.
-
-// Sass variable overrides must be declared before loading up Active Admin's
-// styles. To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
-// Active Admin source.
-$primary-color: #2a2951 !default;
-$secondary-color: #a0a0a0 !default;
-$table-stripe-color: lighten($primary-color, 70%) !default;
-$link-color: #144469 !default;
-$text-color: #0f0f0f !default;
-$error-color: #d63384 !default;
-$breadcrumbs-color: $link-color !default;
-$table-error-color: lighten($error-color, 25%) !default;
-
-// Arctic Admin base import (from feature branch)
 @import "arctic_admin/base";
 
 /* Fallbacks / fixes when Arctic Admin icon font fails to load
@@ -32,9 +13,9 @@ $table-error-color: lighten($error-color, 25%) !default;
 */
 
 /* Ensure Font Awesome and Quill styles are available for the admin editor UI.
-	 font-awesome is provided by the gem `font-awesome-sass` and is safe to import
-	 only for admin pages. Quill CSS is loaded from CDN as a fallback so toolbar
-	 icons / SVG styles render correctly even if vendor assets are not present.
+	font-awesome is provided by the gem `font-awesome-sass` and is safe to import
+	only for admin pages. Quill CSS is loaded from CDN as a fallback so toolbar
+	icons / SVG styles render correctly even if vendor assets are not present.
 */
 @import "font-awesome";
 @import url('https://cdn.quilljs.com/1.3.6/quill.snow.css');
@@ -87,8 +68,8 @@ $table-error-color: lighten($error-color, 25%) !default;
 }
 
 /* Sortable ghost: hide all cells by default in the dragged ghost and only
-	 show the position and athlete columns so the user sees a compact visual
-	 during drag instead of the whole row. This keeps times visually anchored. */
+   show the position and athlete columns so the user sees a compact visual
+   during drag instead of the whole row. This keeps times visually anchored. */
 .sortable-ghost td { visibility: hidden; }
 .sortable-ghost td.col-position,
 .sortable-ghost td.col-athlete { visibility: visible; }
