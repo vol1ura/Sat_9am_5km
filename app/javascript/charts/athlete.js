@@ -1,6 +1,6 @@
-import ApexCharts from 'apexcharts'
-import { ruLocale } from 'charts/ru'
-import { rsLocale } from 'charts/rs'
+import ApexCharts from 'apexcharts';
+import { ruLocale } from 'charts/ru';
+import { rsLocale } from 'charts/rs';
 
 const translations = {
   ru: {
@@ -11,7 +11,7 @@ const translations = {
     recentResults: 'Nedavni rezultati',
     time: 'vreme',
   }
-}
+};
 
 export default class AthleteCharts {
   constructor(rows) {
@@ -24,7 +24,7 @@ export default class AthleteCharts {
     Apex.chart = {
       locales: [ruLocale, rsLocale],
       defaultLocale: this.currentLocale,
-    }
+    };
 
     const resultsChart = new ApexCharts(container, this.#resultsChartOptions(this.t.recentResults, { max_count: 15 }));
     resultsChart.render();
@@ -106,6 +106,6 @@ export default class AthleteCharts {
         enabled: true,
         formatter: (_, opt) => data.labels[opt.dataPointIndex]
       }
-    }
+    };
   }
 }

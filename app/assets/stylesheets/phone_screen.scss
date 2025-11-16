@@ -1,0 +1,23 @@
+@mixin media($query) {
+  @if $query == phoneScreen {
+    @media (width <= 768px) {
+      @content;
+    }
+  }
+}
+
+@include media(phoneScreen) {
+  .hidden-on-phone {
+    display: none;
+  }
+}
+
+@media (width <= 415px) {
+  .cropped-on-phone {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ".";
+    max-width: 60px;
+  }
+}

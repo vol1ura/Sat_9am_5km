@@ -2,7 +2,7 @@
   <footer class="container-lg">
     <div class="row pt-2">
       <div class="col-7 col-md-3">
-        <a class="fs-5 mb-2 text-reset" href="/" aria-label="Sat9am5km"><%= t '.s95' %></a>
+        <%= link_to t('.s95'), root_path, class: 'fs-5 mb-2 text-reset text-decoration-none', aria: { label: 'Sat9am5km' } %>
       </div>
       <div class="col-12 col-md-6 footer-text fw-light">
         <%= t '.slogan' %>
