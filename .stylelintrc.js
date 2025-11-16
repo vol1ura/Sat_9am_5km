@@ -9,5 +9,7 @@ export default {
     'scss/at-extend-no-missing-placeholder': null,
     // Relax specificity rules
     'no-descending-specificity': null,
+    // Disallow single-line styles
+    'declaration-block-single-line-max-declarations': 0,
   },
 };

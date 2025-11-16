@@ -114,7 +114,7 @@ h6 {
     font-size: 25px;
   }
 
-  :hover {
+  &:hover {
     opacity: 0.85;
   }
 }
@@ -172,6 +172,10 @@ h6 {
 }
 
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0.3; }
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.3;
+  }
 }
