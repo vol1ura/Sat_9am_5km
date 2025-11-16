@@ -212,7 +212,11 @@ ActiveAdmin.setup do |config|
   config.register_stylesheet 'active_admin.css'
   config.register_javascript 'active_admin.js'
   # Load SortableJS for drag/drop ordering in admin (used by Results protocol editor)
-  config.register_javascript 'https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js'
+  config.register_javascript 'active_admin/sortable.min.js'
+  # Load QuillJS locally
+  config.register_javascript 'active_admin/quill.min.js'
+  # Load Select2 locally
+  config.register_javascript 'active_admin/select2.min.js'
 
   # == CSV options
   #

@@ -6,6 +6,7 @@
 	 - ensure icon elements don't show 'tofu' glyph boxes when font missing
 	 - keep this scoped to Active Admin pages
 */
+
 /* Avoid forcing a global font-family on <i>/.icon elements here —
 	 forcing system fonts can break icon-font glyph mapping (shows empty boxes).
 	 We rely on proper asset loading (font-face from Arctic Admin / Font Awesome)
@@ -18,11 +19,12 @@
 	icons / SVG styles render correctly even if vendor assets are not present.
 */
 @import "font-awesome";
-@import url('https://cdn.quilljs.com/1.3.6/quill.snow.css');
+@import "active_admin/quill.snow";
+@import "active_admin/select2.min";
 
 /* If icon pseudo-elements are empty or render square glyphs, hide them */
-.active_admin i:before,
-.active_admin .icon:before {
+.active_admin i::before,
+.active_admin .icon::before {
 	display: inline-block;
 }
 
@@ -62,6 +64,7 @@
 .active_admin form .input.boolean input[type="checkbox"],
 .active_admin .formtastic .input.boolean input[type="checkbox"] {
 	margin: 0;
+
 	/* slightly larger hit area */
 	width: auto;
 	transform: scale(1.05);
@@ -70,10 +73,16 @@
 /* Sortable ghost: hide all cells by default in the dragged ghost and only
    show the position and athlete columns so the user sees a compact visual
    during drag instead of the whole row. This keeps times visually anchored. */
-.sortable-ghost td { visibility: hidden; }
+.sortable-ghost td {
+	visibility: hidden;
+}
 .sortable-ghost td.col-position,
-.sortable-ghost td.col-athlete { visibility: visible; }
-.drag-handle { cursor: move; }
+.sortable-ghost td.col-athlete {
+	visibility: visible;
+}
+.drag-handle {
+	cursor: move;
+}
 
 /* Arctic migration notice styling (Results editor) */
 .arctic-migration-notice {
@@ -99,9 +108,14 @@
 	font-size: 0.95rem;
 }
 
-@media (max-width: 600px) {
-	.arctic-migration-notice { padding: 8px; gap: 8px; }
-	.arctic-migration-notice .arctic-message { font-size: 0.9rem; }
+@media (width <= 600px) {
+	.arctic-migration-notice {
+		padding: 8px;
+		gap: 8px;
+	}
+	.arctic-migration-notice .arctic-message {
+		font-size: 0.9rem;
+	}
 }
 
 /* Mobile / narrow-screen fixes: keep admin forms readable on phones
@@ -109,7 +123,7 @@
 	 - make Quill toolbar wrap and reduce button padding
 	 - action buttons (create/cancel) stack / wrap nicely
 	 These are conservative rules scoped under .active_admin to avoid affecting public site. */
-@media (max-width: 600px) {
+@media (width <= 600px) {
 	.active_admin .main_content,
 	.active_admin .content,
 	.active_admin .panel_contents {
@@ -166,6 +180,6 @@
 	.active_admin .tabs,
 	.active_admin .table_tools {
 		overflow-x: visible !important;
-		word-break: break-word !important;
+		word-break: break-all !important;
 	}
 }
