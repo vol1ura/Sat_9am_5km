@@ -18,6 +18,15 @@ ActiveAdmin.register Result do
     title: -> { "Редактор протокола #{l(@activity.date)}" },
     row_class: ->(r) { 'athlete-error' unless r.correct? },
   ) do
+    # Small notice about new drag-and-drop participant reordering.
+    div class: 'arctic-migration-notice' do
+      span class: 'arctic-badge' do
+        'НОВОЕ'
+      end
+      span class: 'arctic-message' do
+        'Добавлена возможность перетаскивать участников — при переносе перемещается только участник, а время остаётся на позиции.'
+      end
+    end
     selectable_column
     column :position
     column :athlete do |result|
@@ -174,6 +183,46 @@ ActiveAdmin.register Result do
   rescue StandardError => e
     Rollbar.error e
     redirect_to collection_path, alert: t('active_admin.results.insert_result_failed')
+  end
+
+  collection_action :reorder, method: :post, if: proc { can? :update, Result } do
+    ids = Array(params[:order]).map(&:to_i)
+    activity = Activity.find(params[:activity_id])
+
+    # We want to move participants (athlete_id) between fixed position rows
+    # while keeping the total_time anchored to positions. To do that we:
+    # 1. collect athlete_ids for the given result ids in the requested order
+    # 2. nulify athlete_id for all results in the activity
+    # 3. assign athlete_ids to results in position order according to the requested order
+    results = activity.results.order(:position).to_a
+    source_map = Result.where(id: ids).pluck(:id, :athlete_id).to_h
+
+    ActiveRecord::Base.transaction do
+      # clear existing athlete assignments to avoid uniqueness conflicts
+      Result.where(id: results.map(&:id)).update_all(athlete_id: nil)
+
+      # snapshot total_time by result id to ensure we don't accidentally move times
+      before_times = Result.where(id: results.map(&:id)).pluck(:id, :total_time).to_h
+
+      results.each_with_index do |res, idx|
+        src_id = ids[idx]
+        next unless src_id
+        athlete_id = source_map[src_id]
+        # assign athlete_id directly via update_columns to avoid callbacks (which may change times)
+        res.update_columns(athlete_id: athlete_id) if athlete_id.present?
+      end
+
+      # verify times didn't change during the operation
+      after_times = Result.where(id: results.map(&:id)).pluck(:id, :total_time).to_h
+      if before_times != after_times
+        raise "Invariant violation: total_time changed during reorder"
+      end
+    end
+
+    render json: { updated: ids }, status: :ok
+  rescue StandardError => e
+    Rails.logger.error "Results reorder failed: ", e
+    render json: { error: e.message }, status: :unprocessable_entity
   end
 
   member_action :gender_set, method: :patch, if: proc { can? :manage, Athlete } do

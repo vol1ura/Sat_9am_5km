@@ -10,7 +10,6 @@ $dark: #0f0f0f;
 $enable-negative-margins: true;
 
 @import "bootstrap";
-@import "font-awesome";
 
 @mixin media($query) {
   @if $query == phoneScreen {

@@ -23,3 +23,25 @@
 #   # Report violations without enforcing the policy.
 #   # config.content_security_policy_report_only = true
 # end
+
+# Notes for Arctic Admin and admin assets (uncomment / adapt when enabling CSP):
+# If you enable a Content Security Policy in production, ensure the following
+# allowances are made for admin pages so remote assets (Sortable/Quill CDN) and
+# icon fonts are permitted. Keep these as conservative additions, and prefer
+# self-hosting the assets in production where possible.
+#
+#   config.content_security_policy do |policy|
+#     policy.default_src :self, :https
+#     # allow JS from jsdelivr (Sortable) and cdn.quilljs if used via CDN
+#     policy.script_src  :self, :https, 'https://cdn.jsdelivr.net', 'https://cdn.quilljs.com'
+#     # allow styles from the same hosts and inline styles for Quill nonces if necessary
+#     policy.style_src   :self, :https, 'https://cdn.jsdelivr.net', 'https://cdn.quilljs.com', :unsafe_inline
+#     # fonts must be allowed from self, data, and your asset host
+#     policy.font_src    :self, :https, :data
+#     policy.img_src     :self, :https, :data
+#   end
+#
+# Note: If you self-host Quill and Sortable (recommended) you can avoid adding
+# external hosts and keep a tighter policy by serving those files from your
+# asset pipeline (precompile) and referencing them locally.
+

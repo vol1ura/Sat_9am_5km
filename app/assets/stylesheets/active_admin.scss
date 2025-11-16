@@ -1,103 +1,171 @@
-// Sass variable overrides must be declared before loading up Active Admin's styles.
-//
-// To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
-// Active Admin source.
-//
-// For example, to change the sidebar width:
-// $sidebar-width: 242px;
-$primary-color: #2a2951 !default;
-$secondary-color: #a0a0a0 !default;
-$table-stripe-color: lighten($primary-color, 70%) !default;
-$link-color: #144469 !default;
-$text-color: #0f0f0f !default;
-$error-color: #d63384 !default;
-$breadcrumbs-color: $link-color !default;
-$table-error-color: lighten($error-color, 25%);
+@import "arctic_admin/base";
 
-// Active Admin's got SASS!
-@import "active_admin/mixins";
-@import "active_admin/base";
-@import "activeadmin/quill_editor/quill.snow";
-@import "activeadmin/quill_editor_input";
-@import "active_admin/searchable_select";
+/* Fallbacks / fixes when Arctic Admin icon font fails to load
+	 The screenshot shows a row of empty glyph boxes — often caused by
+	 icon fonts not being served. We add safe fallbacks here:
+	 - ensure icon elements don't show 'tofu' glyph boxes when font missing
+	 - keep this scoped to Active Admin pages
+*/
+/* Avoid forcing a global font-family on <i>/.icon elements here —
+	 forcing system fonts can break icon-font glyph mapping (shows empty boxes).
+	 We rely on proper asset loading (font-face from Arctic Admin / Font Awesome)
+	 instead. Keep only the defensive rule below that hides truly empty icon elements.
+*/
 
-// Overriding any non-variable Sass must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
-body {
-  font-size: 82%;
+/* Ensure Font Awesome and Quill styles are available for the admin editor UI.
+	font-awesome is provided by the gem `font-awesome-sass` and is safe to import
+	only for admin pages. Quill CSS is loaded from CDN as a fallback so toolbar
+	icons / SVG styles render correctly even if vendor assets are not present.
+*/
+@import "font-awesome";
+@import url('https://cdn.quilljs.com/1.3.6/quill.snow.css');
+
+/* If icon pseudo-elements are empty or render square glyphs, hide them */
+.active_admin i:before,
+.active_admin .icon:before {
+	display: inline-block;
 }
 
-.suggestions {
-  position: absolute;
-  cursor: pointer;
-  z-index: 100;
-  opacity: 0.91;
-  background-color: #eee;
-  border-radius: 0 0 4px 4px;
-  top: 100%;
-  left: 0;
-  right: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  box-shadow: 0 0 10px #818181;
+.active_admin .icon:empty,
+.active_admin i:empty {
+	display: none;
 }
 
-.suggestions li:first-child {
-  border-top: none !important;
+/* Quill toolbar specific adjustments to avoid theme overrides from Arctic
+	 that can hide icons or squash SVGs. These rules scope to Active Admin only.
+*/
+.active_admin .ql-toolbar .ql-formats button svg {
+	display: inline-block !important;
+	width: 18px !important;
+	height: 18px !important;
+	vertical-align: middle;
+}
+.active_admin .ql-toolbar .ql-formats button {
+	padding: 6px !important;
 }
 
-.suggestions li {
-  padding: 5px 10px;
+
+.active_admin form .inputs .input.boolean,
+.active_admin form .input.boolean,
+.active_admin .formtastic .input.boolean {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5rem;
+}
+.active_admin form .inputs .input.boolean label,
+.active_admin form .input.boolean label,
+.active_admin .formtastic .input.boolean label {
+	margin: 0;
+}
+.active_admin form .inputs .input.boolean input[type="checkbox"],
+.active_admin form .input.boolean input[type="checkbox"],
+.active_admin .formtastic .input.boolean input[type="checkbox"] {
+	margin: 0;
+	/* slightly larger hit area */
+	width: auto;
+	transform: scale(1.05);
 }
 
-.suggestions li:hover {
-  background-color: #ddd;
+/* Sortable ghost: hide all cells by default in the dragged ghost and only
+   show the position and athlete columns so the user sees a compact visual
+   during drag instead of the whole row. This keeps times visually anchored. */
+.sortable-ghost td { visibility: hidden; }
+.sortable-ghost td.col-position,
+.sortable-ghost td.col-athlete { visibility: visible; }
+.drag-handle { cursor: move; }
+
+/* Arctic migration notice styling (Results editor) */
+.arctic-migration-notice {
+	background: #e8f5ff;
+	border-left: 4px solid #1e90ff;
+	padding: 8px 12px;
+	margin-bottom: 12px;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	border-radius: 6px;
+}
+.arctic-migration-notice .arctic-badge {
+	background: #1e90ff;
+	color: #fff;
+	padding: 4px 8px;
+	border-radius: 999px;
+	font-weight: 700;
+	font-size: 0.8rem;
+}
+.arctic-migration-notice .arctic-message {
+	color: #042a3a;
+	font-size: 0.95rem;
 }
 
-.suggestions li.active {
-  background-color: #54528b !important;
-  color: #fff;
+@media (max-width: 600px) {
+	.arctic-migration-notice { padding: 8px; gap: 8px; }
+	.arctic-migration-notice .arctic-message { font-size: 0.9rem; }
 }
 
-.autocomplete {
-  position: relative;
-  margin: 4px 10px;
-}
+/* Mobile / narrow-screen fixes: keep admin forms readable on phones
+	 - force inputs / file inputs to full width
+	 - make Quill toolbar wrap and reduce button padding
+	 - action buttons (create/cancel) stack / wrap nicely
+	 These are conservative rules scoped under .active_admin to avoid affecting public site. */
+@media (max-width: 600px) {
+	.active_admin .main_content,
+	.active_admin .content,
+	.active_admin .panel_contents {
+		padding-left: 12px !important;
+		padding-right: 12px !important;
+	}
 
-.autocomplete .query-field {
-  width: 100%;
-}
+	.active_admin form .inputs .input,
+	.active_admin .formtastic .input,
+	.active_admin .input {
+		width: 100% !important;
+		box-sizing: border-box !important;
+	}
 
-.img-badge {
-  max-width: 100%;
-  max-height: 200px;
-  object-fit: scale-down;
-}
+	/* Quill toolbar: allow wrapping so buttons don't overflow the editor box */
+	.active_admin .ql-toolbar .ql-formats {
+		display: flex !important;
+		flex-wrap: wrap !important;
+		gap: 4px !important;
+	}
+	.active_admin .ql-toolbar button {
+		padding: 4px !important;
+		min-width: 32px !important;
+	}
 
-.warning-box {
-  background-color: #fff3cd;
-  padding: 1em;
-  border-radius: 4px;
-}
+	/* File inputs tend to be inline; make them block and full width */
+	.active_admin input[type="file"],
+	.active_admin .fileinput,
+	.active_admin .file-field {
+		display: block !important;
+		width: 100% !important;
+	}
 
-tr.odd,
-tr.even {
-  &.athlete-error {
-    td.col-athlete, td.col-name, td.col-role {
-      background-color: $table-error-color;
-    }
-  }
-  td.col-position,
-  td.col-total_time {
-    &.error {
-      background-color: $table-error-color;
-    }
-  }
-}
+	/* Action buttons at bottom: allow wrap and accessible hit areas */
+	.active_admin .actions,
+	.active_admin .form-actions {
+		display: flex !important;
+		flex-wrap: wrap !important;
+		gap: 8px !important;
+		justify-content: flex-start !important;
+	}
+	.active_admin .actions .button,
+	.active_admin .form-actions .button,
+	.active_admin .actions .btn,
+	.active_admin .form-actions .btn {
+		flex: 0 0 auto !important;
+		padding: .45rem .9rem !important;
+	}
 
-.ui-datepicker-calendar td:nth-child(6) {
-  background: #ffb9f6;
+	/* Ensure panels and footers don't cause horizontal scroll */
+	.active_admin .panel,
+	.active_admin .panel_contents,
+	.active_admin .footer,
+	.active_admin .tabs,
+	.active_admin .table_tools {
+		overflow-x: visible !important;
+		word-break: break-word !important;
+	}
 }
