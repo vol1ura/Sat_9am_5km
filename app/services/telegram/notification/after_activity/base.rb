@@ -12,10 +12,10 @@ module Telegram
           return unless (telegram_id = athlete&.user&.telegram_id)
 
           @entity.with_lock do
-            return if @entity.informed
-
-            notify!(telegram_id, disable_web_page_preview: true)
-            @entity.update!(informed: true)
+            unless @entity.informed
+              notify!(telegram_id, disable_web_page_preview: true)
+              @entity.update!(informed: true)
+            end
           end
         rescue StandardError => e
           Rollbar.error e, telegram_id: telegram_id, entity_id: @entity.id, entity_class: @entity.class
