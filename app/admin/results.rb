@@ -207,21 +207,20 @@ ActiveAdmin.register Result do
       results.each_with_index do |res, idx|
         src_id = ids[idx]
         next unless src_id
+
         athlete_id = source_map[src_id]
         # assign athlete_id directly via update_columns to avoid callbacks (which may change times)
-        res.update_columns(athlete_id: athlete_id) if athlete_id.present?
+        res.update_columns(athlete_id:) if athlete_id.present?
       end
 
       # verify times didn't change during the operation
       after_times = Result.where(id: results.map(&:id)).pluck(:id, :total_time).to_h
-      if before_times != after_times
-        raise "Invariant violation: total_time changed during reorder"
-      end
+      raise 'Invariant violation: total_time changed during reorder' if before_times != after_times
     end
 
     render json: { updated: ids }, status: :ok
   rescue StandardError => e
-    Rails.logger.error "Results reorder failed: ", e
+    Rails.logger.error 'Results reorder failed: ', e
     render json: { error: e.message }, status: :unprocessable_entity
   end
 

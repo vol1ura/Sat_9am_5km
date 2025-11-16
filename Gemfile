@@ -7,12 +7,12 @@ ruby '3.4.5'
 gem 'rails', '~> 8.0.0'
 
 gem 'activeadmin'
-gem 'arctic_admin'
 gem 'activeadmin-localize'
 gem 'activeadmin_quill_editor'
 gem 'activeadmin-searchable_select'
 gem 'active_storage_dashboard'
 gem 'active_storage_validations'
+gem 'arctic_admin'
 gem 'audited'
 gem 'autoprefixer-rails'
 gem 'bootsnap', require: false
