@@ -1,0 +1,27 @@
+<div class="utility-card admin-utilities" data-controller="export-toggle">
+  <div class="card-header">
+    <i class="fas fa-calendar-alt card-icon"></i>
+    <h5 class="card-title">Месячные тренды</h5>
+  </div>
+  <%= form_with url: admin_utilities_export_monthly_trends_csv_path, local: true, html: { class: 'utility-form' } do |f| %>
+    <div class="mb-3">
+      <%= f.label :model, 'Модель', class: 'form-label' %>
+      <div class="btn-group d-flex mt-2" role="group" aria-label="Model" data-export-toggle-target="options">
+        <%= f.radio_button :model, 'results', class: 'btn-check', id: 'model_results', data: { action: 'export-toggle#change' } %>
+        <%= label_tag 'model_results', 'Результаты', class: 'btn btn-outline-primary flex-fill text-start' %>
+        <%= f.radio_button :model, 'volunteers', class: 'btn-check', id: 'model_volunteers', data: { action: 'export-toggle#change' } %>
+        <%= label_tag 'model_volunteers', 'Волонтёры', class: 'btn btn-outline-primary flex-fill text-start' %>
+      </div>
+    </div>
+
+    <small class="text-muted d-block mb-3">Выберите модель для генерации месячных трендов — статистика по результатам или по волонтёрствам.</small>
+    <div class="mb-2">
+      <small class="text-muted d-block"><strong>Результаты:</strong> агрегированные месячные метрики по событиям за последний год — количество событий, количество результатов, среднее число результатов на событие и количество новичков.</small>
+      <small class="text-muted d-block"><strong>Волонтёры:</strong> агрегированная статистика волонтёрской активности за последний год .</small>
+    </div>
+
+    <div>
+      <%= f.submit 'Сгенерировать месячные тренды', class: 'btn btn-primary', data: { confirm: 'Запустить задачу на создание и отправку отчёта?', export_toggle_target: 'submit' } %>
+    </div>
+  <% end %>
+</div>

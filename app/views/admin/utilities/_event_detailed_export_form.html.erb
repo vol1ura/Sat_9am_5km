@@ -1,0 +1,26 @@
+<%= form_with url: admin_utilities_export_event_detailed_csv_path, local: true, html: { class: 'mb-4' } do |f| %>
+  <div class="row g-3 align-items-end">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+<div class="utility-card">
+  <div class="card-header">
+    <i class="fas fa-chart-line card-icon"></i>
+    <h5 class="card-title">Детализированный экспорт</h5>
+  </div>
+  <%= form_with url: admin_utilities_export_event_detailed_csv_path, local: true, html: { class: 'utility-form' } do |f| %>
+    <div class="mb-3">
+      <%= f.label :event_id, 'Мероприятие', class: 'form-label' %>
+      <%= f.collection_select :event_id, Event.order(:visible_order, :name), :id, :name, { include_blank: true }, { class: 'form-select' } %>
+    </div>
+
+    <small class="text-muted d-block mb-3">Детализированный отчёт: расширенный CSV с посекундными данными (если доступны).</small>
+
+    <div>
+      <%= f.submit 'Сгенерировать детализированный отчёт', class: 'btn btn-primary' , data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
+    </div>
+  <% end %>
+</div>
+<% end %>

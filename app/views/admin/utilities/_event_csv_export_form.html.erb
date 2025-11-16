@@ -1,15 +1,18 @@
-<%= form_with url: admin_utilities_export_event_csv_path do |f| %>
-  <div style="margin-bottom: 12px">
-    <%= f.label :event_id, 'Мероприятие' %>
-    <%=
-      f.collection_select(
-        :event_id,
-        Event.order(:visible_order, :name),
-        :id,
-        :name,
-        include_blank: true,
-      )
-    %>
+<div class="utility-card">
+  <div class="card-header">
+    <i class="fas fa-file-csv card-icon"></i>
+    <h5 class="card-title">Экспорт результатов мероприятия</h5>
   </div>
-  <%= f.submit 'Запросить', data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
-<% end %>
+  <%= form_with url: admin_utilities_export_event_csv_path, local: true, html: { class: 'utility-form' } do |f| %>
+    <div class="mb-3">
+      <%= f.label :event_id, 'Мероприятие', class: 'form-label' %>
+      <%= f.collection_select :event_id, Event.order(:visible_order, :name), :id, :name, { include_blank: true }, { class: 'form-select' } %>
+    </div>
+
+    <small class="text-muted d-block mb-3">Экспортирует CSV с общими результатами и волонтёрской активностью для выбранного мероприятия — список участников (имя, номер, время/результат, место, возрастная категория) и привязанные записи по волонтёрствам.</small>
+
+    <div>
+      <%= f.submit 'Запросить', class: 'btn btn-primary' , data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
+    </div>
+  <% end %>
+</div>
