@@ -3,21 +3,27 @@
 
 <p><%= t '.description' %></p>
 
-<%= form_with url: results_ratings_path, method: :get, html: { class: 'mt-4', role: 'search' } do |f| %>
+<%= form_with url: results_ratings_path, method: :get, html: { class: 'mt-4 mb-2', role: 'search' } do |f| %>
   <%= f.hidden_field :gender, value: (params[:gender].presence || 'male'), id: 'gender-input' %>
   <div class="row g-2">
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 col-sm-6 col-lg-3">
       <%= f.text_field :name, value: params[:name], class: 'form-control', placeholder: t('.name_placeholder'), 'aria-label': t('.name_placeholder') %>
     </div>
-    <div class="col-12 col-sm-6 col-md-3" data-controller="search-combobox" data-search-combobox-initial-id-value="<%= @club&.id %>" data-search-combobox-initial-name-value="<%= @club&.name %>">
+    <div class="col-12 col-sm-6 col-lg-3" data-controller="search-combobox" data-search-combobox-initial-id-value="<%= @club&.id %>" data-search-combobox-initial-name-value="<%= @club&.name %>">
       <%= f.combobox :club_id, search_clubs_path, id: 'club-id-box', placeholder: t('.club_placeholder') %>
     </div>
-    <div class="col-12 col-sm-6 col-md-3" data-controller="search-combobox" data-search-combobox-initial-id-value="<%= @event&.id %>" data-search-combobox-initial-name-value="<%= @event&.name %>">
+    <div class="col-12 col-sm-6 col-lg-3" data-controller="search-combobox" data-search-combobox-initial-id-value="<%= @event&.id %>" data-search-combobox-initial-name-value="<%= @event&.name %>">
       <%= f.combobox :event_id, search_events_path, id: 'event-id-box', placeholder: t('.event_placeholder') %>
     </div>
-    <div class="col-12 col-sm-6 col-md-3">
-      <button class="btn btn-outline-primary mb-2 me-2" type="submit"><%= t '.search_button' %></button>
-      <%= link_to t('.reset_button'), results_ratings_path(gender: params.key?(:gender) ? params[:gender] : 'male'), id: 'results-reset', class: 'btn btn-outline-secondary mb-2' %>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <button class="btn btn-outline-primary me-2" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <%= t '.search_button' %>
+      </button>
+      <%= link_to results_ratings_path(gender: params.key?(:gender) ? params[:gender] : 'male'), id: 'results-reset', class: 'btn btn-outline-secondary' do %>
+        <i class="fa-solid fa-times"></i>
+        <%= t '.reset_button' %>
+      <% end %>
     </div>
   </div>
 <% end %>
