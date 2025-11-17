@@ -14,7 +14,6 @@ ActiveAdmin.register Permission do
   index download_links: false
 
   form do |f|
-    f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
       f.input :subject_class, as: :select, collection: Permission::CLASSES
       f.input :action, as: :select, collection: Permission::ACTIONS

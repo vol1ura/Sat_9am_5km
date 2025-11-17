@@ -38,8 +38,12 @@ class Ability
   end
 
   def permission_param(subject_class, permissions)
-    param = { event_id: permissions.pluck(:event_id).compact.uniq }.compact_blank
-    subject_class.in?(%w[Result Volunteer]) ? { activity: param }.compact_blank : param
+    return {} if subject_class.in?(%w[Athlete Club])
+
+    event_ids = permissions.pluck(:event_id).compact.uniq
+    return {} if event_ids.empty?
+
+    subject_class.in?(%w[Result Volunteer]) ? { activity: { event_id: event_ids } } : { event_id: event_ids }
   end
 
   def set_restrictions

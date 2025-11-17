@@ -9,4 +9,5 @@ class Permission < ApplicationRecord
 
   validates :action, inclusion: ACTIONS
   validates :subject_class, inclusion: CLASSES
+  validates :event_id, absence: true, if: -> { subject_class.in?(%w[Athlete Club]) }
 end
