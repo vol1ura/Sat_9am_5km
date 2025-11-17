@@ -597,7 +597,6 @@ rs:
       friends_protocol: Prijateljski protokol
       duels: Trkački dueli
       badges: Bedževi
-      articles: Članci
       profile: Profil
       settings: Podešavanja
       admin_panel: Administratorski panel
@@ -613,6 +612,7 @@ rs:
       support: Podržite projekat
       feedback: Povratne informacije
       joining: Želite S95 kod vas?
+      articles: Članci
     bottom:
       s95: S95 park trčanje
       slogan: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. I vi možete slobodno učestvovati u našim trkama, razvoju ili kreiranju sadržaja.'

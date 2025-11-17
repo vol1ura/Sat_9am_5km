@@ -10,5 +10,6 @@
     <% about_s95_pages.each do |page| %>
       <li><%= link_to t(".#{page}"), page_path(page:), class: "dropdown-item #{'active' if params[:page] == page}" %></li>
     <% end %>
+    <li><%= link_to t('.articles'), articles_path, class: "dropdown-item #{'active' if params[:controller] == 'articles'}" %></li>
   </ul>
 </li>
