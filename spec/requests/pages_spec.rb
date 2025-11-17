@@ -47,7 +47,7 @@ RSpec.describe '/pages' do
   end
 
   describe 'POST /submit_feedback' do
-    let(:message) { 'Great site!' }
+    let(:message) { 'a' * 2000 }
 
     before do
       allow(NotificationMailer).to receive_message_chain(:with, :feedback, :deliver_later) # rubocop:disable RSpec/MessageChain
@@ -64,7 +64,7 @@ RSpec.describe '/pages' do
     end
 
     context 'when message is too long' do
-      let(:message) { 'a' * 1000 }
+      let(:message) { 'a' * 2001 }
 
       it 'does not send feedback and redirects with alert' do
         expect(NotificationMailer).not_to have_received(:with)

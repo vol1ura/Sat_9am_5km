@@ -2,7 +2,7 @@
 
 class PagesController < ApplicationController
   ALLOWED_PAGES = %w[about feedback joining rules support additional-events privacy-policy robots 5za5 donor].freeze
-  MAX_FEEDBACK_SIZE = 950
+  MAX_FEEDBACK_SIZE = 2000
 
   before_action :validate_page, only: :show
 
