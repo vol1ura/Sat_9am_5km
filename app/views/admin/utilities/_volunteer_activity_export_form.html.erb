@@ -1,0 +1,18 @@
+<div class="utility-card">
+  <div class="card-header">
+    <i class="fas fa-users card-icon"></i>
+    <h5 class="card-title">Экспорт волонтёров</h5>
+  </div>
+  <%= form_with url: admin_utilities_export_volunteer_activity_csv_path, local: true, html: { class: 'utility-form' } do |f| %>
+    <div class="mb-3">
+      <%= f.label :event_id, 'Мероприятие', class: 'form-label' %>
+      <%= f.collection_select :event_id, Event.order(:visible_order, :name), :id, :name, { include_blank: true }, { class: 'form-select' } %>
+    </div>
+
+    <small class="text-muted d-block mb-3">Отчёт по волонтёрам: список волонтёров для выбранного мероприятия.</small>
+
+    <div>
+      <%= f.submit 'Сгенерировать отчёт по волонтёрам', class: 'btn btn-primary' , data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
+    </div>
+  <% end %>
+</div>

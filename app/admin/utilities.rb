@@ -8,7 +8,25 @@ ActiveAdmin.register_page 'Utilities' do
       tab 'Отчёты' do
         panel 'Выгрузка данных по выбранному мероприятию' do
           para 'Будет сформирован CSV файл с отчётом по всем результатам и волонтёрствам на выбранном мероприятии.'
-          render partial: 'event_csv_export_form'
+
+
+          div class: 'utilities-grid row' do
+            div class: 'col-md-6' do
+              render partial: 'event_csv_export_form'
+            end
+
+            div class: 'col-md-6' do
+              render partial: 'event_detailed_export_form'
+            end
+
+            div class: 'col-md-6' do
+              render partial: 'volunteer_activity_export_form'
+            end
+
+            div class: 'col-md-6' do
+              render partial: 'monthly_trends_export_form'
+            end
+          end
         end
       end
 
@@ -114,6 +132,36 @@ ActiveAdmin.register_page 'Utilities' do
       flash[:notice] = t '.reports.task_queued'
     else
       flash[:alert] = t '.reports.event_not_selected'
+    end
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_event_detailed_csv, method: :post do
+    if (event_id = params[:event_id]).present?
+      EventDetailedResultsCsvExportJob.perform_later(event_id.to_i, current_user.id)
+      flash[:notice] = t '.reports.task_queued'
+    else
+      flash[:alert] = t '.reports.event_not_selected'
+    end
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_volunteer_activity_csv, method: :post do
+    if (event_id = params[:event_id]).present?
+      VolunteerActivityCsvExportJob.perform_later(event_id.to_i, current_user.id)
+      flash[:notice] = t '.reports.task_queued'
+    else
+      flash[:alert] = t '.reports.event_not_selected'
+    end
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_monthly_trends_csv, method: :post do
+    if (model = params[:model]).present?
+      MonthlyTrendsCsvExportJob.perform_later(model.to_s, current_user.id)
+      flash[:notice] = t '.reports.task_queued'
+    else
+      flash[:alert] = t '.reports.model_not_selected'
     end
     redirect_to admin_utilities_path
   end

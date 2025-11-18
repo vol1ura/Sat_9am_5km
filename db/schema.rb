@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_24_083457) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_07_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -66,6 +66,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_083457) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token"
+    t.jsonb "beta_timer_stream", default: [], null: false
+    t.jsonb "beta_scanner_stream", default: [], null: false
+    t.jsonb "beta_alignment_report", default: {}, null: false
+    t.index ["beta_scanner_stream"], name: "index_activities_on_beta_scanner_stream", using: :gin
+    t.index ["beta_timer_stream"], name: "index_activities_on_beta_timer_stream", using: :gin
     t.index ["event_id", "date"], name: "index_activities_on_event_id_and_date"
   end
 
@@ -205,6 +210,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_24_083457) do
     t.bigint "calls"
     t.datetime "captured_at", precision: nil
     t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "report_type", null: false
+    t.jsonb "params", default: {}
+    t.string "status", default: "queued", null: false
+    t.datetime "started_at", precision: nil
+    t.datetime "finished_at", precision: nil
+    t.text "error_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "web_visible", default: false, null: false
+    t.index ["report_type"], name: "index_reports_on_report_type"
+    t.index ["user_id", "status"], name: "index_reports_on_user_id_and_status"
+    t.index ["user_id"], name: "index_reports_on_user_id"
+    t.index ["web_visible"], name: "index_reports_on_web_visible"
   end
 
   create_table "results", force: :cascade do |t|
