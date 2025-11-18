@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.4.5'
+ruby '3.4.7'
 
 gem 'rails', '~> 8.0.0'
 
@@ -10,6 +10,7 @@ gem 'activeadmin'
 gem 'activeadmin-localize'
 gem 'activeadmin_quill_editor'
 gem 'activeadmin-searchable_select'
+gem 'arctic_admin'
 gem 'active_storage_dashboard'
 gem 'active_storage_validations'
 gem 'audited'

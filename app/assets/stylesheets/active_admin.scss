@@ -1,29 +1,17 @@
-// Sass variable overrides must be declared before loading up Active Admin's styles.
+// Active Admin stylesheet - use Arctic Admin theme only.
+// This file is loaded for ActiveAdmin pages only and must not affect
+// the main site styles. We import Arctic Admin's main entrypoint and
+// only the admin-specific assets (Quill editor + searchable select inputs).
 
-// To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
-// Active Admin source.
+// Load Font Awesome so admin pages have the same icons as the main site.
+// We use the `font-awesome-sass` gem which provides the necessary fonts
+// via the asset pipeline.
+@import "font-awesome";
 
-// For example, to change the sidebar width:
-// $sidebar-width: 242px;
-@use "sass:color";
-
-$primary-color: #2a2951 !default;
-$secondary-color: #a0a0a0 !default;
-$table-stripe-color: color.adjust($primary-color, $lightness: 70%) !default;
-$link-color: #144469 !default;
-$text-color: #0f0f0f !default;
-$error-color: #d63384 !default;
-$breadcrumbs-color: $link-color !default;
-$table-error-color: color.adjust($error-color, $lightness: 25%);
-
-// Active Admin's got SASS!
-@import "active_admin/mixins";
-@import "active_admin/base";
+@import "arctic_admin/main";
 @import "activeadmin/quill_editor/quill.snow";
 @import "activeadmin/quill_editor_input";
 @import "active_admin/searchable_select";
-
 
 body {
   font-size: 82%;
@@ -105,3 +93,7 @@ tr.even {
 .ui-datepicker-calendar td:nth-child(6) {
   background: #ffb9f6;
 }
+
+// Any admin-specific overrides should go into a separate partial
+// (e.g. app/assets/stylesheets/admin_overrides.scss) and be intentionally
+// minimal. Right now we rely on Arctic Admin defaults for the admin look.
