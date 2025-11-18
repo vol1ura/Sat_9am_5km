@@ -13,6 +13,11 @@
 @import "activeadmin/quill_editor_input";
 @import "active_admin/searchable_select";
 
+// Fallback for table error color in case the Arctic Admin main
+// theme doesn't define it yet in this environment. Keep as a
+// conservative red tint used for error highlighting.
+$table-error-color: #f8d7da !default;
+
 body {
   font-size: 82%;
 }
