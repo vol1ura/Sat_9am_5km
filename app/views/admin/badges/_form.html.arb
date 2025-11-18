@@ -38,7 +38,13 @@ active_admin_form_for [:admin, resource] do |f|
       },
     )
     input :received_date, required: true if f.object.funrun_kind?
-    input :image, as: :file, input_html: { accept: 'image/png' }, required: true
+    input(
+      :image,
+      as: :file,
+      input_html: { accept: 'image/png' },
+      required: true,
+      hint: (image_tag f.object.image.variant(:thumb), class: 'img-hint' if f.object.image.attached?),
+    )
   end
 
   f.actions

@@ -62,6 +62,7 @@ ru:
         phone: телефон
         emergency_contact_name: имя
         emergency_contact_phone: телефон
+        created_at: создан
       permission:
         event: мероприятие
         user: пользователь

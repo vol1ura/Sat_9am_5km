@@ -310,8 +310,8 @@ rs:
         delete_model: Obriši poziciju
     scopes:
       all: Svi
-      admin: Admins
-      super_admin: Glavni admins
+      admin: Admini
+      super_admin: Glavni admini
       supervisors: Nadzornici
       published: Objavljeno
       unpublished: Neobjavljeno
@@ -325,6 +325,8 @@ rs:
       eq: jednako
       start: počinje sa
       end: završava sa
+      gt: veće od
+      lt: manje od
 
   formtastic:
     create: 'Kreiraj'

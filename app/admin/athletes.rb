@@ -18,8 +18,8 @@ ActiveAdmin.register Athlete do
   filter(
     :male,
     as: :select,
-    label: I18n.t('common.gender'),
-    collection: { I18n.t('common.man') => true, I18n.t('common.woman') => false },
+    label: -> { I18n.t 'common.gender' },
+    collection: -> { { I18n.t('common.man') => true, I18n.t('common.woman') => false } },
   )
   filter :club, as: :searchable_select
   filter :event, as: :searchable_select

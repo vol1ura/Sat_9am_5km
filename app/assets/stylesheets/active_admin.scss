@@ -69,6 +69,12 @@ body {
   width: 100%;
 }
 
+.img-hint {
+  max-width: 60px;
+  max-height: 60px;
+  object-fit: scale-down;
+}
+
 .img-badge {
   max-width: 100%;
   max-height: 200px;

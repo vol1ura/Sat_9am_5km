@@ -6,25 +6,33 @@ active_admin_form_for [:admin, resource] do |f|
   f.inputs do
     input :country
     input :name
-    input :description, as: :quill_editor,
-                        input_html: {
-                          data: {
-                            options: {
-                              modules: {
-                                toolbar: [
-                                  %w[bold italic strike],
-                                  %w[blockquote code-block],
-                                  [{ list: 'ordered' }, { list: 'bullet' }],
-                                  ['link'],
-                                  ['clean'],
-                                ],
-                              },
-                              placeholder: 'Какой же классный клуб...',
-                              theme: 'snow',
-                            },
-                          },
-                        }
-    input :logo, as: :file, input_html: { accept: 'image/jpeg,image/png' }
+    input(
+      :description,
+      as: :quill_editor,
+      input_html: {
+        data: {
+          options: {
+            modules: {
+              toolbar: [
+                %w[bold italic strike],
+                %w[blockquote code-block],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link'],
+                ['clean'],
+              ],
+            },
+            placeholder: 'Какой же классный клуб...',
+            theme: 'snow',
+          },
+        },
+      },
+    )
+    input(
+      :logo,
+      as: :file,
+      input_html: { accept: 'image/jpeg,image/png' },
+      hint: (image_tag f.object.logo.variant(:thumb), class: 'img-hint' if f.object.logo.attached?),
+    )
   end
 
   f.actions

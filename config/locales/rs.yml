@@ -64,6 +64,7 @@ rs:
         phone: telefon
         emergency_contact_name: ime
         emergency_contact_phone: telefon
+        created_at: kreiran
       permission:
         event: događaj
         user: korisnik
