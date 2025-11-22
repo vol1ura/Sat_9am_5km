@@ -1,4 +1,4 @@
-rs:
+sr:
   activerecord:
     models:
       club:
@@ -518,7 +518,7 @@ rs:
   country:
     ru: Rusija
     by: Belorusija
-    rs: Srbija
+    sr: Srbija
   duels:
     no_athlete_access: Za pregled dueli potrebno je kreirati profil sportiste
     index:

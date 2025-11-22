@@ -1,5 +1,5 @@
-export const rsLocale = {
-  'name': 'rs',
+export const srLocale = {
+  'name': 'sr',
   'options': {
     'months': [
       'Januar',

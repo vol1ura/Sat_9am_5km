@@ -52,14 +52,14 @@ export default class extends Controller {
       mapElement.style.minHeight = '600px';
 
       const defaultCenters = {
-        ru: [55.7558, 37.6173], // Москва
-        rs: [44.8206, 20.4622], // Белград
-        by: [53.9045, 27.5615]  // Минск
+        ru: [55.7558, 37.6173], // Moscow
+        sr: [44.8206, 20.4622], // Belgrade
+        by: [53.9045, 27.5615]  // Minsk
       };
       const defaultZooms = {
-        ru: 5, // Россия
-        rs: 8, // Сербия
-        by: 5  // Беларусь
+        ru: 5, // Russia
+        sr: 8, // Serbia
+        by: 5  // Belarus
       };
       const defaultCenter = defaultCenters[document.documentElement.lang] || defaultCenters.ru;
       const defaultZoom = defaultZooms[document.documentElement.lang] || defaultZooms.ru;

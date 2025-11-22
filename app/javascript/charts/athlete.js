@@ -1,13 +1,13 @@
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
-import { rsLocale } from 'charts/rs';
+import { srLocale } from 'charts/sr';
 
 const translations = {
   ru: {
     recentResults: 'Недавние результаты',
     time: 'время',
   },
-  rs: {
+  sr: {
     recentResults: 'Nedavni rezultati',
     time: 'vreme',
   }
@@ -16,13 +16,13 @@ const translations = {
 export default class AthleteCharts {
   constructor(rows) {
     this.rows = rows;
-    this.currentLocale = document.documentElement.lang === 'rs' ? 'rs' : 'ru';
+    this.currentLocale = document.documentElement.lang === 'sr' ? 'sr' : 'ru';
     this.t = translations[this.currentLocale];
   }
 
   render(container) {
     Apex.chart = {
-      locales: [ruLocale, rsLocale],
+      locales: [ruLocale, srLocale],
       defaultLocale: this.currentLocale,
     };
 

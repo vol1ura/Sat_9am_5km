@@ -24,15 +24,12 @@ class ApplicationController < ActionController::Base
 
   def current_locale
     requested = params[:lang]&.to_s&.downcase&.to_sym
-    if requested && I18n.available_locales.include?(requested)
-      requested
-    else
-      domain_locale
-    end
+
+    requested && I18n.available_locales.include?(requested) ? requested : domain_locale
   end
 
   def domain_locale
-    I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale
+    top_level_domain == :rs ? :sr : :ru
   end
 
   def top_level_domain
