@@ -30,7 +30,7 @@ module Athletes
     end
 
     def time_to_seconds(time)
-      (time.hour * 3600) + (time.min * 60) + time.sec
+      (((time.hour * 60) + time.min) * 60) + time.sec
     end
   end
 end

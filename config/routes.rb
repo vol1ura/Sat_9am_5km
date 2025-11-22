@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get :dashboard, on: :collection
   end
   scope path: 'athletes' do
+    get ':code/best_result', to: 'athletes#best_result', defaults: { format: :json }
     resources :duels, only: %i[index show] do
       get :protocol, on: :collection
     end
