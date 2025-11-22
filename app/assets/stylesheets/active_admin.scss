@@ -201,19 +201,70 @@ table.index_table {
 
 @media screen and (max-width: 768px) {
 
+    body {
+        font-size: 14px;
+    }
+
+    #title_bar {
+        padding: 1rem;
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .action_items {
+            margin-top: 1rem;
+
+            a,
+            span {
+                padding: 0.75rem 1rem;
+                font-size: 14px;
+            }
+        }
+    }
+
+    #active_admin_content {
+        padding: 1rem;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+
+    .panel {
+        margin-bottom: 1.5rem;
+    }
+
+    .panel_contents {
+        padding: 1rem;
+    }
 
     .index_content {
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     table.index_table {
         min-width: 600px;
+        font-size: 13px;
+
+        th,
+        td {
+            padding: 0.75rem 0.5rem;
+        }
 
         td.col-actions {
             a {
                 display: block;
                 margin-right: 0;
                 margin-bottom: 0.5rem;
+                padding: 0.5rem 0.75rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
                 &:last-child {
                     margin-bottom: 0;
@@ -222,31 +273,72 @@ table.index_table {
         }
     }
 
+    form {
+        fieldset {
+            padding: 1rem 0.5rem;
 
-    form .buttons {
-        flex-direction: column;
-        align-items: stretch;
+            ol>li {
+                margin-bottom: 1.5rem;
+            }
 
-        input[type="submit"],
-        a {
-            width: 100%;
-            text-align: center;
+            label {
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="number"],
+            input[type="date"],
+            input[type="datetime-local"],
+            input[type="search"],
+            textarea,
+            select {
+                font-size: 16px;
+                padding: 0.75rem;
+                min-height: 44px;
+            }
+
+            textarea {
+                min-height: 120px;
+            }
+        }
+
+        .buttons {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1rem;
+
+            input[type="submit"],
+            a {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                min-height: 50px;
+                font-size: 16px;
+                font-weight: 600;
+            }
         }
     }
 
+    .table_tools {
+        padding: 0 1rem;
 
-    .table_tools .scopes {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        .scopes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
 
-        .scope {
-            margin-right: 0;
-            margin-bottom: 0;
+            .scope {
+                margin-right: 0;
+                margin-bottom: 0;
+                font-size: 13px;
+                padding: 0.5rem 1rem;
+            }
         }
     }
 
-    // Prevent inputs and selects from overflowing on mobile
     form,
     .filter_form,
     .sidebar_section {
@@ -266,16 +358,46 @@ table.index_table {
         }
     }
 
-    // Fix filter form specifically
     #filters_sidebar_section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+
+        h3 {
+            font-size: 16px;
+        }
+
         .filter_form_field {
+            margin-bottom: 1.25rem;
+
+            label {
+                font-size: 14px;
+                margin-bottom: 0.5rem;
+            }
 
             input,
             select {
                 max-width: 100%;
                 width: 100%;
                 box-sizing: border-box;
+                padding: 0.75rem;
+                font-size: 16px;
+                min-height: 44px;
             }
+        }
+    }
+
+    .paginated_collection_contents {
+        margin-bottom: 2rem;
+    }
+
+    .pagination {
+        padding: 1rem;
+        font-size: 14px;
+
+        a,
+        span {
+            padding: 0.5rem 0.75rem;
+            margin: 0 0.25rem;
         }
     }
 }
