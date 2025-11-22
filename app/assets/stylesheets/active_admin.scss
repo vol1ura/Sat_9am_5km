@@ -24,3 +24,55 @@
     gap: 0.5rem;
     white-space: nowrap;
 }
+
+.autocomplete {
+    position: relative;
+    width: 100%;
+
+    .query-field {
+        width: 100%;
+    }
+
+    .suggestions {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: white;
+        border: 1px solid #d3d3d3;
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-height: 200px;
+        overflow-y: auto;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            color: #333;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &:hover,
+            &.active {
+                background-color: #f0f4f8;
+                color: #2e2e2e;
+            }
+
+            b {
+                font-weight: 600;
+                color: #007bff;
+            }
+        }
+    }
+}
