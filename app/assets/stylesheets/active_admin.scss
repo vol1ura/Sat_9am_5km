@@ -77,7 +77,7 @@
     }
 }
 
-// Fix for radio button alignment in Arctic Admin
+
 form fieldset.choices {
     .choices-group {
         display: flex;
@@ -97,6 +97,19 @@ form fieldset.choices {
         label {
             margin: 0;
             display: inline-block;
+        }
+    }
+}
+
+
+body.admin_activity_results.index {
+    table.index_table tbody tr {
+        &:nth-child(odd) {
+            background-color: #f5f5f5;
+        }
+
+        &:nth-child(even) {
+            background-color: #ffffff;
         }
     }
 }

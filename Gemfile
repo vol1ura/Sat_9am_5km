@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.4.7'
+ruby '3.4.5'
 
 gem 'rails', '~> 8.0.0'
 
@@ -99,3 +99,5 @@ group :development do
   gem 'bcrypt_pbkdf', '~> 1.1'
   gem 'ed25519', '~> 1.3'
 end
+
+# Added by Antigravity: placeholder for future gem changes
