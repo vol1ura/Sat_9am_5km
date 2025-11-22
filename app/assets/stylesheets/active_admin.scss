@@ -116,6 +116,8 @@ body.admin_activity_results.index {
 
 
 form {
+    margin-bottom: 3rem;
+
     fieldset {
         margin-bottom: 1.5rem;
 
@@ -150,6 +152,7 @@ form {
 
     .actions {
         margin-top: 2rem;
+        margin-bottom: 2rem;
         padding-top: 1.5rem;
         border-top: 1px solid #e8e8e8;
     }
@@ -158,5 +161,114 @@ form {
         display: flex;
         gap: 0.75rem;
         align-items: center;
+        flex-wrap: wrap;
     }
+}
+
+
+table.index_table {
+    margin-bottom: 2rem;
+
+    td.col-actions {
+        white-space: nowrap;
+
+        a {
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-bottom: 0.25rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+
+.table_tools {
+    margin-bottom: 1.5rem;
+
+    .scopes {
+        margin-bottom: 1rem;
+
+        .scope {
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+
+
+    .index_content {
+        overflow-x: auto;
+    }
+
+    table.index_table {
+        min-width: 600px;
+
+        td.col-actions {
+            a {
+                display: block;
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+
+    form .buttons {
+        flex-direction: column;
+        align-items: stretch;
+
+        input[type="submit"],
+        a {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+
+    .table_tools .scopes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+
+        .scope {
+            margin-right: 0;
+            margin-bottom: 0;
+        }
+    }
+}
+
+
+@media screen and (min-width: 769px) {
+    table.index_table {
+        td.col-actions {
+            min-width: 200px;
+
+            a {
+                white-space: nowrap;
+            }
+        }
+    }
+
+    form .buttons {
+        justify-content: flex-start;
+    }
+}
+
+
+#wrapper {
+    padding-bottom: 3rem;
+}
+
+#active_admin_content {
+    margin-bottom: 2rem;
 }
