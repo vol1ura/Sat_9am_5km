@@ -113,3 +113,50 @@ body.admin_activity_results.index {
         }
     }
 }
+
+
+form {
+    fieldset {
+        margin-bottom: 1.5rem;
+
+        ol>li {
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        input[type="datetime-local"],
+        textarea,
+        select {
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .inline-hints {
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .actions {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e8e8e8;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+    }
+}
