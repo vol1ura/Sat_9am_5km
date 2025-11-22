@@ -16,3 +16,11 @@
 // Any admin-specific overrides should go into a separate partial
 // (e.g. app/assets/stylesheets/admin_overrides.scss) and be intentionally
 // minimal. Right now we rely on Arctic Admin defaults for the admin look.
+
+.up-down-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
