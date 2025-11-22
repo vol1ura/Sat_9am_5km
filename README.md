@@ -7,7 +7,9 @@
 ![Contributions](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
 ![Website](https://img.shields.io/website?down_color=red&down_message=failed&up_color=blue&up_message=online&url=https%3A%2F%2Fs95.ru)
 
-# Sat 9am 5km - run events system
+# Sat 9am 5km
+
+Run events system
 
 ## Maintenance
 
@@ -45,10 +47,25 @@ Now you can run it
 make
 ```
 
-- Site [http://localhost:3000](http://localhost:3000)
+For locale switching functionality set `RAILS_DEVELOPMENT_HOSTS` in `deploy/.env`. For example:
+```
+RAILS_DEVELOPMENT_HOSTS=local.app.ru,local.app.rs,local.app.by
+```
+and add these hosts to `/etc/hosts` to bind them to localhost
+```
+127.0.0.1       local.app.rs
+127.0.0.1       local.app.by
+127.0.0.1       local.app.ru
+```
+
+After that you can access the site with different locales:
+- [http://local.app.rs:3000](http://local.app.rs:3000)
+- [http://local.app.by:3000](http://local.app.by:3000)
+- [http://local.app.ru:3000](http://local.app.ru:3000)
+
+### Additional services
 - Admin panel [http://localhost:3000/admin](http://localhost:3000/admin)
 - Email previews [http://localhost:3000/rails/mailers](http://localhost:3000/rails/mailers)
-- Database panel [http://localhost:3003](http://localhost:3003/?pgsql=db&username=postgres)
 - Bug tracker [Rollbar.com](https://app.rollbar.com/a/Urka/fix/items)
 - Sidekiq [WebUI](https://s95.ru/sidekiq) for admin users
 - Rails Performance [dev](http://localhost:3000/app_performance/) or [prod](https://s95.ru/app_performance/) for admin users
