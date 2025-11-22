@@ -132,19 +132,19 @@
   </div>
   <% if @total_results.positive? %>
     <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-totalEvents">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
-            <span class="badge text-light bg-primary me-3"><%= @total_events_count %></span>
-            <%= t '.total_events' %>
-          </button>
-        </h2>
-        <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordion-personal-statistics">
-          <div class="accordion-body">
-            <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-              <%= render '/loading_indicator' %>
-            <% end %>
-          </div>
+      <h2 class="accordion-header" id="flush-totalEvents">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
+          <span class="badge text-light bg-primary me-3"><%= @total_events_count %></span>
+          <%= t '.total_events' %>
+        </button>
+      </h2>
+      <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordion-personal-statistics">
+        <div class="accordion-body">
+          <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+            <%= render '/loading_indicator' %>
+          <% end %>
         </div>
+      </div>
     </div>
 
     <div class="accordion-item">

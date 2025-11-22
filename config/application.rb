@@ -34,7 +34,7 @@ module Sat9am5km
     # in config/environments, which are processed later.
     #
     config.time_zone = ENV.fetch("TZ", "Europe/Moscow")
-    config.i18n.available_locales = %i[ru rs en]
+    config.i18n.available_locales = %i[ru sr en]
     config.i18n.default_locale = :ru
     config.rails_i18n.enabled_modules = %i[pluralization ordinals]
     # config.eager_load_paths << Rails.root.join("extras")

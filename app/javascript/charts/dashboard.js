@@ -17,7 +17,7 @@ const translations = {
     noData: 'Пока нет данных за эту неделю',
     people: 'чел.',
   },
-  rs: {
+  sr: {
     participants: 'Učesnici',
     totalResults: 'Ukupno rezultata',
     personalBests: 'Osobni rekordi',
@@ -48,7 +48,7 @@ export default class DashboardCharts {
   }
 
   initializeCharts(participantsContainer, volunteersContainer, genderContainer) {
-    this.t = translations[document.documentElement.lang === 'rs' ? 'rs' : 'ru'];
+    this.t = translations[document.documentElement.lang === 'sr' ? 'sr' : 'ru'];
 
     if (participantsContainer) {
       const participantsChart = new ApexCharts(participantsContainer, this.#participantsChartOptions());
