@@ -573,6 +573,8 @@ GEM
       ffi (~> 1.1)
     sys-filesystem (1.5.3)
       ffi (~> 1.1)
+    sys-proctable (1.3.0)
+      ffi (~> 1.1)
     terser (1.2.6)
       execjs (>= 0.3.0, < 3)
     thor (1.4.0)
@@ -690,6 +692,7 @@ DEPENDENCIES
   sitemap_generator
   sys-cpu
   sys-filesystem
+  sys-proctable
   terser
   vcr
   webmock
