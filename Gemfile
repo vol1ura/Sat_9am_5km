@@ -10,6 +10,7 @@ gem 'activeadmin'
 gem 'activeadmin-localize'
 gem 'activeadmin_quill_editor'
 gem 'activeadmin-searchable_select'
+gem 'arctic_admin'
 gem 'active_storage_dashboard'
 gem 'active_storage_validations'
 gem 'audited'
@@ -98,3 +99,5 @@ group :development do
   gem 'bcrypt_pbkdf', '~> 1.1'
   gem 'ed25519', '~> 1.3'
 end
+
+# Added by Antigravity: placeholder for future gem changes

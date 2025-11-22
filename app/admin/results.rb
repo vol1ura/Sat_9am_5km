@@ -203,6 +203,39 @@ ActiveAdmin.register Result do
     )
   end
 
+  collection_action :move_athlete, method: :post, if: proc { can?(:manage, Result) } do
+    activity = Activity.find(params[:activity_id])
+    from_pos = params[:from].to_i
+    to_pos = params[:to].to_i
+
+    results = activity.results.order(:position)
+
+    ActiveRecord::Base.transaction do
+      dragged = results.find_by!(position: from_pos).athlete_id
+
+      if to_pos < from_pos
+        from_pos.downto(to_pos + 1) do |pos|
+          res_cur = results.find_by!(position: pos)
+          res_prev = results.find_by!(position: pos - 1)
+          res_cur.update!(athlete_id: res_prev.athlete_id)
+        end
+        results.find_by!(position: to_pos).update!(athlete_id: dragged)
+      elsif to_pos > from_pos
+        from_pos.upto(to_pos - 1) do |pos|
+          res_cur = results.find_by!(position: pos)
+          res_next = results.find_by!(position: pos + 1)
+          res_cur.update!(athlete_id: res_next.athlete_id)
+        end
+        results.find_by!(position: to_pos).update!(athlete_id: dragged)
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to collection_path, notice: t('active_admin.results.athlete_moved') }
+      format.js { render inline: "window.location.reload()" }
+    end
+  end
+
   batch_action(
     :move_time,
     confirm: I18n.t('active_admin.results.batch_move_time_confirm'),

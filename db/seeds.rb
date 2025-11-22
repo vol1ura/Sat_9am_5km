@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 if Rails.env.development?
-  User.create!(
-    email: 'admin@test.com',
-    password: '111111',
-    password_confirmation: '111111',
-    role: 0,
-    first_name: 'John',
-    last_name: 'Doe',
-  )
+  user = User.find_or_create_by!(email: 'admin@test.com') do |u|
+    u.password = '111111'
+    u.password_confirmation = '111111'
+    u.role = 0
+    u.first_name = 'John'
+    u.last_name = 'Doe'
+  end
+  user.update!(locked_at: nil) if user.locked_at.present?
 end
 
 russia = Country.create!(code: 'ru')
