@@ -245,6 +245,39 @@ table.index_table {
             margin-bottom: 0;
         }
     }
+
+    // Prevent inputs and selects from overflowing on mobile
+    form,
+    .filter_form,
+    .sidebar_section {
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        input[type="datetime-local"],
+        input[type="search"],
+        textarea,
+        select {
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    // Fix filter form specifically
+    #filters_sidebar_section {
+        .filter_form_field {
+
+            input,
+            select {
+                max-width: 100%;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    }
 }
 
 
