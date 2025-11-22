@@ -76,3 +76,27 @@
         }
     }
 }
+
+// Fix for radio button alignment in Arctic Admin
+form fieldset.choices {
+    .choices-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .choice {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        input[type="radio"] {
+            margin: 0;
+        }
+
+        label {
+            margin: 0;
+            display: inline-block;
+        }
+    }
+}
