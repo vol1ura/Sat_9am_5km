@@ -518,7 +518,7 @@ sr:
   country:
     ru: Rusija
     by: Belorusija
-    sr: Srbija
+    rs: Srbija
   duels:
     no_athlete_access: Za pregled dueli potrebno je kreirati profil sportiste
     index:
