@@ -27,4 +27,12 @@ class AthletesController < ApplicationController
     @barcode = BarcodePrinter.call("A#{@athlete.code}", module_size: 8)
     @time_predictions = Athletes::TimePredictor.call(@athlete)
   end
+
+  def best_result
+    since_date = params.key?(:since_date) ? Date.parse(params[:since_date]) : Date.new(2022)
+    @athlete = Athlete.find_by!(Athlete::PersonalCode.new(params[:code].to_i).to_params)
+    @result = @athlete.results.published.where(activity: { date: since_date.. }).order(:total_time).first
+  rescue Date::Error => e
+    render json: { error: e.message }, status: :unprocessable_content
+  end
 end
