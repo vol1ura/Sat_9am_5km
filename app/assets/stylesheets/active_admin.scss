@@ -7,7 +7,6 @@
 // We use the `font-awesome-sass` gem which provides the necessary fonts
 // via the asset pipeline.
 @import "font-awesome";
-
 @import "arctic_admin/main";
 @import "activeadmin/quill_editor/quill.snow";
 @import "activeadmin/quill_editor_input";
@@ -43,7 +42,7 @@
         background: white;
         border: 1px solid #d3d3d3;
         border-radius: 0 0 4px 4px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
         max-height: 200px;
         overflow-y: auto;
 
@@ -109,7 +108,7 @@ body.admin_activity_results.index {
         }
 
         &:nth-child(even) {
-            background-color: #ffffff;
+            background-color: #fff;
         }
     }
 }
@@ -199,11 +198,12 @@ table.index_table {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (width <=768px) {
 
     body {
         font-size: 14px;
     }
+
 
     #title_bar {
         padding: 1rem;
@@ -222,6 +222,7 @@ table.index_table {
             }
         }
     }
+
 
     #active_admin_content {
         padding: 1rem;
@@ -257,7 +258,6 @@ table.index_table {
 
         td.col-actions {
             a {
-                display: block;
                 margin-right: 0;
                 margin-bottom: 0.5rem;
                 padding: 0.5rem 0.75rem;
@@ -358,6 +358,7 @@ table.index_table {
         }
     }
 
+
     #filters_sidebar_section {
         padding: 1rem;
         margin-bottom: 1.5rem;
@@ -403,7 +404,7 @@ table.index_table {
 }
 
 
-@media screen and (min-width: 769px) {
+@media screen and (width >=769px) {
     table.index_table {
         td.col-actions {
             min-width: 200px;
@@ -423,6 +424,7 @@ table.index_table {
 #wrapper {
     padding-bottom: 3rem;
 }
+
 
 #active_admin_content {
     margin-bottom: 2rem;

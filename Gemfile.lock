@@ -219,8 +219,7 @@ GEM
     google-protobuf (4.32.0-aarch64-linux-musl)
       bigdecimal
       rake (>= 13)
-      bigdecimal
-      rake (>= 13)
+
     google-protobuf (4.32.0-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
