@@ -201,7 +201,6 @@ GEM
       i18n (>= 1.8.11, < 2)
     ffi (1.17.2)
     ffi (1.17.2-aarch64-linux-musl)
-    ffi (1.17.2-x86-mingw32)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
     font-awesome-sass (6.7.2)
@@ -220,7 +219,6 @@ GEM
     google-protobuf (4.32.0-aarch64-linux-musl)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.32.0-x86-mingw32)
       bigdecimal
       rake (>= 13)
     google-protobuf (4.32.0-x86_64-linux-gnu)
@@ -347,7 +345,6 @@ GEM
       racc
     pg (1.6.2)
     pg (1.6.2-aarch64-linux-musl)
-    pg (1.6.2-x86-mingw32)
     pg (1.6.2-x86_64-linux)
     pg (1.6.2-x86_64-linux-musl)
     pg_query (6.1.0)
@@ -529,8 +526,6 @@ GEM
       rake (>= 13)
     sass-embedded (1.77.5-aarch64-linux-musl)
       google-protobuf (>= 3.25, < 5.0)
-    sass-embedded (1.77.5-x86-mingw32)
-      google-protobuf (>= 3.25, < 5.0)
     sass-embedded (1.77.5-x86_64-linux-gnu)
       google-protobuf (>= 3.25, < 5.0)
     sass-embedded (1.77.5-x86_64-linux-musl)
@@ -613,7 +608,6 @@ GEM
 PLATFORMS
   aarch64-linux-musl
   ruby
-  x86-mingw32
   x86_64-linux
   x86_64-linux-musl
 
@@ -700,7 +694,7 @@ DEPENDENCIES
   whenever
 
 RUBY VERSION
-   ruby 3.4.7p58
+   ruby 3.4.5p51
 
 BUNDLED WITH
    2.4.10

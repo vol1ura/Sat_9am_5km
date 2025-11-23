@@ -2,7 +2,7 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    before_action :unlock_dev_super_admin, only: :create
+    # before_action :unlock_dev_super_admin, only: :create
 
     # GET /resource/sign_in
     # def new

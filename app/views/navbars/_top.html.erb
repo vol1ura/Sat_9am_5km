@@ -67,13 +67,7 @@
       <%= link_to new_user_session_path, class: "me-2 btn btn-outline-danger" do %>
         <i class="fa-solid fa-arrow-right-to-bracket me-2"></i><%= t '.login' %>
       <% end %>
-      <% if Rails.env.development? %>
-        <%= form_for(:user, url: session_path(:user), method: :post, html: { style: 'display: inline;' }) do |f| %>
-          <%= f.hidden_field :email, value: 'admin@test.com' %>
-          <%= f.hidden_field :password, value: '111111' %>
-          <%= f.submit 'Войти как супер админ', class: 'btn btn-outline-secondary me-2' %>
-        <% end %>
-      <% end %>
+
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Navigation">

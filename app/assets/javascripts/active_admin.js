@@ -4,10 +4,9 @@
 //= require active_admin/searchable_select
 
 $(document).ready(function () {
-  $('.datepicker').datepicker(
-    {
-      firstDay: 1, // Monday
-      dateFormat: 'yy-mm-dd',
-      showAnim: 'slideDown'
-    });
+  $('.datepicker').datepicker({
+    firstDay: 1, // Monday
+    dateFormat: 'yy-mm-dd',
+    showAnim: 'slideDown'
+  });
 });
