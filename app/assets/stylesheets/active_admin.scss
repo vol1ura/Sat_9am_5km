@@ -1,4 +1,5 @@
 // Active Admin stylesheet - use Arctic Admin theme only.
+/* stylelint-disable selector-id-pattern */
 // This file is loaded for ActiveAdmin pages only and must not affect
 // the main site styles. We import Arctic Admin's main entrypoint and
 // only the admin-specific assets (Quill editor + searchable select inputs).
@@ -22,6 +23,10 @@
     justify-content: center;
     gap: 0.5rem;
     white-space: nowrap;
+}
+
+body {
+    font-size: 82%;
 }
 
 .autocomplete {
