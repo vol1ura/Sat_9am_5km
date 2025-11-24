@@ -18,8 +18,8 @@ psql: project
 	docker compose exec -it db psql -U postgres s95_dev
 
 checkup:
-	rubocop --display-only-fail-level-offenses --fail-level=error && \
-	rubocop --only Lint/Debugger
+	docker compose exec web rubocop app config db lib spec && \
+	docker compose exec web yarn lint
 
 build:
 	docker compose run --rm web bundle lock
