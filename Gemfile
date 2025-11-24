@@ -99,5 +99,3 @@ group :development do
   gem 'bcrypt_pbkdf', '~> 1.1'
   gem 'ed25519', '~> 1.3'
 end
-
-# Added by Antigravity: placeholder for future gem changes

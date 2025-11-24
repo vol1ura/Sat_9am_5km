@@ -7,7 +7,7 @@ if Rails.env.development?
     password_confirmation: '111111',
     role: 0,
     first_name: 'John',
-    last_name: 'Doe'
+    last_name: 'Doe',
   )
 end
 
