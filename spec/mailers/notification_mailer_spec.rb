@@ -15,7 +15,7 @@ RSpec.describe NotificationMailer do
     let(:mail) { described_class.parkzhrun_error }
 
     it 'renders the mail' do
-      expect(mail.subject).to eq('Ошибка! Не удалось создать забег ПаркЖрун')
+      expect(mail.subject).to eq('Ошибка! Не удалось создать забег ПаркЖран')
       expect(mail.to).to eq(described_class::RECIPIENTS)
       expect(mail.body.encoded).to match('произошла ошибка')
     end

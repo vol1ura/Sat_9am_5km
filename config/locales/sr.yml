@@ -501,7 +501,7 @@ sr:
       last: '⏭️'
       truncate: '&hellip;'
   notification_mailer:
-    parkzhrun_error: 'Greška! Nije moguće kreirati trku ParkŽrun'
+    parkzhrun_error: 'Greška: nije moguće kreirati trku ParkŽrun'
     feedback: 'Novi odgovor na sajt S95'
   button:
     show_more: Prikaži više
@@ -555,7 +555,7 @@ sr:
       no_duels_with_friend: 'Još uvek nemate zajedničke trke sa %{friend_name}'
     duel:
       victory: Pobeda
-      defeat: Poraz
+      defeat: Gubitak
       you: Vi
       position: Mesto
       time: Vreme
@@ -765,7 +765,7 @@ sr:
       submit: Pošalji
     submit_feedback:
       sent: Hvala na vašoj povratnoj informaciji!
-      error: Greška! Dužina poruke mora biti od 1 do 950 karaktera.
+      error: Greška: dužina poruke mora biti od 1 do 950 karaktera.
     joining:
       title: Želite da pokrenete S95 u svom parku?
       description: Objašnjavamo kako da započnete sa organizacijom S95 događaja u svom omiljenom parku.

@@ -9,15 +9,15 @@ sr:
         title: Sva dostignuća
       destroy:
         successfully_deleted: 'Uspešno obrisano %{obj}'
-        cannot_delete_registered: 'Operacija poništena. Ne možete obrisati registrovanog učesnika!'
-        cannot_delete_participant: 'Operacija poništena. Ne možete obrisati učesnika koji ima rezultate!'
+        cannot_delete_registered: 'Nije moguće obrisati registrovanog učesnika.'
+        cannot_delete_participant: 'Nije moguće obrisati učesnika koji ima rezultate.'
     utilities:
       reports:
         task_queued: 'Zadatak za kreiranje fajla je postavljen u red. Očekujte poruku u Telegram-u.'
         event_not_selected: 'Merejment nije izabran'
       cache:
         clear_success: 'Keš uspešno očišćen!'
-        clear_failed: 'Otkazano! Keš je nedavno već bio očišćen. Pokušajte ponovo kasnije.'
+        clear_failed: 'Keš je nedavno već bio očišćen. Pokušajte ponovo kasnije.'
       award_funrun_badge:
         performing: 'Procedura nagrađivanja je pokrenuta, to će potrajati neko vreme. Osvežite stranicu kasnije da vidite rezultate.'
       stats:
@@ -37,13 +37,13 @@ sr:
     activities:
       create: &upload_notices
         success_upload: 'Kreirani zadaci za učitavanje podataka. U zavisnosti od broja učesnika koji nedostaju u bazi, prikupljanje informacija može potrajati neko vreme. Osvežite stranicu za 5-15 sekundi.'
-        failed_upload: 'Greška! Nije moguće obraditi neke datoteke. Proverite format - samo CSV je dozvoljen.'
+        failed_upload: 'Greška: nije moguće obraditi neke datoteke. Proverite format - samo CSV je dozvoljen.'
         bad_timer_format: 'Greška datoteku tajmera: %{message}. Proverite da li su pomešane datoteke sa skenera i tajmera.'
-        bad_data: 'Greška u validaciji podataka u priloženim datotekama! Proverite njihovu ispravnost i pokušajte ponovo.'
+        bad_data: 'Greška u validaciji podataka u priloženim datotekama. Proverite njihovu ispravnost i pokušajte ponovo.'
       update:
         <<: *upload_notices
       destroy:
-        forbidden_for_published: 'Brisanje objavljenog protokola je zabranjeno! Kontaktirajte administratore.'
+        forbidden_for_published: 'Brisanje objavljenog protokola je zabranjeno. Kontaktirajte administratore.'
       publish:
         confirm: Uverite se da protokol ne sadrži greške. Objaviti ga na sajtu?
         successfully_published: Protokol je uspešno objavljen na sajtu
@@ -212,7 +212,7 @@ sr:
       gender_set_failed: "Neuspelo promena pola."
     results:
       cannot_link_athlete: 'Učesnik sa navedenim ID nije pronađen. Proverite brojeve ili prvo kreirajte takvog učesnika.'
-      cannot_move_result: 'Greška! Proverite ispravnost pozicija.'
+      cannot_move_result: 'Greška: proverite ispravnost pozicija.'
       drop_time_failed: 'Neuspelo brisanje vremena. Osvežite stranicu i pokušajte ponovo.'
       drop_athlete_failed: 'Neuspelo brisanje učesnika. Osvežite stranicu i pokušajte ponovo.'
       reset_athlete_failed: 'Neuspelo resetovanje učesnika. Osvežite stranicu i pokušajte ponovo.'
