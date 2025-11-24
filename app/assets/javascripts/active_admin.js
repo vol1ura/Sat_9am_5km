@@ -10,9 +10,7 @@ $(document).ready(function () {
     showAnim: 'slideDown'
   });
 
-  // Fix for Arctic Admin sidebar toggle error
-  // The theme seems to have a bug where insideSection is null when toggling.
-  // We suppress the error and manually toggle the sidebar.
+
   const originalAddEventListener = EventTarget.prototype.addEventListener;
   EventTarget.prototype.addEventListener = function (type, listener, options) {
     if (type === 'click' && listener.name === 'sidebarToggle') {
