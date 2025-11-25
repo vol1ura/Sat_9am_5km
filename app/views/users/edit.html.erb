@@ -2,6 +2,40 @@
   <%= form_with model: current_user do |form| %>
     <div class="d-flex flex-column" data-controller="form">
       <div>
+        <div class="mt-2" data-form-target="input">
+          <%= form.label :image, class: 'form-label text-capitalize fw-light' %>
+          <% is_user_with_saved_image = current_user.image.attached? && current_user.image.blob.persisted? %>
+          <div class="d-flex align-items-center gap-3">
+            <% avatar_src = is_user_with_saved_image ? url_for(current_user.image.variant(:web)) : '/images/person.jpg' %>
+            <%=
+              image_tag(
+                avatar_src,
+                role: 'button',
+                class: 'avatar-100 object-fit-cover',
+                data: { action: 'click->form#openFileDialog', form_target: 'avatar' },
+                alt: t('.click_on_photo_to_change'),
+              )
+            %>
+            <%=
+              form.file_field(
+                :image,
+                class: 'd-none',
+                accept: 'image/jpeg,image/png,image/webp',
+                data: { action: 'change->form#previewAvatar', form_target: 'fileInput' },
+              )
+            %>
+            <small class="text-body-secondary"><%= t '.click_on_photo_to_change' %></small>
+          </div>
+          <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
+        </div>
+        <% if is_user_with_saved_image %>
+          <div class="form-check form-switch mt-2">
+            <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
+            <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="mt-2">
         <%= form.label :first_name, class: 'col-form-label text-capitalize fw-light' %>
         <% is_first_name_invalid = current_user.errors.key?(:first_name) %>
         <%= form.text_field :first_name, class: "form-control #{'is-invalid' if is_first_name_invalid}", required: true %>
@@ -74,20 +108,6 @@
         </div>
       <% end %>
       <div class="mt-2">
-        <h5 class="fw-light"><%= t '.personal_photo' %></h5>
-        <% if current_user.image.attached? %>
-          <div class="form-check form-switch">
-            <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
-            <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
-          </div>
-        <% end %>
-        <div class="mt-2" data-form-target="input">
-          <%= form.label :image, class: 'form-label text-capitalize fw-light' %>
-          <%= form.file_field :image, accept: 'image/jpeg,image/png,image/webp', class: 'form-control' %>
-          <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
-        </div>
-      </div>
-      <div class="mt-2">
         <hr class="border border-primary opacity-25">
         <h5 class="fw-light"><%= t '.emergency_contact' %></h5>
         <div class="mb-2">
@@ -134,7 +154,7 @@
         <% end %>
       </div>
 
-      <div class="my-5">
+      <div class="my-4">
         <button class="me-1 btn btn-outline-primary" type="submit" title="<%= t '.save' %>">
           <i class="fa-regular fa-circle-down"></i> <%= t '.save' %>
         </button>

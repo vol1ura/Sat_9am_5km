@@ -1096,7 +1096,7 @@ sr:
       add_phone_html: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Hitna kontakt osoba
-      personal_photo: Slika
+      click_on_photo_to_change: Kliknite na sliku da biste je promenili
       personal_bests: Lični rekordi
       personal_best_10k: 10 km
       personal_best_half_marathon: 21.1 km

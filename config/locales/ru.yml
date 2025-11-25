@@ -1089,9 +1089,9 @@ ru:
       delete_phone: Удалить телефон %{phone}
       add_phone_html: 'Для участия в партнёрских программах необходимо добавить ваш номер телефона. Привязка и проверка телефона выполняются с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a> командой <code>/phone</code>'
       phone_placeholder: '+0 000 000-00-00'
-      emergency_contact: 'Экстренный контакт'
-      personal_photo: Фотография
-      personal_bests: 'Личные рекорды'
+      emergency_contact: Экстренный контакт
+      click_on_photo_to_change: Нажмите на фото для изменения
+      personal_bests: Личные рекорды
       personal_best_10k: '10 км'
       personal_best_half_marathon: '21.1 км'
       personal_best_marathon: '42.2 км'
