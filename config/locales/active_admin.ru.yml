@@ -14,7 +14,8 @@ ru:
     utilities:
       reports:
         task_queued: 'Задача на создание файла поставлена в очередь. Ждите отчёт в Telegram.'
-        event_not_selected: 'Мероприятие не выбрано'
+        event_not_selected: Мероприятие не выбрано
+        params_not_selected: 'Мероприятие или роль не выбраны'
       cache:
         clear_success: 'Кэш успешно очищен!'
         clear_failed: 'Отмена! Кеш недавно уже был очищен. Повторите запрос позже.'

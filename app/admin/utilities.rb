@@ -10,6 +10,11 @@ ActiveAdmin.register_page 'Utilities' do
           para 'Будет сформирован CSV файл с отчётом по всем результатам и волонтёрствам на выбранном мероприятии.'
           render partial: 'event_csv_export_form'
         end
+
+        panel 'Отчёт по волонтёрским позициям' do
+          para 'Будет сформирован CSV файл со списком участников, волонтёривших на выбранном мероприятии.'
+          render partial: 'volunteers_role_csv_export_form'
+        end
       end
 
       tab t('.badges.title') do
@@ -114,6 +119,18 @@ ActiveAdmin.register_page 'Utilities' do
       flash[:notice] = t '.reports.task_queued'
     else
       flash[:alert] = t '.reports.event_not_selected'
+    end
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_volunteers_role_csv, method: :post do
+    event_id = params[:event_id]
+    role = params[:role]
+    if event_id.present? && role.present?
+      VolunteersRoleCsvExportJob.perform_later event_id.to_i, role, current_user.id
+      flash[:notice] = t '.reports.task_queued'
+    else
+      flash[:alert] = t '.reports.params_not_selected'
     end
     redirect_to admin_utilities_path
   end

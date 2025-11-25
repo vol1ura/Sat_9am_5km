@@ -14,7 +14,8 @@ sr:
     utilities:
       reports:
         task_queued: 'Zadatak za kreiranje fajla je postavljen u red. Očekujte poruku u Telegram-u.'
-        event_not_selected: 'Merejment nije izabran'
+        event_not_selected: Merejment nije izabran
+        params_not_selected: Događaj ili uloga nisu izabrani
       cache:
         clear_success: 'Keš uspešno očišćen!'
         clear_failed: 'Otkazano! Keš je nedavno već bio očišćen. Pokušajte ponovo kasnije.'
