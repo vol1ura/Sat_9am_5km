@@ -90,7 +90,7 @@ group :development do
 
   # Deploy
   gem 'capistrano', '~> 3.19', require: false
-  gem 'capistrano3-puma', '~> 6.0.0', require: false
+  gem 'capistrano3-puma', '~> 7.1.0', require: false
   gem 'capistrano-rails', '~> 1.7', require: false
   gem 'capistrano-rbenv', '~> 2.2', require: false
   gem 'capistrano-sidekiq', require: false
