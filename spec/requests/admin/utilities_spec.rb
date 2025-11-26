@@ -60,7 +60,7 @@ RSpec.describe '/admin/utilities' do
       post admin_utilities_export_event_csv_url, params: { event_id: }
       expect(response).to redirect_to admin_utilities_url
       expect(flash[:notice]).to include('Ждите отчёт в Telegram')
-      expect(EventAthletesCsvExportJob).to have_been_enqueued.with(event_id, user.id)
+      expect(EventAthletesCsvExportJob).to have_been_enqueued.with(event_id, user.id, nil)
     end
 
     it 'does not enqueue csv export job if event is not selected' do

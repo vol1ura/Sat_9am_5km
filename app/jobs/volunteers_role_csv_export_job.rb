@@ -35,10 +35,7 @@ class VolunteersRoleCsvExportJob < ApplicationJob
   end
 
   def volunteers_dataset
-    scope = Volunteer
-            .published
-            .joins(:athlete, :activity)
-            .where(role: @role, activity: { event: @event })
+    scope = Volunteer.published.joins(:athlete, :activity).where(role: @role, activity: { event: @event })
     scope = scope.where(activity: { date: @from_date.. }) if @from_date
     scope
       .group('athletes.id')
