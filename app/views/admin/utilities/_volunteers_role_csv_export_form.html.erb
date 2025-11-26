@@ -13,5 +13,9 @@
       )
     %>
   </div>
+  <div style="margin-bottom: 12px">
+    <%= f.label :from_date, 'Дата начала отчёта' %>
+    <%= f.date_field :from_date, style: 'width: 150px;' %>
+  </div>
   <%= f.submit 'Запросить', data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
 <% end %>

@@ -3,10 +3,11 @@
 class VolunteersRoleCsvExportJob < ApplicationJob
   queue_as :low
 
-  def perform(event_id, role, user_id)
+  def perform(event_id, role, user_id, from_date = nil)
     @event = Event.find event_id
     @role = role
     @user = User.find user_id
+    @from_date = Date.parse from_date if from_date
     return unless @user.telegram_id
 
     tempfile = generate_csv
@@ -34,10 +35,12 @@ class VolunteersRoleCsvExportJob < ApplicationJob
   end
 
   def volunteers_dataset
-    Volunteer
-      .published
-      .joins(:athlete, :activity)
-      .where(role: @role, activity: { event: @event })
+    scope = Volunteer
+            .published
+            .joins(:athlete, :activity)
+            .where(role: @role, activity: { event: @event })
+    scope = scope.where(activity: { date: @from_date.. }) if @from_date
+    scope
       .group('athletes.id')
       .order(volunteering_count: :desc)
       .select(
