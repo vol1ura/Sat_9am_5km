@@ -106,7 +106,8 @@ ru:
         country: страна
         code_name: кодовое имя
         name: название
-        main_picture_link: ссылка на баннер
+        summer_image: летнее изображение
+        winter_image: зимнее изображение
         town: город
         place: 'как найти?'
         latitude: широта
@@ -375,8 +376,14 @@ ru:
       present: нужно оставить пустым
       required: не может отсутствовать
       taken: уже существует
+      dimension_width_not_less_than_or_equal_to: ширина должна быть меньше или равна %{length} пикселей
+      dimension_height_not_less_than_or_equal_to: высота должна быть меньше или равна %{length} пикселей
+      file_size_not_between: 'размер файла должен быть от %{min} до %{max} (текущий размер: %{file_size})'
       more_than_one_volunteering: не может занимать более одной волонтёрской позиции в один день
       more_than_one_trophy: не может иметь более одной награды одного типа
+      content_type_invalid:
+        one: 'имеет неверный тип контента (допустимый тип контента: %{authorized_human_content_types})'
+        other: 'имеет неверный тип контента (допустимые типы контента: %{authorized_human_content_types})'
       too_long:
         one: слишком большой длины (не может быть больше чем %{count} символ)
         few: слишком большой длины (не может быть больше чем %{count} символа)

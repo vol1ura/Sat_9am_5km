@@ -108,7 +108,8 @@ sr:
         country: država
         code_name: nadimak
         name: naziv
-        main_picture_link: link za baner
+        summer_image: letnja slika
+        winter_image: zimska slika
         town: grad
         place: 'kako pronaći?'
         latitude: širina
@@ -376,8 +377,14 @@ sr:
       present: mora biti prazno
       required: obavezno
       taken: zauzeto
+      dimension_width_not_less_than_or_equal_to: širina mora biti manja ili jednaka %{length} piksela
+      dimension_height_not_less_than_or_equal_to: visina mora biti manja ili jednaka %{length} piksela
+      file_size_not_between: 'veličina fajla mora biti od %{min} do %{max} (trenutna veličina: %{file_size})'
       more_than_one_volunteering: ne može obavljati više od jedne volonterske pozicije u istom danu
       more_than_one_trophy: ne može imati više od jedne nagrade istog tipa
+      content_type_invalid:
+        one: 'ima nevažeći tip sadržaja (važeći tip sadržaja: %{authorized_human_content_types})'
+        other: 'ima nevažeći tip sadržaja (važeći tipovi sadržaja: %{authorized_human_content_types})'
       too_long:
         one: previše dugo (ne može biti duže od %{count} znaka)
         few: previše dugo (ne može biti duže od %{count} znaka)

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 active_admin_form_for [:admin, resource] do |f|
-  f.semantic_errors(*f.object.errors.attribute_names)
-
   f.inputs 'Координаты и временная зона' do
     input :latitude
     input :longitude
@@ -40,9 +38,16 @@ active_admin_form_for [:admin, resource] do |f|
                             },
                           },
                         }
-    input :main_picture_link
     input :slogan
     input :visible_order, input_html: { inputmode: 'numeric' }
+    input :summer_image, as: :file, hint:
+      if resource.summer_image.attached? && resource.summer_image.blob.persisted?
+        image_tag resource.summer_image.variant(:thumb), class: 'img-badge'
+      end
+    input :winter_image, as: :file, hint:
+      if resource.winter_image.attached? && resource.winter_image.blob.persisted?
+        image_tag resource.winter_image.variant(:thumb), class: 'img-badge'
+      end
   end
 
   f.actions

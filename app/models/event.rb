@@ -2,6 +2,7 @@
 
 class Event < ApplicationRecord
   AVAILABLE_TIMEZONES = ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name }.uniq.freeze
+  SUMMER_MONTHS = 4..10
 
   belongs_to :country
   has_many :activities, dependent: :destroy
@@ -15,6 +16,25 @@ class Event < ApplicationRecord
     dependent: :nullify,
     inverse_of: false,
   )
+
+  has_one_attached :summer_image do |attachable|
+    attachable.variant :full, resize_to_fill: [2800, 1060]
+    attachable.variant :thumb, resize_to_fill: [1400, 530]
+  end
+
+  has_one_attached :winter_image do |attachable|
+    attachable.variant :full, resize_to_fill: [2800, 1060]
+    attachable.variant :thumb, resize_to_fill: [1400, 530]
+  end
+
+  validates :summer_image,
+            content_type: %i[png jpeg webp],
+            dimension: { width: { min: 2800 }, height: { min: 1060 } },
+            size: { between: (150.kilobytes)..(5.megabytes) }
+  validates :winter_image,
+            content_type: %i[png jpeg webp],
+            dimension: { width: { min: 2800 }, height: { min: 1060 } },
+            size: { between: (150.kilobytes)..(5.megabytes) }
 
   after_update_commit :reset_going_athletes, if: -> { !active && saved_change_to_active? }
 
@@ -63,6 +83,12 @@ class Event < ApplicationRecord
   end
 
   def to_combobox_display = name
+
+  def current_image
+    return summer_image if SUMMER_MONTHS.cover?(Time.current.month) || !winter_image.attached?
+
+    winter_image
+  end
 
   private
 
