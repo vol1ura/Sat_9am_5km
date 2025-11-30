@@ -983,12 +983,13 @@ ru:
   clubs:
     index:
       description: Таблица клубов со статистикой по общему количеству участников, волонтёрств и забегов.
-      how_to_add_new_club_html: 'Вашего клуба нет в списке? Напишите нам <a href="mailto:%{mail}?subject=Добавить%20новый%20клуб" target="_blank" title="Отправить нам email">на почту</a> и мы добавим его.'
+      how_to_add_new_club_html: 'Вашего клуба нет в списке? Напишите нам <a href="mailto:%{mail}?subject=Добавить%20новый%20клуб" target="_blank" title="Отправить нам email">на почту</a> и мы добавим его. В сообщении укажите название клуба, небольшое описание и прикрепите логотип клуба, если есть.'
       name: Название
       athletes: Участники
       results: Результаты
       volunteering: Волонтёрства
-      search_placeholder: Поиск клуба...
+      search_placeholder: Поиск по названию
+      search_button: Искать
     show:
       description: 'Таблица участников и статистика по клубу %{club}'
       main_page: Главная

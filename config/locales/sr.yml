@@ -989,12 +989,13 @@ sr:
   clubs:
     index:
       description: Tabela klubova sa statistikom o ukupnom broju učesnika, volontera i trčanja
-      how_to_add_new_club_html: 'Da li vaš klub nije na listi? Pišite nam na <a href="mailto:%{mail}?subject=Add a new club" target="_blank" title="Pošaljite nam email">email</a> i dodaćemo ga.'
+      how_to_add_new_club_html: 'Da li vaš klub nije na listi? Pišite nam na <a href="mailto:%{mail}?subject=Add a new club (Serbia)" target="_blank" title="Pošaljite nam email">email</a> i dodaćemo ga. U poruci navedite naziv kluba, mali opis i prikačite logo kluba, ako ima.'
       name: Ime
       athletes: Atletičari
       results: Rezultati
       volunteering: Volonterstvo
-      search_placeholder: Pretraga kluba...
+      search_placeholder: Pretraga po imenu
+      search_button: Traži
     show:
       description: 'Tabela učesnika i statistika za klub %{club}'
       main_page: Glavna
