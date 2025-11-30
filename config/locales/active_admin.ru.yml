@@ -61,6 +61,9 @@ ru:
     contacts:
       index:
         title: 'Контакты %{event_name}'
+    events:
+      analytics:
+        title: 'Аналитика'
     results:
       destroy:
         result_destroyed: 'Позиция №%{position} удалена из протокола.'

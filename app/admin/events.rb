@@ -80,4 +80,12 @@ ActiveAdmin.register Event do
   sidebar 'Зимнее изображение', only: :show, if: proc { resource.winter_image.attached? } do
     image_tag resource.winter_image.variant(:thumb), class: 'img-badge', alt: resource.place
   end
+
+  action_item :analytics, only: :show, if: proc { can? :read, Event, id: resource.id } do
+    link_to t('admin.events.analytics.title'), analytics_admin_event_path(resource)
+  end
+
+  member_action :analytics, method: :get, if: proc { can? :read, Event, id: resource.id } do
+    @page_title = t '.title'
+  end
 end

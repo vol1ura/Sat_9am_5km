@@ -61,6 +61,9 @@ sr:
     contacts:
       index:
         title: 'Kontakti %{event_name}'
+    events:
+      analytics:
+        title: 'Analitika'
     results:
       destroy:
         result_destroyed: 'Pozicija #%{position} je uklonjena.'
