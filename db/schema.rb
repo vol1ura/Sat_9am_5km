@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_29_000000) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_04_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -259,6 +259,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_29_000000) do
     t.string "promotions", default: [], null: false, array: true
     t.string "emergency_contact_name"
     t.string "emergency_contact_phone"
+    t.boolean "policy_accepted", default: false, null: false
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

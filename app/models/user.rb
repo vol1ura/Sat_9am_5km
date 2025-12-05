@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   AVAILABLE_PROMOTIONS = %w[spartacus].freeze
 
-  audited only: %i[email role first_name last_name telegram_user promotions]
+  audited only: %i[email role first_name last_name telegram_user promotions policy_accepted]
   has_associated_audits
 
   # Include default devise modules. Others available are:
