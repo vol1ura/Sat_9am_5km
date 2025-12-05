@@ -105,6 +105,9 @@ GEM
     arbre (1.7.0)
       activesupport (>= 3.0.0)
       ruby2_keywords (>= 0.0.2)
+    arctic_admin (4.3.3)
+      activeadmin (>= 1.1.0, < 4.0)
+      font-awesome-sass (~> 6.0)
     ast (2.4.3)
     audited (5.8.0)
       activerecord (>= 5.2, < 8.2)
@@ -615,6 +618,7 @@ DEPENDENCIES
   activeadmin-localize
   activeadmin-searchable_select
   activeadmin_quill_editor
+  arctic_admin
   audited
   autoprefixer-rails
   bcrypt_pbkdf (~> 1.1)

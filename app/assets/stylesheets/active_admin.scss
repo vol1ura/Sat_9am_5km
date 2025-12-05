@@ -1,106 +1,431 @@
-// Sass variable overrides must be declared before loading up Active Admin's styles.
+// Active Admin stylesheet - use Arctic Admin theme only.
+/* stylelint-disable selector-id-pattern */
+// This file is loaded for ActiveAdmin pages only and must not affect
+// the main site styles. We import Arctic Admin's main entrypoint and
+// only the admin-specific assets (Quill editor + searchable select inputs).
 
-// To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
-// Active Admin source.
-
-// For example, to change the sidebar width:
-// $sidebar-width: 242px;
-@use "sass:color";
-
-$primary-color: #2a2951 !default;
-$secondary-color: #a0a0a0 !default;
-$table-stripe-color: color.adjust($primary-color, $lightness: 70%) !default;
-$link-color: #144469 !default;
-$text-color: #0f0f0f !default;
-$error-color: #d63384 !default;
-$breadcrumbs-color: $link-color !default;
-$table-error-color: color.adjust($error-color, $lightness: 25%);
-
-// Active Admin's got SASS!
-@import "active_admin/mixins";
-@import "active_admin/base";
+// Load Font Awesome so admin pages have the same icons as the main site.
+// We use the `font-awesome-sass` gem which provides the necessary fonts
+// via the asset pipeline.
+@import "font-awesome";
+@import "arctic_admin/main";
 @import "activeadmin/quill_editor/quill.snow";
 @import "activeadmin/quill_editor_input";
 @import "active_admin/searchable_select";
 
+// Any admin-specific overrides should go into a separate partial
+// (e.g. app/assets/stylesheets/admin_overrides.scss) and be intentionally
+// minimal. Right now we rely on Arctic Admin defaults for the admin look.
+
+.up-down-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
 body {
-  font-size: 82%;
-}
-
-.suggestions {
-  position: absolute;
-  cursor: pointer;
-  z-index: 100;
-  opacity: 0.91;
-  background-color: #eee;
-  border-radius: 0 0 4px 4px;
-  top: 100%;
-  left: 0;
-  right: 0;
-  overflow: hidden auto;
-  box-shadow: 0 0 10px #818181;
-}
-
-.suggestions li {
-  padding: 5px 10px;
-}
-
-.suggestions li:first-child {
-  border-top: none !important;
-}
-
-.suggestions li:hover {
-  background-color: #ddd;
-}
-
-.suggestions li.active {
-  background-color: #54528b !important;
-  color: #fff;
+    font-size: 82%;
 }
 
 .autocomplete {
-  position: relative;
-  margin: 4px 10px;
-}
+    position: relative;
+    width: 100%;
 
-.autocomplete .query-field {
-  width: 100%;
-}
-
-.img-hint {
-  max-width: 60px;
-  max-height: 60px;
-  object-fit: scale-down;
-}
-
-.img-badge {
-  max-width: 100%;
-  max-height: 200px;
-  object-fit: scale-down;
-}
-
-.warning-box {
-  background-color: #fff3cd;
-  padding: 1em;
-  border-radius: 4px;
-}
-
-tr.odd,
-tr.even {
-  &.athlete-error {
-    td.col-athlete, td.col-name, td.col-role {
-      background-color: $table-error-color;
+    .query-field {
+        width: 100%;
     }
-  }
-  td.col-position,
-  td.col-total_time {
-    &.error {
-      background-color: $table-error-color;
+
+    .suggestions {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: white;
+        border: 1px solid #d3d3d3;
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+        max-height: 200px;
+        overflow-y: auto;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            color: #333;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &:hover,
+            &.active {
+                background-color: #f0f4f8;
+                color: #2e2e2e;
+            }
+
+            b {
+                font-weight: 600;
+                color: #007bff;
+            }
+        }
     }
-  }
 }
 
-.ui-datepicker-calendar td:nth-child(6) {
-  background: #ffb9f6;
+
+form fieldset.choices {
+    .choices-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .choice {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        input[type="radio"] {
+            margin: 0;
+        }
+
+        label {
+            margin: 0;
+            display: inline-block;
+        }
+    }
+}
+
+
+body.admin_activity_results.index {
+    table.index_table tbody tr {
+        &:nth-child(odd) {
+            background-color: #f5f5f5;
+        }
+
+        &:nth-child(even) {
+            background-color: #fff;
+        }
+    }
+}
+
+
+form {
+    margin-bottom: 3rem;
+
+    fieldset {
+        margin-bottom: 1.5rem;
+
+        ol>li {
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        input[type="datetime-local"],
+        textarea,
+        select {
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .inline-hints {
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .actions {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e8e8e8;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+}
+
+
+table.index_table {
+    margin-bottom: 2rem;
+
+    td.col-actions {
+        white-space: nowrap;
+
+        a {
+            display: inline-block;
+            margin-right: 0.5rem;
+            margin-bottom: 0.25rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+
+.table_tools {
+    margin-bottom: 1.5rem;
+
+    .scopes {
+        margin-bottom: 1rem;
+
+        .scope {
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+
+@media screen and (width <=768px) {
+
+    body {
+        font-size: 14px;
+    }
+
+
+    #title_bar {
+        padding: 1rem;
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .action_items {
+            margin-top: 1rem;
+
+            a,
+            span {
+                padding: 0.75rem 1rem;
+                font-size: 14px;
+            }
+        }
+    }
+
+
+    #active_admin_content {
+        padding: 1rem;
+    }
+
+    .breadcrumb {
+        font-size: 12px;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+
+    .panel {
+        margin-bottom: 1.5rem;
+    }
+
+    .panel_contents {
+        padding: 1rem;
+    }
+
+    .index_content {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table.index_table {
+        min-width: 600px;
+        font-size: 13px;
+
+        th,
+        td {
+            padding: 0.75rem 0.5rem;
+        }
+
+        td.col-actions {
+            a {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+                padding: 0.5rem 0.75rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    form {
+        fieldset {
+            padding: 1rem 0.5rem;
+
+            ol>li {
+                margin-bottom: 1.5rem;
+            }
+
+            label {
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="number"],
+            input[type="date"],
+            input[type="datetime-local"],
+            input[type="search"],
+            textarea,
+            select {
+                font-size: 16px;
+                padding: 0.75rem;
+                min-height: 44px;
+            }
+
+            textarea {
+                min-height: 120px;
+            }
+        }
+
+        .buttons {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1rem;
+
+            input[type="submit"],
+            a {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                min-height: 50px;
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .table_tools {
+        padding: 0 1rem;
+
+        .scopes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+
+            .scope {
+                margin-right: 0;
+                margin-bottom: 0;
+                font-size: 13px;
+                padding: 0.5rem 1rem;
+            }
+        }
+    }
+
+    form,
+    .filter_form,
+    .sidebar_section {
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        input[type="datetime-local"],
+        input[type="search"],
+        textarea,
+        select {
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+
+    #filters_sidebar_section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+
+        h3 {
+            font-size: 16px;
+        }
+
+        .filter_form_field {
+            margin-bottom: 1.25rem;
+
+            label {
+                font-size: 14px;
+                margin-bottom: 0.5rem;
+            }
+
+            input,
+            select {
+                max-width: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0.75rem;
+                font-size: 16px;
+                min-height: 44px;
+            }
+        }
+    }
+
+    .paginated_collection_contents {
+        margin-bottom: 2rem;
+    }
+
+    .pagination {
+        padding: 1rem;
+        font-size: 14px;
+
+        a,
+        span {
+            padding: 0.5rem 0.75rem;
+            margin: 0 0.25rem;
+        }
+    }
+}
+
+
+@media screen and (width >=769px) {
+    table.index_table {
+        td.col-actions {
+            min-width: 200px;
+
+            a {
+                white-space: nowrap;
+            }
+        }
+    }
+
+    form .buttons {
+        justify-content: flex-start;
+    }
+}
+
+
+#wrapper {
+    padding-bottom: 3rem;
 }
