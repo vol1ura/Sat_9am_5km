@@ -57,7 +57,7 @@ ActiveAdmin.register User do
   end
 
   action_item :permissions, only: %i[show edit], if: proc { current_user.admin? } do
-    link_to 'Полномочия', admin_user_permissions_path(resource)
+    link_to t('admin.permissions'), admin_user_permissions_path(resource)
   end
 
   batch_action(

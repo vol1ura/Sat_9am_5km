@@ -7,7 +7,7 @@ const translations = {
     personalBests: 'Личные рекорды',
     others: 'Остальные',
     newcomers: 'Впервые',
-    newcomersS95: 'Впервые на S95',
+    newcomersS95: 'Впервые на С95',
     volunteers: 'Волонтёры',
     totalVolunteers: 'Всего волонтеров',
     gender: 'Распределение по полу',

@@ -63,7 +63,7 @@ sr:
         title: 'Kontakti %{event_name}'
     events:
       analytics:
-        title: 'Analitika'
+        title: Analitika
     results:
       destroy:
         result_destroyed: 'Pozicija #%{position} je uklonjena.'
@@ -81,6 +81,7 @@ sr:
         successful: 'Volontiranje uspešno dodato'
       update:
         successful: 'Podaci o volonteru %{volunteer_name} uspešno ažurirani'
+    permissions: Ovlašćenja
   results:
     explanation:
       actions:
@@ -234,13 +235,14 @@ sr:
       index:
         utilities: Alati
         analytics:
-          title: 'Analitika'
+          title: Analitika
         cache_clear:
           title: 'Očisti keš'
           button: 'Očisti'
           confirm: 'Da li ste sigurni da želite da očistite keš?'
         badges:
           title: Značke
+
     devise:
       username:
         title: "Korisničko ime"

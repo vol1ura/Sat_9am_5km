@@ -28,7 +28,7 @@ class Result < ApplicationRecord
     target_result = Result.find_by!(position: target_position, activity: activity)
     target_athlete = target_result.athlete
     transaction do
-      target_result.update!(athlete: nil)
+      without_auditing { target_result.update!(athlete: nil) }
       update!(athlete: target_athlete)
       target_result.update!(athlete: current_athlete)
     end

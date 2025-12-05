@@ -80,7 +80,7 @@ module ApplicationHelper
 
   def event_main_image_tag(event, variant: :full, **)
     image = event.current_image
-    image_path = image.attached? ? image.variant(variant) : '/images/placeholder_big.jpg'
+    image_path = image.attached? ? image.variant(variant) : '/images/event_placeholder.webp'
     image_tag image_path, **
   end
 

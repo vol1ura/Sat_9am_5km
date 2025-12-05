@@ -63,7 +63,7 @@ ru:
         title: 'Контакты %{event_name}'
     events:
       analytics:
-        title: 'Аналитика'
+        title: Аналитика
     results:
       destroy:
         result_destroyed: 'Позиция №%{position} удалена из протокола.'
@@ -81,6 +81,7 @@ ru:
         successful: 'Волонтёрство успешно добавлено'
       update:
         successful: 'Данные о волонтёрстве %{volunteer_name} успешно обновлены'
+    permissions: Полномочия
   results:
     explanation:
       actions:
@@ -234,7 +235,7 @@ ru:
       index:
         utilities: Инструменты
         analytics:
-          title: 'Аналитика'
+          title: Аналитика
         cache_clear:
           title: 'Сброс кеша'
           button: 'Сбросить кеш'
@@ -298,6 +299,7 @@ ru:
       user:
         new_model: Создать пользователя
         edit_model: Изменить пользователя
+        delete_model: Удалить пользователя
       badge:
         new_model: Создать награду
         edit_model: Изменить награду
