@@ -17,7 +17,7 @@ set :deploy_to, ENV['APP_DEPLOY_PATH']
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, 'config/master.key', 'config/additional_events.yml', 'public/app-release.apk'
+append :linked_files, 'config/master.key', 'config/additional_events.yml', 'public/app-release.apk', 'public/images/hero-bg.webp'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'storage' # , 'public/system', 'vendor/javascript'
