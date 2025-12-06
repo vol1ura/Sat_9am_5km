@@ -129,10 +129,13 @@ export default class DashboardCharts {
   }
 
   #basePieChartOptions(title, series, labels) {
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+
     return {
       chart: {
         height: 200,
         type: 'pie',
+        background: 'transparent',
       },
       series: series,
       labels: labels,
@@ -144,7 +147,6 @@ export default class DashboardCharts {
         style: {
           fontSize: '1rem',
           fontWeight: 600,
-          color: '#333'
         }
       },
       legend: {
@@ -159,6 +161,7 @@ export default class DashboardCharts {
         }
       },
       theme: {
+        mode: isDark ? 'dark' : 'light',
         palette: 'palette2'
       }
     };

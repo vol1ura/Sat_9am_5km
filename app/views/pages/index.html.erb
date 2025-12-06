@@ -23,7 +23,7 @@
 </section>
 
 <%# How It Works Section %>
-<section class="how-it-works py-5" style="background-color: #f8f9fa;">
+<section class="how-it-works py-5">
   <div class="container">
     <h2 class="text-center mb-5"><%= t '.how_it_works.title' %></h2>
     <div class="row g-4">
@@ -179,7 +179,7 @@
                     <%= image_tag badge.image.variant(:thumb), class: 'thumb-badge', alt: 'FunRun badge' %>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <%= link_to badge.name, badge, class: 'stretched-link text-decoration-none fw-bold text-dark' %>
+                    <%= link_to badge.name, badge, class: 'stretched-link text-decoration-none fw-bold text-body' %>
                   </div>
                 </div>
               </li>
@@ -194,7 +194,7 @@
                     </div>
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <%= link_to event.name, event_path(event.code_name), class: 'stretched-link text-decoration-none fw-bold text-dark' %>
+                    <%= link_to event.name, event_path(event.code_name), class: 'stretched-link text-decoration-none fw-bold text-body' %>
                   </div>
                 </div>
               </li>
@@ -209,7 +209,7 @@
 <%# Volunteer App Section %>
 <section class="volunteer-app-section py-5" data-controller="carousel">
   <div class="container">
-    <h2 class="text-center mb-5"><%= t '.volunteer_app.title' %></h2>
+    <h2 class="text-center text-primary mb-5"><%= t '.volunteer_app.title' %></h2>
     <div class="row align-items-center g-4">
       <div class="col-md-4">
         <div class="app-screen-container text-center">

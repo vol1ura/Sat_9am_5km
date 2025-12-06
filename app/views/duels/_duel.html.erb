@@ -33,7 +33,7 @@
 
         <div class="row g-2">
           <div class="col-6">
-            <div class="text-center p-2 bg-light rounded-3 border">
+            <div class="text-center p-2 bg-body-tertiary rounded-3 border">
               <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:user_result].position < duel[:friend_result].position %>">
                 #<%= duel[:user_result].position %>
               </div>
@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="col-6">
-            <div class="text-center p-2 bg-light rounded-3 border">
+            <div class="text-center p-2 bg-body-tertiary rounded-3 border">
               <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:winner] == :user %>">
                 <%= human_result_time duel[:user_result].total_time if duel[:user_result].total_time %>
               </div>
@@ -76,7 +76,7 @@
 
         <div class="row g-2">
           <div class="col-6">
-            <div class="text-center p-2 bg-light rounded-3 border">
+            <div class="text-center p-2 bg-body-tertiary rounded-3 border">
               <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:friend_result].position < duel[:user_result].position %>">
                 #<%= duel[:friend_result].position %>
               </div>
@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="col-6">
-            <div class="text-center p-2 bg-light rounded-3 border">
+            <div class="text-center p-2 bg-body-tertiary rounded-3 border">
               <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:winner] == :friend %>">
                 <%= human_result_time duel[:friend_result].total_time if duel[:friend_result].total_time %>
               </div>

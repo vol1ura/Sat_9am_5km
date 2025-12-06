@@ -52,11 +52,14 @@ export default class AthleteCharts {
 
   #resultsChartOptions(title, { max_count = undefined } = {}) {
     const data = this.#resultsData(max_count);
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+
     return {
       chart: {
         height: 300,
         width: '100%',
         type: 'area',
+        background: 'transparent',
         animations: {
           initialAnimation: {
             enabled: false
@@ -96,6 +99,7 @@ export default class AthleteCharts {
         }
       },
       theme: {
+        mode: isDark ? 'dark' : 'light',
         palette: 'palette2'
       },
       title: {

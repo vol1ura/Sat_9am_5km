@@ -50,12 +50,15 @@ export default class EventCharts {
   }
 
   #chartOptions(chartId, title, valueClass) {
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+
     return {
       chart: {
         id: chartId,
         group: 'sparklines',
         type: 'area',
         height: 200,
+        background: 'transparent',
         sparkline: {
           enabled: true
         },
@@ -77,7 +80,10 @@ export default class EventCharts {
       xaxis: {
         type: 'datetime',
       },
-      colors: ['#DCE6EC'],
+      colors: [isDark ? '#4a5568' : '#dce6ec'],
+      theme: {
+        mode: isDark ? 'dark' : 'light',
+      },
       title: {
         text: title,
         offsetX: 30,

@@ -64,12 +64,15 @@ export default class extends Controller {
       });
     });
 
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+
     return {
       series,
       chart: {
         type: 'bar',
         height: 350,
         stacked: true,
+        background: 'transparent',
         toolbar: {
           show: false
         },
@@ -112,6 +115,7 @@ export default class extends Controller {
         offsetY: 40
       },
       theme: {
+        mode: isDark ? 'dark' : 'light',
         palette: 'palette2'
       },
       fill: {
