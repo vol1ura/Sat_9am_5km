@@ -162,7 +162,7 @@ export default class DashboardCharts {
       },
       theme: {
         mode: isDark ? 'dark' : 'light',
-        palette: 'palette2'
+        palette: isDark ? 'palette5' : 'palette2'
       }
     };
   }

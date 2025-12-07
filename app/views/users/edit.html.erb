@@ -106,7 +106,7 @@
           </div>
         </div>
       <% end %>
-      <div class="mt-3 rounded-3 p-3 bg-warning border">
+      <div class="mt-3 rounded-3 p-3 bg-warning-subtle border">
         <h5 class="fw-light"><%= t '.emergency_contact' %></h5>
         <div class="mb-2">
           <% is_emergency_contact_name_invalid = current_user.errors.key?(:emergency_contact_name) %>

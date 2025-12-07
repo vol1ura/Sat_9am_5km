@@ -116,7 +116,7 @@ export default class extends Controller {
       },
       theme: {
         mode: isDark ? 'dark' : 'light',
-        palette: 'palette2'
+        palette: isDark ? 'palette5' : 'palette2'
       },
       fill: {
         opacity: 0.85
