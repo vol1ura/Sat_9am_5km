@@ -22,7 +22,72 @@
   </div>
 </section>
 
-<%# How It Works Section %>
+<% if @weekly_stats %>
+  <section class="weekly-stats py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="stats-card">
+            <div class="stats-header text-center mb-4">
+              <h2 class="stats-title"><%= t '.weekly_stats.title' %></h2>
+              <p class="stats-subtitle text-muted">
+                <%= t '.weekly_stats.subtitle', date: l(@weekly_stats[:updated_at], format: :brief) %>
+              </p>
+            </div>
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="stat-item">
+                  <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value" data-value="<%= @weekly_stats[:total_participants] %>">
+                      <%= @weekly_stats[:total_participants] %>
+                    </div>
+                    <div class="stat-label"><%= t '.weekly_stats.total_participants' %></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="stat-item">
+                  <div class="stat-icon stat-icon-success">
+                    <i class="fas fa-user-plus"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value stat-value-success" data-value="<%= @weekly_stats[:newcomers] %>">
+                      <%= @weekly_stats[:newcomers] %>
+                    </div>
+                    <div class="stat-label"><%= t '.weekly_stats.newcomers' %></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="stat-item">
+                  <div class="stat-icon stat-icon-info">
+                    <i class="fas fa-chart-pie"></i>
+                  </div>
+                  <div class="stat-content">
+                    <div class="stat-value stat-value-info">
+                      <%= @weekly_stats[:newcomers_percentage] %>%
+                    </div>
+                    <div class="stat-label"><%= t '.weekly_stats.newcomers_percentage' %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stats-footer text-center mt-4">
+              <small class="text-muted">
+                <i class="fas fa-clock me-1"></i>
+                <%= t '.weekly_stats.next_update', date: l(@next_saturday, format: :brief) %>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
 <section class="how-it-works py-5">
   <div class="container">
     <h2 class="text-center mb-5"><%= t '.how_it_works.title' %></h2>

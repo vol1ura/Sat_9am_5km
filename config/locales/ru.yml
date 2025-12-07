@@ -756,6 +756,13 @@ ru:
       registration: Регистрация
       results: Результаты
       find_event: Найти ближайший забег
+      weekly_stats:
+        title: Статистика за неделю
+        subtitle: 'Данные за %{date}'
+        total_participants: Участников
+        newcomers: Новичков
+        newcomers_percentage: Процент новичков
+        next_update: 'Следующее обновление: %{date}'
       how_it_works:
         title: Как это работает?
         registration:

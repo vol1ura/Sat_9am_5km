@@ -11,6 +11,8 @@ class PagesController < ApplicationController
   def index
     @local_events = Event.active.in_country(top_level_domain).unscope(:order)
     @next_saturday = Date.tomorrow.next_week.prev_week(:saturday)
+    @last_saturday = @next_saturday - 7.days
+    @weekly_stats = calculate_weekly_stats
     @jubilee_events =
       Activity
         .where(event: @local_events.without_friends, published: true, date: ...@next_saturday)
@@ -59,5 +61,52 @@ class PagesController < ApplicationController
 
   def page_layout
     params[:action] == 'index' || page_name == 'donor' ? 'home' : 'application'
+  end
+
+  def calculate_weekly_stats
+    activities = Activity.where(event: @local_events, published: true, date: @last_saturday)
+                         .includes(:results, :volunteers)
+    return nil if activities.empty?
+
+    participants_data = calculate_participants(activities)
+    
+    {
+      total_participants: participants_data[:total],
+      newcomers: participants_data[:newcomers],
+      newcomers_percentage: calculate_percentage(participants_data[:newcomers], participants_data[:total]),
+      updated_at: @last_saturday
+    }
+  end
+
+  def calculate_participants(activities)
+    total = 0
+    newcomers = 0
+
+    activities.each do |activity|
+      participants = activity.participants
+      total += participants.count
+      newcomers += count_newcomers(participants)
+    end
+
+    { total: total, newcomers: newcomers }
+  end
+
+  def count_newcomers(participants)
+    participants.count do |athlete|
+      first_participation_date(athlete) == @last_saturday
+    end
+  end
+
+  def first_participation_date(athlete)
+    first_result = athlete.results.published.minimum(:date)
+    first_volunteer = athlete.volunteers.joins(:activity)
+                             .where(activity: { published: true })
+                             .minimum(:date)
+    [first_result, first_volunteer].compact.min
+  end
+
+  def calculate_percentage(part, total)
+    return 0 unless total.positive?
+    (part.to_f / total * 100).round(1)
   end
 end
