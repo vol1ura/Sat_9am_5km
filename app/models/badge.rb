@@ -18,7 +18,7 @@ class Badge < ApplicationRecord
   validates :kind, :name, :conditions, presence: true
 
   validates :image, attached: true,
-                    content_type: :png,
+                    content_type: %i[png webp],
                     aspect_ratio: :square,
                     dimension: { width: { in: 200..800 } },
                     size: { less_than: 300.kilobytes }

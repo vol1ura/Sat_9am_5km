@@ -18,7 +18,7 @@
   data-controller="table"
   data-table-url-value="/ratings/table"
   data-table-params-value="order,type">
-  <ul class="nav nav-pills nav-justified mb-3 flex-nowrap overflow-x-auto" role="tablist">
+  <ul class="nav nav-pills nav-justified mb-3 hidden-scroll-x" role="tablist">
     <% RatingsController::RATINGS.each do |order| %>
       <li class="nav-item" role="presentation">
         <%=
