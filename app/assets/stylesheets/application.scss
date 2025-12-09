@@ -252,6 +252,16 @@ h6 {
   }
 }
 
+.hidden-scroll-x {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @keyframes blink {
   0%, 50% {
     opacity: 1;

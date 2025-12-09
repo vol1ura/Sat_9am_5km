@@ -102,11 +102,9 @@ export default class extends Controller {
             [event.latitude, event.longitude],
             {
               balloonContent: `
-                <div>
-                  <h5>${event.name}</h5>
-                  <p class="my-0 text-muted">${event.slogan}</p>
-                  <a href="/events/${event.code_name}" class="btn btn-outline-primary btn-sm my-2">Подробнее</a>
-                </div>
+                <h5 class="text-primary">${event.name}</h5>
+                <p class="my-0 text-black">${event.slogan}</p>
+                <a href="/events/${event.code_name}" class="btn btn-outline-primary btn-sm my-2">Подробнее</a>
               `,
               hintContent: event.name
             },
