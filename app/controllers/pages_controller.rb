@@ -92,34 +92,33 @@ class PagesController < ApplicationController
   end
 
   def calculate_participants_data(activities)
- 
     activity_ids = activities.pluck(:id)
     
-    runner_ids = Result.where(activity_id: activity_ids).pluck(:athlete_id).compact
-    volunteer_ids = Volunteer.where(activity_id: activity_ids).pluck(:athlete_id).compact
-    
 
-    current_athlete_ids = (runner_ids + volunteer_ids).uniq
-    
-
-    previous_runners = Result.joins(:activity)
-                             .where(athlete_id: current_athlete_ids, activity: { published: true })
-                             .where('activity.date < ?', @last_saturday)
-                             .pluck(:athlete_id)
-                             
-    previous_volunteers = Volunteer.joins(:activity)
-                                   .where(athlete_id: current_athlete_ids, activity: { published: true })
-                                   .where('activity.date < ?', @last_saturday)
-                                   .pluck(:athlete_id)
-                                   
-    veteran_athlete_ids = (previous_runners + previous_volunteers).uniq
-    
-
-    newcomers_count = current_athlete_ids.count { |id| !veteran_athlete_ids.include?(id) }
-       
     total_count = activities.sum { |a| a.participants.count }
+  
+    newcomers_count = ActiveRecord::Base.connection.select_value(<<~SQL.squish)
+      WITH current_participants AS (
+        SELECT DISTINCT athlete_id FROM results WHERE activity_id IN (#{activity_ids.join(',')}) AND athlete_id IS NOT NULL
+        UNION
+        SELECT DISTINCT athlete_id FROM volunteers WHERE activity_id IN (#{activity_ids.join(',')}) AND athlete_id IS NOT NULL
+      ),
+      veterans AS (
+        SELECT DISTINCT r.athlete_id FROM results r
+        JOIN activities a ON r.activity_id = a.id
+        WHERE r.athlete_id IN (SELECT athlete_id FROM current_participants)
+          AND a.published = true AND a.date < '#{@last_saturday}'
+        UNION
+        SELECT DISTINCT v.athlete_id FROM volunteers v
+        JOIN activities a ON v.activity_id = a.id
+        WHERE v.athlete_id IN (SELECT athlete_id FROM current_participants)
+          AND a.published = true AND a.date < '#{@last_saturday}'
+      )
+      SELECT COUNT(*) FROM current_participants cp
+      WHERE cp.athlete_id NOT IN (SELECT athlete_id FROM veterans)
+    SQL
 
-    { total: total_count, newcomers: newcomers_count }
+    { total: total_count, newcomers: newcomers_count.to_i }
   end
 
   def calculate_percentage(part, total)

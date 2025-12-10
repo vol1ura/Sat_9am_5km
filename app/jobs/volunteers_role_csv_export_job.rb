@@ -7,7 +7,7 @@ class VolunteersRoleCsvExportJob < ApplicationJob
     @event = Event.find event_id
     @role = role
     @user = User.find user_id
-    @from_date = Date.parse from_date if from_date
+    @from_date = (Date.parse(from_date) rescue nil) if from_date
     return unless @user.telegram_id
 
     exporter = CsvExport::VolunteersRole.new(event: @event, role: @role, from_date: @from_date)

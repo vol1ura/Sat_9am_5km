@@ -111,27 +111,6 @@ ActiveAdmin.register_page 'Utilities' do
       end
     end
 
-    script do
-      raw <<~JS
-        function showConfirmModal(formId, message) {
-          var modalId = formId === 'event_csv_form' ? 'confirm_modal_event' : 'confirm_modal_volunteers';
-          var messageId = formId === 'event_csv_form' ? 'confirm_modal_event_message' : 'confirm_modal_volunteers_message';
-          
-          document.getElementById(messageId).textContent = message;
-          document.getElementById(modalId).style.display = 'flex';
-        }
-
-        function hideConfirmModal(formId) {
-          var modalId = formId === 'event_csv_form' ? 'confirm_modal_event' : 'confirm_modal_volunteers';
-          document.getElementById(modalId).style.display = 'none';
-        }
-
-        function submitConfirmedForm(formId) {
-          hideConfirmModal(formId);
-          document.getElementById(formId).submit();
-        }
-      JS
-    end
   end
 
   page_action :award_funrun_badge, method: :post do
@@ -159,7 +138,7 @@ ActiveAdmin.register_page 'Utilities' do
     end
     
     event = Event.accessible_by(current_ability).find(event_id)
-    from_date = params[:from_date].presence ? Date.parse(params[:from_date]) : nil
+    from_date = (Date.parse(params[:from_date]) rescue nil) if params[:from_date].presence
     
     if params[:download_now] == '1'
 
@@ -184,14 +163,14 @@ ActiveAdmin.register_page 'Utilities' do
     end
     
     event = Event.accessible_by(current_ability).find(event_id)
-    from_date = params[:from_date].presence ? Date.parse(params[:from_date]) : nil
+    from_date = (Date.parse(params[:from_date]) rescue nil) if params[:from_date].presence
     
     if params[:download_now] == '1'
-      # Синхронная генерация и скачивание
+
       exporter = CsvExport::VolunteersRole.new(event: event, role: role, from_date: from_date)
       send_data exporter.generate, filename: exporter.filename, type: 'text/csv'
     else
-      # Асинхронная отправка в Telegram
+
       VolunteersRoleCsvExportJob.perform_later event_id.to_i, role, current_user.id, params[:from_date].presence
       flash[:notice] = t '.reports.task_queued'
       redirect_to admin_utilities_path
@@ -218,8 +197,8 @@ ActiveAdmin.register_page 'Utilities' do
     end
 
     event = Event.accessible_by(current_ability).find(event_id)
-    from_date = params[:from_date].presence ? Date.parse(params[:from_date]) : nil
-    to_date = params[:to_date].presence ? Date.parse(params[:to_date]) : nil
+    from_date = (Date.parse(params[:from_date]) rescue nil) if params[:from_date].presence
+    to_date = (Date.parse(params[:to_date]) rescue nil) if params[:to_date].presence
 
     exporter = CsvExport::Newcomers.new(event: event, from_date: from_date, to_date: to_date)
     send_data exporter.generate, filename: exporter.filename, type: 'text/csv'
@@ -233,8 +212,8 @@ ActiveAdmin.register_page 'Utilities' do
     end
 
     event = Event.accessible_by(current_ability).find(event_id)
-    from_date = params[:from_date].presence ? Date.parse(params[:from_date]) : nil
-    to_date = params[:to_date].presence ? Date.parse(params[:to_date]) : nil
+    from_date = (Date.parse(params[:from_date]) rescue nil) if params[:from_date].presence
+    to_date = (Date.parse(params[:to_date]) rescue nil) if params[:to_date].presence
 
     exporter = CsvExport::ClubStats.new(event: event, from_date: from_date, to_date: to_date)
     send_data exporter.generate, filename: exporter.filename, type: 'text/csv'
