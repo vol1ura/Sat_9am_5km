@@ -9,9 +9,13 @@ class EventAthletesCsvExportJob < ApplicationJob
     @from_date = Date.parse from_date if from_date
     return unless @user.telegram_id
 
-    tempfile = generate_csv
+    exporter = CsvExport::EventAthletes.new(event: @event, from_date: @from_date)
+    
+    tempfile = Tempfile.new(['export', '.csv'])
+    tempfile.write(exporter.generate)
+    tempfile.rewind
 
-    Telegram::Bot.call 'sendDocument', form_data: multipart_form_data(tempfile)
+    Telegram::Bot.call 'sendDocument', form_data: multipart_form_data(tempfile, exporter.filename)
   rescue StandardError => e
     Rollbar.error e, user_id: @user.id, event_id: @event.id
   ensure
@@ -21,45 +25,13 @@ class EventAthletesCsvExportJob < ApplicationJob
 
   private
 
-  def generate_csv
-    tempfile = Tempfile.new
-    CSV.open(tempfile.path, 'w') do |csv|
-      csv << %w[id name results_count volunteering_count]
-      dataset_for.find_each do |athlete|
-        csv << [athlete.id, athlete.name, athlete.results_count, athlete.volunteering_count]
-      end
-    end
-    tempfile.rewind
-    tempfile
-  end
-
-  def dataset_for
-    results_subq = subquery_for(Result).select('athlete_id, COUNT(*) AS results_count')
-    volunteering_subq = subquery_for(Volunteer).select('athlete_id, COUNT(*) AS volunteering_count')
-
-    Athlete
-      .joins("LEFT JOIN (#{results_subq.to_sql}) res ON res.athlete_id = athletes.id")
-      .joins("LEFT JOIN (#{volunteering_subq.to_sql}) vol ON vol.athlete_id = athletes.id")
-      .where('res.results_count IS NOT NULL OR vol.volunteering_count IS NOT NULL')
-      .select(
-        'athletes.id,athletes.name,' \
-        'COALESCE(res.results_count, 0) AS results_count,COALESCE(vol.volunteering_count, 0) AS volunteering_count',
-      )
-  end
-
-  def subquery_for(model)
-    scope = model.published.where(activity: { event: @event }).where.not(athlete_id: nil)
-    scope = scope.where(activity: { date: @from_date.. }) if @from_date
-    scope.group(:athlete_id)
-  end
-
-  def multipart_form_data(file)
+  def multipart_form_data(file, filename)
     [
       [
         'document',
         file,
         {
-          filename: "#{@event.code_name}_participants_#{Time.zone.now.to_i}.csv",
+          filename: filename,
           content_type: 'text/csv',
         },
       ],

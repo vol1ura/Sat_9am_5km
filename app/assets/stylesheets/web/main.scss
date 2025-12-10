@@ -85,159 +85,124 @@
 }
 
 .weekly-stats {
-  background: linear-gradient(135deg, var(--bs-primary-bg-subtle) 0%, var(--bs-secondary-bg-subtle) 100%);
-  padding: 4rem 0;
-  position: relative;
-  overflow: hidden;
+  padding: 6rem 0;
+  background-color: var(--bs-body-bg);
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgb(var(--bs-primary-rgb) / 8%) 0%, transparent 70%);
-    border-radius: 50%;
+  .container {
+    max-width: 1200px;
   }
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -50%;
-    left: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgb(var(--bs-success-rgb) / 8%) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .stats-card {
-    background: var(--bs-body-bg);
-    border-radius: 20px;
-    padding: 3rem;
-    box-shadow: 0 10px 40px rgb(0 0 0 / 8%);
+  h2 {
+    color: $primary;
+    margin-bottom: 1rem;
     position: relative;
-    z-index: 1;
-    border: 1px solid var(--bs-border-color);
+    text-align: center;
+    padding-bottom: 1rem;
 
-    @include media(phoneScreen) {
-      padding: 2rem 1.5rem;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--bs-primary);
     }
   }
 
-  .stats-header {
-    .stats-title {
-      color: var(--bs-primary);
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-
-      @include media(phoneScreen) {
-        font-size: 1.5rem;
-      }
-    }
-
-    .stats-subtitle {
-      font-size: 1rem;
-      color: var(--bs-secondary);
-    }
+  .stats-subtitle {
+    text-align: center;
+    color: var(--bs-secondary);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
   }
 
-  .stat-item {
-    display: flex;
-    align-items: center;
-    padding: 1.5rem;
-    background: var(--bs-tertiary-bg);
-    border-radius: 15px;
-    transition: all 0.3s ease;
+  .card {
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background-color: var(--bs-tertiary-bg);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     height: 100%;
+    overflow: hidden;
+
+    .card-body {
+      padding: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    i {
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+      border-color: rgba(0, 0, 0, 0.1);
+
+      &::before {
+        opacity: 1;
+      }
+
+      i {
+        transform: scale(1.2) rotate(5deg);
+      }
     }
-
-    @include media(phoneScreen) {
-      padding: 1rem;
-    }
-  }
-
-  .stat-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-primary-dark) 100%);
-    color: white;
-    font-size: 1.5rem;
-    margin-right: 1.25rem;
-    flex-shrink: 0;
-    box-shadow: 0 4px 15px rgb(var(--bs-primary-rgb) / 30%);
-
-    &.stat-icon-success {
-      background: linear-gradient(135deg, var(--bs-success) 0%, #198754 100%);
-      box-shadow: 0 4px 15px rgb(var(--bs-success-rgb) / 30%);
-    }
-
-    &.stat-icon-info {
-      background: linear-gradient(135deg, var(--bs-info) 0%, #0a7dbb 100%);
-      box-shadow: 0 4px 15px rgb(var(--bs-info-rgb) / 30%);
-    }
-
-    @include media(phoneScreen) {
-      width: 50px;
-      height: 50px;
-      font-size: 1.25rem;
-      margin-right: 1rem;
-    }
-  }
-
-  .stat-content {
-    flex: 1;
   }
 
   .stat-value {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--bs-primary);
-    line-height: 1;
-    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    margin: 1rem 0;
+    color: $primary;
 
-    &.stat-value-success {
-      color: var(--bs-success);
+    &.text-success {
+      color: $success !important;
     }
 
-    &.stat-value-info {
-      color: var(--bs-info);
+    &.text-danger {
+      color: $danger !important;
     }
 
-    @include media(phoneScreen) {
-      font-size: 2rem;
+    &.text-info {
+      color: $info !important;
     }
   }
 
   .stat-label {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: var(--bs-secondary);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    @include media(phoneScreen) {
-      font-size: 0.8rem;
-    }
+    letter-spacing: 1px;
   }
 
   .stats-footer {
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--bs-border-color);
+    margin-top: 3rem;
+    text-align: center;
 
     small {
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       color: var(--bs-secondary);
+      background-color: var(--bs-tertiary-bg);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
     }
   }
 }
@@ -459,6 +424,10 @@
 .volunteer-app-section {
   background: linear-gradient(135deg, #e9f9f5 0%, #d0f0e7 100%);
 
+  [data-bs-theme="dark"] & {
+    background: linear-gradient(135deg, #1a2e2a 0%, #0f2520 100%);
+  }
+
   .app-screen-container {
     position: relative;
 
@@ -493,11 +462,19 @@
     p {
       color: lighten($dark, 30%);
       transition: color 0.3s ease;
+
+      [data-bs-theme="dark"] & {
+        color: #f5f5f5;
+      }
     }
 
     h3 {
       color: lighten($primary, 12%);
       transition: color 0.3s ease;
+
+      [data-bs-theme="dark"] & {
+        color: #f5f5f5;
+      }
     }
 
     .fas {
@@ -522,11 +499,19 @@
 
       p {
         color: $dark;
+
+        [data-bs-theme="dark"] & {
+          color: #ffffff;
+        }
       }
 
       h3 {
         color: $primary;
         font-weight: 600;
+
+        [data-bs-theme="dark"] & {
+          color: #ffffff;
+        }
       }
     }
   }

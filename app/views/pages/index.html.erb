@@ -22,71 +22,62 @@
   </div>
 </section>
 
-<% if @weekly_stats %>
-  <section class="weekly-stats py-5">
+  <section class="weekly-stats py-5" data-controller="counter">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <div class="stats-card">
-            <div class="stats-header text-center mb-4">
-              <h2 class="stats-title"><%= t '.weekly_stats.title' %></h2>
-              <p class="stats-subtitle text-muted">
-                <%= t '.weekly_stats.subtitle', date: l(@weekly_stats[:updated_at], format: :brief) %>
-              </p>
+      <h2 class="text-center"><%= t '.weekly_stats.title' %></h2>
+      <p class="stats-subtitle">
+        <%= t '.weekly_stats.data_description' %>
+      </p>
+
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+              <% if @weekly_stats[:total_participants] %>
+                <div class="stat-value" data-counter-target="value" data-value="<%= @weekly_stats[:total_participants] %>">0</div>
+              <% else %>
+                <div class="stat-value"><%= t('.weekly_stats.unknown') %></div>
+              <% end %>
+              <div class="stat-label mb-2"><%= t '.weekly_stats.total_participants' %></div>
+              <p class="text-muted small mb-0"><%= t '.weekly_stats.total_participants_description' %></p>
             </div>
-            <div class="row g-4">
-              <div class="col-md-4">
-                <div class="stat-item">
-                  <div class="stat-icon">
-                    <i class="fas fa-users"></i>
-                  </div>
-                  <div class="stat-content">
-                    <div class="stat-value" data-value="<%= @weekly_stats[:total_participants] %>">
-                      <%= @weekly_stats[:total_participants] %>
-                    </div>
-                    <div class="stat-label"><%= t '.weekly_stats.total_participants' %></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="stat-item">
-                  <div class="stat-icon stat-icon-success">
-                    <i class="fas fa-user-plus"></i>
-                  </div>
-                  <div class="stat-content">
-                    <div class="stat-value stat-value-success" data-value="<%= @weekly_stats[:newcomers] %>">
-                      <%= @weekly_stats[:newcomers] %>
-                    </div>
-                    <div class="stat-label"><%= t '.weekly_stats.newcomers' %></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="stat-item">
-                  <div class="stat-icon stat-icon-info">
-                    <i class="fas fa-chart-pie"></i>
-                  </div>
-                  <div class="stat-content">
-                    <div class="stat-value stat-value-info">
-                      <%= @weekly_stats[:newcomers_percentage] %>%
-                    </div>
-                    <div class="stat-label"><%= t '.weekly_stats.newcomers_percentage' %></div>
-                  </div>
-                </div>
-              </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <i class="fas fa-user-plus fa-3x mb-3 text-danger"></i>
+              <% if @weekly_stats[:newcomers] %>
+                <div class="stat-value text-danger" data-counter-target="value" data-value="<%= @weekly_stats[:newcomers] %>">0</div>
+              <% else %>
+                <div class="stat-value text-danger"><%= t('.weekly_stats.unknown') %></div>
+              <% end %>
+              <div class="stat-label mb-2"><%= t '.weekly_stats.newcomers' %></div>
+              <p class="text-muted small mb-0"><%= t '.weekly_stats.newcomers_description' %></p>
             </div>
-            <div class="stats-footer text-center mt-4">
-              <small class="text-muted">
-                <i class="fas fa-clock me-1"></i>
-                <%= t '.weekly_stats.next_update', date: l(@next_saturday, format: :brief) %>
-              </small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <i class="fas fa-chart-pie fa-3x mb-3 text-info"></i>
+              <% if @weekly_stats[:newcomers_percentage] %>
+                <div class="stat-value text-info" data-counter-target="value" data-value="<%= @weekly_stats[:newcomers_percentage] %>" data-percentage="true">0%</div>
+              <% else %>
+                <div class="stat-value text-info"><%= t('.weekly_stats.unknown') %></div>
+              <% end %>
+              <div class="stat-label mb-2"><%= t '.weekly_stats.newcomers_percentage' %></div>
+              <p class="text-muted small mb-0"><%= t '.weekly_stats.newcomers_percentage_description' %></p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-<% end %>
+
 
 <section class="how-it-works py-5">
   <div class="container">

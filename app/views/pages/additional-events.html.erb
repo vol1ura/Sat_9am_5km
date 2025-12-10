@@ -2,7 +2,7 @@
 <% additional_events = Rails.configuration.additional_events %>
 <h2><%= head_info :title, t('.title_html', year: additional_events[:year]) %></h2>
 <div class="row">
-  <div class="col-md-6 offset-md-2">
+  <div class="col-md-6 offset-md-3">
     <table class="table">
       <thead>
         <tr>
@@ -11,10 +11,18 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <% @country_events.where(code_name: additional_events[:events].keys).each do |event| %>
+        <% if additional_events[:events].present? %>
+          <% @country_events.where(code_name: additional_events[:events].keys).each do |event| %>
+            <tr>
+              <td><%= link_to event.name, event_path(event.code_name) %></td>
+              <td><%= additional_events[:events][event.code_name.to_sym] %></td>
+            </tr>
+          <% end %>
+        <% else %>
           <tr>
-            <td><%= link_to event.name, event_path(event.code_name) %></td>
-            <td><%= additional_events[:events][event.code_name.to_sym] %></td>
+            <td colspan="2" class="text-center text-muted">
+              Дополнительные события не настроены
+            </td>
           </tr>
         <% end %>
       </tbody>

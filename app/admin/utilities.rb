@@ -15,6 +15,21 @@ ActiveAdmin.register_page 'Utilities' do
           para 'Будет сформирован CSV файл со списком участников, волонтёривших на выбранном мероприятии.'
           render partial: 'volunteers_role_csv_export_form'
         end
+
+        panel 'Отчёт по юбилеям (Milestones)' do
+          para 'Список участников, когда-либо участвовавших в этом мероприятии, с их текущими счетчиками пробежек и волонтерств.'
+          render partial: 'milestones_csv_export_form'
+        end
+
+        panel 'Отчёт по новичкам' do
+          para 'Список участников, чей ПЕРВЫЙ финиш был на этом мероприятии в заданный период.'
+          render partial: 'newcomers_csv_export_form'
+        end
+
+        panel 'Клубная статистика' do
+          para 'Статистика по беговым клубам на мероприятии за период.'
+          render partial: 'club_stats_csv_export_form'
+        end
       end
 
       tab t('.badges.title') do
@@ -95,6 +110,28 @@ ActiveAdmin.register_page 'Utilities' do
         )
       end
     end
+
+    script do
+      raw <<~JS
+        function showConfirmModal(formId, message) {
+          var modalId = formId === 'event_csv_form' ? 'confirm_modal_event' : 'confirm_modal_volunteers';
+          var messageId = formId === 'event_csv_form' ? 'confirm_modal_event_message' : 'confirm_modal_volunteers_message';
+          
+          document.getElementById(messageId).textContent = message;
+          document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function hideConfirmModal(formId) {
+          var modalId = formId === 'event_csv_form' ? 'confirm_modal_event' : 'confirm_modal_volunteers';
+          document.getElementById(modalId).style.display = 'none';
+        }
+
+        function submitConfirmedForm(formId) {
+          hideConfirmModal(formId);
+          document.getElementById(formId).submit();
+        }
+      JS
+    end
   end
 
   page_action :award_funrun_badge, method: :post do
@@ -114,24 +151,92 @@ ActiveAdmin.register_page 'Utilities' do
   end
 
   page_action :export_event_csv, method: :post do
-    if (event_id = params[:event_id]).present?
+    event_id = params[:event_id]
+    
+    if event_id.blank?
+      flash[:alert] = t '.reports.event_not_selected'
+      return redirect_to admin_utilities_path
+    end
+    
+    event = Event.accessible_by(current_ability).find(event_id)
+    from_date = params[:from_date].presence ? Date.parse(params[:from_date]) : nil
+    
+    if params[:download_now] == '1'
+
+      exporter = CsvExport::EventAthletes.new(event: event, from_date: from_date)
+      send_data exporter.generate, filename: exporter.filename, type: 'text/csv'
+    else
+      # БУДЬТЕ ВНИМАТЕЛЬНЫ! Тут идет АСИНХРОННАЯ отправка в телеграм.
       EventAthletesCsvExportJob.perform_later event_id.to_i, current_user.id, params[:from_date].presence
       flash[:notice] = t '.reports.task_queued'
-    else
-      flash[:alert] = t '.reports.event_not_selected'
+      redirect_to admin_utilities_path
     end
-    redirect_to admin_utilities_path
   end
 
   page_action :export_volunteers_role_csv, method: :post do
     event_id = params[:event_id]
-    role = params[:role]
-    if event_id.present? && role.present?
+    all_roles = params[:all_roles] == '1'
+    role = all_roles ? nil : params[:role]
+    
+    if event_id.blank? || (!all_roles && role.blank?)
+      flash[:alert] = t '.reports.params_not_selected'
+      return redirect_to admin_utilities_path
+    end
+    
+    event = Event.accessible_by(current_ability).find(event_id)
+    from_date = params[:from_date].presence ? Date.parse(params[:from_date]) : nil
+    
+    if params[:download_now] == '1'
+      # Синхронная генерация и скачивание
+      exporter = CsvExport::VolunteersRole.new(event: event, role: role, from_date: from_date)
+      send_data exporter.generate, filename: exporter.filename, type: 'text/csv'
+    else
+      # Асинхронная отправка в Telegram
       VolunteersRoleCsvExportJob.perform_later event_id.to_i, role, current_user.id, params[:from_date].presence
       flash[:notice] = t '.reports.task_queued'
-    else
-      flash[:alert] = t '.reports.params_not_selected'
+      redirect_to admin_utilities_path
     end
-    redirect_to admin_utilities_path
+  end
+
+  page_action :export_milestones_csv, method: :post do
+    event_id = params[:event_id]
+    if event_id.blank?
+      flash[:alert] = t '.reports.event_not_selected'
+      return redirect_to admin_utilities_path
+    end
+
+    event = Event.accessible_by(current_ability).find(event_id)
+    exporter = CsvExport::Milestones.new(event: event)
+    send_data exporter.generate, filename: exporter.filename, type: 'text/csv'
+  end
+
+  page_action :export_newcomers_csv, method: :post do
+    event_id = params[:event_id]
+    if event_id.blank?
+      flash[:alert] = t '.reports.event_not_selected'
+      return redirect_to admin_utilities_path
+    end
+
+    event = Event.accessible_by(current_ability).find(event_id)
+    from_date = params[:from_date].presence ? Date.parse(params[:from_date]) : nil
+    to_date = params[:to_date].presence ? Date.parse(params[:to_date]) : nil
+
+    exporter = CsvExport::Newcomers.new(event: event, from_date: from_date, to_date: to_date)
+    send_data exporter.generate, filename: exporter.filename, type: 'text/csv'
+  end
+
+  page_action :export_club_stats_csv, method: :post do
+    event_id = params[:event_id]
+    if event_id.blank?
+      flash[:alert] = t '.reports.event_not_selected'
+      return redirect_to admin_utilities_path
+    end
+
+    event = Event.accessible_by(current_ability).find(event_id)
+    from_date = params[:from_date].presence ? Date.parse(params[:from_date]) : nil
+    to_date = params[:to_date].presence ? Date.parse(params[:to_date]) : nil
+
+    exporter = CsvExport::ClubStats.new(event: event, from_date: from_date, to_date: to_date)
+    send_data exporter.generate, filename: exporter.filename, type: 'text/csv'
   end
 end

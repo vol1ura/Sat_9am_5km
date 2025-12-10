@@ -1,4 +1,10 @@
 <nav class="navbar bg-primary navbar-dark sticky-top mb-3">
+  <div class="garland d-none d-lg-block">
+    <div class="garland-wire"></div>
+    <% 20.times do |i| %>
+      <div class="garland-bulb" style="left: <%= 2 + i * 5 %>%;"></div>
+    <% end %>
+  </div>
   <div class="container-fluid">
     <%=
       link_to root_path, class: 'navbar-brand' do

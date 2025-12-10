@@ -64,45 +64,62 @@ class PagesController < ApplicationController
   end
 
   def calculate_weekly_stats
-    activities = Activity.where(event: @local_events, published: true, date: @last_saturday)
-                         .includes(:results, :volunteers)
-    return nil if activities.empty?
+    latest_update = Activity.where(published: true).maximum(:updated_at)
+    cache_key = "weekly_stats/#{top_level_domain}/#{@last_saturday}/#{latest_update}"
 
-    participants_data = calculate_participants(activities)
+    Rails.cache.fetch(cache_key) do
+      activities = Activity.where(event: @local_events, published: true, date: @last_saturday)
+
+      stats = { updated_at: @last_saturday }
+
+      if activities.empty?
+        stats.merge!(
+          total_participants: nil,
+          newcomers: nil,
+          newcomers_percentage: nil
+        )
+      else
+        participants_data = calculate_participants_data(activities)
+        stats.merge!(
+          total_participants: participants_data[:total],
+          newcomers: participants_data[:newcomers],
+          newcomers_percentage: calculate_percentage(participants_data[:newcomers], participants_data[:total])
+        )
+      end
+
+      stats
+    end
+  end
+
+  def calculate_participants_data(activities)
+ 
+    activity_ids = activities.pluck(:id)
     
-    {
-      total_participants: participants_data[:total],
-      newcomers: participants_data[:newcomers],
-      newcomers_percentage: calculate_percentage(participants_data[:newcomers], participants_data[:total]),
-      updated_at: @last_saturday
-    }
-  end
+    runner_ids = Result.where(activity_id: activity_ids).pluck(:athlete_id).compact
+    volunteer_ids = Volunteer.where(activity_id: activity_ids).pluck(:athlete_id).compact
+    
 
-  def calculate_participants(activities)
-    total = 0
-    newcomers = 0
+    current_athlete_ids = (runner_ids + volunteer_ids).uniq
+    
 
-    activities.each do |activity|
-      participants = activity.participants
-      total += participants.count
-      newcomers += count_newcomers(participants)
-    end
+    previous_runners = Result.joins(:activity)
+                             .where(athlete_id: current_athlete_ids, activity: { published: true })
+                             .where('activity.date < ?', @last_saturday)
+                             .pluck(:athlete_id)
+                             
+    previous_volunteers = Volunteer.joins(:activity)
+                                   .where(athlete_id: current_athlete_ids, activity: { published: true })
+                                   .where('activity.date < ?', @last_saturday)
+                                   .pluck(:athlete_id)
+                                   
+    veteran_athlete_ids = (previous_runners + previous_volunteers).uniq
+    
 
-    { total: total, newcomers: newcomers }
-  end
+    newcomers_count = current_athlete_ids.count { |id| !veteran_athlete_ids.include?(id) }
+       
+    total_count = activities.sum { |a| a.participants.count }
 
-  def count_newcomers(participants)
-    participants.count do |athlete|
-      first_participation_date(athlete) == @last_saturday
-    end
-  end
-
-  def first_participation_date(athlete)
-    first_result = athlete.results.published.minimum(:date)
-    first_volunteer = athlete.volunteers.joins(:activity)
-                             .where(activity: { published: true })
-                             .minimum(:date)
-    [first_result, first_volunteer].compact.min
+    { total: total_count, newcomers: newcomers_count }
   end
 
   def calculate_percentage(part, total)
