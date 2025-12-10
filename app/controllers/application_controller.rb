@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   def top_level_domain
     @top_level_domain ||= begin
       tld = request.host.split('.').last.to_sym
-      # срыв обратно на ru для локального теста
+      # возврат на ru для локального теста
       tld == :localhost ? :ru : tld
     end
   end
