@@ -100,7 +100,7 @@ export default class AthleteCharts {
       },
       theme: {
         mode: isDark ? 'dark' : 'light',
-        palette: 'palette2'
+        palette: isDark ? 'palette5' : 'palette2',
       },
       title: {
         text: title,

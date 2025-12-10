@@ -22,6 +22,11 @@ $enable-negative-margins: true;
   --bs-link-hover-color: #21c8d7;
   --bs-link-hover-color-rgb: 33, 200, 215;
 
+  .navbar {
+    --bs-navbar-color: #ffffffaf;
+    --bs-navbar-hover-color: #ffffffcf;
+  }
+
   .dropdown-item.active {
     --bs-dropdown-link-active-bg: #1aa7b4;
   }
@@ -262,6 +267,17 @@ h6 {
     @include media(phoneScreen) {
       font-size: 0.85em;
     }
+  }
+}
+
+.hidden-scroll-x {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
