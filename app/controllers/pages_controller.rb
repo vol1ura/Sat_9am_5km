@@ -94,30 +94,34 @@ class PagesController < ApplicationController
   def calculate_participants_data(activities)
     activity_ids = activities.pluck(:id)
     
-
     total_count = activities.sum { |a| a.participants.count }
-  
-    newcomers_count = ActiveRecord::Base.connection.select_value(<<~SQL.squish)
+
+    # Prepare placeholders for parameterized query
+    placeholders = activity_ids.map { '?' }.join(',')
+    sql = <<~SQL.squish
       WITH current_participants AS (
-        SELECT DISTINCT athlete_id FROM results WHERE activity_id IN (#{activity_ids.join(',')}) AND athlete_id IS NOT NULL
+        SELECT DISTINCT athlete_id FROM results WHERE activity_id IN (#{placeholders}) AND athlete_id IS NOT NULL
         UNION
-        SELECT DISTINCT athlete_id FROM volunteers WHERE activity_id IN (#{activity_ids.join(',')}) AND athlete_id IS NOT NULL
+        SELECT DISTINCT athlete_id FROM volunteers WHERE activity_id IN (#{placeholders}) AND athlete_id IS NOT NULL
       ),
       veterans AS (
         SELECT DISTINCT r.athlete_id FROM results r
         JOIN activities a ON r.activity_id = a.id
         WHERE r.athlete_id IN (SELECT athlete_id FROM current_participants)
-          AND a.published = true AND a.date < '#{@last_saturday}'
+          AND a.published = true AND a.date < ?
         UNION
         SELECT DISTINCT v.athlete_id FROM volunteers v
         JOIN activities a ON v.activity_id = a.id
         WHERE v.athlete_id IN (SELECT athlete_id FROM current_participants)
-          AND a.published = true AND a.date < '#{@last_saturday}'
+          AND a.published = true AND a.date < ?
       )
       SELECT COUNT(*) FROM current_participants cp
       WHERE cp.athlete_id NOT IN (SELECT athlete_id FROM veterans)
     SQL
 
+    # Pass activity_ids twice (for results and volunteers), and @last_saturday twice (for both date conditions)
+    bind_params = activity_ids + activity_ids + [@last_saturday, @last_saturday]
+    newcomers_count = ActiveRecord::Base.connection.select_value(ActiveRecord::Base.send(:sanitize_sql_array, [sql, *bind_params]))
     { total: total_count, newcomers: newcomers_count.to_i }
   end
 
