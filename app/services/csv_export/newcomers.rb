@@ -30,9 +30,9 @@ module CsvExport
     private
 
     def dataset
-
-      
       sql = <<~SQL
+        WITH correct_first_runs AS (
+           SELECT DISTINCT ON (r.athlete_id)
         WITH correct_first_runs AS (
            SELECT DISTINCT ON (r.athlete_id)
              r.athlete_id,
