@@ -1,0 +1,24 @@
+<%= form_with url: admin_utilities_export_newcomers_csv_path, id: 'newcomers_csv_form', local: true do |f| %>
+  <div style="margin-bottom: 12px">
+    <%= f.label :event_id, 'Мероприятие' %>
+    <%= f.collection_select :event_id, Event.accessible_by(current_ability).order(:visible_order, :name), :id, :name, include_blank: true %>
+  </div>
+  <div style="margin-bottom: 12px">
+    <%= f.label :from_date, 'Дата начала' %>
+    <%= f.date_field :from_date, style: 'width: 150px;' %>
+  </div>
+  <div style="margin-bottom: 12px">
+    <%= f.label :to_date, 'Дата окончания' %>
+    <%= f.date_field :to_date, style: 'width: 150px;' %>
+  </div>
+  <div style="margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+    <%= f.check_box :download_now, id: 'download_now_newcomers', checked: false %>
+    <label for="download_now_newcomers" style="margin: 0; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+      Скачать в браузере
+      <small style="color: #666;">(по умолчанию в телеграм)</small>
+    </label>
+  </div>
+  <div style="text-align: left; margin-top: 16px;">
+    <button type="button" class="button" onclick="document.getElementById('newcomers_csv_form').submit()">Скачать</button>
+  </div>
+<% end %>

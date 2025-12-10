@@ -1,21 +1,40 @@
-<%= form_with url: admin_utilities_export_volunteers_role_csv_path do |f| %>
+<%= form_with url: admin_utilities_export_volunteers_role_csv_path, id: 'volunteers_csv_form', local: true do |f| %>
   <div style="margin-bottom: 12px">
     <%= f.label :event_id, 'Мероприятие' %>
-    <%= f.collection_select :event_id, Event.order(:visible_order, :name), :id, :name, include_blank: true %>
+    <%= f.collection_select :event_id, Event.accessible_by(current_ability).order(:visible_order, :name), :id, :name, include_blank: true %>
+  </div>
+  <div style="margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+    <%= f.check_box :all_roles, id: 'all_roles_checkbox', onchange: "document.getElementById('role_select').disabled = this.checked" %>
+    <label for="all_roles_checkbox" style="margin: 0; cursor: pointer;">Все волонтёрские роли</label>
   </div>
   <div style="margin-bottom: 12px">
     <%= f.label :role, 'Волонтёрская роль' %>
-    <%=
-      f.select(
-        :role,
-        Volunteer.roles.keys.map { |r| [human_volunteer_role(r), r] },
-        include_blank: true,
-      )
-    %>
+    <%= f.select :role, Volunteer.roles.keys.map { |r| [human_volunteer_role(r), r] }, { include_blank: true }, { id: 'role_select' } %>
   </div>
   <div style="margin-bottom: 12px">
     <%= f.label :from_date, 'Дата начала отчёта' %>
     <%= f.date_field :from_date, style: 'width: 150px;' %>
   </div>
-  <%= f.submit 'Запросить', data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
+  <div style="margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+    <%= f.check_box :download_now, id: 'download_now_volunteers', checked: false %>
+    <label for="download_now_volunteers" style="margin: 0; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+      Скачать в браузере
+      <small style="color: #666;">(по умолчанию в телеграм)</small>
+    </label>
+  </div>
+  <div style="text-align: left; margin-top: 16px;">
+    <button type="button" class="button" onclick="showConfirmModal('volunteers_csv_form', 'Запустить задачу на создание и отправку отчёта?')">Запросить</button>
+  </div>
 <% end %>
+
+<div id="confirm_modal_volunteers" class="admin-confirm-modal" style="display: none;">
+  <div class="admin-confirm-modal-overlay" onclick="hideConfirmModal('volunteers_csv_form')"></div>
+  <div class="admin-confirm-modal-content">
+    <h3>Подтверждение</h3>
+    <p id="confirm_modal_volunteers_message"></p>
+    <div class="admin-confirm-modal-buttons">
+      <button type="button" class="button" onclick="submitConfirmedForm('volunteers_csv_form')">Подтвердить</button>
+      <button type="button" class="button cancel" onclick="hideConfirmModal('volunteers_csv_form')">Отмена</button>
+    </div>
+  </div>
+</div>

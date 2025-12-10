@@ -89,10 +89,14 @@ body {
 tr.odd,
 tr.even {
   &.athlete-error {
-    td.col-athlete, td.col-name, td.col-role {
+
+    td.col-athlete,
+    td.col-name,
+    td.col-role {
       background-color: $table-error-color;
     }
   }
+
   td.col-position,
   td.col-total_time {
     &.error {
@@ -103,4 +107,87 @@ tr.even {
 
 .ui-datepicker-calendar td:nth-child(6) {
   background: #ffb9f6;
+}
+
+// оверрайд стилей модального окна подтверждения в админке
+.admin-confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-confirm-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.admin-confirm-modal-content {
+  position: relative;
+  background: #fff;
+  padding: 24px 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+
+  h3 {
+    margin: 0 0 16px;
+    color: $primary-color;
+    font-size: 18px;
+  }
+
+  p {
+    margin: 0 0 24px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.admin-confirm-modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+
+  .button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+
+    &::before {
+      content: none !important;
+    }
+
+    &:not(.cancel) {
+      background: $primary-color;
+      color: #fff;
+
+      &:hover {
+        background: color.adjust($primary-color, $lightness: 10%);
+      }
+    }
+
+    &.cancel {
+      background: #e0e0e0;
+      color: #333;
+
+      &:hover {
+        background: #d0d0d0;
+      }
+    }
+  }
 }

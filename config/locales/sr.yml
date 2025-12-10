@@ -654,6 +654,13 @@ sr:
       registration: "Registracija"
       results: "Rezultati"
       find_event: "Pronađi najbližu trku"
+      weekly_stats:
+        title: "Nedeljne statistike"
+        subtitle: 'Podaci za %{date}'
+        total_participants: "Učesnika"
+        newcomers: "Novajlija"
+        newcomers_percentage: "Procenat novajlija"
+        next_update: 'Sledeće ažuriranje: %{date}'
       how_it_works:
         title: "Kako to radi?"
         registration:

@@ -11,6 +11,11 @@
 
 Run events system
 
+## Localisation support
+
+The application supports multiple languages. Translation files are located in `config/locales/` (YAML format).
+If you'd like to contribute new translations or improve existing ones, please refer to the instructions above or contribute directly by editing the YAML files via a pull request.
+
 ## Maintenance
 
 Reset Postgres stats with:

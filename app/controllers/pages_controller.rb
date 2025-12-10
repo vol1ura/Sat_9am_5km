@@ -11,6 +11,8 @@ class PagesController < ApplicationController
   def index
     @local_events = Event.active.in_country(top_level_domain).unscope(:order)
     @next_saturday = Date.tomorrow.next_week.prev_week(:saturday)
+    @last_saturday = @next_saturday - 7.days
+    @weekly_stats = calculate_weekly_stats
     @jubilee_events =
       Activity
         .where(event: @local_events.without_friends, published: true, date: ...@next_saturday)
@@ -59,5 +61,72 @@ class PagesController < ApplicationController
 
   def page_layout
     params[:action] == 'index' || page_name == 'donor' ? 'home' : 'application'
+  end
+
+  def calculate_weekly_stats
+    latest_update = Activity.where(published: true).maximum(:updated_at)
+    cache_key = "weekly_stats/#{top_level_domain}/#{@last_saturday}/#{latest_update}"
+
+    Rails.cache.fetch(cache_key) do
+      activities = Activity.where(event: @local_events, published: true, date: @last_saturday)
+
+      stats = { updated_at: @last_saturday }
+
+      if activities.empty?
+        stats.merge!(
+          total_participants: nil,
+          newcomers: nil,
+          newcomers_percentage: nil
+        )
+      else
+        participants_data = calculate_participants_data(activities)
+        stats.merge!(
+          total_participants: participants_data[:total],
+          newcomers: participants_data[:newcomers],
+          newcomers_percentage: calculate_percentage(participants_data[:newcomers], participants_data[:total])
+        )
+      end
+
+      stats
+    end
+  end
+
+  def calculate_participants_data(activities)
+    activity_ids = activities.pluck(:id)
+    
+    total_count = activities.sum { |a| a.participants.count }
+
+    # Prepare placeholders for parameterized query
+    placeholders = activity_ids.map { '?' }.join(',')
+    sql = <<~SQL.squish
+      WITH current_participants AS (
+        SELECT DISTINCT athlete_id FROM results WHERE activity_id IN (#{placeholders}) AND athlete_id IS NOT NULL
+        UNION
+        SELECT DISTINCT athlete_id FROM volunteers WHERE activity_id IN (#{placeholders}) AND athlete_id IS NOT NULL
+      ),
+      veterans AS (
+        SELECT DISTINCT r.athlete_id FROM results r
+        JOIN activities a ON r.activity_id = a.id
+        WHERE r.athlete_id IN (SELECT athlete_id FROM current_participants)
+          AND a.published = true AND a.date < ?
+        UNION
+        SELECT DISTINCT v.athlete_id FROM volunteers v
+        JOIN activities a ON v.activity_id = a.id
+        WHERE v.athlete_id IN (SELECT athlete_id FROM current_participants)
+          AND a.published = true AND a.date < ?
+      )
+      SELECT COUNT(*) FROM current_participants cp
+      WHERE cp.athlete_id NOT IN (SELECT athlete_id FROM veterans)
+    SQL
+
+    # Pass activity_ids twice (for results and volunteers), and @last_saturday twice (for both date conditions)
+    bind_params = activity_ids + activity_ids + [@last_saturday, @last_saturday]
+    newcomers_count = ActiveRecord::Base.connection.select_value(ActiveRecord::Base.send(:sanitize_sql_array, [sql, *bind_params]))
+    { total: total_count, newcomers: newcomers_count.to_i }
+  end
+
+  def calculate_percentage(part, total)
+    return 0 unless total.positive?
+    (part.to_f / total * 100).round(1)
   end
 end

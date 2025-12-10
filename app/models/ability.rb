@@ -12,7 +12,12 @@ class Ability
 
     @user = user
     can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
+    can :read, ActiveAdmin::Page, name: 'Utilities', namespace_name: 'admin'
     can %i[read update], User, id: @user.id
+
+    # верификация прав 
+    event_ids = @user.permissions.where(subject_class: 'Activity').pluck(:event_id).compact.uniq
+    can :read, Event, id: event_ids if event_ids.present?
 
     special_permissions
     set_restrictions

@@ -1,282 +1,282 @@
-ru:
+kz:
   activerecord:
     models:
       club:
         one: клуб
-        other: Клубы
+        other: Клубтар
       event:
-        one: мероприятие
-        other: Мероприятия
+        one: іс-шара
+        other: Іс-шаралар
       activity:
-        one: забег
-        other: Забеги
+        one: жүгіріс
+        other: Жүгірістер
       athlete:
-        one: участник
-        other: Участники
+        one: қатысушы
+        other: Қатысушылар
       result:
-        one: результат
-        few: результата
-        many: результатов
-        other: Результаты
+        one: нәтиже
+        few: нәтиже
+        many: нәтижелер
+        other: Нәтижелер
       volunteer:
-        one: волонтёр
-        other: Волонтёры
+        one: ерікті
+        other: Еріктілер
       volunteering_position:
         one: позиция
-        few: позиции
-        many: позиций
-        other: Волонтёрские позиции
+        few: позициялар
+        many: позициялар
+        other: Еріктілер позициялары
       contact:
-        one: контакт
-        other: Контакты
+        one: байланыс
+        other: Байланыстар
       badge:
-        one: награда
-        other: Награды
+        one: марапат
+        other: Марапаттар
       newsletter:
-        one: рассылка
-        other: Рассылки
+        one: хабарлама
+        other: Хабарламалар
       trophy:
-        one: достижение
-        other: Достижения
+        one: жетістік
+        other: Жетістіктер
       permission:
-        one: полномочия
-        other: Полномочия
+        one: өкілеттік
+        other: Өкілеттіктер
       user:
-        one: пользователь
-        few: пользователя
-        many: пользователей
-        other: Пользователи
+        one: қолданушы
+        few: қолданушы
+        many: қолданушылар
+        other: Қолданушылар
     attributes:
       user:
-        first_name: имя
-        last_name: фамилия
+        first_name: аты
+        last_name: тегі
         email: e-mail
-        role: роль
+        role: рөлі
         roles:
-          super_admin: главный админ
+          super_admin: бас админ
           admin: админ
-        note: примечание
+        note: ескерту
         telegram_user: телеграм
-        athlete: участник
+        athlete: қатысушы
         image: фото
         phone: телефон
-        emergency_contact_name: имя
+        emergency_contact_name: аты
         emergency_contact_phone: телефон
-        created_at: создан
+        created_at: құрылған уақыты
       permission:
-        event: мероприятие
-        user: пользователь
-        action: действие
-        subject_class: класс объектов
+        event: іс-шара
+        user: қолданушы
+        action: әрекет
+        subject_class: объект класы
       athlete:
-        name: Имя ФАМИЛИЯ
+        name: Аты ТЕГІ
         parkrun_code: parkrun ID
         fiveverst_code: 5 вёрст ID
         runpark_code: RunPark ID
         parkzhrun_code: parkzhrun ID
-        gender: пол
+        gender: жынысы
         club: клуб
         club_id: клуб
-        event: домашний забег
-        event_id: домашний забег
-        going_to_event: собирается в
-        male: мужчина
-        user: пользователь
-        registered: зарег.
-        id_info: Инфа по ID
-        profile: Профиль на сайте
-        results: Забеги
-        volunteering: Волонтёрства
-        trophies: Награды
-        created_at: создан
-        updated_at: обновлён
+        event: үй жүгірісі
+        event_id: үй жүгірісі
+        going_to_event: барады
+        male: ер
+        user: қолданушы
+        registered: тіркелген
+        id_info: ID бойынша ақпарат
+        profile: Сайттағы профиль
+        results: Жүгірістер
+        volunteering: Еріктілік
+        trophies: Марапаттар
+        created_at: құрылған уақыты
+        updated_at: жаңартылған уақыты
       activity:
-        date: дата
-        published: опубликован?
-        description: описание
-        event_name: где?
-        correct?: корректен?
+        date: күн
+        published: жарияланды ма?
+        description: сипаттама
+        event_name: қайда?
+        correct?: дұрыс па?
       club:
-        name: название
-        country: страна
+        name: атауы
+        country: ел
         logo: логотип
-        description: описание
+        description: сипаттама
       event:
-        active: активен
-        country: страна
-        code_name: кодовое имя
-        name: название
-        summer_image: летнее изображение
-        winter_image: зимнее изображение
-        town: город
-        place: 'как найти?'
-        latitude: широта
-        longitude: долгота
-        coordinates: координаты
-        timezone: зона
-        slogan: девиз
-        description: описание
-        visible_order: вес в ленте
-        created_at: создан
-        updated_at: обновлён
+        active: белсенді
+        country: ел
+        code_name: кодтық атау
+        name: атауы
+        summer_image: жазғы сурет
+        winter_image: қысқы сурет
+        town: қала
+        place: 'қалай табуға болады?'
+        latitude: ендік
+        longitude: бойлық
+        coordinates: координаттар
+        timezone: аймақ
+        slogan: ұран
+        description: сипаттама
+        visible_order: таспадағы салмағы
+        created_at: құрылған уақыты
+        updated_at: жаңартылған уақыты
       newsletter:
-        body: текст
-        picture_link: ссылка на картинку
-        created_at: создана
-        updated_at: обновлена
+        body: мәтін
+        picture_link: суретке сілтеме
+        created_at: құрылған уақыты
+        updated_at: жаңартылған уақыты
       result:
-        position: место
-        total_time: результат
-        athlete: участник
-        user: пользователь
-        gender: пол
+        position: орын
+        total_time: нәтиже
+        athlete: қатысушы
+        user: қолданушы
+        gender: жынысы
         club: клуб
       volunteer:
-        activity: забег
-        athlete: участник
-        name: 'имя волонтёра'
-        comment: комментарий
-        role: роль
+        activity: жүгіріс
+        athlete: қатысушы
+        name: 'еріктінің аты'
+        comment: пікір
+        role: рөлі
         roles: &volunteer_roles
           director: Директор
           marshal: Маршал
           timer: Секундомер
           photograph: Фотограф
-          tokens: 'Раздача карточек позиций'
+          tokens: 'Карточка тарату'
           scanner: Сканер
-          instructor: 'Инструктаж новичков'
-          marking_maker: 'Разметка трассы'
-          event_closer: Замыкающий
-          marking_picker: 'Сбор разметки'
-          cards_sorter: 'Сортировка карточек'
-          bike_leader: 'Ведущий велосипед'
+          instructor: 'Жаңадан келгендерге нұсқаулық'
+          marking_maker: 'Трассаны белгілеу'
+          event_closer: Тұйықтаушы
+          marking_picker: 'Белгілеуді жинау'
+          cards_sorter: 'Карточкаларды сұрыптау'
+          bike_leader: 'Велосипед жүргізушісі'
           pacemaker: Пейсмейкер
-          results_handler: 'Обработка результатов'
-          equipment_supplier: 'Доставка оборудования'
-          public_relations: 'Связи с общественностью'
-          warm_up: 'Проведение разминки'
-          other: 'Разное'
-          attendant: 'Сопровождающий'
-          finish_maker: 'Организация финиша'
-          volunteer_coordinator: 'Координатор волонтёров'
-          food_maker: 'Организация питания'
+          results_handler: 'Нәтижелерді өңдеу'
+          equipment_supplier: 'Жабдықты жеткізу'
+          public_relations: 'Қоғаммен байланыс'
+          warm_up: 'Жаттығу өткізу'
+          other: 'Әртүрлі'
+          attendant: 'Ілесіп жүруші'
+          finish_maker: 'Мәрені ұйымдастыру'
+          volunteer_coordinator: 'Еріктілер үйлестірушісі'
+          food_maker: 'Тамақтануды ұйымдастыру'
           videographer: Видеограф
       volunteering_position:
-        rank: ранг
-        number: количество
-        role: роль
+        rank: дәреже
+        number: саны
+        role: рөлі
         roles:
           <<: *volunteer_roles
       contact:
-        new_model: 'Добавить контакт'
-        edit_model: 'Изменить контакт'
-        delete_model: 'Удалить контакт'
-        event: мероприятие
-        link: контакт
-        contact_type: 'тип контакта'
+        new_model: 'Байланыс қосу'
+        edit_model: 'Байланысты өзгерту'
+        delete_model: 'Байланысты жою'
+        event: іс-шара
+        link: байланыс
+        contact_type: 'байланыс түрі'
         contact_types:
           email: E-mail
           phone: Телефон
-          tg_channel: Telegram-канал
+          tg_channel: Telegram-арна
           tg_chat: Telegram-чат
           vk: ВКонтакте
           zen: Дзен
-          instagram: Инстаграм
-          facebook: Фейсбук
-          strava: Страва
-          map_link: Карта и схема проезда
-          parking: Парковка
+          instagram: Instagram
+          facebook: Facebook
+          strava: Strava
+          map_link: Карта және жүру сызбасы
+          parking: Тұрақ
       badge:
-        name: название
-        conditions: условия получения
-        image: изображение
-        received_date: дата получения
-        country: страна
-        kind: тип
+        name: атауы
+        conditions: алу шарттары
+        image: сурет
+        received_date: алынған күн
+        country: ел
+        kind: түрі
         kinds:
           funrun: фан-ран
-          full_profile: полный комплект
-          participating: участник
-          home_participating: лучше дома
-          jubilee_participating: юбилейный
+          full_profile: толық жиынтық
+          participating: қатысушы
+          home_participating: үйде жақсы
+          jubilee_participating: мерейтойлық
           tourist: турист
-          breaking: прорыв
-          record: рекорд трассы
+          breaking: серпіліс
+          record: трасса рекорды
           rage: раж
-          five_plus: пять с плюсом
-          minute_bingo: минута бинго
+          five_plus: бес плюспен
+          minute_bingo: минут бинго
       trophy:
-        athlete: участник
-        date: дата получения
-        info: доп.информация
-        updated_at: обновлён
+        athlete: қатысушы
+        date: алынған күн
+        info: қосымша ақпарат
+        updated_at: жаңартылған уақыты
 
     errors:
       messages:
-        record_invalid: 'Возникли ошибки: %{errors}'
+        record_invalid: 'Қателер орын алды: %{errors}'
         restrict_dependent_destroy:
-          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
-          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+          has_one: 'Жазбаны жою мүмкін емес, өйткені тәуелділік бар: %{record}'
+          has_many: 'Жазбаны жою мүмкін емес, өйткені тәуелділіктер бар: %{record}'
       models:
         event:
           attributes:
             code_name:
-              invalid: 'только строчные латинские буквы и символ "_" вместо пробела'
+              invalid: 'тек кіші латын әріптері және бос орын орнына "_" таңбасы'
         contact:
           attributes:
             link:
-              invalid: 'символы < и > запрещены'
+              invalid: '< және > таңбаларына тыйым салынған'
 
   date:
     abbr_day_names:
-    - Вс
-    - Пн
-    - Вт
+    - Жс
+    - Дс
+    - Сс
     - Ср
-    - Чт
-    - Пт
+    - Бс
+    - Жм
     - Сб
     abbr_month_names:
     -
-    - янв.
-    - февр.
-    - марта
-    - апр.
-    - мая
-    - июня
-    - июля
-    - авг.
-    - сент.
-    - окт.
-    - нояб.
-    - дек.
+    - қаң.
+    - ақп.
+    - нау.
+    - сәу.
+    - мам.
+    - мау.
+    - шіл.
+    - там.
+    - қыр.
+    - қаз.
+    - қар.
+    - жел.
     day_names:
-    - воскресенье
-    - понедельник
-    - вторник
-    - среда
-    - четверг
-    - пятница
-    - суббота
+    - жексенбі
+    - дүйсенбі
+    - сейсенбі
+    - сәрсенбі
+    - бейсенбі
+    - жұма
+    - сенбі
     formats:
       default: "%d.%m.%Y"
-      long: "%-d %B %Y г."
+      long: "%-d %B %Y ж."
       brief: "%-d %B"
       short: "%-d %b %Y"
     month_names:
     -
-    - января
-    - февраля
-    - марта
-    - апреля
-    - мая
-    - июня
-    - июля
-    - августа
-    - сентября
-    - октября
-    - ноября
-    - декабря
+    - қаңтар
+    - ақпан
+    - наурыз
+    - сәуір
+    - мамыр
+    - маусым
+    - шілде
+    - тамыз
+    - қыркүйек
+    - қазан
+    - қараша
+    - желтоқсан
     order:
     - :day
     - :month
@@ -284,135 +284,135 @@ ru:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: около %{count} часа
-        few: около %{count} часов
-        many: около %{count} часов
-        other: около %{count} часа
+        one: "шамамен %{count} сағат"
+        few: "шамамен %{count} сағат"
+        many: "шамамен %{count} сағат"
+        other: "шамамен %{count} сағат"
       about_x_months:
-        one: около %{count} месяца
-        few: около %{count} месяцев
-        many: около %{count} месяцев
-        other: около %{count} месяца
+        one: "шамамен %{count} ай"
+        few: "шамамен %{count} ай"
+        many: "шамамен %{count} ай"
+        other: "шамамен %{count} ай"
       about_x_years:
-        one: около %{count} года
-        few: около %{count} лет
-        many: около %{count} лет
-        other: около %{count} лет
+        one: "шамамен %{count} жыл"
+        few: "шамамен %{count} жыл"
+        many: "шамамен %{count} жыл"
+        other: "шамамен %{count} жыл"
       almost_x_years:
-        one: почти 1 год
-        few: почти %{count} года
-        many: почти %{count} лет
-        other: почти %{count} лет
-      half_a_minute: полминуты
+        one: "шамамен 1 жыл"
+        few: "шамамен %{count} жыл"
+        many: "шамамен %{count} жыл"
+        other: "шамамен %{count} жыл"
+      half_a_minute: жарты минут
       less_than_x_seconds:
-        one: меньше %{count} секунды
-        few: меньше %{count} секунд
-        many: меньше %{count} секунд
-        other: меньше %{count} секунды
+        one: "%{count} секундтан аз"
+        few: "%{count} секундтан аз"
+        many: "%{count} секундтан аз"
+        other: "%{count} секундтан аз"
       less_than_x_minutes:
-        one: меньше %{count} минуты
-        few: меньше %{count} минут
-        many: меньше %{count} минут
-        other: меньше %{count} минуты
+        one: "%{count} минуттан аз"
+        few: "%{count} минуттан аз"
+        many: "%{count} минуттан аз"
+        other: "%{count} минуттан аз"
       over_x_years:
-        one: больше %{count} года
-        few: больше %{count} лет
-        many: больше %{count} лет
-        other: больше %{count} лет
+        one: "%{count} жылдан астам"
+        few: "%{count} жылдан астам"
+        many: "%{count} жылдан астам"
+        other: "%{count} жылдан астам"
       x_seconds:
-        one: "%{count} секунду"
-        few: "%{count} секунды"
+        one: "%{count} секунд"
+        few: "%{count} секунд"
         many: "%{count} секунд"
-        other: "%{count} секунды"
+        other: "%{count} секунд"
       x_minutes:
-        one: "%{count} минуту"
-        few: "%{count} минуты"
+        one: "%{count} минут"
+        few: "%{count} минут"
         many: "%{count} минут"
-        other: "%{count} минуты"
+        other: "%{count} минут"
       x_days:
-        one: "%{count} день"
-        few: "%{count} дня"
-        many: "%{count} дней"
-        other: "%{count} дня"
+        one: "%{count} күн"
+        few: "%{count} күн"
+        many: "%{count} күн"
+        other: "%{count} күн"
       x_months:
-        one: "%{count} месяц"
-        few: "%{count} месяца"
-        many: "%{count} месяцев"
-        other: "%{count} месяца"
+        one: "%{count} ай"
+        few: "%{count} ай"
+        many: "%{count} ай"
+        other: "%{count} ай"
       x_years:
-        one: "%{count} год"
-        few: "%{count} года"
-        many: "%{count} лет"
-        other: "%{count} года"
+        one: "%{count} жыл"
+        few: "%{count} жыл"
+        many: "%{count} жыл"
+        other: "%{count} жыл"
     prompts:
       second: Секунд
       minute: Минут
-      hour: Часов
-      day: День
-      month: Месяц
-      year: Год
+      hour: Сағат
+      day: Күн
+      month: Ай
+      year: Жыл
   errors:
     format: "%{attribute} %{message}"
     messages:
-      accepted: нужно подтвердить
-      blank: не может быть пустым
-      confirmation: не совпадает со значением поля %{attribute}
-      empty: не может быть пустым
-      equal_to: может иметь лишь значение, равное %{count}
-      even: может иметь лишь четное значение
-      exclusion: имеет зарезервированное значение
-      greater_than: должно иметь значение большее %{count}
-      greater_than_or_equal_to: должно иметь значение большее или равное %{count}
-      in: должен быть в %{count}
-      inclusion: имеет непредусмотренное значение
-      invalid: имеет неверное значение
-      less_than: должно иметь значение меньшее чем %{count}
-      less_than_or_equal_to: должно иметь значение меньшее или равное %{count}
-      model_invalid: 'Возникли ошибки: %{errors}'
-      not_a_number: не является числом
-      not_an_integer: не является целым числом
-      odd: может иметь лишь нечетное значение
-      other_than: должно отличаться от %{count}
-      present: нужно оставить пустым
-      required: не может отсутствовать
-      taken: уже существует
-      dimension_width_not_less_than_or_equal_to: ширина должна быть меньше или равна %{length} пикселей
-      dimension_height_not_less_than_or_equal_to: высота должна быть меньше или равна %{length} пикселей
-      file_size_not_between: 'размер файла должен быть от %{min} до %{max} (текущий размер: %{file_size})'
-      more_than_one_volunteering: не может занимать более одной волонтёрской позиции в один день
-      more_than_one_trophy: не может иметь более одной награды одного типа
+      accepted: растау керек
+      blank: бос болмауы керек
+      confirmation: "%{attribute} өрісінің мәнімен сәйкес келмейді"
+      empty: бос болмауы керек
+      equal_to: "мәні %{count}-ге тең болуы керек"
+      even: тек жұп мән болуы керек
+      exclusion: резервтелген мәні бар
+      greater_than: "мәні %{count}-ден үлкен болуы керек"
+      greater_than_or_equal_to: "мәні %{count}-ден үлкен немесе тең болуы керек"
+      in: "%{count} ішінде болуы керек"
+      inclusion: қарастырылмаған мәні бар
+      invalid: қате мәні бар
+      less_than: "мәні %{count}-ден кіші болуы керек"
+      less_than_or_equal_to: "мәні %{count}-ден кіші немесе тең болуы керек"
+      model_invalid: 'Қателер орын алды: %{errors}'
+      not_a_number: сан емес
+      not_an_integer: бүтін сан емес
+      odd: тек тақ мән болуы керек
+      other_than: "%{count}-ден өзгеше болуы керек"
+      present: бос қалдыру керек
+      required: жоқ болмауы керек
+      taken: бар
+      dimension_width_not_less_than_or_equal_to: ені %{length} пиксельден аз немесе тең болуы керек
+      dimension_height_not_less_than_or_equal_to: биіктігі %{length} пиксельден аз немесе тең болуы керек
+      file_size_not_between: 'файл өлшемі %{min}-ден %{max}-ге дейін болуы керек (қазіргі өлшемі: %{file_size})'
+      more_than_one_volunteering: бір күнде бірден артық ерікті позициясын ала алмайды
+      more_than_one_trophy: бір түрдегі бірден артық марапатқа ие бола алмайды
       content_type_invalid:
-        one: 'имеет неверный тип контента (допустимый тип контента: %{authorized_human_content_types})'
-        other: 'имеет неверный тип контента (допустимые типы контента: %{authorized_human_content_types})'
+        one: 'контент түрі қате (рұқсат етілген контент түрі: %{authorized_human_content_types})'
+        other: 'контент түрі қате (рұқсат етілген контент түрлері: %{authorized_human_content_types})'
       too_long:
-        one: слишком большой длины (не может быть больше чем %{count} символ)
-        few: слишком большой длины (не может быть больше чем %{count} символа)
-        many: слишком большой длины (не может быть больше чем %{count} символов)
-        other: слишком большой длины (не может быть больше чем %{count} символа)
+        one: тым ұзын (%{count} таңбадан артық болмауы керек)
+        few: тым ұзын (%{count} таңбадан артық болмауы керек)
+        many: тым ұзын (%{count} таңбадан артық болмауы керек)
+        other: тым ұзын (%{count} таңбадан артық болмауы керек)
       too_short:
-        one: недостаточной длины (не может быть меньше %{count} символа)
-        few: недостаточной длины (не может быть меньше %{count} символов)
-        many: недостаточной длины (не может быть меньше %{count} символов)
-        other: недостаточной длины (не может быть меньше %{count} символа)
+        one: тым қысқа (%{count} таңбадан аз болмауы керек)
+        few: тым қысқа (%{count} таңбадан аз болмауы керек)
+        many: тым қысқа (%{count} таңбадан аз болмауы керек)
+        other: тым қысқа (%{count} таңбадан аз болмауы керек)
       wrong_length:
-        one: неверной длины (может быть длиной ровно %{count} символ)
-        few: неверной длины (может быть длиной ровно %{count} символа)
-        many: неверной длины (может быть длиной ровно %{count} символов)
-        other: неверной длины (может быть длиной ровно %{count} символа)
+        one: ұзындығы қате (ұзындығы дәл %{count} таңба болуы керек)
+        few: ұзындығы қате (ұзындығы дәл %{count} таңба болуы керек)
+        many: ұзындығы қате (ұзындығы дәл %{count} таңба болуы керек)
+        other: ұзындығы қате (ұзындығы дәл %{count} таңба болуы керек)
     template:
-      body: 'Проблемы возникли со следующими полями:'
+      body: 'Келесі өрістерде мәселелер туындады:'
       header:
-        one: "%{model}: сохранение не удалось из-за %{count} ошибки"
-        few: "%{model}: сохранение не удалось из-за %{count} ошибок"
-        many: "%{model}: сохранение не удалось из-за %{count} ошибок"
-        other: "%{model}: сохранение не удалось из-за %{count} ошибки"
+        one: "%{model}: %{count} қатеге байланысты сақталмады"
+        few: "%{model}: %{count} қатеге байланысты сақталмады"
+        many: "%{model}: %{count} қатеге байланысты сақталмады"
+        other: "%{model}: %{count} қатеге байланысты сақталмады"
   helpers:
     select:
-      prompt: 'Выберите: '
+      prompt: 'Таңдаңыз: '
     submit:
-      create: Создать %{model}
-      submit: Сохранить %{model}
-      update: Сохранить %{model}
+      create: "%{model} құру"
+      submit: "%{model} сақтау"
+      update: "%{model} сақтау"
   number:
     currency:
       format:
@@ -422,7 +422,7 @@ ru:
         separator: ","
         significant: false
         strip_insignificant_zeros: false
-        unit: руб.
+        unit: ₸
     format:
       delimiter: " "
       precision: 3
@@ -435,29 +435,29 @@ ru:
         units:
           billion:
             one: миллиард
-            few: миллиардов
-            many: миллиардов
-            other: миллиардов
+            few: миллиард
+            many: миллиард
+            other: миллиард
           million:
             one: миллион
-            few: миллионов
-            many: миллионов
-            other: миллионов
+            few: миллион
+            many: миллион
+            other: миллион
           quadrillion:
             one: квадриллион
-            few: квадриллионов
-            many: квадриллионов
-            other: квадриллионов
+            few: квадриллион
+            many: квадриллион
+            other: квадриллион
           thousand:
-            one: тысяча
-            few: тысяч
-            many: тысяч
-            other: тысяч
+            one: мың
+            few: мың
+            many: мың
+            other: мың
           trillion:
             one: триллион
-            few: триллионов
-            many: триллионов
-            other: триллионов
+            few: триллион
+            many: триллион
+            other: триллион
           unit: ''
       format:
         delimiter: ''
@@ -469,9 +469,9 @@ ru:
         units:
           byte:
             one: байт
-            few: байта
+            few: байт
             many: байт
-            other: байта
+            other: байт
           eb: ЭБ
           gb: ГБ
           kb: КБ
@@ -487,23 +487,23 @@ ru:
         delimiter: ''
   support:
     array:
-      last_word_connector: " и "
-      two_words_connector: " и "
+      last_word_connector: " және "
+      two_words_connector: " және "
       words_connector: ", "
   time:
-    am: утра
-    pm: вечера
+    am: таңғы
+    pm: кешкі
     formats:
       default: "%d %b %Y, %H:%M:%S %z"
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
   cookie_consent:
-    message: 'Продолжая использовать наш сайт, вы даёте согласие на обработку файлов cookie, которые обеспечивают правильную работу сайта.'
-    policy_link: 'Политика обработки персональных данных'
-    accept_button: 'Понятно'
+    message: 'Біздің сайтты пайдалануды жалғастыра отырып, сіз сайттың дұрыс жұмыс істеуін қамтамасыз ететін cookie файлдарын өңдеуге келісім бересіз.'
+    policy_link: 'Дербес деректерді өңдеу саясаты'
+    accept_button: 'Түсінікті'
   views:
-    greeting: '%{name}, приветствуем в S95!'
-    auth_link_invalid: 'Ссылка недействительна или срок её действия истёк'
+    greeting: '%{name}, S95-ке қош келдіңіз!'
+    auth_link_invalid: 'Сілтеме жарамсыз немесе оның мерзімі өтіп кеткен'
     pagination:
       previous: '◀️'
       first: '⏮️'
@@ -511,128 +511,128 @@ ru:
       last: '⏭️'
       truncate: '&hellip;'
   notification_mailer:
-    parkzhrun_error: 'Ошибка! Не удалось создать забег ПаркЖрун'
-    feedback: 'Новый отзыв на сайте S95'
+    parkzhrun_error: 'Қате! ParkZhrun жүгірісін құру мүмкін болмады'
+    feedback: 'S95 сайтында жаңа пікір'
   button:
-    show_more: Показать все
-    show_less: Свернуть
+    show_more: Барлығын көрсету
+    show_less: Жиру
   common:
-    without_token: БЕЗ ТОКЕНА (создать)
-    without_name: БЕЗ ИМЕНИ
-    nobody: НЕИЗВЕСТНЫЙ
-    gender: Пол
-    man: Мужчина
-    woman: Женщина
-    title: Еженедельные парковые забеги на 5 километров
-    description: Еженедельные субботние пробежки на 5км в парке. Дистанцию можно пройти, пробежать, либо принять участие как волонтёр — уровень подготовки не важен. У нас вы найдёте новые знакомства и отличное настроение.
+    without_token: ТОКЕНСІЗ (құру)
+    without_name: АТЫ ЖОҚ
+    nobody: БЕЛГІСІЗ
+    gender: Жынысы
+    man: Ер
+    woman: Әйел
+    title: Апталық 5 шақырымдық саябақ жүгірістері
+    description: Саябақтағы апталық сенбілік 5 км жүгірістер. Қашықтықты жүріп өтуге, жүгіруге немесе ерікті ретінде қатысуға болады — дайындық деңгейі маңызды емес. Бізде сіз жаңа таныстықтар мен керемет көңіл-күй табасыз.
   country:
-    ru: Россия
+    ru: Ресей
     by: Беларусь
     rs: Сербия
-    kz: Казахстан
+    kz: Қазақстан
   duels:
-    no_athlete_access: Для просмотра дуэлей необходимо создать профиль атлета
+    no_athlete_access: Дуэльдерді көру үшін қатысушы профилін құру қажет
     index:
-      title: 'Беговые дуэли %{athlete_name}'
-      description: 'Дружеские дуэли %{athlete_name} с другими участниками'
-      header: Беговые дуэли
-      subheader: Сравнивайте свои результаты с друзьями на совместных забегах - беговых дуэлях. Смотрите когда и где вы участвовали вместе.
+      title: '%{athlete_name} жүгіру дуэльдері'
+      description: '%{athlete_name} басқа қатысушылармен достық дуэльдері'
+      header: Жүгіру дуэльдері
+      subheader: Бірлескен жүгірістерде - жүгіру дуэльдерінде достарыңызбен нәтижелеріңізді салыстырыңыз. Қашан және қайда бірге қатысқаныңызды қараңыз.
       duels_count:
         one: '%{count} дуэль'
-        few: '%{count} дуэли'
-        many: '%{count} дуэлей'
-        other: '%{count} дуэлей'
-      my_wins: Мои победы
-      friend_wins: Победы друга
-      win_rate: Процент побед
-      recent_duels: Последние дуэли
-      view_all: Смотреть все
-      no_duels: Пока нет совместных забегов
-      no_duels_description: Добавляйте друзей и участвуйте с ними в забегах, чтобы увидеть здесь сравнение результатов!
-      profile: Мой профиль
+        few: '%{count} дуэль'
+        many: '%{count} дуэль'
+        other: '%{count} дуэль'
+      my_wins: Менің жеңістерім
+      friend_wins: Досымның жеңістері
+      win_rate: Жеңіс пайызы
+      recent_duels: Соңғы дуэльдер
+      view_all: Барлығын көру
+      no_duels: Әзірге бірлескен жүгірістер жоқ
+      no_duels_description: Нәтижелерді салыстыруды көру үшін достар қосыңыз және олармен бірге жүгірістерге қатысыңыз!
+      profile: Менің профилім
     show:
-      title: 'Беговые дуэли %{athlete_name} против %{friend_name}'
-      description: 'История совместных забегов между %{athlete_name} и %{friend_name}'
-      header: 'Совместные забеги с %{friend_name}'
-      duels: Дружеские дуэли
-      back_to_all: Ко всем дуэлям
-      total_duels: Всего дуэлей
-      my_wins: Мои победы
-      friend_wins: Победы друга
-      win_rate: Процент побед
-      your_friend: Ваш друг
-      duel_history: История дуэлей
-      no_duels: Совместных забегов нет
-      no_duels_with_friend: 'У вас пока нет совместных забегов с %{friend_name}'
+      title: '%{athlete_name} және %{friend_name} арасындағы жүгіру дуэльдері'
+      description: '%{athlete_name} және %{friend_name} арасындағы бірлескен жүгірістер тарихы'
+      header: '%{friend_name}-мен бірлескен жүгірістер'
+      duels: Достық дуэльдер
+      back_to_all: Барлық дуэльдерге
+      total_duels: Барлық дуэльдер
+      my_wins: Менің жеңістерім
+      friend_wins: Досымның жеңістері
+      win_rate: Жеңіс пайызы
+      your_friend: Сіздің досыңыз
+      duel_history: Дуэльдер тарихы
+      no_duels: Бірлескен жүгірістер жоқ
+      no_duels_with_friend: 'Сізде әзірге %{friend_name}-мен бірлескен жүгірістер жоқ'
     duel:
-      victory: Победа
-      defeat: Поражение
-      you: Вы
-      position: Место
-      time: Время
-      time_difference: Разность времени
-      position_difference: Разность мест
-      position_singular: место
-      position_plural: мест
+      victory: Жеңіс
+      defeat: Жеңіліс
+      you: Сіз
+      position: Орын
+      time: Уақыт
+      time_difference: Уақыт айырмашылығы
+      position_difference: Орын айырмашылығы
+      position_singular: орын
+      position_plural: орын
     duel_compact:
-      you_won: Вы выиграли
-      friend_won: Друг выиграл
+      you_won: Сіз жеңдіңіз
+      friend_won: Досыңыз жеңді
     friend_stats:
-      dominating: Побеждаете
-      competitive: Равная борьба
-      struggling: Отстаёте
+      dominating: Жеңіп жатырсыз
+      competitive: Тең күрес
+      struggling: Қалып келесіз
     protocol:
-      title: Дружеский протокол
-      header: Дружеский протокол
-      description: Здесь показаны ваши результаты и результаты ваших друзей за последнюю субботу по всем локациям С95. Результаты упорядочены по времени, а при равном времени выше находится участник, занявший более высокое место в своём забеге. Также здесь вы найдёте тех, кто волонтёрил в этот день.
-      not_published_yet: Протоколы пока не опубликованы.
-      you_did_not_participate: Вы не принимали участия в последнюю субботу.
-      no_friends: У вас пока нет друзей
-      no_friends_description: Добавьте друзей, чтобы видеть их результаты и волонтёрства в протоколе.
-      profile: Мой профиль
-      athlete: Участник
-      result: Результат
-      pace: Темп
-      event: Мероприятие
+      title: Достық хаттама
+      header: Достық хаттама
+      description: Мұнда соңғы сенбідегі барлық S95 локациялары бойынша сіздің және достарыңыздың нәтижелері көрсетілген. Нәтижелер уақыт бойынша реттелген, ал уақыт тең болған жағдайда өз жүгірісінде жоғары орын алған қатысушы жоғары тұрады. Сондай-ақ мұнда осы күні ерікті болғандарды таба аласыз.
+      not_published_yet: Хаттамалар әзірге жарияланбаған.
+      you_did_not_participate: Сіз соңғы сенбіде қатысқан жоқсыз.
+      no_friends: Сізде әзірге достар жоқ
+      no_friends_description: Хаттамада олардың нәтижелері мен еріктілігін көру үшін достар қосыңыз.
+      profile: Менің профилім
+      athlete: Қатысушы
+      result: Нәтиже
+      pace: Қарқын
+      event: Іс-шара
       club: Клуб
-      volunteers_title: Друзья волонтёры
+      volunteers_title: Ерікті достар
   navbars:
     top:
-      events: Мероприятия
-      map: Карта мероприятий
-      results: Результаты
-      recent_results: Недавние забеги
-      1_january: 1 января
-      club_ratings: Клубные рейтинги
-      top_results: Лучшие результаты
-      top_athletes: Рейтинг участников
-      top_volunteers: Рейтинг волонтёров
-      friends_protocol: Дружеский протокол
-      duels: Дружеские дуэли
-      badges: Личные награды
+      events: Іс-шаралар
+      map: Іс-шаралар картасы
+      results: Нәтижелер
+      recent_results: Соңғы жүгірістер
+      1_january: 1 қаңтар
+      club_ratings: Клубтық рейтингтер
+      top_results: Үздік нәтижелер
+      top_athletes: Қатысушылар рейтингі
+      top_volunteers: Еріктілер рейтингі
+      friends_protocol: Достық хаттама
+      duels: Достық дуэльдер
+      badges: Жеке марапаттар
       profile: Профиль
-      settings: Настройки
+      settings: Баптаулар
       admin_panel: Админка
-      login: Войти
-      logout: Выход
-      search: Поиск
-      name_or_id: Фамилия или ID
-      language: Язык
+      login: Кіру
+      logout: Шығу
+      search: Іздеу
+      name_or_id: Тегі немесе ID
+      language: Тіл
     about_s95:
-      title: Про S95
-      rules: Правила
-      about: О нас
-      support: Поддержать проект
-      feedback: Обратная связь
-      joining: Хотите открыть S95?
-      articles: Статьи
+      title: S95 туралы
+      rules: Ережелер
+      about: Біз туралы
+      support: Жобаны қолдау
+      feedback: Кері байланыс
+      joining: S95 ашқыңыз келе ме?
+      articles: Мақалалар
     bottom:
-      s95: Парковые забеги S95
-      slogan: 'Система независимых парковых забегов. Сделана бегунами для бегунов. Вы также можете присоединиться к нашим забегам, к разработке или редактированию контента.'
-      telegram_title: Новости проекта в Telegram
-      vk_title: Группа ВКонтакте
-      send_email: Отправить нам email
-      github_title: Проект в GitHub
+      s95: S95 саябақ жүгірістері
+      slogan: 'Тәуелсіз саябақ жүгірістер жүйесі. Жүгірушілер жүгірушілер үшін жасаған. Сіз де біздің жүгірістерге, әзірлеуге немесе контентті өңдеуге қосыла аласыз.'
+      telegram_title: Telegram-дағы жоба жаңалықтары
+      vk_title: ВКонтакте тобы
+      send_email: Бізге email жіберу
+      github_title: GitHub-тағы жоба
   articles:
     index:
       title: Статьи
@@ -723,7 +723,7 @@ ru:
         <h3>Почему S95?</h3>
         <p>
           <ol>
-            <li>Мы — международное сообщество: забеги S95 проходят в России, Беларуси и Сербии, а все результаты собраны в единой системе</li>
+            <li>Мы — международное сообщество: забеги S95 проходят в России, Беларусии Сербии, а все результаты собраны в единой системе</li>
             <li>У нас есть мотивирующая система наград и челленджей — получайте достижения не только за высокие результаты, но и просто за участие и личный прогресс</li>
             <li>Наша платформа — это не только про бег, но и про общение, а также социальную миссию: мы активно развиваем волонтёрство, общаемся, находим новых друзей</li>
             <li>Простая и быстрая регистрация новых участников с помощью Telegram-бота, все данные всегда под рукой</li>
@@ -758,8 +758,8 @@ ru:
       results: Результаты
       find_event: Найти ближайший забег
       weekly_stats:
-        title: Статистика за неделю
-        data_description: 'Здесь показана статистика по всем нашим мероприятиям за последнюю субботу'
+        title: Апталық статистика
+        data_description: 'Мұнда біздің барлық іс-шараларымыз бойынша соңғы сенбідегі статистика көрсетілген'
         total_participants: Участников
         total_participants_description: 'Бегуны, ходоки и волонтёры на всех стартах'
         newcomers: Новичков
@@ -775,7 +775,7 @@ ru:
           description: Создай профиль в нашем Telegram-боте @sat9am5kmbot
         choose_run:
           title: Выбери забег
-          description: Более 20 точек в 3 странах
+          description: Более 20 точек в 4 странах
         come_saturday:
           title: Приходи в субботу
           description: 'Старт в 09:00, дистанцию можно пройти или пробежать'
