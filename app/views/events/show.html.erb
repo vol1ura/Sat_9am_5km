@@ -40,6 +40,7 @@
     <p class="card-text"><strong><%= t '.place' %>:</strong> <%= @event.place %></p>
     <div class="d-flex flex-wrap">
       <% @event.contacts.order(:contact_type).each do |contact| %>
+        <% next if contact.contact_type == 'instagram' && top_level_domain == :ru %>
         <%=
           external_link_to(
             contact.link.html_safe,

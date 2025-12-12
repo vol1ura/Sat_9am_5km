@@ -37,7 +37,7 @@
 </div>
 
 <% content_for :head do %>
-  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV['YANDEX_MAPS_API_KEY'] %>&lang=<%= I18n.locale == :rs ? 'en_RU' : 'ru_RU' %>&onload=initYandexMaps" async defer></script>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV['YANDEX_MAPS_API_KEY'] %>&lang=<%= I18n.locale == :sr ? 'en_RU' : 'ru_RU' %>&onload=initYandexMaps" async defer></script>
   <script>
     window.initYandexMaps = function() {
       if (window.ymaps) {
