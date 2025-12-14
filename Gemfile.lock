@@ -539,6 +539,9 @@ GEM
       logger (>= 1.6.2)
       rack (>= 3.1.0)
       redis-client (>= 0.23.2)
+    sidekiq-prometheus-exporter (0.3.0)
+      rack (>= 1.6.0)
+      sidekiq (>= 4.1.0)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -680,6 +683,7 @@ DEPENDENCIES
   rubocop-rspec_rails
   ruby-vips (>= 2.1.0)
   sidekiq
+  sidekiq-prometheus-exporter
   simplecov
   sitemap_generator
   sys-cpu
