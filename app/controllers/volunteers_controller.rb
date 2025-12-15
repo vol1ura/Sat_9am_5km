@@ -19,6 +19,12 @@ class VolunteersController < ApplicationController
     render(@volunteer.update(resource_params) ? :create : :edit)
   end
 
+  def destroy
+    @activity = @volunteer.activity
+    @role = @volunteer.role
+    @volunteer.destroy
+  end
+
   private
 
   def resource_params

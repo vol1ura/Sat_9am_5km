@@ -1091,6 +1091,8 @@ sr:
       main_page: Glavna
       role: Uloga
       volunteer: Volonter
+    volunteer:
+      confirm_delete: Osloboditi poziciju %{role} (%{name})?
   users:
     omniauth_callbacks:
       auth_error: Prijava neuspešna

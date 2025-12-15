@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :volunteers, only: %i[new edit create update]
+  resources :volunteers, only: %i[new edit create update destroy]
   resources :badges, only: %i[index show]
   resources :clubs, only: %i[index show] do
     get :search, on: :collection
