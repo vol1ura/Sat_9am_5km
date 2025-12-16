@@ -30,7 +30,7 @@
                            'data-action' => 'keydown->autocomplete#search'
           %>
           <button class="btn btn-outline-secondary" type="submit">
-            <i class="fa-solid fa-user-plus text-primary"></i>
+            <i class="fa-regular fa-circle-down text-primary"></i>
           </button>
           <% if is_athlete_invalid %>
             <div class="invalid-feedback"><%= @volunteer.errors.messages.values.flatten.join(', ') %></div>

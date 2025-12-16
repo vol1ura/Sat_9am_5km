@@ -1,27 +1,16 @@
-<%=
-  turbo_frame_tag "volunteer-#{idx}" do
-    if volunteer
-      concat(
-        content_tag(:span, class: 'd-inline-flex align-items-center gap-2 flex-nowrap w-100') do
-          safe_join(
-            [
-              link_to_if(
-                can?(:manage, volunteer) && can?(:read, activity),
-                volunteer.name,
-                edit_volunteer_path(volunteer, idx:)
-              ),
-              (can?(:destroy, volunteer) ? link_to(
-                volunteer_path(volunteer, idx:),
-                method: :delete,
-                class: 'text-danger ms-auto ms-md-0',
-                data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete', role: human_volunteer_role(role), name: volunteer.name) }
-              ) { tag.i(class: 'fa-solid fa-xmark') } : nil),
-            ].compact
-          )
-        end
-      )
-    elsif can?(:create, Volunteer) && can?(:read, activity)
-      link_to 'добавить', new_volunteer_path(activity_id: activity.id, role: role, idx: idx)
-    end
-  end
-%>
+<%= turbo_frame_tag "volunteer-#{idx}" do %>
+  <% if volunteer %>
+    <span class="d-inline-flex align-items-center gap-2 flex-nowrap w-100">
+      <%= link_to_if can?(:manage, volunteer) && can?(:read, activity), volunteer.name, edit_volunteer_path(volunteer, idx:) %>
+      <% if can?(:destroy, volunteer) %>
+        <%= link_to volunteer_path(volunteer, idx:), method: :delete, class: 'text-danger ms-auto ms-md-0', data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete', role: human_volunteer_role(role), name: volunteer.name) } do %>
+          <i class="fa-solid fa-xmark"></i>
+        <% end %>
+      <% end %>
+    </span>
+  <% elsif can?(:create, Volunteer) && can?(:read, activity) %>
+    <%= link_to new_volunteer_path(activity_id: activity.id, role: role, idx: idx) do %>
+      <i class="fa-solid fa-user-plus"></i>
+    <% end %>
+  <% end %>
+<% end %>
