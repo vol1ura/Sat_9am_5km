@@ -95,8 +95,15 @@ body {
   flex: 1 0 auto;
 }
 
-.bd-footer {
+.main-footer {
   background-color: var(--bs-primary-bg-subtle);
+
+  hr {
+    @extend .my-3;
+
+    border-color: var(--bs-secondary-color);
+    width: 100%;
+  }
 
   .social-links {
     a {

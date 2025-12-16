@@ -1,4 +1,4 @@
-<nav class="navbar bd-footer py-4 mt-4">
+<nav class="py-4 mt-4 main-footer">
   <footer class="container-lg">
     <div class="row pt-2">
       <div class="col-7 col-md-3">
@@ -24,6 +24,21 @@
         </div>
       </div>
     </div>
+    <% if top_level_domain == :ru %>
+      <hr>
+      <div class="w-100 text-center fw-light fs-small text-body-secondary">
+        <p class="mb-1">
+          ©&nbsp;АНО&nbsp;«Физкультура», <%= Date.today.year %>. Все материалы сайта s95.ru защищены авторским правом
+        </p>
+        <p class="mb-1">
+          АНО&nbsp;«Физкультура»&nbsp;· ОГРН: 1237700352713&nbsp;· ИНН: 9721206702&nbsp;· КПП: 772101001&nbsp;· Дата регистрации: 18.05.2023
+        </p>
+        <p class="mb-0">
+          Москва, кв-л 114А Волжский Бульвар, к. 3, кв. 366&nbsp;·
+          <a href="mailto:info@s95.ru" class="text-reset text-decoration-none">info@s95.ru</a>
+        </p>
+      </div>
+    <% end %>
   </footer>
 </nav>
 <%= render '/cookie_consent' unless cookies[:policy_accepted] || current_user&.policy_accepted? %>
