@@ -20,7 +20,7 @@
     <%= image_tag @badge.image.variant(:web), class: 'img-badge', alt: @badge.name %>
   </div>
   <div class="col-sm-8 col-md-9">
-    <h2><%= @badge.name %></h2>
+    <h1><%= @badge.name %></h1>
     <p class="card-text"><%= sanitized_text @badge.conditions %></p>
     <% if @badge.funrun_kind? && @badge.received_date %>
       <p class="text-muted">

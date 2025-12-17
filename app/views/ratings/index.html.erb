@@ -1,10 +1,10 @@
 <% head_info :description, t('.description') %>
-<h2><%= head_info :title, t(".#{@rating_type}.title") %></h2>
+<h1><%= head_info :title, t(".#{@rating_type}.title") %></h1>
 
 <div class="ratings-description mb-4">
   <p><%= t '.description' %></p>
   <div class="alert alert-info">
-    <h3 class="alert-heading"><%= t '.order_types' %></h3>
+    <h2 class="alert-heading"><%= t '.order_types' %></h2>
     <% RatingsController::RATINGS.each do |order| %>
       <p class="mb-2">
         <strong><%= t(".#{order}") %>:</strong>

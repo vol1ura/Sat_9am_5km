@@ -3,7 +3,7 @@
   paragraphs = t '.paragraphs'
 %>
 <% head_info :description, t('.description') %>
-<h2><%= head_info :title, t('navbars.about_s95.about') %></h2>
+<h1><%= head_info :title, t('navbars.about_s95.about') %></h1>
 
 <% paragraphs.zip(VkPhotos.call(paragraphs.size)).each do |paragraph, photo| %>
   <p><%= paragraph %></p>
@@ -14,7 +14,7 @@
 
 <p><%= t '.events', events_count: actual_events.size, events: actual_events.to_sentence %></p>
 
-<h3><%= t '.s95_abroad.title' %></h3>
+<h2><%= t '.s95_abroad.title' %></h2>
 <%
   countries_links =
     Country
