@@ -1,48 +1,49 @@
 # frozen_string_literal: true
 
-RSpec.describe EventAthletesCsvExportJob do
+RSpec.describe VolunteersRolesCsvExportJob do
   let(:event) { create(:event) }
   let(:user) { create(:user) }
 
   describe 'queueing' do
-    it 'enqueues on low immediately' do
+    it 'schedules a job on the low queue' do
       expect { described_class.perform_later(event.id, user.id) }
         .to have_enqueued_job.on_queue('low').at(:no_wait)
     end
   end
 
   describe '#perform' do
-    before { allow(Telegram::Bot).to receive(:call) }
-
     context 'when user has no telegram_id' do
       let(:user) { create(:user, :with_email) }
 
+      before { allow(Telegram::Bot).to receive(:call) }
+
       it 'does nothing' do
-        described_class.perform_now(event.id, user.id)
+        described_class.perform_now event.id, user.id
         expect(Telegram::Bot).not_to have_received(:call)
       end
     end
 
     context 'when user has telegram_id' do
-      let(:activity) { create(:activity, event:) }
+      let(:activity) { create(:activity, event: event, date: Date.yesterday, published: true) }
 
       before do
-        create(:result, activity:)
-        create(:result, activity:)
-        create(:volunteer, activity:)
-        described_class.perform_now(event.id, user.id)
+        allow(Telegram::Bot).to receive(:call)
+        create(:volunteer, role: :director, activity: activity)
+        create(:volunteer, role: :marshal, activity: activity)
       end
 
-      it 'generates CSV and sends document to telegram' do
-        expect(Telegram::Bot).to have_received(:call).with('sendDocument', hash_including(:form_data))
+      it 'sends CSV with aggregated volunteers starting from the date' do
+        described_class.perform_now event.id, user.id, activity.date.to_s
+        expect(Telegram::Bot).to have_received(:call)
       end
     end
 
-    context 'when an error occurs' do
+    context 'with error' do
       before do
-        allow(Rollbar).to receive(:error)
         allow(Telegram::Bot).to receive(:call).and_raise(StandardError)
-        described_class.perform_now(event.id, user.id)
+        allow(Rollbar).to receive(:error)
+
+        described_class.perform_now event.id, user.id
       end
 
       it 'reports error to Rollbar' do
