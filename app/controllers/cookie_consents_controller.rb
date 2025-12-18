@@ -7,7 +7,7 @@ class CookieConsentsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove('cookie-consent') }
-      format.html { redirect_back fallback_location: root_path }
+      format.html { redirect_back_or_to root_path }
     end
   end
 end
