@@ -94,7 +94,6 @@ end
 
 group :development do
   gem 'database_consistency', require: false
-  gem 'rack-mini-profiler'
 
   # Deploy
   gem 'capistrano', '~> 3.19', require: false
