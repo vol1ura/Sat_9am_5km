@@ -32,4 +32,31 @@ RSpec.describe '/duels' do
       expect(response).to be_successful
     end
   end
+
+  describe 'GET /duels/protocol' do
+    let(:athlete) { create(:athlete, user:) }
+    let(:friend) { create(:athlete) }
+    let(:stranger) { create(:athlete) }
+    let(:target_date) { Date.new(2024, 8, 3) }
+    let(:activity) { create(:activity, date: target_date) }
+
+    before do
+      create(:friendship, athlete:, friend:)
+      create(:result, athlete:, activity:)
+      create(:result, athlete: friend, activity: activity)
+      create(:result, athlete: stranger, activity: activity)
+      create(:volunteer, athlete: friend, activity: activity, role: :timer)
+    end
+
+    it 'shows friends protocol for target saturday only' do
+      travel_to target_date do
+        get protocol_duels_path
+      end
+
+      expect(response).to be_successful
+      expect(response.body).to include athlete.name, friend.name, activity.event.name
+      expect(response.body).to include 'Секундомер'
+      expect(response.body).not_to include stranger.name
+    end
+  end
 end

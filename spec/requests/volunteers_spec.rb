@@ -62,4 +62,18 @@ RSpec.describe '/volunteers' do
       expect(volunteer.athlete.going_to_event_id).to eq activity.event_id
     end
   end
+
+  describe 'DELETE /volunteer' do
+    let(:idx) { 1 }
+
+    it 'removes volunteer and responds with turbo stream' do
+      volunteer
+      expect do
+        delete volunteer_url(volunteer), params: { idx: }, as: :turbo_stream
+      end.to change(Volunteer, :count).by(-1)
+      expect(response).to be_successful
+      expect(response.media_type).to eq 'text/vnd.turbo-stream.html'
+      expect(response.body).to include("volunteer-#{idx}", "role-#{idx}")
+    end
+  end
 end
