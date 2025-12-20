@@ -54,6 +54,9 @@ ActiveAdmin.register Activity do
     flash[:error] = t '.bad_timer_format', message: e.message
   rescue ActiveRecord::RecordInvalid
     flash[:error] = t '.bad_data'
+  rescue StandardError => e
+    Rollbar.error e
+    flash[:error] = t '.bad_files'
   end
 
   action_item(
