@@ -969,9 +969,11 @@ sr:
   friendships:
     button:
       your_friend: Vaš prijatelj
+      your_mutual_friend: Vaš uzajamni prijatelj
       add_friend: Dodaj u prijatelje
     friend:
       going_to: 'Ide na trku %{event}'
+      confirm_add: 'Dodati %{name} u prijatelje?'
       confirm_unfriend: 'Da li ste sigurni da želite da uklonite iz prijatelja?'
   badges:
     index:

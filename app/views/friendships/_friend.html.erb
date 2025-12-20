@@ -10,18 +10,31 @@
       <% end %>
     </div>
   </div>
-  <% if current_user&.athlete == @athlete && local_assigns[:is_friends_tab] %>
-    <% if (friendship_id = @friendships_hash[friend.id]) %>
+  <% if current_user&.athlete == @athlete %>
+    <% if local_assigns[:is_friends_tab] %>
+      <% if (friendship_id = @friendships_hash[friend.id]) %>
+        <%=
+          button_to(
+            friendship_path(friendship_id, viewed_athlete_id: @athlete.id),
+            method: :delete,
+            class: 'btn btn-sm btn-outline-danger',
+            form_class: 'd-inline-block',
+            data: { turbo: true, turbo_confirm: t('.confirm_unfriend') },
+          ) do
+        %>
+          <i class="fa-solid fa-user-minus"></i>
+        <% end %>
+      <% end %>
+    <% elsif !@friendships_hash[friend.id] %>
       <%=
         button_to(
-          friendship_path(friendship_id, viewed_athlete_id: @athlete.id),
-          method: :delete,
-          class: 'btn btn-sm btn-outline-danger',
+          friendships_path(friend_id: friend.id, viewed_athlete_id: @athlete.id),
+          class: 'btn btn-sm btn-outline-primary',
           form_class: 'd-inline-block',
-          data: { turbo: true, turbo_confirm: t('.confirm_unfriend') },
+          data: { turbo: true, turbo_confirm: t('.confirm_add', name: friend.name) },
         ) do
       %>
-        <i class="fa-solid fa-user-minus"></i>
+        <i class="fa-solid fa-user-plus"></i>
       <% end %>
     <% end %>
   <% end %>

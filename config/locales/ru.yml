@@ -1134,9 +1134,11 @@ ru:
   friendships:
     button:
       your_friend: Ваш друг
+      your_mutual_friend: Ваш взаимный друг
       add_friend: Подписаться
     friend:
       going_to: 'Собирается в %{event}'
+      confirm_add: 'Добавить %{name} в друзья?'
       confirm_unfriend: 'Исключить из друзей?'
     create:
       success: 'Участник добавлен в друзья'

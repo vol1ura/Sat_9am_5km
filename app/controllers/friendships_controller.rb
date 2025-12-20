@@ -7,10 +7,10 @@ class FriendshipsController < ApplicationController
   before_action :set_friend, only: :create
   before_action :set_friendship, only: :destroy
   before_action :set_viewed_athlete
-  before_action :set_friendships_hash
 
   def create
     @athlete.friends << @friend unless @athlete.friend?(@friend)
+    set_friendships_hash
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to athlete_path(@friend), notice: t('.success') }
@@ -20,6 +20,7 @@ class FriendshipsController < ApplicationController
   def destroy
     @friend = @friendship.friend
     @friendship.destroy
+    set_friendships_hash
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to athlete_path(@friend), notice: t('.success') }
