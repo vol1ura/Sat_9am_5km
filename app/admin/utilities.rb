@@ -15,6 +15,11 @@ ActiveAdmin.register_page 'Utilities' do
           para 'Будет сформирован CSV файл по участникам и волонтёрским позициям.'
           render partial: 'event_csv_export_form', locals: { url: admin_utilities_export_volunteers_roles_csv_path }
         end
+
+        panel 'Статистика регистраций пользователей' do
+          para 'Будет сформирован CSV файл с ежемесячной статистикой.'
+          render partial: 'user_registrations_export_form'
+        end
       end
 
       tab t('.badges.title') do
@@ -130,6 +135,12 @@ ActiveAdmin.register_page 'Utilities' do
     else
       flash[:alert] = t '.reports.event_not_selected'
     end
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_user_registrations_csv, method: :post do
+    UserRegistrationsCsvExportJob.perform_later current_user.id, params[:from_date].presence
+    flash[:notice] = t '.reports.task_queued'
     redirect_to admin_utilities_path
   end
 end

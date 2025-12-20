@@ -88,4 +88,14 @@ RSpec.describe '/admin/utilities' do
       expect(VolunteersRolesCsvExportJob).not_to have_been_enqueued
     end
   end
+
+  describe 'POST /admin/utilities/export_user_registrations_csv' do
+    it 'enqueues csv export job' do
+      post admin_utilities_export_user_registrations_csv_url, params: { from_date: '2023-01-01' }
+
+      expect(response).to redirect_to admin_utilities_url
+      expect(flash[:notice]).to include('Ждите отчёт в Telegram')
+      expect(UserRegistrationsCsvExportJob).to have_been_enqueued.with(user.id, '2023-01-01')
+    end
+  end
 end
