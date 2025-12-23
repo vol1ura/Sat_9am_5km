@@ -1,0 +1,1167 @@
+en:
+  activerecord:
+    models:
+      club:
+        one: club
+        other: Clubs
+      event:
+        one: event
+        other: Events
+      activity:
+        one: run
+        other: Runs
+      athlete:
+        one: participant
+        other: Participants
+      result:
+        one: result
+        other: Results
+      volunteer:
+        one: volunteer
+        other: Volunteers
+      volunteering_position:
+        one: position
+        other: Volunteering Positions
+      contact:
+        one: contact
+        other: Contacts
+      badge:
+        one: badge
+        other: Badges
+      newsletter:
+        one: newsletter
+        other: Newsletters
+      trophy:
+        one: achievement
+        other: Achievements
+      permission:
+        one: permission
+        other: Permissions
+      user:
+        one: user
+        other: Users
+    attributes:
+      user:
+        first_name: first name
+        last_name: last name
+        email: e-mail
+        role: role
+        roles:
+          super_admin: super admin
+          admin: admin
+        note: note
+        telegram_user: telegram
+        athlete: participant
+        image: photo
+        phone: phone
+        emergency_contact_name: name
+        emergency_contact_phone: phone
+        created_at: created
+      permission:
+        event: event
+        user: user
+        action: action
+        subject_class: subject class
+      athlete:
+        name: Name SURNAME
+        parkrun_code: parkrun ID
+        fiveverst_code: 5 versts ID
+        runpark_code: RunPark ID
+        parkzhrun_code: parkzhrun ID
+        gender: gender
+        club: club
+        club_id: club
+        event: home run
+        event_id: home run
+        going_to_event: going to
+        male: male
+        user: user
+        registered: reg.
+        id_info: ID info
+        profile: Website profile
+        results: Runs
+        volunteering: Volunteering
+        trophies: Badges
+        created_at: created
+        updated_at: updated
+      activity:
+        date: date
+        published: published?
+        description: description
+        event_name: where?
+        correct?: correct?
+      club:
+        name: name
+        country: country
+        logo: logo
+        description: description
+      event:
+        active: active
+        country: country
+        code_name: code name
+        name: name
+        summer_image: summer image
+        winter_image: winter image
+        town: town
+        place: 'how to find?'
+        latitude: latitude
+        longitude: longitude
+        coordinates: coordinates
+        timezone: timezone
+        slogan: slogan
+        description: description
+        visible_order: weight in feed
+        created_at: created
+        updated_at: updated
+      newsletter:
+        body: text
+        picture_link: picture link
+        created_at: created
+        updated_at: updated
+      result:
+        position: position
+        total_time: result
+        athlete: participant
+        user: user
+        gender: gender
+        club: club
+      volunteer:
+        activity: run
+        athlete: participant
+        name: 'volunteer name'
+        comment: comment
+        role: role
+        roles: &volunteer_roles
+          director: Director
+          marshal: Marshal
+          timer: Timer
+          photograph: Photographer
+          tokens: 'Position Tokens Distribution'
+          scanner: Scanner
+          instructor: 'Newcomers Briefing'
+          marking_maker: 'Course Marking'
+          event_closer: Tail Walker
+          marking_picker: 'Course Marking Collection'
+          cards_sorter: 'Finish Tokens Sorting'
+          bike_leader: 'Bike Leader'
+          pacemaker: Pacemaker
+          results_handler: 'Results Processing'
+          equipment_supplier: 'Equipment Delivery'
+          public_relations: 'Public Relations'
+          warm_up: 'Warm-up Leader'
+          other: 'Other'
+          attendant: 'Attendant'
+          finish_maker: 'Finish Organization'
+          volunteer_coordinator: 'Volunteer Coordinator'
+          food_maker: 'Food Organization'
+          videographer: Videographer
+      volunteering_position:
+        rank: rank
+        number: number
+        role: role
+        roles:
+          <<: *volunteer_roles
+      contact:
+        new_model: 'Add contact'
+        edit_model: 'Edit contact'
+        delete_model: 'Delete contact'
+        event: event
+        link: contact
+        contact_type: 'contact type'
+        contact_types:
+          email: E-mail
+          phone: Phone
+          tg_channel: Telegram channel
+          tg_chat: Telegram chat
+          vk: VKontakte
+          zen: Zen
+          instagram: Instagram
+          facebook: Facebook
+          strava: Strava
+          map_link: Map and directions
+          parking: Parking
+      badge:
+        name: name
+        conditions: conditions
+        image: image
+        received_date: received date
+        country: country
+        kind: type
+        kinds:
+          funrun: fun run
+          full_profile: full profile
+          participating: participant
+          home_participating: better at home
+          jubilee_participating: jubilee
+          tourist: tourist
+          breaking: breakthrough
+          record: course record
+          rage: rage
+          five_plus: five plus
+          minute_bingo: minute bingo
+      trophy:
+        athlete: participant
+        date: received date
+        info: additional info
+        updated_at: updated
+
+    errors:
+      messages:
+        record_invalid: 'Errors occurred: %{errors}'
+        restrict_dependent_destroy:
+          has_one: 'Cannot delete record because there is a dependency: %{record}'
+          has_many: 'Cannot delete record because there are dependencies: %{record}'
+      models:
+        event:
+          attributes:
+            code_name:
+              invalid: 'only lowercase Latin letters and "_" symbol instead of space'
+        contact:
+          attributes:
+            link:
+              invalid: 'characters < and > are forbidden'
+
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: "%m/%d/%Y"
+      long: "%B %-d, %Y"
+      brief: "%-d %B"
+      short: "%-d %b %Y"
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about %{count} hour
+        other: about %{count} hours
+      about_x_months:
+        one: about %{count} month
+        other: about %{count} months
+      about_x_years:
+        one: about %{count} year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_seconds:
+        one: less than %{count} second
+        other: less than %{count} seconds
+      less_than_x_minutes:
+        one: less than %{count} minute
+        other: less than %{count} minutes
+      over_x_years:
+        one: over %{count} year
+        other: over %{count} years
+      x_seconds:
+        one: "%{count} second"
+        other: "%{count} seconds"
+      x_minutes:
+        one: "%{count} minute"
+        other: "%{count} minutes"
+      x_days:
+        one: "%{count} day"
+        other: "%{count} days"
+      x_months:
+        one: "%{count} month"
+        other: "%{count} months"
+      x_years:
+        one: "%{count} year"
+        other: "%{count} years"
+    prompts:
+      second: Seconds
+      minute: Minutes
+      hour: Hours
+      day: Day
+      month: Month
+      year: Year
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      in: must be in %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: 'Errors occurred: %{errors}'
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      other_than: must be other than %{count}
+      present: must be blank
+      required: must exist
+      taken: has already been taken
+      dimension_width_not_less_than_or_equal_to: width must be less than or equal to %{length} pixels
+      dimension_height_not_less_than_or_equal_to: height must be less than or equal to %{length} pixels
+      file_size_not_between: 'file size must be between %{min} and %{max} (current size: %{file_size})'
+      more_than_one_volunteering: cannot hold more than one volunteering position on the same day
+      more_than_one_trophy: cannot have more than one badge of the same type
+      content_type_invalid:
+        one: 'has invalid content type (allowed content type: %{authorized_human_content_types})'
+        other: 'has invalid content type (allowed content types: %{authorized_human_content_types})'
+      too_long:
+        one: is too long (maximum is %{count} character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is %{count} character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be %{count} character)
+        other: is the wrong length (should be %{count} characters)
+    template:
+      body: 'Problems occurred with the following fields:'
+      header:
+        one: "%{model}: saving failed due to %{count} error"
+        other: "%{model}: saving failed due to %{count} errors"
+  helpers:
+    select:
+      prompt: 'Select: '
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Save %{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: billion
+            other: billions
+          million:
+            one: million
+            other: millions
+          quadrillion:
+            one: quadrillion
+            other: quadrillions
+          thousand:
+            one: thousand
+            other: thousands
+          trillion:
+            one: trillion
+            other: trillions
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: byte
+            other: bytes
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
+  time:
+    am: AM
+    pm: PM
+    formats:
+      default: "%B %d, %Y %I:%M %p %z"
+      long: "%B %d, %Y %I:%M %p"
+      short: "%b %d, %I:%M %p"
+  cookie_consent:
+    message: 'By continuing to use our website, you consent to the processing of cookies that ensure the proper functioning of the site.'
+    policy_link: 'Privacy Policy'
+    accept_button: 'Got it'
+  views:
+    greeting: '%{name}, welcome to S95!'
+    auth_link_invalid: 'Link is invalid or has expired'
+    pagination:
+      previous: '◀️'
+      first: '⏮️'
+      next: '▶️'
+      last: '⏭️'
+      truncate: '&hellip;'
+  notification_mailer:
+    parkzhrun_error: 'Error! Failed to create ParkZhrun run'
+    feedback: 'New feedback on S95 website'
+  button:
+    show_more: Show all
+    show_less: Collapse
+  common:
+    without_token: NO TOKEN (create)
+    without_name: NO NAME
+    nobody: UNKNOWN
+    gender: Gender
+    man: Male
+    woman: Female
+    title: Weekly 5-kilometer park runs
+    description: Weekly Saturday 5km runs in the park. You can walk, run, or volunteer — fitness level doesn't matter. You'll find new friends and great mood here.
+  country:
+    ru: Russia
+    by: Belarus
+    rs: Serbia
+  duels:
+    no_athlete_access: You need to create an athlete profile to view duels
+    index:
+      title: 'Running Duels %{athlete_name}'
+      description: 'Friendly duels %{athlete_name} with other participants'
+      header: Running Duels
+      subheader: Compare your results with friends on joint runs - running duels. See when and where you participated together.
+      duels_count:
+        one: '%{count} duel'
+        other: '%{count} duels'
+      my_wins: My Wins
+      friend_wins: Friend Wins
+      win_rate: Win Rate
+      recent_duels: Recent Duels
+      view_all: View All
+      no_duels: No joint runs yet
+      no_duels_description: Add friends and participate in runs with them to see comparison results here!
+      profile: My Profile
+    show:
+      title: 'Running Duels %{athlete_name} vs %{friend_name}'
+      description: 'History of joint runs between %{athlete_name} and %{friend_name}'
+      header: 'Joint Runs with %{friend_name}'
+      duels: Friendly Duels
+      back_to_all: Back to All Duels
+      total_duels: Total Duels
+      my_wins: My Wins
+      friend_wins: Friend Wins
+      win_rate: Win Rate
+      your_friend: Your Friend
+      duel_history: Duel History
+      no_duels: No joint runs
+      no_duels_with_friend: 'You don't have joint runs with %{friend_name} yet'
+    duel:
+      victory: Victory
+      defeat: Defeat
+      you: You
+      position: Position
+      time: Time
+      time_difference: Time Difference
+      position_difference: Position Difference
+      position_singular: position
+      position_plural: positions
+    duel_compact:
+      you_won: You Won
+      friend_won: Friend Won
+    friend_stats:
+      dominating: Dominating
+      competitive: Competitive
+      struggling: Struggling
+    protocol:
+      title: Friends Protocol
+      header: Friends Protocol
+      description: Here are your results and your friends' results for the last Saturday across all S95 locations. Results are ordered by time, and with equal times, the participant who finished higher in their run is placed above. You'll also find those who volunteered that day here.
+      not_published_yet: Protocols are not published yet.
+      you_did_not_participate: You did not participate last Saturday.
+      no_friends: You don't have friends yet
+      no_friends_description: Add friends to see their results and volunteering in the protocol.
+      profile: My Profile
+      athlete: Participant
+      result: Result
+      pace: Pace
+      event: Event
+      club: Club
+      volunteers_title: Friends Volunteers
+  navbars:
+    top:
+      s95: Saturday 9 AM 5 KM
+      events: Events
+      map: Events Map
+      results: Results
+      recent_results: Recent Runs
+      1_january: January 1
+      club_ratings: Club Ratings
+      top_results: Top Results
+      top_athletes: Participant Rankings
+      top_volunteers: Volunteer Rankings
+      friends_protocol: Friends Protocol
+      duels: Friendly Duels
+      badges: Personal Badges
+      profile: Profile
+      settings: Settings
+      admin_panel: Admin Panel
+      login: Login
+      logout: Logout
+      search: Search
+      name_or_id: Surname or ID
+      language: Language
+    about_s95:
+      title: About S95
+      rules: Rules
+      about: About Us
+      support: Support the Project
+      feedback: Feedback
+      joining: Want to Start S95?
+      articles: Articles
+    bottom:
+      s95: S95 Park Runs
+      slogan: 'Independent park run system. Made by runners for runners. You can also join our runs, development, or content editing.'
+      telegram_title: Project News on Telegram
+      vk_title: VKontakte Group
+      send_email: Send us email
+      github_title: Project on GitHub
+  articles:
+    index:
+      title: Articles
+      description: Training tips, equipment, technique, and pre-race preparation for beginner runners
+      first_run:
+        title: 'How to Run Your First 5K: Tips for Beginners'
+        description: Training tips, equipment, technique, and pre-race preparation for beginner runners
+      smart_watches:
+        title: 'Sports Watches: Your Digital Coach'
+        description: How to use heart rate zones, auto-splits, and metrics to run 5K scientifically
+      weight_and_time:
+        title: How Weight Affects Running Results
+        description: Estimating finish time changes with weight changes and a calculator for time estimation based on weight
+  pages:
+    about:
+      description: S95 is a platform that unites independent park runs conducted according to the main principles of parkrun suspended in Russia (Saturday, 9 AM, 5 km).
+      paragraphs:
+        - 'Imagine: Saturday, 9 AM. The sun is just starting to warm up, birds are singing, and you... you're already at the start of a 5-kilometer distance. But this isn't just a run — it's S95, a platform that unites everyone who loves running, fresh air, and good company.'
+        - 'Many have already fallen in love with parkruns as events where runners and volunteers start each Saturday with movement, communication, and a cup of tea from a thermos. But times change, and traditions remain. Now there's S95 — it's a whole community. Here you can find out where the nearest run is, what volunteers are needed for the upcoming Saturday, check your results (and proudly brag if you've beaten your personal record), and find like-minded people who also believe that Saturday morning is time not for sleep, but for running and communication.'
+        - 'And most importantly — S95 is accessible to everyone. It doesn't matter who you are: a marathoner with a hundred medals or someone who last ran in school PE class. There's no participation fee here, only payment in the form of good mood and smiles. You can walk or run the distance at your comfortable pace.'
+        - 'So, if you're not yet in the know, S95 isn't just a set of symbols, it's a lifestyle, a Saturday ritual, and an opportunity to start the day with something really cool. Grab your sneakers, call your friends, and join the runs where every kilometer is a step toward new acquaintances, adventures, or a cool photo for social media.'
+      events: 'Currently, our system displays results from %{events_count} locations: %{events}, as well as themed runs, like it was in Nikola-Lenivets Park at the SMF festival.'
+      s95_abroad:
+        title: S95 Runs Abroad
+        body: 'Saturday runs are also held in other countries - these are %{countries}. All results are accounted for in a unified system and displayed in participants' personal profiles.'
+      back: Back
+      forward: Forward
+    rules:
+      description: Brief rules for S95 run participants, as well as frequently asked questions
+      register_with_bot_html: 'If you're not registered, create a profile using our <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a>. You'll receive a link to your profile with a personal barcode.'
+      come_to_s95_html: 'Most importantly - come on <strong>Saturday</strong> at <strong>9 AM</strong> to one of the events and run <strong>5 km</strong>.'
+      scan_barcodes: At the finish, you'll be given a position card. Scan your personal barcode and position card with the volunteer.
+      return_position_card: Return the position card.
+      faq: Frequently Asked Questions
+      about_markers:
+        question: Will there be any directions or markers on the route?
+        answer: The course is well marked with orange cones, there's a marshal at the turnaround (if there is one), and you'll likely be running surrounded by other participants.
+      about_registering:
+        question: Do I need to register to participate in a run?
+        answer_html: 'Not required, but it's recommended to register using our Telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. As a result, you'll have a personal barcode that you'll show to the volunteer. Additionally, the bot will send notifications with run results.'
+      about_participation:
+        question: 'Can I just come at 8:45 to run together?'
+        answer: 'Yes, you can just come and run. Registration is needed so you have a result in the protocol. Register once and you can come to any run. If you don't register - you'll be in the protocol as "Unknown". On site, they'll help you register and enjoy five kilometers in good company.'
+      about_barcode:
+        question: Can I use a parkrun (5 versts, RunPark) barcode?
+        answer: Yes, you can come to a run with another system's barcode. However, your result will only be counted in the S95 system.
+      about_things:
+        question: Where can I leave my things during the run?
+        answer: Usually, everyone leaves their things on benches near the start and finish area.
+      personal_info:
+        question: I accidentally made a mistake in my name during registration. How to fix it?
+        answer_html: Go to the <a href="/user">Settings</a> section (login and password may be required) and make the necessary changes.
+    support:
+      description: 'You can support the Sat9am5km project in various ways: volunteering, donation, or by participating in the development of this website'
+      title: Want to Support the Project?
+      how_to_support: >
+        Friends, our events are completely free and run by volunteers.
+        However, if you want and can support our project, we'll be grateful for any material assistance.
+        To do this, contact the event organizers you want to support through the contacts on the event page.
+        Collected funds will be used to purchase volunteer vests, marking cones, and other necessary items for conducting runs.
+      about_volunteering: But don't forget, the biggest help is volunteering.
+      site_development: Website Development
+      add_new_issues_html: >
+        Do you have ideas on how to make this website better?
+        The system code is open on <a href="%{github_repo}" target="_blank" rel="noopener">GitHub</a>.
+        Suggest your ideas and write comments
+        in <a href="%{github_issues}" target="_blank" rel="noopener">Issues</a>.
+        To do this, register on <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>, star our project
+        and create a New Issue describing what you want (in Russian or English).
+      how_to_contribute: Want to make changes yourself? No problem - clone the repository, create and push a branch with your changes, and then open a Pull request.
+      small_changes: Small changes are easiest to make directly in the browser using GitHub's visual editor!
+      best_regards: With love, S95.
+    feedback:
+      title: Feedback and Suggestions
+      description: We'll be grateful for any feedback and suggestions. Write if you've encountered any problems, want to offer your help, an idea, or just speak out. If desired (and if you need to be contacted), include any contact in your message.
+      other_contacts_html: You can also send a message to our <a href="mailto:%{our_email}" target="_blank" title="Send us email">email</a>. You'll find our other contacts at the bottom, as well as on event pages.
+      placeholder: Your feedback or suggestion (up to %{max_length} characters)
+      submit: Send
+    submit_feedback:
+      sent: Thank you for your feedback!
+      error: Error! Message length must be between 1 and 950 characters.
+    joining:
+      title: Want to Start S95 in Your Park?
+      description: We tell you how to start conducting S95 events in your favorite park.
+      body_html: >
+        <p>This section is for those ready to turn their favorite park into a place where running enthusiasts and good mood gather every Saturday.</p>
+
+        <h3>Why S95?</h3>
+        <p>
+          <ol>
+            <li>We're an international community: S95 runs take place in Russia, Belarus, and Serbia, and all results are collected in a unified system</li>
+            <li>We have a motivating badge and challenge system — get achievements not only for high results, but also just for participation and personal progress</li>
+            <li>Our platform isn't just about running, but also about communication and social mission: we actively develop volunteering, communicate, find new friends</li>
+            <li>Simple and fast registration of new participants via Telegram bot, all data always at hand</li>
+            <li>We use modern technologies and approaches: lots of various statistics and rankings, ability to add friends and see who's going to which run</li>
+            <li>We have our own unique mobile app for conducting runs</li>
+            <li>Our system is completely open and uses OpenSource technologies — everyone can suggest improvements and make the platform even better</li>
+          </ol>
+        </p>
+
+        <h3>Action Plan</h3>
+        <p>Before submitting an application, check the <a href="/events">Our Events</a> section — there might already be our runs near you. In that case, join the local team and help develop the running community in your area.</p>
+        <p>
+          If there are no S95 runs nearby, and you're eager to become a pioneer of the movement, you'll need:
+          <ul>
+            <li>a safe and convenient course (without intersections with roads and dangerous sections)</li>
+            <li>a team of enthusiasts ready to wake up on Saturdays before the alarm</li>
+            <li>some organizational skills and lots of love for running</li>
+          </ul>
+        </p>
+        <p>From the moment of application to the first technical start, some time may pass, but the S95 team will do everything possible so your park fills with Saturday running spirit as soon as possible!</p>
+        <p>Ready to become part of a movement that changes Saturday mornings for the better? Write to us at <a href="mailto:%{info_email}" target="_blank" title="Send us email">%{info_email}</a> with the subject "Start S95" and let's create new running traditions together!</p>
+    additional-events:
+      title_html: Additional Starts January&nbsp;1,&nbsp;%{year}
+      description: Usually, we only hold runs on Saturday, but on January 1 we make an exception and hold an additional run. On this page you can see the time and event where you can run on January 1
+      time: Time
+    index:
+      upcoming_events: 'Upcoming Events %{date}'
+      hero_title: 'Every Saturday at 9:00!'
+      hero_subtitle: '5 km for all fitness levels, free. Join us!'
+      my_profile: My Profile
+      registration: Registration
+      results: Results
+      find_event: Find Nearest Run
+      how_it_works:
+        title: How It Works?
+        registration:
+          title: Registration
+          description: Create a profile in our Telegram bot @sat9am5kmbot
+        choose_run:
+          title: Choose a Run
+          description: Over 20 locations in 3 countries
+        come_saturday:
+          title: Come on Saturday
+          description: 'Start at 09:00, you can walk or run the distance'
+        track_progress:
+          title: Track Progress
+          description: On the website you'll find all results, as well as badges and rankings
+      why_s95:
+        title: Why S95?
+        for_everyone:
+          title: For Everyone
+          description: You can participate with family, friends, pets. You can run or walk, you can help by volunteering
+        community:
+          title: Community
+          description: Find new friends, chat at tea parties after runs, join event chats
+        free:
+          title: Free
+          description: All events are run by running enthusiast volunteers
+      stories:
+        title: Participant Stories
+        previous: Previous
+        next: Next
+        content:
+          4029: My journey in S95 — a road from angry denial of running to first sports victories and self-realization in organizing. A new best life with the support of a big caring family. More than Saturdays. More than running.
+          6901: For me, our running community is more than just running! It's a healthy atmosphere and support among completely different people united by one movement. And a great bonus in the form of a cool side effect — good health, cheerful spirit, and a toned body!
+          14500: Once, running along Pechatniki Embankment, I heard the call "run with us". I came a week later and my Saturday mornings were captured by regular starts and volunteering. Insanely happy that I found a running company that I so lacked.
+          14089: One Saturday I came to the park in the morning, learning about the runs from a poster on a stand. The second time I came back to volunteer and run, and the next one — brought my son. And it all got so addictive that it hasn't "let go" of both of us to this day)
+          7736: This is no longer just a community, not just Saturday - it's huge positive energy from people who meet to run 5 km together. During this run we learn all the news about each other, celebrate birthdays, plan the running year. I started running 4 years ago, didn't do any sports in my youth. It all started with a good doctor who after surgery didn't forbid, but advised running. It seems, that was my point from which I plunged into the running community and met wonderful people. Very soon I'll be celebrating my 100th Saturday run and, you know what that means?! It's AMAZING. Don't believe it? Come!
+      volunteer_app:
+        title: S95 Volunteer App
+        features:
+          timer:
+            title: Timer
+            description: with ability to delete erroneous splits
+          scanner:
+            title: Scanner
+            description: super fast and accurate module with ability to simultaneously capture participant and position cards
+          upload:
+            title: Results Upload
+            description: directly from the app to the system
+          stats:
+            title: Personal Statistics
+            description: tracking your volunteering activity
+          live_results:
+            title: Live Streaming
+            description: run results to the website in real time
+        download_rustore: Download from RuStore
+        download_app_gallery: Download from App Gallery
+        download_apk: Download APK File
+      our_partners: Our Partners
+  ratings:
+    index:
+      description: Participant rankings by various indicators. Information on this page is updated regularly, but sometimes may be slightly different. You can always check current values in the participant's profile.
+      order_types: Ranking Types
+      name: Participant
+      total: Total
+      club: Club
+      count: Runs
+      h_index: h-index
+      uniq_events: Parks
+      longest_streak: Longest Streak
+      trophies: Badges
+      results:
+        title: Participant Rankings
+        description:
+          count: Total number of counted runs. In case of equal values, the one with more volunteering will rank higher.
+          h_index: Running h-index - a value equal to h if the participant ran in h parks, with at least h times in each. In case of equal values, the participant with more runs will rank higher.
+          uniq_events: Unique parks - number of parks visited as a runner. In case of equal values, the participant with more runs will rank higher.
+          longest_streak: Maximum number of consecutive runs. The streak is considered broken if there was no result on any week. In case of equal values, the participant with more runs will rank higher.
+          trophies: Number of badges. In case of equal values, the participant with more runs will rank higher.
+      volunteers:
+        title: Volunteer Rankings
+        description:
+          count: Total number of volunteering sessions. In case of equal values, the one with more counted runs will rank higher.
+          h_index: Volunteering h-index - a value equal to h if the participant was a volunteer at h different positions (roles), at least h times at each. In case of equal values, the participant with more volunteering will rank higher.
+          uniq_events: Unique parks - number of parks visited as a volunteer. In case of equal values, the participant with more volunteering will rank higher.
+          longest_streak: Maximum number of consecutive volunteering sessions. The streak is considered broken if there was no volunteering on any week. In case of equal values, the participant with more volunteering will rank higher.
+          trophies: Number of badges. In case of equal values, the participant with more volunteering will rank higher.
+    results:
+      title: Top Results
+      description: Table with top results of S95 participants. If you want to get rankings for a specific event, select it in the "Search by Location" field. Similarly, you can display rankings by participants of a club you're interested in, or by a combination of several parameters. When searching by name, the participant's absolute position is also displayed (i.e., position in the ranking without name filter).
+      men: Men
+      women: Women
+      athlete: Participant
+      result: Time
+      date: Date
+      event: Run
+      club: Club
+      abs: Abs.
+      name_placeholder: Search by Name
+      club_placeholder: Search by Club
+      event_placeholder: Search by Location
+      search_button: Search
+      reset_button: Reset
+  athletes:
+    index:
+      title: Search Results
+      description: Search results by participant name, or by their ID (S95, parkrun, 5 versts, RunPark, ParkZhrun)
+      name: Name
+      club: Club
+      athletes_count: Total found %{count} participants
+      nothing_found: Unfortunately, nothing found.
+    show:
+      description: 'Participant Profile %{athlete_name}'
+      show_club_html: 'View club statistics %{link}'
+      total_results: total runs
+      total_volunteering: total volunteering
+      total_trophies: total badges
+      total_events: visited events
+      personal_best: S95 personal best (PB)
+      best_position: best position
+      no_results: No results yet.
+      no_volunteering: No volunteering yet.
+      results: Results
+      volunteering: Volunteering
+      close: Close
+      mission_minute_bingo: Mission "60 Seconds Bingo!"
+      table:
+        pb: PB
+        date: Date
+        time: Time
+        pace: Pace
+        place: Place
+        event: Event
+      friends: Friends
+      followers: Following
+      duels: Duels
+      duels_description: Compare your results with friends on the same runs
+      view_duels: View Duels
+      personal_bests_section: personal bests on other distances
+      distance: Distance
+      personal_best: PB
+      predicted_time: Prediction
+      personal_best_10k: 10 km
+      personal_best_half_marathon: Half Marathon
+      personal_best_marathon: Marathon
+      prediction_hint: Prediction is based on the best result in S95 runs over the last 3 months. Result is only possible with training appropriate for the specific distance
+      no_personal_bests: Personal bests not specified.
+      no_predictions: Insufficient data for prediction (need at least 3 results in the last 3 months)
+    statistics:
+      volunteering_chart:
+        h_index: h-index
+        h_index_explanation: Index equals h if there are at least h positions (roles), with at least h volunteering sessions at each
+        volunteering_coefficient: Volunteer Coefficient
+        volunteering_coefficient_explanation: Number of volunteering sessions per every 10 runs
+      total_events:
+        finishes: Finishes
+        volunteering: Volunteering
+        event: Event
+        count: Count
+        roles: Roles
+        best_position: Best Position
+        best_time: Best Time
+    minute_bingo:
+      from_minute: out of 60 seconds
+      catch_them_all: catch them all
+  activities:
+    index:
+      description: Recent S95 run results
+      date: Date
+      event: Event
+      athletes: Participants
+      volunteers: Volunteers
+      first_man: First
+      first_woman: First
+      dashboard: Statistics for the Last Week
+    dashboard:
+      error: Failed to load statistics for the last week. Please refresh the page.
+    show:
+      title: 'Run Results %{activity}'
+      description: 'Run protocol %{activity}, volunteer list and brief report'
+      main_page: Main Page
+      short_report: Brief Report
+      total_runners_count: run participants
+      personal_bests_count: number of personal bests
+      first_runners_count: first time at run
+      first_s95_count: first time at S95 run
+      volunteers_count: volunteer team
+      first_volunteers_count: first volunteering
+      protocol: Protocol
+      common: Overall
+      men: Men
+      women: Women
+      volunteers: Volunteers
+      about_volunteers: 'The run was conducted by a volunteer team:'
+      volunteer: Volunteer
+      role: Role
+      total_volunteering: '%{count} volunteering sessions'
+      first_volunteering: 'First Volunteering!'
+      search_athlete_placeholder: 'Search participant...'
+      clear_search: 'Clear Search'
+    protocol:
+      position_short: Pos.
+      position_full: Position
+      athlete: Participant
+      time: Time
+      pace: Pace
+      club: Club
+    result:
+      total_runs_html: '%{count}&nbsp;runs'
+      total_volunteering_html: '%{count}&nbsp;volunteering sessions'
+      first_run: 'First Run!'
+      personal_best: 'Personal Best!'
+  badges:
+    index:
+      how_to_get: Participate in our events, fulfill conditions, and get badges. All badges will appear on your profile page. Their number will gradually increase.
+      about_badges: We try to come up with badges to reward both fast runners and regular participants who regularly attend our events.
+      achievements: Achievements
+      thematic: Thematic
+    badge:
+      event_date: 'Event Date: %{date}'
+    show:
+      main_page: Main Page
+      event_date: 'Event Date: %{date}'
+      athlete: Participant
+      event: Run
+      club: Club
+      result: Time
+      received_date: Received Date
+      soon: Soon!
+      nobody_has: No one has this badge yet.
+  clubs:
+    index:
+      description: Table of clubs with statistics on total number of participants, volunteering, and runs.
+      how_to_add_new_club_html: 'Your club isn't in the list? Write to us <a href="mailto:%{mail}?subject=Add%20new%20club" target="_blank" title="Send us email">by email</a> and we'll add it. In the message, specify the club name, add a brief description, and attach the club logo if available.'
+      name: Name
+      athletes: Participants
+      results: Results
+      volunteering: Volunteering
+      search_placeholder: Search by Name
+      search_button: Search
+    show:
+      description: 'Participant table and statistics for club %{club}'
+      main_page: Main Page
+      clubs: Clubs
+      athletes_count: number of participants
+      results_count: number of runs
+      volunteering_count: number of volunteering sessions
+      best_results: Personal Bests of Club Participants
+      last_week_activities: Club Participants Activity Last Week
+      name: Name
+      activities: Runs
+      volunteering: Volunteering
+      personal_best: Best Time
+    last_week:
+      title: 'Activity of %{club} Participants'
+      main: Main Page
+      clubs: Clubs
+      participants_activity: Participant Activity
+      description: 'Runs from the past week in which %{club} club members participated as runners or volunteers.'
+      disclaimer: On Saturday, some runs may not yet be loaded, so information may be incomplete.
+      activities: Runs
+      volunteering: Volunteering
+      position: Position
+      name: Name
+      total_time: Result
+      role: Role
+  events:
+    index:
+      list: List
+      map: Map
+      our_events: Our Events
+    show:
+      title: '%{event} | Park Runs'
+      our_contacts: Our Contacts
+      jubilee_by_results: Coming Jubilee Runs
+      jubilee_by_volunteering: Coming Jubilee Volunteering
+      results: Results
+      no_results_disclaimer: There are no loaded and published results here yet.
+      description: General Information
+      how_participate: How to Participate?
+      how_find_us: How to Find Us?
+      volunteers: Volunteers
+      attention: Attention!
+      opening_soon: Opening Soon!
+      start_cancelled: Nearest Start Cancelled.
+      inactivity_disclaimer_html: 'Follow the news in our <a href="%{link}" class="alert-link">Telegram channel</a>, and meanwhile come to other <a href="/" class="alert-link">our runs</a>.'
+      place: Venue
+      event_totals: Over All Time There Was
+      event_dynamics: Event Dynamics
+      live_streaming: Live Streaming
+      live_streaming_description: Results are updated in real time
+    live:
+      title: 'Live Streaming - %{event}'
+      description: 'Results of %{event} run in real time'
+      main_page: Main Page
+      live_results: Live Streaming
+      timer: Timer
+      disclaimer: Results on this page are preliminary and may be changed when verified with finished participants
+    live_results_frame:
+      position: Position
+      time: Time
+      gap: Gap
+      waiting_for_results: Waiting for results...
+      results_will_appear: Results will appear here during the run
+    card:
+      about_participation: 'Register in our Telegram bot and come Saturday morning. You can run or walk the distance. We welcome everyone regardless of age and fitness level.'
+      registration: Telegram Registration
+      about_volunteers: 'All events are free and organized by volunteers. Check available positions and also join the organizing team'
+      show: View
+      place: Venue
+      athlete: Participant
+      results_count: Runs
+      volunteering_count: Volunteering
+      totals:
+        activities: runs conducted
+        results: results recorded
+        athletes: total unique participants
+        volunteering: total volunteering sessions
+        uniq_volunteers: total unique volunteers
+    volunteering:
+      title: Volunteering Schedule | %{event} | %{date}
+      description: 'Volunteering information. Table with volunteering schedule and required positions for "%{event}" run on %{date}.'
+      closest_date: closest dates
+      acknowledgements: We'll be very grateful if you can provide volunteer assistance. You can choose an interesting and feasible activity for yourself that will allow you to express yourself, support friends, and have a great time.
+      about_roster_html: 'Below you can see the list of <em>required positions</em>, as well as see which ones are already taken.'
+      how_to_participate_html: 'To sign up, just write in our <a href="%{tg_chat_link}" target="_blank" rel="noopener">Telegram chat</a>.'
+      additional_positions: In addition, sometimes run directors decide to recruit additional volunteers - follow the news, or ask directly in the chat.
+      main_title: Volunteering Schedule
+      main_page: Main Page
+      role: Role
+      volunteer: Volunteer
+    volunteer:
+      confirm_delete: Free position %{role} (%{name})?
+  users:
+    omniauth_callbacks:
+      auth_error: Failed to sign in. Make sure you're actually registered
+    show:
+      title: Settings
+      description: 'Settings for user %{user_name}'
+      edit: Edit
+      not_specified: not specified
+      emergency_contact: Emergency Contact
+    field:
+      edit: Edit
+    edit:
+      delete_image: Delete Photo
+      delete_phone: Delete Phone %{phone}
+      add_phone_html: 'To participate in partner programs, you need to add your phone number. Phone binding and verification are done using the <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a> with the <code>/phone</code> command'
+      phone_placeholder: '+0 000 000-00-00'
+      emergency_contact: Emergency Contact
+      click_on_photo_to_change: Click on photo to change
+      personal_bests: Personal Bests
+      personal_best_10k: '10 km'
+      personal_best_half_marathon: '21.1 km'
+      personal_best_marathon: '42.2 km'
+      personal_best_format_hint: 'HH:MM:SS'
+      save: Save
+      cancel: Cancel
+      promotion_terms: Agreement with Terms
+      promotions:
+        title: Partner Programs
+        spartacus: Fan Club FANATIK SQUAD Promotion
+      disagree: Disagree
+      agree: Agree
+  going_tos:
+    create:
+      success: You've successfully marked yourself as a participant
+    destroy:
+      success: You've cancelled participation
+    form:
+      going: 'Going %{date}!'
+      cancel: 'Not going %{date}'
+      confirm_cancel: Are you sure you want to cancel participation in the nearest run?
+      going_to_event: 'If you're planning to attend the nearest run, you can mark yourself right now, then your friends will see in the profile that you're going here and, perhaps, they'll join you.'
+      already_going: 'You've marked that you're planning to come here for the nearest run. If you want to cancel your decision, you can do so at any time.'
+      reset_going_to: 'This mark will be automatically reset on the nearest Saturday.'
+  friendships:
+    button:
+      your_friend: Your Friend
+      your_mutual_friend: Your Mutual Friend
+      add_friend: Follow
+    friend:
+      going_to: 'Going to %{event}'
+      confirm_add: 'Add %{name} as friend?'
+      confirm_unfriend: 'Remove from friends?'
+    create:
+      success: 'Participant added as friend'
+      friends: 'Friends'
+      followers: 'Following'
+    destroy:
+      success: 'Participant removed from friends'
+      friends: 'Friends'
+      followers: 'Following'
+  loading: Loading...
+  notification:
+    common:
+      signature: |
+        With love,
+        S95 team.
+      not_yet: not yet
+      no_value: no
+    after_activity:
+      base: You can view the final protocol on [our website](%{activity_url}). All your results and statistics are available at [this link](%{athlete_url}).
+      result: |
+        %{first_name}, congratulations on participating in your %{number} S95 run %{event_name}.
+        You finished in %{position} place overall with a result of %{total_time}.
+        Total number of athletes who participated in the run was %{count}.
+      volunteer: |
+        %{first_name}, hello!
+        Thank you for volunteering at your %{number} S95 run %{event_name}.
+        S95 runs entirely depend on volunteer contribution, and we're very grateful for your help.
+    badge:
+      base: All your badges and results can be viewed [here](%{athlete_url}).
+      rage_expiration: |
+        Hello, %{first_name}!
+        Last Saturday you received a [Rage badge](%{badge_url}) for continuous improvement of results. Try to keep it! For this, at any next run you need to show a result faster than %{last_total_time}.
+      breaking_time_expiration: |
+        Hello, %{first_name}.
+        In a week, your [badge](%{badge_url}) for speed expires.
+        Try to keep it!
+    user:
+      new_runner: |
+        Hello, %{first_name}.
+        Last Saturday you [visited your first S95 run](%{activity_url}).
+        We hope you enjoyed everything and will come again tomorrow. We remind you that our runs are held weekly regardless of season and weather. You can run, walk, or help with organization.
+
+        See you on Saturday!
+      reunite: |
+        Hello, %{first_name}.
+
+        It seems there were several profiles in our database belonging to you (for example, you might have been entered manually at some point). The bot merged them into one automatically and your data might have been slightly updated.
+
+        Please check the data correctness and _update your QR code_ using the /qrcode command
+
+        %{full_name}
+        *Gender:* %{gender}
+        *Club:* %{club}
+        *Home Run:* %{home_event}
+        *Parkrun ID:* %{parkrun_code}
+        *5 versts ID:* %{fiveverst_code}
+        *RunPark ID:* %{runpark_code}
+
+        If you find inaccuracies, report this to the volunteers of your run or write to @vol1ura
+    volunteer_info: |
+      %{first_name}, good evening!
+
+      We're grateful that you agreed to be a volunteer tomorrow at the S95 run.
+      Please come early and dress for the weather.
+
+      *Run:* [%{event_name}](%{roster_link})
+      *Director:* %{director_info}
+      *Your Position:* %{volunteer_role}
+
+      If your circumstances have changed or you've found an inaccuracy, please inform the director or in the run chat.
+
+      Best regards,
+      S95 team
+    scanner_processing: |
+      Attention!
+      Scanner data contains errors, so result *%{position}* cannot be saved.
+      Please check position *%{position}*, as well as participant with ID *%{code}* for duplication in the protocol and scanner files.
+
