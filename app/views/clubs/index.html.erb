@@ -1,17 +1,18 @@
 <% head_info :description, t('.description') %>
-<h2><%= head_info :title, t('navbars.top.club_ratings') %></h2>
+<h1><%= head_info :title, t('navbars.top.club_ratings') %></h1>
 
 <p><%= t '.how_to_add_new_club_html', mail: ENV['INFO_EMAIL'] %></p>
 
 <div class="row mb-3">
-  <%= search_form_for @q, url: clubs_path, method: :get, html: { class: 'col-12 col-md-6 col-lg-4' } do |f| %>
+  <%= search_form_for @q, url: clubs_path, method: :get, html: { class: 'col-12 col-md-6 col-xl-4' } do |f| %>
     <div class="input-group">
       <%= f.search_field :name_i_cont, class: 'form-control', placeholder: t('.search_placeholder') %>
-      <%= button_tag type: 'submit', class: 'btn btn-outline-secondary' do %>
-        <i class="fa-solid fa-magnifying-glass text-primary"></i>
-      <% end %>
       <%= link_to clubs_path, class: 'btn btn-outline-secondary' do %>
         <i class="fa-solid fa-times"></i>
+      <% end %>
+      <%= button_tag type: 'submit', class: 'btn btn-outline-primary border-secondary' do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <%= t '.search_button' %>
       <% end %>
     </div>
   <% end %>

@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ['input'];
+  static targets = ['input', 'avatar', 'fileInput'];
 
   connect() {
     this.modal = new bootstrap.Modal(document.getElementById('promotionModal'));
@@ -21,6 +21,23 @@ export default class extends Controller {
     } else {
       this.inputTarget.classList.remove('d-none');
       input.disabled = false;
+    }
+  }
+
+  openFileDialog() {
+    if (this.hasFileInputTarget) {
+      this.fileInputTarget.click();
+    }
+  }
+
+  previewAvatar(event) {
+    const file = event.target.files[0];
+    if (file && this.hasAvatarTarget) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.avatarTarget.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 

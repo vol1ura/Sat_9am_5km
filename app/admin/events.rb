@@ -9,7 +9,7 @@ ActiveAdmin.register Event do
   config.sort_order = 'visible_order_asc'
 
   permit_params(
-    :description, :active, :place, :name, :main_picture_link, :code_name,
+    :description, :active, :place, :name, :summer_image, :winter_image, :code_name,
     :town, :visible_order, :slogan, :country_id, :latitude, :longitude, :timezone,
   )
 
@@ -44,7 +44,6 @@ ActiveAdmin.register Event do
       row :place
       row(:coordinates) { |e| "#{e.latitude},#{e.longitude}" }
       row :timezone
-      row :main_picture_link
       row :slogan
       row :visible_order
       row(:description) { |e| sanitized_text e.description }
@@ -56,12 +55,13 @@ ActiveAdmin.register Event do
   form partial: 'form'
 
   sidebar 'Инструкция', only: %i[new edit] do
-    li 'Кодовое имя должно состоять из маленьких латинских букв, можно использовать символ "_". Для паркрановских локаций
-    крайне желательно использовать то же самое имя, что было. Например, angarskieprudy - Ангарские Пруды.'
+    li 'Кодовое имя должно состоять из маленьких латинских букв, можно использовать символ "_".
+    Например, angarskie_prudy - Ангарские Пруды.'
     li 'В поле Местонахождение должно быть описание как найти мероприятие. Этот текст появится в блоке Как нас найти?
     на странице мероприятия. Желательно добавить 2-4 предложения.'
-    li 'Ссылка на баннер может быть как в виде url на внешнюю картинку, так и в виде указания относительного пути в ассетах.
-    Крайне желательно использовать формат webp, привести к размеру 2800х1060 пикселей и сжать до 200-300кб.'
+    li 'Изображения должны быть в формате jpg, png или webp (предпочтительно webp)
+    размером не менее 2800х1060 пикселей и весом не менее 150 Кб (в идеале ~400 Кб), но не более 5 Мб.
+    Если зимнее изображение не загружено, то всё время будет отображаться летнее изображение.'
     li 'В поле Девиз прописывается короткое ёмкое описание мероприятия, которое будет отображаться на главной странице.'
     li 'Вес в ленте - числовое значение, чем оно больше, тем ниже событие будет расположено в ленте на главной странице.'
   end
@@ -73,7 +73,19 @@ ActiveAdmin.register Event do
     end
   end
 
-  sidebar 'Предпросмотр', only: :show do
-    image_tag resource.main_picture_link, class: 'img-badge', alt: resource.place if resource.main_picture_link
+  sidebar 'Летнее изображение', only: :show, if: proc { resource.summer_image.attached? } do
+    image_tag resource.summer_image.variant(:thumb), class: 'img-badge', alt: resource.place
+  end
+
+  sidebar 'Зимнее изображение', only: :show, if: proc { resource.winter_image.attached? } do
+    image_tag resource.winter_image.variant(:thumb), class: 'img-badge', alt: resource.place
+  end
+
+  action_item :analytics, only: :show, if: proc { can? :read, Event, id: resource.id } do
+    link_to t('admin.events.analytics.title'), analytics_admin_event_path(resource)
+  end
+
+  member_action :analytics, method: :get, if: proc { can? :read, Event, id: resource.id } do
+    @page_title = t '.title'
   end
 end

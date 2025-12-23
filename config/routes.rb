@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get :dashboard, on: :collection
   end
   scope path: 'athletes' do
+    get ':code/best_result', to: 'athletes#best_result', defaults: { format: :json }
     resources :duels, only: %i[index show] do
       get :protocol, on: :collection
     end
@@ -39,7 +40,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :volunteers, only: %i[new edit create update]
+  resources :volunteers, only: %i[new edit create update destroy]
   resources :badges, only: %i[index show]
   resources :clubs, only: %i[index show] do
     get :search, on: :collection
@@ -57,6 +58,7 @@ Rails.application.routes.draw do
   resources :articles, only: %i[index show], param: :page
 
   resource :user, only: %i[show edit update]
+  resource :cookie_consent, only: :create
   resolve('User') { [:user] }
 
   ActiveAdmin.routes(self)

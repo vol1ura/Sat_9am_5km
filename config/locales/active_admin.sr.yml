@@ -1,0 +1,340 @@
+sr:
+  admin:
+    athletes:
+      results:
+        title: Svi rezultati
+      volunteering:
+        title: Objavljeno volontiranje
+      trophies:
+        title: Sva dostignuća
+      destroy:
+        successfully_deleted: 'Uspešno obrisano %{obj}'
+        cannot_delete_registered: 'Operacija poništena. Ne možete obrisati registrovanog učesnika!'
+        cannot_delete_participant: 'Operacija poništena. Ne možete obrisati učesnika koji ima rezultate!'
+    utilities:
+      reports:
+        task_queued: 'Zadatak za kreiranje fajla je postavljen u red. Očekujte poruku u Telegram-u.'
+        event_not_selected: Merejment nije izabran
+        params_not_selected: Događaj ili uloga nisu izabrani
+      cache:
+        clear_success: 'Keš uspešno očišćen!'
+        clear_failed: 'Otkazano! Keš je nedavno već bio očišćen. Pokušajte ponovo kasnije.'
+      award_funrun_badge:
+        performing: 'Procedura nagrađivanja je pokrenuta, to će potrajati neko vreme. Osvežite stranicu kasnije da vidite rezultate.'
+      stats:
+        title: Statistika
+        month: Mesec
+        activities_count: Trčanja
+        volunteers:
+          title: Dinamika volontera za poslednje 12 meseci
+          count: Volontera
+          avg_count: Srednje broj volontera
+          newbies_count: Novih volontera
+        results:
+          title: Dinamika učesnika za poslednje 12 meseci
+          count: Učesnika
+          avg_count: Srednje broj učesnika
+          newbies_count: Novih učesnika
+    activities:
+      create: &upload_notices
+        success_upload: 'Kreirani zadaci za učitavanje podataka. U zavisnosti od broja učesnika koji nedostaju u bazi, prikupljanje informacija može potrajati neko vreme. Osvežite stranicu za 5-15 sekundi.'
+        failed_upload: 'Greška! Nije moguće obraditi neke datoteke. Proverite format - samo CSV je dozvoljen.'
+        bad_timer_format: 'Greška datoteku tajmera: %{message}. Proverite da li su pomešane datoteke sa skenera i tajmera.'
+        bad_data: 'Greška u validaciji podataka u priloženim datotekama. Proverite njihovu ispravnost i pokušajte ponovo.'
+        bad_files: 'Greška pri obradi datoteka. Možda pokušavate da učitate datoteku sa tajmerom umesto datoteke sa skenerom, ili su datoteke oštećene. Proverite njihovu ispravnost i pokušajte ponovo.'
+      update:
+        <<: *upload_notices
+      destroy:
+        forbidden_for_published: 'Brisanje objavljenog protokola je zabranjeno! Kontaktirajte administratore.'
+      publish:
+        confirm: Uverite se da protokol ne sadrži greške. Objaviti ga na sajtu?
+        successfully_published: Protokol je uspešno objavljen na sajtu
+        empty_protocol: Nema rezultata u protokolu
+        incorrect_protocol: Protokol sadrži greške. Molimo ispravite ih pre objavljivanja
+        has_doubled_results: 'Neke učesnike već imaju objavljene rezultate u drugim lokacijama u ovaj dan.'
+      toggle_mode:
+        auto:
+          confirm: 'Da li želite da pređete u automatski režim? U tom režimu će biti omogućeno učitavanje podataka iz mobilne aplikacije'
+          success: 'Automatski režim je aktiviran. Skenirajte QR kod pomoću aplikacije Volontir S95'
+        manual:
+          confirm: 'Da li želite da pređete u režim ručnog uređivanja? Uklonjeni će biti podaci za učitavanje'
+          success: 'Režim ručnog uređivanja je aktiviran. Sada možete da uređujete i objavljujete protokol'
+    contacts:
+      index:
+        title: 'Kontakti %{event_name}'
+    events:
+      analytics:
+        title: Analitika
+    results:
+      destroy:
+        result_destroyed: 'Pozicija #%{position} je uklonjena.'
+    volunteering_positions:
+      index:
+        title: 'Volonterske pozicije %{event_name}'
+      create:
+        successful: 'Pozicija je uspešno kreirana'
+      update:
+        successful: 'Pozicija je uspešno ažurirana'
+    volunteers:
+      index:
+        title: 'Editor volontera %{date}'
+      create:
+        successful: 'Volontiranje uspešno dodato'
+      update:
+        successful: 'Podaci o volonteru %{volunteer_name} uspešno ažurirani'
+    permissions: Ovlašćenja
+  results:
+    explanation:
+      actions:
+        title: Objašnjenja
+        items:
+          - 'Ukloniti - ukloniće ceo red.'
+          - 'Ukloniti 🆙 - uklonite presek sa ponovnim brojanjem sledećih pozicija (pomeraju se na jednu poziciju naviše).'
+          - 'Ukloniti 🕑 - Uklanja vreme u redu, zamenjujući njega i sve naredne vremenom iz sledećeg reda. Poslednji učesnik će ostati bez rezultata.'
+          - 'Ukloniti 🏃 - uklanja učesnika iz reda, zamenjujući njega i sve naredne učesnike učesnikom iz sledećeg reda. To jest, svi učesnici se pomeraju za jednu poziciju, počevši od uklonjenog učesnika.'
+          - 'Resetovati 🏃 - resetuje učesnika. U protokolu će pisati Nepoznat.'
+          - 'Dodati 🔝 - umeće novi rezultat pre odabranog reda.'
+      batch_actions:
+        title: Grupne operacije
+        items:
+          - 'Ukloniti - obriše red bez ponovnog brojanja pozicija'
+          - 'Promeni vreme - promeni vreme za odabrane rezultate'
+      important:
+        title: Pažnja!
+        items:
+          - 'Grupovno brisanje rezultata je moguće samo za neobjavljene rezultate. Nakon objavljivanja, svaka promena se vrši sa velikom pažnjom.'
+          - 'Ako se učesnik prikaže kao "Nepoznat", to znači da nije moguće automatski popuniti njegovo ime. Kliknite na Nepoznat i koristite sajt parkrun da nađete ime prema ID-u.'
+          - 'Ako se učesnik prikaže kao "BEZ TOKENA (kreirati)", to znači da nije skeniran. Moguće je da je ta osoba već u bazi i da nije potrebno kreirati novi unos - kliknite na rezultat i u otvorenom obrascu unesite parkrun ID.'
+  active_admin:
+    dashboard: Kontrolna tabla
+    dashboard_welcome:
+      call_to_action: 'U delu Trčanja možete učitati podatke sa skenera i tajmera (dugme Kreirati Trčanje). Sva funkcije su vidljive i dostupne samo korisnicima sa pravima administratora. Obratite se njima putem telegram-čata za podešavanje vaših prava.'
+      info: Informacija
+      latest_activities: 'Nedavno kreirana trčanja'
+      upcoming_activities: 'Predstojeća trčanja'
+      change_log: Ažuriranja
+    utilities: Alati
+    view: Pregled
+    edit: Uredi
+    delete: Obriši
+    delete_confirmation: "Da li ste sigurni da želite da obrišete ovo?"
+    new_model: "Kreiraj %{model}"
+    edit_model: "Uredi %{model}"
+    delete_model: "Obriši %{model}"
+    details: "%{model} detalji"
+    cancel: "Otkaži"
+    empty: "Prazno"
+    previous: "Preth."
+    next: "Sledeće"
+    download: "Preuzimanje:"
+    has_many_new: "Dodaj %{model}"
+    has_many_delete: "Obriši"
+    has_many_remove: "Ukloni"
+    filters:
+      buttons:
+        filter: "Filtriraj"
+        clear: "Očisti"
+      predicates:
+        contains: "Sadrži"
+        equals: "Jednako"
+        starts_with: "Počinje sa"
+        ends_with: "Završava sa"
+        greater_than: "veće od"
+        less_than: "manje od"
+        from: "Od"
+        to: "Do"
+    search_status:
+      headline: "Status pretrage:"
+      current_scope: "Opseg:"
+      current_filters: "Trenutni filter:"
+      no_current_filters: "Nijedan"
+    status_tag:
+      "yes": "Da"
+      "no": "Ne"
+      "unset": "Nije postavljeno"
+    main_content: "Kreirajte %{model}#main_content za prikaz sadržaja."
+    logout: "Odjavi se"
+    powered_by: "Pokreće %{active_admin} %{version}"
+    sidebars:
+      filters: "Filteri"
+      search_status: "Status pretrage"
+    pagination:
+      per_page: 'po stranici'
+      empty: "%{model} nije pronađeno"
+      one: "Rezultat: <b>1</b> %{model}"
+      one_page: "Rezultat: <b>%{n}</b> %{model}"
+      multiple: "Rezultat: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> od <b>%{total}</b>"
+      multiple_without_total: "Rezultat: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
+      entry:
+        one: "zapis"
+        few: "zapisa"
+        many: "zapisa"
+        other: "zapisa"
+    any: "Bilo koji"
+    blank_slate:
+      content: "Još uvek nema %{resource_name}."
+      link: "Kreiraj"
+    dropdown_actions:
+      button_label: "Operacije"
+    batch_actions:
+      button_label: "Grupne operacije"
+      default_confirmation: "Da li ste sigurni da želite to da uradite?"
+      delete_confirmation: "Da li ste sigurni da želite da obrišete %{plural_model}?"
+      succesfully_destroyed:
+        one: "Uspešno obrisano: 1 %{model}"
+        few: "Uspešno obrisano: %{count} %{plural_model}"
+        many: "Uspešno obrisano: %{count} %{plural_model}"
+        other: "Uspešno obrisano: %{count} %{plural_model}"
+      successfully_moved_time: "Promena vremena (%{sign}%{delta}sek) za %{count} rezultata"
+      selection_toggle_explanation: "(Označi sve / Deselektuj)"
+      action_label: "%{title}"
+      labels:
+        destroy: Obriši
+        reunite: Spoji
+        gender_set: Postavi pol
+        change_roles: Promeni uloge
+        move_time: Promeni vreme
+    comments:
+      created_at: "Datum kreiranja"
+      resource_type: "Tip resursa"
+      author_type: "Tip autora"
+      body: "Tekst"
+      author: "Autor"
+      add: "Dodaj Komentar"
+      delete: "Obriši Komentar"
+      delete_confirmation: "Da li ste sigurni da želite da obrišete ovaj komentar?"
+      resource: "Resurs"
+      no_comments_yet: "Još uvek nema komentara."
+      author_missing: "Anonimac"
+      title_content: "Komentari (%{count})"
+      errors:
+        empty_text: "Komentar nije sačuvan, tekst ne sme biti prazan."
+    athletes:
+      confirm_reunite: "Da li ste sigurni da želite da spojite ove učesnike u jednog?"
+      successful_reunite: "Učesnici su spojeni."
+      failed_reunite: "Operacija nije uspela. Učesnici ne mogu biti spojeni."
+      confirm_gender_set: "Postaviti pol izabranim učesnicima?"
+      successful_gender_set: "Uspešno promenjen pol."
+      gender_set_failed: "Neuspelo promena pola."
+    results:
+      cannot_link_athlete: 'Učesnik sa navedenim ID nije pronađen. Proverite brojeve ili prvo kreirajte takvog učesnika.'
+      cannot_move_result: 'Greška! Proverite ispravnost pozicija.'
+      drop_time_failed: 'Neuspelo brisanje vremena. Osvežite stranicu i pokušajte ponovo.'
+      drop_athlete_failed: 'Neuspelo brisanje učesnika. Osvežite stranicu i pokušajte ponovo.'
+      reset_athlete_failed: 'Neuspelo resetovanje učesnika. Osvežite stranicu i pokušajte ponovo.'
+      insert_result_failed: 'Neuspelo dodavanje reda. Osvežite stranicu i pokušajte ponovo.'
+      result_successfully_appended: 'Pozicija №%{position} uspešno dodata u protokol.'
+      result_successfully_deleted: 'Odsek je uspešno uklonjen, pozicije su preračunate.'
+      batch_destroy_confirm: 'Da li ste sigurni da želite da obrišete izabrane rezultate?'
+      batch_move_time_confirm: 'Da li ste sigurni da želite da promenite vreme za izabrane rezultate?'
+    newsletters:
+      notified: 'Na vaš Telegram je poslat uzorak biltena'
+    users:
+      confirm_change_roles: 'Da li ste sigurni da želite da promenite uloge izabranim korisnicima?'
+      successful_roles_changed: 'Uspšeno postavljene uloge.'
+    page:
+      index:
+        utilities: Alati
+        analytics:
+          title: Analitika
+        cache_clear:
+          title: 'Očisti keš'
+          button: 'Očisti'
+          confirm: 'Da li ste sigurni da želite da očistite keš?'
+        badges:
+          title: Značke
+
+    devise:
+      username:
+        title: "Korisničko ime"
+      email:
+        title: "Elektronska pošta"
+      subdomain:
+        title: "Poddomen"
+      password:
+        title: "Lozinka"
+      password_confirmation:
+        title: "Potvrda lozinke"
+      sign_up:
+        title: "Registruj se"
+        submit: "Registruj se"
+      login:
+        title: "Prijavi se"
+        submit: "Prijavi se"
+      reset_password:
+        title: "Zaboravili ste lozinku?"
+        submit: "Resetuj lozinku"
+      change_password:
+        title: "Promena lozinke"
+        submit: "Promeni lozinku"
+      unlock:
+        title: "Ponovo pošalji instrukcije za otključavanje"
+        submit: "Ponovo pošalji instrukcije za otključavanje"
+      resend_confirmation_instructions:
+        title: "Ponovo pošalji mejl za aktivaciju"
+        submit: "Ponovo pošalji mejl za aktivaciju"
+      links:
+        sign_up: "Registruj se"
+        sign_in: "Prijavi se"
+        forgot_your_password: "Zaboravili ste lozinku?"
+        sign_in_with_omniauth_provider: "Prijavite se preko %{provider}"
+        resend_unlock_instructions: "Ponovo pošalji instrukcije za otključavanje"
+        resend_confirmation_instructions: "Ponovo pošalji instrukcije za potvrdu"
+    unsupported_browser:
+      headline: "Nažalost, ovaj sajt ne podržava stare verzije Internet Explorer-a počevši od verzije IE 8"
+      recommendation: "Preporučujemo da ažurirate verziju vašeg pregledača (<a href=\"http://windows.microsoft.com/ie\">Internet Explorer</a>, <a href=\"https://chrome.google.com/\">Google Chrome</a>, ili <a href=\"https://mozilla.org/firefox/\">Firefox</a>)."
+      turn_off_compatibility_view: "Ako koristite IE 9 ili noviji, proverite da li ste isključili opciju <a href=\"https://support.microsoft.com/ru-ru/help/17471\">\"Prikaz u režimu kompatibilnosti\"</a>."
+    access_denied:
+      message: "Nemate prava za izvršenje ovog postupka ili za pregled traženog resursa."
+    index_list:
+      table: "Tabela"
+      block: "Lista"
+      grid: "Grid"
+      blog: "Blog"
+    resources:
+      volunteer:
+        new_model: Dodaj volontiranje
+        edit_model: Izmeni volontiranje
+        delete_model: Obriši volontiranje
+      athlete:
+        new_model: Kreiraj učesnika
+        edit_model: Izmeni učesnika
+        delete_model: Obriši učesnika
+      user:
+        new_model: Kreiraj korisnika
+        edit_model: Izmeni korisnika
+      badge:
+        new_model: Kreiraj nagradu
+        edit_model: Izmeni nagradu
+        delete_model: Obriši nagradu
+      newsletter:
+        new_model: Napravite bilten
+        edit_model: Uredi
+        delete_model: Izbriši
+      volunteering_position:
+        new_model: Dodaj poziciju
+        edit_model: Izmeni poziciju
+        delete_model: Obriši poziciju
+    scopes:
+      all: Svi
+      admin: Admini
+      super_admin: Glavni admini
+      supervisors: Nadzornici
+      published: Objavljeno
+      unpublished: Neobjavljeno
+      duplicates: Duplikati?
+      active: Aktivno
+      inactive: Neaktivno
+
+  ransack:
+    predicates:
+      cont: sadrži
+      eq: jednako
+      start: počinje sa
+      end: završava sa
+      gt: veće od
+      lt: manje od
+
+  formtastic:
+    create: 'Kreiraj'
+    update: 'Ažuriranje'

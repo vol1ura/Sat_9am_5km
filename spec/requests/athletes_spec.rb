@@ -40,4 +40,88 @@ RSpec.describe '/athletes' do
       expect(response).to be_successful
     end
   end
+
+  describe 'GET /athletes/:code/best_result' do
+    let(:athlete) { create(:athlete) }
+
+    let!(:old_result) do
+      create(
+        :result,
+        athlete: athlete,
+        total_time: Result.total_time(0, 17, 0),
+        activity_params: { date: Date.new(2022, 1, 1) },
+      )
+    end
+
+    let!(:recent_result) do
+      create(
+        :result,
+        athlete: athlete,
+        total_time: Result.total_time(0, 18, 0),
+        activity_params: { date: Date.new(2023, 6, 1) },
+      )
+    end
+
+    before do
+      create(
+        :result,
+        athlete: athlete,
+        total_time: Result.total_time(0, 20, 0),
+        activity_params: { date: Date.new(2023, 1, 1) },
+      )
+
+      get "/athletes/#{athlete.parkrun_code}/best_result", params:
+    end
+
+    context 'with valid params' do
+      let(:params) { { since_date: '2023-01-01' } }
+      let(:expected_result) do
+        {
+          'id' => athlete.id,
+          'name' => athlete.name,
+          'gender' => 'male',
+          'best_result' => {
+            'date' => recent_result.date.iso8601,
+            'position' => recent_result.position,
+            'total_time' => 18 * 60,
+          },
+        }
+      end
+
+      it 'returns the best result since given date in JSON' do
+        expect(response).to be_successful
+        expect(response.parsed_body['athlete']).to eq(expected_result)
+      end
+    end
+
+    context 'without since_date' do
+      let(:params) { {} }
+      let(:expected_result) do
+        {
+          'id' => athlete.id,
+          'name' => athlete.name,
+          'gender' => 'male',
+          'best_result' => {
+            'date' => old_result.date.iso8601,
+            'position' => old_result.position,
+            'total_time' => 17 * 60,
+          },
+        }
+      end
+
+      it 'returns the best result since the beginning in JSON' do
+        expect(response).to be_successful
+        expect(response.parsed_body['athlete']).to eq(expected_result)
+      end
+    end
+
+    context 'with invalid since_date' do
+      let(:params) { { since_date: 'invalid-date' } }
+
+      it 'returns an error with unprocessable_content status' do
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(response.parsed_body['error']).to be_present
+      end
+    end
+  end
 end

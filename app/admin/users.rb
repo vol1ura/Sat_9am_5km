@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  actions :all, except: %i[new create destroy]
+  actions :all, except: %i[new create]
 
   menu if: proc { current_user.admin? }
 
@@ -57,7 +57,7 @@ ActiveAdmin.register User do
   end
 
   action_item :permissions, only: %i[show edit], if: proc { current_user.admin? } do
-    link_to 'Полномочия', admin_user_permissions_path(resource)
+    link_to t('admin.permissions'), admin_user_permissions_path(resource)
   end
 
   batch_action(

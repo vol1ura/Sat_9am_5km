@@ -1,0 +1,11 @@
+<%= form_with(url: admin_utilities_export_user_registrations_csv_path) do |f| %>
+  <div style="margin-bottom: 12px">
+    <%= f.label :from_date, 'Начало отчёта' %>
+    <%= f.date_field :from_date, style: 'width: 150px;', max: Time.zone.today %>
+  </div>
+  <div style="margin-bottom: 12px">
+    <%= f.label :till_date, 'Конец отчёта' %>
+    <%= f.date_field :till_date, style: 'width: 150px;', max: Time.zone.today %>
+  </div>
+  <%= f.submit 'Запросить', data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
+<% end %>

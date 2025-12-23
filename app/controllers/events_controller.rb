@@ -5,7 +5,9 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    @events = @events.in_country(top_level_domain) unless params[:all]
+    return if params[:all]
+
+    @events = @events.in_country(top_level_domain).includes(:summer_image_attachment, :winter_image_attachment)
   end
 
   def search

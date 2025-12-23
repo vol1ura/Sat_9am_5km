@@ -7,7 +7,7 @@
 
 <div class="d-flex">
   <div class="flex-grow-1">
-    <h2 class="h1 mt-2 text-break"><%= head_info :title, athlete_name %></h2>
+    <h1 class="mt-2 text-break"><%= head_info :title, athlete_name %></h1>
     <% if @athlete.going_to_event? %>
       <div class="badge bg-success mb-2">
         <%= t 'friendships.friend.going_to', event: @athlete.going_to_event.name %>
@@ -132,19 +132,19 @@
   </div>
   <% if @total_results.positive? %>
     <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-totalEvents">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
-            <span class="badge text-light bg-primary me-3"><%= @total_events_count %></span>
-            <%= t '.total_events' %>
-          </button>
-        </h2>
-        <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordion-personal-statistics">
-          <div class="accordion-body">
-            <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-              <%= render '/loading_indicator' %>
-            <% end %>
-          </div>
+      <h2 class="accordion-header" id="flush-totalEvents">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
+          <span class="badge text-light bg-primary me-3"><%= @total_events_count %></span>
+          <%= t '.total_events' %>
+        </button>
+      </h2>
+      <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordion-personal-statistics">
+        <div class="accordion-body">
+          <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+            <%= render '/loading_indicator' %>
+          <% end %>
         </div>
+      </div>
     </div>
 
     <div class="accordion-item">
@@ -306,7 +306,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="minute-bingo-modal-label"><%= t '.mission_minute_bingo' %></h1>
+        <h3 class="modal-title fs-5" id="minute-bingo-modal-label"><%= t '.mission_minute_bingo' %></h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

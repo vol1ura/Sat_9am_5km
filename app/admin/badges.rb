@@ -19,6 +19,7 @@ ActiveAdmin.register Badge do
   index download_links: false do
     selectable_column
     column(:kind) { |b| kind_of_badge b }
+    column(:country) { |b| t("country.#{b.country_code}") if b.country_code }
     column :name
     column :received_date
     column(:conditions) { |b| sanitized_text b.conditions }

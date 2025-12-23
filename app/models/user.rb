@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   AVAILABLE_PROMOTIONS = %w[spartacus].freeze
 
-  audited only: %i[email role first_name last_name telegram_user promotions]
+  audited only: %i[email role first_name last_name telegram_user promotions policy_accepted]
   has_associated_audits
 
   # Include default devise modules. Others available are:
@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_many :permissions, dependent: :destroy
 
   has_one_attached :image do |attachable|
-    attachable.variant :web, resize_to_fill: [200, 200], preprocessed: true
+    attachable.variant :web, resize_to_fill: [200, 200]
   end
 
   validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+(-[[:alpha:]]{2,})?\z/ }

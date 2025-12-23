@@ -5,7 +5,7 @@ RSpec.describe NotificationMailer do
     let(:mail) { described_class.with(message: 'test message', user_id: 1).feedback }
 
     it 'renders the mail' do
-      expect(mail.subject).to eq('Новый отзыв на сайте S95')
+      expect(mail.subject).to eq('Новый отзыв на сайте С95')
       expect(mail.body).to match('User ID: 1').and match('test message')
       expect(mail.to).to eq(described_class::RECIPIENTS)
     end

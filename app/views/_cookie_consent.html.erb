@@ -1,0 +1,9 @@
+<div id="cookie-consent" class="position-fixed bottom-0 start-0 end-0 bg-dark text-white p-3 mx-3 mb-3 rounded-3 border-secondary border z-2">
+  <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+    <p class="mb-0 small">
+      <%= t('cookie_consent.message') %>
+      <%= link_to t('cookie_consent.policy_link'), page_path(page: 'privacy-policy'), class: 'text-info' %>
+    </p>
+    <%= button_to t('cookie_consent.accept_button'), cookie_consent_path, class: 'btn btn-light btn-sm flex-shrink-0' %>
+  </div>
+</div>

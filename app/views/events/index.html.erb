@@ -2,7 +2,7 @@
 
 <div data-controller="map">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2><%= t '.our_events' %></h2>
+    <h1><%= t '.our_events' %></h1>
     <div class="btn-group">
       <button data-action="map#showList" data-map-target="listButton" class="btn btn-primary"><%= t '.list' %></button>
       <button data-action="map#showMap" data-map-target="mapButton" class="btn btn-outline-primary"><%= t '.map' %></button>
@@ -15,7 +15,7 @@
         <div class="col">
           <%= tag.div class: ['card-with-border', event.active ? 'border-primary' : 'border-danger'] do %>
             <div class="overflow-hidden card-img-top">
-              <%= event_main_image_tag event, class: 'img-fluid rounded-top img-scaled', alt: event.name, loading: 'lazy' %>
+              <%= event_main_image_tag event, variant: :thumb, class: 'img-fluid rounded-top img-scaled', alt: event.name, loading: 'lazy' %>
             </div>
             <%= tag.div class: ['position-absolute', 'top-0', 'bg-gradient', 'bg-opacity-25', 'w-100', 'px-3', 'card-img-top', event.active ? 'bg-dark' : 'bg-danger'] do %>
               <section class="fs-4 text-light"><%= event.name %></section>
@@ -37,7 +37,7 @@
 </div>
 
 <% content_for :head do %>
-  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV['YANDEX_MAPS_API_KEY'] %>&lang=<%= I18n.locale == :rs ? 'en_RU' : 'ru_RU' %>&onload=initYandexMaps" async defer></script>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV['YANDEX_MAPS_API_KEY'] %>&lang=<%= I18n.locale == :sr ? 'en_RU' : 'ru_RU' %>&onload=initYandexMaps" async defer></script>
   <script>
     window.initYandexMaps = function() {
       if (window.ymaps) {

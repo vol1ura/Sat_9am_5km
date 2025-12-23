@@ -6,9 +6,19 @@ ActiveAdmin.register_page 'Utilities' do
   content title: proc { t '.utilities' } do
     tabs do
       tab 'Отчёты' do
-        panel 'Выгрузка данных по выбранному мероприятию' do
-          para 'Будет сформирован CSV файл с отчётом по всем результатам и волонтёрствам на выбранном мероприятии.'
-          render partial: 'event_csv_export_form'
+        panel 'Выгрузка результатов и волонтёрств' do
+          para 'Будет сформирован CSV файл по участникам с количеством результатов и волонтёрств.'
+          render partial: 'event_csv_export_form', locals: { url: admin_utilities_export_event_csv_path }
+        end
+
+        panel 'Выгрузка волонтёрских позиций' do
+          para 'Будет сформирован CSV файл по участникам и волонтёрским позициям.'
+          render partial: 'event_csv_export_form', locals: { url: admin_utilities_export_volunteers_roles_csv_path }
+        end
+
+        panel 'Статистика регистраций пользователей' do
+          para 'Будет сформирован CSV файл с ежемесячной статистикой.'
+          render partial: 'user_registrations_export_form'
         end
       end
 
@@ -110,11 +120,41 @@ ActiveAdmin.register_page 'Utilities' do
 
   page_action :export_event_csv, method: :post do
     if (event_id = params[:event_id]).present?
-      EventAthletesCsvExportJob.perform_later(event_id.to_i, current_user.id)
+      CsvReports::EventAthletesJob.perform_later(
+        event_id.to_i,
+        current_user.id,
+        params[:from_date].presence,
+        params[:till_date].presence,
+      )
       flash[:notice] = t '.reports.task_queued'
     else
       flash[:alert] = t '.reports.event_not_selected'
     end
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_volunteers_roles_csv, method: :post do
+    if (event_id = params[:event_id]).present?
+      CsvReports::VolunteersRolesJob.perform_later(
+        event_id.to_i,
+        current_user.id,
+        params[:from_date].presence,
+        params[:till_date].presence,
+      )
+      flash[:notice] = t '.reports.task_queued'
+    else
+      flash[:alert] = t '.reports.event_not_selected'
+    end
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_user_registrations_csv, method: :post do
+    CsvReports::UserRegistrationsJob.perform_later(
+      current_user.id,
+      params[:from_date].presence,
+      params[:till_date].presence,
+    )
+    flash[:notice] = t '.reports.task_queued'
     redirect_to admin_utilities_path
   end
 end

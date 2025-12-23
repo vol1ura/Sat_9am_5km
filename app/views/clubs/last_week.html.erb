@@ -16,7 +16,7 @@
   </ol>
 </nav>
 
-<h2><%= t '.participants_activity' %></h2>
+<h1><%= t '.participants_activity' %></h1>
 
 <p>
   <%= t '.description', club: @club.name %>
@@ -51,14 +51,14 @@
       <tbody class="table-group-divider">
         <% @activities_with_results.each do |activity| %>
           <tr>
-            <th colspan="3" class="table-warning table-active">
+            <th colspan="3" class="table-active bg-secondary-subtle">
               <%= link_to activity.event_name, activity_path(activity) %>
             </th>
           </tr>
           <% activity.results.includes(:athlete).where(athlete: { club: @club }).order(:position).each do |result| %>
             <tr>
               <td><%= result.position %></td>
-              <td><%= link_to result.athlete.name, athlete_path(result.athlete) %></td>
+              <td><%= link_to result.athlete.name, result.athlete %></td>
               <td><%= human_result_time result.total_time %></td>
             </tr>
           <% end %>

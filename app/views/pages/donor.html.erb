@@ -1,6 +1,6 @@
 <% head_info :title, 'Бег, спасающий жизни - благотворительное мероприятие и забег в Кузьминках' %>
 <% head_info :description, 'Ежегодное мероприятие в Кузьминках, которое проводится в рамках пробежки С95. Главная цель – информирование участников о донорстве костного мозга и вступление участников в регистр потенциальных доноров.' %>
-<% head_info :og_image, '/images/donor.webp' %>
+<% head_info :og_image, image_url('/images/donor.webp') %>
 
 <!-- Hero Section -->
 <div class="mb-4 mb-md-5 mt-n3" style="background: linear-gradient(135deg, #2a2951 0%, #a6e9d5 100%); padding: 60px 0; position: relative; overflow: hidden;">
@@ -19,10 +19,10 @@
           и вступление участников в регистр потенциальных доноров
         </p>
         <div class="mt-4 d-flex gap-3 flex-wrap justify-content-center">
-          <span class="badge bg-light text-dark" style="font-size: 1rem;">
+          <span class="badge bg-body-secondary text-body" style="font-size: 1rem;">
             <i class="fas fa-calendar-alt text-info"></i> 6 сентября 2025
           </span>
-          <a class="badge bg-light text-dark text-decoration-none" style="font-size: 1rem;" href="https://yandex.ru/maps/-/CHh4UY2G" target="_blank">
+          <a class="badge bg-body-secondary text-body text-decoration-none" style="font-size: 1rem;" href="https://yandex.ru/maps/-/CHh4UY2G" target="_blank">
             <i class="fas fa-map-marker-alt text-success"></i> Парк Кузьминки
           </a>
         </div>
@@ -93,7 +93,7 @@
       <!-- Program Timeline -->
       <div class="card shadow mb-4 mb-md-5" style="border-radius: 20px; background: linear-gradient(145deg,rgb(244, 243, 250) 0%, #ffffff 100%);">
         <div class="card-body p-4">
-          <h2 class="h3 mb-4 text-center text-dark">
+          <h2 class="h3 mb-4 text-center text-body">
             <i class="fas fa-clock text-primary me-2"></i>
             Программа мероприятия
           </h2>
@@ -210,7 +210,7 @@
             <div class="d-flex align-items-center">
               <i class="fas fa-qrcode text-warning me-3" style="font-size: 2rem;"></i>
               <div>
-                <h5 class="mb-1 text-dark">После финиша</h5>
+                <h5 class="mb-1 text-body">После финиша</h5>
                 <p class="mb-0">Предъявите волонтёру QR-код, полученный в боте. Так ваше имя будет в списке финишёров и вы увидите свой результат.</p>
               </div>
             </div>
@@ -270,9 +270,9 @@
 
             <div class="col-12">
               <div class="d-flex align-items-center justify-content-center p-3 rounded shadow-sm" style="background: linear-gradient(135deg, #fecba1 0%, #ffd54f 100%); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                <i class="fas fa-balance-scale text-dark me-3" style="font-size: 1.5rem;"></i>
+                <i class="fas fa-balance-scale text-body me-3" style="font-size: 1.5rem;"></i>
                 <div class="text-center">
-                  <%= link_to 'Юридическая фирма White Stone', 'https://www.wst.one/', target: '_blank', class: 'text-dark fw-bold text-decoration-none stretched-link' %>
+                  <%= link_to 'Юридическая фирма White Stone', '/clubs/214', class: 'text-body fw-bold text-decoration-none stretched-link' %>
                   <br><small class="text-muted">Информационная и юридическая поддержка</small>
                 </div>
               </div>
@@ -319,10 +319,10 @@
         <div class="card-body p-0">
           <div class="p-3 text-center text-white position-relative" style="background: linear-gradient(135deg, #d63384 0%, #rgba(214, 51, 132, 0.95) 50%, #rgba(214, 51, 132, 0.9) 100%); overflow: hidden;">
             <div class="position-relative" style="z-index: 2;">
-              <h2 class="h2 mb-2 fw-bold text-dark">
+              <h2 class="h2 mb-2 fw-bold text-body">
                 Результаты в прошлые годы
               </h2>
-              <p class="mb-0 lead text-dark">Бег, спасающий жизни</p>
+              <p class="mb-0 lead text-body">Бег, спасающий жизни</p>
             </div>
           </div>
 

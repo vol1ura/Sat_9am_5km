@@ -1,7 +1,16 @@
 import { Controller } from '@hotwired/stimulus';
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
-import { rsLocale } from 'charts/rs';
+import { srLocale } from 'charts/sr';
+
+const translations = {
+  ru: {
+    recentVolunteering: 'Недавние волонтёрства',
+  },
+  sr: {
+    recentVolunteering: 'Nedavno volontiranje',
+  }
+};
 
 // Connects to data-controller="volunteer"
 export default class extends Controller {
@@ -21,10 +30,10 @@ export default class extends Controller {
 
   #renderVolunteeringChart() {
     try {
-      const currentLocale = document.documentElement.lang === 'rs' ? rsLocale : ruLocale;
+      const currentLocale = document.documentElement.lang === 'sr' ? srLocale : ruLocale;
       this.volunteeringChart = new ApexCharts(
         this.chartTarget,
-        this.#chartOptions('Недавние волонтёрства', currentLocale.options.shortMonths)
+        this.#chartOptions(translations[currentLocale.name].recentVolunteering, currentLocale.options.shortMonths)
       );
       this.volunteeringChart.render();
     } catch (error) {
@@ -55,12 +64,15 @@ export default class extends Controller {
       });
     });
 
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+
     return {
       series,
       chart: {
         type: 'bar',
         height: 350,
         stacked: true,
+        background: 'transparent',
         toolbar: {
           show: false
         },
@@ -103,7 +115,8 @@ export default class extends Controller {
         offsetY: 40
       },
       theme: {
-        palette: 'palette2'
+        mode: isDark ? 'dark' : 'light',
+        palette: isDark ? 'palette5' : 'palette2'
       },
       fill: {
         opacity: 0.85

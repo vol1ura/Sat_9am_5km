@@ -41,9 +41,14 @@ active_admin_form_for [:admin, resource] do |f|
     input(
       :image,
       as: :file,
-      input_html: { accept: 'image/png' },
+      input_html: { accept: 'image/webp,image/png' },
       required: true,
-      hint: (image_tag f.object.image.variant(:thumb), class: 'img-hint' if f.object.image.attached?),
+      hint:
+        if f.object.image.attached? && f.object.image.blob.persisted?
+          image_tag f.object.image.variant(:thumb), class: 'img-hint'
+        else
+          'Поддерживаются файлы PNG и WebP, размером до 300 КБ, разрешением до 800px (по ширине и высоте)'
+        end,
     )
   end
 

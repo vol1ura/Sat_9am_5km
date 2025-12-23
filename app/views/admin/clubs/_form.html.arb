@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 active_admin_form_for [:admin, resource] do |f|
-  f.semantic_errors(*f.object.errors.attribute_names)
-
   f.inputs do
     input :country
     input :name
@@ -31,7 +29,12 @@ active_admin_form_for [:admin, resource] do |f|
       :logo,
       as: :file,
       input_html: { accept: 'image/jpeg,image/png' },
-      hint: (image_tag f.object.logo.variant(:thumb), class: 'img-hint' if f.object.logo.attached?),
+      hint:
+        if f.object.logo.attached? && f.object.logo.blob.persisted?
+          image_tag f.object.logo.variant(:thumb), class: 'img-hint'
+        else
+          'Поддерживаются файлы JPEG и PNG, размером до 300 КБ, разрешением до 900px (по ширине или высоте)'
+        end,
     )
   end
 

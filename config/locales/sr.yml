@@ -1,0 +1,1209 @@
+sr:
+  activerecord:
+    models:
+      club:
+        one: klub
+        other: Klubovi
+      event:
+        one: događaj
+        other: Događaji
+      activity:
+        one: aktivnost
+        other: Aktivnosti
+      athlete:
+        one: sportista
+        other: Sportisti
+      result:
+        one: rezultat
+        few: rezultata
+        many: rezultata
+        other: Rezultati
+      volunteer:
+        one: volonter
+        other: Volonteri
+      volunteering_position:
+        one: pozicija
+        few: pozicije
+        many: pozicija
+        other: Volonterske pozicije
+      contact:
+        one: kontakt
+        other: Kontakti
+      badge:
+        one: nagrada
+        other: Nagrade
+      newsletter:
+        one: bilten
+        other: Bilteni
+      trophy:
+        one: dostignuće
+        other: Dostignuća
+      permission:
+        one: ovlašćenje
+        other: Ovlašćenja
+      user:
+        one: korisnik
+        few: korisnika
+        many: korisnika
+        other: Korisnici
+    attributes:
+      user:
+        first_name: ime
+        last_name: prezime
+        email: e-mail
+        role: uloga
+        roles:
+          super_admin: glavni admin
+          admin: admin
+        note: napomena
+        telegram_user: telegram
+        athlete: sportista
+        password: lozinka
+        remember_me: Zapamti me
+        image: slika
+        phone: telefon
+        emergency_contact_name: ime
+        emergency_contact_phone: telefon
+        created_at: kreiran
+      permission:
+        event: događaj
+        user: korisnik
+        action: akcija
+        subject_class: klasa objekata
+      athlete:
+        name: Ime PREZIME
+        parkrun_code: parkrun ID
+        fiveverst_code: 5 verst ID
+        runpark_code: RunPark ID
+        parkzhrun_code: parkzhrun ID
+        gender: pol
+        club: klub
+        club_id: klub
+        event: domaće trčanje
+        event_id: domaće trčanje
+        going_to_event: idu u
+        male: muškarac
+        user: korisnik
+        registered: registrovan
+        id_info: ID info
+        profile: Profil sajta
+        results: Rezultati
+        volunteering: Volontiranje
+        trophies: Dostignuća
+        created_at: kreiran
+        updated_at: ažuriran
+      activity:
+        date: datum
+        published: objavljeno?
+        description: opis
+        event_name: gde?
+        correct?: ispravno?
+      club:
+        name: naziv
+        country: država
+        logo: logo
+        description: opis
+      event:
+        active: aktivan
+        country: država
+        code_name: nadimak
+        name: naziv
+        summer_image: letnja slika
+        winter_image: zimska slika
+        town: grad
+        place: 'kako pronaći?'
+        latitude: širina
+        longitude: dužina
+        coordinates: koordinate
+        timezone: zona
+        slogan: slogan
+        description: opis
+        visible_order: redosled prikaza
+        created_at: kreiran
+        updated_at: ažuriran
+      newsletter:
+        body: text
+        picture_link: link do slike
+        created_at: stvorena
+        updated_at: ažurirano
+      result:
+        position: pozicija
+        total_time: vreme
+        athlete: sportista
+        user: korisnik
+        gender: pol
+        club: klub
+      volunteer:
+        activity: trčanje
+        athlete: sportista
+        name: 'ime volontera'
+        comment: comment
+        role: uloga
+        roles: &volunteer_roles
+          director: Direktor
+          marshal: Maršal
+          timer: Tajmer
+          photograph: Fotograf
+          tokens: 'Dodela kartica pozicija'
+          scanner: Skener
+          instructor: 'Instruktor za početnike'
+          marking_maker: 'Markacija staze'
+          event_closer: Pratilac trkača
+          marking_picker: 'Sakupljač markacija'
+          cards_sorter: 'Sortiranje kartica'
+          bike_leader: 'Vodeći biciklista'
+          pacemaker: Pejsmejker
+          results_handler: 'Obrada rezultata'
+          equipment_supplier: 'Dostava opreme'
+          public_relations: 'Odnosi s javnošću'
+          warm_up: 'Zagrevanje'
+          other: 'Ostalo'
+          attendant: 'Pratilac'
+          finish_maker: 'Organizacija cilja'
+          volunteer_coordinator: 'Koordinator volontera'
+          food_maker: 'Organizacija hrane'
+          videographer: Videograf
+      volunteering_position:
+        rank: rang
+        number: broj
+        role: uloga
+        roles:
+          <<: *volunteer_roles
+      contact:
+        new_model: 'Dodaj kontakt'
+        edit_model: 'Izmeni kontakt'
+        delete_model: 'Obriši kontakt'
+        event: događaj
+        link: link
+        contact_type: 'vrsta kontakta'
+        contact_types:
+          email: E-mail
+          phone: Telefon
+          tg_channel: Telegram kanal
+          tg_chat: Telegram čet
+          vk: VKontakte
+          zen: Zen
+          instagram: Instagram
+          facebook: Facebook
+          strava: Strava
+          map_link: Link za mapu i pravac
+          parking: Parking
+      badge:
+        name: naziv
+        conditions: uslovi za dobijanje
+        image: slika
+        received_date: datum prijema
+        country: država
+        kind: vrsta
+        kinds:
+          funrun: zabavno trčanje
+          full_profile: kompletan set
+          participating: učesnik
+          home_participating: kuće su bolje
+          jubilee_participating: jubilej
+          tourist: turista
+          breaking: breaking
+          record: rekord staze
+          rage: rang
+          five_plus: pet plus
+          minute_bingo: minutni bingo
+      trophy:
+        athlete: sportista
+        date: datum prijema
+        info: dod. informacije
+        updated_at: ažuriran
+
+    errors:
+      messages:
+        record_invalid: 'Pojavile su se greške: %{errors}'
+        restrict_dependent_destroy:
+          has_one: 'Ne može se obrisati zapis jer postoji zavisnost: %{record}'
+          has_many: 'Ne može se obrisati zapis jer postoje zavisnosti: %{record}'
+      models:
+        event:
+          attributes:
+            code_name:
+              invalid: 'samo mala latinična slova i simbol "_" umesto razmaka'
+        contact:
+          attributes:
+            link:
+              invalid: 'simboli < i > su zabranjeni'
+
+  date:
+    abbr_day_names:
+    - Ne
+    - Po
+    - Ut
+    - Sr
+    - Če
+    - Pe
+    - Su
+    abbr_month_names:
+    -
+    - jan.
+    - feb.
+    - mart
+    - apr.
+    - maj
+    - jun
+    - jul
+    - avg.
+    - sep.
+    - okt.
+    - nov.
+    - dec.
+    day_names:
+    - nedelja
+    - ponedeljak
+    - utorak
+    - sreda
+    - četvrtak
+    - petak
+    - subota
+    formats:
+      default: "%d.%m.%Y"
+      long: "%-d %B %Y"
+      brief: "%-d %B"
+      short: "%-d %b %Y"
+    month_names:
+    -
+    - januar
+    - februar
+    - mart
+    - april
+    - maj
+    - jun
+    - jul
+    - avgust
+    - septembar
+    - oktobar
+    - novembar
+    - decembar
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: oko %{count} sata
+        few: oko %{count} sata
+        many: oko %{count} sati
+        other: oko %{count} sata
+      about_x_months:
+        one: oko %{count} meseca
+        few: oko %{count} meseca
+        many: oko %{count} meseci
+        other: oko %{count} meseca
+      about_x_years:
+        one: oko %{count} godine
+        few: oko %{count} godine
+        many: oko %{count} godina
+        other: oko %{count} godine
+      almost_x_years:
+        one: skoro 1 godina
+        few: skoro %{count} godine
+        many: skoro %{count} godina
+        other: skoro %{count} godine
+      half_a_minute: pola minute
+      less_than_x_seconds:
+        one: manje od %{count} sekunde
+        few: manje od %{count} sekunde
+        many: manje od %{count} sekundi
+        other: manje od %{count} sekunde
+      less_than_x_minutes:
+        one: manje od %{count} minute
+        few: manje od %{count} minute
+        many: manje od %{count} minuta
+        other: manje od %{count} minute
+      over_x_years:
+        one: više od %{count} godine
+        few: više od %{count} godine
+        many: više od %{count} godina
+        other: više od %{count} godine
+      x_seconds:
+        one: "%{count} sekunda"
+        few: "%{count} sekunde"
+        many: "%{count} sekundi"
+        other: "%{count} sekunde"
+      x_minutes:
+        one: "%{count} minut"
+        few: "%{count} minute"
+        many: "%{count} minuta"
+        other: "%{count} minute"
+      x_days:
+        one: "%{count} dan"
+        few: "%{count} dana"
+        many: "%{count} dana"
+        other: "%{count} dana"
+      x_months:
+        one: "%{count} mesec"
+        few: "%{count} meseca"
+        many: "%{count} meseci"
+        other: "%{count} meseca"
+      x_years:
+        one: "%{count} godina"
+        few: "%{count} godine"
+        many: "%{count} godina"
+        other: "%{count} godine"
+    prompts:
+      second: Sekunda
+      minute: Minut
+      hour: Sat
+      day: Dan
+      month: Mesec
+      year: Godina
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: mora biti prihvaćeno
+      blank: ne može biti prazno
+      confirmation: ne poklapa se sa vrednošću polja %{attribute}
+      empty: ne može biti prazno
+      equal_to: mora biti jednako %{count}
+      even: mora biti parno
+      exclusion: je rezervisana vrednost
+      greater_than: mora biti veće od %{count}
+      greater_than_or_equal_to: mora biti veće ili jednako %{count}
+      inclusion: nije u dozvoljenom opsegu
+      invalid: je nevažeće
+      less_than: mora biti manje od %{count}
+      less_than_or_equal_to: mora biti manje ili jednako %{count}
+      model_invalid: 'Došlo je do grešaka: %{errors}'
+      not_a_number: nije broj
+      not_an_integer: nije ceo broj
+      odd: mora biti neparno
+      other_than: mora biti različito od %{count}
+      present: mora biti prazno
+      required: obavezno
+      taken: zauzeto
+      dimension_width_not_less_than_or_equal_to: širina mora biti manja ili jednaka %{length} piksela
+      dimension_height_not_less_than_or_equal_to: visina mora biti manja ili jednaka %{length} piksela
+      file_size_not_between: 'veličina fajla mora biti od %{min} do %{max} (trenutna veličina: %{file_size})'
+      more_than_one_volunteering: ne može obavljati više od jedne volonterske pozicije u istom danu
+      more_than_one_trophy: ne može imati više od jedne nagrade istog tipa
+      content_type_invalid:
+        one: 'ima nevažeći tip sadržaja (važeći tip sadržaja: %{authorized_human_content_types})'
+        other: 'ima nevažeći tip sadržaja (važeći tipovi sadržaja: %{authorized_human_content_types})'
+      too_long:
+        one: previše dugo (ne može biti duže od %{count} znaka)
+        few: previše dugo (ne može biti duže od %{count} znaka)
+        many: previše dugo (ne može biti duže od %{count} znakova)
+        other: previše dugo (ne može biti duže od %{count} znaka)
+      too_short:
+        one: previše kratko (mora biti barem %{count} znak)
+        few: previše kratko (mora biti barem %{count} znaka)
+        many: previše kratko (mora biti barem %{count} znakova)
+        other: previše kratko (mora biti barem %{count} znaka)
+      wrong_length:
+        one: pogrešna dužina (mora imati tačno %{count} znak)
+        few: pogrešna dužina (mora imati tačno %{count} znaka)
+        many: pogrešna dužina (mora imati tačno %{count} znakova)
+        other: pogrešna dužina (mora imati tačno %{count} znaka)
+    template:
+      body: 'Problemi su se pojavili u sledećim poljima: '
+      header:
+        one: "%{model} ne može biti sačuvan zbog 1 greške"
+        few: "%{model} ne može biti sačuvan zbog %{count} greške"
+        many: "%{model} ne može biti sačuvan zbog %{count} grešaka"
+        other: "%{model} ne može biti sačuvan zbog %{count} greške"
+  helpers:
+    select:
+      prompt: 'Odaberite: '
+    submit:
+      create: Kreiraj %{model}
+      submit: Sačuvaj %{model}
+      update: Ažuriraj %{model}
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: RSD
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: milijarda
+            few: milijarde
+            many: milijardi
+            other: milijarde
+          million:
+            one: milion
+            few: miliona
+            many: miliona
+            other: miliona
+          quadrillion:
+            one: kvadrilion
+            few: kvadriliona
+            many: kvadriliona
+            other: kvadriliona
+          thousand:
+            one: hiljada
+            few: hiljade
+            many: hiljada
+            other: hiljade
+          trillion:
+            one: trilion
+            few: triliona
+            many: triliona
+            other: triliona
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: bajt
+            few: bajta
+            many: bajtova
+            other: bajta
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: " i "
+      two_words_connector: " i "
+      words_connector: ", "
+  time:
+    am: pre podne
+    pm: posle podne
+    formats:
+      default: "%d %b %Y, %H:%M:%S %z"
+      long: "%d %B %Y, %H:%M"
+      short: "%d %b, %H:%M"
+  cookie_consent:
+    message: 'Nastavkom korišćenja našeg sajta prihvatate obradu kolačića koji obezbeđuju pravilan rad sajta.'
+    policy_link: 'Politika obrade ličnih podataka'
+    accept_button: 'Razumem'
+  views:
+    greeting: '%{name}, dobro došli na S95!'
+    auth_link_invalid: 'Link za prijavu više nije validan'
+    pagination:
+      previous: '◀️'
+      first: '⏮️'
+      next: '▶️'
+      last: '⏭️'
+      truncate: '&hellip;'
+  notification_mailer:
+    parkzhrun_error: 'Greška! Nije moguće kreirati trku ParkŽrun'
+    feedback: 'Novi odgovor na sajt S95'
+  button:
+    show_more: Prikaži više
+    show_less: Prikaži manje
+  common:
+    without_token: BEZ TOKENA (napravi)
+    without_name: BEZ IMENA
+    nobody: NEPOZNATO
+    gender: Pol
+    man: Čovek
+    woman: Žena
+    title: Nedeljne park trčanje sa 5 km
+    description: Nedeljne subotnje probežke sa 5km u parku. Možete proći, probežeti, ili se prijaviti kao volonter - nivo spremnosti nije bitan. Našim događajima ćete pronaći nove poznanstva i odličan način za spavanje.
+  country:
+    ru: Rusija
+    by: Belorusija
+    rs: Srbija
+  duels:
+    no_athlete_access: Za pregled dueli potrebno je kreirati profil sportiste
+    index:
+      title: 'Trkački dueli %{athlete_name}'
+      description: 'Prijateljski dueli %{athlete_name} sa drugim učesnicima'
+      header: Trkački dueli
+      subheader: Poredite svoje rezultate sa prijateljima na zajedničkim trkama - trkačkim duelima. Pogledajte kada i gde ste učestvovali zajedno.
+      duels_count:
+        one: '%{count} duel'
+        few: '%{count} dueli'
+        many: '%{count} dueli'
+        other: '%{count} dueli'
+      my_wins: Moje pobede
+      friend_wins: Pobede prijatelja
+      win_rate: Procenat pobeda
+      recent_duels: Poslednji dueli
+      view_all: Pogledaj sve
+      no_duels: Nema zajedničkih trka još uvek
+      no_duels_description: Dodajte prijatelje i učestvujte u trkama zajedno da biste ovde videli poredjenje rezultata!
+      profile: Moj profil
+    show:
+      title: 'Trkački dueli %{athlete_name} protiv %{friend_name}'
+      description: 'Istorija zajedničkih trka između %{athlete_name} i %{friend_name}'
+      header: 'Zajedničke trke sa %{friend_name}'
+      duels: Trkački dueli
+      back_to_all: Nazad na sve duele
+      total_duels: Ukupno dueli
+      my_wins: Moje pobede
+      friend_wins: Pobede prijatelja
+      win_rate: Procenat pobeda
+      your_friend: Vaš prijatelj
+      duel_history: Istorija dueli
+      no_duels: Nema zajedničkih trka
+      no_duels_with_friend: 'Još uvek nemate zajedničke trke sa %{friend_name}'
+    duel:
+      victory: Pobeda
+      defeat: Poraz
+      you: Vi
+      position: Mesto
+      time: Vreme
+      time_difference: Razlika u vremenu
+      position_difference: Razlika u mestima
+      position_singular: mesto
+      position_plural: mesta
+    duel_compact:
+      you_won: Pobedili ste
+      friend_won: Prijatelj je pobedio
+    friend_stats:
+      dominating: Pobedujete
+      competitive: Ravna borba
+      struggling: Zaostajete
+    protocol:
+      title: Prijateljski protokol
+      header: Prijateljski protokol
+      description: Ovde su prikazani vaši i rezultati vaših prijatelja za poslednju subotu na svim S95 lokacijama. Rezultati su poređani od vremena završetka ka najgorem, a pri istom vremenu više je učesnik sa boljim mestom. Ispod su navedeni prijatelji koji su volontirali tog dana.
+      not_published_yet: Protokoli još nisu objavljeni.
+      you_did_not_participate: Niste učestvovali prošle subote.
+      no_friends: Još uvek nemate prijatelja
+      no_friends_description: Dodajte prijatelje da vidite njihove rezultate i volontiranja u protokolu.
+      profile: Moj profil
+      athlete: Učesnik
+      result: Rezultat
+      pace: Tempo
+      event: Događaj
+      club: Klub
+      volunteers_title: Prijatelji volonteri
+  navbars:
+    top:
+      s95: Subota 9 ujutru 5 km
+      events: Događaji
+      results: Rezultati
+      recent_results: Skorašnji rezultati
+      1_january: 1 januar
+      club_ratings: Klubovi
+      top_results: Najbolji rezultati
+      top_athletes: Rejting sportista
+      top_volunteers: Rejting volontera
+      friends_protocol: Prijateljski protokol
+      duels: Trkački dueli
+      badges: Bedževi
+      profile: Profil
+      settings: Podešavanja
+      admin_panel: Administratorski panel
+      login: Prijava
+      logout: Odjava
+      search: Pretraži
+      name_or_id: Ime ili ID
+      language: Jezik
+    about_s95:
+      title: O S95
+      rules: Pravila
+      about: O nama
+      support: Podržite projekat
+      feedback: Povratne informacije
+      joining: Želite S95 kod vas?
+      articles: Članci
+    bottom:
+      s95: S95 park trčanje
+      slogan: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. I vi možete slobodno učestvovati u našim trkama, razvoju ili kreiranju sadržaja.'
+      telegram_title: Vesti o projektu na Telegramu
+      vk_title: Grupa VKontakte
+      send_email: Pošaljite nam email
+      github_title: Projekat na GitHubu
+  articles:
+    index:
+      title: Članci
+      description: Saveti o treninzima, opremi, tehnici i pripremi pre starta za početnike u trčanju
+      first_run:
+        title: 'Kako istrčati svojih prvih 5 km: saveti za početnike'
+        description: Saveti o treninzima, opremi, tehnici i pripremi pre starta za početnike u trčanju
+      smart_watches:
+        title: 'Sporazni sati: vaš digitalni trener'
+        description: Kako koristiti pulsove zone, automatske odsečke i metrike da bi istrčali 5 km po nauki.
+      weight_and_time:
+        title: Kako težina utiče na rezultate u trčanju
+        description: Ocena promene vremena završetka pri promeni mase i kalkulator ocene vremena u zavisnosti od težine
+  pages:
+    index:
+      upcoming_events: 'Predstojeći događaji %{date}'
+      hero_title: "Svake subote u 09:00!"
+      hero_subtitle: "5 km za sve nivoe spremnosti, besplatno. Pridruži se!"
+      my_profile: "Moj profil"
+      registration: "Registracija"
+      results: "Rezultati"
+      find_event: "Pronađi najbližu trku"
+      how_it_works:
+        title: "Kako to radi?"
+        registration:
+          title: "Registracija"
+          description: "Napravi profil u našem Telegram botu @sat9am5kmbot"
+        choose_run:
+          title: "Izaberi trku"
+          description: "Više od 20 lokacija u 3 zemlje"
+        come_saturday:
+          title: "Dođi u subotu"
+          description: "Start u 09:00, distancu možete preći ili proći"
+        track_progress:
+          title: "Prati napredak"
+          description: "Rezultati, nagrade, rang liste - na našem sajtu"
+      why_s95:
+        title: "Zašto S95?"
+        for_everyone:
+          title: "Za sve"
+          description: "Možete učestvovati zajedno sa porodicom, prijateljima, kućnim ljubimcima. Možete trčati ili hodati, možete pomoći volontiranjem"
+        community:
+          title: "Zajednica"
+          description: "Pronađite nove prijatelje, družite se na čajankama posle trka, pridružite se četovima događaja"
+        free:
+          title: "Besplatno"
+          description: "Svi događaji se organizuju od strane entuzijasta ljubitelja trčanja i volontera"
+      stories:
+        title: Priče učesnika
+        previous: Prethodni
+        next: Sledeći
+        content:
+          4029: Moj put u S95 — put od ljutitog odbijanja trčanja do prvih sportskih pobeda i samoostvarenja na organizacionom polju. Novi bolji život uz podršku velike brižne porodice. Više od subota. Više od trčanja.
+          6901: Za mene, naša trkačka zajednica je više od samog trčanja! To je zdrava atmosfera i podrška među potpuno različitim ljudima ujedinjenim jednim pokretom. I odličan bonus u vidu sjajnog sporednog efekta — dobrog zdravlja, vedrog duha i zategnute figure!
+          14500: Jednom, trčeći duž keja Pečatnikov, čula sam poziv "trči sa nama". Došla sam sledeće nedelje i moja subotnja jutra su osvojila redovna trčanja i volontiranja. Neizmerno sam srećna što sam pronašla trkačko društvo koje mi je toliko nedostajalo.
+          14089: Jedne subote sam došao u park ujutru, saznavši za trke sa plakata na tabli. Drugi put sam se vratio da volontiram i potrčim, a sledeći put sam poveo i sina. I sve to nas je toliko uvuklo da nas obojicu ne "pušta" do dan danas)
+          7736: Ovo više nije samo zajednica, nije samo subota - ovo je ogromna pozitivna energija od ljudi koji se sreću da zajedno pretrče 5 km. Tokom ove trke saznajemo sve vesti jedni o drugima, slavimo rođendane, planiramo trkačku godinu. Trčanje sam počela pre 4 godine, nisam se bavila nikakvim sportom u mladosti. Sve je počelo od normalnog lekara koji nakon operacije nije zabranio, već savetovao trčanje. Čini se da je to bila moja tačka od koje sam uronila u trkačku zajednicu i upoznala predivne ljude. Uskoro ću slaviti svoju 100-tu trku u subotu i, znate li šta to znači?! To je NEVEROVATNO. Ne verujete? Dođite!
+      volunteer_app:
+        title: Aplikacija Volonter S95
+        features:
+          timer:
+            title: Štoperica
+            description: za volontere-meriče vremena sa brisanjem pogrešnih merenja
+          scanner:
+            title: Skener
+            description: super brz i precizan modul sa istovremenim skeniranjem kartice učesnika i pozicije
+          upload:
+            title: Učitavanje rezultata
+            description: rezultati trka se učitavaju u sistem direktno iz aplikacije
+          stats:
+            title: Lična statistika
+            description: praćenje vaše volonterske aktivnosti
+          live_results:
+            title: Online transkripcija
+            description: rezultati trke na sajtu u realnom vremenu
+        download_rustore: Preuzmi u RuStore
+        download_app_gallery: Preuzmi u App Gallery
+        download_apk: Preuzmi APK fajl
+      our_partners: Naši partneri
+    about:
+      description: S95 je otvorena platforma koja objedinjuje nezavisne park trke koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
+      paragraphs:
+        - 'Zamislite: subota, 9 ujutru. Sunce tek počinje da greje, ptice pevaju, a vi… već ste na startu 5-kilometarske staze. Ali ovo nije obična trka — ovo je S95, platforma koja okuplja sve koji vole trčanje, svež vazduh i dobro društvo.'
+        - 'Mnogi su već zavoleli parkrune kao događaje gde trkači i volonteri svake subote započinju dan kretanjem, druženjem i šoljom čaja iz termosa. Ali vremena se menjaju, a tradicije ostaju. Sada postoji S95 — to je čitava zajednica. Ovde možete saznati gde je najbliži trka, koji su volonteri potrebni za narednu subotu, pogledati svoje rezultate (i ponosno se pohvaliti ako ste slučajno oborili lični rekord), kao i pronaći istomišljenike koji takođe smatraju da je subotnje jutro vreme ne za spavanje, već za trčanje i druženje.'
+        - 'I najvažnije — S95 je dostupan svima. Nije bitno ko ste: maratonac sa stotinama medalja ili osoba koja je poslednji put trčala u školi na časovima fizičkog vaspitanja. Ovde nema naknade za učešće, samo „plata“ u vidu dobrog raspoloženja i osmeha. Stazu možete prošetati ili pretrčati tempom koji vam odgovara.'
+        - 'Tako da, ako još uvek niste u toku, S95 nije samo skup simbola, to je stil života, subotnji ritual i prilika da započnete dan nečim zaista kul. Uzmite patike, pozovite prijatelje i pridružite se trkama gde svaki kilometar predstavlja korak ka novim poznanstvima, avanturama ili kul fotografiji za društvene mreže.'
+      events: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}.'
+      s95_abroad:
+        title: S95 trke u drugim zemljama
+        body: Danas se naše trke organizuju i u %{countries}. Svi rezultati se čuvaju u jednom sistemu odakle ćete imati uvid u profile atletiča.
+      back: Nazad
+      forward: Napred
+    rules:
+      description: Kratka pravila za učesnike S95, kao i često postavljana pitanja
+      register_with_bot_html: 'Ako niste registrovani, kreirajte profil koristeći <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a>. Dobićete link do vašeg profila sa ličnim QR kodom.'
+      come_to_s95_html: 'Najvažnije je doći na jedan od naših događaja u <strong>subotu</strong> u <strong>9 ujutru</strong> i pretrčati <strong>5 km</strong>.'
+      scan_barcodes: Na cilju ćete dobiti karticu pozicije. Skenirajte lični QR kod i karticu pozicije kod volontera.
+      return_position_card: Predajte karticu pozicije.
+      faq: Često postavljana pitanja
+      about_markers:
+        question: Da li će biti markera ili znakova duž rute?
+        answer: Staza je dobro obeležena narandžastim čunjevima, postoji i maršal na skretanju (ako ga ima), i najverovatnije ćete biti okruženi drugim učesnicima tokom trčanja.
+      about_registering:
+        question: Da li je potrebno da se registrujem za učešće u trci?
+        answer_html: 'Nije obavezno, ali je preporučljivo da prođete proceduru registracije koristeći naš telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. Kao rezultat, imaćete lični bar kod, koji ćete naknadno pokazati volonteru. Pored toga, bot će slati obaveštenja sa rezultatima trke.'
+      about_participation:
+        question: 'Da li je moguće samo doći u 8:45 da trčimo zajedno?'
+        answer: 'Da, možete samo doći i trčati. Registracija nije obavezna, služi samo za čuvanje vašeg rezultata u protokolu. Ako se ne registrujete, bićete navedeni u protokolu kao "Nepoznat".'
+      about_barcode:
+        question: Mogu li koristiti parkrun bar kod (5 verst, RunPark)?
+        answer: Da, možete doći na naše događaje sa bar kodom iz drugog sistema. Međutim, vaš rezultat će biti uzet u obzir samo u S95 sistemu.
+      about_things:
+        question: Gde mogu ostaviti stvari dok trčim?
+        answer: Obično svi ostavljaju stvari na klupama u blizini startnih i ciljnih zona.
+      personal_info:
+        question: Slučajno sam pogrešio u imenu prilikom registracije. Kako ispraviti?
+        answer_html: Idite na <a href="/user">Podešavanja</a> (može zahtevati prijavu i lozinku) i izvršite potrebne promene.
+    support:
+      description: 'Projekat Sat9am5km možete podržati na različite načine: volontiranjem, donacijama ili učešćem u razvoju ovog sajta'
+      title: Želite da podržite projekat?
+      how_to_support: >
+        Prijatelji, naši događaji su potpuno besplatni i sprovode ih volonterske snage.
+        Međutim, ako želite i možete podržati naš projekat, onda ćemo biti srećni zbog bilo kakve materijalne pomoći.
+        Da biste to uradili, kontaktirajte organizatore događaja kojima želite da pružite podršku putem kontakata na stranici događaja.
+        Sastavljene sredstva će biti korišćene za kupovinu volonterskih majica, razmetničkih štampica i drugih neophodnih predmeta za organizaciju trka.
+      about_volunteering: Ali ne zaboravite da je najveća pomoć volontiranje.
+      site_development: Razvoj sajta
+      add_new_issues_html: >
+        Imate li ideju kako poboljšati ovaj sajt?
+        Kod sistema je otvoren na <a href="%{github_repo}" target="_blank" rel="noopener">GitHub</a>.
+        Predložite svoje ideje i napišite primedbe u <a href="%{github_issues}" target="_blank" rel="noopener">Issues</a>.
+        Da biste to uradili, registrujte se za <a href="https://github.com/" target="_blank" rel="noopener">Github</a>, stavite zvezdu na naš projekat
+        i napravite novo izdanje gde opišite šta želite (na engleskom).
+      how_to_contribute: Želite sami da izvršite promene? Nema problema - nagnite spremište prema sebi, kreirajte i zapišite granu sa svojim izmenama, a zatim otvorite zahtev za povlačenje.
+      small_changes: Male promene je najlakše izvršiti direktno u pregledaču u Githubovom vizuelnom uređivaču!
+      best_regards: S ljubavlju, S95.
+    feedback:
+      title: Povratne informacije i predlozi
+      description: Bili bismo zahvalni na svim vašim povratnim informacijama i predlozima. Pišite ako ste naišli na neke probleme, želite da ponudite svoju pomoć, ideju ili samo da se izjasnite. Po želji, možete navesti kontakt za komunikaciju u poruci.
+      other_contacts_html: Takođe možete poslati poruku na naš <a href="mailto:%{our_email}" target="_blank" title="Pošaljite nam email">email</a>. Ostale naše kontakte možete pronaći na dnu stranice, kao i na stranicama događaja.
+      placeholder: Vaša povratna informacija ili predlog (do %{max_length} karaktera)
+      submit: Pošalji
+    submit_feedback:
+      sent: Hvala na vašoj povratnoj informaciji!
+      error: Greška! Dužina poruke mora biti od 1 do 950 karaktera.
+    joining:
+      title: Želite da pokrenete S95 u svom parku?
+      description: Objašnjavamo kako da započnete sa organizacijom S95 događaja u svom omiljenom parku.
+      body_html: >
+        <p>Ovaj odeljak je za one koji su spremni da pretvore svoj omiljeni park u mesto gde se svake subote okupljaju ljubitelji trčanja i dobrog raspoloženja.</p>
+
+        <h3>Zašto S95?</h3>
+        <p>
+          <ol>
+            <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su prikupljeni u jednom sistemu</li>
+            <li>Imamo motivacionu sistem nagrada i izazova — dobijajte dostignuća ne samo za visoke rezultate, već i samo za učešće i lični napredak</li>
+            <li>Naša platforma nije samo o trčanju, već i o druženju, kao i o društvenoj misiji: aktivno razvijamo volontiranje, družimo se, nalazimo nove prijatelje</li>
+            <li>Jednostavna i brza registracija novih učesnika pomoću Telegram-bota, svi podaci su uvek pri ruci</li>
+            <li>Koristimo moderne tehnologije i pristupe: mnoštvo različitih statistika i rangiranja, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku</li>
+            <li>Imamo sopstvenu jedinstvenu mobilnu aplikaciju za organizaciju trka</li>
+            <li>Naš sistem je potpuno otvoren i koristi OpenSource tehnologije — svako može predložiti poboljšanja i učiniti platformu još boljom</li>
+          </ol>
+        </p>
+
+        <h3>Plan akcije</h3>
+        <p>Pre nego što pošaljete prijavu, pogledajte odeljak <a href="/events">Naši događaji</a> — možda već postoje naše trke u vašoj blizini. U tom slučaju, pridružite se lokalnom timu i pomozite u razvoju trkačke zajednice u vašem kraju.</p>
+        <p>
+          Ako u blizini nema S95 trka, a vi gorite željom da postanete pionir pokreta, potrebno vam je:
+          <ul>
+            <li>bezbedna i pogodna staza (bez preseka sa automobilskim putevima i opasnih delova)</li>
+            <li>tim entuzijasta, spremnih da se budi subotom ranije od budilnika</li>
+            <li>malo organizacionih sposobnosti i puno ljubavi prema trčanju</li>
+          </ul>
+        </p>
+        <p>Od trenutka slanja prijave do prvog tehničkog starta može proći neko vreme, ali S95 tim će učiniti sve što je moguće da vaš park što pre ispuni subotnji trkački duh!</p>
+        <p>Spremni da postanete deo pokreta koji menja subotnja jutra na bolje? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> sa oznakom "Otvoriti S95" i hajde da zajedno stvaramo nove trkačke tradicije!</p>
+    additional-events:
+      title_html: 'Dodatni događaji 1.&nbsp;januar&nbsp;%{year}'
+      description: Obično trke organizujemo samo subotom, ali 1. januara pravimo izuzetak i održavamo dodatnu trku. Na ovoj stranici možete videti vreme i događaj gde možete trčati 1. januara.
+      time: Vreme
+  ratings:
+    index:
+      description: Rejtinzi učesnika po različitim pokazateljima. Informacije na ovoj stranici se redovno ažuriraju, ali ponekad mogu biti malo drugačije od trenutnih. Uvek možete proveriti trenutne vrednosti u profilu sportiste.
+      order_types: Vrste rejtinga
+      name: Učesnik
+      count: Aktivnosti
+      club: Klub
+      total: Ukupno
+      h_index: h-indeks
+      uniq_events: Jedinstveni parkovi
+      longest_streak: Najduža serija
+      trophies: Značke
+      results:
+        title: Rejting sportista
+        description:
+          count: Ukupan broj trka. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          h_index: Trkački h-indeks - vrednost koja je jednaka h ako je učesnik trkao u h parkovima, i u svakom od njih bar h puta. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          uniq_events: Jedinstveni parkovi - broj parkova posetjenih kao trkač. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          longest_streak: Maksimalan broj serija trka. Serija se prekida ako nema trka na nekoj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          trophies: Broj znački. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+      volunteers:
+        title: Rejting volontera
+        description:
+          count: Ukupan broj volontera. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          h_index: Volonterski h-indeks - vrednost koja je jednaka h ako je učesnik bio volonter u h različitih pozicija (uloga), u svakoj od kojih bar h puta. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          uniq_events: Jedinstveni parkovi - broj parkova posetjenih kao volonter. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          longest_streak: Maksimalan broj serija volontera. Serija se prekida ako nema volontera na nekoj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          trophies: Broj znački. U slučaju jednakih vrednosti, viši rang će imati učesnika sa velikim brojem volontiranje.
+    results:
+      title: Najbolji rezultati
+      description: Tabela sa najboljim rezultatima učesnika S95. Ako želite da dobijete rejting za konkretno događaj, izaberite ga u polju "Pretraga po događaju". Na isti način možete dobiti rejting za željeni klub, ili kombinaciju nekoliko parametara. Pri pretragi po imenu, prikazuje se i apsolutno mesto učesnika (tj. mesto u rejtingu bez filtera po imenu).
+      men: Muškarci
+      women: Žene
+      athlete: Učesnik
+      result: Vreme
+      date: Datum
+      event: Događaj
+      club: Klub
+      abs: Abs.
+      name_placeholder: Pretraga po imenu
+      club_placeholder: Pretraga po klubu
+      event_placeholder: Pretraga po događaju
+      search_button: Traži
+      reset_button: Reset
+  athletes:
+    index:
+      title: Rezultati pretrage
+      description: Rezultati pretrage po imenu člana ili po njegovom ID (S95, parkrun, 5 verst, RunPark, ParkZhrun)
+      name: Ime
+      club: Klub
+      athletes_count: Ukupno pronađeno %{count} čl.
+      nothing_found: Nažalost, ništa nije pronađeno.
+    show:
+      description: 'Profil atletičara %{athlete_name}: rezultati, statistike i volontiranje'
+      show_club_html: 'Prikaži statistike kluba %{link}'
+      total_results: ukupno trčanja
+      total_volunteering: ukupno volontiranja
+      total_trophies: ukupno trofeja
+      total_events: učestvovano na događaja
+      personal_best: lični rekord S95 (PB)
+      best_position: najbolje mesto
+      no_results: Bez rezultata do sada.
+      no_volunteering: Bez volontiranja do sada.
+      results: Rezultati
+      volunteering: Volonterstvo
+      close: Zatvori
+      mission_minute_bingo: Misija "60 sekundi bingo!"
+      friends: Prijatelji
+      followers: Pratioci
+      duels: Dueli
+      duels_description: Poredite svoje rezultate sa prijateljima na istim trkama
+      view_duels: Pogledaj duele
+      table:
+        pb: PB
+        date: Datum
+        time: Vreme
+        pace: Tempo
+        place: Mesto
+        event: Događaj
+      personal_bests_section: Lični rekordi na drugim dužinama
+      distance: Dužina
+      personal_best: PB
+      predicted_time: Prognoza
+      personal_best_10k: 10 km
+      personal_best_half_marathon: Polmaraton
+      personal_best_marathon: Maraton
+      prediction_hint: Prognoza na osnovu najboljeg rezultata u S95 događajima za posljednje 3 mjeseca. Rezultat je moguć samo ako su ispunjeni uslovi za treninge, odgovarajuće za određenu dužinu.
+      no_personal_bests: Lični rekordi nisu navedeni.
+      no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
+    statistics:
+      volunteering_chart:
+        h_index: h-indeks
+        h_index_explanation: Indeks je jednak h ako postoji bar h pozicija (uloge), u svakoj od kojih je bar h puta volontiranje
+        volunteering_coefficient: Koeficijent volontiranja
+        volunteering_coefficient_explanation: Broj volontiranja za svakih 10 trčanja
+      total_events:
+        finishes: Trčanja
+        volunteering: Volontiranje
+        event: Događaj
+        count: Broj
+        roles: Uloge
+        best_position: Najbolje mesto
+        best_time: Najbolje vreme
+    minute_bingo:
+      from_minute: od 60 sekundi
+      catch_them_all: skupite sve
+  activities:
+    index:
+      description: Skorašnji rezultati sa S95 trka
+      date: Datum
+      event: Događaj
+      athletes: Sportisti
+      volunteers: Volonteri
+      first_man: Prvi čovek
+      first_woman: Prva žena
+      dashboard: Statistika u poslednjoj nedelji
+    dashboard:
+      error: Neuspešno učitavanje statistike u poslednjoj nedelji. Pokušajte ponovno.
+    show:
+      title: 'Rezultati trke %{activity}'
+      description: 'Protokol trke %{activity}, lista volontera i kratki izveštaj o trci'
+      main_page: Glavna
+      short_report: Kratak izveštaj
+      total_runners_count: učesnika trke
+      personal_bests_count: broj ličnih rekorda
+      first_runners_count: prvi put na događaju
+      first_s95_count: prvi put na S95
+      volunteers_count: koša volontera
+      first_volunteers_count: prvo volontiranje
+      protocol: Protokol
+      common: Zajednički
+      men: Muškarci
+      women: Žene
+      volunteers: Volonteri
+      about_volunteers: 'Trka se održala zahvaljujući timu volontera:'
+      volunteer: Volonter
+      role: Uloga
+      total_volunteering: 'volontiranja %{count}'
+      first_volunteering: 'Prvo volontirsko delanje!'
+      search_athlete_placeholder: 'Pretraga atleta...'
+      clear_search: 'Obriši pretragu'
+    protocol:
+      position_short: Poz.
+      position_full: Pozicija
+      athlete: Atleta
+      time: Vreme
+      pace: Tempo
+      club: Klub
+    result:
+      total_runs_html: '%{count}&nbsp;trčanja'
+      total_volunteering_html: '%{count}&nbsp;volonterstvo'
+      first_run: Prvi trka!
+      personal_best: Liki rekord!
+  friendships:
+    button:
+      your_friend: Vaš prijatelj
+      your_mutual_friend: Vaš uzajamni prijatelj
+      add_friend: Dodaj u prijatelje
+    friend:
+      going_to: 'Ide na trku %{event}'
+      confirm_add: 'Dodati %{name} u prijatelje?'
+      confirm_unfriend: 'Da li ste sigurni da želite da uklonite iz prijatelja?'
+  badges:
+    index:
+      how_to_get: Učestvujte u našim aktivnostima, ispunite uslove i osvojite nagrade. Sve ikone će se prikazati na vašoj stranici profila. Postepeno će se njihov broj dopunjavati.
+      about_badges: Trudimo se da smislimo nagrade kako bismo ohrabrili brze trkače i redovne učesnike koji redovno prisustvuju našim događajima.
+      achievements: Dostignuća
+      thematic: Tematske
+    badge:
+      event_date: 'Datum događaja: %{date}'
+    show:
+      main_page: Glavna
+      event_date: 'Datum događaja: %{date}'
+      athlete: Učesnik
+      event: Trka
+      club: Klub
+      result: Vreme
+      received_date: Datum prijema
+      soon: Uskoro!
+      nobody_has: Još niko nema tu nagradu.
+  clubs:
+    index:
+      description: Tabela klubova sa statistikom o ukupnom broju učesnika, volontera i trčanja
+      how_to_add_new_club_html: 'Da li vaš klub nije na listi? Pišite nam na <a href="mailto:%{mail}?subject=Add a new club (Serbia)" target="_blank" title="Pošaljite nam email">email</a> i dodaćemo ga. U poruci navedite naziv kluba, mali opis i prikačite logo kluba, ako ima.'
+      name: Ime
+      athletes: Atletičari
+      results: Rezultati
+      volunteering: Volonterstvo
+      search_placeholder: Pretraga po imenu
+      search_button: Traži
+    show:
+      description: 'Tabela učesnika i statistika za klub %{club}'
+      main_page: Glavna
+      clubs: Klubovi
+      athletes_count: broj učesnika
+      results_count: broj trka
+      volunteering_count: broj volontiranje
+      best_results: Lični rekordi učesnika
+      last_week_activities: Aktivnosti članova kluba u poslednjoj nedelji
+      name: Ime
+      activities: Trke
+      volunteering: Volontiranje
+      personal_best: Najbolje vreme
+    last_week:
+      title: 'Aktivnost učesnika %{club}'
+      main: Glavna
+      clubs: Klubovi
+      participants_activity: Aktivnost učesnika
+      description: 'Trke prošle nedelje, u kojima su učestvovali kao trkači ili kao volonteri članovi kluba %{club}.'
+      disclaimer: U subotu neke trke možda još nisu učitane, tako da informacije mogu biti nepotpune.
+      activities: Trke
+      volunteering: Volontiranje
+      position: Pozicija
+      name: Ime
+      total_time: Rezultat
+      role: Uloga
+  events:
+    index:
+      list: Lista
+      map: Karta
+      our_events: Naši događaji
+    show:
+      title: 'Park trčanje | %{event}'
+      our_contacts: Naši kontakti
+      jubilee_by_results: Uskoro jubilarne trke
+      jubilee_by_volunteering: Uskoro jubilarno volontiranje
+      results: Rezultati
+      no_results_disclaimer: Ovde još nema preuzetih ili objavljenih rezultata.
+      description: Opšte informacije
+      how_participate: Kako učestvovati?
+      how_find_us: Kako nas pronaći?
+      volunteers: Volonteri
+      attention: Pažnja!
+      opening_soon: Uskoro otvaranje!
+      start_cancelled: Sledeći start je otkazan.
+      inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class="alert-link">naše trke</a>.'
+      place: Mesto događaja
+      event_totals: Ukupno od početka
+      event_dynamics: Dinamika događaja
+      live_streaming: Online rezultati
+      live_streaming_description: Rezultati se redovno ažuriraju u realnom vremenu
+    live:
+      title: 'Online rezultati - %{event}'
+      description: 'Rezultati trke %{event} u realnom vremenu'
+      main_page: Glavna
+      live_results: Online rezultati
+      timer: Sekundomer
+      disclaimer: Rezultati na ovoj stranici su preliminarni i mogu biti izmenjeni nakon provjere sa finiširanim učesnicima
+    live_results_frame:
+      position: Mesto
+      time: Vreme
+      gap: Odmak
+      waiting_for_results: Čekanje rezultata...
+      results_will_appear: Rezultati će se pojaviti ovde tokom trke
+    card:
+      about_participation: 'Registrujte se u našem telegram-botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
+      registration: Registracija u telegramu
+      about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu'
+      show: Prikaži
+      place: Mesto događaja
+      athlete: Atleta
+      results_count: Trčanja
+      volunteering_count: Volonterstvo
+      totals:
+        activities: održanih trka
+        results: zabeleženi rezultati
+        athletes: ukupno jedinstvenih učesnika
+        volunteering: ukupno volonterstva
+        uniq_volunteers: ukupno jedinstvenih volontera
+    volunteering:
+      title: Grafik volontiranja | %{event} | %{date}
+      description: 'Informacije o volontiranju. Tabela sa rasporedom volontiranja i potrebnim pozicijama za trku "%{event}" na %{date}.'
+      closest_date: najbliži datum
+      acknowledgements: Bili bismo vam veoma zahvalni ako nam možete pružiti volontersku pomoć. Možete odabrati zanimljivu i jaku aktivnost za svakoga koja će vam omogućiti da se otkrijete, podržite prijatelje, odlično se zabavite.
+      about_roster_html: 'Ispod možete pogledati listu <em>obaveznih pozicija</em>, kao i videti koje su već izabrane.'
+      how_to_participate_html: 'Da biste se prijavili, samo napišite u naš <a href="%{tg_chat_link}" target="_blank" rel="noopener" >Telegram Chat</a>.'
+      additional_positions: Osim toga, ponekad rukovodioci trka donose odluku o regrutovanju dodatnih volontera - pratite vesti ili pitajte direktno u ćaskanju.
+      main_title: Grafik volontiranja
+      main_page: Glavna
+      role: Uloga
+      volunteer: Volonter
+    volunteer:
+      confirm_delete: Osloboditi poziciju %{role} (%{name})?
+  users:
+    omniauth_callbacks:
+      auth_error: Prijava neuspešna
+    show:
+      title: Podešavanja
+      description: 'Podešavanja za %{user_name}'
+      edit: Izmeni
+      not_specified: nije naveden
+      emergency_contact: Hitna kontakt osoba
+    field:
+      edit: Izmeni
+    edit:
+      delete_image: Obriši sliku
+      delete_phone: Obriši telefon %{phone}
+      add_phone_html: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'
+      phone_placeholder: '+0 000 000-00-00'
+      emergency_contact: Hitna kontakt osoba
+      click_on_photo_to_change: Kliknite na sliku da biste je promenili
+      personal_bests: Lični rekordi
+      personal_best_10k: 10 km
+      personal_best_half_marathon: 21.1 km
+      personal_best_marathon: 42.2 km
+      personal_best_format_hint: HH:MM:SS
+      save: Sačuvaj
+      cancel: Otkaži
+      promotion_terms: Saglasnost sa uslovima
+      promotions:
+        title: Partnerski programi
+        spartacus: Akcija kluba navijača FANAT1K SQUAD
+      disagree: Ne slažem se
+      agree: Slažem se
+  going_tos:
+    create:
+      success: Uspešno ste se označili kao učesnik
+    destroy:
+      success: Otkazali ste učešće
+    form:
+      going: 'Pođem %{date}!'
+      cancel: 'Otkaži učešće %{date}'
+      confirm_cancel: Da li ste sigurni da želite da otkažete učešće?
+      going_to_event: 'Ako želite da pođete na sledeću trku, možete da se označite sada. Tada će vaši prijatelji videti da idete na trku i, možda, pridruže se vama.'
+      already_going: 'Već ste označili da idete na sledeću trku. Ako želite da otkažete svoju odluku, možete to učiniti u bilo kom trenutku.'
+      reset_going_to: 'Ova oznaka će biti automatski obrisana u sledećoj suboti.'
+  loading: Učitavanje...
+  notification:
+    common:
+      signature: |
+        S ljubavlju,
+        S95 tim.
+      not_yet: još nije
+      no_value: nema
+    after_activity:
+      base: Možete pogledati konačni protokol na [našem sajtu](%{activity_url}). Svi vaši rezultati i statistika su dostupni na [linku](%{athlete_url}).
+      result: |
+        %{first_name}, čestitamo vam na učešću u %{number}. trci S95 %{event_name}.
+        Završili ste na %{position}. mestu u generalnom plasmanu sa vremenom %{total_time}.
+        Ukupan broj učesnika koji su učestvovali u trci je %{count}.
+      volunteer: |
+        %{first_name}, zdravo!
+        Zahvaljujemo vam na volontiranju u %{number}. trci S95 %{event_name}.
+        Trke S95 u potpunosti zavise od volontera, i mi smo vam veoma zahvalni za pomoć.
+    badge:
+      base: Sve vaše nagrade i rezultate možete pogledati [ovde](%{athlete_url}).
+      rage_expiration: |
+        Zdravo, %{first_name}!
+        Prošle subote ste dobili [Rang značku](%{badge_url}) za kontinuirano poboljšanje rezultata. Pokušajte da je zadržite! Za to vam je potrebno da pokažete rezultat brži od %{last_total_time} na bilo kojoj sledećoj trci.
+      breaking_time_expiration: |
+        Zdravo, %{first_name}.
+        Za nedelju dana ističe vaša [nagrada](%{badge_url}) za brzinu.
+        Pokušajte da je zadržite!
+    user:
+      new_runner: |
+        Zdravo, %{first_name}.
+        Prošle subote ste prvi put [posetili S95 trčanje](%{activity_url}).
+        Nadamo se da vam se sve svidelo i da ćete doći ponovo sutra. Podsetimo vas da se naše trke održavaju nedeljno bez obzira na godišnje doba i vreme. Možete trčati, hodati ili pomoći sa organizacijom.
+
+        Vidimo se u subotu!
+      reunite: |
+        Pozdrav, %{first_name}.
+
+        Izgleda da je u našoj bazi bilo više profila koji pripadaju vama (na primer, možda ste ranije bili uneti ručno). Bot ih je automatski spojio u jedan i vaši podaci su možda malo ažurirani.
+
+        Molimo vas da proverite tačnost podataka i _ažurirajte vaš QR kod_ komandom /qrcode
+
+        %{full_name}
+        *Pol:* %{gender}
+        *Klub:* %{club}
+        *Domaća trka:* %{home_event}
+        *Parkrun ID:* %{parkrun_code}
+        *5 verst ID:* %{fiveverst_code}
+        *RunPark ID:* %{runpark_code}
+
+        U slučaju otkrivanja netačnosti, prijavite to volonterima vaše trke ili pišite @vol1ura
+    volunteer_info: |
+      %{first_name}, dobro veče!
+
+      Zahvalni smo što ste pristali da budete volonter sutra na S95 trci.
+      Molimo vas da dođete ranije i da se obučete prema vremenu.
+
+      *Trka:* [%{event_name}](%{roster_link})
+      *Direktor:* %{director_info}
+      *Vaša pozicija:* %{volunteer_role}
+
+      Ako su se vaše okolnosti promenile ili ste otkrili netačnost, molimo vas da obavestite direktora ili u četu trke.
+
+      S poštovanjem,
+      S95 tim
+    scanner_processing: |
+      Pažnja!
+      Podaci skenera sadrže greške, stoga rezultat *%{position}* ne može biti sačuvan.
+      Molimo vas da proverite poziciju *%{position}*, kao i učesnika sa ID *%{code}* za dupliranje u protokolu i fajlovima skenera.

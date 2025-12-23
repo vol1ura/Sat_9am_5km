@@ -49,7 +49,7 @@ class ClubsController < ApplicationController
     today = Date.current
     date_interval = (today.cwday < 6 ? today.prev_week : today).all_week
     activities_dataset =
-      Activity.published.joins(:event).where(date: date_interval, athletes: { club: @club }).includes(:event).distinct
+      Activity.published.where(date: date_interval, athletes: { club: @club }).includes(:event).distinct
     @activities_with_results = activities_dataset.joins(results: :athlete)
     @activities_with_volunteers = activities_dataset.joins(volunteers: :athlete)
   end

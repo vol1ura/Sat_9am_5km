@@ -27,4 +27,45 @@ RSpec.describe Event do
       expect { event.update(active: false) }.to have_enqueued_job(RenewGoingToEventJob).with(event.id)
     end
   end
+
+  describe '#current_image' do
+    let(:event) { create(:event) }
+    let(:summer_image) { fixture_file_upload 'spec/fixtures/files/default.png', 'image/png' }
+    let(:winter_image) { fixture_file_upload 'spec/fixtures/files/default.png', 'image/png' }
+
+    context 'when only summer_image is attached' do
+      before { event.summer_image.attach summer_image }
+
+      it 'returns summer_image in summer' do
+        travel_to Time.zone.local(2025, 6, 15) do
+          expect(event.current_image).to eq event.summer_image
+        end
+      end
+
+      it 'returns summer_image in winter as fallback' do
+        travel_to Time.zone.local(2025, 1, 15) do
+          expect(event.current_image).to eq event.summer_image
+        end
+      end
+    end
+
+    context 'when both images are attached' do
+      before do
+        event.summer_image.attach summer_image
+        event.winter_image.attach winter_image
+      end
+
+      it 'returns summer_image in summer' do
+        travel_to Time.zone.local(2025, 6, 15) do
+          expect(event.current_image).to eq event.summer_image
+        end
+      end
+
+      it 'returns winter_image in winter' do
+        travel_to Time.zone.local(2025, 1, 15) do
+          expect(event.current_image).to eq event.winter_image
+        end
+      end
+    end
+  end
 end

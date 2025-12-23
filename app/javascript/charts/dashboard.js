@@ -7,7 +7,7 @@ const translations = {
     personalBests: 'Личные рекорды',
     others: 'Остальные',
     newcomers: 'Впервые',
-    newcomersS95: 'Впервые на S95',
+    newcomersS95: 'Впервые на С95',
     volunteers: 'Волонтёры',
     totalVolunteers: 'Всего волонтеров',
     gender: 'Распределение по полу',
@@ -17,7 +17,7 @@ const translations = {
     noData: 'Пока нет данных за эту неделю',
     people: 'чел.',
   },
-  rs: {
+  sr: {
     participants: 'Učesnici',
     totalResults: 'Ukupno rezultata',
     personalBests: 'Osobni rekordi',
@@ -48,7 +48,7 @@ export default class DashboardCharts {
   }
 
   initializeCharts(participantsContainer, volunteersContainer, genderContainer) {
-    this.t = translations[document.documentElement.lang === 'rs' ? 'rs' : 'ru'];
+    this.t = translations[document.documentElement.lang === 'sr' ? 'sr' : 'ru'];
 
     if (participantsContainer) {
       const participantsChart = new ApexCharts(participantsContainer, this.#participantsChartOptions());
@@ -129,10 +129,13 @@ export default class DashboardCharts {
   }
 
   #basePieChartOptions(title, series, labels) {
+    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+
     return {
       chart: {
         height: 200,
         type: 'pie',
+        background: 'transparent',
       },
       series: series,
       labels: labels,
@@ -144,7 +147,6 @@ export default class DashboardCharts {
         style: {
           fontSize: '1rem',
           fontWeight: 600,
-          color: '#333'
         }
       },
       legend: {
@@ -159,7 +161,8 @@ export default class DashboardCharts {
         }
       },
       theme: {
-        palette: 'palette2'
+        mode: isDark ? 'dark' : 'light',
+        palette: isDark ? 'palette5' : 'palette2'
       }
     };
   }

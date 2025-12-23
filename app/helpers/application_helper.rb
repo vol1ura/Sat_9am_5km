@@ -78,8 +78,10 @@ module ApplicationHelper
     sanitize link_to(...), tags: ['a'], attributes: %w[href rel target]
   end
 
-  def event_main_image_tag(event, options = {})
-    image_tag event.main_picture_link || '/images/events/placeholder_big.jpg', **options
+  def event_main_image_tag(event, variant: :full, **)
+    image = event.current_image
+    image_path = image.attached? ? image.variant(variant) : '/images/event_placeholder.webp'
+    image_tag image_path, **
   end
 
   def athlete_code_id(athlete)

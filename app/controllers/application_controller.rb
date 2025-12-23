@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def access_denied(_)
     message = t 'active_admin.access_denied.message'
     respond_to do |format|
-      format.html { redirect_back fallback_location: root_path, alert: message }
+      format.html { redirect_back_or_to root_path, alert: message }
       format.js { render js: "alert('#{message}')" }
     end
   end
@@ -24,15 +24,12 @@ class ApplicationController < ActionController::Base
 
   def current_locale
     requested = params[:lang]&.to_s&.downcase&.to_sym
-    if requested && I18n.available_locales.include?(requested)
-      requested
-    else
-      domain_locale
-    end
+
+    requested && I18n.available_locales.include?(requested) ? requested : domain_locale
   end
 
   def domain_locale
-    I18n.available_locales.find { |l| l == top_level_domain } || I18n.default_locale
+    top_level_domain == :rs ? :sr : :ru
   end
 
   def top_level_domain

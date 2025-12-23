@@ -5,6 +5,8 @@ class Ability
 
   def initialize(user)
     return unless user
+
+    cannot :destroy, User unless user.super_admin?
     can(:manage, :all) and return if user.admin?
     return if user.permissions.blank?
 

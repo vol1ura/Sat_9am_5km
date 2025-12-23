@@ -32,7 +32,11 @@
       </div>
     </nav>
 
-    <div class="ms-auto me-2">
+    <div class="ms-auto me-2 d-flex align-items-center gap-2">
+      <button type="button" class="btn btn-sm fs-6 p-1 theme-toggle" data-action="theme#toggle" aria-label="Toggle theme">
+        <i class="fa-solid fa-sun text-light theme-icon-light"></i>
+        <i class="fa-solid fa-moon text-light theme-icon-dark"></i>
+      </button>
       <a href="#" class="btn btn-sm fs-6 p-1" data-bs-toggle="modal" data-bs-target="#langModal" aria-label="Language">
         <i class="fa-solid fa-globe text-light"></i>
       </a>
@@ -74,18 +78,18 @@
     </button>
     <div class="offcanvas offcanvas-end text-bg-primary" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h1 class="fs-5 offcanvas-title" id="offcanvasNavbarLabel">
-          <%= link_to 'Sat 9am 5km', root_path, class: 'link-light text-decoration-none' %>
-        </h1>
+        <header class="fs-4 mt-3 offcanvas-title" id="offcanvasNavbarLabel">
+          <%= link_to t('.s95'), root_path, class: 'link-light text-decoration-none' %>
+        </header>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body d-flex flex-column justify-content-between">
         <ul class="navbar-nav justify-content-start flex-grow-1 fa-ul pe-3">
-          <!--<li class="nav-item">
-            <%#= link_to page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" do %>
+          <li class="nav-item">
+            <%= link_to page_path(page: 'additional-events'), class: "nav-link #{'active' if params[:page] == 'additional-events'}" do %>
               <span class="fa-li"><i class="fa-solid fa-snowman"></i></span><%= t '.1_january' %>
-            <%# end %>
-          </li>-->
+            <% end %>
+          </li>
           <li class="nav-item">
             <%= link_to events_path, class: "nav-link #{'active' if params[:controller] == 'events' && params[:action] == 'index'}" do %>
               <span class="fa-li"><i class="fa-solid fa-map-location-dot"></i></span><%= t '.events' %>
@@ -154,7 +158,7 @@
       </div>
       <div class="modal-body">
         <div class="list-group list-group-flush">
-          <% [[:ru, 'Русский', '🇷🇺'], [:rs, 'Srpski', '🇷🇸']].each do |locale, title, flag| %>
+          <% [[:ru, 'Русский', '🇷🇺'], [:sr, 'Srpski', '🇷🇸']].each do |locale, title, flag| %>
             <% opts = { only_path: true, params: request.query_parameters.except(:lang) } %>
             <% opts[:lang] = (locale == domain_locale ? nil : locale) %>
             <%= link_to opts, class: 'list-group-item d-flex justify-content-between align-items-center' do %>

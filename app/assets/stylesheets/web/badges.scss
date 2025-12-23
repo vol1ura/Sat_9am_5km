@@ -24,23 +24,26 @@
 
 .trophy-container .active {
   position: relative;
-  filter: drop-shadow(0 0 2px rgb(190 34 112 / 35%))
-          drop-shadow(0 0 5px rgb(190 34 112 / 25%))
-          drop-shadow(0 0 8px rgb(190 34 112 / 15%));
+  filter:
+    drop-shadow(0 0 2px rgb(190 34 112 / 35%))
+    drop-shadow(0 0 5px rgb(190 34 112 / 25%))
+    drop-shadow(0 0 8px rgb(190 34 112 / 15%));
   animation: glowing-pulse 2.5s ease-in-out infinite;
 }
 
 @keyframes glowing-pulse {
   0%, 100% {
-    filter: drop-shadow(0 0 2px rgb(190 34 112 / 30%))
-            drop-shadow(0 0 4px rgb(190 34 112 / 20%))
-            drop-shadow(0 0 6px rgb(190 34 112 / 10%));
+    filter:
+      drop-shadow(0 0 2px rgb(190 34 112 / 30%))
+      drop-shadow(0 0 4px rgb(190 34 112 / 20%))
+      drop-shadow(0 0 6px rgb(190 34 112 / 10%));
   }
   50% {
-    filter: drop-shadow(0 0 4px rgb(190 34 112 / 45%))
-            drop-shadow(0 0 8px rgb(190 34 112 / 35%))
-            drop-shadow(0 0 12px rgb(190 34 112 / 25%))
-            drop-shadow(0 0 16px rgb(190 34 112 / 15%));
+    filter:
+      drop-shadow(0 0 4px rgb(190 34 112 / 45%))
+      drop-shadow(0 0 8px rgb(190 34 112 / 35%))
+      drop-shadow(0 0 12px rgb(190 34 112 / 25%))
+      drop-shadow(0 0 16px rgb(190 34 112 / 15%));
   }
 }
 
@@ -58,7 +61,7 @@
   width: 92px;
   height: 92px;
   border-radius: 50%;
-  background-color: $light;
+  background-color: var(--bs-tertiary-bg);
   position: relative;
 
   &.ppb-gt-50 {
@@ -83,14 +86,14 @@
 
     .ppb-progress-fill {
       clip-path: inset(0 0 0 50%);
-      background: $light;
+      background: var(--bs-tertiary-bg);
     }
   }
 }
 .ppb-info {
   @include circle(80px);
 
-  background: #fff;
+  background: var(--bs-body-bg);
   text-align: center;
   display: table;
 
@@ -98,7 +101,7 @@
     display: block;
     font-size: 10px;
     font-weight: bold;
-    color: $primary;
+    color: var(--bs-primary-text-emphasis);
   }
 }
 .ppb-info-wrapper {
