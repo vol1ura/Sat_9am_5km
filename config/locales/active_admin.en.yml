@@ -1,0 +1,335 @@
+en:
+  admin:
+    athletes:
+      results:
+        title: All Results
+      volunteering:
+        title: Published Volunteering
+      trophies:
+        title: All Badges
+      destroy:
+        successfully_deleted: 'Successfully deleted %{obj}'
+        cannot_delete_registered: 'Action cancelled. Cannot delete a registered participant!'
+        cannot_delete_participant: 'Action cancelled. Cannot delete a participant who has results!'
+    utilities:
+      reports:
+        task_queued: 'File creation task has been queued. Wait for the report in Telegram.'
+        event_not_selected: Event not selected
+        params_not_selected: 'Event or role not selected'
+      cache:
+        clear_success: 'Cache successfully cleared!'
+        clear_failed: 'Cancelled! Cache was recently cleared. Please try again later.'
+      award_funrun_badge:
+        performing: 'Award procedure has been started, this will take some time. Refresh the page a bit later to see the results.'
+      stats:
+        title: Statistics
+        month: Month
+        activities_count: Runs
+        volunteers:
+          title: Volunteer Dynamics Over Last 12 Months
+          count: Volunteers
+          avg_count: Avg. Number of Volunteers
+          newbies_count: New Volunteers
+        results:
+          title: Participant Dynamics Over Last 12 Months
+          count: Participants
+          avg_count: Avg. Number of Participants
+          newbies_count: New Participants
+    activities:
+      create: &upload_notices
+        success_upload: 'Data upload tasks have been created. Depending on the number of participants missing from the database, retrieving information may take some time. Refresh the page in 5-15 seconds.'
+        failed_upload: 'Error! Failed to process some files. Check the format - only CSV is allowed.'
+        bad_timer_format: 'Error in timer file: %{message}. Check the time format 00:00:00. Also check that scanner and timer files are not mixed up.'
+        bad_data: 'Data validation error in attached files. Check their correctness and try again.'
+        bad_files: 'File processing error. You may be trying to upload a timer file instead of a scanner file, or some files are corrupted. Check their correctness and try again.'
+      update:
+        <<: *upload_notices
+      destroy:
+        forbidden_for_published: 'Deletion of published protocol is forbidden! Contact administrators.'
+      publish:
+        confirm: Make sure the protocol contains no errors. Publish on the website?
+        successfully_published: Protocol successfully published on the website
+        empty_protocol: Protocol has no results
+        incorrect_protocol: Protocol contains errors. Please fix them before publishing
+        has_doubled_results: 'Some participants already have published results in other locations on this day.'
+      toggle_mode:
+        auto:
+          confirm: Switch to automatic mode? Data upload from mobile app will be enabled
+          success: Automatic mode activated. Scan QR code using S95 Volunteer app
+        manual:
+          confirm: Switch to manual editing mode? Remote data upload will be disabled
+          success: Manual editing mode activated. You can now edit and publish the protocol
+    contacts:
+      index:
+        title: 'Contacts %{event_name}'
+    events:
+      analytics:
+        title: Analytics
+    results:
+      destroy:
+        result_destroyed: 'Position #%{position} removed from protocol.'
+    volunteering_positions:
+      index:
+        title: 'Volunteering Positions %{event_name}'
+      create:
+        successful: 'Position successfully added'
+      update:
+        successful: 'Position successfully updated'
+    volunteers:
+      index:
+        title: 'Volunteer Editor %{date}'
+      create:
+        successful: 'Volunteering successfully added'
+      update:
+        successful: 'Volunteering data for %{volunteer_name} successfully updated'
+    permissions: Permissions
+  results:
+    explanation:
+      actions:
+       title: Operations
+       items:
+        - 'Delete - will delete the entire row without recalculating positions (numbering will remain).'
+        - 'Delete 🆙 - will delete the row with recalculation of subsequent positions (will shift up by one).'
+        - 'Delete 🕑 - deletes time in the row, replacing it and all subsequent times with time from the next row. The last participant will be left without a result.'
+        - 'Delete 🏃 - deletes participant in the row, replacing them and all subsequent participants with participant from the next row. That is, all participants will shift by 1 position starting from the deleted participant.'
+        - 'Reset 🏃 - resets participant. Protocol will show Unknown.'
+        - 'Add 🔝 - inserts a new result before the selected row.'
+      batch_actions:
+        title: Batch Operations
+        items:
+          - 'Delete - will delete rows without recalculating positions'
+          - 'Move Time - will shift time by the specified number of minutes and seconds'
+      important:
+        title: Please Read Carefully!
+        items:
+          - 'Batch deletion of results is only possible for unpublished results. After publishing, perform all changes extremely carefully, and only if really necessary.'
+          - 'If a participant appears as "UNKNOWN", it means their name could not be automatically filled. Click on UNKNOWN and use the parkrun or 5 versts website to find the name by ID.'
+          - 'If a participant appears as "NO TOKEN (create)", it means they were not scanned. Before creating them, make sure this person is not already in the database, and then you DO NOT NEED to create a new record, just click on the time and enter their data in the opened form.'
+  active_admin:
+    dashboard: Dashboard
+    dashboard_welcome:
+      call_to_action: 'In the Runs section you can upload data from scanners and timer (Create Run button). All functionality is visible and accessible only to users with administrator rights. Contact them via Telegram chat to configure your rights.'
+      info: Information
+      latest_activities: 'Recently Created Runs'
+      upcoming_activities: 'Upcoming Runs'
+      change_log: Updates
+    utilities: Utilities
+    view: View
+    edit: Edit
+    delete: Delete
+    delete_confirmation: "Are you sure you want to delete this?"
+    new_model: "Create %{model}"
+    edit_model: "Edit %{model}"
+    delete_model: "Delete %{model}"
+    details: "%{model} Details"
+    cancel: "Cancel"
+    empty: "Empty"
+    previous: "Prev."
+    next: "Next"
+    download: "Download:"
+    has_many_new: "Add %{model}"
+    has_many_delete: "Delete"
+    has_many_remove: "Remove"
+    filters:
+      buttons:
+        filter: "Filter"
+        clear: "Clear"
+      predicates:
+        contains: "Contains"
+        equals: "Equals"
+        starts_with: "Starts with"
+        ends_with: "Ends with"
+        greater_than: "greater than"
+        less_than: "less than"
+        from: "From"
+        to: "To"
+    search_status:
+      headline: "Search Status:"
+      current_scope: "Scope:"
+      current_filters: "Current Filter:"
+      no_current_filters: "None"
+    status_tag:
+      "yes": "Yes"
+      "no": "No"
+      "unset": "No"
+    main_content: "Create %{model}#main_content to display content."
+    logout: "Logout"
+    powered_by: "Powered by %{active_admin} %{version}"
+    sidebars:
+      filters: "Filters"
+      search_status: "Search Status"
+    pagination:
+      per_page: 'per page'
+      empty: "%{model} not found"
+      one: "Result: <b>1</b> %{model}"
+      one_page: "Result: <b>%{n}</b> %{model}"
+      multiple: "Result: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{total}</b>"
+      multiple_without_total: "Result: %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
+      entry:
+        one: "entry"
+        other: "entries"
+    any: "Any"
+    blank_slate:
+      content: "There are no %{resource_name} yet."
+      link: "Create"
+    dropdown_actions:
+      button_label: "Actions"
+    batch_actions:
+      button_label: "Batch Actions"
+      default_confirmation: "Are you sure you want to do this?"
+      delete_confirmation: "Are you sure you want to delete %{plural_model}?"
+      succesfully_destroyed:
+        one: "Successfully deleted: 1 %{model}"
+        other: "Successfully deleted: %{count} %{plural_model}"
+      successfully_moved_time: "Time shift (%{sign}%{delta}sec) performed for %{count} results"
+      selection_toggle_explanation: "(Select All / Deselect)"
+      action_label: "%{title}"
+      labels:
+        destroy: Delete
+        reunite: Merge
+        gender_set: Set Gender
+        change_roles: Change Permissions
+        move_time: Move Time
+    comments:
+      created_at: "Created At"
+      resource_type: "Resource Type"
+      author_type: "Author Type"
+      body: "Text"
+      author: "Author"
+      add: "Add Comment"
+      delete: "Delete Comment"
+      delete_confirmation: "Are you sure you want to delete this comment?"
+      resource: "Resource"
+      no_comments_yet: "No comments yet."
+      author_missing: "Anonymous"
+      title_content: "Comments (%{count})"
+      errors:
+        empty_text: "Comment not saved, text must not be empty."
+    athletes:
+      confirm_reunite: "Merge these participants into one?"
+      successful_reunite: "Participants have been merged."
+      failed_reunite: "Operation failed. Participants cannot be merged."
+      confirm_gender_set: "Set gender for selected participants?"
+      successful_gender_set: "Gender change successfully performed."
+      gender_set_failed: "Failed to perform gender change."
+    results:
+      cannot_link_athlete: 'Participant with specified ID not found. Check the numbers or create such participant first.'
+      cannot_move_result: 'Error! Check position correctness.'
+      drop_time_failed: 'Failed to delete time. Refresh the page and try again.'
+      drop_athlete_failed: 'Failed to delete participant. Refresh the page and try again.'
+      reset_athlete_failed: 'Failed to reset participant. Refresh the page and try again.'
+      insert_result_failed: 'Failed to add row. Refresh the page and try again.'
+      result_successfully_appended: 'Position #%{position} successfully added to protocol.'
+      result_successfully_deleted: 'Split successfully deleted, positions recalculated.'
+      batch_destroy_confirm: 'Are you sure you want to delete selected results?'
+      batch_move_time_confirm: 'Are you sure you want to move time for selected results?'
+    newsletters:
+      notified: 'Newsletter sample has been sent to your Telegram'
+    users:
+      confirm_change_roles: 'Are you sure you want to change permissions for selected users?'
+      successful_roles_changed: 'Permissions successfully set.'
+    page:
+      index:
+        utilities: Utilities
+        analytics:
+          title: Analytics
+        cache_clear:
+          title: 'Cache Clear'
+          button: 'Clear Cache'
+          confirm: 'Are you sure you want to clear the cache?'
+        badges:
+          title: Badges
+
+    devise:
+      username:
+        title: "Username"
+      email:
+        title: "Email"
+      subdomain:
+        title: "Subdomain"
+      password:
+        title: "Password"
+      password_confirmation:
+        title: "Password Confirmation"
+      sign_up:
+        title: "Sign Up"
+        submit: "Sign Up"
+      reset_password:
+        title: "Forgot Your Password?"
+        submit: "Reset Password"
+      change_password:
+        title: "Change Password"
+        submit: "Change Password"
+      unlock:
+        title: "Resend Unlock Instructions"
+        submit: "Resend Unlock Instructions"
+      resend_confirmation_instructions:
+        title: "Resend Activation Email"
+        submit: "Resend Activation Email"
+      links:
+        sign_up: "Sign Up"
+        sign_in: "Sign In"
+        forgot_your_password: "Forgot Your Password?"
+        sign_in_with_omniauth_provider: "Sign In with %{provider}"
+        resend_unlock_instructions: "Resend Unlock Instructions"
+        resend_confirmation_instructions: "Resend Confirmation Instructions"
+    unsupported_browser:
+      headline: "Sorry, but the site does not support older versions of Internet Explorer starting from IE 8"
+      recommendation: "We recommend updating your browser version (<a href=\"http://windows.microsoft.com/ie\">Internet Explorer</a>, <a href=\"https://chrome.google.com/\">Google Chrome</a>, or <a href=\"https://mozilla.org/firefox/\">Firefox</a>)."
+      turn_off_compatibility_view: "If you're using IE 9 or newer, make sure <a href=\"https://support.microsoft.com/ru-ru/help/17471\">you've turned off the \"Compatibility View\" option</a>."
+    access_denied:
+      message: "You don't have permission to perform this action or view the requested resource."
+    index_list:
+      table: "Table"
+      block: "List"
+      grid: "Grid"
+      blog: "Blog"
+    resources:
+      volunteer:
+        new_model: Add Volunteering
+        edit_model: Edit Volunteering
+        delete_model: Delete Volunteering
+      athlete:
+        new_model: Create Participant
+        edit_model: Edit Participant
+        delete_model: Delete Participant
+      user:
+        new_model: Create User
+        edit_model: Edit User
+        delete_model: Delete User
+      badge:
+        new_model: Create Badge
+        edit_model: Edit Badge
+        delete_model: Delete Badge
+      newsletter:
+        new_model: Create Newsletter
+        edit_model: Edit
+        delete_model: Delete
+      volunteering_position:
+        new_model: Add Position
+        edit_model: Edit Position
+        delete_model: Delete Position
+    scopes:
+      all: All
+      admin: Admins
+      super_admin: Super Admins
+      supervisors: Supervisors
+      published: Published
+      unpublished: Unpublished
+      duplicates: Duplicates?
+      active: Active
+      inactive: Inactive
+
+  ransack:
+    predicates:
+      cont: contains
+      eq: equals
+      start: starts with
+      end: ends with
+      gt: greater than
+      lt: less than
+
+  formtastic:
+    create: 'Create'
+    update: 'Update'
+
