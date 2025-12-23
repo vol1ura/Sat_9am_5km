@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CookieConsentsController < ApplicationController
+  skip_forgery_protection
+
   def create
     cookies.permanent[:policy_accepted] = true
     current_user.update!(policy_accepted: true) if user_signed_in?

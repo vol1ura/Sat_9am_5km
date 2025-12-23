@@ -6,7 +6,7 @@ active_admin_form_for [:admin, resource] do |f|
     if f.object.new_record?
       para <<~NOTE
         Чтобы результаты участника в будущем не затерялись,
-        крайне желательно сразу указать его номер в системе Parkrun или 5вёрст.
+        крайне желательно сразу указать его номер в системе Parkrun или 5вёрст, если есть.
       NOTE
     end
   end
@@ -19,6 +19,7 @@ active_admin_form_for [:admin, resource] do |f|
     input :parkrun_code, input_html: { inputmode: 'numeric' }
     input :fiveverst_code, input_html: { inputmode: 'numeric' }
     input :runpark_code, input_html: { inputmode: 'numeric' }
+    input :parkzhrun_code, input_html: { inputmode: 'numeric' } if current_user.admin?
     input :club, as: :searchable_select
     input :event, as: :searchable_select, collection: Event.without_friends
     input :male, as: :radio, collection: [['мужчина', true], ['женщина', false]], required: true, label: 'пол'
@@ -28,7 +29,7 @@ active_admin_form_for [:admin, resource] do |f|
     panel 'Внимание - участник привязан к пользователю' do
       div(class: 'warning-box') do
         para 'Пожалуйста, вносите изменения (например, клуб или домашний забег) ТОЛЬКО с согласия пользователя!!!'
-        para 'Зарегистрированные пользователи могут и должны вносить изменения в данные самостоятельно.'
+        para 'Зарегистрированные пользователи могут и должны вносить изменения в личные данные самостоятельно.'
       end
     end
   end

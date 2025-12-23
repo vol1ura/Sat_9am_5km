@@ -60,14 +60,14 @@ RSpec.describe '/admin/utilities' do
       post admin_utilities_export_event_csv_url, params: { event_id: }
       expect(response).to redirect_to admin_utilities_url
       expect(flash[:notice]).to include('Ждите отчёт в Telegram')
-      expect(EventAthletesCsvExportJob).to have_been_enqueued.with(event_id, user.id, nil)
+      expect(CsvReports::EventAthletesJob).to have_been_enqueued.with(event_id, user.id, nil, nil)
     end
 
     it 'does not enqueue csv export job if event is not selected' do
       post admin_utilities_export_event_csv_url
       expect(response).to redirect_to admin_utilities_url
       expect(flash[:alert]).to include('Мероприятие не выбрано')
-      expect(EventAthletesCsvExportJob).not_to have_been_enqueued
+      expect(CsvReports::EventAthletesJob).not_to have_been_enqueued
     end
   end
 
@@ -78,24 +78,24 @@ RSpec.describe '/admin/utilities' do
       post admin_utilities_export_volunteers_roles_csv_url, params: { event_id: }
       expect(response).to redirect_to admin_utilities_url
       expect(flash[:notice]).to include('Ждите отчёт в Telegram')
-      expect(VolunteersRolesCsvExportJob).to have_been_enqueued.with(event_id, user.id, nil)
+      expect(CsvReports::VolunteersRolesJob).to have_been_enqueued.with(event_id, user.id, nil, nil)
     end
 
     it 'does not enqueue csv export job if event is not selected' do
       post admin_utilities_export_volunteers_roles_csv_url
       expect(response).to redirect_to admin_utilities_url
       expect(flash[:alert]).to include('Мероприятие не выбрано')
-      expect(VolunteersRolesCsvExportJob).not_to have_been_enqueued
+      expect(CsvReports::VolunteersRolesJob).not_to have_been_enqueued
     end
   end
 
   describe 'POST /admin/utilities/export_user_registrations_csv' do
     it 'enqueues csv export job' do
-      post admin_utilities_export_user_registrations_csv_url, params: { from_date: '2023-01-01' }
+      post admin_utilities_export_user_registrations_csv_url, params: { from_date: '2023-01-01', till_date: '2023-12-31' }
 
       expect(response).to redirect_to admin_utilities_url
       expect(flash[:notice]).to include('Ждите отчёт в Telegram')
-      expect(UserRegistrationsCsvExportJob).to have_been_enqueued.with(user.id, '2023-01-01')
+      expect(CsvReports::UserRegistrationsJob).to have_been_enqueued.with(user.id, '2023-01-01', '2023-12-31')
     end
   end
 end

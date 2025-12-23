@@ -30,12 +30,14 @@ module CsvReports
     end
 
     def date_range
-      @date_range ||= begin
-        return (@from_date..@till_date) if @from_date && @till_date
-        return (@from_date..) if @from_date
-
-        (..@till_date) if @till_date
-      end
+      @date_range ||=
+        if @from_date && @till_date
+          @from_date..@till_date
+        elsif @from_date
+          @from_date..
+        elsif @till_date
+          ..@till_date
+        end
     end
   end
 end

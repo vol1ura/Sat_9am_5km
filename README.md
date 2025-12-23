@@ -21,10 +21,9 @@ SELECT pg_stat_statements_reset();
 
 ## Development
 
-Create `deploy/.env` and `config/database.yml` files:
+Create `deploy/.env` file:
 ```shell
 cp ./deploy/.env.example ./deploy/.env
-cp ./config/database.yml.example ./config/database.yml
 ```
 
 To build project install `Docker` and execute
