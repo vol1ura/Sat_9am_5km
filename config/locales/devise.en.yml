@@ -14,7 +14,7 @@ en:
         title: Sign In
         description: To sign in, you can use email and password or Telegram bot. Simply request a one-time login link in the bot with the /login command
         registration_html: 'Register using <a href="%{link}" target="_blank" rel="noopener">@sat9am5kmbot</a> Telegram bot'
-        telegram_login_html: 'If you're already registered, use a one-time login link for signing in, which can be obtained with the <code>/login</code> command in the <a href="%{link}" class="text-reset" target="_blank">bot</a>'
+        telegram_login_html: "If you're already registered, use a one-time login link for signing in, which can be obtained with the <code>/login</code> command in the <a href=\"%{link}\" class=\"text-reset\" target=\"_blank\">bot</a>"
     confirmations:
       new:
         title: Resend Confirmation Instructions

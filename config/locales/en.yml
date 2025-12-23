@@ -510,7 +510,7 @@ en:
       your_friend: Your Friend
       duel_history: Duel History
       no_duels: No joint runs
-      no_duels_with_friend: 'You don't have joint runs with %{friend_name} yet'
+      no_duels_with_friend: "You don't have joint runs with %{friend_name} yet"
     duel:
       victory: Victory
       defeat: Defeat
@@ -602,19 +602,19 @@ en:
     about:
       description: S95 is a platform that unites independent park runs conducted according to the main principles of parkrun suspended in Russia (Saturday, 9 AM, 5 km).
       paragraphs:
-        - 'Imagine: Saturday, 9 AM. The sun is just starting to warm up, birds are singing, and you... you're already at the start of a 5-kilometer distance. But this isn't just a run — it's S95, a platform that unites everyone who loves running, fresh air, and good company.'
-        - 'Many have already fallen in love with parkruns as events where runners and volunteers start each Saturday with movement, communication, and a cup of tea from a thermos. But times change, and traditions remain. Now there's S95 — it's a whole community. Here you can find out where the nearest run is, what volunteers are needed for the upcoming Saturday, check your results (and proudly brag if you've beaten your personal record), and find like-minded people who also believe that Saturday morning is time not for sleep, but for running and communication.'
-        - 'And most importantly — S95 is accessible to everyone. It doesn't matter who you are: a marathoner with a hundred medals or someone who last ran in school PE class. There's no participation fee here, only payment in the form of good mood and smiles. You can walk or run the distance at your comfortable pace.'
-        - 'So, if you're not yet in the know, S95 isn't just a set of symbols, it's a lifestyle, a Saturday ritual, and an opportunity to start the day with something really cool. Grab your sneakers, call your friends, and join the runs where every kilometer is a step toward new acquaintances, adventures, or a cool photo for social media.'
+        - "Imagine: Saturday, 9 AM. The sun is just starting to warm up, birds are singing, and you... you're already at the start of a 5-kilometer distance. But this isn't just a run — it's S95, a platform that unites everyone who loves running, fresh air, and good company."
+        - "Many have already fallen in love with parkruns as events where runners and volunteers start each Saturday with movement, communication, and a cup of tea from a thermos. But times change, and traditions remain. Now there's S95 — it's a whole community. Here you can find out where the nearest run is, what volunteers are needed for the upcoming Saturday, check your results (and proudly brag if you've beaten your personal record), and find like-minded people who also believe that Saturday morning is time not for sleep, but for running and communication."
+        - "And most importantly — S95 is accessible to everyone. It doesn't matter who you are: a marathoner with a hundred medals or someone who last ran in school PE class. There's no participation fee here, only payment in the form of good mood and smiles. You can walk or run the distance at your comfortable pace."
+        - "So, if you're not yet in the know, S95 isn't just a set of symbols, it's a lifestyle, a Saturday ritual, and an opportunity to start the day with something really cool. Grab your sneakers, call your friends, and join the runs where every kilometer is a step toward new acquaintances, adventures, or a cool photo for social media."
       events: 'Currently, our system displays results from %{events_count} locations: %{events}, as well as themed runs, like it was in Nikola-Lenivets Park at the SMF festival.'
       s95_abroad:
         title: S95 Runs Abroad
-        body: 'Saturday runs are also held in other countries - these are %{countries}. All results are accounted for in a unified system and displayed in participants' personal profiles.'
+        body: "Saturday runs are also held in other countries - these are %{countries}. All results are accounted for in a unified system and displayed in participants' personal profiles."
       back: Back
       forward: Forward
     rules:
       description: Brief rules for S95 run participants, as well as frequently asked questions
-      register_with_bot_html: 'If you're not registered, create a profile using our <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a>. You'll receive a link to your profile with a personal barcode.'
+      register_with_bot_html: "If you're not registered, create a profile using our <a href=\"%{link}\" target=\"_blank\" rel=\"noopener\">Telegram bot</a>. You'll receive a link to your profile with a personal barcode."
       come_to_s95_html: 'Most importantly - come on <strong>Saturday</strong> at <strong>9 AM</strong> to one of the events and run <strong>5 km</strong>.'
       scan_barcodes: At the finish, you'll be given a position card. Scan your personal barcode and position card with the volunteer.
       return_position_card: Return the position card.
@@ -624,10 +624,10 @@ en:
         answer: The course is well marked with orange cones, there's a marshal at the turnaround (if there is one), and you'll likely be running surrounded by other participants.
       about_registering:
         question: Do I need to register to participate in a run?
-        answer_html: 'Not required, but it's recommended to register using our Telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. As a result, you'll have a personal barcode that you'll show to the volunteer. Additionally, the bot will send notifications with run results.'
+        answer_html: "Not required, but it's recommended to register using our Telegram bot <a href=\"%{link}\" target=\"_blank\" rel=\"noopener\">%{bot_nick}</a>. As a result, you'll have a personal barcode that you'll show to the volunteer. Additionally, the bot will send notifications with run results."
       about_participation:
         question: 'Can I just come at 8:45 to run together?'
-        answer: 'Yes, you can just come and run. Registration is needed so you have a result in the protocol. Register once and you can come to any run. If you don't register - you'll be in the protocol as "Unknown". On site, they'll help you register and enjoy five kilometers in good company.'
+        answer: "Yes, you can just come and run. Registration is needed so you have a result in the protocol. Register once and you can come to any run. If you don't register - you'll be in the protocol as \"Unknown\". On site, they'll help you register and enjoy five kilometers in good company."
       about_barcode:
         question: Can I use a parkrun (5 versts, RunPark) barcode?
         answer: Yes, you can come to a run with another system's barcode. However, your result will only be counted in the S95 system.
@@ -940,7 +940,7 @@ en:
   clubs:
     index:
       description: Table of clubs with statistics on total number of participants, volunteering, and runs.
-      how_to_add_new_club_html: 'Your club isn't in the list? Write to us <a href="mailto:%{mail}?subject=Add%20new%20club" target="_blank" title="Send us email">by email</a> and we'll add it. In the message, specify the club name, add a brief description, and attach the club logo if available.'
+      how_to_add_new_club_html: "Your club isn't in the list? Write to us <a href=\"mailto:%{mail}?subject=Add%20new%20club\" target=\"_blank\" title=\"Send us email\">by email</a> and we'll add it. In the message, specify the club name, add a brief description, and attach the club logo if available."
       name: Name
       athletes: Participants
       results: Results
@@ -1080,8 +1080,8 @@ en:
       going: 'Going %{date}!'
       cancel: 'Not going %{date}'
       confirm_cancel: Are you sure you want to cancel participation in the nearest run?
-      going_to_event: 'If you're planning to attend the nearest run, you can mark yourself right now, then your friends will see in the profile that you're going here and, perhaps, they'll join you.'
-      already_going: 'You've marked that you're planning to come here for the nearest run. If you want to cancel your decision, you can do so at any time.'
+      going_to_event: "If you're planning to attend the nearest run, you can mark yourself right now, then your friends will see in the profile that you're going here and, perhaps, they'll join you."
+      already_going: "You've marked that you're planning to come here for the nearest run. If you want to cancel your decision, you can do so at any time."
       reset_going_to: 'This mark will be automatically reset on the nearest Saturday.'
   friendships:
     button:
