@@ -120,7 +120,12 @@ ActiveAdmin.register_page 'Utilities' do
 
   page_action :export_event_csv, method: :post do
     if (event_id = params[:event_id]).present?
-      EventAthletesCsvExportJob.perform_later event_id.to_i, current_user.id, params[:from_date].presence
+      CsvReports::EventAthletesJob.perform_later(
+        event_id.to_i,
+        current_user.id,
+        params[:from_date].presence,
+        params[:till_date].presence,
+      )
       flash[:notice] = t '.reports.task_queued'
     else
       flash[:alert] = t '.reports.event_not_selected'
@@ -130,7 +135,12 @@ ActiveAdmin.register_page 'Utilities' do
 
   page_action :export_volunteers_roles_csv, method: :post do
     if (event_id = params[:event_id]).present?
-      VolunteersRolesCsvExportJob.perform_later event_id.to_i, current_user.id, params[:from_date].presence
+      CsvReports::VolunteersRolesJob.perform_later(
+        event_id.to_i,
+        current_user.id,
+        params[:from_date].presence,
+        params[:till_date].presence,
+      )
       flash[:notice] = t '.reports.task_queued'
     else
       flash[:alert] = t '.reports.event_not_selected'
@@ -139,7 +149,11 @@ ActiveAdmin.register_page 'Utilities' do
   end
 
   page_action :export_user_registrations_csv, method: :post do
-    UserRegistrationsCsvExportJob.perform_later current_user.id, params[:from_date].presence
+    CsvReports::UserRegistrationsJob.perform_later(
+      current_user.id,
+      params[:from_date].presence,
+      params[:till_date].presence,
+    )
     flash[:notice] = t '.reports.task_queued'
     redirect_to admin_utilities_path
   end

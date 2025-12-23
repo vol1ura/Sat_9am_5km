@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe VolunteersRolesCsvExportJob do
+RSpec.describe CsvReports::VolunteersRolesJob do
   let(:event) { create(:event) }
   let(:user) { create(:user) }
 

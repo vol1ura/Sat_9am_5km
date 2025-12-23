@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe UserRegistrationsCsvExportJob do
+RSpec.describe CsvReports::UserRegistrationsJob do
   let(:user) { create(:user) }
 
   describe 'queueing' do
@@ -13,36 +13,40 @@ RSpec.describe UserRegistrationsCsvExportJob do
     context 'when user has no telegram_id' do
       let(:user) { create(:user, :with_email) }
 
-      before { allow(Telegram::Notification::File).to receive(:call) }
+      before { allow(Telegram::Bot).to receive(:call) }
 
       it 'does nothing' do
         described_class.perform_now user.id
-        expect(Telegram::Notification::File).not_to have_received(:call)
+        expect(Telegram::Bot).not_to have_received(:call)
       end
     end
 
     context 'when user has telegram_id' do
       let!(:user) { create(:user, created_at: 1.week.ago) }
+      let(:expected_form_data) do
+        [
+          [
+            'document',
+            instance_of(Tempfile),
+            { filename: a_string_matching(/user_registrations_\d+\.csv/), content_type: 'text/csv' },
+          ],
+          ['caption', a_string_including('Отчёт по регистрациям пользователей')],
+          ['chat_id', user.telegram_id.to_s],
+        ]
+      end
 
-      before { allow(Telegram::Notification::File).to receive(:call) }
+      before { allow(Telegram::Bot).to receive(:call) }
 
       it 'generates CSV and sends document to telegram' do
         described_class.perform_now user.id
 
-        expect(Telegram::Notification::File).to have_received(:call).with(
-          user,
-          hash_including(
-            file: instance_of(Tempfile),
-            filename: a_string_matching(/user_registrations_\d+\.csv/),
-            caption: a_string_including('Отчёт по регистрациям пользователей'),
-          ),
-        )
+        expect(Telegram::Bot).to have_received(:call).with('sendDocument', form_data: expected_form_data).once
       end
     end
 
     context 'when an error occurs' do
       before do
-        allow(Telegram::Notification::File).to receive(:call).and_raise(StandardError)
+        allow(Telegram::Bot).to receive(:call).and_raise(StandardError)
         allow(Rollbar).to receive(:error)
       end
 
