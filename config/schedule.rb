@@ -47,7 +47,7 @@ every :friday, at: '2' do
   rake 'notification:volunteers'
 end
 
-every '0 2 31 12' do
+every '0 2 31 12 *' do
   rake 'notification:volunteers'
 end
 

@@ -782,33 +782,33 @@ sr:
       title: Želite da pokrenete S95 u svom parku?
       description: Objašnjavamo kako da započnete sa organizacijom S95 događaja u svom omiljenom parku.
       body_html: >
-        <p>Ovaj odeljak je za one koji su spremni da pretvore svoj omiljeni park u mesto gde se svake subote okupljaju ljubitelji trčanja i dobrog raspoloženja.</p>
+        <p>Ova stranica je za one koji su spremni da pretvore svoj omiljeni park u mesto gde se svake subote okupljaju ljubitelji trčanja i dobrog raspoloženja.</p>
 
         <h3>Zašto S95?</h3>
         <p>
           <ol>
-            <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su prikupljeni u jednom sistemu</li>
-            <li>Imamo motivacionu sistem nagrada i izazova — dobijajte dostignuća ne samo za visoke rezultate, već i samo za učešće i lični napredak</li>
-            <li>Naša platforma nije samo o trčanju, već i o druženju, kao i o društvenoj misiji: aktivno razvijamo volontiranje, družimo se, nalazimo nove prijatelje</li>
-            <li>Jednostavna i brza registracija novih učesnika pomoću Telegram-bota, svi podaci su uvek pri ruci</li>
-            <li>Koristimo moderne tehnologije i pristupe: mnoštvo različitih statistika i rangiranja, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku</li>
-            <li>Imamo sopstvenu jedinstvenu mobilnu aplikaciju za organizaciju trka</li>
-            <li>Naš sistem je potpuno otvoren i koristi OpenSource tehnologije — svako može predložiti poboljšanja i učiniti platformu još boljom</li>
+            <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su objedinjeni u jedinstvenom sistemu.</li>
+            <li>Imamo motivacioni sistem nagrada i izazova — dobijajte dostignuća ne samo za visoke rezultate, već i za redovno učešće i lični napredak.</li>
+            <li>Naša platforma nije samo o trčanju, već i o druženju i važnoj društvenoj misiji: razvijamo volontiranje, gradimo prijateljsku zajednicu i pomažemo u pronalaženju istomišljenika.</li>
+            <li>Jednostavna i brza registracija novih učesnika pomoću Telegram-bota — svi podaci su uvek pri ruci.</li>
+            <li>Koristimo moderne tehnologije: raznovrsne statistike i rangiranja, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku.</li>
+            <li>Imamo sopstvenu jedinstvenu mobilnu aplikaciju za organizaciju trka.</li>
+            <li>Naš sistem je potpuno otvoren i zasnovan na OpenSource tehnologijama — svako može predložiti poboljšanja i učiniti platformu još boljom.</li>
           </ol>
         </p>
 
         <h3>Plan akcije</h3>
-        <p>Pre nego što pošaljete prijavu, pogledajte odeljak <a href="/events">Naši događaji</a> — možda već postoje naše trke u vašoj blizini. U tom slučaju, pridružite se lokalnom timu i pomozite u razvoju trkačke zajednice u vašem kraju.</p>
+        <p>Pre nego što podnesete prijavu, pogledajte odeljak <a href="/events">Naši događaji</a> — možda već postoje naše trke u vašoj blizini. U tom slučaju pridružite se lokalnom timu i pomozite u razvoju trkačke zajednice u vašem kraju.</p>
         <p>
-          Ako u blizini nema S95 trka, a vi gorite željom da postanete pionir pokreta, potrebno vam je:
+          Ako u blizini nema S95 trka i vi ste spremni da postanete pionir našeg pokreta, potrebno vam je:
           <ul>
-            <li>bezbedna i pogodna staza (bez preseka sa automobilskim putevima i opasnih delova)</li>
-            <li>tim entuzijasta, spremnih da se budi subotom ranije od budilnika</li>
-            <li>malo organizacionih sposobnosti i puno ljubavi prema trčanju</li>
+            <li>bezbedna i pogodna staza bez ukrštanja sa automobilskim putevima i opasnih delova;</li>
+            <li>tim entuzijasta spremnih da se bude subotom ranije od budilnika;</li>
+            <li>malo organizacionih sposobnosti i puno ljubavi prema trčanju.</li>
           </ul>
         </p>
         <p>Od trenutka slanja prijave do prvog tehničkog starta može proći neko vreme, ali S95 tim će učiniti sve što je moguće da vaš park što pre ispuni subotnji trkački duh!</p>
-        <p>Spremni da postanete deo pokreta koji menja subotnja jutra na bolje? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> sa oznakom "Otvoriti S95" i hajde da zajedno stvaramo nove trkačke tradicije!</p>
+        <p>Spremni da postanete deo pokreta koji čini subotnja jutra boljim? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> sa oznakom «Otvoriti S95» i hajde da zajedno stvaramo nove trkačke tradicije!</p>
     additional-events:
       title_html: 'Dodatni događaji 1.&nbsp;januar&nbsp;%{year}'
       description: Obično trke organizujemo samo subotom, ali 1. januara pravimo izuzetak i održavamo dodatnu trku. Na ovoj stranici možete videti vreme i događaj gde možete trčati 1. januara.
