@@ -3,15 +3,12 @@
 namespace :notification do
   desc 'Notify new runners'
   task invite_newbies: :environment do
-    last_week_first_runs = Result
-      .published
-      .where(activity: { date: Date.current.prev_week(:saturday) }, first_run: true)
-      .select(:athlete_id)
-    athlete_ids = Result
-      .where(athlete_id: last_week_first_runs)
-      .group(:athlete_id)
-      .having('COUNT(*) = 1')
-      .select(:athlete_id)
+    athlete_ids =
+      Result
+        .published
+        .group(:athlete_id)
+        .having("MIN(activities.date) #{1.week.ago.to_date.all_week.to_fs(:db)}")
+        .select(:athlete_id)
     User.joins(:athlete).where(athlete: { id: athlete_ids }).find_each do |user|
       Telegram::Notification::User::NewRunner.call(user)
     end
@@ -32,12 +29,11 @@ namespace :notification do
     end
   end
 
-  desc 'Notify volunteers before activity'
+  desc 'Set notification jobs for volunteers before activity'
   task volunteers: :environment do
     Event.find_each do |event|
-      time_current = event.timezone_object.now
-      closest_friday = time_current.friday? ? time_current : time_current.next_occurring(:friday)
-      Telegram::Notification::VolunteerJob.set(wait_until: closest_friday.change(hour: 18)).perform_later(event.id)
+      notification_time = event.timezone_object.now.change(hour: 18)
+      Telegram::Notification::VolunteerJob.set(wait_until: notification_time).perform_later(event.id)
     end
   end
 

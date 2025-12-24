@@ -5,7 +5,7 @@ RSpec.describe Telegram::Notification::VolunteerJob do
 
   context 'when runs' do
     let(:event) { activity.event }
-    let(:activity) { create(:activity, published: false, date: Time.zone.today.next_occurring(:saturday)) }
+    let(:activity) { create(:activity, published: false, date: Time.zone.tomorrow) }
 
     before do
       allow(Telegram::Bot).to receive(:call)

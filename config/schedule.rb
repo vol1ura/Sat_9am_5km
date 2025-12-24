@@ -47,6 +47,10 @@ every :friday, at: '2' do
   rake 'notification:volunteers'
 end
 
+every '0 2 31 12' do
+  rake 'notification:volunteers'
+end
+
 every :friday, at: '10' do
   rake 'notification:invite_newbies'
 end

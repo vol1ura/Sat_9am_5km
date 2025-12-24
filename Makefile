@@ -19,7 +19,9 @@ psql: project
 
 checkup:
 	docker compose exec web rubocop app config db lib spec && \
-	docker compose exec web yarn lint
+	docker compose exec web yarn lint && \
+	docker compose exec web bundle exec ./bin/importmap audit && \
+	docker compose exec web bundle exec database_consistency
 
 build:
 	docker compose run --rm web bundle lock
