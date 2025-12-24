@@ -11,4 +11,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/charts", under: "charts"
 
 # bin/importmap pin apexcharts --download
-pin "apexcharts" # @4.2.0
+pin "apexcharts" # @5.3.6
