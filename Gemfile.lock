@@ -356,7 +356,7 @@ GEM
       activesupport (>= 6.1)
     pghero (3.7.0)
       activerecord (>= 7.1)
-    phonelib (0.10.13)
+    phonelib (0.10.15)
     platform_agent (1.0.1)
       activesupport (>= 5.2.0)
       useragent (~> 0.16.3)
