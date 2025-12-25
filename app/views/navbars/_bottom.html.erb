@@ -24,19 +24,19 @@
         </div>
       </div>
     </div>
-    <hr>
-    <div class="w-100 text-center fw-light fs-small text-body-secondary">
-      <p class="mb-1">
-        <%= t('.copyright', year: Time.zone.today.year) %>
-      </p>
-      <p class="mb-1">
-        <%= t('.organization_info') %>
-      </p>
-      <p class="mb-0">
-        <%= t('.address') %>&nbsp;·
-        <a href="mailto:<%= t('.email') %>" class="text-reset text-decoration-none"><%= t('.email') %></a>
-      </p>
-    </div>
+    <% if top_level_domain == :ru %>
+      <hr>
+      <div class="w-100 text-center fw-light fs-small text-body-secondary">
+        <p class="mb-1">©&nbsp;<%= t '.ano' %>, <%= Time.zone.today.year %>. <%= t '.copyright' %></p>
+        <p class="mb-1">
+          <%= t '.ano' %>&nbsp;· <%= t '.ogrn' %>: 1237700352713&nbsp;· <%= t '.inn' %>: 9721206702&nbsp;· <%= t '.kpp' %>: 772101001&nbsp;· <%= t '.registration_date' %>: 18.05.2023
+        </p>
+        <p class="mb-0">
+          <%= t '.address' %>&nbsp;·
+          <a href="mailto:<%= ENV['INFO_EMAIL'] %>" class="text-reset text-decoration-none"><%= ENV['INFO_EMAIL'] %></a>
+        </p>
+      </div>
+    <% end %>
   </footer>
 </nav>
 <%= render '/cookie_consent' unless cookies[:policy_accepted] || current_user&.policy_accepted? %>

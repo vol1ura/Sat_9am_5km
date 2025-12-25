@@ -581,10 +581,13 @@ en:
       vk_title: VKontakte Group
       send_email: Send us email
       github_title: Project on GitHub
-      copyright: "© ANO «Fizkultura», %{year}. All materials on s95.ru are protected by copyright"
-      organization_info: "ANO «Fizkultura» · OGRN: 1237700352713 · INN: 9721206702 · KPP: 772101001 · Registration date: 18.05.2023"
-      address: "Moscow, kv-l 114A Volzhsky Boulevard, bld. 3, apt. 366"
-      email: "info@s95.ru"
+      ano: 'ANO «Fizkultura»'
+      copyright: All materials on s95.ru are protected by copyright
+      ogrn: OGRN
+      inn: INN
+      kpp: KPP
+      registration_date: Registration date
+      address: Moscow, kv-l 114A Volzhsky Boulevard, bld. 3, apt. 366
   articles:
     index:
       title: Articles
@@ -1168,4 +1171,3 @@ en:
       Attention!
       Scanner data contains errors, so result *%{position}* cannot be saved.
       Please check position *%{position}*, as well as participant with ID *%{code}* for duplication in the protocol and scanner files.
-

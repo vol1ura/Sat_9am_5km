@@ -633,6 +633,13 @@ sr:
       vk_title: Grupa VKontakte
       send_email: Pošaljite nam email
       github_title: Projekat na GitHubu
+      ano: 'ANO «Fizkultura»'
+      copyright: Sve materijale na sajtu s95.ru su zaštićeni autorskim pravom
+      ogrn: OGRN
+      inn: INN
+      kpp: KPP
+      registration_date: Datum registracije
+      address: Moskva, kv-l 114A Volžski bulvar, zd. 3, kv. 366
   articles:
     index:
       title: Članci

@@ -158,7 +158,7 @@
       </div>
       <div class="modal-body">
         <div class="list-group list-group-flush">
-          <% [[:ru, 'Русский', '🇷🇺'], [:sr, 'Srpski', '🇷🇸']].each do |locale, title, flag| %>
+          <% [[:en, 'English', '🇬🇧'], [:ru, 'Русский', '🇷🇺'], [:sr, 'Srpski', '🇷🇸']].each do |locale, title, flag| %>
             <% opts = { only_path: true, params: request.query_parameters.except(:lang) } %>
             <% opts[:lang] = (locale == domain_locale ? nil : locale) %>
             <%= link_to opts, class: 'list-group-item d-flex justify-content-between align-items-center' do %>
