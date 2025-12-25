@@ -1,0 +1,36 @@
+en:
+  devise:
+    shared:
+      links:
+        sign_in: Sign In
+        registration: Register using Telegram bot
+        password: Forgot your password?
+        confirmation: Didn't receive confirmation instructions?
+        unlock: Didn't receive unlock instructions?
+    sessions:
+      signed_in: Successfully signed in
+      signed_out: Successfully signed out
+      new:
+        title: Sign In
+        description: To sign in, you can use email and password or Telegram bot. Simply request a one-time login link in the bot with the /login command
+        registration_html: 'Register using <a href="%{link}" target="_blank" rel="noopener">@sat9am5kmbot</a> Telegram bot'
+        telegram_login_html: "If you're already registered, use a one-time login link for signing in, which can be obtained with the <code>/login</code> command in the <a href=\"%{link}\" class=\"text-reset\" target=\"_blank\">bot</a>"
+    confirmations:
+      new:
+        title: Resend Confirmation Instructions
+        description: Receiving instructions for e-mail confirmation
+        your_email: Your e-mail
+        send_confirmation: Send Confirmation
+    passwords:
+      new:
+        title: Forgot Your Password?
+        description: Recovering forgotten password
+        your_email: Your e-mail
+        reset_password: Reset Password
+    unlocks:
+      new:
+        title: Resend Unlock Instructions
+        description: Receiving unlock instructions
+        your_email: Your e-mail
+        send_instruction: Send Instructions
+

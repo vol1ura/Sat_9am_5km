@@ -27,15 +27,13 @@
     <% if top_level_domain == :ru %>
       <hr>
       <div class="w-100 text-center fw-light fs-small text-body-secondary">
+        <p class="mb-1">©&nbsp;<%= t '.ano' %>, <%= Time.zone.today.year %>. <%= t '.copyright' %></p>
         <p class="mb-1">
-          ©&nbsp;АНО&nbsp;«Физкультура», <%= Time.zone.today.year %>. Все материалы сайта s95.ru защищены авторским правом
-        </p>
-        <p class="mb-1">
-          АНО&nbsp;«Физкультура»&nbsp;· ОГРН: 1237700352713&nbsp;· ИНН: 9721206702&nbsp;· КПП: 772101001&nbsp;· Дата регистрации: 18.05.2023
+          <%= t '.ano' %>&nbsp;· <%= t '.ogrn' %>: 1237700352713&nbsp;· <%= t '.inn' %>: 9721206702&nbsp;· <%= t '.kpp' %>: 772101001&nbsp;· <%= t '.registration_date' %>: 18.05.2023
         </p>
         <p class="mb-0">
-          Москва, кв-л 114А Волжский Бульвар, к. 3, кв. 366&nbsp;·
-          <a href="mailto:info@s95.ru" class="text-reset text-decoration-none">info@s95.ru</a>
+          <%= t '.address' %>&nbsp;·
+          <a href="mailto:<%= ENV['INFO_EMAIL'] %>" class="text-reset text-decoration-none"><%= ENV['INFO_EMAIL'] %></a>
         </p>
       </div>
     <% end %>
