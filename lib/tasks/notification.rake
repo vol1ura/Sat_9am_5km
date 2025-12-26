@@ -7,7 +7,7 @@ namespace :notification do
       Result
         .published
         .group(:athlete_id)
-        .having("MIN(activities.date) #{1.week.ago.to_date.all_week.to_fs(:db)}")
+        .having("MIN(activity.date) #{1.week.ago.to_date.all_week.to_fs(:db)}")
         .select(:athlete_id)
     User.joins(:athlete).where(athlete: { id: athlete_ids }).find_each do |user|
       Telegram::Notification::User::NewRunner.call(user)

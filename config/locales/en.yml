@@ -702,7 +702,7 @@ en:
         <p>Ready to become part of a movement that changes Saturday mornings for the better? Write to us at <a href="mailto:%{info_email}" target="_blank" title="Send us email">%{info_email}</a> with the subject "Start S95" and let's create new running traditions together!</p>
       support:
         title: Support
-        description: S95 runs in Moscow are organized and conducted with the support of "Гранты Мэра Москвы".
+        description: S95 runs in Moscow are organized and held with the support of "Гранты Мэра Москвы".
         acknowledgment: We thank the Moscow Government for supporting our project and developing sports in the capital.
     additional-events:
       title_html: Additional Starts January&nbsp;1,&nbsp;%{year}
