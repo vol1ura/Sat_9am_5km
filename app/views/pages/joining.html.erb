@@ -2,3 +2,13 @@
 <% head_info :description, t('.description') %>
 <h1><%= t '.title' %></h1>
 <%= t '.body_html', info_email: ENV['INFO_EMAIL'] %>
+<% if top_level_domain == :ru %>
+  <h3><%= t '.support.title' %></h3>
+  <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-start justify-content-start justify-content-sm-between gap-2 gap-md-3">
+    <img src="/images/msk_grant.webp" alt="Гранты Мэра Москвы" style="width: 250px;" class="order-0 order-sm-1">
+    <div class="order-1 order-sm-0">
+      <p class="mb-0"><%= t '.support.description' %></p>
+      <p><%= t '.support.acknowledgment' %></p>
+    </div>
+  </div>
+<% end %>

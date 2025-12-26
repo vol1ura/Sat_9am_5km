@@ -816,6 +816,10 @@ sr:
         </p>
         <p>Od trenutka slanja prijave do prvog tehničkog starta može proći neko vreme, ali S95 tim će učiniti sve što je moguće da vaš park što pre ispuni subotnji trkački duh!</p>
         <p>Spremni da postanete deo pokreta koji čini subotnja jutra boljim? Pišite nam na <a href="mailto:%{info_email}" target="_blank" title="Pošaljite nam email">%{info_email}</a> sa oznakom «Otvoriti S95» i hajde da zajedno stvaramo nove trkačke tradicije!</p>
+      support:
+        title: Podrška
+        description: S95 trke u Moskvi organizuju i održavaju sa podrškom "Гранты Мэра Москвы".
+        acknowledgment: Mi hvalimo Moskovsko Praviteljstvo za podršku našem projektu i razvoju sporta u glavnom gradu.
     additional-events:
       title_html: 'Dodatni događaji 1.&nbsp;januar&nbsp;%{year}'
       description: Obično trke organizujemo samo subotom, ali 1. januara pravimo izuzetak i održavamo dodatnu trku. Na ovoj stranici možete videti vreme i događaj gde možete trčati 1. januara.
