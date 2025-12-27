@@ -49,13 +49,6 @@ gem 'rqrcode'
 gem 'ruby-vips', '>= 2.1.0'
 gem 'sidekiq'
 
-gem 'webrick'
-gem 'yabeda-http_requests'
-gem 'yabeda-prometheus'
-gem 'yabeda-puma-plugin'
-gem 'yabeda-rails'
-gem 'yabeda-sidekiq'
-
 gem 'sitemap_generator'
 gem 'sys-cpu'
 gem 'sys-filesystem'
