@@ -1,14 +1,8 @@
+<% funrun_badges = Badge.funrun_kind.where(received_date: 13.days.ago..Time.zone.today).order(received_date: :desc) %>
 <%= form_with url: admin_utilities_award_funrun_badge_path do |f| %>
   <div style="margin-bottom: 12px">
     <%= f.label :badge_id, 'Бейдж' %>
-    <%=
-      f.collection_select(
-        :badge_id,
-        Badge.funrun_kind.where(received_date: 2.weeks.ago..).order(received_date: :desc),
-        :id,
-        :name,
-      )
-    %>
+    <%= f.collection_select :badge_id, funrun_badges, :id, :name %>
   </div>
   <div style="margin-bottom: 24px">
     <%= f.label :activity_id, 'Забег' %>
@@ -17,7 +11,7 @@
                Activity
                  .includes(:event)
                  .published
-                 .where(date: 2.weeks.ago..)
+                 .where(date: funrun_badges.pluck(:received_date))
                  .order(date: :desc)
                  .map { |a| [human_activity_name(a), a.id] },
                include_blank: true
