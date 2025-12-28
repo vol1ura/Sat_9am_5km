@@ -84,7 +84,7 @@
     <div class="card-body">
       <% Volunteer.roles.each_key do |role| %>
         <% volunteers = @volunteers_by_role[role] %>
-        <% next unless volunteers.present? %>
+        <% next if volunteers.blank? %>
         <div class="mb-2">
           <strong><%= human_volunteer_role(role) %>:</strong>
           <% volunteers.each do |volunteer| %>

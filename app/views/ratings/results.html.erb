@@ -4,7 +4,7 @@
 <p><%= t '.description' %></p>
 
 <%= form_with url: results_ratings_path, method: :get, html: { class: 'mt-4 mb-2', role: 'search' } do |f| %>
-  <%= f.hidden_field :gender, value: (params[:gender].presence || 'male'), id: 'gender-input' %>
+  <%= f.hidden_field :gender, value: params[:gender].presence || 'male', id: 'gender-input' %>
   <div class="row g-2">
     <div class="col-12 col-sm-6 col-lg-3">
       <%= f.text_field :name, value: params[:name], class: 'form-control', placeholder: t('.name_placeholder'), 'aria-label': t('.name_placeholder') %>

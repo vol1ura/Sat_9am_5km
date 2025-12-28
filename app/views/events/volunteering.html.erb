@@ -37,7 +37,7 @@
             l(activity.date, format: :brief),
             volunteering_event_path(@event.code_name, activity_id: activity.id),
             class: "nav-link #{'active' if activity.id == @activity&.id || (idx.zero? && @activity.nil?)}",
-            role: "tab",
+            role: 'tab',
           )
         %>
       </li>

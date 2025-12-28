@@ -29,7 +29,7 @@
         </div>
         <% if is_user_with_saved_image %>
           <div class="form-check form-switch mt-2">
-            <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' =>'change->form#toggleBlock' %>
+            <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' => 'change->form#toggleBlock' %>
             <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
           </div>
         <% end %>
@@ -132,14 +132,14 @@
         <% if current_user.phone %>
           <% User::AVAILABLE_PROMOTIONS.each do |name| %>
             <div class="form-check form-switch mt-3">
-              <%= check_box_tag "user[promotions][]",
+              <%= check_box_tag 'user[promotions][]',
                                 name,
                                 current_user.promotions.include?(name),
                                 class: 'form-check-input',
                                 role: 'switch',
                                 'data-action' => 'change->form#showPromotionModal',
                                 'data-promotion-key' => name %>
-              <%= label_tag "user[promotions][]", t(".promotions.#{name}"), class: 'form-check-label' %>
+              <%= label_tag 'user[promotions][]', t(".promotions.#{name}"), class: 'form-check-label' %>
             </div>
           <% end %>
           <div class="mt-4 form-check form-switch">

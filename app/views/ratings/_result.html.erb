@@ -1,5 +1,5 @@
 <tr>
-  <td class="pe-0 pe-md-2"><%= (@page - 1) * RatingsController::PER_PAGE + result_counter.next %></td>
+  <td class="pe-0 pe-md-2"><%= ((@page - 1) * RatingsController::PER_PAGE) + result_counter.next %></td>
   <% if @with_absolute_position %>
     <td class="pe-0 pe-md-2"><%= result.ranked_position %></td>
   <% end %>

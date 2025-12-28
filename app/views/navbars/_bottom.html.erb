@@ -15,7 +15,7 @@
           <a href="https://vk.com/s95ru" target="_blank" rel="noopener" title="<%= t '.vk_title' %>">
             <i class="fa-brands fa-vk" role="img" aria-label="VK"></i>
           </a>
-          <a href="mailto:<%= ENV['INFO_EMAIL'] %>" target="_blank" title="<%= t '.send_email' %>" rel="noopener">
+          <a href="mailto:<%= ENV.fetch('INFO_EMAIL') %>" target="_blank" title="<%= t '.send_email' %>" rel="noopener">
             <i class="fa fa-envelope-open" role="img" aria-label="Email"></i>
           </a>
           <a href="https://github.com/vol1ura/Sat_9am_5km" target="_blank" rel="license noopener" title="<%= t '.github_title' %>">
@@ -33,7 +33,7 @@
         </p>
         <p class="mb-0">
           <%= t '.address' %>&nbsp;·
-          <a href="mailto:<%= ENV['INFO_EMAIL'] %>" class="text-reset text-decoration-none"><%= ENV['INFO_EMAIL'] %></a>
+          <a href="mailto:<%= ENV.fetch('INFO_EMAIL') %>" class="text-reset text-decoration-none"><%= ENV.fetch('INFO_EMAIL') %></a>
         </p>
       </div>
     <% end %>

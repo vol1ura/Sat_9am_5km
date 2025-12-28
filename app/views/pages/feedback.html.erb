@@ -13,4 +13,4 @@
     <% end %>
   </div>
 </div>
-<p><%= t '.other_contacts_html', our_email: ENV['INFO_EMAIL'] %></p>
+<p><%= t '.other_contacts_html', our_email: ENV.fetch('INFO_EMAIL') %></p>

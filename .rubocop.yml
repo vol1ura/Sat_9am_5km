@@ -5,6 +5,7 @@ plugins:
   - rubocop-rake
   - rubocop-rspec
   - rubocop-rspec_rails
+  - rubocop-erb
 
 # METRICS
 Metrics/AbcSize:
@@ -38,6 +39,7 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Exclude:
     - config.ru
+    - app/views/**/*.erb
     - app/views/**/*.json.jbuilder
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
@@ -55,6 +57,9 @@ Style/FetchEnvVar:
   AllowedVars:
     - DEV_TELEGRAM_ID
     - VK_TOKEN
+Style/RedundantParentheses:
+  Exclude:
+    - app/views/**/*.erb
 
 Naming/VariableNumber:
   CheckSymbols: false
@@ -80,6 +85,12 @@ Rails/SkipsModelValidations:
     - db/**/*
 Rails/CreateTableWithTimestamps:
   Enabled: false
+Rails/OutputSafety:
+  Exclude:
+    - app/views/**/*.erb
+Rails/FindEach:
+  Exclude:
+    - app/views/**/*.erb
 
 # RSpec
 RSpec/MultipleExpectations:

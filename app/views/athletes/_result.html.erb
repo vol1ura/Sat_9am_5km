@@ -3,7 +3,7 @@
   event = result.activity.event
   total_time = result.total_time
 %>
-<%= tag.tr class: ['result', 'collapse multi-collapse' => result_counter > 14] do %>
+<%= tag.tr class: ['result', { 'collapse multi-collapse' => result_counter > 14 }] do %>
   <td><%= @total_results - result_counter %></td>
   <td><%= link_to l(activity_date), result.activity %></td>
   <%= tag.td class: 'total-time', data: { min: time_to_sec(total_time), timestamp: activity_date.to_datetime.to_i * 1000 } do %>

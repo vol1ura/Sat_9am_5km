@@ -23,8 +23,8 @@
       <li class="nav-item" role="presentation">
         <%=
           button_tag(
-            class: "nav-link #{order == @order ? 'active' : ''} px-2 text-nowrap",
-            data: { table_target: "tab", action: "click->table#switchTab", order: order, type: @rating_type },
+            class: "nav-link #{'active' if order == @order} px-2 text-nowrap",
+            data: { table_target: 'tab', action: 'click->table#switchTab', order: order, type: @rating_type },
           ) do
         %>
           <%= t ".#{order}" %>

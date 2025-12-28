@@ -2,7 +2,7 @@
 <h1><%= head_info :title, t('.title') %></h1>
 
 <%= form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'row' }, data: { turbo: false } do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= render 'devise/shared/error_messages', resource: %>
   <div class="col-sm-12 col-lg-6 mb-3">
     <div class="input-group">
       <%=
@@ -21,4 +21,4 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= render 'devise/shared/links' %>

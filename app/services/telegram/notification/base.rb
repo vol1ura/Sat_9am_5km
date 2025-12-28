@@ -10,7 +10,7 @@ module Telegram
       def notify!(telegram_id, **)
         Telegram::Bot.call(
           'sendMessage',
-          chat_id: Rails.env.development? ? ENV['DEV_TELEGRAM_ID'] : telegram_id,
+          chat_id: Rails.env.local? ? ENV['DEV_TELEGRAM_ID'] : telegram_id,
           text: text,
           parse_mode: 'Markdown',
           reply_markup: Bot::MAIN_KEYBOARD,

@@ -35,7 +35,7 @@
               <td>
                 <% if pb_prev %>
                   <% delta = (pb_prev.total_time - pb.total_time).to_i %>
-                  <%= format('%d:%02d', delta / 60, delta % 60) %>
+                  <%= format '%<min>d:%<sec>02d', min: delta / 60, sec: delta % 60 %>
                 <% end %>
               </td>
               <td><%= link_to l(pb.activity.date), pb.activity, data: { turbo: false } %></td>

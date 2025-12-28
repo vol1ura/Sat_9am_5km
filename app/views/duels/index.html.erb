@@ -1,6 +1,6 @@
 <% athlete_name = @athlete&.name || t('common.nobody') %>
-<% head_info :title, t('.title', athlete_name: athlete_name) %>
-<% head_info :description, t('.description', athlete_name: athlete_name) %>
+<% head_info :title, t('.title', athlete_name:) %>
+<% head_info :description, t('.description', athlete_name:) %>
 
 <div class="row">
   <div class="col-12">

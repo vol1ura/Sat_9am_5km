@@ -1,7 +1,7 @@
 <h1>Настройки</h1>
 
 <%= form_for resource, as: resource_name, url: user_registration_path(resource_name), html: { method: :put }, data: { turbo: false } do |f| %>
-  <%= render 'devise/shared/error_messages', resource: resource %>
+  <%= render 'devise/shared/error_messages', resource: %>
 
   <div class="field mt-2">
     <%= f.label :first_name %><br>
