@@ -41,13 +41,18 @@
     <div class="d-flex flex-wrap">
       <% @event.contacts.order(:contact_type).each do |contact| %>
         <% next if contact.contact_type == 'instagram' && top_level_domain == :ru %>
-        <%=
-          external_link_to(
-            contact.link.html_safe,
-            class: 'mb-2',
-            title: human_contact_type(contact.contact_type),
-          ) do
+        <%
+          link_referer =
+            case contact.contact_type
+            when 'email'
+              "mailto:#{contact.link}"
+            when 'phone'
+              "tel:#{contact.link}"
+            else
+              contact.link.html_safe
+            end
         %>
+        <%= external_link_to(link_referer, class: 'mb-2', title: human_contact_type(contact.contact_type)) do %>
           <%= render "events/contacts/#{contact.contact_type}" %>
         <% end %>
       <% end %>

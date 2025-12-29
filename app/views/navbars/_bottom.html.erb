@@ -12,15 +12,15 @@
           <%= link_to Rails.configuration.telegram[top_level_domain], target: '_blank', rel: 'license noopener', title: t('.telegram_title') do %>
             <i class="fa-brands fa-telegram" role="img" aria-label="Telegram"></i>
           <% end %>
-          <a href="https://vk.com/s95ru" target="_blank" rel="noopener" title="<%= t '.vk_title' %>">
+          <%= external_link_to('https://vk.com/s95ru', title: t('.vk_title')) do %>
             <i class="fa-brands fa-vk" role="img" aria-label="VK"></i>
-          </a>
-          <a href="mailto:<%= ENV.fetch('INFO_EMAIL') %>" target="_blank" title="<%= t '.send_email' %>" rel="noopener">
+          <% end %>
+          <%= external_link_to("mailto:#{ENV.fetch('INFO_EMAIL')}", title: t('.send_email')) do %>
             <i class="fa fa-envelope-open" role="img" aria-label="Email"></i>
-          </a>
-          <a href="https://github.com/vol1ura/Sat_9am_5km" target="_blank" rel="license noopener" title="<%= t '.github_title' %>">
+          <% end %>
+          <%= external_link_to('https://github.com/vol1ura/Sat_9am_5km', title: t('.github_title')) do %>
             <i class="fa-brands fa-github" role="img" aria-label="GitHub"></i>
-          </a>
+          <% end %>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
         </p>
         <p class="mb-0">
           <%= t '.address' %>&nbsp;·
-          <a href="mailto:<%= ENV.fetch('INFO_EMAIL') %>" class="text-reset text-decoration-none"><%= ENV.fetch('INFO_EMAIL') %></a>
+          <%= external_link_to(ENV.fetch('INFO_EMAIL'), "mailto:#{ENV.fetch('INFO_EMAIL')}", class: 'text-reset text-decoration-none') %>
         </p>
       </div>
     <% end %>
