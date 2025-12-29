@@ -2,23 +2,28 @@
 
 module CsvReports
   class EventAthletesJob < BaseJob
-    HEADERS = %w[id name results_count volunteering_count].freeze
+    HEADERS = %w[
+      ID
+      Name
+      ResultsCountOnEvent
+      ResultsCount
+      VolunteeringCountOnEvent
+      VolunteeringCount
+    ].freeze
 
     def perform(event_id, user_id, from_date = nil, till_date = nil)
       @event = Event.find event_id
       @from_date = Date.parse from_date if from_date
       @till_date = Date.parse till_date if till_date
-      user = User.find user_id
-      tempfile = generate_csv(dataset) { |row| [row.id, row.name, row.results_count, row.volunteering_count] }
 
       notify(
-        user,
+        User.find(user_id),
         file: tempfile,
         filename: "#{@event.code_name}_participants_#{Time.zone.now.to_i}.csv",
         caption: "Отчёт по участникам мероприятия: #{@event.name}",
       )
     rescue StandardError => e
-      Rollbar.error e, user_id: user.id, event_id: @event.id
+      Rollbar.error e, user_id:, event_id:
     ensure
       tempfile&.close
       tempfile&.unlink
@@ -26,24 +31,40 @@ module CsvReports
 
     private
 
-    def dataset
-      results_subq = subquery_for(Result).select('athlete_id, COUNT(*) AS results_count')
-      volunteering_subq = subquery_for(Volunteer).select('athlete_id, COUNT(*) AS volunteering_count')
+    def tempfile
+      @tempfile ||= generate_csv(dataset) do |row|
+        [row.id, row.name, row.res_event_count, row.res_total_count, row.vol_event_count, row.vol_total_count]
+      end
+    end
 
+    def dataset
       Athlete
-        .joins("LEFT JOIN (#{results_subq.to_sql}) res ON res.athlete_id = athletes.id")
-        .joins("LEFT JOIN (#{volunteering_subq.to_sql}) vol ON vol.athlete_id = athletes.id")
-        .where('res.results_count IS NOT NULL OR vol.volunteering_count IS NOT NULL')
+        .joins("LEFT JOIN (#{results_subquery.to_sql}) res ON res.athlete_id = athletes.id")
+        .joins("LEFT JOIN (#{volunteering_subquery.to_sql}) vol ON vol.athlete_id = athletes.id")
+        .where('res.event_count > 0 OR vol.event_count > 0')
         .select(
           'athletes.id,athletes.name,' \
-          'COALESCE(res.results_count, 0) AS results_count,COALESCE(vol.volunteering_count, 0) AS volunteering_count',
+          'COALESCE(res.total_count, 0) AS res_total_count,COALESCE(res.event_count, 0) AS res_event_count,' \
+          'COALESCE(vol.total_count, 0) AS vol_total_count,COALESCE(vol.event_count, 0) AS vol_event_count',
         )
     end
 
     def subquery_for(model)
-      scope = model.published.where(activity: { event: @event }).where.not(athlete_id: nil)
+      scope = model.published.where.not(athlete_id: nil).group(:athlete_id)
       scope = scope.where(activity: { date: date_range }) if date_range
-      scope.group(:athlete_id)
+      scope
+    end
+
+    def results_subquery
+      subquery_for(Result).select(
+        "athlete_id, COUNT(*) AS total_count, COUNT(*) FILTER (WHERE event_id = #{@event.id}) AS event_count",
+      )
+    end
+
+    def volunteering_subquery
+      subquery_for(Volunteer).select(
+        "athlete_id, COUNT(*) AS total_count, COUNT(*) FILTER (WHERE event_id = #{@event.id}) AS event_count",
+      )
     end
   end
 end
