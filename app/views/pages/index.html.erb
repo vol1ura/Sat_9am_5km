@@ -166,7 +166,7 @@
 
 <%# Events Section %>
 <% if @jubilee_events.present? || @funrun_badges.present? %>
-  <section class="events-section">
+  <section class="events-section py-5">
     <div class="container">
       <h2 class="text-center"><%= t '.upcoming_events', date: l(@next_saturday, format: :brief) %></h2>
       <div class="row justify-content-center">
@@ -303,7 +303,7 @@
 </section>
 
 <%# Partners Section %>
-<section class="partners-section mb-n4">
+<section class="partners-section pt-5 mb-n4">
   <div class="container">
     <h2 class="text-center"><%= t '.our_partners' %></h2>
     <div class="partners">

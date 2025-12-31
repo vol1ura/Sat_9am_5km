@@ -826,7 +826,7 @@ ru:
         download_rustore: Скачать в RuStore
         download_app_gallery: Скачать в App Gallery
         download_apk: Скачать APK файл
-      our_partners: Наши партнеры
+      our_partners: Наши партнёры
   ratings:
     index:
       description: Рейтинги участников по различным показателям. Информация на этой странице обновляется регулярно, но иногда может быть немного другой. Вы всегда можете проверить текущие значения в профиле участника.
