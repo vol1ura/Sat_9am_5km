@@ -65,7 +65,7 @@
   position: relative;
 
   &.ppb-gt-50 {
-    background-color: $info;
+    background-color: var(--bs-info);
   }
 }
 
@@ -111,7 +111,14 @@
 
 #minute-bingo-modal table {
   border-collapse: separate;
-  border-spacing: 4px 0;
+  border-spacing: 4px;
+
+  td.picked {
+    border-radius: 50%;
+    background-color: var(--bs-primary);
+    color: var(--bs-light);
+    padding: 0 3px;
+  }
 }
 
 @include media(phoneScreen) {

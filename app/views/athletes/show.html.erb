@@ -315,7 +315,7 @@
             <tr>
               <% 10.times.each do |col| %>
                 <% x = (row * 10) + col %>
-                <td class="text-<%= seconds_in_results.include?(x) ? 'primary' : 'light' %>"><%= format '%02d', x %></td>
+                <td class="<%= x.in?(seconds_in_results) ? 'picked' : 'text-secondary' %>"><%= format '%02d', x %></td>
               <% end %>
             </tr>
           <% end %>
