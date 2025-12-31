@@ -3,22 +3,26 @@
 RSpec.describe CsvReports::EventAthletesJob do
   let(:event) { create(:event) }
   let(:user) { create(:user) }
+  let(:from_date) { 1.year.ago.to_date.to_s }
+  let(:till_date) { 1.day.ago.to_date.to_s }
 
   describe 'queueing' do
     it 'enqueues on low immediately' do
-      expect { described_class.perform_later(event.id, user.id) }
+      expect { described_class.perform_later(event.id, user.id, from_date, till_date) }
         .to have_enqueued_job.on_queue('low').at(:no_wait)
     end
   end
 
   describe '#perform' do
+    let(:job) { described_class.perform_now(event.id, user.id, from_date, till_date) }
+
     before { allow(Telegram::Bot).to receive(:call) }
 
     context 'when user has no telegram_id' do
       let(:user) { create(:user, :with_email) }
 
       it 'does nothing' do
-        described_class.perform_now(event.id, user.id)
+        job
         expect(Telegram::Bot).not_to have_received(:call)
       end
     end
@@ -30,7 +34,7 @@ RSpec.describe CsvReports::EventAthletesJob do
         create(:result, activity:)
         create(:result, activity:)
         create(:volunteer, activity:)
-        described_class.perform_now(event.id, user.id)
+        job
       end
 
       it 'generates CSV and sends document to telegram' do
@@ -42,7 +46,7 @@ RSpec.describe CsvReports::EventAthletesJob do
       before do
         allow(Rollbar).to receive(:error)
         allow(Telegram::Bot).to receive(:call).and_raise(StandardError)
-        described_class.perform_now(event.id, user.id)
+        job
       end
 
       it 'reports error to Rollbar' do

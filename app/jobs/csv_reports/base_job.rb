@@ -16,7 +16,8 @@ module CsvReports
       tempfile
     end
 
-    def notify(user, file:, filename:, caption:)
+    def notify(user_id, file:, filename:, caption:)
+      user = User.find user_id
       return unless user.telegram_id
 
       Telegram::Bot.call(

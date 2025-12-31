@@ -25,20 +25,19 @@ module CsvReports
       ORDER BY month DESC
     SQL
 
-    def perform(user_id, from_date = nil, till_date = nil)
+    def perform(user_id, from_date, till_date)
       @from_date = from_date ? Date.parse(from_date) : 1.year.ago.beginning_of_month.to_date
       @till_date = till_date ? Date.parse(till_date) : Time.zone.today
-      user = User.find user_id
       tempfile = generate_csv(User.find_by_sql([SQL_QUERY, @from_date, @till_date])) { |stats| generate_row(stats) }
 
       notify(
-        user,
+        user_id,
         file: tempfile,
         filename: "user_registrations_#{Time.zone.now.to_i}.csv",
         caption: "Отчёт по регистрациям пользователей с #{I18n.l(@from_date)} по #{I18n.l(@till_date)}",
       )
     rescue StandardError => e
-      Rollbar.error e, user_id: user.id
+      Rollbar.error e, user_id:
     ensure
       tempfile&.close
       tempfile&.unlink

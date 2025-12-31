@@ -4,21 +4,20 @@ module CsvReports
   class VolunteersRolesJob < BaseJob
     HEADERS = %w[role name id count].freeze
 
-    def perform(event_id, user_id, from_date = nil, till_date = nil)
+    def perform(event_id, user_id, from_date, till_date)
       @event = Event.find event_id
       @from_date = Date.parse from_date if from_date
       @till_date = Date.parse till_date if till_date
-      user = User.find user_id
       tempfile = generate_csv(data) { |arr| arr }
 
       notify(
-        user,
+        user_id,
         file: tempfile,
         filename: "#{@event.code_name}_volunteers_#{Time.zone.now.to_i}.csv",
         caption: "Отчёт по волонтёрским позициям на мероприятии: #{@event.name}",
       )
     rescue StandardError => e
-      Rollbar.error e, user_id: user.id, event_id: @event.id
+      Rollbar.error e, user_id:, event_id:
     ensure
       tempfile&.close
       tempfile&.unlink

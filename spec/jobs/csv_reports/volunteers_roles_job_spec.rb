@@ -3,22 +3,28 @@
 RSpec.describe CsvReports::VolunteersRolesJob do
   let(:event) { create(:event) }
   let(:user) { create(:user) }
+  let(:from_date) { 1.year.ago.to_date.to_s }
+  let(:till_date) { 1.day.ago.to_date.to_s }
 
   describe 'queueing' do
     it 'schedules a job on the low queue' do
-      expect { described_class.perform_later(event.id, user.id) }
+      expect { described_class.perform_later(event.id, user.id, from_date, till_date) }
         .to have_enqueued_job.on_queue('low').at(:no_wait)
     end
   end
 
   describe '#perform' do
+    let(:job) { described_class.perform_now event.id, user.id, from_date, till_date }
+
     context 'when user has no telegram_id' do
       let(:user) { create(:user, :with_email) }
 
-      before { allow(Telegram::Bot).to receive(:call) }
+      before do
+        allow(Telegram::Bot).to receive(:call)
+        job
+      end
 
       it 'does nothing' do
-        described_class.perform_now event.id, user.id
         expect(Telegram::Bot).not_to have_received(:call)
       end
     end
@@ -30,10 +36,10 @@ RSpec.describe CsvReports::VolunteersRolesJob do
         allow(Telegram::Bot).to receive(:call)
         create(:volunteer, role: :director, activity: activity)
         create(:volunteer, role: :marshal, activity: activity)
+        job
       end
 
       it 'sends CSV with aggregated volunteers starting from the date' do
-        described_class.perform_now event.id, user.id, activity.date.to_s
         expect(Telegram::Bot).to have_received(:call)
       end
     end
@@ -42,8 +48,7 @@ RSpec.describe CsvReports::VolunteersRolesJob do
       before do
         allow(Telegram::Bot).to receive(:call).and_raise(StandardError)
         allow(Rollbar).to receive(:error)
-
-        described_class.perform_now event.id, user.id
+        job
       end
 
       it 'reports error to Rollbar' do

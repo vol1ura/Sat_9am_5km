@@ -11,13 +11,13 @@ module CsvReports
       VolunteeringCount
     ].freeze
 
-    def perform(event_id, user_id, from_date = nil, till_date = nil)
+    def perform(event_id, user_id, from_date, till_date)
       @event = Event.find event_id
       @from_date = Date.parse from_date if from_date
       @till_date = Date.parse till_date if till_date
 
       notify(
-        User.find(user_id),
+        user_id,
         file: tempfile,
         filename: "#{@event.code_name}_participants_#{Time.zone.now.to_i}.csv",
         caption: "Отчёт по участникам мероприятия: #{@event.name}",
@@ -43,9 +43,12 @@ module CsvReports
         .joins("LEFT JOIN (#{volunteering_subquery.to_sql}) vol ON vol.athlete_id = athletes.id")
         .where('res.event_count > 0 OR vol.event_count > 0')
         .select(
-          'athletes.id,athletes.name,' \
-          'COALESCE(res.total_count, 0) AS res_total_count,COALESCE(res.event_count, 0) AS res_event_count,' \
-          'COALESCE(vol.total_count, 0) AS vol_total_count,COALESCE(vol.event_count, 0) AS vol_event_count',
+          'athletes.id,' \
+          'athletes.name,' \
+          'COALESCE(res.total_count, 0) AS res_total_count,' \
+          'COALESCE(res.event_count, 0) AS res_event_count,' \
+          'COALESCE(vol.total_count, 0) AS vol_total_count,' \
+          'COALESCE(vol.event_count, 0) AS vol_event_count',
         )
     end
 
