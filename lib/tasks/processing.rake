@@ -47,7 +47,7 @@ namespace :processing do
   desc 'Schedules renew going to events'
   task schedule_renew_going_to_events: :environment do
     Event.find_each do |event|
-      sat_9am = event.timezone_object.now.next_occurring(:saturday).change(hour: 9)
+      sat_9am = event.timezone_object.now.tomorrow.change(hour: 9)
       RenewGoingToEventJob.set(wait_until: sat_9am).perform_later(event.id)
     end
   end
