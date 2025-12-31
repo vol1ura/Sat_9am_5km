@@ -33,3 +33,4 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'storage' # 
 
 after 'deploy:updated', 'sitemap:create'
 after 'deploy:reverted', 'sitemap:create'
+after 'deploy:finished', 'rails_performance:deploy_event'
