@@ -210,8 +210,8 @@
 <section class="volunteer-app-section py-5" data-controller="carousel">
   <div class="container">
     <h2 class="text-center text-primary mb-5"><%= t '.volunteer_app.title' %></h2>
-    <div class="row align-items-center g-4">
-      <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
         <div class="app-screen-container text-center">
           <%= image_tag '/images/app/mobile_app_1.png',
                         class: 'img-fluid app-screen',
@@ -220,84 +220,82 @@
         </div>
       </div>
       <div class="col-md-8">
-        <div class="px-2 px-md-0 mb-5">
-          <ul class="list-unstyled">
-            <li class="mb-3 app-feature-item feature-active"
-                data-carousel-target="feature"
-                data-index="0"
-                data-action="click->carousel#showSlide">
-              <div class="d-flex align-items-center">
-                <i class="fas fa-stopwatch fa-2x text-primary me-3"></i>
-                <div>
-                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.timer.title' %></h3>
-                  <p class="mb-0"><%= t '.volunteer_app.features.timer.description' %></p>
-                </div>
+        <ul class="list-unstyled">
+          <li class="mb-3 app-feature-item feature-active"
+              data-carousel-target="feature"
+              data-index="0"
+              data-action="click->carousel#showSlide">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-stopwatch fa-2x text-primary me-3"></i>
+              <div>
+                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.timer.title' %></h3>
+                <p class="mb-0"><%= t '.volunteer_app.features.timer.description' %></p>
               </div>
-            </li>
-            <li class="mb-3 app-feature-item"
-                data-carousel-target="feature"
-                data-index="1"
-                data-action="click->carousel#showSlide">
-              <div class="d-flex align-items-center">
-                <i class="fas fa-qrcode fa-2x text-primary me-3"></i>
-                <div>
-                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.scanner.title' %></h3>
-                  <p class="mb-0"><%= t '.volunteer_app.features.scanner.description' %></p>
-                </div>
+            </div>
+          </li>
+          <li class="mb-3 app-feature-item"
+              data-carousel-target="feature"
+              data-index="1"
+              data-action="click->carousel#showSlide">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-qrcode fa-2x text-primary me-3"></i>
+              <div>
+                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.scanner.title' %></h3>
+                <p class="mb-0"><%= t '.volunteer_app.features.scanner.description' %></p>
               </div>
-            </li>
-            <li class="mb-3 app-feature-item"
-                data-carousel-target="feature"
-                data-index="2"
-                data-action="click->carousel#showSlide">
-              <div class="d-flex align-items-center">
-                <i class="fas fa-cloud-arrow-up fa-2x text-primary me-3"></i>
-                <div>
-                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.upload.title' %></h3>
-                  <p class="mb-0"><%= t '.volunteer_app.features.upload.description' %></p>
-                </div>
+            </div>
+          </li>
+          <li class="mb-3 app-feature-item"
+              data-carousel-target="feature"
+              data-index="2"
+              data-action="click->carousel#showSlide">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-cloud-arrow-up fa-2x text-primary me-3"></i>
+              <div>
+                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.upload.title' %></h3>
+                <p class="mb-0"><%= t '.volunteer_app.features.upload.description' %></p>
               </div>
-            </li>
-            <li class="mb-3 app-feature-item"
-                data-carousel-target="feature"
-                data-index="3"
-                data-action="click->carousel#showSlide">
-              <div class="d-flex align-items-center">
-                <i class="fas fa-satellite-dish fa-2x text-primary me-3"></i>
-                <div>
-                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.live_results.title' %></h3>
-                  <p class="mb-0"><%= t '.volunteer_app.features.live_results.description' %></p>
-                </div>
+            </div>
+          </li>
+          <li class="mb-3 app-feature-item"
+              data-carousel-target="feature"
+              data-index="3"
+              data-action="click->carousel#showSlide">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-satellite-dish fa-2x text-primary me-3"></i>
+              <div>
+                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.live_results.title' %></h3>
+                <p class="mb-0"><%= t '.volunteer_app.features.live_results.description' %></p>
               </div>
-            </li>
-            <li class="app-feature-item"
-                data-carousel-target="feature"
-                data-index="4"
-                data-action="click->carousel#showSlide">
-              <div class="d-flex align-items-center">
-                <i class="fas fa-chart-bar fa-2x text-primary me-3"></i>
-                <div>
-                  <h3 class="h5 mb-1"><%= t '.volunteer_app.features.stats.title' %></h3>
-                  <p class="mb-0"><%= t '.volunteer_app.features.stats.description' %></p>
-                </div>
+            </div>
+          </li>
+          <li class="app-feature-item"
+              data-carousel-target="feature"
+              data-index="4"
+              data-action="click->carousel#showSlide">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-chart-bar fa-2x text-primary me-3"></i>
+              <div>
+                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.stats.title' %></h3>
+                <p class="mb-0"><%= t '.volunteer_app.features.stats.description' %></p>
               </div>
-            </li>
-          </ul>
-        </div>
-        <div class="d-flex gap-4 align-items-center justify-content-center justify-content-md-start flex-wrap">
-          <%= external_link_to 'https://appgallery.huawei.com/app/C114915605' do %>
-            <%= image_tag "/images/app/#{top_level_domain == :rs ? 'app-gallery-rs.png' : 'app-gallery-ru.svg'}", class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_gallery') %>
-          <% end %>
-          <% if top_level_domain == :ru %>
-            <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
-              <%= image_tag '/images/app/ru-store.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
-            <% end %>
-          <% end %>
-          <%= link_to app_pages_path, class: 'text-decoration-none', data: { turbo_prefetch: false } do %>
-            <%= image_tag '/images/app/apk.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_apk') %>
-          <% end %>
-        </div>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
+    <div class="d-flex gap-4 justify-content-center flex-wrap mt-3">
+      <%= external_link_to 'https://appgallery.huawei.com/app/C114915605' do %>
+        <%= image_tag "/images/app/#{top_level_domain == :rs ? 'app-gallery-rs.png' : 'app-gallery-ru.svg'}", class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_gallery') %>
+      <% end %>
+      <% if top_level_domain == :ru %>
+        <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
+          <%= image_tag '/images/app/ru-store.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
+        <% end %>
+      <% end %>
+      <%= link_to app_pages_path, class: 'text-decoration-none', data: { turbo_prefetch: false } do %>
+        <%= image_tag '/images/app/apk.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_apk') %>
+      <% end %>
     </div>
   </div>
 </section>

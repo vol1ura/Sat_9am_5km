@@ -273,29 +273,11 @@
     }
   }
 
-  .carousel-indicators {
-    button {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: var(--bs-primary);
-      opacity: 0.5;
-
-      &.active {
-        opacity: 1;
-      }
-    }
-  }
-
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 5%;
-    color: var(--bs-primary);
-    opacity: 0.8;
-
-    &:hover {
-      opacity: 1;
-    }
+  .carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--bs-primary);
   }
 }
 
@@ -340,6 +322,7 @@
       transition: opacity 0.75s ease-in-out, transform 0.3s ease;
       box-shadow: 0 10px 30px rgb(0 0 0 / 20%);
       border-radius: 20px;
+      margin-bottom: 18px;
 
       &:hover {
         transform: scale(1.02);
@@ -352,7 +335,9 @@
     cursor: pointer;
     border-radius: 8px;
     padding: 12px;
-    margin: 0 -12px 12px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    margin-right: 8px;
     background-color: rgb(255 255 255 / 5%);
 
     p {

@@ -7,6 +7,10 @@ $info: #009dac;
 $light: #f0f0f0;
 $dark: #0f0f0f;
 $enable-negative-margins: true;
+$carousel-control-width: 5%;
+$carousel-control-color: $primary;
+$carousel-control-opacity: 0.9;
+$carousel-control-hover-opacity: 1;
 
 @import "bootstrap";
 @import "font-awesome";
