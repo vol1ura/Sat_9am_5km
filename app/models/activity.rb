@@ -40,7 +40,7 @@ class Activity < ApplicationRecord
   end
 
   def number
-    event.activities.published.where(date: ...date).size.next
+    @number ||= Activity.published.where(event_id:).where(date: ...date).size.next
   end
 
   def correct?

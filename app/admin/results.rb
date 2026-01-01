@@ -84,7 +84,7 @@ ActiveAdmin.register Result do
     column(:total_time) { |r| human_result_time r.total_time }
   end
 
-  sidebar 'Внимание!', only: :index, if: proc { Activity.published.exists?(params[:activity_id]) } do
+  sidebar 'Внимание!', only: :index, if: proc { activity.published } do
     div(
       'Забег опубликован. Редактирование протокола сейчас может привести
       к логическим ошибкам в статистике и некорректному награждению.
