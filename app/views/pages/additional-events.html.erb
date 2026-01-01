@@ -1,6 +1,5 @@
 <% head_info :description, t('.description') %>
-<% additional_events = Rails.configuration.additional_events %>
-<h1><%= head_info :title, t('.title_html', year: additional_events[:year]) %></h1>
+<h1><%= head_info :title, t('.title_html', year: 5.weeks.from_now.year) %></h1>
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <table class="table">
@@ -11,10 +10,11 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <% @country_events.where(code_name: additional_events[:events].keys).each do |event| %>
+        <% additional_events = Rails.configuration.additional_events %>
+        <% @country_events.where(code_name: additional_events.keys).each do |event| %>
           <tr>
             <td><%= link_to event.name, event_path(event.code_name) %></td>
-            <td><%= additional_events[:events][event.code_name.to_sym] %></td>
+            <td><%= additional_events[event.code_name.to_sym] %></td>
           </tr>
         <% end %>
       </tbody>
