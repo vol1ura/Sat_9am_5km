@@ -47,8 +47,8 @@ module Athletes
 
     def best_position_absolute
       results = @athlete.results.published
-      @best_position = results.minimum(:position)
-      @pb_by_position = results.includes(activity: :event).where(position: @best_position).order(date: :desc)
+      best_position = results.select('MIN(results.position)')
+      @pb_by_position = results.includes(activity: :event).where(position: best_position).order(date: :desc)
     end
 
     def volunteering_chart
