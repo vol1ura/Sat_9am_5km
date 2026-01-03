@@ -34,7 +34,7 @@ Rails.application.routes.draw do
         get :total_events
         get :total_trophies
         get :total_results
-        get :personal_best_absolute
+        get :personal_bests
         get :best_position_absolute
         get :volunteering_chart
       end

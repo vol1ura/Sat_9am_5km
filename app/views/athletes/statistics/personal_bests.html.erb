@@ -1,0 +1,27 @@
+<%= turbo_frame_tag 'personal_bests' do %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= t 'athletes.show.table.pb' %></th>
+        <th>Δ</th>
+        <th><%= t 'athletes.show.table.date' %></th>
+        <th><%= t 'athletes.show.table.event' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @personal_bests.to_a.push(nil).each_cons(2) do |pb, pb_prev| %>
+        <tr>
+          <td><%= human_result_time pb.total_time %></td>
+          <td>
+            <% if pb_prev %>
+              <% delta = (pb_prev.total_time - pb.total_time).to_i %>
+              <%= format '%<min>d:%<sec>02d', min: delta / 60, sec: delta % 60 %>
+            <% end %>
+          </td>
+          <td><%= link_to l(pb.activity.date), pb.activity, data: { turbo: false } %></td>
+          <td><%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name), data: { turbo: false } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

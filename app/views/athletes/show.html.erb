@@ -2,6 +2,7 @@
   athlete_name = @athlete.name || t('common.nobody')
   seconds_in_results = @athlete.stats.dig('results', 'seconds') || []
   seconds_in_results_count = seconds_in_results.size
+  six_days_ago = 6.days.ago.beginning_of_day
 %>
 <% head_info :description, t('.description', athlete_name:) %>
 
@@ -111,7 +112,7 @@
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalTrophies" aria-expanded="false" aria-controls="flush-collapseTotalTrophies">
         <span class="badge text-light bg-primary me-3 position-relative">
           <%= @total_trophies %>
-          <% if @athlete.trophies.where(created_at: 6.days.ago.beginning_of_day..).any? %>
+          <% if @athlete.trophies.where(created_at: six_days_ago..).any? %>
             <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
               <span class="visually-hidden">New trophies</span>
             </span>
@@ -152,7 +153,7 @@
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
           <span class="badge text-light bg-primary me-3 position-relative">
             <%= @last_best_position_result.position %>
-            <% if @last_best_position_result.activity_date >= 6.days.ago.beginning_of_day %>
+            <% if @last_best_position_result.activity_date >= six_days_ago %>
               <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                 <span class="visually-hidden">New best position</span>
               </span>
@@ -171,14 +172,26 @@
     </div>
 
     <div class="accordion-item">
-      <%= turbo_frame_tag 'personal_best_absolute', src: personal_best_absolute_athlete_statistics_path(@athlete) do %>
-        <h2 class="accordion-header" id="flush-personalBestAbsolute">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
-            <span class="badge text-light bg-primary me-3">&nbsp</span>
-            <%= t '.personal_best' %>
-          </button>
-        </h2>
-      <% end %>
+      <h2 class="accordion-header" id="flush-personalBestAbsolute">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
+          <span class="badge text-light bg-primary me-3 position-relative">
+            <%= human_result_time @personal_best.total_time %>
+            <% if @personal_best.activity_date >= six_days_ago %>
+              <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New personal best</span>
+              </span>
+            <% end %>
+          </span>
+          <%= t '.personal_best' %>
+        </button>
+      </h2>
+      <div id="flush-collapsePersonalBestAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-personalBestAbsolute" data-bs-parent="#accordion-personal-statistics">
+        <div class="accordion-body">
+          <%= turbo_frame_tag 'personal_bests', src: personal_bests_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+            <%= render '/loading_indicator' %>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <% if @athlete.personal_best_10k || @athlete.personal_best_half_marathon || @athlete.personal_best_marathon || @time_predictions.any? %>

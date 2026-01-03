@@ -3,9 +3,9 @@
 RSpec.describe '/athletes/:athlete_id/statistics' do
   let(:athlete) { create(:athlete) }
 
-  describe 'GET /personal_best_absolute' do
+  describe 'GET /personal_bests' do
     before do
-      get personal_best_absolute_athlete_statistics_url(athlete_id: athlete.id)
+      get personal_bests_athlete_statistics_url(athlete_id: athlete.id)
     end
 
     it { expect(response).to be_successful }

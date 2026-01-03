@@ -4,17 +4,14 @@ module Athletes
   class StatisticsController < ApplicationController
     before_action :set_athlete
 
-    def personal_best_absolute
-      results = @athlete.results.published
-      @pb_by_time = results.where(personal_best: true).order(date: :desc)
+    def personal_bests
+      @personal_bests = athlete_results.includes(activity: :event).where(personal_best: true).order(date: :desc)
     end
 
     def total_results; end
 
     def total_events
-      @results_by_event = @athlete
-        .results
-        .published
+      @results_by_event = athlete_results
         .joins(activity: :event)
         .group('events.id, events.name')
         .select('events.name as event_name, COUNT(results.id) as results_count,
@@ -33,7 +30,7 @@ module Athletes
 
     def total_trophies
       @total_trophies = @athlete.trophies.size
-      @total_results = @athlete.results.published.size
+      @total_results = athlete_results.size
       @seconds_in_results = @athlete.stats.dig('results', 'seconds') || []
     end
 
@@ -46,20 +43,23 @@ module Athletes
     end
 
     def best_position_absolute
-      results = @athlete.results.published
-      best_position = results.select('MIN(results.position)')
-      @pb_by_position = results.includes(activity: :event).where(position: best_position).order(date: :desc)
+      best_position = athlete_results.select('MIN(results.position)')
+      @pb_by_position = athlete_results.includes(activity: :event).where(position: best_position).order(date: :desc)
     end
 
     def volunteering_chart
       @volunteering = @athlete.volunteering.unscope(:order)
-      @total_results = @athlete.results.published.size
+      @total_results = athlete_results.size
     end
 
     private
 
     def set_athlete
       @athlete = Athlete.find(params[:athlete_id])
+    end
+
+    def athlete_results
+      @athlete_results ||= @athlete.results.published
     end
   end
 end

@@ -21,6 +21,7 @@ class AthletesController < ApplicationController
     @total_results = results_ds.size
     @last_best_position_result =
       results_ds.order(position: :asc, date: :desc).select(:position, 'date AS activity_date').first
+    @personal_best = results_ds.order(:total_time, :date).select(:total_time, 'date AS activity_date').first
     @volunteering = @athlete.volunteering
     @total_vol = @volunteering.size
     @total_events_count =
