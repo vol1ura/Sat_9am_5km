@@ -101,6 +101,6 @@ tr.even {
   }
 }
 
-.ui-datepicker-calendar td:nth-child(6) {
-  background: #ffb9f6;
+input[type="date"] {
+  max-width: 150px;
 }

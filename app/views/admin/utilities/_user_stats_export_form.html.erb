@@ -1,7 +1,7 @@
 <%= form_with(url: admin_utilities_export_user_stats_csv_path) do |f| %>
   <div style="margin-bottom: 12px">
     <%= f.label :from_date, 'Дата начала отчёта' %>
-    <%= f.date_field :from_date, style: 'width: 150px;' %>
+    <%= f.date_field :from_date %>
   </div>
   <%= f.submit 'Запросить', data: { confirm: 'Запустить задачу на создание и отправку отчёта?' } %>
 <% end %>

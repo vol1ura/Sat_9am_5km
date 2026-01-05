@@ -25,9 +25,14 @@ ActiveAdmin.register Trophy do
     f.inputs do
       f.input :badge_id, as: :hidden
       f.input :athlete_id, label: 'ID участника в базе'
-      f.input :date, input_html: { value: f.object.date || resource.badge.received_date },
-                     datepicker_options: { min_date: '-3M', max_date: '+2D' },
-                     as: :datepicker
+      li do
+        f.label :date
+        f.date_field(
+          :date,
+          value: f.object.date || resource.badge.received_date,
+          max: 2.days.from_now,
+        )
+      end
     end
     f.actions
   end

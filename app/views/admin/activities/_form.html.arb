@@ -10,12 +10,16 @@ active_admin_form_for [:admin, resource] do |f|
   end
 
   f.inputs 'Сведения о забеге' do
-    input(
-      :date,
-      as: :datepicker,
-      datepicker_options: { min_date: '-2D', max_date: '+3M' },
-      input_html: { disabled: resource.published || resource.results.exists? },
-    )
+    li do
+      f.label :date
+      f.date_field(
+        :date,
+        value: f.object.date,
+        min: 3.days.ago,
+        max: 3.months.from_now,
+        disabled: resource.published || resource.results.exists?,
+      )
+    end
     input(
       :description,
       as: :quill_editor,
