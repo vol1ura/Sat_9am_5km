@@ -190,6 +190,8 @@ GEM
     ed25519 (1.4.0)
     erb (6.0.1)
     erubi (1.13.1)
+    et-orbi (1.4.0)
+      tzinfo
     execjs (2.10.0)
     factory_bot (6.5.6)
       activesupport (>= 6.1.0)
@@ -207,6 +209,9 @@ GEM
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
     formtastic_i18n (0.7.0)
+    fugit (1.12.1)
+      et-orbi (~> 1.4)
+      raabro (~> 1.4)
     get_process_mem (1.0.0)
       bigdecimal (>= 2.0)
       ffi (~> 1.0)
@@ -384,6 +389,7 @@ GEM
     public_suffix (7.0.0)
     puma (7.1.0)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.4)
     rack-attack (6.8.0)
@@ -528,6 +534,8 @@ GEM
       ffi (~> 1.12)
       logger
     ruby2_keywords (0.0.5)
+    rufus-scheduler (3.9.2)
+      fugit (~> 1.1, >= 1.11.1)
     sass-embedded (1.77.5)
       google-protobuf (>= 3.25, < 5.0)
       rake (>= 13)
@@ -549,6 +557,9 @@ GEM
       logger (>= 1.6.2)
       rack (>= 3.1.0)
       redis-client (>= 0.23.2)
+    sidekiq-scheduler (6.0.1)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 7.3, < 9)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -689,6 +700,7 @@ DEPENDENCIES
   rubocop-rspec_rails
   ruby-vips (>= 2.1.0)
   sidekiq
+  sidekiq-scheduler
   simplecov
   sitemap_generator
   sys-cpu

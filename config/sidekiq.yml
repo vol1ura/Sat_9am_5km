@@ -8,3 +8,20 @@
   - critical
   - default
   - low
+
+:scheduler:
+  rufus_scheduler_options:
+    max_work_threads: 1
+  :schedule:
+    full_profile_awarding:
+      cron: "30 23 * * *"
+      class: FullProfileAwardingJob
+      queue: low
+    minute_bingo_awarding:
+      cron: "30 5 * * SUN"
+      class: MinuteBingoAwardingJob
+      queue: low
+    athlete_stats_update:
+      cron: "31 5 * * SUN"
+      class: AthleteStatsUpdateJob
+      queue: low

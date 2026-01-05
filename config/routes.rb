@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require 'sidekiq-scheduler/web'
 
 Rails.application.routes.draw do
   default_url_options host: ENV.fetch('APP_HOST')
@@ -105,7 +106,7 @@ Rails.application.routes.draw do
   get 'up', to: 'rails/health#show'
 
   authenticate :user, ->(user) { user.super_admin? } do
-    mount Sidekiq::Web => 'sidekiq' if Rails.env.production?
+    mount Sidekiq::Web => 'sidekiq'
     mount RailsPerformance::Engine => 'app_performance'
     mount PgHero::Engine => 'pg_stats'
     mount ActiveStorageDashboard::Engine => 'storage'
