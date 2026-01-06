@@ -1218,3 +1218,6 @@ sr:
       Pažnja!
       Podaci skenera sadrže greške, stoga rezultat *%{position}* ne može biti sačuvan.
       Molimo vas da proverite poziciju *%{position}*, kao i učesnika sa ID *%{code}* za dupliranje u protokolu i fajlovima skenera.
+    incorrect_running_volunteers: |
+      *Pažnja!* Događaj ID=%{activity_id} (%{activity_date}) ima volontera *%{athlete_name}* (ID=%{athlete_code}) na trkačkoj poziciji,
+      međutim on nema rezultat u protokolu. Molimo vas da ispravite ovo.

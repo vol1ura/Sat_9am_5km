@@ -1175,3 +1175,6 @@ en:
       Attention!
       Scanner data contains errors, so result *%{position}* cannot be saved.
       Please check position *%{position}*, as well as participant with ID *%{code}* for duplication in the protocol and scanner files.
+    incorrect_running_volunteers: |
+      *Attention!* Activity ID=%{activity_id} (%{activity_date}) has running volunteer *%{athlete_name}* (ID=%{athlete_code})
+      on the running position, however he has no result in the protocol. Please fix it.

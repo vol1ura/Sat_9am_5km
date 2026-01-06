@@ -35,7 +35,7 @@ class ScannerProcessingJob < ApplicationJob
   end
 
   def alert_message(result_params)
-    @activity.event.country.localized(
+    @activity.country.localized(
       'notification.scanner_processing',
       position: result_params[:position],
       code: result_params[:code],

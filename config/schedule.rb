@@ -19,10 +19,6 @@ every 1.day, at: '2' do
   command "$HOME/backup_storage.sh"
 end
 
-every 1.month, at: '6' do
-  rake 'processing:set_five_plus_trophy_dates'
-end
-
 every 1.month, at: '1' do
   rake 'processing:purge_unattached_files'
 end
@@ -31,36 +27,12 @@ every 4.months, at: '1' do
   command "rm -rf #{File.join ENV.fetch('APP_DEPLOY_PATH'), 'shared/tmp/cache/bootsnap/*'}"
 end
 
-every :thursday, at: '18' do
-  rake 'notification:rage_badges_expiration'
-end
-
 every :friday, at: '1' do
   rake 'pghero:clean_query_stats'
 end
 
-every :friday, at: '2' do
-  rake 'notification:volunteers'
-end
-
-every '0 2 31 12 *' do
-  rake 'notification:volunteers'
-end
-
 every :friday, at: '10' do
   rake 'notification:invite_newbies'
-end
-
-every :friday, at: '11' do
-  rake 'processing:schedule_renew_going_to_events'
-end
-
-every '0 11 31 12 *' do
-  rake 'processing:schedule_renew_going_to_events'
-end
-
-every :saturday, at: '18' do
-  rake 'notification:breaking_time_badges_expiration'
 end
 
 every :saturday, at: '23' do
@@ -79,10 +51,6 @@ every :sunday, at: '5:10' do
   rake 'processing:awarding'
 end
 
-every :sunday, at: '5:15' do
-  rake 'processing:home_badge_awarding'
-end
-
 every :sunday, at: '5:30' do
   rake 'sitemap:create'
 end
@@ -93,8 +61,4 @@ end
 
 every :sunday, at: '12:05' do
   rake 'notification:incorrect_activities'
-end
-
-every :sunday, at: '12:10' do
-  rake 'notification:incorrect_running_volunteers'
 end

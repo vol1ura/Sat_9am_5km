@@ -11,7 +11,7 @@ class Volunteer < ApplicationRecord
   validates :athlete, uniqueness: { scope: :activity_id }
   validate :more_than_one_volunteering
 
-  before_validation :strip_comment, if: :comment_changed?
+  before_validation :squish_comment, if: :comment_changed?
   after_save_commit :update_athlete_going_to_event
   after_destroy_commit :reset_athlete_going_to_event
   after_commit :broadcast_refresh
@@ -29,6 +29,17 @@ class Volunteer < ApplicationRecord
   delegate :date, to: :activity, allow_nil: true
   delegate :name, to: :athlete, allow_nil: true
 
+  def self.incorrect_on_running_positions
+    where(role: %i[event_closer pacemaker attendant])
+      .where('EXISTS (SELECT 1 FROM results protocol WHERE protocol.activity_id = volunteers.activity_id)')
+      .joins(<<~SQL.squish)
+        LEFT JOIN results volunteer_results
+          ON volunteer_results.activity_id = volunteers.activity_id
+          AND volunteer_results.athlete_id = volunteers.athlete_id
+      SQL
+      .where(volunteer_results: { id: nil })
+  end
+
   private
 
   def more_than_one_volunteering
@@ -37,13 +48,11 @@ class Volunteer < ApplicationRecord
     errors.add(:athlete, :more_than_one_volunteering) if other_volunteering.exists?
   end
 
-  def strip_comment
-    self.comment = comment&.strip.presence
+  def squish_comment
+    self.comment = comment&.squish.presence
   end
 
-  def broadcast_refresh
-    broadcast_refresh_later_to :volunteers_roster
-  end
+  def broadcast_refresh = broadcast_refresh_later_to :volunteers_roster
 
   def update_athlete_going_to_event
     return if activity.published || date <= Date.current || date > Date.current.next_occurring(:saturday)

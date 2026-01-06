@@ -17,6 +17,29 @@
       cron: "30 23 * * *"
       class: FullProfileAwardingJob
       queue: low
+    rage_badges_expiration:
+      cron: "0 18 * * THU"
+      class: "Telegram::Notification::RageBadgesExpirationJob"
+      queue: low
+    before_activity:
+      cron: "0 2 * * FRI"
+      class: "Telegram::Notification::BeforeActivityJob"
+      queue: low
+      description: Set notification jobs for volunteers before activity
+    before_activity_end_of_year:
+      cron: "0 2 31 12 *"
+      class: "Telegram::Notification::BeforeActivityJob"
+      queue: low
+      description: Set notification jobs for volunteers before activity
+    breaking_time_badges_expiration:
+      cron: "0 18 * * SAT"
+      class: "Telegram::Notification::BreakingTimeBadgesExpirationJob"
+      queue: low
+      description: Notify about breaking time badge expiration
+    home_badge_awarding:
+      cron: "30 5 * * SUN"
+      class: HomeBadgeAwardingJob
+      queue: low
     minute_bingo_awarding:
       cron: "30 5 * * SUN"
       class: MinuteBingoAwardingJob
@@ -25,3 +48,12 @@
       cron: "31 5 * * SUN"
       class: AthleteStatsUpdateJob
       queue: low
+    incorrect_running_volunteers:
+      cron: "12 0 * * SUN"
+      class: "Telegram::Notification::IncorrectRunningVolunteersJob"
+      queue: low
+    set_five_plus_trophy_dates:
+      cron: "0 6 1 * *"
+      class: SetFivePlusTrophyDatesJob
+      queue: low
+      description: Fix awarding dates for 5+ trophies

@@ -44,7 +44,7 @@ panel 'Протокол' do
   end
 end
 
-incorrect_running_volunteers_ids = activity.incorrect_running_volunteers.ids
+incorrect_running_volunteers_ids = activity.volunteers.incorrect_on_running_positions.ids
 
 panel 'Волонтёры' do
   table_for(

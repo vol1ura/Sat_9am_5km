@@ -147,7 +147,7 @@ class Athlete < ApplicationRecord
   private
 
   def remove_name_extra_spaces
-    trimmed_name = name.gsub(/\s+/, ' ').gsub(/^ | $|(?<= ) /, '')
+    trimmed_name = name.squish
     self.name = trimmed_name unless name == trimmed_name
   end
 

@@ -40,7 +40,7 @@ module Telegram
         end
 
         def country
-          @country ||= activity.event.country
+          @country ||= activity.country
         end
       end
     end

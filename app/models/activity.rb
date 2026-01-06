@@ -19,6 +19,7 @@ class Activity < ApplicationRecord
   scope :unpublished, -> { where(published: false) }
   scope :in_country, ->(country_code) { joins(event: :country).where(country: { code: country_code }) }
 
+  delegate :country, to: :event
   delegate :name, to: :event, prefix: true
 
   def self.ransackable_attributes(_auth_object = nil)
@@ -64,14 +65,6 @@ class Activity < ApplicationRecord
     Result
       .where(athlete_id: results.select(:athlete_id))
       .where(activity_id: Activity.published.where(date:).where.not(id:).select(:id))
-  end
-
-  def incorrect_running_volunteers
-    return Volunteer.none if results.empty?
-
-    volunteers
-      .where(role: %w[event_closer pacemaker attendant])
-      .where.not(athlete_id: results.where.not(athlete_id: nil).select(:athlete_id))
   end
 
   def clear_live_results!

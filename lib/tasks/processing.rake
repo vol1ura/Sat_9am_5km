@@ -23,35 +23,6 @@ namespace :processing do
     BreakingTimeAwardingJob.perform_now
   end
 
-  desc 'Award by badge of home participating kind'
-  task home_badge_awarding: :environment do
-    HomeBadgeAwardingJob.perform_now
-  end
-
-  desc 'Set awarding dates for 5+ trophies'
-  task set_five_plus_trophy_dates: :environment do
-    initial_date = Date.current.saturday? ? Date.current : Date.tomorrow.prev_week(:saturday)
-    Badge.five_plus_kind.sole.trophies.includes(:athlete).find_each do |trophy|
-      res_dates = trophy.athlete.results.published.pluck(:date)
-      vol_dates = trophy.athlete.volunteering.unscope(:order).pluck(:date)
-      dates = (res_dates | vol_dates).uniq
-      5.upto(dates.size) do |k|
-        date = initial_date - k.weeks
-        next if dates.include?(date) && k != dates.size
-
-        trophy.update!(date: date + 5.weeks) and break
-      end
-    end
-  end
-
-  desc 'Schedules renew going to events'
-  task schedule_renew_going_to_events: :environment do
-    Event.find_each do |event|
-      sat_9am = event.timezone_object.now.tomorrow.change(hour: 9)
-      RenewGoingToEventJob.set(wait_until: sat_9am).perform_later(event.id)
-    end
-  end
-
   desc 'create Parkzhrun activity'
   task parkzhrun: :environment do
     Parkzhrun::ActivityCreator.call(1.day.ago.strftime('%Y-%m-%d'))
