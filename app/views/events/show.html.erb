@@ -126,12 +126,12 @@
                 <%= link_to live_event_path(@event.code_name), class: 'text-decoration-none' do %>
                   <span class="badge bg-danger">
                     <i class="fa-solid fa-circle" style="animation: blink 0.8s infinite;"></i>
-                    <%= t 'events.show.live_streaming' %>
+                    <%= t '.live_streaming' %>
                   </span>
                 <% end %>
               </td>
               <td colspan="2" class="text-muted hidden-on-phone">
-                <small><%= t 'events.show.live_streaming_description' %></small>
+                <small><%= t '.live_streaming_description' %></small>
               </td>
             </tr>
           <% end %>

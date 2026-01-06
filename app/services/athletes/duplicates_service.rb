@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 module Athletes
-  class DuplicatesFinder < ApplicationService
-    def initialize(name: nil)
-      @name = name
-    end
+  class DuplicatesService < ApplicationService
+    option :name, reader: :private, default: -> {}
 
     def call
       Athlete
@@ -36,8 +34,9 @@ module Athletes
           .from(Arel.sql("athletes, unnest(string_to_array(LOWER(name), ' ')) AS words"))
           .group(:id)
 
-      ds = ds.having("string_agg(words, ' ' ORDER BY words) = ?", @name.downcase.split.sort.join(' ')) if @name
-      ds
+      return ds unless name
+
+      ds.having("string_agg(words, ' ' ORDER BY words) = ?", name.downcase.split.sort.join(' '))
     end
 
     def name_stats_query

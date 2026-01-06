@@ -8,7 +8,7 @@ ActiveAdmin.register Athlete do
   config.per_page = [20, 50, 100]
 
   scope :all
-  scope(:duplicates) { |s| s.where(id: Athletes::DuplicatesFinder.call) }
+  scope(:duplicates) { |s| s.where(id: Athletes::DuplicatesService.call) }
 
   filter :name
   filter :id

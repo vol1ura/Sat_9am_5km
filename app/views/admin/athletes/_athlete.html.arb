@@ -25,7 +25,7 @@ panel 'Двойники по имени. ВНИМАНИЕ! Это могут б�
   dataset =
     Athlete
       .includes(:club, :event)
-      .where(id: Athletes::DuplicatesFinder.call(name: athlete.name))
+      .where(id: Athletes::DuplicatesService.call(name: athlete.name))
       .excluding(athlete)
       .limit(20)
   table_for dataset do

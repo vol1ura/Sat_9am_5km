@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TimerParser, type: :service do
+RSpec.describe TimerProcessingService, type: :service do
   subject(:timer_parser) { described_class.call(activity, file_timer) }
 
   let(:activity) { create(:activity) }

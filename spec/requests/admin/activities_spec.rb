@@ -45,8 +45,8 @@ RSpec.describe '/admin/activities' do
   describe 'POST /admin/activities' do
     before do
       create(:permission, user: user, action: 'manage', subject_class: 'Activity', event: event)
-      allow(TimerParser).to receive(:call).and_return(nil)
-      allow(ScannerParser).to receive(:call).and_return(nil)
+      allow(TimerProcessingService).to receive(:call).and_return(nil)
+      allow(ScannerProcessingService).to receive(:call).and_return(nil)
     end
 
     let(:valid_attributes) do
@@ -61,10 +61,10 @@ RSpec.describe '/admin/activities' do
       }
     end
 
-    it 'calls TimerParser and ScannerParser' do
+    it 'calls timer and scanner services' do
       post admin_activities_url, params: valid_attributes
-      expect(TimerParser).to have_received(:call).once
-      expect(ScannerParser).to have_received(:call).once
+      expect(TimerProcessingService).to have_received(:call).once
+      expect(ScannerProcessingService).to have_received(:call).once
     end
   end
 

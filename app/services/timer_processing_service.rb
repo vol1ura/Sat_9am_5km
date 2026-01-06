@@ -1,25 +1,23 @@
 # frozen_string_literal: true
 
-class TimerParser < ApplicationService
+class TimerProcessingService < ApplicationService
   class FormatError < StandardError; end
 
-  def initialize(activity, timer_file)
-    @activity = activity
-    @timer_file = timer_file
-  end
+  param :activity, reader: :private
+  param :timer_file, reader: :private
 
   def call
-    return unless @timer_file
+    return unless timer_file
     raise FormatError, table.first.inspect if table.dig(0, 0) != 'STARTOFEVENT'
 
-    @activity.update! date: Date.parse(table.dig(0, 1)) # Date of event is the second column of first row
-    TimerProcessingJob.perform_later @activity.id, timer_data
+    activity.update! date: Date.parse(table.dig(0, 1)) # Date of event is the second column of first row
+    TimerProcessingJob.perform_later activity.id, timer_data
   end
 
   private
 
   def table
-    @table ||= CSV.parse @timer_file.read, headers: false
+    @table ||= CSV.parse timer_file.read, headers: false
   end
 
   def timer_data

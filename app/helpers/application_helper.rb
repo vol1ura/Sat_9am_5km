@@ -89,7 +89,7 @@ module ApplicationHelper
     return code unless athlete && (athlete.parkrun_code || athlete.fiveverst_code || athlete.runpark_code)
 
     code_type = Athlete::PersonalCode.new(code).code_type
-    url = format(Athletes::Finder::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type))
+    url = format Athletes::FindNameService::NAME_PATH.dig(code_type, :url), athlete.public_send(code_type)
     external_link_to code, url
   end
 

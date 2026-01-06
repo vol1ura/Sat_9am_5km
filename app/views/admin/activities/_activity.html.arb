@@ -23,7 +23,7 @@ columns do
   column do
     if can?(:manage, activity) && activity.token && activity.date.today?
       panel 'QR-код забега' do
-        BarcodePrinter.call(activity.token, module_size: 5)
+        BarcodeService.call(activity.token, module_size: 5)
       end
     end
   end

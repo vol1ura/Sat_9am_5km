@@ -27,7 +27,7 @@ class AthletesController < ApplicationController
     @total_events_count =
       (results_ds.distinct.pluck(:event_id) + @volunteering.unscope(:order).distinct.pluck(:event_id)).uniq.count
     @total_trophies = @athlete.trophies.size
-    @barcode = BarcodePrinter.call("A#{@athlete.code}", module_size: 8)
+    @barcode = BarcodeService.call("A#{@athlete.code}", module_size: 8)
     @time_predictions = Athletes::TimePredictor.call(@athlete)
   end
 

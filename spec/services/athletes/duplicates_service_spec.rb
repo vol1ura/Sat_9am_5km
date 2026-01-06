@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Athletes::DuplicatesFinder do
+RSpec.describe Athletes::DuplicatesService do
   describe '.call' do
     let!(:parkrun_athlete) { create(:athlete, name: 'Test Name', fiveverst_code: nil) }
     let!(:fiveverst_athlete) { create(:athlete, name: 'Name TEST', parkrun_code: nil) }

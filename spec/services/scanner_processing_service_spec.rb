@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe ScannerParser, type: :service do
+RSpec.describe ScannerProcessingService, type: :service do
   let(:activity) { build(:activity) }
 
   context 'when scanner file is nil' do

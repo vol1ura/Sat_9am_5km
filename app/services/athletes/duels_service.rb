@@ -2,11 +2,9 @@
 
 module Athletes
   class DuelsService < ApplicationService
-    def initialize(athlete, friend_id: nil, limit: 50)
-      @athlete = athlete
-      @friend_id = friend_id&.to_i
-      @limit = limit
-    end
+    param :athlete, model: Athlete, reader: :private
+    option :friend_id, reader: :private, default: -> {}
+    option :limit, reader: :private, default: -> { 50 }
 
     def call
       return [] if friend_ids.empty?
@@ -27,9 +25,9 @@ module Athletes
         .group_by(&:activity_id)
         .each_value do |results|
           next if results.size < 2
-          next unless (user_result = results.find { |r| r.athlete_id == @athlete.id })
+          next unless (user_result = results.find { |r| r.athlete_id == athlete.id })
 
-          friend_results = results.reject { |r| r.athlete_id == @athlete.id }
+          friend_results = results.reject { |r| r.athlete_id == athlete.id }
           friend_results.each { |friend_result| duels << create_duel_data(user_result, friend_result) }
         end
 
@@ -37,12 +35,12 @@ module Athletes
     end
 
     def friends_scope
-      scoped_friend_ids = @friend_id ? [@friend_id].select { |id| friend_ids.include?(id) } : friend_ids
-      Athlete.where(id: [*scoped_friend_ids, @athlete.id])
+      scoped_friend_ids = friend_id ? [friend_id].select { |id| friend_ids.include?(id) } : friend_ids
+      Athlete.where(id: [*scoped_friend_ids, athlete.id])
     end
 
     def friend_ids
-      @friend_ids ||= Friendship.where(athlete_id: @athlete.id).pluck(:friend_id)
+      @friend_ids ||= Friendship.where(athlete_id: athlete.id).pluck(:friend_id)
     end
 
     def create_duel_data(user_result, friend_result)
@@ -70,15 +68,13 @@ module Athletes
     end
 
     def group_and_sort_duels(duels)
-      # Сначала группируем по друзьям, потом сортируем и ограничиваем для каждого друга
       duels.group_by { |duel| duel[:friend_result].athlete }
         .transform_values do |friend_duels|
-        # Сортируем дуэли каждого друга по дате (новые сначала)
         sorted_duels = friend_duels.sort_by { |duel| -duel[:date].to_time.to_i }
 
         {
-          duels: sorted_duels.first(@limit), # Ограничиваем для отображения
-          stats: calculate_friend_stats(sorted_duels), # Статистика по всем дуэлям
+          duels: sorted_duels.first(limit),
+          stats: calculate_friend_stats(sorted_duels),
         }
       end
     end

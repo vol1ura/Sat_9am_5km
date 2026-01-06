@@ -89,15 +89,15 @@ class Athlete < ApplicationRecord
   store_accessor :personal_bests, *PERSONAL_BEST_DISTANCES, prefix: :personal_best
 
   def self.find_or_scrape_by_code!(code)
-    personal_code = PersonalCode.new(code)
+    personal_code = PersonalCode.new code
     code_type = personal_code.code_type
-    athlete = find_by(**personal_code.to_params)
+    athlete = find_by **personal_code.to_params
     return athlete if athlete && (athlete.name || code_type == :id)
     return create if code_type == :id
 
-    athlete_name = Athletes::Finder.call(personal_code)
+    athlete_name = Athletes::FindNameService.call personal_code
     athlete ||= new
-    athlete.update!(name: athlete_name, **personal_code.to_params)
+    athlete.update! name: athlete_name, **personal_code.to_params
     athlete
   end
 
