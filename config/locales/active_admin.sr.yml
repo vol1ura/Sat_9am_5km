@@ -59,6 +59,10 @@ sr:
         manual:
           confirm: 'Da li želite da pređete u režim ručnog uređivanja? Uklonjeni će biti podaci za učitavanje'
           success: 'Režim ručnog uređivanja je aktiviran. Sada možete da uređujete i objavljujete protokol'
+      gender_setup_links:
+        male: 'Muški'
+        female: 'Ženski'
+        confirm: 'Postavi pol "%{gender}" za %{name}?'
     contacts:
       index:
         title: 'Kontakti %{event_name}'
@@ -191,7 +195,6 @@ sr:
       labels:
         destroy: Obriši
         reunite: Spoji
-        gender_set: Postavi pol
         change_roles: Promeni uloge
         move_time: Promeni vreme
     comments:
@@ -213,8 +216,6 @@ sr:
       confirm_reunite: "Da li ste sigurni da želite da spojite ove učesnike u jednog?"
       successful_reunite: "Učesnici su spojeni."
       failed_reunite: "Operacija nije uspela. Učesnici ne mogu biti spojeni."
-      confirm_gender_set: "Postaviti pol izabranim učesnicima?"
-      successful_gender_set: "Uspešno promenjen pol."
       gender_set_failed: "Neuspelo promena pola."
     results:
       cannot_link_athlete: 'Učesnik sa navedenim ID nije pronađen. Proverite brojeve ili prvo kreirajte takvog učesnika.'

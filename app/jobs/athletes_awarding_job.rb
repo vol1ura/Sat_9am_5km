@@ -6,7 +6,7 @@ class AthletesAwardingJob < ApplicationJob
   def perform(activity_id)
     @activity = Activity.published.find activity_id
 
-    [true, false].each { |male| process_event_records(male:) }
+    Athlete.genders.each_key { process_event_records it }
 
     @activity.athletes.includes(:event).find_each do |athlete|
       award_athlete(athlete, badge_type: 'result')
@@ -22,11 +22,11 @@ class AthletesAwardingJob < ApplicationJob
   private
 
   # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-  def process_event_records(male:)
-    best_result = @activity.results.joins(:athlete).where(athlete: { male: }).order(:position).first
+  def process_event_records(gender)
+    best_result = @activity.results.joins(:athlete).where(athlete: { gender: }).order(:position).first
     return unless best_result
 
-    record_badge = Badge.record_kind.find_by("(info->'male')::boolean = ?", male)
+    record_badge = Badge.record_kind.find_by "info->>'gender' = ?", gender
     trophies = Trophy.where(badge: record_badge).where("info @@ '$.data[*].event_id == #{event_id}'")
     award_by_record_badge!(record_badge, best_result) and return if trophies.empty?
 
@@ -39,7 +39,7 @@ class AthletesAwardingJob < ApplicationJob
             Result
               .published
               .joins(:athlete)
-              .where(activity: { event_id: }, athlete: { male: })
+              .where(activity: { event_id: }, athlete: { gender: })
               .order(total_time: :asc, date: :desc, position: :asc)
               .first
           trophy.update!(athlete_id: record_result.athlete_id)

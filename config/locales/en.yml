@@ -69,12 +69,14 @@ en:
         runpark_code: RunPark ID
         parkzhrun_code: parkzhrun ID
         gender: gender
+        genders:
+          male: male
+          female: female
         club: club
         club_id: club
         event: home run
         event_id: home run
         going_to_event: going to
-        male: male
         user: user
         registered: reg.
         id_info: ID info
@@ -470,9 +472,7 @@ en:
     without_token: NO TOKEN (create)
     without_name: NO NAME
     nobody: UNKNOWN
-    gender: Gender
-    man: Male
-    woman: Female
+    gender_unknown: Unspecified
     title: Weekly 5-kilometer park runs
     description: Weekly Saturday 5km runs in the park. You can walk, run, or volunteer — fitness level doesn't matter. You'll find new friends and great mood here.
   country:

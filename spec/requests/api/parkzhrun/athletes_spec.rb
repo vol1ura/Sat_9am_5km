@@ -28,7 +28,7 @@ RSpec.describe '/api/parkzhrun/athletes' do
     end
 
     context 'with valid header api key' do
-      let!(:athlete) { create(:athlete, parkzhrun_code: parkzhrun_code, male: nil) }
+      let!(:athlete) { create(:athlete, parkzhrun_code: parkzhrun_code, gender: nil) }
       let(:valid_headers) do
         { 'Authorization' => Rails.application.credentials.parkzhrun_api_key }
       end
@@ -37,7 +37,7 @@ RSpec.describe '/api/parkzhrun/athletes' do
         patch api_parkzhrun_athlete_url(parkzhrun_code), params: athlete_attributes, headers: valid_headers, as: :json
         expect(response).to be_successful
         athlete.reload
-        expect(athlete.male).to eq(athlete_attributes.dig(:athlete, :gender) == 'male')
+        expect(athlete.gender).to eq athlete_attributes.dig(:athlete, :gender)
         expect(athlete.name).to eq(
           "#{athlete_attributes.dig(:athlete, :first_name)} #{athlete_attributes.dig(:athlete, :last_name).upcase}",
         )

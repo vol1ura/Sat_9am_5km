@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
-if Rails.env.development?
-  User.create!(
-    email: 'admin@test.com',
-    password: '111111',
-    password_confirmation: '111111',
-    role: 0,
-    first_name: 'John',
-    last_name: 'Doe',
-  )
-end
+user = User.create!(
+  telegram_id: ENV['DEV_TELEGRAM_ID'],
+  role: 0,
+  first_name: 'John',
+  last_name: 'Doe',
+)
 
 russia = Country.create!(code: 'ru')
 
-Event.create!(
+kuzminki = Event.create!(
   name: 'Кузьминки',
   code_name: 'kuzminki',
   town: 'Москва',
@@ -29,3 +25,26 @@ Event.create!(
   description: 'Каждую субботу сбор в 8:45 где-то в парке.',
   country: russia,
 )
+
+club = Club.create!(
+  name: Faker::Team.name,
+  country: russia,
+)
+
+Athlete.create!(
+  user:,
+  club:,
+  name: user.full_name,
+  gender: 'male',
+  event: kuzminki,
+  fiveverst_code: 790000000 + Faker::Number.number(digits: 6),
+)
+
+50.times do
+  Athlete.create!(
+    name: Faker::Name.name,
+    gender: Faker::Gender.binary_type.downcase,
+    event: Event.order('RANDOM()').first,
+    parkrun_code: Faker::Number.number(digits: 6),
+  )
+end

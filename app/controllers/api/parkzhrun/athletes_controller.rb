@@ -28,7 +28,7 @@ module API
         if parkzhrun_athlete_params[:first_name]
           options[:name] = "#{parkzhrun_athlete_params[:first_name]} #{parkzhrun_athlete_params[:last_name].upcase}"
         end
-        options[:male] = parkzhrun_athlete_params[:gender] == 'male' if parkzhrun_athlete_params[:gender]
+        options[:gender] = parkzhrun_athlete_params[:gender] if parkzhrun_athlete_params[:gender]
         if (parkrun_code = parkzhrun_athlete_params[:parkrun_id]) && !Athlete.exists?(parkrun_code:)
           options[:parkrun_code] = parkrun_code
         end

@@ -6,7 +6,7 @@ RSpec.describe '/api/mobile/athletes' do
     let(:expected_result) do
       {
         'name' => athlete.name,
-        'male' => athlete.male,
+        'gender' => athlete.gender,
         'home_event' => nil,
         'volunteering' => include(
           'scheduled' => [include('event_name', 'date', 'role', 'town')],

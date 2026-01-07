@@ -75,12 +75,14 @@ ru:
         runpark_code: RunPark ID
         parkzhrun_code: parkzhrun ID
         gender: пол
+        genders:
+          male: мужчина
+          female: женщина
         club: клуб
         club_id: клуб
         event: домашний забег
         event_id: домашний забег
         going_to_event: собирается в
-        male: мужчина
         user: пользователь
         registered: зарег.
         id_info: Инфа по ID
@@ -520,9 +522,7 @@ ru:
     without_token: БЕЗ ТОКЕНА (создать)
     without_name: БЕЗ ИМЕНИ
     nobody: НЕИЗВЕСТНЫЙ
-    gender: Пол
-    man: Мужчина
-    woman: Женщина
+    gender_unknown: Не указан
     title: Еженедельные парковые забеги на 5 километров
     description: Еженедельные субботние пробежки на 5км в парке. Дистанцию можно пройти, пробежать, либо принять участие как волонтёр — уровень подготовки не важен. У нас вы найдёте новые знакомства и отличное настроение.
   country:

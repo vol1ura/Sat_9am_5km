@@ -8,11 +8,11 @@ class BreakingTimeAwardingJob < ApplicationJob
   def perform(activity_id = nil)
     expire_badges
 
-    [true, false].each do |male|
+    Athlete.genders.each_key do |gender|
       award_badges(
-        Badge.breaking_kind.where("(info->'male')::boolean = ?", male).order(Arel.sql("info->'min'")),
+        Badge.breaking_kind.where("info->>'gender' = ?", gender).order(Arel.sql("info->'min'")),
         activity_id:,
-        male:,
+        gender:,
       )
     end
   end
@@ -32,7 +32,7 @@ class BreakingTimeAwardingJob < ApplicationJob
   end
 
   # rubocop:disable Metrics/MethodLength
-  def award_badges(badges, activity_id:, male:)
+  def award_badges(badges, activity_id:, gender:)
     badges.each do |badge|
       time_threshold = badge.info['min']
       prev_badges = badges.where("(info->'min')::integer < ?", time_threshold)
@@ -40,7 +40,7 @@ class BreakingTimeAwardingJob < ApplicationJob
       results_dataset(activity_id:)
         .joins(:athlete)
         .where(total_time: minutes_threshold(prev_badges.last&.info&.dig('min'))...minutes_threshold(time_threshold))
-        .where(athlete: { male: })
+        .where(athlete: { gender: })
         .order(:date)
         .select(:athlete_id, :date)
         .each do |res|

@@ -22,7 +22,7 @@ active_admin_form_for [:admin, resource] do |f|
     input :parkzhrun_code, input_html: { inputmode: 'numeric' } if current_user.admin?
     input :club, as: :searchable_select
     input :event, as: :searchable_select, collection: Event.without_friends
-    input :male, as: :radio, collection: [['мужчина', true], ['женщина', false]], required: true, label: 'пол'
+    input :gender, as: :radio, collection: Athlete.genders.transform_keys { human_gender it }, required: true
   end
 
   if resource.user_id.present?

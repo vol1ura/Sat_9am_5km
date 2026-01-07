@@ -10,7 +10,7 @@
     data-dashboard-first-time-volunteers-value="<%= @first_time_volunteers_count %>"
     data-dashboard-total-male-value="<%= @gender_stats['male'] || 0 %>"
     data-dashboard-total-female-value="<%= @gender_stats['female'] || 0 %>"
-    data-dashboard-total-unknown-value="<%= @gender_stats['unknown'] || 0 %>"
+    data-dashboard-total-unknown-value="<%= @gender_stats[nil] || 0 %>"
     data-dashboard-error-value="<%= t '.error' %>">
     <div class="row g-3">
       <div class="col-md-4">

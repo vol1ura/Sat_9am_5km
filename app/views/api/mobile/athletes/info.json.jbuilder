@@ -1,4 +1,4 @@
-json.call(@athlete, :name, :male)
+json.call @athlete, :name, :gender
 json.home_event @athlete.event&.name
 json.volunteering do
   json.stats do

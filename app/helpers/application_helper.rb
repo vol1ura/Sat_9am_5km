@@ -55,19 +55,23 @@ module ApplicationHelper
   end
 
   def human_volunteer_role(role)
-    I18n.t("activerecord.attributes.volunteer.roles.#{role}")
+    I18n.t "activerecord.attributes.volunteer.roles.#{role}"
   end
 
   def human_contact_type(type)
-    I18n.t("activerecord.attributes.contact.contact_types.#{type}")
+    I18n.t "activerecord.attributes.contact.contact_types.#{type}"
   end
 
   def human_phone(phone)
     Phonelib.parse(phone).full_international
   end
 
+  def human_gender(gender)
+    I18n.t "activerecord.attributes.athlete.genders.#{gender}" if gender
+  end
+
   def kind_of_badge(badge)
-    I18n.t("activerecord.attributes.badge.kinds.#{badge.kind}")
+    I18n.t "activerecord.attributes.badge.kinds.#{badge.kind}"
   end
 
   def sanitized_text(text)

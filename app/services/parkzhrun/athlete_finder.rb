@@ -18,7 +18,7 @@ module Parkzhrun
 
       Athlete.create!(
         name: "#{athlete_info[:first_name]} #{athlete_info[:last_name].upcase}",
-        male: athlete_info[:gender] == 'male',
+        gender: athlete_info[:gender],
         parkrun_code: athlete_info[:parkrun_id],
         fiveverst_code: athlete_info[:five_verst_id],
         runpark_code: athlete_info[:runpark_id],

@@ -37,7 +37,7 @@ module API
       end
 
       def athlete_params
-        params.expect(athlete: %i[name male parkrun_code fiveverst_code runpark_code])
+        params.expect(athlete: %i[name gender parkrun_code fiveverst_code runpark_code])
       end
 
       def link_user_to_athlete!

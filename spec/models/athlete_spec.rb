@@ -26,29 +26,6 @@ RSpec.describe Athlete do
     expect { athlete.save }.to change(athlete, :name).to('Test TEST')
   end
 
-  describe '#gender' do
-    context 'when male is true' do
-      it 'returns "мужчина"' do
-        athlete = build_stubbed(:athlete, male: true)
-        expect(athlete.gender).to eq 'мужчина'
-      end
-    end
-
-    context 'when male is false' do
-      it 'returns "женщина"' do
-        athlete = build_stubbed(:athlete, male: false)
-        expect(athlete.gender).to eq 'женщина'
-      end
-    end
-
-    context 'when male is nil' do
-      it 'returns nil' do
-        athlete = build_stubbed(:athlete, male: nil)
-        expect(athlete.gender).to be_nil
-      end
-    end
-  end
-
   describe '#find_or_scrape_by_code!' do
     context 'when such athlete exists in the database' do
       let(:athlete) { create(:athlete, runpark_code: 7000998502) }

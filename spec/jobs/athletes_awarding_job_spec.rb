@@ -2,7 +2,7 @@
 
 RSpec.describe AthletesAwardingJob do
   let(:athlete) { create(:athlete) }
-  let!(:record_badge) { create(:badge, kind: :record, info: { male: true }) }
+  let!(:record_badge) { create(:badge, kind: :record, info: { gender: 'male' }) }
 
   before do
     create(:badge, kind: :rage)

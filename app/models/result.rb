@@ -20,7 +20,7 @@ class Result < ApplicationRecord
   def correct?
     return false unless total_time
 
-    !athlete_id || (athlete.name.present? && !athlete.male.nil?)
+    !athlete_id || (athlete.name.present? && athlete.gender.present?)
   end
 
   def swap_with_position!(target_position)

@@ -34,10 +34,7 @@ class ActivitiesController < ApplicationController
     @total_volunteers = Volunteer.joins(:activity).where(activity: weekly_activities)
     @first_time_volunteers_count = count_first_time_volunteers(@total_volunteers)
 
-    @gender_stats = @total_results
-      .left_joins(:athlete)
-      .group("CASE WHEN athletes.male IS TRUE THEN 'male' WHEN athletes.male IS FALSE THEN 'female' ELSE 'unknown' END")
-      .count
+    @gender_stats = @total_results.left_joins(:athlete).group(:gender).count
   end
 
   private

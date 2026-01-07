@@ -6,7 +6,7 @@ RSpec.describe BreakingTimeAwardingJob do
 
   before do
     [16, 18, 20].each do |threshold|
-      create(:badge, info: { male: true, min: threshold }, kind: :breaking)
+      create(:badge, info: { gender: 'male', min: threshold }, kind: :breaking)
     end
   end
 

@@ -178,7 +178,9 @@ ActiveAdmin.register Result do
   end
 
   member_action :gender_set, method: :patch, if: proc { can? :manage, Athlete } do
-    render js: "alert('#{t 'active_admin.athletes.gender_set_failed'}')" unless resource.athlete.update(male: params[:male])
+    unless resource.athlete.update(gender: params[:gender].presence)
+      render js: "alert('#{t 'active_admin.athletes.gender_set_failed'}')"
+    end
   end
 
   action_item :activity, only: :index do

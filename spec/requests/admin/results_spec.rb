@@ -138,11 +138,11 @@ RSpec.describe '/admin/results' do
 
     describe 'PATCH /admin/activities/1/results/1/gender_set' do
       it 'assigns gender for athlete' do
-        athlete = create(:athlete, male: nil)
+        athlete = create(:athlete, gender: nil)
         result = create(:result, athlete:, activity:)
-        patch gender_set_admin_activity_result_url(activity, result, male: true, format: :js)
+        patch gender_set_admin_activity_result_url(activity, result, gender: 'male', format: :js)
         expect(response).to be_successful
-        expect(athlete.reload.male).to be_truthy
+        expect(athlete.reload.gender).to eq 'male'
       end
     end
 
@@ -221,7 +221,7 @@ RSpec.describe '/admin/results' do
 
     describe 'PATCH /admin/activities/1/results/2/gender_set' do
       it 'renders alert' do
-        patch gender_set_admin_activity_result_url(activity, result, male: true, format: :js)
+        patch gender_set_admin_activity_result_url(activity, result, gender: 'male', format: :js)
         expect(response).to be_successful
         expect(response.body).to include 'У вас нет прав'
       end

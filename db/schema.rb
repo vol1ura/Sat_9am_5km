@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_01_230000) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_07_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "athlete_gender", ["male", "female"]
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.bigint "author_id"
@@ -74,8 +78,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_01_230000) do
     t.datetime "created_at", null: false
     t.bigint "event_id"
     t.bigint "fiveverst_code"
+    t.enum "gender", enum_type: "athlete_gender"
     t.bigint "going_to_event_id"
-    t.boolean "male"
     t.string "name"
     t.integer "parkrun_code"
     t.bigint "parkzhrun_code"

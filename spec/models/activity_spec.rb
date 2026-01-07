@@ -16,7 +16,7 @@ RSpec.describe Activity do
       FactoryBot.rewind_sequences
       activity.results << build_list(:result, 3, activity_id: nil)
       activity.save!
-      expect(activity.leader_result.position).to eq 1
+      expect(activity.leader_result(:male).position).to eq 1
     end
   end
 end

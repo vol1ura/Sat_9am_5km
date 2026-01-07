@@ -1,0 +1,14 @@
+<%
+  setup_link = lambda do |gender|
+    link_to(
+      t(".#{gender}"),
+      gender_set_admin_activity_result_path(activity, result, gender: gender, format: :js),
+      remote: true,
+      method: :patch,
+      data: { confirm: t('.confirm', name: result.athlete.name, gender: human_gender(gender)) },
+    )
+  end
+%>
+<%= setup_link.call 'male' %>
+<span style="color: #e61ccc;">-&starf;-</span>
+<%= setup_link.call 'female' %>

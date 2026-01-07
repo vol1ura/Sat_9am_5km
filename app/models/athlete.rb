@@ -82,6 +82,8 @@ class Athlete < ApplicationRecord
             allow_nil: true
   validate :personal_bests_format
 
+  enum :gender, { male: 'male', female: 'female' }
+
   before_save :remove_name_extra_spaces, if: :will_save_change_to_name?
   before_destroy(prepend: true) { results.update_all personal_best: false, first_run: false }
   after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
@@ -91,7 +93,7 @@ class Athlete < ApplicationRecord
   def self.find_or_scrape_by_code!(code)
     personal_code = PersonalCode.new code
     code_type = personal_code.code_type
-    athlete = find_by **personal_code.to_params
+    athlete = find_by personal_code.to_params
     return athlete if athlete && (athlete.name || code_type == :id)
     return create if code_type == :id
 
@@ -103,7 +105,7 @@ class Athlete < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[
-      club_id event_id id male name parkrun_code fiveverst_code runpark_code updated_at created_at going_to_event_id
+      club_id event_id id gender name parkrun_code fiveverst_code runpark_code updated_at created_at going_to_event_id
     ]
   end
 
@@ -128,12 +130,6 @@ class Athlete < ApplicationRecord
       .select(:date)
       .distinct
       .size == 5
-  end
-
-  def gender
-    return if male.nil?
-
-    male ? 'мужчина' : 'женщина'
   end
 
   def going_to_event?

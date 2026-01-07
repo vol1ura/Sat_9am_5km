@@ -1,1 +1,4 @@
-document.querySelector('#<%= dom_id @result %> .col-gender').innerText = '<%= @result.athlete.gender %>';
+<% if @result.correct? %>
+document.querySelector('#<%= dom_id @result %>').classList.remove('athlete-error');
+<% end %>
+document.querySelector('#<%= dom_id @result %> .col-gender').innerText = '<%= human_gender @result.athlete.gender %>';

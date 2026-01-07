@@ -37,7 +37,7 @@ panel 'Протокол' do
     column(:total_time) { |r| human_result_time r.total_time }
     column(:gender) do |r|
       if (athlete = r.athlete)
-        athlete.gender || render(partial: 'gender_links', locals: { result: r, activity: activity })
+        human_gender(athlete.gender) || render(partial: 'gender_setup_links', locals: { result: r, activity: activity })
       end
     end
     column(:club) { |r| r.athlete&.club&.name }

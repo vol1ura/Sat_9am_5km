@@ -59,6 +59,10 @@ en:
         manual:
           confirm: Switch to manual editing mode? Remote data upload will be disabled
           success: Manual editing mode activated. You can now edit and publish the protocol
+      gender_setup_links:
+        male: 'Male'
+        female: 'Female'
+        confirm: 'Set gender "%{gender}" for %{name}?'
     contacts:
       index:
         title: 'Contacts %{event_name}'
@@ -187,7 +191,6 @@ en:
       labels:
         destroy: Delete
         reunite: Merge
-        gender_set: Set Gender
         change_roles: Change Permissions
         move_time: Move Time
     comments:
@@ -209,8 +212,6 @@ en:
       confirm_reunite: "Merge these participants into one?"
       successful_reunite: "Participants have been merged."
       failed_reunite: "Operation failed. Participants cannot be merged."
-      confirm_gender_set: "Set gender for selected participants?"
-      successful_gender_set: "Gender change successfully performed."
       gender_set_failed: "Failed to perform gender change."
     results:
       cannot_link_athlete: 'Participant with specified ID not found. Check the numbers or create such participant first.'
@@ -332,4 +333,3 @@ en:
   formtastic:
     create: 'Create'
     update: 'Update'
-

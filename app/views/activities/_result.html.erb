@@ -1,6 +1,6 @@
 <% results_count = @results_count[result.athlete_id] %>
 
-<%= tag.tr data: { male: result.athlete&.male } do %>
+<%= tag.tr data: { gender: result.athlete&.gender } do %>
   <td class="position align-middle"><%= result.position %></td>
   <td>
     <% if result.athlete_id %>

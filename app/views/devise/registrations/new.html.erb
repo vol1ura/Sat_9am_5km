@@ -32,7 +32,7 @@
   <%= f.fields_for :athlete, (f.object.athlete || Athlete.new) do |form| %>
     <div class="field">
       <%= form.label :male %><br>
-      <%= form.collection_radio_buttons :male, [['мужчина', true], ['женщина', false]], :last, :first %>
+      <%= form.collection_radio_buttons :gender, Athlete.genders.transform_keys { human_gender it }.to_a, :last, :first %>
     </div>
     <div class="field">
       <%= form.label :parkrun_code %><br>

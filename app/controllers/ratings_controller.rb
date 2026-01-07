@@ -78,7 +78,8 @@ class RatingsController < ApplicationController
   end
 
   def ranked_results_dataset
-    base_ds = country_dataset_for(Result).joins(:athlete).where(athlete: { male: params[:gender] != 'female' })
+    gender = params[:gender] == 'female' ? :female : :male
+    base_ds = country_dataset_for(Result).joins(:athlete).where(athlete: { gender: })
     base_ds = base_ds.where(athlete: { club_id: params[:club_id] }) if params[:club_id].present?
     base_ds = base_ds.where(activity: { event_id: params[:event_id] }) if params[:event_id].present?
     base_ds.select('results.*', 'athlete.name AS name', RANKING_SQL)

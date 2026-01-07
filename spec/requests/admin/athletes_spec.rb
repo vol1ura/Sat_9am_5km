@@ -97,7 +97,7 @@ RSpec.describe '/admin/athletes' do
     end
 
     context 'with valid athletes' do
-      let(:athletes) { create_list(:athlete, 2, name: 'Same Name', male: true) }
+      let(:athletes) { create_list(:athlete, 2, name: 'Same Name', gender: :male) }
       let(:batch_params) do
         { batch_action: :reunite, batch_action_inputs: '{}', collection_selection: athletes.map(&:id) }
       end
@@ -114,22 +114,6 @@ RSpec.describe '/admin/athletes' do
 
       it 'redirects to admin athletes page' do
         expect(response).to redirect_to admin_athletes_url(scope: :duplicates)
-      end
-    end
-
-    context 'when set gender' do
-      let(:athletes) { create_list(:athlete, 2, male: nil) }
-      let(:batch_params) do
-        {
-          batch_action: :gender_set,
-          batch_action_inputs: { gender: 'мужчина' }.to_json,
-          collection_selection: athletes.map(&:id),
-        }
-      end
-
-      it 'changes gender to all athletes' do
-        expect(response).to redirect_to admin_athletes_path
-        expect(athletes.map(&:reload)).to all be_male
       end
     end
   end

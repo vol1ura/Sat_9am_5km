@@ -31,11 +31,9 @@ To build project install `Docker` and execute
 make build
 make ash
 # in docker container
-rails db:prepare
-rake db:parse_parkrun_codes[kuzminki_db.csv]
-rails db:environment:set RAILS_ENV=test
-# add secrets
 rails credentials:edit --environment test
+rails db:prepare
+rails db:environment:set RAILS_ENV=test
 # run tests
 rspec
 ```

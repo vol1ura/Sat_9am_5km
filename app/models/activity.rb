@@ -36,8 +36,8 @@ class Activity < ApplicationRecord
     Athlete.where(id: results.select(:athlete_id)).or(Athlete.where(id: volunteers.select(:athlete_id))).distinct
   end
 
-  def leader_result(male: true)
-    results.joins(:athlete).where(athlete: { male: }).order(:position).first
+  def leader_result(gender)
+    results.joins(:athlete).where(athlete: { gender: }).order(:position).first
   end
 
   def number
@@ -48,13 +48,13 @@ class Activity < ApplicationRecord
     subquery = results.left_joins(:athlete).select(
       'position, LEAD(position, 1) OVER (ORDER BY position) AS next_position, ' \
       'total_time, LEAD(total_time, 1) OVER (ORDER BY position) AS next_total_time, ' \
-      'athlete_id, name, male',
+      'athlete_id, name, gender',
     ).to_sql
     Result
       .from("(#{subquery}) AS ext_results")
       .where(
         'total_time IS NULL OR next_position != position + 1 OR total_time > next_total_time OR ' \
-        '(athlete_id IS NOT NULL AND (name IS NULL OR male IS NULL))',
+        '(athlete_id IS NOT NULL AND (name IS NULL OR gender IS NULL))',
       )
       .empty?
   end
