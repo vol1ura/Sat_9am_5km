@@ -19,10 +19,6 @@ every 1.day, at: '2' do
   command "$HOME/backup_storage.sh"
 end
 
-every 1.month, at: '1' do
-  rake 'processing:purge_unattached_files'
-end
-
 every 4.months, at: '1' do
   command "rm -rf #{File.join ENV.fetch('APP_DEPLOY_PATH'), 'shared/tmp/cache/bootsnap/*'}"
 end
@@ -41,14 +37,6 @@ end
 
 every :sunday, at: '5' do
   rake 'processing:parkzhrun'
-end
-
-every :sunday, at: '5:05' do
-  rake 'processing:results'
-end
-
-every :sunday, at: '5:10' do
-  rake 'processing:awarding'
 end
 
 every :sunday, at: '5:30' do

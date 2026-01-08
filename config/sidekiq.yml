@@ -40,6 +40,10 @@
       cron: "30 5 * * SUN"
       class: HomeBadgeAwardingJob
       queue: low
+    breaking_time_badge_awarding:
+      cron: "30 5 * * SUN"
+      class: BreakingTimeAwardingJob
+      queue: low
     minute_bingo_awarding:
       cron: "30 5 * * SUN"
       class: MinuteBingoAwardingJob
@@ -49,8 +53,12 @@
       class: AthleteStatsUpdateJob
       queue: low
     incorrect_running_volunteers:
-      cron: "12 0 * * SUN"
+      cron: "0 12 * * SUN"
       class: "Telegram::Notification::IncorrectRunningVolunteersJob"
+      queue: low
+    current_week_processing:
+      cron: "0 18 * * SUN"
+      class: CurrentWeekProcessingJob
       queue: low
     set_five_plus_trophy_dates:
       cron: "0 6 1 * *"
