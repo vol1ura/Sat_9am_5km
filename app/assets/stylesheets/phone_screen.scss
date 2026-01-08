@@ -1,6 +1,6 @@
 @mixin media($query) {
   @if $query == phoneScreen {
-    @media (width <= 768px) {
+    @media (width < 768px) {
       @content;
     }
   }
@@ -19,5 +19,15 @@
     overflow: hidden;
     text-overflow: ".";
     max-width: 60px;
+  }
+}
+
+@media (width >= 768px) {
+  .top-navbar {
+    .navbar-nav {
+      .dropdown-menu {
+        position: absolute;
+      }
+    }
   }
 }

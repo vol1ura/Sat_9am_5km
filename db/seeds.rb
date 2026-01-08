@@ -32,8 +32,8 @@ club = Club.create!(
 )
 
 Athlete.create!(
-  user:,
-  club:,
+  user: user,
+  club: club,
   name: user.full_name,
   gender: 'male',
   event: kuzminki,

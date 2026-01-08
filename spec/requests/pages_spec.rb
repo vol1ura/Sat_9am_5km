@@ -33,11 +33,7 @@ RSpec.describe '/pages' do
     end
 
     context 'when user log in' do
-      before do
-        user = create(:user)
-        create(:athlete, user_id: user.id)
-        sign_in user
-      end
+      before { sign_in create(:user, :with_athlete) }
 
       it 'renders root page with successful response' do
         get root_url

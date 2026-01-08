@@ -4,13 +4,16 @@ export default class extends Controller {
   static targets = ['toggle', 'menu'];
 
   connect() {
-    this.element.addEventListener('mouseenter', this.show.bind(this));
-    this.element.addEventListener('mouseleave', this.hide.bind(this));
+    this._boundShow = this.show.bind(this);
+    this._boundHide = this.hide.bind(this);
+
+    this.element.addEventListener('mouseenter', this._boundShow);
+    this.element.addEventListener('mouseleave', this._boundHide);
   }
 
   disconnect() {
-    this.element.removeEventListener('mouseenter', this.show.bind(this));
-    this.element.removeEventListener('mouseleave', this.hide.bind(this));
+    this.element.removeEventListener('mouseenter', this._boundShow);
+    this.element.removeEventListener('mouseleave', this._boundHide);
   }
 
   show() {

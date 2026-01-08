@@ -11,6 +11,8 @@ FactoryBot.define do
       role { :admin }
     end
 
+    trait(:with_athlete) { athlete }
+
     trait :with_email do
       email { Faker::Internet.email }
       password { Faker::Internet.password(min_length: 6) }

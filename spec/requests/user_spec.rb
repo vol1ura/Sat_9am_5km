@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe '/user' do
-  let(:user) { create(:user, with_avatar: true, phone: '79991234567') }
+  let(:user) { create(:user, :with_athlete, with_avatar: true, phone: '79991234567') }
 
   describe 'GET /user/sign_up' do
     it 'renders successful response' do

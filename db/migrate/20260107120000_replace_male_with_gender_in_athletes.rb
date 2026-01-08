@@ -19,13 +19,13 @@ class ReplaceMaleWithGenderInAthletes < ActiveRecord::Migration[8.1]
   end
 
   def down
-    add_column :athletes, :male, :boolean
+    add_column :athletes, :male, :boolean # rubocop:disable Rails/ThreeStateBooleanColumn
 
     Athlete.where(gender: 'male').update_all(male: true)
     Athlete.where(gender: 'female').update_all(male: false)
 
     remove_column :athletes, :gender
-    drop_enum :athlete_gender, if_exists: true
+    drop_enum :athlete_gender
 
     Badge
       .where("info->>'gender' = 'male'")
