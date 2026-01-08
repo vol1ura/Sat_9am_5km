@@ -1040,7 +1040,7 @@ ru:
       map: Карта
       our_events: Наши мероприятия
     show:
-      title: '%{event} | Парковые забеги'
+      title: '%{event} | %{town} | Парковые забеги'
       our_contacts: Наши контакты
       jubilee_by_results: Скоро юбилейные забеги
       jubilee_by_volunteering: Скоро юбилейные волонтёрства
