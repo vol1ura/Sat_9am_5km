@@ -1,6 +1,14 @@
 <li class="nav-item dropdown" data-controller="dropdown">
   <% about_s95_pages = %w[rules about support feedback joining] %>
-  <%= link_to '#', class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'pages' && about_s95_pages.include?(params[:page])}", role: 'button', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false', 'data-dropdown-target' => 'toggle' do %>
+  <%=
+    button_tag(
+      type: 'button',
+      class: "nav-link dropdown-toggle #{'active' if params[:controller] == 'pages' && about_s95_pages.include?(params[:page])}",
+      'data-bs-toggle' => 'dropdown',
+      'aria-expanded' => 'false',
+      'data-dropdown-target' => 'toggle',
+    ) do
+  %>
     <% if with_icon %>
       <span class="fa-li"><i class="fa-solid fa-circle-info"></i></span>
     <% end %>
