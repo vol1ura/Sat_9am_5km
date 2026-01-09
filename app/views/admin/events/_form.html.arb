@@ -38,7 +38,6 @@ active_admin_form_for [:admin, resource] do |f|
                             },
                           },
                         }
-    input :slogan
     input :visible_order, input_html: { inputmode: 'numeric' }
     input :summer_image, as: :file, hint:
       if resource.summer_image.attached? && resource.summer_image.blob.persisted?

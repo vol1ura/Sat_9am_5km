@@ -1,29 +1,20 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  toggleSort(e) {
-    e.target.closest('tr').querySelectorAll('i.fa').forEach(cell => {
-      cell.classList.remove('fa-angle-up', 'fa-angle-down');
-      if (cell === e.target) {
-        let sort_direction = 'asc';
-        if (cell.classList.contains('fa-caret-up')) {
-          cell.classList.remove('fa-caret-up');
-          cell.classList.add('fa-caret-down');
-          sort_direction = 'desc';
-        } else {
-          cell.classList.remove('fa-caret-down');
-          cell.classList.add('fa-caret-up');
-        }
-        this.sortTable(
-          e.target.closest('table'),
-          this.currentColumnIndex(e.target.closest('th')),
-          sort_direction
-        );
-        return;
-      }
-      cell.classList.remove('fa-caret-down', 'fa-caret-up');
-      cell.classList.add('fa-angle-up');
+  toggleSort(event) {
+    const th = event.currentTarget.closest('th');
+    const table = this.element.closest('table');
+    const currentIcon = th.querySelector('.sort-arrow > i');
+    const wasAsc = currentIcon.classList.contains('fa-caret-down');
+
+    this.element.querySelectorAll('.sort-arrow > i').forEach(i => {
+      i.classList.remove('fa-caret-up', 'fa-caret-down');
     });
+
+    currentIcon.classList.add(wasAsc ? 'fa-caret-up' : 'fa-caret-down');
+    const sort_direction = wasAsc ? 'desc' : 'asc';
+
+    this.sortTable(table, this.currentColumnIndex(th), sort_direction);
   }
 
   sortTable(table, column_idx, sort_direction) {
@@ -33,19 +24,20 @@ export default class extends Controller {
       let val1 = el1.getAttribute('sort_by') || el1.innerHTML;
       let val2 = el2.getAttribute('sort_by') || el2.innerHTML;
       if (isNaN(val1) || isNaN(val2)) {
-        return (sort_direction === 'desc' ? 1 : -1) * val1.localeCompare(val2);
+        return (sort_direction === 'desc' ? -1 : 1) * val1.localeCompare(val2);
       }
       val1 = parseInt(val1);
       val2 = parseInt(val2);
-      return sort_direction === 'desc' ? val1 - val2 : val2 - val1;
+      return sort_direction === 'desc' ? val2 - val1 : val1 - val2;
     });
-    const table_body = table.querySelector('tbody');
-    table_body.innerHTML = '';
-    result.forEach(row => table_body.appendChild(row));
+
+    const tableBody = table.querySelector('tbody');
+    tableBody.innerHTML = '';
+    result.forEach(row => tableBody.appendChild(row));
   }
 
   currentColumnIndex(cell) {
-    const columns = Array.prototype.slice.call(cell.closest('tr').cells);
+    const columns = Array.prototype.slice.call(this.element.cells);
     return columns.indexOf(cell);
   }
 }

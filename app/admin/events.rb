@@ -10,7 +10,7 @@ ActiveAdmin.register Event do
 
   permit_params(
     :description, :active, :place, :name, :summer_image, :winter_image, :code_name,
-    :town, :visible_order, :slogan, :country_id, :latitude, :longitude, :timezone,
+    :town, :visible_order, :country_id, :latitude, :longitude, :timezone,
   )
 
   filter :country
@@ -30,7 +30,6 @@ ActiveAdmin.register Event do
     column :name
     column :town
     column :place
-    column :slogan
     actions
   end
 
@@ -44,7 +43,6 @@ ActiveAdmin.register Event do
       row :place
       row(:coordinates) { |e| "#{e.latitude},#{e.longitude}" }
       row :timezone
-      row :slogan
       row :visible_order
       row(:description) { |e| sanitized_text e.description }
       row :updated_at
@@ -62,7 +60,6 @@ ActiveAdmin.register Event do
     li 'Изображения должны быть в формате jpg, png или webp (предпочтительно webp)
     размером не менее 2800х1060 пикселей и весом не менее 150 Кб (в идеале ~400 Кб), но не более 5 Мб.
     Если зимнее изображение не загружено, то всё время будет отображаться летнее изображение.'
-    li 'В поле Девиз прописывается короткое ёмкое описание мероприятия, которое будет отображаться на главной странице.'
     li 'Вес в ленте - числовое значение, чем оно больше, тем ниже событие будет расположено в ленте на главной странице.'
   end
 

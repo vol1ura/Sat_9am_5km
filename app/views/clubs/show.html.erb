@@ -50,20 +50,23 @@
 </ul>
 
 <table class="table table-striped">
-  <thead data-controller="table-head">
-    <tr>
-      <th><%= t '.name' %></th>
-      <th>
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        <%= t '.activities' %>
+  <thead>
+    <tr data-controller="table-head">
+      <th class="sortable" data-action="click->table-head#toggleSort">
+        <span><%= t '.name' %></span>
+        <span class="sort-arrow" aria-hidden="true"><i class="fa fa-caret-down"></i></span>
       </th>
-      <th class="hidden-on-phone">
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        <%= t '.volunteering' %>
+      <th class="sortable" data-action="click->table-head#toggleSort">
+        <span><%= t '.activities' %></span>
+        <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
       </th>
-      <th>
-        <span class="sort-arrow" data-action="click->table-head#toggleSort"><i class="fa fa-angle-up"></i></span>
-        <%= t '.personal_best' %>
+      <th class="hidden-on-phone sortable" data-action="click->table-head#toggleSort">
+        <span><%= t '.volunteering' %></span>
+        <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
+      </th>
+      <th class="sortable" data-action="click->table-head#toggleSort">
+        <span><%= t '.personal_best' %></span>
+        <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
       </th>
     </tr>
   </thead>

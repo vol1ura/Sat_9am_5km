@@ -935,6 +935,7 @@ sr:
       description: Skorašnji rezultati sa S95 trka
       date: Datum
       event: Događaj
+      town: Grad
       athletes: Sportisti
       volunteers: Volonteri
       first_man: Prvi čovek

@@ -3,6 +3,7 @@
 <tr id="<%= dom_id activity %>">
   <td><%= link_to l(activity.date), activity %></td>
   <td><%= link_to activity.event_name, event_path(activity.event.code_name) %></td>
+  <td><%= activity.event.town %></td>
   <td class="text-center"><%= @results_count[activity.id] %></td>
   <td class="text-center"><%= @volunteers_count.fetch(activity.id, 0) %></td>
   <td><%= male_leader_result&.athlete&.name %></td>

@@ -184,17 +184,34 @@ h6 {
 }
 
 .table.table-centered {
-  th,
-  tr {
+  th, tr {
     @extend .text-center;
   }
 }
 
-.sort-arrow {
+th.sortable {
   cursor: pointer;
-  color: var(--bs-secondary-color);
-  i.fa:hover {
-    color: var(--bs-primary);
+  text-wrap: nowrap;
+  color: var(--bs-link-color);
+
+  &:hover {
+    color: var(--bs-link-hover-color);
+  }
+
+  span:not(.sort-arrow) {
+    text-decoration: underline;
+  }
+
+  .sort-arrow {
+    margin-left: 0.1rem;
+
+    i.fa {
+      display: none;
+
+      &.fa-caret-up, &.fa-caret-down {
+        display: inherit;
+      }
+    }
   }
 }
 

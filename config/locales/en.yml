@@ -884,6 +884,7 @@ en:
       description: Recent S95 run results
       date: Date
       event: Event
+      town: City
       athletes: Participants
       volunteers: Volunteers
       first_man: First

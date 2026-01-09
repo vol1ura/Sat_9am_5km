@@ -938,6 +938,7 @@ ru:
       description: Недавние результаты забегов С95
       date: Дата
       event: Мероприятие
+      town: Город
       athletes: Участники
       volunteers: Волонтёры
       first_man: Первый
