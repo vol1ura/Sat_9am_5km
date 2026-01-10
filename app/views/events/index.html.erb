@@ -17,10 +17,13 @@
             <div class="overflow-hidden card-img-top">
               <%= event_main_image_tag event, variant: :thumb, class: 'img-fluid rounded-top img-scaled', alt: event.name, loading: 'lazy' %>
             </div>
+            <%= tag.div class: ['position-absolute', 'top-0', 'bg-gradient', 'bg-opacity-25', 'w-100', 'px-3', 'card-img-top', event.active ? 'bg-dark' : 'bg-danger'] do %>
+              <section class="fs-4 text-light"><%= event.name %></section>
+            <% end %>
             <div class="card-body">
-              <section class="card-text fs-5">
-                <%= link_to "#{event.name} (#{event.town})", event_path(event.code_name), class: 'stretched-link text-decoration-none text-body' %>
-              </section>
+              <p class="card-text">
+                <%= link_to "#{event.place} (#{event.town})", event_path(event.code_name), class: 'stretched-link text-decoration-none text-body' %>
+              </p>
             </div>
           <% end %>
         </div>

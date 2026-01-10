@@ -20,24 +20,28 @@ active_admin_form_for [:admin, resource] do |f|
     input :code_name if resource.new_record? || current_user.super_admin?
     input :town
     input :place
-    input :description, as: :quill_editor,
-                        input_html: {
-                          data: {
-                            options: {
-                              modules: {
-                                toolbar: [
-                                  %w[bold italic strike],
-                                  %w[blockquote code-block],
-                                  [{ list: 'ordered' }, { list: 'bullet' }],
-                                  ['link'],
-                                  ['clean'],
-                                ],
-                              },
-                              placeholder: 'Описать кто и где проводит, особенности.',
-                              theme: 'snow',
-                            },
-                          },
-                        }
+    input :place_description
+    input(
+      :description,
+      as: :quill_editor,
+      input_html: {
+        data: {
+          options: {
+            modules: {
+              toolbar: [
+                %w[bold italic strike],
+                %w[blockquote code-block],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link'],
+                ['clean'],
+              ],
+            },
+            placeholder: 'Описать кто и где проводит, особенности.',
+            theme: 'snow',
+          },
+        },
+      },
+    )
     input :visible_order, input_html: { inputmode: 'numeric' }
     input :summer_image, as: :file, hint:
       if resource.summer_image.attached? && resource.summer_image.blob.persisted?

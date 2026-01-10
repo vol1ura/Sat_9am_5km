@@ -103,7 +103,7 @@ export default class extends Controller {
             {
               balloonContent: `
                 <h5 class="text-primary">${event.name}</h5>
-                <p class="my-0 text-black">${event.town}</p>
+                <p class="my-0 text-black">${event.place} (${event.town})</p>
                 <a href="/events/${event.code_name}" class="btn btn-outline-primary btn-sm my-2">Подробнее</a>
               `,
               hintContent: event.name

@@ -8,7 +8,7 @@ ActiveAdmin.register Activity do
   menu priority: 2
 
   filter :date
-  filter :event, label: 'Забег', collection: proc { Event.authorized_for(current_user) }
+  filter :event, label: 'Забег', collection: -> { Event.authorized_for(current_user) }, as: :searchable_select
 
   scope :all
   scope :published

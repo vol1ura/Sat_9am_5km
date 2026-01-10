@@ -38,7 +38,7 @@ class Event < ApplicationRecord
 
   after_update_commit :reset_going_athletes, if: -> { !active && saved_change_to_active? }
 
-  validates :name, :code_name, :town, :place, presence: true
+  validates :name, :code_name, :town, :place, :place_description, :description, presence: true
   validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ }
   validates :timezone, presence: true, inclusion: { in: AVAILABLE_TIMEZONES }
 

@@ -113,7 +113,8 @@ sr:
         summer_image: letnja slika
         winter_image: zimska slika
         town: grad
-        place: 'kako pronaći?'
+        place: lokacija trke
+        place_description: 'kako pronaći?'
         latitude: širina
         longitude: dužina
         coordinates: koordinate

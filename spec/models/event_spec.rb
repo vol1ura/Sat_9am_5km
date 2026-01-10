@@ -3,7 +3,7 @@
 RSpec.describe Event do
   it { is_expected.not_to be_valid }
 
-  it 'valid with name, code_name, town and place' do
+  it 'valid with name, code_name, town, place and place_description' do
     event = build(:event)
     expect(event).to be_valid
   end

@@ -111,7 +111,8 @@ ru:
         summer_image: летнее изображение
         winter_image: зимнее изображение
         town: город
-        place: 'как найти?'
+        place: место забега
+        place_description: 'как найти?'
         latitude: широта
         longitude: долгота
         coordinates: координаты

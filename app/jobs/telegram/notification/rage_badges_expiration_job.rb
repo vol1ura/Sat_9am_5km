@@ -4,7 +4,7 @@ module Telegram
   module Notification
     class RageBadgesExpirationJob < ApplicationJob
       queue_as :low
-      discard_on(StandardError) { |_job, error| Rollbar.error error }
+      discard_on(StandardError) { |_, e| Rollbar.error e }
 
       def perform
         Trophy.where(badge: ::Badge.rage_kind, date: Date.current.prev_week(:saturday)).find_each do |trophy|

@@ -11,14 +11,14 @@ ActiveAdmin.register Badge do
     { conditions_translations: I18n.available_locales },
   )
 
-  filter :kind, as: :select, collection: Badge.kinds
+  filter :kind, as: :select, collection: -> { Badge.kinds.transform_keys { human_badge_kind it } }
   filter :name
   filter :conditions
   filter :received_date
 
   index download_links: false do
     selectable_column
-    column(:kind) { |b| kind_of_badge b }
+    column(:kind) { |b| human_badge_kind b.kind }
     column(:country) { |b| t("country.#{b.country_code}") if b.country_code }
     column :name
     column :received_date
@@ -28,7 +28,7 @@ ActiveAdmin.register Badge do
 
   show do
     attributes_table do
-      row(:kind) { |b| kind_of_badge b }
+      row(:kind) { |b| human_badge_kind b.kind }
       row :name
       if badge.funrun_kind?
         row :received_date

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_09_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_10_094813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -158,12 +158,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_09_120000) do
     t.string "code_name", null: false
     t.bigint "country_id", null: false
     t.datetime "created_at", null: false
-    t.text "description"
+    t.text "description", null: false
     t.decimal "latitude", precision: 10, scale: 6
     t.jsonb "live_results"
     t.decimal "longitude", precision: 10, scale: 6
     t.string "name", null: false
     t.string "place", null: false
+    t.text "place_description", null: false
     t.string "timezone", default: "Europe/Moscow", null: false
     t.string "town", null: false
     t.datetime "updated_at", null: false

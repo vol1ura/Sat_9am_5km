@@ -4,7 +4,7 @@ module Telegram
   module Notification
     class BreakingTimeBadgesExpirationJob < ApplicationJob
       queue_as :low
-      discard_on(StandardError) { |_job, error| Rollbar.error error }
+      discard_on(StandardError) { |_, e| Rollbar.error e }
 
       def perform
         threshold_date = BreakingTimeAwardingJob::EXPIRATION_PERIOD.ago.to_date + 1.week

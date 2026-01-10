@@ -105,7 +105,8 @@ en:
         summer_image: summer image
         winter_image: winter image
         town: town
-        place: 'how to find?'
+        place: event location
+        place_description: 'how to find?'
         latitude: latitude
         longitude: longitude
         coordinates: coordinates

@@ -4,7 +4,7 @@ module Telegram
   module Notification
     class BeforeActivityJob < ApplicationJob
       queue_as :low
-      discard_on(StandardError) { |_job, error| Rollbar.error error }
+      discard_on(StandardError) { |_, e| Rollbar.error e }
 
       def perform
         Event.find_each do |event|

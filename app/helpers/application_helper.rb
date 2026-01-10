@@ -70,8 +70,8 @@ module ApplicationHelper
     I18n.t "activerecord.attributes.athlete.genders.#{gender}" if gender
   end
 
-  def kind_of_badge(badge)
-    I18n.t "activerecord.attributes.badge.kinds.#{badge.kind}"
+  def human_badge_kind(kind)
+    I18n.t "activerecord.attributes.badge.kinds.#{kind}"
   end
 
   def sanitized_text(text)

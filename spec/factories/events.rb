@@ -6,6 +6,7 @@ FactoryBot.define do
     sequence(:code_name, 'aa') { |c| "event_#{c}" }
     town { Faker::Address.city }
     place { Faker::Address.street_name }
+    place_description { Faker::Address.full_address }
     description { Faker::Lorem.paragraph }
     country_id { 1 }
   end

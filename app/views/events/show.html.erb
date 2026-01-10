@@ -37,7 +37,7 @@
     <%= link_to t('.show'), volunteering_event_path(@event.code_name), class: 'btn btn-outline-primary' %>
   <% end %>
   <%= render 'card', header: t('.our_contacts') do %>
-    <p class="card-text"><strong><%= t '.place' %>:</strong> <%= @event.place %></p>
+    <p class="card-text"><strong><%= t '.place' %>:</strong> <%= @event.place_description %></p>
     <div class="d-flex flex-wrap">
       <% @event.contacts.order(:contact_type).each do |contact| %>
         <% next if contact.contact_type == 'instagram' && top_level_domain == :ru %>

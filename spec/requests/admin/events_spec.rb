@@ -5,7 +5,7 @@ RSpec.describe '/admin/events' do
 
   before do
     user.admin!
-    sign_in user
+    sign_in user, scope: :user
   end
 
   describe 'GET /admin/events' do
@@ -50,8 +50,10 @@ RSpec.describe '/admin/events' do
         event: {
           name: Faker::Team.name,
           code_name: Faker::Internet.slug(glue: '_'),
+          description: Faker::Lorem.paragraph,
           town: Faker::Address.city,
           place: Faker::Address.street_name,
+          place_description: Faker::Address.full_address,
           country_id: countries(:ru).id,
         },
       }
