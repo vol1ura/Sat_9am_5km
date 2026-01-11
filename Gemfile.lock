@@ -588,7 +588,7 @@ GEM
     stringio (3.2.0)
     sys-cpu (1.1.0)
       ffi (~> 1.1)
-    sys-filesystem (1.5.3)
+    sys-filesystem (1.5.5)
       ffi (~> 1.1)
     terser (1.2.6)
       execjs (>= 0.3.0, < 3)
