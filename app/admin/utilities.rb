@@ -49,8 +49,8 @@ ActiveAdmin.register_page 'Utilities' do
                 ROUND(COUNT(#{model}.id)::numeric / COUNT(DISTINCT activities.id), 1) AS avg_count,
                 COUNT(DISTINCT #{model}.athlete_id) FILTER (WHERE activities.date = first_#{model}.date) AS newbies_count
               FROM activities
-              INNER JOIN #{model} ON #{model}.activity_id = activities.id
-              INNER JOIN first_#{model} ON first_#{model}.athlete_id = #{model}.athlete_id
+              JOIN #{model} ON #{model}.activity_id = activities.id
+              JOIN first_#{model} ON first_#{model}.athlete_id = #{model}.athlete_id
               WHERE activities.published = true
                 AND activities.date BETWEEN DATE_TRUNC('month', current_date - interval '12 months') AND current_date
               GROUP BY DATE_TRUNC('month', activities.date)

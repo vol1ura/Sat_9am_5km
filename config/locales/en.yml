@@ -988,7 +988,7 @@ en:
       map: Map
       our_events: Our Events
     show:
-      title: '%{event} | %{town} | Park Runs'
+      title: '%{place} | %{town} | Park Runs'
       our_contacts: Our Contacts
       jubilee_by_results: Coming Jubilee Runs
       jubilee_by_volunteering: Coming Jubilee Volunteering

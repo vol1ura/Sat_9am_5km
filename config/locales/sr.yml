@@ -1048,7 +1048,7 @@ sr:
       map: Karta
       our_events: Naši događaji
     show:
-      title: '%{event} | %{town} | Park trčanje'
+      title: '%{place} | %{town} | Park trčanje'
       our_contacts: Naši kontakti
       jubilee_by_results: Uskoro jubilarne trke
       jubilee_by_volunteering: Uskoro jubilarno volontiranje

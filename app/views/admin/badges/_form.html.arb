@@ -26,7 +26,7 @@ active_admin_form_for [:admin, resource] do |f|
               toolbar: [
                 %w[bold italic strike],
                 %w[blockquote code-block],
-                [{ list: 'ordered' }, { list: 'bullet' }],
+                [{ list: 'ordered' }],
                 ['link'],
                 ['clean'],
               ],

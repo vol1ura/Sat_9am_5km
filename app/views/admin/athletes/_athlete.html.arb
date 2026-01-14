@@ -6,7 +6,7 @@ attributes_table_for athlete do
   row :fiveverst_code
   row :runpark_code
   row :parkzhrun_code
-  row :gender
+  row(:gender) { |a| human_gender a.gender }
   row :club
   row :event
   if current_user.admin?
