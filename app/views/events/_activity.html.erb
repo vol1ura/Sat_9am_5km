@@ -5,6 +5,6 @@
   <td class="date" data-date="<%= activity.date %>"><%= link_to l(activity.date), activity %></td>
   <td class="results_count"><%= @results_count[activity] %></td>
   <td class="volunteers_count"><%= @volunteers_count.fetch(activity, 0) %></td>
-  <td class="hidden-on-phone"><%= "#{male_leader_result.athlete.name} (#{human_result_time(male_leader_result.total_time)})" if male_leader_result&.athlete %></td>
-  <td class="hidden-on-phone"><%= "#{female_leader_result.athlete.name} (#{human_result_time(female_leader_result.total_time)})" if female_leader_result&.athlete %></td>
+  <td class="hidden-on-phone"><%= "#{male_leader_result.athlete.name} (#{male_leader_result.time_string})" if male_leader_result&.athlete %></td>
+  <td class="hidden-on-phone"><%= "#{female_leader_result.athlete.name} (#{female_leader_result.time_string})" if female_leader_result&.athlete %></td>
 <% end %>

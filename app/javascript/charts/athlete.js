@@ -10,13 +10,17 @@ const translations = {
   sr: {
     recentResults: 'Nedavni rezultati',
     time: 'vreme',
-  }
+  },
+  en: {
+    recentResults: 'Recent results',
+    time: 'time',
+  },
 };
 
 export default class AthleteCharts {
   constructor(rows) {
     this.rows = rows;
-    this.currentLocale = document.documentElement.lang === 'sr' ? 'sr' : 'ru';
+    this.currentLocale = document.documentElement.lang === 'sr' ? 'sr' : document.documentElement.lang;
     this.t = translations[this.currentLocale];
   }
 
@@ -39,7 +43,7 @@ export default class AthleteCharts {
       labels.push(time_cell.textContent);
       points.push([
         Number(time_cell.dataset.timestamp),
-        Number(time_cell.dataset.min)
+        Number(time_cell.dataset.sec)
       ]);
     });
 

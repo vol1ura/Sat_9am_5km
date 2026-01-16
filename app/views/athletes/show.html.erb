@@ -175,7 +175,7 @@
       <h2 class="accordion-header" id="flush-personalBestAbsolute">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
           <span class="badge text-light bg-primary me-3 position-relative">
-            <%= human_result_time @personal_best.total_time %>
+            <%= @personal_best.time_string %>
             <% if @personal_best.activity_date >= six_days_ago %>
               <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                 <span class="visually-hidden">New personal best</span>
@@ -228,17 +228,17 @@
                 <tr>
                   <td><%= t '.personal_best_10k' %></td>
                   <td><%= @athlete.personal_best_10k %></td>
-                  <td><%= human_result_time @time_predictions[10] %></td>
+                  <td><%= Result.time_string @time_predictions[10] %></td>
                 </tr>
                 <tr>
                   <td><%= t '.personal_best_half_marathon' %></td>
                   <td><%= @athlete.personal_best_half_marathon %></td>
-                  <td><%= human_result_time @time_predictions[21.1] %></td>
+                  <td><%= Result.time_string @time_predictions[21.1] %></td>
                 </tr>
                 <tr>
                   <td><%= t '.personal_best_marathon' %></td>
                   <td><%= @athlete.personal_best_marathon %></td>
-                  <td><%= human_result_time @time_predictions[42.2] %></td>
+                  <td><%= Result.time_string @time_predictions[42.2] %></td>
                 </tr>
               </tbody>
             </table>

@@ -1,50 +1,16 @@
 # frozen_string_literal: true
 
 RSpec.describe ApplicationHelper do
-  describe '#human_result_time' do
-    context 'when time is nil' do
-      it 'represent time in human format' do
-        expect(helper.human_result_time(nil)).to eq 'xx:xx'
-      end
-    end
-
-    context 'when time is less than 1 hour' do
-      it 'represent time in human format' do
-        expect(helper.human_result_time(Result.total_time(17, 30))).to eq '17:30'
-      end
-    end
-
-    context 'when time is over 1 hour' do
-      it 'represent time in human format' do
-        expect(helper.human_result_time(Result.total_time(1, 2, 17))).to eq '01:02:17'
-      end
-    end
-
-    context 'when time is numeric value' do
-      it 'represent time in human format' do
-        time = Result.total_time(17, 30).to_f
-        expect(helper.human_result_time(time)).to eq '17:30'
-      end
-    end
-
-    context 'when time in string' do
-      it 'represent time in human format' do
-        time = Result.total_time(17, 30).to_f.to_s
-        expect(helper.human_result_time(time)).to eq '17:30'
-      end
-    end
-  end
-
   describe '#human_result_pace' do
     context 'when time is less than 1 hour' do
       it 'represents pace' do
-        expect(helper.human_result_pace(Result.total_time(17, 30))).to eq '3:30'
+        expect(helper.human_result_pace((17 * 60) + 30)).to eq '3:30'
       end
     end
 
     context 'when time is over 1 hour' do
       it 'represent time in human format' do
-        expect(helper.human_result_pace(Result.total_time(1, 10, 17))).to eq '14:03'
+        expect(helper.human_result_pace((1 * 3600) + (10 * 60) + 17)).to eq '14:03'
       end
     end
   end

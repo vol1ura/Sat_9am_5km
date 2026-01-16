@@ -13,7 +13,7 @@ class Club < ApplicationRecord
   validates :logo, size: { less_than: 300.kilobytes }, dimension: { width: { in: 150..900 }, height: { in: 150..900 } }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[name country_id athletes_count results_count volunteering_count]
+    %w[name country_id athletes_count results_count volunteering_count avg_total_time best_total_time]
   end
 
   def to_combobox_display = name
@@ -47,6 +47,30 @@ class Club < ApplicationRecord
         FROM volunteers
         INNER JOIN athletes ON athletes.id = volunteers.athlete_id
         INNER JOIN activities ON activities.id = volunteers.activity_id
+        WHERE athletes.club_id = clubs.id AND activities.published = TRUE
+      )',
+    )
+  end
+
+  ransacker :avg_total_time do
+    Arel.sql(
+      '(
+        SELECT AVG(results.total_time)
+        FROM results
+        INNER JOIN athletes ON athletes.id = results.athlete_id
+        INNER JOIN activities ON activities.id = results.activity_id
+        WHERE athletes.club_id = clubs.id AND activities.published = TRUE
+      )',
+    )
+  end
+
+  ransacker :best_total_time do
+    Arel.sql(
+      '(
+        SELECT MIN(results.total_time)
+        FROM results
+        INNER JOIN athletes ON athletes.id = results.athlete_id
+        INNER JOIN activities ON activities.id = results.activity_id
         WHERE athletes.club_id = clubs.id AND activities.published = TRUE
       )',
     )

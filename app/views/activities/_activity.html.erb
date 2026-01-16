@@ -7,11 +7,11 @@
   <td class="text-center"><%= @results_count[activity.id] %></td>
   <td class="text-center"><%= @volunteers_count.fetch(activity.id, 0) %></td>
   <td><%= male_leader_result&.athlete&.name %></td>
-  <td class="ps-0" sort_by="<%= male_leader_result&.total_time&.to_i %>">
-    <%= human_result_time(male_leader_result&.total_time) %>
+  <td class="ps-0" sort-by="<%= male_leader_result&.total_time %>">
+    <%= male_leader_result&.time_string %>
   </td>
   <td><%= female_leader_result&.athlete&.name %></td>
-  <td class="ps-0" sort_by="<%= female_leader_result&.total_time&.to_i %>">
-    <%= human_result_time(female_leader_result&.total_time) %>
+  <td class="ps-0" sort-by="<%= female_leader_result&.total_time %>">
+    <%= female_leader_result&.time_string %>
   </td>
 </tr>

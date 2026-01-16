@@ -48,7 +48,7 @@ RSpec.describe '/athletes' do
       create(
         :result,
         athlete: athlete,
-        total_time: Result.total_time(0, 17, 0),
+        total_time: 17 * 60,
         activity_params: { date: Date.new(2022, 1, 1) },
       )
     end
@@ -57,7 +57,7 @@ RSpec.describe '/athletes' do
       create(
         :result,
         athlete: athlete,
-        total_time: Result.total_time(0, 18, 0),
+        total_time: 18 * 60,
         activity_params: { date: Date.new(2023, 6, 1) },
       )
     end
@@ -66,7 +66,7 @@ RSpec.describe '/athletes' do
       create(
         :result,
         athlete: athlete,
-        total_time: Result.total_time(0, 20, 0),
+        total_time: 20 * 60,
         activity_params: { date: Date.new(2023, 1, 1) },
       )
 

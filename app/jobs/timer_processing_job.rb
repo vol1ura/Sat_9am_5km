@@ -20,10 +20,11 @@ class TimerProcessingJob < ApplicationJob
 
   def process_result(result_params)
     results = @activity.results.where position: result_params[:position]
+    total_time = Result.parse_total_time(result_params[:total_time])
     if results.empty?
-      @activity.results.create! position: result_params[:position], total_time: result_params[:total_time]
+      @activity.results.create! position: result_params[:position], total_time: total_time
     else
-      results.where(total_time: nil).update_all total_time: result_params[:total_time]
+      results.where(total_time: nil).update_all(total_time:)
     end
   end
 end

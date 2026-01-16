@@ -70,7 +70,7 @@ RSpec.describe '/admin/results' do
       it 'changes result total_time to next result total_time' do
         second_time = results.second.total_time
         delete drop_time_admin_activity_result_url(activity, results.first, format: :js)
-        expect(results.first.reload.total_time.strftime('%H:%M:%S')).to eq second_time.strftime('%H:%M:%S')
+        expect(results.first.reload.total_time).to eq second_time
         expect(results.last.reload.total_time).to be_nil
       end
     end

@@ -5,9 +5,6 @@ Athlete:
   index_athletes_on_user_id:
     UniqueIndexChecker:
       enabled: false
-  male:
-    ThreeStateBooleanChecker:
-      enabled: false
 
 Permission:
   event:

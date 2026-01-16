@@ -59,7 +59,7 @@
               <% if res.personal_best %>
                 <%= tag.i class: 'fa-solid fa-bolt text-primary', title: t('activities.result.personal_best') %>
               <% end %>
-              <%= human_result_time res.total_time %>
+              <%= res.time_string %>
             </td>
             <td class="text-center">
               <%= human_result_pace res.total_time %>

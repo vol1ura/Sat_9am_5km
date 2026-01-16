@@ -953,6 +953,8 @@ en:
       name: Name
       athletes: Participants
       results: Results
+      avg_result: Average result
+      best_result: Best result
       volunteering: Volunteering
       search_placeholder: Search by Name
       search_button: Search

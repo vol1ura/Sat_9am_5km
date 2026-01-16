@@ -15,7 +15,7 @@ module Athletes
         .joins(activity: :event)
         .group('events.id, events.name')
         .select('events.name as event_name, COUNT(results.id) as results_count,
-                  MIN(results.position) as best_position, MIN(EXTRACT(EPOCH FROM results.total_time)) as best_time')
+                MIN(results.position) as best_position, MIN(results.total_time) as best_time')
         .order('events.visible_order')
 
       @volunteering_by_event = @athlete

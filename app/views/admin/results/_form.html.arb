@@ -13,8 +13,11 @@ active_admin_form_for [:admin, activity, resource] do |f|
         li "Дата забега: #{f.object.date}"
       end
     end
+    column { nil }
+  end
+  columns do
     column do
-      para 'Заполните одно и ТОЛЬКО одно из полей, другое поле очистите.'
+      para 'Заполните одно и ТОЛЬКО одно из полей - либо ID участника, либо его ИМЯ, другое поле очистите.'
       f.inputs 'Parkrun, RunPark или 5вёрст ID участника (только цифры, без буквы "A")' do
         code = f.object.athlete&.parkrun_code || f.object.athlete&.fiveverst_code || f.object.athlete&.runpark_code
         number_field_tag(
@@ -27,18 +30,15 @@ active_admin_form_for [:admin, activity, resource] do |f|
         render partial: '/admin/athlete_fields', locals: { resource: f.object.athlete, form: f }
       end
     end
-  end
-  columns do
     column do
-      para 'Внимание! При изменении здесь времени, место изменено НЕ будет!'
-      f.inputs 'Результат (Часы:Минуты:Секунды)' do
-        input :total_time, as: :time_select, include_seconds: true, ignore_date: true, include_blank: false
-      end
-    end
-    column do
-      para 'Внимание! При изменении здесь номера, время изменено НЕ будет!'
-      f.inputs do
-        input :position, required: true, input_html: { inputmode: 'numeric' }
+      f.inputs 'Меняя ВРЕМЯ или МЕСТО, учитывайте, что они должны быть согласованы с другими результатами забега.' do
+        f.input(
+          :total_time,
+          required: true,
+          input_html: { type: 'time', step: 1, value: Result.time_string(f.object.total_time, full: true) },
+          hint: 'Часы:Минуты:Секунды',
+        )
+        f.input :position, required: true, input_html: { inputmode: 'numeric' }
       end
     end
   end

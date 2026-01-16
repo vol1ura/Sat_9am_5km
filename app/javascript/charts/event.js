@@ -13,6 +13,11 @@ const translations = {
     volunteers: 'Vlontori',
     count: 'Broj',
   },
+  en: {
+    participants: 'Participants',
+    volunteers: 'Volunteers',
+    count: 'Count',
+  },
 };
 
 export default class EventCharts {

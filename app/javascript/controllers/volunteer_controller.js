@@ -9,7 +9,10 @@ const translations = {
   },
   sr: {
     recentVolunteering: 'Nedavno volontiranje',
-  }
+  },
+  en: {
+    recentVolunteering: 'Recent volunteering',
+  },
 };
 
 // Connects to data-controller="volunteer"

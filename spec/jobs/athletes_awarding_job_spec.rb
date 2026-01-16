@@ -24,10 +24,10 @@ RSpec.describe AthletesAwardingJob do
 
       24.times do |idx|
         activity = create(:activity, event: event, date: idx.next.week.ago)
-        create(:result, athlete: athlete, activity: activity, total_time: Result.total_time(19, idx))
+        create(:result, athlete: athlete, activity: activity, total_time: (19 * 60) + idx)
         create(:volunteer, athlete:, activity:)
       end
-      create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(18, 30))
+      create(:result, activity: activity, athlete: athlete, total_time: (18 * 60) + 30)
       create(:volunteer, activity:, athlete:)
     end
 
@@ -44,7 +44,7 @@ RSpec.describe AthletesAwardingJob do
 
   context 'with record badge' do
     let(:event) { create(:event) }
-    let(:old_best_result) { create(:result, athlete: old_best_result_athlete, total_time: Result.total_time(20, 0)) }
+    let(:old_best_result) { create(:result, athlete: old_best_result_athlete, total_time: 20 * 60) }
     let(:old_best_result_athlete) { create(:athlete) }
     let!(:trophy) do
       create(
@@ -58,7 +58,7 @@ RSpec.describe AthletesAwardingJob do
 
     before do
       activity = create(:activity, date: Time.zone.today, event: event)
-      create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(19, 59))
+      create(:result, activity: activity, athlete: athlete, total_time: (19 * 60) + 59)
 
       described_class.perform_now(activity.id)
     end
@@ -91,7 +91,7 @@ RSpec.describe AthletesAwardingJob do
   context 'with tourist and record badges' do
     it 'creates runner badge' do
       5.times do |idx|
-        total_time = Result.total_time(19, 10 - idx)
+        total_time = (19 * 60) + (10 - idx)
         create(:result, athlete: athlete, total_time: total_time, activity_params: { date: idx.weeks.ago })
       end
 

@@ -13,8 +13,37 @@ class Result < ApplicationRecord
 
   delegate :date, to: :activity
 
-  def self.total_time(hour = 0, min, sec)
-    Time.zone.local(2000, 1, 1, hour, min, sec)
+  def self.parse_total_time(string)
+    matcher = string.match(/(?:(?<h>\d+):)?(?<m>[0-5]\d):(?<s>[0-5]\d)/)
+    raise ArgumentError, "Invalid time string format: #{string}" unless matcher
+
+    (((matcher[:h].to_i * 60) + matcher[:m].to_i) * 60) + matcher[:s].to_i
+  end
+
+  def self.time_string(time, full: false)
+    return 'xx:xx' unless time
+
+    hours = time / 3600
+    minutes = (time % 3600) / 60
+    seconds = time % 60
+    time_format = full || hours.positive? ? '%<h>02d:%<m>02d:%<s>02d' : '%<m>02d:%<s>02d'
+
+    format time_format, h: hours, m: minutes, s: seconds
+  end
+
+  def time_string = self.class.time_string total_time
+
+  def total_time=(time)
+    value =
+      if time.blank?
+        nil
+      elsif time.is_a? String
+        self.class.parse_total_time time
+      else
+        time
+      end
+
+    super(value)
   end
 
   def correct?

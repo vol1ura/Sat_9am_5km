@@ -14,26 +14,6 @@ module ApplicationHelper
     content_for?(:"meta_#{tag}") ? content_for(:"meta_#{tag}") : default_text
   end
 
-  def human_result_time(time)
-    return 'xx:xx' if time.blank?
-
-    time_obj =
-      case time
-      when Numeric
-        Time.zone.at(time.round)
-      when String
-        Time.zone.at(time.to_f.round)
-      else
-        time
-      end
-
-    time_obj.strftime(time_obj.hour.zero? ? '%M:%S' : '%H:%M:%S')
-  end
-
-  def time_to_sec(time)
-    (((time.hour * 60) + time.min) * 60) + time.sec
-  end
-
   def calculate_time_gap(current_time, reference_time)
     return if current_time.blank? || reference_time.blank?
 
@@ -46,7 +26,7 @@ module ApplicationHelper
   def human_result_pace(time, distance = 5)
     return unless time
 
-    avg_sec = (time_to_sec(time) / distance.to_f).round
+    avg_sec = (time / distance.to_f).round
     format '%<min>d:%<sec>02d', min: avg_sec / 60, sec: avg_sec % 60
   end
 

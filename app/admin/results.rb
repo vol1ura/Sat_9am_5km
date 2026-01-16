@@ -28,7 +28,7 @@ ActiveAdmin.register Result do
       end
     end
     column :total_time do |result|
-      external_link_to human_result_time(result.total_time), edit_admin_activity_result_path(result.activity, result)
+      external_link_to result.time_string, edit_admin_activity_result_path(result.activity, result)
     end
     column('Изменение позиции') do |result|
       render partial: 'up_down', locals: { activity: result.activity, result: result } if can?(:manage, result)
@@ -81,7 +81,7 @@ ActiveAdmin.register Result do
     column(:code) { |r| r.athlete&.code }
     column(:athlete) { |r| r.athlete&.name }
     column(:gender) { |r| r.athlete&.gender }
-    column(:total_time) { |r| human_result_time r.total_time }
+    column(:total_time, &:time_string)
   end
 
   sidebar 'Внимание!', only: :index, if: proc { activity.published } do
@@ -218,7 +218,7 @@ ActiveAdmin.register Result do
   ) do |ids, inputs|
     sign = inputs[:type] == 'up' ? '+' : '-'
     delta = (inputs[:minutes].to_i * 60) + inputs[:seconds].to_i
-    Result.where(id: ids).update_all("total_time = total_time #{sign} INTERVAL '#{delta} seconds'")
+    Result.where(id: ids).update_all("total_time = total_time #{sign} #{delta}")
 
     redirect_to(
       collection_path(parent),

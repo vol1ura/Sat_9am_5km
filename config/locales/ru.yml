@@ -1007,6 +1007,8 @@ ru:
       name: Название
       athletes: Участники
       results: Результаты
+      avg_result: Средний результат
+      best_result: Лучший результат
       volunteering: Волонтёрства
       search_placeholder: Поиск по названию
       search_button: Искать

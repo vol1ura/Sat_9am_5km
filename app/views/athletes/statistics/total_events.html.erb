@@ -18,7 +18,7 @@
                 <td><%= result.event_name %></td>
                 <td><%= result.results_count %></td>
                 <td><%= result.best_position %></td>
-                <td><%= human_result_time(result.best_time) %></td>
+                <td><%= Result.time_string result.best_time %></td>
               </tr>
             <% end %>
           </tbody>

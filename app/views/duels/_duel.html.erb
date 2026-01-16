@@ -43,7 +43,7 @@
           <div class="col-6">
             <div class="text-center p-2 bg-body-tertiary rounded-3 border">
               <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:winner] == :user %>">
-                <%= human_result_time duel[:user_result].total_time if duel[:user_result].total_time %>
+                <%= duel[:user_result].time_string if duel[:user_result].total_time %>
               </div>
               <small class="text-muted text-uppercase"><%= t '.time' %></small>
             </div>
@@ -86,7 +86,7 @@
           <div class="col-6">
             <div class="text-center p-2 bg-body-tertiary rounded-3 border">
               <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:winner] == :friend %>">
-                <%= human_result_time duel[:friend_result].total_time if duel[:friend_result].total_time %>
+                <%= duel[:friend_result].time_string if duel[:friend_result].total_time %>
               </div>
               <small class="text-muted text-uppercase"><%= t '.time' %></small>
             </div>
@@ -95,7 +95,6 @@
       </div>
     </div>
 
-    <!-- Разность времени и позиций -->
     <% if duel[:time_difference] || duel[:position_difference] %>
       <hr class="my-3">
       <div class="row">
@@ -105,7 +104,7 @@
               <div class="text-center">
                 <div class="bg-info bg-opacity-10 rounded-3 p-2 border border-info border-opacity-25">
                   <div class="small text-muted mb-1 text-uppercase fw-semibold"><%= t '.time_difference' %></div>
-                  <div class="h6 mb-0 text-info fw-bold"><%= human_result_time duel[:time_difference] %></div>
+                  <div class="h6 mb-0 text-info fw-bold"><%= Result.time_string duel[:time_difference] %></div>
                 </div>
               </div>
             <% end %>

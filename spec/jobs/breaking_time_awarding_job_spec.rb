@@ -5,8 +5,8 @@ RSpec.describe BreakingTimeAwardingJob do
   let(:activity) { create(:activity, date: Date.yesterday) }
 
   before do
-    [16, 18, 20].each do |threshold|
-      create(:badge, info: { gender: 'male', min: threshold }, kind: :breaking)
+    [16, 18, 20].map { |x| x * 60 }.each do |threshold|
+      create(:badge, info: { gender: 'male', sec: threshold }, kind: :breaking)
     end
   end
 
@@ -23,14 +23,14 @@ RSpec.describe BreakingTimeAwardingJob do
   it 'updates trophy date' do
     badge = Badge.breaking_kind.take!
     trophy = create(:trophy, date: 2.months.ago, athlete: athlete, badge: badge)
-    create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(badge.info['min'].pred, 59))
+    create(:result, activity: activity, athlete: athlete, total_time: (badge.info['sec'] - 1))
 
     expect { described_class.perform_now }.not_to change(athlete.trophies, :count)
     expect(trophy.reload.date).to eq activity.date
   end
 
   it 'adds new trophy' do
-    create(:result, activity: activity, athlete: athlete, total_time: Result.total_time(17, 59))
+    create(:result, activity: activity, athlete: athlete, total_time: (17 * 60) + 59)
 
     expect { described_class.perform_now(activity.id) }.to change(athlete.trophies, :count).by(1)
   end

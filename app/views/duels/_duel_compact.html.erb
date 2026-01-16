@@ -21,7 +21,7 @@
 
     <% if duel[:time_difference] %>
       <small class="text-muted">
-        <%= human_result_time duel[:time_difference] %>
+        <%= Result.time_string duel[:time_difference] %>
       </small>
     <% end %>
   </div>

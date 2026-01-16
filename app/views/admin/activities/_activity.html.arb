@@ -34,7 +34,7 @@ panel 'Протокол' do
     column :position
     column('QR-ID') { |r| athlete_code_id r.athlete }
     column :athlete
-    column(:total_time) { |r| human_result_time r.total_time }
+    column :time_string
     column(:gender) do |r|
       if (athlete = r.athlete)
         human_gender(athlete.gender) || render(partial: 'gender_setup_links', locals: { result: r, activity: activity })

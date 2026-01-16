@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :result do
     sequence :position
-    total_time { Result.total_time(18, 10) + (position * 2).seconds }
+    total_time { (18 * 60) + 10 + (position * 2) }
     athlete
     first_run { !athlete&.results&.exists? }
     personal_best { !athlete&.results&.exists? }

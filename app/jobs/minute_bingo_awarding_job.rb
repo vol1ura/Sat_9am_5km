@@ -13,7 +13,7 @@ class MinuteBingoAwardingJob < ApplicationJob
     dataset.find_each do |athlete|
       seconds = []
       athlete.results.published.order(:date).pluck(:total_time, :date).each do |total_time, date|
-        seconds.push(total_time.sec)
+        seconds.push(total_time % 60)
         if (ALL_SECONDS - seconds).empty?
           athlete.trophies.create! badge: minute_bingo_badge, date: date
           break

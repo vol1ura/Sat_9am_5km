@@ -2,7 +2,7 @@
 
 module Athletes
   class DuelsService < ApplicationService
-    param :athlete, model: Athlete, reader: :private
+    param :athlete, reader: :private
     option :friend_id, reader: :private, default: -> {}
     option :limit, reader: :private, default: -> { 50 }
 
@@ -62,9 +62,7 @@ module Athletes
     def calculate_time_difference(user_result, friend_result)
       return unless user_result.total_time && friend_result.total_time
 
-      diff_seconds = (friend_result.total_time - user_result.total_time).abs.to_i
-
-      Result.total_time(0, 0) + diff_seconds.seconds
+      (friend_result.total_time - user_result.total_time).abs
     end
 
     def group_and_sort_duels(duels)

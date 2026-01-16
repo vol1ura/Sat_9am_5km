@@ -32,7 +32,23 @@ const translations = {
     unknown: 'Nepoznati',
     noData: 'Nema podataka za ovu nedelju',
     people: 'osoba',
-  }
+  },
+  en: {
+    participants: 'Participants',
+    totalResults: 'Total results',
+    personalBests: 'Personal bests',
+    others: 'Others',
+    newcomers: 'Newcomers',
+    newcomersS95: 'Newcomers on S95',
+    volunteers: 'Volunteers',
+    totalVolunteers: 'Total volunteers',
+    gender: 'Gender distribution',
+    male: 'Men',
+    female: 'Women',
+    unknown: 'Unknown',
+    noData: 'No data for this week',
+    people: 'people',
+  },
 };
 
 export default class DashboardCharts {

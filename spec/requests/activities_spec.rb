@@ -21,7 +21,7 @@ RSpec.describe '/activities' do
     it 'renders json' do
       get activity_url(activity, format: :json)
       expect(response.parsed_body.dig('results', 0)).to eq(
-        'total_time' => result.total_time.strftime('%M:%S'),
+        'total_time' => result.time_string,
         'position' => result.position,
         'athlete' => %w[id name parkrun_code gender].index_with { |field| result.athlete.public_send(field) },
       )

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_10_094813) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_11_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -218,7 +218,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_10_094813) do
     t.boolean "informed", default: false, null: false
     t.boolean "personal_best", default: false, null: false
     t.integer "position"
-    t.time "total_time"
+    t.integer "total_time"
     t.datetime "updated_at", null: false
     t.index ["activity_id", "position"], name: "index_results_on_activity_id_and_position"
     t.index ["athlete_id", "activity_id"], name: "index_results_on_athlete_id_and_activity_id", unique: true

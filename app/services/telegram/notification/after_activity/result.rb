@@ -14,7 +14,7 @@ module Telegram
               number: activity.number,
               event_name: activity.event_name,
               position: @entity.position,
-              total_time: ApplicationController.helpers.human_result_time(@entity.total_time),
+              total_time: @entity.time_string,
               count: activity.results.count,
             )}
             #{super}

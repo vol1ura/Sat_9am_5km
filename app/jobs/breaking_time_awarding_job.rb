@@ -10,7 +10,7 @@ class BreakingTimeAwardingJob < ApplicationJob
 
     Athlete.genders.each_key do |gender|
       award_badges(
-        Badge.breaking_kind.where("info->>'gender' = ?", gender).order(Arel.sql("info->'min'")),
+        Badge.breaking_kind.where("info->>'gender' = ?", gender).order(Arel.sql("(info->>'sec')::integer")),
         activity_id:,
         gender:,
       )
@@ -24,7 +24,7 @@ class BreakingTimeAwardingJob < ApplicationJob
       accomplished_athlete_ids =
         results_dataset
           .joins(athlete: :trophies)
-          .where(total_time: ...minutes_threshold(badge.info['min']))
+          .where(total_time: ...badge.info['sec'])
           .where(athlete: { trophies: { badge: } })
           .select(:athlete_id)
       Trophy.where(badge:).where.not(athlete_id: accomplished_athlete_ids).destroy_all
@@ -34,12 +34,12 @@ class BreakingTimeAwardingJob < ApplicationJob
   # rubocop:disable Metrics/MethodLength
   def award_badges(badges, activity_id:, gender:)
     badges.each do |badge|
-      time_threshold = badge.info['min']
-      prev_badges = badges.where("(info->'min')::integer < ?", time_threshold)
-      next_badges = badges.where("(info->'min')::integer > ?", time_threshold)
+      time_threshold = badge.info['sec']
+      prev_badges = badges.where("(info->>'sec')::integer < ?", time_threshold)
+      next_badges = badges.where("(info->>'sec')::integer > ?", time_threshold)
       results_dataset(activity_id:)
         .joins(:athlete)
-        .where(total_time: minutes_threshold(prev_badges.last&.info&.dig('min'))...minutes_threshold(time_threshold))
+        .where(total_time: prev_badges.last&.info&.dig('sec').to_i...time_threshold)
         .where(athlete: { gender: })
         .order(:date)
         .select(:athlete_id, :date)
@@ -61,10 +61,5 @@ class BreakingTimeAwardingJob < ApplicationJob
     ds = Result.published.where(activity: { date: EXPIRATION_PERIOD.ago.. })
     ds = ds.where(activity_id:) if activity_id
     ds
-  end
-
-  # Threshold time. It is 00:00:00 for the first interval.
-  def minutes_threshold(minutes)
-    Result.total_time(minutes || 0, 0)
   end
 end

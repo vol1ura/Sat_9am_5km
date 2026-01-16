@@ -59,7 +59,7 @@
             <tr>
               <td><%= result.position %></td>
               <td><%= link_to result.athlete.name, result.athlete %></td>
-              <td><%= human_result_time result.total_time %></td>
+              <td><%= result.time_string %></td>
             </tr>
           <% end %>
         <% end %>

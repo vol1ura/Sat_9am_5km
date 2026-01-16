@@ -1013,6 +1013,8 @@ sr:
       name: Ime
       athletes: Atletičari
       results: Rezultati
+      avg_result: Prosečan rezultat
+      best_result: Najbolji rezultat
       volunteering: Volonterstvo
       search_placeholder: Pretraga po imenu
       search_button: Traži

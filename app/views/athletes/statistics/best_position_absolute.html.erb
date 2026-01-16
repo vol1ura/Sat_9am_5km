@@ -7,7 +7,7 @@
             <%= link_to l(pb.date), pb.activity, data: { turbo: false } %>
           </div>
           <div class="mx-3">
-            <%= human_result_time pb.total_time %>
+            <%= pb.time_string %>
           </div>
           <div>
             <%= link_to pb.activity.event_name, event_path(pb.activity.event.code_name), data: { turbo: false } %>

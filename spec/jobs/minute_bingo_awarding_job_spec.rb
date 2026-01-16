@@ -6,7 +6,7 @@ RSpec.describe MinuteBingoAwardingJob do
 
   before do
     60.times do |idx|
-      create(:result, athlete: athlete, total_time: Result.total_time(18, idx))
+      create(:result, athlete: athlete, total_time: (18 * 60) + idx)
     end
   end
 

@@ -1,6 +1,9 @@
 <tr>
   <td><%= link_to club.name, club %></td>
   <td><%= @count_athletes.fetch(club.id, 0) %></td>
-  <td><%= @count_results.fetch(club.id, 0) %></td>
+  <% results_stats = @results_stats[club.id] || {} %>
+  <td><%= results_stats.fetch(:count, 0) %></td>
+  <td sort-by="<%= results_stats[:avg_seconds] %>"><%= Result.time_string results_stats[:avg_seconds] %></td>
+  <td sort-by="<%= results_stats[:best_seconds] %>"><%= Result.time_string results_stats[:best_seconds] %></td>
   <td><%= @count_volunteering.fetch(club.id, 0) %></td>
 </tr>
