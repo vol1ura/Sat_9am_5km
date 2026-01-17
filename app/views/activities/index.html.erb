@@ -6,7 +6,10 @@
     <thead>
       <tr data-controller="table-head">
         <th><%= t '.date' %></th>
-        <th><%= t '.event' %></th>
+        <th class="sortable" data-action="click->table-head#toggleSort">
+          <span><%= t '.event' %></span>
+          <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
+        </th>
         <th class="sortable" data-action="click->table-head#toggleSort">
           <span><%= t '.town' %></span>
           <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>

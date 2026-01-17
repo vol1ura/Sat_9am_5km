@@ -131,7 +131,8 @@ sr:
         updated_at: ažurirano
       result:
         position: pozicija
-        total_time: vreme
+        total_time: sekunde
+        time_string: rezultat
         athlete: sportista
         user: korisnik
         gender: pol

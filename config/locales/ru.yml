@@ -129,7 +129,8 @@ ru:
         updated_at: обновлена
       result:
         position: место
-        total_time: результат
+        total_time: секунд
+        time_string: результат
         athlete: участник
         user: пользователь
         gender: пол

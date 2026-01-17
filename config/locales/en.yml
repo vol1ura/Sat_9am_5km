@@ -123,7 +123,8 @@ en:
         updated_at: updated
       result:
         position: position
-        total_time: result
+        total_time: seconds
+        time_string: result
         athlete: participant
         user: user
         gender: gender

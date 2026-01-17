@@ -57,6 +57,20 @@ $carousel-control-hover-opacity: 1;
     --bs-btn-active-border-color: #1aa7b4;
   }
 
+  .form-check-input {
+    background-color: var(--bs-secondary-bg);
+    border-color: var(--bs-border-color);
+
+    &:checked {
+      background-color: var(--bs-primary);
+      border-color: var(--bs-primary);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgba(26, 167, 180, 0.25);
+    }
+  }
+
   // .bg-primary {
   //   --bs-bg-opacity: 1;
   //   background-color: rgba(26, 167, 180, var(--bs-bg-opacity)) !important;
