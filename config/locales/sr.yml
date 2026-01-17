@@ -781,7 +781,8 @@ sr:
       title: Povratne informacije i predlozi
       description: Bili bismo zahvalni na svim vašim povratnim informacijama i predlozima. Pišite ako ste naišli na neke probleme, želite da ponudite svoju pomoć, ideju ili samo da se izjasnite. Po želji, možete navesti kontakt za komunikaciju u poruci.
       other_contacts_html: Takođe možete poslati poruku na naš <a href="mailto:%{our_email}" target="_blank" title="Pošaljite nam email">email</a>. Ostale naše kontakte možete pronaći na dnu stranice, kao i na stranicama događaja.
-      placeholder: Vaša povratna informacija ili predlog (do %{max_length} karaktera)
+      placeholder: Vaša povratna informacija ili predlog
+      confirm: Pošaljite povratnu informaciju?
       submit: Pošalji
     submit_feedback:
       sent: Hvala na vašoj povratnoj informaciji!

@@ -665,7 +665,8 @@ en:
       title: Feedback and Suggestions
       description: We'll be grateful for any feedback and suggestions. Write if you've encountered any problems, want to offer your help, an idea, or just speak out. If desired (and if you need to be contacted), include any contact in your message.
       other_contacts_html: You can also send a message to our <a href="mailto:%{our_email}" target="_blank" title="Send us email">email</a>. You'll find our other contacts at the bottom, as well as on event pages.
-      placeholder: Your feedback or suggestion (up to %{max_length} characters)
+      placeholder: Your feedback or suggestion
+      confirm: Send feedback?
       submit: Send
     submit_feedback:
       sent: Thank you for your feedback!

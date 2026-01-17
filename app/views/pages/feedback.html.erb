@@ -3,13 +3,13 @@
 <div class="card mb-4">
   <div class="card-body">
     <%= form_with url: submit_feedback_pages_path, local: true do |form| %>
-      <%= form.text_area :message, class: 'mb-3 form-control', placeholder: t('.placeholder', max_length: PagesController::MAX_FEEDBACK_SIZE), maxlength: PagesController::MAX_FEEDBACK_SIZE, rows: 7, required: true %>
+      <%= form.text_area :message, class: 'mb-3 form-control', placeholder: t('.placeholder'), maxlength: PagesController::MAX_FEEDBACK_SIZE, rows: 7, required: true %>
 
-      <div class="d-none" aria-hidden="true">
+      <div class="contact d-none required">
         <%= form.text_field :contact, autocomplete: 'off' %>
       </div>
 
-      <%= form.submit t('.submit'), class: 'btn btn-primary' %>
+      <%= form.submit t('.submit'), class: 'btn btn-primary', data: { turbo_confirm: t('.confirm') } %>
     <% end %>
   </div>
 </div>
