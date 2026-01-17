@@ -2,7 +2,7 @@
 
 module CsvReports
   class UserRegistrationsJob < BaseJob
-    HEADERS = %w[Month TotalNew Russia Belarus Serbia ParkrunID 5verstID RunParkID].freeze
+    HEADERS = %w[Month TotalNew Russia Belarus Serbia ParkrunID 5verstID RunParkID WithResult WithVolunteering].freeze
 
     SQL_QUERY = <<~SQL.squish
       SELECT
@@ -13,7 +13,23 @@ module CsvReports
         COUNT(*) FILTER (WHERE ec.code = 'rs' OR cc.code = 'rs') AS rs_count,
         COUNT(*) FILTER (WHERE a.parkrun_code IS NOT NULL) AS parkrun_count,
         COUNT(*) FILTER (WHERE a.fiveverst_code IS NOT NULL) AS fiveverst_count,
-        COUNT(*) FILTER (WHERE a.runpark_code IS NOT NULL) AS runpark_count
+        COUNT(*) FILTER (WHERE a.runpark_code IS NOT NULL) AS runpark_count,
+        COUNT(*) FILTER (
+          WHERE EXISTS (
+            SELECT 1
+            FROM results r
+            INNER JOIN activities ar ON ar.id = r.activity_id AND ar.published = true
+            WHERE r.athlete_id = a.id
+          )
+        ) AS with_results_count,
+        COUNT(*) FILTER (
+          WHERE EXISTS (
+            SELECT 1
+            FROM volunteers v
+            INNER JOIN activities av ON av.id = v.activity_id AND av.published = true
+            WHERE v.athlete_id = a.id
+          )
+        ) AS with_volunteering_count
       FROM users
       LEFT JOIN athletes a ON a.user_id = users.id
       LEFT JOIN events e ON e.id = a.event_id
@@ -55,6 +71,8 @@ module CsvReports
         stats.parkrun_count,
         stats.fiveverst_count,
         stats.runpark_count,
+        stats.with_results_count,
+        stats.with_volunteering_count,
       ]
     end
   end

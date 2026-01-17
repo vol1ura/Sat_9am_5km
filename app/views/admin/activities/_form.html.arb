@@ -15,8 +15,6 @@ active_admin_form_for [:admin, resource] do |f|
       f.date_field(
         :date,
         value: f.object.date,
-        min: 3.days.ago,
-        max: 3.months.from_now,
         disabled: resource.published || resource.results.exists?,
       )
     end
