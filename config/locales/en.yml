@@ -868,9 +868,12 @@ en:
     statistics:
       volunteering_chart:
         h_index: h-index
-        h_index_explanation: Index equals h if there are at least h positions (roles), with at least h volunteering sessions at each
+        h_index_explanation: Index equals h if there are at least h positions (roles), with at least h volunteering sessions at each. In other words, the higher the number of volunteering sessions on different positions, the higher the h-index.
+        h_index_chart_title: Volunteerings relative to h-index
+        h_index_chart_tooltip: Missing to reach h+1
+        h_index_missing_roles: To increase h-index you need volunteering at %{count} more position
         volunteering_coefficient: Volunteer Coefficient
-        volunteering_coefficient_explanation: Number of volunteering sessions per every 10 runs
+        volunteering_coefficient_explanation: Average number of volunteering sessions per every 10 runs. If equal to 1 - perfect balance between running and volunteering, more than 1 - super volunteer. Runs are only possible thanks to volunteers.
       total_events:
         finishes: Finishes
         volunteering: Volunteering

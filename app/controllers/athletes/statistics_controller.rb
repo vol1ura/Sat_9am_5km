@@ -50,6 +50,10 @@ module Athletes
     def volunteering_chart
       @volunteering = @athlete.volunteering.unscope(:order)
       @total_results = athlete_results.size
+      @role_counts = @volunteering.group(:role).order(count_all: :desc).count
+      @h_index = @role_counts.values.map.with_index.take_while { |count, idx| count > idx }.size
+      @h_index_target = @h_index + 1
+      @h_index_missing_roles = [@h_index_target - @role_counts.size, 0].max
     end
 
     private

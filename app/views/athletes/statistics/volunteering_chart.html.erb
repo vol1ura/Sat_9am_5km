@@ -3,35 +3,29 @@
     <li class="list-group-item">
       <div class="hstack">
         <div class="acc-li-s"><%= t '.h_index' %></div>
-        <div class="mx-3">
-          <abbr title="<%= t '.h_index_explanation' %>" class="initialism">
-            <%=
-              @volunteering
-                .group(:role)
-                .order(count_all: :desc)
-                .count
-                .values
-                .map
-                .with_index
-                .take_while { |count, idx| count > idx }
-                .size
-            %>
-          </abbr>
-        </div>
+        <div class="mx-3"><%= @h_index %></div>
+      </div>
+      <div class="text-muted small">
+        <%= t '.h_index_explanation' %>
+        <% if @h_index_missing_roles.positive? %>
+          <br>
+          <%= t '.h_index_missing_roles', count: @h_index_missing_roles %>
+        <% end %>
       </div>
     </li>
     <li class="list-group-item">
       <div class="hstack">
         <div class="acc-li-s"><%= t '.volunteering_coefficient' %></div>
         <div class="mx-3">
-          <abbr title="<%= t '.volunteering_coefficient_explanation' %>" class="initialism">
-            <% if @total_results.zero? %>
-              <i class="fa-solid fa-infinity"></i>
-            <% else %>
-              <%= (@volunteering.count * 10.0 / @total_results).round(1) %>
-            <% end %>
-          </abbr>
+          <% if @total_results.zero? %>
+            <i class="fa-solid fa-infinity"></i>
+          <% else %>
+            <%= (@volunteering.count * 10.0 / @total_results).round(1) %>
+          <% end %>
         </div>
+      </div>
+      <div class="text-muted small">
+        <%= t '.volunteering_coefficient_explanation' %>
       </div>
     </li>
   </ul>
@@ -58,6 +52,38 @@
         <% end %>
       </tbody>
     </table>
+    <table class="d-none">
+      <tbody>
+        <%
+          @role_counts
+            .first(@h_index_target)
+            .map do |role, count|
+              {
+                role: role,
+                count: count,
+                deficit: [@h_index_target - count, 0].max
+              }
+            end
+            .each do |row|
+        %>
+              <tr
+                data-volunteer-target="hdata"
+                data-count="<%= row[:count] %>"
+                data-deficit="<%= row[:deficit] %>">
+                <th><%= human_volunteer_role row[:role] %></th>
+              </tr>
+        <% end %>
+      </tbody>
+    </table>
     <div class="col-12 col-md-10 col-xl-8" data-volunteer-target="chart"></div>
+    <div class="col-12 col-md-10 col-xl-8 mt-4">
+      <div
+        class="mt-2"
+        data-volunteer-target="hchart"
+        data-h-index-target="<%= @h_index_target %>"
+        data-h-index-title="<%= t '.h_index_chart_title' %>"
+        data-h-index-tooltip="<%= t '.h_index_chart_tooltip' %>"
+      ></div>
+    </div>
   </div>
 <% end %>

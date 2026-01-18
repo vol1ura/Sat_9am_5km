@@ -919,9 +919,12 @@ sr:
     statistics:
       volunteering_chart:
         h_index: h-indeks
-        h_index_explanation: Indeks je jednak h ako postoji bar h pozicija (uloge), u svakoj od kojih je bar h puta volontiranje
+        h_index_explanation: Indeks je jednak h ako postoji bar h pozicija (uloge), u svakoj od kojih je bar h puta volontiranje. Prosto rečeno, što je više volontiranja na različitim pozicijama, to je viši h-indeks.
+        h_index_chart_title: Volontiranja relativno h-indeksu
+        h_index_chart_tooltip: Nedostaje do h+1
+        h_index_missing_roles: Za povećanje h-indeksa potrebno je volontiranje na još %{count} poziciji
         volunteering_coefficient: Koeficijent volontiranja
-        volunteering_coefficient_explanation: Broj volontiranja za svakih 10 trčanja
+        volunteering_coefficient_explanation: Srednji broj volontiranja za svakih 10 trčanja. Ako je jednak 1 - idealan balans između trčanja i volontiranja, više od 1 - super volonter. Trke se mogu održati samo zahvaljujući volonterima.
       total_events:
         finishes: Trčanja
         volunteering: Volontiranje
