@@ -2,11 +2,11 @@
 
 module CsvReports
   class UserRegistrationsJob < BaseJob
-    HEADERS = %w[Month TotalNew Russia Belarus Serbia ParkrunID 5verstID RunParkID WithResult WithVolunteering].freeze
+    HEADERS = %w[Date TotalNew Russia Belarus Serbia ParkrunID 5verstID RunParkID WithResult WithVolunteering].freeze
 
     SQL_QUERY = <<~SQL.squish
       SELECT
-        DATE_TRUNC('month', users.created_at) AS month,
+        users.created_at::date AS date,
         COUNT(*) AS total_count,
         COUNT(*) FILTER (WHERE ec.code = 'ru' OR cc.code = 'ru') AS ru_count,
         COUNT(*) FILTER (WHERE ec.code = 'by' OR cc.code = 'by') AS by_count,
@@ -36,9 +36,9 @@ module CsvReports
       LEFT JOIN clubs c ON c.id = a.club_id
       LEFT JOIN countries ec ON ec.id = e.country_id
       LEFT JOIN countries cc ON cc.id = c.country_id
-      WHERE users.created_at >= ? AND users.created_at <= ?
-      GROUP BY DATE_TRUNC('month', users.created_at)
-      ORDER BY month DESC
+      WHERE users.created_at::date >= ? AND users.created_at::date <= ?
+      GROUP BY users.created_at::date
+      ORDER BY date DESC
     SQL
 
     def perform(user_id, from_date, till_date)
@@ -62,18 +62,11 @@ module CsvReports
     private
 
     def generate_row(stats)
-      [
-        I18n.l(stats.month, format: '%B %Y'),
-        stats.total_count,
-        stats.ru_count,
-        stats.by_count,
-        stats.rs_count,
-        stats.parkrun_count,
-        stats.fiveverst_count,
-        stats.runpark_count,
-        stats.with_results_count,
-        stats.with_volunteering_count,
-      ]
+      %i[
+        date total_count ru_count by_count rs_count
+        parkrun_count fiveverst_count runpark_count
+        with_results_count with_volunteering_count
+      ].map { stats.send it }
     end
   end
 end

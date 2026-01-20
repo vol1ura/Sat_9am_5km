@@ -17,7 +17,7 @@ ActiveAdmin.register_page 'Utilities' do
         end
 
         panel 'Статистика регистраций пользователей' do
-          para 'Будет сформирован CSV файл с ежемесячной статистикой.'
+          para 'Будет сформирован CSV файл с ежедневной статистикой.'
           render partial: 'user_registrations_export_form'
         end
       end
