@@ -257,7 +257,7 @@ en:
     - Friday
     - Saturday
     formats:
-      default: "%m/%d/%Y"
+      default: "%d.%m.%Y"
       long: "%B %-d, %Y"
       brief: "%-d %B"
       short: "%-d %b %Y"
@@ -448,9 +448,9 @@ en:
     am: AM
     pm: PM
     formats:
-      default: "%B %d, %Y %I:%M %p %z"
-      long: "%B %d, %Y %I:%M %p"
-      short: "%b %d, %I:%M %p"
+      default: "%B %d, %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%b %d, %H:%M"
   cookie_consent:
     message: 'By continuing to use our website, you consent to the processing of cookies that ensure the proper functioning of the site.'
     policy_link: 'Privacy Policy'

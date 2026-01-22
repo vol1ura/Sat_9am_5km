@@ -4,7 +4,7 @@
     <div>
       <%= link_to friend.name, athlete_path(friend), class: 'text-decoration-none me-2', data: { turbo: false } %>
       <% if friend.going_to_event? %>
-        <span class="badge bg-success">
+        <span class="badge bg-success mt-1 mt-sm-0 text-wrap">
           <%= t '.going_to', event: friend.going_to_event.name %>
         </span>
       <% end %>
@@ -17,7 +17,7 @@
           button_to(
             friendship_path(friendship_id, viewed_athlete_id: @athlete.id),
             method: :delete,
-            class: 'btn btn-sm btn-outline-danger',
+            class: 'btn btn-sm btn-outline-danger ms-2',
             form_class: 'd-inline-block',
             data: { turbo: true, turbo_confirm: t('.confirm_unfriend') },
           ) do
@@ -29,7 +29,7 @@
       <%=
         button_to(
           friendships_path(friend_id: friend.id, viewed_athlete_id: @athlete.id),
-          class: 'btn btn-sm btn-outline-primary',
+          class: 'btn btn-sm btn-outline-primary ms-2',
           form_class: 'd-inline-block',
           data: { turbo: true, turbo_confirm: t('.confirm_add', name: friend.name) },
         ) do
