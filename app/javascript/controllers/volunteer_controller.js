@@ -157,14 +157,24 @@ export default class extends Controller {
   #heatmapOptions(title, tooltipLabel, target) {
     const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
     const categories = Array.from({ length: target }, (_, idx) => (idx + 1).toString());
-    const series = this.hdataTargets.map(row => {
+    const series = this.hdataTargets.map((row, rowIdx) => {
       const role = row.querySelector('th').textContent.trim();
       const count = Number(row.dataset.count);
       const deficit = Number(row.dataset.deficit);
-      const data = categories.map((x, idx) => ({
-        x,
-        y: idx + 1 <= count ? 1 : 0
-      }));
+      const data = categories.map((x, colIdx) => {
+        let y;
+        if (colIdx >= count) {
+          y = 0; // empty
+        } else if (colIdx < target - 1 && rowIdx < target - 1) {
+          y = 3; // inside h×h zone
+        } else if (deficit === 0) {
+          y = 2; // outside h×h zone, role has no deficit
+        } else {
+          y = 1; // role has deficit
+        }
+
+        return { x, y };
+      });
 
       return {
         name: role,
@@ -172,9 +182,6 @@ export default class extends Controller {
         meta: { count, deficit }
       };
     });
-
-    const filledColor = isDark ? '#2b908f' : '#3f51b5';
-    const emptyColor = isDark ? '#2d3748' : '#edf2f7';
 
     return {
       series,
@@ -204,12 +211,22 @@ export default class extends Controller {
               {
                 from: 0,
                 to: 0,
-                color: emptyColor
+                color: isDark ? '#2d3748' : '#edf2f7'
               },
               {
                 from: 1,
                 to: 1,
-                color: filledColor
+                color: isDark ? '#47c1bf' : '#7986cb'
+              },
+              {
+                from: 2,
+                to: 2,
+                color: isDark ? '#2b908f' : '#3f51b5'
+              },
+              {
+                from: 3,
+                to: 3,
+                color: isDark ? '#f6ad55' : '#ffb300'
               }
             ]
           }
