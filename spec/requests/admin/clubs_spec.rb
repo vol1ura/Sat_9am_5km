@@ -18,6 +18,7 @@ RSpec.describe '/admin/clubs' do
       {
         club: {
           name: Faker::Team.name,
+          slug: Faker::Alphanumeric.alphanumeric(number: 3),
           country_id: countries(:ru).id,
         },
       }

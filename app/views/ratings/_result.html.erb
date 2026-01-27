@@ -8,7 +8,7 @@
   <td class="ps-0 ps-md-2"><%= link_to l(result.date), result.activity %></td>
   <td>
     <% club = result.athlete&.club %>
-    <%= link_to club.name, club if club %>
+    <%= link_to club.name, club_path(club.slug) if club %>
   </td>
   <td><%= link_to result.activity.event_name, event_path(result.activity.event.code_name) %></td>
 </tr>

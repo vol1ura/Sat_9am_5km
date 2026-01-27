@@ -1,7 +1,11 @@
 <%= turbo_frame_tag "volunteer-#{idx}" do %>
   <% if volunteer %>
     <span class="d-inline-flex align-items-center gap-2 flex-nowrap w-100">
-      <%= link_to_if can?(:manage, volunteer) && can?(:read, activity), volunteer.name, edit_volunteer_path(volunteer, idx:) %>
+      <% if can?(:manage, volunteer) && can?(:read, activity) %>
+        <%= link_to volunteer.name, edit_volunteer_path(volunteer, idx:) %>
+      <% else %>
+        <%= link_to volunteer.name, athlete_path(volunteer.athlete), data: { turbo: false } %>
+      <% end %>
       <% if can?(:destroy, volunteer) %>
         <%= link_to volunteer_path(volunteer, idx:), method: :delete, class: 'text-danger ms-auto ms-md-0', data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete', role: human_volunteer_role(role), name: volunteer.name) } do %>
           <i class="fa-solid fa-xmark"></i>

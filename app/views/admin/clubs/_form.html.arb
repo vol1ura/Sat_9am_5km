@@ -4,6 +4,7 @@ active_admin_form_for [:admin, resource] do |f|
   f.inputs do
     input :country
     input :name
+    input :slug, hint: 'Разрешены только строчные латинские буквы, цифры и дефис'
     input(
       :description,
       as: :quill_editor,

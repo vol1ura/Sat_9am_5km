@@ -4,7 +4,7 @@ ActiveAdmin.register Club do
   menu priority: 70
   includes :country, logo_attachment: :blob
 
-  permit_params :name, :country_id, :logo, :description
+  permit_params :name, :slug, :country_id, :logo, :description
 
   actions :all, except: :show
 
@@ -15,7 +15,8 @@ ActiveAdmin.register Club do
     selectable_column
     id_column
     column(:logo) { |c| image_tag c.logo.variant(:thumb) if c.logo.attached? }
-    column(:name) { |c| link_to c.name, c }
+    column :slug
+    column(:name) { |c| link_to c.name, club_path(c.slug) }
     column(:description) { |c| sanitized_text c.description&.truncate(160) }
     column :country
     actions

@@ -67,7 +67,7 @@
             <td><%= link_to res.activity.event.name, res.activity %></td>
             <td>
               <% club = res.athlete&.club %>
-              <%= link_to club&.name, club if club %>
+              <%= link_to club.name, club_path(club.slug) if club %>
             </td>
           <% end %>
         <% end %>

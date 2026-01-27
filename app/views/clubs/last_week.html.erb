@@ -10,7 +10,7 @@
       <%= link_to t('.clubs'), clubs_path %>
     </li>
     <li class="breadcrumb-item">
-      <%= link_to @club.name, club_path(@club) %>
+      <%= link_to @club.name, club_path(@club.slug) %>
     </li>
     <li class="breadcrumb-item active" aria-current="page"><%= t '.participants_activity' %></li>
   </ol>

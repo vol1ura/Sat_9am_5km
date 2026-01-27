@@ -50,8 +50,8 @@ Country.find_each do |country|
     # Add clubs
     add clubs_path, changefreq: 'daily'
     country.clubs.find_each do |club|
-      add club_path(club), changefreq: 'daily'
-      add last_week_club_path(club)
+      add club_path(club.slug), changefreq: 'daily'
+      add last_week_club_path(club.slug)
     end
   end
 end

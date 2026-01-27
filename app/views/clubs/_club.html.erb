@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to club.name, club %></td>
+  <td><%= link_to club.name, club_path(club.slug) %></td>
   <td><%= @count_athletes.fetch(club.id, 0) %></td>
   <% results_stats = @results_stats[club.id] || {} %>
   <td><%= results_stats.fetch(:count, 0) %></td>

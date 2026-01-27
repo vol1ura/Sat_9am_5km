@@ -100,6 +100,7 @@ ru:
         correct?: корректен?
       club:
         name: название
+        slug: идентификатор
         country: страна
         logo: логотип
         description: описание
