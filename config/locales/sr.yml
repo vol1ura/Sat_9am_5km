@@ -102,6 +102,7 @@ sr:
         correct?: ispravno?
       club:
         name: naziv
+        slug: identifikator
         country: država
         logo: logo
         description: opis

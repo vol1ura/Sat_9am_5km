@@ -38,6 +38,6 @@
   <td class="align-middle text-end"><%= human_result_pace result.total_time %></td>
   <td class="hidden-on-phone align-middle">
     <% club = result.athlete&.club %>
-    <%= link_to club.name, club if club %>
+    <%= link_to club.name, club_path(club.slug) if club %>
   </td>
 <% end %>

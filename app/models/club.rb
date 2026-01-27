@@ -11,6 +11,7 @@ class Club < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :logo, size: { less_than: 300.kilobytes }, dimension: { width: { in: 150..900 }, height: { in: 150..900 } }
+  validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-z0-9-]+\z/ }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[name country_id athletes_count results_count volunteering_count avg_total_time best_total_time]

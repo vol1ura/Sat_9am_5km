@@ -94,6 +94,7 @@ en:
         correct?: correct?
       club:
         name: name
+        slug: slug
         country: country
         logo: logo
         description: description

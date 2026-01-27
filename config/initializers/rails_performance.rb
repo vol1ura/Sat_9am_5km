@@ -10,6 +10,10 @@ RailsPerformance.setup do |config|
   config.include_rake_tasks = true
 
   config.custom_data_proc = proc do |env|
-    { user_agent: Rack::Request.new(env).env['HTTP_USER_AGENT'] }
+    request = Rack::Request.new(env)
+    {
+      ip: request.ip,
+      user_agent: request.env['HTTP_USER_AGENT']
+    }
   end
 end

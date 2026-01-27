@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe '/clubs' do
-  describe 'GET /index' do
+  describe 'GET /' do
     it 'renders a successful response' do
       clubs = create_list(:club, 2)
       clubs.each { |club| create_list(:athlete, 2, club:) }
@@ -18,16 +18,16 @@ RSpec.describe '/clubs' do
       athletes.each { |athlete| create_list(:result, 2, athlete:) }
     end
 
-    describe 'GET /show' do
+    describe 'GET /:slug' do
       it 'renders a successful response' do
-        get club_url(club)
+        get club_url(club.slug)
         expect(response).to be_successful
       end
     end
 
-    describe 'GET /last_week' do
+    describe 'GET /:slug/last_week' do
       it 'renders a successful response' do
-        get last_week_club_url(club)
+        get last_week_club_url(club.slug)
         expect(response).to be_successful
       end
     end
