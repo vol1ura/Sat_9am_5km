@@ -24,7 +24,34 @@ class Rack::Attack
     req.ip if req.path.start_with?('/auth_links/')
   end
 
-  blocklist('pentesters block') do |req|
-    req.env['HTTP_ACCEPT'].to_s.include?('../../')
+  blocklist('scrapers') do |req|
+    Allow2Ban.filter("scraper:#{req.ip}", maxretry: 180, findtime: 15.minutes, bantime: 1.week) do
+      req.path.match?(%r{\A/(activities|athletes)/\d+}) && !req.path.match?(%r{/(best_result|statistics|duels)})
+    end
   end
+
+  blocklist('pentesters') do |req|
+    ban_key = "rack_attack:pentesters:ban:#{req.ip}"
+    next true if Rails.cache.read(ban_key)
+
+    if req.env['HTTP_ACCEPT'].to_s.include?('../../')
+      Rails.cache.write(ban_key, true, expires_in: 2.days)
+      true
+    else
+      false
+    end
+  end
+end
+
+ActiveSupport::Notifications.subscribe(/rack_attack/) do |_name, _start, _finish, _request_id, payload|
+  req = payload[:request]
+
+  Rollbar.warning(
+    'Rack::Attack triggered',
+    ip: req.ip,
+    path: req.path,
+    type: req.env['rack.attack.match_type'],
+    matched: req.env['rack.attack.matched'],
+    user_agent: req.user_agent
+  )
 end
