@@ -1013,9 +1013,13 @@ ru:
       name: Название
       athletes: Участники
       results: Результаты
+      avg_results_per_athlete: СКРНУ
+      avg_results_per_athlete_description_html: '<strong>СКРНУ</strong> - это <em>среднее количество результатов на участника</em>. В клубе может быть немного участников, однако если все они стабильно участвуют в забегах, то этот показатель будет выше, чем в клубе с большим количеством участников, однако редко участвующих.'
       avg_result: Средний результат
       best_result: Лучший результат
       volunteering: Волонтёрства
+      avg_volunteering_per_athlete: СКВНУ
+      avg_volunteering_per_athlete_description_html: '<strong>СКВНУ</strong> - это <em>среднее количество волонтёрств на участника</em>. Аналогично СКРНУ, но для волонтёрств.'
       search_placeholder: Поиск по названию
       search_button: Искать
     show:

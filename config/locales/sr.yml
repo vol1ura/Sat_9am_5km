@@ -1019,9 +1019,13 @@ sr:
       name: Ime
       athletes: Atletičari
       results: Rezultati
+      avg_results_per_athlete: SČRPA
+      avg_results_per_athlete_description_html: '<strong>SČRPA</strong> je <em>srednje rezultata po atletičaru</em>. Klub može imati malo atletičara, ali ako svi redovno trče, ovaj pokazatelj će biti viši nego u klubu sa mnogo atletičara, ali rijetko trčećih.'
       avg_result: Prosečan rezultat
       best_result: Najbolji rezultat
       volunteering: Volonterstvo
+      avg_volunteering_per_athlete: SČVPA
+      avg_volunteering_per_athlete_description_html: '<strong>SČVPA</strong> je <em>srednje volontiranja po atletičaru</em>. Analogno SČRPA, ali za volontiranje.'
       search_placeholder: Pretraga po imenu
       search_button: Traži
     show:

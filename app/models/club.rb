@@ -14,7 +14,8 @@ class Club < ApplicationRecord
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-z0-9-]+\z/ }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[name country_id athletes_count results_count volunteering_count avg_total_time best_total_time]
+    %w[name country_id athletes_count results_count volunteering_count avg_total_time best_total_time
+       avg_results_per_athlete avg_volunteering_per_athlete]
   end
 
   def to_combobox_display = name
@@ -73,6 +74,38 @@ class Club < ApplicationRecord
         INNER JOIN athletes ON athletes.id = results.athlete_id
         INNER JOIN activities ON activities.id = results.activity_id
         WHERE athletes.club_id = clubs.id AND activities.published = TRUE
+      )',
+    )
+  end
+
+  ransacker :avg_results_per_athlete do
+    Arel.sql(
+      'COALESCE(
+        (
+          SELECT COUNT(results.id)::float
+          FROM results
+          INNER JOIN athletes ON athletes.id = results.athlete_id
+          INNER JOIN activities ON activities.id = results.activity_id
+          WHERE athletes.club_id = clubs.id AND activities.published = TRUE
+        ) / NULLIF(
+          (SELECT COUNT(a.id) FROM athletes a WHERE a.club_id = clubs.id), 0
+        ), 0
+      )',
+    )
+  end
+
+  ransacker :avg_volunteering_per_athlete do
+    Arel.sql(
+      'COALESCE(
+        (
+          SELECT COUNT(volunteers.id)::float
+          FROM volunteers
+          INNER JOIN athletes ON athletes.id = volunteers.athlete_id
+          INNER JOIN activities ON activities.id = volunteers.activity_id
+          WHERE athletes.club_id = clubs.id AND activities.published = TRUE
+        ) / NULLIF(
+          (SELECT COUNT(a.id) FROM athletes a WHERE a.club_id = clubs.id), 0
+        ), 0
       )',
     )
   end

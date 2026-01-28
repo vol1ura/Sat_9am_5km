@@ -959,9 +959,13 @@ en:
       name: Name
       athletes: Participants
       results: Results
+      avg_results_per_athlete: ANRPA
+      avg_results_per_athlete_description_html: '<strong>ANRPA</strong> is the <em>average number of results per athlete</em>. A club may have a few athletes, but if all of them consistently participate in runs, this indicator will be higher than in club with many athletes, but rarely participating.'
       avg_result: Average result
       best_result: Best result
       volunteering: Volunteering
+      avg_volunteering_per_athlete: ANVPA
+      avg_volunteering_per_athlete_description_html: '<strong>ANVPA</strong> is the <em>average number of volunteering per athlete</em>. Similar to ANRPA, but for volunteering.'
       search_placeholder: Search by Name
       search_button: Search
     show:

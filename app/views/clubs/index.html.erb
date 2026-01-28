@@ -2,6 +2,11 @@
 <h1><%= head_info :title, t('navbars.top.club_ratings') %></h1>
 
 <p><%= t '.how_to_add_new_club_html', mail: ENV.fetch('INFO_EMAIL') %></p>
+<p>
+  <%= t '.avg_results_per_athlete_description_html' %>
+  <br>
+  <%= t '.avg_volunteering_per_athlete_description_html' %>
+</p>
 
 <div class="row mb-3">
   <%= search_form_for @q, url: clubs_path, method: :get, html: { class: 'col-12 col-md-6 col-xl-4' } do |f| %>
@@ -25,9 +30,11 @@
         <th><%= sort_link @q, :name, t('.name') %></th>
         <th><%= sort_link @q, :athletes_count, t('.athletes') %></th>
         <th><%= sort_link @q, :results_count, t('.results') %></th>
+        <th><%= sort_link @q, :avg_results_per_athlete, t('.avg_results_per_athlete') %></th>
         <th><%= sort_link @q, :avg_total_time, t('.avg_result') %></th>
         <th><%= sort_link @q, :best_total_time, t('.best_result') %></th>
         <th><%= sort_link @q, :volunteering_count, t('.volunteering') %></th>
+        <th><%= sort_link @q, :avg_volunteering_per_athlete, t('.avg_volunteering_per_athlete') %></th>
       </tr>
     </thead>
     <tbody class="table-group-divider">
