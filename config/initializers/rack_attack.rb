@@ -25,8 +25,10 @@ class Rack::Attack
   end
 
   blocklist('scrapers') do |req|
-    Allow2Ban.filter("scraper:#{req.ip}", maxretry: 180, findtime: 15.minutes, bantime: 1.week) do
-      req.path.match?(%r{\A/(activities|athletes)/\d+}) && !req.path.match?(%r{/(best_result|statistics|duels)})
+    next false unless req.path.match?(%r{\A/(activities|athletes)/\d+})
+
+    Allow2Ban.filter("scraper:#{req.ip}", maxretry: 90, findtime: 15.minutes, bantime: 1.week) do
+      !req.path.match?(%r{/(best_result|statistics|duels)})
     end
   end
 
@@ -36,7 +38,6 @@ class Rack::Attack
 
     if req.env['HTTP_ACCEPT'].to_s.include?('../../')
       Rails.cache.write(ban_key, true, expires_in: 2.days)
-      true
     else
       false
     end
