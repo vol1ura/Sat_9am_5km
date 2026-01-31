@@ -27,7 +27,7 @@ class Rack::Attack
   blocklist('scrapers') do |req|
     next false unless req.path.match?(%r{\A/(activities|athletes)/\d+})
 
-    Allow2Ban.filter("scraper:#{req.ip}", maxretry: 90, findtime: 15.minutes, bantime: 1.week) do
+    Allow2Ban.filter("scraper:#{req.ip}", maxretry: 160, findtime: 15.minutes, bantime: 1.week) do
       !req.path.match?(%r{/(best_result|statistics|duels)})
     end
   end
