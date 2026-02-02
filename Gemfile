@@ -15,7 +15,7 @@ gem 'active_storage_validations'
 gem 'audited'
 gem 'autoprefixer-rails'
 gem 'bootsnap', require: false
-gem 'bootstrap', '~> 5.3.5'
+gem 'bootstrap', '~> 5.3.8'
 gem 'cancancan'
 gem 'connection_pool', '~> 2.5'
 gem 'dalli'
