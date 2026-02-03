@@ -612,7 +612,7 @@ en:
         - "Many have already fallen in love with parkruns as events where runners and volunteers start each Saturday with movement, communication, and a cup of tea from a thermos. But times change, and traditions remain. Now there's S95 — it's a whole community. Here you can find out where the nearest run is, what volunteers are needed for the upcoming Saturday, check your results (and proudly brag if you've beaten your personal record), and find like-minded people who also believe that Saturday morning is time not for sleep, but for running and communication."
         - "And most importantly — S95 is accessible to everyone. It doesn't matter who you are: a marathoner with a hundred medals or someone who last ran in school PE class. There's no participation fee here, only payment in the form of good mood and smiles. You can walk or run the distance at your comfortable pace."
         - "So, if you're not yet in the know, S95 isn't just a set of symbols, it's a lifestyle, a Saturday ritual, and an opportunity to start the day with something really cool. Grab your sneakers, call your friends, and join the runs where every kilometer is a step toward new acquaintances, adventures, or a cool photo for social media."
-      events: 'Currently, our system displays results from %{events_count} locations: %{events}, as well as themed runs, like it was in Nikola-Lenivets Park at the SMF festival.'
+      events_html: 'Currently, our system displays <a href="%{link}">results from %{events_count} locations</a>: %{events}.'
       s95_abroad:
         title: S95 Runs Abroad
         body: "Saturday runs are also held in other countries - these are %{countries}. All results are accounted for in a unified system and displayed in participants' personal profiles."
@@ -621,7 +621,7 @@ en:
     rules:
       description: Brief rules for S95 run participants, as well as frequently asked questions
       register_with_bot_html: "If you're not registered, create a profile using our <a href=\"%{link}\" target=\"_blank\" rel=\"noopener\">Telegram bot</a>. You'll receive a link to your profile with a personal barcode."
-      come_to_s95_html: 'Most importantly - come on <strong>Saturday</strong> at <strong>9 AM</strong> to one of the events and run <strong>5 km</strong>.'
+      come_to_s95_html: 'Most importantly - come on <strong>Saturday</strong> at <strong>9 AM</strong> to one of the <a href="%{link}">events</a> and run <strong>5 km</strong>.'
       scan_barcodes: At the finish, you'll be given a position card. Scan your personal barcode and position card with the volunteer.
       return_position_card: Return the position card.
       faq: Frequently Asked Questions
@@ -683,7 +683,7 @@ en:
         <p>
           <ol>
             <li>We're an international community: S95 runs take place in Russia, Belarus, and Serbia, and all results are collected in a unified system</li>
-            <li>We have a motivating badge and challenge system — get achievements not only for high results, but also just for participation and personal progress</li>
+            <li>We have a motivating badge and challenge system — get <a href="%{badges_link}">achievements</a> not only for high results, but also just for participation and personal progress</li>
             <li>Our platform isn't just about running, but also about communication and social mission: we actively develop volunteering, communicate, find new friends</li>
             <li>Simple and fast registration of new participants via Telegram bot, all data always at hand</li>
             <li>We use modern technologies and approaches: lots of various statistics and rankings, ability to add friends and see who's going to which run</li>

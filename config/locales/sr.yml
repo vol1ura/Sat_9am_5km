@@ -729,7 +729,7 @@ sr:
         - 'Mnogi su već zavoleli parkrune kao događaje gde trkači i volonteri svake subote započinju dan kretanjem, druženjem i šoljom čaja iz termosa. Ali vremena se menjaju, a tradicije ostaju. Sada postoji S95 — to je čitava zajednica. Ovde možete saznati gde je najbliži trka, koji su volonteri potrebni za narednu subotu, pogledati svoje rezultate (i ponosno se pohvaliti ako ste slučajno oborili lični rekord), kao i pronaći istomišljenike koji takođe smatraju da je subotnje jutro vreme ne za spavanje, već za trčanje i druženje.'
         - 'I najvažnije — S95 je dostupan svima. Nije bitno ko ste: maratonac sa stotinama medalja ili osoba koja je poslednji put trčala u školi na časovima fizičkog vaspitanja. Ovde nema naknade za učešće, samo „plata“ u vidu dobrog raspoloženja i osmeha. Stazu možete prošetati ili pretrčati tempom koji vam odgovara.'
         - 'Tako da, ako još uvek niste u toku, S95 nije samo skup simbola, to je stil života, subotnji ritual i prilika da započnete dan nečim zaista kul. Uzmite patike, pozovite prijatelje i pridružite se trkama gde svaki kilometar predstavlja korak ka novim poznanstvima, avanturama ili kul fotografiji za društvene mreže.'
-      events: 'Sistem trenutno prikazuje rezultate %{events_count} lokacija: %{events}.'
+      events_html: 'Sistem trenutno prikazuje <a href="%{link}">rezultate %{events_count} lokacija</a>: %{events}.'
       s95_abroad:
         title: S95 trke u drugim zemljama
         body: Danas se naše trke organizuju i u %{countries}. Svi rezultati se čuvaju u jednom sistemu odakle ćete imati uvid u profile atletiča.
@@ -738,7 +738,7 @@ sr:
     rules:
       description: Kratka pravila za učesnike S95, kao i često postavljana pitanja
       register_with_bot_html: 'Ako niste registrovani, kreirajte profil koristeći <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a>. Dobićete link do vašeg profila sa ličnim QR kodom.'
-      come_to_s95_html: 'Najvažnije je doći na jedan od naših događaja u <strong>subotu</strong> u <strong>9 ujutru</strong> i pretrčati <strong>5 km</strong>.'
+      come_to_s95_html: 'Najvažnije je doći na jedan od <a href="%{link}">događaja</a> u <strong>subotu</strong> u <strong>9 ujutru</strong> i pretrčati <strong>5 km</strong>.'
       scan_barcodes: Na cilju ćete dobiti karticu pozicije. Skenirajte lični QR kod i karticu pozicije kod volontera.
       return_position_card: Predajte karticu pozicije.
       faq: Često postavljana pitanja
@@ -799,7 +799,7 @@ sr:
         <p>
           <ol>
             <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su objedinjeni u jedinstvenom sistemu.</li>
-            <li>Imamo motivacioni sistem nagrada i izazova — dobijajte dostignuća ne samo za visoke rezultate, već i za redovno učešće i lični napredak.</li>
+            <li>Imamo motivacioni sistem nagrada i izazova — dobijajte <a href="%{badges_link}">dostignuća</a> ne samo za visoke rezultate, već i za redovno učešće i lični napredak.</li>
             <li>Naša platforma nije samo o trčanju, već i o druženju i važnoj društvenoj misiji: razvijamo volontiranje, gradimo prijateljsku zajednicu i pomažemo u pronalaženju istomišljenika.</li>
             <li>Jednostavna i brza registracija novih učesnika pomoću Telegram-bota — svi podaci su uvek pri ruci.</li>
             <li>Koristimo moderne tehnologije: raznovrsne statistike i rangiranja, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku.</li>
