@@ -8,6 +8,7 @@ ActiveAdmin.register Athlete do
   config.per_page = [20, 50, 100]
 
   scope :all
+  scope(:registered) { |s| s.where.not(user_id: nil) }
   scope(:duplicates) { |s| s.where(id: Athletes::DuplicatesService.call) }
 
   filter :name

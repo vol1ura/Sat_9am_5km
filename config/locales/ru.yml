@@ -126,6 +126,7 @@ ru:
       newsletter:
         body: текст
         picture_link: ссылка на картинку
+        sent_count: отправлено
         created_at: создана
         updated_at: обновлена
       result:
@@ -912,7 +913,8 @@ ru:
       view_duels: Посмотреть дуэли
       personal_bests_section: личные рекорды на других дистанциях
       distance: Дистанция
-      personal_best: ЛР
+      personal_best: Личный рекорд (ЛР)
+      pb: ЛР
       predicted_time: Прогноз
       personal_best_10k: 10 км
       personal_best_half_marathon: Полумарафон

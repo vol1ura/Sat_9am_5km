@@ -128,6 +128,7 @@ sr:
       newsletter:
         body: text
         picture_link: link do slike
+        sent_count: poslato
         created_at: stvorena
         updated_at: ažurirano
       result:
@@ -887,7 +888,8 @@ sr:
       total_volunteering: ukupno volontiranja
       total_trophies: ukupno trofeja
       total_events: učestvovano na događaja
-      personal_best: lični rekord S95 (PB)
+      personal_best: lični rekord S95 (LR)
+      pb: LR
       best_position: najbolje mesto
       no_results: Bez rezultata do sada.
       no_volunteering: Bez volontiranja do sada.

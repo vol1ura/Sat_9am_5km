@@ -11,7 +11,9 @@ RSpec.describe Telegram::Notification::Newsletter, type: :service do
 
   shared_examples 'successfully sends newsletter' do
     specify do
-      described_class.call(newsletter, user)
+      described_class.call newsletter, user
+      # expect {
+      # }.to change(newsletter, :sent_count).by(1)
       expect(request).to have_been_requested
     end
   end
@@ -32,7 +34,9 @@ RSpec.describe Telegram::Notification::Newsletter, type: :service do
     end
 
     it 'does not send newsletter' do
-      described_class.call(newsletter, user)
+      described_class.call newsletter, user
+      # expect {
+      # }.not_to change(newsletter, :sent_count)
       expect(request).to have_been_requested.times(3)
       expect(Rollbar).to have_received(:error).once
     end

@@ -120,6 +120,7 @@ en:
       newsletter:
         body: text
         picture_link: picture link
+        sent_count: sent
         created_at: created
         updated_at: updated
       result:
@@ -837,6 +838,7 @@ en:
       total_trophies: total badges
       total_events: visited events
       personal_best: S95 personal best (PB)
+      pb: PB
       best_position: best position
       no_results: No results yet.
       no_volunteering: No volunteering yet.
