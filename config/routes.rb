@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   resources :badges, only: %i[index show]
   resources :clubs, param: :slug, only: %i[index show] do
     get :search, on: :collection
-    get :last_week, on: :member
+    get :last_week, on: :member, path: 'last-week'
   end
   resources :ratings, only: :index do
     collection do

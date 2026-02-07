@@ -25,7 +25,7 @@ RSpec.describe '/clubs' do
       end
     end
 
-    describe 'GET /:slug/last_week' do
+    describe 'GET /:slug/last-week' do
       it 'renders a successful response' do
         get last_week_club_url(club.slug)
         expect(response).to be_successful
