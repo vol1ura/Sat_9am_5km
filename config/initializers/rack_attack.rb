@@ -1,4 +1,8 @@
 class Rack::Attack
+  WHITELIST_IPS = ENV['RACK_ATTACK_WHITELIST_IPS'].to_s.split(',').freeze
+
+  safelist('ip-whitelist') { |req| req.ip.in?(WHITELIST_IPS) }
+
   # Throttle requests by IP
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
@@ -44,13 +48,11 @@ class Rack::Attack
   end
 end
 
-ActiveSupport::Notifications.subscribe(/rack_attack/) do |_name, _start, _finish, _request_id, payload|
+ActiveSupport::Notifications.subscribe(/(?<!safelist)\.rack_attack\z/) do |_name, _start, _finish, _request_id, payload|
   req = payload[:request]
 
   Rollbar.warning(
     'Rack::Attack triggered',
-    ip: req.ip,
-    path: req.path,
     type: req.env['rack.attack.match_type'],
     matched: req.env['rack.attack.matched'],
     user_agent: req.user_agent
