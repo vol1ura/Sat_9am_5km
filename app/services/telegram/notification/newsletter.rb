@@ -3,9 +3,10 @@
 module Telegram
   module Notification
     class Newsletter < ApplicationService
-      def initialize(newsletter, user)
+      def initialize(newsletter, user, increment: true)
         @newsletter = newsletter
         @user = user
+        @increment = increment
       end
 
       def call
@@ -19,6 +20,8 @@ module Telegram
           disable_web_page_preview: true,
           reply_markup: Bot::MAIN_KEYBOARD,
         )
+
+        @newsletter.with_lock { @newsletter.update!(sent_count: @newsletter.sent_count.next) } if @increment
       rescue StandardError => e
         Rollbar.error e, user_id: @user.id, newsletter_id: @newsletter.id
       end

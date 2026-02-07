@@ -12,6 +12,7 @@ ActiveAdmin.register Newsletter do
     id_column
     column(:body) { |nl| simple_format nl.body }
     column(:picture_link) { |nl| nl.picture_link.present? }
+    column :sent_count
     actions
   end
 
@@ -19,13 +20,14 @@ ActiveAdmin.register Newsletter do
     attributes_table do
       row :picture_link
       row(:body) { |nl| simple_format nl.body }
+      row :sent_count
       row :updated_at
       row :created_at
     end
   end
 
   member_action :notify, method: :post do
-    Telegram::Notification::Newsletter.call(resource, current_user)
+    Telegram::Notification::Newsletter.call resource, current_user, increment: false
     redirect_to admin_newsletter_path(resource), notice: I18n.t('active_admin.newsletters.notified')
   end
 
