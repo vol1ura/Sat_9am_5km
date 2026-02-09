@@ -324,6 +324,7 @@ sr:
       published: Objavljeno
       unpublished: Neobjavljeno
       duplicates: Duplikati?
+      registered: Registrovan
       active: Aktivno
       inactive: Neaktivno
 

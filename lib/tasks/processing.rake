@@ -48,4 +48,13 @@ namespace :processing do
       ],
     )
   end
+
+  desc 'Block by IP address'
+  task :block_by_ip_address, [:ip_address] => :environment do |_t, args|
+    cache_prefix = Rack::Attack.cache.prefix
+    cache_suffix = "scraper:#{args[:ip_address]}"
+    Rack::Attack.cache.store.write("#{cache_prefix}:allow2ban:ban:#{cache_suffix}", true, expires_in: 1.week)
+
+    puts "IP address #{args[:ip_address]} blocked"
+  end
 end
