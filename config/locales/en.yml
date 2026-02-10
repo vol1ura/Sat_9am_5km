@@ -142,25 +142,27 @@ en:
           marshal: Marshal
           timer: Timer
           photograph: Photographer
-          tokens: 'Position Tokens Distribution'
+          tokens: Position Tokens Distribution
           scanner: Scanner
-          instructor: 'Newcomers Briefing'
-          marking_maker: 'Course Marking'
+          instructor: Newcomers Briefing
+          marking_maker: Course Marking
           event_closer: Tail Walker
-          marking_picker: 'Course Marking Collection'
-          cards_sorter: 'Finish Tokens Sorting'
-          bike_leader: 'Bike Leader'
+          marking_picker: Course Marking Collection
+          cards_sorter: Finish Tokens Sorting
+          bike_leader: Bike Leader
           pacemaker: Pacemaker
-          results_handler: 'Results Processing'
-          equipment_supplier: 'Equipment Delivery'
-          public_relations: 'Public Relations'
-          warm_up: 'Warm-up Leader'
-          other: 'Other'
-          attendant: 'Attendant'
-          finish_maker: 'Finish Organization'
-          volunteer_coordinator: 'Volunteer Coordinator'
-          food_maker: 'Food Organization'
+          results_handler: Results Processing
+          equipment_supplier: Equipment Delivery
+          public_relations: Public Relations
+          warm_up: Warm-up Leader
+          other: Other
+          attendant: Attendant
+          finish_maker: Finish Organization
+          volunteer_coordinator: Volunteer Coordinator
+          food_maker: Food Organization
           videographer: Videographer
+          designer: Designer
+          event_preparation: Event Manager
       volunteering_position:
         rank: rank
         number: number
@@ -728,7 +730,7 @@ en:
           description: Create a profile in our Telegram bot @sat9am5kmbot
         choose_run:
           title: Choose a Run
-          description: Over 20 locations in 3 countries
+          description: Over 30 locations in 3 countries
         come_saturday:
           title: Come on Saturday
           description: 'Start at 09:00, you can walk or run the distance'

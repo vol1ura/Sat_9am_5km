@@ -150,25 +150,27 @@ sr:
           marshal: Maršal
           timer: Tajmer
           photograph: Fotograf
-          tokens: 'Dodela kartica pozicija'
+          tokens: Dodela kartica pozicija
           scanner: Skener
-          instructor: 'Instruktor za početnike'
-          marking_maker: 'Markacija staze'
+          instructor: Instruktor za početnike
+          marking_maker: Markacija staze
           event_closer: Pratilac trkača
-          marking_picker: 'Sakupljač markacija'
-          cards_sorter: 'Sortiranje kartica'
-          bike_leader: 'Vodeći biciklista'
+          marking_picker: Sakupljač markacija
+          cards_sorter: Sortiranje kartica
+          bike_leader: Vodeći biciklista
           pacemaker: Pejsmejker
-          results_handler: 'Obrada rezultata'
-          equipment_supplier: 'Dostava opreme'
-          public_relations: 'Odnosi s javnošću'
-          warm_up: 'Zagrevanje'
-          other: 'Ostalo'
-          attendant: 'Pratilac'
-          finish_maker: 'Organizacija cilja'
-          volunteer_coordinator: 'Koordinator volontera'
-          food_maker: 'Organizacija hrane'
+          results_handler: Obrada rezultata
+          equipment_supplier: Dostava opreme
+          public_relations: Odnosi s javnošću
+          warm_up: Zagrevanje
+          other: Ostalo
+          attendant: Pratilac
+          finish_maker: Organizacija cilja
+          volunteer_coordinator: Koordinator volontera
+          food_maker: Organizacija hrane
           videographer: Videograf
+          designer: Dizajner
+          event_preparation: Organizator događaja
       volunteering_position:
         rank: rang
         number: broj
@@ -669,16 +671,16 @@ sr:
       how_it_works:
         title: "Kako to radi?"
         registration:
-          title: "Registracija"
+          title: Registracija
           description: "Napravi profil u našem Telegram botu @sat9am5kmbot"
         choose_run:
-          title: "Izaberi trku"
-          description: "Više od 20 lokacija u 3 zemlje"
+          title: Izaberi trku
+          description: Više od 30 lokacija u 3 zemlje
         come_saturday:
-          title: "Dođi u subotu"
+          title: Dođi u subotu
           description: "Start u 09:00, distancu možete preći ili proći"
         track_progress:
-          title: "Prati napredak"
+          title: Prati napredak
           description: "Rezultati, nagrade, rang liste - na našem sajtu"
       why_s95:
         title: "Zašto S95?"

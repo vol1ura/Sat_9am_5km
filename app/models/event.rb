@@ -36,7 +36,7 @@ class Event < ApplicationRecord
             dimension: { width: { min: 2800 }, height: { min: 1060 } },
             size: { between: (150.kilobytes)..(5.megabytes) }
 
-  after_update_commit :reset_going_athletes, if: -> { !active && saved_change_to_active? }
+  after_update_commit :renew_going_athletes, if: :saved_change_to_active?
 
   validates :name, :code_name, :town, :place, :place_description, :description, presence: true
   validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ }
@@ -92,7 +92,5 @@ class Event < ApplicationRecord
 
   private
 
-  def reset_going_athletes
-    RenewGoingToEventJob.perform_later(id)
-  end
+  def renew_going_athletes = RenewGoingToEventJob.perform_later id
 end

@@ -140,7 +140,7 @@ ru:
       volunteer:
         activity: забег
         athlete: участник
-        name: 'имя волонтёра'
+        name: имя волонтёра
         comment: комментарий
         role: роль
         roles: &volunteer_roles
@@ -148,25 +148,27 @@ ru:
           marshal: Маршал
           timer: Секундомер
           photograph: Фотограф
-          tokens: 'Раздача карточек позиций'
+          tokens: Раздача карточек позиций
           scanner: Сканер
-          instructor: 'Инструктаж новичков'
-          marking_maker: 'Разметка трассы'
+          instructor: Инструктаж новичков
+          marking_maker: Разметка трассы
           event_closer: Замыкающий
-          marking_picker: 'Сбор разметки'
-          cards_sorter: 'Сортировка карточек'
-          bike_leader: 'Ведущий велосипед'
+          marking_picker: Сбор разметки
+          cards_sorter: Сортировка карточек
+          bike_leader: Ведущий велосипед
           pacemaker: Пейсмейкер
-          results_handler: 'Обработка результатов'
-          equipment_supplier: 'Доставка оборудования'
-          public_relations: 'Связи с общественностью'
-          warm_up: 'Проведение разминки'
-          other: 'Разное'
-          attendant: 'Сопровождающий'
-          finish_maker: 'Организация финиша'
-          volunteer_coordinator: 'Координатор волонтёров'
-          food_maker: 'Организация питания'
+          results_handler: Обработка результатов
+          equipment_supplier: Доставка оборудования
+          public_relations: Связи с общественностью
+          warm_up: Проведение разминки
+          other: Разное
+          attendant: Сопровождающий
+          finish_maker: Организация финиша
+          volunteer_coordinator: Координатор волонтёров
+          food_maker: Организация питания
           videographer: Видеограф
+          designer: Дизайнер
+          event_preparation: Подготовка забега
       volunteering_position:
         rank: ранг
         number: количество
@@ -782,7 +784,7 @@ ru:
           description: Создай профиль в нашем Telegram-боте @sat9am5kmbot
         choose_run:
           title: Выбери забег
-          description: Более 20 точек в 3 странах
+          description: Более 30 точек в 3 странах
         come_saturday:
           title: Приходи в субботу
           description: 'Старт в 09:00, дистанцию можно пройти или пробежать'
