@@ -2,17 +2,9 @@
   function parseTimeString(timeStr) {
     const timeParts = timeStr.split(':')
     let seconds = 0
-
-    if (timeParts.length === 2) {
-        // Format 'MM:SS'
-        seconds += parseInt(timeParts[0]) * 60 // Minutes
-        seconds += parseInt(timeParts[1]) // Seconds
-    } else if (timeParts.length === 3) {
-        // Format 'HH:MM:SS'
-        seconds += parseInt(timeParts[0]) * 3600 // Hours
-        seconds += parseInt(timeParts[1]) * 60 // Minutes
-        seconds += parseInt(timeParts[2]) // Seconds
-    }
+    seconds += parseInt(timeParts.at(-1)) // Seconds
+    seconds += parseInt(timeParts.at(-2)) * 60 // Minutes
+    seconds += parseInt(timeParts.at(-3) || '0') * 3600 // Hours
 
     return seconds
   }

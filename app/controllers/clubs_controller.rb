@@ -35,7 +35,7 @@ class ClubsController < ApplicationController
   end
 
   def show
-    @club = Club.find_by!(slug: params[:slug])
+    @club = Club.find_by!(slug: params[:slug].downcase)
     @count_volunteering = Athlete.left_joins(:volunteering).where(club: @club).group('athletes.id').count('volunteers.id')
     @total_results_count = Result.published.joins(:athlete).where(athlete: { club: @club }).size
     @total_volunteering_count = Volunteer.published.joins(:athlete).where(athlete: { club: @club }).size
@@ -49,7 +49,7 @@ class ClubsController < ApplicationController
   end
 
   def last_week
-    @club = Club.find_by!(slug: params[:slug])
+    @club = Club.find_by!(slug: params[:slug].downcase)
     today = Date.current
     date_interval = (today.cwday < 6 ? today.prev_week : today).all_week
     activities_dataset =

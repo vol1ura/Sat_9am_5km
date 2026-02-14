@@ -94,7 +94,7 @@ tr.even {
     }
   }
   td.col-position,
-  td.col-total_time {
+  td.col-time_string {
     &.error {
       background-color: $table-error-color;
     }
