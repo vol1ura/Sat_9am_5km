@@ -777,8 +777,17 @@ ru:
       registration: Регистрация
       results: Результаты
       find_event: Найти ближайший забег
+      marquee_items:
+        - Парковые забеги
+        - Результаты
+        - Мотивация
+        - Сообщество
+        - Статистика
+        - Волонтёрство
+        - Рейтинги
+        - Друзья
       how_it_works:
-        title: Как это работает?
+        title: Как всё устроено?
         registration:
           title: Регистрация
           description: Создай профиль в нашем Telegram-боте @sat9am5kmbot
@@ -829,7 +838,7 @@ ru:
             description: отслеживание вашей волонтёрской активности
           live_results:
             title: Онлайн-трансляция
-            description: результаты забега на сайт в реальном времени
+            description: результатов забега на сайт в реальном времени
         download_rustore: Скачать в RuStore
         download_app_gallery: Скачать в App Gallery
         download_apk: Скачать APK файл

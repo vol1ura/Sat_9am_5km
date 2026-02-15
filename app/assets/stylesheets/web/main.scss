@@ -128,6 +128,57 @@
   }
 }
 
+.home-marquee {
+  background-color: var(--bs-primary);
+  color: $light;
+  overflow: hidden;
+  position: relative;
+  width: calc(100% / 1.03);
+  margin-inline: auto;
+  transform-origin: center;
+  transform: scale(1.03);
+  box-shadow: 0 0.75rem 1.5rem rgb(0 0 0 / 20%);
+  z-index: 10;
+
+  .home-marquee__inner {
+    width: max-content;
+    white-space: nowrap;
+    animation: home-marquee-scroll 32s linear infinite;
+  }
+
+  .home-marquee__track {
+    gap: 1.75rem;
+    padding-inline: 1.5rem;
+    font-size: clamp(1rem, 1.3vw + 0.7rem, 1.8rem);
+    letter-spacing: 0.08em;
+  }
+
+  .home-marquee__item {
+    line-height: 1;
+  }
+
+  .home-marquee__dot {
+    font-size: 1.5em;
+    line-height: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes home-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-marquee .home-marquee__inner {
+    animation: none;
+  }
+}
+
 .events-section {
   background-color: var(--bs-tertiary-bg);
   border-top: 1px solid var(--bs-border-color);
@@ -282,10 +333,10 @@
 }
 
 .volunteer-app-section {
-  background: linear-gradient(135deg, #e9f9f5 0%, #d0f0e7 100%);
+  background-color: var(--bs-info-bg-subtle);
 
   [data-bs-theme="dark"] & {
-    background: linear-gradient(135deg, darken(#2a2951, 6%) 0%, darken(#2a2951, 12%));
+    background-color: var(--bs-body-bg);
   }
 
   h2 {

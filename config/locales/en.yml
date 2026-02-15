@@ -723,6 +723,15 @@ en:
       registration: Registration
       results: Results
       find_event: Find Nearest Run
+      marquee_items:
+        - Park Runs
+        - Results
+        - Motivation
+        - Statistics
+        - Volunteering
+        - Ratings
+        - Friends
+        - Community
       how_it_works:
         title: How It Works?
         registration:

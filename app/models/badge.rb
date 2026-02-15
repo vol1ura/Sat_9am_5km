@@ -38,9 +38,15 @@ class Badge < ApplicationRecord
 
   def self.participating_thresholds
     @participating_thresholds ||=
-      %i[result volunteer].index_with do |type|
-        dataset_of(kind: :participating, type: type).pluck(:info).pluck('threshold')
-      end
+      participating_kind
+        .where("info->>'type' IN (?)", BADGE_TYPES)
+        .group(Arel.sql("info->>'type'"))
+        .pluck(
+          Arel.sql("info->>'type'"),
+          Arel.sql("array_agg((info->'threshold')::int ORDER BY (info->'threshold')::int)"),
+        )
+        .to_h
+        .symbolize_keys
   end
 
   def self.ransackable_attributes(_auth_object = nil)

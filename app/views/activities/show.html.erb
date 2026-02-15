@@ -102,8 +102,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th><%= t '.volunteer' %></th>
-      <th><%= t '.role' %></th>
+      <th class="fs-small-sm"><%= t '.volunteer' %></th>
+      <th class="fs-small-sm"><%= t '.role' %></th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -112,13 +112,13 @@
       <tr>
         <td>
           <div>
-            <%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link' %>
+            <%= link_to volunteer.name, volunteer.athlete, class: 'athlete-link fs-small-sm' %>
           </div>
           <div class="athlete-details fw-lighter">
             <%= t '.total_volunteering', count: volunteering_count %>
           </div>
         </td>
-        <td class="align-middle">
+        <td class="align-middle fs-small-sm">
           <%= human_volunteer_role volunteer.role %>
           <% case volunteering_count %>
           <% when 1 %>

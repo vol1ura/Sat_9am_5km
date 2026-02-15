@@ -668,6 +668,15 @@ sr:
       registration: "Registracija"
       results: "Rezultati"
       find_event: "Pronađi najbližu trku"
+      marquee_items:
+        - Park trke
+        - Rezultati
+        - Motivacija
+        - Zajednica
+        - Statistika
+        - Volontiranje
+        - Rangiranje
+        - Prijatelji
       how_it_works:
         title: "Kako to radi?"
         registration:

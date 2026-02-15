@@ -164,6 +164,21 @@
   </div>
 </section>
 
+<%# Marquee Section %>
+<% marquee_items = t('.marquee_items') %>
+<section class="home-marquee py-3 border-top border-bottom">
+  <div class="home-marquee__inner d-flex align-items-center text-uppercase fw-bold">
+    <% 2.times do %>
+      <div class="home-marquee__track d-flex align-items-center flex-shrink-0">
+        <% marquee_items.each do |item| %>
+          <span class="home-marquee__item"><%= item %></span>
+          <span class="home-marquee__dot text-secondary" aria-hidden="true">•</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
 <%# Events Section %>
 <% if @jubilee_events.present? || @funrun_badges.present? %>
   <section class="events-section py-5">
