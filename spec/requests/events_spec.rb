@@ -14,8 +14,8 @@ RSpec.describe '/events' do
 
   describe 'GET /events/:code_name' do
     before do
-      create(:badge, kind: :participating, info: { type: 'result', threshold: 100 })
-      create(:badge, kind: :participating, info: { type: 'volunteer', threshold: 100 })
+      create(:participating_badge, type: 'result')
+      create(:participating_badge, type: 'volunteer')
     end
 
     it 'renders a successful response' do

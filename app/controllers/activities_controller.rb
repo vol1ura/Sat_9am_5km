@@ -27,31 +27,32 @@ class ActivitiesController < ApplicationController
   end
 
   def dashboard
-    @total_results = Result.joins(:activity).where(activity: weekly_activities)
+    @total_results = Result.where(activity_id: weekly_activities_ids)
     @personal_bests_count = @total_results.where(personal_best: true).count
-    @first_runs_count = @total_results.where(first_run: true).count
+    @first_runs_count = count_newbies(model: Result, current_ds: @total_results)
 
-    @total_volunteers = Volunteer.joins(:activity).where(activity: weekly_activities)
-    @first_time_volunteers_count = count_first_time_volunteers(@total_volunteers)
+    @total_volunteers = Volunteer.where(activity_id: weekly_activities_ids)
+    @first_time_volunteers_count = count_newbies(model: Volunteer, current_ds: @total_volunteers)
 
     @gender_stats = @total_results.left_joins(:athlete).group(:gender).count
   end
 
   private
 
-  def weekly_activities
-    @weekly_activities ||=
+  def weekly_activities_ids
+    @weekly_activities_ids ||=
       begin
         today = Date.current
         last_saturday = today.saturday? ? today : today.prev_occurring(:saturday)
 
-        Activity.published.joins(:event).where(event: @country_events, date: last_saturday..)
+        Activity.published.joins(:event).where(event: @country_events, date: last_saturday..).select(:id)
       end
   end
 
-  def count_first_time_volunteers(current_volunteers)
-    Volunteer
-      .where(athlete_id: current_volunteers.select(:athlete_id))
+  def count_newbies(model:, current_ds:)
+    model
+      .published
+      .where(athlete_id: current_ds.select(:athlete_id))
       .group(:athlete_id)
       .having('count(athlete_id) = 1')
       .count
