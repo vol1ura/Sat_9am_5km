@@ -8,6 +8,7 @@ class Result < ApplicationRecord
 
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true }
   validates :athlete_id, uniqueness: { scope: :activity_id }, allow_nil: true
+  validate :total_time_format
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
 
@@ -34,6 +35,7 @@ class Result < ApplicationRecord
   def time_string = self.class.time_string total_time
 
   def total_time=(time)
+    @is_total_time_invalid = false
     value =
       if time.blank?
         nil
@@ -44,6 +46,9 @@ class Result < ApplicationRecord
       end
 
     super(value)
+  rescue ArgumentError
+    @is_total_time_invalid = true
+    super(0)
   end
 
   def correct?
@@ -83,5 +88,11 @@ class Result < ApplicationRecord
       activity.results.where(position: position..).update_all 'position = position + 1'
       activity.results.create! position:
     end
+  end
+
+  private
+
+  def total_time_format
+    errors.add(:total_time, :invalid) if @is_total_time_invalid
   end
 end

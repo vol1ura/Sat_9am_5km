@@ -34,9 +34,16 @@ active_admin_form_for [:admin, activity, resource] do |f|
       f.inputs 'Меняя ВРЕМЯ или МЕСТО, учитывайте, что они должны быть согласованы с другими результатами забега.' do
         f.input(
           :total_time,
+          as: :string,
+          label: 'время',
           required: true,
-          input_html: { type: 'time', step: 1, value: Result.time_string(f.object.total_time, full: true) },
-          hint: 'Часы:Минуты:Секунды',
+          input_html: {
+            value: Result.time_string(f.object.total_time, full: true),
+            pattern: '\\d{1,2}:[0-5][0-9]:[0-5][0-9]',
+            placeholder: '00:00:00',
+            maxlength: 8,
+          },
+          hint: 'Формат: ЧЧ:ММ:СС',
         )
         f.input :position, required: true, input_html: { inputmode: 'numeric' }
       end
