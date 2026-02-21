@@ -66,15 +66,16 @@ module Athletes
     end
 
     def group_and_sort_duels(duels)
-      duels.group_by { |duel| duel[:friend_result].athlete }
+      duels
+        .group_by { |duel| duel[:friend_result].athlete }
         .transform_values do |friend_duels|
-        sorted_duels = friend_duels.sort_by { |duel| -duel[:date].to_time.to_i }
+          sorted_duels = friend_duels.sort_by { |duel| -duel[:date].to_time.to_i }
 
-        {
-          duels: sorted_duels.first(limit),
-          stats: calculate_friend_stats(sorted_duels),
-        }
-      end
+          {
+            duels: sorted_duels.first(limit),
+            stats: calculate_friend_stats(sorted_duels),
+          }
+        end
     end
 
     def calculate_friend_stats(friend_duels)

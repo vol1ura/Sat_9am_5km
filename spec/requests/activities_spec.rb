@@ -13,10 +13,10 @@ RSpec.describe '/activities' do
     let(:activity) { create(:activity) }
     let!(:result) { create(:result, activity:) }
 
-    before { create(:badge, kind: :participating, info: { type: 'result', threshold: 100 }) }
-
     it 'renders a successful response' do
+      create(:participating_badge)
       get activity_url(activity)
+
       expect(response).to be_successful
     end
 
