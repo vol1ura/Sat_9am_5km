@@ -188,6 +188,7 @@ en:
           strava: Strava
           map_link: Map and directions
           parking: Parking
+          max_channel: Max Channel
       badge:
         name: name
         conditions: conditions

@@ -14,6 +14,9 @@ RSpec.describe '/events' do
 
   describe 'GET /events/:code_name' do
     before do
+      if Badge.instance_variable_defined?(:@participating_thresholds)
+        Badge.remove_instance_variable(:@participating_thresholds)
+      end
       create(:participating_badge, type: 'result')
       create(:participating_badge, type: 'volunteer')
     end

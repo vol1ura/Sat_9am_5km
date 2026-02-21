@@ -196,6 +196,7 @@ sr:
           strava: Strava
           map_link: Link za mapu i pravac
           parking: Parking
+          max_channel: Kanal Max
       badge:
         name: naziv
         conditions: uslovi za dobijanje

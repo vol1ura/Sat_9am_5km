@@ -8,6 +8,6 @@ class Contact < ApplicationRecord
 
   enum :contact_type, {
     map_link: 0, parking: 1, phone: 2, tg_channel: 3, tg_chat: 4,
-    vk: 5, zen: 6, instagram: 7, facebook: 8, strava: 9, email: 10
+    vk: 5, zen: 6, instagram: 7, facebook: 8, strava: 9, email: 10, max_channel: 11
   }, instance_methods: false
 end

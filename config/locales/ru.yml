@@ -194,6 +194,7 @@ ru:
           strava: Страва
           map_link: Карта и схема проезда
           parking: Парковка
+          max_channel: Канал Макс
       badge:
         name: название
         conditions: условия получения
