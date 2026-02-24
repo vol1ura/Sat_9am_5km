@@ -29,7 +29,7 @@ class User < ApplicationRecord
   validates :emergency_contact_name, presence: true, if: -> { emergency_contact_phone }
   validates :image,
             content_type: %i[png jpeg webp],
-            dimension: { width: { max: 8000 }, height: { max: 8000 } },
+            dimension: { width: { max: 2000 }, height: { max: 2000 } },
             size: { less_than: 10.megabytes }
   validate :promotions_must_be_available, if: :will_save_change_to_promotions?
 

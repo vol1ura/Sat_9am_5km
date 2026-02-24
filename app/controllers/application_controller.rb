@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   def top_level_domain
     @top_level_domain ||= begin
       tld = request.host.split('.').last
-      %w[ru rs by].include?(tld) ? tld.to_sym : :ru
+      ALLOWED_TLDS.include?(tld) ? tld.to_sym : DEFAULT_TLD
     end
   end
 
