@@ -33,7 +33,10 @@ class ApplicationController < ActionController::Base
   end
 
   def top_level_domain
-    @top_level_domain ||= request.host.split('.').last.to_sym
+    @top_level_domain ||= begin
+      tld = request.host.split('.').last
+      %w[ru rs by].include?(tld) ? tld.to_sym : :ru
+    end
   end
 
   def default_url_options
