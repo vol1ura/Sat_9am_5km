@@ -29,11 +29,11 @@ class Event < ApplicationRecord
 
   validates :summer_image,
             content_type: %i[png jpeg webp],
-            dimension: { width: { min: 2800, max: 8000 }, height: { min: 1060, max: 8000 } },
+            dimension: { width: { min: 2800 }, height: { min: 1060 } },
             size: { between: (150.kilobytes)..(5.megabytes) }
   validates :winter_image,
             content_type: %i[png jpeg webp],
-            dimension: { width: { min: 2800, max: 8000 }, height: { min: 1060, max: 8000 } },
+            dimension: { width: { min: 2800 }, height: { min: 1060 } },
             size: { between: (150.kilobytes)..(5.megabytes) }
 
   after_update_commit :renew_going_athletes, if: :saved_change_to_active?
