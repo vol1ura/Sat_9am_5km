@@ -9,7 +9,7 @@ module API
       # Data format json:
       # { "token": string, "results": [{ "position": number, "total_time": "HH:MM:SS" }, ...] }
       def stopwatch
-        TimerProcessingJob.perform_later @activity.id, params.expect(results: %i[position total_time])
+        TimerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position total_time]])
         notify_volunteers('timer')
         head :ok
       end
@@ -17,7 +17,7 @@ module API
       # Data format json:
       # { "token": string, "results": [{ "position": "P1234", "code": "A123456" }, ...] }
       def scanner
-        ScannerProcessingJob.perform_later @activity.id, params.expect(results: %i[position code])
+        ScannerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position code]])
         notify_volunteers('scanner')
         head :ok
       end
@@ -32,7 +32,7 @@ module API
         return head :unprocessable_content unless params.key?(:results)
 
         results = params[:results]
-        permitted_results = results.any? ? results.map { |r| r.expect(:position, :total_time) } : []
+        permitted_results = results.any? ? results.map { |r| r.expect(:position, :total_time).then { |pos, time| { position: pos, total_time: time } } } : []
 
         event = @activity.event
         event.update!(live_results: { results: permitted_results, start_time: params.expect(:activityStartTime) })

@@ -32,6 +32,7 @@ end
 require 'csv'
 require 'vcr'
 require 'webmock/rspec'
+require 'cancan/matchers'
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/cassettes'
