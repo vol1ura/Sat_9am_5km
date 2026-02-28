@@ -45,7 +45,7 @@ class Athlete < ApplicationRecord
     end
   end
 
-  belongs_to :club, optional: true, touch: true
+  belongs_to :club, optional: true
   belongs_to :user, optional: true
   belongs_to :event, optional: true
   belongs_to :going_to_event, class_name: 'Event', optional: true
@@ -88,6 +88,7 @@ class Athlete < ApplicationRecord
 
   before_save :remove_name_extra_spaces, if: :will_save_change_to_name?
   before_destroy(prepend: true) { results.update_all personal_best: false, first_run: false }
+  after_save { Club.where(id: saved_change_to_club_id.compact).touch_all if saved_change_to_club_id? }
   after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
 
   store_accessor :personal_bests, *PERSONAL_BEST_DISTANCES, prefix: :personal_best

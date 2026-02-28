@@ -81,6 +81,7 @@ Lint/MissingSuper:
 Rails/SkipsModelValidations:
   AllowedMethods:
     - update_all
+    - touch_all
   Exclude:
     - db/**/*
 Rails/CreateTableWithTimestamps:
