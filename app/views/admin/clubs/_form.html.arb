@@ -39,13 +39,5 @@ active_admin_form_for [:admin, resource] do |f|
     )
   end
 
-  f.inputs 'Уведомить пользователя о создании' do
-    number_field_tag(
-      :requester_user_id,
-      params[:requester_user_id],
-      placeholder: 'ID пользователя', style: 'width: 10rem; margin-left: 1rem;', inputmode: 'numeric',
-    )
-  end
-
   f.actions
 end

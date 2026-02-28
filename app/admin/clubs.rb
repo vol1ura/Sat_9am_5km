@@ -23,10 +23,4 @@ ActiveAdmin.register Club do
   end
 
   form partial: 'form'
-
-  after_create do |club|
-    next if params[:requester_user_id].blank?
-
-    Telegram::Notification::ClubRegisteredJob.perform_later params[:requester_user_id].to_i, club.id
-  end
 end

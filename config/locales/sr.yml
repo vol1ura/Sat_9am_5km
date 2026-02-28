@@ -523,7 +523,6 @@ sr:
   notification_mailer:
     parkzhrun_error: 'Greška! Nije moguće kreirati trku ParkŽrun'
     feedback: 'Novi odgovor na sajt S95'
-    new_club: 'Zahtev za kreiranje kluba'
   button:
     show_more: Prikaži više
     show_less: Prikaži manje
@@ -1028,23 +1027,9 @@ sr:
       soon: Uskoro!
       nobody_has: Još niko nema tu nagradu.
   clubs:
-    new:
-      main_page: Glavna
-      clubs: Klubovi
-      title: Zahtev za kreiranje kluba
-      description: Nakon razmatranja zahteva, kreiraćemo klub i obavestiti vas. Možemo odbiti zahtev, zatražiti ispravku ili sami malo izmeniti opis.
-      club_name: Naziv kluba
-      club_description: Opis kluba
-      description_hint: Recite nam o klubu, njegovim ciljevima i posebnostima u detaljno. Ne koristite linkove na druge resurse, telefone i druge kontakte.
-      club_logo: Logo kluba (opcionalno)
-      logo_hint: Prikačite sliku
-      submit: Pošalji
-    create:
-      sent: Zahtev za kreiranje kluba je poslat! Razmotricemo ga u najkraćem roku.
-      validation_error: Naziv i opis kluba su obavezni.
     index:
       description: Tabela klubova sa statistikom o ukupnom broju učesnika, volontera i trčanja
-      how_to_add_new_club_html: 'Da li vaš klub nije na listi? <a href="%{link}">Podnesite zahtev</a> za kreiranje novog kluba. Takođe možete izmeniti opis postojećeg kluba.'
+      how_to_add_new_club_html: 'Da li vaš klub nije na listi? Pišite nam na <a href="mailto:%{mail}?subject=Add a new club (Serbia)" target="_blank" title="Pošaljite nam email">email</a> i dodaćemo ga. U poruci navedite naziv kluba, mali opis i prikačite logo kluba, ako ima.'
       name: Ime
       athletes: Atletičari
       results: Rezultati
@@ -1270,9 +1255,3 @@ sr:
     incorrect_running_volunteers: |
       *Pažnja!* Događaj ID=%{activity_id} (%{activity_date}) ima volontera *%{athlete_name}* (ID=%{athlete_code}) na trkačkoj poziciji,
       međutim on nema rezultat u protokolu. Molimo vas da ispravite ovo.
-    club_registered: |
-      Zdravo, %{first_name}!
-
-      Klub [%{club_name}](%{club_url}) je registrovan na platformi S95. Vi i drugi učesnici sada možete da mu se pridružite, koristeći bot ili podešavanja profila na sajtu.
-
-      Imajte na umu: klub može biti obrisan, ako u roku od šest meseci nema učesnika.

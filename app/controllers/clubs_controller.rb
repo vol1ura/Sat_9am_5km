@@ -2,7 +2,6 @@
 
 class ClubsController < ApplicationController
   before_action :set_club, only: %i[show last_week]
-  before_action :authenticate_user!, only: %i[new create]
 
   def index
     @q = Club
@@ -48,32 +47,6 @@ class ClubsController < ApplicationController
         .select('athletes.*', 'MIN(results.total_time) AS personal_best', 'COUNT(results.id) AS results_count')
         .group('athletes.id')
         .order(:name)
-  end
-
-  def new; end
-
-  def create
-    name = params[:name].to_s.strip
-    description = params[:description].to_s.strip
-
-    if name.blank? || description.blank?
-      redirect_to new_club_path, alert: t('.validation_error')
-      return
-    end
-
-    mailer_params = { name: name, description: description, user: current_user, country_code: top_level_domain }
-
-    if (logo = params[:logo])
-      mailer_params[:logo] = {
-        filename: logo.original_filename,
-        content_type: logo.content_type,
-        data: Base64.strict_encode64(logo.read),
-      }
-    end
-
-    NotificationMailer.with(**mailer_params).new_club.deliver_later
-
-    redirect_to clubs_path, notice: t('.sent')
   end
 
   def last_week
