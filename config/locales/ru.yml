@@ -1077,11 +1077,17 @@ ru:
       name: Имя
       total_time: Результат
       role: Роль
+  favorite_events:
+    add: Добавить в избранное
+    remove: Удалить из избранного
   events:
     index:
       list: Список
       map: Карта
       our_events: Наши мероприятия
+    favorite_events_section:
+      title: Избранные мероприятия
+      all_events: Все мероприятия
     show:
       title: '%{place} | %{town} | Парковые забеги'
       our_contacts: Наши контакты

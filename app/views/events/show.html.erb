@@ -2,8 +2,9 @@
 <% head_info :description, strip_tags(@event.description).squish %>
 
 <div class="img-event-container">
-  <div class="img-event-shadow position-absolute top-0 start-0 px-3">
+  <div class="img-event-shadow position-absolute top-0 start-0 w-100 px-3 d-flex justify-content-between align-items-start">
     <h1 class="h2 fs-4 text-light"><%= @event.name %></h1>
+    <%= render 'favorite_events/heart', event: @event %>
   </div>
   <%= event_main_image_tag @event, class: 'img-event', alt: t('.place'), title: @event.name %>
 </div>

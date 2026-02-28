@@ -1023,11 +1023,17 @@ en:
       name: Name
       total_time: Result
       role: Role
+  favorite_events:
+    add: Add to favorites
+    remove: Remove from favorites
   events:
     index:
       list: List
       map: Map
       our_events: Our Events
+    favorite_events_section:
+      title: Favorite events
+      all_events: All events
     show:
       title: '%{place} | %{town} | Park Runs'
       our_contacts: Our Contacts

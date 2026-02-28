@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_24_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_28_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -253,6 +253,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_24_120000) do
     t.string "emergency_contact_phone"
     t.string "encrypted_password"
     t.integer "failed_attempts", default: 0, null: false
+    t.bigint "favorite_event_ids", default: [], null: false, array: true
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.datetime "locked_at"

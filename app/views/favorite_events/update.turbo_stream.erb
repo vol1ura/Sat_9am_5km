@@ -1,0 +1,6 @@
+<turbo-stream action="replace" targets=".favorite-heart-event-<%= @event.id %>">
+  <template><%= render partial: 'favorite_events/heart', formats: [:html], locals: { event: @event } %></template>
+</turbo-stream>
+<%= turbo_stream.replace 'favorite_events_section' do %>
+  <%= render 'events/favorite_events_section' %>
+<% end %>

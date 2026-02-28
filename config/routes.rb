@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get :volunteering, on: :member
     get :live, on: :member
     resource :going_to, only: %i[create destroy]
+    resource :favorite_event, only: :update
   end
   resources :activities, only: %i[index show] do
     get :dashboard, on: :collection

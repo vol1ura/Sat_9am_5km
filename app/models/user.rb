@@ -50,6 +50,22 @@ class User < ApplicationRecord
 
   def admin? = super || super_admin?
 
+  def favorite_event?(event)
+    favorite_event_ids.include?(event.id)
+  end
+
+  def toggle_favorite_event(event)
+    if favorite_event?(event)
+      update!(favorite_event_ids: favorite_event_ids - [event.id])
+    else
+      update!(favorite_event_ids: favorite_event_ids + [event.id])
+    end
+  end
+
+  def favorite_events
+    Event.where(id: favorite_event_ids)
+  end
+
   private
 
   def update_athlete_name

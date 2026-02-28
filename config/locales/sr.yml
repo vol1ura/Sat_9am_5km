@@ -1083,11 +1083,17 @@ sr:
       name: Ime
       total_time: Rezultat
       role: Uloga
+  favorite_events:
+    add: Dodaj u omiljene
+    remove: Ukloni iz omiljenih
   events:
     index:
       list: Lista
       map: Karta
       our_events: Naši događaji
+    favorite_events_section:
+      title: Omiljeni događaji
+      all_events: Svi događaji
     show:
       title: '%{place} | %{town} | Park trčanje'
       our_contacts: Naši kontakti

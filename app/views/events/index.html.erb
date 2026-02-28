@@ -10,6 +10,7 @@
   </div>
 
   <div data-map-target="listView">
+    <%= render 'favorite_events_section' %>
     <div class="row row-cols-1 row-cols-md-2 g-3">
       <% @events.each do |event| %>
         <div class="col">
@@ -17,8 +18,9 @@
             <div class="overflow-hidden card-img-top">
               <%= event_main_image_tag event, variant: :thumb, class: 'img-fluid rounded-top img-scaled', alt: event.name, loading: 'lazy' %>
             </div>
-            <%= tag.div class: ['position-absolute', 'top-0', 'bg-gradient', 'bg-opacity-25', 'w-100', 'px-3', 'card-img-top', event.active ? 'bg-dark' : 'bg-danger'] do %>
+            <%= tag.div class: ['position-absolute', 'top-0', 'bg-gradient', 'bg-opacity-25', 'w-100', 'px-3', 'card-img-top', 'd-flex', 'justify-content-between', 'align-items-start', event.active ? 'bg-dark' : 'bg-danger'] do %>
               <section class="fs-4 text-light"><%= event.name %></section>
+              <%= render 'favorite_events/heart', event: %>
             <% end %>
             <div class="card-body">
               <p class="card-text">

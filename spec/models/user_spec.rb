@@ -60,4 +60,34 @@ RSpec.describe User do
       expect(user).not_to be_valid
     end
   end
+
+  describe '#toggle_favorite_event' do
+    let(:user) { create(:user) }
+    let(:event) { create(:event) }
+
+    it 'adds event to favorites' do
+      user.toggle_favorite_event(event)
+      expect(user.favorite_event_ids).to include(event.id)
+    end
+
+    it 'removes event from favorites' do
+      user.update!(favorite_event_ids: [event.id])
+      user.toggle_favorite_event(event)
+      expect(user.favorite_event_ids).not_to include(event.id)
+    end
+  end
+
+  describe '#favorite_events' do
+    let(:user) { create(:user) }
+    let(:event) { create(:event) }
+
+    it 'returns events matching favorite_event_ids' do
+      user.update!(favorite_event_ids: [event.id])
+      expect(user.favorite_events).to include(event)
+    end
+
+    it 'returns empty relation when no favorites' do
+      expect(user.favorite_events).to be_empty
+    end
+  end
 end
