@@ -23,12 +23,18 @@ class EventsController < ApplicationController
 
   def show
     @total_activities = @event.activities.published.size
-    @results_count = Result.published.where(activity: { event: @event }).group(:activity).count
-    @volunteers_count = Volunteer.published.where(activity: { event: @event }).group(:activity).count
-    @uniq_athletes_count = Result.published.where(activity: { event: @event }).select(:athlete_id).distinct.count
-    @uniq_volunteers_count = Volunteer.published.where(activity: { event: @event }).select(:athlete_id).distinct.count
+
+    results_dataset = Result.published.where(activity: { event: @event })
+    @results_count = results_dataset.group(:activity).count
+    @uniq_athletes_count = results_dataset.select(:athlete_id).distinct.count
+
+    volunteers_dataset = Volunteer.published.where(activity: { event: @event })
+    @volunteers_count = volunteers_dataset.group(:activity).count
+    @uniq_volunteers_count = volunteers_dataset.select(:athlete_id).distinct.count
+
     @almost_jubilee_by_results = @event.almost_jubilee_athletes_dataset 'results'
     @almost_jubilee_by_volunteers = @event.almost_jubilee_athletes_dataset 'volunteers'
+
     @first_male_by_activity_id = @event.leader_results_dataset(gender: :male).preload(:athlete).index_by(&:activity_id)
     @first_female_by_activity_id = @event.leader_results_dataset(gender: :female).preload(:athlete).index_by(&:activity_id)
   end

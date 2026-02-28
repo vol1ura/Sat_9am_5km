@@ -472,6 +472,7 @@ en:
   notification_mailer:
     parkzhrun_error: 'Error! Failed to create ParkZhrun run'
     feedback: 'New feedback on S95 website'
+    new_club: 'New club request'
   button:
     show_more: Show all
     show_less: Collapse
@@ -967,9 +968,23 @@ en:
       soon: Soon!
       nobody_has: No one has this badge yet.
   clubs:
+    new:
+      main_page: Main Page
+      clubs: Clubs
+      title: Club Creation Request
+      description: After reviewing the request, we will create the club and notify you. We reserve the right to reject the request, ask you to correct it, or make minor changes to the description ourselves.
+      club_name: Club Name
+      club_description: Club Description
+      description_hint: Tell us about the club, its goals and features in detail. Do not use links to other resources, phone numbers and other contacts.
+      club_logo: Club Logo (optional)
+      logo_hint: Attach a logo image
+      submit: Submit
+    create:
+      sent: Club creation request has been sent! We will review it shortly.
+      validation_error: Club name and description are required.
     index:
       description: Table of clubs with statistics on total number of participants, volunteering, and runs.
-      how_to_add_new_club_html: "Your club isn't in the list? Write to us <a href=\"mailto:%{mail}?subject=Add%20new%20club\" target=\"_blank\" title=\"Send us email\">by email</a> and we'll add it. In the message, specify the club name, add a brief description, and attach the club logo if available."
+      how_to_add_new_club_html: "Your club isn't in the list? <a href=\"%{link}\">Submit a request</a> to create a new club. You can also make changes to the description of an existing club."
       name: Name
       athletes: Participants
       results: Results
@@ -1206,3 +1221,10 @@ en:
     incorrect_running_volunteers: |
       *Attention!* Activity ID=%{activity_id} (%{activity_date}) has running volunteer *%{athlete_name}* (ID=%{athlete_code})
       on the running position, however he has no result in the protocol. Please fix it.
+    club_registered: |
+      Hello, %{first_name}!
+
+      Club [%{club_name}](%{club_url}) was registered on the S95 platform.
+      Now you and other participants can join it, using the bot or profile settings on the site.
+
+      Note: the club may be deleted if there are no participants in it for six months.

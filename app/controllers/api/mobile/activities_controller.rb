@@ -10,7 +10,7 @@ module API
       # { "token": string, "results": [{ "position": number, "total_time": "HH:MM:SS" }, ...] }
       def stopwatch
         TimerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position total_time]])
-        notify_volunteers('timer')
+        notify_volunteers 'timer'
         head :ok
       end
 
@@ -18,7 +18,7 @@ module API
       # { "token": string, "results": [{ "position": "P1234", "code": "A123456" }, ...] }
       def scanner
         ScannerProcessingJob.perform_later @activity.id, params.expect(results: [%i[position code]])
-        notify_volunteers('scanner')
+        notify_volunteers 'scanner'
         head :ok
       end
 

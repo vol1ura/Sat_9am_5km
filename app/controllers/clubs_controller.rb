@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ClubsController < ApplicationController
+  before_action :set_club, only: %i[show last_week]
+  before_action :authenticate_user!, only: %i[new create]
+
   def index
     @q = Club
       .joins(:country)
@@ -35,7 +38,6 @@ class ClubsController < ApplicationController
   end
 
   def show
-    @club = Club.find_by!(slug: params[:slug].downcase)
     @count_volunteering = Athlete.left_joins(:volunteering).where(club: @club).group('athletes.id').count('volunteers.id')
     @total_results_count = Result.published.joins(:athlete).where(athlete: { club: @club }).size
     @total_volunteering_count = Volunteer.published.joins(:athlete).where(athlete: { club: @club }).size
@@ -48,8 +50,33 @@ class ClubsController < ApplicationController
         .order(:name)
   end
 
+  def new; end
+
+  def create
+    name = params[:name].to_s.strip
+    description = params[:description].to_s.strip
+
+    if name.blank? || description.blank?
+      redirect_to new_club_path, alert: t('.validation_error')
+      return
+    end
+
+    mailer_params = { name: name, description: description, user: current_user, country_code: top_level_domain }
+
+    if (logo = params[:logo])
+      mailer_params[:logo] = {
+        filename: logo.original_filename,
+        content_type: logo.content_type,
+        data: Base64.strict_encode64(logo.read),
+      }
+    end
+
+    NotificationMailer.with(**mailer_params).new_club.deliver_later
+
+    redirect_to clubs_path, notice: t('.sent')
+  end
+
   def last_week
-    @club = Club.find_by!(slug: params[:slug].downcase)
     today = Date.current
     date_interval = (today.cwday < 6 ? today.prev_week : today).all_week
     activities_dataset =
@@ -59,6 +86,11 @@ class ClubsController < ApplicationController
   end
 
   private
+
+  def set_club
+    @club = Club.find_by(slug: params[:slug].downcase)
+    redirect_to clubs_path, status: :found unless @club
+  end
 
   def group_and_count_clubs_for(entity, club_ids:)
     entity

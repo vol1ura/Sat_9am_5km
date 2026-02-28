@@ -45,7 +45,7 @@ class Athlete < ApplicationRecord
     end
   end
 
-  belongs_to :club, optional: true
+  belongs_to :club, optional: true, touch: true
   belongs_to :user, optional: true
   belongs_to :event, optional: true
   belongs_to :going_to_event, class_name: 'Event', optional: true

@@ -65,3 +65,8 @@
       class: SetFivePlusTrophyDatesJob
       queue: low
       description: Fix awarding dates for 5+ trophies
+    empty_clubs_cleanup:
+      cron: "0 3 * * *"
+      class: EmptyClubsCleanupJob
+      queue: low
+      description: Remove old clubs with no athletes and missing or short description

@@ -14,6 +14,7 @@ class Country < ApplicationRecord
   def host = "s95.#{code}"
 
   def localized(key, **)
-    I18n.t(key, locale: I18n.available_locales.include?(code.to_sym) ? code.to_sym : I18n.default_locale, **)
+    locale = code == 'rs' ? :sr : code.to_sym
+    I18n.t(key, locale: I18n.available_locales.include?(locale) ? locale : I18n.default_locale, **)
   end
 end
