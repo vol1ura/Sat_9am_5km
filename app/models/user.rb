@@ -62,9 +62,7 @@ class User < ApplicationRecord
     end
   end
 
-  def favorite_events
-    Event.where(id: favorite_event_ids)
-  end
+  def favorite_events = Event.where(id: favorite_event_ids)
 
   private
 
