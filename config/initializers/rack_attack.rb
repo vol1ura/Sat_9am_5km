@@ -50,11 +50,8 @@ end
 
 ActiveSupport::Notifications.subscribe(/(?<!safelist)\.rack_attack\z/) do |_name, _start, _finish, _request_id, payload|
   req = payload[:request]
-
-  Rollbar.warning(
-    'Rack::Attack triggered',
-    type: req.env['rack.attack.match_type'],
-    matched: req.env['rack.attack.matched'],
-    user_agent: req.user_agent
+  Rails.logger.warn(
+    "RackAttack triggered: IP '#{req.ip}' with type '#{req.env['rack.attack.match_type']}', " \
+    "matched by '#{req.env['rack.attack.matched']}', UA: '#{req.user_agent}'",
   )
 end

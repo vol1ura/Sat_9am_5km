@@ -10,7 +10,7 @@ ActiveAdmin.register Newsletter do
   index download_links: false do
     selectable_column
     id_column
-    column(:body) { |nl| simple_format nl.body }
+    column(:body) { |nl| simple_format nl.body.truncate(200) }
     column(:picture_link) { |nl| nl.picture_link.present? }
     column :sent_count
     actions

@@ -35,8 +35,8 @@ class EventsController < ApplicationController
     @almost_jubilee_by_results = @event.almost_jubilee_athletes_dataset 'results'
     @almost_jubilee_by_volunteers = @event.almost_jubilee_athletes_dataset 'volunteers'
 
-    @first_male_by_activity_id = @event.leader_results_dataset(gender: :male).preload(:athlete).index_by(&:activity_id)
-    @first_female_by_activity_id = @event.leader_results_dataset(gender: :female).preload(:athlete).index_by(&:activity_id)
+    @first_male_by_activity_id = leader_results(gender: :male)
+    @first_female_by_activity_id = leader_results(gender: :female)
   end
 
   def volunteering
@@ -54,5 +54,16 @@ class EventsController < ApplicationController
 
   def find_event
     @event = Event.find_by!(code_name: params[:code_name]&.downcase)
+  end
+
+  def leader_results(gender:)
+    Result
+      .published
+      .joins(:athlete)
+      .where(activity: { event_id: @event.id }, athlete: { gender: })
+      .select('DISTINCT ON (results.activity_id) results.*')
+      .order('results.activity_id, results.position')
+      .preload(:athlete)
+      .index_by(&:activity_id)
   end
 end

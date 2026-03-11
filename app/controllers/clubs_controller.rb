@@ -4,12 +4,11 @@ class ClubsController < ApplicationController
   before_action :set_club, only: %i[show last_week]
 
   def index
-    @q = Club
-      .joins(:country)
-      .where(country: { code: top_level_domain })
-      .ransack(params[:q])
+    @q = Club.joins(:country).where(country: { code: top_level_domain }).ransack(params[:q])
     @q.sorts = 'athletes_count desc' if @q.sorts.empty?
-    @clubs = @q.result.page(params[:page]).per(25)
+    result = @q.result
+    result = result.order(:name) if @q.sorts.none? { |s| s.name == 'name' }
+    @clubs = result.page(params[:page]).per(25)
     club_ids = @clubs.map(&:id)
 
     if club_ids.empty?
