@@ -10,11 +10,11 @@
     "lint": "yarn lint:js && yarn lint:scss"
   },
   "devDependencies": {
+    "@stylistic/stylelint-plugin": "^4.0.0",
     "eslint": "^9.39.1",
     "eslint-plugin-import": "^2.32.0",
-    "stylelint": "^16.25.0",
-    "@stylistic/stylelint-plugin": "^4.0.0",
     "postcss": "^8.4.29",
-    "postcss-scss": "^4.0.9"
+    "postcss-scss": "^4.0.9",
+    "stylelint": "^16.25.0"
   }
 }
