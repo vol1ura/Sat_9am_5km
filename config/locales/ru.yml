@@ -106,6 +106,7 @@ ru:
         description: описание
       event:
         active: активен
+        cancellation_reason: причина отмены
         country: страна
         code_name: кодовое имя
         name: название
@@ -117,7 +118,7 @@ ru:
         latitude: широта
         longitude: долгота
         coordinates: координаты
-        timezone: зона
+        timezone: часовой пояс
         slogan: девиз
         description: описание
         visible_order: вес в ленте
@@ -1087,6 +1088,7 @@ ru:
       attention: Внимание!
       opening_soon: Скоро открытие!
       start_cancelled: Ближайший старт отменён.
+      cancellation_reason: 'Причина:'
       inactivity_disclaimer_html: 'Следите за новостями в <a href="%{link}" class="alert-link">телеграм-канале</a>, а пока приходите на другие <a href="/" class="alert-link">наши пробежки</a>.'
       place: Место проведения
       event_totals: За всё время было
@@ -1245,6 +1247,14 @@ ru:
         *RunPark ID:* %{runpark_code}
 
         В случае обнаружения неточностей, сообщите об этом волонтёрам вашего забега или напишите @vol1ura
+    event_cancellation: |
+      %{first_name}, здравствуйте!
+
+      Мероприятие *%{event_name}* отменено.
+      Актуальный статус мероприятия и причину отмены смотрите на [странице мероприятия](%{event_link}).
+
+      С уважением,
+      команда С95
     volunteer_info: |
       %{first_name}, добрый вечер!
 

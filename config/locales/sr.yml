@@ -108,6 +108,7 @@ sr:
         description: opis
       event:
         active: aktivan
+        cancellation_reason: razlog otkazivanja
         country: država
         code_name: nadimak
         name: naziv
@@ -119,7 +120,7 @@ sr:
         latitude: širina
         longitude: dužina
         coordinates: koordinate
-        timezone: zona
+        timezone: vremenska zona
         slogan: slogan
         description: opis
         visible_order: redosled prikaza
@@ -1093,6 +1094,7 @@ sr:
       attention: Pažnja!
       opening_soon: Uskoro otvaranje!
       start_cancelled: Sledeći start je otkazan.
+      cancellation_reason: 'Razlog:'
       inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class="alert-link">naše trke</a>.'
       place: Mesto događaja
       event_totals: Ukupno od početka
@@ -1234,6 +1236,14 @@ sr:
         *RunPark ID:* %{runpark_code}
 
         U slučaju otkrivanja netačnosti, prijavite to volonterima vaše trke ili pišite @vol1ura
+    event_cancellation: |
+      %{first_name}, zdravo!
+
+      Događaj *%{event_name}* je otkazan.
+      Aktualan status događaja i razlog otkazivanja mogu se pronaći na [stranici događaja](%{event_link}).
+
+      S poštovanjem,
+      S95 tim
     volunteer_info: |
       %{first_name}, dobro veče!
 

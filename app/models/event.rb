@@ -36,8 +36,6 @@ class Event < ApplicationRecord
             dimension: { width: { min: 2800 }, height: { min: 1060 } },
             size: { between: (150.kilobytes)..(5.megabytes) }
 
-  after_update_commit :renew_going_athletes, if: :saved_change_to_active?
-
   validates :name, :code_name, :town, :place, :place_description, :description, presence: true
   validates :code_name, uniqueness: true, format: { with: /\A[a-z_]+\z/ }
   validates :timezone, presence: true, inclusion: { in: AVAILABLE_TIMEZONES }
@@ -80,8 +78,4 @@ class Event < ApplicationRecord
 
     winter_image
   end
-
-  private
-
-  def renew_going_athletes = RenewGoingToEventJob.perform_later id
 end

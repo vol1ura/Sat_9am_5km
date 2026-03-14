@@ -10,7 +10,7 @@ ActiveAdmin.register Event do
 
   permit_params(
     :description, :active, :place_description, :place, :name, :summer_image, :winter_image, :code_name,
-    :town, :visible_order, :country_id, :latitude, :longitude, :timezone,
+    :town, :visible_order, :country_id, :latitude, :longitude, :timezone, :cancellation_reason,
   )
 
   filter :country
@@ -36,6 +36,7 @@ ActiveAdmin.register Event do
   show do
     attributes_table do
       row :active
+      row :cancellation_reason unless resource.active
       row :country
       row :code_name
       row :name
@@ -85,5 +86,14 @@ ActiveAdmin.register Event do
 
   member_action :analytics, method: :get, if: proc { can? :read, Event, id: resource.id } do
     @page_title = t '.title'
+  end
+
+  after_update do
+    next unless resource.saved_change_to_active?
+
+    if !resource.active && params[:notify_cancellation] == '1'
+      Telegram::Notification::EventCancellationJob.perform_later resource.id
+    end
+    RenewGoingToEventJob.set(queue: resource.active ? :low : :sequential).perform_later resource.id
   end
 end

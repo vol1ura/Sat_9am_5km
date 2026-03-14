@@ -65,4 +65,30 @@ RSpec.describe '/admin/events' do
       end.to change(Event, :count).by(1)
     end
   end
+
+  describe 'PATCH /admin/events/1' do
+    let(:event) { create(:event) }
+    let(:configured_renew_job) { instance_double(ActiveJob::ConfiguredJob, perform_later: true) }
+
+    before do
+      allow(RenewGoingToEventJob).to receive(:set).and_return(configured_renew_job)
+      allow(Telegram::Notification::EventCancellationJob).to receive(:perform_later)
+    end
+
+    it 'enqueues cancellation notification before renewing going athletes' do
+      patch admin_event_url(event), params: { event: { active: false }, notify_cancellation: '1' }
+
+      expect(Telegram::Notification::EventCancellationJob).to have_received(:perform_later).with(event.id).ordered
+      expect(RenewGoingToEventJob).to have_received(:set).with(queue: :sequential).ordered
+      expect(configured_renew_job).to have_received(:perform_later).with(event.id).ordered
+    end
+
+    it 'enqueues only renew job when notifications are disabled' do
+      patch admin_event_url(event), params: { event: { active: false }, notify_cancellation: '0' }
+
+      expect(RenewGoingToEventJob).to have_received(:set).with(queue: :sequential)
+      expect(configured_renew_job).to have_received(:perform_later).with(event.id)
+      expect(Telegram::Notification::EventCancellationJob).not_to have_received(:perform_later)
+    end
+  end
 end

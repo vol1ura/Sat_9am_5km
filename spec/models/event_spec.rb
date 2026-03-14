@@ -21,13 +21,6 @@ RSpec.describe Event do
     end
   end
 
-  describe '#after_update_commit' do
-    it 'schedules RenewGoingToEventJob' do
-      event = create(:event)
-      expect { event.update(active: false) }.to have_enqueued_job(RenewGoingToEventJob).with(event.id)
-    end
-  end
-
   describe '#current_image' do
     let(:event) { create(:event) }
     let(:summer_image) { fixture_file_upload 'spec/fixtures/files/default.png', 'image/png' }

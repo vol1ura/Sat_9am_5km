@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :event do
+    active { true }
     name { Faker::Team.name }
     sequence(:code_name, 'aa') { |c| "event_#{c}" }
     town { Faker::Address.city }

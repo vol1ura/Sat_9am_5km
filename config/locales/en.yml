@@ -100,6 +100,7 @@ en:
         description: description
       event:
         active: active
+        cancellation_reason: cancellation reason
         country: country
         code_name: code name
         name: name
@@ -1033,6 +1034,7 @@ en:
       attention: Attention!
       opening_soon: Opening Soon!
       start_cancelled: Nearest Start Cancelled.
+      cancellation_reason: 'Reason:'
       inactivity_disclaimer_html: 'Follow the news in our <a href="%{link}" class="alert-link">Telegram channel</a>, and meanwhile come to other <a href="/" class="alert-link">our runs</a>.'
       place: Venue
       event_totals: Over All Time There Was
@@ -1191,6 +1193,14 @@ en:
         *RunPark ID:* %{runpark_code}
 
         If you find inaccuracies, report this to the volunteers of your run or write to @vol1ura
+    event_cancellation: |
+      %{first_name}, hello!
+
+      The event *%{event_name}* has been cancelled.
+      The current status of the event and the reason for cancellation can be found on the [event page](%{event_link}).
+
+      Best regards,
+      S95 team
     volunteer_info: |
       %{first_name}, good evening!
 

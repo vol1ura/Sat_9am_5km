@@ -8,6 +8,7 @@
   - critical
   - default
   - low
+  # and 'sequential' queue with concurrency = 1
 
 :scheduler:
   rufus_scheduler_options:
