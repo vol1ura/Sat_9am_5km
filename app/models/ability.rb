@@ -6,11 +6,9 @@ class Ability
   def initialize(user)
     return unless user
 
-    can(:manage, :all) if user.admin?
-    cannot :destroy, User unless user.super_admin?
-    return if user.admin?
-    return if user.permissions.blank?
+    can(:manage, :all) and return if user.admin? 
 
+    return if user.permissions.blank?
     @user = user
     can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
     can %i[read update], User, id: @user.id
