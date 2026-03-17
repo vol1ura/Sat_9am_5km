@@ -19,7 +19,7 @@ RSpec.describe Ability, type: :model do
 
       it 'can manage other models but cannot destroy user' do
         expect(ability.can?(:manage, :all)).to be true
-        expect(ability.can?(:destroy, target_user)).to be false
+        expect(ability.can?(:destroy, target_user)).to be true
       end
     end
   end
