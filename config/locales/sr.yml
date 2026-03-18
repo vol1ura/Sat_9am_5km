@@ -198,6 +198,7 @@ sr:
           map_link: Link za mapu i pravac
           parking: Parking
           max_channel: Kanal Max
+          max_chat: Chat Max
       badge:
         name: naziv
         conditions: uslovi za dobijanje

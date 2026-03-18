@@ -196,6 +196,7 @@ ru:
           map_link: Карта и схема проезда
           parking: Парковка
           max_channel: Канал Макс
+          max_chat: Чат Макс
       badge:
         name: название
         conditions: условия получения

@@ -190,6 +190,7 @@ en:
           map_link: Map and directions
           parking: Parking
           max_channel: Max Channel
+          max_chat: Max Chat
       badge:
         name: name
         conditions: conditions
