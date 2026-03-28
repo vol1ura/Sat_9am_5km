@@ -8,6 +8,10 @@ class CurrentWeekProcessingJob < ApplicationJob
       process_activity activity
     end
 
+    Event.find_each do |event|
+      EventRecordAwardingJob.perform_now event.id
+    end
+
     fill_informed_flag
     ActiveStorage::Blob.unattached.find_each &:purge_later
   end

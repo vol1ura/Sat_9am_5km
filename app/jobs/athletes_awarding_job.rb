@@ -6,8 +6,6 @@ class AthletesAwardingJob < ApplicationJob
   def perform(activity_id)
     @activity = Activity.published.find activity_id
 
-    Athlete.genders.each_key { process_event_records it }
-
     @activity.athletes.includes(:event).find_each do |athlete|
       award_athlete(athlete, badge_type: 'result')
     end
@@ -20,51 +18,6 @@ class AthletesAwardingJob < ApplicationJob
   end
 
   private
-
-  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-  def process_event_records(gender)
-    best_result = @activity.results.joins(:athlete).where(athlete: { gender: }).order(:position).first
-    return unless best_result
-
-    record_badge = Badge.record_kind.find_by "info->>'gender' = ?", gender
-    trophies = Trophy.where(badge: record_badge).where("info @@ '$.data[*].event_id == #{event_id}'")
-    award_by_record_badge!(record_badge, best_result) and return if trophies.empty?
-
-    award_best_result = false
-    Trophy.transaction do
-      trophies.each do |trophy|
-        record_data = trophy.data.find { |d| d['event_id'] == event_id }
-        unless (record_result = Result.find_by(id: record_data['result_id']))
-          record_result =
-            Result
-              .published
-              .joins(:athlete)
-              .where(activity: { event_id: }, athlete: { gender: })
-              .order(total_time: :asc, date: :desc, position: :asc)
-              .first
-          trophy.update!(athlete_id: record_result.athlete_id)
-          award_by_record_badge!(record_badge, record_result) and next
-        end
-        next if best_result.total_time > record_result.total_time || best_result.date < record_result.date
-
-        award_best_result ||= true
-        trophy.data.delete(record_data)
-        if best_result.athlete_id == record_result.athlete_id
-          trophy.data << { event_id: event_id, result_id: best_result.id }
-          trophy.save! and next
-        end
-        trophy.destroy and next if trophy.data.empty?
-
-        trophy.save!
-      end
-    end
-    return if !award_best_result || trophies.exists?(athlete_id: best_result.athlete_id)
-
-    award_by_record_badge!(record_badge, best_result)
-  rescue StandardError => e
-    Rollbar.error e, activity_id: @activity.id
-  end
-  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def award_athlete(athlete, badge_type:)
     dataset =
@@ -90,20 +43,8 @@ class AthletesAwardingJob < ApplicationJob
     @activity_date ||= @activity.date
   end
 
-  def event_id
-    @event_id ||= @activity.event_id
-  end
-
   def rage_badge
     @rage_badge ||= Badge.rage_kind.sole
-  end
-
-  def award_by_record_badge!(badge, result)
-    trophy = Trophy.find_or_initialize_by(badge: badge, athlete_id: result.athlete_id)
-    trophy.info = { data: [] } unless trophy.data
-    trophy.data.delete_if { |d| d['event_id'] == event_id }
-    trophy.data << { event_id: event_id, result_id: result.id }
-    trophy.save!
   end
 
   def rage_badge_awarding!(athlete)
