@@ -653,7 +653,6 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.2)
   capistrano-sidekiq
   capistrano3-puma (~> 7.1.0)
-  connection_pool (~> 3.0)
   dalli
   dartsass-sprockets
   database_consistency

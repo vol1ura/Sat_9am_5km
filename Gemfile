@@ -17,7 +17,6 @@ gem 'autoprefixer-rails'
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.3.8'
 gem 'cancancan'
-gem 'connection_pool', '~> 3.0'
 gem 'dalli'
 gem 'dartsass-sprockets'
 gem 'devise', '~> 5.0'
