@@ -1,0 +1,317 @@
+<% head_info :title, 'S95 x GRI | ЗАБЕГ МАЯКОВ' %>
+<% head_info :description, 'Мы бежим, чтобы подсветить путь друг другу. Еженедельные бесплатные старты на 5 км.' %>
+<%# head_info :og_image, image_url('/images/zabeg-mayakov/hero_preview.jpg') %>
+
+<style>
+    :root {
+        --red: #eb0045; 
+        --white: #ffffff;
+        --black: #0a0a0a;
+        --font-main: 'Unbounded', sans-serif;
+    }
+
+    #lighthouse-beam {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        background: radial-gradient(circle 350px at var(--x, 50%) var(--y, 50%), rgba(235, 0, 69, 0.1) 0%, rgba(0,0,0,0) 100%);
+        z-index: 100;
+    }
+
+    .grid-bg {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), 
+                          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+        z-index: -1;
+    }
+
+    .zabeg-mayakov-container { 
+        width: 100%; 
+        max-width: 1440px; 
+        margin: 0 auto; 
+        padding: 0 5%; 
+    }
+
+    section.hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        margin-top: -80px; /* Компенсация навбара, если он есть */
+    }
+
+    .video-wrapper {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .video-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.8) 100%);
+        z-index: 2;
+    }
+
+    .hero-video { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        filter: grayscale(0.2) contrast(1.1);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+    }
+
+    .hero-title {
+        font-family: var(--font-main);
+        font-size: clamp(2.5rem, 12vw, 10rem);
+        font-weight: 900;
+        line-height: 0.85;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+    }
+
+    .red-stripes {
+        height: 12px;
+        background: repeating-linear-gradient(90deg, var(--red), var(--red) 80px, var(--white) 80px, var(--white) 160px);
+        width: 100vw;
+        margin: 35px 0;
+        animation: moveStripes 15s linear infinite;
+    }
+
+    @keyframes moveStripes {
+        0% { background-position: 0 0; }
+        100% { background-position: -160px 0; }
+    }
+
+    .hero-info {
+        display: flex;
+        align-items: baseline;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .hero-date {
+        font-family: var(--font-main);
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        color: var(--red);
+        white-space: nowrap;
+        line-height: 1;
+    }
+
+    .hero-loc {
+        letter-spacing: 2px;
+        opacity: 0.8;
+        font-weight: 700;
+        font-size: clamp(0.8rem, 1.5vw, 1rem);
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .marquee, .s95-banner {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        display: flex;
+    }
+
+    .marquee {
+        background: var(--red);
+        padding: 25px 0;
+        border-top: 2px solid var(--white);
+        border-bottom: 2px solid var(--white);
+    }
+
+    .marquee-inner, .banner-inner {
+        display: flex;
+        flex-shrink: 0;
+        white-space: nowrap;
+        will-change: transform;
+    }
+
+    .marquee-inner {
+        font-family: var(--font-main);
+        font-weight: 900;
+        font-size: 1.5rem;
+        animation: scrollText 30s linear infinite;
+    }
+
+    .s95-banner {
+        background: var(--white);
+        color: var(--black);
+        padding: 60px 0;
+        transform: rotate(-1.5deg) scale(1.1);
+        margin: 100px 0;
+        font-family: var(--font-main);
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 3.5vw;
+    }
+
+    .banner-inner {
+        animation: scrollBanner 60s linear infinite;
+    }
+
+    @keyframes scrollText {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollBanner {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    .info-section {
+        padding: 120px 0;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 30px;
+    }
+
+    .info-card {
+        grid-column: span 6;
+        border-left: 6px solid var(--red);
+        padding: 45px;
+        background: rgba(255,255,255,0.03);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+
+    .info-card h3 { font-family: var(--font-main); font-size: 1.8rem; margin-bottom: 20px; color: var(--red); }
+    .info-card p { font-size: 1.1rem; line-height: 1.6; opacity: 0.85; }
+
+    .city-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+    .city-tag {
+        font-family: var(--font-main); font-weight: 900; padding: 14px 28px;
+        background: var(--white); color: var(--black); text-transform: uppercase;
+        transform: skewX(-12deg); transition: 0.3s; cursor: default;
+    }
+    .city-tag:hover { transform: skewX(-12deg) translateY(-8px); box-shadow: 8px 8px 0 var(--red); background: var(--red); color: var(--white); }
+
+    .cta-box { text-align: center; padding: 120px 0; }
+    .btn-huge {
+        font-family: var(--font-main); font-size: clamp(1.2rem, 4vw, 2.8rem); font-weight: 900;
+        color: var(--white); text-decoration: none; border: 6px solid var(--white);
+        padding: 45px 90px; display: inline-block; position: relative; transition: 0.4s;
+    }
+    .btn-huge:hover { background: var(--red); border-color: var(--red); transform: scale(1.05) skewX(-5deg); color: white; }
+
+    .zabeg-mayakov-footer { padding: 80px 5%; text-align: center; font-size: 0.75rem; opacity: 0.4; letter-spacing: 3px; }
+
+    @media (max-width: 768px) {
+        .info-card { grid-column: span 12; padding: 30px; }
+        .hero-info { flex-direction: column; gap: 10px; }
+        .s95-banner { font-size: 2rem; padding: 40px 0; }
+        section.hero { margin-top: -60px; }
+    }
+</style>
+
+<div id="lighthouse-beam"></div>
+<div class="grid-bg"></div>
+
+<section class="hero">
+        <div class="video-wrapper">
+            <div class="video-overlay"></div>
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="/videos/zabeg-mayakov/hero.webm" type="video/webm">
+            </video>
+        </div>
+        
+        <div class="zabeg-mayakov-container hero-content">
+            <div class="hero-title" id="mayakov-title">ЗАБЕГ<br><span style="color: var(--red)">МАЯКОВ</span></div>
+            <div class="red-stripes"></div>
+            <div class="hero-info">
+                <div class="hero-date">18 ИЮЛЯ • 9:00</div>
+                <div class="hero-loc">ПАРК КУЗЬМИНКИ И ДРУГИЕ ЛОКАЦИИ</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee">
+        <div class="marquee-inner">
+            <span>МОСКВА • ПЕНЗА • САРАНСК • ИВАНОВО • ВЕЛИКИЙ НОВГОРОД • МОСКВА • ПЕНЗА • САРАНСК • ИВАНОВО • ВЕЛИКИЙ НОВГОРОД • МОСКВА • ПЕНЗА • САРАНСК • ИВАНОВО • ВЕЛИКИЙ НОВГОРОД • МОСКВА • ПЕНЗА • САРАНСК • ИВАНОВО • ВЕЛИКИЙ НОВГОРОД •</span>
+            <span>МОСКВА • ПЕНЗА • САРАНСК • ИВАНОВО • ВЕЛИКИЙ НОВГОРОД • МОСКВА • ПЕНЗА • САРАНСК • ИВАНОВО • ВЕЛИКИЙ НОВГОРОД • МОСКВА • ПЕНЗА • САРАНСК • ИВАНОВО • ВЕЛИКИЙ НОВГОРОД • МОСКВА • ПЕНЗА • САРАНСК • ИВАНОВО • ВЕЛИКИЙ НОВГОРОД •</span>
+        </div>
+    </div>
+
+    <div class="zabeg-mayakov-container">
+        <section class="info-section">
+            <div class="info-card reveal-item">
+                <h3>МАЯКИ — ЭТО МЫ</h3>
+                <p>Мы бежим, чтобы подсветить путь друг другу. В этом забеге важен не финишный створ, а искра, которую мы зажигаем вместе каждое субботнее утро.</p>
+            </div>
+            <div class="info-card reveal-item">
+                <h3>БЕРИ СВОЙ СВЕТ</h3>
+                <p>S95 — это бесплатные старты на 5 км. Твой QR-код — единственный документ, который тебе нужен. Никаких справок, только желание бежать.</p>
+            </div>
+        </section>
+
+        <section class="info-section" style="padding-top: 0;">
+            <div style="grid-column: span 12;">
+                <h2 class="reveal-item" style="font-family: var(--font-main); font-size: clamp(1.5rem, 5vw, 3.5rem); margin-bottom: 40px; border-bottom: 4px solid var(--red); display: inline-block;">
+                    ГЕОГРАФИЯ СВЕТА
+                </h2>
+                <div class="city-grid">
+                    <div class="city-tag reveal-item">МОСКВА</div>
+                    <div class="city-tag reveal-item" style="background: var(--red); color: white;">ПЕНЗА</div>
+                    <div class="city-tag reveal-item">САРАНСК</div>
+                    <div class="city-tag reveal-item" style="border: 2px solid var(--red); background: transparent; color: var(--red);">ИВАНОВО</div>
+                    <div class="city-tag reveal-item">ВЕЛИКИЙ НОВГОРОД</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="s95-banner">
+        <div class="banner-inner">
+            <span>СУББОТА • 9 УТРА • 5 КИЛОМЕТРОВ • ДЛЯ ВСЕХ • S95.RU • СУББОТА • 9 УТРА • 5 КИЛОМЕТРОВ • ДЛЯ ВСЕХ • S95.RU • СУББОТА • 9 УТРА • 5 КИЛОМЕТРОВ • ДЛЯ ВСЕХ • S95.RU •</span>
+            <span>СУББОТА • 9 УТРА • 5 КИЛОМЕТРОВ • ДЛЯ ВСЕХ • S95.RU • СУББОТА • 9 УТРА • 5 КИЛОМЕТРОВ • ДЛЯ ВСЕХ • S95.RU • СУББОТА • 9 УТРА • 5 КИЛОМЕТРОВ • ДЛЯ ВСЕХ • S95.RU •</span>
+        </div>
+    </div>
+
+    <div class="zabeg-mayakov-container">
+        <section class="cta-box reveal-item">
+            <a href="https://t.me/sat9am5kmbot" class="btn-huge" target="_blank">
+                ПОЛУЧИТЬ QR-КОД
+            </a>
+            <p style="margin-top: 40px; opacity: 0.5; font-family: var(--font-main); font-size: 0.8rem; letter-spacing: 1px;">РЕГИСТРАЦИЯ В TELEGRAM ЗА 10 СЕКУНД</p>
+        </section>
+    </div>
+
+    <footer class="zabeg-mayakov-footer"><p>2026 // GRI x S95 // СУББОТА В 9:00 // ПАРК КУЗЬМИНКИ</p></footer>
+
+<script src="/js/zabeg-mayakov/gsap.min.js"></script>
+<script src="/js/zabeg-mayakov/ScrollTrigger.min.js"></script>
+
+<script>
+    (function() {
+        const beam = document.getElementById('lighthouse-beam');
+        let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+        document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+        function animateBeam() {
+            curX += (mouseX - curX) * 0.1; curY += (mouseY - curY) * 0.1;
+            beam.style.setProperty('--x', `${curX}px`); beam.style.setProperty('--y', `${curY}px`);
+            requestAnimationFrame(animateBeam);
+        }
+        animateBeam();
+
+        if (window.gsap) {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.from("#mayakov-title", { duration: 1.8, y: 100, opacity: 0, ease: "power4.out", delay: 0.3 });
+            document.querySelectorAll('.reveal-item').forEach(el => {
+                gsap.from(el, { scrollTrigger: { trigger: el, start: "top 85%" }, y: 50, opacity: 0, duration: 1.2, ease: "power3.out" });
+            });
+        }
+    })();
+</script>
