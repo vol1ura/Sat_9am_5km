@@ -65,11 +65,9 @@ group :development, :test do
   gem 'brakeman'
   gem 'bullet'
   gem 'bundler-audit'
+  gem 'byebug'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'pry-byebug'
-  gem 'pry-doc'
-  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-erb', require: false
