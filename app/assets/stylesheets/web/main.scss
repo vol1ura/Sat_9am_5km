@@ -133,10 +133,10 @@
   color: $light;
   overflow: hidden;
   position: relative;
-  width: calc(100% / 1.03);
+  width: calc(100%);
   margin-inline: auto;
   transform-origin: center;
-  transform: scale(1.03);
+  // transform: scale(1.03);
   box-shadow: 0 0.75rem 1.5rem rgb(0 0 0 / 20%);
   z-index: 10;
 

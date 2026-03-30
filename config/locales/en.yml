@@ -790,6 +790,7 @@ en:
             description: run results to the website in real time
         download_rustore: Download from RuStore
         download_app_gallery: Download from App Gallery
+        download_app_store: Download from App Store
         download_apk: Download APK File
       our_partners: Our Partners
   ratings:

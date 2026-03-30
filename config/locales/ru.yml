@@ -844,6 +844,7 @@ ru:
             description: результатов забега на сайт в реальном времени
         download_rustore: Скачать в RuStore
         download_app_gallery: Скачать в App Gallery
+        download_app_store: Скачать в App Store
         download_apk: Скачать APK файл
       our_partners: Наши партнёры
   ratings:

@@ -735,6 +735,7 @@ sr:
             description: rezultati trke na sajtu u realnom vremenu
         download_rustore: Preuzmi u RuStore
         download_app_gallery: Preuzmi u App Gallery
+        download_app_store: Preuzmi u App Store
         download_apk: Preuzmi APK fajl
       our_partners: Naši partneri
     about:

@@ -300,6 +300,9 @@
       </div>
     </div>
     <div class="d-flex gap-4 justify-content-center flex-wrap mt-3">
+      <%= external_link_to 'https://apps.apple.com/app/id6760978429' do %>
+        <%= image_tag '/images/app/app-store.png', class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_store') %>
+      <% end %>
       <%= external_link_to 'https://appgallery.huawei.com/app/C114915605' do %>
         <%= image_tag "/images/app/#{top_level_domain == :rs ? 'app-gallery-rs.png' : 'app-gallery-ru.svg'}", class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_gallery') %>
       <% end %>

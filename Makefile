@@ -1,6 +1,6 @@
 WEB_CONTAINER := `docker compose ps | grep web | cut -d ' ' -f1`
 
-target: project
+target: bind
 
 project:
 	docker compose ps | grep -E '.web.[1-9].*(Up|running)' || docker compose up -d
