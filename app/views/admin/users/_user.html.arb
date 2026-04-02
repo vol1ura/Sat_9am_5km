@@ -3,9 +3,9 @@
 attributes_table_for user do
   row :first_name
   row :last_name
-  row :email
-  row(:phone) { |user| user.phone.present? }
-  row(:telegram_user) { |user| telegram_link user }
+  row(:email) { |u| u.email || u.unconfirmed_email }
+  row(:phone) { |u| u.phone.present? }
+  row(:telegram_user) { telegram_link it }
   row :created_at
   if current_user.admin?
     row :role

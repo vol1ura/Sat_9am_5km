@@ -1093,6 +1093,7 @@ en:
       description: 'Settings for user %{user_name}'
       edit: Edit
       not_specified: not specified
+      email_pending_badge: 'Pending confirmation: %{email}'
       emergency_contact: Emergency Contact
     field:
       edit: Edit
@@ -1110,12 +1111,28 @@ en:
       personal_best_format_hint: 'HH:MM:SS'
       save: Save
       cancel: Cancel
+      email: Email
+      email_confirmed: "Email confirmed: %{email}"
+      email_pending: "Pending confirmation: %{email}"
+      email_not_set: No email linked
+      resend_confirmation: Resend confirmation email
+      email_hint: After changing your email, a confirmation link will be sent to the new address
+
       promotion_terms: Agreement with Terms
       promotions:
         title: Partner Programs
         spartacus: Fan Club FANATIK SQUAD Promotion
       disagree: Disagree
       agree: Agree
+    email_sessions:
+      new:
+        title: Sign in
+        description: Enter your email — we will send you a sign-in link
+        email_label: Your email
+        submit: Send sign-in link
+        back_to_login: Back to sign in
+      create:
+        link_sent: Sign-in link sent to your email. Please check your inbox.
   going_tos:
     create:
       success: You've successfully marked yourself as a participant
@@ -1224,3 +1241,14 @@ en:
     incorrect_running_volunteers: |
       *Attention!* Activity ID=%{activity_id} (%{activity_date}) has running volunteer *%{athlete_name}* (ID=%{athlete_code})
       on the running position, however he has no result in the protocol. Please fix it.
+
+  auth_link_mailer:
+    login_link:
+      subject: Your sign-in link for S95
+      greeting: "Hello, %{name}!"
+      body: "To sign in to S95, follow the link below:"
+      link_text: Sign in
+      expiry: "The link is valid for %{minutes} minutes."
+      ignore: If you did not request this link, please ignore this email.
+      regards: "Best regards,"
+      team: S95 team

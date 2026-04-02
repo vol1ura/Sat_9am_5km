@@ -28,6 +28,10 @@ class Rack::Attack
     req.ip if req.path.start_with?('/auth_links/')
   end
 
+  throttle('email_sessions/ip', limit: 5, period: 5.minutes) do |req|
+    req.ip if req.path.start_with?('/email_sessions') && req.post?
+  end
+
   blocklist('scrapers') do |req|
     next false unless req.path.match?(%r{\A/(activities|athletes)/\d+})
 

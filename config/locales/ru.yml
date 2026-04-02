@@ -1147,6 +1147,7 @@ ru:
       description: 'Настройки для пользователя %{user_name}'
       edit: Изменить
       not_specified: не указан
+      email_pending_badge: 'Ожидает подтверждения: %{email}'
       emergency_contact: Экстренный контакт
     field:
       edit: Изменить
@@ -1164,12 +1165,28 @@ ru:
       personal_best_format_hint: 'ЧЧ:ММ:СС'
       save: Сохранить
       cancel: Отмена
+      email: Email
+      email_confirmed: "Email подтверждён: %{email}"
+      email_pending: "Ожидает подтверждения: %{email}"
+      email_not_set: Email не привязан
+      resend_confirmation: Отправить письмо повторно
+      email_hint: После изменения email вам придёт письмо с ссылкой для подтверждения
+
       promotion_terms: Соглашение с условиями
       promotions:
         title: Партнерские программы
         spartacus: Акция клуба болельщиков ФАНАТИК СКВАД
       disagree: Не согласен
       agree: Согласен
+    email_sessions:
+      new:
+        title: Вход
+        description: Введите ваш email — мы отправим ссылку для входа
+        email_label: Ваш email
+        submit: Получить ссылку для входа
+        back_to_login: Вернуться к странице входа
+      create:
+        link_sent: Одноразовая ссылка для входа отправлена на ваш email. Проверьте почту.
   going_tos:
     create:
       success: Вы успешно отметились как участник
@@ -1278,3 +1295,13 @@ ru:
     incorrect_running_volunteers: |
       *Внимание!* В забеге ID=%{activity_id} (%{activity_date}) волонтёр *%{athlete_name}* (ID=%{athlete_code}) стоит на
       беговой позиции, однако при этом он без результата в протоколе. Пожалуйста, исправьте это.
+  auth_link_mailer:
+    login_link:
+      subject: Ссылка для входа на сайт С95
+      greeting: "Здравствуйте, %{name}!"
+      body: "Для входа на сайт С95 перейдите по ссылке:"
+      link_text: Войти
+      expiry: "Ссылка действительна в течение %{minutes} минут."
+      ignore: Если вы не запрашивали эту ссылку, просто проигнорируйте данное сообщение.
+      regards: С уважением,
+      team: команда С95

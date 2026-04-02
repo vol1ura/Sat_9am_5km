@@ -2,12 +2,14 @@
 
 module Users
   class AuthToken
+    TTL = 5.minutes
+
     def initialize(user)
       @user = user
     end
 
     def generate!
-      @user.update!(auth_token: SecureRandom.hex(16), auth_token_expires_at: 2.minutes.from_now)
+      @user.update!(auth_token: SecureRandom.hex(16), auth_token_expires_at: TTL.from_now)
     end
 
     def expire!

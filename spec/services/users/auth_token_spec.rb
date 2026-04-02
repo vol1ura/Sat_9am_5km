@@ -11,7 +11,7 @@ RSpec.describe Users::AuthToken do
     it 'updates user with new auth token and expiration time' do
       expect { service.generate! }.to change { user.reload.auth_token }.from(nil)
       expect(user.auth_token_expires_at).to be > Time.current
-      expect(user.auth_token_expires_at).to be < 3.minutes.from_now
+      expect(user.auth_token_expires_at).to be < 6.minutes.from_now
     end
   end
 

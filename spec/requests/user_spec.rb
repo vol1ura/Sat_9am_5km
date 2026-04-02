@@ -65,6 +65,14 @@ RSpec.describe '/user' do
         patch user_url, params: { delete_phone: 'true', user: user.attributes.slice('first_name') }
         expect(user.phone).to be_nil
       end
+
+      it 'queues email confirmation when email is changed' do
+        new_email = Faker::Internet.email
+        expect do
+          patch user_url, params: { user: { first_name: user.first_name, last_name: user.last_name, email: new_email } }
+        end.to change { user.reload.unconfirmed_email }.to(new_email)
+        expect(response).to redirect_to user_path
+      end
     end
   end
 

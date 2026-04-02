@@ -20,7 +20,18 @@
           <div class="d-flex flex-column mt-3">
             <p class="mb-2">
               <i class="fa-solid fa-envelope text-primary me-3"></i>
-              <%= current_user.email %>
+              <% if current_user.email %>
+                <%= current_user.email %>
+              <% else %>
+                <span class="text-body-secondary"><%= t '.not_specified' %></span>
+              <% end %>
+              <% if current_user.unconfirmed_email %>
+                <br>
+                <small class="text-warning-emphasis">
+                  <i class="fa-solid fa-clock me-1"></i>
+                  <%= t '.email_pending_badge', email: current_user.unconfirmed_email %>
+                </small>
+              <% end %>
             </p>
             <p class="mb-2">
               <i class="fa-solid fa-phone text-primary me-3"></i>

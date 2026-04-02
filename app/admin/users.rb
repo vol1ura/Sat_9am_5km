@@ -7,7 +7,8 @@ ActiveAdmin.register User do
 
   permit_params do
     permitted = %i[first_name last_name password password_confirmation email]
-    permitted.push(:role, :note) if current_user.admin?
+    permitted << :role if current_user.super_admin?
+    permitted << :note if current_user.admin?
     permitted
   end
 
@@ -25,9 +26,10 @@ ActiveAdmin.register User do
     selectable_column
     column :first_name
     column :last_name
-    column(:telegram_user) { |user| telegram_link user }
+    column(:email) { |u| u.email || u.unconfirmed_email }
+    column(:telegram_user) { telegram_link it }
     if current_user.admin?
-      column(:phone) { |user| user.phone.present? }
+      column(:phone) { |u| u.phone.present? }
       column :note
     end
     column :role if current_user.super_admin?
@@ -41,11 +43,7 @@ ActiveAdmin.register User do
     f.inputs do
       f.input :first_name
       f.input :last_name
-      if current_user == f.object || f.object.new_record?
-        f.input :email
-        f.input :password
-        f.input :password_confirmation
-      end
+      f.input :email if (!f.object.email && !f.object.unconfirmed_email) || current_user.super_admin?
       f.input :role if current_user.super_admin?
       f.input :note if current_user.admin?
     end

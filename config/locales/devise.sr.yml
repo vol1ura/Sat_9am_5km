@@ -15,6 +15,9 @@ sr:
         description: Da bi se prijavili, koristite email i lozinku ili Telegram bot. Potrebno je samo da zatražite jednokratnu vezu za prijavu u botu komandom /login
         registration_html: 'Registrujte se pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a>'
         telegram_login_html: 'Ako ste već registrovan, možete dobiti jednokratnu vezu za prijavu u <a href="%{link}" class="text-reset" target="_blank">Telegram botu</a> pomoću komande <code>/login</code>'
+        email_login_title: Prijavite se putem e-maila
+        email_login_description: Ako ste povezali e-mail, možete se prijaviti bez Telegrama — poslaćemo vam link za prijavu
+        email_login_link: Prijavite se putem e-maila
     confirmations:
       new:
         title: Pošaljite uputstva za potvrdu e-mail

@@ -38,6 +38,7 @@ class UsersController < ApplicationController
       user: [
         :first_name,
         :last_name,
+        :email,
         :image,
         :emergency_contact_name,
         :emergency_contact_phone,

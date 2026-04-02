@@ -1153,6 +1153,7 @@ sr:
       description: 'Podešavanja za %{user_name}'
       edit: Izmeni
       not_specified: nije naveden
+      email_pending_badge: 'Čeka potvrdu: %{email}'
       emergency_contact: Hitna kontakt osoba
     field:
       edit: Izmeni
@@ -1170,12 +1171,27 @@ sr:
       personal_best_format_hint: HH:MM:SS
       save: Sačuvaj
       cancel: Otkaži
+      email: E-mail
+      email_confirmed: "E-mail potvrđen: %{email}"
+      email_pending: "Čeka potvrdu: %{email}"
+      email_not_set: E-mail nije povezan
+      resend_confirmation: Ponovo pošaljite e-mail za potvrdu
+      email_hint: Nakon promene e-maila, na novu adresu će biti poslat link za potvrdu
       promotion_terms: Saglasnost sa uslovima
       promotions:
         title: Partnerski programi
         spartacus: Akcija kluba navijača FANAT1K SQUAD
       disagree: Ne slažem se
       agree: Slažem se
+    email_sessions:
+      new:
+        title: Prijavite se
+        description: Unesite vaš e-mail — poslaćemo vam link za prijavu
+        email_label: Vaš e-mail
+        submit: Pošaljite link za prijavu
+        back_to_login: Nazad na stranicu za prijavu
+      create:
+        link_sent: Link za prijavu je poslat na vaš e-mail. Proverite poštu.
   going_tos:
     create:
       success: Uspešno ste se označili kao učesnik
@@ -1267,3 +1283,13 @@ sr:
     incorrect_running_volunteers: |
       *Pažnja!* Događaj ID=%{activity_id} (%{activity_date}) ima volontera *%{athlete_name}* (ID=%{athlete_code}) na trkačkoj poziciji,
       međutim on nema rezultat u protokolu. Molimo vas da ispravite ovo.
+  auth_link_mailer:
+    login_link:
+      subject: Link za prijavu na sajt S95
+      greeting: "Zdravo, %{name}!"
+      body: "Da biste se prijavili na sajt S95, pratite sledeći link:"
+      link_text: Prijavi se
+      expiry: "Link je važeći %{minutes} minuta."
+      ignore: Ako ste ne zatražili ovaj link, samo zanemarite ovu poruku.
+      regards: "S poštovanjem,"
+      team: tim S95
