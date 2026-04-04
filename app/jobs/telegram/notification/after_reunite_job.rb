@@ -6,7 +6,10 @@ module Telegram
       queue_as :low
 
       def perform(user_id)
-        User::Reunite.call ::User.find(user_id)
+        user = ::User.find user_id
+        return if user.notification_disabled? :other
+
+        User::Reunite.call user
       end
     end
   end

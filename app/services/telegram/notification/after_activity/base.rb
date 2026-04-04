@@ -10,6 +10,7 @@ module Telegram
 
         def call
           return unless (telegram_id = athlete&.user&.telegram_id)
+          return if athlete.user.notification_disabled? :after_activity
 
           @entity.with_lock do
             return if @entity.informed

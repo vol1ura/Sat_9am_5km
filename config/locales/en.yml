@@ -1124,6 +1124,13 @@ en:
         spartacus: Fan Club FANATIK SQUAD Promotion
       disagree: Disagree
       agree: Agree
+      notifications:
+        title: Notifications
+        newsletter: News, announcements and promotions
+        badge: Badge awards or expirations
+        after_activity: Run results and volunteer appreciation
+        volunteer_reminder: Volunteer reminders
+        other: Other notifications (cancellations, venue changes, etc. important messages)
     email_sessions:
       new:
         title: Sign in

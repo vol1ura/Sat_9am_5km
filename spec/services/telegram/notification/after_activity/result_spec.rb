@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::AfterActivity::Result, type: :service do
-  let(:result) { create(:result, athlete: create(:athlete, user: create(:user))) }
+  let(:result) { create(:result, athlete: create(:athlete, user: create(:user, disabled_notifications:))) }
+  let(:disabled_notifications) { [] }
   let(:bot_token) { '123456:aaabbb' }
   let!(:request) { stub_request(:post, %r{https://api\.telegram\.org/bot#{bot_token}/sendMessage}) }
 
@@ -12,6 +13,16 @@ RSpec.describe Telegram::Notification::AfterActivity::Result, type: :service do
       described_class.call(result)
       expect(request).to have_been_requested
       expect(result.reload).to be_informed
+    end
+  end
+
+  context 'with disabled after_activity notification' do
+    let(:disabled_notifications) { %w[after_activity] }
+
+    it 'does not inform athlete' do
+      described_class.call(result)
+      expect(request).not_to have_been_requested
+      expect(result.reload).not_to be_informed
     end
   end
 

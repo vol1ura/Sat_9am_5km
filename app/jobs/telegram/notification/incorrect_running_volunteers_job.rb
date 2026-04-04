@@ -14,7 +14,8 @@ module Telegram
             volunteer.athlete.user,
           ]
             .compact
-            .each { |user| User::Message.call(user, message) }
+            .uniq
+            .each { |user| User::Message.call(user, message) unless user.notification_disabled? :other }
         end
       end
 

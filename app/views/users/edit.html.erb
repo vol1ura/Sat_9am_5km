@@ -186,6 +186,25 @@
         <% end %>
       </div>
 
+      <div class="mt-3 rounded-3 p-3 bg-body-tertiary border">
+        <h5 class="fw-light"><%= t '.notifications.title' %></h5>
+        <% User::NOTIFICATION_TYPES.each do |type| %>
+          <div class="form-check form-switch mt-3">
+            <%=
+              check_box_tag(
+                'enabled_notifications[]',
+                type,
+                !current_user.notification_disabled?(type),
+                class: 'form-check-input',
+                role: 'switch',
+                id: "notification_#{type}",
+              )
+            %>
+            <%= label_tag "notification_#{type}", t(".notifications.#{type}"), class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+
       <div class="my-5">
         <button class="me-1 btn btn-outline-primary" type="submit" title="<%= t '.save' %>">
           <i class="fa-regular fa-circle-down"></i> <%= t '.save' %>

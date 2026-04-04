@@ -1183,6 +1183,13 @@ sr:
         spartacus: Akcija kluba navijača FANAT1K SQUAD
       disagree: Ne slažem se
       agree: Slažem se
+      notifications:
+        title: Obaveštenja
+        newsletter: Vesti, najave i akcije
+        badge: Dodela ili istek nagrada
+        after_activity: Rezultati trčanja i zahvalnost za volontiranje
+        volunteer_reminder: Podsetnici za volontere
+        other: Ostala obaveštenja (otkazivanja, promene mesta starta i dr. važna obaveštenja)
     email_sessions:
       new:
         title: Prijavite se

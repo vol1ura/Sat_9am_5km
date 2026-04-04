@@ -61,6 +61,25 @@ RSpec.describe User do
     end
   end
 
+  describe '#notification_disabled?' do
+    let(:user) { build(:user, disabled_notifications: %w[newsletter badge]) }
+
+    it 'returns true for disabled notification type' do
+      expect(user.notification_disabled?(:newsletter)).to be true
+      expect(user.notification_disabled?(:badge)).to be true
+    end
+
+    it 'returns false for enabled notification type' do
+      expect(user.notification_disabled?(:after_activity)).to be false
+      expect(user.notification_disabled?(:other)).to be false
+    end
+
+    it 'returns false when disabled_notifications is empty' do
+      user.disabled_notifications = []
+      expect(user.notification_disabled?(:newsletter)).to be false
+    end
+  end
+
   describe '#toggle_favorite_event' do
     let(:user) { create(:user) }
     let(:event) { create(:event) }
