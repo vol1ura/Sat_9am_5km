@@ -10,7 +10,10 @@ module Telegram
           .where(activity_id: activity_id, role: notified_roles)
           .includes(athlete: :user)
           .find_each do |volunteer|
-            User::Message.call volunteer.athlete.user, message
+            user = volunteer.athlete.user
+            next if user&.notification_disabled? :other
+
+            User::Message.call user, message
           end
       end
     end

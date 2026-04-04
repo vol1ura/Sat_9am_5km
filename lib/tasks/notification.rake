@@ -9,9 +9,11 @@ namespace :notification do
         .group(:athlete_id)
         .having("MIN(activity.date) #{1.week.ago.to_date.all_week.to_fs(:db)}")
         .select(:athlete_id)
-    User.joins(:athlete).where(athlete: { id: athlete_ids }).find_each do |user|
-      Telegram::Notification::User::NewRunner.call(user)
-    end
+    User
+      .joins(:athlete)
+      .where(athlete: { id: athlete_ids })
+      .where.not("'after_activity' = ANY(disabled_notifications)")
+      .find_each { |user| Telegram::Notification::User::NewRunner.call(user) }
   end
 
   desc 'Notify about doubled results'
@@ -28,7 +30,10 @@ namespace :notification do
     message =
       "Athletes with doubled results:\n#{doubled_results.map { |r| "ID=#{r[:athlete_id]} on #{r[:date]}" }.join("\n")}"
 
-    User.where(role: %i[super_admin admin]).find_each { |user| Telegram::Notification::User::Message.call(user, message) }
+    User
+      .where(role: %i[super_admin admin])
+      .where.not("'other' = ANY(disabled_notifications)")
+      .find_each { |user| Telegram::Notification::User::Message.call user, message }
   end
 
   desc 'Notify about incorrect activities'
@@ -42,7 +47,7 @@ namespace :notification do
         *User.protocol_responsible(activity),
       ]
         .compact
-        .each { |user| Telegram::Notification::User::Message.call(user, message) }
+        .each { |user| Telegram::Notification::User::Message.call user, message }
     end
   end
 end

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::Volunteer do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, disabled_notifications:) }
+  let(:disabled_notifications) { [] }
   let(:athlete) { create(:athlete, user:) }
   let(:activity) { create(:activity, event:) }
   let(:volunteer) { create(:volunteer, athlete:, activity:) }
@@ -20,5 +21,13 @@ RSpec.describe Telegram::Notification::Volunteer do
   it 'notifies the volunteer' do
     expect(request).to have_been_requested
     expect(Rollbar).not_to have_received(:error)
+  end
+
+  context 'with disabled volunteer_reminder notification' do
+    let(:disabled_notifications) { %w[volunteer_reminder] }
+
+    it 'does not notify the volunteer' do
+      expect(request).not_to have_been_requested
+    end
   end
 end

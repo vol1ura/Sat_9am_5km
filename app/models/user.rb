@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   AVAILABLE_PROMOTIONS = %w[spartacus].freeze
+  NOTIFICATION_TYPES = %w[newsletter badge after_activity volunteer_reminder other].freeze
 
   audited only: %i[email role first_name last_name telegram_user promotions policy_accepted]
   has_associated_audits
@@ -63,6 +64,10 @@ class User < ApplicationRecord
   end
 
   def favorite_events = Event.where(id: favorite_event_ids)
+
+  def notification_disabled?(type)
+    disabled_notifications.include?(type.to_s)
+  end
 
   private
 

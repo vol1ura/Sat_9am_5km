@@ -9,6 +9,8 @@ module Telegram
         @event = Event.find event_id
 
         ::User.where(id: @event.athletes.or(@event.going_athletes).select(:user_id)).find_each do |user|
+          next if user.notification_disabled? :other
+
           User::Message.call user, build_message(user)
         end
       end

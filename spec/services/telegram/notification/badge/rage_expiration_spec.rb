@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Telegram::Notification::Badge::RageExpiration, type: :service do
-  let(:athlete) { create(:athlete, user: create(:user)) }
+  let(:athlete) { create(:athlete, user: create(:user, disabled_notifications:)) }
+  let(:disabled_notifications) { [] }
   let(:date) { Date.current.prev_week(:saturday) }
   let(:rage_trophy) do
     create(
@@ -23,6 +24,15 @@ RSpec.describe Telegram::Notification::Badge::RageExpiration, type: :service do
     it 'informs athlete' do
       described_class.call(rage_trophy)
       expect(request).to have_been_requested
+    end
+  end
+
+  context 'with disabled badge notification' do
+    let(:disabled_notifications) { %w[badge] }
+
+    it 'does not inform athlete' do
+      described_class.call(rage_trophy)
+      expect(request).not_to have_been_requested
     end
   end
 

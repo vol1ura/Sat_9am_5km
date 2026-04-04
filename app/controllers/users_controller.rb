@@ -31,6 +31,8 @@ class UsersController < ApplicationController
     elsif params.dig(:user, :promotions).blank?
       current_user.promotions = []
     end
+
+    current_user.disabled_notifications = User::NOTIFICATION_TYPES - Array(params[:enabled_notifications])
   end
 
   def user_params
