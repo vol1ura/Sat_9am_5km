@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  ALLOWED_PAGES = %w[about feedback joining rules support additional-events privacy-policy robots 5za5 donor].freeze
+  ALLOWED_PAGES = %w[about feedback joining rules support additional-events privacy-policy robots 5za5 donor zabeg-mayakov].freeze
   MAX_FEEDBACK_SIZE = 2000
 
   before_action :validate_page, only: :show
@@ -58,6 +58,9 @@ class PagesController < ApplicationController
   end
 
   def page_layout
-    params[:action] == 'index' || page_name == 'donor' ? 'home' : 'application'
+    return 'index' if params[:action] == 'index'
+    return 'landing' if page_name == 'zabeg-mayakov'
+
+    page_name == 'donor' ? 'home' : 'application'
   end
 end

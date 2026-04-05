@@ -1,5 +1,5 @@
 <% current_date = Date.current %>
-<nav class="navbar top-navbar bg-primary navbar-dark sticky-top mb-3" aria-label="Primary navigation">
+<nav class="navbar top-navbar <%= @navbar_bg || 'bg-primary' %> navbar-dark sticky-top <%= 'mb-3' unless @hide_navbar_margin %>" aria-label="Primary navigation">
   <div class="container-fluid">
     <%=
       link_to root_path, class: 'navbar-brand' do

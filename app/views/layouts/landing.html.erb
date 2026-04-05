@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="<%= current_locale %>" data-controller="theme">
+  <% @skip_main_styles = true %>
+  <% @hide_navbar_margin = true %>
+  <% @navbar_bg = 'bg-black' %>
+  <% content_for :head do %>
+    <%= stylesheet_link_tag 'landing', 'data-turbo-track': 'reload' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0a0a0a !important; color: white !important; font-family: 'Inter', sans-serif !important; }
+        .top-navbar { border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .main-footer { background-color: #0a0a0a !important; color: white !important; border-top: 1px solid rgba(255,255,255,0.1); }
+        .main-footer .text-body-secondary { color: rgba(255,255,255,0.5) !important; }
+        .main-footer hr { border-color: rgba(255,255,255,0.1) !important; }
+        .main-footer a { color: white !important; }
+        
+        /* Fix for dropdown position to prevent navbar expansion */
+        @media (min-width: 768px) {
+          .top-navbar .navbar-nav .dropdown-menu {
+            position: absolute !important;
+          }
+        }
+    </style>
+  <% end %>
+  <%= render '/head' %>
+  <body class="m-0 d-flex flex-column bg-black">
+    <%= render 'navbars/top' %>
+    <%= render '/flash' %>
+    <%= yield %>
+    <div class="spacer"></div>
+    <%= render 'navbars/bottom' %>
+  </body>
+</html>
