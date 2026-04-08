@@ -112,11 +112,8 @@ sr:
   active_admin:
     dashboard: Kontrolna tabla
     dashboard_welcome:
-      call_to_action: 'U delu Trčanja možete učitati podatke sa skenera i tajmera (dugme Kreirati Trčanje). Sva funkcije su vidljive i dostupne samo korisnicima sa pravima administratora. Obratite se njima putem telegram-čata za podešavanje vaših prava.'
-      info: Informacija
       latest_activities: 'Nedavno kreirana trčanja'
       upcoming_activities: 'Predstojeća trčanja'
-      change_log: Ažuriranja
     utilities: Alati
     view: Pregled
     edit: Uredi

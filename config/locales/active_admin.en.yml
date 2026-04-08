@@ -112,11 +112,8 @@ en:
   active_admin:
     dashboard: Dashboard
     dashboard_welcome:
-      call_to_action: 'In the Runs section you can upload data from scanners and timer (Create Run button). All functionality is visible and accessible only to users with administrator rights. Contact them via Telegram chat to configure your rights.'
-      info: Information
       latest_activities: 'Recently Created Runs'
       upcoming_activities: 'Upcoming Runs'
-      change_log: Updates
     utilities: Utilities
     view: View
     edit: Edit

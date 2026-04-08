@@ -72,10 +72,4 @@ class Event < ApplicationRecord
   end
 
   def to_combobox_display = name
-
-  def current_image
-    return summer_image if SUMMER_MONTHS.cover?(Time.current.month) || !winter_image.attached?
-
-    winter_image
-  end
 end
