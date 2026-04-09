@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+(-[[:alpha:]]{2,})?\z/ }
   validates :last_name, presence: true, format: { with: /\A[[:alpha:]]+([-' ][[:alpha:]]{2,})?\z/ }
-  validates :email, :password, presence: true, if: -> { telegram_id.nil? }
+  validates :email, presence: true, if: -> { telegram_id.nil? }
   validates :telegram_id, :email, :auth_token, uniqueness: true, allow_nil: true
   validates :emergency_contact_phone, phone: true, allow_nil: true
   validates :emergency_contact_name, presence: true, if: -> { emergency_contact_phone }

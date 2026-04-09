@@ -1,25 +1,25 @@
 <% head_info :description, t('.description') %>
 
 <div class="row justify-content-center">
-  <div class="col-md-8 col-lg-6">
+  <div class="col-md-6 col-lg-4">
     <h1><%= head_info :title, t('.title') %></h1>
-    <p class="my-3"><span class="fa-li"><i class="fa-solid fa-robot"></i></span>
-      <%= t '.registration_html', link: 'https://t.me/sat9am5kmbot' %>
-    </p>
-    <div class="alert alert-info" role="alert">
-      <i class="fa-solid fa-robot"></i>
-      <%= t '.telegram_login_html', link: 'https://t.me/sat9am5kmbot' %>
-    </div>
-    <p class="h5"><%= t '.email_login_title' %></p>
     <p><%= t '.email_login_description' %></p>
+    <%= form_with url: email_sessions_path, method: :post, data: { turbo: false } do |f| %>
+      <div class="input-group mb-3">
+        <%= f.email_field :email, autofocus: true, autocomplete: :email, inputmode: :email, class: 'form-control', placeholder: t('.email_placeholder'), required: true %>
+        <%= f.submit t('.email_submit'), class: 'btn btn-outline-primary' %>
+      </div>
+    <% end %>
+    <hr class="my-4">
+    <p><%= t '.email_registration_description' %></p>
     <p class="text-center">
-      <%= link_to t('.email_login_link'), new_email_session_path, class: 'btn btn-outline-primary' %>
+      <%= link_to t('.email_registration_link'), new_user_registration_path, class: 'btn btn-outline-danger' %>
     </p>
     <% if top_level_domain == :ru %>
-      <p class="h5 mt-5">Ещё один способ входа</p>
+      <p class="h5 mt-5">Альтернативный способ входа</p>
       <p>
-        Если способы с получением ссылки по какой-то причине вам не подходят,
-        можете воспользоваться входом по номеру вашего телефона (с которого регистрировались в боте).
+        Если способ с получением ссылки по какой-то причине вам не подходит,
+        можете воспользоваться входом по номеру вашего телефона (если вы регистрировались через бота).
         После подтверждения запроса от Telegram, вы сможете легко входить нажатием на эту кнопку.
       </p>
       <p class="text-body-secondary small">

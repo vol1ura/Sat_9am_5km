@@ -3,7 +3,7 @@ en:
     shared:
       links:
         sign_in: Sign In
-        registration: Register using Telegram bot
+        registration: Register with email
         password: Forgot your password?
         confirmation: Didn't receive confirmation instructions?
         unlock: Didn't receive unlock instructions?
@@ -12,12 +12,21 @@ en:
       signed_out: Successfully signed out
       new:
         title: Sign In
-        description: To sign in, you can use email and password or Telegram bot. Simply request a one-time login link in the bot with the /login command
-        registration_html: 'Register using <a href="%{link}" target="_blank" rel="noopener">@sat9am5kmbot</a> Telegram bot'
-        telegram_login_html: "If you're already registered, use a one-time login link for signing in, which can be obtained with the <code>/login</code> command in the <a href=\"%{link}\" class=\"text-reset\" target=\"_blank\">bot</a>"
-        email_login_title: Sign In with Email
-        email_login_description: If you've linked your email, you can sign in without Telegram — a sign-in link will be sent to you
-        email_login_link: Sign in with email
+        description: To sign in, you can use Telegram bot or email. Simply request a one-time login link.
+        email_login_description: Enter your email — we'll send you a one-time sign-in link
+        email_placeholder: Your email
+        email_submit: Get link
+        email_registration_description: If you're not registered yet, create a new profile
+        email_registration_link: Register
+    registrations:
+      new:
+        title: Register
+        description: Create your profile on the S95 website
+        subtitle: A confirmation link will be sent to the provided email address
+        email_hint: (must be confirmed within 1 hour)
+        gender_required: Please specify your gender
+        submit: Register
+      signed_up_but_unconfirmed: 'A confirmation link has been sent to your email. Please confirm your email within 1 hour.'
     confirmations:
       new:
         title: Resend Confirmation Instructions
@@ -36,4 +45,3 @@ en:
         description: Receiving unlock instructions
         your_email: Your e-mail
         send_instruction: Send Instructions
-

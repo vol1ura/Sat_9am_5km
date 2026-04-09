@@ -3,13 +3,6 @@
 RSpec.describe '/email_sessions' do
   let(:user) { create(:user, :with_email) }
 
-  describe 'GET /email_sessions/new' do
-    it 'renders a successful response' do
-      get new_email_session_url
-      expect(response).to be_successful
-    end
-  end
-
   describe 'POST /email_sessions (create)' do
     context 'with an unconfirmed or missing email' do
       it 'redirects without sending email' do

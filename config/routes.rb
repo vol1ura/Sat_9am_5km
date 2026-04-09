@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   end
   resources :friendships, only: %i[create destroy]
   resources :auth_links, only: :show, module: :users, param: :token
-  resources :email_sessions, only: %i[new create], module: :users
+  resources :email_sessions, only: :create, module: :users
   resources :articles, only: %i[index show], param: :page
 
   resource :user, only: %i[show edit update]

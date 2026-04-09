@@ -1,56 +1,49 @@
-<h1>Регистрация</h1>
+<% head_info :title, t('.title') %>
+<% head_info :description, t('.description') %>
 
-<%= form_for resource, as: resource_name, url: user_registration_path, data: { turbo: false } do |f| %>
-  <%= render 'devise/shared/error_messages', resource: %>
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <h1><%= t '.title' %></h1>
+    <p class="text-body-secondary"><%= t '.subtitle' %></p>
 
-  <div class="field">
-    <%= f.label :email %> <em>(будет выслана ссылка для подтверждения)</em><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: :email, inputmode: :email %>
+    <%= form_for resource, as: resource_name, url: user_registration_path, data: { turbo: false } do |f| %>
+      <%= render 'devise/shared/error_messages', resource: %>
+
+      <div class="mb-3">
+        <%= f.label :last_name, class: 'form-label text-capitalize' %>
+        <%= f.text_field :last_name, autofocus: true, autocomplete: 'family-name', class: 'form-control', required: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :first_name, class: 'form-label text-capitalize' %>
+        <%= f.text_field :first_name, autocomplete: 'given-name', class: 'form-control', required: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :email, class: 'form-label' %>
+        <span class="text-body-secondary small"><%= t '.email_hint' %></span>
+        <%= f.email_field :email, autocomplete: :email, inputmode: :email, class: 'form-control', required: true %>
+      </div>
+
+      <%= f.fields_for :athlete do |af| %>
+        <div class="mb-3">
+          <%= af.label :gender, class: 'form-label text-capitalize' %>
+          <div class="d-flex gap-4">
+            <% Athlete.genders.each do |label, value| %>
+              <div class="form-check">
+                <%= af.radio_button :gender, value, class: 'form-check-input', required: true %>
+                <%= af.label "gender_#{value}", human_gender(label), class: 'form-check-label' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="my-3">
+        <%= f.submit t('.submit'), class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+    <%= render 'devise/shared/links' %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-      <em>(минимум <%= @minimum_password_length %> символов и обязательно должна быть одна цифра, одна прописная буква и один символ)</em>
-    <% end %><br>
-    <%= f.password_field :password, autocomplete: 'new-password' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name, autocomplete: 'name' %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name, autocomplete: 'surname' %>
-  </div>
-  <%= f.fields_for :athlete, (f.object.athlete || Athlete.new) do |form| %>
-    <div class="field">
-      <%= form.label :male %><br>
-      <%= form.collection_radio_buttons :gender, Athlete.genders.transform_keys { human_gender it }.to_a, :last, :first %>
-    </div>
-    <div class="field">
-      <%= form.label :parkrun_code %><br>
-      <%= form.number_field :parkrun_code, autocomplete: 'off' %>
-    </div>
-    <div class="field">
-      <%= form.label :fiveverst_code %><br>
-      <%= form.number_field :fiveverst_code, autocomplete: 'off' %>
-    </div>
-    <div class="field">
-      <%= form.label :club_id, 'Клуб (если есть)' %><br>
-      <%= form.collection_select :club_id, Club.order(:name), :id, :name %>
-    </div>
-  <% end %>
-
-  <div class="actions my-3">
-    <%= f.submit 'Зарегистрироваться', class: 'btn btn-primary' %>
-  </div>
-<% end %>
-
-<%= render 'devise/shared/links' %>
+</div>

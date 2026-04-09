@@ -3,7 +3,7 @@ sr:
     shared:
       links:
         sign_in: Prijavite se
-        registration: Registruj se pomoću Telegram bota
+        registration: Registrujte se putem e-maila
         password: Zaboravili ste lozinku?
         confirmation: Niste dobili link za potvrdu?
         unlock: Niste dobili link za otključavanje?
@@ -12,12 +12,21 @@ sr:
       signed_out : Uspešno ste se odjavili sa sajta
       new:
         title: Prijavite se na sajt
-        description: Da bi se prijavili, koristite email i lozinku ili Telegram bot. Potrebno je samo da zatražite jednokratnu vezu za prijavu u botu komandom /login
-        registration_html: 'Registrujte se pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a>'
-        telegram_login_html: 'Ako ste već registrovan, možete dobiti jednokratnu vezu za prijavu u <a href="%{link}" class="text-reset" target="_blank">Telegram botu</a> pomoću komande <code>/login</code>'
-        email_login_title: Prijavite se putem e-maila
-        email_login_description: Ako ste povezali e-mail, možete se prijaviti bez Telegrama — poslaćemo vam link za prijavu
-        email_login_link: Prijavite se putem e-maila
+        description: Da bi se prijavili, koristite Telegram bot ili e-mail. Potrebno je samo da zatražite jednokratnu vezu za prijavu.
+        email_login_description: Unesite svoj e-mail — poslaćemo vam jednokratni link za prijavu
+        email_placeholder: Vaš e-mail
+        email_submit: Dobijte link
+        email_registration_description: Ako niste registrovan, kreirajte novi profil
+        email_registration_link: Registrujte se
+    registrations:
+      new:
+        title: Registracija
+        description: Napravite profil na sajtu S95
+        subtitle: Link za potvrdu će biti poslat na navedenu e-mail adresu
+        email_hint: (potrebno je potvrditi u roku od 1 sata)
+        gender_required: Navedite pol
+        submit: Registrujte se
+      signed_up_but_unconfirmed: 'Link za potvrdu je poslat na vaš e-mail. Molimo potvrdite e-mail u roku od 1 sata.'
     confirmations:
       new:
         title: Pošaljite uputstva za potvrdu e-mail

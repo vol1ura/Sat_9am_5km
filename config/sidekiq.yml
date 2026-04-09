@@ -71,3 +71,8 @@
       class: EmptyClubsCleanupJob
       queue: low
       description: Remove old clubs with no athletes and missing or short description
+    cleanup_unconfirmed_users:
+      cron: "15 * * * *"
+      class: CleanupUnconfirmedUsersJob
+      queue: low
+      description: Remove users who did not confirm email within 1 hour

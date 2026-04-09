@@ -3,7 +3,7 @@ ru:
     shared:
       links:
         sign_in: Войти
-        registration: Зарегистрироваться с помощью Telegram бота
+        registration: Зарегистрироваться по email
         password: Забыли пароль?
         confirmation: Не получили ссылку для подтверждения?
         unlock: Не получили ссылку для разблокировки?
@@ -12,12 +12,21 @@ ru:
       signed_out : Выход из системы успешно выполнен
       new:
         title: Вход на сайт
-        description: Чтобы войти на сайт, можно использовать email и пароль или Telegram-бота. Достаточно просто запросить в боте одноразовую ссылку для входа командой /login
-        registration_html: 'Зарегистрируйтесь с помощью <a href="%{link}" target="_blank" rel="noopener">@sat9am5kmbot</a> Telegram бота'
-        telegram_login_html: 'Если вы уже зарегистрированы, используйте для входа одноразовую ссылку, которую можно получить командой <code>/login</code> в <a href="%{link}" class="text-reset" target="_blank">боте</a>'
-        email_login_title: Вход по email
-        email_login_description: Если вы привязали email, можно войти без Telegram — вам придёт ссылка для входа
-        email_login_link: Войти по email
+        description: Чтобы войти на сайт, можно использовать Telegram-бота или email. Достаточно просто запросить одноразовую ссылку для входа.
+        email_login_description: Введите ваш email — мы отправим одноразовую ссылку для входа
+        email_placeholder: Ваш email
+        email_submit: Получить ссылку
+        email_registration_description: Либо если вы ещё не зарегистрированы, создайте новый профиль
+        email_registration_link: Зарегистрироваться
+    registrations:
+      new:
+        title: Регистрация
+        description: Создайте профиль на сайте С95
+        subtitle: На указанный email будет отправлена ссылка для подтверждения
+        email_hint: (необходимо подтвердить в течение 1 часа)
+        gender_required: Укажите пол
+        submit: Зарегистрироваться
+      signed_up_but_unconfirmed: 'На ваш email отправлена ссылка для подтверждения. Пожалуйста, подтвердите email в течение 1 часа.'
     confirmations:
       new:
         title: Выслать инструкции для подтверждения e-mail
