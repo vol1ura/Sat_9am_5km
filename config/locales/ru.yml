@@ -524,6 +524,10 @@ ru:
   notification_mailer:
     parkzhrun_error: 'Ошибка! Не удалось создать забег ПаркЖрун'
     feedback: 'Новый отзыв на сайте С95'
+  user_notification_mailer:
+    notify:
+      subject: Уведомление от С95
+      unsubscribe_html: Отписаться от уведомлений можно в <a href="%{url}">личном кабинете</a>.
   button:
     show_more: Показать все
     show_less: Свернуть

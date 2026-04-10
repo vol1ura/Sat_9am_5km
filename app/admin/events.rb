@@ -91,9 +91,7 @@ ActiveAdmin.register Event do
   after_update do
     next unless resource.saved_change_to_active?
 
-    if !resource.active && params[:notify_cancellation] == '1'
-      Telegram::Notification::EventCancellationJob.perform_later resource.id
-    end
+    Notification::EventCancellationJob.perform_later resource.id if !resource.active && params[:notify_cancellation] == '1'
     RenewGoingToEventJob.set(queue: resource.active ? :low : :sequential).perform_later resource.id
   end
 end

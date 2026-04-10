@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+module Notification
+  module User
+    class NewRunner < Base
+      private
+
+      def text
+        activity = @user.athlete.results.first.activity
+
+        activity.country.localized(
+          'notification.user.new_runner',
+          first_name: @user.first_name,
+          activity_url: activity_url(activity, host: activity.country.host),
+        )
+      end
+    end
+  end
+end

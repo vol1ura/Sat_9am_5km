@@ -35,7 +35,7 @@ module Telegram
     end
 
     def send_request
-      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, open_timeout: 60, read_timeout: 60) do |http|
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, open_timeout: 15, read_timeout: 15) do |http|
         req = Net::HTTP::Post.new(uri)
         if @payload.key?(:form_data)
           req.set_form(@payload[:form_data], 'multipart/form-data')

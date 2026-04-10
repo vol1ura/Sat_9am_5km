@@ -27,7 +27,7 @@ ActiveAdmin.register Newsletter do
   end
 
   member_action :notify, method: :post do
-    Telegram::Notification::Newsletter.call resource, current_user, increment: false
+    Notification::Newsletter.call resource, current_user, increment: false
     redirect_to admin_newsletter_path(resource), notice: I18n.t('active_admin.newsletters.notified')
   end
 

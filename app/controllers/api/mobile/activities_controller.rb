@@ -58,7 +58,7 @@ module API
       end
 
       def notify_volunteers(role)
-        Telegram::Notification::ActivityAlertJob.perform_later(
+        Notification::ActivityAlertJob.perform_later(
           @activity.id,
           ['director', 'results_handler', role],
           render_to_string(partial: role, formats: :text).to_str,

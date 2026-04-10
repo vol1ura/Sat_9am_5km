@@ -6,7 +6,7 @@ RSpec.describe '/user' do
   describe 'GET /user/sign_up' do
     it 'renders successful response' do
       get new_user_registration_url
-      expect(response).to redirect_to 'https://t.me/sat9am5kmbot'
+      expect(response).to be_successful
     end
   end
 

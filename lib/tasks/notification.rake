@@ -13,7 +13,7 @@ namespace :notification do
       .joins(:athlete)
       .where(athlete: { id: athlete_ids })
       .where.not("'after_activity' = ANY(disabled_notifications)")
-      .find_each { |user| Telegram::Notification::User::NewRunner.call(user) }
+      .find_each { |user| Notification::User::NewRunner.call user }
   end
 
   desc 'Notify about doubled results'
@@ -33,7 +33,7 @@ namespace :notification do
     User
       .where(role: %i[super_admin admin])
       .where.not("'other' = ANY(disabled_notifications)")
-      .find_each { |user| Telegram::Notification::User::Message.call user, message }
+      .find_each { |user| Notification::User::Message.call user, message }
   end
 
   desc 'Notify about incorrect activities'
@@ -47,7 +47,7 @@ namespace :notification do
         *User.protocol_responsible(activity),
       ]
         .compact
-        .each { |user| Telegram::Notification::User::Message.call user, message }
+        .each { |user| Notification::User::Message.call user, message }
     end
   end
 end

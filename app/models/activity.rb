@@ -81,7 +81,7 @@ class Activity < ApplicationRecord
     BreakingTimeAwardingJob.perform_later id
     FivePlusAwardingJob.perform_later id
     AthleteStatsUpdateJob.set(wait: 10.minutes).perform_later participants.ids
-    Telegram::Notification::AfterActivityJob.perform_later id
+    Notification::AfterActivityJob.perform_later id
     ClearCache.call
   end
 end

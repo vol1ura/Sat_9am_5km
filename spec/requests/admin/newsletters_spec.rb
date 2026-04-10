@@ -38,7 +38,7 @@ RSpec.describe '/admin/newsletters' do
   end
 
   describe 'POST /admin/newsletters/1/notify' do
-    before { allow(Telegram::Notification::Newsletter).to receive(:call) }
+    before { allow(Notification::Newsletter).to receive(:call) }
 
     it 'redirects to show page' do
       newsletter = create(:newsletter)

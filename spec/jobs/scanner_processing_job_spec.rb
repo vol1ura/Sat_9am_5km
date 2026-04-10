@@ -30,7 +30,7 @@ RSpec.describe ScannerProcessingJob do
     let(:other_result) { create(:result, activity:, athlete:) }
 
     it 'alerts about incorrect result' do
-      expect(Telegram::Notification::ActivityAlertJob).to have_been_enqueued.with(
+      expect(Notification::ActivityAlertJob).to have_been_enqueued.with(
         activity.id,
         %w[director results_handler],
         include("проверьте позицию *P#{result.position}*, а также участника с ID *A#{athlete.code}* на дублирование"),

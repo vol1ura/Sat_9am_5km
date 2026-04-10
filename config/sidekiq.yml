@@ -20,21 +20,21 @@
       queue: low
     rage_badges_expiration:
       cron: "0 18 * * THU"
-      class: "Telegram::Notification::RageBadgesExpirationJob"
+      class: "Notification::RageBadgesExpirationJob"
       queue: low
     before_activity:
       cron: "0 2 * * FRI"
-      class: "Telegram::Notification::BeforeActivityJob"
+      class: "Notification::BeforeActivityJob"
       queue: low
       description: Set notification jobs for volunteers before activity
     before_activity_end_of_year:
       cron: "0 2 31 12 *"
-      class: "Telegram::Notification::BeforeActivityJob"
+      class: "Notification::BeforeActivityJob"
       queue: low
       description: Set notification jobs for volunteers before activity
     breaking_time_badges_expiration:
       cron: "0 18 * * SAT"
-      class: "Telegram::Notification::BreakingTimeBadgesExpirationJob"
+      class: "Notification::BreakingTimeBadgesExpirationJob"
       queue: low
       description: Notify about breaking time badge expiration
     home_badge_awarding:
@@ -55,7 +55,7 @@
       queue: low
     incorrect_running_volunteers:
       cron: "0 12 * * SUN"
-      class: "Telegram::Notification::IncorrectRunningVolunteersJob"
+      class: "Notification::IncorrectRunningVolunteersJob"
       queue: low
     current_week_processing:
       cron: "0 18 * * SUN"

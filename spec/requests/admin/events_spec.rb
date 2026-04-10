@@ -72,13 +72,13 @@ RSpec.describe '/admin/events' do
 
     before do
       allow(RenewGoingToEventJob).to receive(:set).and_return(configured_renew_job)
-      allow(Telegram::Notification::EventCancellationJob).to receive(:perform_later)
+      allow(Notification::EventCancellationJob).to receive(:perform_later)
     end
 
     it 'enqueues cancellation notification before renewing going athletes' do
       patch admin_event_url(event), params: { event: { active: false }, notify_cancellation: '1' }
 
-      expect(Telegram::Notification::EventCancellationJob).to have_received(:perform_later).with(event.id).ordered
+      expect(Notification::EventCancellationJob).to have_received(:perform_later).with(event.id).ordered
       expect(RenewGoingToEventJob).to have_received(:set).with(queue: :sequential).ordered
       expect(configured_renew_job).to have_received(:perform_later).with(event.id).ordered
     end
@@ -88,7 +88,7 @@ RSpec.describe '/admin/events' do
 
       expect(RenewGoingToEventJob).to have_received(:set).with(queue: :sequential)
       expect(configured_renew_job).to have_received(:perform_later).with(event.id)
-      expect(Telegram::Notification::EventCancellationJob).not_to have_received(:perform_later)
+      expect(Notification::EventCancellationJob).not_to have_received(:perform_later)
     end
   end
 end

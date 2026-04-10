@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+
+RSpec.describe Notification::Volunteer do
+  let(:user) { create(:user, disabled_notifications:) }
+  let(:disabled_notifications) { [] }
+  let(:athlete) { create(:athlete, user:) }
+  let(:activity) { create(:activity, event:) }
+  let(:volunteer) { create(:volunteer, athlete:, activity:) }
+  let(:director) { create(:athlete) }
+  let(:event) { create(:event) }
+  let(:bot_token) { '123456:aaabbb' }
+  let(:request) { stub_request(:post, %r{https://api\.telegram\.org/bot#{bot_token}/sendMessage}) }
+
+  before do
+    stub_const('Telegram::Bot::TOKEN', bot_token)
+    allow(Rollbar).to receive(:error)
+    request.to_return(status: 200)
+    described_class.new(volunteer, director, event).call
+  end
+
+  it 'notifies the volunteer' do
+    expect(request).to have_been_requested
+    expect(Rollbar).not_to have_received(:error)
+  end
+
+  context 'with disabled volunteer_reminder notification' do
+    let(:disabled_notifications) { %w[volunteer_reminder] }
+
+    it 'does not notify the volunteer' do
+      expect(request).not_to have_been_requested
+    end
+  end
+end

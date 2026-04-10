@@ -474,6 +474,10 @@ en:
   notification_mailer:
     parkzhrun_error: 'Error! Failed to create ParkZhrun run'
     feedback: 'New feedback on S95 website'
+  user_notification_mailer:
+    notify:
+      subject: Notification from S95
+      unsubscribe_html: You can unsubscribe from notifications in your <a href="%{url}">account settings</a>.
   button:
     show_more: Show all
     show_less: Collapse
