@@ -63,7 +63,7 @@ module ApplicationHelper
   end
 
   def event_main_image_tag(event, variant: :full, **)
-    image = event.summer_image if Event::SUMMER_MONTHS.cover?(Time.current.month) || !event.winter_image.attached?
+    image = event.summer_image if Time.current.summer? || !event.winter_image.attached?
     image ||= event.winter_image
     image_path = image.attached? ? image.variant(variant) : '/images/event_placeholder.webp'
     image_tag image_path, **

@@ -1,11 +1,29 @@
 # frozen_string_literal: true
 
 RSpec.describe '/events' do
-  let!(:event) { create(:event) }
+  let!(:event) do
+    event = create(:event)
+    event.summer_image.attach(
+      io: File.open('spec/fixtures/files/default.png'),
+      filename: 'summer.png',
+    )
+    event.winter_image.attach(
+      io: File.open('spec/fixtures/files/default.png'),
+      filename: 'winter.png',
+    )
+    event
+  end
 
   describe 'GET /' do
-    context 'without :all in params' do
-      it 'makes successful request' do
+    it 'makes successful request in summer' do
+      travel_to Time.zone.local(2025, 4, 1) do
+        get events_url
+        expect(response).to be_successful
+      end
+    end
+
+    it 'makes successful request in winter' do
+      travel_to Time.zone.local(2025, 11, 1) do
         get events_url
         expect(response).to be_successful
       end

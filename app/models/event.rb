@@ -2,7 +2,6 @@
 
 class Event < ApplicationRecord
   AVAILABLE_TIMEZONES = ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name }.uniq.freeze
-  SUMMER_MONTHS = 4..10
 
   belongs_to :country
   has_many :activities, dependent: :destroy

@@ -7,7 +7,8 @@ class EventsController < ApplicationController
     @events = Event.all
     return if params[:all]
 
-    @events = @events.in_country(top_level_domain).includes(:summer_image_attachment, :winter_image_attachment)
+    @events = @events.in_country(top_level_domain).includes(:summer_image_attachment)
+    @events = @events.includes(:winter_image_attachment) unless Time.current.summer?
   end
 
   def search
