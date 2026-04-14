@@ -5,7 +5,7 @@ RSpec.describe '/admin/events' do
 
   before do
     user.admin!
-    sign_in user, scope: :user
+    sign_in user
   end
 
   describe 'GET /admin/events' do

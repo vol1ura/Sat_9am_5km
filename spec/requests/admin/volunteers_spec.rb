@@ -6,7 +6,7 @@ RSpec.describe '/admin/activities/1/volunteers' do
 
   before do
     create(:permission, user: user, action: 'manage', subject_class: 'Volunteer', event_id: activity.event_id)
-    sign_in user, scope: :user
+    sign_in user
   end
 
   describe 'GET /admin/activities/1/volunteers' do

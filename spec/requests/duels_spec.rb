@@ -3,7 +3,7 @@
 RSpec.describe '/duels' do
   let(:user) { create(:user) }
 
-  before { sign_in user, scope: :user }
+  before { sign_in user }
 
   describe 'GET /duels' do
     let(:athlete) { create(:athlete, user:) }

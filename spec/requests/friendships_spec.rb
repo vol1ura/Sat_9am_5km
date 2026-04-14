@@ -5,7 +5,7 @@ RSpec.describe '/friendships' do
   let(:athlete) { create(:athlete, user:) }
   let(:friend) { create(:athlete) }
 
-  before { sign_in user, scope: :user }
+  before { sign_in user }
 
   describe 'POST #create' do
     it 'creates a new friendship' do

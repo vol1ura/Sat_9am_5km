@@ -8,7 +8,7 @@ RSpec.describe '/admin/results' do
 
   before do
     create(:permission, user: user, action: 'read', subject_class: 'Result', event_id: event.id)
-    sign_in user, scope: :user
+    sign_in user
   end
 
   describe 'GET /admin/results' do

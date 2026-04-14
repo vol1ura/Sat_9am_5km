@@ -3,7 +3,7 @@
 RSpec.describe '/admin/utilities' do
   let(:user) { create(:user, :admin) }
 
-  before { sign_in user, scope: :user }
+  before { sign_in user }
 
   describe 'GET /admin/utilities' do
     before do

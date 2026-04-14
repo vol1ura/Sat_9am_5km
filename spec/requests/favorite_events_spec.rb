@@ -6,7 +6,7 @@ RSpec.describe '/favorite_events' do
   let(:user) { create(:user) }
   let(:event) { create(:event) }
 
-  before { sign_in user, scope: :user }
+  before { sign_in user }
 
   describe 'PUT /events/:code_name/favorite_event' do
     it 'adds event to favorites via turbo stream' do

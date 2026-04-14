@@ -7,7 +7,7 @@ RSpec.describe '/going_tos' do
   let(:event) { create(:event) }
   let!(:athlete) { create(:athlete, user:) }
 
-  before { sign_in user, scope: :user }
+  before { sign_in user }
 
   describe 'POST /going_tos' do
     it 'returns a successful response' do

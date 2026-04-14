@@ -12,7 +12,7 @@ RSpec.describe '/user' do
 
   context 'with authenticated user' do
     before do
-      sign_in user, scope: :user
+      sign_in user
       Bullet.n_plus_one_query_enable = false if defined?(Bullet)
     end
 
