@@ -71,8 +71,8 @@ class User < ApplicationRecord
 
   private
 
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
+  def send_devise_notification(notification, *)
+    devise_mailer.send(notification, self, *).deliver_later
   end
 
   def update_athlete_name
