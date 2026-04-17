@@ -526,7 +526,7 @@ ru:
     feedback: 'Новый отзыв на сайте С95'
   user_notification_mailer:
     notify:
-      subject: Уведомление от С95
+      subject: Загляните в письмо! Внутри информация о вашей субботе
       unsubscribe_html: Отписаться от уведомлений можно в <a href="%{url}">личном кабинете</a>.
   button:
     show_more: Показать все
@@ -797,7 +797,7 @@ ru:
         title: Как всё устроено?
         registration:
           title: Регистрация
-          description: Создай профиль в нашем Telegram-боте @sat9am5kmbot
+          description: Создай профиль, заполнив простую форму
         choose_run:
           title: Выбери забег
           description: Более 30 точек в 3 странах

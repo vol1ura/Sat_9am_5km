@@ -13,7 +13,7 @@ module Notification
 
       director = activity.volunteers.find_by(role: :director)&.athlete
 
-      activity.volunteers.includes(athlete: :user).find_each do |volunteer|
+      activity.volunteers.preload(athlete: :user).find_each do |volunteer|
         Volunteer.call volunteer, director, event
       end
     end

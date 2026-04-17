@@ -30,4 +30,13 @@ RSpec.describe Notification::Volunteer do
       expect(request).not_to have_been_requested
     end
   end
+
+  context 'when athlete has no user' do
+    let(:user) { nil }
+
+    it 'does not notify and does not raise' do
+      expect(request).not_to have_been_requested
+      expect(Rollbar).not_to have_received(:error)
+    end
+  end
 end

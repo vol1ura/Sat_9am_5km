@@ -527,7 +527,7 @@ sr:
     feedback: 'Novi odgovor na sajt S95'
   user_notification_mailer:
     notify:
-      subject: Obaveštenje od S95
+      subject: Proverite svoju email adresu! Unutar je informacija o vašoj suboti
       unsubscribe_html: Obaveštenja možete odjaviti u <a href="%{url}">ličnom kabinetu</a>.
   button:
     show_more: Prikaži više
@@ -688,7 +688,7 @@ sr:
         title: "Kako to radi?"
         registration:
           title: Registracija
-          description: "Napravi profil u našem Telegram botu @sat9am5kmbot"
+          description: Napravi profil, popuni jednostavnu formu
         choose_run:
           title: Izaberi trku
           description: Više od 30 lokacija u 3 zemlje

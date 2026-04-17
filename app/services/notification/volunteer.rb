@@ -10,6 +10,7 @@ module Notification
     end
 
     def call
+      return unless @user
       return if @user.notification_disabled? :volunteer_reminder
 
       notify! @user

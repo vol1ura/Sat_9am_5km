@@ -476,7 +476,7 @@ en:
     feedback: 'New feedback on S95 website'
   user_notification_mailer:
     notify:
-      subject: Notification from S95
+      subject: Check your email! Inside is information about your Saturday
       unsubscribe_html: You can unsubscribe from notifications in your <a href="%{url}">account settings</a>.
   button:
     show_more: Show all
@@ -743,7 +743,7 @@ en:
         title: How It Works?
         registration:
           title: Registration
-          description: Create a profile in our Telegram bot @sat9am5kmbot
+          description: Create a profile, fill out a simple form
         choose_run:
           title: Choose a Run
           description: Over 30 locations in 3 countries

@@ -14,25 +14,12 @@ set :chronic_options, hours24: true
 #
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, at: '2' do
-  command "$HOME/db_backups/sendmail.sh #{ENV.fetch('ADMIN_EMAIL')}"
-  command "$HOME/backup_storage.sh"
-end
-
-every 4.months, at: '1' do
-  command "rm -rf #{File.join ENV.fetch('APP_DEPLOY_PATH'), 'shared/tmp/cache/bootsnap/*'}"
-end
-
 every :friday, at: '1' do
   rake 'pghero:clean_query_stats'
 end
 
 every :friday, at: '10' do
   rake 'notification:invite_newbies'
-end
-
-every :saturday, at: '23' do
-  command "$HOME/db_backups/weekly.sh #{ENV.fetch('INFO_EMAIL')}"
 end
 
 every :sunday, at: '5' do
