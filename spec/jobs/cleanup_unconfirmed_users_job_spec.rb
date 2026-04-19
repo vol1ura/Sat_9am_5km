@@ -6,11 +6,11 @@ RSpec.describe CleanupUnconfirmedUsersJob do
   end
 
   describe '#perform' do
-    it 'destroys only unconfirmed users older than 1 hour' do
+    it 'destroys only unconfirmed users older than 3 hours' do
       athlete = create(:athlete, :with_user)
-      athlete.user.update!(confirmed_at: nil, created_at: 2.hours.ago)
+      athlete.user.update!(confirmed_at: nil, created_at: 181.minutes.ago)
       create(:user)
-      create(:user).update!(confirmed_at: nil, created_at: 30.minutes.ago)
+      create(:user).update!(confirmed_at: nil, created_at: 179.minutes.ago)
 
       expect { described_class.perform_now }
         .to change(Athlete, :count).by(-1)
@@ -21,7 +21,7 @@ RSpec.describe CleanupUnconfirmedUsersJob do
 
     it 'keeps athlete with results' do
       athlete = create(:athlete, :with_user)
-      athlete.user.update!(confirmed_at: nil, created_at: 2.hours.ago)
+      athlete.user.update!(confirmed_at: nil, created_at: 4.hours.ago)
       create(:result, athlete:)
 
       described_class.perform_now
@@ -32,7 +32,7 @@ RSpec.describe CleanupUnconfirmedUsersJob do
 
     it 'keeps athlete with volunteering' do
       athlete = create(:athlete, :with_user)
-      athlete.user.update!(confirmed_at: nil, created_at: 2.hours.ago)
+      athlete.user.update!(confirmed_at: nil, created_at: 4.hours.ago)
       create(:volunteer, athlete:)
 
       described_class.perform_now
