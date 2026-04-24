@@ -16,9 +16,6 @@ en:
         task_queued: 'File creation task has been queued. Wait for the report in Telegram.'
         event_not_selected: Event not selected
         params_not_selected: 'Event or role not selected'
-      cache:
-        clear_success: 'Cache successfully cleared!'
-        clear_failed: 'Cancelled! Cache was recently cleared. Please try again later.'
       award_funrun_badge:
         performing: 'Award procedure has been started, this will take some time. Refresh the page a bit later to see the results.'
       stats:
@@ -231,10 +228,6 @@ en:
         utilities: Utilities
         analytics:
           title: Analytics
-        cache_clear:
-          title: 'Cache Clear'
-          button: 'Clear Cache'
-          confirm: 'Are you sure you want to clear the cache?'
         badges:
           title: Badges
 

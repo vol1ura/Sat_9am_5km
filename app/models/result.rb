@@ -85,7 +85,7 @@ class Result < ApplicationRecord
 
   def insert_new_result_above!
     transaction do
-      activity.results.where(position: position..).update_all 'position = position + 1'
+      activity.results.where(position: position..).update_all ['position = position + 1, updated_at = ?', Time.current]
       activity.results.create! position:
     end
   end

@@ -28,31 +28,6 @@ RSpec.describe '/admin/utilities' do
     end
   end
 
-  describe 'DELETE /admin/utilities/cache' do
-    before do
-      allow(ClearCache).to receive(:call).and_return(clear_result)
-      delete admin_utilities_cache_url
-    end
-
-    context 'when cache was cleared' do
-      let(:clear_result) { true }
-
-      it 'redirects' do
-        expect(flash[:notice]).to be_present
-        expect(response).to redirect_to admin_utilities_url
-      end
-    end
-
-    context 'when cache was not cleared' do
-      let(:clear_result) { false }
-
-      it 'redirects' do
-        expect(flash[:alert]).to be_present
-        expect(response).to redirect_to admin_utilities_url
-      end
-    end
-  end
-
   describe 'POST /admin/utilities/export_event_csv' do
     let!(:event_id) { create(:event).id }
 

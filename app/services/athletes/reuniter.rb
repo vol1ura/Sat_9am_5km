@@ -23,7 +23,6 @@ module Athletes
       AthleteStatsUpdateJob.perform_later athlete.id
       AthletePersonalBestsUpdateJob.perform_later athlete.id
       schedule_telegram_notification
-      ClearCache.call
       true
     rescue StandardError => e
       Rollbar.error e, ids: @ids.inspect
@@ -57,9 +56,13 @@ module Athletes
     end
 
     def replace_all_by_one!
+      activity_ids =
+        (Result.where(athlete_id: @ids).pluck(:activity_id) + Volunteer.where(athlete_id: @ids).pluck(:activity_id)).uniq
+      now = Time.current
       ActiveRecord::Base.transaction do
-        Result.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
-        Volunteer.where(athlete_id: @ids).update_all(athlete_id: athlete.id)
+        Result.where(athlete_id: @ids).update_all(athlete_id: athlete.id, updated_at: now)
+        Volunteer.where(athlete_id: @ids).update_all(athlete_id: athlete.id, updated_at: now)
+        Activity.where(id: activity_ids).touch_all
         update_all_trophies!
         @collection.excluding(athlete).destroy_all
         athlete.save!

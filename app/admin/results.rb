@@ -157,7 +157,9 @@ ActiveAdmin.register Result do
 
   member_action :drop, method: :delete, if: proc { can? :manage, Result } do
     resource.transaction do
-      collection.where('position > ?', resource.position).update_all 'position = position - 1'
+      collection
+        .where('position > ?', resource.position)
+        .update_all(['position = position - 1, updated_at = ?', Time.current])
       resource.destroy
     end
     redirect_to collection_path, notice: t('active_admin.results.result_successfully_deleted')
@@ -218,7 +220,7 @@ ActiveAdmin.register Result do
   ) do |ids, inputs|
     sign = inputs[:type] == 'up' ? '+' : '-'
     delta = (inputs[:minutes].to_i * 60) + inputs[:seconds].to_i
-    Result.where(id: ids).update_all("total_time = total_time #{sign} #{delta}")
+    Result.where(id: ids).update_all(["total_time = total_time #{sign} #{delta}, updated_at = ?", Time.current])
 
     redirect_to(
       collection_path(parent),

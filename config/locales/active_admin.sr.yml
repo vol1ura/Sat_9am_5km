@@ -16,9 +16,6 @@ sr:
         task_queued: 'Zadatak za kreiranje fajla je postavljen u red. Očekujte poruku u Telegram-u.'
         event_not_selected: Merejment nije izabran
         params_not_selected: Događaj ili uloga nisu izabrani
-      cache:
-        clear_success: 'Keš uspešno očišćen!'
-        clear_failed: 'Otkazano! Keš je nedavno već bio očišćen. Pokušajte ponovo kasnije.'
       award_funrun_badge:
         performing: 'Procedura nagrađivanja je pokrenuta, to će potrajati neko vreme. Osvežite stranicu kasnije da vidite rezultate.'
       stats:
@@ -235,10 +232,6 @@ sr:
         utilities: Alati
         analytics:
           title: Analitika
-        cache_clear:
-          title: 'Očisti keš'
-          button: 'Očisti'
-          confirm: 'Da li ste sigurni da želite da očistite keš?'
         badges:
           title: Značke
 
