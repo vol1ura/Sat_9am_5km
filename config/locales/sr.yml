@@ -108,6 +108,7 @@ sr:
         description: opis
       event:
         active: aktivan
+        auto_create_activities: automatsko kreiranje trka
         cancellation_reason: razlog otkazivanja
         country: država
         code_name: nadimak

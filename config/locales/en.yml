@@ -100,6 +100,7 @@ en:
         description: description
       event:
         active: active
+        auto_create_activities: auto-create runs
         cancellation_reason: cancellation reason
         country: country
         code_name: code name

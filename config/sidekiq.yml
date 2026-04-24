@@ -32,6 +32,11 @@
       class: "Notification::BeforeActivityJob"
       queue: low
       description: Set notification jobs for volunteers before activity
+    auto_create_activities:
+      cron: "0 1 * * SAT"
+      class: AutoCreateActivitiesJob
+      queue: low
+      description: Create unpublished activities for the next four Saturdays for active events with auto-create enabled
     breaking_time_badges_expiration:
       cron: "0 18 * * SAT"
       class: "Notification::BreakingTimeBadgesExpirationJob"

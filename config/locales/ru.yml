@@ -106,6 +106,7 @@ ru:
         description: описание
       event:
         active: активен
+        auto_create_activities: автосоздание забегов
         cancellation_reason: причина отмены
         country: страна
         code_name: кодовое имя

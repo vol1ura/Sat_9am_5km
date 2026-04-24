@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_04_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -159,6 +159,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_04_120000) do
 
   create_table "events", force: :cascade do |t|
     t.boolean "active", default: false, null: false
+    t.boolean "auto_create_activities", default: false, null: false
     t.string "cancellation_reason"
     t.string "code_name", null: false
     t.bigint "country_id", null: false
