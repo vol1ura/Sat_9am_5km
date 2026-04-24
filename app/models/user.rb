@@ -22,6 +22,8 @@ class User < ApplicationRecord
     attachable.variant :web, resize_to_fill: [200, 200]
   end
 
+  normalizes :email, with: ->(value) { value.presence }
+
   validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+(-[[:alpha:]]{2,})?\z/ }
   validates :last_name, presence: true, format: { with: /\A[[:alpha:]]+([-' ][[:alpha:]]{2,})?\z/ }
   validates :email, presence: true, if: -> { telegram_id.nil? }

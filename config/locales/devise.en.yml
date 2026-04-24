@@ -23,10 +23,10 @@ en:
         title: Register
         description: Create your profile on the S95 website
         subtitle: A confirmation link will be sent to the provided email address
-        email_hint: (must be confirmed within 1 hour)
+        email_hint: (must be confirmed within 3 hours)
         gender_required: Please specify your gender
         submit: Register
-      signed_up_but_unconfirmed: 'A confirmation link has been sent to your email. Please confirm your email within 1 hour.'
+      signed_up_but_unconfirmed: 'A confirmation link has been sent to your email. Please confirm your email within 3 hours.'
     confirmations:
       new:
         title: Resend Confirmation Instructions

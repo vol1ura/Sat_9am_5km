@@ -53,6 +53,14 @@ RSpec.describe User do
     end
   end
 
+  describe 'email normalization' do
+    it 'converts blank email to nil' do
+      user = create(:user)
+      user.update!(email: '')
+      expect(user.reload.email).to be_nil
+    end
+  end
+
   describe '#notification_disabled?' do
     let(:user) { build(:user, disabled_notifications: %w[newsletter badge]) }
 

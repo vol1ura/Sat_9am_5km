@@ -23,10 +23,10 @@ sr:
         title: Registracija
         description: Napravite profil na sajtu S95
         subtitle: Link za potvrdu će biti poslat na navedenu e-mail adresu
-        email_hint: (potrebno je potvrditi u roku od 1 sata)
+        email_hint: (potrebno je potvrditi u roku od 3 sata)
         gender_required: Navedite pol
         submit: Registrujte se
-      signed_up_but_unconfirmed: 'Link za potvrdu je poslat na vaš e-mail. Molimo potvrdite e-mail u roku od 1 sata.'
+      signed_up_but_unconfirmed: 'Link za potvrdu je poslat na vaš e-mail. Molimo potvrdite e-mail u roku od 3 sata.'
     confirmations:
       new:
         title: Pošaljite uputstva za potvrdu e-mail
