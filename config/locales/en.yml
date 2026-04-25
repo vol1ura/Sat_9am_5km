@@ -1024,6 +1024,7 @@ en:
       list: List
       map: Map
       our_events: Our Events
+      details: Details
     favorite_events_section:
       title: Favorite events
       all_events: All events

@@ -27,6 +27,12 @@ sr:
         gender_required: Navedite pol
         submit: Registrujte se
       signed_up_but_unconfirmed: 'Link za potvrdu je poslat na vaš e-mail. Molimo potvrdite e-mail u roku od 3 sata.'
+      signed_up: 'Dobrodošli! Uspešno ste se prijavili.'
+      signed_up_but_inactive: 'Uspešno ste se registrovali. Međutim, nismo mogli da Vas prijavimo jer Vaš nalog još uvek nije aktiviran.'
+      signed_up_but_locked: 'Uspešno ste se registrovali. Međutim, nismo mogli da Vas prijavimo jer je Vaš nalog zaključan.'
+      updated: 'Uspešno ste ažurirali svoj nalog.'
+      update_needs_confirmation: 'Uspešno ste ažurirali svoj nalog, ali potrebno je da potvrdite Vašu novu email adresu. Molimo proverite Vaš email i kliknite na link za potvrdu Vaše nove email adrese.'
+      destroyed: 'Doviđenja! Vaš nalog je uspešno otkazan. Nadamo se da ćemo Vas videti ponovo.'
     confirmations:
       new:
         title: Pošaljite uputstva za potvrdu e-mail
@@ -65,14 +71,6 @@ sr:
       updated: 'Vaša lozinka je uspešno izmenjena, sada ste prijavljeni na sistem.'
       updated_not_active: 'Lozinka je uspešno promenjena.'
       send_paranoid_instructions: 'Ako Vaša email adresa postoji u bazi, uskoro ćete dobiti email sa uputstvima kako da resetujete lozinku.'
-    registrations:
-      signed_up: 'Dobrodošli! Uspešno ste se prijavili.'
-      signed_up_but_unconfirmed: 'Poruka sa linkom za potvrdu naloga Vam je poslata na Vašu email adresu. Molimo otvorite taj link kako bi ste aktivirali svoj nalog.'
-      signed_up_but_inactive: 'Uspešno ste se registrovali. Međutim, nismo mogli da Vas prijavimo jer Vaš nalog još uvek nije aktiviran.'
-      signed_up_but_locked: 'Uspešno ste se registrovali. Međutim, nismo mogli da Vas prijavimo jer je Vaš nalog zaključan.'
-      updated: 'Uspešno ste ažurirali svoj nalog.'
-      update_needs_confirmation: 'Uspešno ste ažurirali svoj nalog, ali potrebno je da potvrdite Vašu novu email adresu. Molimo proverite Vaš email i kliknite na link za potvrdu Vaše nove email adrese.'
-      destroyed: 'Doviđenja! Vaš nalog je uspešno otkazan. Nadamo se da ćemo Vas videti ponovo.'
     unlocks:
       new:
         title: Pošaljite uputstva za otključavanje

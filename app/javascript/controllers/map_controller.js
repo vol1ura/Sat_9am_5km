@@ -2,6 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
   static targets = ['mapView', 'listView', 'mapButton', 'listButton'];
+  static values = { buttonLabel: String };
 
   connect() {
     this.showList();
@@ -104,7 +105,7 @@ export default class extends Controller {
               balloonContent: `
                 <h5 class="text-primary">${event.name}</h5>
                 <p class="my-0 text-black">${event.place} (${event.town})</p>
-                <a href="/events/${event.code_name}" class="btn btn-outline-primary btn-sm my-2">Подробнее</a>
+                <a href="/events/${event.code_name}" class="btn btn-outline-primary btn-sm my-2">${this.buttonLabelValue}</a>
               `,
               hintContent: event.name
             },

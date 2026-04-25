@@ -1084,6 +1084,7 @@ sr:
       list: Lista
       map: Karta
       our_events: Naši događaji
+      details: Detaljnije
     favorite_events_section:
       title: Omiljeni događaji
       all_events: Svi događaji
