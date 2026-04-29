@@ -36,6 +36,7 @@ ActiveAdmin.register Event do
   show do
     attributes_table do
       row :active
+      row :auto_create_activities
       row :cancellation_reason unless resource.active
       row :country
       row :code_name

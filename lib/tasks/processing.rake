@@ -20,22 +20,32 @@ namespace :processing do
   task :send_pacemakers_report, [:telegram_id] => :environment do |_t, args|
     require 'csv'
 
-    volunteers =
+    rows =
       Volunteer
+        .joins(:athlete, activity: :event)
+        .joins(<<~SQL.squish)
+          LEFT JOIN results ON results.activity_id = volunteers.activity_id
+            AND results.athlete_id = volunteers.athlete_id
+        SQL
         .published
-        .where(activity: { date: 1.week.ago.all_week }, role: :pacemaker)
-        .includes(:athlete, activity: :event)
-        .all
-    results =
-      Result
-        .where(activity_id: volunteers.pluck(:activity_id), athlete_id: volunteers.pluck(:athlete_id))
-        .pluck(:athlete_id, :total_time)
-        .to_h
-        .transform_values { Result.time_string it }
+        .pacemaker_role
+        .pluck(
+          Arel.sql(
+            '(SELECT COUNT(*) FROM activities a ' \
+            'WHERE a.event_id = activity.event_id AND a.published = TRUE AND a.date <= activity.date)',
+          ),
+          'activity.date',
+          'event.name',
+          'athlete.name',
+          'volunteers.athlete_id',
+          'results.total_time',
+          'volunteers.comment',
+        )
     file = CSV.generate(headers: true) do |csv|
       csv << %w[N Date Event Name ID Time Comment]
-      volunteers.each do |v|
-        csv << [v.activity.number, v.date, v.activity.event.name, v.name, v.athlete_id, results[v.athlete_id], v.comment]
+      rows.each do |row|
+        row[5] = Result.time_string row[5]
+        csv << row
       end
     end
 

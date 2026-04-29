@@ -71,7 +71,7 @@
             </tr>
           <% end %>
         <% end %>
-        <% all_volunteers.reject { |v| v.role.in?(volunteering_positions_roles) }.each do |volunteer| %>
+        <% all_volunteers.reject { |v| v.role.in?(volunteering_positions_roles) }.sort_by { |v| [v.role, v.comment.to_s] }.each do |volunteer| %>
           <% idx = "#{volunteer.role}-#{volunteer.id}-#{@activity.id}" %>
           <tr>
             <td><%= render partial: 'role', locals: { volunteer: volunteer, role: volunteer.role, idx: idx } %></td>

@@ -11,7 +11,7 @@ module Notification
       activity = event.activities.find_by date: event.timezone_object.tomorrow
       return unless activity
 
-      director = activity.volunteers.find_by(role: :director)&.athlete
+      director = activity.volunteers.director_role.take&.athlete
 
       activity.volunteers.preload(athlete: :user).find_each do |volunteer|
         Volunteer.call volunteer, director, event
