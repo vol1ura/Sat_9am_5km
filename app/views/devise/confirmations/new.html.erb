@@ -1,6 +1,13 @@
 <% head_info :description, t('.description') %>
 <h1><%= head_info :title, t('.title') %></h1>
 
+<% if user_signed_in? %>
+  <div class="alert alert-warning my-3" role="alert">
+    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+    <%= t('.sign_out_warning') %>
+  </div>
+<% end %>
+
 <%= form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'row' }, data: { turbo: false } do |f| %>
   <%= render 'devise/shared/error_messages', resource: %>
   <div class="col-sm-12 col-lg-6 mb-3">

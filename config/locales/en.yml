@@ -1109,7 +1109,7 @@ en:
       add_phone_html: 'To participate in partner programs, you need to add your phone number. Phone binding and verification are done using the <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a> with the <code>/phone</code> command'
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Emergency Contact
-      click_on_photo_to_change: Click on photo to change
+      change_photo: Edit
       personal_bests: Personal Bests
       personal_best_10k: '10 km'
       personal_best_half_marathon: '21.1 km'
@@ -1255,6 +1255,9 @@ en:
       *Attention!* Activity ID=%{activity_id} (%{activity_date}) has running volunteer *%{athlete_name}* (ID=%{athlete_code})
       on the running position, however he has no result in the protocol. Please fix it.
 
+  shared:
+    barcode_modal:
+      close: Close
   auth_link_mailer:
     login_link:
       subject: Your sign-in link for S95

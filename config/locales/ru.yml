@@ -1163,7 +1163,7 @@ ru:
       add_phone_html: 'Для участия в партнёрских программах необходимо добавить ваш номер телефона. Привязка и проверка телефона выполняются с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a> командой <code>/phone</code>'
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Экстренный контакт
-      click_on_photo_to_change: Нажмите на фото для изменения
+      change_photo: Изменить
       personal_bests: Личные рекорды
       personal_best_10k: '10 км'
       personal_best_half_marathon: '21.1 км'
@@ -1308,6 +1308,9 @@ ru:
     incorrect_running_volunteers: |
       *Внимание!* В забеге ID=%{activity_id} (%{activity_date}) волонтёр *%{athlete_name}* (ID=%{athlete_code}) стоит на
       беговой позиции, однако при этом он без результата в протоколе. Пожалуйста, исправьте это.
+  shared:
+    barcode_modal:
+      close: Закрыть
   auth_link_mailer:
     login_link:
       subject: Ссылка для входа на сайт С95

@@ -4,7 +4,7 @@
     <h1 class="mb-4"><%= head_info :title, t('.title') %></h1>
     <%= turbo_frame_tag current_user do %>
       <div class="card border-0 mb-4">
-        <div class="card-body p-4">
+        <div class="card-body p-2">
           <div class="d-flex align-items-center">
             <div class="flex-grow-1 me-3">
               <div class="d-flex flex-column">
@@ -18,6 +18,10 @@
           </div>
 
           <div class="d-flex flex-column mt-3">
+            <p class="mb-2">
+              <i class="fa-solid fa-qrcode text-primary me-3"></i>
+              <%= link_to "A#{current_user.athlete.code}", '#', data: { 'bs-toggle' => 'modal', 'bs-target' => '#barcodeModal' } %>
+            </p>
             <p class="mb-2">
               <i class="fa-solid fa-envelope text-primary me-3"></i>
               <% if current_user.email %>
@@ -68,3 +72,5 @@
     <% end %>
   </div>
 </div>
+
+<%= render 'shared/barcode_modal', code: current_user.athlete.code, barcode: @barcode %>

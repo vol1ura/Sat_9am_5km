@@ -25,6 +25,10 @@ en:
         subtitle: A confirmation link will be sent to the provided email address
         email_hint: (must be confirmed within 3 hours)
         gender_required: Please specify your gender
+        policy_required: You must consent to the processing of personal data and the participation rules
+        policy_accepted_html: 'I agree to the %{policy_link} and the %{rules_link}'
+        policy_link: privacy policy
+        rules_link: participation rules
         submit: Register
       signed_up_but_unconfirmed: 'A confirmation link has been sent to your email. Please confirm your email within 3 hours.'
     confirmations:
@@ -33,6 +37,7 @@ en:
         description: Receiving instructions for e-mail confirmation
         your_email: Your e-mail
         send_confirmation: Send Confirmation
+        sign_out_warning: You are currently signed in. Submitting this form will sign you out.
     passwords:
       new:
         title: Forgot Your Password?

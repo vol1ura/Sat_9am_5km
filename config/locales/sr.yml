@@ -1169,7 +1169,7 @@ sr:
       add_phone_html: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Hitna kontakt osoba
-      click_on_photo_to_change: Kliknite na sliku da biste je promenili
+      change_photo: Izmeni
       personal_bests: Lični rekordi
       personal_best_10k: 10 km
       personal_best_half_marathon: 21.1 km
@@ -1296,6 +1296,9 @@ sr:
     incorrect_running_volunteers: |
       *Pažnja!* Događaj ID=%{activity_id} (%{activity_date}) ima volontera *%{athlete_name}* (ID=%{athlete_code}) na trkačkoj poziciji,
       međutim on nema rezultat u protokolu. Molimo vas da ispravite ovo.
+  shared:
+    barcode_modal:
+      close: Zatvori
   auth_link_mailer:
     login_link:
       subject: Link za prijavu na sajt S95

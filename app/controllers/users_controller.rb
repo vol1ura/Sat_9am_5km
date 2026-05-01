@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :reset_attributes, only: :update
 
-  def show; end
+  def show
+    @barcode = BarcodeService.call "A#{current_user.athlete.code}", module_size: 8
+  end
 
   def edit; end
 

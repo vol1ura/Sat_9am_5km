@@ -25,6 +25,10 @@ sr:
         subtitle: Link za potvrdu će biti poslat na navedenu e-mail adresu
         email_hint: (potrebno je potvrditi u roku od 3 sata)
         gender_required: Navedite pol
+        policy_required: Morate prihvatiti obradu ličnih podataka i pravila učešća
+        policy_accepted_html: 'Slažem se sa %{policy_link} i %{rules_link}'
+        policy_link: politikom obrade ličnih podataka
+        rules_link: pravilima učešća
         submit: Registrujte se
       signed_up_but_unconfirmed: 'Link za potvrdu je poslat na vaš e-mail. Molimo potvrdite e-mail u roku od 3 sata.'
       signed_up: 'Dobrodošli! Uspešno ste se prijavili.'
@@ -39,6 +43,7 @@ sr:
         description: Dobijanje uputstva za potvrdu e-mail
         your_email: Vaš e-mail
         send_confirmation: Pošaljite potvrdu
+        sign_out_warning: Prijavljeni ste na sistem. Slanjem ove forme bićete odjavljeni.
       confirmed: 'Vaš nalog je uspešno potvrđen, sada ste prijavljeni na sistem.'
       send_instructions: 'Uskoro ćete dobiti email sa uputstvima kako da potvrdite vaš nalog.'
       send_paranoid_instructions: 'Ako Vaša email adresa postoji u bazi, dobićete email sa uputstvima kako da potvrdite Vaš nalog.'

@@ -308,23 +308,7 @@
   </div>
 <% end %>
 
-<!-- Modal barcode -->
-<div class="modal fade" id="barcodeModal" tabindex="-1" aria-labelledby="barcodeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="barcodeModalLabel">A<%= @athlete.code %></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body d-flex justify-content-center">
-        <%= @barcode %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= t '.close' %></button>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'shared/barcode_modal', code: @athlete.code, barcode: @barcode %>
 
 <!-- Modal minute bingo -->
 <div class="modal fade" id="minute-bingo-modal" tabindex="-1" aria-labelledby="minute-bingo-modal-label" aria-hidden="true">

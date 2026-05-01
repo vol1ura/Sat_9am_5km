@@ -16,10 +16,10 @@ export default class extends Controller {
   toggleBlock(event) {
     const input = this.inputTarget.getElementsByTagName('input')[0];
     if (event.target.checked) {
-      this.inputTarget.classList.add('d-none');
+      this.inputTarget.classList.add('invisible');
       input.disabled = true;
     } else {
-      this.inputTarget.classList.remove('d-none');
+      this.inputTarget.classList.remove('invisible');
       input.disabled = false;
     }
   }

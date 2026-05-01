@@ -7,37 +7,77 @@
     <p class="text-body-secondary"><%= t '.subtitle' %></p>
 
     <%= form_for resource, as: resource_name, url: user_registration_path, data: { turbo: false } do |f| %>
-      <%= render 'devise/shared/error_messages', resource: %>
+      <% if resource.errors[:base].any? %>
+        <ul>
+          <% resource.errors[:base].each do |message| %>
+            <li class="text-danger"><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
 
       <div class="mb-3">
         <%= f.label :last_name, class: 'form-label text-capitalize' %>
-        <%= f.text_field :last_name, autofocus: true, autocomplete: 'family-name', class: 'form-control', required: true %>
+        <% last_name_invalid = resource.errors.key?(:last_name) %>
+        <%= f.text_field :last_name, autofocus: true, autocomplete: 'family-name',
+              class: "form-control #{'is-invalid' if last_name_invalid}", required: true %>
+        <% if last_name_invalid %>
+          <div class="invalid-feedback d-block"><%= resource.errors[:last_name].join(', ') %></div>
+        <% end %>
       </div>
 
       <div class="mb-3">
         <%= f.label :first_name, class: 'form-label text-capitalize' %>
-        <%= f.text_field :first_name, autocomplete: 'given-name', class: 'form-control', required: true %>
+        <% first_name_invalid = resource.errors.key?(:first_name) %>
+        <%= f.text_field :first_name, autocomplete: 'given-name',
+              class: "form-control #{'is-invalid' if first_name_invalid}", required: true %>
+        <% if first_name_invalid %>
+          <div class="invalid-feedback d-block"><%= resource.errors[:first_name].join(', ') %></div>
+        <% end %>
       </div>
 
       <div class="mb-3">
         <%= f.label :email, class: 'form-label' %>
         <span class="text-body-secondary small"><%= t '.email_hint' %></span>
-        <%= f.email_field :email, autocomplete: :email, inputmode: :email, class: 'form-control', required: true %>
+        <% email_invalid = resource.errors.key?(:email) %>
+        <%= f.email_field :email, autocomplete: :email, inputmode: :email,
+              class: "form-control #{'is-invalid' if email_invalid}", required: true %>
+        <% if email_invalid %>
+          <div class="invalid-feedback d-block"><%= resource.errors[:email].join(', ') %></div>
+        <% end %>
       </div>
 
       <%= f.fields_for :athlete do |af| %>
         <div class="mb-3">
           <%= af.label :gender, class: 'form-label text-capitalize' %>
+          <% gender_invalid = resource.athlete.errors.key?(:gender) %>
           <div class="d-flex gap-4">
             <% Athlete.genders.each do |label, value| %>
               <div class="form-check">
-                <%= af.radio_button :gender, value, class: 'form-check-input', required: true %>
+                <%= af.radio_button :gender, value,
+                      class: "form-check-input #{'is-invalid' if gender_invalid}", required: true %>
                 <%= af.label "gender_#{value}", human_gender(label), class: 'form-check-label' %>
               </div>
             <% end %>
           </div>
+          <% if gender_invalid %>
+            <div class="invalid-feedback d-block"><%= resource.athlete.errors[:gender].join(', ') %></div>
+          <% end %>
         </div>
       <% end %>
+
+      <div class="mb-3 form-check">
+        <% policy_invalid = resource.errors.key?(:policy_accepted) %>
+        <%= f.check_box :policy_accepted,
+              class: "form-check-input #{'is-invalid' if policy_invalid}", required: true %>
+        <%= f.label :policy_accepted, class: 'form-check-label' do %>
+          <%= t('.policy_accepted_html',
+                 policy_link: link_to(t('.policy_link'), page_path(page: 'privacy-policy'), target: '_blank', rel: 'noopener'),
+                 rules_link: link_to(t('.rules_link'), page_path(page: 'rules'), target: '_blank', rel: 'noopener')) %>
+        <% end %>
+        <% if policy_invalid %>
+          <div class="invalid-feedback d-block"><%= resource.errors[:policy_accepted].join(', ') %></div>
+        <% end %>
+      </div>
 
       <div class="my-3">
         <%= f.submit t('.submit'), class: 'btn btn-primary' %>

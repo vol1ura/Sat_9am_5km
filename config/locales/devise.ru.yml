@@ -25,6 +25,10 @@ ru:
         subtitle: На указанный email будет отправлена ссылка для подтверждения
         email_hint: (необходимо подтвердить в течение 3 часов)
         gender_required: Укажите пол
+        policy_required: Необходимо согласие с обработкой персональных данных и правилами участия
+        policy_accepted_html: 'Я согласен с %{policy_link} и %{rules_link}'
+        policy_link: политикой обработки персональных данных
+        rules_link: правилами участия
         submit: Зарегистрироваться
       signed_up_but_unconfirmed: 'На ваш email отправлена ссылка для подтверждения. Пожалуйста, подтвердите email в течение 3 часов.'
     confirmations:
@@ -33,6 +37,7 @@ ru:
         description: Получение инструкции для подтверждения e-mail
         your_email: Ваш e-mail
         send_confirmation: Выслать подтверждение
+        sign_out_warning: Вы вошли в систему. При отправке формы вы будете разлогинены.
     passwords:
       new:
         title: Забыли пароль?
