@@ -583,25 +583,30 @@ en:
     about_s95:
       title: About S95
       rules: Rules
-      about: About Us
+      about: S95 Movement
       support: Support the Project
       feedback: Feedback
       joining: Want to Start S95?
       articles: Articles
     bottom:
       s95: S95 Park Runs
-      slogan: 'Independent park run system. Made by runners for runners. You can also join our runs, development, or content editing.'
+      slogan: 'Independent park run system. Made by runners for runners. Join our runs, development, or content editing.'
       telegram_title: Project News on Telegram
       vk_title: VKontakte Group
       send_email: Send us email
       github_title: Project on GitHub
+      privacy_policy: Personal data processing policy
+      feedback: Feedback form
       ano: 'ANO «Fizkultura»'
-      copyright: All materials on s95.ru are protected by copyright
+      copyright: All rights reserved.
       ogrn: OGRN
       inn: INN
       kpp: KPP
       registration_date: Registration date
       address: Moscow, kv-l 114A Volzhsky Boulevard, bld. 3, apt. 366
+      headings:
+        explore: Explore
+        connect: Get in touch
   articles:
     index:
       title: Articles
@@ -676,14 +681,20 @@ en:
       best_regards: With love, S95.
     feedback:
       title: Feedback and Suggestions
-      description: We'll be grateful for any feedback and suggestions. Write if you've encountered any problems, want to offer your help, an idea, or just speak out. If desired (and if you need to be contacted), include any contact in your message.
+      description: We'll be grateful for any feedback and suggestions. Write if you've encountered any problems, want to offer your help, an idea, or just speak out.
       other_contacts_html: You can also send a message to our <a href="mailto:%{our_email}" target="_blank" title="Send us email">email</a>. You'll find our other contacts at the bottom, as well as on event pages.
+      message_label: Message
       placeholder: Your feedback or suggestion
+      contact_label: Contact
+      contact_placeholder: Email, phone or Telegram
+      contact_hint: Provide it if you want a reply. This field is optional.
+      policy_consent_html: I agree to the processing of personal data in accordance with the <a href="%{link}" target="_blank" rel="noopener">Personal Data Processing Policy</a>.
       confirm: Send feedback?
       submit: Send
     submit_feedback:
       sent: Thank you for your feedback!
       error: Error! Message length must be between 1 and 950 characters.
+      policy_required: You must agree to the personal data processing policy to send feedback.
     joining:
       title: Want to Start S95 in Your Park?
       description: We tell you how to start conducting S95 events in your favorite park.

@@ -117,46 +117,6 @@ body {
   flex: 1 0 auto;
 }
 
-.main-footer {
-  background-color: var(--bs-primary-bg-subtle);
-
-  hr {
-    @extend .my-3;
-
-    border-color: var(--bs-secondary-color);
-    width: 100%;
-  }
-
-  .social-links {
-    a {
-      margin-right: 8px;
-      text-decoration: none;
-    }
-    a:hover {
-      opacity: 0.85;
-    }
-    a:last-child {
-      margin-right: 0;
-    }
-    i {
-      font-size: 2em;
-
-      @include media(phoneScreen) {
-        font-size: 1.6em;
-      }
-    }
-  }
-
-  @include media(phoneScreen) {
-    .social-links {
-      order: 2;
-    }
-    .footer-text {
-      order: 3;
-    }
-  }
-}
-
 // Style Kaminari pagination helper
 nav.pagination {
   a {

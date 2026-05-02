@@ -1,0 +1,267 @@
+<% head_info :description, "Politika obrade ličnih podataka korisnika i učesnika događaja projekta Sat9am5km (#{request.host})" %>
+<h1><%= head_info :title, 'Politika obrade ličnih podataka' %></h1>
+
+<% policy_page_url = page_url(page: 'privacy-policy') %>
+<% site_url = root_url %>
+
+<p class="text-body-secondary">
+  Važeća verzija od <%= l Date.new(2026, 5, 2) %>.
+  Sajt: <%= external_link_to site_url, site_url %>.
+</p>
+
+<section class="mt-4">
+  <h2>1. Opšte odredbe</h2>
+  <p>
+    1.1. Ova Politika obrade ličnih podataka (u daljem tekstu — „Politika“) izrađena je u skladu sa
+    Zakonom o zaštiti podataka o ličnosti Republike Srbije („Sl. glasnik RS“, br. 87/2018) i drugim
+    važećim propisima Republike Srbije iz oblasti zaštite ličnih podataka, kao i u skladu sa principima
+    Opšte uredbe o zaštiti podataka (GDPR) Evropske unije.
+  </p>
+  <p>
+    1.2. Rukovalac obrade ličnih podataka (u daljem tekstu — „Rukovalac“) jeste administracija
+    projekta <strong>Sat9am5km</strong>, koja upravlja sajtom
+    <%= external_link_to site_url, site_url %>. Kontakt e-mail Rukovaoca:
+    <%= mail_to ENV.fetch('INFO_EMAIL') %>.
+  </p>
+  <p>
+    1.3. Politika se primenjuje na sajt <%= external_link_to site_url, site_url %>
+    (u daljem tekstu — „Sajt“) i određuje pravila i postupke obrade i mere zaštite ličnih podataka
+    korisnika Sajta (u daljem tekstu — „Korisnik“).
+  </p>
+  <p>
+    1.4. Korišćenjem Sajta, popunjavanjem obrazaca za registraciju i obrazaca za kontakt, Korisnik
+    potvrđuje da je upoznat sa uslovima ove Politike i daje saglasnost za obradu svojih ličnih podataka
+    u svrhe navedene u Politici.
+  </p>
+  <p>
+    1.5. Važeća verzija Politike je u svakom trenutku dostupna na adresi
+    <%= external_link_to policy_page_url, policy_page_url %>.
+    Rukovalac zadržava pravo da menja Politiku. Datum poslednjeg ažuriranja navodi se na početku dokumenta.
+  </p>
+</section>
+
+<section class="mt-4">
+  <h2>2. Osnovni pojmovi</h2>
+  <p>U ovoj Politici koriste se sledeći pojmovi (u značenju propisanom Zakonom o zaštiti podataka o ličnosti):</p>
+  <ul>
+    <li>
+      <strong>Lični podaci</strong> — svaka informacija koja se odnosi na fizičko lice čiji je identitet
+      određen ili odrediv, neposredno ili posredno (lice na koje se podaci odnose).
+    </li>
+    <li>
+      <strong>Obrada</strong> — svaka radnja ili skup radnji koji se sa ličnim podacima vrše uz pomoć
+      sredstava automatizacije ili bez njih: prikupljanje, beleženje, organizovanje, strukturisanje,
+      pohranjivanje, prilagođavanje ili menjanje, pretraživanje, korišćenje, prenošenje (objavljivanje,
+      omogućavanje pristupa), brisanje, uništavanje i druge radnje.
+    </li>
+    <li>
+      <strong>Rukovalac</strong> — lice koje samostalno ili zajedno sa drugima određuje svrhu i način
+      obrade ličnih podataka.
+    </li>
+    <li>
+      <strong>Korisnik</strong> — posetilac Sajta čije lične podatke Rukovalac obrađuje u skladu sa
+      ovom Politikom.
+    </li>
+    <li>
+      <strong>Kolačići (cookies)</strong> — male tekstualne datoteke koje se čuvaju u pregledaču
+      Korisnika prilikom posete Sajtu i koje se koriste za obezbeđivanje pravilnog rada Sajta i
+      prikupljanje anonimne statistike.
+    </li>
+  </ul>
+</section>
+
+<section class="mt-4">
+  <h2>3. Kategorije lica i vrste ličnih podataka koji se obrađuju</h2>
+  <p>3.1. Rukovalac obrađuje lične podatke sledećih kategorija lica:</p>
+  <ul>
+    <li>posetioci Sajta, uključujući neregistrovane;</li>
+    <li>registrovani korisnici Sajta (učesnici trka, volonteri);</li>
+    <li>lica koja se obraćaju Rukovaocu putem obrazaca za kontakt ili putem e-mail adrese.</li>
+  </ul>
+
+  <p>
+    3.2. Spisak ličnih podataka koje Korisnik samostalno dostavlja prilikom registracije i popunjavanja
+    obrazaca na Sajtu:
+  </p>
+  <ul>
+    <li>ime i prezime;</li>
+    <li>pol;</li>
+    <li>e-mail adresa;</li>
+    <li>broj mobilnog telefona (dostavlja se po želji za učešće u partnerskim programima);</li>
+    <li>kontakt podaci za hitan slučaj (ime i broj telefona, po želji Korisnika);</li>
+    <li>fotografija profila (po želji Korisnika).</li>
+  </ul>
+
+  <p>
+    3.3. Podaci koji se automatski prikupljaju prilikom posete Sajtu (u anonimnom obliku):
+  </p>
+  <ul>
+    <li>IP adresa;</li>
+    <li>informacije iz kolačića (cookies);</li>
+    <li>informacije o pregledaču, operativnom sistemu, vrsti i jeziku uređaja;</li>
+    <li>datum i vreme pristupa Sajtu, adrese zatraženih stranica;</li>
+    <li>izvor posete Sajtu (referrer);</li>
+    <li>podaci o ponašanju Korisnika na Sajtu (klikovi, prelasci, skrolovanje).</li>
+  </ul>
+
+  <p>
+    3.4. Rukovalac <strong>ne obrađuje</strong> posebne kategorije ličnih podataka (podatke o rasnom
+    ili etničkom poreklu, političkom mišljenju, verskim ili filozofskim uverenjima, zdravstvenom
+    stanju, seksualnom životu) i <strong>ne obrađuje</strong> biometrijske podatke.
+  </p>
+</section>
+
+<section class="mt-4">
+  <h2>4. Svrhe obrade ličnih podataka</h2>
+  <p>Rukovalac obrađuje lične podatke Korisnika u sledeće svrhe:</p>
+  <ul>
+    <li>registracija i identifikacija Korisnika na Sajtu, obezbeđivanje rada ličnog naloga;</li>
+    <li>učešće Korisnika u subotnjim trkama na 5&nbsp;km, vođenje protokola i objavljivanje rezultata;</li>
+    <li>vođenje statistike i rang-lista učesnika i volontera;</li>
+    <li>komunikacija sa Korisnikom putem e-mail adrese, uključujući potvrdu registracije, oporavak
+      pristupa, obaveštenja o rezultatima trka i druge servisne poruke;</li>
+    <li>razmatranje obraćanja Korisnika putem obrasca za kontakt i e-mail-a;</li>
+    <li>poboljšanje rada Sajta, analiza posećenosti i ponašanja korisnika korišćenjem anonimnih
+      statističkih podataka;</li>
+    <li>poštovanje važećih propisa Republike Srbije.</li>
+  </ul>
+</section>
+
+<section class="mt-4">
+  <h2>5. Pravni osnov za obradu</h2>
+  <p>Rukovalac obrađuje lične podatke na sledećim pravnim osnovima:</p>
+  <ul>
+    <li>saglasnost Korisnika za obradu ličnih podataka;</li>
+    <li>neophodnost obrade radi izvršenja ugovora čija je strana lice na koje se podaci odnose,
+      odnosno radi preduzimanja radnji na zahtev tog lica pre zaključenja ugovora;</li>
+    <li>legitimni interesi Rukovaoca koji ne preovlađuju nad pravima i slobodama lica na koje se
+      podaci odnose;</li>
+    <li>ispunjavanje zakonskih obaveza Rukovaoca.</li>
+  </ul>
+  <p>
+    Saglasnost Korisnika izražava se kroz aktivne radnje: registraciju na Sajtu, slanje podataka
+    putem obrazaca na Sajtu ili putem e-mail adrese, kao i označavanjem polja prilikom registracije.
+  </p>
+</section>
+
+<section class="mt-4">
+  <h2>6. Načini i rokovi obrade ličnih podataka</h2>
+  <p>
+    6.1. Obrada ličnih podataka vrši se kako uz pomoć sredstava automatizacije, tako i bez njih.
+    Rukovalac vrši prikupljanje, beleženje, organizovanje, pohranjivanje, ažuriranje, korišćenje,
+    prenošenje (omogućavanje pristupa), anonimizaciju, ograničavanje, brisanje i uništavanje ličnih
+    podataka.
+  </p>
+  <p>
+    6.2. Rok obrade ličnih podataka određuje se ostvarenjem svrhe obrade, istekom roka važenja
+    saglasnosti Korisnika, opozivom saglasnosti od strane Korisnika ili na drugom osnovu propisanom
+    važećim zakonom.
+  </p>
+  <p>
+    6.3. Po ostvarenju svrhe obrade ili po opozivu saglasnosti, lični podaci Korisnika se brišu ili
+    anonimizuju u rokovima propisanim Zakonom o zaštiti podataka o ličnosti, ukoliko drugačije nije
+    propisano zakonom.
+  </p>
+</section>
+
+<section class="mt-4">
+  <h2>7. Prenos ličnih podataka trećim licima</h2>
+  <p>
+    7.1. Rukovalac ne prodaje lične podatke Korisnika i ne prosleđuje ih trećim licima u marketinške
+    ili reklamne svrhe.
+  </p>
+  <p>
+    7.2. Rukovalac koristi servis za veb-analitiku <strong>Yandex&nbsp;Metrica</strong> radi
+    prikupljanja i obrade anonimnih podataka o posetama Sajtu (kolačići, IP adresa, informacije o
+    pregledaču i uređaju, ponašanje na Sajtu). Uslovi obrade podataka u Yandex&nbsp;Metrica objavljeni
+    su na adresi
+    <%= external_link_to 'https://yandex.com/legal/confidential/', 'https://yandex.com/legal/confidential/' %>.
+  </p>
+  <p>
+    7.3. Rukovalac može preneti lične podatke nadležnim državnim organima u slučajevima i na način
+    propisan zakonom.
+  </p>
+</section>
+
+<section class="mt-4">
+  <h2>8. Korišćenje kolačića (cookies) i veb-analitike</h2>
+  <p>8.1. Sajt koristi kolačiće i servis Yandex&nbsp;Metrica radi:</p>
+  <ul>
+    <li>obezbeđivanja pravilnog rada Sajta (tehnički kolačići);</li>
+    <li>očuvanja autorizacije Korisnika u ličnom nalogu;</li>
+    <li>prikupljanja anonimne statistike posećenosti i unapređenja rada Sajta.</li>
+  </ul>
+  <p>
+    8.2. Prilikom prve posete Sajtu Korisniku se prikazuje obaveštenje o korišćenju kolačića.
+    Nastavkom korišćenja Sajta Korisnik daje saglasnost za njihovu obradu.
+  </p>
+  <p>
+    8.3. Korisnik u svakom trenutku može onemogućiti kolačiće u podešavanjima svog pregledača.
+    U tom slučaju pojedine funkcije Sajta (npr. prijava u lični nalog) možda neće biti dostupne.
+  </p>
+</section>
+
+<section class="mt-4">
+  <h2>9. Prava Korisnika</h2>
+  <p>
+    U skladu sa Zakonom o zaštiti podataka o ličnosti, Korisnik kao lice na koje se podaci odnose ima
+    sledeća prava:
+  </p>
+  <ul>
+    <li>pravo na obaveštenje i pristup ličnim podacima koje Rukovalac obrađuje;</li>
+    <li>pravo na ispravku, dopunu, brisanje ili ograničenje obrade ličnih podataka;</li>
+    <li>pravo na opoziv date saglasnosti u svakom trenutku, bez uticaja na zakonitost obrade
+      sprovedene pre opoziva.</li>
+  </ul>
+  <p>
+    Zahtevi i obraćanja u vezi sa obradom ličnih podataka, kao i opoziv saglasnosti, šalju se
+    Rukovaocu na e-mail <%= mail_to ENV.fetch('INFO_EMAIL') %> sa naslovom „Obrada ličnih podataka“.
+    Rukovalac razmatra zahtev u roku ne dužem od 30&nbsp;dana od dana prijema.
+  </p>
+  <p>
+    Korisnik takođe može samostalno obrisati svoj nalog i lične podatke u svom ličnom nalogu na Sajtu.
+  </p>
+</section>
+
+<section class="mt-4">
+  <h2>10. Mere zaštite ličnih podataka</h2>
+  <p>
+    10.1. Rukovalac primenjuje neophodne pravne, organizacione i tehničke mere zaštite ličnih
+    podataka od neovlašćenog ili slučajnog pristupa, uništenja, izmene, ograničenja, kopiranja,
+    distribucije i drugih protivpravnih radnji trećih lica.
+  </p>
+  <p>10.2. U te mere, između ostalog, spadaju:</p>
+  <ul>
+    <li>imenovanje lica odgovornih za organizaciju obrade ličnih podataka;</li>
+    <li>ograničavanje i razdvajanje pristupa zaposlenih i izvođača ličnim podacima;</li>
+    <li>primena tehničkih sredstava zaštite informacija;</li>
+    <li>čuvanje lozinki u zaštićenom (heširanom) obliku;</li>
+    <li>redovno ažuriranje softvera i mere za sprečavanje neovlašćenog pristupa;</li>
+    <li>rezervno kopiranje podataka i kontrola sprovođenja preduzetih mera zaštite.</li>
+  </ul>
+</section>
+
+<section class="mt-4">
+  <h2>11. Kontakt podaci Rukovaoca</h2>
+  <p>
+    Po svim pitanjima u vezi sa obradom ličnih podataka, Korisnik se može obratiti Rukovaocu
+    putem e-mail adrese: <%= mail_to ENV.fetch('INFO_EMAIL') %>.
+  </p>
+</section>
+
+<section class="mt-4">
+  <h2>12. Završne odredbe</h2>
+  <p>
+    12.1. Ova Politika stupa na snagu danom objavljivanja na Sajtu i važi do njene izmene ili
+    zamene novom verzijom.
+  </p>
+  <p>
+    12.2. U slučaju izmena, ažurirana verzija Politike objavljuje se na Sajtu na adresi
+    <%= external_link_to policy_page_url, policy_page_url %>.
+    Datum stupanja na snagu nove verzije navodi se na početku dokumenta.
+  </p>
+  <p>
+    12.3. Korisnik se obavezuje da samostalno prati izmene Politike i da se periodično upoznaje sa
+    njenom važećom verzijom.
+  </p>
+</section>

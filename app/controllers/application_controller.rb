@@ -36,9 +36,13 @@ class ApplicationController < ActionController::Base
     @top_level_domain ||= request.host.split('.').last.to_sym
   end
 
+  def policy_already_accepted?
+    cookies[:policy_accepted].present? || current_user&.policy_accepted? || false
+  end
+
   def default_url_options
     super.merge(lang: current_locale == domain_locale ? nil : current_locale)
   end
 
-  helper_method :top_level_domain, :domain_locale, :current_locale
+  helper_method :top_level_domain, :domain_locale, :current_locale, :policy_already_accepted?
 end

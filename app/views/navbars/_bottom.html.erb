@@ -1,42 +1,91 @@
-<nav class="py-4 mt-4 main-footer">
-  <footer class="container-lg">
-    <div class="row pt-2">
-      <div class="col-7 col-md-3">
-        <%= link_to t('.s95'), root_path, class: 'fs-5 mb-2 text-reset text-decoration-none', aria: { label: 'Sat9am5km' } %>
-      </div>
-      <div class="col-12 col-md-6 footer-text fw-light">
-        <%= t '.slogan' %>
-      </div>
-      <div class="col-5 col-md-3 social-links ps-0 mt-1">
-        <div class="float-end">
-          <%= link_to Rails.configuration.telegram[top_level_domain], target: '_blank', rel: 'license noopener', title: t('.telegram_title') do %>
-            <i class="fa-brands fa-telegram" role="img" aria-label="Telegram"></i>
-          <% end %>
-          <%= external_link_to('https://vk.com/s95ru', title: t('.vk_title')) do %>
-            <i class="fa-brands fa-vk" role="img" aria-label="VK"></i>
-          <% end %>
-          <%= external_link_to("mailto:#{ENV.fetch('INFO_EMAIL')}", title: t('.send_email')) do %>
-            <i class="fa fa-envelope-open" role="img" aria-label="Email"></i>
-          <% end %>
-          <%= external_link_to('https://github.com/vol1ura/Sat_9am_5km', title: t('.github_title')) do %>
-            <i class="fa-brands fa-github" role="img" aria-label="GitHub"></i>
-          <% end %>
+<footer class="main-footer mt-5" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="visually-hidden"><%= t '.s95' %></h2>
+  <div class="container-lg py-5">
+    <div class="row g-4 footer-top">
+      <div class="col-12 col-lg-4 footer-brand">
+        <%= link_to root_path, class: 'd-inline-flex align-items-center gap-2 footer-logo text-reset text-decoration-none', aria: { label: 'Sat9am5km' } do %>
+          <%= image_tag '/images/logo_hex_off.svg', alt: 'S95', height: 48, width: 48, class: 'footer-logo-img' %>
+          <span class="fs-5 fw-semibold"><%= t '.s95' %></span>
+        <% end %>
+        <p class="footer-text fw-light mt-3"><%= t '.slogan' %></p>
+        <div class="small mt-2 mb-0">
+          <%= link_to t('.privacy_policy'), page_path(page: 'privacy-policy'), class: ' link-secondary' %>
         </div>
       </div>
-    </div>
-    <% if top_level_domain == :ru %>
-      <hr>
-      <div class="w-100 text-center fw-light fs-small text-body-secondary">
-        <p class="mb-1">©&nbsp;<%= t '.ano' %>, <%= Time.zone.today.year %>. <%= t '.copyright' %></p>
-        <p class="mb-1">
-          <%= t '.ano' %>&nbsp;· <%= t '.ogrn' %>: 1237700352713&nbsp;· <%= t '.inn' %>: 9721206702&nbsp;· <%= t '.kpp' %>: 772101001&nbsp;· <%= t '.registration_date' %>: 18.05.2023
-        </p>
-        <p class="mb-0">
-          <%= t '.address' %>&nbsp;·
-          <%= external_link_to(ENV.fetch('INFO_EMAIL'), "mailto:#{ENV.fetch('INFO_EMAIL')}", class: 'text-reset text-decoration-none') %>
-        </p>
+
+      <div class="col-6 col-md-4 col-lg-2 footer-col">
+        <h3 class="footer-heading"><%= t '.headings.explore' %></h3>
+        <ul class="footer-links list-unstyled mb-0">
+          <li><%= link_to t('navbars.top.events'), events_path %></li>
+          <li><%= link_to t('navbars.top.recent_results'), activities_path %></li>
+          <li><%= link_to t('navbars.top.club_ratings'), clubs_path %></li>
+          <li><%= link_to t('navbars.top.top_results'), results_ratings_path %></li>
+          <li><%= link_to t('navbars.top.badges'), badges_path %></li>
+          </ul>
       </div>
-    <% end %>
-  </footer>
-</nav>
-<%= render '/cookie_consent' unless cookies[:policy_accepted] || current_user&.policy_accepted? %>
+
+      <div class="col-6 col-md-4 col-lg-3 footer-col">
+        <h3 class="footer-heading"><%= t 'navbars.about_s95.title' %></h3>
+        <ul class="footer-links list-unstyled mb-0">
+          <li><%= link_to t('navbars.about_s95.rules'), page_path(page: 'rules') %></li>
+          <li><%= link_to t('navbars.about_s95.about'), page_path(page: 'about') %></li>
+          <li><%= link_to t('navbars.about_s95.support'), page_path(page: 'support') %></li>
+          <li><%= link_to t('navbars.about_s95.joining'), page_path(page: 'joining') %></li>
+          <li><%= link_to t('navbars.about_s95.articles'), articles_path %></li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-4 col-lg-3 footer-col">
+        <h3 class="footer-heading"><%= t '.headings.connect' %></h3>
+        <p class="footer-links"><%= link_to t('.feedback'), page_path(page: 'feedback') %></p>
+        <ul class="social-links list-unstyled d-flex flex-wrap gap-2 mb-0">
+          <li>
+            <%= external_link_to(Rails.configuration.telegram[top_level_domain], title: t('.telegram_title'), aria: { label: 'Telegram' }) do %>
+              <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= external_link_to('https://vk.com/s95ru', title: t('.vk_title'), aria: { label: 'VK' }) do %>
+              <i class="fa-brands fa-vk" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= external_link_to("mailto:#{ENV.fetch('INFO_EMAIL')}", title: t('.send_email'), aria: { label: 'Email' }) do %>
+              <i class="fa fa-envelope-open" aria-hidden="true"></i>
+            <% end %>
+          </li>
+          <li>
+            <%= external_link_to('https://github.com/vol1ura/Sat_9am_5km', title: t('.github_title'), aria: { label: 'GitHub' }) do %>
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center mt-4 pt-3">
+      <p class="mb-0 small text-body-secondary">
+        ©&nbsp;<%= Time.zone.today.year %>
+        <% if top_level_domain == :ru %>
+          <%= t '.ano' %>.
+        <% else %>
+          <%= t '.s95' %>.
+        <% end %>
+        <%= t '.copyright' %>
+      </p>
+
+      <% if top_level_domain == :ru %>
+        <div class="legal-info mt-2 small text-body-secondary">
+          <p class="mb-1">
+            <%= t '.ano' %>&nbsp;· <%= t '.ogrn' %>: 1237700352713&nbsp;· <%= t '.inn' %>: 9721206702&nbsp;· <%= t '.kpp' %>: 772101001&nbsp;· <%= t '.registration_date' %>: 18.05.2023
+          </p>
+          <p class="mb-0">
+            <%= t '.address' %>&nbsp;·
+            <%= external_link_to(ENV.fetch('INFO_EMAIL'), "mailto:#{ENV.fetch('INFO_EMAIL')}", class: 'text-reset') %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</footer>
+<%= render '/cookie_consent' unless policy_already_accepted? %>

@@ -21,9 +21,13 @@ columns do
     end
   end
   column do
-    if can?(:manage, activity) && activity.token && activity.date.today?
+    if can?(:manage, activity) && activity.token
       panel 'QR-код забега' do
-        BarcodeService.call(activity.token, module_size: 5)
+        if activity.date.today?
+          BarcodeService.call(activity.token, module_size: 5)
+        else
+          'Отобразится в день забега'
+        end
       end
     end
   end

@@ -42,5 +42,5 @@
 
 <h2 class="mt-2"><%= t '.dashboard' %></h2>
 <%= turbo_frame_tag 'dashboard', src: dashboard_activities_path, loading: 'lazy' do %>
-  <%= render '/loading_indicator' %>
+  <%= render 'dashboard_skeleton' %>
 <% end %>

@@ -3,13 +3,34 @@
 <div class="card mb-4">
   <div class="card-body">
     <%= form_with url: submit_feedback_pages_path, local: true do |form| %>
-      <%= form.text_area :message, class: 'mb-3 form-control', placeholder: t('.placeholder'), maxlength: PagesController::MAX_FEEDBACK_SIZE, rows: 7, required: true %>
-
-      <div class="contact d-none required">
-        <%= form.text_field :contact, autocomplete: 'off' %>
+      <div class="mb-3">
+        <%= form.label :message, t('.message_label'), class: 'form-label' %>
+        <%= form.text_area :message, class: 'form-control', placeholder: t('.placeholder'), maxlength: PagesController::MAX_FEEDBACK_SIZE, rows: 7, required: true %>
       </div>
 
-      <%= form.submit t('.submit'), class: 'btn btn-primary', data: { turbo_confirm: t('.confirm') } %>
+      <% unless current_user %>
+        <div class="contact d-none required">
+          <%= form.label :contact, 'Required your contact', class: 'form-label' %>
+          <%= form.text_field :contact, placeholder: t('.contact_placeholder'), autocomplete: 'off' %>
+        </div>
+
+        <div class="contact mb-3 required">
+          <%= form.label :user_contact, t('.contact_label'), class: 'form-label' %>
+          <%= form.text_field :user_contact, class: 'form-control', placeholder: t('.contact_placeholder'), maxlength: 255, autocomplete: 'off' %>
+          <div class="form-text"><%= t '.contact_hint' %></div>
+        </div>
+      <% end %>
+
+      <% unless policy_already_accepted? %>
+        <div class="form-check mb-3">
+          <%= form.check_box :policy_accepted, class: 'form-check-input', required: true %>
+          <%= form.label :policy_accepted, class: 'form-check-label' do %>
+            <%= t('.policy_consent_html', link: page_path(page: 'privacy-policy')) %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= form.submit t('.submit'), class: 'btn btn-primary mt-2', data: { turbo_confirm: t('.confirm') } %>
     <% end %>
   </div>
 </div>

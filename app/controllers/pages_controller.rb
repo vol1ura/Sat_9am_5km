@@ -34,9 +34,14 @@ class PagesController < ApplicationController
 
   def submit_feedback
     message = params[:message].to_s
+    user_contact = params[:user_contact].to_s.strip.presence
+
+    return redirect_to page_path(page: 'feedback'), alert: t('.policy_required') unless policy_accepted?
 
     if params[:contact].blank? && message.present? && message.length <= MAX_FEEDBACK_SIZE
-      NotificationMailer.with(message: message, user_id: current_user&.id).feedback.deliver_later
+      NotificationMailer
+        .with(message: message, user_id: current_user&.id, user_contact: user_contact)
+        .feedback.deliver_later
       redirect_to page_path(page: 'feedback'), notice: t('.sent')
     else
       redirect_to page_path(page: 'feedback'), alert: t('.error')
@@ -48,6 +53,10 @@ class PagesController < ApplicationController
   end
 
   private
+
+  def policy_accepted?
+    policy_already_accepted? || ActiveModel::Type::Boolean.new.cast(params[:policy_accepted])
+  end
 
   def page_name
     @page_name ||= params[:page].to_s

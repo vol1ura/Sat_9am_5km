@@ -1,0 +1,20 @@
+<div class="mt-3" aria-hidden="true">
+  <div class="row g-3">
+    <% 3.times do %>
+      <div class="col-md-4">
+        <div class="card-with-border">
+          <div class="card-body placeholder-wave">
+            <p class="text-center mb-3">
+              <span class="placeholder col-5"></span>
+            </p>
+            <span class="placeholder col-12" style="height: 180px;"></span>
+            <p class="text-center mt-3 mb-0">
+              <span class="placeholder col-4"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <span class="visually-hidden"><%= t 'loading' %></span>
+</div>
