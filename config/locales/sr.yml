@@ -1181,6 +1181,7 @@ sr:
       preview: Pregled propusnice
       athlete_label: Učesnik
       default_athlete_name: Učesnik S95
+      location_relevant_text: Vidimo se na startu S95! Vaš kod za skeniranje:
       download_pass: Preuzmi za Apple Wallet
       how_it_works_title: Kako funkcioniše?
       step_1: Unesite svoj ID učesnika i ime

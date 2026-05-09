@@ -98,6 +98,15 @@ Rails.application.routes.draw do
       resources :athletes, only: :update
       resources :activities, only: :create
     end
+
+    scope '/v1' do
+      post   'devices/:device_library_identifier/registrations/:pass_type_identifier/:serial_number', to: 'wallet_passes#register'
+      delete 'devices/:device_library_identifier/registrations/:pass_type_identifier/:serial_number', to: 'wallet_passes#unregister'
+      get    'devices/:device_library_identifier/registrations/:pass_type_identifier',                to: 'wallet_passes#registrations'
+      get    'passes/:pass_type_identifier/:serial_number',                                           to: 'wallet_passes#show'
+      post   'log',                                                                                   to: 'wallet_passes#log'
+    end
+
     namespace :mobile do
       get 'athletes/:code/info', to: 'athletes#info'
       post 'activities/stopwatch', to: 'activities#stopwatch'

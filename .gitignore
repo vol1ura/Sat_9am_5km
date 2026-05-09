@@ -35,3 +35,4 @@ deploy/*
 !deploy/logrotate.example
 !deploy/sidekiq.service.example
 !deploy/puma.*.example
+.wallet_secrets/

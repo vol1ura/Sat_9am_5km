@@ -1175,8 +1175,8 @@ ru:
       preview: Превью личной карточка
       athlete_label: Участник
       default_athlete_name: Участник С95
-      download_pass: Скачать для Apple Wallet
-      how_it_works_title: Как это работает?
+      location_relevant_text: Увидимся на старте С95! Ваш код для сканирования:
+      download_pass: Скачать для Apple Wallet      how_it_works_title: Как это работает?
       step_1: Введите свой ID участника и имя
       step_2: Нажмите «Скачать для Apple Wallet»
       step_3: Откройте скачанный файл на iPhone

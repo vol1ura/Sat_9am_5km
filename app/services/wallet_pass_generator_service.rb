@@ -13,6 +13,9 @@ class WalletPassGeneratorService < ApplicationService
   option :runs_count, reader: :private, default: -> { 0 }
   option :volunteering_count, reader: :private, default: -> { 0 }
 
+  option :latitude, reader: :private, default: -> { nil }
+  option :longitude, reader: :private, default: -> { nil }
+
   def self.normalize_code(code)
     code = code.to_s.strip
     code.match?(/^A\d+$/i) ? code.upcase : "A#{code}"
@@ -77,6 +80,21 @@ class WalletPassGeneratorService < ApplicationService
         { message: athlete_code, format: 'PKBarcodeFormatCode128', messageEncoding: 'iso-8859-1' },
       ],
     }
+
+    # Geofencing
+    if latitude && longitude
+      json[:locations] = [
+        {
+          latitude: latitude.to_f,
+          longitude: longitude.to_f,
+          relevantText: I18n.t('wallet_passes.new.location_relevant_text')
+        }
+      ]
+    end
+
+    # Set relevant date to next Saturday 9:00 AM
+    next_saturday = Date.today.next_occurring(:saturday).to_time.change(hour: 9)
+    json[:relevantDate] = next_saturday.iso8601
 
     if ENV['APPLE_WALLET_WEB_SERVICE_URL'].present?
       json[:webServiceURL] = ENV['APPLE_WALLET_WEB_SERVICE_URL']

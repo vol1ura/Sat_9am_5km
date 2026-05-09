@@ -13,17 +13,11 @@
 
       <%= form_with url: wallet_pass_path, method: :post, data: { action: 'submit->wallet-loader#submit', turbo: false } do |f| %>
         <div class="card border-0 shadow-sm mb-4">
-          <div class="card-body p-4">
+          <div class="card-body p-4 text-center">
             <div class="mb-4">
-              <%= f.label :athlete_code, t('.athlete_code'), class: 'form-label fw-bold' %>
-              <%= f.text_field :athlete_code,
-                  value: @athlete_code,
-                  class: 'form-control form-control-lg font-monospace text-center',
-                  placeholder: t('.athlete_code_placeholder'),
-                  required: true,
-                  inputmode: 'numeric',
-                  autocomplete: 'off' %>
-              <div class="form-text text-center mt-2"><%= t '.athlete_code_hint' %></div>
+              <div class="small text-body-secondary text-uppercase tracking-widest mb-1">Ваш ID</div>
+              <div class="fs-2 fw-bold font-monospace"><%= @athlete_code %></div>
+              <div class="fw-semibold text-primary"><%= @athlete_name %></div>
             </div>
 
             <div class="d-grid">
