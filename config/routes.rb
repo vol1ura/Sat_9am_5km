@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     end
 
     scope '/v1' do
+      get    'passes/athlete/:athlete_id',                                                            to: 'wallet_passes#download'
       post   'devices/:device_library_identifier/registrations/:pass_type_identifier/:serial_number', to: 'wallet_passes#register'
       delete 'devices/:device_library_identifier/registrations/:pass_type_identifier/:serial_number', to: 'wallet_passes#unregister'
       get    'devices/:device_library_identifier/registrations/:pass_type_identifier',                to: 'wallet_passes#registrations'

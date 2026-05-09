@@ -72,72 +72,15 @@ After that you can access the site with different locales:
 
 ## Apple Wallet Pass
 
-Для генерации `.pkpass` файлов (штрих-код участника для Apple Wallet) необходимы сертификаты Apple Developer.
+Requires Apple Developer certificates in `config/wallet_pass/`:
+- `AppleWWDRCAG4.cer`, `pass.cer`, `pass.key` (or `pass.p12`).
+- `icon*.png` (branding), `strip.png` (optional banner).
 
-### Первоначальная настройка
+**Environment Variables:**
+- `APPLE_WALLET_WEB_SERVICE_URL`: Server URL for automatic updates.
+- `WALLET_API_TOKEN`: Auth token for external pass issuance API.
 
-1. Войдите в [Apple Developer Portal](https://developer.apple.com/account) → **Certificates, Identifiers & Profiles** → **Identifiers**.
-2. Нажмите **+**, выберите **Pass Type IDs**, задайте идентификатор (например, `pass.ru.s95.barcode`).
-3. Откройте созданный Pass Type ID и нажмите **Create Certificate**.
-4. Сгенерируйте ключ и CSR:
-```bash
-openssl genrsa -out pass.key 2048
-openssl req -new -key pass.key -out pass.csr -subj "/CN=S95 Pass/emailAddress=info@s95.ru"
-```
-5. Загрузите `pass.csr` на портале Apple, скачайте полученный `pass.cer`.
-6. Создайте `.p12`:
-```bash
-openssl x509 -inform DER -in pass.cer -out pass.pem
-openssl pkcs12 -export -out config/wallet_pass/pass.p12 -inkey pass.key -in pass.pem -passout pass:
-```
-7. Скачайте WWDR-сертификат Apple:
-```bash
-curl -o config/wallet_pass/AppleWWDRCAG4.cer https://www.apple.com/certificateauthority/AppleWWDRCAG4.cer
-```
-8. Подготовьте иконки (из `public/favicon-512x512.png` или другого источника):
-```bash
-convert source.png -resize 29x29   config/wallet_pass/icon.png
-convert source.png -resize 58x58   config/wallet_pass/icon@2x.png
-convert source.png -resize 87x87   config/wallet_pass/icon@3x.png
-```
-
-### Обновление сертификатов
-
-Сертификат Pass Type ID действует **~1 год**. При истечении:
-
-1. Откройте [Certificates](https://developer.apple.com/account/resources/certificates/list) в Apple Developer Portal.
-2. Найдите истекший Pass Type ID Certificate, нажмите **Revoke**.
-3. Перейдите к Pass Type ID в **Identifiers**, нажмите **Create Certificate**.
-4. Повторите шаги 4–6 из первоначальной настройки (используя новый CSR или существующий `pass.key`):
-```bash
-openssl req -new -key pass.key -out pass.csr -subj "/CN=S95 Pass/emailAddress=info@s95.ru"
-# загрузите pass.csr на портале, скачайте новый pass.cer
-openssl x509 -inform DER -in pass.cer -out pass.pem
-openssl pkcs12 -export -out config/wallet_pass/pass.p12 -inkey pass.key -in pass.pem -passout pass:
-```
-5. Пересоберите Docker-образ (`make build`) или скопируйте файлы на сервер в директорию `config/wallet_pass/`.
-
-### Настройка окружения
-
-Для полноценной работы Apple Wallet на сервере необходимо:
-
-1. **Файлы в `config/wallet_pass/`**:
-   - `AppleWWDRCAG4.cer` (Центральный сертификат Apple).
-   - `pass.cer` и `pass.key` (Ваш сертификат и приватный ключ).
-   - `icon.png`, `icon@2x.png`, `icon@3x.png` (Уже в репозитории).
-   - `strip.png` (Опционально: фоновая картинка-лента 1125x369).
-
-2. **Переменные окружения (`.env`)**:
-   - `APPLE_WALLET_WEB_SERVICE_URL`: URL вашего сервера (например, `https://s95.ru`) для включения поддержки автоматических обновлений и пуш-уведомлений.
-
-3. **Пароль сертификата (если используется `.p12`)**:
-   - Если вы используете `pass.p12` вместо пары `.cer`/`.key`, добавьте пароль в `rails credentials:edit`:
-     ```yaml
-     apple_wallet:
-       certificate_password: "ваш_пароль"
-     ```
-
-> **Важно:** файлы `pass.p12`, `pass.key` и `*.cer` не должны попадать в git (добавлены в `.gitignore`).
+> **Note:** Certificates and keys are git-ignored; deploy them manually to the server.
 
 ## Server setup
 

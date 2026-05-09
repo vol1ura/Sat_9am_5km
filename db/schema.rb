@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_09_192000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -302,6 +302,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
     t.index ["athlete_id"], name: "index_volunteers_on_athlete_id"
   end
 
+  create_table "wallet_pass_registrations", force: :cascade do |t|
+    t.bigint "athlete_id", null: false
+    t.datetime "created_at", null: false
+    t.string "device_library_identifier", null: false
+    t.string "pass_type_identifier", null: false
+    t.string "push_token", null: false
+    t.string "serial_number", null: false
+    t.datetime "updated_at", null: false
+    t.index ["athlete_id"], name: "index_wallet_pass_registrations_on_athlete_id"
+    t.index ["device_library_identifier", "serial_number"], name: "idx_wallet_pass_registrations_on_device_and_serial", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activities", "events"
@@ -322,4 +334,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
   add_foreign_key "volunteering_positions", "events"
   add_foreign_key "volunteers", "activities"
   add_foreign_key "volunteers", "athletes"
+  add_foreign_key "wallet_pass_registrations", "athletes"
 end

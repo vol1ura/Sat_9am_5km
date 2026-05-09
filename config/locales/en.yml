@@ -1121,8 +1121,9 @@ en:
       preview: Pass preview
       athlete_label: Athlete
       default_athlete_name: S95 Athlete
-      location_relevant_text: See you at S95! Here is your scan code:
-      download_pass: Download for Apple Wallet      how_it_works_title: How does it work?
+      location_relevant_text: "See you at S95! Here is your scan code:"
+      download_pass: Download for Apple Wallet
+      how_it_works_title: How does it work?
       step_1: Enter your athlete ID and name
       step_2: Click "Download for Apple Wallet"
       step_3: Open the downloaded file on your iPhone

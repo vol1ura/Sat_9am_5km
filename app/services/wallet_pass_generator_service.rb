@@ -81,7 +81,6 @@ class WalletPassGeneratorService < ApplicationService
       ],
     }
 
-    # Geofencing
     if latitude && longitude
       json[:locations] = [
         {
@@ -92,13 +91,13 @@ class WalletPassGeneratorService < ApplicationService
       ]
     end
 
-    # Set relevant date to next Saturday 9:00 AM
     next_saturday = Date.today.next_occurring(:saturday).to_time.change(hour: 9)
     json[:relevantDate] = next_saturday.iso8601
 
     if ENV['APPLE_WALLET_WEB_SERVICE_URL'].present?
       json[:webServiceURL] = ENV['APPLE_WALLET_WEB_SERVICE_URL']
-      json[:authenticationToken] = Digest::SHA256.hexdigest(athlete_code + Rails.application.secret_key_base)[0...20]
+      registration = WalletPassRegistration.find_by(serial_number: json[:serialNumber])
+      json[:authenticationToken] = registration&.auth_token || Digest::SHA256.hexdigest(athlete_code + Rails.application.secret_key_base)[0...20]
     end
 
     json

@@ -52,6 +52,7 @@ class Athlete < ApplicationRecord
 
   has_many :trophies, dependent: :destroy
   has_many :badges, through: :trophies
+  has_many :wallet_pass_registrations, dependent: :destroy
   has_many :results, dependent: :nullify
   has_many :published_results, -> { where(activity_id: Activity.published.select(:id)) },
            dependent: :nullify, class_name: 'Result', inverse_of: :athlete
