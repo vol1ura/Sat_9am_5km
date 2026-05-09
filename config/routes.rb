@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   resources :articles, only: %i[index show], param: :page
 
   resource :user, only: %i[show edit update]
+  resource :wallet_pass, only: %i[new create]
   resource :cookie_consent, only: :create
   resolve('User') { [:user] }
 

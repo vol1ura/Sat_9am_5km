@@ -24,6 +24,10 @@ spec/requests/requests.http
 config/master.key
 
 config/additional_events.yml
+config/wallet_pass/*.p12
+config/wallet_pass/*.cer
+config/wallet_pass/*.pem
+config/wallet_pass/*.key
 public/app-release.apk
 public/images/hero-bg.webp
 deploy/*

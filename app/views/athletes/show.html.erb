@@ -18,13 +18,37 @@
   </div>
   <div class="position-relative">
     <%= image_tag user_image_path(@athlete.user), class: 'avatar', title: athlete_name %>
-    <div class="position-absolute top-0 end-0">
+    <div class="position-absolute top-0 end-0 d-flex gap-2">
+      <%= link_to new_wallet_pass_path, class: 'btn btn-light rounded-circle border-primary', title: t('navbars.top.apple_wallet') do %>
+        <i class="fa-solid fa-wallet text-primary"></i>
+      <% end %>
       <a href="#" class="btn btn-light rounded-circle border-primary" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
         <i class="fa-solid fa-qrcode" title="QR"></i>
       </a>
     </div>
   </div>
 </div>
+
+<% if @athlete.user == current_user %>
+  <div class="card border-primary-subtle bg-primary-subtle bg-opacity-10 mb-4 rounded-4 shadow-sm">
+    <div class="card-body p-3">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="fs-2 text-primary me-3">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div>
+            <h6 class="mb-0 fw-bold">Похоже, вы еще не добавили свой QR в Apple Wallet</h6>
+            <small class="text-body-secondary">Это удобно: карточка всегда под рукой, даже без интернета.</small>
+          </div>
+        </div>
+        <%= link_to new_wallet_pass_path, class: 'btn btn-primary rounded-pill px-4' do %>
+          <i class="fa-solid fa-plus me-2"></i>Добавить
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <div class="accordion accordion-flush" id="accordion-personal-statistics">
   <div class="accordion-item">
