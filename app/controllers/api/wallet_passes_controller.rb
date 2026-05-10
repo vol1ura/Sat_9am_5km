@@ -13,6 +13,9 @@ module Api
         return render json: { error: 'Athlete not found' }, status: :not_found
       end
 
+      relevant_event = athlete.going_to_event || athlete.event
+      relevant_date = Date.current.next_occurring(:saturday).to_time.change(hour: 9) if athlete.going_to_event
+
       pass_data = WalletPassGeneratorService.call(
         athlete.code,
         athlete_name: athlete.name,
@@ -21,8 +24,9 @@ module Api
         volunteering_count: athlete.volunteering.count,
         emergency_contact_name: athlete.user&.emergency_contact_name,
         emergency_contact_phone: athlete.user&.emergency_contact_phone,
-        latitude: athlete.event&.latitude,
-        longitude: athlete.event&.longitude
+        latitude: relevant_event&.latitude,
+        longitude: relevant_event&.longitude,
+        relevant_date: relevant_date
       )
 
       send_data pass_data,
@@ -89,6 +93,9 @@ module Api
         return render json: {}, status: :not_found
       end
 
+      relevant_event = athlete.going_to_event || athlete.event
+      relevant_date = Date.current.next_occurring(:saturday).to_time.change(hour: 9) if athlete.going_to_event
+
       pass_data = WalletPassGeneratorService.call(
         athlete.code,
         athlete_name: athlete.name,
@@ -97,8 +104,9 @@ module Api
         volunteering_count: athlete.volunteering.count,
         emergency_contact_name: athlete.user&.emergency_contact_name,
         emergency_contact_phone: athlete.user&.emergency_contact_phone,
-        latitude: athlete.event&.latitude,
-        longitude: athlete.event&.longitude
+        latitude: relevant_event&.latitude,
+        longitude: relevant_event&.longitude,
+        relevant_date: relevant_date
       )
 
       send_data pass_data,

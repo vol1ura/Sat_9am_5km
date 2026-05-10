@@ -1,98 +1,41 @@
 <% head_info :description, t('.description') %>
-<div class="row justify-content-center my-5" data-controller="wallet-loader">
+<div class="row justify-content-center my-5">
   <div style="max-width: 450px;">
-    <!-- Initial State -->
-    <div data-wallet-loader-target="initialState">
-      <div class="text-center mb-5">
-        <div class="display-1 text-primary mb-3">
-          <i class="fa-solid fa-wallet"></i>
-        </div>
-        <h1 class="h2 mb-2"><%= head_info :title, t('.title') %></h1>
-        <p class="text-body-secondary"><%= t '.subtitle' %></p>
+    <div class="text-center mb-5">
+      <div class="display-1 text-primary mb-3">
+        <i class="fa-solid fa-wallet"></i>
       </div>
-
-      <%= form_with url: wallet_pass_path, method: :post, data: { action: 'submit->wallet-loader#submit', turbo: false } do |f| %>
-        <div class="card border-0 shadow-sm mb-4">
-          <div class="card-body p-4 text-center">
-            <div class="mb-4">
-              <div class="small text-body-secondary text-uppercase tracking-widest mb-1">Ваш ID</div>
-              <div class="fs-2 fw-bold font-monospace"><%= @athlete_code %></div>
-              <div class="fw-semibold text-primary"><%= @athlete_name %></div>
-            </div>
-
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm" data-wallet-loader-target="submitButton">
-                <i class="fa-solid fa-cloud-arrow-down me-2"></i><%= t '.download_pass' %>
-              </button>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="card border-0 bg-primary-subtle bg-opacity-10 mb-4 rounded-4">
-        <div class="card-body p-4 text-center">
-          <div class="fs-4 text-primary mb-2">
-            <i class="fa-brands fa-apple"></i>
-          </div>
-          <h6 class="fw-bold mb-1">Только для iPhone и Apple Watch</h6>
-          <p class="small text-body-secondary mb-0">
-            На Android-устройствах потребуется стороннее приложение (например, WalletPasses).
-          </p>
-        </div>
-      </div>
-
-      <div class="card border-0 bg-light-subtle mb-4">
-        <div class="card-body p-4">
-          <h6 class="fw-bold mb-3">
-            <i class="fa-solid fa-circle-info text-primary me-2"></i><%= t '.how_it_works_title' %>
-          </h6>
-          <p class="small text-body-secondary mb-3">
-            Мы автоматически подтянем ваше имя, актуальную статистику пробежек и волонтерств из нашей базы данных.
-          </p>
-          <ul class="list-unstyled small mb-0">
-            <li class="mb-2 d-flex align-items-center">
-              <i class="fa-solid fa-check text-success me-2"></i>
-              <span>Работает без интернета на финише</span>
-            </li>
-            <li class="d-flex align-items-center">
-              <i class="fa-solid fa-check text-success me-2"></i>
-              <span>Мгновенный доступ с заблокированного экрана</span>
-            </li>
-          </ul>
-        </div>
-      </div>    </div>
-
-    <!-- Loading State -->
-    <div class="text-center d-none py-5" data-wallet-loader-target="loadingState">
-      <div class="mb-4">
-        <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
-      <h2 class="h3 mb-3">Минуточку, идет магия...</h2>
-      <p class="text-body-secondary">
-        Мы собираем вашу персональную карточку С95.<br>
-        Файл скачается автоматически через несколько секунд.
-      </p>
+      <h1 class="h2 mb-2"><%= head_info :title, t('.title') %></h1>
+      <p class="text-body-secondary"><%= t '.subtitle' %></p>
     </div>
 
-    <!-- Success State -->
-    <div class="text-center d-none py-5" data-wallet-loader-target="successState">
-      <div class="mb-4">
-        <div class="display-1 text-success scale-up">
-          <i class="fa-solid fa-circle-check"></i>
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-body p-4 text-center">
+        <div class="mb-4">
+          <div class="small text-body-secondary text-uppercase tracking-widest mb-1">Ваш ID</div>
+          <div class="fs-2 fw-bold font-monospace"><%= @athlete_code %></div>
+          <div class="fw-semibold text-primary"><%= @athlete_name %></div>
         </div>
-      </div>
-      <h2 class="h3 mb-3">Ура! Теперь у вас есть пропуск</h2>
-      <p class="text-body-secondary mb-5">
-        Карточка должна была скачаться. Если этого не произошло, нажмите на кнопку ниже еще раз.
-      </p>
-      
-      <div class="d-grid gap-3">
-        <%= link_to user_signed_in? ? athlete_path(current_user.athlete) : root_path, class: 'btn btn-primary btn-lg rounded-pill shadow-sm' do %>
-          Вернуться в профиль
+
+        <%= form_with url: wallet_pass_path, method: :post, data: { turbo: false } do |f| %>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+              <i class="fa-solid fa-cloud-arrow-down me-2"></i><%= t '.download_pass' %>
+            </button>
+          </div>
         <% end %>
-        <%= link_to 'Скачать еще раз', new_wallet_pass_path, class: 'btn btn-outline-secondary rounded-pill' %>
+      </div>
+    </div>
+
+    <div class="card border-0 bg-primary-subtle bg-opacity-10 mb-4 rounded-4">
+      <div class="card-body p-4 text-center">
+        <div class="fs-4 text-primary mb-2">
+          <i class="fa-brands fa-apple"></i>
+        </div>
+        <h6 class="fw-bold mb-1">Только для iPhone и Apple Watch</h6>
+        <p class="small text-body-secondary mb-0">
+          На Android-устройствах потребуется стороннее приложение.
+        </p>
       </div>
     </div>
 

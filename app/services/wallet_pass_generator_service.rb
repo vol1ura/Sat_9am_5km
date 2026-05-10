@@ -15,6 +15,7 @@ class WalletPassGeneratorService < ApplicationService
 
   option :latitude, reader: :private, default: -> { nil }
   option :longitude, reader: :private, default: -> { nil }
+  option :relevant_date, reader: :private, default: -> { nil }
 
   def self.normalize_code(code)
     code = code.to_s.strip
@@ -91,8 +92,7 @@ class WalletPassGeneratorService < ApplicationService
       ]
     end
 
-    next_saturday = Date.today.next_occurring(:saturday).to_time.change(hour: 9)
-    json[:relevantDate] = next_saturday.iso8601
+    json[:relevantDate] = relevant_date.iso8601 if relevant_date
 
     if ENV['APPLE_WALLET_WEB_SERVICE_URL'].present?
       json[:webServiceURL] = ENV['APPLE_WALLET_WEB_SERVICE_URL']
@@ -113,12 +113,11 @@ class WalletPassGeneratorService < ApplicationService
   end
 
   def collect_images(files)
-    IMAGE_FILES.each do |filename|
+    @cached_images ||= IMAGE_FILES.each_with_object({}) do |filename, memo|
       path = PASS_DIR.join(filename)
-      next unless File.exist?(path)
-
-      files[filename] = File.binread(path)
+      memo[filename] = File.binread(path) if File.exist?(path)
     end
+    files.merge!(@cached_images)
   end
 
   def build_manifest(files)
@@ -126,13 +125,13 @@ class WalletPassGeneratorService < ApplicationService
   end
 
   def sign_manifest(files)
-    wwdr = OpenSSL::X509::Certificate.new(File.binread(PASS_DIR.join('AppleWWDRCAG4.cer')))
+    @cached_wwdr ||= OpenSSL::X509::Certificate.new(File.binread(PASS_DIR.join('AppleWWDRCAG4.cer')))
 
     signature = OpenSSL::PKCS7.sign(
       certificate,
       private_key,
       files['manifest.json'],
-      [wwdr],
+      [@cached_wwdr],
       OpenSSL::PKCS7::BINARY | OpenSSL::PKCS7::DETACHED,
     )
 

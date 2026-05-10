@@ -91,6 +91,7 @@ class Athlete < ApplicationRecord
   before_destroy(prepend: true) { results.update_all personal_best: false, first_run: false }
   after_save { Club.where(id: saved_change_to_club_id.compact).touch_all if saved_change_to_club_id? }
   after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
+  after_commit :refresh_wallet_passes, if: :saved_change_to_going_to_event_id?
 
   store_accessor :personal_bests, *PERSONAL_BEST_DISTANCES, prefix: :personal_best
 
@@ -154,6 +155,10 @@ class Athlete < ApplicationRecord
   def refresh_home_trophies
     trophies.joins(:badge).where(badge: { kind: :home_participating }).destroy_all
     HomeBadgeAwardingJob.perform_later(id) if event_id
+  end
+
+  def refresh_wallet_passes
+    Wallet::UpdatePassesJob.perform_later(id) if wallet_pass_registrations.any?
   end
 
   def personal_bests_format
