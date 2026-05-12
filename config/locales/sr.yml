@@ -787,7 +787,7 @@ sr:
         question: Slučajno sam pogrešio u imenu prilikom registracije. Kako ispraviti?
         answer_html: Idite na <a href="/user">Podešavanja</a> (može zahtevati prijavu i lozinku) i izvršite potrebne promene.
     support:
-      description: 'Projekat Sat9am5km možete podržati na različite načine: volontiranjem, donacijama ili učešćem u razvoju ovog sajta'
+      description: 'Projekat S95 možete podržati na različite načine: volontiranjem, donacijama ili učešćem u razvoju ovog sajta'
       title: Želite da podržite projekat?
       how_to_support: >
         Prijatelji, naši događaji su potpuno besplatni i sprovode ih volonterske snage.

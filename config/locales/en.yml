@@ -660,7 +660,7 @@ en:
         question: I accidentally made a mistake in my name during registration. How to fix it?
         answer_html: Go to the <a href="/user">Settings</a> section (login and password may be required) and make the necessary changes.
     support:
-      description: 'You can support the Sat9am5km project in various ways: volunteering, donation, or by participating in the development of this website'
+      description: 'You can support the S95 project in various ways: volunteering, donation, or by participating in the development of this website'
       title: Want to Support the Project?
       how_to_support: >
         Friends, our events are completely free and run by volunteers.
