@@ -534,6 +534,7 @@ sr:
     show_more: Prikaži više
     show_less: Prikaži manje
   common:
+    error: Došlo je do greške. Pokušajte ponovo kasnije.
     without_token: BEZ TOKENA (napravi)
     without_name: BEZ IMENA
     nobody: NEPOZNATO
@@ -632,6 +633,7 @@ sr:
       search: Pretraži
       name_or_id: Ime ili ID
       language: Jezik
+      apple_wallet: Apple Wallet
     about_s95:
       title: O S95
       rules: Pravila
@@ -659,6 +661,7 @@ sr:
       headings:
         explore: Navigacija
         connect: Kontaktirajte nas
+      apple_wallet: Apple Wallet
   articles:
     index:
       title: Članci
@@ -1162,6 +1165,31 @@ sr:
       volunteer: Volonter
     volunteer:
       confirm_delete: Osloboditi poziciju %{role} (%{name})?
+  wallet_passes:
+    new:
+      title: Apple Wallet
+      description: Generišite bar-kod učesnika S95 za Apple Wallet na iPhone-u i Apple Watch-u
+      subtitle: Dodajte svoj bar-kod učesnika S95 u Apple Wallet za brz pristup na iPhone-u i Apple Watch-u.
+      athlete_code: ID učesnika
+      athlete_code_placeholder: 'Npr. A770000001'
+      athlete_code_hint: Vaš numerički ID iz sistema S95, parkrun, 5 versta ili RunPark
+      athlete_name: Ime i prezime
+      athlete_name_placeholder: Petar Petrović
+      emergency_contact: Hitni kontakt
+      emergency_contact_name: Ime kontaktne osobe
+      emergency_contact_phone: Telefon
+      preview: Pregled propusnice
+      athlete_label: Učesnik
+      default_athlete_name: Učesnik S95
+      location_relevant_text: "Vidimo se na startu S95! Vaš kod za skeniranje:"
+      download_pass: Preuzmi za Apple Wallet
+      how_it_works_title: Kako funkcioniše?
+      step_1: Unesite svoj ID učesnika i ime
+      step_2: Kliknite na „Preuzmi za Apple Wallet"
+      step_3: Otvorite preuzetu datoteku na iPhone-u
+      step_4: Pokažite bar-kod volonteru na cilju trke
+    create:
+      athlete_code_required: Unesite ID učesnika
   users:
     omniauth_callbacks:
       auth_error: Prijava neuspešna
@@ -1169,6 +1197,7 @@ sr:
       title: Podešavanja
       description: 'Podešavanja za %{user_name}'
       edit: Izmeni
+      apple_wallet: Apple Wallet
       not_specified: nije naveden
       email_pending_badge: 'Čeka potvrdu: %{email}'
       emergency_contact: Hitna kontakt osoba

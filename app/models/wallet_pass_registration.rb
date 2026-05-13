@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+class WalletPassRegistration < ApplicationRecord
+  belongs_to :athlete
+
+  validates :device_library_identifier, presence: true
+  validates :push_token, presence: true
+  validates :serial_number, presence: true
+  validates :pass_type_identifier, presence: true
+  validates :auth_token, presence: true
+  validates :device_library_identifier, uniqueness: { scope: :serial_number }
+
+  before_validation :generate_auth_token, on: :create
+
+  private
+
+  def generate_auth_token
+    self.auth_token ||= SecureRandom.hex(16)
+  end
+end

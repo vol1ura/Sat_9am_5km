@@ -483,6 +483,7 @@ en:
     show_more: Show all
     show_less: Collapse
   common:
+    error: An error occurred. Please try again later.
     without_token: NO TOKEN (create)
     without_name: NO NAME
     nobody: UNKNOWN
@@ -580,6 +581,7 @@ en:
       search: Search
       name_or_id: Surname or ID
       language: Language
+      apple_wallet: Apple Wallet
     about_s95:
       title: About S95
       rules: Rules
@@ -607,6 +609,7 @@ en:
       headings:
         explore: Explore
         connect: Get in touch
+      apple_wallet: Apple Wallet
   articles:
     index:
       title: Articles
@@ -1102,6 +1105,31 @@ en:
       volunteer: Volunteer
     volunteer:
       confirm_delete: Free position %{role} (%{name})?
+  wallet_passes:
+    new:
+      title: Apple Wallet
+      description: Generate your S95 athlete barcode for Apple Wallet on iPhone and Apple Watch
+      subtitle: Add your S95 athlete barcode to Apple Wallet for quick access on iPhone and Apple Watch.
+      athlete_code: Athlete ID
+      athlete_code_placeholder: 'e.g. A770000001'
+      athlete_code_hint: Your numeric ID from S95, parkrun, 5 verst, or RunPark
+      athlete_name: Full name
+      athlete_name_placeholder: John Doe
+      emergency_contact: Emergency contact
+      emergency_contact_name: Contact name
+      emergency_contact_phone: Phone
+      preview: Pass preview
+      athlete_label: Athlete
+      default_athlete_name: S95 Athlete
+      location_relevant_text: "See you at S95! Here is your scan code:"
+      download_pass: Download for Apple Wallet
+      how_it_works_title: How does it work?
+      step_1: Enter your athlete ID and name
+      step_2: Click "Download for Apple Wallet"
+      step_3: Open the downloaded file on your iPhone
+      step_4: Show the barcode to a volunteer at the finish line
+    create:
+      athlete_code_required: Athlete ID is required
   users:
     omniauth_callbacks:
       auth_error: Failed to sign in. Make sure you're actually registered
@@ -1109,6 +1137,7 @@ en:
       title: Settings
       description: 'Settings for user %{user_name}'
       edit: Edit
+      apple_wallet: Apple Wallet
       not_specified: not specified
       email_pending_badge: 'Pending confirmation: %{email}'
       emergency_contact: Emergency Contact

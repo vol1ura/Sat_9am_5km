@@ -533,6 +533,7 @@ ru:
     show_more: Показать все
     show_less: Свернуть
   common:
+    error: Произошла ошибка. Попробуйте позже.
     without_token: БЕЗ ТОКЕНА (создать)
     without_name: БЕЗ ИМЕНИ
     nobody: НЕИЗВЕСТНЫЙ
@@ -632,6 +633,7 @@ ru:
       search: Поиск
       name_or_id: Фамилия или ID
       language: Язык
+      apple_wallet: Apple Wallet
     about_s95:
       title: Про С95
       rules: Правила
@@ -659,6 +661,7 @@ ru:
       headings:
         explore: Навигация
         connect: Свяжитесь с нами
+      apple_wallet: Apple Wallet
   articles:
     index:
       title: Статьи
@@ -1156,6 +1159,31 @@ ru:
       volunteer: Волонтёр
     volunteer:
       confirm_delete: Освободить позицию %{role} (%{name})?
+  wallet_passes:
+    new:
+      title: Apple Wallet
+      description: Сгенерируйте штрих-код участника С95 для Apple Wallet на iPhone и Apple Watch
+      subtitle: Добавьте свой штрих-код участника С95 в Apple Wallet для быстрого доступа на iPhone и Apple Watch.
+      athlete_code: ID участника
+      athlete_code_placeholder: 'Например: A770000001'
+      athlete_code_hint: Ваш числовой ID из системы С95, parkrun, 5 вёрст или RunPark
+      athlete_name: Имя и фамилия
+      athlete_name_placeholder: Иван Иванов
+      emergency_contact: Экстренный контакт
+      emergency_contact_name: Имя контактного лица
+      emergency_contact_phone: Телефон
+      preview: Превью личной карточка
+      athlete_label: Участник
+      default_athlete_name: Участник С95
+      location_relevant_text: "Увидимся на старте С95! Ваш код для сканирования:"
+      download_pass: Скачать для Apple Wallet
+      how_it_works_title: Как это работает?
+      step_1: Введите свой ID участника и имя
+      step_2: Нажмите «Скачать для Apple Wallet»
+      step_3: Откройте скачанный файл на iPhone
+      step_4: Покажите штрих-код волонтёру на финише забега
+    create:
+      athlete_code_required: Укажите ID участника
   users:
     omniauth_callbacks:
       auth_error: Не удалось выполнить вход. Убедитесь, что вы действительно зарегистрированы
@@ -1163,6 +1191,7 @@ ru:
       title: Настройки
       description: 'Настройки для пользователя %{user_name}'
       edit: Изменить
+      apple_wallet: Apple Wallet
       not_specified: не указан
       email_pending_badge: 'Ожидает подтверждения: %{email}'
       emergency_contact: Экстренный контакт
