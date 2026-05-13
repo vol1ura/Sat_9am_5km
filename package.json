@@ -13,7 +13,7 @@
     "@stylistic/stylelint-plugin": "^4.0.0",
     "eslint": "^9.39.1",
     "eslint-plugin-import": "^2.32.0",
-    "postcss": "^8.4.29",
+    "postcss": "^8.5.10",
     "postcss-scss": "^4.0.9",
     "stylelint": "^16.25.0"
   }
