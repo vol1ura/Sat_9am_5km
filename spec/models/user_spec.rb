@@ -53,6 +53,15 @@ RSpec.describe User do
     end
   end
 
+  describe 'name normalization' do
+    it 'strips leading and trailing spaces from first_name and last_name' do
+      user = build(:user, first_name: '  Иван ', last_name: '  Иванов  ')
+      expect(user).to be_valid
+      expect(user.first_name).to eq('Иван')
+      expect(user.last_name).to eq('Иванов')
+    end
+  end
+
   describe 'email normalization' do
     it 'converts blank email to nil' do
       user = create(:user)

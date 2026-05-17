@@ -23,6 +23,7 @@ class User < ApplicationRecord
   end
 
   normalizes :email, with: ->(value) { value.presence }
+  normalizes :first_name, :last_name, with: ->(value) { value.strip.presence }
 
   validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+(-[[:alpha:]]{2,})?\z/ }
   validates :last_name, presence: true, format: { with: /\A[[:alpha:]]+([-' ][[:alpha:]]{2,})?\z/ }
