@@ -16,7 +16,7 @@ sr:
         email_login_description: Unesite svoj e-mail — poslaćemo vam jednokratni link za prijavu
         email_placeholder: Vaš e-mail
         email_submit: Dobijte link
-        email_registration_description: Ako niste registrovan, kreirajte novi profil
+        email_registration_description: Alternativno, ako niste registrovan, kreirajte novi profil
         email_registration_link: Registrujte se
     registrations:
       new:

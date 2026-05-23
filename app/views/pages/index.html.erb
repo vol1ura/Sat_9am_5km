@@ -11,7 +11,7 @@
             <% if current_user&.athlete %>
               <%= link_to t('.my_profile'), athlete_path(current_user.athlete), class: 'btn btn-danger btn-lg' %>
             <% else %>
-              <%= link_to t('.registration'), new_user_session_path, class: 'btn btn-danger btn-lg' %>
+              <%= link_to t('.registration'), new_user_registration_path, class: 'btn btn-danger btn-lg' %>
             <% end %>
             <%= link_to t('.results'), activities_path, class: 'btn btn-outline-light btn-lg' %>
             <%= link_to t('.find_event'), events_path, class: 'btn btn-outline-light btn-lg' %>

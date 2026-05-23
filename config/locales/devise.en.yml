@@ -16,7 +16,7 @@ en:
         email_login_description: Enter your email — we'll send you a one-time sign-in link
         email_placeholder: Your email
         email_submit: Get link
-        email_registration_description: If you're not registered yet, create a new profile
+        email_registration_description: Alternatively, if you have not registered yet, create a new profile
         email_registration_link: Register
     registrations:
       new:

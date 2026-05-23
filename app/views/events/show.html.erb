@@ -34,7 +34,7 @@
         <%= render 'going_tos/form' %>
       </div>
     <% else %>
-      <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
+      <%= link_to t('.registration'), new_user_registration_path, class: 'btn btn-outline-danger' %>
     <% end %>
   <% end %>
   <%= render 'card', header: t('.volunteers') do %>

@@ -16,7 +16,9 @@ class AthletesController < ApplicationController
   end
 
   def show
-    @athlete = Athlete.find(params[:id])
+    @athlete = Athlete.find params[:id]
+    return redirect_unregistered_athlete if !@athlete.user_id && @athlete.fiveverst_code
+
     results_ds = @athlete.results.published
     @total_results = results_ds.size
     @last_best_position_result =
@@ -37,5 +39,15 @@ class AthletesController < ApplicationController
     @result = @athlete.results.published.where(activity: { date: since_date.. }).order(:total_time).first
   rescue Date::Error => e
     render json: { error: e.message }, status: :unprocessable_content
+  end
+
+  private
+
+  def redirect_unregistered_athlete
+    if user_signed_in?
+      redirect_to activities_path, notice: t('.profile_hidden')
+    else
+      redirect_to new_user_registration_path, alert: t('.registration_required')
+    end
   end
 end

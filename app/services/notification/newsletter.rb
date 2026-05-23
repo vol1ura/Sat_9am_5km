@@ -9,10 +9,10 @@ module Notification
     end
 
     def call
-      if @user.email
-        deliver_by_email
-      elsif @user.telegram_id
+      if @user.telegram_id
         deliver_by_telegram
+      elsif @user.email
+        deliver_by_email
       else
         return
       end
@@ -26,7 +26,7 @@ module Notification
 
     def deliver_by_email
       html = build_email_html
-      UserNotificationMailer.notify(@user, html).deliver_later
+      UserNotificationMailer.notify(@user, html).deliver_now
     end
 
     def deliver_by_telegram

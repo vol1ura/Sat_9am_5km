@@ -193,13 +193,11 @@
                 </div>
                 <h4 class="text-center mb-3" style="color: #2a2951;">Регистрация</h4>
                 <p class="text-center mb-3">
-                  Для попадания в протокол забега нужно зарегистрироваться в телеграм-боте
+                  Для попадания в протокол забега нужно зарегистрироваться на сайте
                   (это делается один раз на все наши мероприятия).
                 </p>
                 <div class="text-center">
-                  <%= link_to '@sat9am5kmbot', 'https://t.me/sat9am5kmbot',
-                      target: '_blank',
-                      rel: 'noopener',
+                  <%= link_to 'Зарегистрироваться', new_user_registration_path,
                       class: 'btn btn-primary btn-lg fw-bold',
                       style: 'background: linear-gradient(135deg, #2a2951 0%, #4a5568 100%); border: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(42, 41, 81, 0.3); transition: all 0.3s ease;' %>
                 </div>

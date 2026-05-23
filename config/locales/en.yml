@@ -636,7 +636,7 @@ en:
       forward: Forward
     rules:
       description: Brief rules for S95 run participants, as well as frequently asked questions
-      register_with_bot_html: "If you're not registered, create a profile using our <a href=\"%{link}\" target=\"_blank\" rel=\"noopener\">Telegram bot</a>. You'll receive a link to your profile with a personal barcode."
+      register_with_bot_html: "If you're not registered, create a profile, filling out the <a href=\"%{link}\">registration form</a>. After confirming your email, you'll be taken to your profile with a personal barcode."
       come_to_s95_html: 'Most importantly - come on <strong>Saturday</strong> at <strong>9 AM</strong> to one of the <a href="%{link}">events</a> and run <strong>5 km</strong>.'
       scan_barcodes: At the finish, you'll be given a position card. Scan your personal barcode and position card with the volunteer.
       return_position_card: Return the position card.
@@ -646,7 +646,7 @@ en:
         answer: The course is well marked with orange cones, there's a marshal at the turnaround (if there is one), and you'll likely be running surrounded by other participants.
       about_registering:
         question: Do I need to register to participate in a run?
-        answer_html: "Not required, but it's recommended to register using our Telegram bot <a href=\"%{link}\" target=\"_blank\" rel=\"noopener\">%{bot_nick}</a>. As a result, you'll have a personal barcode that you'll show to the volunteer. Additionally, the bot will send notifications with run results."
+        answer_html: "Not required, but it's recommended to register once, filling out a small <a href=\"%{link}\">form</a> and confirming your email. After that, you'll be able to mark yourself at any of our runs using a personal barcode, which will allow you to not lose your results and track your achievements."
       about_participation:
         question: 'Can I just come at 8:45 to run together?'
         answer: "Yes, you can just come and run. Registration is needed so you have a result in the protocol. Register once and you can come to any run. If you don't register - you'll be in the protocol as \"Unknown\". On site, they'll help you register and enjoy five kilometers in good company."
@@ -862,6 +862,8 @@ en:
       athletes_count: Total found %{count} participants
       nothing_found: Unfortunately, nothing found.
     show:
+      registration_required: You are trying to view the profile of an unregistered participant. If this is your profile, please register on the site and through the feedback form request to add this profile to your account.
+      profile_hidden: Participant data is hidden because they have not completed registration on the site yet.
       description: 'Participant Profile %{athlete_name}'
       show_club_html: 'View club statistics %{link}'
       total_results: total runs
@@ -1074,8 +1076,8 @@ en:
       waiting_for_results: Waiting for results...
       results_will_appear: Results will appear here during the run
     card:
-      about_participation: 'Register in our Telegram bot and come Saturday morning. You can run or walk the distance. We welcome everyone regardless of age and fitness level.'
-      registration: Telegram Registration
+      about_participation: 'Register on the site and come Saturday morning. You can run or walk the distance. We welcome everyone regardless of age and fitness level.'
+      registration: Register
       about_volunteers: 'All events are free and organized by volunteers. Check available positions and also join the organizing team'
       show: View
       place: Venue

@@ -763,7 +763,7 @@ sr:
       forward: Napred
     rules:
       description: Kratka pravila za učesnike S95, kao i često postavljana pitanja
-      register_with_bot_html: 'Ako niste registrovani, kreirajte profil koristeći <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a>. Dobićete link do vašeg profila sa ličnim QR kodom.'
+      register_with_bot_html: 'Ako niste registrovani, kreirajte profil, popunjavajući <a href="%{link}">formu registracije</a>. Nakon potvrde email-a, biti ćete preusmereni na vaš profil sa ličnim QR kodom.'
       come_to_s95_html: 'Najvažnije je doći na jedan od <a href="%{link}">događaja</a> u <strong>subotu</strong> u <strong>9 ujutru</strong> i pretrčati <strong>5 km</strong>.'
       scan_barcodes: Na cilju ćete dobiti karticu pozicije. Skenirajte lični QR kod i karticu pozicije kod volontera.
       return_position_card: Predajte karticu pozicije.
@@ -773,7 +773,7 @@ sr:
         answer: Staza je dobro obeležena narandžastim čunjevima, postoji i maršal na skretanju (ako ga ima), i najverovatnije ćete biti okruženi drugim učesnicima tokom trčanja.
       about_registering:
         question: Da li je potrebno da se registrujem za učešće u trci?
-        answer_html: 'Nije obavezno, ali je preporučljivo da prođete proceduru registracije koristeći naš telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. Kao rezultat, imaćete lični bar kod, koji ćete naknadno pokazati volonteru. Pored toga, bot će slati obaveštenja sa rezultatima trke.'
+        answer_html: 'Nije obavezno, ali je preporučljivo da prođete proceduru registracije, popunjavajući nebolju <a href="%{link}">formu</a> i potvrdite email. Nakon toga, moćićete da se označite na našim trkama koristeći lični bar kod, što će vam omogućiti da ne izgubite svoje rezultate i da pratite svoje dostignuća.'
       about_participation:
         question: 'Da li je moguće samo doći u 8:45 da trčimo zajedno?'
         answer: 'Da, možete samo doći i trčati. Registracija nije obavezna, služi samo za čuvanje vašeg rezultata u protokolu. Ako se ne registrujete, bićete navedeni u protokolu kao "Nepoznat".'
@@ -913,6 +913,8 @@ sr:
       athletes_count: Ukupno pronađeno %{count} čl.
       nothing_found: Nažalost, ništa nije pronađeno.
     show:
+      registration_required: Molimo registrujte se na sajtu da biste videli profil učesnika. Ako je ovo vaš profil, molimo vas da se registrujete na sajtu i da nam pošaljete povratnu informaciju da bismo ga dodali vašem nalogu.
+      profile_hidden: Podaci učesnika su skriveni jer još nije završio registraciju na sajtu.
       description: 'Profil atletičara %{athlete_name}: rezultati, statistike i volontiranje'
       show_club_html: 'Prikaži statistike kluba %{link}'
       total_results: ukupno trčanja
@@ -1134,8 +1136,8 @@ sr:
       waiting_for_results: Čekanje rezultata...
       results_will_appear: Rezultati će se pojaviti ovde tokom trke
     card:
-      about_participation: 'Registrujte se u našem telegram-botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
-      registration: Registracija u telegramu
+      about_participation: 'Registrujte se na sajtu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
+      registration: Registracija
       about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu'
       show: Prikaži
       place: Mesto događaja

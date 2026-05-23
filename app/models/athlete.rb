@@ -113,7 +113,7 @@ class Athlete < ApplicationRecord
   end
 
   def code
-    parkrun_code || fiveverst_code || runpark_code || (SAT_9AM_5KM_BORDER + id if id)
+    parkrun_code || runpark_code || fiveverst_code || (SAT_9AM_5KM_BORDER + id if id)
   end
 
   def award_by_rage_badge?

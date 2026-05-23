@@ -16,7 +16,7 @@ ru:
         email_login_description: Введите ваш email — мы отправим одноразовую ссылку для входа
         email_placeholder: Ваш email
         email_submit: Получить ссылку
-        email_registration_description: Либо если вы ещё не зарегистрированы, создайте новый профиль
+        email_registration_description: Либо, если вы ранее не регистрировались, создайте новый профиль
         email_registration_link: Зарегистрироваться
     registrations:
       new:
