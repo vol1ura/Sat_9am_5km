@@ -9,10 +9,10 @@ module Notification
     end
 
     def call
-      if @user.telegram_id
-        deliver_by_telegram
-      elsif @user.email
+      if @user.email
         deliver_by_email
+      elsif @user.telegram_id
+        deliver_by_telegram
       else
         return
       end

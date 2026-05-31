@@ -140,7 +140,6 @@ sr:
         athlete: sportista
         user: korisnik
         gender: pol
-        club: klub
       volunteer:
         activity: trčanje
         athlete: sportista
@@ -833,7 +832,7 @@ sr:
             <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su objedinjeni u jedinstvenom sistemu.</li>
             <li>Imamo motivacioni sistem nagrada i izazova — dobijajte <a href="%{badges_link}">dostignuća</a> ne samo za visoke rezultate, već i za redovno učešće i lični napredak.</li>
             <li>Naša platforma nije samo o trčanju, već i o druženju i važnoj društvenoj misiji: razvijamo volontiranje, gradimo prijateljsku zajednicu i pomažemo u pronalaženju istomišljenika.</li>
-            <li>Jednostavna i brza registracija novih učesnika pomoću Telegram-bota — svi podaci su uvek pri ruci.</li>
+            <li>Jednostavna i brza registracija novih učesnika, pogodan лични профил, brzi пријава на сајт, сви подаци су увек под руком. Учесници не морају да траже свој QR код где-то у пошти, да се сећају и уносе лозинку за пријаву на сајт, они ће моћи да примају обавештења о резултатима трка како је они буду објављени.</li>
             <li>Koristimo moderne tehnologije: raznovrsne statistike i rangiranja, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku.</li>
             <li>Imamo sopstvenu jedinstvenu mobilnu aplikaciju za organizaciju trka.</li>
             <li>Naš sistem je potpuno otvoren i zasnovan na OpenSource tehnologijama — svako može predložiti poboljšanja i učiniti platformu još boljom.</li>
@@ -1008,6 +1007,7 @@ sr:
       first_volunteering: 'Prvo volontirsko delanje!'
       search_athlete_placeholder: 'Pretraga atleta...'
       clear_search: 'Obriši pretragu'
+      not_published: Trka još nije objavljena. Pokušajte ponovno kasnije.
     protocol:
       position_short: Poz.
       position_full: Pozicija

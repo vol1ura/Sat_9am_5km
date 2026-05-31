@@ -7,10 +7,10 @@ module Notification
     private
 
     def notify!(user, **)
-      if user.telegram_id
-        Channel::Telegram.deliver(user, text:, **)
-      elsif user.email
+      if user.email
         Channel::Email.deliver(user, text:, **)
+      elsif user.telegram_id
+        Channel::Telegram.deliver(user, text:, **)
       end
     end
 

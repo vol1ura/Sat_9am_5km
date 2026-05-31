@@ -132,7 +132,6 @@ en:
         athlete: participant
         user: user
         gender: gender
-        club: club
       volunteer:
         activity: run
         athlete: participant
@@ -707,7 +706,7 @@ en:
             <li>We're an international community: S95 runs take place in Russia, Belarus, and Serbia, and all results are collected in a unified system</li>
             <li>We have a motivating badge and challenge system — get <a href="%{badges_link}">achievements</a> not only for high results, but also just for participation and personal progress</li>
             <li>Our platform isn't just about running, but also about communication and social mission: we actively develop volunteering, communicate, find new friends</li>
-            <li>Simple and fast registration of new participants via Telegram bot, all data always at hand</li>
+            <li>Simple and fast registration of new participants, convenient personal account, fast login to the site, all data always at hand. Participants won't have to search for their QR code somewhere in the mail, remember and enter the password to log in to the site, they'll be able to receive notifications about the results of the runs as soon as they're published.</li>
             <li>We use modern technologies and approaches: lots of various statistics and rankings, ability to add friends and see who's going to which run</li>
             <li>We have our own unique mobile app for conducting runs</li>
             <li>Our system is completely open and uses OpenSource technologies — everyone can suggest improvements and make the platform even better</li>
@@ -957,6 +956,7 @@ en:
       first_volunteering: 'First Volunteering!'
       search_athlete_placeholder: 'Search participant...'
       clear_search: 'Clear Search'
+      not_published: Run not published yet. Please try again later.
     protocol:
       position_short: Pos.
       position_full: Position

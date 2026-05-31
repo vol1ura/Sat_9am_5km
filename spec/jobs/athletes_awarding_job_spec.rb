@@ -20,6 +20,7 @@ RSpec.describe AthletesAwardingJob do
         create(:participating_badge, threshold: threshold, type: 'volunteer')
       end
       allow(FunrunAwardingJob).to receive(:perform_later).with(activity.id, jubilee_badge.id)
+      allow(FunrunAwardingJob).to receive(:set).with(wait: 12.hours).and_return(FunrunAwardingJob)
 
       24.times do |idx|
         activity = create(:activity, event: event, date: idx.next.week.ago)
@@ -37,7 +38,8 @@ RSpec.describe AthletesAwardingJob do
       expect(athlete.trophies.joins(:badge).pluck(:kind)).to contain_exactly(
         'rage', 'participating', 'participating',
       )
-      expect(FunrunAwardingJob).to have_received(:perform_later).once
+      expect(FunrunAwardingJob).to have_received(:perform_later).with(activity.id, jubilee_badge.id).twice
+      expect(FunrunAwardingJob).to have_received(:set).with(wait: 12.hours).once
     end
   end
 
