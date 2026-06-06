@@ -13,9 +13,7 @@ module Notification
       return unless @user
       return if @user.notification_disabled? :volunteer_reminder
 
-      notify! @user
-    rescue StandardError => e
-      Rollbar.error e, user_id: @user.id, volunteer_id: @volunteer.id
+      notify @user
     end
 
     private

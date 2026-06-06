@@ -12,9 +12,7 @@ module Notification
         return unless user&.email || user&.telegram_id
         return if user.notification_disabled? :badge
 
-        notify! user, disable_web_page_preview: true
-      rescue StandardError => e
-        Rollbar.error e, user_id: user&.id, trophy_id: @trophy.id
+        notify user, disable_web_page_preview: true
       end
 
       private

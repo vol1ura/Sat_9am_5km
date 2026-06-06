@@ -22,8 +22,7 @@ module Telegram
 
         parsed_body = JSON.parse(response.body, symbolize_names: true)
         raise "Telegram request failed. #{parsed_body[:description]}" if parsed_body[:error_code] != 403
-      rescue StandardError => e
-        Rails.logger.error e.message
+      rescue StandardError
         (retry_count += 1) < 3 ? retry : raise
       end
     end
@@ -35,7 +34,7 @@ module Telegram
     end
 
     def send_request
-      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, open_timeout: 15, read_timeout: 15) do |http|
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, open_timeout: 10, read_timeout: 10) do |http|
         req = Net::HTTP::Post.new(uri)
         if @payload.key?(:form_data)
           req.set_form(@payload[:form_data], 'multipart/form-data')

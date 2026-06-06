@@ -6,12 +6,19 @@ module Notification
 
     private
 
-    def notify!(user, **)
+    def notify(user, **)
       if user.email
-        Channel::Email.deliver(user, text:, **)
+        Channel::Email.deliver user, text:, **
       elsif user.telegram_id
-        Channel::Telegram.deliver(user, text:, **)
+        Channel::Telegram.deliver user, text:, **
+      else
+        return false
       end
+
+      true
+    rescue StandardError => e
+      Rollbar.error e, user_id: user.id
+      false
     end
 
     # :nocov:

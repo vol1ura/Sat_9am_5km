@@ -27,12 +27,16 @@ RSpec.describe Notification::AfterActivity::Result do
   end
 
   context 'when request to telegram fails' do
-    before { request.to_raise(StandardError) }
+    before do
+      request.to_raise(StandardError)
+      allow(Rollbar).to receive(:error)
+    end
 
-    it 'not informs athlete' do
+    it 'does not inform athlete' do
       described_class.call(result)
       expect(request).to have_been_requested.times(3)
       expect(result.reload).not_to be_informed
+      expect(Rollbar).to have_received(:error).once
     end
   end
 end
