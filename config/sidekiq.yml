@@ -42,6 +42,11 @@
       class: "Notification::BreakingTimeBadgesExpirationJob"
       queue: low
       description: Notify about breaking time badge expiration
+    empty_athletes_cleanup:
+      cron: "0 1 * * SUN"
+      class: EmptyAthletesCleanupJob
+      queue: low
+      description: Remove athletes without user, results, volunteering and name
     home_badge_awarding:
       cron: "30 5 * * SUN"
       class: HomeBadgeAwardingJob
