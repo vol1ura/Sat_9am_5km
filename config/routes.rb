@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   resources :articles, only: %i[index show], param: :page
 
   resource :user, only: %i[show edit update]
+  resource :wallet_pass, only: %i[new create]
   resource :cookie_consent, only: :create
   resolve('User') { [:user] }
 
@@ -97,6 +98,16 @@ Rails.application.routes.draw do
       resources :athletes, only: :update
       resources :activities, only: :create
     end
+
+    scope '/v1' do
+      get    'passes/athlete/:athlete_id',                                                            to: 'wallet_passes#download'
+      post   'devices/:device_library_identifier/registrations/:pass_type_identifier/:serial_number', to: 'wallet_passes#register'
+      delete 'devices/:device_library_identifier/registrations/:pass_type_identifier/:serial_number', to: 'wallet_passes#unregister'
+      get    'devices/:device_library_identifier/registrations/:pass_type_identifier',                to: 'wallet_passes#registrations'
+      get    'passes/:pass_type_identifier/:serial_number',                                           to: 'wallet_passes#show'
+      post   'log',                                                                                   to: 'wallet_passes#log'
+    end
+
     namespace :mobile do
       get 'athletes/:code/info', to: 'athletes#info'
       post 'activities/stopwatch', to: 'activities#stopwatch'

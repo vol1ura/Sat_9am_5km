@@ -70,6 +70,18 @@ After that you can access the site with different locales:
 - Active Storage Dashboard [dev](http://localhost:3000/storage) or [prod](https://s95.ru/storage)
 - Uptime monitor [UptimeRobot](https://dashboard.uptimerobot.com/monitors/797544445)
 
+## Apple Wallet Pass
+
+Requires Apple Developer certificates in `config/wallet_pass/`:
+- `AppleWWDRCAG4.cer`, `pass.cer`, `pass.key` (or `pass.p12`).
+- `icon*.png` (branding), `strip.png` (optional banner).
+
+**Environment Variables:**
+- `APPLE_WALLET_WEB_SERVICE_URL`: Server URL for automatic updates.
+- `WALLET_API_TOKEN`: Auth token for external pass issuance API.
+
+> **Note:** Certificates and keys are git-ignored; deploy them manually to the server.
+
 ## Server setup
 
 To install web application on Ubuntu server run
