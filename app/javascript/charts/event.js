@@ -24,7 +24,8 @@ export default class EventCharts {
   constructor(rows) {
     this.rows = rows;
     this.eventsData = {};
-    this.currentLocale = document.documentElement.lang === 'sr' ? 'sr' : 'ru';
+    const lang = document.documentElement.lang;
+    this.currentLocale = translations[lang] ? lang : 'ru';
     this.t = translations[this.currentLocale];
 
     Apex.chart = { locales: [ruLocale, srLocale], defaultLocale: this.currentLocale };
