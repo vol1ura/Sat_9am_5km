@@ -7,7 +7,7 @@ class EmptyAthletesCleanupJob < ApplicationJob
     Athlete
       .where(user_id: nil)
       .where.missing(:results)
-      .where.missing(:volunteering)
+      .where.not(id: Volunteer.select(:athlete_id))
       .where(name: [nil, ''])
       .destroy_all
   end

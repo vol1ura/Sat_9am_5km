@@ -6,6 +6,13 @@ RSpec.describe EmptyAthletesCleanupJob do
   end
 
   describe '#perform' do
+    around do |example|
+      Bullet.n_plus_one_query_enable = false if defined?(Bullet)
+      example.run
+    ensure
+      Bullet.n_plus_one_query_enable = true if defined?(Bullet)
+    end
+
     it 'destroys athletes without user, results, volunteering and name' do
       athlete = create(:athlete, user: nil, name: nil)
       create(:athlete, user: nil, name: '')
