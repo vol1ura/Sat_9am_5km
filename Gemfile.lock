@@ -524,6 +524,7 @@ GEM
       ffi (~> 1.12)
       logger
     ruby2_keywords (0.0.5)
+    rubyzip (3.2.2)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
     sass-embedded (1.97.2)
@@ -687,6 +688,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-rspec_rails
   ruby-vips (>= 2.1.0)
+  rubyzip
   sidekiq
   sidekiq-scheduler
   simplecov
