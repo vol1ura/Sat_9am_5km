@@ -12,6 +12,8 @@ RSpec.describe '/activities' do
   describe 'GET /show' do
     let(:activity) { create(:activity) }
     let!(:result) { create(:result, activity:) }
+    let!(:volunteer) { create(:volunteer, activity:) }
+    let(:athlete_fields) { %i[id name parkrun_code gender] }
 
     it 'renders a successful response' do
       create(:participating_badge)
@@ -22,10 +24,15 @@ RSpec.describe '/activities' do
 
     it 'renders json' do
       get activity_url(activity, format: :json)
+
       expect(response.parsed_body.dig('results', 0)).to eq(
         'total_time' => result.time_string,
         'position' => result.position,
-        'athlete' => %w[id name parkrun_code gender].index_with { |field| result.athlete.public_send(field) },
+        'athlete' => result.athlete.as_json(only: athlete_fields),
+      )
+      expect(response.parsed_body.dig('volunteers', 0)).to eq(
+        'role' => volunteer.role,
+        'athlete' => volunteer.athlete.as_json(only: athlete_fields),
       )
     end
   end

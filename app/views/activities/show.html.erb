@@ -104,6 +104,7 @@
     <tr>
       <th class="fs-small-sm"><%= t '.volunteer' %></th>
       <th class="fs-small-sm"><%= t '.role' %></th>
+      <th class="hidden-on-phone fs-small-sm"><%= t 'activities.protocol.club' %></th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -126,6 +127,10 @@
           <% when *Badge.participating_thresholds[:volunteer] %>
             <%= render partial: '/badge_icon', locals: { label: volunteering_count, icon_class: 'text-danger' } %>
           <% end %>
+        </td>
+        <td class="hidden-on-phone align-middle fs-small-sm">
+          <% club = volunteer.athlete.club %>
+          <%= link_to club.name, club_path(club.slug) if club %>
         </td>
       </tr>
     <% end %>
