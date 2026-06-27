@@ -29,6 +29,21 @@ ActiveAdmin.register_page 'Utilities' do
         end
       end
 
+      tab t('.discrepancies.title') do
+        discrepancies =
+          Volunteer.published
+            .incorrect_on_running_positions
+            .includes(:athlete, activity: :event)
+            .order(activity: { date: :desc }, athlete_id: :asc)
+
+        render 'discrepancies', discrepancies:
+      end
+
+      tab t('.no_volunteers.title') do
+        activities = Activity.published.includes(:event).where.missing(:volunteers).order(date: :desc)
+        render 'no_volunteers', activities:
+      end
+
       tab t('.analytics.title') do
         stats_for = lambda do |model|
           Activity.find_by_sql(
@@ -49,8 +64,8 @@ ActiveAdmin.register_page 'Utilities' do
                 ROUND(COUNT(#{model}.id)::numeric / COUNT(DISTINCT activities.id), 1) AS avg_count,
                 COUNT(DISTINCT #{model}.athlete_id) FILTER (WHERE activities.date = first_#{model}.date) AS newbies_count
               FROM activities
-              JOIN #{model} ON #{model}.activity_id = activities.id
-              JOIN first_#{model} ON first_#{model}.athlete_id = #{model}.athlete_id
+              LEFT JOIN #{model} ON #{model}.activity_id = activities.id
+              LEFT JOIN first_#{model} ON first_#{model}.athlete_id = #{model}.athlete_id
               WHERE activities.published = true
                 AND activities.date BETWEEN DATE_TRUNC('month', current_date - interval '12 months') AND current_date
               GROUP BY DATE_TRUNC('month', activities.date)

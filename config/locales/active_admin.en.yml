@@ -18,6 +18,19 @@ en:
         params_not_selected: 'Event or role not selected'
       award_funrun_badge:
         performing: 'Award procedure has been started, this will take some time. Refresh the page a bit later to see the results.'
+      discrepancies:
+        title: Running volunteers missing from protocol results
+        athlete: Participant
+        role: Role
+        activity_date: Run date
+        event: Location
+        activity: Run
+        open_activity: Open
+        empty: No discrepancies found
+      no_volunteers:
+        title: Published runs without volunteers
+        description: Runs are held by volunteers and only thanks to volunteers, so it is extremely important to mark all volunteers as a sign of gratitude.
+        empty: All published runs have volunteers
       stats:
         title: Statistics
         month: Month
@@ -230,6 +243,10 @@ en:
           title: Analytics
         badges:
           title: Badges
+        discrepancies:
+          title: Discrepancies
+        no_volunteers:
+          title: No volunteers
 
     devise:
       username:
