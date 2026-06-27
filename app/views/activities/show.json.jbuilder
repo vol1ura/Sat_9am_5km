@@ -9,3 +9,10 @@ json.results do
     cached: ->(result) { locale_cache_key(result, result.athlete) },
   )
 end
+json.volunteers do
+  json.partial!(
+    'volunteer',
+    collection: @volunteers,
+    as: :volunteer
+  )
+end
