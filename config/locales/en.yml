@@ -168,6 +168,7 @@ en:
         rank: rank
         number: number
         role: role
+        activity: run
         roles:
           <<: *volunteer_roles
       contact:
@@ -1078,7 +1079,7 @@ en:
     card:
       about_participation: 'Register on the site and come Saturday morning. You can run or walk the distance. We welcome everyone regardless of age and fitness level.'
       registration: Register
-      about_volunteers: 'All events are free and organized by volunteers. Check available positions and also join the organizing team'
+      about_volunteers: 'All events are free and organized by volunteers. You can now sign yourself up — check available positions and pick a role'
       show: View
       place: Venue
       athlete: Participant
@@ -1096,14 +1097,33 @@ en:
       closest_date: closest dates
       acknowledgements: We'll be very grateful if you can provide volunteer assistance. You can choose an interesting and feasible activity for yourself that will allow you to express yourself, support friends, and have a great time.
       about_roster_html: 'Below you can see the list of <em>required positions</em>, as well as see which ones are already taken.'
-      how_to_participate_html: 'To sign up, just write in our <a href="%{tg_chat_link}" target="_blank" rel="noopener">Telegram chat</a>.'
+      how_to_participate: 'Click "Join" next to an open position in the table below.'
+      how_to_participate_html: 'You can also write in our <a href="%{tg_chat_link}" target="_blank" rel="noopener">Telegram chat</a>.'
       additional_positions: In addition, sometimes run directors decide to recruit additional volunteers - follow the news, or ask directly in the chat.
       main_title: Volunteering Schedule
       main_page: Main Page
       role: Role
       volunteer: Volunteer
+      slots_filled: '%{filled} of %{total} filled'
+      extra_volunteers_header: Additional volunteers
+      all_slots_full: There are no open positions right now, but you can still come to the run — ask the organizers on site to sign you up manually and give you a role.
     volunteer:
       confirm_delete: Free position %{role} (%{name})?
+      its_you: You
+      cancel: Cancel
+      add: Add volunteer
+      sign_in_to_join: Sign in to join
+      no_athlete_profile: complete your athlete profile to join
+      join: Join
+      already_volunteering: 'You are already signed up %{role} for this day'
+      already_volunteering_short: you are already signed up for this day
+      confirm_title: 'Signing up for "%{role}"'
+      confirm_come: 'We will ask you to come to the run on %{date}.'
+      confirm_place_html: 'You can check the location and rules on the <a href="%{event_link}">event page</a>.'
+      confirm_help_html: 'If you need help, write in <a href="%{tg_chat_link}" target="_blank" rel="noopener">our Telegram chat</a>.'
+      confirm_cancel_hint: You can cancel your sign-up at any time — just click the X next to your name.
+      confirm_cancel: Cancel
+      confirm_submit: Confirm sign-up
   users:
     omniauth_callbacks:
       auth_error: Failed to sign in. Make sure you're actually registered

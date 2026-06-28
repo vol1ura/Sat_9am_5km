@@ -32,6 +32,16 @@ class Activity < ApplicationRecord
       .order(:rank, :role, :comment)
   end
 
+  def volunteering_positions_roster
+    positions = event.volunteering_positions.where(activity_id: [nil, id])
+    defaults, overrides = positions.partition { |p| p.activity_id.nil? }
+    overrides_by_role = overrides.index_by(&:role)
+    defaults
+      .reject { |p| overrides_by_role.key?(p.role) }
+      .concat(overrides)
+      .sort_by(&:rank)
+  end
+
   def participants
     Athlete.where(id: results.select(:athlete_id)).or(Athlete.where(id: volunteers.select(:athlete_id))).distinct
   end

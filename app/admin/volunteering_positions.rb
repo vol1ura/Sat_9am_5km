@@ -5,7 +5,7 @@ ActiveAdmin.register VolunteeringPosition do
 
   actions :all, except: :show
 
-  permit_params :event_id, :rank, :role, :number
+  permit_params :event_id, :activity_id, :rank, :role, :number
 
   config.filters = false
   config.sort_order = 'rank_asc'
@@ -19,6 +19,10 @@ ActiveAdmin.register VolunteeringPosition do
   end
 
   controller do
+    def scoped_collection
+      action_name == 'index' ? super.includes(:activity) : super
+    end
+
     def update
       update!(notice: t('.successful')) { collection_path }
     end
@@ -33,6 +37,7 @@ ActiveAdmin.register VolunteeringPosition do
     column :rank
     column :number
     column(:role) { |v| human_volunteer_role v.role }
+    column(:activity) { |v| v.activity ? human_activity_name(v.activity) : 'по умолчанию (все забеги)' }
     actions
   end
 
@@ -41,6 +46,13 @@ ActiveAdmin.register VolunteeringPosition do
       f.input :rank
       f.input :number
       f.input :role, as: :searchable_select
+      f.input(
+        :activity_id,
+        as: :searchable_select,
+        collection: event.activities.unpublished.order(date: :desc),
+        label: 'Забег (оставьте пустым, чтобы применить ко всем забегам события)',
+        include_blank: 'По умолчанию (все забеги)',
+      )
     end
     f.actions
   end

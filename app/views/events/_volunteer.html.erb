@@ -1,3 +1,8 @@
+<%
+  show_join_modal = !volunteer && !organizer && user_signed_in? && current_user.athlete && !my_volunteering && can?(:create, Volunteer)
+  modal_id = "confirm-volunteer-#{idx}"
+%>
+
 <%= turbo_frame_tag "volunteer-#{idx}" do %>
   <% if volunteer %>
     <span class="d-inline-flex align-items-center gap-2 flex-nowrap w-100">
@@ -6,15 +11,63 @@
       <% else %>
         <%= link_to volunteer.name, athlete_path(volunteer.athlete), data: { turbo: false } %>
       <% end %>
+      <% if my_volunteering && my_volunteering.id == volunteer.id %>
+        <span class="badge bg-primary"><%= t '.its_you' %></span>
+      <% end %>
       <% if can?(:destroy, volunteer) %>
         <%= link_to volunteer_path(volunteer, idx:), method: :delete, class: 'text-danger ms-auto ms-md-0', data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete', role: human_volunteer_role(role), name: volunteer.name) } do %>
           <i class="fa-solid fa-xmark"></i>
         <% end %>
       <% end %>
     </span>
-  <% elsif can?(:create, Volunteer) && can?(:read, activity) %>
+  <% elsif organizer %>
     <%= link_to new_volunteer_path(activity_id: activity.id, role: role, idx: idx) do %>
       <i class="fa-solid fa-user-plus"></i>
     <% end %>
+  <% elsif !user_signed_in? %>
+    <%= link_to t('.sign_in_to_join'), new_user_session_path, class: 'text-muted small' %>
+  <% elsif current_user.athlete.nil? %>
+    <span class="text-muted small"><%= t '.no_athlete_profile' %></span>
+  <% elsif my_volunteering %>
+    <span
+      class="text-muted small"
+      title="<%= t '.already_volunteering', role: human_volunteer_role(my_volunteering.role) %>"
+    >
+      <%= t '.already_volunteering_short' %>
+    </span>
+  <% elsif show_join_modal %>
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#<%= modal_id %>">
+      <%= t '.join' %>
+    </button>
   <% end %>
+<% end %>
+
+<% if show_join_modal %>
+  <div class="modal fade" id="<%= modal_id %>" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t '.confirm_title', role: human_volunteer_role(role) %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><%= t '.confirm_come', date: l(activity.date, format: :long) %></p>
+          <p><%= t '.confirm_place_html', event_link: event_path(activity.event.code_name) %></p>
+          <% if tg_chat %>
+            <p><%= t '.confirm_help_html', tg_chat_link: tg_chat.link %></p>
+          <% end %>
+          <p class="text-muted small mb-0"><%= t '.confirm_cancel_hint' %></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><%= t '.confirm_cancel' %></button>
+          <%=
+            button_to t('.confirm_submit'), volunteers_path,
+                     params: { volunteer: { activity_id: activity.id, role: role, athlete_id: current_user.athlete.id }, idx: idx },
+                     form_class: 'd-inline',
+                     class: 'btn btn-primary'
+          %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

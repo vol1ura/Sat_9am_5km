@@ -59,6 +59,10 @@ class User < ApplicationRecord
     favorite_event_ids.include?(event.id)
   end
 
+  def volunteer_organizer_for?(activity)
+    admin? || permissions.exists?(subject_class: 'Volunteer', event_id: activity.event_id)
+  end
+
   def toggle_favorite_event(event)
     if favorite_event?(event)
       update!(favorite_event_ids: favorite_event_ids - [event.id])

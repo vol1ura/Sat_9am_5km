@@ -1,2 +1,8 @@
-<%= turbo_stream.replace "role-#{@idx}", partial: 'events/role', locals: { volunteer: @volunteer, role: @volunteer.role, idx: @idx } %>
-<%= turbo_stream.replace "volunteer-#{@idx}", partial: 'events/volunteer', locals: { volunteer: @volunteer, activity: @volunteer.activity, role: @volunteer.role, idx: @idx } %>
+<%
+  show_role = !@volunteer.role.in?(@volunteer.activity.event.volunteering_positions.pluck(:role))
+  my_volunteering = current_user&.athlete && Volunteer.joins(:activity).find_by(athlete_id: current_user.athlete.id, activity: { date: @volunteer.date })
+  organizer = current_user&.volunteer_organizer_for?(@volunteer.activity)
+  tg_chat = @volunteer.activity.event.contacts.find_by(contact_type: :tg_chat)
+%>
+<%= turbo_stream.replace "role-#{@idx}", partial: 'events/role', locals: { volunteer: @volunteer, role: @volunteer.role, idx: @idx, show_role: show_role } %>
+<%= turbo_stream.replace "volunteer-#{@idx}", partial: 'events/volunteer', locals: { volunteer: @volunteer, activity: @volunteer.activity, role: @volunteer.role, idx: @idx, my_volunteering: my_volunteering, organizer: organizer, tg_chat: tg_chat } %>
