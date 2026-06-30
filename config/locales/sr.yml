@@ -1218,6 +1218,8 @@ sr:
         back_to_login: Nazad na stranicu za prijavu
       create:
         link_sent: Link za prijavu je poslat na vaš e-mail. Proverite poštu.
+        not_registered: Korisnik sa ovim e-mailom nije registrovan. Popunite formular za registraciju.
+        unconfirmed: E-mail nije potvrđen. Proverite poštu ili zatražite novi link za potvrdu.
   going_tos:
     create:
       success: Uspešno ste se označili kao učesnik

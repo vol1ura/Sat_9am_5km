@@ -1159,6 +1159,8 @@ en:
         back_to_login: Back to sign in
       create:
         link_sent: Sign-in link sent to your email. Please check your inbox.
+        not_registered: No account found for this email. Please complete the registration form.
+        unconfirmed: Email not confirmed. Check your inbox or request a new confirmation link.
   going_tos:
     create:
       success: You've successfully marked yourself as a participant
