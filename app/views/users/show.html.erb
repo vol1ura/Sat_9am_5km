@@ -67,6 +67,9 @@
           <%= link_to edit_user_path, class: 'btn btn-outline-primary me-2', title: t('.edit') do %>
             <i class="fa-solid fa-pen-to-square me-2"></i><%= t '.edit' %>
           <% end %>
+          <%= link_to new_wallet_pass_path, class: 'btn btn-outline-dark', title: t('.apple_wallet'), data: { turbo_frame: '_top' } do %>
+            <i class="fa-solid fa-wallet me-2"></i><%= t '.apple_wallet' %>
+          <% end %>
         </div>
       </div>
     <% end %>

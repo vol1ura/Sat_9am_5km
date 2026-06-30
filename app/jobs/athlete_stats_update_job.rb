@@ -9,6 +9,7 @@ class AthleteStatsUpdateJob < ApplicationJob
 
     dataset.find_each do |athlete|
       Athletes::StatsUpdate.call(athlete)
+      Wallet::UpdatePassesJob.perform_later(athlete.id) if athlete.wallet_pass_registrations.any?
     end
   end
 end

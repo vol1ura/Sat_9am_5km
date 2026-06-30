@@ -32,6 +32,8 @@
             <li><%= link_to t('.friends_protocol'), protocol_duels_path, class: 'dropdown-item' %></li>
             <li><%= link_to t('.duels'), duels_path, class: 'dropdown-item' %></li>
             <li><%= link_to t('.badges'), badges_path, class: 'dropdown-item' %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to t('.apple_wallet'), new_wallet_pass_path, class: 'dropdown-item' %></li>
           </ul>
         </li>
         <%= render 'navbars/about_s95', with_icon: false %>
@@ -54,6 +56,7 @@
           <ul class="dropdown-menu dropdown-menu-end">
             <li><%= link_to t('.profile'), athlete_path(current_user.athlete), class: 'dropdown-item' %></li>
             <li><%= link_to t('.settings'), user_path, class: 'dropdown-item' %></li>
+            <li><%= link_to t('.apple_wallet'), new_wallet_pass_path, class: 'dropdown-item' %></li>
             <% if current_user.admin? || current_user.permissions.any? %>
               <li><%= link_to t('.admin_panel'), admin_root_path, class: 'dropdown-item' %></li>
             <% end %>
@@ -130,6 +133,11 @@
           <li class="nav-item">
             <%= link_to badges_path, class: "nav-link #{'active' if params[:controller] == 'badges'}" do %>
               <span class="fa-li"><i class="fa-solid fa-award"></i></span><%= t '.badges' %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_wallet_pass_path, class: "nav-link #{'active' if params[:controller] == 'wallet_passes'}" do %>
+              <span class="fa-li"><i class="fa-solid fa-wallet"></i></span><%= t '.apple_wallet' %>
             <% end %>
           </li>
           <%= render 'navbars/about_s95', with_icon: true %>
