@@ -176,6 +176,7 @@ sr:
         rank: rang
         number: broj
         role: uloga
+        activity: trka
         roles:
           <<: *volunteer_roles
       contact:
@@ -1138,7 +1139,7 @@ sr:
     card:
       about_participation: 'Registrujte se na sajtu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
       registration: Registracija
-      about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu'
+      about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Sada se možete sami prijaviti — pogledajte dostupne pozicije i izaberite ulogu'
       show: Prikaži
       place: Mesto događaja
       athlete: Atleta
@@ -1156,14 +1157,33 @@ sr:
       closest_date: najbliži datum
       acknowledgements: Bili bismo vam veoma zahvalni ako nam možete pružiti volontersku pomoć. Možete odabrati zanimljivu i jaku aktivnost za svakoga koja će vam omogućiti da se otkrijete, podržite prijatelje, odlično se zabavite.
       about_roster_html: 'Ispod možete pogledati listu <em>obaveznih pozicija</em>, kao i videti koje su već izabrane.'
-      how_to_participate_html: 'Da biste se prijavili, samo napišite u naš <a href="%{tg_chat_link}" target="_blank" rel="noopener" >Telegram Chat</a>.'
+      how_to_participate: 'Kliknite "Prijavi se" pored slobodne pozicije u tabeli ispod.'
+      how_to_participate_html: 'Takođe možete napisati u naš <a href="%{tg_chat_link}" target="_blank" rel="noopener" >Telegram Chat</a>.'
       additional_positions: Osim toga, ponekad rukovodioci trka donose odluku o regrutovanju dodatnih volontera - pratite vesti ili pitajte direktno u ćaskanju.
       main_title: Grafik volontiranja
       main_page: Glavna
       role: Uloga
       volunteer: Volonter
+      slots_filled: '%{filled} od %{total} popunjeno'
+      extra_volunteers_header: Dodatni volonteri
+      all_slots_full: Trenutno nema slobodnih pozicija, ali ipak možete doći na trku — zamolite organizatore na licu mesta da vas prijave ručno i dodele vam ulogu.
     volunteer:
       confirm_delete: Osloboditi poziciju %{role} (%{name})?
+      its_you: Vi
+      cancel: Otkaži
+      add: Dodaj volontera
+      sign_in_to_join: Prijavite se da se priključite
+      no_athlete_profile: popunite profil atlete da se priključite
+      join: Prijavi se
+      already_volunteering: 'Već ste prijavljeni %{role} za ovaj dan'
+      already_volunteering_short: već ste prijavljeni za ovaj dan
+      confirm_title: 'Prijava za ulogu "%{role}"'
+      confirm_come: 'Zamolićemo vas da dođete na trku %{date}.'
+      confirm_place_html: 'Možete se upoznati sa lokacijom i pravilima na <a href="%{event_link}">stranici trke</a>.'
+      confirm_help_html: 'Ako vam zatreba pomoć, pišite u <a href="%{tg_chat_link}" target="_blank" rel="noopener">naš Telegram chat</a>.'
+      confirm_cancel_hint: Prijavu možete otkazati u bilo kom trenutku — samo kliknite na X pored svog imena.
+      confirm_cancel: Otkaži
+      confirm_submit: Potvrdi prijavu
   users:
     omniauth_callbacks:
       auth_error: Prijava neuspešna

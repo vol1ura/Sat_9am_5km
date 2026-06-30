@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_28_210000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -283,11 +283,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
   end
 
   create_table "volunteering_positions", force: :cascade do |t|
+    t.bigint "activity_id"
     t.bigint "event_id", null: false
     t.integer "number", null: false
     t.integer "rank", null: false
     t.integer "role", null: false
-    t.index ["event_id", "role"], name: "index_volunteering_positions_on_event_id_and_role", unique: true
+    t.index ["activity_id"], name: "index_volunteering_positions_on_activity_id"
+    t.index ["event_id", "activity_id", "role"], name: "index_volunteering_positions_on_event_activity_role", unique: true
+    t.index ["event_id", "role"], name: "index_volunteering_positions_on_default_event_role", unique: true, where: "(activity_id IS NULL)"
   end
 
   create_table "volunteers", force: :cascade do |t|
@@ -319,6 +322,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
   add_foreign_key "results", "athletes", on_delete: :nullify
   add_foreign_key "trophies", "athletes"
   add_foreign_key "trophies", "badges"
+  add_foreign_key "volunteering_positions", "activities"
   add_foreign_key "volunteering_positions", "events"
   add_foreign_key "volunteers", "activities"
   add_foreign_key "volunteers", "athletes"

@@ -22,6 +22,7 @@
   <% unless @activities.empty? %>
     <%= t '.about_roster_html' %>
   <% end %>
+  <%= t '.how_to_participate' %>
   <% if @tg_chat %>
     <%= t '.how_to_participate_html', tg_chat_link: @tg_chat.link %>
   <% end %>
@@ -30,13 +31,13 @@
 
 <% unless @activities.empty? %>
   <ul class="nav nav-tabs" id="protocol" role="tablist">
-    <% @activities.each_with_index do |activity, idx| %>
+    <% @activities.each_with_index do |activity, tab_idx| %>
       <li class="nav-item" role="presentation">
         <%=
           link_to(
             l(activity.date, format: :brief),
             volunteering_event_path(@event.code_name, activity_id: activity.id),
-            class: "nav-link #{'active' if activity.id == @activity&.id || (idx.zero? && @activity.nil?)}",
+            class: "nav-link #{'active' if activity.id == @activity&.id || (tab_idx.zero? && @activity.nil?)}",
             role: 'tab',
           )
         %>
@@ -44,41 +45,81 @@
     <% end %>
   </ul>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th><%= t '.role' %></th>
-        <th><%= t '.volunteer' %></th>
-      </tr>
-    </thead>
-    <% if @activity %>
-      <tbody class="table-group-divider" data-turbo-prefetch="false">
-        <%
-          all_volunteers = @activity.volunteers.includes(:athlete).to_a
-          volunteering_positions = @event.volunteering_positions.order(:rank).to_a
-          volunteering_positions_roles = volunteering_positions.map(&:role)
-        %>
-        <% volunteering_positions.each do |position| %>
-          <% volunteers = all_volunteers.select { |v| v.role == position.role }.sort_by { |v| v.comment.to_s } %>
-          <% [position.number, volunteers.size].max.times.each do |i| %>
-            <%
-              volunteer = volunteers[i]
-              idx = "#{position.role}-#{i}-#{@activity.id}"
-            %>
-            <tr>
-              <td><%= render partial: 'role', locals: { volunteer: volunteer, role: position.role, idx: idx } %></td>
-              <td><%= render partial: 'volunteer', locals: { volunteer: volunteer, role: position.role, idx: idx, activity: @activity } %></td>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="w-auto"></th>
+          <th><%= t '.volunteer' %></th>
+        </tr>
+      </thead>
+      <% if @activity %>
+        <tbody class="table-group-divider" data-turbo-prefetch="false">
+          <%
+            all_volunteers = @activity.volunteers.includes(:athlete).to_a
+            volunteering_positions = @activity.volunteering_positions_roster
+            volunteering_positions_roles = volunteering_positions.map(&:role)
+            any_open_slot = false
+          %>
+          <% volunteering_positions.each do |position| %>
+            <% volunteers = all_volunteers.select { |v| v.role == position.role }.sort_by { |v| v.comment.to_s } %>
+            <% filled = volunteers.size %>
+            <% total = position.number %>
+            <% any_open_slot ||= filled < total %>
+            <tr class="table-light">
+              <td colspan="2" class="py-2">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                  <span class="fw-semibold"><%= human_volunteer_role position.role %></span>
+                  <span class="d-flex align-items-center gap-2">
+                    <div class="progress" style="width: 100px; height: 8px;">
+                      <div
+                        class="progress-bar <%= filled >= total ? 'bg-success' : 'bg-primary' %>"
+                        style="width: <%= total.positive? ? (100.0 * [filled, total].min / total).round : 0 %>%"
+                      ></div>
+                    </div>
+                    <span class="text-muted small text-nowrap">
+                      <%= t '.slots_filled', filled:, total: %>
+                    </span>
+                  </span>
+                </div>
+              </td>
             </tr>
+            <% [total, filled].max.times.each do |i| %>
+              <%
+                volunteer = volunteers[i]
+                idx = "#{position.role}-#{i}-#{@activity.id}"
+              %>
+              <tr>
+                <td class="text-muted small text-center"><%= i + 1 %></td>
+                <td>
+                  <%= render partial: 'role', locals: { volunteer: volunteer, role: position.role, idx: idx } %>
+                  <%= render partial: 'volunteer', locals: { volunteer: volunteer, role: position.role, idx: idx, activity: @activity, my_volunteering: @my_volunteering, organizer: @volunteer_organizer, tg_chat: @tg_chat } %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
-        <% all_volunteers.reject { |v| v.role.in?(volunteering_positions_roles) }.sort_by { |v| [v.role, v.comment.to_s] }.each do |volunteer| %>
-          <% idx = "#{volunteer.role}-#{volunteer.id}-#{@activity.id}" %>
-          <tr>
-            <td><%= render partial: 'role', locals: { volunteer: volunteer, role: volunteer.role, idx: idx } %></td>
-            <td><%= render partial: 'volunteer', locals: { volunteer: volunteer, role: volunteer.role, idx: idx, activity: @activity } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    <% end %>
-  </table>
+          <% extra_volunteers = all_volunteers.reject { |v| v.role.in?(volunteering_positions_roles) }.sort_by { |v| [v.role, v.comment.to_s] } %>
+          <% if extra_volunteers.any? %>
+            <tr class="table-light">
+              <td colspan="2" class="py-2 fw-semibold"><%= t '.extra_volunteers_header' %></td>
+            </tr>
+            <% extra_volunteers.each do |volunteer| %>
+              <% idx = "#{volunteer.role}-#{volunteer.id}-#{@activity.id}" %>
+              <tr>
+                <td></td>
+                <td>
+                  <%= render partial: 'role', locals: { volunteer: volunteer, role: volunteer.role, idx: idx, show_role: true } %>
+                  <%= render partial: 'volunteer', locals: { volunteer: volunteer, role: volunteer.role, idx: idx, activity: @activity, my_volunteering: @my_volunteering, organizer: @volunteer_organizer, tg_chat: @tg_chat } %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+
+  <% if @activity && !any_open_slot %>
+    <div class="alert alert-info"><%= t '.all_slots_full' %></div>
+  <% end %>
 <% end %>

@@ -8,6 +8,9 @@ class Ability
 
     cannot :destroy, User unless user.super_admin?
     can(:manage, :all) and return if user.admin?
+
+    self_volunteering(user)
+
     return if user.permissions.blank?
 
     @user = user
@@ -19,6 +22,13 @@ class Ability
   end
 
   private
+
+  def self_volunteering(user)
+    return unless user.athlete
+
+    can %i[create destroy], Volunteer, athlete_id: user.athlete.id, activity: { published: false, date: Date.current.. }
+    can :new, Volunteer
+  end
 
   def special_permissions
     @user
