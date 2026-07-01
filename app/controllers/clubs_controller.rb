@@ -60,7 +60,7 @@ class ClubsController < ApplicationController
   private
 
   def set_club
-    @club = Club.find_by(slug: params[:slug].downcase)
+    @club = Club.find_by(slug: params.expect(:slug).downcase)
     redirect_to clubs_path, status: :found unless @club
   end
 

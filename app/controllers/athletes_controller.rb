@@ -16,7 +16,7 @@ class AthletesController < ApplicationController
   end
 
   def show
-    @athlete = Athlete.find params[:id]
+    @athlete = Athlete.find params.expect(:id)
     return redirect_unregistered_athlete if !@athlete.user_id && @athlete.fiveverst_code
 
     load_athlete_results
@@ -29,7 +29,7 @@ class AthletesController < ApplicationController
 
   def best_result
     since_date = params.key?(:since_date) ? Date.parse(params[:since_date]) : Date.new(2022)
-    @athlete = Athlete.find_by!(Athlete::PersonalCode.new(params[:code].to_i).to_params)
+    @athlete = Athlete.find_by!(Athlete::PersonalCode.new(params.expect(:code).to_i).to_params)
     @result = @athlete.results.published.where(activity: { date: since_date.. }).order(:total_time).first
   rescue Date::Error => e
     render json: { error: e.message }, status: :unprocessable_content

@@ -4,7 +4,7 @@ module API
   module Parkzhrun
     class AthletesController < ApplicationController
       def update
-        athlete = Athlete.find_by!(parkzhrun_code: params[:id])
+        athlete = Athlete.find_by!(parkzhrun_code: params.expect(:id))
         athlete.update!(athlete_params)
         head :ok
       rescue ActiveRecord::RecordNotFound => e

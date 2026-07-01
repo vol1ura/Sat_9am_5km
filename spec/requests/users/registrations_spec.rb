@@ -15,7 +15,7 @@ RSpec.describe '/user' do
     end
 
     def field_invalid?(name)
-      doc = Nokogiri::HTML(response.body)
+      doc = response.parsed_body
       doc.css(%(input[name="#{name}"].is-invalid)).any?
     end
 
