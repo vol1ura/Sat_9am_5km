@@ -14,7 +14,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.find params[:id]
+    @activity = Activity.find params.expect(:id)
     return redirect_to activities_path, alert: t('.not_published') unless @activity.published
 
     @results = @activity.results.includes(athlete: :club).order(:position)

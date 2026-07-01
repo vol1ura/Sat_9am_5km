@@ -37,7 +37,7 @@ RSpec.describe '/user/confirmation' do
       get new_user_confirmation_path(user: { email: 'test@test.ru' })
 
       expect(response).to be_successful
-      doc = Nokogiri::HTML(response.body)
+      doc = response.parsed_body
       expect(doc.at_css('input[name="user[email]"]')['value']).to eq 'test@test.ru'
     end
 

@@ -10,7 +10,7 @@ class DuelsController < ApplicationController
   end
 
   def show
-    @friend = Athlete.find params[:id]
+    @friend = Athlete.find params.expect(:id)
     duels_data = Athletes::DuelsService.call @athlete, friend_id: @friend.id
     @friend_duels = duels_data[@friend]
   end

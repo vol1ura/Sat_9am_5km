@@ -34,15 +34,15 @@ class FriendshipsController < ApplicationController
   end
 
   def set_friend
-    @friend = Athlete.find(params[:friend_id])
+    @friend = Athlete.find(params.expect(:friend_id))
   end
 
   def set_friendship
-    @friendship = @athlete.friendships.find(params[:id])
+    @friendship = @athlete.friendships.find(params.expect(:id))
   end
 
   def set_viewed_athlete
-    @viewed_athlete = params[:viewed_athlete_id] ? Athlete.find(params[:viewed_athlete_id]) : @friend
+    @viewed_athlete = params[:viewed_athlete_id] ? Athlete.find(params.expect(:viewed_athlete_id)) : @friend
   end
 
   def set_friendships_hash
