@@ -63,6 +63,62 @@ RSpec.describe '/athletes' do
     end
   end
 
+  describe 'GET /athletes/1.json' do
+    let(:athlete) { create(:athlete, fiveverst_code: nil) }
+    let!(:result) { create(:result, athlete:) }
+    let!(:volunteer) { create(:volunteer, athlete:) }
+
+    let(:expected_body) do
+      {
+        'athlete' => {
+          'id' => athlete.id,
+          'name' => athlete.name,
+          'gender' => 'male',
+          'parkrun_code' => athlete.parkrun_code,
+          'code' => athlete.code,
+          'home_event' => athlete.event&.name,
+          'club' => athlete.club&.name,
+        },
+        'total_results' => 1,
+        'total_volunteering' => 1,
+        'results' => [
+          {
+            'date' => result.date.iso8601,
+            'total_time' => result.time_string,
+            'position' => result.position,
+            'personal_best' => result.personal_best,
+            'first_run' => result.first_run,
+            'event' => result.activity.event.as_json(only: %i[code_name name town]),
+          },
+        ],
+        'volunteering' => [
+          {
+            'date' => volunteer.date.iso8601,
+            'role' => volunteer.role,
+            'event' => volunteer.activity.event.as_json(only: %i[code_name name town]),
+          },
+        ],
+      }
+    end
+
+    it 'renders athlete with results and volunteering in JSON' do
+      get athlete_url(athlete, format: :json)
+
+      expect(response).to be_successful
+      expect(response.parsed_body).to eq(expected_body)
+    end
+
+    context 'when athlete is unregistered and has fiveverst_code' do
+      let(:hidden_athlete) { create(:athlete, parkrun_code: nil) }
+
+      it 'returns not found' do
+        get athlete_url(hidden_athlete, format: :json)
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
   describe 'GET /athletes/:code/best_result' do
     let(:athlete) { create(:athlete) }
 
