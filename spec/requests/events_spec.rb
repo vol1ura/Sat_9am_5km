@@ -45,6 +45,69 @@ RSpec.describe '/events' do
     end
   end
 
+  describe 'GET /events/:code_name.json' do
+    let(:activity) { create(:activity, event: event, date: '2026-06-20') }
+    let!(:result) { create(:result, activity:) }
+
+    def event_json
+      get event_url(code_name: event.code_name, format: :json)
+      response.parsed_body
+    end
+
+    it 'returns the latest protocol change time across published activities' do
+      expect(event_json['updated_at']).to eq(event.activities.published.maximum(:updated_at).iso8601)
+    end
+
+    it 'exposes date, updated_at and url for each activity' do
+      json_activity = event_json.dig('activities', 0)
+      expect(json_activity['date']).to eq('2026-06-20')
+      expect(json_activity['updated_at']).to eq(activity.reload.updated_at.iso8601)
+    end
+
+    it 'bumps updated_at when a protocol row changes' do
+      before = event_json['updated_at']
+      travel_to(1.minute.from_now) { result.update!(position: 99) }
+      expect(event_json['updated_at']).to be > before
+    end
+
+    it 'bumps updated_at when a protocol row is added' do
+      before = event_json['updated_at']
+      travel_to(1.minute.from_now) { create(:result, activity:) }
+      expect(event_json['updated_at']).to be > before
+    end
+
+    it 'bumps updated_at when a protocol row is removed' do
+      before = event_json['updated_at']
+      travel_to(1.minute.from_now) { result.destroy! }
+      expect(event_json['updated_at']).to be > before
+    end
+
+    it 'does NOT bump updated_at when an athlete only edits their name' do
+      before = event_json['updated_at']
+      travel_to(1.minute.from_now) { result.athlete.update!(name: 'ИВАН ПЕТРОВ') }
+      expect(event_json['updated_at']).to eq(before)
+    end
+
+    context 'with updated_since filter' do
+      before do
+        travel_to(2.days.ago) { create(:result, activity: create(:activity, event: event, date: '2026-06-01')) }
+      end
+
+      it 'returns only activities updated after the given time' do
+        get event_url(code_name: event.code_name, format: :json, updated_since: 1.day.ago.iso8601)
+
+        dates = response.parsed_body['activities'].pluck('date')
+        expect(dates).to eq(['2026-06-20'])
+      end
+
+      it 'returns 422 for an invalid updated_since' do
+        get event_url(code_name: event.code_name, format: :json, updated_since: 'not-a-date')
+
+        expect(response).to have_http_status(:unprocessable_content)
+      end
+    end
+  end
+
   describe 'GET /events/:code_name/volunteering' do
     it 'renders a successful response' do
       activity = create(:activity, date: Faker::Date.forward(days: 20))

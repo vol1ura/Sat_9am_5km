@@ -23,6 +23,8 @@ class EventsController < ApplicationController
   end
 
   def show
+    return prepare_activities_json unless request.format.html?
+
     @total_activities = @event.activities.published.size
 
     results_dataset = Result.published.where(activity: { event: @event })
@@ -52,6 +54,16 @@ class EventsController < ApplicationController
   def live; end
 
   private
+
+  def prepare_activities_json
+    @activities = @event.activities.published.order(:date)
+    return if params[:updated_since].blank?
+
+    since = Time.zone.parse(params[:updated_since]) or raise ArgumentError
+    @activities = @activities.where('activities.updated_at > ?', since)
+  rescue ArgumentError
+    render json: { error: 'invalid updated_since parameter' }, status: :unprocessable_content
+  end
 
   def find_event
     @event = Event.find_by!(code_name: params[:code_name]&.downcase)
