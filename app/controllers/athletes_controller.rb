@@ -17,10 +17,18 @@ class AthletesController < ApplicationController
 
   def show
     @athlete = Athlete.find params.expect(:id)
-    return redirect_unregistered_athlete if !@athlete.user_id && @athlete.fiveverst_code
+
+    if !@athlete.user_id && @athlete.fiveverst_code
+      return head :not_found if request.format.json?
+
+      return redirect_unregistered_athlete
+    end
 
     load_athlete_results
     load_athlete_volunteering
+
+    return if request.format.json?
+
     @total_events_count = total_events_count
     @total_trophies = @athlete.trophies.size
     @barcode = BarcodeService.call("A#{@athlete.code}", module_size: 8)
