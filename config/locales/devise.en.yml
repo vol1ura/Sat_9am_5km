@@ -12,7 +12,7 @@ en:
       signed_out: Successfully signed out
       new:
         title: Sign In
-        description: To sign in, you can use Telegram bot or email. Simply request a one-time login link.
+        description: To sign in, simply request a one-time login link to your email.
         email_login_description: Enter your email — we'll send you a one-time sign-in link
         email_placeholder: Your email
         email_submit: Get link

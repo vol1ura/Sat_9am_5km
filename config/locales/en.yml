@@ -1105,8 +1105,6 @@ en:
     volunteer:
       confirm_delete: Free position %{role} (%{name})?
   users:
-    omniauth_callbacks:
-      auth_error: Failed to sign in. Make sure you're actually registered
     show:
       title: Settings
       description: 'Settings for user %{user_name}'

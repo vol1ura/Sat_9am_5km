@@ -1159,8 +1159,6 @@ ru:
     volunteer:
       confirm_delete: Освободить позицию %{role} (%{name})?
   users:
-    omniauth_callbacks:
-      auth_error: Не удалось выполнить вход. Убедитесь, что вы действительно зарегистрированы
     show:
       title: Настройки
       description: 'Настройки для пользователя %{user_name}'

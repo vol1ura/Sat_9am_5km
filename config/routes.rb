@@ -76,7 +76,6 @@ Rails.application.routes.draw do
         unlocks: 'users/unlocks',
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
-        omniauth_callbacks: 'users/omniauth_callbacks',
       },
       path_names: {
         sign_in: 'login',
