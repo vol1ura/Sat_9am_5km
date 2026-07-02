@@ -92,20 +92,8 @@ RSpec.describe '/user' do
       it { expect(response).to be_successful }
     end
 
-    describe 'GET /user/password/new' do
-      before { get new_user_password_url }
-
-      it { expect(response).to be_successful }
-    end
-
     describe 'GET /user/confirmation/new' do
       before { get new_user_confirmation_url }
-
-      it { expect(response).to be_successful }
-    end
-
-    describe 'GET /user/unlock/new' do
-      before { get new_user_unlock_url }
 
       it { expect(response).to be_successful }
     end

@@ -9,19 +9,9 @@
       <%= link_to t('.sign_in'), new_user_session_path %>
     </li>
   <% end %>
-  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-    <li><span class="fa-li"><i class="fa-solid fa-key"></i></span>
-      <%= link_to t('.password'), new_user_password_path %>
-    </li>
-  <% end %>
   <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <li><span class="fa-li"><i class="fa-solid fa-check-double"></i></span>
       <%= link_to t('.confirmation'), new_user_confirmation_path %>
-    </li>
-  <% end %>
-  <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-    <li><span class="fa-li"><i class="fa-solid fa-lock-open"></i></span>
-      <%= link_to t('.unlock'), new_user_unlock_path %>
     </li>
   <% end %>
 </ul>

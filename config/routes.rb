@@ -72,8 +72,6 @@ Rails.application.routes.draw do
       path: :user,
       controllers: {
         sessions: 'users/sessions',
-        passwords: 'users/passwords',
-        unlocks: 'users/unlocks',
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
       },
