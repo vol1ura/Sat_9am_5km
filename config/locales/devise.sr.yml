@@ -2,8 +2,8 @@ sr:
   devise:
     shared:
       links:
-        sign_in: Prijavite se
-        registration: Registrujte se putem e-maila
+        sign_in: Prijavite se (već ste registrovan)
+        registration: Registrujte se
         password: Zaboravili ste lozinku?
         confirmation: Niste dobili link za potvrdu?
         unlock: Niste dobili link za otključavanje?

@@ -2,8 +2,8 @@ en:
   devise:
     shared:
       links:
-        sign_in: Sign In
-        registration: Register with email
+        sign_in: Sign In (already registered)
+        registration: Register
         password: Forgot your password?
         confirmation: Didn't receive confirmation instructions?
         unlock: Didn't receive unlock instructions?

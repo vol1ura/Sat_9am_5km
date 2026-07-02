@@ -2,8 +2,8 @@ ru:
   devise:
     shared:
       links:
-        sign_in: Войти
-        registration: Зарегистрироваться по email
+        sign_in: Войти (уже зарегистрирован)
+        registration: Зарегистрироваться
         password: Забыли пароль?
         confirmation: Не получили ссылку для подтверждения?
         unlock: Не получили ссылку для разблокировки?
