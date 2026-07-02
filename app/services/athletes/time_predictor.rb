@@ -5,7 +5,9 @@ module Athletes
   class TimePredictor < ApplicationService
     COEFFICIENTS = [10, 21.1, 42.2].index_with { |x| (x / 5)**1.08 }.freeze
 
-    param :athlete, reader: :private
+    def initialize(athlete)
+      @athlete = athlete
+    end
 
     def call
       return {} if recent_total_times.size < 3
@@ -18,7 +20,7 @@ module Athletes
 
     def recent_total_times
       @recent_total_times ||=
-        athlete.results.published.where(activity: { date: 3.months.ago.. }).pluck(:total_time)
+        @athlete.results.published.where(activity: { date: 3.months.ago.. }).pluck(:total_time)
     end
   end
 end

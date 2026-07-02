@@ -2,7 +2,9 @@
 
 module Athletes
   class DuplicatesService < ApplicationService
-    option :name, reader: :private, default: -> {}
+    def initialize(name: nil)
+      @name = name
+    end
 
     def call
       Athlete
@@ -34,9 +36,9 @@ module Athletes
           .from(Arel.sql("athletes, unnest(string_to_array(LOWER(name), ' ')) AS words"))
           .group(:id)
 
-      return ds unless name
+      return ds unless @name
 
-      ds.having("string_agg(words, ' ' ORDER BY words) = ?", name.downcase.split.sort.join(' '))
+      ds.having("string_agg(words, ' ' ORDER BY words) = ?", @name.downcase.split.sort.join(' '))
     end
 
     def name_stats_query
