@@ -81,6 +81,10 @@ ActiveAdmin.register Activity do
     link_to 'Редактор волонтёров', admin_activity_volunteers_path(resource)
   end
 
+  action_item :volunteer_applications, only: %i[show edit], if: proc { !resource.published && can?(:update, resource) } do
+    link_to 'Заявки на волонтёрство', admin_activity_volunteer_applications_path(resource)
+  end
+
   action_item :publish, only: :show, if: proc { resource.token.nil? && !resource.published && resource.correct? } do
     link_to(
       'Опубликовать',

@@ -96,6 +96,15 @@ ru:
         successful: 'Волонтёрство успешно добавлено'
       update:
         successful: 'Данные о волонтёрстве %{volunteer_name} успешно обновлены'
+    volunteer_applications:
+      index:
+        title: 'Заявки на волонтёрство %{date}'
+        approve: Одобрить
+        reject: Отклонить
+      approve:
+        approved: 'Заявка одобрена, волонтёр добавлен'
+      reject:
+        rejected: Заявка отклонена
     permissions: Полномочия
   results:
     explanation:

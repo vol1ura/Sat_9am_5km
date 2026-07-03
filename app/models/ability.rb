@@ -26,8 +26,9 @@ class Ability
   def self_volunteering(user)
     return unless user.athlete
 
-    can %i[create destroy], Volunteer, athlete_id: user.athlete.id, activity: { published: false, date: Date.current.. }
-    can :new, Volunteer
+    can %i[create destroy], VolunteerApplication,
+        athlete_id: user.athlete.id, activity: { published: false, date: Date.current.. }
+    can :new, VolunteerApplication
   end
 
   def special_permissions

@@ -78,7 +78,7 @@
                       ></div>
                     </div>
                     <span class="text-muted small text-nowrap">
-                      <%= t '.slots_filled', filled:, total: %>
+                      <%= t '.slots_filled', filled: [filled, total].min, total: %>
                     </span>
                   </span>
                 </div>
@@ -93,7 +93,7 @@
                 <td class="text-muted small text-center"><%= i + 1 %></td>
                 <td>
                   <%= render partial: 'role', locals: { volunteer: volunteer, role: position.role, idx: idx } %>
-                  <%= render partial: 'volunteer', locals: { volunteer: volunteer, role: position.role, idx: idx, activity: @activity, my_volunteering: @my_volunteering, organizer: @volunteer_organizer, tg_chat: @tg_chat } %>
+                  <%= render partial: 'volunteer', locals: { volunteer: volunteer, role: position.role, idx: idx, activity: @activity, my_volunteering: @my_volunteering, my_application: @my_applications[position.role], organizer: @volunteer_organizer, tg_chat: @tg_chat } %>
                 </td>
               </tr>
             <% end %>
@@ -109,7 +109,7 @@
                 <td></td>
                 <td>
                   <%= render partial: 'role', locals: { volunteer: volunteer, role: volunteer.role, idx: idx, show_role: true } %>
-                  <%= render partial: 'volunteer', locals: { volunteer: volunteer, role: volunteer.role, idx: idx, activity: @activity, my_volunteering: @my_volunteering, organizer: @volunteer_organizer, tg_chat: @tg_chat } %>
+                  <%= render partial: 'volunteer', locals: { volunteer: volunteer, role: volunteer.role, idx: idx, activity: @activity, my_volunteering: @my_volunteering, my_application: nil, organizer: @volunteer_organizer, tg_chat: @tg_chat } %>
                 </td>
               </tr>
             <% end %>

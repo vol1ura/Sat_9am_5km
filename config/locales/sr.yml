@@ -526,6 +526,16 @@ sr:
   notification_mailer:
     parkzhrun_error: 'Greška! Nije moguće kreirati trku ParkŽrun'
     feedback: 'Novi odgovor na sajt S95'
+  volunteer_application_mailer:
+    approved:
+      subject: 'Prijava za volontiranje odobrena: %{role}'
+      greeting: 'Zdravo, %{name}!'
+      body_html: 'Vaša prijava za ulogu <strong>%{role}</strong> na trci <strong>%{event_name}</strong> %{date} je odobrena. Vidimo se!'
+      cancel_hint: Ako se planovi promene, obavestite organizatore.
+    rejected:
+      subject: 'Prijava za volontiranje: %{role}'
+      greeting: 'Zdravo, %{name}!'
+      body: 'Nažalost, vaša prijava za ulogu %{role} na trci %{event_name} %{date} ovog puta nije odobrena. Nadamo se da ćete doći sledeći put!'
   user_notification_mailer:
     notify:
       subject: Proverite svoju email adresu! Unutar je informacija o vašoj suboti
@@ -1139,7 +1149,7 @@ sr:
     card:
       about_participation: 'Registrujte se na sajtu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
       registration: Registracija
-      about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Sada se možete sami prijaviti — pogledajte dostupne pozicije i izaberite ulogu'
+      about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Želite da pomognete — pošaljite prijavu za slobodnu poziciju i organizator će vas kontaktirati'
       show: Prikaži
       place: Mesto događaja
       athlete: Atleta
@@ -1157,7 +1167,7 @@ sr:
       closest_date: najbliži datum
       acknowledgements: Bili bismo vam veoma zahvalni ako nam možete pružiti volontersku pomoć. Možete odabrati zanimljivu i jaku aktivnost za svakoga koja će vam omogućiti da se otkrijete, podržite prijatelje, odlično se zabavite.
       about_roster_html: 'Ispod možete pogledati listu <em>obaveznih pozicija</em>, kao i videti koje su već izabrane.'
-      how_to_participate: 'Kliknite "Prijavi se" pored slobodne pozicije u tabeli ispod.'
+      how_to_participate: 'Kliknite "Podnesi prijavu" pored slobodne pozicije u tabeli ispod, i organizator će razmotriti vašu prijavu.'
       how_to_participate_html: 'Takođe možete napisati u naš <a href="%{tg_chat_link}" target="_blank" rel="noopener" >Telegram Chat</a>.'
       additional_positions: Osim toga, ponekad rukovodioci trka donose odluku o regrutovanju dodatnih volontera - pratite vesti ili pitajte direktno u ćaskanju.
       main_title: Grafik volontiranja
@@ -1174,16 +1184,11 @@ sr:
       add: Dodaj volontera
       sign_in_to_join: Prijavite se da se priključite
       no_athlete_profile: popunite profil atlete da se priključite
-      join: Prijavi se
+      apply: Podnesi prijavu
+      application_pending: Prijava u razmatranju
+      withdraw_application: Povuci
       already_volunteering: 'Već ste prijavljeni %{role} za ovaj dan'
       already_volunteering_short: već ste prijavljeni za ovaj dan
-      confirm_title: 'Prijava za ulogu "%{role}"'
-      confirm_come: 'Zamolićemo vas da dođete na trku %{date}.'
-      confirm_place_html: 'Možete se upoznati sa lokacijom i pravilima na <a href="%{event_link}">stranici trke</a>.'
-      confirm_help_html: 'Ako vam zatreba pomoć, pišite u <a href="%{tg_chat_link}" target="_blank" rel="noopener">naš Telegram chat</a>.'
-      confirm_cancel_hint: Prijavu možete otkazati u bilo kom trenutku — samo kliknite na X pored svog imena.
-      confirm_cancel: Otkaži
-      confirm_submit: Potvrdi prijavu
   users:
     omniauth_callbacks:
       auth_error: Prijava neuspešna
