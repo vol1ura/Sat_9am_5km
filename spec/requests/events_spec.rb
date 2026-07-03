@@ -45,6 +45,24 @@ RSpec.describe '/events' do
     end
   end
 
+  describe 'GET /events/:code_name.json' do
+    before do
+      if Badge.instance_variable_defined?(:@participating_thresholds)
+        Badge.remove_instance_variable(:@participating_thresholds)
+      end
+      create(:participating_badge, type: 'result')
+      create(:participating_badge, type: 'volunteer')
+    end
+
+    it 'exposes updated_at for each published activity' do
+      activity = create(:activity, event:)
+
+      get event_url(code_name: event.code_name, format: :json)
+
+      expect(response.parsed_body.dig('activities', 0, 'updated_at')).to eq(activity.reload.updated_at.iso8601)
+    end
+  end
+
   describe 'GET /events/:code_name/volunteering' do
     it 'renders a successful response' do
       activity = create(:activity, date: Faker::Date.forward(days: 20))
