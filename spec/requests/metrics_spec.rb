@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 RSpec.describe '/metrics' do
+  let(:cache_store) { ActiveSupport::Cache::MemoryStore.new }
+
   before do
+    allow(Rails).to receive(:cache).and_return(cache_store)
     ENV['PROMETHEUS_TOKEN'] = 'test-token'
+    Rails.cache.clear
   end
 
   after do
     ENV['PROMETHEUS_TOKEN'] = nil
+    Rails.cache.clear
   end
 
   describe 'GET /metrics' do
@@ -15,52 +20,64 @@ RSpec.describe '/metrics' do
         ENV['PROMETHEUS_TOKEN'] = nil
       end
 
-      after do
-        ENV['PROMETHEUS_TOKEN'] = 'test-token'
-      end
-
-      it 'returns 503 Service Unavailable' do
+      it 'returns 404 Not Found' do
         get metrics_path
-        expect(response).to have_http_status(:service_unavailable)
+
+        expect(response).to have_http_status(:not_found)
       end
     end
 
-    context 'when credentials are configured' do
-      before do
-        allow(Metrics::S95Collector).to receive(:call).and_return('s95_events_total{country="rs",active="true"} 1')
+    context 'when authentication fails' do
+      it 'returns 401 Unauthorized' do
+        get metrics_path, headers: { 'Authorization' => 'invalid-token' }
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when authentication succeeds' do
+      it 'accepts Prometheus bearer authorization' do
+        get metrics_path, headers: { 'Authorization' => 'Bearer test-token' }
+
+        expect(response).to have_http_status(:ok)
       end
 
-      context 'when authentication fails' do
-        it 'returns 401 Unauthorized' do
-          get metrics_path, headers: { 'Authorization' => 'invalid-token' }
-          expect(response).to have_http_status(:unauthorized)
-        end
+      it 'accepts raw token authorization' do
+        get metrics_path, headers: { 'Authorization' => 'test-token' }
+
+        expect(response).to have_http_status(:ok)
       end
 
-      context 'when authentication succeeds' do
-        it 'returns 200 OK with text/plain content type' do
-          get metrics_path, headers: auth_headers
-          expect(response).to have_http_status(:ok)
-          expect(response.media_type).to eq('text/plain')
-        end
+      it 'returns text/plain content type' do
+        get metrics_path, headers: auth_headers
 
-        it 'returns metrics in Prometheus format' do
-          get metrics_path, headers: auth_headers
-          expect(response.body).to match(/s95_.*\{.*\}\s+\d+/)
-        end
+        expect(response.media_type).to eq('text/plain')
+      end
 
-        it 'caches the response' do
-          allow(Rails.cache).to receive(:fetch).and_call_original
+      it 'returns an empty snapshot state without collecting metrics' do
+        allow(Metrics::S95Collector).to receive(:call)
 
-          get metrics_path, headers: auth_headers
+        get metrics_path, headers: auth_headers
 
-          expect(Rails.cache).to have_received(:fetch).with('s95_metrics', { expires_in: 300 })
-        end
+        expect(response.body).to include('s95_metrics_snapshot_ready 0')
+        expect(response.body).to include('s95_metrics_generated_at_seconds 0')
+        expect(response.body).to include('s95_metrics_snapshot_age_seconds 0')
+        expect(Metrics::S95Collector).not_to have_received(:call)
+      end
+
+      it 'returns the latest metrics snapshot' do
+        Rails.cache.write(Metrics::Snapshot::BODY_KEY, 's95_events_total{country="rs",active="true"} 1')
+        Rails.cache.write(Metrics::Snapshot::GENERATED_AT_KEY, 1.hour.ago.to_i)
+
+        get metrics_path, headers: auth_headers
+
+        expect(response.body).to include('s95_metrics_snapshot_ready 1')
+        expect(response.body).to include('s95_events_total{country="rs",active="true"} 1')
       end
     end
   end
 
   def auth_headers
-    { 'Authorization' => 'test-token' }
+    { 'Authorization' => 'Bearer test-token' }
   end
 end

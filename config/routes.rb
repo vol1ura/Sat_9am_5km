@@ -104,7 +104,7 @@ Rails.application.routes.draw do
 
   get 'up', to: 'rails/health#show'
 
-  get '/metrics', to: 'metrics#show'
+  get 'metrics', to: 'metrics#show'
 
   authenticate :user, ->(user) { user.super_admin? } do
     mount Sidekiq::Web => 'sidekiq'
