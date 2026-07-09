@@ -44,4 +44,63 @@ RSpec.describe '/clubs' do
       end
     end
   end
+
+  describe 'GET /:slug.json' do
+    let!(:club) { create(:club, description: 'Test club description') }
+
+    def club_json
+      get club_url(club.slug, format: :json)
+      response.parsed_body
+    end
+
+    context 'with members' do
+      let!(:athlete) { create(:athlete, club:) }
+      let!(:result) { create(:result, athlete:) }
+      let!(:volunteer_athlete) { create(:athlete, club:) }
+
+      before { create(:volunteer, athlete: volunteer_athlete) }
+
+      it 'renders club fields' do
+        expect(club_json['club']).to eq(
+          'slug' => club.slug,
+          'name' => club.name,
+          'description' => club.description,
+          'logo_url' => nil,
+        )
+      end
+
+      it 'renders aggregate counts' do
+        expect(club_json).to include(
+          'athletes_count' => 2,
+          'total_results_count' => 1,
+          'total_volunteering_count' => 1,
+        )
+      end
+
+      it 'renders per-athlete roster fields' do
+        json_athlete = club_json['athletes'].find { |a| a['id'] == athlete.id }
+
+        expect(json_athlete).to eq(
+          'id' => athlete.id,
+          'name' => athlete.name,
+          'results_count' => 1,
+          'personal_best' => result.total_time,
+          'volunteering_count' => 0,
+        )
+      end
+    end
+
+    it 'returns an empty roster for a club without members' do
+      json = club_json
+
+      expect(json['athletes']).to eq([])
+      expect(json['athletes_count']).to eq(0)
+    end
+
+    it 'returns not found for an unknown slug' do
+      get club_url('unknown-slug-xyz', format: :json)
+
+      expect(response).to have_http_status(:not_found)
+    end
+  end
 end
