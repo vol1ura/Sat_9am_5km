@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
-class Metrics::LocationHealthCalculator < ApplicationService
-  def call(event)
-    return 0 unless event.active?
+module Metrics
+  class LocationHealthCalculator < ApplicationService
+    def call(event)
+      return 0 unless event.active?
 
-    factors = []
+      factors = []
 
-    factors << calculate_activity_frequency_factor(event)
-    factors << calculate_volunteer_consistency_factor(event)
-    factors << calculate_athlete_retention_factor(event)
-    factors << calculate_results_quality_factor(event)
+      factors << calculate_activity_frequency_factor(event)
+      factors << calculate_volunteer_consistency_factor(event)
+      factors << calculate_athlete_retention_factor(event)
+      factors << calculate_results_quality_factor(event)
 
-    factors.reduce(:+).to_f / factors.size * 100
-  end
+      factors.sum.to_f / factors.size * 100
+    end
 
-  private
+    private
 
   def calculate_activity_frequency_factor(event)
     six_months_ago = Date.current - 6.months
@@ -51,7 +52,10 @@ class Metrics::LocationHealthCalculator < ApplicationService
 
     return 0 if total_athletes.zero?
 
-    (recent_athletes.to_f / total_athletes * 50 + returning_athletes.to_f / total_athletes * 50).clamp(0, 100)
+    (
+      (recent_athletes.to_f / total_athletes * 50) +
+      (returning_athletes.to_f / total_athletes * 50)
+    ).clamp(0, 100)
   end
 
   def calculate_results_quality_factor(event)
@@ -64,9 +68,10 @@ class Metrics::LocationHealthCalculator < ApplicationService
     incorrect = Result.joins(:activity)
       .where(activity: { event: event, published: true })
       .where(
-        'total_time IS NULL OR athlete_id IS NOT NULL AND (name IS NULL OR gender IS NULL)'
+        'total_time IS NULL OR athlete_id IS NOT NULL AND (name IS NULL OR gender IS NULL)',
       ).count
 
-    (1.0 - incorrect.to_f / total) * 100
+    (1.0 - (incorrect.to_f / total)) * 100
+    end
   end
 end
