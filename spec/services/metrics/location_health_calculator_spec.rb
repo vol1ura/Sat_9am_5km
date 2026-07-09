@@ -27,7 +27,7 @@ RSpec.describe Metrics::LocationHealthCalculator do
       it 'considers volunteer consistency' do
         athlete = create(:athlete)
         activity = create(:activity, event: event, published: true, date: 2.months.ago.to_date)
-        create(:volunteer, athlete: athlete, activity: activity, role: :timer, published: true)
+        create(:volunteer, athlete: athlete, activity: activity, role: :timer)
 
         result = described_class.call(event)
         expect(result).to be > 0

@@ -26,6 +26,10 @@ RSpec.describe '/metrics' do
     end
 
     context 'when credentials are configured' do
+      before do
+        allow(Metrics::S95Collector).to receive(:call).and_return('s95_events_total{country="rs",active="true"} 1')
+      end
+
       context 'when authentication fails' do
         it 'returns 401 Unauthorized' do
           get metrics_path, headers: { 'Authorization' => 'invalid-token' }
@@ -37,7 +41,7 @@ RSpec.describe '/metrics' do
         it 'returns 200 OK with text/plain content type' do
           get metrics_path, headers: auth_headers
           expect(response).to have_http_status(:ok)
-          expect(response.content_type).to eq('text/plain')
+          expect(response.media_type).to eq('text/plain')
         end
 
         it 'returns metrics in Prometheus format' do
@@ -46,8 +50,11 @@ RSpec.describe '/metrics' do
         end
 
         it 'caches the response' do
-          expect(Rails.cache).to receive(:fetch).with('s95_metrics', { expires_in: 300 }).and_call_original
+          allow(Rails.cache).to receive(:fetch).and_call_original
+
           get metrics_path, headers: auth_headers
+
+          expect(Rails.cache).to have_received(:fetch).with('s95_metrics', { expires_in: 300 })
         end
       end
     end

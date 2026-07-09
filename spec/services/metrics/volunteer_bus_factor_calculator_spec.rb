@@ -10,8 +10,9 @@ RSpec.describe Metrics::VolunteerBusFactorCalculator do
     end
 
     it 'considers volunteer distribution across roles' do
-      create_list(:volunteer, 5, activity: create(:activity, event: event, published: true), role: :timer, published: true)
-      create_list(:volunteer, 3, activity: create(:activity, event: event, published: true), role: :marshal, published: true)
+      activity = create(:activity, event: event, published: true)
+      create_list(:volunteer, 5, activity: activity, role: :timer)
+      create_list(:volunteer, 3, activity: activity, role: :marshal)
 
       result = described_class.call(event)
       expect(result).to be > 0
