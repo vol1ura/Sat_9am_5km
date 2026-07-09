@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class MetricsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :authenticate
 
   def show
@@ -11,18 +10,21 @@ class MetricsController < ApplicationController
   private
 
   def authenticate
-    unless credentials_configured?
+    unless token_configured?
       head :service_unavailable
       return
     end
 
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV.fetch('PROMETHEUS_USERNAME') && password == ENV.fetch('PROMETHEUS_PASSWORD')
-    end
+    return if ActiveSupport::SecurityUtils.secure_compare(
+      request.headers['Authorization'].to_s,
+      ENV.fetch('PROMETHEUS_TOKEN'),
+    )
+
+    head :unauthorized
   end
 
-  def credentials_configured?
-    ENV['PROMETHEUS_USERNAME'].present? && ENV['PROMETHEUS_PASSWORD'].present?
+  def token_configured?
+    ENV['PROMETHEUS_TOKEN'].present?
   end
 
   def metrics_data
