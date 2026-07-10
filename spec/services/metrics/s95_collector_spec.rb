@@ -50,6 +50,12 @@ RSpec.describe Metrics::S95Collector do
       expect(result).to match(/s95_.*\{.*\}\s+\d+/)
     end
 
+    it 'escapes Prometheus label values' do
+      collector = described_class.new
+
+      expect(collector.send(:escape_label, "event\\name\"\nnext")).to eq('event\\\\name\"\nnext')
+    end
+
     it 'does not expose expensive derived metrics' do
       expensive_metrics = %w[
         active_community_total activity_best_time_seconds activity_median_time_seconds athletes_total

@@ -3,6 +3,11 @@
 module Metrics
   class S95Collector < ApplicationService
     RECENT_ACTIVITY_WINDOW = 12.weeks
+    PROMETHEUS_LABEL_ESCAPES = {
+      '\\' => '\\\\',
+      '"' => '\"',
+      "\n" => '\n',
+    }.freeze
 
     def call
       @metrics = []
@@ -123,7 +128,7 @@ module Metrics
     end
 
     def escape_label(value)
-      value.to_s.gsub('\\', '\\\\\\').gsub('"', '\"').gsub("\n", '\\n')
+      value.to_s.gsub(/\\|"|\n/) { |char| PROMETHEUS_LABEL_ESCAPES.fetch(char) }
     end
   end
 end
