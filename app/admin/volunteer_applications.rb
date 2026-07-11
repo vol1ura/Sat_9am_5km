@@ -41,9 +41,11 @@ ActiveAdmin.register VolunteerApplication do
     column :created_at
     actions do |application|
       if application.pending?
-        item t('.approve'), approve_admin_activity_volunteer_application_path(@activity, application),
+        item t('admin.volunteer_applications.index.approve'),
+             approve_admin_activity_volunteer_application_path(application.activity, application),
              method: :put, class: 'member_link'
-        item t('.reject'), reject_admin_activity_volunteer_application_path(@activity, application),
+        item t('admin.volunteer_applications.index.reject'),
+             reject_admin_activity_volunteer_application_path(application.activity, application),
              method: :put, class: 'member_link'
       end
     end

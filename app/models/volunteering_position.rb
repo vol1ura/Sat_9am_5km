@@ -6,7 +6,8 @@ class VolunteeringPosition < ApplicationRecord
 
   validates :rank, numericality: { greater_than_or_equal_to: 1, only_integer: true }
   validates :number, numericality: { greater_than_or_equal_to: 1, only_integer: true }
-  validates :role, uniqueness: { scope: %i[event_id activity_id] }
+  validates :role, uniqueness: { scope: :event_id }, if: -> { activity_id.nil? }
+  validates :role, uniqueness: { scope: %i[event_id activity_id] }, if: -> { activity_id.present? }
   validate :activity_belongs_to_event
 
   enum :role, Volunteer.roles, instance_methods: false, validate: true

@@ -23,6 +23,7 @@ class VolunteersController < ApplicationController
     @activity = @volunteer.activity
     @role = @volunteer.role
     @volunteer.destroy
+    @position = @activity.volunteering_positions_roster.find { |position| position.role == @role }
   end
 
   private

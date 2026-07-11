@@ -66,24 +66,7 @@
             <% filled = volunteers.size %>
             <% total = position.number %>
             <% any_open_slot ||= filled < total %>
-            <tr class="table-light">
-              <td colspan="2" class="py-2">
-                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                  <span class="fw-semibold"><%= human_volunteer_role position.role %></span>
-                  <span class="d-flex align-items-center gap-2">
-                    <div class="progress" style="width: 100px; height: 8px;">
-                      <div
-                        class="progress-bar <%= filled >= total ? 'bg-success' : 'bg-primary' %>"
-                        style="width: <%= total.positive? ? (100.0 * [filled, total].min / total).round : 0 %>%"
-                      ></div>
-                    </div>
-                    <span class="text-muted small text-nowrap">
-                      <%= t '.slots_filled', filled: [filled, total].min, total: %>
-                    </span>
-                  </span>
-                </div>
-              </td>
-            </tr>
+            <%= render 'position_summary', position: position, activity: @activity, filled: filled %>
             <% [total, filled].max.times.each do |i| %>
               <%
                 volunteer = volunteers[i]
@@ -100,7 +83,7 @@
           <% end %>
           <% extra_volunteers = all_volunteers.reject { |v| v.role.in?(volunteering_positions_roles) }.sort_by { |v| [v.role, v.comment.to_s] } %>
           <% if extra_volunteers.any? %>
-            <tr class="table-light">
+            <tr class="table-active">
               <td colspan="2" class="py-2 fw-semibold"><%= t '.extra_volunteers_header' %></td>
             </tr>
             <% extra_volunteers.each do |volunteer| %>
@@ -120,6 +103,6 @@
   </div>
 
   <% if @activity && !any_open_slot %>
-    <div class="alert alert-info"><%= t '.all_slots_full' %></div>
+    <div id="all-slots-full-<%= @activity.id %>" class="alert alert-info"><%= t '.all_slots_full' %></div>
   <% end %>
 <% end %>

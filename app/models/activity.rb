@@ -9,6 +9,8 @@ class Activity < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :athletes, through: :results
   has_many :volunteers, dependent: :destroy, inverse_of: :activity
+  has_many :volunteer_applications, dependent: :destroy
+  has_many :volunteering_positions, dependent: :destroy
 
   validates :date, presence: true
   validates_associated :volunteers, if: :will_save_change_to_date?

@@ -290,7 +290,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_03_120000) do
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id", "athlete_id"], name: "index_volunteer_applications_on_activity_id_and_athlete_id", unique: true
-    t.index ["activity_id"], name: "index_volunteer_applications_on_activity_id"
     t.index ["athlete_id"], name: "index_volunteer_applications_on_athlete_id"
   end
 

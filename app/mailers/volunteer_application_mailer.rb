@@ -5,7 +5,7 @@ class VolunteerApplicationMailer < ApplicationMailer
     @application = params[:application]
     @athlete = @application.athlete
     @activity = @application.activity
-    @role = human_volunteer_role(@application.role)
+    @role = I18n.t("activerecord.attributes.volunteer.roles.#{@application.role}")
     mail(to: @athlete.user.email, subject: t('.subject', role: @role))
   end
 
@@ -13,7 +13,7 @@ class VolunteerApplicationMailer < ApplicationMailer
     @application = params[:application]
     @athlete = @application.athlete
     @activity = @application.activity
-    @role = human_volunteer_role(@application.role)
+    @role = I18n.t("activerecord.attributes.volunteer.roles.#{@application.role}")
     mail(to: @athlete.user.email, subject: t('.subject', role: @role))
   end
 end
