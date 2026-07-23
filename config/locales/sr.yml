@@ -788,7 +788,7 @@ sr:
     support:
       description: 'Projekat S95 možete podržati na različite načine: volontiranjem, donacijama ili učešćem u razvoju ovog sajta'
       title: Želite da podržite projekat?
-      how_to_support: >
+      how_to_support_html: >
         Prijatelji, naši događaji su potpuno besplatni i sprovode ih volonterske snage.
         Međutim, ako želite i možete podržati naš projekat, onda ćemo biti srećni zbog bilo kakve materijalne pomoći.
         Da biste to uradili, kontaktirajte organizatore događaja kojima želite da pružite podršku putem kontakata na stranici događaja.

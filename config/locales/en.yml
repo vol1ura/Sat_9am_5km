@@ -661,7 +661,7 @@ en:
     support:
       description: 'You can support the S95 project in various ways: volunteering, donation, or by participating in the development of this website'
       title: Want to Support the Project?
-      how_to_support: >
+      how_to_support_html: >
         Friends, our events are completely free and run by volunteers.
         However, if you want and can support our project, we'll be grateful for any material assistance.
         To do this, contact the event organizers you want to support through the contacts on the event page.
