@@ -27,6 +27,20 @@ RSpec.describe Volunteer do
     end
   end
 
+  describe '.published' do
+    let(:visible_athlete) { create(:athlete) }
+    let(:hidden_athlete) { create(:athlete, hidden_profile: true) }
+    let(:activity) { create(:activity, published: true) }
+
+    let!(:visible_volunteer) { create(:volunteer, activity: activity, athlete: visible_athlete) }
+
+    before { create(:volunteer, activity: activity, athlete: hidden_athlete) }
+
+    it 'excludes volunteering of athletes with a hidden profile' do
+      expect(described_class.published).to contain_exactly(visible_volunteer)
+    end
+  end
+
   describe 'validation' do
     subject(:volunteer) { described_class.new }
 

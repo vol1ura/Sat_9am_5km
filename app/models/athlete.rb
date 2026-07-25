@@ -12,6 +12,8 @@ class Athlete < ApplicationRecord
 
   audited associated_with: :user, max_audits: 20, except: %i[stats going_to_event_id personal_bests]
 
+  scope :publicly_visible, -> { where(hidden_profile: false) }
+
   PARKZHRUN_BORDER = 690_000_000
   SAT_9AM_5KM_BORDER = 770_000_000
   FIVE_VERST_BORDER = 790_000_000

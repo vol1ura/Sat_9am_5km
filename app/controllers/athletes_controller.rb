@@ -3,7 +3,7 @@
 class AthletesController < ApplicationController
   def index
     query = params[:q].to_s.gsub(/[^[:alnum:][:blank:]\-']/, '').strip
-    criteria = Athlete.where(hidden_profile: false).order(:event_id).limit(100)
+    criteria = Athlete.publicly_visible.order(:event_id).limit(100)
     @athletes =
       if query.length < 3
         Athlete.none

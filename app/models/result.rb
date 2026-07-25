@@ -10,7 +10,13 @@ class Result < ApplicationRecord
   validates :athlete_id, uniqueness: { scope: :activity_id }, allow_nil: true
   validate :total_time_format
 
-  scope :published, -> { joins(:activity).where(activity: { published: true }) }
+  scope :published, lambda {
+    joins(:activity).where(activity: { published: true }).where(<<~SQL.squish)
+      NOT EXISTS (
+        SELECT 1 FROM athletes WHERE athletes.id = results.athlete_id AND athletes.hidden_profile = TRUE
+      )
+    SQL
+  }
 
   delegate :date, to: :activity
 

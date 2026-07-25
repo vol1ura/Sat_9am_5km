@@ -61,6 +61,25 @@ RSpec.describe '/user' do
         expect(response).to redirect_to user_path
       end
 
+      it 'hides the athlete profile and revokes distribution consent' do
+        user.update!(distribution_consent: true)
+
+        patch user_url, params: { user: { athlete_attributes: { id: user.athlete.id, hidden_profile: '1' } } }
+
+        expect(user.athlete.reload.hidden_profile).to be true
+        expect(user.reload.distribution_consent).to be false
+      end
+
+      it 'unhides the athlete profile and restores distribution consent' do
+        user.athlete.update!(hidden_profile: true)
+        user.update!(distribution_consent: false)
+
+        patch user_url, params: { user: { athlete_attributes: { id: user.athlete.id, hidden_profile: '0' } } }
+
+        expect(user.athlete.reload.hidden_profile).to be false
+        expect(user.reload.distribution_consent).to be true
+      end
+
       it 'deletes phone' do
         patch user_url, params: { delete_phone: 'true', user: user.attributes.slice('first_name') }
         expect(user.phone).to be_nil

@@ -42,6 +42,7 @@ class ClubsController < ApplicationController
     @athletes =
       Athlete
         .where(club: @club)
+        .publicly_visible
         .left_outer_joins(:published_results)
         .select('athletes.*', 'MIN(results.total_time) AS personal_best', 'COUNT(results.id) AS results_count')
         .group('athletes.id')

@@ -23,6 +23,21 @@ RSpec.describe Result do
     end
   end
 
+  describe '.published' do
+    let(:visible_athlete) { create(:athlete) }
+    let(:hidden_athlete) { create(:athlete, hidden_profile: true) }
+    let(:activity) { create(:activity, published: true) }
+
+    let!(:visible_result) { create(:result, activity: activity, athlete: visible_athlete) }
+    let!(:unlinked_result) { create(:result, activity: activity, athlete: nil) }
+
+    before { create(:result, activity: activity, athlete: hidden_athlete) }
+
+    it 'excludes results of athletes with a hidden profile' do
+      expect(described_class.published).to contain_exactly(visible_result, unlinked_result)
+    end
+  end
+
   describe 'validation' do
     subject { described_class.new }
 

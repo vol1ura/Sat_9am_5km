@@ -16,7 +16,13 @@ class Volunteer < ApplicationRecord
   after_destroy_commit :reset_athlete_going_to_event
   after_commit :broadcast_refresh
 
-  scope :published, -> { joins(:activity).where(activity: { published: true }) }
+  scope :published, lambda {
+    joins(:activity).where(activity: { published: true }).where(<<~SQL.squish)
+      NOT EXISTS (
+        SELECT 1 FROM athletes WHERE athletes.id = volunteers.athlete_id AND athletes.hidden_profile = TRUE
+      )
+    SQL
+  }
 
   enum :role, {
     director: 0, marshal: 1, timer: 2, photograph: 3, tokens: 4, scanner: 5,

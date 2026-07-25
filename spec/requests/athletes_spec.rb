@@ -30,6 +30,15 @@ RSpec.describe '/athletes' do
       get athletes_url(q: ' ')
       expect(response).to be_successful
     end
+
+    context 'when athlete has a hidden profile' do
+      before { create(:athlete, name: 'Hidden Runner', hidden_profile: true) }
+
+      it 'excludes it from name search results' do
+        get athletes_url(q: 'Hidden Runner')
+        expect(response.body).not_to include('Hidden Runner')
+      end
+    end
   end
 
   describe 'GET /athletes/1' do
@@ -59,6 +68,25 @@ RSpec.describe '/athletes' do
           expect(response).to redirect_to(activities_url)
           expect(flash[:notice]).to eq(I18n.t('athletes.show.profile_hidden'))
         end
+      end
+    end
+
+    context 'when athlete has hidden their profile' do
+      let(:athlete) { create(:athlete, :with_user, hidden_profile: true, fiveverst_code: nil) }
+
+      it 'redirects a guest to activities with notice' do
+        get athlete_url(athlete)
+
+        expect(response).to redirect_to(activities_url)
+        expect(flash[:notice]).to eq(I18n.t('athletes.show.hidden_by_owner'))
+      end
+
+      it 'renders a successful response for the profile owner' do
+        sign_in athlete.user
+
+        get athlete_url(athlete)
+
+        expect(response).to be_successful
       end
     end
   end

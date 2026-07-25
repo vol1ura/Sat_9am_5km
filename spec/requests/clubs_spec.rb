@@ -23,6 +23,15 @@ RSpec.describe '/clubs' do
         get club_url(club.slug)
         expect(response).to be_successful
       end
+
+      it 'excludes athletes with a hidden profile from the members list' do
+        hidden_athlete = create(:athlete, name: 'Hidden Runner', club: club, hidden_profile: true)
+        create(:result, athlete: hidden_athlete)
+
+        get club_url(club.slug)
+
+        expect(response.body).not_to include('Hidden Runner')
+      end
     end
 
     describe 'GET /:slug/last-week' do

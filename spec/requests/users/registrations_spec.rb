@@ -9,6 +9,7 @@ RSpec.describe '/user' do
           last_name: 'Ivanov',
           email: 'ivan@example.com',
           policy_accepted: '1',
+          distribution_consent: '1',
           athlete_attributes: { gender: 'male' },
         },
       }
@@ -44,6 +45,18 @@ RSpec.describe '/user' do
         expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include(I18n.t('devise.registrations.new.policy_required'))
         expect(field_invalid?('user[policy_accepted]')).to be true
+      end
+    end
+
+    context 'without distribution_consent' do
+      let(:params) { valid_params.deep_merge(user: { distribution_consent: '0' }) }
+
+      it 'does not create the user and highlights the checkbox with an error', :aggregate_failures do
+        expect { post user_registration_path, params: }.not_to change(User, :count)
+
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(response.body).to include(I18n.t('devise.registrations.new.distribution_consent_required'))
+        expect(field_invalid?('user[distribution_consent]')).to be true
       end
     end
 

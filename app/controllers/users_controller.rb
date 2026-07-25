@@ -12,6 +12,8 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
+      sync_distribution_consent
+
       if params[:delete_image]
         current_user.image.purge
       elsif params[:user][:image] && current_user.image.attached?
@@ -25,6 +27,12 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def sync_distribution_consent
+    return unless current_user.athlete
+
+    current_user.update!(distribution_consent: !current_user.athlete.hidden_profile)
+  end
 
   def reset_attributes
     if params[:delete_phone]
