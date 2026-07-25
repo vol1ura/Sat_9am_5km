@@ -15,6 +15,9 @@ $carousel-control-hover-opacity: 1;
 @import "bootstrap";
 @import "font-awesome";
 @import "phone_screen";
+@import "../../vendor/stylesheets/leaflet";
+@import "../../vendor/stylesheets/MarkerCluster";
+@import "../../vendor/stylesheets/MarkerCluster.Default";
 @import "web/*";
 
 // Dark theme primary color override

@@ -122,6 +122,7 @@ sr:
         longitude: dužina
         coordinates: koordinate
         timezone: vremenska zona
+        route_map: šema staze
         slogan: slogan
         description: opis
         visible_order: redosled prikaza
@@ -1101,6 +1102,9 @@ sr:
     favorite_events_section:
       title: Omiljeni događaji
       all_events: Svi događaji
+    map:
+      title: Mapa događaja
+      as_list: Lista
     show:
       title: '%{place} | %{town} | Park trčanje'
       our_contacts: Naši kontakti
@@ -1122,6 +1126,7 @@ sr:
       event_dynamics: Dinamika događaja
       live_streaming: Online rezultati
       live_streaming_description: Rezultati se redovno ažuriraju u realnom vremenu
+      route_map: Šema staze
     live:
       title: 'Online rezultati - %{event}'
       description: 'Rezultati trke %{event} u realnom vremenu'

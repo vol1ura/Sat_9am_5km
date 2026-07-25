@@ -1,0 +1,12 @@
+<% head_info :title, t('.title') %>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1><%= t '.title' %></h1>
+  <%= link_to t('.as_list'), events_path, class: 'btn btn-outline-primary' %>
+</div>
+
+<div
+  class="events-map rounded border"
+  data-controller="map"
+  data-map-button-label-value="<%= t('events.index.details') %>"
+></div>

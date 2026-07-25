@@ -120,6 +120,7 @@ ru:
         longitude: долгота
         coordinates: координаты
         timezone: часовой пояс
+        route_map: схема трассы
         slogan: девиз
         description: описание
         visible_order: вес в ленте
@@ -1095,6 +1096,9 @@ ru:
     favorite_events_section:
       title: Избранные мероприятия
       all_events: Все мероприятия
+    map:
+      title: Карта мероприятий
+      as_list: Списком
     show:
       title: '%{place} | %{town} | Парковые забеги'
       our_contacts: Наши контакты
@@ -1116,6 +1120,7 @@ ru:
       event_dynamics: Динамика мероприятия
       live_streaming: Онлайн трансляция
       live_streaming_description: Результаты обновляются в режиме реального времени
+      route_map: Схема трассы
     live:
       title: 'Онлайн трансляция - %{event}'
       description: 'Результаты забега %{event} в режиме реального времени'

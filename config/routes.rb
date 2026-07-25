@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   end
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
+    get :map, on: :collection
     get :volunteering, on: :member
     get :live, on: :member
+    get :route_map, on: :member
     resource :going_to, only: %i[create destroy]
     resource :favorite_event, only: :update
   end

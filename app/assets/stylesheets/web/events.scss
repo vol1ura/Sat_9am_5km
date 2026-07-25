@@ -27,3 +27,26 @@
     border-radius: 0 !important;
   }
 }
+
+.route-map {
+  height: 450px;
+  min-height: 300px;
+  width: 100%;
+}
+
+.events-map {
+  height: 600px;
+  min-height: 400px;
+  width: 100%;
+}
+
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background-color: rgb(220 53 69 / 35%);
+
+  div {
+    background-color: #dc3545;
+    color: #fff;
+  }
+}

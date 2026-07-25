@@ -114,6 +114,7 @@ en:
         longitude: longitude
         coordinates: coordinates
         timezone: timezone
+        route_map: route map
         slogan: slogan
         description: description
         visible_order: weight in feed
@@ -1041,6 +1042,9 @@ en:
     favorite_events_section:
       title: Favorite events
       all_events: All events
+    map:
+      title: Events Map
+      as_list: As List
     show:
       title: '%{place} | %{town} | Park Runs'
       our_contacts: Our Contacts
@@ -1062,6 +1066,7 @@ en:
       event_dynamics: Event Dynamics
       live_streaming: Live Streaming
       live_streaming_description: Results are updated in real time
+      route_map: Route Map
     live:
       title: 'Live Streaming - %{event}'
       description: 'Results of %{event} run in real time'
