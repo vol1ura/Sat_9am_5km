@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Start" },
+      "geometry": { "type": "Point", "coordinates": [37.6173, 55.7558] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Finish" },
+      "geometry": { "type": "Point", "coordinates": [37.6273, 55.7658] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Route" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[37.6173, 55.7558], [37.6223, 55.7608], [37.6273, 55.7658]]
+      }
+    }
+  ]
+}

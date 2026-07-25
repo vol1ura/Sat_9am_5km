@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :find_event, except: %i[index search]
+  before_action :find_event, except: %i[index search map]
 
   def index
     @events = Event.all
@@ -21,6 +21,8 @@ class EventsController < ApplicationController
         .per(20)
     render turbo_stream: helpers.async_combobox_options(@events, next_page: @events.last_page? ? nil : @events.next_page)
   end
+
+  def map; end
 
   def show
     @total_activities = @event.activities.published.size
@@ -50,6 +52,17 @@ class EventsController < ApplicationController
   end
 
   def live; end
+
+  def route_map
+    head :not_found and return unless @event.route_map.attached?
+
+    send_data(
+      @event.route_map.download,
+      type: 'application/json',
+      disposition: 'inline',
+      filename: @event.route_map.filename.to_s,
+    )
+  end
 
   private
 

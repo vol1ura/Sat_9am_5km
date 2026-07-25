@@ -83,4 +83,35 @@ RSpec.describe '/events' do
       expect(response.body).not_to include(event.name)
     end
   end
+
+  describe 'GET /events/map' do
+    it 'renders a successful response' do
+      get map_events_url
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET /events/:code_name/route_map' do
+    let!(:event) { create(:event) }
+
+    it 'returns GeoJSON when route map is attached' do
+      event.route_map.attach(
+        io: Rails.root.join('spec/fixtures/files/sample_route.json').open,
+        filename: 'route.json',
+        content_type: 'application/json',
+      )
+
+      get route_map_event_url(code_name: event.code_name)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq('application/json')
+      expect(response.body).to include('FeatureCollection')
+    end
+
+    it 'returns not found when route map is not attached' do
+      get route_map_event_url(code_name: event.code_name)
+
+      expect(response).to have_http_status(:not_found)
+    end
+  end
 end

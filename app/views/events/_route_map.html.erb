@@ -1,0 +1,13 @@
+<div class="row row-cols-1 g-3 mb-3">
+  <%= render 'card', header: do %>
+    <div
+      class="route-map rounded border"
+      data-controller="route-map"
+      data-route-map-url-value="<%= route_map_event_path(@event.code_name) %>"
+      <% if @event.latitude.present? && @event.longitude.present? %>
+        data-route-map-latitude-value="<%= @event.latitude %>"
+        data-route-map-longitude-value="<%= @event.longitude %>"
+      <% end %>
+    ></div>
+  <% end %>
+</div>

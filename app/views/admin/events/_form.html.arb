@@ -33,6 +33,15 @@ active_admin_form_for [:admin, resource] do |f|
     )
   end
 
+  f.inputs 'Карта трассы' do
+    input :route_map, as: :file, input_html: { accept: 'application/json,.json' }, hint:
+      if resource.route_map.attached? && resource.route_map.blob.persisted?
+        link_to(resource.route_map.filename, route_map_event_path(resource.code_name), target: '_blank', rel: 'noopener')
+      else
+        'GeoJSON-файл (.json) со схемой трассы и точками'
+      end
+  end
+
   f.inputs 'Основные параметры' do
     input :country, include_blank: false
     input :name
@@ -62,11 +71,11 @@ active_admin_form_for [:admin, resource] do |f|
       },
     )
     input :visible_order, input_html: { inputmode: 'numeric' }
-    input :summer_image, as: :file, hint:
+    input :summer_image, as: :file, input_html: { accept: 'image/*' }, hint:
       if resource.summer_image.attached? && resource.summer_image.blob.persisted?
         image_tag resource.summer_image.variant(:thumb), class: 'img-badge'
       end
-    input :winter_image, as: :file, hint:
+    input :winter_image, as: :file, input_html: { accept: 'image/*' }, hint:
       if resource.winter_image.attached? && resource.winter_image.blob.persisted?
         image_tag resource.winter_image.variant(:thumb), class: 'img-badge'
       end
