@@ -914,6 +914,7 @@ sr:
     show:
       registration_required: Molimo registrujte se na sajtu da biste videli profil učesnika. Ako je ovo vaš profil, molimo vas da se registrujete na sajtu i da nam pošaljete povratnu informaciju da bismo ga dodali vašem nalogu.
       profile_hidden: Podaci učesnika su skriveni jer još nije završio registraciju na sajtu.
+      hidden_by_owner: Ovaj učesnik je sakrio svoj profil od javnog pregleda.
       description: 'Profil atletičara %{athlete_name}: rezultati, statistike i volontiranje'
       show_club_html: 'Prikaži statistike kluba %{link}'
       total_results: ukupno trčanja
@@ -1183,6 +1184,8 @@ sr:
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Hitna kontakt osoba
       change_photo: Izmeni
+      hidden_profile: Sakrij moj profil od javnog pregleda
+      hidden_profile_hint: Kada je uključeno, vaše ime i rezultati neće biti vidljivi drugim posetiocima i neće se pojavljivati u pretrazi učesnika.
       personal_bests: Lični rekordi
       personal_best_10k: 10 km
       personal_best_half_marathon: 21.1 km

@@ -29,6 +29,8 @@ sr:
         policy_accepted_html: 'Slažem se sa %{policy_link} i %{rules_link}'
         policy_link: politikom obrade ličnih podataka
         rules_link: pravilima učešća
+        distribution_consent_required: Morate pristati na javno objavljivanje vaših ličnih podataka
+        distribution_consent_html: 'Slažem se da će moje ime i rezultati trka biti javno prikazani na sajtu u skladu sa %{policy_link} (može se povući u podešavanjima profila)'
         submit: Registrujte se
       signed_up_but_unconfirmed: 'Link za potvrdu je poslat na vaš e-mail. Molimo potvrdite e-mail u roku od 3 sata.'
       signed_up: 'Dobrodošli! Uspešno ste se prijavili.'

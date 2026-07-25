@@ -30,13 +30,16 @@ module Users
 
     def collect_custom_errors
       resource.athlete.errors.add(:gender, t('devise.registrations.new.gender_required')) if resource.athlete.gender.blank?
-      return if resource.policy_accepted
+      resource.errors.add(:policy_accepted, t('devise.registrations.new.policy_required')) unless resource.policy_accepted
+      return if resource.distribution_consent
 
-      resource.errors.add(:policy_accepted, t('devise.registrations.new.policy_required'))
+      resource.errors.add(:distribution_consent, t('devise.registrations.new.distribution_consent_required'))
     end
 
     def sign_up_params
-      params.expect(user: [:first_name, :last_name, :email, :policy_accepted, { athlete_attributes: [:gender] }])
+      params.expect(
+        user: [:first_name, :last_name, :email, :policy_accepted, :distribution_consent, { athlete_attributes: [:gender] }],
+      )
     end
   end
 end

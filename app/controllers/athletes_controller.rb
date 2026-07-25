@@ -3,7 +3,7 @@
 class AthletesController < ApplicationController
   def index
     query = params[:q].to_s.gsub(/[^[:alnum:][:blank:]\-']/, '').strip
-    criteria = Athlete.order(:event_id).limit(100)
+    criteria = Athlete.where(hidden_profile: false).order(:event_id).limit(100)
     @athletes =
       if query.length < 3
         Athlete.none
@@ -18,6 +18,7 @@ class AthletesController < ApplicationController
   def show
     @athlete = Athlete.find params[:id]
     return redirect_unregistered_athlete if !@athlete.user_id && @athlete.fiveverst_code
+    return redirect_hidden_athlete if @athlete.hidden_profile && current_user&.athlete != @athlete
 
     load_athlete_results
     load_athlete_volunteering
@@ -43,6 +44,10 @@ class AthletesController < ApplicationController
     else
       redirect_to new_user_registration_path, alert: t('.registration_required')
     end
+  end
+
+  def redirect_hidden_athlete
+    redirect_to activities_path, notice: t('.hidden_by_owner')
   end
 
   def published_results

@@ -29,6 +29,8 @@ en:
         policy_accepted_html: 'I agree to the %{policy_link} and the %{rules_link}'
         policy_link: privacy policy
         rules_link: participation rules
+        distribution_consent_required: You must consent to the public distribution of your personal data
+        distribution_consent_html: 'I agree that my name and race results will be publicly displayed on the site as described in the %{policy_link} (can be revoked in profile settings)'
         submit: Register
       signed_up_but_unconfirmed: 'A confirmation link has been sent to your email. Please confirm your email within 3 hours.'
     confirmations:

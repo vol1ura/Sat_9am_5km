@@ -29,6 +29,8 @@ ru:
         policy_accepted_html: 'Я согласен с %{policy_link} и %{rules_link}'
         policy_link: политикой обработки персональных данных
         rules_link: правилами участия
+        distribution_consent_required: Необходимо согласие на распространение персональных данных
+        distribution_consent_html: 'Я согласен на распространение моего имени и результатов забегов в открытом доступе на сайте согласно %{policy_link} (можно отозвать в настройках профиля)'
         submit: Зарегистрироваться
       signed_up_but_unconfirmed: 'На ваш email отправлена ссылка для подтверждения. Пожалуйста, подтвердите email в течение 3 часов.'
     confirmations:

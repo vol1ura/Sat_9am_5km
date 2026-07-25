@@ -79,6 +79,19 @@
         <% end %>
       </div>
 
+      <div class="mb-3 form-check">
+        <% consent_invalid = resource.errors.key?(:distribution_consent) %>
+        <%= f.check_box :distribution_consent,
+              class: "form-check-input #{'is-invalid' if consent_invalid}", required: true %>
+        <%= f.label :distribution_consent, class: 'form-check-label' do %>
+          <%= t('.distribution_consent_html',
+                 policy_link: link_to(t('.policy_link'), page_path(page: 'privacy-policy'), target: '_blank', rel: 'noopener')) %>
+        <% end %>
+        <% if consent_invalid %>
+          <div class="invalid-feedback d-block"><%= resource.errors[:distribution_consent].join(', ') %></div>
+        <% end %>
+      </div>
+
       <div class="my-3">
         <%= f.submit t('.submit'), class: 'btn btn-primary' %>
       </div>

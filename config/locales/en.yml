@@ -863,6 +863,7 @@ en:
     show:
       registration_required: You are trying to view the profile of an unregistered participant. If this is your profile, please register on the site and through the feedback form request to add this profile to your account.
       profile_hidden: Participant data is hidden because they have not completed registration on the site yet.
+      hidden_by_owner: This participant has hidden their profile from public view.
       description: 'Participant Profile %{athlete_name}'
       show_club_html: 'View club statistics %{link}'
       total_results: total runs
@@ -1123,6 +1124,8 @@ en:
       phone_placeholder: '+0 000 000-00-00'
       emergency_contact: Emergency Contact
       change_photo: Edit
+      hidden_profile: Hide my profile from public view
+      hidden_profile_hint: When enabled, your name and results will not be visible to other visitors and will not appear in athlete search.
       personal_bests: Personal Bests
       personal_best_10k: '10 km'
       personal_best_half_marathon: '21.1 km'

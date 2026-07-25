@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_25_190000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -80,6 +80,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
     t.bigint "fiveverst_code"
     t.enum "gender", enum_type: "athlete_gender"
     t.bigint "going_to_event_id"
+    t.boolean "hidden_profile", default: false, null: false
     t.string "name"
     t.integer "parkrun_code"
     t.bigint "parkzhrun_code"
@@ -251,6 +252,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
     t.datetime "confirmed_at"
     t.datetime "created_at", null: false
     t.text "disabled_notifications", default: [], null: false, array: true
+    t.boolean "distribution_consent", default: false, null: false
     t.string "email"
     t.string "emergency_contact_name"
     t.string "emergency_contact_phone"
