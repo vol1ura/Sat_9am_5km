@@ -10,7 +10,7 @@ ActiveAdmin.register Event do
 
   permit_params(
     :description, :active, :auto_create_activities, :place_description, :place, :name, :summer_image, :winter_image,
-    :code_name, :town, :visible_order, :country_id, :latitude, :longitude, :timezone, :cancellation_reason,
+    :route_map, :code_name, :town, :visible_order, :country_id, :latitude, :longitude, :timezone, :cancellation_reason,
   )
 
   filter :country
@@ -46,6 +46,11 @@ ActiveAdmin.register Event do
       row :place_description
       row(:coordinates) { |e| "#{e.latitude},#{e.longitude}" }
       row :timezone
+      row(:route_map) do |e|
+        if e.route_map.attached?
+          link_to e.route_map.filename, route_map_event_path(e.code_name), target: '_blank', rel: 'noopener'
+        end
+      end
       row :visible_order
       row(:description) { |e| sanitized_text e.description }
       row :updated_at
@@ -64,6 +69,7 @@ ActiveAdmin.register Event do
     размером не менее 2800х1060 пикселей и весом не менее 150 Кб (в идеале ~400 Кб), но не более 5 Мб.
     Если зимнее изображение не загружено, то всё время будет отображаться летнее.'
     li 'Вес в ленте - числовое значение, чем оно больше, тем ниже событие будет расположено в ленте на главной странице.'
+    li 'Схема трассы — GeoJSON-файл (.json). Рекомендуется указать старт, финиш, повороты или развороты с комментариями.'
   end
 
   sidebar 'Настройки', only: %i[show edit] do

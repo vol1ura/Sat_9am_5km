@@ -8,11 +8,8 @@ class User < ApplicationRecord
   has_associated_audits
 
   # Include default devise modules. Others available are:
-  # :timeoutable, :trackable, :validatable
-  devise(
-    :database_authenticatable, :recoverable, :rememberable, :confirmable, :lockable, :registerable,
-    :omniauthable, omniauth_providers: %i[telegram],
-  )
+  # :timeoutable, :trackable, :validatable, :rememberable
+  devise :database_authenticatable, :confirmable, :registerable
 
   has_one :athlete, dependent: :nullify
   accepts_nested_attributes_for :athlete, reject_if: :all_blank

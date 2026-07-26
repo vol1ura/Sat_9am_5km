@@ -105,6 +105,10 @@
   <% end %>
 </div>
 
+<% if @event.route_map.attached? %>
+  <%= render 'route_map', header: t('.route_map') %>
+<% end %>
+
 <h2><%= t '.results' %></h2>
 <% if @total_activities.zero? %>
   <p><%= t '.no_results_disclaimer' %></p>

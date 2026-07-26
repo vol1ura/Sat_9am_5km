@@ -11,10 +11,12 @@ class BarcodeService < ApplicationService
     use_path: true,
   }.freeze
 
-  param :code, reader: :private
-  option :module_size, reader: :private
+  def initialize(code, module_size:)
+    @code = code
+    @module_size = module_size
+  end
 
   def call
-    RQRCode::QRCode.new(code).as_svg(OPTIONS.merge(module_size:)).html_safe # rubocop:disable Rails/OutputSafety
+    RQRCode::QRCode.new(@code).as_svg(OPTIONS.merge(module_size: @module_size)).html_safe # rubocop:disable Rails/OutputSafety
   end
 end

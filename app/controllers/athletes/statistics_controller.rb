@@ -59,7 +59,7 @@ module Athletes
     private
 
     def set_athlete
-      @athlete = Athlete.find(params[:athlete_id])
+      @athlete = Athlete.find(params.expect(:athlete_id))
     end
 
     def athlete_results

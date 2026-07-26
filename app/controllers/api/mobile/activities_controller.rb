@@ -50,7 +50,7 @@ module API
       private
 
       def find_activity!
-        @activity = Activity.unpublished.find_by!(token: params[:token])
+        @activity = Activity.unpublished.find_by!(token: params.expect(:token))
       end
 
       def check_activity_date!

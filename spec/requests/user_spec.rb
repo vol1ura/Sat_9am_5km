@@ -111,56 +111,10 @@ RSpec.describe '/user' do
       it { expect(response).to be_successful }
     end
 
-    describe 'GET /user/password/new' do
-      before { get new_user_password_url }
-
-      it { expect(response).to be_successful }
-    end
-
     describe 'GET /user/confirmation/new' do
       before { get new_user_confirmation_url }
 
       it { expect(response).to be_successful }
-    end
-
-    describe 'GET /user/unlock/new' do
-      before { get new_user_unlock_url }
-
-      it { expect(response).to be_successful }
-    end
-
-    describe 'POST /user/auth/telegram' do
-      let(:telegram_id) { 1234567 }
-      let(:auth_hash) { OmniAuth::AuthHash.new(uid: telegram_id.to_s) }
-
-      before do
-        OmniAuth.config.test_mode = true
-        OmniAuth.config.mock_auth[:telegram] = auth_hash
-      end
-
-      it 'redirects to new registration url unregistered user' do
-        post user_telegram_omniauth_callback_url
-        expect(response).to redirect_to new_user_registration_url
-      end
-
-      context 'with registered user' do
-        before { create(:user, telegram_id:) }
-
-        it 'returns success' do
-          post user_telegram_omniauth_callback_url
-          expect(response).to redirect_to root_url
-          expect(flash[:notice]).to include 'Telegram'
-        end
-      end
-
-      context 'with failure' do
-        let(:auth_hash) { :invalid_credentials }
-
-        it 'redirects to login path' do
-          expect { post user_telegram_omniauth_callback_url }.to output.to_stdout_from_any_process
-          expect(response).to redirect_to new_user_session_url
-        end
-      end
     end
   end
 end

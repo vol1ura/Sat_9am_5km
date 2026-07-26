@@ -2,8 +2,8 @@ sr:
   devise:
     shared:
       links:
-        sign_in: Prijavite se
-        registration: Registrujte se putem e-maila
+        sign_in: Prijavite se (već ste registrovan)
+        registration: Registrujte se
         password: Zaboravili ste lozinku?
         confirmation: Niste dobili link za potvrdu?
         unlock: Niste dobili link za otključavanje?
@@ -12,7 +12,7 @@ sr:
       signed_out : Uspešno ste se odjavili sa sajta
       new:
         title: Prijavite se na sajt
-        description: Da bi se prijavili, koristite Telegram bot ili e-mail. Potrebno je samo da zatražite jednokratnu vezu za prijavu.
+        description: Da biste se prijavili, dovoljno je da zatražite jednokratnu vezu za prijavu putem e-maila.
         email_login_description: Unesite svoj e-mail — poslaćemo vam jednokratni link za prijavu
         email_placeholder: Vaš e-mail
         email_submit: Dobijte link

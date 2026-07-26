@@ -114,6 +114,7 @@ en:
         longitude: longitude
         coordinates: coordinates
         timezone: timezone
+        route_map: route map
         slogan: slogan
         description: description
         visible_order: weight in feed
@@ -661,7 +662,7 @@ en:
     support:
       description: 'You can support the S95 project in various ways: volunteering, donation, or by participating in the development of this website'
       title: Want to Support the Project?
-      how_to_support: >
+      how_to_support_html: >
         Friends, our events are completely free and run by volunteers.
         However, if you want and can support our project, we'll be grateful for any material assistance.
         To do this, contact the event organizers you want to support through the contacts on the event page.
@@ -1042,6 +1043,9 @@ en:
     favorite_events_section:
       title: Favorite events
       all_events: All events
+    map:
+      title: Events Map
+      as_list: As List
     show:
       title: '%{place} | %{town} | Park Runs'
       our_contacts: Our Contacts
@@ -1063,6 +1067,7 @@ en:
       event_dynamics: Event Dynamics
       live_streaming: Live Streaming
       live_streaming_description: Results are updated in real time
+      route_map: Route Map
     live:
       title: 'Live Streaming - %{event}'
       description: 'Results of %{event} run in real time'
@@ -1106,8 +1111,6 @@ en:
     volunteer:
       confirm_delete: Free position %{role} (%{name})?
   users:
-    omniauth_callbacks:
-      auth_error: Failed to sign in. Make sure you're actually registered
     show:
       title: Settings
       description: 'Settings for user %{user_name}'
@@ -1162,6 +1165,8 @@ en:
         back_to_login: Back to sign in
       create:
         link_sent: Sign-in link sent to your email. Please check your inbox.
+        not_registered: No account found for this email. Please complete the registration form.
+        unconfirmed: Email not confirmed. Check your inbox or request a new confirmation link.
   going_tos:
     create:
       success: You've successfully marked yourself as a participant

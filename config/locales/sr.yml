@@ -122,6 +122,7 @@ sr:
         longitude: dužina
         coordinates: koordinate
         timezone: vremenska zona
+        route_map: šema staze
         slogan: slogan
         description: opis
         visible_order: redosled prikaza
@@ -788,7 +789,7 @@ sr:
     support:
       description: 'Projekat S95 možete podržati na različite načine: volontiranjem, donacijama ili učešćem u razvoju ovog sajta'
       title: Želite da podržite projekat?
-      how_to_support: >
+      how_to_support_html: >
         Prijatelji, naši događaji su potpuno besplatni i sprovode ih volonterske snage.
         Međutim, ako želite i možete podržati naš projekat, onda ćemo biti srećni zbog bilo kakve materijalne pomoći.
         Da biste to uradili, kontaktirajte organizatore događaja kojima želite da pružite podršku putem kontakata na stranici događaja.
@@ -1102,6 +1103,9 @@ sr:
     favorite_events_section:
       title: Omiljeni događaji
       all_events: Svi događaji
+    map:
+      title: Mapa događaja
+      as_list: Lista
     show:
       title: '%{place} | %{town} | Park trčanje'
       our_contacts: Naši kontakti
@@ -1123,6 +1127,7 @@ sr:
       event_dynamics: Dinamika događaja
       live_streaming: Online rezultati
       live_streaming_description: Rezultati se redovno ažuriraju u realnom vremenu
+      route_map: Šema staze
     live:
       title: 'Online rezultati - %{event}'
       description: 'Rezultati trke %{event} u realnom vremenu'
@@ -1166,8 +1171,6 @@ sr:
     volunteer:
       confirm_delete: Osloboditi poziciju %{role} (%{name})?
   users:
-    omniauth_callbacks:
-      auth_error: Prijava neuspešna
     show:
       title: Podešavanja
       description: 'Podešavanja za %{user_name}'
@@ -1221,6 +1224,8 @@ sr:
         back_to_login: Nazad na stranicu za prijavu
       create:
         link_sent: Link za prijavu je poslat na vaš e-mail. Proverite poštu.
+        not_registered: Korisnik sa ovim e-mailom nije registrovan. Popunite formular za registraciju.
+        unconfirmed: E-mail nije potvrđen. Proverite poštu ili zatražite novi link za potvrdu.
   going_tos:
     create:
       success: Uspešno ste se označili kao učesnik

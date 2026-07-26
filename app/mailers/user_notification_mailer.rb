@@ -9,6 +9,12 @@ class UserNotificationMailer < ApplicationMailer
     @unsubscribe_url = UNSUBSCRIBE_URL
     headers['List-Unsubscribe'] = "<#{UNSUBSCRIBE_URL}>"
     headers['List-Unsubscribe-Post'] = 'List-Unsubscribe=One-Click'
-    mail(to: user.email, subject: t('.subject'))
+    mail(to: recipient_email(user), subject: t('.subject'))
+  end
+
+  private
+
+  def recipient_email(user)
+    Rails.env.local? ? ENV.fetch('ADMIN_EMAIL') : user.email
   end
 end

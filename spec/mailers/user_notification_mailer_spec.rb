@@ -10,7 +10,7 @@ RSpec.describe UserNotificationMailer do
 
     it 'renders the mail' do
       expect(mail.subject).to eq('Загляните в письмо! Внутри информация о вашей субботе')
-      expect(mail.to).to eq([user.email])
+      expect(mail.to).to eq([ENV.fetch('ADMIN_EMAIL')])
       expect(mail.body.encoded).to include(html_body).and include(described_class::UNSUBSCRIBE_URL)
       expect(mail['List-Unsubscribe'].value).to eq("<#{described_class::UNSUBSCRIBE_URL}>")
     end
