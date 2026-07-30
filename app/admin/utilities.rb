@@ -20,6 +20,11 @@ ActiveAdmin.register_page 'Utilities' do
           para 'Будет сформирован CSV файл с ежедневной статистикой.'
           render partial: 'user_registrations_export_form'
         end
+
+        panel 'Отчёт по новичкам' do
+          para 'Участники, у которых первый забег в системе состоялся в выбранной локации в указанный период.'
+          render partial: 'event_csv_export_form', locals: { url: admin_utilities_export_newcomers_csv_path }
+        end
       end
 
       tab t('.badges.title') do
@@ -124,6 +129,21 @@ ActiveAdmin.register_page 'Utilities' do
       params[:till_date].presence,
     )
     flash[:notice] = t '.reports.task_queued'
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_newcomers_csv, method: :post do
+    if (event_id = params[:event_id]).present?
+      CsvReports::NewcomersJob.perform_later(
+        event_id.to_i,
+        current_user.id,
+        params[:from_date].presence,
+        params[:till_date].presence,
+      )
+      flash[:notice] = t '.reports.task_queued'
+    else
+      flash[:alert] = t '.reports.event_not_selected'
+    end
     redirect_to admin_utilities_path
   end
 end

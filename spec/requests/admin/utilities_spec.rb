@@ -73,4 +73,24 @@ RSpec.describe '/admin/utilities' do
       expect(CsvReports::UserRegistrationsJob).to have_been_enqueued.with(user.id, '2023-01-01', '2023-12-31')
     end
   end
+
+  describe 'POST /admin/utilities/export_newcomers_csv' do
+    let!(:event_id) { create(:event).id }
+
+    it 'enqueues csv export job' do
+      post admin_utilities_export_newcomers_csv_url, params: { event_id:, from_date: '2023-01-01', till_date: '2023-12-31' }
+
+      expect(response).to redirect_to admin_utilities_url
+      expect(flash[:notice]).to include('Ждите отчёт в Telegram')
+      expect(CsvReports::NewcomersJob).to have_been_enqueued.with(event_id, user.id, '2023-01-01', '2023-12-31')
+    end
+
+    it 'does not enqueue csv export job if event is not selected' do
+      post admin_utilities_export_newcomers_csv_url
+
+      expect(response).to redirect_to admin_utilities_url
+      expect(flash[:alert]).to include('Мероприятие не выбрано')
+      expect(CsvReports::NewcomersJob).not_to have_been_enqueued
+    end
+  end
 end
