@@ -2,7 +2,7 @@
 
 class PagesController < ApplicationController
   ALLOWED_PAGES = %w[
-    about feedback joining rules support additional-events privacy-policy robots 5za5 donor donation
+    about feedback joining rules additional-events privacy-policy robots 5za5 donor donation
   ].freeze
   MAX_FEEDBACK_SIZE = 2000
 

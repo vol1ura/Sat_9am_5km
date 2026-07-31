@@ -31,7 +31,7 @@ module Notification
         event_name: @event.name,
         roster_link: roster_link,
         director_info: director_info,
-        volunteer_role: ApplicationController.helpers.human_volunteer_role(@volunteer.role),
+        volunteer_role: @event.country.localized("activerecord.attributes.volunteer.roles.#{@volunteer.role}"),
       )
     end
 

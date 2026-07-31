@@ -2,11 +2,23 @@
 
 RSpec.describe '/pages' do
   describe 'GET /pages' do
-    %w[about support rules donation].each do |page|
+    %w[about rules].each do |page|
       it "renders #{page} page with successful response", vcr: page == 'about' do
         get page_url(page:)
         expect(response).to be_successful
       end
+    end
+
+    it 'renders donation widget on ru domain' do
+      get page_url(page: 'donation'), headers: { host: 'test.ru' }
+      expect(response).to be_successful
+      expect(response.body).to include('mixplat-page')
+    end
+
+    it 'renders project support content on non-ru domain' do
+      get page_url(page: 'donation'), headers: { host: 'test.rs' }
+      expect(response).to be_successful
+      expect(response.body).to include(I18n.t('pages.support.title', locale: :sr))
     end
 
     context 'with json request' do
