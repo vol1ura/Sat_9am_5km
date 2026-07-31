@@ -78,7 +78,10 @@ RSpec.describe '/admin/utilities' do
     let!(:event_id) { create(:event).id }
 
     it 'enqueues csv export job' do
-      post admin_utilities_export_newcomers_csv_url, params: { event_id:, from_date: '2023-01-01', till_date: '2023-12-31' }
+      post(
+        admin_utilities_export_newcomers_csv_url,
+        params: { event_id: event_id, from_date: '2023-01-01', till_date: '2023-12-31' },
+      )
 
       expect(response).to redirect_to admin_utilities_url
       expect(flash[:notice]).to include('Ждите отчёт в Telegram')

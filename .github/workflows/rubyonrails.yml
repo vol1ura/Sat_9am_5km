@@ -6,7 +6,7 @@ on:
     branches: [master]
 jobs:
   security:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@main
@@ -21,7 +21,7 @@ jobs:
         run: bundle exec brakeman -q -w2
 
   lint-ruby:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@main
@@ -34,7 +34,7 @@ jobs:
         run: bundle exec rubocop --fail-fast -c .rubocop.yml
 
   lint-bundle:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@main
@@ -53,7 +53,7 @@ jobs:
       - security
       - lint-ruby
       - lint-bundle
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:17.2-alpine
@@ -81,7 +81,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@main
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y libvips
+        run: sudo apt-get update && sudo apt-get install -y libvips-tools
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
@@ -107,7 +107,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     needs:
       - test
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@main
