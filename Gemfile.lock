@@ -55,7 +55,7 @@ GEM
       activestorage (>= 6.1.4)
       activesupport (>= 6.1.4)
       marcel (>= 1.0.3)
-    activeadmin (3.5.1)
+    activeadmin (3.5.2)
       arbre (~> 1.2, >= 1.2.1)
       csv
       formtastic (>= 3.1)
@@ -164,7 +164,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.7)
-    csv (3.3.5)
+    csv (3.3.6)
     dalli (3.2.8)
     dartsass-sprockets (3.2.1)
       railties (>= 4.0.0)
