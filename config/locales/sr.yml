@@ -871,6 +871,7 @@ sr:
       h_index: h-indeks
       uniq_events: Jedinstveni parkovi
       longest_streak: Najduža serija
+      current_streak: Trenutna serija
       trophies: Značke
       results:
         title: Rejting sportista
@@ -879,6 +880,7 @@ sr:
           h_index: Trkački h-indeks - vrednost koja je jednaka h ako je učesnik trkao u h parkovima, i u svakom od njih bar h puta. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
           uniq_events: Jedinstveni parkovi - broj parkova posetjenih kao trkač. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
           longest_streak: Maksimalan broj serija trka. Serija se prekida ako nema trka na nekoj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          current_streak: Broj uzastopnih trka na momentu. Serija se prekida ako nema trka na tekućoj ili prošloj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
           trophies: Broj znački. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
       volunteers:
         title: Rejting volontera
@@ -887,6 +889,7 @@ sr:
           h_index: Volonterski h-indeks - vrednost koja je jednaka h ako je učesnik bio volonter u h različitih pozicija (uloga), u svakoj od kojih bar h puta. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
           uniq_events: Jedinstveni parkovi - broj parkova posetjenih kao volonter. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
           longest_streak: Maksimalan broj serija volontera. Serija se prekida ako nema volontera na nekoj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          current_streak: Broj uzastopnih volontiranja na momentu. Serija se prekida ako nema volontiranja na tekućoj ili prošloj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
           trophies: Broj znački. U slučaju jednakih vrednosti, viši rang će imati učesnika sa velikim brojem volontiranje.
     results:
       title: Najbolji rezultati

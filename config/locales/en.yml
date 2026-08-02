@@ -820,6 +820,7 @@ en:
       h_index: h-index
       uniq_events: Parks
       longest_streak: Longest Streak
+      current_streak: Current Streak
       trophies: Badges
       results:
         title: Participant Rankings
@@ -828,6 +829,7 @@ en:
           h_index: Running h-index - a value equal to h if the participant ran in h parks, with at least h times in each. In case of equal values, the participant with more runs will rank higher.
           uniq_events: Unique parks - number of parks visited as a runner. In case of equal values, the participant with more runs will rank higher.
           longest_streak: Maximum number of consecutive runs. The streak is considered broken if there was no result on any week. In case of equal values, the participant with more runs will rank higher.
+          current_streak: Number of consecutive runs at the moment. The streak is considered broken if there was no result on the current or previous week. In case of equal values, the participant with more runs will rank higher.
           trophies: Number of badges. In case of equal values, the participant with more runs will rank higher.
       volunteers:
         title: Volunteer Rankings
@@ -836,6 +838,7 @@ en:
           h_index: Volunteering h-index - a value equal to h if the participant was a volunteer at h different positions (roles), at least h times at each. In case of equal values, the participant with more volunteering will rank higher.
           uniq_events: Unique parks - number of parks visited as a volunteer. In case of equal values, the participant with more volunteering will rank higher.
           longest_streak: Maximum number of consecutive volunteering sessions. The streak is considered broken if there was no volunteering on any week. In case of equal values, the participant with more volunteering will rank higher.
+          current_streak: Number of consecutive volunteering sessions at the moment. The streak is considered broken if there was no volunteering on the current or previous week. In case of equal values, the participant with more volunteering will rank higher.
           trophies: Number of badges. In case of equal values, the participant with more volunteering will rank higher.
     results:
       title: Top Results
