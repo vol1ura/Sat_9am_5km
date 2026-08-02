@@ -1117,6 +1117,16 @@ en:
       not_specified: not specified
       email_pending_badge: 'Pending confirmation: %{email}'
       emergency_contact: Emergency Contact
+      delete_account:
+        title: Delete registration
+        lead: You can delete your site registration. This action cannot be undone.
+        button: Delete registration
+        modal_title: Delete registration
+        modal_text: >-
+          You accept that your registration will be permanently DELETED and your personal data will be removed:
+          email, photo, phone, and Telegram (if linked). Your run results and volunteer records may remain.
+        confirm_label: I accept and agree to delete my registration
+        submit: Delete registration
     field:
       edit: Edit
     edit:
@@ -1153,6 +1163,9 @@ en:
         after_activity: Run results and volunteer appreciation
         volunteer_reminder: Volunteer reminders
         other: Other notifications (cancellations, venue changes, etc. important messages)
+    destroy:
+      success: Registration deleted
+      confirmation_required: Confirm that you agree to delete your registration
     email_sessions:
       new:
         title: Sign in

@@ -63,14 +63,78 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <%= link_to edit_user_path, class: 'btn btn-outline-primary me-2', title: t('.edit') do %>
+        <div class="card-body mt-3 p-2">
+          <%= link_to edit_user_path, class: 'btn btn-outline-primary', title: t('.edit') do %>
             <i class="fa-solid fa-pen-to-square me-2"></i><%= t '.edit' %>
           <% end %>
         </div>
+        <div class="card-body border-top mt-5 p-2">
+          <h5 class="mb-3 text-danger"><%= t '.delete_account.title' %></h5>
+          <p class="mb-3 text-body-secondary"><%= t '.delete_account.lead' %></p>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteAccountModal"
+          >
+            <%= t '.delete_account.button' %>
+          </button>
+        </div>
       </div>
+
+      <div
+        class="modal fade"
+        id="deleteAccountModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="deleteAccountModalLabel"
+        aria-hidden="true"
+        data-controller="account-deletion"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <%= form_with url: user_path, method: :delete, data: { turbo: false } do %>
+              <div class="modal-header">
+                <h5 class="modal-title" id="deleteAccountModalLabel"><%= t '.delete_account.modal_title' %></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t 'users.edit.cancel' %>"></button>
+              </div>
+              <div class="modal-body">
+                <p class="mb-0"><%= t '.delete_account.modal_text' %></p>
+                <div class="form-check mt-3">
+                  <%=
+                    check_box_tag(
+                      :confirm_deletion,
+                      '1',
+                      false,
+                      class: 'form-check-input',
+                      id: 'confirm_deletion',
+                      data: {
+                        account_deletion_target: 'checkbox',
+                        action: 'account-deletion#toggleSubmit',
+                      },
+                    )
+                  %>
+                  <%= label_tag :confirm_deletion, t('.delete_account.confirm_label'), class: 'form-check-label' %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= t 'users.edit.cancel' %></button>
+                <%=
+                  submit_tag(
+                    t('.delete_account.submit'),
+                    class: 'btn btn-danger',
+                    disabled: true,
+                    data: { account_deletion_target: 'submit' },
+                  )
+                %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%= render 'shared/barcode_modal', code: current_user.athlete.code, barcode: @barcode %>
     <% end %>
   </div>
 </div>
-
-<%= render 'shared/barcode_modal', code: current_user.athlete.code, barcode: @barcode %>

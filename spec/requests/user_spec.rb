@@ -74,6 +74,26 @@ RSpec.describe '/user' do
         expect(response).to redirect_to user_path
       end
     end
+
+    describe 'DELETE /user' do
+      it 'destroys registration when confirmed' do
+        athlete = user.athlete
+
+        expect do
+          delete user_url, params: { confirm_deletion: '1' }
+        end.to change(User, :count).by(-1)
+
+        expect(response).to redirect_to root_path
+        expect(User).not_to exist(id: user.id)
+        expect(Athlete).not_to exist(id: athlete.id)
+      end
+
+      it 'does not destroy without confirmation' do
+        expect { delete user_url }.not_to change(User, :count)
+        expect(response).to redirect_to user_path
+        expect(flash[:alert]).to be_present
+      end
+    end
   end
 
   context 'when unauthenticated user' do

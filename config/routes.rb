@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   resources :email_sessions, only: :create, module: :users
   resources :articles, only: %i[index show], param: :page
 
-  resource :user, only: %i[show edit update]
+  resource :user, only: %i[show edit update destroy]
   resource :cookie_consent, only: :create
   resolve('User') { [:user] }
 

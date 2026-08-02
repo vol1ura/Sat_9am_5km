@@ -1177,6 +1177,16 @@ sr:
       not_specified: nije naveden
       email_pending_badge: 'Čeka potvrdu: %{email}'
       emergency_contact: Hitna kontakt osoba
+      delete_account:
+        title: Brisanje registracije
+        lead: Možete trajno obrisati registraciju na sajtu. Ova radnja se ne može poništiti.
+        button: Obriši registraciju
+        modal_title: Brisanje registracije
+        modal_text: >-
+          Prihvatate da će vaša registracija biti trajno OBRISANA i da će vaši lični podaci biti uklonjeni:
+          e-mail, slika, telefon, Telegram (ako su bili povezani). Vaši rezultati trčanja i zapisi o volontiranju mogu ostati.
+        confirm_label: Prihvatam i slažem se da obrišem registraciju
+        submit: Obriši registraciju
     field:
       edit: Izmeni
     edit:
@@ -1212,6 +1222,9 @@ sr:
         after_activity: Rezultati trčanja i zahvalnost za volontiranje
         volunteer_reminder: Podsetnici za volontere
         other: Ostala obaveštenja (otkazivanja, promene mesta starta i dr. važna obaveštenja)
+    destroy:
+      success: Registracija je obrisana
+      confirmation_required: Potvrdite saglasnost za brisanje registracije
     email_sessions:
       new:
         title: Prijavite se
