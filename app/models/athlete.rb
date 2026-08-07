@@ -59,6 +59,7 @@ class Athlete < ApplicationRecord
   has_many :events, through: :activities
   has_many :volunteering, -> { published.order(date: :desc) },
            dependent: :destroy, class_name: 'Volunteer', inverse_of: :athlete
+  has_many :volunteer_applications, dependent: :destroy
 
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships

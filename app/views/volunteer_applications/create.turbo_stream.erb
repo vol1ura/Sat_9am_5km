@@ -1,0 +1,6 @@
+<%
+  my_volunteering = current_user&.athlete && Volunteer.joins(:activity).find_by(athlete_id: current_user.athlete.id, activity: { date: @activity.date })
+  organizer = current_user&.volunteer_organizer_for?(@activity)
+  tg_chat = @activity.event.contacts.find_by(contact_type: :tg_chat)
+%>
+<%= turbo_stream.replace "volunteer-#{@idx}", partial: 'events/volunteer', locals: { volunteer: nil, activity: @activity, role: @role, idx: @idx, my_volunteering: my_volunteering, my_application: @volunteer_application, organizer: organizer, tg_chat: tg_chat } %>
