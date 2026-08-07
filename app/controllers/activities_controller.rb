@@ -27,6 +27,14 @@ class ActivitiesController < ApplicationController
     @volunteers = @activity.volunteers_roster.includes(athlete: :club)
   end
 
+  def changes
+    scope = Activity.published.where(event: @country_events).includes(:event)
+    scope = scope.where('activities.updated_at > ?', updated_since) if params[:updated_since].present?
+    @activities = scope.order(:updated_at, :id).page(params[:page]).per(100)
+  rescue ArgumentError
+    render json: { error: 'invalid updated_since parameter' }, status: :unprocessable_content
+  end
+
   def dashboard
     @total_results = Result.where(activity_id: weekly_activities_ids)
     @personal_bests_count = @total_results.where(personal_best: true).count
@@ -39,6 +47,10 @@ class ActivitiesController < ApplicationController
   end
 
   private
+
+  def updated_since
+    Time.zone.parse(params[:updated_since]) or raise ArgumentError
+  end
 
   def weekly_activities_ids
     @weekly_activities_ids ||=
