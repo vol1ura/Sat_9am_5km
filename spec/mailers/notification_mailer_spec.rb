@@ -2,13 +2,24 @@
 
 RSpec.describe NotificationMailer do
   describe '#feedback' do
-    let(:mail) { described_class.with(message: 'test message', user_id: 1, user_contact: user_contact).feedback }
+    let(:mail) { described_class.with(message: 'test message', user_id: user_id, user_contact: user_contact).feedback }
+    let(:user_id) { user&.id }
+    let(:user) { create(:user, :with_email) }
     let(:user_contact) { nil }
 
     it 'renders the mail' do
       expect(mail.subject).to eq('Новый отзыв на сайте С95')
-      expect(mail.body).to match('User: http://example.com/admin/users/1').and match('test message')
+      expect(mail.body).to match("User: http://example.com/admin/users/#{user.id}").and match('test message')
       expect(mail.to).to eq(described_class::RECIPIENTS)
+      expect(mail.reply_to).to eq([user.email])
+    end
+
+    context 'without logged-in user' do
+      let(:user_id) { nil }
+
+      it 'does not set reply_to' do
+        expect(mail.reply_to).to be_nil
+      end
     end
 
     context 'with user contact' do

@@ -8,6 +8,6 @@ class AuthLinkMailer < ApplicationMailer
     @url = auth_link_url(token: user.auth_token)
     @ttl_minutes = Users::AuthToken::TTL / 1.minute
 
-    mail(to: @user.email, subject: t('.subject'))
+    mail to: email(@user), subject: t('.subject')
   end
 end

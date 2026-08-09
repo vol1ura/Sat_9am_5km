@@ -3,4 +3,10 @@
 class ApplicationMailer < ActionMailer::Base
   default from: email_address_with_name(Rails.application.credentials.mailer.user_name, 'S95')
   layout 'mailer'
+
+  private
+
+  def email(user)
+    Rails.env.production? ? user.email : ENV.fetch('ADMIN_EMAIL')
+  end
 end
