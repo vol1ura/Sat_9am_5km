@@ -14,7 +14,7 @@ RSpec.describe AuthLinkMailer do
 
     it 'renders the mail' do
       expect(mail.subject).to eq('Ссылка для входа на сайт С95')
-      expect(mail.to).to eq([user.email])
+      expect(mail.to).to eq([ENV.fetch('ADMIN_EMAIL')])
       expect(mail.body.encoded)
         .to include(user.first_name)
         .and include("/auth_links/#{user.auth_token}")
