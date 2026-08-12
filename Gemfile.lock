@@ -172,7 +172,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    database_consistency (3.0.5)
+    database_consistency (3.0.9)
       activerecord (>= 3.2)
     date (3.5.1)
     devise (5.0.4)
