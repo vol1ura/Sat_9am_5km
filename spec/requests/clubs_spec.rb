@@ -46,7 +46,7 @@ RSpec.describe '/clubs' do
   end
 
   describe 'GET /:slug.json' do
-    let!(:club) { create(:club, description: 'Test club description') }
+    let!(:club) { create(:club) }
 
     def club_json
       get club_url(club.slug, format: :json)
@@ -55,46 +55,20 @@ RSpec.describe '/clubs' do
 
     context 'with members' do
       let!(:athlete) { create(:athlete, club:) }
-      let!(:result) { create(:result, athlete:) }
-      let!(:volunteer_athlete) { create(:athlete, club:) }
 
-      before { create(:volunteer, athlete: volunteer_athlete) }
+      before { create_list(:result, 2, athlete:) }
 
       it 'renders club fields' do
-        expect(club_json['club']).to eq(
-          'slug' => club.slug,
-          'name' => club.name,
-          'description' => club.description,
-          'logo_url' => nil,
-        )
+        expect(club_json['club']).to eq('slug' => club.slug, 'name' => club.name)
       end
 
-      it 'renders aggregate counts' do
-        expect(club_json).to include(
-          'athletes_count' => 2,
-          'total_results_count' => 1,
-          'total_volunteering_count' => 1,
-        )
-      end
-
-      it 'renders per-athlete roster fields' do
-        json_athlete = club_json['athletes'].find { |a| a['id'] == athlete.id }
-
-        expect(json_athlete).to eq(
-          'id' => athlete.id,
-          'name' => athlete.name,
-          'results_count' => 1,
-          'personal_best' => result.total_time,
-          'volunteering_count' => 0,
-        )
+      it 'renders each member once with id and name only' do
+        expect(club_json['athletes']).to eq([{ 'id' => athlete.id, 'name' => athlete.name }])
       end
     end
 
     it 'returns an empty roster for a club without members' do
-      json = club_json
-
-      expect(json['athletes']).to eq([])
-      expect(json['athletes_count']).to eq(0)
+      expect(club_json['athletes']).to eq([])
     end
 
     it 'returns not found for an unknown slug' do
