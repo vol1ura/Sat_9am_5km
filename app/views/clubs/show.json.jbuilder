@@ -2,7 +2,7 @@ json.club do
   json.slug @club.slug
   json.name @club.name
   json.description @club.description
-  json.logo_url @club.logo.attached? ? url_for(@club.logo) : nil
+  json.logo_url url_for(@club.logo) if @club.logo.attached?
 end
 
 json.athletes_count @athletes.length
