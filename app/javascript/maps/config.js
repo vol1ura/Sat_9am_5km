@@ -51,9 +51,11 @@ export function addEventMarker(map, event, buttonLabel) {
   });
 
   marker.bindPopup(`
-    <h5 class="text-primary mb-1">${event.name}</h5>
-    <p class="my-0 text-black">${event.place} (${event.town})</p>
-    <a href="/events/${event.code_name}" class="btn btn-outline-primary btn-sm my-2">${buttonLabel}</a>
+    <div class="map-popup">
+      <h5 class="map-popup__title">${event.name}</h5>
+      <p class="map-popup__place">${event.place} (${event.town})</p>
+      <a href="/events/${event.code_name}" class="map-popup__link">${buttonLabel}</a>
+    </div>
   `);
 
   marker.addTo(map);

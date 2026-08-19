@@ -1,4 +1,5 @@
 import ApexCharts from 'apexcharts';
+import { apexThemeOptions, chartLayoutPadding, chartTitleOptions } from 'charts/theme';
 
 const translations = {
   ru: {
@@ -67,22 +68,22 @@ export default class DashboardCharts {
     this.t = translations[document.documentElement.lang] ?? translations.ru;
 
     if (participantsContainer) {
-      const participantsChart = new ApexCharts(participantsContainer, this.#participantsChartOptions());
+      const participantsChart = new ApexCharts(participantsContainer, this.#participantsChartOptions('participants-chart'));
       participantsChart.render();
     }
 
     if (volunteersContainer) {
-      const volunteersChart = new ApexCharts(volunteersContainer, this.#volunteersChartOptions());
+      const volunteersChart = new ApexCharts(volunteersContainer, this.#volunteersChartOptions('volunteers-chart'));
       volunteersChart.render();
     }
 
     if (genderContainer) {
-      const genderChart = new ApexCharts(genderContainer, this.#genderChartOptions());
+      const genderChart = new ApexCharts(genderContainer, this.#genderChartOptions('gender-chart'));
       genderChart.render();
     }
   }
 
-  #participantsChartOptions() {
+  #participantsChartOptions(chartId) {
     const newcomers = this.firstRuns;
     const personalBestsExcludingNewcomers = Math.max(0, this.personalBests - this.firstRuns);
     const others = Math.max(0, this.totalResults - this.firstRuns - personalBestsExcludingNewcomers);
@@ -106,11 +107,11 @@ export default class DashboardCharts {
     if (series.length === 0) {
       return this.#emptyChartOptions(this.t.participants, this.t.noData);
     } else {
-      return this.#basePieChartOptions(`${this.t.totalResults}: ${this.totalResults}`, series, labels);
+      return this.#basePieChartOptions(`${this.t.totalResults}: ${this.totalResults}`, series, labels, chartId);
     }
   }
 
-  #volunteersChartOptions() {
+  #volunteersChartOptions(chartId) {
     const newcomerVolunteers = this.firstTimeVolunteers;
     const experiencedVolunteers = Math.max(0, this.totalVolunteers - this.firstTimeVolunteers);
 
@@ -129,11 +130,11 @@ export default class DashboardCharts {
     if (series.length === 0) {
       return this.#emptyChartOptions(this.t.volunteers, this.t.noData);
     } else {
-      return this.#basePieChartOptions(`${this.t.totalVolunteers}: ${this.totalVolunteers}`, series, labels);
+      return this.#basePieChartOptions(`${this.t.totalVolunteers}: ${this.totalVolunteers}`, series, labels, chartId);
     }
   }
 
-  #genderChartOptions() {
+  #genderChartOptions(chartId) {
     const series = [this.totalMale, this.totalFemale];
     const labels = [this.t.male, this.t.female];
     if (this.totalUnknown) {
@@ -141,32 +142,29 @@ export default class DashboardCharts {
       labels.push(this.t.unknown);
     }
 
-    return this.#basePieChartOptions(this.t.gender, series, labels);
+    return this.#basePieChartOptions(this.t.gender, series, labels, chartId);
   }
 
-  #basePieChartOptions(title, series, labels) {
-    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+  #basePieChartOptions(title, series, labels, chartId) {
+    const { theme, colors, foreColor, legend } = apexThemeOptions();
+    const layout = chartLayoutPadding();
 
     return {
+      ...layout,
       chart: {
-        height: 200,
+        ...layout.chart,
+        ...(chartId ? { id: chartId } : {}),
+        height: 220,
         type: 'pie',
         background: 'transparent',
+        foreColor,
       },
       series: series,
       labels: labels,
-      title: {
-        text: title,
-        align: 'center',
-        margin: 10,
-        offsetY: 10,
-        style: {
-          fontSize: '1rem',
-          fontWeight: 600,
-        }
-      },
+      title: chartTitleOptions(title),
       legend: {
-        position: 'bottom'
+        position: 'bottom',
+        ...legend,
       },
       dataLabels: {
         enabled: true
@@ -176,15 +174,16 @@ export default class DashboardCharts {
           formatter: val => `${val} ${this.t.people}`
         }
       },
-      theme: {
-        mode: isDark ? 'dark' : 'light',
-        palette: isDark ? 'palette5' : 'palette2'
-      }
+      colors,
+      theme,
+      fill: {
+        opacity: 0.92,
+      },
     };
   }
 
   #emptyChartOptions(title, message) {
-    const baseOptions = this.#basePieChartOptions(title, [1], [message]);
+    const baseOptions = this.#basePieChartOptions(title, [1], [message], null);
 
     return {
       ...baseOptions,

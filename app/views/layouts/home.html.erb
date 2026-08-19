@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="<%= current_locale %>" data-controller="theme">
+<html lang="<%= current_locale %>" data-controller="theme" class="">
   <%= render '/head' %>
-  <body class="m-0 d-flex flex-column">
-    <%= render 'navbars/top' %>
-    <%= render '/flash' %>
-    <%= yield %>
-    <div class="spacer mb-n5"></div>
-    <%= render 'navbars/bottom' %>
+  <body class="flex min-h-screen flex-col">
+    <div data-controller="sheet search-overlay" class="flex min-h-screen flex-1 flex-col">
+      <%= render Ui::TopBarComponent.new %>
+      <% if alert %>
+        <div class="px-4 pt-4">
+          <%= render Ui::FlashComponent.new(message: alert, type: :alert) %>
+        </div>
+      <% elsif notice %>
+        <div class="px-4 pt-4">
+          <%= render Ui::FlashComponent.new(message: notice, type: :notice) %>
+        </div>
+      <% end %>
+      <main class="flex-1">
+        <%= yield %>
+      </main>
+      <%= render Layout::FooterComponent.new %>
+      <div class="bottom-nav-spacer shrink-0 lg:hidden" aria-hidden="true"></div>
+      <%= render 'navbars/sheet' %>
+      <%= render Ui::BottomNavComponent.new %>
+    </div>
+    <%= render '/cookie_consent' unless policy_already_accepted? %>
   </body>
 </html>

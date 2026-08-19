@@ -6,10 +6,13 @@ export default class extends Controller {
   static targets = ['results'];
 
   connect() {
-    if (this.hasResultsTarget) {
-      const athleteCharts = new AthleteCharts(document.querySelectorAll('tr.result'));
-      athleteCharts.render(this.resultsTarget);
-    }
+    if (!this.hasResultsTarget) return;
+
+    const rows = document.querySelectorAll('#panel-results tr.result');
+    if (rows.length === 0) return;
+
+    this.chart = new AthleteCharts(rows);
+    this.chart.render(this.resultsTarget);
   }
 
   disconnect() {

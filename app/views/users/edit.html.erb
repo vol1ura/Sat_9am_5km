@@ -1,238 +1,251 @@
-<%= turbo_frame_tag current_user do %>
-  <%= form_with model: current_user do |form| %>
-    <div class="d-flex flex-column" data-controller="form">
-      <div class="mt-3 rounded-3 p-3 bg-body-tertiary border">
-        <% is_user_with_saved_image = current_user.image.attached? && current_user.image.blob.persisted? %>
-        <% avatar_src = is_user_with_saved_image ? url_for(current_user.image.variant(:web)) : '/images/person.jpg' %>
-        <div class="d-flex align-items-center justify-content-between">
-          <% if is_user_with_saved_image %>
-            <div class="form-check form-switch">
-              <%= check_box_tag :delete_image, class: 'form-check-input', role: 'switch', 'data-action' => 'change->form#toggleBlock' %>
-              <%= label_tag :delete_image, t('.delete_image'), class: 'form-check-label' %>
-            </div>
-          <% end %>
-          <div data-form-target="input">
-            <div class="position-relative d-inline-block" role="button" data-action="click->form#openFileDialog">
+<% head_info :description, t('users.show.description', user_name: current_user.full_name) %>
+
+<div class="page-container page-container--narrow">
+  <%= render Ui::PageHeaderComponent.new(title: t('.title')) do |header| %>
+    <% header.with_actions do %>
+      <%= render Ui::ButtonComponent.new(variant: :ghost, size: :sm, href: user_path) do %>
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        <%= t '.cancel' %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= turbo_frame_tag current_user do %>
+    <%= form_with model: current_user, class: 'space-y-4' do |form| %>
+      <div data-controller="form" class="flex flex-col gap-4">
+        <%= render Ui::CardComponent.new do %>
+          <% is_user_with_saved_image = current_user.image.attached? && current_user.image.blob.persisted? %>
+          <% avatar_src = is_user_with_saved_image ? url_for(current_user.image.variant(:web)) : '/images/person.jpg' %>
+
+          <div class="flex flex-col items-center border-b border-line pb-5">
+            <div data-form-target="input">
+              <button type="button" class="group relative cursor-pointer rounded-full" data-action="click->form#openFileDialog">
+                <%=
+                  image_tag(
+                    avatar_src,
+                    class: 'avatar-100 block',
+                    data: { form_target: 'avatar' },
+                    alt: t('.change_photo'),
+                  )
+                %>
+                <span class="pointer-events-none absolute inset-0 flex items-center justify-center rounded-full bg-black/40 text-xs font-medium text-white opacity-70 transition-opacity group-hover:opacity-100">
+                  <%= t '.change_photo' %>
+                </span>
+              </button>
               <%=
-                image_tag(
-                  avatar_src,
-                  class: 'avatar-100 object-fit-cover d-block',
-                  data: { form_target: 'avatar' },
-                  alt: t('.change_photo'),
+                form.file_field(
+                  :image,
+                  class: 'hidden',
+                  accept: 'image/jpeg,image/png,image/webp',
+                  data: { action: 'change->form#previewAvatar', form_target: 'fileInput' },
                 )
               %>
-              <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded-circle bg-dark bg-opacity-25 text-white fw-light pe-none">
-                <%= t '.change_photo' %>
-              </div>
             </div>
-            <%=
-              form.file_field(
-                :image,
-                class: 'd-none',
-                accept: 'image/jpeg,image/png,image/webp',
-                data: { action: 'change->form#previewAvatar', form_target: 'fileInput' },
-              )
-            %>
-            <div class="invalid-feedback d-block"><%= current_user.errors[:image].join(', ') %></div>
+            <% if is_user_with_saved_image %>
+              <div class="mt-3">
+                <label class="<%= form_toggle_label_class %>" for="delete_image">
+                <%= check_box_tag :delete_image,
+                      class: form_toggle_input_class,
+                      id: 'delete_image',
+                      data: { action: 'change->form#toggleBlock' } %>
+                <span class="form-toggle__switch" aria-hidden="true"></span>
+                <span class="form-toggle__label"><%= t('.delete_image') %></span>
+              </label>
+              </div>
+            <% end %>
+            <% if current_user.errors[:image].any? %>
+              <p class="mt-2 text-sm text-danger"><%= current_user.errors[:image].join(', ') %></p>
+            <% end %>
           </div>
-        </div>
-        <div class="mt-1">
-          <%= form.label :first_name, class: 'col-form-label text-capitalize fw-light' %>
-          <% is_first_name_invalid = current_user.errors.key?(:first_name) %>
-          <%= form.text_field :first_name, class: "form-control #{'is-invalid' if is_first_name_invalid}", required: true %>
-          <% if is_first_name_invalid %>
-            <div class="invalid-feedback d-block"><%= current_user.errors[:first_name].join(', ') %></div>
-          <% end %>
-        </div>
-        <div class="mt-2">
-          <%= form.label :last_name, class: 'form-label text-capitalize fw-light' %>
-          <% is_last_name_invalid = current_user.errors.key?(:last_name) %>
-          <%= form.text_field :last_name, class: "form-control #{'is-invalid' if is_last_name_invalid}", required: true %>
-          <% if is_last_name_invalid %>
-            <div class="invalid-feedback d-block"><%= current_user.errors[:last_name].join(', ') %></div>
-          <% end %>
-        </div>
-      </div>
-      <div class="mt-3 rounded-3 p-3 bg-body-tertiary border">
-        <h5 class="fw-light"><%= t '.email' %></h5>
-        <% if current_user.unconfirmed_email %>
-          <p class="mb-2 text-warning-emphasis">
-            <i class="fa-solid fa-clock me-2"></i>
-            <%= t '.email_pending', email: current_user.unconfirmed_email %>
-          </p>
-          <p class="mb-2 text-body-secondary small"><%= t '.email_hint' %></p>
-          <%= link_to t('.resend_confirmation'),
-                new_user_confirmation_path(user: { email: current_user.unconfirmed_email }),
-                class: 'btn btn-sm btn-outline-secondary mb-2',
-                data: { turbo: false } %>
-        <% elsif current_user.email %>
-          <p class="mb-2 text-success">
-            <i class="fa-solid fa-circle-check me-2"></i>
-            <%= t '.email_confirmed', email: current_user.email %>
-          </p>
-        <% else %>
-          <p class="mb-2 text-body-secondary"><%= t '.email_not_set' %></p>
+
+          <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <%= form.label :first_name, class: 'mb-1 block text-sm font-medium text-ink' %>
+              <% is_first_name_invalid = current_user.errors.key?(:first_name) %>
+              <%= form.text_field :first_name, class: form_input_class(invalid: is_first_name_invalid), required: true %>
+              <% if is_first_name_invalid %>
+                <p class="mt-1 text-sm text-danger"><%= current_user.errors[:first_name].join(', ') %></p>
+              <% end %>
+            </div>
+            <div>
+              <%= form.label :last_name, class: 'mb-1 block text-sm font-medium text-ink' %>
+              <% is_last_name_invalid = current_user.errors.key?(:last_name) %>
+              <%= form.text_field :last_name, class: form_input_class(invalid: is_last_name_invalid), required: true %>
+              <% if is_last_name_invalid %>
+                <p class="mt-1 text-sm text-danger"><%= current_user.errors[:last_name].join(', ') %></p>
+              <% end %>
+            </div>
+          </div>
         <% end %>
 
-        <% is_email_invalid = current_user.errors.key?(:email) %>
-        <div class="mt-2">
+        <%= render Ui::CardComponent.new do %>
+          <h2 class="mb-3 font-display text-base font-semibold text-ink"><%= t '.email' %></h2>
+          <% if current_user.unconfirmed_email %>
+            <p class="mb-3 text-sm text-warning">
+              <i class="fa-solid fa-clock me-2" aria-hidden="true"></i>
+              <%= t '.email_pending', email: current_user.unconfirmed_email %>
+            </p>
+            <%= render Ui::ButtonComponent.new(
+                  variant: :secondary,
+                  size: :sm,
+                  href: new_user_confirmation_path(user: { email: current_user.unconfirmed_email }),
+                  class: 'mb-3',
+                  data: { turbo: false },
+                ) { t('.resend_confirmation') } %>
+          <% elsif current_user.email %>
+            <p class="mb-3 text-sm text-success">
+              <i class="fa-solid fa-circle-check me-2" aria-hidden="true"></i>
+              <%= t '.email_confirmed', email: current_user.email %>
+            </p>
+          <% else %>
+            <p class="mb-3 text-sm text-ink-muted"><%= t '.email_not_set' %></p>
+          <% end %>
+
+          <% is_email_invalid = current_user.errors.key?(:email) %>
           <%= form.email_field :email,
-                class: "form-control #{'is-invalid' if is_email_invalid}",
+                class: form_input_class(invalid: is_email_invalid),
                 autocomplete: :email,
                 inputmode: :email,
                 placeholder: 'Email',
                 value: current_user.unconfirmed_email || current_user.email %>
           <% if is_email_invalid %>
-            <div class="invalid-feedback d-block"><%= current_user.errors[:email].join(', ') %></div>
+            <p class="mt-1 text-sm text-danger"><%= current_user.errors[:email].join(', ') %></p>
           <% end %>
-          <div class="form-text"><%= t '.email_hint' %></div>
-        </div>
-      </div>
-      <%= form.fields_for :athlete do |athlete_form| %>
-        <div class="mt-2">
-          <%= athlete_form.label :event_id, class: 'form-label text-capitalize fw-light' %>
-          <%= athlete_form.combobox :event_id, search_events_path, id: 'event-id-box' %>
-        </div>
-        <div class="mt-2">
-          <%= athlete_form.label :club_id, class: 'form-label text-capitalize fw-light' %>
-          <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
-        </div>
-        <div class="mt-2">
-          <h5 class="fw-light"><%= t '.personal_bests' %></h5>
-          <div class="input-group mt-2">
-            <span class="input-group-text">
-              <%= tag.i class: ['fa-solid fa-stopwatch', current_user.athlete.errors.key?(:personal_best_10k) ? 'text-danger' : 'text-secondary'] %>
-            </span>
-            <%=
-              athlete_form.text_field :personal_best_10k,
-              id: 'personal-record-10k-input',
-              class: 'form-control',
-              pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
-              placeholder: t('.personal_best_format_hint'),
-              inputmode: 'numeric',
-              data: { controller: 'time-input' }
-            %>
-            <span class="input-group-text text-primary font-monospace">&nbsp;&nbsp;<%= t '.personal_best_10k' %></span>
-          </div>
-          <div class="input-group mt-2">
-            <span class="input-group-text">
-              <%= tag.i class: ['fa-solid fa-stopwatch', current_user.athlete.errors.key?(:personal_best_half_marathon) ? 'text-danger' : 'text-secondary'] %>
-            </span>
-            <%=
-              athlete_form.text_field :personal_best_half_marathon,
-              class: 'form-control',
-              pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
-              placeholder: t('.personal_best_format_hint'),
-              inputmode: 'numeric',
-              data: { controller: 'time-input' }
-            %>
-            <span class="input-group-text text-primary font-monospace"><%= t '.personal_best_half_marathon' %></span>
-          </div>
-          <div class="input-group mt-2">
-            <span class="input-group-text">
-              <%= tag.i class: ['fa-solid fa-stopwatch', current_user.athlete.errors.key?(:personal_best_marathon) ? 'text-danger' : 'text-secondary'] %>
-            </span>
-            <%=
-              athlete_form.text_field :personal_best_marathon,
-              class: 'form-control',
-              pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
-              placeholder: t('.personal_best_format_hint'),
-              inputmode: 'numeric',
-              data: { controller: 'time-input' }
-            %>
-            <span class="input-group-text text-primary font-monospace"><%= t '.personal_best_marathon' %></span>
-          </div>
-        </div>
-      <% end %>
-      <div class="mt-3 rounded-3 p-3 bg-warning-subtle border">
-        <h5 class="fw-light"><%= t '.emergency_contact' %></h5>
-        <div class="mb-2">
-          <% is_emergency_contact_name_invalid = current_user.errors.key?(:emergency_contact_name) %>
-          <%= form.label :emergency_contact_name, class: 'form-label text-capitalize fw-light' %>
-          <%= form.text_field :emergency_contact_name, class: "form-control #{'is-invalid' if is_emergency_contact_name_invalid}" %>
-          <% if is_emergency_contact_name_invalid %>
-            <div class="invalid-feedback d-block"><%= current_user.errors[:emergency_contact_name].join(', ') %></div>
-          <% end %>
-        </div>
+          <p class="mt-2 text-sm text-ink-muted"><%= t '.email_hint' %></p>
+        <% end %>
 
-        <div>
-          <% is_emergency_contact_phone_invalid = current_user.errors.key?(:emergency_contact_phone) %>
-          <%= form.label :emergency_contact_phone, class: 'form-label text-capitalize fw-light' %>
-          <%= form.text_field :emergency_contact_phone, class: "form-control #{'is-invalid' if is_emergency_contact_phone_invalid}", placeholder: t('.phone_placeholder') %>
-          <% if is_emergency_contact_phone_invalid %>
-            <div class="invalid-feedback d-block"><%= current_user.errors[:emergency_contact_phone].join(', ') %></div>
-          <% end %>
-        </div>
-      </div>
-
-      <% if current_user.telegram_id %>
-        <div class="mt-3 rounded-3 p-3 bg-body-tertiary border">
-          <h5 class="fw-light"><%= t '.promotions.title' %></h5>
-          <% if current_user.phone %>
-            <% User::AVAILABLE_PROMOTIONS.each do |name| %>
-              <div class="form-check form-switch mt-3">
-                <%= check_box_tag 'user[promotions][]',
-                                  name,
-                                  current_user.promotions.include?(name),
-                                  class: 'form-check-input',
-                                  role: 'switch',
-                                  'data-action' => 'change->form#showPromotionModal',
-                                  'data-promotion-key' => name %>
-                <%= label_tag 'user[promotions][]', t(".promotions.#{name}"), class: 'form-check-label' %>
+        <%= form.fields_for :athlete do |athlete_form| %>
+          <%= render Ui::CardComponent.new do %>
+            <div class="space-y-4">
+              <div>
+                <%= athlete_form.label :event_id, class: 'mb-1 block text-sm font-medium text-ink' %>
+                <%= athlete_form.combobox :event_id, search_events_path, id: 'event-id-box' %>
               </div>
-            <% end %>
-            <div class="mt-4 form-check form-switch">
-              <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
-              <%= label_tag :delete_phone, t('.delete_phone', phone: human_phone(current_user.phone)), class: 'form-check-label text-danger' %>
+              <div>
+                <%= athlete_form.label :club_id, class: 'mb-1 block text-sm font-medium text-ink' %>
+                <%= athlete_form.combobox :club_id, search_clubs_path, id: 'club-id-box' %>
+              </div>
             </div>
-          <% else %>
-            <p><%= t '.add_phone_html', link: 'https://t.me/sat9am5kmbot' %></p>
+
+            <h3 class="mb-3 mt-6 font-display text-base font-semibold text-ink"><%= t '.personal_bests' %></h3>
+            <div class="space-y-3">
+              <% [
+                [:personal_best_10k, t('.personal_best_10k')],
+                [:personal_best_half_marathon, t('.personal_best_half_marathon')],
+                [:personal_best_marathon, t('.personal_best_marathon')],
+              ].each do |field, label| %>
+                <div class="flex items-stretch overflow-hidden rounded-md border border-line">
+                  <span class="inline-flex items-center border-r border-line bg-surface-elevated px-3">
+                    <%= tag.i class: ['fa-solid fa-stopwatch', current_user.athlete.errors.key?(field) ? 'text-danger' : 'text-ink-muted'], aria: { hidden: true } %>
+                  </span>
+                  <%= athlete_form.text_field field,
+                        class: form_input_class(extra: 'rounded-none border-0 focus-visible:ring-0'),
+                        pattern: '[0-9]{2}:[0-9]{2}:[0-9]{2}',
+                        placeholder: t('.personal_best_format_hint'),
+                        inputmode: 'numeric',
+                        data: { controller: 'time-input' } %>
+                  <span class="inline-flex items-center whitespace-nowrap border-l border-line bg-surface-elevated px-3 text-sm font-medium text-brand"><%= label %></span>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <%= render Ui::CardComponent.new(class: 'border-warning/25 bg-warning-subtle/40') do %>
+          <h2 class="mb-4 font-display text-base font-semibold text-ink"><%= t '.emergency_contact' %></h2>
+          <div class="space-y-4">
+            <div>
+              <% is_emergency_contact_name_invalid = current_user.errors.key?(:emergency_contact_name) %>
+              <%= form.label :emergency_contact_name, class: 'mb-1 block text-sm font-medium text-ink' %>
+              <%= form.text_field :emergency_contact_name, class: form_input_class(invalid: is_emergency_contact_name_invalid) %>
+              <% if is_emergency_contact_name_invalid %>
+                <p class="mt-1 text-sm text-danger"><%= current_user.errors[:emergency_contact_name].join(', ') %></p>
+              <% end %>
+            </div>
+            <div>
+              <% is_emergency_contact_phone_invalid = current_user.errors.key?(:emergency_contact_phone) %>
+              <%= form.label :emergency_contact_phone, class: 'mb-1 block text-sm font-medium text-ink' %>
+              <%= form.text_field :emergency_contact_phone,
+                    class: form_input_class(invalid: is_emergency_contact_phone_invalid),
+                    placeholder: t('.phone_placeholder') %>
+              <% if is_emergency_contact_phone_invalid %>
+                <p class="mt-1 text-sm text-danger"><%= current_user.errors[:emergency_contact_phone].join(', ') %></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if current_user.telegram_id %>
+          <%= render Ui::CardComponent.new do %>
+            <h2 class="mb-3 font-display text-base font-semibold text-ink"><%= t '.promotions.title' %></h2>
+            <% if current_user.phone %>
+              <div class="space-y-3">
+                <% User::AVAILABLE_PROMOTIONS.each do |name| %>
+                  <label class="<%= form_toggle_label_class %>" for="user_promotions_<%= name %>">
+                    <%= check_box_tag 'user[promotions][]',
+                          name,
+                          current_user.promotions.include?(name),
+                          class: form_toggle_input_class,
+                          id: "user_promotions_#{name}",
+                          data: { action: 'change->form#showPromotionModal', promotion_key: name } %>
+                    <span class="form-toggle__switch" aria-hidden="true"></span>
+                    <span class="form-toggle__label"><%= t(".promotions.#{name}") %></span>
+                  </label>
+                <% end %>
+              </div>
+              <div class="mt-4 border-t border-line pt-4">
+                <label class="<%= form_toggle_label_class %>" for="delete_phone">
+                  <%= check_box_tag :delete_phone, class: form_toggle_input_class, id: 'delete_phone' %>
+                  <span class="form-toggle__switch" aria-hidden="true"></span>
+                  <span class="form-toggle__label text-danger"><%= t('.delete_phone', phone: human_phone(current_user.phone)) %></span>
+                </label>
+              </div>
+            <% else %>
+              <p class="text-sm text-ink-muted"><%= t '.add_phone_html', link: 'https://t.me/sat9am5kmbot' %></p>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <%= render Ui::CardComponent.new do %>
+          <h2 class="mb-3 font-display text-base font-semibold text-ink"><%= t '.notifications.title' %></h2>
+          <div class="space-y-3">
+            <% User::NOTIFICATION_TYPES.each do |type| %>
+              <label class="<%= form_toggle_label_class %>" for="notification_<%= type %>">
+                <%=
+                  check_box_tag(
+                    'enabled_notifications[]',
+                    type,
+                    !current_user.notification_disabled?(type),
+                    class: form_toggle_input_class,
+                    id: "notification_#{type}",
+                  )
+                %>
+                <span class="form-toggle__switch" aria-hidden="true"></span>
+                <span class="form-toggle__label"><%= t(".notifications.#{type}") %></span>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="flex flex-col gap-2 sm:flex-row sm:justify-start">
+          <%= render Ui::ButtonComponent.new(variant: :primary, type: 'submit') do %>
+            <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
+            <%= t '.save' %>
+          <% end %>
+          <%= render Ui::ButtonComponent.new(variant: :ghost, href: user_path) do %>
+            <%= t '.cancel' %>
           <% end %>
         </div>
-      <% end %>
 
-      <div class="mt-3 rounded-3 p-3 bg-body-tertiary border">
-        <h5 class="fw-light"><%= t '.notifications.title' %></h5>
-        <% User::NOTIFICATION_TYPES.each do |type| %>
-          <div class="form-check form-switch mt-3">
-            <%=
-              check_box_tag(
-                'enabled_notifications[]',
-                type,
-                !current_user.notification_disabled?(type),
-                class: 'form-check-input',
-                role: 'switch',
-                id: "notification_#{type}",
-              )
-            %>
-            <%= label_tag "notification_#{type}", t(".notifications.#{type}"), class: 'form-check-label' %>
+        <%= render Ui::ModalComponent.new(id: 'promotionModal', size: :md) do |modal| %>
+          <% modal.with_title { t('.promotion_terms') } %>
+          <div id="promotionTerms"></div>
+          <div class="mt-4 flex justify-end gap-2">
+            <%= render Ui::ButtonComponent.new(variant: :ghost, type: 'button', label: t('.disagree'), data: { action: 'dialog#close' }) %>
+            <%= render Ui::ButtonComponent.new(variant: :primary, type: 'button', label: t('.agree'), data: { action: 'form#agreeToPromotion' }) %>
           </div>
         <% end %>
       </div>
-
-      <div class="my-5">
-        <button class="me-1 btn btn-outline-primary" type="submit" title="<%= t '.save' %>">
-          <i class="fa-regular fa-circle-down"></i> <%= t '.save' %>
-        </button>
-        <%= link_to user_path, class: 'btn btn-light float-end' do %>
-          <i class="fa-regular fa-circle-xmark"></i> <%= t '.cancel' %>
-        <% end %>
-      </div>
-
-      <div class="modal fade" id="promotionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="promotionModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="promotionModalLabel"><%= t '.promotion_terms' %></h5>
-            </div>
-            <div class="modal-body" id="promotionTerms"></div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= t '.disagree' %></button>
-              <button type="button" class="btn btn-primary" data-action="form#agreeToPromotion"><%= t '.agree' %></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

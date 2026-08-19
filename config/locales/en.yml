@@ -483,6 +483,7 @@ en:
     show_more: Show all
     show_less: Collapse
   common:
+    close: Close
     without_token: NO TOKEN (create)
     without_name: NO NAME
     nobody: UNKNOWN
@@ -560,18 +561,27 @@ en:
   navbars:
     top:
       s95: Saturday 9 AM 5 KM
+      s95_line1: Saturday
+      s95_line2: 9 AM
+      s95_line3: 5 KM
       events: Events
-      map: Events Map
       results: Results
       recent_results: Recent Runs
       1_january: January 1
       club_ratings: Club Ratings
       top_results: Top Results
-      top_athletes: Participant Rankings
-      top_volunteers: Volunteer Rankings
+      athletes: Athletes
+      volunteers: Volunteers
       friends_protocol: Friends Protocol
       duels: Friendly Duels
-      badges: Personal Badges
+      badges: Awards
+      movement: Movement
+      sections: Sections
+      about_us: About us
+      more: More
+      theme: Theme
+      ratings: Ratings
+      ratings_hub: All ratings
       profile: Profile
       settings: Settings
       admin_panel: Admin Panel
@@ -583,7 +593,7 @@ en:
     about_s95:
       title: About S95
       rules: Rules
-      about: S95 Movement
+      about: About us
       donation: Support the Project
       feedback: Feedback
       joining: Want to Start S95?
@@ -605,7 +615,7 @@ en:
       registration_date: Registration date
       address: Moscow, kv-l 114A Volzhsky Boulevard, bld. 3, apt. 366
       headings:
-        explore: Explore
+        sections: Sections
         connect: Get in touch
   articles:
     index:
@@ -891,6 +901,14 @@ en:
         event: Event
       friends: Friends
       followers: Following
+      profile_sections: Profile sections
+      tab_results: Results
+      tab_stats: Statistics
+      tab_social: Friends
+      tab_volunteering: Volunteering
+      statistics: Statistics
+      no_trophies: No trophies yet
+      volunteering_chart: Volunteering chart
       duels: Duels
       duels_description: Compare your results with friends on the same runs
       view_duels: View Duels
@@ -904,6 +922,7 @@ en:
       prediction_hint: Prediction is based on the best result in S95 runs over the last 3 months. Result is only possible with training appropriate for the specific distance
       no_personal_bests: Personal bests not specified.
       no_predictions: Insufficient data for prediction (need at least 3 results in the last 3 months)
+      recent_results_chart: Recent results
     statistics:
       volunteering_chart:
         h_index: h-index
@@ -979,6 +998,8 @@ en:
       about_badges: We try to come up with badges to reward both fast runners and regular participants who regularly attend our events.
       achievements: Achievements
       thematic: Thematic
+      archive: Archive
+      empty: No badges yet
     badge:
       event_date: 'Event Date: %{date}'
     show:
@@ -989,6 +1010,11 @@ en:
       club: Club
       result: Time
       received_date: Received Date
+      date: Date
+      holders: Holders
+      holders_count:
+        one: '%{count} holder'
+        other: '%{count} holders'
       soon: Soon!
       nobody_has: No one has this badge yet.
   clubs:
@@ -1133,6 +1159,7 @@ en:
     field:
       edit: Edit
     edit:
+      title: Edit profile
       delete_image: Delete Photo
       delete_phone: Delete Phone %{phone}
       add_phone_html: 'To participate in partner programs, you need to add your phone number. Phone binding and verification are done using the <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a> with the <code>/phone</code> command'

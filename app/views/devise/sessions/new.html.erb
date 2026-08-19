@@ -1,19 +1,42 @@
 <% head_info :description, t('.description') %>
 
-<div class="row justify-content-center">
-  <div class="col-md-6 col-lg-4">
-    <h1><%= head_info :title, t('.title') %></h1>
-    <p><%= t '.email_login_description' %></p>
-    <%= form_with url: email_sessions_path, method: :post, data: { turbo: false } do |f| %>
-      <div class="input-group mb-3">
-        <%= f.email_field :email, autofocus: true, autocomplete: :email, inputmode: :email, class: 'form-control', placeholder: t('.email_placeholder'), required: true %>
-        <%= f.submit t('.email_submit'), class: 'btn btn-outline-primary' %>
+<div class="page-container page-container--narrow">
+  <%= render Ui::PageHeaderComponent.new(
+        title: head_info(:title, t('.title')),
+        description: t('.email_login_description'),
+      ) %>
+
+  <div class="flex flex-col gap-4">
+    <%= render Ui::CardComponent.new do %>
+      <%= form_with url: email_sessions_path, method: :post, data: { turbo: false }, class: 'space-y-4' do |f| %>
+        <div>
+          <%= f.label :email, class: 'mb-1 block text-sm font-medium text-ink' %>
+          <%= f.email_field :email,
+                autofocus: true,
+                autocomplete: :email,
+                inputmode: :email,
+                class: form_input_class,
+                placeholder: t('.email_placeholder'),
+                required: true %>
+        </div>
+
+        <div class="flex flex-col gap-2 sm:flex-row sm:justify-start">
+          <%= render Ui::ButtonComponent.new(variant: :secondary, type: 'submit') do %>
+            <i class="fa-solid fa-link" aria-hidden="true"></i>
+            <%= t('.email_submit') %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= render Ui::CardComponent.new do %>
+      <p class="mb-4 text-sm leading-relaxed text-ink-muted"><%= t '.email_registration_description' %></p>
+      <div class="flex flex-col gap-2 sm:flex-row sm:justify-start">
+        <%= render Ui::ButtonComponent.new(variant: :primary, href: new_user_registration_path) do %>
+          <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+          <%= t('.email_registration_link') %>
+        <% end %>
       </div>
     <% end %>
-    <hr class="my-4">
-    <p><%= t '.email_registration_description' %></p>
-    <p class="text-center">
-      <%= link_to t('.email_registration_link'), new_user_registration_path, class: 'btn btn-outline-danger' %>
-    </p>
   </div>
 </div>

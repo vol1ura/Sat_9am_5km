@@ -51,7 +51,7 @@ export default class extends Controller {
   #showError() {
     if (this.hasContainerTarget) {
       this.containerTarget.innerHTML = `
-        <div class="alert alert-warning" role="alert">
+        <div class="rounded-md border border-warning/30 bg-warning-subtle px-4 py-3 text-warning-fg" role="alert">
           <i class="fa fa-exclamation-triangle"></i>
           ${this.errorValue}
         </div>

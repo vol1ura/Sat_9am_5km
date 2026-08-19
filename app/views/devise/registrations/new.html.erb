@@ -1,86 +1,113 @@
 <% head_info :title, t('.title') %>
 <% head_info :description, t('.description') %>
 
-<div class="row justify-content-center">
-  <div class="col-md-6 col-lg-4">
-    <h1><%= t '.title' %></h1>
-    <p class="text-body-secondary"><%= t '.subtitle' %></p>
+<div class="page-container page-container--narrow">
+  <%= render Ui::PageHeaderComponent.new(
+        title: t('.title'),
+        description: t('.subtitle'),
+      ) %>
 
-    <%= form_for resource, as: resource_name, url: user_registration_path, data: { turbo: false } do |f| %>
-      <% if resource.errors[:base].any? %>
-        <ul>
+  <div class="flex flex-col gap-4">
+    <%= form_for resource,
+          as: resource_name,
+          url: user_registration_path,
+          html: { data: { turbo: false } } do |f| %>
+      <div class="flex flex-col gap-4">
+    <% if resource.errors[:base].any? %>
+      <div class="rounded-lg border border-danger/25 bg-danger-subtle/40 px-4 py-3" role="alert">
+        <ul class="space-y-1 text-sm text-danger">
           <% resource.errors[:base].each do |message| %>
-            <li class="text-danger"><%= message %></li>
+            <li><%= message %></li>
           <% end %>
         </ul>
-      <% end %>
-
-      <div class="mb-3">
-        <%= f.label :last_name, class: 'form-label text-capitalize' %>
-        <% last_name_invalid = resource.errors.key?(:last_name) %>
-        <%= f.text_field :last_name, autofocus: true, autocomplete: 'family-name',
-              class: "form-control #{'is-invalid' if last_name_invalid}", required: true %>
-        <% if last_name_invalid %>
-          <div class="invalid-feedback d-block"><%= resource.errors[:last_name].join(', ') %></div>
-        <% end %>
       </div>
+    <% end %>
 
-      <div class="mb-3">
-        <%= f.label :first_name, class: 'form-label text-capitalize' %>
-        <% first_name_invalid = resource.errors.key?(:first_name) %>
-        <%= f.text_field :first_name, autocomplete: 'given-name',
-              class: "form-control #{'is-invalid' if first_name_invalid}", required: true %>
-        <% if first_name_invalid %>
-          <div class="invalid-feedback d-block"><%= resource.errors[:first_name].join(', ') %></div>
-        <% end %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :email, class: 'form-label' %>
-        <span class="text-body-secondary small"><%= t '.email_hint' %></span>
-        <% email_invalid = resource.errors.key?(:email) %>
-        <%= f.email_field :email, autocomplete: :email, inputmode: :email,
-              class: "form-control #{'is-invalid' if email_invalid}", required: true %>
-        <% if email_invalid %>
-          <div class="invalid-feedback d-block"><%= resource.errors[:email].join(', ') %></div>
-        <% end %>
-      </div>
-
-      <%= f.fields_for :athlete do |af| %>
-        <div class="mb-3">
-          <%= af.label :gender, class: 'form-label text-capitalize' %>
-          <% gender_invalid = resource.athlete.errors.key?(:gender) %>
-          <div class="d-flex gap-4">
-            <% Athlete.genders.each do |label, value| %>
-              <div class="form-check">
-                <%= af.radio_button :gender, value,
-                      class: "form-check-input #{'is-invalid' if gender_invalid}", required: true %>
-                <%= af.label "gender_#{value}", human_gender(label), class: 'form-check-label' %>
-              </div>
-            <% end %>
-          </div>
-          <% if gender_invalid %>
-            <div class="invalid-feedback d-block"><%= resource.athlete.errors[:gender].join(', ') %></div>
+    <%= render Ui::CardComponent.new do %>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <%= f.label :last_name, class: 'mb-1 block text-sm font-medium text-ink' %>
+          <% last_name_invalid = resource.errors.key?(:last_name) %>
+          <%= f.text_field :last_name,
+                autofocus: true,
+                autocomplete: 'family-name',
+                class: form_input_class(invalid: last_name_invalid),
+                required: true %>
+          <% if last_name_invalid %>
+            <p class="mt-1 text-sm text-danger"><%= resource.errors[:last_name].join(', ') %></p>
           <% end %>
         </div>
-      <% end %>
 
-      <div class="mb-3 form-check">
-        <% policy_invalid = resource.errors.key?(:policy_accepted) %>
-        <%= f.check_box :policy_accepted,
-              class: "form-check-input #{'is-invalid' if policy_invalid}", required: true %>
-        <%= f.label :policy_accepted, class: 'form-check-label' do %>
-          <%= t('.policy_accepted_html',
-                 policy_link: link_to(t('.policy_link'), page_path(page: 'privacy-policy'), target: '_blank', rel: 'noopener'),
-                 rules_link: link_to(t('.rules_link'), page_path(page: 'rules'), target: '_blank', rel: 'noopener')) %>
-        <% end %>
-        <% if policy_invalid %>
-          <div class="invalid-feedback d-block"><%= resource.errors[:policy_accepted].join(', ') %></div>
-        <% end %>
+        <div>
+          <%= f.label :first_name, class: 'mb-1 block text-sm font-medium text-ink' %>
+          <% first_name_invalid = resource.errors.key?(:first_name) %>
+          <%= f.text_field :first_name,
+                autocomplete: 'given-name',
+                class: form_input_class(invalid: first_name_invalid),
+                required: true %>
+          <% if first_name_invalid %>
+            <p class="mt-1 text-sm text-danger"><%= resource.errors[:first_name].join(', ') %></p>
+          <% end %>
+        </div>
       </div>
+    <% end %>
 
-      <div class="my-4">
-        <%= f.submit t('.submit'), class: 'btn btn-primary' %>
+    <%= render Ui::CardComponent.new do %>
+      <h2 class="mb-3 font-display text-base font-semibold text-ink"><%= User.human_attribute_name(:email) %></h2>
+      <p class="mb-3 text-sm text-ink-muted"><%= t '.email_hint' %></p>
+      <% email_invalid = resource.errors.key?(:email) %>
+      <%= f.email_field :email,
+            autocomplete: :email,
+            inputmode: :email,
+            class: form_input_class(invalid: email_invalid),
+            required: true %>
+      <% if email_invalid %>
+        <p class="mt-1 text-sm text-danger"><%= resource.errors[:email].join(', ') %></p>
+      <% end %>
+    <% end %>
+
+    <%= f.fields_for :athlete do |af| %>
+      <%= render Ui::CardComponent.new do %>
+        <%= af.label :gender, class: 'mb-3 block text-sm font-medium text-ink' %>
+        <% gender_invalid = resource.athlete.errors.key?(:gender) %>
+        <div class="flex flex-wrap gap-4">
+          <% Athlete.genders.each do |label, value| %>
+            <div class="flex items-center gap-2">
+              <%= af.radio_button :gender, value,
+                    class: "size-4 border-line text-accent focus:ring-focus-ring #{'border-danger' if gender_invalid}",
+                    required: true %>
+              <%= af.label "gender_#{value}", human_gender(label), class: 'text-sm text-ink' %>
+            </div>
+          <% end %>
+        </div>
+        <% if gender_invalid %>
+          <p class="mt-2 text-sm text-danger"><%= resource.athlete.errors[:gender].join(', ') %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= render Ui::CardComponent.new(class: 'border-line bg-surface-elevated/60') do %>
+      <% policy_invalid = resource.errors.key?(:policy_accepted) %>
+      <%= f.label :policy_accepted, class: form_toggle_label_class(invalid: policy_invalid) do %>
+        <%= f.check_box :policy_accepted, class: form_toggle_input_class, required: true %>
+        <span class="form-toggle__switch" aria-hidden="true"></span>
+        <span class="form-toggle__label">
+          <%= t('.policy_accepted_html',
+                 policy_link: link_to(t('.policy_link'), page_path(page: 'privacy-policy'), target: '_blank', rel: 'noopener', class: 'text-brand hover:text-accent'),
+                 rules_link: link_to(t('.rules_link'), page_path(page: 'rules'), target: '_blank', rel: 'noopener', class: 'text-brand hover:text-accent')) %>
+        </span>
+      <% end %>
+      <% if policy_invalid %>
+        <p class="mt-2 text-sm text-danger"><%= resource.errors[:policy_accepted].join(', ') %></p>
+      <% end %>
+    <% end %>
+
+    <div class="flex flex-col gap-2 sm:flex-row sm:justify-start">
+      <%= render Ui::ButtonComponent.new(variant: :primary, type: 'submit') do %>
+        <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+        <%= t('.submit') %>
+      <% end %>
+    </div>
       </div>
     <% end %>
 

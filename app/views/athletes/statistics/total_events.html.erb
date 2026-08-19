@@ -1,24 +1,24 @@
 <%= turbo_frame_tag 'total_events' do %>
-  <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+  <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
     <% if @results_by_event.present? %>
-      <div class="col">
-        <table class="table caption-top">
-          <caption><%= t('.finishes') %></caption>
+      <div class="data-table-inset min-w-0">
+        <table class="data-table data-table--compact min-w-[20rem] caption-top">
+          <caption class="mb-2 font-semibold text-ink"><%= t('.finishes') %></caption>
           <thead>
             <tr>
-              <th class="fs-small-sm"><%= t('.event') %></th>
-              <th class="fs-small-sm"><%= t('.count') %></th>
-              <th class="fs-small-sm"><%= t('.best_position') %></th>
-              <th class="fs-small-sm"><%= t('.best_time') %></th>
+              <th><%= t('.event') %></th>
+              <th class="cell-num"><%= t('.count') %></th>
+              <th class="cell-num"><%= t('.best_position') %></th>
+              <th class="cell-num-strong"><%= t('.best_time') %></th>
             </tr>
           </thead>
-          <tbody class="table-group-divider">
+          <tbody>
             <% @results_by_event.each do |result| %>
               <tr>
                 <td><%= result.event_name %></td>
-                <td><%= result.results_count %></td>
-                <td><%= result.best_position %></td>
-                <td><%= Result.time_string result.best_time %></td>
+                <td class="cell-num"><%= result.results_count %></td>
+                <td class="cell-num"><%= result.best_position %></td>
+                <td class="cell-num-strong"><%= Result.time_string result.best_time %></td>
               </tr>
             <% end %>
           </tbody>
@@ -27,22 +27,22 @@
     <% end %>
 
     <% if @volunteering_by_event.present? %>
-      <div class="col">
-        <table class="table caption-top">
-          <caption><%= t('.volunteering') %></caption>
+      <div class="data-table-inset min-w-0">
+        <table class="data-table data-table--compact min-w-[16rem] caption-top">
+          <caption class="mb-2 font-semibold text-ink"><%= t('.volunteering') %></caption>
           <thead>
             <tr>
-              <th class="fs-small-sm"><%= t('.event') %></th>
-              <th class="fs-small-sm"><%= t('.count') %></th>
-              <th class="fs-small-sm"><%= t('.roles') %></th>
+              <th><%= t('.event') %></th>
+              <th class="cell-num"><%= t('.count') %></th>
+              <th class="cell-num"><%= t('.roles') %></th>
             </tr>
           </thead>
-          <tbody class="table-group-divider">
+          <tbody>
             <% @volunteering_by_event.each do |volunteering| %>
               <tr>
                 <td><%= volunteering.event_name %></td>
-                <td><%= volunteering.vol_count %></td>
-                <td><%= volunteering.unique_roles_count %></td>
+                <td class="cell-num"><%= volunteering.vol_count %></td>
+                <td class="cell-num"><%= volunteering.unique_roles_count %></td>
               </tr>
             <% end %>
           </tbody>

@@ -27,6 +27,7 @@ export default class extends Controller {
       const clusterGroup = createEventClusterGroup();
       events.forEach((event) => addEventMarker(clusterGroup, event, this.buttonLabelValue));
       this.map.addLayer(clusterGroup);
+      requestAnimationFrame(() => this.map.invalidateSize());
     } catch (error) {
       console.error('Error loading events data:', error);
     }

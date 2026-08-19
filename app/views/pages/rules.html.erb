@@ -1,84 +1,68 @@
 <% head_info :description, t('.description') %>
-<h1><%= head_info :title, t('navbars.about_s95.rules') %></h1>
-<ul class="list-group list-group-flush">
-  <li class="list-group-item"><%= t '.register_with_bot_html', link: new_user_registration_path %></li>
-  <li class="list-group-item"><%= t '.come_to_s95_html', link: events_path %></li>
-  <li class="list-group-item"><%= t '.scan_barcodes' %></li>
-  <li class="list-group-item"><%= t '.return_position_card' %></li>
-</ul>
 
-<h2 class="mt-3"><%= t '.faq' %></h2>
-<div class="accordion accordion-flush" id="accordionFAQ">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-heading1">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
-        <%= t '.about_markers.question' %>
-      </button>
-    </h2>
-    <div id="flush-collapse1" class="accordion-collapse collapse" aria-labelledby="flush-heading1" data-bs-parent="#accordionFAQ">
-      <div class="accordion-body">
-        <%= t '.about_markers.answer' %>
-      </div>
+<div class="page-container my-6 md:my-8">
+  <article class="article">
+    <header class="article__header">
+      <h1><%= head_info :title, t('navbars.about_s95.rules') %></h1>
+    </header>
+
+    <div class="article__body">
+      <section>
+        <ul class="divide-y divide-line border-y border-line">
+          <li class="py-3"><%= t '.register_with_bot_html', link: new_user_registration_path %></li>
+          <li class="py-3"><%= t '.come_to_s95_html', link: events_path %></li>
+          <li class="py-3"><%= t '.scan_barcodes' %></li>
+          <li class="py-3"><%= t '.return_position_card' %></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><%= t '.faq' %></h2>
+        <div class="divide-y divide-line border-y border-line">
+          <details class="group py-1">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-2 py-3 font-medium text-ink [&::-webkit-details-marker]:hidden">
+              <%= t '.about_markers.question' %>
+              <i class="fa-solid fa-chevron-down text-ink-muted transition-transform group-open:rotate-180"></i>
+            </summary>
+            <div class="pb-3 text-ink-muted"><%= t '.about_markers.answer' %></div>
+          </details>
+          <details class="group py-1">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-2 py-3 font-medium text-ink [&::-webkit-details-marker]:hidden">
+              <%= t '.about_registering.question' %>
+              <i class="fa-solid fa-chevron-down text-ink-muted transition-transform group-open:rotate-180"></i>
+            </summary>
+            <div class="pb-3 text-ink-muted"><%= t '.about_registering.answer_html', link: new_user_registration_path %></div>
+          </details>
+          <details class="group py-1">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-2 py-3 font-medium text-ink [&::-webkit-details-marker]:hidden">
+              <%= t '.about_participation.question' %>
+              <i class="fa-solid fa-chevron-down text-ink-muted transition-transform group-open:rotate-180"></i>
+            </summary>
+            <div class="pb-3 text-ink-muted"><%= t '.about_participation.answer' %></div>
+          </details>
+          <details class="group py-1">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-2 py-3 font-medium text-ink [&::-webkit-details-marker]:hidden">
+              <%= t '.about_barcode.question' %>
+              <i class="fa-solid fa-chevron-down text-ink-muted transition-transform group-open:rotate-180"></i>
+            </summary>
+            <div class="pb-3 text-ink-muted"><%= t '.about_barcode.answer' %></div>
+          </details>
+          <details class="group py-1">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-2 py-3 font-medium text-ink [&::-webkit-details-marker]:hidden">
+              <%= t '.about_things.question' %>
+              <i class="fa-solid fa-chevron-down text-ink-muted transition-transform group-open:rotate-180"></i>
+            </summary>
+            <div class="pb-3 text-ink-muted"><%= t '.about_things.answer' %></div>
+          </details>
+          <details class="group py-1">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-2 py-3 font-medium text-ink [&::-webkit-details-marker]:hidden">
+              <%= t '.personal_info.question' %>
+              <i class="fa-solid fa-chevron-down text-ink-muted transition-transform group-open:rotate-180"></i>
+            </summary>
+            <div class="pb-3 text-ink-muted"><%= t '.personal_info.answer_html' %></div>
+          </details>
+        </div>
+      </section>
     </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-heading2">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
-        <%= t '.about_registering.question' %>
-      </button>
-    </h2>
-    <div id="flush-collapse2" class="accordion-collapse collapse" aria-labelledby="flush-heading2" data-bs-parent="#accordionFAQ">
-      <div class="accordion-body">
-        <%= t '.about_registering.answer_html', link: new_user_registration_path %>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-heading3">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
-        <%= t '.about_participation.question' %>
-      </button>
-    </h2>
-    <div id="flush-collapse3" class="accordion-collapse collapse" aria-labelledby="flush-heading3" data-bs-parent="#accordionFAQ">
-      <div class="accordion-body">
-        <%= t '.about_participation.answer' %>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-heading4">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
-        <%= t '.about_barcode.question' %>
-      </button>
-    </h2>
-    <div id="flush-collapse4" class="accordion-collapse collapse" aria-labelledby="flush-heading4" data-bs-parent="#accordionFAQ">
-      <div class="accordion-body">
-        <%= t '.about_barcode.answer' %>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-heading5">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
-        <%= t '.about_things.question' %>
-      </button>
-    </h2>
-    <div id="flush-collapse5" class="accordion-collapse collapse" aria-labelledby="flush-heading5" data-bs-parent="#accordionFAQ">
-      <div class="accordion-body">
-        <%= t '.about_things.answer' %>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-heading6">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
-        <%= t '.personal_info.question' %>
-      </button>
-    </h2>
-    <div id="flush-collapse6" class="accordion-collapse collapse" aria-labelledby="flush-heading6" data-bs-parent="#accordionFAQ">
-      <div class="accordion-body">
-        <%= t '.personal_info.answer_html' %>
-      </div>
-    </div>
-  </div>
+  </article>
 </div>

@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "volunteer-#{idx}" do %>
   <% if volunteer %>
-    <span class="d-inline-flex align-items-center gap-2 flex-nowrap w-100">
+    <span class="inline-flex w-full flex-nowrap items-center gap-2">
       <% if can?(:manage, volunteer) && can?(:read, activity) %>
         <%= link_to volunteer.name, edit_volunteer_path(volunteer, idx:) %>
       <% else %>

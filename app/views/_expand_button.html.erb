@@ -1,13 +1,15 @@
-<div class="d-flex justify-content-center">
-  <button
-    class="btn btn-outline-primary"
-    type="button"
-    data-controller="button"
-    data-action="click->button#setName"
-    data-button-show-value="<%= t 'button.show_more' %>"
-    data-button-hide-value="<%= t 'button.show_less' %>"
-    data-bs-toggle="collapse"
-    data-bs-target=".multi-collapse"
-    aria-expanded="false">
-  </button>
+<div class="flex justify-center mt-2">
+  <%=
+    render(Ui::ButtonComponent.new(
+      variant: :secondary,
+      type: 'button',
+      data: {
+        controller: 'collapse',
+        action: 'click->collapse#toggle',
+        collapse_show_value: t('button.show_more'),
+        collapse_hide_value: t('button.show_less'),
+      },
+      aria: { expanded: 'false' },
+    ))
+  %>
 </div>

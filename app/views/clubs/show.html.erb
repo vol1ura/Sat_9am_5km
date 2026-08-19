@@ -1,22 +1,18 @@
 <% head_info :og_image, url_for(@club.logo) if @club.logo.attached? %>
 <% head_info :description, t('.description', club: @club.name) %>
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to t('.main_page'), root_path %>
-    </li>
-    <li class="breadcrumb-item">
-      <%= link_to t('.clubs'), clubs_path %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @club.name %></li>
+<nav aria-label="breadcrumb" class="mb-4 text-sm text-ink-muted">
+  <ol class="flex flex-wrap items-center gap-1">
+    <li><%= link_to t('.main_page'), root_path, class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/']"><%= link_to t('.clubs'), clubs_path, class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/'] text-ink" aria-current="page"><%= @club.name %></li>
   </ol>
 </nav>
 
-<div class="d-flex">
-  <h1 class="mt-2 me-1 text-break"><%= head_info :title, @club.name %></h1>
+<div class="flex">
+  <h1 class="me-1 mt-2 break-words"><%= head_info :title, @club.name %></h1>
   <% if @club.logo.attached? %>
-    <div class="ms-auto float-end my-2">
+    <div class="ms-auto my-2">
       <%= image_tag @club.logo.variant(:web), class: 'img-club', alt: @club.name %>
     </div>
   <% end %>
@@ -26,51 +22,53 @@
   <%= sanitized_text @club.description %>
 </div>
 
-<ul class="list-group list-group-flush">
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @athletes.load.size %></span>
+<ul class="divide-y divide-line border-y border-line">
+  <li class="flex items-center gap-3 py-3">
+    <%= render Ui::BadgeComponent.new(variant: :brand) { @athletes.load.size } %>
     <%= t '.athletes_count' %>
   </li>
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @total_results_count %></span>
+  <li class="flex items-center gap-3 py-3">
+    <%= render Ui::BadgeComponent.new(variant: :brand) { @total_results_count } %>
     <%= t '.results_count' %>
   </li>
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><%= @total_volunteering_count %></span>
+  <li class="flex items-center gap-3 py-3">
+    <%= render Ui::BadgeComponent.new(variant: :brand) { @total_volunteering_count } %>
     <%= t '.volunteering_count' %>
   </li>
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><i class="fa-solid fa-trophy"></i></span>
+  <li class="flex items-center gap-3 py-3">
+    <%= render Ui::BadgeComponent.new(variant: :brand) { tag.i(class: 'fa-solid fa-trophy') } %>
     <%= link_to t('.best_results'), results_ratings_path(club_id: @club.id) %>
   </li>
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill me-3"><i class="fa-solid fa-running"></i></span>
+  <li class="flex items-center gap-3 py-3">
+    <%= render Ui::BadgeComponent.new(variant: :brand) { tag.i(class: 'fa-solid fa-running') } %>
     <%= link_to t('.last_week_activities'), last_week_club_path(@club.slug) %>
   </li>
 </ul>
 
-<table class="table table-striped">
-  <thead>
-    <tr data-controller="table-head">
+<div class="data-table-shell mt-4">
+  <table class="data-table">
+    <thead>
+      <tr data-controller="table-head">
       <th class="sortable" data-action="click->table-head#toggleSort">
         <span><%= t '.name' %></span>
         <span class="sort-arrow" aria-hidden="true"><i class="fa fa-caret-down"></i></span>
       </th>
-      <th class="sortable" data-action="click->table-head#toggleSort">
+      <th class="sortable cell-center" data-action="click->table-head#toggleSort">
         <span><%= t '.activities' %></span>
         <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
       </th>
-      <th class="hidden-on-phone sortable" data-action="click->table-head#toggleSort">
+      <th class="sortable hidden-on-phone cell-center" data-action="click->table-head#toggleSort">
         <span><%= t '.volunteering' %></span>
         <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
       </th>
-      <th class="sortable" data-action="click->table-head#toggleSort">
+      <th class="sortable cell-num" data-action="click->table-head#toggleSort">
         <span><%= t '.personal_best' %></span>
         <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
       </th>
     </tr>
   </thead>
-  <tbody class="table-group-divider">
+  <tbody>
     <%= render partial: 'athlete', collection: @athletes, cached: ->(athlete) { locale_cache_key(athlete) } %>
   </tbody>
 </table>
+</div>

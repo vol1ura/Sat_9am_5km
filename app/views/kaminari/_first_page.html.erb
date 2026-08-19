@@ -1,0 +1,7 @@
+<span class="first">
+  <% unless current_page.first? %>
+    <%= link_to url, remote: remote, aria: { label: 'First page' } do %>
+      <i class="fa-solid fa-angles-left" aria-hidden="true"></i>
+    <% end %>
+  <% end %>
+</span>

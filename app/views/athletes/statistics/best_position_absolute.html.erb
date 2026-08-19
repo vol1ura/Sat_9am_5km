@@ -1,12 +1,12 @@
 <%= turbo_frame_tag 'best_position_absolute' do %>
-  <ul class="list-group list-group-flush">
+  <ul class="divide-y divide-line border-y border-line">
     <% @pb_by_position.each do |pb| %>
-      <li class="list-group-item">
-        <div class="hstack">
-          <div class="acc-li-s">
+      <li class="py-3">
+        <div class="flex items-center gap-3">
+          <div class="min-w-[150px] md:min-w-[200px]">
             <%= link_to l(pb.date), pb.activity, data: { turbo: false } %>
           </div>
-          <div class="mx-3">
+          <div>
             <%= pb.time_string %>
           </div>
           <div>
