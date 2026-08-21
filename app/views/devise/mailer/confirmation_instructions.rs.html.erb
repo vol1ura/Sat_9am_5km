@@ -2,10 +2,10 @@
 
 <p>Možete potvrditi svoj email (<%= @email %>) prateći sledeći link:</p>
 
-<p><%= link_to 'potvrdi moj nalog', confirmation_url(@resource, confirmation_token: @token, host: 's95.rs') %></p>
+<p><%= link_to 'potvrdi moj nalog', confirmation_url(@resource, confirmation_token: @token) %></p>
 
 <p>
-  Dobili ste ovaj e-mail jer je vaša adresa uneta prilikom registracije na web stranici <%= link_to 'Sat 9am 5km', root_url(host: 's95.rs') %>.
+  Dobili ste ovaj e-mail jer je vaša adresa uneta prilikom registracije na web stranici <%= link_to 'S95', root_url %>.
   Ako to niste bili vi, samo zanemarite datu poruku.
 </p>
 
