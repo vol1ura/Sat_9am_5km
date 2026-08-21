@@ -8,7 +8,7 @@ module Users
 
       if user&.confirmed?
         Users::AuthToken.new(user).generate!
-        AuthLinkMailer.login_link(user).deliver_later
+        AuthLinkMailer.with(host: request.host).login_link(user).deliver_later
         redirect_to new_user_session_path, notice: t('.link_sent')
       elsif !user
         redirect_to new_user_registration_path(user: { email: }), alert: t('.not_registered')
