@@ -7,8 +7,8 @@ RSpec.describe '/email_sessions' do
     context 'with a confirmed user' do
       it 'sends login link and redirects to sign in' do
         expect do
-          post email_sessions_url, params: { email: user.email }
-        end.to have_enqueued_mail(AuthLinkMailer, :login_link)
+          post email_sessions_url, params: { email: user.email }, headers: { host: 's95.by' }
+        end.to have_enqueued_mail(AuthLinkMailer, :login_link).with(an_instance_of(User), params: { host: 's95.by' })
 
         expect(response).to redirect_to(new_user_session_path)
         expect(flash[:notice]).to eq(I18n.t('users.email_sessions.create.link_sent'))

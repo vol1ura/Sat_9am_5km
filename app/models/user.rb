@@ -73,7 +73,8 @@ class User < ApplicationRecord
   private
 
   def send_devise_notification(notification, *)
-    devise_mailer.send(notification, self, *).deliver_later
+    mailer = MailerHost.host ? devise_mailer.with(host: MailerHost.host) : devise_mailer
+    mailer.send(notification, self, *).deliver_later
   end
 
   def update_athlete_name
