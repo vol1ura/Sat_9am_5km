@@ -2,26 +2,39 @@
 <% head_info :description, t('pages.support.description') %>
 
 <% if top_level_domain == :ru %>
-  <div id="82bc0e81-4b54-4c1c-8108-bcc02c69c49a" data-type="mixplat-page" class="m-n3"></div>
+  <div class="page-container my-6 md:my-8">
+    <div id="82bc0e81-4b54-4c1c-8108-bcc02c69c49a" data-type="mixplat-page" class="-mx-4 md:mx-0"></div>
+  </div>
 
   <script src="https://widgets.donation.ru/wloader/def0c638-b08c-4bdc-8426-63377e5ca86f/wloader.js" async></script>
 <% else %>
-  <h1><%= t 'pages.support.title' %></h1>
-  <p><%= t 'pages.support.how_to_support_html' %></p>
-  <p><%= t 'pages.support.about_volunteering' %></p>
+  <div class="page-container my-6 md:my-8">
+    <article class="article">
+      <header class="article__header">
+        <h1><%= t 'pages.support.title' %></h1>
+      </header>
 
-  <h4><%= t 'pages.support.site_development' %></h4>
-  <p>
-    <%=
-      t(
-        'pages.support.add_new_issues_html',
-        github_repo: 'https://github.com/vol1ura/Sat_9am_5km',
-        github_issues: 'https://github.com/vol1ura/Sat_9am_5km/issues',
-      )
-    %>
-  </p>
-  <p><%= t 'pages.support.how_to_contribute' %></p>
-  <p><%= t 'pages.support.small_changes' %></p>
+      <div class="article__body">
+        <p><%= t 'pages.support.how_to_support_html' %></p>
+        <p><%= t 'pages.support.about_volunteering' %></p>
 
-  <p><%= t 'pages.support.best_regards' %></p>
+        <section>
+          <h3><%= t 'pages.support.site_development' %></h3>
+          <p>
+            <%=
+              t(
+                'pages.support.add_new_issues_html',
+                github_repo: 'https://github.com/vol1ura/Sat_9am_5km',
+                github_issues: 'https://github.com/vol1ura/Sat_9am_5km/issues',
+              )
+            %>
+          </p>
+          <p><%= t 'pages.support.how_to_contribute' %></p>
+          <p><%= t 'pages.support.small_changes' %></p>
+        </section>
+
+        <p><%= t 'pages.support.best_regards' %></p>
+      </div>
+    </article>
+  </div>
 <% end %>

@@ -1,0 +1,22 @@
+<dialog
+  id="<%= @id %>"
+  data-controller="dialog"
+  class="fixed inset-0 z-50 m-auto w-[calc(100%-2rem)] <%= size_class %> rounded-xl border border-line bg-surface p-0 text-ink shadow-xl backdrop:bg-black/40 open:animate-in"
+  aria-labelledby="<%= @id %>-title"
+>
+  <div class="flex items-center justify-between border-b border-line px-4 py-3">
+    <h2 id="<%= @id %>-title" class="font-display text-lg font-semibold">
+      <%= title %>
+    </h2>
+    <%=
+      render(Ui::IconButtonComponent.new(
+        icon: 'xmark',
+        label: t('common.close'),
+        data: { action: 'dialog#close' },
+      ))
+    %>
+  </div>
+  <div class="p-4">
+    <%= content %>
+  </div>
+</dialog>

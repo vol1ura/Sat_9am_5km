@@ -1,52 +1,51 @@
 <% head_info :description, t('.description') %>
-<h1><%= head_info :title, t(".#{@rating_type}.title") %></h1>
-<p><%= t '.description' %></p>
+
+<%= render 'hub_tabs' %>
+
+<%= render Ui::PageHeaderComponent.new(
+  title: head_info(:title, t(".#{@rating_type}.title")),
+  description: t('.description'),
+) %>
 
 <div
   data-controller="table"
   data-table-url-value="/ratings/table"
   data-table-params-value="order,type">
 
-  <ul class="nav nav-pills nav-justified mb-3 hidden-scroll-x" role="tablist">
+  <div class="mb-4 flex gap-1 overflow-x-auto pb-1" role="tablist">
     <% RatingsController::RATINGS.each do |order| %>
-      <li class="nav-item" role="presentation">
-        <%=
-          button_tag(
-            class: "nav-link #{'active' if order == @order} px-2 text-nowrap",
-            data: {
-              table_target: 'tab',
-              action: 'click->table#switchTab',
-              order: order,
-              type: @rating_type,
-              description_title: t(".#{order}"),
-              description_text: t(".#{@rating_type}.description.#{order}"),
-            },
-          ) do
-        %>
-          <%= t ".#{order}" %>
-        <% end %>
-      </li>
+      <%= button_tag t(".#{order}"),
+                     type: 'button',
+                     class: "whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium #{order == @order ? 'active bg-accent text-accent-fg' : 'bg-surface-elevated text-ink-muted hover:text-ink'}",
+                     data: {
+                       table_target: 'tab',
+                       action: 'click->table#switchTab',
+                       order: order,
+                       type: @rating_type,
+                       description_title: t(".#{order}"),
+                       description_text: t(".#{@rating_type}.description.#{order}"),
+                     } %>
     <% end %>
-  </ul>
-
-  <div class="ratings-description">
-    <div class="alert alert-light mb-2">
-      <h2 class="h4 mb-1 mt-0 alert-heading" data-table-target="descriptionTitle"><%= t(".#{@order}") %></h2>
-      <p class="mb-0" data-table-target="descriptionText"><%= t(".#{@rating_type}.description.#{@order}") %></p>
-    </div>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th><%= t '.name' %></th>
-        <th><%= t '.total' %></th>
-        <th class="hidden-on-phone"><%= t '.club' %></th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider" data-table-target="content">
-      <%= render 'loading_indicator', colspan: 4 %>
-    </tbody>
-  </table>
+  <div class="mb-4 rounded-lg border border-line bg-surface-elevated p-4">
+    <h2 class="mb-1 font-display text-lg font-semibold text-ink" data-table-target="descriptionTitle"><%= t(".#{@order}") %></h2>
+    <p class="mb-0 text-sm text-ink-muted" data-table-target="descriptionText"><%= t(".#{@rating_type}.description.#{@order}") %></p>
+  </div>
+
+  <div class="data-table-shell">
+    <table class="data-table sm:table-fixed">
+      <thead>
+        <tr>
+          <th class="cell-num-muted w-9 shrink-0 sm:w-12">#</th>
+          <th class="min-w-0"><%= t '.name' %></th>
+          <th class="cell-num-strong w-14 shrink-0 sm:w-28"><%= t '.total' %></th>
+          <th class="hidden-on-phone w-48"><%= t '.club' %></th>
+        </tr>
+      </thead>
+      <tbody data-table-target="content">
+        <%= render 'loading_indicator', colspan: 4 %>
+      </tbody>
+    </table>
+  </div>
 </div>

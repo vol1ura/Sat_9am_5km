@@ -1,17 +1,28 @@
-<ul class="fa-ul">
-  <% if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <li class="pb-2"><span class="fa-li"><i class="fa-solid fa-user-plus"></i></span>
-      <%= link_to t('.registration'), new_user_registration_path %>
-    </li>
-  <% end %>
-  <% if controller_name != 'sessions' %>
-    <li><span class="fa-li"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
-      <%= link_to t('.sign_in'), new_user_session_path %>
-    </li>
-  <% end %>
-  <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-    <li><span class="fa-li"><i class="fa-solid fa-check-double"></i></span>
-      <%= link_to t('.confirmation'), new_user_confirmation_path %>
-    </li>
-  <% end %>
-</ul>
+<% links = [] %>
+
+<% if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <% links << { href: new_user_registration_path, icon: 'fa-user-plus', label: t('.registration') } %>
+<% end %>
+
+<% if controller_name != 'sessions' %>
+  <% links << { href: new_user_session_path, icon: 'fa-arrow-right-to-bracket', label: t('.sign_in') } %>
+<% end %>
+
+<% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <% links << { href: new_user_confirmation_path, icon: 'fa-check-double', label: t('.confirmation') } %>
+<% end %>
+
+<% if links.any? %>
+  <nav class="rounded-lg border border-line bg-surface-elevated/60 p-4">
+    <ul class="space-y-2">
+      <% links.each do |link| %>
+        <li>
+          <%= link_to link[:href], class: 'inline-flex items-center gap-2 text-sm text-brand transition-colors hover:text-accent' do %>
+            <i class="fa-solid <%= link[:icon] %> w-4 shrink-0" aria-hidden="true"></i>
+            <%= link[:label] %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+<% end %>

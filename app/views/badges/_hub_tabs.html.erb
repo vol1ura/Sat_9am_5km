@@ -1,0 +1,8 @@
+<%= render Ui::PageSubnavComponent.new(
+  aria_label: t('navbars.top.badges'),
+  items: [
+    { label: t('badges.index.achievements'), href: achievements_badges_path, active: action_name == 'achievements' },
+    { label: t('badges.index.thematic'), href: funruns_badges_path, active: action_name == 'funruns' },
+    { label: t('badges.index.archive'), href: archive_badges_path, active: action_name == 'archive' },
+  ],
+) %>

@@ -1,11 +1,11 @@
 <%= turbo_frame_tag 'volunteering_chart' do %>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <div class="hstack">
-        <div class="acc-li-s"><%= t '.h_index' %></div>
-        <div class="mx-3"><%= @h_index %></div>
+  <ul class="divide-y divide-line border-y border-line">
+    <li class="py-3">
+      <div class="flex items-center gap-3">
+        <div class="min-w-[150px] md:min-w-[200px]"><%= t '.h_index' %></div>
+        <div><%= @h_index %></div>
       </div>
-      <div class="text-muted small">
+      <div class="text-sm text-ink-muted">
         <%= t '.h_index_explanation' %>
         <% if @h_index_missing_roles.positive? %>
           <br>
@@ -13,10 +13,10 @@
         <% end %>
       </div>
     </li>
-    <li class="list-group-item">
-      <div class="hstack">
-        <div class="acc-li-s"><%= t '.volunteering_coefficient' %></div>
-        <div class="mx-3">
+    <li class="py-3">
+      <div class="flex items-center gap-3">
+        <div class="min-w-[150px] md:min-w-[200px]"><%= t '.volunteering_coefficient' %></div>
+        <div>
           <% if @total_results.zero? %>
             <i class="fa-solid fa-infinity"></i>
           <% else %>
@@ -24,13 +24,13 @@
           <% end %>
         </div>
       </div>
-      <div class="text-muted small">
+      <div class="text-sm text-ink-muted">
         <%= t '.volunteering_coefficient_explanation' %>
       </div>
     </li>
   </ul>
-  <div class="mt-2 d-flex flex-wrap justify-content-around" data-controller="volunteer">
-    <table class="d-none">
+  <div class="mt-2 flex flex-wrap justify-around" data-controller="volunteer">
+    <table class="hidden">
       <%
         history_stats = @volunteering
           .where(activity: { date: 5.months.ago.beginning_of_month.. })
@@ -52,7 +52,7 @@
         <% end %>
       </tbody>
     </table>
-    <table class="d-none">
+    <table class="hidden">
       <tbody>
         <%
           @role_counts
@@ -75,8 +75,8 @@
         <% end %>
       </tbody>
     </table>
-    <div class="col-12 col-md-10 col-xl-8" data-volunteer-target="chart"></div>
-    <div class="col-12 col-md-10 col-xl-8 mt-4">
+    <div class="w-full max-w-3xl" data-volunteer-target="chart"></div>
+    <div class="mt-4 w-full max-w-3xl">
       <div
         class="mt-2"
         data-volunteer-target="hchart"

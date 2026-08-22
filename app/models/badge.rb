@@ -16,6 +16,7 @@ class Badge < ApplicationRecord
   end
 
   validates :kind, :name, :conditions, presence: true
+  validates :received_date, presence: true, if: :funrun_kind?
 
   validates :image, attached: true,
                     content_type: %i[png webp],
@@ -47,6 +48,10 @@ class Badge < ApplicationRecord
         )
         .to_h
         .symbolize_keys
+  end
+
+  def self.funrun_archive_cutoff
+    2.years.ago.to_date
   end
 
   def self.ransackable_attributes(_auth_object = nil)

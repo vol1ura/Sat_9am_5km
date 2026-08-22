@@ -1,26 +1,26 @@
-<div class="d-flex justify-content-between align-items-center py-1 border-bottom border-light">
-  <div class="small">
+<div class="flex items-center justify-between border-b border-line border-light py-1">
+  <div class="text-sm">
     <strong><%= l duel[:date] %></strong>
-    <span class="text-muted">
-      <%= link_to duel[:event].name, event_path(duel[:event].code_name), class: 'text-decoration-none text-muted' %>
+    <span class="text-ink-muted">
+      <%= link_to duel[:event].name, event_path(duel[:event].code_name), class: 'text-ink-muted no-underline hover:text-brand' %>
     </span>
   </div>
 
-  <div class="d-flex align-items-center gap-2">
+  <div class="flex items-center gap-2">
     <% if duel[:winner] == :user %>
-      <span class="badge bg-success-subtle text-success">
+      <%= render Ui::BadgeComponent.new(variant: :success) do %>
         <i class="fa-solid fa-trophy me-1"></i>
         <%= t '.you_won' %>
-      </span>
+      <% end %>
     <% else %>
-      <span class="badge bg-danger-subtle text-danger">
+      <%= render Ui::BadgeComponent.new(variant: :danger) do %>
         <i class="fa-solid fa-flag me-1"></i>
         <%= t '.friend_won' %>
-      </span>
+      <% end %>
     <% end %>
 
     <% if duel[:time_difference] %>
-      <small class="text-muted">
+      <small class="text-ink-muted">
         <%= Result.time_string duel[:time_difference] %>
       </small>
     <% end %>

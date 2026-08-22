@@ -1,6 +1,7 @@
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
 import { srLocale } from 'charts/sr';
+import { apexThemeOptions, chartSparklineColors, chartTitleOptions } from 'charts/theme';
 
 const translations = {
   ru: {
@@ -33,12 +34,12 @@ export default class EventCharts {
 
   initializeCharts(resultsTarget, volunteersTarget) {
     if (resultsTarget) {
-      const chart = new ApexCharts(resultsTarget, this.#chartOptions('results-count-chart', this.t.participants, 'results_count'));
+      const chart = new ApexCharts(resultsTarget, this.#chartOptions('results-count-chart', this.t.participants, 'results_count', 0));
       chart.render();
     }
 
     if (volunteersTarget) {
-      const chart = new ApexCharts(volunteersTarget, this.#chartOptions('volunteers-count-chart', this.t.volunteers, 'volunteers_count'));
+      const chart = new ApexCharts(volunteersTarget, this.#chartOptions('volunteers-count-chart', this.t.volunteers, 'volunteers_count', 1));
       chart.render();
     }
   }
@@ -55,8 +56,9 @@ export default class EventCharts {
     return this.eventsData;
   }
 
-  #chartOptions(chartId, title, valueClass) {
-    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+  #chartOptions(chartId, title, valueClass, sparklineIndex) {
+    const { theme, foreColor, titleStyle } = apexThemeOptions();
+    const sparklineColor = chartSparklineColors()[sparklineIndex] ?? chartSparklineColors()[0];
 
     return {
       chart: {
@@ -65,15 +67,17 @@ export default class EventCharts {
         type: 'area',
         height: 200,
         background: 'transparent',
+        foreColor,
         sparkline: {
           enabled: true
         },
       },
       stroke: {
-        curve: 'straight'
+        curve: 'straight',
+        width: 2,
       },
       fill: {
-        opacity: 1,
+        opacity: 0.45,
       },
       series: [{
         name: this.t.count,
@@ -86,17 +90,9 @@ export default class EventCharts {
       xaxis: {
         type: 'datetime',
       },
-      colors: [isDark ? '#4a5568' : '#dce6ec'],
-      theme: {
-        mode: isDark ? 'dark' : 'light',
-      },
-      title: {
-        text: title,
-        offsetX: 30,
-        style: {
-          fontSize: '16px',
-        }
-      }
+      colors: [sparklineColor],
+      theme,
+      title: chartTitleOptions(title, { offsetX: 30, style: { fontSize: '16px', color: titleStyle.color } }),
     };
   }
 }

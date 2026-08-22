@@ -1,10 +1,10 @@
 <%= turbo_frame_tag 'total_trophies' do %>
-  <div class="d-flex justify-content-start flex-wrap">
+  <div class="flex flex-wrap items-start gap-1">
     <% if @total_results.positive? && @seconds_in_results.size < 60 %>
       <%= render 'athletes/minute_bingo', seconds_in_results_count: @seconds_in_results.size %>
     <% end %>
     <% @athlete.trophies.includes(badge: { image_attachment: :blob }).order('date ASC NULLS FIRST').each do |trophy| %>
-      <div class="p-1 trophy-container">
+      <div class="trophy-container p-1">
         <%
           trophy_link = link_to badge_path(trophy.badge), data: { turbo: false } do
             image_tag(

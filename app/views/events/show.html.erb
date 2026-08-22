@@ -1,17 +1,17 @@
 <% head_info :title, t('.title', place: @event.place, town: @event.town) %>
 <% head_info :description, strip_tags(@event.description).squish %>
 
-<div class="img-event-container">
-  <div class="img-event-shadow position-absolute top-0 start-0 w-100 px-3 d-flex justify-content-between align-items-start">
-    <h1 class="h2 fs-4 text-light"><%= @event.name %></h1>
+<div class="relative -mx-4 -mt-6 mb-3 sm:mt-0 sm:mx-0">
+  <div class="absolute inset-x-0 top-0 z-10 flex w-full items-start justify-between bg-gradient-to-b from-black/40 to-transparent px-3 py-2 sm:rounded-t-lg">
+    <h1 class="text-lg font-display font-semibold text-white sm:text-xl"><%= @event.name %></h1>
     <%= render 'favorite_events/heart', event: @event %>
   </div>
-  <%= event_main_image_tag @event, class: 'img-event', alt: t('.place'), title: @event.name %>
+  <%= event_main_image_tag @event, class: 'w-full rounded-none object-cover sm:rounded-lg', alt: t('.place'), title: @event.name %>
 </div>
 
 <% unless @event.active %>
-  <div class="alert alert-danger d-flex align-items-center" role="alert">
-    <i class="fa-solid fa-triangle-exclamation fs-1 me-1"></i>&nbsp;
+  <div class="mb-3 flex items-start gap-3 rounded-lg border border-danger/20 bg-danger-subtle px-4 py-3 text-danger" role="alert">
+    <i class="fa-solid fa-triangle-exclamation shrink-0 text-2xl"></i>
     <div>
       <strong><%= t '.attention' %></strong> <%= @total_activities.zero? ? t('.opening_soon') : t('.start_cancelled') %>
       <%= t '.inactivity_disclaimer_html', link: Rails.configuration.telegram[top_level_domain] %>
@@ -23,27 +23,27 @@
   </div>
 <% end %>
 
-<div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+<div class="mb-3 grid grid-cols-1 gap-3 md:grid-cols-2">
   <%= render 'card', header: t('.description') do %>
-    <div class="card-text"><%= sanitized_text @event.description %></div>
+    <div class="text-ink"><%= sanitized_text @event.description %></div>
   <% end %>
   <%= render 'card', header: t('.how_participate') do %>
-    <p class="card-text"><%= t '.about_participation' %></p>
+    <p><%= t '.about_participation' %></p>
     <% if @event.active && user_signed_in? %>
       <div id="going_to_form">
         <%= render 'going_tos/form' %>
       </div>
     <% else %>
-      <%= link_to t('.registration'), new_user_registration_path, class: 'btn btn-outline-danger' %>
+      <%= render Ui::ButtonComponent.new(variant: :danger, href: new_user_registration_path, label: t('.registration')) %>
     <% end %>
   <% end %>
   <%= render 'card', header: t('.volunteers') do %>
-    <p class="card-text"><%= t '.about_volunteers' %></p>
-    <%= link_to t('.show'), volunteering_event_path(@event.code_name), class: 'btn btn-outline-primary' %>
+    <p class="mb-2"><%= t '.about_volunteers' %></p>
+    <%= render Ui::ButtonComponent.new(variant: :secondary, href: volunteering_event_path(@event.code_name), label: t('.show')) %>
   <% end %>
   <%= render 'card', header: t('.our_contacts') do %>
-    <p class="card-text"><strong><%= t '.place' %>:</strong> <%= @event.place_description %></p>
-    <div class="d-flex flex-wrap">
+    <p class="mb-2"><strong><%= t '.place' %>:</strong> <%= @event.place_description %></p>
+    <div class="flex flex-wrap gap-2">
       <% @event.contacts.order(:contact_type).each do |contact| %>
         <% next if contact.contact_type == 'instagram' && top_level_domain == :ru %>
         <%
@@ -65,42 +65,46 @@
   <% end %>
   <% if @almost_jubilee_by_results.present? %>
     <%= render 'card', header: t('.jubilee_by_results') do %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col"><%= t '.athlete' %></th>
-            <th scope="col"><%= t '.results_count' %></th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <% @almost_jubilee_by_results.each do |athlete| %>
+      <div class="data-table-inset">
+        <table class="data-table data-table--compact">
+          <thead>
             <tr>
-              <td><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %></td>
-              <td><%= athlete.stats['results']['count'] %></td>
+              <th scope="col"><%= t '.athlete' %></th>
+              <th scope="col" class="cell-num-strong"><%= t '.results_count' %></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @almost_jubilee_by_results.each do |athlete| %>
+              <tr>
+                <td><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link font-semibold' %></td>
+                <td class="cell-num-strong"><%= athlete.stats['results']['count'] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     <% end %>
   <% end %>
   <% if @almost_jubilee_by_volunteers.present? %>
     <%= render 'card', header: t('.jubilee_by_volunteering') do %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col"><%= t '.athlete' %></th>
-            <th scope="col"><%= t '.volunteering_count' %></th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <% @almost_jubilee_by_volunteers.each do |athlete| %>
+      <div class="data-table-inset">
+        <table class="data-table data-table--compact">
+          <thead>
             <tr>
-              <th scope="row"><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link' %></th>
-              <td><%= athlete.stats['volunteers']['count'] %></td>
+              <th scope="col"><%= t '.athlete' %></th>
+              <th scope="col" class="cell-num-strong"><%= t '.volunteering_count' %></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @almost_jubilee_by_volunteers.each do |athlete| %>
+              <tr>
+                <td><%= link_to athlete.name, athlete_path(athlete), class: 'athlete-link font-semibold' %></td>
+                <td class="cell-num-strong"><%= athlete.stats['volunteers']['count'] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     <% end %>
   <% end %>
 </div>
@@ -113,73 +117,71 @@
 <% if @total_activities.zero? %>
   <p><%= t '.no_results_disclaimer' %></p>
 <% else %>
-  <div class="row row-cols-1">
-    <div class="col">
-      <table class="table table-striped table-centered">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th><%= t 'activities.index.date' %></th>
-            <th><span class="cropped-on-phone"><%= t 'activities.index.athletes' %></span></th>
-            <th><span class="cropped-on-phone"><%= t 'activities.index.volunteers' %></span></th>
-            <th class="hidden-on-phone"><%= t 'activities.index.first_man' %></th>
-            <th class="hidden-on-phone"><%= t 'activities.index.first_woman' %></th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <% if @event.live_results %>
-            <tr class="table-info">
-              <td><%= @total_activities.next %></td>
-              <td><%= link_to l(Date.current), live_event_path(@event.code_name) %></td>
-              <td colspan="2">
-                <%= link_to live_event_path(@event.code_name), class: 'text-decoration-none' do %>
-                  <span class="badge bg-danger">
-                    <i class="fa-solid fa-circle" style="animation: blink 0.8s infinite;"></i>
-                    <%= t '.live_streaming' %>
-                  </span>
+  <div class="data-table-shell">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="cell-num-muted">#</th>
+          <th><%= t 'activities.index.date' %></th>
+          <th class="cell-center"><span class="cropped-on-phone"><%= t 'activities.index.athletes' %></span></th>
+          <th class="cell-center"><span class="cropped-on-phone"><%= t 'activities.index.volunteers' %></span></th>
+          <th class="hidden-on-phone"><%= t 'activities.index.first_man' %></th>
+          <th class="hidden-on-phone"><%= t 'activities.index.first_woman' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @event.live_results %>
+          <tr class="bg-info-subtle">
+            <td class="cell-num-muted"><%= @total_activities.next %></td>
+            <td><%= link_to l(Date.current), live_event_path(@event.code_name) %></td>
+            <td colspan="2">
+              <%= link_to live_event_path(@event.code_name), class: 'no-underline' do %>
+                <%= render Ui::BadgeComponent.new(variant: :danger) do %>
+                  <i class="fa-solid fa-circle" style="animation: blink 0.8s infinite;"></i>
+                  <%= t '.live_streaming' %>
                 <% end %>
-              </td>
-              <td colspan="2" class="text-muted hidden-on-phone">
-                <small><%= t '.live_streaming_description' %></small>
-              </td>
-            </tr>
-          <% end %>
-          <%= render partial: 'activity', collection: @event.activities.published.order(date: :desc) %>
-        </tbody>
-      </table>
-      <%= render '/expand_button' if @total_activities > 15 %>
-    </div>
+              <% end %>
+            </td>
+            <td colspan="2" class="hidden-on-phone text-ink-muted">
+              <small><%= t '.live_streaming_description' %></small>
+            </td>
+          </tr>
+        <% end %>
+        <%= render partial: 'activity', collection: @event.activities.published.order(date: :desc) %>
+      </tbody>
+    </table>
   </div>
+  <%= render '/expand_button' if @total_activities > 15 %>
 
-  <div class="row row-cols-1 row-cols-md-2 g-3 mt-3">
+  <div class="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
     <%= render 'card', header: t('.event_totals') do %>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= @total_activities %></span>
+      <ul class="divide-y divide-line">
+        <li class="flex items-center gap-3 py-3">
+          <%= render Ui::BadgeComponent.new(variant: :brand) { @total_activities } %>
           <%= t '.totals.activities' %>
         </li>
-        <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= @results_count.sum { |_, v| v } %></span>
+        <li class="flex items-center gap-3 py-3">
+          <%= render Ui::BadgeComponent.new(variant: :brand) { @results_count.sum { |_, v| v } } %>
           <%= t '.totals.results' %>
         </li>
-        <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= @uniq_athletes_count %></span>
+        <li class="flex items-center gap-3 py-3">
+          <%= render Ui::BadgeComponent.new(variant: :brand) { @uniq_athletes_count } %>
           <%= t '.totals.athletes' %>
         </li>
-        <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= @volunteers_count.sum { |_, v| v } %></span>
+        <li class="flex items-center gap-3 py-3">
+          <%= render Ui::BadgeComponent.new(variant: :brand) { @volunteers_count.sum { |_, v| v } } %>
           <%= t '.totals.volunteering' %>
         </li>
-        <li class="list-group-item">
-          <span class="badge bg-primary rounded-pill"><%= @uniq_volunteers_count %></span>
+        <li class="flex items-center gap-3 py-3">
+          <%= render Ui::BadgeComponent.new(variant: :brand) { @uniq_volunteers_count } %>
           <%= t '.totals.uniq_volunteers' %>
         </li>
       </ul>
     <% end %>
     <%= render 'card', header: t('.event_dynamics') do %>
-      <div class="row row-cols-2" data-controller="event">
-        <div class="col" data-event-target="results"></div>
-        <div class="col" data-event-target="volunteers"></div>
+      <div class="grid grid-cols-2 gap-3" data-controller="event">
+        <div data-event-target="results"></div>
+        <div data-event-target="volunteers"></div>
       </div>
     <% end %>
   </div>

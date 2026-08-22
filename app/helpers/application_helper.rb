@@ -1,8 +1,31 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include NavigationHelper
+
   def locale_cache_key(*cache_key_parts)
     [I18n.locale, *cache_key_parts]
+  end
+
+  def form_input_class(invalid: false, extra: nil)
+    [
+      'w-full rounded-md border border-line bg-surface px-3 py-2 text-ink',
+      'placeholder:text-ink-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring',
+      ('border-danger' if invalid),
+      extra,
+    ].compact.join(' ')
+  end
+
+  def form_toggle_label_class(invalid: false, extra: nil)
+    [
+      'form-toggle',
+      ('form-toggle--invalid' if invalid),
+      extra,
+    ].compact.join(' ')
+  end
+
+  def form_toggle_input_class(extra: nil)
+    ['form-toggle__input', extra].compact.join(' ')
   end
 
   def head_info(tag, text)

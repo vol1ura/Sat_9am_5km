@@ -1,6 +1,7 @@
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
 import { srLocale } from 'charts/sr';
+import { apexThemeOptions, chartAccentColor, chartLayoutPadding } from 'charts/theme';
 
 const translations = {
   ru: {
@@ -31,7 +32,7 @@ export default class AthleteCharts {
       defaultLocale: this.currentLocale,
     };
 
-    const resultsChart = new ApexCharts(container, this.#resultsChartOptions(this.t.recentResults, { max_count: 15 }));
+    const resultsChart = new ApexCharts(container, this.#resultsChartOptions({ max_count: 15 }));
     resultsChart.render();
   }
 
@@ -55,16 +56,22 @@ export default class AthleteCharts {
     return `${Math.floor(seconds / 60)}:${('00' + seconds % 60).slice(-2)}`;
   }
 
-  #resultsChartOptions(title, { max_count = undefined } = {}) {
+  #resultsChartOptions({ max_count = undefined } = {}) {
     const data = this.#resultsData(max_count);
-    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    const { theme, foreColor, axisLabels } = apexThemeOptions();
+    const accent = chartAccentColor();
+    const layout = chartLayoutPadding();
 
     return {
+      ...layout,
       chart: {
-        height: 300,
+        ...layout.chart,
+        id: 'athlete-results-chart',
+        height: 320,
         width: '100%',
         type: 'area',
         background: 'transparent',
+        foreColor,
         animations: {
           initialAnimation: {
             enabled: false
@@ -74,8 +81,18 @@ export default class AthleteCharts {
           enabled: false
         }
       },
+      stroke: {
+        curve: 'smooth',
+        width: 2,
+      },
       fill: {
-        type: 'gradient'
+        type: 'gradient',
+        gradient: {
+          shadeIntensity: 0.3,
+          opacityFrom: 0.42,
+          opacityTo: 0.08,
+          stops: [0, 90, 100],
+        },
       },
       plotOptions: {
         area: {
@@ -87,12 +104,14 @@ export default class AthleteCharts {
         data: data.points
       }],
       xaxis: {
-        type: 'datetime'
+        type: 'datetime',
+        labels: axisLabels,
       },
       yaxis: {
         reversed: true,
         opposite: true,
         labels: {
+          ...axisLabels,
           formatter: this.#secondsFormatter
         }
       },
@@ -103,14 +122,9 @@ export default class AthleteCharts {
           formatter: this.#secondsFormatter
         }
       },
-      theme: {
-        mode: isDark ? 'dark' : 'light',
-        palette: isDark ? 'palette5' : 'palette2',
-      },
-      title: {
-        text: title,
-        align: 'center',
-      },
+      theme,
+      colors: [accent],
+      title: { show: false },
       dataLabels: {
         enabled: true,
         formatter: (_, opt) => data.labels[opt.dataPointIndex]

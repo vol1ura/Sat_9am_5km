@@ -1,13 +1,15 @@
 <% content_for :title, 'Как пробежать свои первые 5 км: советы для начинающих' %>
 <% content_for :description, 'Советы по тренировкам, экипировке, технике и предстартовой подготовке для начинающих бегунов.' %>
 
-<div class="container my-3 article">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-10 col-xl-8">
-      <%= render partial: 'shared/breadcrumbs', locals: { items: [{ name: t('activities.show.main_page'), path: root_path }, { name: 'Статьи', path: articles_path }, { name: 'Первая пятёрка', current: true }] } %>
+<div class="page-container my-6 md:my-8">
+  <article class="article">
+    <%= render partial: 'shared/breadcrumbs', locals: { items: [{ name: t('activities.show.main_page'), path: root_path }, { name: 'Статьи', path: articles_path }, { name: 'Первая пятёрка', current: true }] } %>
 
-      <h1 class="mb-3">Как пробежать свои первые 5 км: советы для начинающих</h1>
+    <header class="article__header">
+      <h1>Как пробежать свои первые 5 км: советы для начинающих</h1>
+    </header>
 
+    <div class="article__body">
       <section>
         <h2>1. Подготовка</h2>
         <p>
@@ -22,9 +24,6 @@
         </p>
         <p><strong>Важно:</strong> главное — слушать своё тело. Постепенно вы будете увеличивать время бега и уменьшать время ходьбы.</p>
       </section>
-
-      <hr>
-
       <section>
         <h2>2. Правильная экипировка: во что одеваться в любую погоду</h2>
         <p>Основа комфортного бега — правильная одежда. Забудьте о хлопке, который, впитывая пот, тяжелеет и перестаёт согревать. Только <strong>спортивные синтетические материалы</strong> - они, легче, лучше отводят влагу и не теряют согревающие свойства при намокании.</p>
@@ -44,9 +43,6 @@
         </p>
         <p>Правило: при выходе на улицу вам должно быть немного прохладно. Через 10 минут бега вы согреетесь, и вам будет комфортно.</p>
       </section>
-
-      <hr>
-
       <section>
         <h2>3. Техника бега и дыхания</h2>
         <ul>
@@ -56,9 +52,6 @@
           <li><strong>Дыхание:</strong> Дышите естественно. Не обязательно дышать только носом. Многие бегуны дышат ртом, особенно если бегут на высокой скорости.</li>
         </ul>
       </section>
-
-      <hr>
-
       <section>
         <h2>4. Возможные проблемы и их решения</h2>
         <ul>
@@ -75,9 +68,6 @@
           </li>
         </ul>
       </section>
-
-      <hr>
-
       <section>
         <h2>5. День забега: настрой и тактика</h2>
         <ul>
@@ -87,9 +77,6 @@
           <li><strong>Настрой:</strong> Цель — финишировать с удовольствием.</li>
         </ul>
       </section>
-
-      <hr>
-
       <section>
         <h2>6. Восстановление: что делать после финиша</h2>
         <ul>
@@ -106,5 +93,5 @@
         <p><strong>Главный совет:</strong> Наслаждайтесь процессом и у вас всё получится!</p>
       </section>
     </div>
-  </div>
+  </article>
 </div>

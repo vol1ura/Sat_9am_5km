@@ -1,15 +1,12 @@
 <% head_info :og_image, image_url('/images/protocol.png') %>
 <% head_info :title, t('.title', activity: human_activity_name(@activity)) %>
 <% head_info :description, t('.description', activity: human_activity_name(@activity)) %>
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to t('.main_page'), root_path %>
-    </li>
-    <li class="breadcrumb-item">
-      <%= link_to @activity.event_name, event_path(@activity.event.code_name) %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><%= l @activity.date, format: :long %></li>
+
+<nav aria-label="breadcrumb" class="mb-4 text-sm text-ink-muted">
+  <ol class="flex flex-wrap items-center gap-1">
+    <li><%= link_to t('.main_page'), root_path, class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/']"><%= link_to @activity.event_name, event_path(@activity.event.code_name), class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/'] text-ink" aria-current="page"><%= l @activity.date, format: :long %></li>
   </ol>
 </nav>
 
@@ -18,121 +15,126 @@
   <%= sanitized_text @activity.description %>
 <% end %>
 
-<ul class="list-group list-group-flush">
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill"><%= @results.load.size %></span>
-    <%= t '.total_runners_count' %>
-  </li>
-  <% if @personal_best_count.positive? %>
-    <li class="list-group-item">
-      <span class="badge bg-primary rounded-pill"><%= @personal_best_count %></span>
-      <%= t '.personal_bests_count' %>&nbsp;<i class="fa-solid fa-bolt text-primary"></i>
+<div class="data-table-shell mb-6">
+  <ul class="divide-y divide-line bg-surface text-sm">
+    <li class="flex items-center gap-3 px-2 py-2 sm:px-3">
+      <%= render Ui::BadgeComponent.new(variant: :brand, label: @results.load.size) %>
+      <%= t '.total_runners_count' %>
     </li>
-  <% end %>
-  <% s95_first_run_count = @results_count.count { |_, c| c == 1 } %>
-  <% if @first_run_count > s95_first_run_count %>
-    <li class="list-group-item">
-      <span class="badge bg-primary rounded-pill"><%= @first_run_count - s95_first_run_count %></span>
-      <%= t '.first_runners_count' %> <%= @activity.event_name %>&nbsp;<i class="fa-solid fa-heart text-primary"></i>
+    <% if @personal_best_count.positive? %>
+      <li class="flex items-center gap-3 px-2 py-2 sm:px-3">
+        <%= render Ui::BadgeComponent.new(variant: :brand, label: @personal_best_count) %>
+        <%= t '.personal_bests_count' %>&nbsp;<i class="fa-solid fa-bolt text-brand"></i>
+      </li>
+    <% end %>
+    <% s95_first_run_count = @results_count.count { |_, c| c == 1 } %>
+    <% if @first_run_count > s95_first_run_count %>
+      <li class="flex items-center gap-3 px-2 py-2 sm:px-3">
+        <%= render Ui::BadgeComponent.new(variant: :brand, label: @first_run_count - s95_first_run_count) %>
+        <%= t '.first_runners_count' %> <%= @activity.event_name %>&nbsp;<i class="fa-regular fa-heart text-brand" aria-hidden="true"></i>
+      </li>
+    <% end %>
+    <% if s95_first_run_count.positive? %>
+      <li class="flex items-center gap-3 px-2 py-2 sm:px-3">
+        <%= render Ui::BadgeComponent.new(variant: :brand, label: s95_first_run_count) %>
+        <%= t '.first_s95_count' %>&nbsp;<i class="fa-solid fa-heart text-brand" aria-hidden="true"></i>
+      </li>
+    <% end %>
+    <li class="flex items-center gap-3 px-2 py-2 sm:px-3">
+      <%= render Ui::BadgeComponent.new(variant: :brand, label: @volunteers.load.size) %>
+      <%= t '.volunteers_count' %>
     </li>
-  <% end %>
-  <% if s95_first_run_count.positive? %>
-    <li class="list-group-item">
-      <span class="badge bg-primary rounded-pill"><%= s95_first_run_count %></span>
-      <%= t '.first_s95_count' %>&nbsp;<i class="fa-solid fa-heart text-success"></i>
-    </li>
-  <% end %>
-  <li class="list-group-item">
-    <span class="badge bg-primary rounded-pill"><%= @volunteers.load.size %></span>
-    <%= t '.volunteers_count' %>
-  </li>
-  <% first_volunteers_count = @volunteering_v_count.count { |_, c| c == 1 } %>
-  <% if first_volunteers_count.positive? %>
-    <li class="list-group-item">
-      <span class="badge bg-primary rounded-pill"><%= first_volunteers_count %></span>
-      <%= t '.first_volunteers_count' %>&nbsp;<i class="fa-solid fa-heart text-danger"></i>
-    </li>
-  <% end %>
-</ul>
+    <% first_volunteers_count = @volunteering_v_count.count { |_, c| c == 1 } %>
+    <% if first_volunteers_count.positive? %>
+      <li class="flex items-center gap-3 px-2 py-2 sm:px-3">
+        <%= render Ui::BadgeComponent.new(variant: :brand, label: first_volunteers_count) %>
+        <%= t '.first_volunteers_count' %>&nbsp;<i class="fa-solid fa-heart text-danger"></i>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
-<div class="row justify-content-between align-items-center my-2" data-controller="athlete-search">
-  <h2 class="col-sm-6 mb-sm-0"><%= t '.protocol' %></h2>
-  <div class="col-sm-6 col-md-4">
-    <div class="input-group">
+<div class="my-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" data-controller="athlete-search">
+  <h2 class="mb-0"><%= t '.protocol' %></h2>
+  <div class="w-full sm:max-w-xs">
+    <div class="flex gap-2">
       <input
         type="text"
         autocomplete="off"
-        class="form-control"
+        class="w-full min-w-0 rounded-md border border-line bg-surface px-3 py-2 text-ink placeholder:text-ink-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring"
         placeholder="<%= t '.search_athlete_placeholder' %>"
         data-athlete-search-target="input"
         data-action="input->athlete-search#search">
-      <button
-        type="button"
-        class="btn btn-outline-secondary"
-        data-action="click->athlete-search#clear"
-        title="<%= t '.clear_search' %>">
+      <%= render Ui::ButtonComponent.new(
+            variant: :secondary,
+            size: :sm,
+            type: 'button',
+            class: 'shrink-0',
+            data: { action: 'click->athlete-search#clear' },
+            title: t('.clear_search'),
+          ) do %>
         <i class="fa-solid fa-times"></i>
-      </button>
+      <% end %>
     </div>
   </div>
 </div>
 
-<ul class="nav nav-tabs" id="protocol" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="absolute-tab" data-bs-toggle="tab" data-bs-target="#absolute-tab-pane" type="button" role="tab" aria-controls="absolute-tab-pane" aria-selected="true"><%= t '.common' %></button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="male-tab" data-bs-toggle="tab" data-bs-target="#male-tab-pane" type="button" role="tab" aria-controls="male-tab-pane" aria-selected="false"><%= t '.men' %></button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="female-tab" data-bs-toggle="tab" data-bs-target="#female-tab-pane" type="button" role="tab" aria-controls="female-tab-pane" aria-selected="false"><%= t '.women' %></button>
-  </li>
-</ul>
+<div class="radio-tabs mb-4" data-controller="protocol" id="protocol">
+  <input type="radio" name="protocol-tabs" id="protocol-tab-absolute" class="peer/absolute sr-only" checked tabindex="-1">
+  <input type="radio" name="protocol-tabs" id="protocol-tab-male" class="peer/male sr-only" tabindex="-1">
+  <input type="radio" name="protocol-tabs" id="protocol-tab-female" class="peer/female sr-only" tabindex="-1">
 
-<div class="tab-content" data-controller="protocol">
-  <div class="tab-pane fade show active" id="absolute-tab-pane" role="tabpanel" aria-labelledby="absolute-tab" tabindex="0" data-protocol-target="absolute">
+  <div class="mb-4 flex gap-1 overflow-x-auto pb-1" role="tablist">
+    <label for="protocol-tab-absolute" role="tab" class="radio-tab-label"><%= t '.common' %></label>
+    <label for="protocol-tab-male" role="tab" class="radio-tab-label"><%= t '.men' %></label>
+    <label for="protocol-tab-female" role="tab" class="radio-tab-label"><%= t '.women' %></label>
+  </div>
+
+  <div class="radio-tab-panel hidden peer-checked/absolute:block" id="absolute-tab-pane" role="tabpanel" aria-labelledby="protocol-tab-absolute" data-protocol-target="absolute">
     <%= render partial: 'protocol', locals: { results: @results } %>
   </div>
-  <div class="tab-pane fade" id="male-tab-pane" role="tabpanel" aria-labelledby="male-tab" tabindex="0" data-protocol-target="male"></div>
-  <div class="tab-pane fade" id="female-tab-pane" role="tabpanel" aria-labelledby="female-tab" tabindex="0" data-protocol-target="female"></div>
+  <div class="radio-tab-panel hidden peer-checked/male:block" id="male-tab-pane" role="tabpanel" aria-labelledby="protocol-tab-male" data-protocol-target="male"></div>
+  <div class="radio-tab-panel hidden peer-checked/female:block" id="female-tab-pane" role="tabpanel" aria-labelledby="protocol-tab-female" data-protocol-target="female"></div>
 </div>
 
 <h2><%= t '.volunteers' %></h2>
 <p><%= t '.about_volunteers' %></p>
-<table class="table">
-  <thead>
-    <tr>
-      <th class="fs-small-sm"><%= t '.volunteer' %></th>
-      <th class="fs-small-sm"><%= t '.role' %></th>
-      <th class="hidden-on-phone fs-small-sm"><%= t 'activities.protocol.club' %></th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <% @volunteers.each do |volunteer| %>
-      <% volunteering_count = @volunteering_v_count[volunteer.athlete_id] %>
+<div class="data-table-shell">
+  <table class="data-table sm:table-fixed">
+    <thead>
       <tr>
-        <td>
-          <div>
-            <%= link_to volunteer.name, volunteer.athlete, class: 'athlete-link fs-small-sm' %>
-          </div>
-          <div class="athlete-details fw-lighter">
-            <%= t '.total_volunteering', count: volunteering_count %>
-          </div>
-        </td>
-        <td class="align-middle fs-small-sm">
-          <%= human_volunteer_role volunteer.role %>
-          <% case volunteering_count %>
-          <% when 1 %>
-            <%= tag.i class: 'fa-solid fa-heart text-danger', title: t('.first_volunteering') %>
-          <% when *Badge.participating_thresholds[:volunteer] %>
-            <%= render partial: '/badge_icon', locals: { label: volunteering_count, icon_class: 'text-danger' } %>
-          <% end %>
-        </td>
-        <td class="hidden-on-phone align-middle fs-small-sm">
-          <% club = volunteer.athlete.club %>
-          <%= link_to club.name, club_path(club.slug) if club %>
-        </td>
+        <th><%= t '.volunteer' %></th>
+        <th><%= t '.role' %></th>
+        <th class="hidden-on-phone"><%= t 'activities.protocol.club' %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @volunteers.each do |volunteer| %>
+        <% volunteering_count = @volunteering_v_count[volunteer.athlete_id] %>
+        <tr>
+          <td>
+            <div>
+              <%= link_to volunteer.name, volunteer.athlete, class: 'athlete-link font-semibold' %>
+            </div>
+            <div class="text-sm font-light text-ink-muted">
+              <%= t '.total_volunteering', count: volunteering_count %>
+            </div>
+          </td>
+          <td>
+            <%= human_volunteer_role volunteer.role %>
+            <% case volunteering_count %>
+            <% when 1 %>
+              <%= tag.i class: 'fa-solid fa-heart text-danger', title: t('.first_volunteering') %>
+            <% when *Badge.participating_thresholds[:volunteer] %>
+              <%= render partial: '/badge_icon', locals: { label: volunteering_count, icon_class: 'text-danger' } %>
+            <% end %>
+          </td>
+          <td class="hidden-on-phone">
+            <% club = volunteer.athlete.club %>
+            <%= link_to club.name, club_path(club.slug) if club %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

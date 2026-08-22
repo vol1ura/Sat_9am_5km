@@ -1,339 +1,284 @@
-<%# Hero Section %>
-<section class="hero-section py-4 py-sm-5 text-white mt-n3">
-  <img src="/images/hero-bg.webp" alt="" class="hero-bg-image">
-  <div class="container">
-    <div class="row align-items-center justify-content-end">
-      <div class="col-lg-7 col-xl-6">
-        <div class="placeholder-image">
-          <h1 class="display-4 fw-bold mb-4 text-white"><%= t '.hero_title' %></h1>
-          <p class="lead mb-4"><%= t '.hero_subtitle' %></p>
-          <div class="d-flex flex-wrap gap-3">
-            <% if current_user&.athlete %>
-              <%= link_to t('.my_profile'), athlete_path(current_user.athlete), class: 'btn btn-danger btn-lg' %>
-            <% else %>
-              <%= link_to t('.registration'), new_user_registration_path, class: 'btn btn-danger btn-lg' %>
+<%# Hero — full-bleed, warm morning overlay %>
+<section class="relative min-h-[min(100vh-7rem,52rem)] w-full overflow-hidden">
+  <img
+    src="/images/hero-bg.webp"
+    alt=""
+    class="absolute inset-0 h-full w-full object-cover object-bottom"
+    aria-hidden="true"
+    loading="eager">
+  <div class="absolute inset-0 bg-gradient-to-br from-ink/85 via-brand-fill/45 to-accent/30" aria-hidden="true"></div>
+
+  <div class="relative z-10 mx-auto flex min-h-[inherit] max-w-6xl items-center px-4 py-10 sm:py-16 lg:justify-end">
+    <div class="w-full max-w-xl rounded-xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md sm:p-8">
+      <h1 class="font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl"><%= t '.hero_title' %></h1>
+      <p class="mt-4 text-lg text-white/90"><%= t '.hero_subtitle' %></p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <% if current_user&.athlete %>
+          <%= render Ui::ButtonComponent.new(variant: :primary, size: :lg, href: athlete_path(current_user.athlete)) do %>
+            <%= t '.my_profile' %>
+          <% end %>
+        <% else %>
+          <%= render Ui::ButtonComponent.new(variant: :primary, size: :lg, href: new_user_registration_path) do %>
+            <%= t '.registration' %>
+          <% end %>
+        <% end %>
+        <%= render Ui::ButtonComponent.new(
+              variant: :secondary,
+              size: :lg,
+              href: activities_path,
+              class: 'border-white/40 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20',
+            ) do %>
+          <%= t '.results' %>
+        <% end %>
+        <%= render Ui::ButtonComponent.new(
+              variant: :secondary,
+              size: :lg,
+              href: events_path,
+              class: 'border-white/40 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20',
+            ) do %>
+          <%= t '.find_event' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Upcoming Saturday — promoted above marketing content %>
+<% if @jubilee_events.present? || @funrun_badges.present? %>
+  <section class="border-b border-line bg-surface-elevated py-10 sm:py-12">
+    <div class="mx-auto max-w-2xl px-4">
+      <h2 class="mb-8 text-center font-display text-2xl font-bold text-ink sm:text-3xl">
+        <%= t '.upcoming_events', date: l(@next_saturday, format: :brief) %>
+      </h2>
+      <ul class="space-y-3">
+        <% @funrun_badges.each do |badge| %>
+          <li>
+            <%= render Ui::CardComponent.new(hover: true, class: 'relative') do %>
+              <div class="flex items-center gap-4">
+                <%= image_tag badge.image.variant(:thumb), class: 'h-16 w-16 shrink-0 rounded-lg object-cover', alt: 'FunRun badge' %>
+                <%= link_to badge.name, badge, class: 'font-semibold text-ink no-underline hover:text-brand after:absolute after:inset-0' %>
+              </div>
             <% end %>
-            <%= link_to t('.results'), activities_path, class: 'btn btn-outline-light btn-lg' %>
-            <%= link_to t('.find_event'), events_path, class: 'btn btn-outline-light btn-lg' %>
+          </li>
+        <% end %>
+        <% @jubilee_events.each do |event, activity_number| %>
+          <li>
+            <%= render Ui::CardComponent.new(hover: true, class: 'relative') do %>
+              <div class="flex items-center gap-4">
+                <div class="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-full border-2 border-accent bg-accent text-center text-accent-fg">
+                  <div class="text-xs capitalize leading-tight"><%= t 'activerecord.models.activity.one' %></div>
+                  <div class="font-display text-sm font-bold italic leading-tight">№<%= activity_number %></div>
+                </div>
+                <%= link_to event.name, event_path(event.code_name), class: 'font-semibold text-ink no-underline hover:text-brand after:absolute after:inset-0' %>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>
+
+<%# How it works + Why S95 — consolidated, no icon grids %>
+<section class="bg-canvas py-10 sm:py-14">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="mb-10 text-center font-display text-2xl font-bold text-ink sm:text-3xl"><%= t '.how_it_works.title' %></h2>
+
+    <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <% [
+        { title: t('.how_it_works.registration.title'), description: t('.how_it_works.registration.description'), href: new_user_session_path, step: '01' },
+        { title: t('.how_it_works.choose_run.title'), description: t('.how_it_works.choose_run.description'), href: events_path, step: '02' },
+        { title: t('.how_it_works.come_saturday.title'), description: t('.how_it_works.come_saturday.description'), href: page_path(page: 'rules'), step: '03' },
+        { title: t('.how_it_works.track_progress.title'), description: t('.how_it_works.track_progress.description'), href: ratings_path, step: '04' },
+      ].each do |item| %>
+        <li>
+          <%= render Ui::CardComponent.new(hover: true, class: 'relative h-full') do %>
+            <span class="font-display text-2xl font-bold text-accent" aria-hidden="true"><%= item[:step] %></span>
+            <h3 class="mt-2 font-display text-base font-semibold text-ink">
+              <%= link_to item[:title], item[:href], class: 'text-ink no-underline hover:text-brand after:absolute after:inset-0' %>
+            </h3>
+            <p class="mt-2 mb-0 text-sm text-ink-muted"><%= item[:description] %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ol>
+
+    <div class="mt-10 rounded-xl border border-line bg-surface p-6 sm:p-8">
+      <h3 class="mb-6 text-center font-display text-lg font-semibold text-ink"><%= t '.why_s95.title' %></h3>
+      <dl class="grid gap-6 sm:grid-cols-3">
+        <% [
+          { title: t('.why_s95.for_everyone.title'), description: t('.why_s95.for_everyone.description') },
+          { title: t('.why_s95.community.title'), description: t('.why_s95.community.description') },
+          { title: t('.why_s95.free.title'), description: t('.why_s95.free.description') },
+        ].each do |item| %>
+          <div>
+            <dt class="font-display font-semibold text-brand"><%= item[:title] %></dt>
+            <dd class="mt-1 text-sm text-ink-muted"><%= item[:description] %></dd>
           </div>
-        </div>
-      </div>
+        <% end %>
+      </dl>
     </div>
   </div>
 </section>
 
-<%# How It Works Section %>
-<section class="how-it-works py-5">
-  <div class="container">
-    <h2 class="text-center mb-5"><%= t '.how_it_works.title' %></h2>
-    <div class="row g-4">
-      <div class="col-md-3">
-        <div class="card h-100 border-0 shadow-sm position-relative">
-          <div class="card-body text-center">
-            <i class="fas fa-user-plus fa-3x mb-3 text-primary"></i>
-            <h3 class="h5 card-title">
-              <%= link_to t('.how_it_works.registration.title'), new_user_session_path, class: 'text-decoration-none stretched-link text-reset' %>
-            </h3>
-            <p class="card-text"><%= t '.how_it_works.registration.description' %></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card h-100 border-0 shadow-sm position-relative">
-          <div class="card-body text-center">
-            <i class="fas fa-map-marker-alt fa-3x mb-3 text-primary"></i>
-            <h3 class="h5 card-title">
-              <%= link_to t('.how_it_works.choose_run.title'), events_path, class: 'text-decoration-none stretched-link text-reset' %>
-            </h3>
-            <p class="card-text"><%= t '.how_it_works.choose_run.description' %></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card h-100 border-0 shadow-sm position-relative">
-          <div class="card-body text-center">
-            <i class="fas fa-calendar-check fa-3x mb-3 text-primary"></i>
-            <h3 class="h5 card-title">
-              <%= link_to t('.how_it_works.come_saturday.title'), page_path(page: 'rules'), class: 'text-decoration-none stretched-link text-reset' %>
-            </h3>
-            <p class="card-text"><%= t '.how_it_works.come_saturday.description' %></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card h-100 border-0 shadow-sm position-relative">
-          <div class="card-body text-center">
-            <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
-            <h3 class="h5 card-title">
-              <%= link_to t('.how_it_works.track_progress.title'), ratings_path, class: 'text-decoration-none stretched-link text-reset' %>
-            </h3>
-            <p class="card-text"><%= t '.how_it_works.track_progress.description' %></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<%# Stories Section %>
-<section class="stories-section py-5">
-  <div class="container">
-    <h2 class="text-center mb-5"><%= t '.stories.title' %></h2>
+<%# Stories carousel %>
+<section class="bg-surface py-10 sm:py-14">
+  <div class="mx-auto max-w-4xl px-4">
+    <h2 class="mb-8 text-center font-display text-2xl font-bold text-ink sm:text-3xl"><%= t '.stories.title' %></h2>
     <%
       stories = t '.stories.content'
       athletes = Athlete.includes(:event, user: { image_attachment: :blob }).where(id: stories.keys).shuffle
     %>
-    <div id="storiesCarousel" class="carousel carousel-dark slide">
-      <div class="carousel-indicators">
+    <div data-controller="carousel" class="relative">
+      <div class="overflow-hidden">
         <% athletes.each_with_index do |athlete, idx| %>
-          <button
-            type="button"
-            data-bs-target="#storiesCarousel"
-            data-bs-slide-to="<%= idx %>"
-            class="<%= 'active' if idx.zero? %>"
-            aria-label="<%= athlete.name %>">
-          </button>
-        <% end %>
-      </div>
-      <div class="carousel-inner">
-        <% athletes.each_with_index do |athlete, idx| %>
-          <div class="carousel-item <%= 'active' if idx.zero? %>">
-            <div class="story-card m-3 h-100">
-              <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start">
-                <div class="flex-shrink-0 mb-3 mb-md-0 text-center">
-                  <%= image_tag user_image_path(athlete.user), class: 'avatar', alt: athlete.name, loading: 'lazy' %>
+          <div data-carousel-target="slide" class="<%= idx.zero? ? '' : 'hidden' %>">
+            <%= render Ui::CardComponent.new(class: 'mx-1 border-line bg-surface-elevated') do %>
+              <figure class="flex flex-col items-center gap-4 md:flex-row md:items-start">
+                <div class="shrink-0">
+                  <%= image_tag user_image_path(athlete.user), class: 'h-24 w-24 shrink-0 rounded-full object-cover ring-2 ring-line', alt: athlete.name, loading: 'lazy' %>
                 </div>
-                <figure class="flex-grow-1 ms-md-3 mb-0">
-                  <blockquote class="blockquote">
-                    <p><%= stories[athlete.id] %></p>
+                <figcaption class="min-w-0 flex-1 text-center md:text-left">
+                  <blockquote class="m-0">
+                    <p class="text-base italic text-ink sm:text-lg"><%= stories[athlete.id] %></p>
                   </blockquote>
-                  <figcaption class="blockquote-footer my-2 text-center text-md-start">
-                    <%= link_to athlete.name, athlete %>, <%= athlete.event.name %>
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
+                  <cite class="mt-3 block text-sm not-italic text-ink-muted">
+                    <%= link_to athlete.name, athlete, class: 'font-semibold text-brand no-underline hover:text-accent' %>,
+                    <%= athlete.event.name %>
+                  </cite>
+                </figcaption>
+              </figure>
+            <% end %>
           </div>
         <% end %>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#storiesCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden"><%= t '.stories.previous' %></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#storiesCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden"><%= t '.stories.next' %></span>
-      </button>
-    </div>
-  </div>
-</section>
 
-<%# Why S95 Section %>
-<section class="why-s95 py-5">
-  <div class="container">
-    <h2 class="text-center mb-5"><%= t '.why_s95.title' %></h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-users fa-3x mb-3 text-primary"></i>
-            <h3 class="h5 card-title"><%= t '.why_s95.for_everyone.title' %></h3>
-            <p class="card-text"><%= t '.why_s95.for_everyone.description' %></p>
-          </div>
+      <div class="mt-4 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          class="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-ink transition-colors hover:bg-accent-subtle"
+          data-action="carousel#prev"
+          aria-label="<%= t '.stories.previous' %>">
+          <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
+        </button>
+
+        <div class="flex gap-2" role="tablist" aria-label="<%= t '.stories.title' %>">
+          <% athletes.each_with_index do |athlete, idx| %>
+            <button
+              type="button"
+              role="tab"
+              data-carousel-target="indicator"
+              data-index="<%= idx %>"
+              data-action="carousel#showSlide"
+              aria-label="<%= athlete.name %>"
+              aria-current="<%= idx.zero? ? 'true' : 'false' %>"
+              class="h-2.5 w-2.5 rounded-full transition-colors <%= idx.zero? ? 'bg-accent' : 'bg-line' %>">
+            </button>
+          <% end %>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-comments fa-3x mb-3 text-primary"></i>
-            <h3 class="h5 card-title"><%= t '.why_s95.community.title' %></h3>
-            <p class="card-text"><%= t '.why_s95.community.description' %></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
-          <div class="card-body text-center">
-            <i class="fas fa-gift fa-3x mb-3 text-primary"></i>
-            <h3 class="h5 card-title"><%= t '.why_s95.free.title' %></h3>
-            <p class="card-text"><%= t '.why_s95.free.description' %></p>
-          </div>
-        </div>
+
+        <button
+          type="button"
+          class="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-ink transition-colors hover:bg-accent-subtle"
+          data-action="carousel#next"
+          aria-label="<%= t '.stories.next' %>">
+          <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </div>
 </section>
 
-<%# Marquee Section %>
+<%# Marquee %>
 <% marquee_items = t('.marquee_items') %>
-<section class="home-marquee py-3 border-top border-bottom">
-  <div class="home-marquee__inner d-flex align-items-center text-uppercase fw-bold">
+<section class="home-marquee overflow-hidden border-y border-line bg-brand-fill py-3 text-brand-fg shadow-md">
+  <div class="home-marquee__inner flex w-max items-center uppercase">
     <% 2.times do %>
-      <div class="home-marquee__track d-flex align-items-center flex-shrink-0">
+      <div class="home-marquee__track flex shrink-0 items-center gap-7 px-6 text-sm font-bold tracking-widest sm:text-base">
         <% marquee_items.each do |item| %>
           <span class="home-marquee__item"><%= item %></span>
-          <span class="home-marquee__dot text-secondary" aria-hidden="true">•</span>
+          <span class="home-marquee__dot opacity-60" aria-hidden="true">•</span>
         <% end %>
       </div>
     <% end %>
   </div>
 </section>
 
-<%# Events Section %>
-<% if @jubilee_events.present? || @funrun_badges.present? %>
-  <section class="events-section py-5">
-    <div class="container">
-      <h2 class="text-center"><%= t '.upcoming_events', date: l(@next_saturday, format: :brief) %></h2>
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <ul class="list-group list-group-flush">
-            <% @funrun_badges.each do |badge| %>
-              <li class="list-group-item">
-                <div class="d-flex align-items-center">
-                  <div class="flex-shrink-0">
-                    <%= image_tag badge.image.variant(:thumb), class: 'thumb-badge', alt: 'FunRun badge' %>
-                  </div>
-                  <div class="flex-grow-1 ms-3">
-                    <%= link_to badge.name, badge, class: 'stretched-link text-decoration-none fw-bold text-body' %>
-                  </div>
-                </div>
-              </li>
-            <% end %>
-            <% @jubilee_events.each do |event, activity_number| %>
-              <li class="list-group-item">
-                <div class="d-flex align-items-center">
-                  <div class="flex-shrink-0">
-                    <div class="text-badge px-3 py-4">
-                      <div class="fw-normal text-capitalize"><%= t 'activerecord.models.activity.one' %></div>
-                      <div class="fw-bold fst-italic">№<%= activity_number %></div>
-                    </div>
-                  </div>
-                  <div class="flex-grow-1 ms-3">
-                    <%= link_to event.name, event_path(event.code_name), class: 'stretched-link text-decoration-none fw-bold text-body' %>
-                  </div>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-<% end %>
+<%# Volunteer app %>
+<section id="app" class="bg-info-subtle py-10 sm:py-14" data-controller="carousel">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="mb-10 text-center font-display text-2xl font-bold text-brand sm:text-3xl"><%= t '.volunteer_app.title' %></h2>
 
-<%# Volunteer App Section %>
-<section id="app" class="volunteer-app-section py-5" data-controller="carousel">
-  <div class="container">
-    <h2 class="text-center text-primary mb-5"><%= t '.volunteer_app.title' %></h2>
-    <div class="row">
-      <div class="col-md-4 d-flex align-items-center justify-content-center">
-        <div class="app-screen-container text-center">
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:items-center">
+      <div class="flex justify-center">
+        <div class="relative rounded-3xl p-2">
           <%= image_tag '/images/app/mobile_app_1.png',
-                        class: 'img-fluid app-screen',
+                        class: 'max-h-96 w-auto rounded-2xl shadow-xl transition-opacity duration-200',
                         alt: t('.volunteer_app.title'),
                         data: { carousel_target: 'image' } %>
         </div>
       </div>
-      <div class="col-md-8">
-        <ul class="list-unstyled">
-          <li class="mb-3 app-feature-item feature-active"
-              data-carousel-target="feature"
-              data-index="0"
-              data-action="click->carousel#showSlide">
-            <div class="d-flex align-items-center">
-              <i class="fas fa-stopwatch fa-2x text-primary me-3"></i>
+
+      <ul class="space-y-2">
+        <% [
+          { icon: 'fa-stopwatch', key: 'timer', index: 0 },
+          { icon: 'fa-qrcode', key: 'scanner', index: 1 },
+          { icon: 'fa-cloud-arrow-up', key: 'upload', index: 2 },
+          { icon: 'fa-satellite-dish', key: 'live_results', index: 3 },
+          { icon: 'fa-chart-bar', key: 'stats', index: 4 },
+        ].each do |feature| %>
+          <li
+            class="cursor-pointer rounded-lg border border-transparent p-3 transition-colors hover:bg-surface/60 <%= 'feature-active' if feature[:index].zero? %>"
+            data-carousel-target="feature"
+            data-index="<%= feature[:index] %>"
+            data-action="click->carousel#showSlide">
+            <div class="flex items-start gap-3">
+              <i class="fa-solid <%= feature[:icon] %> mt-0.5 text-xl text-brand" aria-hidden="true"></i>
               <div>
-                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.timer.title' %></h3>
-                <p class="mb-0"><%= t '.volunteer_app.features.timer.description' %></p>
+                <h3 class="font-display text-base font-semibold text-ink"><%= t ".volunteer_app.features.#{feature[:key]}.title" %></h3>
+                <p class="mb-0 text-sm text-ink-muted"><%= t ".volunteer_app.features.#{feature[:key]}.description" %></p>
               </div>
             </div>
           </li>
-          <li class="mb-3 app-feature-item"
-              data-carousel-target="feature"
-              data-index="1"
-              data-action="click->carousel#showSlide">
-            <div class="d-flex align-items-center">
-              <i class="fas fa-qrcode fa-2x text-primary me-3"></i>
-              <div>
-                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.scanner.title' %></h3>
-                <p class="mb-0"><%= t '.volunteer_app.features.scanner.description' %></p>
-              </div>
-            </div>
-          </li>
-          <li class="mb-3 app-feature-item"
-              data-carousel-target="feature"
-              data-index="2"
-              data-action="click->carousel#showSlide">
-            <div class="d-flex align-items-center">
-              <i class="fas fa-cloud-arrow-up fa-2x text-primary me-3"></i>
-              <div>
-                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.upload.title' %></h3>
-                <p class="mb-0"><%= t '.volunteer_app.features.upload.description' %></p>
-              </div>
-            </div>
-          </li>
-          <li class="mb-3 app-feature-item"
-              data-carousel-target="feature"
-              data-index="3"
-              data-action="click->carousel#showSlide">
-            <div class="d-flex align-items-center">
-              <i class="fas fa-satellite-dish fa-2x text-primary me-3"></i>
-              <div>
-                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.live_results.title' %></h3>
-                <p class="mb-0"><%= t '.volunteer_app.features.live_results.description' %></p>
-              </div>
-            </div>
-          </li>
-          <li class="app-feature-item"
-              data-carousel-target="feature"
-              data-index="4"
-              data-action="click->carousel#showSlide">
-            <div class="d-flex align-items-center">
-              <i class="fas fa-chart-bar fa-2x text-primary me-3"></i>
-              <div>
-                <h3 class="h5 mb-1"><%= t '.volunteer_app.features.stats.title' %></h3>
-                <p class="mb-0"><%= t '.volunteer_app.features.stats.description' %></p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <% end %>
+      </ul>
     </div>
-    <div class="d-flex gap-4 justify-content-center flex-wrap mt-3">
+
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
       <%= external_link_to 'https://apps.apple.com/app/id6760978429' do %>
-        <%= image_tag '/images/app/app-store.png', class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_store') %>
+        <%= image_tag '/images/app/app-store.png', class: 'h-10 w-auto', alt: t('.volunteer_app.download_app_store') %>
       <% end %>
       <%= external_link_to 'https://appgallery.huawei.com/app/C114915605' do %>
-        <%= image_tag "/images/app/#{top_level_domain == :rs ? 'app-gallery-rs.png' : 'app-gallery-ru.svg'}", class: 'img-fluid app-button', alt: t('.volunteer_app.download_app_gallery') %>
+        <%= image_tag "/images/app/#{top_level_domain == :rs ? 'app-gallery-rs.png' : 'app-gallery-ru.svg'}", class: 'h-10 w-auto', alt: t('.volunteer_app.download_app_gallery') %>
       <% end %>
       <% if top_level_domain == :ru %>
-        <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2', class: 'text-decoration-none' do %>
-          <%= image_tag '/images/app/ru-store.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_rustore') %>
+        <%= external_link_to 'https://www.rustore.ru/catalog/app/ru.s95.app?rsm=1&mt_link_id=l394r2' do %>
+          <%= image_tag '/images/app/ru-store.svg', class: 'h-10 w-auto', alt: t('.volunteer_app.download_rustore') %>
         <% end %>
       <% end %>
-      <%= link_to app_pages_path, class: 'text-decoration-none', data: { turbo_prefetch: false } do %>
-        <%= image_tag '/images/app/apk.svg', class: 'img-fluid app-button', alt: t('.volunteer_app.download_apk') %>
+      <%= link_to app_pages_path, data: { turbo_prefetch: false } do %>
+        <%= image_tag '/images/app/apk.svg', class: 'h-10 w-auto', alt: t('.volunteer_app.download_apk') %>
       <% end %>
     </div>
   </div>
 </section>
 
-<%# Partners Section %>
-<section class="partners-section pt-5 mb-n4">
-  <div class="container">
-    <h2 class="text-center"><%= t '.our_partners' %></h2>
-    <div class="partners">
+<%# Partners %>
+<section class="bg-surface pb-24 pt-10 sm:pt-12">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="mb-8 text-center font-display text-2xl font-bold text-ink"><%= t '.our_partners' %></h2>
+    <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
       <%= external_link_to 'https://t.me/parkrun' do %>
-        <%= image_tag '/images/partners/pro_parkrun.png', class: 'img-partner', alt: 'Pro parkrun', loading: 'lazy' %>
+        <%= image_tag '/images/partners/pro_parkrun.png', class: 'h-24 opacity-90 transition-transform hover:-translate-y-1 hover:opacity-100 sm:h-36', alt: 'Pro parkrun', loading: 'lazy' %>
       <% end %>
       <% if top_level_domain == :ru %>
         <%= external_link_to 'https://rununion.ru/clubs/6' do %>
-          <%= image_tag '/images/partners/run_union.png', class: 'img-partner', alt: 'Союз любителей бега', loading: 'lazy' %>
+          <%= image_tag '/images/partners/run_union.png', class: 'h-24 opacity-90 transition-transform hover:-translate-y-1 hover:opacity-100 sm:h-36', alt: 'Союз любителей бега', loading: 'lazy' %>
         <% end %>
       <% end %>
       <% if top_level_domain == :rs %>
         <%= external_link_to 'https://www.instagram.com/grnhs_serbia/' do %>
-          <%= image_tag '/images/partners/grnhs_serbia.svg', class: 'img-partner', alt: 'Green House' %>
+          <%= image_tag '/images/partners/grnhs_serbia.svg', class: 'h-24 opacity-90 transition-transform hover:-translate-y-1 hover:opacity-100 sm:h-36', alt: 'Green House', loading: 'lazy' %>
         <% end %>
       <% end %>
     </div>

@@ -1,11 +1,12 @@
 <% head_info :title, t('.our_events') %>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h1><%= t '.our_events' %></h1>
-  <%= link_to t('.map'), map_events_path, class: 'btn btn-outline-primary' %>
-</div>
+<%= render Ui::PageHeaderComponent.new(title: t('.our_events')) do |header| %>
+  <% header.with_actions do %>
+    <%= render Ui::ButtonComponent.new(variant: :secondary, href: map_events_path, label: t('.map')) %>
+  <% end %>
+<% end %>
 
 <%= render 'favorite_events_section' %>
-<div class="row row-cols-1 row-cols-md-2 g-3">
+<div class="grid grid-cols-1 gap-3 md:grid-cols-2">
   <%= render partial: 'event_card', collection: @events, as: :event %>
 </div>

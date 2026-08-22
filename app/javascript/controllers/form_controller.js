@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ['input', 'avatar', 'fileInput'];
 
   connect() {
-    this.modal = new bootstrap.Modal(document.getElementById('promotionModal'));
+    this.modal = document.getElementById('promotionModal');
     this.currentPromotionKey = null;
   }
 
@@ -46,7 +46,7 @@ export default class extends Controller {
       this.currentPromotionKey = event.target.dataset.promotionKey;
       const terms = this.getPromotionTerms(this.currentPromotionKey);
       document.getElementById('promotionTerms').innerHTML = terms;
-      this.modal.show();
+      this.modal?.showModal();
       event.target.checked = false;
     }
   }
@@ -55,7 +55,7 @@ export default class extends Controller {
     if (this.currentPromotionKey) {
       const checkbox = document.querySelector(`[data-promotion-key="${this.currentPromotionKey}"]`);
       checkbox.checked = true;
-      this.modal.hide();
+      this.modal?.close();
     }
   }
 

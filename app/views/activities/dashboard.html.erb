@@ -12,27 +12,21 @@
     data-dashboard-total-female-value="<%= @gender_stats['female'] || 0 %>"
     data-dashboard-total-unknown-value="<%= @gender_stats[nil] || 0 %>"
     data-dashboard-error-value="<%= t '.error' %>">
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="card-with-border">
-          <div class="card-body">
-            <div data-dashboard-target="participants"></div>
-          </div>
-        </div>
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+      <div>
+        <%= render Ui::CardComponent.new do %>
+          <div data-dashboard-target="participants"></div>
+        <% end %>
       </div>
-      <div class="col-md-4">
-        <div class="card-with-border">
-          <div class="card-body">
-            <div data-dashboard-target="gender"></div>
-          </div>
-        </div>
+      <div>
+        <%= render Ui::CardComponent.new do %>
+          <div data-dashboard-target="gender"></div>
+        <% end %>
       </div>
-      <div class="col-md-4">
-        <div class="card-with-border">
-          <div class="card-body">
-            <div data-dashboard-target="volunteers"></div>
-          </div>
-        </div>
+      <div>
+        <%= render Ui::CardComponent.new do %>
+          <div data-dashboard-target="volunteers"></div>
+        <% end %>
       </div>
     </div>
   </div>

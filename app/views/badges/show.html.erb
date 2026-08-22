@@ -3,57 +3,65 @@
 <% head_info :title, "#{@badge.name}#{info_suffix}" %>
 <% head_info :description, "#{strip_tags(@badge.conditions)}#{info_suffix}".squish %>
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to t('.main_page'), root_path %>
-    </li>
-    <li class="breadcrumb-item">
-      <%= link_to t('navbars.top.badges'), badges_path %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @badge.name %></li>
-  </ol>
-</nav>
+<%= render 'shared/breadcrumbs', items: [
+      { name: t('.main_page'), path: root_path },
+      { name: t('navbars.top.badges'), path: badge_hub_path(@badge) },
+      { name: @badge.name, current: true },
+    ] %>
 
-<div class="row g-0">
-  <div class="col-sm-4 col-md-3 p-3 d-flex justify-content-center align-items-start">
-    <%= image_tag @badge.image.variant(:web), class: 'img-badge', alt: @badge.name %>
+<%= render Ui::CardComponent.new(class: 'mb-8') do %>
+  <div class="flex flex-col items-center gap-5 sm:flex-row sm:items-start">
+    <div class="flex size-28 shrink-0 items-center justify-center rounded-xl bg-surface-elevated p-3 sm:size-32">
+      <%= image_tag @badge.image.variant(:web), class: 'badge-show-thumb', alt: @badge.name %>
+    </div>
+    <div class="min-w-0 flex-1 text-center sm:text-left">
+      <p class="text-xs font-medium uppercase tracking-wide text-brand"><%= human_badge_kind(@badge.kind) %></p>
+      <h1 class="mt-1 font-display text-2xl font-bold text-ink sm:text-3xl"><%= @badge.name %></h1>
+      <div class="mt-3 max-w-none text-sm leading-relaxed text-ink-muted [&_a]:text-brand [&_p+p]:mt-2"><%= sanitized_text @badge.conditions %></div>
+      <% if @badge.funrun_kind? && @badge.received_date %>
+        <p class="mt-3 text-sm text-ink-muted"><%= t '.event_date', date: l(@badge.received_date, format: :long) %></p>
+      <% end %>
+    </div>
   </div>
-  <div class="col-sm-8 col-md-9">
-    <h1><%= @badge.name %></h1>
-    <p class="card-text"><%= sanitized_text @badge.conditions %></p>
-    <% if @badge.funrun_kind? && @badge.received_date %>
-      <p class="text-muted">
-        <%= t '.event_date', date: l(@badge.received_date, format: :long) %>
-      </p>
+<% end %>
+
+<section aria-labelledby="badge-holders-heading">
+  <div class="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+    <h2 id="badge-holders-heading" class="font-display text-lg font-semibold text-ink"><%= t '.holders' %></h2>
+    <% if @trophies.total_count.positive? %>
+      <span class="text-sm text-ink-muted"><%= t '.holders_count', count: @trophies.total_count %></span>
     <% end %>
   </div>
-</div>
 
-<% if @trophies.exists? %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th><%= t '.athlete' %></th>
-        <% if @badge.record_kind? %>
-          <th><%= t '.event' %></th>
-          <th class="px-0 px-sm-2"><%= t '.result' %></th>
-          <th class="hidden-on-phone">Дата</th>
-        <% elsif !@badge.funrun_kind? %>
-          <th><%= t '.received_date' %></th>
-        <% end %>
-        <%= tag.th class: ('hidden-on-phone' unless @badge.funrun_kind?) do %>
-          <%= t '.club' %>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <%= render partial: 'trophy', collection: @trophies %>
-    </tbody>
-  </table>
-  <%= paginate @trophies, window: 2 %>
-<% elsif @badge.funrun_kind? %>
-  <p><%= t '.soon' %></p>
-<% else %>
-  <p><%= t '.nobody_has' %></p>
-<% end %>
+  <% if @trophies.exists? %>
+    <div class="data-table-shell">
+      <table class="data-table data-table--compact">
+        <thead>
+          <tr>
+            <th><%= t '.athlete' %></th>
+            <% if @badge.record_kind? %>
+              <th><%= t '.event' %></th>
+              <th><%= t '.result' %></th>
+              <th class="hidden-on-phone"><%= t '.date' %></th>
+            <% elsif !@badge.funrun_kind? %>
+              <th><%= t '.received_date' %></th>
+            <% end %>
+            <%= tag.th class: ('hidden-on-phone' unless @badge.funrun_kind?) do %>
+              <%= t '.club' %>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'trophy', collection: @trophies %>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4">
+      <%= paginate @trophies, window: 2 %>
+    </div>
+  <% elsif @badge.funrun_kind? %>
+    <%= render Ui::EmptyComponent.new(title: t('.soon')) %>
+  <% else %>
+    <%= render Ui::EmptyComponent.new(title: t('.nobody_has')) %>
+  <% end %>
+</section>

@@ -1,140 +1,137 @@
 <% head_info :description, t('.description', user_name: current_user.full_name) %>
-<div class="row justify-content-center">
-  <div style="max-width: 400px;">
-    <h1 class="mb-4"><%= head_info :title, t('.title') %></h1>
-    <%= turbo_frame_tag current_user do %>
-      <div class="card border-0 mb-4">
-        <div class="card-body p-2">
-          <div class="d-flex align-items-center">
-            <div class="flex-grow-1 me-3">
-              <div class="d-flex flex-column">
-                <p class="fs-3 mb-1"><%= current_user.first_name %></p>
-                <p class="fs-3 mb-0"><%= current_user.last_name %></p>
-              </div>
-            </div>
-            <div class="flex-shrink-0">
-              <%= image_tag user_image_path(current_user), class: 'avatar-100' %>
-            </div>
-          </div>
 
-          <div class="d-flex flex-column mt-3">
-            <p class="mb-2">
-              <i class="fa-solid fa-qrcode text-primary me-3"></i>
-              <%= link_to "A#{current_user.athlete.code}", '#', data: { 'bs-toggle' => 'modal', 'bs-target' => '#barcodeModal' } %>
-            </p>
-            <p class="mb-2">
-              <i class="fa-solid fa-envelope text-primary me-3"></i>
-              <% if current_user.email %>
-                <%= current_user.email %>
-              <% else %>
-                <span class="text-body-secondary"><%= t '.not_specified' %></span>
-              <% end %>
-              <% if current_user.unconfirmed_email %>
-                <br>
-                <small class="text-warning-emphasis">
-                  <i class="fa-solid fa-clock me-1"></i>
-                  <%= t '.email_pending_badge', email: current_user.unconfirmed_email %>
-                </small>
-              <% end %>
-            </p>
-            <p class="mb-2">
-              <i class="fa-solid fa-phone text-primary me-3"></i>
-              <%= current_user.phone ? human_phone(current_user.phone) : t('.not_specified') %>
-            </p>
-            <p class="mb-2">
-              <i class="fa-solid fa-people-group text-primary me-3"></i>
-              <%= current_user&.athlete&.club&.name || t('.not_specified') %>
-            </p>
-            <p class="mb-2">
-              <i class="fa-solid fa-house text-primary me-3"></i>
-              <%= current_user&.athlete&.event&.name || t('.not_specified') %>
-            </p>
-            <div class="mt-3">
-              <h5 class="mb-3"><%= t '.emergency_contact' %></h5>
-              <p class="mb-2">
-                <i class="fa-solid fa-phone text-primary me-3"></i>
-                <% if current_user.emergency_contact_phone %>
-                  <%= human_phone current_user.emergency_contact_phone %>
-                  (<%= current_user.emergency_contact_name %>)
-                <% else %>
-                  <%= t '.not_specified' %>
-                <% end %>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="card-body mt-3 p-2">
-          <%= link_to edit_user_path, class: 'btn btn-outline-primary', title: t('.edit') do %>
-            <i class="fa-solid fa-pen-to-square me-2"></i><%= t '.edit' %>
-          <% end %>
-        </div>
-        <div class="card-body border-top mt-5 p-2">
-          <h5 class="mb-3 text-danger"><%= t '.delete_account.title' %></h5>
-          <p class="mb-3 text-body-secondary"><%= t '.delete_account.lead' %></p>
-          <button
-            type="button"
-            class="btn btn-outline-danger"
-            data-bs-toggle="modal"
-            data-bs-target="#deleteAccountModal"
-          >
-            <%= t '.delete_account.button' %>
-          </button>
-        </div>
+<div class="page-container page-container--narrow">
+  <%= render Ui::PageHeaderComponent.new(title: head_info(:title, t('.title'))) %>
+
+  <%= turbo_frame_tag current_user do %>
+    <%= render Ui::CardComponent.new(class: 'mb-4') do %>
+      <div class="flex flex-col items-center border-b border-line pb-5 text-center">
+        <%= image_tag user_image_path(current_user), class: 'avatar-100', alt: current_user.full_name %>
+        <p class="mt-4 font-display text-2xl font-bold leading-tight text-ink">
+          <%= current_user.first_name %>
+        </p>
+        <p class="font-display text-2xl font-bold leading-tight text-ink">
+          <%= current_user.last_name %>
+        </p>
       </div>
 
-      <div
-        class="modal fade"
-        id="deleteAccountModal"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="deleteAccountModalLabel"
-        aria-hidden="true"
-        data-controller="account-deletion"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <%= form_with url: user_path, method: :delete, data: { turbo: false } do %>
-              <div class="modal-header">
-                <h5 class="modal-title" id="deleteAccountModalLabel"><%= t '.delete_account.modal_title' %></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t 'users.edit.cancel' %>"></button>
-              </div>
-              <div class="modal-body">
-                <p class="mb-0"><%= t '.delete_account.modal_text' %></p>
-                <div class="form-check mt-3">
-                  <%=
-                    check_box_tag(
-                      :confirm_deletion,
-                      '1',
-                      false,
-                      class: 'form-check-input',
-                      id: 'confirm_deletion',
-                      data: {
-                        account_deletion_target: 'checkbox',
-                        action: 'account-deletion#toggleSubmit',
-                      },
-                    )
-                  %>
-                  <%= label_tag :confirm_deletion, t('.delete_account.confirm_label'), class: 'form-check-label' %>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= t 'users.edit.cancel' %></button>
-                <%=
-                  submit_tag(
-                    t('.delete_account.submit'),
-                    class: 'btn btn-danger',
-                    disabled: true,
-                    data: { account_deletion_target: 'submit' },
-                  )
-                %>
-              </div>
+      <div class="mt-5 space-y-4">
+        <div class="flex items-start gap-3 text-sm">
+          <i class="fa-solid fa-qrcode mt-0.5 w-4 shrink-0 text-brand" aria-hidden="true"></i>
+          <div>
+            <%= link_to "A#{current_user.athlete.code}", '#',
+                  class: 'font-medium text-brand hover:text-accent',
+                  data: { controller: 'dialog', dialog_id_value: 'barcodeModal', action: 'click->dialog#open' } %>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 text-sm">
+          <i class="fa-solid fa-envelope mt-0.5 w-4 shrink-0 text-brand" aria-hidden="true"></i>
+          <div class="min-w-0">
+            <% if current_user.email %>
+              <span class="break-all"><%= current_user.email %></span>
+            <% else %>
+              <span class="text-ink-muted"><%= t '.not_specified' %></span>
+            <% end %>
+            <% if current_user.unconfirmed_email %>
+              <p class="mt-1 text-warning">
+                <i class="fa-solid fa-clock me-1" aria-hidden="true"></i>
+                <%= t '.email_pending_badge', email: current_user.unconfirmed_email %>
+              </p>
             <% end %>
           </div>
         </div>
+
+        <div class="flex items-start gap-3 text-sm">
+          <i class="fa-solid fa-phone mt-0.5 w-4 shrink-0 text-brand" aria-hidden="true"></i>
+          <div>
+            <%= current_user.phone ? human_phone(current_user.phone) : content_tag(:span, t('.not_specified'), class: 'text-ink-muted') %>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 text-sm">
+          <i class="fa-solid fa-people-group mt-0.5 w-4 shrink-0 text-brand" aria-hidden="true"></i>
+          <div><%= current_user&.athlete&.club&.name || content_tag(:span, t('.not_specified'), class: 'text-ink-muted') %></div>
+        </div>
+
+        <div class="flex items-start gap-3 text-sm">
+          <i class="fa-solid fa-house mt-0.5 w-4 shrink-0 text-brand" aria-hidden="true"></i>
+          <div><%= current_user&.athlete&.event&.name || content_tag(:span, t('.not_specified'), class: 'text-ink-muted') %></div>
+        </div>
+
+        <div class="rounded-lg border border-line bg-surface-elevated/60 p-4">
+          <h2 class="mb-3 text-sm font-semibold text-ink"><%= t '.emergency_contact' %></h2>
+          <div class="flex items-start gap-3 text-sm">
+            <i class="fa-solid fa-phone mt-0.5 w-4 shrink-0 text-brand" aria-hidden="true"></i>
+            <div>
+              <% if current_user.emergency_contact_phone %>
+                <%= human_phone current_user.emergency_contact_phone %>
+                <span class="text-ink-muted">(<%= current_user.emergency_contact_name %>)</span>
+              <% else %>
+                <span class="text-ink-muted"><%= t '.not_specified' %></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <%= render 'shared/barcode_modal', code: current_user.athlete.code, barcode: @barcode %>
+      <div class="mt-6 pt-4 flex flex-col sm:flex-row sm:justify-start border-t border-line">
+        <%= render Ui::ButtonComponent.new(variant: :secondary, href: edit_user_path) do %>
+          <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+          <%= t '.edit' %>
+        <% end %>
+      </div>
     <% end %>
-  </div>
+
+    <%= render Ui::CardComponent.new(class: 'border-danger/25 bg-danger-subtle/30') do %>
+      <h2 class="mb-2 font-display text-base font-semibold text-danger"><%= t '.delete_account.title' %></h2>
+      <p class="mb-4 text-sm leading-relaxed text-ink-muted"><%= t '.delete_account.lead' %></p>
+      <div class="flex flex-col sm:flex-row sm:justify-start">
+        <%= render Ui::ButtonComponent.new(
+            variant: :danger,
+            type: 'button',
+            label: t('.delete_account.button'),
+            data: { controller: 'dialog', dialog_id_value: 'deleteAccountModal', action: 'click->dialog#open' },
+          ) %>
+      </div>
+    <% end %>
+
+    <%= render Ui::ModalComponent.new(id: 'deleteAccountModal', size: :md) do |modal| %>
+      <% modal.with_title { t('.delete_account.modal_title') } %>
+      <%= form_with url: user_path, method: :delete, data: { turbo: false, controller: 'account-deletion' } do %>
+        <p class="text-sm leading-relaxed text-ink-muted"><%= t '.delete_account.modal_text' %></p>
+        <label class="<%= form_toggle_label_class %> mt-4 rounded-lg border border-line bg-surface-elevated p-3" for="confirm_deletion">
+          <%=
+            check_box_tag(
+              :confirm_deletion,
+              '1',
+              false,
+              class: form_toggle_input_class,
+              id: 'confirm_deletion',
+              data: {
+                account_deletion_target: 'checkbox',
+                action: 'change->account-deletion#toggleSubmit',
+              },
+            )
+          %>
+          <span class="form-toggle__switch" aria-hidden="true"></span>
+          <span class="form-toggle__label"><%= t('.delete_account.confirm_label') %></span>
+        </label>
+        <div class="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-start">
+          <%= render Ui::ButtonComponent.new(variant: :secondary, type: 'button', label: t('users.edit.cancel'), data: { action: 'dialog#close' }) %>
+          <%=
+            render Ui::ButtonComponent.new(
+              variant: :danger,
+              type: 'submit',
+              label: t('.delete_account.submit'),
+              disabled: true,
+              data: { account_deletion_target: 'submit' },
+            )
+          %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= render 'shared/barcode_modal', code: current_user.athlete.code, barcode: @barcode %>
+  <% end %>
 </div>

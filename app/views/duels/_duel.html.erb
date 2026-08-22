@@ -1,127 +1,105 @@
-<div class="card mb-3 <%= duel[:winner] == :user ? 'border-success' : 'border-danger' %>">
-  <div class="card-header d-flex justify-content-between align-items-center py-2">
-    <h5 class="d-flex flex-column align-items-center gap-2">
-      <%= link_to duel[:event].name, activity_path(duel[:activity]), class: 'text-decoration-none my-0' %>
-      <span class="badge bg-secondary-subtle text-secondary-emphasis px-2 py-1">
-        <i class="fa-regular fa-calendar me-1"></i>
-        <%= l duel[:date] %>
-      </span>
-    </h5>
+<%= render Ui::CardComponent.new(class: "mb-3 #{duel[:winner] == :user ? 'border-success' : 'border-danger'}") do |card| %>
+  <% card.with_header do %>
+    <div class="flex items-center justify-between border-b border-line px-4 py-2">
+      <h5 class="my-0 flex flex-col items-center gap-2 sm:flex-row">
+        <%= link_to duel[:event].name, activity_path(duel[:activity]), class: 'text-ink no-underline hover:text-brand' %>
+        <%= render Ui::BadgeComponent.new(variant: :default) do %>
+          <i class="fa-regular fa-calendar me-1"></i>
+          <%= l duel[:date] %>
+        <% end %>
+      </h5>
 
-    <div class="text-end">
-      <% if duel[:winner] == :user %>
-        <span class="badge bg-success">
-          <i class="fa-solid fa-trophy me-1"></i>
-          <%= t '.victory' %>
-        </span>
-      <% else %>
-        <span class="badge bg-danger">
-          <i class="fa-solid fa-flag me-1"></i>
-          <%= t '.defeat' %>
-        </span>
+      <div class="text-end">
+        <% if duel[:winner] == :user %>
+          <%= render Ui::BadgeComponent.new(variant: :success) do %>
+            <i class="fa-solid fa-trophy me-1"></i>
+            <%= t '.victory' %>
+          <% end %>
+        <% else %>
+          <%= render Ui::BadgeComponent.new(variant: :danger) do %>
+            <i class="fa-solid fa-flag me-1"></i>
+            <%= t '.defeat' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
+    <div>
+      <div class="mb-2 text-center">
+        <div class="font-bold"><%= @athlete&.name || t('common.nobody') %></div>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div class="rounded-lg border border-line bg-surface-elevated p-2 text-center">
+          <div class="mb-1 text-xl <%= 'font-bold text-success' if duel[:user_result].position < duel[:friend_result].position %>">
+            #<%= duel[:user_result].position %>
+          </div>
+          <small class="uppercase text-ink-muted"><%= t '.position' %></small>
+        </div>
+        <div class="rounded-lg border border-line bg-surface-elevated p-2 text-center">
+          <div class="mb-1 text-xl <%= 'font-bold text-success' if duel[:winner] == :user %>">
+            <%= duel[:user_result].time_string if duel[:user_result].total_time %>
+          </div>
+          <small class="uppercase text-ink-muted"><%= t '.time' %></small>
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden text-center md:block">
+      <div class="relative">
+        <div class="mx-auto h-20 w-px border-l-2 border-ink-muted/25"></div>
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <%= render Ui::BadgeComponent.new(variant: :brand, class: 'px-3 py-2 text-base shadow-sm') { 'VS' } %>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-2 md:hidden">
+
+    <div>
+      <div class="mb-2 text-center">
+        <div class="font-bold"><%= duel[:friend_result].athlete.name %></div>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div class="rounded-lg border border-line bg-surface-elevated p-2 text-center">
+          <div class="mb-1 text-xl <%= 'font-bold text-success' if duel[:friend_result].position < duel[:user_result].position %>">
+            #<%= duel[:friend_result].position %>
+          </div>
+          <small class="uppercase text-ink-muted"><%= t '.position' %></small>
+        </div>
+        <div class="rounded-lg border border-line bg-surface-elevated p-2 text-center">
+          <div class="mb-1 text-xl <%= 'font-bold text-success' if duel[:winner] == :friend %>">
+            <%= duel[:friend_result].time_string if duel[:friend_result].total_time %>
+          </div>
+          <small class="uppercase text-ink-muted"><%= t '.time' %></small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if duel[:time_difference] || duel[:position_difference] %>
+    <hr class="my-3 border-line">
+    <div class="flex justify-center gap-4">
+      <% if duel[:time_difference] %>
+        <div class="text-center">
+          <div class="rounded-lg border border-info/25 bg-info-subtle p-2">
+            <div class="mb-1 text-xs font-semibold uppercase text-ink-muted"><%= t '.time_difference' %></div>
+            <div class="text-lg font-bold text-info"><%= Result.time_string duel[:time_difference] %></div>
+          </div>
+        </div>
+      <% end %>
+
+      <% if duel[:position_difference] %>
+        <div class="text-center">
+          <div class="rounded-lg border border-warning/25 bg-warning-subtle p-2">
+            <div class="mb-1 text-xs font-semibold uppercase text-ink-muted"><%= t '.position_difference' %></div>
+            <div class="text-lg font-bold text-warning">
+              <%= pluralize(duel[:position_difference], t('.position_singular'), t('.position_plural')) %>
+            </div>
+          </div>
+        </div>
       <% end %>
     </div>
-  </div>
-
-  <div class="card-body py-3">
-    <div class="row align-items-center">
-      <!-- Результат пользователя -->
-      <div class="col-md-5">
-        <div class="text-center mb-2">
-          <div class="fw-bold"><%= @athlete&.name || t('common.nobody') %></div>
-        </div>
-
-        <div class="row g-2">
-          <div class="col-6">
-            <div class="text-center p-2 bg-body-tertiary rounded-3 border">
-              <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:user_result].position < duel[:friend_result].position %>">
-                #<%= duel[:user_result].position %>
-              </div>
-              <small class="text-muted text-uppercase"><%= t '.position' %></small>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="text-center p-2 bg-body-tertiary rounded-3 border">
-              <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:winner] == :user %>">
-                <%= duel[:user_result].time_string if duel[:user_result].total_time %>
-              </div>
-              <small class="text-muted text-uppercase"><%= t '.time' %></small>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- VS разделитель -->
-      <div class="col-md-2 d-none d-md-block">
-        <div class="text-center">
-          <div class="position-relative">
-            <div class="border-start border-3 border-secondary opacity-25" style="height: 80px; margin: 0 auto; width: 1px;"></div>
-            <div class="position-absolute top-50 start-50 translate-middle">
-              <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill shadow-sm">VS</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Мобильный разделитель -->
-      <div class="col-12 d-md-none">
-        <hr class="my-2">
-      </div>
-
-      <!-- Результат друга -->
-      <div class="col-md-5">
-        <div class="text-center mb-2">
-          <div class="fw-bold"><%= duel[:friend_result].athlete.name %></div>
-        </div>
-
-        <div class="row g-2">
-          <div class="col-6">
-            <div class="text-center p-2 bg-body-tertiary rounded-3 border">
-              <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:friend_result].position < duel[:user_result].position %>">
-                #<%= duel[:friend_result].position %>
-              </div>
-              <small class="text-muted text-uppercase"><%= t '.position' %></small>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="text-center p-2 bg-body-tertiary rounded-3 border">
-              <div class="h5 mb-1 <%= 'text-success fw-bold' if duel[:winner] == :friend %>">
-                <%= duel[:friend_result].time_string if duel[:friend_result].total_time %>
-              </div>
-              <small class="text-muted text-uppercase"><%= t '.time' %></small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <% if duel[:time_difference] || duel[:position_difference] %>
-      <hr class="my-3">
-      <div class="row">
-        <div class="col-12">
-          <div class="d-flex justify-content-center gap-4">
-            <% if duel[:time_difference] %>
-              <div class="text-center">
-                <div class="bg-info bg-opacity-10 rounded-3 p-2 border border-info border-opacity-25">
-                  <div class="small text-muted mb-1 text-uppercase fw-semibold"><%= t '.time_difference' %></div>
-                  <div class="h6 mb-0 text-info fw-bold"><%= Result.time_string duel[:time_difference] %></div>
-                </div>
-              </div>
-            <% end %>
-
-            <% if duel[:position_difference] %>
-              <div class="text-center">
-                <div class="bg-warning bg-opacity-10 rounded-3 p-2 border border-warning border-opacity-25">
-                  <div class="small text-muted mb-1 text-uppercase fw-semibold"><%= t '.position_difference' %></div>
-                  <div class="h6 mb-0 text-warning-emphasis fw-bold">
-                    <%= pluralize(duel[:position_difference], t('.position_singular'), t('.position_plural')) %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+  <% end %>
+<% end %>

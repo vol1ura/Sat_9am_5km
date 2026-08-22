@@ -1,0 +1,7 @@
+<span class="last">
+  <% unless current_page.last? %>
+    <%= link_to url, remote: remote, aria: { label: 'Last page' } do %>
+      <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+    <% end %>
+  <% end %>
+</span>

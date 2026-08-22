@@ -1,0 +1,56 @@
+<%= render Ui::SheetComponent.new do %>
+  <% if Date.current.month == 12 || (Date.current.month == 1 && Date.current.day == 1) %>
+    <section class="py-3">
+      <ul class="space-y-1">
+        <li>
+          <%= link_to page_path(page: 'additional-events'), class: nav_sheet_link_class(active: controller_name == 'pages' && params[:page] == 'additional-events') do %>
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-snowman w-4 text-center" aria-hidden="true"></i>
+              <%= nav_label(:'1_january') %>
+            </span>
+          <% end %>
+        </li>
+      </ul>
+    </section>
+  <% end %>
+
+  <% Navigation::SHEET_SECTIONS.each do |section| %>
+    <section class="py-3">
+      <% if section[:key].present? %>
+        <h3 class="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-ink-muted">
+          <%= nav_label(section[:key]) %>
+        </h3>
+      <% end %>
+      <ul class="space-y-1">
+        <% section[:items].each do |item| %>
+          <li>
+            <%= link_to nav_path(item), class: nav_sheet_link_class(active: nav_active?(item)) do %>
+              <%= nav_label(item[:key]) %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <section class="border-t border-line py-3">
+    <ul class="space-y-1">
+      <li>
+        <button type="button" class="<%= nav_sheet_action_class %>" data-action="theme#toggle">
+          <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+          <%= t('navbars.top.theme', default: 'Тема') %>
+        </button>
+      </li>
+      <% locale_options.each do |locale, title, flag| %>
+        <li>
+          <%= link_to locale_switch_path(locale), class: nav_sheet_link_class(active: current_locale == locale) do %>
+            <span class="flex items-center gap-3">
+              <span><%= flag %></span>
+              <%= title %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

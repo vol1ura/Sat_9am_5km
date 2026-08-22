@@ -1,7 +1,9 @@
-<div class="row row-cols-1 g-3 mb-3">
+<% content_for :maps do %>true<% end %>
+
+<div class="mb-3 grid grid-cols-1 gap-3">
   <%= render 'card', header: do %>
     <div
-      class="route-map rounded border"
+      class="route-map rounded-lg border border-line"
       data-controller="route-map"
       data-route-map-url-value="<%= route_map_event_path(@event.code_name) %>"
       <% if @event.latitude.present? && @event.longitude.present? %>

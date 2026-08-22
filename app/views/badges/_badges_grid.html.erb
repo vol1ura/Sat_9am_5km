@@ -1,0 +1,7 @@
+<% if badges.any? %>
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    <%= render partial: 'badge', collection: badges %>
+  </div>
+<% else %>
+  <%= render Ui::EmptyComponent.new(title: t('badges.index.empty')) %>
+<% end %>

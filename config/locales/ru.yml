@@ -533,6 +533,7 @@ ru:
     show_more: Показать все
     show_less: Свернуть
   common:
+    close: Закрыть
     without_token: БЕЗ ТОКЕНА (создать)
     without_name: БЕЗ ИМЕНИ
     nobody: НЕИЗВЕСТНЫЙ
@@ -612,18 +613,27 @@ ru:
   navbars:
     top:
       s95: Суббота 9 утра 5 км
+      s95_line1: Суббота
+      s95_line2: 9 утра
+      s95_line3: 5 км
       events: Мероприятия
-      map: Карта мероприятий
       results: Результаты
       recent_results: Недавние забеги
       1_january: 1 января
       club_ratings: Клубные рейтинги
       top_results: Лучшие результаты
-      top_athletes: Рейтинг участников
-      top_volunteers: Рейтинг волонтёров
+      athletes: Участники
+      volunteers: Волонтёры
       friends_protocol: Дружеский протокол
       duels: Дружеские дуэли
-      badges: Личные награды
+      badges: Награды
+      movement: Движение
+      sections: Разделы
+      about_us: О нас
+      more: Ещё
+      theme: Тема
+      ratings: Рейтинги
+      ratings_hub: Все рейтинги
       profile: Профиль
       settings: Настройки
       admin_panel: Админка
@@ -635,7 +645,7 @@ ru:
     about_s95:
       title: Про С95
       rules: Правила
-      about: Движение С95
+      about: О нас
       donation: Поддержать проект
       feedback: Обратная связь
       joining: Хотите открыть С95?
@@ -657,7 +667,7 @@ ru:
       address: Москва, кв-л 114А Волжский Бульвар, к. 3, кв. 366
       registration_date: Дата регистрации
       headings:
-        explore: Навигация
+        sections: Разделы
         connect: Свяжитесь с нами
   articles:
     index:
@@ -944,6 +954,15 @@ ru:
         event: Мероприятие
       friends: Друзья
       followers: В друзьях
+      profile_sections: Разделы профиля
+      tab_results: Результаты
+      tab_stats: Статистика
+      tab_social: Друзья
+      tab_volunteering: Волонтёрство
+      statistics: Статистика
+      no_trophies: Пока нет трофеев
+      volunteering_chart: График волонтёрств
+      recent_results_chart: Недавние результаты
       duels: Дуэли
       duels_description: Сравнивайте свои результаты с друзьями на одинаковых забегах
       view_duels: Посмотреть дуэли
@@ -1033,6 +1052,8 @@ ru:
       about_badges: Мы стараемся придумывать награды, чтобы поощрить как быстрых бегунов, так и обычных участников, которые регулярно посещают наши мероприятия.
       achievements: Достижения
       thematic: Тематические
+      archive: Архив
+      empty: Наград пока нет
     badge:
       event_date: 'Дата мероприятия: %{date}'
     show:
@@ -1043,6 +1064,13 @@ ru:
       club: Клуб
       result: Время
       received_date: Дата получения
+      date: Дата
+      holders: Обладатели
+      holders_count:
+        one: '%{count} обладатель'
+        few: '%{count} обладателя'
+        many: '%{count} обладателей'
+        other: '%{count} обладателей'
       soon: Скоро!
       nobody_has: Пока ещё ни у кого нет этой награды.
   clubs:
@@ -1187,6 +1215,7 @@ ru:
     field:
       edit: Изменить
     edit:
+      title: Редактирование профиля
       delete_image: Удалить фото
       delete_phone: Удалить телефон %{phone}
       add_phone_html: 'Для участия в партнёрских программах необходимо добавить ваш номер телефона. Привязка и проверка телефона выполняются с помощью <a href="%{link}" target="_blank" rel="noopener">Telegram бота</a> командой <code>/phone</code>'

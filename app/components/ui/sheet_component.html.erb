@@ -1,0 +1,31 @@
+<div
+  id="<%= @id %>"
+  data-sheet-target="panel"
+  class="fixed inset-x-0 bottom-0 z-50 hidden max-h-[85vh] overflow-y-auto rounded-t-xl border border-line bg-surface pb-[env(safe-area-inset-bottom)] shadow-xl lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="<%= @id %>-title"
+>
+  <div class="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-surface px-4 py-3">
+    <h2 id="<%= @id %>-title" class="font-display text-lg font-semibold text-ink">
+      <%= t('navbars.top.more', default: 'Ещё') %>
+    </h2>
+    <button
+      type="button"
+      class="rounded-md p-2 text-ink-muted hover:bg-accent-subtle"
+      data-action="sheet#close"
+      aria-label="<%= t('common.close', default: 'Close') %>"
+    >
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="px-4 py-2">
+    <%= content %>
+  </div>
+</div>
+<div
+  data-sheet-target="backdrop"
+  data-action="click->sheet#close"
+  class="fixed inset-0 z-40 hidden bg-black/40 lg:hidden"
+  aria-hidden="true"
+></div>

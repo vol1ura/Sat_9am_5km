@@ -1,8 +1,12 @@
 <% head_info :description, t('.description') %>
-<h1><%= head_info :title, t('navbars.top.recent_results') %></h1>
 
-<div class="table-responsive">
-  <table id="activities" class="table table-striped">
+<%= render Ui::PageHeaderComponent.new(
+      title: head_info(:title, t('navbars.top.recent_results')),
+      description: t('.description'),
+    ) %>
+
+<div class="data-table-shell">
+  <table id="activities" class="data-table">
     <thead>
       <tr data-controller="table-head">
         <th><%= t '.date' %></th>
@@ -14,11 +18,11 @@
           <span><%= t '.town' %></span>
           <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
         </th>
-        <th class="text-center sortable" data-action="click->table-head#toggleSort">
+        <th class="sortable cell-center" data-action="click->table-head#toggleSort">
           <span><%= t '.athletes' %></span>
           <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
         </th>
-        <th class="text-center sortable" data-action="click->table-head#toggleSort">
+        <th class="sortable cell-center" data-action="click->table-head#toggleSort">
           <span><%= t '.volunteers' %></span>
           <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
         </th>
@@ -34,13 +38,13 @@
         </th>
       </tr>
     </thead>
-    <tbody class="table-group-divider">
+    <tbody>
       <%= render @activities, cached: ->(activity) { locale_cache_key(activity) } %>
     </tbody>
   </table>
 </div>
 
-<h2 class="mt-2"><%= t '.dashboard' %></h2>
+<h2 class="mt-6"><%= t '.dashboard' %></h2>
 <%= turbo_frame_tag 'dashboard', src: dashboard_activities_path, loading: 'lazy' do %>
   <%= render 'dashboard_skeleton' %>
 <% end %>

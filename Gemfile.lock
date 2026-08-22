@@ -112,16 +112,12 @@ GEM
     audited (5.8.0)
       activerecord (>= 5.2, < 8.2)
       activesupport (>= 5.2, < 8.2)
-    autoprefixer-rails (10.4.21.0)
-      execjs (~> 2)
     base64 (0.3.0)
     bcrypt (3.1.22)
     bcrypt_pbkdf (1.1.2)
     bigdecimal (4.1.2)
     bootsnap (1.23.0)
       msgpack (~> 1.2)
-    bootstrap (5.3.8)
-      popper_js (>= 2.11.8, < 3)
     brakeman (8.0.4)
       racc
     browser (6.2.0)
@@ -165,7 +161,8 @@ GEM
       rexml
     crass (1.0.7)
     csv (3.3.6)
-    dalli (3.2.8)
+    dalli (5.1.0)
+      logger
     dartsass-sprockets (3.2.1)
       railties (>= 4.0.0)
       sassc-embedded (~> 1.80.1)
@@ -337,7 +334,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
-    parallel (2.1.0)
+    parallel (1.28.0)
     parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
@@ -356,7 +353,6 @@ GEM
     platform_agent (1.0.1)
       activesupport (>= 5.2.0)
       useragent (~> 0.16.3)
-    popper_js (2.11.8)
     pp (0.6.4)
       prettyprint
     prettyprint (0.2.0)
@@ -464,7 +460,7 @@ GEM
       rspec-mocks (>= 3.13.0, < 5.0.0)
       rspec-support (>= 3.13.0, < 5.0.0)
     rspec-support (3.13.7)
-    rubocop (1.88.2)
+    rubocop (1.89.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -566,6 +562,13 @@ GEM
       ffi (~> 1.1)
     sys-filesystem (1.5.5)
       ffi (~> 1.1)
+    tailwindcss-rails (4.6.0)
+      railties (>= 7.0.0)
+      tailwindcss-ruby (~> 4.0)
+    tailwindcss-ruby (4.3.3)
+    tailwindcss-ruby (4.3.3-aarch64-linux-musl)
+    tailwindcss-ruby (4.3.3-x86_64-linux-gnu)
+    tailwindcss-ruby (4.3.3-x86_64-linux-musl)
     terser (1.2.7)
       execjs (>= 0.3.0, < 3)
     thor (1.5.0)
@@ -584,6 +587,10 @@ GEM
     uri (1.1.1)
     useragent (0.16.11)
     vcr (6.4.0)
+    view_component (4.12.0)
+      actionview (>= 7.1.0)
+      activesupport (>= 7.1.0)
+      concurrent-ruby (~> 1)
     warden (1.2.9)
       rack (>= 2.0.9)
     webmock (3.26.2)
@@ -612,10 +619,8 @@ DEPENDENCIES
   activeadmin-searchable_select
   activeadmin_quill_editor
   audited
-  autoprefixer-rails
   bcrypt_pbkdf (~> 1.1)
   bootsnap
-  bootstrap (~> 5.3.8)
   brakeman
   bullet
   bundler-audit
@@ -675,8 +680,10 @@ DEPENDENCIES
   sitemap_generator
   sys-cpu
   sys-filesystem
+  tailwindcss-rails
   terser
   vcr
+  view_component
   webmock
   whenever
 

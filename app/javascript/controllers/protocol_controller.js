@@ -3,6 +3,14 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
   static targets = ['absolute', 'male', 'female'];
 
+  connect() {
+    this.element.querySelectorAll('input[type="radio"]').forEach((radio) => {
+      radio.addEventListener('focus', (event) => {
+        event.target.blur();
+      });
+    });
+  }
+
   initialize() {
     this.maleTarget.innerHTML = this.absoluteTarget.innerHTML;
     this.#filterTable(this.maleTarget, 'male');
