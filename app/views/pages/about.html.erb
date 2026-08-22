@@ -1,35 +1,43 @@
-<%
-  actual_events = @country_events.without_friends.pluck(:name)
-  paragraphs = t '.paragraphs'
-%>
 <% head_info :description, t('.description') %>
-<h1><%= head_info :title, t('navbars.about_s95.about') %></h1>
 
-<% paragraphs.zip(VkPhotos.call(paragraphs.size)).each do |paragraph, photo| %>
-  <p><%= paragraph %></p>
-  <% if photo %>
-    <p class="text-center"><%= image_tag photo, class: 'img-fluid', alt: 'S95', loading: 'lazy' %></p>
-  <% end %>
-<% end %>
+<div class="page-container my-6 md:my-8">
+  <article class="article">
+    <header class="article__header">
+      <h1><%= head_info :title, t('navbars.about_s95.about') %></h1>
+    </header>
 
-<p>
-  <%=
-    t(
-      '.events_html',
-      link: activities_path,
-      events_count: actual_events.size,
-      events: actual_events.to_sentence,
-    )
-  %>
-</p>
+    <div class="article__body">
+      <% paragraphs = t '.paragraphs' %>
+      <% paragraphs.zip(VkPhotos.call(paragraphs.size)).each do |paragraph, photo| %>
+        <p><%= paragraph %></p>
+        <% if photo %>
+          <p class="text-center"><%= image_tag photo, class: 'mx-auto max-w-full rounded-xl', alt: 'S95', loading: 'lazy' %></p>
+        <% end %>
+      <% end %>
 
-<h2><%= t '.s95_abroad.title' %></h2>
-<%
-  countries_links =
-    Country
-      .where.not(code: top_level_domain)
-      .pluck(:code)
-      .map { |code| external_link_to t("country.#{code}"), "https://s95.#{code}/" }
-      .to_sentence
-%>
-<p><%= raw t '.s95_abroad.body', countries: countries_links %></p>
+      <p>
+        <%=
+          t(
+            '.events_html',
+            link: activities_path,
+            events_count: @country_events.without_friends.pluck(:name).size,
+            events: @country_events.without_friends.pluck(:name).to_sentence,
+          )
+        %>
+      </p>
+
+      <section>
+        <h2><%= t '.s95_abroad.title' %></h2>
+        <%
+          countries_links =
+            Country
+              .where.not(code: top_level_domain)
+              .pluck(:code)
+              .map { |code| external_link_to t("country.#{code}"), "https://s95.#{code}/" }
+              .to_sentence
+        %>
+        <p><%= raw t '.s95_abroad.body', countries: countries_links %></p>
+      </section>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,10 @@
+<% head_info :description, t('badges.index.about_badges') %>
+
+<%= render 'hub_tabs' %>
+
+<%= render Ui::PageHeaderComponent.new(
+      title: head_info(:title, t('badges.index.achievements')),
+      description: badge_hub_description,
+    ) %>
+
+<%= render 'badges_grid', badges: @badges %>

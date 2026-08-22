@@ -1,0 +1,11 @@
+<% if @href %>
+  <%= link_to @href, class: stat_classes do %>
+    <div class="font-display text-2xl tabular-nums text-ink"><%= @value %></div>
+    <div class="mt-1 text-sm text-ink-muted"><%= @label %></div>
+  <% end %>
+<% else %>
+  <div class="<%= stat_classes %>">
+    <div class="font-display text-2xl tabular-nums text-ink"><%= @value %></div>
+    <div class="mt-1 text-sm text-ink-muted"><%= @label %></div>
+  </div>
+<% end %>

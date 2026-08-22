@@ -1,18 +1,12 @@
 <% head_info :title, t('.title', club: @club.name) %>
 <% head_info :description, t('.description', club: @club.name) %>
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to t('.main'), root_path %>
-    </li>
-    <li class="breadcrumb-item">
-      <%= link_to t('.clubs'), clubs_path %>
-    </li>
-    <li class="breadcrumb-item">
-      <%= link_to @club.name, club_path(@club.slug) %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><%= t '.participants_activity' %></li>
+<nav aria-label="breadcrumb" class="mb-4 text-sm text-ink-muted">
+  <ol class="flex flex-wrap items-center gap-1">
+    <li><%= link_to t('.main'), root_path, class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/']"><%= link_to t('.clubs'), clubs_path, class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/']"><%= link_to @club.name, club_path(@club.slug), class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/'] text-ink" aria-current="page"><%= t '.participants_activity' %></li>
   </ol>
 </nav>
 
@@ -25,70 +19,70 @@
   <% end %>
 </p>
 
-<ul class="nav nav-tabs" id="protocol" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="results-tab" data-bs-toggle="tab" data-bs-target="#results-tab-pane" type="button" role="tab" aria-controls="results-tab-pane" aria-selected="true">
-      <%= t '.activities' %>
-    </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="volunteerings-tab" data-bs-toggle="tab" data-bs-target="#volunteerings-tab-pane" type="button" role="tab" aria-controls="volunteerings-tab-pane" aria-selected="false">
-      <%= t '.volunteering' %>
-    </button>
-  </li>
-</ul>
+<div class="radio-tabs mb-4">
+  <input type="radio" name="last-week-tabs" id="last-week-results" class="peer/results sr-only" checked tabindex="-1">
+  <input type="radio" name="last-week-tabs" id="last-week-volunteering" class="peer/volunteering sr-only" tabindex="-1">
 
-<div class="tab-content">
-  <div class="tab-pane fade show active" id="results-tab-pane" role="tabpanel" aria-labelledby="results-tab" tabindex="0">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><%= t '.position' %></th>
-          <th><%= t '.name' %></th>
-          <th><%= t '.total_time' %></th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
-        <% @activities_with_results.each do |activity| %>
-          <tr>
-            <th colspan="3" class="table-active bg-secondary-subtle">
-              <%= link_to activity.event_name, activity_path(activity) %>
-            </th>
-          </tr>
-          <% activity.results.includes(:athlete).where(athlete: { club: @club }).order(:position).each do |result| %>
-            <tr>
-              <td><%= result.position %></td>
-              <td><%= link_to result.athlete.name, result.athlete %></td>
-              <td><%= result.time_string %></td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="mb-4 flex gap-1 overflow-x-auto pb-1" role="tablist">
+    <label for="last-week-results" class="radio-tab-label"><%= t '.activities' %></label>
+    <label for="last-week-volunteering" class="radio-tab-label"><%= t '.volunteering' %></label>
   </div>
-  <div class="tab-pane fade" id="volunteerings-tab-pane" role="tabpanel" aria-labelledby="volunteerings-tab" tabindex="0">
-    <table class="table table-striped">
+
+  <div class="radio-tab-panel hidden peer-checked/results:block">
+  <div class="data-table-shell">
+  <table class="data-table sm:table-fixed">
+    <thead>
+      <tr>
+        <th class="cell-num-muted w-12"><%= t '.position' %></th>
+        <th><%= t '.name' %></th>
+        <th class="cell-num-strong"><%= t '.total_time' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @activities_with_results.each do |activity| %>
+        <tr>
+          <th colspan="3" class="bg-surface-elevated font-medium">
+            <%= link_to activity.event_name, activity_path(activity) %>
+          </th>
+        </tr>
+        <% activity.results.includes(:athlete).where(athlete: { club: @club }).order(:position).each do |result| %>
+          <tr>
+            <td class="cell-num-muted"><%= result.position %></td>
+            <td><%= link_to result.athlete.name, result.athlete, class: 'athlete-link font-semibold' %></td>
+            <td class="cell-num-strong"><%= result.time_string %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+  </div>
+
+  <div class="radio-tab-panel hidden peer-checked/volunteering:block">
+    <div class="data-table-shell">
+    <table class="data-table sm:table-fixed">
       <thead>
         <tr>
           <th><%= t '.name' %></th>
           <th><%= t '.role' %></th>
         </tr>
       </thead>
-      <tbody class="table-group-divider">
+      <tbody>
         <% @activities_with_volunteers.each do |activity| %>
           <tr>
-            <th colspan="2" class="table-warning table-active">
+            <th colspan="2" class="bg-warning-subtle font-medium">
               <%= link_to activity.event_name, activity_path(activity) %>
             </th>
           </tr>
           <% activity.volunteers_roster.includes(:athlete).where(athlete: { club: @club }).each do |volunteer| %>
             <tr>
-              <td><%= link_to volunteer.name, athlete_path(volunteer.athlete) %></td>
+              <td><%= link_to volunteer.name, athlete_path(volunteer.athlete), class: 'athlete-link font-semibold' %></td>
               <td><%= human_volunteer_role volunteer.role %></td>
             </tr>
           <% end %>
         <% end %>
       </tbody>
     </table>
+    </div>
   </div>
 </div>

@@ -1,0 +1,9 @@
+<nav class="page-subnav -mt-6 <%= @margin_class %> border-b border-line bg-surface/95 backdrop-blur-sm lg:sticky lg:top-14 lg:z-20" aria-label="<%= @aria_label %>">
+  <div class="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2">
+    <% @items.each do |item| %>
+      <%= link_to item[:href], class: page_subnav_link_class(active: item[:active]) do %>
+        <%= item[:label] %>
+      <% end %>
+    <% end %>
+  </div>
+</nav>

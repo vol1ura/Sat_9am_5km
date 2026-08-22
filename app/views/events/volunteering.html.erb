@@ -3,15 +3,11 @@
 <% head_info :description, t('.description', event: @event.name, date: closest_date) %>
 <%= turbo_stream_from :volunteers_roster %>
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <%= link_to t('.main_page'), root_path %>
-    </li>
-    <li class="breadcrumb-item">
-      <%= link_to @event.name, event_path(@event.code_name) %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><%= t '.main_title' %></li>
+<nav aria-label="breadcrumb" class="mb-4 text-sm text-ink-muted">
+  <ol class="flex flex-wrap items-center gap-1">
+    <li><%= link_to t('.main_page'), root_path, class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/']"><%= link_to @event.name, event_path(@event.code_name), class: 'text-brand hover:text-accent' %></li>
+    <li class="before:px-1 before:content-['/'] text-ink" aria-current="page"><%= t '.main_title' %></li>
   </ol>
 </nav>
 
@@ -29,22 +25,22 @@
 </p>
 
 <% unless @activities.empty? %>
-  <ul class="nav nav-tabs" id="protocol" role="tablist">
+  <div class="mb-4 flex gap-1 overflow-x-auto pb-1">
     <% @activities.each_with_index do |activity, idx| %>
-      <li class="nav-item" role="presentation">
-        <%=
-          link_to(
-            l(activity.date, format: :brief),
-            volunteering_event_path(@event.code_name, activity_id: activity.id),
-            class: "nav-link #{'active' if activity.id == @activity&.id || (idx.zero? && @activity.nil?)}",
-            role: 'tab',
-          )
-        %>
-      </li>
+      <% active = activity.id == @activity&.id || (idx.zero? && @activity.nil?) %>
+      <%=
+        link_to(
+          l(activity.date, format: :brief),
+          volunteering_event_path(@event.code_name, activity_id: activity.id),
+          class: "whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium #{active ? 'bg-accent text-accent-fg' : 'bg-surface-elevated text-ink-muted hover:text-ink'}",
+          role: 'tab',
+        )
+      %>
     <% end %>
-  </ul>
+  </div>
 
-  <table class="table">
+  <div class="data-table-shell">
+  <table class="data-table sm:table-fixed">
     <thead>
       <tr>
         <th><%= t '.role' %></th>
@@ -52,7 +48,7 @@
       </tr>
     </thead>
     <% if @activity %>
-      <tbody class="table-group-divider" data-turbo-prefetch="false">
+      <tbody data-turbo-prefetch="false">
         <%
           all_volunteers = @activity.volunteers.includes(:athlete).to_a
           volunteering_positions = @event.volunteering_positions.order(:rank).to_a
@@ -81,4 +77,5 @@
       </tbody>
     <% end %>
   </table>
+  </div>
 <% end %>

@@ -1,11 +1,13 @@
-<div class="list-group-item d-flex justify-content-between align-items-center pe-1 pe-sm-3">
-  <div class="d-flex align-items-center gap-2">
+<div class="flex items-center justify-between border-b border-line py-3 pe-1 sm:pe-3 last:border-b-0">
+  <div class="flex items-center gap-2">
     <%= image_tag user_image_path(friend.user), class: 'avatar-50', alt: friend.name %>
     <div>
-      <%= link_to friend.name, athlete_path(friend), class: 'text-decoration-none me-2', data: { turbo: false } %>
+      <%= link_to friend.name, athlete_path(friend), class: 'me-2 text-ink no-underline hover:text-brand', data: { turbo: false } %>
       <% if friend.going_to_event? %>
-        <span class="badge bg-success mt-1 mt-sm-0 text-wrap">
-          <%= t '.going_to', event: friend.going_to_event.name %>
+        <span class="mt-1 block sm:mt-0 sm:inline">
+          <%= render Ui::BadgeComponent.new(variant: :success, class: 'text-wrap') do
+            t('.going_to', event: friend.going_to_event.name)
+          end %>
         </span>
       <% end %>
     </div>
@@ -13,28 +15,17 @@
   <% if current_user&.athlete == @athlete %>
     <% if local_assigns[:is_friends_tab] %>
       <% if (friendship_id = @friendships_hash[friend.id]) %>
-        <%=
-          button_to(
-            friendship_path(friendship_id, viewed_athlete_id: @athlete.id),
-            method: :delete,
-            class: 'btn btn-sm btn-outline-danger ms-2',
-            form_class: 'd-inline-block',
-            data: { turbo: true, turbo_confirm: t('.confirm_unfriend') },
-          ) do
-        %>
-          <i class="fa-solid fa-user-minus"></i>
+        <%= form_with url: friendship_path(friendship_id, viewed_athlete_id: @athlete.id), method: :delete, class: 'ms-2 inline', data: { turbo: true, turbo_confirm: t('.confirm_unfriend') } do %>
+          <%= render Ui::ButtonComponent.new(variant: :secondary, size: :sm, type: 'submit', class: 'text-danger hover:bg-danger-subtle') do %>
+            <i class="fa-solid fa-user-minus"></i>
+          <% end %>
         <% end %>
       <% end %>
     <% elsif !@friendships_hash[friend.id] %>
-      <%=
-        button_to(
-          friendships_path(friend_id: friend.id, viewed_athlete_id: @athlete.id),
-          class: 'btn btn-sm btn-outline-primary ms-2',
-          form_class: 'd-inline-block',
-          data: { turbo: true, turbo_confirm: t('.confirm_add', name: friend.name) },
-        ) do
-      %>
-        <i class="fa-solid fa-user-plus"></i>
+      <%= form_with url: friendships_path(friend_id: friend.id, viewed_athlete_id: @athlete.id), class: 'ms-2 inline', data: { turbo: true, turbo_confirm: t('.confirm_add', name: friend.name) } do %>
+        <%= render Ui::ButtonComponent.new(variant: :secondary, size: :sm, type: 'submit') do %>
+          <i class="fa-solid fa-user-plus"></i>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

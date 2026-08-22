@@ -1,27 +1,38 @@
 <% head_info :description, t('.description') %>
-<h1><%= head_info :title, t('.title') %></h1>
 
-<p><%= t '.description' %></p>
+<%= render 'hub_tabs' %>
 
-<%= form_with url: results_ratings_path, method: :get, html: { class: 'mt-4 mb-2', role: 'search' } do |f| %>
+<%= render Ui::PageHeaderComponent.new(
+  title: head_info(:title, t('.title')),
+  description: t('.description'),
+) %>
+
+<%= form_with url: results_ratings_path, method: :get, html: { class: 'mb-6', role: 'search' } do |f| %>
   <%= f.hidden_field :gender, value: params[:gender].presence || 'male', id: 'gender-input' %>
-  <div class="row g-2">
-    <div class="col-12 col-sm-6 col-lg-3">
-      <%= f.text_field :name, value: params[:name], class: 'form-control', placeholder: t('.name_placeholder'), 'aria-label': t('.name_placeholder') %>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3" data-controller="search-combobox" data-search-combobox-initial-id-value="<%= @club&.id %>" data-search-combobox-initial-name-value="<%= @club&.name %>">
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <%= f.text_field :name,
+                     value: params[:name],
+                     class: form_input_class,
+                     placeholder: t('.name_placeholder'),
+                     'aria-label': t('.name_placeholder') %>
+    <div data-controller="search-combobox" data-search-combobox-initial-id-value="<%= @club&.id %>" data-search-combobox-initial-name-value="<%= @club&.name %>">
       <%= f.combobox :club_id, search_clubs_path, id: 'club-id-box', placeholder: t('.club_placeholder') %>
     </div>
-    <div class="col-12 col-sm-6 col-lg-3" data-controller="search-combobox" data-search-combobox-initial-id-value="<%= @event&.id %>" data-search-combobox-initial-name-value="<%= @event&.name %>">
+    <div data-controller="search-combobox" data-search-combobox-initial-id-value="<%= @event&.id %>" data-search-combobox-initial-name-value="<%= @event&.name %>">
       <%= f.combobox :event_id, search_events_path, id: 'event-id-box', placeholder: t('.event_placeholder') %>
     </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <button class="btn btn-outline-primary me-2" type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>
+    <div class="flex flex-wrap gap-2">
+      <%= render Ui::ButtonComponent.new(variant: :secondary, size: :md, type: 'submit') do %>
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         <%= t '.search_button' %>
-      </button>
-      <%= link_to results_ratings_path(gender: params.key?(:gender) ? params[:gender] : 'male'), id: 'results-reset', class: 'btn btn-outline-secondary' do %>
-        <i class="fa-solid fa-times"></i>
+      <% end %>
+      <%= render Ui::ButtonComponent.new(
+            variant: :ghost,
+            size: :md,
+            href: results_ratings_path(gender: params.key?(:gender) ? params[:gender] : 'male'),
+            id: 'results-reset',
+          ) do %>
+        <i class="fa-solid fa-times" aria-hidden="true"></i>
         <%= t '.reset_button' %>
       <% end %>
     </div>
@@ -29,53 +40,40 @@
 <% end %>
 
 <div
-  class="mb-4"
   data-controller="table"
   data-table-url-value="<%= results_table_ratings_path %>"
   data-table-params-value="gender">
-  <ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button
-        class="nav-link <%= params[:gender] == 'female' ? '' : 'active' %>"
-        type="button"
-        role="tab"
-        aria-controls="male"
-        data-table-target="tab"
-        data-gender="male"
-        data-action="click->table#switchTab click->table#setGender">
-        <%= t '.men' %>
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button
-        class="nav-link <%= params[:gender] == 'female' ? 'active' : '' %>"
-        type="button"
-        role="tab"
-        aria-controls="female"
-        data-table-target="tab"
-        data-gender="female"
-        data-action="click->table#switchTab click->table#setGender">
-        <%= t '.women' %>
-      </button>
-    </li>
-  </ul>
+  <div class="mb-4 flex gap-1 overflow-x-auto pb-1" role="tablist">
+    <% %w[male female].each do |gender| %>
+      <% active = params[:gender] == gender || (gender == 'male' && params[:gender].blank?) %>
+      <%= button_tag t(".#{gender == 'male' ? 'men' : 'women'}"),
+                     type: 'button',
+                     role: 'tab',
+                     class: "whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium #{active ? 'active bg-accent text-accent-fg' : 'bg-surface-elevated text-ink-muted hover:text-ink'}",
+                     data: {
+                       table_target: 'tab',
+                       gender: gender,
+                       action: 'click->table#switchTab click->table#setGender',
+                     } %>
+    <% end %>
+  </div>
 
-  <div class="table-responsive">
-    <table class="table table-striped">
+  <div class="data-table-shell">
+    <table class="data-table min-w-[640px] md:table-fixed md:min-w-0">
       <thead>
         <tr>
-          <th scope="col" class="pe-0 pe-md-2">#</th>
+          <th class="cell-num w-12">#</th>
           <% if params[:name].present? %>
-            <th scope="col" class="pe-0 pe-md-2"><%= t '.abs' %></th>
+            <th class="cell-num w-16"><%= t '.abs' %></th>
           <% end %>
-          <th scope="col"><%= t '.result' %></th>
-          <th scope="col" class="ps-0 ps-md-2"><%= t '.athlete' %></th>
-          <th scope="col" class="ps-0 ps-md-2"><%= t '.date' %></th>
-          <th scope="col"><%= t '.club' %></th>
-          <th scope="col"><%= t '.event' %></th>
+          <th class="cell-num-strong w-24"><%= t '.result' %></th>
+          <th><%= t '.athlete' %></th>
+          <th class="w-28"><%= t '.date' %></th>
+          <th class="w-40"><%= t '.club' %></th>
+          <th><%= t '.event' %></th>
         </tr>
       </thead>
-      <tbody class="table-group-divider" data-table-target="content">
+      <tbody data-table-target="content">
         <%= render 'loading_indicator', colspan: params[:name].present? ? 7 : 6 %>
       </tbody>
     </table>

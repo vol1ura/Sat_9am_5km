@@ -1,10 +1,16 @@
 <% head_info :description, "Политика обработки персональных данных пользователей и участников мероприятий проекта С95 (#{request.host})" %>
-<h1><%= head_info :title, 'Политика обработки персональных данных' %></h1>
 
+<div class="page-container my-6 md:my-8">
+  <article class="article">
+    <header class="article__header">
+      <h1><%= head_info :title, 'Политика обработки персональных данных' %></h1>
+    </header>
+
+    <div class="article__body">
 <% policy_page_url = page_url(page: 'privacy-policy') %>
 <% site_url = root_url %>
 
-<p class="text-body-secondary">
+<p class="text-ink-muted">
   Действующая редакция от <%= l Date.new(2026, 5, 1) %>.
   Сайт: <%= link_to site_url, site_url %>.
 </p>
@@ -314,3 +320,6 @@
     знакомясь с её актуальной редакцией.
   </p>
 </section>
+    </div>
+  </article>
+</div>

@@ -1,23 +1,47 @@
 import { Controller } from '@hotwired/stimulus';
+import {
+  CHART_IDS,
+  accentChartThemeUpdateOptions,
+  heatmapThemeUpdateOptions,
+  sparklineThemeUpdateOptions,
+  themeUpdateOptions,
+} from 'charts/theme';
+
+const STORAGE_KEY = 's95_theme';
+
+const SPARKLINE_CHARTS = {
+  'results-count-chart': 0,
+  'volunteers-count-chart': 1,
+};
 
 export default class extends Controller {
-  async toggle() {
-    const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-bs-theme', newTheme);
-    localStorage.setItem('s95_theme', newTheme);
+  toggle() {
+    const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+    localStorage.setItem(STORAGE_KEY, next);
+    this.applyTheme(next);
+    this.updateCharts();
+  }
 
-    const event_charts = document.querySelector('div[data-controller="event"]');
-    if (!event_charts) return;
+  applyTheme(mode) {
+    document.documentElement.classList.toggle('dark', mode === 'dark');
+  }
 
+  async updateCharts() {
     const { default: ApexCharts } = await import('apexcharts');
-    ['results-count-chart', 'volunteers-count-chart'].forEach(chartId => {
-      ApexCharts.exec(chartId, 'updateOptions', {
-        theme: {
-          mode: newTheme,
-        },
-        colors: [newTheme === 'dark' ? '#4a5568' : '#dce6ec'],
-      }, false, true);
+    const baseOptions = themeUpdateOptions();
+
+    CHART_IDS.forEach((chartId) => {
+      let chartOptions = baseOptions;
+
+      if (chartId in SPARKLINE_CHARTS) {
+        chartOptions = sparklineThemeUpdateOptions(SPARKLINE_CHARTS[chartId]);
+      } else if (chartId === 'athlete-results-chart') {
+        chartOptions = accentChartThemeUpdateOptions();
+      } else if (chartId === 'h-index-chart') {
+        chartOptions = heatmapThemeUpdateOptions();
+      }
+
+      ApexCharts.exec(chartId, 'updateOptions', chartOptions, false, true);
     });
   }
 }

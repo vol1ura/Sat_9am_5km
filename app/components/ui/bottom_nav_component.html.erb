@@ -1,0 +1,24 @@
+<nav class="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface md:hidden" aria-label="Mobile navigation">
+  <ul class="mx-auto flex h-14 max-w-lg items-stretch justify-around">
+    <% Navigation::BOTTOM_NAV_ITEMS.each do |item| %>
+      <li class="flex flex-1">
+        <% if item[:action] == :sheet %>
+          <button
+            type="button"
+            class="flex flex-1 flex-col items-center justify-center gap-0.5 text-xs text-ink-muted"
+            data-action="sheet#open"
+          >
+            <i class="fa-solid fa-<%= item[:icon] %> text-lg" aria-hidden="true"></i>
+            <span><%= t('navbars.top.more', default: 'Ещё') %></span>
+          </button>
+        <% else %>
+          <% active = nav_active?(item) %>
+          <%= link_to nav_path(item), class: nav_bottom_link_class(active:) do %>
+            <i class="fa-solid fa-<%= item[:icon] %> text-lg" aria-hidden="true"></i>
+            <span><%= nav_label(item[:key]) %></span>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

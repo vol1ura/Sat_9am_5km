@@ -2,13 +2,13 @@
   activity_date = result.date
   event = result.activity.event
 %>
-<%= tag.tr class: ['result', { 'collapse multi-collapse' => result_counter > 14 }] do %>
-  <td><%= total_results - result_counter %></td>
-  <td><%= link_to l(activity_date), result.activity %></td>
-  <%= tag.td class: 'total-time', data: { sec: result.total_time, timestamp: activity_date.to_datetime.to_i * 1000 } do %>
+<%= tag.tr class: ['result', ({ 'multi-collapse hidden' => result_counter > 14 })] do %>
+  <td class="cell-num-muted"><%= total_results - result_counter %></td>
+  <td><%= link_to l(activity_date), result.activity, class: 'text-brand hover:text-accent' %></td>
+  <%= tag.td class: 'total-time cell-num-strong', data: { sec: result.total_time, timestamp: activity_date.to_datetime.to_i * 1000 } do %>
     <%= result.time_string %>
   <% end %>
-  <td class="hidden-on-phone"><%= human_result_pace(result.total_time) %></td>
-  <td class="hidden-on-phone"><%= result.position %></td>
-  <td><%= link_to event.name, event_path(event.code_name) %></td>
+  <td class="hidden cell-num sm:table-cell"><%= human_result_pace(result.total_time) %></td>
+  <td class="hidden cell-num md:table-cell"><%= result.position %></td>
+  <td><%= link_to event.name, event_path(event.code_name), class: 'text-brand hover:text-accent' %></td>
 <% end %>

@@ -1,9 +1,9 @@
-<div id="cookie-consent" class="position-fixed bottom-0 start-0 end-0 bg-dark text-white p-3 mx-3 mb-3 rounded-3 border-secondary border z-2">
-  <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
-    <p class="mb-0 small">
+<div id="cookie-consent" class="fixed bottom-[calc(var(--bottomnav-height)+env(safe-area-inset-bottom)+0.75rem)] start-4 end-4 z-20 rounded-lg border border-line bg-surface-elevated p-4 shadow-lg lg:bottom-4">
+  <div class="mx-auto flex max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
+    <p class="mb-0 text-sm text-ink-muted">
       <%= t('cookie_consent.message') %>
-      <%= link_to t('cookie_consent.policy_link'), page_path(page: 'privacy-policy'), class: 'text-info' %>
+      <%= link_to t('cookie_consent.policy_link'), page_path(page: 'privacy-policy'), class: 'text-brand hover:text-accent' %>
     </p>
-    <%= button_to t('cookie_consent.accept_button'), cookie_consent_path, class: 'btn btn-light btn-sm flex-shrink-0' %>
+    <%= button_to t('cookie_consent.accept_button'), cookie_consent_path, class: 'shrink-0 rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-fg' %>
   </div>
 </div>

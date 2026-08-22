@@ -534,6 +534,7 @@ sr:
     show_more: Prikaži više
     show_less: Prikaži manje
   common:
+    close: Zatvori
     without_token: BEZ TOKENA (napravi)
     without_name: BEZ IMENA
     nobody: NEPOZNATO
@@ -613,17 +614,27 @@ sr:
   navbars:
     top:
       s95: Subota 9 ujutru 5 km
+      s95_line1: Subota
+      s95_line2: 9 ujutru
+      s95_line3: 5 km
       events: Događaji
       results: Rezultati
       recent_results: Skorašnji rezultati
       1_january: 1 januar
       club_ratings: Klubovi
       top_results: Najbolji rezultati
-      top_athletes: Rejting sportista
-      top_volunteers: Rejting volontera
+      athletes: Sportisti
+      volunteers: Volonteri
       friends_protocol: Prijateljski protokol
       duels: Trkački dueli
-      badges: Bedževi
+      badges: Nagrade
+      movement: Pokret
+      sections: Odeljci
+      about_us: O nama
+      more: Više
+      theme: Tema
+      ratings: Rang liste
+      ratings_hub: Sve rang liste
       profile: Profil
       settings: Podešavanja
       admin_panel: Administratorski panel
@@ -635,7 +646,7 @@ sr:
     about_s95:
       title: O S95
       rules: Pravila
-      about: S95 pokret
+      about: O nama
       donation: Podržite projekat
       feedback: Povratne informacije
       joining: Želite S95 kod vas?
@@ -657,7 +668,7 @@ sr:
       registration_date: Datum registracije
       address: Moskva, kv-l 114A Volžski bulvar, zd. 3, kv. 366
       headings:
-        explore: Navigacija
+        sections: Odeljci
         connect: Kontaktirajte nas
   articles:
     index:
@@ -935,6 +946,14 @@ sr:
       mission_minute_bingo: Misija "60 sekundi bingo!"
       friends: Prijatelji
       followers: Pratioci
+      profile_sections: Sekcije profila
+      tab_results: Rezultati
+      tab_stats: Statistika
+      tab_social: Prijatelji
+      tab_volunteering: Volontiranje
+      statistics: Statistika
+      no_trophies: Još nema trofeja
+      volunteering_chart: Grafikon volontiranja
       duels: Dueli
       duels_description: Poredite svoje rezultate sa prijateljima na istim trkama
       view_duels: Pogledaj duele
@@ -955,6 +974,7 @@ sr:
       prediction_hint: Prognoza na osnovu najboljeg rezultata u S95 događajima za posljednje 3 mjeseca. Rezultat je moguć samo ako su ispunjeni uslovi za treninge, odgovarajuće za određenu dužinu.
       no_personal_bests: Lični rekordi nisu navedeni.
       no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
+      recent_results_chart: Nedavni rezultati
     statistics:
       volunteering_chart:
         h_index: h-indeks
@@ -1039,6 +1059,8 @@ sr:
       about_badges: Trudimo se da smislimo nagrade kako bismo ohrabrili brze trkače i redovne učesnike koji redovno prisustvuju našim događajima.
       achievements: Dostignuća
       thematic: Tematske
+      archive: Arhiva
+      empty: Nagrada još nema
     badge:
       event_date: 'Datum događaja: %{date}'
     show:
@@ -1049,6 +1071,12 @@ sr:
       club: Klub
       result: Vreme
       received_date: Datum prijema
+      date: Datum
+      holders: Nositelji
+      holders_count:
+        one: '%{count} nositelj'
+        few: '%{count} nositelja'
+        other: '%{count} nositelja'
       soon: Uskoro!
       nobody_has: Još niko nema tu nagradu.
   clubs:
@@ -1193,6 +1221,7 @@ sr:
     field:
       edit: Izmeni
     edit:
+      title: Uređivanje profila
       delete_image: Obriši sliku
       delete_phone: Obriši telefon %{phone}
       add_phone_html: 'Za učešće u partnerskim programima potrebno je dodati vaš broj telefona. Povezivanje i provera telefona se vrše pomoću <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a> komandom <code>/phone</code>'

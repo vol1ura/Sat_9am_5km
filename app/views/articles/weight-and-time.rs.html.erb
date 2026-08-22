@@ -1,33 +1,35 @@
 <% content_for :title, 'Kako težina utiče na rezultat u trčanju' %>
 <% content_for :description, 'Pojednostavljeno: smanjenje mase može poboljšati procenjeno vreme finiša. Kalkulator pokazuje procenu promene vremena na distancama 5, 10, 21.1 i 42.2 km.' %>
 
-<div class="container my-3 article">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-10 col-xl-8">
-      <%= render partial: 'shared/breadcrumbs', locals: { items: [{ name: t('activities.show.main_page'), path: root_path }, { name: 'Članci', path: articles_path }, { name: 'Težina i rezultat', current: true }] } %>
+<div class="page-container my-6 md:my-8">
+  <article class="article article--wide">
+    <%= render partial: 'shared/breadcrumbs', locals: { items: [{ name: t('activities.show.main_page'), path: root_path }, { name: 'Članci', path: articles_path }, { name: 'Težina i rezultat', current: true }] } %>
 
-      <h1 class="mb-3">Kako težina utiče na rezultate u trčanju</h1>
+    <header class="article__header">
+      <h1>Kako težina utiče na rezultate u trčanju</h1>
+    </header>
 
-      <section class="mb-3">
+    <div class="article__body">
+      <section class="article__intro">
         <p>
           Smanjenje viška telesne mase može pozitivno uticati na brzinu, ali to nije uvek tačno. Ako se smanjuje funkcionalna masa (mišići),
           rezultat se može, naprotiv, pogoršati. Ispod je pojednostavljen kalkulator po motivima pristupa Džeka Danijelsa (autor knjige "Daniels' Running Formula"): pod ostalim istim uslovima promena mase
           utiče na proračunatu brzinu i, shodno tome, na vreme finiša.
         </p>
-        <p class="mb-0 text-muted">
+        <p>
           Važno: ovo su približne procene za ravan profil staze. Kalkulator ne uzima u obzir uzrast, visinu i pol, kao ni nivo utreniranosti.
         </p>
       </section>
 
-      <section class="card bg-body-tertiary border-primary border-opacity-25 mb-4" data-controller="weight-time">
-        <div class="card-header mt-0">
-          <h2 class="fs-5 card-title mb-0">Uticaj težine na rezultat</h2>
+      <section class="article__tool" data-controller="weight-time">
+        <div class="article__tool-header">
+          <h2>Uticaj težine na rezultat</h2>
         </div>
-        <div class="card-body">
-          <div class="row g-3 align-items-end">
-            <div class="col-12 col-md-4">
-              <label for="distance" class="form-label">Distanca</label>
-              <select id="distance" class="form-select" data-action="change->weight-time#clear" data-weight-time-target="distance">
+        <div class="article__tool-body">
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+            <div>
+              <label for="distance" class="block text-sm font-medium text-ink">Distanca</label>
+              <select id="distance" class="<%= form_input_class(extra: 'mt-1') %>" data-action="change->weight-time#clear" data-weight-time-target="distance">
                 <option value="5000">5 km</option>
                 <option value="10000">10 km</option>
                 <option value="21100">21.1 km</option>
@@ -35,32 +37,32 @@
               </select>
             </div>
 
-            <div class="col-12 col-md-4">
-              <label for="weightKg" class="form-label">Vaša trenutna težina (kg)</label>
-              <input id="weightKg" type="number" step="0.1" min="20" max="200" class="form-control" placeholder="npr. 72.5" inputmode="numeric" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="weight">
+            <div>
+              <label for="weightKg" class="block text-sm font-medium text-ink">Vaša trenutna težina (kg)</label>
+              <input id="weightKg" type="number" step="0.1" min="20" max="200" class="<%= form_input_class(extra: 'mt-1') %>" placeholder="npr. 72.5" inputmode="numeric" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="weight">
             </div>
 
-            <div class="col-12 col-md-4">
-              <label for="finishTime" class="form-label">Vaše vreme na izabranoj distanci</label>
-              <input id="finishTime" type="text" class="form-control" placeholder="hh:mm:ss" inputmode="numeric" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="time" data-controller="time-input">
+            <div>
+              <label for="finishTime" class="block text-sm font-medium text-ink">Vaše vreme na izabranoj distanci</label>
+              <input id="finishTime" type="text" class="<%= form_input_class(extra: 'mt-1') %>" placeholder="hh:mm:ss" inputmode="numeric" data-action="input->weight-time#recalculate change->weight-time#recalculate" data-weight-time-target="time" data-controller="time-input">
             </div>
           </div>
 
           <hr>
 
           <div>
-            <p class="text-muted mb-2">Procena vremena na distanci pri promeni težine.</p>
-            <div class="">
-              <table class="table table-sm align-middle mb-0">
-                <thead>
-                  <tr>
-                    <th scope="col">Težina (kg)</th>
-                    <th scope="col">Prognoza rezultata</th>
-                    <th scope="col">Promena</th>
-                  </tr>
-                </thead>
-                <tbody class="table-group-divider" data-weight-time-target="tbody"></tbody>
-              </table>
+            <p class="mb-2 text-sm text-ink-muted">Procena vremena na distanci pri promeni težine.</p>
+            <div class="data-table-inset">
+            <table class="data-table data-table--compact">
+              <thead>
+                <tr>
+                  <th scope="col">Težina (kg)</th>
+                  <th scope="col">Prognoza rezultata</th>
+                  <th scope="col">Promena</th>
+                </tr>
+              </thead>
+              <tbody data-weight-time-target="tbody"></tbody>
+            </table>
             </div>
           </div>
         </div>
@@ -105,5 +107,5 @@
         </ul>
       </section>
     </div>
-  </div>
+  </article>
 </div>

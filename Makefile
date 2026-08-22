@@ -3,7 +3,7 @@ WEB_CONTAINER := `docker compose ps | grep web | cut -d ' ' -f1`
 target: bind
 
 project:
-	docker compose ps | grep -E '.web.[1-9].*(Up|running)' || docker compose up -d
+	docker compose up -d db redis web --remove-orphans
 
 bind: project
 	docker attach $(WEB_CONTAINER)
@@ -18,10 +18,17 @@ psql: project
 	docker compose exec -it db psql -U postgres s95_dev
 
 checkup:
-	docker compose exec web rubocop app config db lib spec && \
-	docker compose exec web yarn lint && \
-	docker compose exec web bundle exec ./bin/importmap audit && \
-	docker compose exec web bundle exec database_consistency
+	docker compose exec -T web rubocop app config db lib spec && \
+	docker compose exec -T web yarn lint && \
+	docker compose exec -T web bundle exec rails tailwindcss:build && \
+	docker compose exec -T web bundle exec ./bin/importmap audit && \
+	docker compose exec -T web bundle exec database_consistency
+
+css:
+	docker compose exec -T web bundle exec rails tailwindcss:build
+
+yarn:
+	docker compose run --rm -T web yarn install --frozen-lockfile
 
 build:
 	docker compose run --rm web bundle lock
@@ -34,4 +41,4 @@ clean_logs:
 	rm ./log/bullet.log
 	touch ./log/bullet.log
 
-.PHONY: project bind rc ash psql checkup build clean_logs
+.PHONY: project bind rc ash psql checkup build clean_logs css yarn

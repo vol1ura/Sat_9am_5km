@@ -1,0 +1,158 @@
+<header class="safe-top z-40 border-b border-line bg-surface/95 backdrop-blur-sm lg:sticky lg:top-0" aria-label="<%= t('navbars.top.s95') %>">
+  <div class="mx-auto flex min-h-14 w-full max-w-6xl items-center justify-between gap-1 px-4 py-1">
+    <div class="flex min-w-0 flex-1 items-center gap-1 lg:gap-2">
+      <%= link_to root_path, class: 'flex shrink-0 items-center gap-2', aria: { label: 'S95' } do %>
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-fill p-1.5">
+          <%= image_tag "/images/logo_hex_#{@current_date.saturday? ? 'on' : 'off'}.svg", alt: 'S95', class: 'h-full w-full object-contain' %>
+        </span>
+        <span class="hidden flex-col leading-none sm:flex">
+          <span class="font-display text-[10px] font-semibold text-ink xl:text-[11px]"><%= t('navbars.top.s95_line1') %></span>
+          <span class="font-display text-[10px] font-semibold text-ink xl:text-[11px]"><%= t('navbars.top.s95_line2') %></span>
+          <span class="font-display text-[10px] font-semibold text-ink xl:text-[11px]"><%= t('navbars.top.s95_line3') %></span>
+        </span>
+      <% end %>
+
+      <nav class="hidden ms-4 min-w-0 flex-1 items-center justify-start gap-0.5 md:flex xl:gap-1" aria-label="Primary">
+        <% Navigation::DESKTOP_NAV_ITEMS.each do |item| %>
+          <% if item[:children] %>
+            <div class="relative shrink-0" data-controller="dropdown">
+              <button
+                type="button"
+                class="inline-flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-2 text-sm font-medium text-ink hover:bg-accent-subtle xl:px-3"
+                data-dropdown-target="toggle"
+                aria-expanded="false"
+                aria-haspopup="menu"
+              >
+                <%= nav_label(item[:key]) %>
+                <i class="fa-solid fa-chevron-down text-[10px]" aria-hidden="true"></i>
+              </button>
+              <ul class="<%= dropdown_menu_class(min_width: 'min-w-48') %>" data-dropdown-target="menu">
+                <% item[:children].each do |child| %>
+                  <li>
+                    <%= link_to nav_path(child), class: nav_dropdown_link_class(active: nav_active?(child)) do %>
+                      <%= nav_label(child[:key]) %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% else %>
+            <%= link_to nav_path(item), class: nav_desktop_link_class(active: nav_active?(item)) do %>
+              <%= nav_label(item[:key]) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </nav>
+    </div>
+
+    <div class="flex shrink-0 items-center">
+      <div class="hidden md:flex">
+        <%= render Ui::IconButtonComponent.new(
+              icon: 'circle-half-stroke',
+              label: t('navbars.top.theme'),
+              data: { action: 'theme#toggle' },
+            ) %>
+      </div>
+
+      <div class="relative hidden md:flex" data-controller="dropdown">
+        <%= render Ui::IconButtonComponent.new(
+              icon: 'globe',
+              label: t('navbars.top.language'),
+              data: { dropdown_target: 'toggle' },
+              aria: { expanded: 'false', haspopup: 'menu' },
+            ) %>
+        <ul class="<%= dropdown_menu_class(align: :end) %>" data-dropdown-target="menu">
+          <% locale_options.each do |locale, title, flag| %>
+            <li>
+              <%= link_to locale_switch_path(locale), class: nav_dropdown_link_class(active: current_locale == locale) do %>
+                <span class="flex items-center gap-2">
+                  <span aria-hidden="true"><%= flag %></span>
+                  <%= title %>
+                  <% if current_locale == locale %>
+                    <i class="fa-solid fa-check ms-auto text-accent" aria-hidden="true"></i>
+                  <% end %>
+                </span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <%=
+        render Ui::IconButtonComponent.new(
+          icon: 'magnifying-glass',
+          label: t('navbars.top.search'),
+          data: {
+            search_overlay_target: 'toggle',
+            action: 'click->search-overlay#open',
+          },
+          aria: { expanded: 'false', controls: 'search-overlay-panel' },
+        )
+      %>
+
+      <% if user_signed_in? %>
+        <div class="relative flex ms-2" data-controller="dropdown">
+          <button
+            type="button"
+            class="inline-flex size-10 items-center justify-center rounded-full leading-none"
+            data-dropdown-target="toggle"
+            aria-label="<%= t('navbars.top.profile') %>"
+            aria-expanded="false"
+            aria-haspopup="menu"
+          >
+            <%= image_tag user_image_path(current_user), class: 'h-9 w-9 rounded-full border-2 border-line object-cover', alt: current_user.first_name %>
+          </button>
+          <ul class="<%= dropdown_menu_class(align: :end) %>" data-dropdown-target="menu">
+            <li><%= link_to t('navbars.top.profile'), athlete_path(current_user.athlete), class: nav_dropdown_link_class %></li>
+            <li><%= link_to t('navbars.top.settings'), user_path, class: nav_dropdown_link_class %></li>
+            <% if current_user.admin? || current_user.permissions.any? %>
+              <li><%= link_to t('navbars.top.admin_panel'), admin_root_path, class: nav_dropdown_link_class %></li>
+            <% end %>
+            <li><hr class="my-1 border-line"></li>
+            <li><%= link_to t('navbars.top.logout'), destroy_user_session_path, class: "#{nav_dropdown_link_class} text-danger hover:bg-danger-subtle", data: { turbo_prefetch: false } %></li>
+          </ul>
+        </div>
+      <% else %>
+        <div class="ms-2">
+          <%= render Ui::ButtonComponent.new(variant: :primary, size: :sm, href: new_user_session_path) do %>
+            <%= t('navbars.top.login') %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</header>
+
+<div
+  id="search-overlay-panel"
+  data-search-overlay-target="panel"
+  class="hidden border-b border-line bg-surface/95 px-4 py-3 backdrop-blur-sm"
+  role="search"
+>
+  <div class="mx-auto w-full max-w-6xl">
+    <%= form_with url: athletes_path, method: :get, class: 'ms-auto flex w-full max-w-md items-center gap-2 sm:max-w-lg lg:ms-auto lg:me-0' do |f| %>
+      <label class="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-line bg-surface-elevated px-3 py-2 shadow-sm transition focus-within:border-accent/40 focus-within:ring-2 focus-within:ring-focus-ring">
+        <i class="fa-solid fa-magnifying-glass shrink-0 text-sm text-ink-muted" aria-hidden="true"></i>
+        <%=
+          f.search_field(
+            :q,
+            data: { search_overlay_target: 'input' },
+            class: 'min-w-0 flex-1 border-0 bg-transparent text-sm text-ink outline-none placeholder:text-ink-muted',
+            placeholder: t('navbars.top.name_or_id'),
+            autocomplete: 'off',
+            'aria-label': t('navbars.top.search'),
+          )
+        %>
+      </label>
+      <%= f.submit t('navbars.top.search'), class: 'shrink-0 rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-fg hover:opacity-90' %>
+      <%=
+        render Ui::IconButtonComponent.new(
+          icon: 'xmark',
+          label: t('common.close', default: 'Close'),
+          class: 'shrink-0',
+          data: { action: 'search-overlay#close' },
+        )
+      %>
+    <% end %>
+  </div>
+</div>

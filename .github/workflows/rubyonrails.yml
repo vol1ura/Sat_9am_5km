@@ -32,6 +32,8 @@ jobs:
           bundler-cache: true
       - name: Lint Ruby files
         run: bundle exec rubocop --fail-fast -c .rubocop.yml
+      - name: Build Tailwind CSS
+        run: bundle exec rails tailwindcss:build
 
   lint-bundle:
     runs-on: ubuntu-24.04

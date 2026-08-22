@@ -1,11 +1,16 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <% Array(items).each do |item| %>
-      <% if item[:current] || item[:path].blank? %>
-        <li class="breadcrumb-item active" aria-current="page"><%= item[:name] %></li>
-      <% else %>
-        <li class="breadcrumb-item"><%= link_to item[:name], item[:path] %></li>
-      <% end %>
+<nav aria-label="breadcrumb" class="mb-4 text-sm text-ink-muted">
+  <ol class="flex flex-wrap items-center gap-1">
+    <% Array(items).each_with_index do |item, index| %>
+      <li class="flex items-center gap-1">
+        <% if index.positive? %>
+          <span class="text-line" aria-hidden="true">/</span>
+        <% end %>
+        <% if item[:current] || item[:path].blank? %>
+          <span class="text-ink" aria-current="page"><%= item[:name] %></span>
+        <% else %>
+          <%= link_to item[:name], item[:path], class: 'text-brand hover:text-accent' %>
+        <% end %>
+      </li>
     <% end %>
   </ol>
 </nav>

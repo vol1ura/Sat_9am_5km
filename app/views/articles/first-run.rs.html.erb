@@ -1,13 +1,15 @@
 <% content_for :title, 'Kako istrčati svojih prvih 5 km: saveti za početnike' %>
 <% content_for :description, 'Saveti o treninzima, opremi, tehnici i pripremi pre starta za početnike u trčanju.' %>
 
-<div class="container my-3 article">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-10 col-xl-8">
-      <%= render partial: 'shared/breadcrumbs', locals: { items: [{ name: t('activities.show.main_page'), path: root_path }, { name: 'Članci', path: articles_path }, { name: 'Prvih 5 km', current: true }] } %>
+<div class="page-container my-6 md:my-8">
+  <article class="article">
+    <%= render partial: 'shared/breadcrumbs', locals: { items: [{ name: t('activities.show.main_page'), path: root_path }, { name: 'Članci', path: articles_path }, { name: 'Prvih 5 km', current: true }] } %>
 
-      <h1 class="mb-3">Kako istrčati svojih prvih 5 km: saveti za početnike</h1>
+    <header class="article__header">
+      <h1>Kako istrčati svojih prvih 5 km: saveti za početnike</h1>
+    </header>
 
+    <div class="article__body">
       <section>
         <h2>1. Priprema</h2>
         <p>
@@ -22,9 +24,6 @@
         </p>
         <p><strong>Važno:</strong> slušajte svoje telo. Postepeno produžavajte vreme trčanja i skraćujte vreme hodanja.</p>
       </section>
-
-      <hr>
-
       <section>
         <h2>2. Prava oprema: kako se oblačiti po svakom vremenu</h2>
         <p>Osnova udobnog trčanja je prava odeća. Zaboravite na pamuk koji, upijajući znoj, postaje teži i prestaje da greje. Birajte samo <strong>sportske sintetičke materijale</strong> – lakši su, bolje odvode vlagu i ne gube termička svojstva kad se pokvase.</p>
@@ -44,9 +43,6 @@
         </p>
         <p>Pravilo: kada izađete napolje, treba da vam bude malo sveže. Posle 10 minuta trčanja ugrejaćete se i biće vam prijatno.</p>
       </section>
-
-      <hr>
-
       <section>
         <h2>3. Tehnika trčanja i disanja</h2>
         <ul>
@@ -56,9 +52,6 @@
           <li><strong>Disanje:</strong> Dišite prirodno. Nije obavezno disati samo na nos. Mnogi trkači dišu na usta, naročito pri visokom intenzitetu.</li>
         </ul>
       </section>
-
-      <hr>
-
       <section>
         <h2>4. Mogući problemi i rešenja</h2>
         <ul>
@@ -75,9 +68,6 @@
           </li>
         </ul>
       </section>
-
-      <hr>
-
       <section>
         <h2>5. Dan trke: stav i taktika</h2>
         <ul>
@@ -87,9 +77,6 @@
           <li><strong>Stav:</strong> Cilj — da završite sa osmehom i uživanjem.</li>
         </ul>
       </section>
-
-      <hr>
-
       <section>
         <h2>6. Oporavak: šta raditi posle cilja</h2>
         <ul>
@@ -105,5 +92,5 @@
         <p><strong>Glavni savet:</strong> Uživajte u procesu i uspećete!</p>
       </section>
     </div>
-  </div>
+  </article>
 </div>

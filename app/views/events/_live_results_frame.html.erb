@@ -1,42 +1,42 @@
 <%= turbo_frame_tag 'live_results_frame' do %>
-  <div class="card border-primary border-opacity-25 shadow h-100">
-    <div class="card-header">
-      <section class="fs-5 card-title mb-0">
-        <i class="fa-solid fa-stopwatch text-primary"></i>
+  <%= render Ui::CardComponent.new(class: 'h-full border-brand/25 shadow-sm') do |card| %>
+    <% card.with_header do %>
+      <section class="text-lg font-semibold">
+        <i class="fa-solid fa-stopwatch text-brand"></i>
         <% if live_results.key?('start_time') %>
-          <span class="text-primary ms-2 font-monospace"
+          <span class="ms-2 font-mono text-brand"
                 data-controller="live-timer"
                 data-live-timer-start-time-value="<%= live_results['start_time'] %>"
                 data-live-timer-target="time">
             --:--:--
           </span>
         <% else %>
-          <span class="text-primary ms-2 font-monospace">--:--:--</span>
+          <span class="ms-2 font-mono text-brand">--:--:--</span>
         <% end %>
       </section>
-    </div>
+    <% end %>
 
-    <div class="card-body">
-      <% if live_results.key?('results') %>
-        <table class="table table-striped align-middle">
-          <thead>
-            <tr>
-              <th scope="col"><%= t('.position') %></th>
-              <th scope="col"><%= t('.time') %></th>
-              <th scope="col"><%= t('.gap') %></th>
-            </tr>
-          </thead>
-          <tbody id="live-results" class="table-group-divider">
-            <%= render 'events/live_results', results: live_results['results'] %>
-          </tbody>
-        </table>
-      <% else %>
-        <div class="text-center py-4">
-          <i class="fa-solid fa-stopwatch fa-3x text-muted mb-3"></i>
-          <h5><%= t('.waiting_for_results') %></h5>
-          <p class="text-muted"><%= t('.results_will_appear') %></p>
-        </div>
-      <% end %>
-    </div>
-  </div>
+    <% if live_results.key?('results') %>
+      <div class="data-table-inset">
+      <table class="data-table data-table--compact">
+        <thead>
+          <tr>
+            <th scope="col" class="cell-num-muted"><%= t('.position') %></th>
+            <th scope="col" class="cell-num-strong"><%= t('.time') %></th>
+            <th scope="col" class="cell-num text-ink-muted"><%= t('.gap') %></th>
+          </tr>
+        </thead>
+        <tbody id="live-results">
+          <%= render 'events/live_results', results: live_results['results'] %>
+        </tbody>
+      </table>
+      </div>
+    <% else %>
+      <div class="py-4 text-center">
+        <i class="fa-solid fa-stopwatch mb-3 text-4xl text-ink-muted"></i>
+        <h5><%= t('.waiting_for_results') %></h5>
+        <p class="text-ink-muted"><%= t('.results_will_appear') %></p>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>

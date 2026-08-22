@@ -13,9 +13,7 @@ gem 'activeadmin-searchable_select'
 gem 'active_storage_dashboard'
 gem 'active_storage_validations'
 gem 'audited'
-gem 'autoprefixer-rails'
 gem 'bootsnap', require: false
-gem 'bootstrap', '~> 5.3.8'
 gem 'cancancan'
 gem 'dalli'
 gem 'dartsass-sprockets'
@@ -45,7 +43,9 @@ gem 'ruby-vips'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'sitemap_generator'
+gem 'tailwindcss-rails'
 gem 'terser'
+gem 'view_component'
 gem 'whenever', require: false
 
 # Rails Performance

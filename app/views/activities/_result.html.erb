@@ -1,40 +1,44 @@
 <% results_count = @results_count[result.athlete_id] %>
 
 <%= tag.tr data: { gender: result.athlete&.gender } do %>
-  <td class="position align-middle"><%= result.position %></td>
+  <td class="cell-num-muted"><%= result.position %></td>
   <td>
     <% if result.athlete_id %>
-      <%= link_to result.athlete.name.presence || t('common.nobody'), result.athlete, class: 'athlete-link fs-small-sm' %>
-      <div class="athlete-details fw-lighter">
+      <%= link_to result.athlete.name.presence || t('common.nobody'), result.athlete, class: 'athlete-link font-semibold' %>
+      <div class="text-sm font-light text-ink-muted">
         <%= t '.total_runs_html', count: results_count %>
         <% if @volunteering_r_count[result.athlete_id] %>
-          <div class="vr"></div>
+          <span class="mx-2 border-l border-line" aria-hidden="true"></span>
           <%= t '.total_volunteering_html', count: @volunteering_r_count[result.athlete_id] %>
         <% end %>
       </div>
     <% else %>
-      <span class="fs-small-sm"><%= t 'common.nobody' %></span>
+      <span><%= t 'common.nobody' %></span>
     <% end %>
   </td>
-  <td class="align-middle text-end">
+  <td class="cell-num-strong">
     <% if result.personal_best %>
-      <%= tag.i class: 'fa-solid fa-bolt text-primary', title: t('.personal_best') %>
+      <%= tag.i class: 'fa-solid fa-bolt text-brand', title: t('.personal_best') %>
     <% end %>
     <% if Badge.participating_thresholds[:result].include?(results_count) %>
-      <%= render partial: '/badge_icon', locals: { label: results_count, icon_class: 'text-primary' } %>
+      <%= render partial: '/badge_icon', locals: { label: results_count, icon_class: 'text-brand' } %>
     <% end %>
     <% if result.first_run %>
       <%=
         tag.i(
-          class: ['fa-solid fa-heart', results_count == 1 ? 'text-success' : 'text-primary'],
+          class: [
+            results_count == 1 ? 'fa-solid' : 'fa-regular',
+            'fa-heart text-brand',
+          ],
           title: t('.first_run'),
+          aria: { hidden: true },
         )
       %>
     <% end %>
     <%= result.time_string %>
   </td>
-  <td class="align-middle text-end"><%= human_result_pace result.total_time %></td>
-  <td class="hidden-on-phone align-middle">
+  <td class="cell-num"><%= human_result_pace result.total_time %></td>
+  <td class="hidden-on-phone">
     <% club = result.athlete&.club %>
     <%= link_to club.name, club_path(club.slug) if club %>
   </td>

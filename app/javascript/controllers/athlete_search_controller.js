@@ -5,7 +5,7 @@ export default class extends Controller {
 
   search() {
     const query = this.inputTarget.value.toLowerCase().trim();
-    const tables = this.element.parentElement.querySelectorAll('.tab-content table');
+    const tables = this.element.parentElement.querySelectorAll('.radio-tab-panel table');
 
     tables.forEach(table => this.#filterTable(table, query));
 

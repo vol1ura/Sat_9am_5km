@@ -1,12 +1,13 @@
+<% content_for :maps do %>true<% end %>
 <% head_info :title, t('.title') %>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1><%= t '.title' %></h1>
-  <%= link_to t('.as_list'), events_path, class: 'btn btn-outline-primary' %>
+<div class="mb-3 flex items-center justify-between gap-3">
+  <h1 class="font-display text-2xl font-bold text-ink"><%= t '.title' %></h1>
+  <%= render Ui::ButtonComponent.new(variant: :secondary, href: events_path, label: t('.as_list')) %>
 </div>
 
 <div
-  class="events-map rounded border"
+  class="events-map h-[600px] min-h-[300px] w-full rounded-lg border border-line"
   data-controller="map"
   data-map-button-label-value="<%= t('events.index.details') %>"
 ></div>

@@ -2,73 +2,70 @@
 <% head_info :title, t('.title', athlete_name:) %>
 <% head_info :description, t('.description', athlete_name:) %>
 
-<div class="row">
-  <div class="col-12">
-    <h1 class="mt-2"><%= t '.header' %></h1>
-    <p><%= t '.subheader' %></p>
-  </div>
+<%= render 'ratings/hub_tabs' %>
+
+<div>
+  <h1 class="mt-2"><%= t '.header' %></h1>
+  <p><%= t '.subheader' %></p>
 </div>
 
 <% if @duels_data.any? %>
-  <div class="row">
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
     <% @duels_data.each do |friend, data| %>
-      <div class="col-lg-6 col-12 mb-4">
-        <div class="card shadow-sm">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center gap-2">
+      <%= render Ui::CardComponent.new(class: 'shadow-sm') do |card| %>
+        <% card.with_header do %>
+          <div class="flex items-center justify-between gap-2 border-b border-line px-4 py-3">
+            <div class="flex items-center gap-2">
               <%= image_tag user_image_path(friend.user), class: 'avatar-50' %>
               <div>
-                <h5 class="mb-0">
-                  <%= link_to friend.name, athlete_path(friend), class: 'text-decoration-none' %>
+                <h5 class="mb-0 font-semibold">
+                  <%= link_to friend.name, athlete_path(friend), class: 'text-ink no-underline hover:text-brand' %>
                 </h5>
-                <small class="text-muted">
+                <small class="text-ink-muted">
                   <%= t '.duels_count', count: data[:stats][:total_duels] %>
                 </small>
               </div>
             </div>
             <div class="ms-1 text-end">
-              <%= link_to t('.view_all'), duel_path(friend), class: 'btn btn-sm btn-outline-primary text-nowrap' %>
+              <%= render Ui::ButtonComponent.new(variant: :secondary, size: :sm, href: duel_path(friend), class: 'text-nowrap', label: t('.view_all')) %>
             </div>
           </div>
+        <% end %>
 
-          <div class="card-body">
-            <div class="row g-2 mb-3">
-              <div class="col-6 text-center">
-                <div class="text-success h4 mb-0"><%= data[:stats][:user_wins] %></div>
-                <small class="text-muted"><%= t '.my_wins' %></small>
-              </div>
-              <div class="col-6 text-center">
-                <div class="text-danger h4 mb-0"><%= data[:stats][:friend_wins] %></div>
-                <small class="text-muted"><%= t '.friend_wins' %></small>
-              </div>
-            </div>
-
-            <div class="progress mb-2" style="height: 8px;">
-              <% win_rate = data[:stats][:user_win_rate] %>
-              <div class="progress-bar bg-success" style="width: <%= win_rate %>%"></div>
-            </div>
-            <div class="d-flex justify-content-between">
-              <small class="text-muted"><%= t '.win_rate' %>: <%= win_rate %>%</small>
-                <%= render 'friend_stats', stats: data[:stats] %>
-            </div>
-
-            <!-- Последние 3 дуэли -->
-            <div class="mt-3">
-              <h6 class="text-muted mb-2"><%= t '.recent_duels' %></h6>
-              <% data[:duels].first(3).each do |duel| %>
-                <%= render 'duel_compact', duel: %>
-              <% end %>
-            </div>
+        <div class="mb-3 grid grid-cols-2 gap-2">
+          <div class="text-center">
+            <div class="text-2xl font-semibold text-success"><%= data[:stats][:user_wins] %></div>
+            <small class="text-ink-muted"><%= t '.my_wins' %></small>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-semibold text-danger"><%= data[:stats][:friend_wins] %></div>
+            <small class="text-ink-muted"><%= t '.friend_wins' %></small>
           </div>
         </div>
-      </div>
+
+        <div class="mb-2 h-2 overflow-hidden rounded-full bg-surface-elevated">
+          <% win_rate = data[:stats][:user_win_rate] %>
+          <div class="h-full bg-success" style="width: <%= win_rate %>%"></div>
+        </div>
+        <div class="flex justify-between">
+          <small class="text-ink-muted"><%= t '.win_rate' %>: <%= win_rate %>%</small>
+          <%= render 'friend_stats', stats: data[:stats] %>
+        </div>
+
+        <div class="mt-3">
+          <h6 class="mb-2 text-ink-muted"><%= t '.recent_duels' %></h6>
+          <% data[:duels].first(3).each do |duel| %>
+            <%= render 'duel_compact', duel: %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 <% else %>
-  <div class="text-center py-5">
-    <i class="fa-solid fa-crossed-swords text-muted display-1"></i>
-    <h3 class="mt-3 text-muted"><%= t '.no_duels' %></h3>
-    <p class="text-muted"><%= t '.no_duels_description' %></p>
-    <%= link_to t('.profile'), athlete_path(@athlete), class: 'btn btn-primary' %>
+  <div class="py-5 text-center">
+    <i class="fa-solid fa-crossed-swords text-6xl text-ink-muted"></i>
+    <h3 class="mt-3 text-ink-muted"><%= t '.no_duels' %></h3>
+    <p class="text-ink-muted"><%= t '.no_duels_description' %></p>
+    <%= render Ui::ButtonComponent.new(variant: :primary, href: athlete_path(@athlete), label: t('.profile')) %>
   </div>
 <% end %>
