@@ -43,5 +43,16 @@ RSpec.describe Volunteer do
       volunteer.activity = build :activity
       expect(volunteer).to be_valid
     end
+
+    it 'does not allow the same athlete to volunteer at two different parks on the same day' do
+      athlete = create(:athlete)
+      date = Date.current
+      create(:volunteer, athlete: athlete, activity: create(:activity, date:), role: :timer)
+
+      other_park_volunteer = build(:volunteer, athlete: athlete, activity: create(:activity, date:), role: :marshal)
+
+      expect(other_park_volunteer).not_to be_valid
+      expect(other_park_volunteer.errors[:athlete]).to be_present
+    end
   end
 end

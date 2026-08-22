@@ -9,6 +9,8 @@ class Activity < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :athletes, through: :results
   has_many :volunteers, dependent: :destroy, inverse_of: :activity
+  has_many :volunteer_applications, dependent: :destroy
+  has_many :volunteering_positions, dependent: :destroy
 
   validates :date, presence: true
   validates_associated :volunteers, if: :will_save_change_to_date?
@@ -30,6 +32,16 @@ class Activity < ApplicationRecord
     volunteers
       .joins("LEFT JOIN volunteering_positions vp ON vp.event_id = #{event_id} AND vp.role = volunteers.role")
       .order(:rank, :role, :comment)
+  end
+
+  def volunteering_positions_roster
+    positions = event.volunteering_positions.where(activity_id: [nil, id])
+    defaults, overrides = positions.partition { |p| p.activity_id.nil? }
+    overrides_by_role = overrides.index_by(&:role)
+    defaults
+      .reject { |p| overrides_by_role.key?(p.role) }
+      .concat(overrides)
+      .sort_by(&:rank)
   end
 
   def participants

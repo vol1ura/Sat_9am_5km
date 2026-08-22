@@ -49,6 +49,10 @@ class EventsController < ApplicationController
 
     activity_id = params[:activity_id] || @activities.first&.id
     @activity = event_future_activities_dataset.find_by(id: activity_id) if activity_id
+
+    @my_volunteering = find_my_volunteering
+    @volunteer_organizer = @activity && current_user&.volunteer_organizer_for?(@activity)
+    @my_applications = find_my_applications
   end
 
   def live; end
@@ -68,6 +72,18 @@ class EventsController < ApplicationController
 
   def find_event
     @event = Event.find_by!(code_name: params[:code_name]&.downcase)
+  end
+
+  def find_my_volunteering
+    return unless @activity && current_user&.athlete
+
+    Volunteer.joins(:activity).find_by(athlete_id: current_user.athlete.id, activity: { date: @activity.date })
+  end
+
+  def find_my_applications
+    return {} unless @activity && current_user&.athlete
+
+    current_user.athlete.volunteer_applications.where(activity: @activity, status: :pending).index_by(&:role)
   end
 
   def leader_results(gender:)

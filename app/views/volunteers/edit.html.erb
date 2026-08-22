@@ -32,6 +32,16 @@
           <button class="btn btn-outline-secondary" type="submit">
             <i class="fa-regular fa-circle-down text-primary"></i>
           </button>
+          <%=
+            link_to(
+              volunteering_event_path(@volunteer.activity.event.code_name, activity_id: @volunteer.activity_id),
+              class: 'btn btn-outline-secondary',
+              data: { turbo_frame: '_top' },
+              'aria-label' => 'Отмена',
+            ) do
+          %>
+            <i class="fa-solid fa-xmark text-danger"></i>
+          <% end %>
           <% if is_athlete_invalid %>
             <div class="invalid-feedback"><%= @volunteer.errors.messages.values.flatten.join(', ') %></div>
           <% end %>
