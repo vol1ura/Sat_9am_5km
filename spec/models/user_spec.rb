@@ -118,4 +118,44 @@ RSpec.describe User do
       expect(user.favorite_events).to be_empty
     end
   end
+
+  describe '#donor_this_year?' do
+    let(:user) { build(:user) }
+
+    it 'returns false when donor_marked_at is blank' do
+      expect(user.donor_this_year?).to be false
+    end
+
+    it 'returns true when donor_marked_at falls in the current year' do
+      user.donor_marked_at = Time.current
+      expect(user.donor_this_year?).to be true
+    end
+
+    it 'returns false when donor_marked_at falls in a previous year' do
+      user.donor_marked_at = 1.year.ago
+      expect(user.donor_this_year?).to be false
+    end
+  end
+
+  describe '#donor_marked=' do
+    let(:user) { build(:user) }
+
+    it 'sets donor_marked_at to now when marked true' do
+      user.donor_marked = true
+      expect(user.donor_marked_at.to_date).to eq(Date.current)
+    end
+
+    it 'clears donor_marked_at when marked false' do
+      user.donor_marked_at = Time.current
+      user.donor_marked = false
+      expect(user.donor_marked_at).to be_nil
+    end
+
+    it 'keeps the original timestamp when already marked this year' do
+      original_time = 3.days.ago
+      user.donor_marked_at = original_time
+      user.donor_marked = true
+      expect(user.donor_marked_at).to be_within(1.second).of(original_time)
+    end
+  end
 end

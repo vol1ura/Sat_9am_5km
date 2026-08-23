@@ -49,7 +49,7 @@
       <% if user_signed_in? %>
         <div class="dropdown">
           <%= button_tag type: 'button', class: 'nav-link', 'data-bs-toggle' => 'dropdown', 'aria-expanded' => 'false' do %>
-            <%= image_tag user_image_path(current_user), class: 'avatar-50 border border-light border-3', alt: current_user.first_name %>
+            <%= image_tag user_image_path(current_user), class: avatar_class(current_user, 'avatar-50', 'border', 'border-light', 'border-3'), alt: current_user.first_name %>
           <% end %>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><%= link_to t('.profile'), athlete_path(current_user.athlete), class: 'dropdown-item' %></li>

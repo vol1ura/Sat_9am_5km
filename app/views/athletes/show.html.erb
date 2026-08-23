@@ -18,7 +18,7 @@
     <%= render 'friendships/button', athlete: @athlete %>
   </div>
   <div class="position-relative">
-    <%= image_tag user_image_path(@athlete.user), class: 'avatar', title: athlete_name %>
+    <%= image_tag user_image_path(@athlete.user), class: avatar_class(@athlete.user, 'avatar'), title: athlete_name %>
     <div class="position-absolute top-0 end-0">
       <a href="#" class="btn btn-light rounded-circle border-primary" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
         <i class="fa-solid fa-qrcode" title="QR"></i>

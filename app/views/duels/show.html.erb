@@ -66,7 +66,7 @@
     <div class="col-md-6">
       <div class="card h-100">
         <div class="card-body text-center">
-          <%= image_tag user_image_path(@athlete&.user), class: 'avatar-100 mb-3' if @athlete&.user %>
+          <%= image_tag user_image_path(@athlete&.user), class: avatar_class(@athlete&.user, 'avatar-100', 'mb-3') if @athlete&.user %>
           <h5><%= @athlete&.name || t('common.nobody') %></h5>
           <div class="mt-2">
             <%= render 'friend_stats', stats: @friend_duels[:stats] %>
@@ -77,7 +77,7 @@
     <div class="col-md-6">
       <div class="card h-100">
         <div class="card-body text-center">
-          <%= image_tag user_image_path(@friend.user), class: 'avatar-100 mb-3' %>
+          <%= image_tag user_image_path(@friend.user), class: avatar_class(@friend.user, 'avatar-100', 'mb-3') %>
           <h5>
             <%= link_to @friend.name, athlete_path(@friend), class: 'text-decoration-none' %>
           </h5>

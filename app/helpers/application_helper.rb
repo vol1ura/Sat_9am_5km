@@ -96,4 +96,8 @@ module ApplicationHelper
   def user_image_path(user)
     user&.image&.attached? ? user.image.variant(:web) : '/images/person.jpg'
   end
+
+  def avatar_class(user, *base_classes)
+    [*base_classes, ('avatar-hex' if user&.donor_this_year?)].compact.join(' ')
+  end
 end

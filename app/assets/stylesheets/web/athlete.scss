@@ -34,3 +34,7 @@
   width: 50px;
   height: 50px;
 }
+
+.avatar-hex {
+  clip-path: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3CclipPath%20id='avatar-hex-shape'%20clipPathUnits='objectBoundingBox'%3E%3Cpath%20d='M0.1536,0.2%20L0.4134,0.05%20Q0.5,0%200.5866,0.05%20L0.8464,0.2%20Q0.933,0.25%200.933,0.35%20L0.933,0.65%20Q0.933,0.75%200.8464,0.8%20L0.5866,0.95%20Q0.5,1%200.4134,0.95%20L0.1536,0.8%20Q0.067,0.75%200.067,0.65%20L0.067,0.35%20Q0.067,0.25%200.1536,0.2%20Z'/%3E%3C/clipPath%3E%3C/svg%3E#avatar-hex-shape");
+}

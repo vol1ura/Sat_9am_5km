@@ -50,7 +50,7 @@
           <%= tag.tr class: (res.athlete_id == @athlete.id ? 'table-success' : nil) do %>
             <td class="position align-middle"><%= idx + 1 %></td>
             <td>
-              <%= image_tag user_image_path(res.athlete&.user), class: 'avatar-50' %>
+              <%= image_tag user_image_path(res.athlete&.user), class: avatar_class(res.athlete&.user, 'avatar-50') %>
             </td>
             <td>
               <%= link_to res.athlete.name, res.athlete, class: 'athlete-link' %>
