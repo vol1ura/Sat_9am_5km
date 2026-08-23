@@ -26,6 +26,12 @@ class Event < ApplicationRecord
     attachable.variant :thumb, resize_to_fill: [1400, 530]
   end
 
+  has_one_attached :route_map
+
+  validates :route_map,
+            content_type: :json,
+            size: { less_than: 100.kilobytes }
+
   validates :summer_image,
             content_type: %i[png jpeg webp],
             dimension: { width: { min: 2800 }, height: { min: 1060 } },

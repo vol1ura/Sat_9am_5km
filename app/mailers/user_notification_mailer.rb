@@ -9,6 +9,6 @@ class UserNotificationMailer < ApplicationMailer
     @unsubscribe_url = UNSUBSCRIBE_URL
     headers['List-Unsubscribe'] = "<#{UNSUBSCRIBE_URL}>"
     headers['List-Unsubscribe-Post'] = 'List-Unsubscribe=One-Click'
-    mail(to: user.email, subject: t('.subject'))
+    mail to: email(user), subject: t('.subject')
   end
 end

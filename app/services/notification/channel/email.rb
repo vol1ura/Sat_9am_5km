@@ -5,7 +5,7 @@ module Notification
     class Email
       def self.deliver(user, text:, **)
         html = ::Notification::MarkdownConverter.to_html(text)
-        UserNotificationMailer.notify(user, html).deliver_later
+        UserNotificationMailer.notify(user, html).deliver_now
       end
     end
   end

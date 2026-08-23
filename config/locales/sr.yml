@@ -122,6 +122,7 @@ sr:
         longitude: dužina
         coordinates: koordinate
         timezone: vremenska zona
+        route_map: šema staze
         slogan: slogan
         description: opis
         visible_order: redosled prikaza
@@ -140,7 +141,6 @@ sr:
         athlete: sportista
         user: korisnik
         gender: pol
-        club: klub
       volunteer:
         activity: trčanje
         athlete: sportista
@@ -638,7 +638,7 @@ sr:
       title: O S95
       rules: Pravila
       about: S95 pokret
-      support: Podržite projekat
+      donation: Podržite projekat
       feedback: Povratne informacije
       joining: Želite S95 kod vas?
       articles: Članci
@@ -766,7 +766,7 @@ sr:
       forward: Napred
     rules:
       description: Kratka pravila za učesnike S95, kao i često postavljana pitanja
-      register_with_bot_html: 'Ako niste registrovani, kreirajte profil koristeći <a href="%{link}" target="_blank" rel="noopener">Telegram bota</a>. Dobićete link do vašeg profila sa ličnim QR kodom.'
+      register_with_bot_html: 'Ako niste registrovani, kreirajte profil, popunjavajući <a href="%{link}">formu registracije</a>. Nakon potvrde email-a, biti ćete preusmereni na vaš profil sa ličnim QR kodom.'
       come_to_s95_html: 'Najvažnije je doći na jedan od <a href="%{link}">događaja</a> u <strong>subotu</strong> u <strong>9 ujutru</strong> i pretrčati <strong>5 km</strong>.'
       scan_barcodes: Na cilju ćete dobiti karticu pozicije. Skenirajte lični QR kod i karticu pozicije kod volontera.
       return_position_card: Predajte karticu pozicije.
@@ -776,7 +776,7 @@ sr:
         answer: Staza je dobro obeležena narandžastim čunjevima, postoji i maršal na skretanju (ako ga ima), i najverovatnije ćete biti okruženi drugim učesnicima tokom trčanja.
       about_registering:
         question: Da li je potrebno da se registrujem za učešće u trci?
-        answer_html: 'Nije obavezno, ali je preporučljivo da prođete proceduru registracije koristeći naš telegram bot <a href="%{link}" target="_blank" rel="noopener">%{bot_nick}</a>. Kao rezultat, imaćete lični bar kod, koji ćete naknadno pokazati volonteru. Pored toga, bot će slati obaveštenja sa rezultatima trke.'
+        answer_html: 'Nije obavezno, ali je preporučljivo da prođete proceduru registracije, popunjavajući nebolju <a href="%{link}">formu</a> i potvrdite email. Nakon toga, moćićete da se označite na našim trkama koristeći lični bar kod, što će vam omogućiti da ne izgubite svoje rezultate i da pratite svoje dostignuća.'
       about_participation:
         question: 'Da li je moguće samo doći u 8:45 da trčimo zajedno?'
         answer: 'Da, možete samo doći i trčati. Registracija nije obavezna, služi samo za čuvanje vašeg rezultata u protokolu. Ako se ne registrujete, bićete navedeni u protokolu kao "Nepoznat".'
@@ -790,9 +790,9 @@ sr:
         question: Slučajno sam pogrešio u imenu prilikom registracije. Kako ispraviti?
         answer_html: Idite na <a href="/user">Podešavanja</a> (može zahtevati prijavu i lozinku) i izvršite potrebne promene.
     support:
-      description: 'Projekat Sat9am5km možete podržati na različite načine: volontiranjem, donacijama ili učešćem u razvoju ovog sajta'
+      description: 'Projekat S95 možete podržati na različite načine: volontiranjem, donacijama ili učešćem u razvoju ovog sajta'
       title: Želite da podržite projekat?
-      how_to_support: >
+      how_to_support_html: >
         Prijatelji, naši događaji su potpuno besplatni i sprovode ih volonterske snage.
         Međutim, ako želite i možete podržati naš projekat, onda ćemo biti srećni zbog bilo kakve materijalne pomoći.
         Da biste to uradili, kontaktirajte organizatore događaja kojima želite da pružite podršku putem kontakata na stranici događaja.
@@ -836,7 +836,7 @@ sr:
             <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su objedinjeni u jedinstvenom sistemu.</li>
             <li>Imamo motivacioni sistem nagrada i izazova — dobijajte <a href="%{badges_link}">dostignuća</a> ne samo za visoke rezultate, već i za redovno učešće i lični napredak.</li>
             <li>Naša platforma nije samo o trčanju, već i o druženju i važnoj društvenoj misiji: razvijamo volontiranje, gradimo prijateljsku zajednicu i pomažemo u pronalaženju istomišljenika.</li>
-            <li>Jednostavna i brza registracija novih učesnika pomoću Telegram-bota — svi podaci su uvek pri ruci.</li>
+            <li>Jednostavna i brza registracija novih učesnika, pogodan лични профил, brzi пријава на сајт, сви подаци су увек под руком. Учесници не морају да траже свој QR код где-то у пошти, да се сећају и уносе лозинку за пријаву на сајт, они ће моћи да примају обавештења о резултатима трка како је они буду објављени.</li>
             <li>Koristimo moderne tehnologije: raznovrsne statistike i rangiranja, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku.</li>
             <li>Imamo sopstvenu jedinstvenu mobilnu aplikaciju za organizaciju trka.</li>
             <li>Naš sistem je potpuno otvoren i zasnovan na OpenSource tehnologijama — svako može predložiti poboljšanja i učiniti platformu još boljom.</li>
@@ -874,6 +874,7 @@ sr:
       h_index: h-indeks
       uniq_events: Jedinstveni parkovi
       longest_streak: Najduža serija
+      current_streak: Trenutna serija
       trophies: Značke
       results:
         title: Rejting sportista
@@ -882,6 +883,7 @@ sr:
           h_index: Trkački h-indeks - vrednost koja je jednaka h ako je učesnik trkao u h parkovima, i u svakom od njih bar h puta. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
           uniq_events: Jedinstveni parkovi - broj parkova posetjenih kao trkač. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
           longest_streak: Maksimalan broj serija trka. Serija se prekida ako nema trka na nekoj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
+          current_streak: Broj uzastopnih trka na momentu. Serija se prekida ako nema trka na tekućoj ili prošloj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
           trophies: Broj znački. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem trka.
       volunteers:
         title: Rejting volontera
@@ -890,6 +892,7 @@ sr:
           h_index: Volonterski h-indeks - vrednost koja je jednaka h ako je učesnik bio volonter u h različitih pozicija (uloga), u svakoj od kojih bar h puta. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
           uniq_events: Jedinstveni parkovi - broj parkova posetjenih kao volonter. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
           longest_streak: Maksimalan broj serija volontera. Serija se prekida ako nema volontera na nekoj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
+          current_streak: Broj uzastopnih volontiranja na momentu. Serija se prekida ako nema volontiranja na tekućoj ili prošloj nedelji. U slučaju jednakih vrednosti, u rangiranju iznad će biti učesnik sa većim brojem volontiranja.
           trophies: Broj znački. U slučaju jednakih vrednosti, viši rang će imati učesnika sa velikim brojem volontiranje.
     results:
       title: Najbolji rezultati
@@ -916,6 +919,8 @@ sr:
       athletes_count: Ukupno pronađeno %{count} čl.
       nothing_found: Nažalost, ništa nije pronađeno.
     show:
+      registration_required: Molimo registrujte se na sajtu da biste videli profil učesnika. Ako je ovo vaš profil, molimo vas da se registrujete na sajtu i da nam pošaljete povratnu informaciju da bismo ga dodali vašem nalogu.
+      profile_hidden: Podaci učesnika su skriveni jer još nije završio registraciju na sajtu.
       description: 'Profil atletičara %{athlete_name}: rezultati, statistike i volontiranje'
       show_club_html: 'Prikaži statistike kluba %{link}'
       total_results: ukupno trčanja
@@ -1009,6 +1014,7 @@ sr:
       first_volunteering: 'Prvo volontirsko delanje!'
       search_athlete_placeholder: 'Pretraga atleta...'
       clear_search: 'Obriši pretragu'
+      not_published: Trka još nije objavljena. Pokušajte ponovno kasnije.
     protocol:
       position_short: Poz.
       position_full: Pozicija
@@ -1102,6 +1108,9 @@ sr:
     favorite_events_section:
       title: Omiljeni događaji
       all_events: Svi događaji
+    map:
+      title: Mapa događaja
+      as_list: Lista
     show:
       title: '%{place} | %{town} | Park trčanje'
       our_contacts: Naši kontakti
@@ -1123,6 +1132,7 @@ sr:
       event_dynamics: Dinamika događaja
       live_streaming: Online rezultati
       live_streaming_description: Rezultati se redovno ažuriraju u realnom vremenu
+      route_map: Šema staze
     live:
       title: 'Online rezultati - %{event}'
       description: 'Rezultati trke %{event} u realnom vremenu'
@@ -1137,8 +1147,8 @@ sr:
       waiting_for_results: Čekanje rezultata...
       results_will_appear: Rezultati će se pojaviti ovde tokom trke
     card:
-      about_participation: 'Registrujte se u našem telegram-botu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
-      registration: Registracija u telegramu
+      about_participation: 'Registrujte se na sajtu i dođite u subotu ujutru. Distanca se može trčati ili hodati. Dobrodošli su svi, bez obzira na uzrast i nivo treninga.'
+      registration: Registracija
       about_volunteers: 'Svi događaji su besplatni i organizovani od strane volontera. Možete pogledati dostupne pozicije i takođe se pridružiti organizacionom timu'
       show: Prikaži
       place: Mesto događaja
@@ -1191,8 +1201,6 @@ sr:
     create:
       athlete_code_required: Unesite ID učesnika
   users:
-    omniauth_callbacks:
-      auth_error: Prijava neuspešna
     show:
       title: Podešavanja
       description: 'Podešavanja za %{user_name}'
@@ -1201,6 +1209,16 @@ sr:
       not_specified: nije naveden
       email_pending_badge: 'Čeka potvrdu: %{email}'
       emergency_contact: Hitna kontakt osoba
+      delete_account:
+        title: Brisanje registracije
+        lead: Možete trajno obrisati registraciju na sajtu. Ova radnja se ne može poništiti.
+        button: Obriši registraciju
+        modal_title: Brisanje registracije
+        modal_text: >-
+          Prihvatate da će vaša registracija biti trajno OBRISANA i da će vaši lični podaci biti uklonjeni:
+          e-mail, slika, telefon, Telegram (ako su bili povezani). Vaši rezultati trčanja i zapisi o volontiranju mogu ostati.
+        confirm_label: Prihvatam i slažem se da obrišem registraciju
+        submit: Obriši registraciju
     field:
       edit: Izmeni
     edit:
@@ -1236,6 +1254,9 @@ sr:
         after_activity: Rezultati trčanja i zahvalnost za volontiranje
         volunteer_reminder: Podsetnici za volontere
         other: Ostala obaveštenja (otkazivanja, promene mesta starta i dr. važna obaveštenja)
+    destroy:
+      success: Registracija je obrisana
+      confirmation_required: Potvrdite saglasnost za brisanje registracije
     email_sessions:
       new:
         title: Prijavite se
@@ -1245,6 +1266,8 @@ sr:
         back_to_login: Nazad na stranicu za prijavu
       create:
         link_sent: Link za prijavu je poslat na vaš e-mail. Proverite poštu.
+        not_registered: Korisnik sa ovim e-mailom nije registrovan. Popunite formular za registraciju.
+        unconfirmed: E-mail nije potvrđen. Proverite poštu ili zatražite novi link za potvrdu.
   going_tos:
     create:
       success: Uspešno ste se označili kao učesnik

@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+panel t('.title') do
+  if discrepancies.any?
+    table_for discrepancies do
+      column(t('.athlete')) { |v| link_to v.athlete.name, admin_athlete_path(v.athlete) }
+      column(t('.role')) { |v| human_volunteer_role v.role }
+      column(t('.activity_date')) { |v| l v.activity.date }
+      column(t('.event')) { |v| v.activity.event_name }
+      column(t('.activity')) { |v| link_to t('.open_activity'), admin_activity_path(v.activity) }
+    end
+  else
+    para t('.empty'), class: 'empty-message'
+  end
+end

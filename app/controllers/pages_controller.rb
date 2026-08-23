@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  ALLOWED_PAGES = %w[about feedback joining rules support additional-events privacy-policy robots 5za5 donor].freeze
+  ALLOWED_PAGES = %w[
+    about feedback joining rules additional-events privacy-policy robots 5za5 donor donation
+  ].freeze
   MAX_FEEDBACK_SIZE = 2000
 
   before_action :validate_page, only: :show

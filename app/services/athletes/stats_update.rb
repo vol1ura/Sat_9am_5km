@@ -19,12 +19,15 @@ module Athletes
       results_count = published_results.size
       return if results_count.zero?
 
+      week_counts = week_counts_by_monday(published_results.pluck(:date))
+
       (@athlete.stats['results'] ||= {}).merge!(
         'count' => results_count,
         'h_index' => h_index(published_results, :event_id),
         'uniq_events' => uniq_events(published_results),
         'trophies' => trophies_count,
-        'longest_streak' => longest_weekly_streak(published_results.pluck(:date)),
+        'current_streak' => current_weekly_streak(week_counts),
+        'longest_streak' => longest_weekly_streak(week_counts),
       )
     end
 
@@ -33,12 +36,15 @@ module Athletes
       volunteering_count = published_volunteering.size
       return if volunteering_count.zero?
 
+      week_counts = week_counts_by_monday(published_volunteering.pluck(:date))
+
       (@athlete.stats['volunteers'] ||= {}).merge!(
         'count' => volunteering_count,
         'h_index' => h_index(published_volunteering, :role),
         'uniq_events' => uniq_events(published_volunteering),
         'trophies' => trophies_count,
-        'longest_streak' => longest_weekly_streak(published_volunteering.pluck(:date)),
+        'current_streak' => current_weekly_streak(week_counts),
+        'longest_streak' => longest_weekly_streak(week_counts),
       )
     end
 
@@ -54,12 +60,13 @@ module Athletes
       @trophies_count ||= @athlete.trophies.count
     end
 
-    def longest_weekly_streak(dates)
-      return 0 if dates.empty?
-
+    def week_counts_by_monday(dates)
       week_counts = Hash.new(0)
       dates.each { |date| week_counts[date.to_date.beginning_of_week(:monday)] += 1 }
+      week_counts
+    end
 
+    def longest_weekly_streak(week_counts)
       longest = 0
       current = 0
       previous_week = nil
@@ -75,6 +82,22 @@ module Athletes
       end
 
       longest
+    end
+
+    def current_weekly_streak(week_counts)
+      last_week = week_counts.keys.max
+      current_week = Date.current.beginning_of_week(:monday)
+
+      return 0 if current_week - last_week > 7
+
+      streak = 0
+      week = last_week
+      while week_counts.key?(week)
+        streak += week_counts[week]
+        week -= 7
+      end
+
+      streak
     end
   end
 end

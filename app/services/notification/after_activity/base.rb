@@ -13,13 +13,11 @@ module Notification
         return if user.notification_disabled? :after_activity
 
         @entity.with_lock do
-          return if @entity.informed
+          next if @entity.informed
+          next unless notify user, disable_web_page_preview: true
 
-          notify! user, disable_web_page_preview: true
           @entity.update! informed: true
         end
-      rescue StandardError => e
-        Rollbar.error e, user_id: user&.id, entity_id: @entity.id, entity_class: @entity.class
       end
 
       private

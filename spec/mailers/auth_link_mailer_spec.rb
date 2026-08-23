@@ -10,14 +10,14 @@ RSpec.describe AuthLinkMailer do
         auth_token_expires_at: Users::AuthToken::TTL.from_now,
       )
     end
-    let(:mail) { described_class.login_link(user) }
+    let(:mail) { described_class.with(host: 's95.by').login_link(user) }
 
     it 'renders the mail' do
       expect(mail.subject).to eq('Ссылка для входа на сайт С95')
-      expect(mail.to).to eq([user.email])
+      expect(mail.to).to eq([ENV.fetch('ADMIN_EMAIL')])
       expect(mail.body.encoded)
         .to include(user.first_name)
-        .and include("/auth_links/#{user.auth_token}")
+        .and include("s95.by/auth_links/#{user.auth_token}")
         .and include((Users::AuthToken::TTL / 1.minute).to_s)
     end
 

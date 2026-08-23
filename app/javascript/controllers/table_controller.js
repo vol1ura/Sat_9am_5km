@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ['content', 'tab'];
+  static targets = ['content', 'tab', 'descriptionTitle', 'descriptionText'];
   static values = {
     page: { type: Number, default: 1 },
     loading: { type: Boolean, default: false },
@@ -41,8 +41,11 @@ export default class extends Controller {
   }
 
   async switchTab(event) {
-    this.tabTargets.forEach(tab => tab.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+    const tab = event.currentTarget;
+
+    this.tabTargets.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    this.updateDescription(tab);
 
     this.pageValue = 1;
     this.loadingValue = false;
@@ -60,6 +63,13 @@ export default class extends Controller {
     const url = new URL(resetLink.href, window.location.origin);
     url.searchParams.set('gender', gender);
     resetLink.href = url.pathname + url.search;
+  }
+
+  updateDescription(tab) {
+    if (!this.hasDescriptionTitleTarget || !this.hasDescriptionTextTarget) return;
+
+    this.descriptionTitleTarget.textContent = tab.dataset.descriptionTitle;
+    this.descriptionTextTarget.textContent = tab.dataset.descriptionText;
   }
 
   async loadPage() {

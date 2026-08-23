@@ -10,7 +10,11 @@ class NotificationMailer < ApplicationMailer
   def feedback
     @message = params[:message]
     @user_contact = params[:user_contact]
-    @user_admin_url = admin_user_url(params[:user_id]) if params[:user_id]
-    mail to: RECIPIENTS, subject: t('.feedback'), &:text
+    if params[:user_id]
+      @user_admin_url = admin_user_url(params[:user_id])
+      user = User.find_by(id: params[:user_id])
+    end
+
+    mail to: RECIPIENTS, subject: t('.feedback'), reply_to: user&.email, &:text
   end
 end

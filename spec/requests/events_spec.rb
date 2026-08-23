@@ -45,6 +45,24 @@ RSpec.describe '/events' do
     end
   end
 
+  describe 'GET /events/:code_name.json' do
+    before do
+      if Badge.instance_variable_defined?(:@participating_thresholds)
+        Badge.remove_instance_variable(:@participating_thresholds)
+      end
+      create(:participating_badge, type: 'result')
+      create(:participating_badge, type: 'volunteer')
+    end
+
+    it 'exposes updated_at for each published activity' do
+      activity = create(:activity, event:)
+
+      get event_url(code_name: event.code_name, format: :json)
+
+      expect(response.parsed_body.dig('activities', 0, 'updated_at')).to eq(activity.reload.updated_at.iso8601)
+    end
+  end
+
   describe 'GET /events/:code_name/volunteering' do
     it 'renders a successful response' do
       activity = create(:activity, date: Faker::Date.forward(days: 20))
@@ -63,6 +81,37 @@ RSpec.describe '/events' do
       expect(response.media_type).to eq('text/vnd.turbo-stream.html')
       expect(response.body).to include(msk_event.name)
       expect(response.body).not_to include(event.name)
+    end
+  end
+
+  describe 'GET /events/map' do
+    it 'renders a successful response' do
+      get map_events_url
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET /events/:code_name/route_map' do
+    let!(:event) { create(:event) }
+
+    it 'returns GeoJSON when route map is attached' do
+      event.route_map.attach(
+        io: Rails.root.join('spec/fixtures/files/sample_route.json').open,
+        filename: 'route.json',
+        content_type: 'application/json',
+      )
+
+      get route_map_event_url(code_name: event.code_name)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq('application/json')
+      expect(response.body).to include('FeatureCollection')
+    end
+
+    it 'returns not found when route map is not attached' do
+      get route_map_event_url(code_name: event.code_name)
+
+      expect(response).to have_http_status(:not_found)
     end
   end
 end

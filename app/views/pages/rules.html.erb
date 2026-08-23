@@ -1,7 +1,7 @@
 <% head_info :description, t('.description') %>
 <h1><%= head_info :title, t('navbars.about_s95.rules') %></h1>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item"><%= t '.register_with_bot_html', link: 'https://t.me/sat9am5kmbot' %></li>
+  <li class="list-group-item"><%= t '.register_with_bot_html', link: new_user_registration_path %></li>
   <li class="list-group-item"><%= t '.come_to_s95_html', link: events_path %></li>
   <li class="list-group-item"><%= t '.scan_barcodes' %></li>
   <li class="list-group-item"><%= t '.return_position_card' %></li>
@@ -29,7 +29,7 @@
     </h2>
     <div id="flush-collapse2" class="accordion-collapse collapse" aria-labelledby="flush-heading2" data-bs-parent="#accordionFAQ">
       <div class="accordion-body">
-        <%= t '.about_registering.answer_html', link: 'https://t.me/sat9am5kmbot', bot_nick: '@sat9am5kmbot' %>
+        <%= t '.about_registering.answer_html', link: new_user_registration_path %>
       </div>
     </div>
   </div>

@@ -24,6 +24,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    unless ActiveModel::Type::Boolean.new.cast(params[:confirm_deletion])
+      redirect_to user_path, alert: t('.confirmation_required')
+      return
+    end
+
+    Users::DestroyRegistration.call current_user
+    sign_out :user
+    redirect_to root_path, notice: t('.success')
+  end
+
   private
 
   def reset_attributes

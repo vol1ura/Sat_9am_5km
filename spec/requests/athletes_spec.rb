@@ -34,10 +34,32 @@ RSpec.describe '/athletes' do
 
   describe 'GET /athletes/1' do
     it 'renders a successful response' do
-      athlete = create(:athlete)
+      athlete = create(:athlete, fiveverst_code: nil)
       create_list(:result, 3, athlete:)
       get athlete_url(athlete)
       expect(response).to be_successful
+    end
+
+    context 'when athlete is unregistered and has fiveverst_code' do
+      let(:athlete) { create(:athlete, parkrun_code: nil) }
+
+      it 'redirects guest to registration with alert' do
+        get athlete_url(athlete)
+
+        expect(response).to redirect_to(new_user_registration_url)
+        expect(flash[:alert]).to eq(I18n.t('athletes.show.registration_required'))
+      end
+
+      context 'when user is signed in' do
+        before { sign_in create(:user, :with_athlete) }
+
+        it 'redirects to activities with notice' do
+          get athlete_url(athlete)
+
+          expect(response).to redirect_to(activities_url)
+          expect(flash[:notice]).to eq(I18n.t('athletes.show.profile_hidden'))
+        end
+      end
     end
   end
 

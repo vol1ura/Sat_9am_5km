@@ -8,8 +8,6 @@ class AddPlaceDescriptionColumnInEvents < ActiveRecord::Migration[8.1]
       t.column :place, :string
     end
 
-    Event.update_all('place = name')
-
     change_table :events, bulk: true do |t|
       t.change :place, :string, null: false
       t.change :description, :text, null: false

@@ -16,28 +16,30 @@ module Athletes
       },
     }.freeze
 
-    param :personal_code, reader: :private
+    delegate :code_type, to: :@personal_code, private: true
 
-    delegate :code_type, to: :personal_code
+    def initialize(personal_code)
+      @personal_code = personal_code
+    end
 
     def call
       return unless (xpath = NAME_PATH.dig(code_type, :xpath))
 
-      Nokogiri::HTML.parse(fetch).xpath(xpath).text.tr("\u00A0", ' ').strip
+      fetched_body.xpath(xpath).text.tr("\u00A0", ' ').strip
     rescue StandardError => e
-      Rollbar.error e, code: personal_code.id
+      Rollbar.error e, code: @personal_code.id
       nil
     end
 
     private
 
-    def fetch
-      url = format NAME_PATH.dig(code_type, :url), personal_code.id
+    def fetched_body
+      url = format NAME_PATH.dig(code_type, :url), @personal_code.id
       sleep(1 + rand) unless Rails.env.test?
       response = Client.get url
       raise "Bad request. Body: #{response.body}" unless response.is_a?(Net::HTTPSuccess)
 
-      response.body
+      Nokogiri::HTML(response.body)
     end
   end
 end

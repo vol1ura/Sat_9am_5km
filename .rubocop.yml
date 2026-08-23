@@ -54,7 +54,7 @@ Style/NumericLiterals:
 Style/SafeNavigationChainLength:
   Max: 3
 Style/FetchEnvVar:
-  AllowedVars:
+  AllowedVariables:
     - DEV_TELEGRAM_ID
     - VK_TOKEN
 Style/RedundantParentheses:

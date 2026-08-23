@@ -1,30 +1,26 @@
 <% head_info :description, t('.description') %>
 <h1><%= head_info :title, t(".#{@rating_type}.title") %></h1>
-
-<div class="ratings-description mb-4">
-  <p><%= t '.description' %></p>
-  <div class="alert alert-info">
-    <h2 class="alert-heading"><%= t '.order_types' %></h2>
-    <% RatingsController::RATINGS.each do |order| %>
-      <p class="mb-2">
-        <strong><%= t(".#{order}") %>:</strong>
-        <%= t(".#{@rating_type}.description.#{order}") %>
-      </p>
-    <% end %>
-  </div>
-</div>
+<p><%= t '.description' %></p>
 
 <div
   data-controller="table"
   data-table-url-value="/ratings/table"
   data-table-params-value="order,type">
+
   <ul class="nav nav-pills nav-justified mb-3 hidden-scroll-x" role="tablist">
     <% RatingsController::RATINGS.each do |order| %>
       <li class="nav-item" role="presentation">
         <%=
           button_tag(
             class: "nav-link #{'active' if order == @order} px-2 text-nowrap",
-            data: { table_target: 'tab', action: 'click->table#switchTab', order: order, type: @rating_type },
+            data: {
+              table_target: 'tab',
+              action: 'click->table#switchTab',
+              order: order,
+              type: @rating_type,
+              description_title: t(".#{order}"),
+              description_text: t(".#{@rating_type}.description.#{order}"),
+            },
           ) do
         %>
           <%= t ".#{order}" %>
@@ -32,6 +28,13 @@
       </li>
     <% end %>
   </ul>
+
+  <div class="ratings-description">
+    <div class="alert alert-light mb-2">
+      <h2 class="h4 mb-1 mt-0 alert-heading" data-table-target="descriptionTitle"><%= t(".#{@order}") %></h2>
+      <p class="mb-0" data-table-target="descriptionText"><%= t(".#{@rating_type}.description.#{@order}") %></p>
+    </div>
+  </div>
 
   <table class="table table-striped">
     <thead>

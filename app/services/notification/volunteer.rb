@@ -13,9 +13,7 @@ module Notification
       return unless @user
       return if @user.notification_disabled? :volunteer_reminder
 
-      notify! @user
-    rescue StandardError => e
-      Rollbar.error e, user_id: @user.id, volunteer_id: @volunteer.id
+      notify @user
     end
 
     private
@@ -33,7 +31,7 @@ module Notification
         event_name: @event.name,
         roster_link: roster_link,
         director_info: director_info,
-        volunteer_role: ApplicationController.helpers.human_volunteer_role(@volunteer.role),
+        volunteer_role: @event.country.localized("activerecord.attributes.volunteer.roles.#{@volunteer.role}"),
       )
     end
 

@@ -20,6 +20,11 @@ ActiveAdmin.register_page 'Utilities' do
           para 'Будет сформирован CSV файл с ежедневной статистикой.'
           render partial: 'user_registrations_export_form'
         end
+
+        panel 'Отчёт по новичкам' do
+          para 'Участники, у которых первый забег в системе состоялся в выбранной локации в указанный период.'
+          render partial: 'event_csv_export_form', locals: { url: admin_utilities_export_newcomers_csv_path }
+        end
       end
 
       tab t('.badges.title') do
@@ -27,6 +32,21 @@ ActiveAdmin.register_page 'Utilities' do
           para 'Внимание! Будут награждены все участники и волонтёры выбранного забега.'
           render partial: 'funrun_badge_awarding_form'
         end
+      end
+
+      tab t('.discrepancies.title') do
+        discrepancies =
+          Volunteer.published
+            .incorrect_on_running_positions
+            .includes(:athlete, activity: :event)
+            .order(activity: { date: :desc }, athlete_id: :asc)
+
+        render 'discrepancies', discrepancies:
+      end
+
+      tab t('.no_volunteers.title') do
+        activities = Activity.published.includes(:event).where.missing(:volunteers).order(date: :desc)
+        render 'no_volunteers', activities:
       end
 
       tab t('.analytics.title') do
@@ -49,8 +69,8 @@ ActiveAdmin.register_page 'Utilities' do
                 ROUND(COUNT(#{model}.id)::numeric / COUNT(DISTINCT activities.id), 1) AS avg_count,
                 COUNT(DISTINCT #{model}.athlete_id) FILTER (WHERE activities.date = first_#{model}.date) AS newbies_count
               FROM activities
-              JOIN #{model} ON #{model}.activity_id = activities.id
-              JOIN first_#{model} ON first_#{model}.athlete_id = #{model}.athlete_id
+              LEFT JOIN #{model} ON #{model}.activity_id = activities.id
+              LEFT JOIN first_#{model} ON first_#{model}.athlete_id = #{model}.athlete_id
               WHERE activities.published = true
                 AND activities.date BETWEEN DATE_TRUNC('month', current_date - interval '12 months') AND current_date
               GROUP BY DATE_TRUNC('month', activities.date)
@@ -109,6 +129,21 @@ ActiveAdmin.register_page 'Utilities' do
       params[:till_date].presence,
     )
     flash[:notice] = t '.reports.task_queued'
+    redirect_to admin_utilities_path
+  end
+
+  page_action :export_newcomers_csv, method: :post do
+    if (event_id = params[:event_id]).present?
+      CsvReports::NewcomersJob.perform_later(
+        event_id.to_i,
+        current_user.id,
+        params[:from_date].presence,
+        params[:till_date].presence,
+      )
+      flash[:notice] = t '.reports.task_queued'
+    else
+      flash[:alert] = t '.reports.event_not_selected'
+    end
     redirect_to admin_utilities_path
   end
 end

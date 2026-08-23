@@ -3,7 +3,7 @@
 module Users
   class RegistrationsController < Devise::RegistrationsController
     def new
-      build_resource({})
+      build_resource(email: params.dig(:user, :email))
       resource.build_athlete
       respond_with resource
     end

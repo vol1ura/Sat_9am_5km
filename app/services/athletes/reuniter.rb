@@ -3,10 +3,11 @@
 module Athletes
   class Reuniter < ApplicationService
     SKIPPED_ATTRIBUTES = %w[id created_at updated_at name user_id stats personal_bests].freeze
-    MODIFIED_ATTRIBUTES = %w[
+    ATHLETE_MODIFIED_ATTRIBUTES = %w[
       parkrun_code fiveverst_code parkzhrun_code runpark_code club_id event_id going_to_event_id gender
     ].freeze
-    private_constant :SKIPPED_ATTRIBUTES, :MODIFIED_ATTRIBUTES
+    USER_MODIFIED_ATTRIBUTES = %w[phone emergency_contact_name emergency_contact_phone].freeze
+    private_constant :SKIPPED_ATTRIBUTES, :ATHLETE_MODIFIED_ATTRIBUTES, :USER_MODIFIED_ATTRIBUTES
 
     def initialize(collection, ids)
       @collection = collection
@@ -14,9 +15,9 @@ module Athletes
     end
 
     def call
-      return false if @collection.where.not(user_id: nil).many?
       return false unless athlete
 
+      merge_users!
       grab_modified_attributes_from_collection!
       update_results_seconds
       replace_all_by_one!
@@ -32,11 +33,52 @@ module Athletes
     private
 
     def athlete
-      @athlete ||= @collection.where.not(user_id: nil).take || @collection.where.not(name: nil).take
+      @athlete ||= email_user&.athlete || telegram_user&.athlete || @collection.where.not(name: nil).take
+    end
+
+    def athletes_with_users
+      @athletes_with_users ||= @collection.where.not(user_id: nil).includes(:user).to_a
+    end
+
+    def mergeable_users?
+      return false unless email_user && telegram_user && email_user != telegram_user
+      return false if email_user.telegram_id && email_user.telegram_id != telegram_user.telegram_id
+
+      true
+    end
+
+    def email_user
+      @email_user ||= athletes_with_users.map(&:user).find(&:email)
+    end
+
+    def telegram_user
+      @telegram_user ||= athletes_with_users.map(&:user).find do |user|
+        user.telegram_id && user != email_user
+      end
+    end
+
+    def merge_users!
+      users = athletes_with_users.map(&:user).uniq
+      return unless users.many?
+      raise 'Only two users (email and telegram) can be merged' unless users.size == 2 && mergeable_users?
+
+      ActiveRecord::Base.transaction do
+        telegram_attributes = telegram_user.as_json(only: %w[telegram_id telegram_user])
+        telegram_user.update!(telegram_id: rand(1000), telegram_user: nil) # random telegram_id to avoid validation error
+        email_user.update!(mergeable_user_attributes.merge(telegram_attributes))
+        email_user.image.attach(telegram_user.image.blob) if !email_user.image.attached? && telegram_user.image.attached?
+        telegram_user.destroy!
+      end
+    end
+
+    def mergeable_user_attributes
+      USER_MODIFIED_ATTRIBUTES.index_with do |attr|
+        telegram_user.public_send(attr).presence if email_user.public_send(attr).blank?
+      end.compact
     end
 
     def grab_modified_attributes_from_collection!
-      MODIFIED_ATTRIBUTES.each do |attr|
+      ATHLETE_MODIFIED_ATTRIBUTES.each do |attr|
         athlete.public_send(:"#{attr}=", @collection.where.not(attr => nil).take&.send(attr)) unless athlete.send(attr)
         unmodified_attributes.delete attr
       end

@@ -2,8 +2,8 @@ ru:
   devise:
     shared:
       links:
-        sign_in: Войти
-        registration: Зарегистрироваться по email
+        sign_in: Войти (уже зарегистрирован)
+        registration: Зарегистрироваться
         password: Забыли пароль?
         confirmation: Не получили ссылку для подтверждения?
         unlock: Не получили ссылку для разблокировки?
@@ -12,11 +12,11 @@ ru:
       signed_out : Выход из системы успешно выполнен
       new:
         title: Вход на сайт
-        description: Чтобы войти на сайт, можно использовать Telegram-бота или email. Достаточно просто запросить одноразовую ссылку для входа.
+        description: Чтобы войти на сайт, достаточно запросить одноразовую ссылку для входа на ваш email.
         email_login_description: Введите ваш email — мы отправим одноразовую ссылку для входа
         email_placeholder: Ваш email
         email_submit: Получить ссылку
-        email_registration_description: Либо если вы ещё не зарегистрированы, создайте новый профиль
+        email_registration_description: Либо, если вы ранее не регистрировались, создайте новый профиль
         email_registration_link: Зарегистрироваться
     registrations:
       new:

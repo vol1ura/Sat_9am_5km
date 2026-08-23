@@ -14,7 +14,8 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.published.find(params[:id])
+    @activity = Activity.find params.expect(:id)
+    return redirect_to activities_path, alert: t('.not_published') unless @activity.published
 
     @results = @activity.results.includes(athlete: :club).order(:position)
 
@@ -23,7 +24,7 @@ class ActivitiesController < ApplicationController
     @volunteering_v_count = counters(model: Volunteer, table: :volunteers)
     @personal_best_count = @activity.results.where(personal_best: true).size
     @first_run_count = @activity.results.where(first_run: true).size
-    @volunteers = @activity.volunteers_roster.includes(:athlete)
+    @volunteers = @activity.volunteers_roster.includes(athlete: :club)
   end
 
   def dashboard

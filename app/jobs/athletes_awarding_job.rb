@@ -74,5 +74,6 @@ class AthletesAwardingJob < ApplicationJob
     return unless (badge = Badge.jubilee_participating_kind.find_by("(info->'threshold')::integer = ?", @activity.number))
 
     FunrunAwardingJob.perform_later @activity.id, badge.id
+    FunrunAwardingJob.set(wait: 12.hours).perform_later @activity.id, badge.id
   end
 end

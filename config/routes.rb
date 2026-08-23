@@ -14,8 +14,10 @@ Rails.application.routes.draw do
   end
   resources :events, param: :code_name, only: %i[index show] do
     get :search, on: :collection
+    get :map, on: :collection
     get :volunteering, on: :member
     get :live, on: :member
+    get :route_map, on: :member
     resource :going_to, only: %i[create destroy]
     resource :favorite_event, only: :update
   end
@@ -60,7 +62,7 @@ Rails.application.routes.draw do
   resources :email_sessions, only: :create, module: :users
   resources :articles, only: %i[index show], param: :page
 
-  resource :user, only: %i[show edit update]
+  resource :user, only: %i[show edit update destroy]
   resource :wallet_pass, only: %i[new create]
   resource :cookie_consent, only: :create
   resolve('User') { [:user] }
@@ -73,11 +75,8 @@ Rails.application.routes.draw do
       path: :user,
       controllers: {
         sessions: 'users/sessions',
-        passwords: 'users/passwords',
-        unlocks: 'users/unlocks',
         registrations: 'users/registrations',
         confirmations: 'users/confirmations',
-        omniauth_callbacks: 'users/omniauth_callbacks',
       },
       path_names: {
         sign_in: 'login',

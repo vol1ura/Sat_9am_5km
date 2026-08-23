@@ -34,7 +34,7 @@
         <%= render 'going_tos/form' %>
       </div>
     <% else %>
-      <a href="https://t.me/sat9am5kmbot" class="btn btn-outline-danger" target="_blank" rel="noopener"><%= t '.registration' %></a>
+      <%= link_to t('.registration'), new_user_registration_path, class: 'btn btn-outline-danger' %>
     <% end %>
   <% end %>
   <%= render 'card', header: t('.volunteers') do %>
@@ -105,6 +105,10 @@
   <% end %>
 </div>
 
+<% if @event.route_map.attached? %>
+  <%= render 'route_map', header: t('.route_map') %>
+<% end %>
+
 <h2><%= t '.results' %></h2>
 <% if @total_activities.zero? %>
   <p><%= t '.no_results_disclaimer' %></p>
@@ -140,13 +144,7 @@
               </td>
             </tr>
           <% end %>
-          <%=
-            render(
-              partial: 'activity',
-              collection: @event.activities.published.order(date: :desc),
-              cached: ->(activity) { locale_cache_key(activity) },
-            )
-          %>
+          <%= render partial: 'activity', collection: @event.activities.published.order(date: :desc) %>
         </tbody>
       </table>
       <%= render '/expand_button' if @total_activities > 15 %>

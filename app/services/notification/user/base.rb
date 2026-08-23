@@ -7,11 +7,7 @@ module Notification
         @user = user
       end
 
-      def call
-        notify! @user if @user.email || @user.telegram_id
-      rescue StandardError => e
-        Rollbar.error e, user_id: @user.id
-      end
+      def call = notify @user
     end
   end
 end

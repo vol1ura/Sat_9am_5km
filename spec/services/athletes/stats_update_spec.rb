@@ -8,6 +8,7 @@ RSpec.describe Athletes::StatsUpdate, type: :service do
         'results' => {
           'count' => 1,
           'h_index' => 1,
+          'current_streak' => 1,
           'longest_streak' => 1,
           'trophies' => 1,
           'uniq_events' => 1,
@@ -15,6 +16,7 @@ RSpec.describe Athletes::StatsUpdate, type: :service do
         'volunteers' => {
           'count' => 1,
           'h_index' => 1,
+          'current_streak' => 1,
           'longest_streak' => 1,
           'trophies' => 1,
           'uniq_events' => 1,
@@ -23,8 +25,9 @@ RSpec.describe Athletes::StatsUpdate, type: :service do
     end
 
     before do
-      create(:result, athlete:)
-      create(:volunteer, athlete:)
+      activity_params = { date: Date.current }
+      create(:result, athlete:, activity_params:)
+      create(:volunteer, athlete:, activity_params:)
       create(:trophy, athlete:)
     end
 

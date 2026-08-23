@@ -64,7 +64,7 @@ export default class DashboardCharts {
   }
 
   initializeCharts(participantsContainer, volunteersContainer, genderContainer) {
-    this.t = translations[document.documentElement.lang === 'sr' ? 'sr' : 'ru'];
+    this.t = translations[document.documentElement.lang] ?? translations.ru;
 
     if (participantsContainer) {
       const participantsChart = new ApexCharts(participantsContainer, this.#participantsChartOptions());

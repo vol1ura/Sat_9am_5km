@@ -165,29 +165,31 @@
         </div>
       </div>
 
-      <div class="mt-3 rounded-3 p-3 bg-body-tertiary border">
-        <h5 class="fw-light"><%= t '.promotions.title' %></h5>
-        <% if current_user.phone %>
-          <% User::AVAILABLE_PROMOTIONS.each do |name| %>
-            <div class="form-check form-switch mt-3">
-              <%= check_box_tag 'user[promotions][]',
-                                name,
-                                current_user.promotions.include?(name),
-                                class: 'form-check-input',
-                                role: 'switch',
-                                'data-action' => 'change->form#showPromotionModal',
-                                'data-promotion-key' => name %>
-              <%= label_tag 'user[promotions][]', t(".promotions.#{name}"), class: 'form-check-label' %>
+      <% if current_user.telegram_id %>
+        <div class="mt-3 rounded-3 p-3 bg-body-tertiary border">
+          <h5 class="fw-light"><%= t '.promotions.title' %></h5>
+          <% if current_user.phone %>
+            <% User::AVAILABLE_PROMOTIONS.each do |name| %>
+              <div class="form-check form-switch mt-3">
+                <%= check_box_tag 'user[promotions][]',
+                                  name,
+                                  current_user.promotions.include?(name),
+                                  class: 'form-check-input',
+                                  role: 'switch',
+                                  'data-action' => 'change->form#showPromotionModal',
+                                  'data-promotion-key' => name %>
+                <%= label_tag 'user[promotions][]', t(".promotions.#{name}"), class: 'form-check-label' %>
+              </div>
+            <% end %>
+            <div class="mt-4 form-check form-switch">
+              <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
+              <%= label_tag :delete_phone, t('.delete_phone', phone: human_phone(current_user.phone)), class: 'form-check-label text-danger' %>
             </div>
+          <% else %>
+            <p><%= t '.add_phone_html', link: 'https://t.me/sat9am5kmbot' %></p>
           <% end %>
-          <div class="mt-4 form-check form-switch">
-            <%= check_box_tag :delete_phone, class: 'form-check-input', role: 'switch' %>
-            <%= label_tag :delete_phone, t('.delete_phone', phone: human_phone(current_user.phone)), class: 'form-check-label text-danger' %>
-          </div>
-        <% else %>
-          <p><%= t '.add_phone_html', link: 'https://t.me/sat9am5kmbot' %></p>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
       <div class="mt-3 rounded-3 p-3 bg-body-tertiary border">
         <h5 class="fw-light"><%= t '.notifications.title' %></h5>

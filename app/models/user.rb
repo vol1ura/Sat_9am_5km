@@ -8,11 +8,8 @@ class User < ApplicationRecord
   has_associated_audits
 
   # Include default devise modules. Others available are:
-  # :timeoutable, :trackable, :validatable
-  devise(
-    :database_authenticatable, :recoverable, :rememberable, :confirmable, :lockable, :registerable,
-    :omniauthable, omniauth_providers: %i[telegram],
-  )
+  # :timeoutable, :trackable, :validatable, :rememberable
+  devise :database_authenticatable, :confirmable, :registerable
 
   has_one :athlete, dependent: :nullify
   accepts_nested_attributes_for :athlete, reject_if: :all_blank
@@ -23,10 +20,12 @@ class User < ApplicationRecord
   end
 
   normalizes :email, with: ->(value) { value.presence }
+  normalizes :first_name, :last_name, with: ->(value) { value.strip.presence }
 
   validates :first_name, presence: true, format: { with: /\A[[:alpha:]]+(-[[:alpha:]]{2,})?\z/ }
   validates :last_name, presence: true, format: { with: /\A[[:alpha:]]+([-' ][[:alpha:]]{2,})?\z/ }
   validates :email, presence: true, if: -> { telegram_id.nil? }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: :email
   validates :telegram_id, :email, :auth_token, uniqueness: true, allow_nil: true
   validates :emergency_contact_phone, phone: true, allow_nil: true
   validates :emergency_contact_name, presence: true, if: -> { emergency_contact_phone }
@@ -74,7 +73,8 @@ class User < ApplicationRecord
   private
 
   def send_devise_notification(notification, *)
-    devise_mailer.send(notification, self, *).deliver_later
+    mailer = MailerHost.host ? devise_mailer.with(host: MailerHost.host) : devise_mailer
+    mailer.send(notification, self, *).deliver_later
   end
 
   def update_athlete_name

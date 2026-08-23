@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   around_action :switch_locale
   before_action :find_country_events
+  before_action :set_mailer_host
 
   def access_denied(_)
     message = t 'active_admin.access_denied.message'
@@ -42,6 +43,10 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     super.merge(lang: current_locale == domain_locale ? nil : current_locale)
+  end
+
+  def set_mailer_host
+    MailerHost.host = request.host
   end
 
   helper_method :top_level_domain, :domain_locale, :current_locale, :policy_already_accepted?

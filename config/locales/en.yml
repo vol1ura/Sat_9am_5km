@@ -114,6 +114,7 @@ en:
         longitude: longitude
         coordinates: coordinates
         timezone: timezone
+        route_map: route map
         slogan: slogan
         description: description
         visible_order: weight in feed
@@ -132,7 +133,6 @@ en:
         athlete: participant
         user: user
         gender: gender
-        club: club
       volunteer:
         activity: run
         athlete: participant
@@ -586,7 +586,7 @@ en:
       title: About S95
       rules: Rules
       about: S95 Movement
-      support: Support the Project
+      donation: Support the Project
       feedback: Feedback
       joining: Want to Start S95?
       articles: Articles
@@ -639,7 +639,7 @@ en:
       forward: Forward
     rules:
       description: Brief rules for S95 run participants, as well as frequently asked questions
-      register_with_bot_html: "If you're not registered, create a profile using our <a href=\"%{link}\" target=\"_blank\" rel=\"noopener\">Telegram bot</a>. You'll receive a link to your profile with a personal barcode."
+      register_with_bot_html: "If you're not registered, create a profile, filling out the <a href=\"%{link}\">registration form</a>. After confirming your email, you'll be taken to your profile with a personal barcode."
       come_to_s95_html: 'Most importantly - come on <strong>Saturday</strong> at <strong>9 AM</strong> to one of the <a href="%{link}">events</a> and run <strong>5 km</strong>.'
       scan_barcodes: At the finish, you'll be given a position card. Scan your personal barcode and position card with the volunteer.
       return_position_card: Return the position card.
@@ -649,7 +649,7 @@ en:
         answer: The course is well marked with orange cones, there's a marshal at the turnaround (if there is one), and you'll likely be running surrounded by other participants.
       about_registering:
         question: Do I need to register to participate in a run?
-        answer_html: "Not required, but it's recommended to register using our Telegram bot <a href=\"%{link}\" target=\"_blank\" rel=\"noopener\">%{bot_nick}</a>. As a result, you'll have a personal barcode that you'll show to the volunteer. Additionally, the bot will send notifications with run results."
+        answer_html: "Not required, but it's recommended to register once, filling out a small <a href=\"%{link}\">form</a> and confirming your email. After that, you'll be able to mark yourself at any of our runs using a personal barcode, which will allow you to not lose your results and track your achievements."
       about_participation:
         question: 'Can I just come at 8:45 to run together?'
         answer: "Yes, you can just come and run. Registration is needed so you have a result in the protocol. Register once and you can come to any run. If you don't register - you'll be in the protocol as \"Unknown\". On site, they'll help you register and enjoy five kilometers in good company."
@@ -663,9 +663,9 @@ en:
         question: I accidentally made a mistake in my name during registration. How to fix it?
         answer_html: Go to the <a href="/user">Settings</a> section (login and password may be required) and make the necessary changes.
     support:
-      description: 'You can support the Sat9am5km project in various ways: volunteering, donation, or by participating in the development of this website'
+      description: 'You can support the S95 project in various ways: volunteering, donation, or by participating in the development of this website'
       title: Want to Support the Project?
-      how_to_support: >
+      how_to_support_html: >
         Friends, our events are completely free and run by volunteers.
         However, if you want and can support our project, we'll be grateful for any material assistance.
         To do this, contact the event organizers you want to support through the contacts on the event page.
@@ -710,7 +710,7 @@ en:
             <li>We're an international community: S95 runs take place in Russia, Belarus, and Serbia, and all results are collected in a unified system</li>
             <li>We have a motivating badge and challenge system — get <a href="%{badges_link}">achievements</a> not only for high results, but also just for participation and personal progress</li>
             <li>Our platform isn't just about running, but also about communication and social mission: we actively develop volunteering, communicate, find new friends</li>
-            <li>Simple and fast registration of new participants via Telegram bot, all data always at hand</li>
+            <li>Simple and fast registration of new participants, convenient personal account, fast login to the site, all data always at hand. Participants won't have to search for their QR code somewhere in the mail, remember and enter the password to log in to the site, they'll be able to receive notifications about the results of the runs as soon as they're published.</li>
             <li>We use modern technologies and approaches: lots of various statistics and rankings, ability to add friends and see who's going to which run</li>
             <li>We have our own unique mobile app for conducting runs</li>
             <li>Our system is completely open and uses OpenSource technologies — everyone can suggest improvements and make the platform even better</li>
@@ -823,6 +823,7 @@ en:
       h_index: h-index
       uniq_events: Parks
       longest_streak: Longest Streak
+      current_streak: Current Streak
       trophies: Badges
       results:
         title: Participant Rankings
@@ -831,6 +832,7 @@ en:
           h_index: Running h-index - a value equal to h if the participant ran in h parks, with at least h times in each. In case of equal values, the participant with more runs will rank higher.
           uniq_events: Unique parks - number of parks visited as a runner. In case of equal values, the participant with more runs will rank higher.
           longest_streak: Maximum number of consecutive runs. The streak is considered broken if there was no result on any week. In case of equal values, the participant with more runs will rank higher.
+          current_streak: Number of consecutive runs at the moment. The streak is considered broken if there was no result on the current or previous week. In case of equal values, the participant with more runs will rank higher.
           trophies: Number of badges. In case of equal values, the participant with more runs will rank higher.
       volunteers:
         title: Volunteer Rankings
@@ -839,6 +841,7 @@ en:
           h_index: Volunteering h-index - a value equal to h if the participant was a volunteer at h different positions (roles), at least h times at each. In case of equal values, the participant with more volunteering will rank higher.
           uniq_events: Unique parks - number of parks visited as a volunteer. In case of equal values, the participant with more volunteering will rank higher.
           longest_streak: Maximum number of consecutive volunteering sessions. The streak is considered broken if there was no volunteering on any week. In case of equal values, the participant with more volunteering will rank higher.
+          current_streak: Number of consecutive volunteering sessions at the moment. The streak is considered broken if there was no volunteering on the current or previous week. In case of equal values, the participant with more volunteering will rank higher.
           trophies: Number of badges. In case of equal values, the participant with more volunteering will rank higher.
     results:
       title: Top Results
@@ -865,6 +868,8 @@ en:
       athletes_count: Total found %{count} participants
       nothing_found: Unfortunately, nothing found.
     show:
+      registration_required: You are trying to view the profile of an unregistered participant. If this is your profile, please register on the site and through the feedback form request to add this profile to your account.
+      profile_hidden: Participant data is hidden because they have not completed registration on the site yet.
       description: 'Participant Profile %{athlete_name}'
       show_club_html: 'View club statistics %{link}'
       total_results: total runs
@@ -958,6 +963,7 @@ en:
       first_volunteering: 'First Volunteering!'
       search_athlete_placeholder: 'Search participant...'
       clear_search: 'Clear Search'
+      not_published: Run not published yet. Please try again later.
     protocol:
       position_short: Pos.
       position_full: Position
@@ -1042,6 +1048,9 @@ en:
     favorite_events_section:
       title: Favorite events
       all_events: All events
+    map:
+      title: Events Map
+      as_list: As List
     show:
       title: '%{place} | %{town} | Park Runs'
       our_contacts: Our Contacts
@@ -1063,6 +1072,7 @@ en:
       event_dynamics: Event Dynamics
       live_streaming: Live Streaming
       live_streaming_description: Results are updated in real time
+      route_map: Route Map
     live:
       title: 'Live Streaming - %{event}'
       description: 'Results of %{event} run in real time'
@@ -1077,8 +1087,8 @@ en:
       waiting_for_results: Waiting for results...
       results_will_appear: Results will appear here during the run
     card:
-      about_participation: 'Register in our Telegram bot and come Saturday morning. You can run or walk the distance. We welcome everyone regardless of age and fitness level.'
-      registration: Telegram Registration
+      about_participation: 'Register on the site and come Saturday morning. You can run or walk the distance. We welcome everyone regardless of age and fitness level.'
+      registration: Register
       about_volunteers: 'All events are free and organized by volunteers. Check available positions and also join the organizing team'
       show: View
       place: Venue
@@ -1131,8 +1141,6 @@ en:
     create:
       athlete_code_required: Athlete ID is required
   users:
-    omniauth_callbacks:
-      auth_error: Failed to sign in. Make sure you're actually registered
     show:
       title: Settings
       description: 'Settings for user %{user_name}'
@@ -1141,6 +1149,16 @@ en:
       not_specified: not specified
       email_pending_badge: 'Pending confirmation: %{email}'
       emergency_contact: Emergency Contact
+      delete_account:
+        title: Delete registration
+        lead: You can delete your site registration. This action cannot be undone.
+        button: Delete registration
+        modal_title: Delete registration
+        modal_text: >-
+          You accept that your registration will be permanently DELETED and your personal data will be removed:
+          email, photo, phone, and Telegram (if linked). Your run results and volunteer records may remain.
+        confirm_label: I accept and agree to delete my registration
+        submit: Delete registration
     field:
       edit: Edit
     edit:
@@ -1177,6 +1195,9 @@ en:
         after_activity: Run results and volunteer appreciation
         volunteer_reminder: Volunteer reminders
         other: Other notifications (cancellations, venue changes, etc. important messages)
+    destroy:
+      success: Registration deleted
+      confirmation_required: Confirm that you agree to delete your registration
     email_sessions:
       new:
         title: Sign in
@@ -1186,6 +1207,8 @@ en:
         back_to_login: Back to sign in
       create:
         link_sent: Sign-in link sent to your email. Please check your inbox.
+        not_registered: No account found for this email. Please complete the registration form.
+        unconfirmed: Email not confirmed. Check your inbox or request a new confirmation link.
   going_tos:
     create:
       success: You've successfully marked yourself as a participant

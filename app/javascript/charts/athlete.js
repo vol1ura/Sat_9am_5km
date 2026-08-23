@@ -20,7 +20,8 @@ const translations = {
 export default class AthleteCharts {
   constructor(rows) {
     this.rows = rows;
-    this.currentLocale = document.documentElement.lang === 'sr' ? 'sr' : document.documentElement.lang;
+    const lang = document.documentElement.lang;
+    this.currentLocale = translations[lang] ? lang : 'ru';
     this.t = translations[this.currentLocale];
   }
 

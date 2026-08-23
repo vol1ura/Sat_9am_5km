@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+panel t('.title') do
+  para t('.description')
+
+  if activities.any?
+    ul do
+      activities.each do |activity|
+        li link_to human_activity_name(activity), admin_activity_path(activity)
+      end
+    end
+  else
+    para t('.empty'), class: 'empty-message'
+  end
+end

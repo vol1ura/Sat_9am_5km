@@ -18,6 +18,19 @@ sr:
         params_not_selected: Događaj ili uloga nisu izabrani
       award_funrun_badge:
         performing: 'Procedura nagrađivanja je pokrenuta, to će potrajati neko vreme. Osvežite stranicu kasnije da vidite rezultate.'
+      discrepancies:
+        title: Trkački volonteri bez rezultata u protokolu
+        athlete: Učesnik
+        role: Uloga
+        activity_date: Datum trčanja
+        event: Lokacija
+        activity: Trčanje
+        open_activity: Otvori
+        empty: Nema neslaganja
+      no_volunteers:
+        title: Objavljena trčanja bez volontera
+        description: Trčanja se održavaju zahvaljujući volonterima, pa je izuzetno važno označiti sve volontere u znak zahvalnosti.
+        empty: Sva objavljena trčanja imaju volontere
       stats:
         title: Statistika
         month: Mesec
@@ -234,6 +247,10 @@ sr:
           title: Analitika
         badges:
           title: Značke
+        discrepancies:
+          title: Neslaganja
+        no_volunteers:
+          title: Nema volontera
 
     devise:
       username:

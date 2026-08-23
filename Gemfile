@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.4.5'
 
-gem 'rails', '~> 8.1.1'
+gem 'rails', '~> 8.1.3'
 
 gem 'activeadmin'
 gem 'activeadmin-localize'
@@ -21,19 +21,14 @@ gem 'dalli'
 gem 'dartsass-sprockets'
 gem 'devise', '~> 5.0'
 gem 'devise-i18n'
-gem 'dry-initializer'
 gem 'font-awesome-sass'
-gem 'get_process_mem'
-gem 'hotwire_combobox', '0.4.0'
+gem 'hotwire_combobox'
 gem 'hotwire-rails'
 gem 'image_processing'
 gem 'importmap-rails', '~> 1.2'
 gem 'jbuilder'
 gem 'json_translate'
 gem 'nokogiri'
-gem 'omniauth'
-gem 'omniauth-rails_csrf_protection'
-gem 'omniauth-telegram'
 gem 'pg'
 gem 'pghero'
 gem 'pg_query'
@@ -43,24 +38,25 @@ gem 'puma'
 gem 'rack-attack'
 gem 'rack-cors'
 gem 'rails-i18n'
-gem 'rails_performance', '1.7.0.beta1'
 gem 'ransack'
+gem 'rollbar'
 gem 'rqrcode'
 gem 'rubyzip', require: 'zip'
-gem 'ruby-vips', '>= 2.1.0'
+gem 'ruby-vips'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
-
 gem 'sitemap_generator'
-gem 'sys-cpu'
-gem 'sys-filesystem'
 gem 'terser'
 gem 'whenever', require: false
 
+# Rails Performance
+gem 'get_process_mem'
+gem 'rails_performance'
+gem 'sys-cpu'
+gem 'sys-filesystem'
+
 gem 'hiredis-client'
 gem 'redis'
-
-gem 'rollbar'
 
 group :development, :test do
   gem 'brakeman'
@@ -91,7 +87,7 @@ group :development do
 
   # Deploy
   gem 'capistrano', '~> 3.19', require: false
-  gem 'capistrano3-puma', '~> 7.1.0', require: false
+  gem 'capistrano3-puma', '~> 8.1.0', require: false
   gem 'capistrano-rails', '~> 1.7', require: false
   gem 'capistrano-rbenv', '~> 2.2', require: false
   gem 'capistrano-sidekiq', require: false

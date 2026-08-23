@@ -1,35 +1,11 @@
 <% head_info :title, t('.our_events') %>
 
-<div data-controller="map" data-map-button-label-value="<%= t '.details' %>">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1><%= t '.our_events' %></h1>
-    <div class="btn-group">
-      <button data-action="map#showList" data-map-target="listButton" class="btn btn-primary"><%= t '.list' %></button>
-      <button data-action="map#showMap" data-map-target="mapButton" class="btn btn-outline-primary"><%= t '.map' %></button>
-    </div>
-  </div>
-
-  <div data-map-target="listView">
-    <%= render 'favorite_events_section' %>
-    <div class="row row-cols-1 row-cols-md-2 g-3">
-      <%= render partial: 'event_card', collection: @events, as: :event %>
-    </div>
-  </div>
-
-  <div data-map-target="mapView" class="card shadow rounded-0 d-none">
-    <div id="map" style="height: 600px; width: 100%;"></div>
-  </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1><%= t '.our_events' %></h1>
+  <%= link_to t('.map'), map_events_path, class: 'btn btn-outline-primary' %>
 </div>
 
-<% content_for :head do %>
-  <script src="https://api-maps.yandex.ru/2.1/?apikey=<%= ENV.fetch('YANDEX_MAPS_API_KEY') %>&lang=<%= I18n.locale == :sr ? 'en_RU' : 'ru_RU' %>&onload=initYandexMaps" async defer></script>
-  <script>
-    window.initYandexMaps = function() {
-      if (window.ymaps) {
-        window.ymaps.ready(function() {
-          window.dispatchEvent(new Event('yandex-maps-ready'));
-        });
-      }
-    }
-  </script>
-<% end %>
+<%= render 'favorite_events_section' %>
+<div class="row row-cols-1 row-cols-md-2 g-3">
+  <%= render partial: 'event_card', collection: @events, as: :event %>
+</div>

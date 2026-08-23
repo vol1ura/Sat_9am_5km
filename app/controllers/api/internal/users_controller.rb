@@ -15,7 +15,7 @@ module API
       end
 
       def auth_link
-        user = User.find(params[:user_id])
+        user = User.find(params.expect(:user_id))
         Users::AuthToken.new(user).generate!
 
         render json: { link: auth_link_url(token: user.auth_token, host: "s95.#{params[:domain]}") }
@@ -42,7 +42,7 @@ module API
 
       def link_user_to_athlete!
         if params[:athlete_id]
-          @athlete = Athlete.find(params[:athlete_id])
+          @athlete = Athlete.find(params.expect(:athlete_id))
           @athlete.update!(user: @user)
         else
           @athlete = @user.create_athlete!(athlete_params)

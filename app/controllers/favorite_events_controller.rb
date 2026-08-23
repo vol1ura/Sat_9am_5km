@@ -15,6 +15,6 @@ class FavoriteEventsController < ApplicationController
   private
 
   def find_event
-    @event = Event.find_by!(code_name: params[:event_code_name])
+    @event = Event.find_by!(code_name: params.expect(:event_code_name))
   end
 end

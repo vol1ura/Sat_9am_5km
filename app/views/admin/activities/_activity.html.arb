@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-collection = activity.results.includes(athlete: :club).order(:position)
+collection = activity.results.includes(athlete: :event).order(:position)
 
 columns do
   column do
@@ -44,7 +44,8 @@ panel 'Протокол' do
         human_gender(athlete.gender) || render(partial: 'gender_setup_links', locals: { result: r, activity: activity })
       end
     end
-    column(:club) { |r| r.athlete&.club&.name }
+    column('домашний') { |r| r.athlete&.event&.name }
+    column('зарег.') { |r| r.athlete&.user_id.present? }
   end
 end
 
@@ -52,13 +53,15 @@ incorrect_running_volunteers_ids = activity.volunteers.incorrect_on_running_posi
 
 panel 'Волонтёры' do
   table_for(
-    activity.volunteers_roster.includes(:athlete),
+    activity.volunteers_roster.includes(athlete: :event),
     row_class: ->(v) { 'athlete-error' if incorrect_running_volunteers_ids.include?(v.id) },
   ) do
     column(:role) { |v| human_volunteer_role v.role }
     column('QR-ID') { |v| athlete_code_id v.athlete }
     column(:name) { |v| link_to v.name, admin_athlete_path(v.athlete) }
     column :comment
+    column('домашний') { |v| v.athlete&.event&.name }
+    column('зарег.') { |v| v.athlete&.user_id.present? }
   end
 end
 
@@ -66,4 +69,4 @@ panel 'Правки забега' do
   render partial: 'admin/audits_table', locals: { object: activity }
 end
 
-render partial: 'protocol_validation' if collection.exists?
+render partial: 'protocol_validation' if collection.any?
