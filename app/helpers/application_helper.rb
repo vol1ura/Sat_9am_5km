@@ -98,6 +98,6 @@ module ApplicationHelper
   end
 
   def avatar_class(user, *base_classes)
-    [*base_classes, ('avatar-hex' if user&.donor_this_year?)].compact.join(' ')
+    [*base_classes, ('avatar-hex' if user&.sponsor_marked)].compact.join(' ')
   end
 end

@@ -251,7 +251,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_120000) do
     t.datetime "confirmed_at"
     t.datetime "created_at", null: false
     t.text "disabled_notifications", default: [], null: false, array: true
-    t.datetime "donor_marked_at"
     t.string "email"
     t.string "emergency_contact_name"
     t.string "emergency_contact_phone"
@@ -269,6 +268,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_120000) do
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.integer "role"
+    t.datetime "sponsor_marked_at"
     t.bigint "telegram_id"
     t.string "telegram_user"
     t.string "unconfirmed_email"
