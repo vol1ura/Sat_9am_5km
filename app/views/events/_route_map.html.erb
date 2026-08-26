@@ -4,6 +4,8 @@
       class="route-map rounded border"
       data-controller="route-map"
       data-route-map-url-value="<%= route_map_event_path(@event.code_name) %>"
+      data-fullscreen-enter-label="<%= t('events.map.fullscreen_enter') %>"
+      data-fullscreen-exit-label="<%= t('events.map.fullscreen_exit') %>"
       <% if @event.latitude.present? && @event.longitude.present? %>
         data-route-map-latitude-value="<%= @event.latitude %>"
         data-route-map-longitude-value="<%= @event.longitude %>"

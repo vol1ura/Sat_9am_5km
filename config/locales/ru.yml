@@ -1102,6 +1102,10 @@ ru:
     map:
       title: Карта мероприятий
       as_list: Списком
+      locate: Где я
+      locate_failed: Не удалось определить местоположение
+      fullscreen_enter: На весь экран
+      fullscreen_exit: Свернуть
     show:
       title: '%{place} | %{town} | Парковые забеги'
       our_contacts: Наши контакты

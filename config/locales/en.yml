@@ -1048,6 +1048,10 @@ en:
     map:
       title: Events Map
       as_list: As List
+      locate: Where am I
+      locate_failed: Could not determine your location
+      fullscreen_enter: Full screen
+      fullscreen_exit: Exit full screen
     show:
       title: '%{place} | %{town} | Park Runs'
       our_contacts: Our Contacts

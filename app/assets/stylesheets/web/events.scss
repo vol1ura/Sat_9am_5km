@@ -40,6 +40,42 @@
   width: 100%;
 }
 
+.events-map,
+.route-map {
+  .leaflet-bottom.leaflet-right {
+    margin-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .leaflet-control-locate a,
+  .leaflet-control-fullscreen a {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .leaflet-control-locate svg,
+  .leaflet-control-fullscreen svg {
+    display: block;
+    height: 16px;
+    width: 16px;
+  }
+
+  &.map-is-fullscreen {
+    border-radius: 0 !important;
+    height: 100dvh !important;
+    inset: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    position: fixed !important;
+    width: 100% !important;
+    z-index: 1055;
+  }
+}
+
+body.map-pseudo-fullscreen {
+  overflow: hidden;
+}
+
 .marker-cluster-small,
 .marker-cluster-medium,
 .marker-cluster-large {

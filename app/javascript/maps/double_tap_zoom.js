@@ -10,12 +10,12 @@ import L from 'leaflet';
 const DOUBLE_TAP_MS = 320;
 // ...and no further than this from it, otherwise these are two separate taps.
 const TAP_SLOP_PX = 32;
+// Finger must travel this far on the second tap before we steal the gesture.
+// Below this, a short double tap is left to Leaflet's doubleClickZoom (+1).
+const DRAG_START_PX = 8;
 // Zoom levels per pixel of vertical travel: ~700px of map height covers about
 // six levels, enough to go from a region to a district in a single move.
 const ZOOM_PER_PX = 1 / 110;
-// At most once per frame. requestAnimationFrame is avoided on purpose: it does
-// not tick in background tabs, and the gesture would freeze there.
-const FRAME_MS = 16;
 
 // Center that keeps `anchor` under the finger at the new zoom — the same math
 // Map.setZoomAround does internally.
@@ -27,117 +27,118 @@ function centerKeepingAnchor(map, anchor, zoom) {
   return map.containerPointToLatLng(viewHalf.add(offset));
 }
 
+function mapIsLive(map) {
+  return Boolean(map._mapPane && map._mapPane.parentNode);
+}
+
 export function addDoubleTapDragZoom(map) {
   const container = map.getContainer();
 
   let lastTapAt = 0;
   let lastTapPoint = null;
 
-  let active = false;
+  // Second tap is down, but the finger has not moved enough to zoom yet.
+  let candidate = false;
+  // The map is being zoomed by this gesture.
+  let zooming = false;
+  let startPoint = null;
   let startY = 0;
   let startZoom = 0;
   let anchor = null;
-  let lastMoveAt = 0;
   // The map has been moved at least once, so it has to be settled afterwards:
   // tiles for the final zoom level are loaded only then.
   let moved = false;
   let lastCenter = null;
   let lastZoom = 0;
+  let pendingY = 0;
+  let animRequest = null;
   let snapBeforeGesture = map.options.zoomSnap;
   let draggingWasEnabled = false;
   let doubleClickWasEnabled = false;
+  let handlersHeld = false;
 
-  const stop = () => {
-    if (!active) return;
-
-    active = false;
-    anchor = null;
-    // Settle on the final zoom BEFORE restoring zoomSnap: with zoomSnap = 0
-    // Leaflet keeps the fractional zoom the gesture ended on instead of jumping
-    // to a whole level. This is the single tile reload of the whole gesture.
-    if (moved && lastCenter) {
-      const settleZoom = map._limitZoom(lastZoom);
-      if (map.options.zoomAnimation) {
-        map._animateZoom(lastCenter, settleZoom, true, false);
-      } else {
-        map._resetView(lastCenter, settleZoom);
-      }
-    }
-    moved = false;
-    lastCenter = null;
-    map.options.zoomSnap = snapBeforeGesture;
-    if (draggingWasEnabled) map.dragging.enable();
-    if (doubleClickWasEnabled) map.doubleClickZoom.enable();
-    // Forget the first tap so that lifting the finger after a gesture does not
-    // start a new double tap.
+  const forgetTap = () => {
     lastTapAt = 0;
     lastTapPoint = null;
   };
 
-  const onTouchStart = (event) => {
-    if (event.touches.length !== 1) {
-      // Two fingers: a pinch, handled by Leaflet's own touchZoom.
-      stop();
-      return;
-    }
+  const holdHandlers = () => {
+    if (handlersHeld) return;
 
-    const touch = event.touches[0];
-    const point = { x: touch.clientX, y: touch.clientY };
-    const now = event.timeStamp || Date.now();
-    const isSecondTap = lastTapPoint
-      && now - lastTapAt < DOUBLE_TAP_MS
-      && Math.abs(point.x - lastTapPoint.x) < TAP_SLOP_PX
-      && Math.abs(point.y - lastTapPoint.y) < TAP_SLOP_PX;
-
-    if (!isSecondTap) {
-      lastTapAt = now;
-      lastTapPoint = point;
-      return;
-    }
-
-    active = true;
-    startY = point.y;
-    startZoom = map.getZoom();
-    // Zoom around the touched point rather than the map center: the finger is
-    // on the very place the user wants to look at.
-    const bounds = container.getBoundingClientRect();
-    anchor = map.containerPointToLatLng(L.point(point.x - bounds.left, point.y - bounds.top));
     snapBeforeGesture = map.options.zoomSnap;
-    // Without this Leaflet rounds the zoom to whole levels and the smooth zoom
-    // turns into jumps.
     map.options.zoomSnap = 0;
     draggingWasEnabled = map.dragging.enabled();
     doubleClickWasEnabled = map.doubleClickZoom.enabled();
-    // Panning would drag the map along with the zoom, and Leaflet's own double
-    // tap would add its level on top of ours.
     map.dragging.disable();
     map.doubleClickZoom.disable();
-    lastMoveAt = 0;
-    moved = false;
-    lastCenter = null;
-    lastZoom = startZoom;
-    event.preventDefault();
+    handlersHeld = true;
   };
 
-  const onTouchMove = (event) => {
-    if (!active || !anchor) return;
+  const releaseHandlers = () => {
+    if (!handlersHeld) return;
 
-    if (event.touches.length !== 1) {
-      stop();
+    map.options.zoomSnap = snapBeforeGesture;
+    if (draggingWasEnabled) map.dragging.enable();
+    if (doubleClickWasEnabled) map.doubleClickZoom.enable();
+    handlersHeld = false;
+  };
+
+  const resetGesture = () => {
+    candidate = false;
+    zooming = false;
+    startPoint = null;
+    anchor = null;
+    moved = false;
+    lastCenter = null;
+    forgetTap();
+  };
+
+  const cancelPendingFrame = () => {
+    if (animRequest === null) return;
+    L.Util.cancelAnimFrame(animRequest);
+    animRequest = null;
+  };
+
+  // Settle tiles after a one-finger zoom. Restores dragging only on zoomend so
+  // a new pan cannot start while the zoom animation is still running.
+  const settle = () => {
+    if (!moved || !lastCenter || !mapIsLive(map)) {
+      releaseHandlers();
+      resetGesture();
       return;
     }
 
-    // Keep the page from scrolling under the gesture. Requires a non-passive
-    // listener, otherwise the browser ignores preventDefault.
-    event.preventDefault();
+    const settleZoom = map._limitZoom(lastZoom);
+    const center = lastCenter;
+    resetGesture();
 
-    const now = event.timeStamp || Date.now();
-    if (now - lastMoveAt < FRAME_MS) return;
+    const restore = () => {
+      map.off('zoomend', restore);
+      releaseHandlers();
+    };
 
-    lastMoveAt = now;
-    // Dragging up zooms OUT: the finger pushes the map away from the viewer.
-    const delta = (event.touches[0].clientY - startY) * ZOOM_PER_PX;
-    const zoom = Math.max(map.getMinZoom(), Math.min(map.getMaxZoom(), startZoom + delta));
+    if (map.options.zoomAnimation) {
+      map.once('zoomend', restore);
+      map._animateZoom(center, settleZoom, true, false);
+    } else {
+      map._resetView(center, settleZoom);
+      releaseHandlers();
+    }
+  };
+
+  // Drop the gesture without rebuilding tiles — used when a second finger
+  // arrives so Leaflet's own pinch can take over (it settles on lift).
+  const abort = () => {
+    cancelPendingFrame();
+    releaseHandlers();
+    resetGesture();
+  };
+
+  const applyZoom = () => {
+    animRequest = null;
+    if (!zooming || !anchor) return;
+
+    const zoom = Math.max(map.getMinZoom(), Math.min(map.getMaxZoom(), startZoom + (pendingY - startY) * ZOOM_PER_PX));
     if (Math.abs(zoom - map.getZoom()) < 0.01) return;
 
     const center = centerKeepingAnchor(map, anchor, zoom);
@@ -153,19 +154,112 @@ export function addDoubleTapDragZoom(map) {
     map._move(center, zoom, { pinch: true, round: false });
   };
 
+  const beginZoom = (point) => {
+    map._stop();
+    holdHandlers();
+    zooming = true;
+    startY = point.y;
+    startZoom = map.getZoom();
+    anchor = map.containerPointToLatLng(point);
+    lastCenter = null;
+    lastZoom = startZoom;
+    moved = false;
+    pendingY = point.y;
+  };
+
+  const onTouchStart = (event) => {
+    if (event.touches.length !== 1) {
+      // Two fingers: a pinch, handled by Leaflet's own touchZoom.
+      abort();
+      return;
+    }
+
+    const point = map.mouseEventToContainerPoint(event.touches[0]);
+    const now = event.timeStamp || Date.now();
+    const isSecondTap = lastTapPoint
+      && now - lastTapAt < DOUBLE_TAP_MS
+      && lastTapPoint.distanceTo(point) < TAP_SLOP_PX;
+
+    if (!isSecondTap) {
+      lastTapAt = now;
+      lastTapPoint = point;
+      candidate = false;
+      return;
+    }
+
+    // Remember the candidate only. Handlers stay on so a short double tap
+    // still goes to Leaflet's doubleClickZoom (+1 level).
+    candidate = true;
+    startPoint = point;
+    startY = point.y;
+    startZoom = map.getZoom();
+    lastZoom = startZoom;
+  };
+
+  const onTouchMove = (event) => {
+    if (event.touches.length !== 1) {
+      abort();
+      return;
+    }
+
+    const point = map.mouseEventToContainerPoint(event.touches[0]);
+
+    if (!candidate && !zooming) {
+      // First tap turned into a pan — it must not count toward a double tap.
+      if (lastTapPoint && lastTapPoint.distanceTo(point) > TAP_SLOP_PX) {
+        forgetTap();
+      }
+      return;
+    }
+
+    if (candidate && !zooming) {
+      if (startPoint.distanceTo(point) < DRAG_START_PX) return;
+      beginZoom(startPoint);
+    }
+
+    if (!zooming) return;
+
+    // Keep the page from scrolling under the gesture. Requires a non-passive
+    // listener, otherwise the browser ignores preventDefault.
+    event.preventDefault();
+    pendingY = point.y;
+    if (animRequest === null) {
+      animRequest = L.Util.requestAnimFrame(applyZoom, map);
+    }
+  };
+
+  const onTouchEnd = () => {
+    if (zooming) {
+      cancelPendingFrame();
+      applyZoom();
+      settle();
+      return;
+    }
+
+    // Second tap lifted without dragging: leave doubleClickZoom alone.
+    candidate = false;
+    startPoint = null;
+  };
+
+  const onTouchCancel = () => {
+    if (zooming || candidate) abort();
+  };
+
   // Capture phase: Leaflet's own handlers sit on the same container, and
   // dragging has to be disabled before they see the touch.
   const options = { capture: true, passive: false };
   container.addEventListener('touchstart', onTouchStart, options);
   container.addEventListener('touchmove', onTouchMove, options);
-  container.addEventListener('touchend', stop, options);
-  container.addEventListener('touchcancel', stop, options);
+  container.addEventListener('touchend', onTouchEnd, options);
+  container.addEventListener('touchcancel', onTouchCancel, options);
 
   return () => {
-    stop();
+    cancelPendingFrame();
+    candidate = false;
+    zooming = false;
     container.removeEventListener('touchstart', onTouchStart, options);
     container.removeEventListener('touchmove', onTouchMove, options);
-    container.removeEventListener('touchend', stop, options);
-    container.removeEventListener('touchcancel', stop, options);
+    container.removeEventListener('touchend', onTouchEnd, options);
+    container.removeEventListener('touchcancel', onTouchCancel, options);
   };
 }

@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import { addDoubleTapDragZoom } from 'maps/double_tap_zoom';
+import { addFullscreenControl } from 'maps/fullscreen';
 
 window.L = L;
 
@@ -29,13 +30,20 @@ const OSM_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 export function createMap(element, { center, zoom } = {}) {
-  const map = L.map(element);
+  const map = L.map(element, { zoomControl: false });
   map.attributionControl.setPrefix('S95');
+  map.attributionControl.setPosition('bottomleft');
   map.setView(center || defaultCenter(), zoom ?? defaultZoom());
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
+  addFullscreenControl(map, {
+    enterLabel: element.dataset.fullscreenEnterLabel,
+    exitLabel: element.dataset.fullscreenExitLabel,
+  });
 
   L.tileLayer(OSM_TILE_URL, { maxZoom: 19, attribution: OSM_ATTRIBUTION }).addTo(map);
 
-  map.once('unload', addDoubleTapDragZoom(map));
+  const detachDoubleTapDragZoom = addDoubleTapDragZoom(map);
+  map.once('unload', detachDoubleTapDragZoom);
 
   return map;
 }
@@ -61,18 +69,6 @@ export function addEventMarker(map, event, buttonLabel) {
 
   marker.addTo(map);
   return marker;
-}
-
-export function applyGeolocation(map, zoom = 10) {
-  if (!navigator.geolocation) return;
-
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      map.setView([position.coords.latitude, position.coords.longitude], zoom);
-    },
-    () => {},
-    { enableHighAccuracy: false, timeout: 10000, maximumAge: 300_000 },
-  );
 }
 
 export function queryMapCenter() {

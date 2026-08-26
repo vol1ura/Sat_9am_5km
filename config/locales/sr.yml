@@ -1108,6 +1108,10 @@ sr:
     map:
       title: Mapa događaja
       as_list: Lista
+      locate: Gde sam
+      locate_failed: Nije moguće odrediti lokaciju
+      fullscreen_enter: Ceo ekran
+      fullscreen_exit: Zatvori ceo ekran
     show:
       title: '%{place} | %{town} | Park trčanje'
       our_contacts: Naši kontakti
