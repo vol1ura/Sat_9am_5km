@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import { addDoubleTapDragZoom } from 'maps/double_tap_zoom';
 
 window.L = L;
 
@@ -33,6 +34,8 @@ export function createMap(element, { center, zoom } = {}) {
   map.setView(center || defaultCenter(), zoom ?? defaultZoom());
 
   L.tileLayer(OSM_TILE_URL, { maxZoom: 19, attribution: OSM_ATTRIBUTION }).addTo(map);
+
+  map.once('unload', addDoubleTapDragZoom(map));
 
   return map;
 }
