@@ -1,7 +1,9 @@
 <tr class="loading-indicator">
-  <td colspan="<%= colspan %>" class="text-center p-3">
-    <div class="spinner-border text-primary text-center my-4" role="status">
-      <span class="visually-hidden"><%= t 'loading' %></span>
+  <td colspan="<%= colspan %>" class="p-3 text-center">
+    <div class="my-4 flex justify-center">
+      <div class="size-8 animate-spin rounded-full border-2 border-line border-t-accent" role="status">
+        <span class="sr-only"><%= t 'loading' %></span>
+      </div>
     </div>
   </td>
 </tr>

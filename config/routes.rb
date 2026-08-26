@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resource :favorite_event, only: :update
   end
   resources :activities, only: %i[index show] do
-    get :dashboard, on: :collection
+    get 'dashboard/:chart', action: :dashboard, on: :collection, as: :dashboard_chart
   end
   scope path: 'athletes' do
     get ':code/best_result', to: 'athletes#best_result', defaults: { format: :json }
@@ -31,6 +31,12 @@ Rails.application.routes.draw do
     end
   end
   resources :athletes, only: %i[index show] do
+    member do
+      get :summary
+      get :results
+      get :volunteering
+      get :friends
+    end
     resources :statistics, module: :athletes, only: [] do
       collection do
         get :friends
@@ -39,13 +45,19 @@ Rails.application.routes.draw do
         get :total_trophies
         get :total_results
         get :personal_bests
-        get :best_position_absolute
+        get :goals
         get :volunteering_chart
       end
     end
   end
   resources :volunteers, only: %i[new edit create update destroy]
-  resources :badges, only: %i[index show]
+  resources :badges, only: %i[index show] do
+    collection do
+      get :achievements
+      get :funruns
+      get :archive
+    end
+  end
   resources :clubs, param: :slug, only: %i[index show] do
     get :search, on: :collection
     get :last_week, on: :member, path: 'last-week'

@@ -20,28 +20,27 @@ class Athlete < ApplicationRecord
   RAGE_BADGE_LIMIT = 3
   PERSONAL_BEST_DISTANCES = %i[10k half_marathon marathon].freeze
 
-  PersonalCode = Struct.new(:code) do
+  PersonalCode = Data.define(:code) do
     def code_type
-      @code_type ||=
-        if code < PARKZHRUN_BORDER
-          :parkrun_code
-        elsif code < SAT_9AM_5KM_BORDER
-          :parkzhrun_code
-        elsif code > RUN_PARK_BORDER
-          :runpark_code
-        elsif code > FIVE_VERST_BORDER
-          :fiveverst_code
-        else
-          :id
-        end
+      if code < PARKZHRUN_BORDER
+        :parkrun_code
+      elsif code < SAT_9AM_5KM_BORDER
+        :parkzhrun_code
+      elsif code > RUN_PARK_BORDER
+        :runpark_code
+      elsif code > FIVE_VERST_BORDER
+        :fiveverst_code
+      else
+        :id
+      end
     end
 
     def id
-      @id ||= code.between?(SAT_9AM_5KM_BORDER, FIVE_VERST_BORDER) ? code - SAT_9AM_5KM_BORDER : code
+      code.between?(SAT_9AM_5KM_BORDER, FIVE_VERST_BORDER) ? code - SAT_9AM_5KM_BORDER : code
     end
 
     def to_params
-      @to_params ||= { code_type => id }
+      { code_type => id }
     end
   end
 
@@ -55,6 +54,8 @@ class Athlete < ApplicationRecord
   has_many :results, dependent: :nullify
   has_many :published_results, -> { where(activity_id: Activity.published.select(:id)) },
            dependent: :nullify, class_name: 'Result', inverse_of: :athlete
+  has_many :published_volunteering, -> { where(activity_id: Activity.published.select(:id)) },
+           dependent: :destroy, class_name: 'Volunteer', inverse_of: :athlete
   has_many :activities, through: :results
   has_many :events, through: :activities
   has_many :volunteering, -> { published.order(date: :desc) },
@@ -135,12 +136,22 @@ class Athlete < ApplicationRecord
       .size == 5
   end
 
-  def going_to_event?
-    going_to_event.present?
-  end
-
   def friend?(friend)
     friendships.exists?(friend_id: friend.id)
+  end
+
+  def first_event_visit_dates
+    result_dates = results.published.group('activity.event_id').minimum('activity.date')
+    volunteer_dates = volunteering.unscope(:order).group('activity.event_id').minimum('activity.date')
+    result_dates.merge(volunteer_dates) { |_event_id, result_date, volunteer_date| [result_date, volunteer_date].min }
+  end
+
+  def first_finish_seconds
+    results.published
+      .select(Arel.sql('DISTINCT ON (results.total_time % 60) results.*'))
+      .order(Arel.sql('results.total_time % 60, activity.date ASC, results.id ASC'))
+      .preload(:activity)
+      .index_by { |result| result.total_time % 60 }
   end
 
   private

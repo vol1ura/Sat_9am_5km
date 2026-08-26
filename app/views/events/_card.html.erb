@@ -1,10 +1,11 @@
-<div class="col">
-  <div class="card border-primary border-opacity-25 shadow h-100">
-    <div class="card-header mt-0">
-      <section class="fs-5 card-title mb-0"><%= header %></section>
-    </div>
-    <div class="card-body">
-      <%= yield %>
-    </div>
-  </div>
-</div>
+<% heading_tag = local_assigns.fetch(:heading_tag, :h2) %>
+<%= render Ui::CardComponent.new(class: 'h-full border-brand/25') do |card| %>
+  <% if header.present? %>
+    <% card.with_header do %>
+      <div class="border-b border-line px-4 py-3">
+        <%= content_tag heading_tag, header, class: 'mb-0 text-lg font-semibold text-ink' %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= yield %>
+<% end %>

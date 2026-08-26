@@ -1,0 +1,11 @@
+<%= render Ui::PageSubnavComponent.new(
+  aria_label: t('navbars.top.ratings'),
+  items: [
+    { label: nav_label(:athletes), href: ratings_path(type: 'results'), active: controller_name == 'ratings' && params[:type] != 'volunteers' && action_name == 'index' },
+    { label: nav_label(:volunteers), href: ratings_path(type: 'volunteers'), active: controller_name == 'ratings' && params[:type] == 'volunteers' && action_name == 'index' },
+    { label: nav_label(:club_ratings), href: clubs_path, active: controller_name == 'clubs' && action_name == 'index' },
+    { label: nav_label(:top_results), href: results_ratings_path, active: controller_name == 'ratings' && action_name == 'results' },
+    { label: nav_label(:duels), href: duels_path, active: controller_name == 'duels' && action_name.in?(%w[index show]) },
+    { label: nav_label(:friends_protocol), href: protocol_duels_path, active: controller_name == 'duels' && action_name == 'protocol' },
+  ],
+) %>

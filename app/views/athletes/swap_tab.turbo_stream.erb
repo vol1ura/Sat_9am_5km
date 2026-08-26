@@ -1,0 +1,6 @@
+<%= turbo_stream.update 'athlete_subnav' do %>
+  <%= render 'subnav' %>
+<% end %>
+<%= turbo_stream.update 'athlete_tab' do %>
+  <%= render @current_tab.to_s %>
+<% end %>

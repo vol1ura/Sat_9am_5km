@@ -16,6 +16,7 @@ class Badge < ApplicationRecord
   end
 
   validates :kind, :name, :conditions, presence: true
+  validates :received_date, presence: true, if: :funrun_kind?
 
   validates :image, attached: true,
                     content_type: %i[png webp],
@@ -36,9 +37,13 @@ class Badge < ApplicationRecord
     public_send(:"#{kind}_kind").where("info->>'type' = ?", type).order(Arel.sql("info->'threshold'"))
   end
 
-  def self.participating_thresholds
-    @participating_thresholds ||=
-      participating_kind
+  def self.thresholds_for(kind)
+    ivar = :"@#{kind}_thresholds"
+    return instance_variable_get(ivar) if instance_variable_defined?(ivar)
+
+    instance_variable_set(
+      ivar,
+      public_send(:"#{kind}_kind")
         .where("info->>'type' IN (?)", BADGE_TYPES)
         .group(Arel.sql("info->>'type'"))
         .pluck(
@@ -46,7 +51,12 @@ class Badge < ApplicationRecord
           Arel.sql("array_agg((info->'threshold')::int ORDER BY (info->'threshold')::int)"),
         )
         .to_h
-        .symbolize_keys
+        .symbolize_keys,
+    )
+  end
+
+  def self.funrun_archive_cutoff
+    2.years.ago.to_date
   end
 
   def self.ransackable_attributes(_auth_object = nil)

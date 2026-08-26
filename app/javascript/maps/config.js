@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import { addDoubleTapDragZoom } from 'maps/double_tap_zoom';
 import { addFullscreenControl } from 'maps/fullscreen';
+import { mapColors } from 'maps/theme';
 
 window.L = L;
 
@@ -49,22 +50,26 @@ export function createMap(element, { center, zoom } = {}) {
 }
 
 export function eventMarkerColor(active) {
-  return active ? '#dc3545' : '#6c757d';
+  const { active: activeColor, inactive } = mapColors();
+
+  return active ? activeColor : inactive;
 }
 
 export function addEventMarker(map, event, buttonLabel) {
   const marker = L.circleMarker([event.latitude, event.longitude], {
     radius: 8,
-    color: '#fff',
+    color: mapColors().stroke,
     weight: 2,
     fillColor: eventMarkerColor(event.active),
     fillOpacity: 1,
   });
 
   marker.bindPopup(`
-    <h5 class="text-primary mb-1">${event.name}</h5>
-    <p class="my-0 text-black">${event.place} (${event.town})</p>
-    <a href="/events/${event.code_name}" class="btn btn-outline-primary btn-sm my-2">${buttonLabel}</a>
+    <div class="map-popup">
+      <h5 class="map-popup__title">${event.name}</h5>
+      <p class="map-popup__place">${event.place} (${event.town})</p>
+      <a href="/events/${event.code_name}" class="map-popup__link">${buttonLabel}</a>
+    </div>
   `);
 
   marker.addTo(map);

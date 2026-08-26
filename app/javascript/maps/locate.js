@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import { mapColors } from 'maps/theme';
 
 const USER_ZOOM = 14;
 const FIT_MAX_ZOOM = 15;
@@ -118,20 +119,22 @@ const LocateControl = L.Control.extend({
       return;
     }
 
+    const { locate, stroke } = mapColors();
+
     this._circle = L.circle(latlng, {
       radius,
-      color: '#0d6efd',
+      color: locate,
       weight: 1,
-      fillColor: '#0d6efd',
+      fillColor: locate,
       fillOpacity: 0.15,
       interactive: false,
     }).addTo(this._map);
 
     this._marker = L.circleMarker(latlng, {
       radius: 8,
-      color: '#fff',
+      color: stroke,
       weight: 2,
-      fillColor: '#0d6efd',
+      fillColor: locate,
       fillOpacity: 1,
       interactive: false,
     }).addTo(this._map);

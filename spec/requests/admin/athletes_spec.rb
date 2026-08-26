@@ -71,9 +71,9 @@ RSpec.describe '/admin/athletes' do
 
   describe 'GET /admin/athletes?scope=duplicates' do
     before do
-      create(:athlete, name: 'Doe JOHN', parkrun_code: nil)
-      create(:athlete, name: 'John Doe', parkrun_code: nil)
-      create(:athlete, name: 'John Doe'.swapcase, fiveverst_code: nil)
+      create(:athlete, :fiveverst, name: 'Doe JOHN')
+      create(:athlete, :fiveverst, name: 'John Doe')
+      create(:athlete, name: 'John Doe'.swapcase)
 
       get admin_athletes_url(scope: :duplicates)
     end

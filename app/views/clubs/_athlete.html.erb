@@ -1,6 +1,6 @@
 <tr>
   <td sort-by="<%= athlete.name %>"><%= link_to athlete.name, athlete %></td>
-  <td><%= athlete.results_count %></td>
-  <td class="hidden-on-phone"><%= @count_volunteering.fetch(athlete.id, 0) %></td>
-  <td sort-by="<%= athlete.personal_best %>"><%= Result.time_string athlete.personal_best %></td>
+  <td class="cell-center"><%= athlete.results_count %></td>
+  <td class="hidden-on-phone cell-center"><%= @count_volunteering.fetch(athlete.id, 0) %></td>
+  <td class="cell-num-strong" sort-by="<%= athlete.personal_best %>"><%= Result.time_string athlete.personal_best %></td>
 </tr>

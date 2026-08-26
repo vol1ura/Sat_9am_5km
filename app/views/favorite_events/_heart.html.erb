@@ -3,9 +3,9 @@
     <% favorited = current_user.favorite_event?(event) %>
     <%= button_to event_favorite_event_path(event.code_name),
                   method: :put,
-                  class: 'btn btn-link px-0 border-0 position-relative z-2',
+                  class: 'relative z-2 border-0 bg-transparent p-0',
                   title: favorited ? t('favorite_events.remove') : t('favorite_events.add') do %>
-      <i class="<%= favorited ? 'fa-solid' : 'fa-regular' %> fa-heart fs-5 <%= favorited ? 'text-danger' : 'text-light' %>"></i>
+      <i class="<%= favorited ? 'fa-solid' : 'fa-regular' %> fa-heart text-lg <%= favorited ? 'text-danger' : 'text-ink-muted' %>"></i>
     <% end %>
   <% end %>
 </span>

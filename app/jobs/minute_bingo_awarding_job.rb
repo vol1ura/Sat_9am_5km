@@ -3,26 +3,16 @@
 class MinuteBingoAwardingJob < ApplicationJob
   queue_as :low
 
-  ALL_SECONDS = 60.times.to_a.freeze
-
   def perform(activity_id = nil)
     athlete_ids = Result.published.select(:athlete_id)
     athlete_ids = athlete_ids.where(activity_id:) if activity_id
-    dataset = Athlete.where.not(id: Trophy.where(badge: minute_bingo_badge).select(:athlete_id)).where(id: athlete_ids)
+    dataset = Athlete.where.not(id: minute_bingo_badge.trophies.select(:athlete_id)).where(id: athlete_ids)
 
     dataset.find_each do |athlete|
-      seconds = []
-      athlete.results.published.order(:date).pluck(:total_time, :date).each do |total_time, date|
-        seconds.push(total_time % 60)
-        if (ALL_SECONDS - seconds).empty?
-          athlete.trophies.create! badge: minute_bingo_badge, date: date
-          break
-        end
-      end
-      seconds = seconds.uniq.sort
-      next if athlete.stats.dig('results', 'seconds') == seconds
+      first_second_dates = athlete.results.published.group(Arel.sql('results.total_time % 60')).minimum('activity.date')
+      next if first_second_dates.size != 60
 
-      athlete.update!(stats: athlete.stats.deep_merge('results' => { 'seconds' => seconds }))
+      athlete.trophies.create! badge: minute_bingo_badge, date: first_second_dates.values.max
     end
   end
 

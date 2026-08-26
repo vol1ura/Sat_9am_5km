@@ -1,0 +1,32 @@
+<%= render Ui::PageSubnavComponent.new(
+  aria_label: t('athletes.show.profile_sections'),
+  items: [
+    {
+      label: t('athletes.show.tab_summary'),
+      href: summary_athlete_path(@athlete),
+      active: @current_tab == :summary,
+      data: { turbo_stream: true },
+    },
+    {
+      label: t('athletes.show.tab_results'),
+      href: results_athlete_path(@athlete),
+      active: @current_tab == :results,
+      disabled: @total_results.zero?,
+      data: { turbo_stream: true },
+    },
+    {
+      label: t('athletes.show.volunteering'),
+      href: volunteering_athlete_path(@athlete),
+      active: @current_tab == :volunteering,
+      disabled: @total_vol.zero?,
+      data: { turbo_stream: true },
+    },
+    {
+      label: t('athletes.show.tab_social'),
+      href: friends_athlete_path(@athlete),
+      active: @current_tab == :friends,
+      disabled: !@has_friends_tab,
+      data: { turbo_stream: true },
+    },
+  ],
+) %>

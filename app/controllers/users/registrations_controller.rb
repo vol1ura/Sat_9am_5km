@@ -37,7 +37,7 @@ module Users
     end
 
     def sign_up_params
-      params.expect(user: [:first_name, :last_name, :email, :policy_accepted, { athlete_attributes: [:gender] }])
+      params.expect(user: [:first_name, :last_name, :email, :policy_accepted, { athlete_attributes: %i[gender event_id] }])
     end
   end
 end

@@ -1,0 +1,7 @@
+<span class="prev">
+  <% unless current_page.first? %>
+    <%= link_to url, rel: 'prev', remote: remote, aria: { label: 'Previous page' } do %>
+      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+    <% end %>
+  <% end %>
+</span>

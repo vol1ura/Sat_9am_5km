@@ -1,14 +1,18 @@
 import L from 'leaflet';
+import { mapColors } from 'maps/theme';
 
-const ROUTE_STYLE = { color: '#0d6efd', weight: 4, opacity: 0.9 };
+function routeStyle() {
+  return { color: mapColors().route, weight: 4, opacity: 0.9 };
+}
 
 function pointColor(name = '') {
+  const { start, finish, route } = mapColors();
   const label = name.toLowerCase();
 
-  if (label.includes('старт') || label.includes('start')) return '#198754';
-  if (label.includes('финиш') || label.includes('finish')) return '#dc3545';
+  if (label.includes('старт') || label.includes('start')) return start;
+  if (label.includes('финиш') || label.includes('finish')) return finish;
 
-  return '#0d6efd';
+  return route;
 }
 
 function addStyledLayer(map, geojson) {
@@ -17,7 +21,7 @@ function addStyledLayer(map, geojson) {
       const name = _feature.properties?.name || '';
       return L.circleMarker(latlng, {
         radius: 6,
-        color: '#fff',
+        color: mapColors().stroke,
         weight: 2,
         fillColor: pointColor(name),
         fillOpacity: 1,
@@ -26,7 +30,7 @@ function addStyledLayer(map, geojson) {
     style(feature) {
       const geometryType = feature.geometry?.type;
       if (geometryType === 'LineString' || geometryType === 'MultiLineString') {
-        return ROUTE_STYLE;
+        return routeStyle();
       }
 
       return {};

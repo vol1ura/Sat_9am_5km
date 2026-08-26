@@ -58,6 +58,11 @@ module Sat9am5km
     config.active_storage.service = :local
     config.active_storage.resolve_model_to_route = :rails_storage_proxy
 
+    config.view_component.generate.sidecar = true
+
+    # SCSS is compiled by dartsass-sprockets; Tailwind v4 is minified at build time.
+    config.assets.css_compressor = nil
+
     config.telegram = config_for(:telegram)
     config.additional_events = config_for(:additional_events)
   end

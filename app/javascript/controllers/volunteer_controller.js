@@ -2,6 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
 import { srLocale } from 'charts/sr';
+import { apexThemeOptions, barChartOptions, chartHeatmapScale, chartLayoutPadding, chartTitleOptions } from 'charts/theme';
 
 const translations = {
   ru: {
@@ -94,68 +95,41 @@ export default class extends Controller {
       });
     });
 
-    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    const { legend } = apexThemeOptions();
 
-    return {
+    return barChartOptions({
+      id: 'volunteering-chart',
+      height: 380,
       series,
-      chart: {
-        type: 'bar',
-        height: 350,
-        stacked: true,
-        background: 'transparent',
-        toolbar: {
-          show: false
-        },
-        zoom: {
-          enabled: false
-        }
+      chart: { stacked: true },
+      plotBar: {
+        borderRadiusApplication: 'end',
+        borderRadiusWhenStacked: 'last',
       },
-      title: {
-        text: title,
-        floating: true,
-        align: 'center',
-      },
-      dataLabels: {
-        enabled: false
-      },
+      title: chartTitleOptions(title, { floating: false }),
+      dataLabels: { enabled: false },
       responsive: [{
         breakpoint: 720,
         options: {
           legend: {
             position: 'bottom',
-            offsetX: -20,
+            offsetX: 0,
             offsetY: 0
           }
         }
       }],
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          borderRadius: 10,
-          borderRadiusApplication: 'end', // 'around', 'end'
-          borderRadiusWhenStacked: 'last', // 'all', 'last'
-        },
-      },
       xaxis: { categories },
-      yaxis: {
-        forceNiceScale: true,
-      },
       legend: {
         position: 'right',
-        offsetY: 40
+        offsetY: 40,
+        ...legend,
       },
-      theme: {
-        mode: isDark ? 'dark' : 'light',
-        palette: isDark ? 'palette5' : 'palette2'
-      },
-      fill: {
-        opacity: 0.85
-      }
-    };
+    });
   }
 
   #heatmapOptions(title, tooltipLabel, target) {
-    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    const { theme, foreColor } = apexThemeOptions();
+    const layout = chartLayoutPadding();
     const categories = Array.from({ length: target }, (_, idx) => (idx + 1).toString());
     const series = this.hdataTargets.map((row, rowIdx) => {
       const role = row.querySelector('th').textContent.trim();
@@ -184,19 +158,21 @@ export default class extends Controller {
     });
 
     return {
+      ...layout,
       series,
       chart: {
+        ...layout.chart,
+        id: 'h-index-chart',
         type: 'heatmap',
-        height: 360,
+        height: 380,
+        width: '100%',
         background: 'transparent',
+        foreColor,
         toolbar: {
           show: false
         }
       },
-      title: {
-        text: title,
-        align: 'center'
-      },
+      title: chartTitleOptions(title),
       dataLabels: {
         enabled: false
       },
@@ -207,28 +183,7 @@ export default class extends Controller {
         heatmap: {
           shadeIntensity: 0,
           colorScale: {
-            ranges: [
-              {
-                from: 0,
-                to: 0,
-                color: isDark ? '#2d3748' : '#edf2f7'
-              },
-              {
-                from: 1,
-                to: 1,
-                color: isDark ? '#47c1bf' : '#7986cb'
-              },
-              {
-                from: 2,
-                to: 2,
-                color: isDark ? '#2b908f' : '#3f51b5'
-              },
-              {
-                from: 3,
-                to: 3,
-                color: isDark ? '#f6ad55' : '#ffb300'
-              }
-            ]
+            ranges: chartHeatmapScale(),
           }
         }
       },
@@ -240,6 +195,10 @@ export default class extends Controller {
       },
       yaxis: {
         opposite: true,
+        labels: {
+          maxWidth: 96,
+          trim: true,
+        },
       },
       tooltip: {
         custom: ({ seriesIndex, w }) => {
@@ -256,11 +215,9 @@ export default class extends Controller {
           `;
         }
       },
-      theme: {
-        mode: isDark ? 'dark' : 'light'
-      },
+      theme,
       fill: {
-        opacity: 0.85
+        opacity: 0.72
       }
     };
   }

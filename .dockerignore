@@ -2,10 +2,15 @@ coverage/
 tmp/
 log/
 node_modules/
+storage/
+public/assets/
+public/sitemaps/
 
 .git/
 .vscode/
+.github/
 deploy/
+coverage/
 spec/requests/requests.http
 .dockerignore
 .byebug_history

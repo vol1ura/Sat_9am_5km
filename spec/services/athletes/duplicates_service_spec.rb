@@ -2,8 +2,8 @@
 
 RSpec.describe Athletes::DuplicatesService do
   describe '.call' do
-    let!(:parkrun_athlete) { create(:athlete, name: 'Test Name', fiveverst_code: nil) }
-    let!(:fiveverst_athlete) { create(:athlete, name: 'Name TEST', parkrun_code: nil) }
+    let!(:parkrun_athlete) { create(:athlete, name: 'Test Name') }
+    let!(:fiveverst_athlete) { create(:athlete, :fiveverst, name: 'Name TEST') }
 
     it 'finds duplicated athletes by name case insensitive' do
       expect(described_class.call.size).to eq 2

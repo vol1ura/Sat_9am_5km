@@ -20,7 +20,6 @@ module Athletes
       ActiveRecord::Base.transaction do
         merge_users!
         grab_modified_attributes_from_collection!
-        update_results_seconds
         replace_all_by_one!
       end
       AthleteStatsUpdateJob.perform_later athlete.id
@@ -97,11 +96,6 @@ module Athletes
 
     def unmodified_attributes
       @unmodified_attributes ||= athlete.attribute_names - SKIPPED_ATTRIBUTES
-    end
-
-    def update_results_seconds
-      athlete_seconds = @athletes.flat_map { |a| a.stats.dig('results', 'seconds') || [] }.uniq.sort
-      athlete.stats.deep_merge! 'results' => { 'seconds' => athlete_seconds }
     end
 
     def replace_all_by_one!

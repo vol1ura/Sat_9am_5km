@@ -67,7 +67,7 @@ class Event < ApplicationRecord
   end
 
   def almost_jubilee_athletes_dataset(type, delta = 1)
-    thresholds = Badge.participating_thresholds[type.singularize.to_sym].map { |x| x - delta }
+    thresholds = Badge.thresholds_for(:participating)[type.singularize.to_sym].map { |x| x - delta }
     ds =
       athletes
         .where("(stats->?->'count')::integer in (?)", type, thresholds)

@@ -1,0 +1,54 @@
+<footer class="mt-auto border-t border-line bg-surface-elevated" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only"><%= t 'navbars.bottom.s95' %></h2>
+  <div class="mx-auto max-w-6xl px-4 py-10">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div>
+        <%= link_to t('navbars.bottom.s95'), root_path, class: 'inline-flex items-center gap-2 text-ink no-underline hover:text-link font-display font-semibold' %>
+        <p class="mt-3 max-w-xs text-sm text-ink-muted"><%= t 'navbars.bottom.slogan' %></p>
+        <%= link_to t('navbars.bottom.privacy_policy'), page_path(page: 'privacy-policy'), class: 'mt-2 inline-block text-sm text-ink-muted hover:text-link' %>
+      </div>
+
+      <div class="grid grid-cols-1 min-[360px]:grid-cols-2 gap-8 lg:contents">
+        <% Navigation::FOOTER_SECTIONS.each do |section| %>
+          <div class="min-w-0">
+            <h3 class="mb-3 text-xs font-semibold uppercase tracking-wide text-ink-muted">
+              <%= nav_label(section[:heading_key]) %>
+            </h3>
+            <ul class="space-y-2 text-sm">
+              <% nav_visible_items(section[:items]).each do |item| %>
+                <li><%= link_to nav_label(item[:key]), nav_path(item), class: 'text-ink-muted hover:text-link' %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <p class="mt-8 border-t border-line pt-4 text-center text-xs text-ink-muted">
+      © <%= Time.zone.today.year %>
+      <% if top_level_domain == :ru %>
+        <%= t 'navbars.bottom.ano' %>.
+      <% else %>
+        <%= t 'navbars.bottom.s95' %>.
+      <% end %>
+      <%= t 'navbars.bottom.copyright' %>
+    </p>
+
+    <% if top_level_domain == :ru %>
+      <div class="mt-2 space-y-1 text-center text-xs text-ink-muted">
+        <p>
+          <%= t 'navbars.bottom.ano' %>
+          · <%= t 'navbars.bottom.ogrn' %>: 1237700352713
+          · <%= t 'navbars.bottom.inn' %>: 9721206702
+          · <%= t 'navbars.bottom.kpp' %>: 772101001
+          · <%= t 'navbars.bottom.registration_date' %>: 18.05.2023
+        </p>
+        <p>
+          <%= t 'navbars.bottom.address' %>
+          ·
+          <%= external_link_to(ENV.fetch('INFO_EMAIL'), "mailto:#{ENV.fetch('INFO_EMAIL')}", class: 'text-ink-muted hover:text-link') %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</footer>

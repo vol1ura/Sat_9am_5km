@@ -41,6 +41,7 @@ Style/FrozenStringLiteralComment:
     - config.ru
     - app/views/**/*.erb
     - app/views/**/*.json.jbuilder
+    - app/components/**/*.html.erb
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 Style/TrailingCommaInArguments:

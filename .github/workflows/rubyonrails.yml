@@ -92,6 +92,7 @@ jobs:
           cp config/additional_events.yml.example config/additional_events.yml
           touch public/app-release.apk
           bin/rails db:schema:load
+          bin/rails tailwindcss:build
       - name: Check database consistency
         run: bundle exec database_consistency
       - name: Run tests

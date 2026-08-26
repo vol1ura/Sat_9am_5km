@@ -1,0 +1,59 @@
+<% filterable = local_assigns.fetch(:filterable, false) %>
+<%
+  if filterable
+    events = volunteering.map { |vol| vol.activity.event }.uniq(&:id).sort_by(&:name)
+    roles = volunteering.map(&:role).uniq.sort_by { |role| human_volunteer_role(role) }
+  end
+%>
+
+<div<% if filterable %> data-controller="table-filter"<% end %>>
+  <% if filterable && (events.size > 1 || roles.size > 1) %>
+    <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <% if roles.size > 1 %>
+        <div class="sm:max-w-xs sm:flex-1">
+          <label class="sr-only" for="volunteering-role-filter"><%= t 'athletes.show.table.role' %></label>
+          <select
+            id="volunteering-role-filter"
+            class="<%= form_input_class %>"
+            data-table-filter-target="role"
+            data-action="change->table-filter#filter">
+            <option value=""><%= t 'athletes.show.filter_all_roles' %></option>
+            <% roles.each do |role| %>
+              <option value="<%= role %>"><%= human_volunteer_role role %></option>
+            <% end %>
+          </select>
+        </div>
+      <% end %>
+      <% if events.size > 1 %>
+        <div class="sm:max-w-xs sm:flex-1">
+          <label class="sr-only" for="volunteering-event-filter"><%= t 'athletes.show.table.event' %></label>
+          <select
+            id="volunteering-event-filter"
+            class="<%= form_input_class %>"
+            data-table-filter-target="event"
+            data-action="change->table-filter#filter">
+            <option value=""><%= t 'athletes.show.filter_all_events' %></option>
+            <% events.each do |event| %>
+              <option value="<%= event.id %>"><%= event.name %></option>
+            <% end %>
+          </select>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="data-table-shell">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="cell-num-muted">#</th>
+          <th><%= t 'athletes.show.table.date' %></th>
+          <th><%= t 'athletes.show.table.role' %></th>
+          <th><%= t 'athletes.show.table.event' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'volunteering_row', collection: volunteering, as: :vol, locals: { total_vol: } %>
+      </tbody>
+    </table>
+  </div>
+</div>

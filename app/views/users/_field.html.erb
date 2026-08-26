@@ -1,8 +1,8 @@
 <%= turbo_frame_tag field do %>
-  <div class="d-flex align-items-center">
+  <div class="flex items-center">
     <span class="me-auto"><%= current_user.public_send(field) %></span>
-    <%= link_to edit_user_path(field:), class: 'btn btn-outline-secondary', title: 'Изменить' do %>
-      <i class="fa-solid fa-pen-to-square text-primary"></i>
+    <%= render Ui::ButtonComponent.new(variant: :secondary, size: :sm, href: edit_user_path(field:), title: 'Изменить') do %>
+      <i class="fa-solid fa-pen-to-square text-brand"></i>
     <% end %>
   </div>
 <% end %>

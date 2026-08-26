@@ -13,25 +13,30 @@ module Athletes
     def total_events
       @results_by_event = athlete_results
         .joins(activity: :event)
-        .group('events.id, events.name')
-        .select('events.name as event_name, COUNT(results.id) as results_count,
+        .group('events.id, events.name, events.code_name')
+        .select('events.name as event_name, events.code_name as event_code_name,
+                COUNT(results.id) as results_count,
                 MIN(results.position) as best_position, MIN(results.total_time) as best_time')
         .order('events.visible_order')
 
-      @volunteering_by_event = @athlete
-        .volunteering
-        .unscope(:order)
+      @volunteering_by_event = athlete_volunteering
         .joins(activity: :event)
-        .group('events.id, events.name')
-        .select('events.name as event_name, COUNT(volunteers.id) as vol_count,
+        .group('events.id, events.name, events.code_name')
+        .select('events.name as event_name, events.code_name as event_code_name,
+                COUNT(volunteers.id) as vol_count,
                   COUNT(DISTINCT volunteers.role) as unique_roles_count')
         .order('events.visible_order')
     end
 
     def total_trophies
       @total_trophies = @athlete.trophies.size
-      @total_results = athlete_results.size
-      @seconds_in_results = @athlete.stats.dig('results', 'seconds') || []
+    end
+
+    def goals
+      @recent_since = 6.days.ago.to_date
+      assign_goal_thresholds
+      assign_goal_progress
+      assign_bingo_progress
     end
 
     def followers
@@ -42,13 +47,8 @@ module Athletes
       @friendships_hash = current_user&.athlete&.friendships&.pluck(:friend_id, :id).to_h
     end
 
-    def best_position_absolute
-      best_position = athlete_results.select('MIN(results.position)')
-      @pb_by_position = athlete_results.includes(activity: :event).where(position: best_position).order(date: :desc)
-    end
-
     def volunteering_chart
-      @volunteering = @athlete.volunteering.unscope(:order)
+      @volunteering = athlete_volunteering
       @total_results = athlete_results.size
       @role_counts = @volunteering.group(:role).order(count_all: :desc).count
       @h_index = @role_counts.values.map.with_index.take_while { |count, idx| count > idx }.size
@@ -64,6 +64,32 @@ module Athletes
 
     def athlete_results
       @athlete_results ||= @athlete.results.published
+    end
+
+    def athlete_volunteering
+      @athlete_volunteering ||= @athlete.volunteering.unscope(:order)
+    end
+
+    def assign_goal_thresholds
+      participating = Badge.thresholds_for(:participating)
+      @run_thresholds = participating[:result]
+      @vol_thresholds = participating[:volunteer]
+      @event_thresholds = Badge.thresholds_for(:tourist).values.flatten.uniq.sort
+    end
+
+    def assign_goal_progress
+      first_event_dates = @athlete.first_event_visit_dates
+      @total_results = athlete_results.size
+      @total_vol = athlete_volunteering.count
+      @events_count = first_event_dates.size
+      @recent_runs = athlete_results.exists?(activity: { date: @recent_since.. })
+      @recent_vol = athlete_volunteering.exists?(activity: { date: @recent_since.. })
+      @recent_events = first_event_dates.any? { |_event_id, date| date >= @recent_since }
+    end
+
+    def assign_bingo_progress
+      @bingo_by_second = @athlete.first_finish_seconds
+      @recent_bingo = @bingo_by_second.any? { |_second, result| result.date >= @recent_since }
     end
   end
 end

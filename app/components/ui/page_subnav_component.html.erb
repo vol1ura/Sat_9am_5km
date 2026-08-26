@@ -1,0 +1,15 @@
+<nav class="<%= nav_classes %>" aria-label="<%= @aria_label %>">
+  <div class="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2">
+    <% @items.each do |item| %>
+      <% if item[:disabled] %>
+        <span class="<%= page_subnav_link_class(disabled: true) %>" aria-disabled="true">
+          <%= item[:label] %>
+        </span>
+      <% else %>
+        <%= link_to item[:href], class: page_subnav_link_class(active: item[:active]), data: item[:data] do %>
+          <%= item[:label] %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</nav>

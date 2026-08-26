@@ -1,10 +1,16 @@
 <% head_info :description, "Politika obrade ličnih podataka korisnika i učesnika događaja projekta S95 (#{request.host})" %>
-<h1><%= head_info :title, 'Politika obrade ličnih podataka' %></h1>
 
+<div class="page-container my-6 md:my-8">
+  <article class="article">
+    <header class="article__header">
+      <h1><%= head_info :title, 'Politika obrade ličnih podataka' %></h1>
+    </header>
+
+    <div class="article__body">
 <% policy_page_url = page_url(page: 'privacy-policy') %>
 <% site_url = root_url %>
 
-<p class="text-body-secondary">
+<p class="text-ink-muted">
   Važeća verzija od <%= l Date.new(2026, 5, 2) %>.
   Sajt: <%= external_link_to site_url, site_url %>.
 </p>
@@ -265,3 +271,6 @@
     njenom važećom verzijom.
   </p>
 </section>
+    </div>
+  </article>
+</div>

@@ -11,11 +11,11 @@ class PagesController < ApplicationController
   layout :page_layout
 
   def index
-    @stats = HomeStats.call(top_level_domain)
     @local_events = Event.active.in_country(top_level_domain).unscope(:order)
     @next_saturday = Date.tomorrow.next_week.prev_week(:saturday)
-    @jubilee_events = jubilee_events
-    @funrun_badges = funrun_badges
+    @jubilee_events = jubilee_events_for(@local_events, @next_saturday)
+    @funrun_badges = funrun_badges_for(@next_saturday)
+    @country_stats = country_stats
   end
 
   def show
@@ -60,10 +60,31 @@ class PagesController < ApplicationController
     params[:action] == 'index' || page_name == 'donor' ? 'home' : 'application'
   end
 
-  def jubilee_events
+  def country_stats
+    Rails.cache.fetch("home/country_stats/v1/#{top_level_domain}", expires_in: 12.hours) do
+      events = Event.in_country(top_level_domain).without_friends.unscope(:order)
+      event_ids = events.select(:id)
+      results = Result.published.where(activity: { event_id: event_ids })
+      volunteers = Volunteer.published.where(activity: { event_id: event_ids })
+
+      {
+        athletes: results.distinct.count(:athlete_id),
+        volunteers: volunteers.distinct.count(:athlete_id),
+        events: events.count,
+        activities: Activity.published.in_country(top_level_domain).count,
+        finishes: results.count,
+        volunteering: volunteers.count,
+      }
+    end
+  end
+
+  def jubilee_events_for(local_events, next_saturday)
     Activity
-      .where(event: @local_events.without_friends, published: true, date: ...@next_saturday)
-      .group(:event).order(count_all: :desc).count.filter_map do |event, activities_count|
+      .where(event: local_events.without_friends, published: true, date: ...next_saturday)
+      .group(:event)
+      .order(count_all: :desc)
+      .count
+      .filter_map do |event, activities_count|
         activity_number = activities_count.next
         next unless (activity_number <= 50 && (activity_number % 10).zero?) || (activity_number % 100).zero?
 
@@ -71,11 +92,11 @@ class PagesController < ApplicationController
       end
   end
 
-  def funrun_badges
+  def funrun_badges_for(next_saturday)
     Badge
       .includes(:image_attachment)
       .funrun_kind
-      .where(received_date: @next_saturday)
+      .where(received_date: next_saturday)
       .where("info->>'country_code' IS NULL OR info->>'country_code' = ?", top_level_domain)
   end
 end

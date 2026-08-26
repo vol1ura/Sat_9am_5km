@@ -3,23 +3,24 @@
 <%= form_for resource, as: resource_name, url: user_registration_path(resource_name), html: { method: :put }, data: { turbo: false } do |f| %>
   <%= render 'devise/shared/error_messages', resource: %>
 
-  <div class="field mt-2">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+  <div class="mt-2">
+    <%= f.label :first_name, class: 'block text-sm font-medium text-ink' %><br>
+    <%= f.text_field :first_name, class: form_input_class %>
   </div>
 
-  <div class="field mt-2">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+  <div class="mt-2">
+    <%= f.label :last_name, class: 'block text-sm font-medium text-ink' %><br>
+    <%= f.text_field :last_name, class: form_input_class %>
   </div>
 
   <%= f.fields_for :athlete, f.object.athlete do |athlete_form| %>
-    <%= athlete_form.label :club %>
-    <%= athlete_form.collection_select :club_id, Club.order(:name), :id, :name, { include_blank: 'Нет клуба' } %>
+    <%= athlete_form.label :club, class: 'block text-sm font-medium text-ink' %>
+    <%= athlete_form.collection_select :club_id, Club.order(:name), :id, :name, { include_blank: 'Нет клуба' },
+          class: form_input_class %>
   <% end %>
 
-  <div class="actions my-3">
-    <%= f.submit 'Обновить', class: 'btn btn-primary' %>
+  <div class="my-3">
+    <%= render Ui::ButtonComponent.new(variant: :primary, type: 'submit', label: 'Обновить') %>
   </div>
 <% end %>
 
@@ -27,7 +28,6 @@
 <h2>Удалить мой аккаунт</h2>
 
 <p>Ваша учётная запись будет удалена. Данное действие необратимо.</p>
-<%= link_to 'Удалить мой аккаунт', user_registration_path, data: { confirm: 'Вы уверены?' }, method: :delete, class: 'btn btn-danger' %>
 -->
 <br>
-<%= link_to 'Назад', :back, class: 'btn btn-light mt-4' %>
+<%= render Ui::ButtonComponent.new(variant: :ghost, href: :back, class: 'mt-4', label: 'Назад') %>

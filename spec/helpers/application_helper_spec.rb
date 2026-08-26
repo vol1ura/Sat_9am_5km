@@ -30,12 +30,12 @@ RSpec.describe ApplicationHelper do
 
   describe '#athlete_code_id' do
     it 'returns parkrun link' do
-      athlete = build(:athlete, fiveverst_code: nil)
+      athlete = build(:athlete)
       expect(helper.athlete_code_id(athlete)).to match(%r{https://www\.parkrun.*=#{athlete.parkrun_code}})
     end
 
     it 'returns 5 verst link' do
-      athlete = build(:athlete, parkrun_code: nil)
+      athlete = build(:athlete, :fiveverst)
       expect(helper.athlete_code_id(athlete)).to match(%r{https://5verst\.ru.*/#{athlete.fiveverst_code}/})
     end
 
@@ -43,14 +43,13 @@ RSpec.describe ApplicationHelper do
       athlete = build(
         :athlete,
         parkrun_code: nil,
-        fiveverst_code: nil,
         runpark_code: (7 * (10**9)) + Faker::Number.number(digits: 5),
       )
-      expect(helper.athlete_code_id(athlete)).to match(%r{https://runpark.ru/UserCard/A#{athlete.fiveverst_code}})
+      expect(helper.athlete_code_id(athlete)).to match(%r{https://runpark.ru/UserCard/A#{athlete.runpark_code}})
     end
 
     it 'returns s95 ID' do
-      athlete = build_stubbed(:athlete, parkrun_code: nil, fiveverst_code: nil)
+      athlete = build_stubbed(:athlete, parkrun_code: nil)
       expect(helper.athlete_code_id(athlete)).to eq(athlete.code)
     end
   end

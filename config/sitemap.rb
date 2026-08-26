@@ -29,6 +29,7 @@ Country.find_each do |country|
     #
     # Add all events:
     add events_path
+    add map_events_path
     saturday_date = Date.current.saturday? ? Date.current : Date.tomorrow.prev_week(:saturday)
     country.events.find_each do |event|
       add event_path(event.code_name), lastmod: saturday_date, priority: 0.99
@@ -42,7 +43,9 @@ Country.find_each do |country|
     end
     #
     # Add badges
-    add badges_path, changefreq: 'daily'
+    add achievements_badges_path, changefreq: 'daily'
+    add funruns_badges_path, changefreq: 'daily'
+    add archive_badges_path, changefreq: 'daily'
     Badge.find_each do |badge|
       add badge_path(badge)
     end

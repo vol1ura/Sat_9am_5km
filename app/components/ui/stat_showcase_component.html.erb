@@ -1,0 +1,21 @@
+<div>
+  <%= render Ui::SectionHeadingComponent.new title: @title %>
+  <div class="grid grid-cols-2 gap-3 lg:grid-cols-3">
+    <% @stats.each do |stat| %>
+      <% body = capture do %>
+        <div class="font-display text-2xl tabular-nums whitespace-nowrap text-ink sm:text-3xl lg:text-4xl"><%= helpers.number_with_delimiter(stat[:value]) %></div>
+        <div class="mt-1 text-sm text-ink-muted"><%= stat[:label] %></div>
+      <% end %>
+      <% classes = 'block rounded-xl border border-line bg-surface p-4 transition-shadow duration-200 hover:shadow-md' %>
+      <% if stat[:href].present? %>
+        <%= link_to stat[:href], class: "#{classes} no-underline" do %>
+          <%= body %>
+        <% end %>
+      <% else %>
+        <div class="<%= classes %>">
+          <%= body %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

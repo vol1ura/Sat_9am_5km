@@ -1,0 +1,11 @@
+<% head_info :description, t('badges.index.archive_description') %>
+
+<%= render 'hub_tabs' %>
+
+<%= render Ui::PageHeaderComponent.new(
+      title: head_info(:title, t('badges.index.archive')),
+      description: t('badges.index.archive_description'),
+      variant: :rule,
+    ) %>
+
+<%= render 'badges_grid', badges: @badges %>

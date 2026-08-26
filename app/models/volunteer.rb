@@ -70,7 +70,7 @@ class Volunteer < ApplicationRecord
   def broadcast_refresh = broadcast_refresh_later_to :volunteers_roster
 
   def update_athlete_going_to_event
-    return if activity.published || date <= Date.current || date > Date.current.next_occurring(:saturday)
+    return if should_not_update_athlete_going_to_event?
 
     if athlete_id_previously_changed? && athlete_id_previously_was
       Athlete.find(athlete_id_previously_was).update(going_to_event_id: nil)
@@ -79,8 +79,12 @@ class Volunteer < ApplicationRecord
   end
 
   def reset_athlete_going_to_event
-    return if activity.published || date <= Date.current || date > Date.current.next_occurring(:saturday)
+    return if should_not_update_athlete_going_to_event?
 
     athlete.update(going_to_event_id: nil) if athlete.going_to_event_id
+  end
+
+  def should_not_update_athlete_going_to_event?
+    activity.published || date <= Date.current || date > Date.current.next_occurring(:saturday)
   end
 end

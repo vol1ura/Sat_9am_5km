@@ -1,0 +1,7 @@
+<% event = vol.activity.event %>
+<%= tag.tr data: { event_id: event.id, role: vol.role, table_filter_target: 'row' } do %>
+  <td class="cell-num-muted"><%= total_vol - vol_counter %></td>
+  <td><%= link_to l(vol.date), vol.activity, data: { turbo_frame: '_top' } %></td>
+  <td><%= human_volunteer_role vol.role %></td>
+  <td><%= link_to event.name, event_path(event.code_name), data: { turbo_frame: '_top' } %></td>
+<% end %>

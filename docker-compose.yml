@@ -6,6 +6,7 @@ services:
     volumes:
       - .:/usr/src
       - ./deploy/.ssh:/root/.ssh
+      - /usr/src/node_modules
     tmpfs:
       - /usr/src/tmp/pids
       - /usr/src/tmp/cache

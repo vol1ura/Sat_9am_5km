@@ -3,7 +3,7 @@
 <% end %>
 
 <%= turbo_stream.update 'friends' do %>
-  <div class="list-group list-group-flush">
+  <div class="divide-y divide-line border-y border-line">
     <%= render(
       partial: 'friendships/friend',
       collection: @viewed_athlete.friends.includes(:going_to_event, user: { image_attachment: :blob }),
@@ -13,7 +13,7 @@
 <% end %>
 
 <%= turbo_stream.update 'followers' do %>
-  <div class="list-group list-group-flush">
+  <div class="divide-y divide-line border-y border-line">
     <%= render(
       partial: 'friendships/friend',
       collection: @viewed_athlete.followers.includes(:going_to_event, user: { image_attachment: :blob }),

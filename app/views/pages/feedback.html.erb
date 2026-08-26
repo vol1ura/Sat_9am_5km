@@ -1,37 +1,80 @@
-<h1><%= head_info :title, t('navbars.about_s95.feedback') %></h1>
-<p><%= head_info :description, t('.description') %></p>
-<div class="card mb-4">
-  <div class="card-body">
+<% head_info :description, t('.description') %>
+
+<%=
+  render Ui::PageHeaderComponent.new(
+    title: head_info(:title, t('.title')),
+    description: t('.description'),
+    variant: :rule,
+  )
+%>
+
+<div class="flex flex-col gap-10">
+  <div>
+    <%= render Ui::CardComponent.new(padding: false, class: 'overflow-hidden') do %>
+      <ul class="divide-y divide-line">
+        <li>
+          <%= render 'channel_link', url: Rails.configuration.telegram[top_level_domain], icon: 'fa-brands fa-telegram', label: nav_label(:telegram) %>
+        </li>
+        <li>
+          <%= render 'channel_link', url: 'https://vk.com/s95ru', icon: 'fa-brands fa-vk', label: nav_label(:vk) %>
+        </li>
+        <li>
+          <%= render 'channel_link', url: "mailto:#{ENV.fetch('INFO_EMAIL')}", icon: 'fa-solid fa-envelope-open', label: nav_label(:email) %>
+        </li>
+      </ul>
+    <% end %>
+    <p class="mt-4 text-ink-muted"><%= t '.other_contacts_html', events_link: events_path %></p>
+  </div>
+
+  <section>
+  <%= render Ui::SectionHeaderComponent.new(title: t('.form_title')) %>
+  <p class="mb-6 text-ink-muted"><%= t '.form_description' %></p>
+
+  <%= render Ui::CardComponent.new do %>
     <%= form_with url: submit_feedback_pages_path, local: true do |form| %>
       <div class="mb-3">
-        <%= form.label :message, t('.message_label'), class: 'form-label' %>
-        <%= form.text_area :message, class: 'form-control', placeholder: t('.placeholder'), maxlength: PagesController::MAX_FEEDBACK_SIZE, rows: 7, required: true %>
+        <%= form.label :message, t('.message_label'), class: 'block text-sm font-medium text-ink' %>
+        <%= form.text_area :message,
+              class: form_input_class(extra: 'min-h-[10rem]'),
+              placeholder: t('.placeholder'), maxlength: PagesController::MAX_FEEDBACK_SIZE, rows: 7, required: true %>
       </div>
 
       <% unless current_user %>
-        <div class="contact d-none required">
-          <%= form.label :contact, 'Required your contact', class: 'form-label' %>
-          <%= form.text_field :contact, placeholder: t('.contact_placeholder'), autocomplete: 'off' %>
+        <div class="contact hidden required">
+          <%= form.label :contact, 'Required your contact', class: 'block text-sm font-medium text-ink' %>
+          <%= form.text_field :contact, placeholder: t('.contact_placeholder'), autocomplete: 'off',
+                class: form_input_class %>
         </div>
 
         <div class="contact mb-3 required">
-          <%= form.label :user_contact, t('.contact_label'), class: 'form-label' %>
-          <%= form.text_field :user_contact, class: 'form-control', placeholder: t('.contact_placeholder'), maxlength: 255, autocomplete: 'off' %>
-          <div class="form-text"><%= t '.contact_hint' %></div>
+          <%= form.label :user_contact, t('.contact_label'), class: 'block text-sm font-medium text-ink' %>
+          <%= form.text_field :user_contact,
+                class: form_input_class,
+                placeholder: t('.contact_placeholder'), maxlength: 255, autocomplete: 'off' %>
+          <div class="mt-1 text-sm text-ink-muted"><%= t '.contact_hint' %></div>
         </div>
       <% end %>
 
       <% unless policy_already_accepted? %>
-        <div class="form-check mb-3">
-          <%= form.check_box :policy_accepted, class: 'form-check-input', required: true %>
-          <%= form.label :policy_accepted, class: 'form-check-label' do %>
+        <div class="mb-3 flex items-start gap-2">
+          <%= form.check_box :policy_accepted, class: 'mt-0.5 rounded border-line text-accent focus:ring-focus-ring', required: true %>
+          <%= form.label :policy_accepted, class: 'text-sm text-ink' do %>
             <%= t('.policy_consent_html', link: page_path(page: 'privacy-policy')) %>
           <% end %>
         </div>
       <% end %>
 
-      <%= form.submit t('.submit'), class: 'btn btn-primary mt-2', data: { turbo_confirm: t('.confirm') } %>
+      <%= render Ui::ButtonComponent.new(variant: :primary, type: 'submit', class: 'mt-2', data: { turbo_confirm: t('.confirm') }, label: t('.submit')) %>
     <% end %>
-  </div>
+  <% end %>
+</section>
+
+<section>
+  <%= render Ui::SectionHeaderComponent.new(title: t('.open_source.title')) %>
+  <p class="mb-6 text-ink-muted"><%= t '.open_source.body' %></p>
+
+  <%= render Ui::CardComponent.new(padding: false, class: 'overflow-hidden') do %>
+    <%= render 'channel_link', url: Navigation::GITHUB_URL, icon: 'fa-brands fa-github', label: t('.open_source.link') %>
+  <% end %>
+</section>
 </div>
-<p><%= t '.other_contacts_html', our_email: ENV.fetch('INFO_EMAIL') %></p>

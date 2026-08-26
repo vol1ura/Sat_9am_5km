@@ -12,7 +12,34 @@ export default class extends Controller {
 
   connect() {
     this.setupInfiniteScroll();
+    this.ensureActiveTab();
     this.loadPage();
+  }
+
+  activeTab() {
+    return this.tabTargets.find((tab) => tab.classList.contains('active')) ?? this.tabTargets[0];
+  }
+
+  ensureActiveTab() {
+    if (this.tabTargets.length === 0) return;
+    if (!this.tabTargets.some((tab) => tab.classList.contains('active'))) {
+      this.activateTab(this.tabTargets[0]);
+    }
+  }
+
+  resetTabStyles() {
+    this.tabTargets.forEach((tab) => {
+      tab.classList.remove('active', 'bg-accent', 'text-accent-fg', 'border-accent', 'text-accent', 'border-transparent');
+      tab.classList.add('bg-surface-elevated', 'text-ink-muted');
+    });
+  }
+
+  activateTab(tab) {
+    if (!tab) return;
+
+    this.resetTabStyles();
+    tab.classList.remove('bg-surface-elevated', 'text-ink-muted');
+    tab.classList.add('active', 'bg-accent', 'text-accent-fg');
   }
 
   setupInfiniteScroll() {
@@ -43,8 +70,7 @@ export default class extends Controller {
   async switchTab(event) {
     const tab = event.currentTarget;
 
-    this.tabTargets.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
+    this.activateTab(tab);
     this.updateDescription(tab);
 
     this.pageValue = 1;
@@ -77,8 +103,10 @@ export default class extends Controller {
 
     this.loadingValue = true;
 
-    const tabData = this.tabTargets.find(tab => tab.classList.contains('active')).dataset;
-    const query_arr = this.paramsValue.split(',').map(param => `${param}=${tabData[param]}`);
+    const tabData = this.activeTab()?.dataset;
+    if (!tabData) return;
+
+    const query_arr = this.paramsValue.split(',').map((param) => `${param}=${tabData[param]}`);
 
     const urlParams = new URLSearchParams(window.location.search);
     const tabParamNames = this.paramsValue.split(',');

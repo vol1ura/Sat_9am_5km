@@ -1,0 +1,106 @@
+<% if @total_results.positive? %>
+  <section id="panel-results" class="mb-10">
+    <%= render Ui::SectionHeaderComponent.new title: t('athletes.show.recent_results') %>
+    <%= render 'results_table', results: @recent_results, total_results: @total_results %>
+  </section>
+<% end %>
+
+<% if @total_vol.positive? %>
+  <section class="mb-10">
+    <%= render Ui::SectionHeaderComponent.new title: t('athletes.show.recent_volunteering') %>
+    <%= render 'volunteering_table', volunteering: @recent_volunteering, total_vol: @total_vol %>
+  </section>
+<% end %>
+
+<section id="panel-stats" class="mb-10 space-y-4">
+  <%= render Ui::SectionHeaderComponent.new title: t('athletes.show.statistics') %>
+  <div class="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
+    <% if @total_results.positive? %>
+      <%= tag.div class: 'contents', data: {
+            controller: 'athlete',
+            athlete_categories_value: @top_position_counts.keys,
+            athlete_counts_value: @top_position_counts.values,
+          } do %>
+        <%= render Ui::CardComponent.new do %>
+          <h3 class="mb-3 font-display font-semibold text-ink"><%= t 'athletes.show.recent_results_chart' %></h3>
+          <div data-athlete-target="results" class="w-full min-w-0 overflow-hidden"></div>
+        <% end %>
+        <%= render Ui::CardComponent.new do %>
+          <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.best_position') %></h3>
+          <div data-athlete-target="positions" class="w-full min-w-0 overflow-hidden"></div>
+        <% end %>
+      <% end %>
+      <%= render Ui::CardComponent.new do %>
+        <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.personal_best') %></h3>
+        <%= turbo_frame_tag 'personal_bests', src: personal_bests_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+          <%= render '/loading_indicator' %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% if @total_results.positive? && (@athlete.personal_best_10k || @athlete.personal_best_half_marathon || @athlete.personal_best_marathon || @time_predictions.any?) %>
+      <%= render Ui::CardComponent.new do %>
+        <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.personal_bests_section') %></h3>
+        <div class="data-table-inset">
+          <table class="data-table data-table--compact">
+            <thead>
+              <tr>
+                <th><%= t 'athletes.show.distance' %></th>
+                <th><%= t 'athletes.show.pb' %></th>
+                <th><%= t 'athletes.show.predicted_time' %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= t 'athletes.show.personal_best_10k' %></td>
+                <td><%= @athlete.personal_best_10k %></td>
+                <td><%= Result.time_string @time_predictions[10] %></td>
+              </tr>
+              <tr>
+                <td><%= t 'athletes.show.personal_best_half_marathon' %></td>
+                <td><%= @athlete.personal_best_half_marathon %></td>
+                <td><%= Result.time_string @time_predictions[21.1] %></td>
+              </tr>
+              <tr>
+                <td><%= t 'athletes.show.personal_best_marathon' %></td>
+                <td><%= @athlete.personal_best_marathon %></td>
+                <td><%= Result.time_string @time_predictions[42.2] %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    <% end %>
+    <%= render Ui::CardComponent.new(class: 'md:col-span-2') do %>
+      <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.total_events') %></h3>
+      <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+        <%= render '/loading_indicator' %>
+      <% end %>
+    <% end %>
+    <%= render Ui::CardComponent.new(class: 'md:col-span-2') do %>
+      <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.total_trophies') %></h3>
+      <% if @total_trophies.positive? %>
+        <%= turbo_frame_tag 'total_trophies', src: total_trophies_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+          <%= render '/loading_indicator' %>
+        <% end %>
+      <% else %>
+        <p class="text-sm text-ink-muted"><%= t('athletes.show.no_trophies') %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
+    <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.goals') %></h3>
+    <%= turbo_frame_tag 'goals', src: goals_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+      <%= render '/loading_indicator' %>
+    <% end %>
+  </div>
+
+  <% if @total_vol.positive? %>
+    <%= render Ui::CardComponent.new do %>
+      <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.volunteering_chart') %></h3>
+      <%= turbo_frame_tag 'volunteering_chart', src: volunteering_chart_athlete_statistics_path(@athlete), loading: 'lazy' do %>
+        <%= render '/loading_indicator' %>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>

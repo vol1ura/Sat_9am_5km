@@ -1,22 +1,25 @@
 # frozen_string_literal: true
 
 RSpec.describe '/pages' do
+  before { host! 's95.ru' }
+
   describe 'GET /pages' do
-    %w[about rules team].each do |page|
+    %w[about rules feedback team].each do |page|
       it "renders #{page} page with successful response", vcr: page == 'about' do
-        get page_url(page:)
+        get page_path(page:)
         expect(response).to be_successful
       end
     end
 
     it 'renders donation widget on ru domain' do
-      get page_url(page: 'donation'), headers: { host: 'test.ru' }
+      get page_path(page: 'donation')
       expect(response).to be_successful
       expect(response.body).to include('mixplat-page')
     end
 
     it 'renders project support content on non-ru domain' do
-      get page_url(page: 'donation'), headers: { host: 'test.rs' }
+      host! 'test.rs'
+      get page_path(page: 'donation')
       expect(response).to be_successful
       expect(response.body).to include(I18n.t('pages.support.title', locale: :sr))
     end
@@ -26,21 +29,21 @@ RSpec.describe '/pages' do
       let(:event) { activity.event }
 
       it 'returns events params' do
-        get pages_url, headers: { host: 'test.ru' }, as: :json
+        get pages_path, as: :json
         expect(response.parsed_body).to eq(
           'events' => [{
             'active' => true,
             'name' => event.name,
             'place' => event.place,
             'town' => event.town,
-            'url' => "http://test.ru/events/#{event.code_name}.json",
+            'url' => event_url(event.code_name, format: :json),
           }],
         )
       end
     end
 
     it 'renders 404 error page' do
-      get page_url(page: 'test')
+      get page_path(page: 'test')
       expect(response).to have_http_status :not_found
     end
 
@@ -48,7 +51,7 @@ RSpec.describe '/pages' do
       before { sign_in create(:user, :with_athlete) }
 
       it 'renders root page with successful response' do
-        get root_url
+        get root_path
         expect(response).to be_successful
       end
     end
@@ -61,7 +64,7 @@ RSpec.describe '/pages' do
 
     before do
       allow(NotificationMailer).to receive_message_chain(:with, :feedback, :deliver_later) # rubocop:disable RSpec/MessageChain
-      post submit_feedback_pages_url, params: { message:, user_contact:, policy_accepted: }
+      post submit_feedback_pages_path, params: { message:, user_contact:, policy_accepted: }
     end
 
     context 'when message is valid and policy accepted' do
@@ -97,7 +100,7 @@ RSpec.describe '/pages' do
 
       before do
         cookies[:policy_accepted] = 'true'
-        post submit_feedback_pages_url, params: { message:, user_contact: }
+        post submit_feedback_pages_path, params: { message:, user_contact: }
       end
 
       it 'sends feedback without explicit checkbox' do
@@ -120,7 +123,7 @@ RSpec.describe '/pages' do
 
   describe 'GET /app' do
     it 'sends app file' do
-      get app_pages_url
+      get app_pages_path
       expect(response).to be_successful
     end
   end

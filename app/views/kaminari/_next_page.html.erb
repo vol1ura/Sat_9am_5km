@@ -1,0 +1,7 @@
+<span class="next">
+  <% unless current_page.last? %>
+    <%= link_to url, rel: 'next', remote: remote, aria: { label: 'Next page' } do %>
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+    <% end %>
+  <% end %>
+</span>

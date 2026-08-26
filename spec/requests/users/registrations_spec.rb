@@ -14,11 +14,6 @@ RSpec.describe '/user' do
       }
     end
 
-    def field_invalid?(name)
-      doc = response.parsed_body
-      doc.css(%(input[name="#{name}"].is-invalid)).any?
-    end
-
     context 'with all required fields filled in' do
       it 'creates the user and redirects to the sign-in page', :aggregate_failures do
         expect { post user_registration_path, params: valid_params }.to change(User, :count).by(1)
@@ -37,6 +32,14 @@ RSpec.describe '/user' do
       it 'saves the default country when host has no country TLD' do
         post user_registration_path, params: valid_params
         expect(User.last.country).to eq Country.default
+      end
+
+      it 'saves the optional home event when provided', :aggregate_failures do
+        event = create(:event)
+        params = valid_params.deep_merge(user: { athlete_attributes: { event_id: event.id } })
+
+        expect { post user_registration_path, params: }.to change(User, :count).by(1)
+        expect(User.last.athlete.event_id).to eq event.id
       end
     end
 
@@ -60,7 +63,6 @@ RSpec.describe '/user' do
 
         expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include(I18n.t('devise.registrations.new.policy_required'))
-        expect(field_invalid?('user[policy_accepted]')).to be true
       end
     end
 
@@ -72,7 +74,6 @@ RSpec.describe '/user' do
 
         expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include(I18n.t('devise.registrations.new.gender_required'))
-        expect(field_invalid?('user[athlete_attributes][gender]')).to be true
       end
     end
 
@@ -83,7 +84,6 @@ RSpec.describe '/user' do
         expect { post user_registration_path, params: }.not_to change(User, :count)
 
         expect(response).to have_http_status(:unprocessable_content)
-        expect(field_invalid?('user[first_name]')).to be true
       end
     end
 
@@ -94,7 +94,6 @@ RSpec.describe '/user' do
         expect { post user_registration_path, params: }.not_to change(User, :count)
 
         expect(response).to have_http_status(:unprocessable_content)
-        expect(field_invalid?('user[last_name]')).to be true
       end
     end
 
@@ -105,7 +104,6 @@ RSpec.describe '/user' do
         expect { post user_registration_path, params: }.not_to change(User, :count)
 
         expect(response).to have_http_status(:unprocessable_content)
-        expect(field_invalid?('user[email]')).to be true
       end
     end
   end

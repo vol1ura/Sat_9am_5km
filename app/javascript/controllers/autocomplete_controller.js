@@ -52,7 +52,14 @@ export default class extends Controller {
     this.resultsTarget.innerHTML = '';
     athletes.forEach((athlete, i) => {
       if (i >= 10) return;
-      const list_item = `<li class="list-group-item" athlete_id="${athlete.id}" name="${athlete.name}"><span class="badge bg-secondary">A${athlete.code}</span> ${athlete.name}${this.additionalData(athlete)}</li>`;
+      const list_item = `
+        <li class="cursor-pointer px-2.5 py-1.5 text-sm text-ink hover:bg-surface-elevated" athlete_id="${athlete.id}" name="${athlete.name}">
+          <span class="me-1 rounded bg-surface-elevated px-1.5 py-0.5 text-xs font-medium text-ink-muted">
+            A${athlete.code}
+          </span>
+          ${athlete.name}${this.additionalData(athlete)}
+        </li>
+      `;
       this.resultsTarget.insertAdjacentHTML('beforeend', list_item);
     });
   }

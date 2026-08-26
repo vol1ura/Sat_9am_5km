@@ -1,11 +1,16 @@
 <%= turbo_frame_tag 'friends_list' do %>
-  <div class="list-group list-group-flush" id="friends">
-    <%=
-      render(
-        partial: 'friendships/friend',
-        collection: @athlete.friends.includes(:going_to_event, user: { image_attachment: :blob }).order(:name),
-        locals: { is_friends_tab: true },
-      )
-    %>
-  </div>
+  <% friends = @athlete.friends.includes(:going_to_event, user: { image_attachment: :blob }).order(:name) %>
+  <% if friends.any? %>
+    <div class="divide-y divide-line border-y border-line" id="friends">
+      <%=
+        render(
+          partial: 'friendships/friend',
+          collection: friends,
+          locals: { is_friends_tab: true },
+        )
+      %>
+    </div>
+  <% else %>
+    <p class="text-sm text-ink-muted"><%= t 'athletes.show.no_friends_list' %></p>
+  <% end %>
 <% end %>

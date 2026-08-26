@@ -37,11 +37,15 @@ RSpec.describe '/activities' do
     end
   end
 
-  describe 'GET /dashboard' do
-    it 'renders a successful response' do
-      create_list(:activity, 3, date: Date.current)
-      get dashboard_activities_url, headers: { host: 'test.ru' }
-      expect(response).to be_successful
+  describe 'GET /dashboard/:chart' do
+    before { create_list(:activity, 3, date: Date.current) }
+
+    %w[participants gender volunteers].each do |chart|
+      it "renders #{chart} chart" do
+        get dashboard_chart_activities_url(chart), headers: { host: 'test.ru' }
+
+        expect(response).to be_successful
+      end
     end
   end
 end

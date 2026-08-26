@@ -49,6 +49,9 @@ end
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
+# Rebuild Tailwind CSS on file changes in development.
+plugin :tailwindcss if ENV.fetch("RAILS_ENV", "development") == "development"
+
 # Run the Solid Queue supervisor inside of Puma for single-server deployments.
 plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
 

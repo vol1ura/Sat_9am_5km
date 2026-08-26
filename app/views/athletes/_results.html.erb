@@ -1,0 +1,8 @@
+<% if @total_results.positive? %>
+  <section class="mb-10">
+    <%= render Ui::SectionHeaderComponent.new title: t('athletes.show.results') %>
+    <%= render 'results_table', results: @results, total_results: @total_results, filterable: true %>
+  </section>
+<% else %>
+  <%= render Ui::EmptyComponent.new(title: t('athletes.show.no_results')) %>
+<% end %>

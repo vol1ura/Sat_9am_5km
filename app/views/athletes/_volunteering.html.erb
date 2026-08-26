@@ -1,0 +1,8 @@
+<% if @total_vol.positive? %>
+  <section class="mb-10">
+    <%= render Ui::SectionHeaderComponent.new(title: t('athletes.show.volunteering')) %>
+    <%= render 'volunteering_table', volunteering: @volunteering, total_vol: @total_vol, filterable: true %>
+  </section>
+<% else %>
+  <%= render Ui::EmptyComponent.new(title: t('athletes.show.no_volunteering')) %>
+<% end %>

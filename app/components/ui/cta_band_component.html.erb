@@ -1,0 +1,19 @@
+<div class="surface-gradient-band overflow-hidden rounded-2xl px-6 py-12 text-center sm:px-10 sm:py-16">
+  <h2 class="font-display text-2xl font-semibold text-brand-fg sm:text-3xl"><%= @title %></h2>
+  <% if @description.present? %>
+    <p class="mx-auto mt-3 max-w-xl text-base text-brand-fg/85 sm:text-lg"><%= @description %></p>
+  <% end %>
+  <% if @href.present? %>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <%= render Ui::ButtonComponent.new(
+            variant: :secondary,
+            size: :lg,
+            rounded: :full,
+            href: @href,
+            class: 'border-0 bg-surface text-ink hover:bg-white',
+          ) do %>
+        <%= @label %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

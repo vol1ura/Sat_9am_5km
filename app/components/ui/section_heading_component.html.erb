@@ -1,0 +1,8 @@
+<div class="mb-8 text-center">
+  <% if @kicker.present? %>
+    <p class="mb-2 text-sm font-medium uppercase tracking-wide text-accent"><%= @kicker %></p>
+  <% end %>
+  <%= content_tag @heading_tag, class: 'font-display text-2xl font-semibold sm:text-3xl' do %>
+    <%= title_content %>
+  <% end %>
+</div>

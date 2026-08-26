@@ -1,0 +1,82 @@
+<div
+  id="nav-sheet"
+  data-sheet-target="panel"
+  class="fixed inset-x-0 bottom-0 z-50 hidden max-h-[85vh] overflow-y-auto rounded-t-xl border border-line bg-surface pb-[env(safe-area-inset-bottom)] shadow-xl lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="nav-sheet-title"
+>
+  <div class="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-surface px-4 py-3">
+    <h2 id="nav-sheet-title" class="font-display text-lg font-semibold text-ink">
+      <%= t('navbars.top.more', default: 'Ещё') %>
+    </h2>
+    <button
+      type="button"
+      class="rounded-md p-2 text-ink-muted hover:bg-accent-subtle"
+      data-action="sheet#close"
+      aria-label="<%= t('common.close', default: 'Close') %>"
+    >
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="px-4 py-2">
+    <% if Date.current.month == 12 || (Date.current.month == 1 && Date.current.day == 1) %>
+      <section class="py-3">
+        <ul class="space-y-1">
+          <li>
+            <%= link_to page_path(page: 'additional-events'), class: nav_sheet_link_class(active: controller_name == 'pages' && params[:page] == 'additional-events') do %>
+              <span class="flex items-center gap-3">
+                <i class="fa-solid fa-snowman w-4 text-center" aria-hidden="true"></i>
+                <%= nav_label(:'1_january') %>
+              </span>
+            <% end %>
+          </li>
+        </ul>
+      </section>
+    <% end %>
+
+    <% Navigation::SHEET_SECTIONS.each do |section| %>
+      <section class="py-3">
+        <% if section[:key].present? %>
+          <h3 class="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-ink-muted">
+            <%= nav_label(section[:key]) %>
+          </h3>
+        <% end %>
+        <ul class="space-y-1">
+          <% nav_visible_items(section[:items]).each do |item| %>
+            <li>
+              <%= nav_item_link(item, html_class: nav_sheet_link_class(active: nav_active?(item))) %>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+
+    <section class="border-t border-line py-3">
+      <ul class="space-y-1">
+        <li>
+          <button type="button" class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-ink hover:bg-accent-subtle" data-action="theme#toggle">
+            <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+            <%= t('navbars.top.theme', default: 'Тема') %>
+          </button>
+        </li>
+        <% Navigation::LOCALE_OPTIONS.each do |locale, title, flag| %>
+          <li>
+            <%= link_to locale_switch_path(locale), class: nav_sheet_link_class(active: current_locale == locale) do %>
+              <span class="flex items-center gap-3">
+                <span><%= flag %></span>
+                <%= title %>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  </div>
+</div>
+<div
+  data-sheet-target="backdrop"
+  data-action="click->sheet#close"
+  class="fixed inset-0 z-40 hidden bg-black/40 lg:hidden"
+  aria-hidden="true"
+></div>

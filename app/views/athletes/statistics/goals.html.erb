@@ -1,0 +1,84 @@
+<%= turbo_frame_tag 'goals' do %>
+  <div class="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
+    <%= render Ui::CardComponent.new do %>
+      <%= render Ui::GoalProgressComponent.new(
+            title: t('athletes.show.goal_runs'),
+            current: @total_results,
+            thresholds: @run_thresholds,
+            recent: @recent_runs,
+            icon: 'person-running',
+          ) %>
+    <% end %>
+    <%= render Ui::CardComponent.new do %>
+      <%= render Ui::GoalProgressComponent.new(
+            title: t('athletes.show.goal_volunteering'),
+            current: @total_vol,
+            thresholds: @vol_thresholds,
+            recent: @recent_vol,
+            icon: 'heart',
+          ) %>
+    <% end %>
+    <%= render Ui::CardComponent.new do %>
+      <%= render Ui::GoalProgressComponent.new(
+            title: t('athletes.show.goal_events'),
+            current: @events_count,
+            thresholds: @event_thresholds,
+            recent: @recent_events,
+            icon: 'location-dot',
+          ) %>
+    <% end %>
+    <%= render Ui::CardComponent.new do %>
+      <%= render Ui::GoalProgressComponent.new(
+            title: t('athletes.show.mission_minute_bingo'),
+            current: @bingo_by_second.size,
+            thresholds: [60],
+            recent: @recent_bingo,
+            icon: 'table-cells',
+          ) do |goal| %>
+        <% goal.with_details do %>
+          <button
+            type="button"
+            class="font-medium text-link hover:underline"
+            data-controller="dialog"
+            data-dialog-id-value="minute-bingo-modal"
+            data-action="click->dialog#open"
+          >
+            <%= t('athletes.show.more_details') %>
+          </button>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= render Ui::ModalComponent.new(id: 'minute-bingo-modal') do |modal| %>
+    <% modal.with_title { t('athletes.show.mission_minute_bingo') } %>
+    <div class="max-h-80 overflow-y-auto">
+      <table class="data-table data-table--compact">
+        <thead>
+          <tr>
+            <th class="w-16"><%= t('athletes.show.goal_second') %></th>
+            <th><%= t('athletes.show.table.date') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% 60.times do |second| %>
+            <% result = @bingo_by_second[second] %>
+            <tr>
+              <td class="tabular-nums <%= result ? 'text-ink' : 'text-ink-muted' %>"><%= format '%02d', second %></td>
+              <td>
+                <% if result %>
+                  <span class="inline-flex flex-wrap items-center gap-2">
+                    <%= link_to l(result.date), result.activity, data: { turbo: false } %>
+                    <% if result.date >= @recent_since %>
+                      <%= render Ui::BadgeComponent.new(variant: :success, label: t('ui.goal_progress_component.recent_increment')) %>
+                    <% end %>
+                  </span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% end %>

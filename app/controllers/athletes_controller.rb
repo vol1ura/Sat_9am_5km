@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AthletesController < ApplicationController
+  before_action :set_athlete_profile, only: %i[show summary results volunteering friends]
+
   def index
     query = params[:q].to_s.gsub(/[^[:alnum:][:blank:]\-']/, '').strip
     criteria = Athlete.order(:event_id).limit(100)
@@ -16,15 +18,38 @@ class AthletesController < ApplicationController
   end
 
   def show
-    @athlete = Athlete.find params.expect(:id)
-    return redirect_unregistered_athlete if !@athlete.user_id && @athlete.fiveverst_code
-
-    load_athlete_results
-    load_athlete_volunteering
-    @total_events_count = total_events_count
-    @total_trophies = @athlete.trophies.size
+    @current_tab = :summary
+    load_summary_data
+    @personal_best = published_results
+      .where(personal_best: true)
+      .order(:total_time, :date)
+      .select(:total_time, 'date AS activity_date')
+      .first
+    @total_events_count = @athlete.first_event_visit_dates.size
     @barcode = BarcodeService.call("A#{@athlete.code}", module_size: 8)
-    @time_predictions = Athletes::TimePredictor.call(@athlete)
+  end
+
+  def summary
+    @current_tab = :summary
+    load_summary_data
+    render_athlete_tab
+  end
+
+  def results
+    @current_tab = :results
+    @results = results_with_event.load
+    render_athlete_tab
+  end
+
+  def volunteering
+    @current_tab = :volunteering
+    @volunteering = volunteering_with_event.load
+    render_athlete_tab
+  end
+
+  def friends
+    @current_tab = :friends
+    render_athlete_tab
   end
 
   def best_result
@@ -37,34 +62,53 @@ class AthletesController < ApplicationController
 
   private
 
+  def set_athlete_profile
+    @athlete = Athlete.find params.expect(:id)
+    return redirect_unregistered_athlete if !@athlete.user_id && @athlete.fiveverst_code
+
+    load_profile_nav
+  end
+
   def redirect_unregistered_athlete
     if user_signed_in?
-      redirect_to activities_path, notice: t('.profile_hidden')
+      redirect_to activities_path, notice: t('athletes.show.profile_hidden')
     else
-      redirect_to new_user_registration_path, alert: t('.registration_required')
+      redirect_to new_user_registration_path, alert: t('athletes.show.registration_required')
     end
+  end
+
+  def load_profile_nav
+    @total_results = published_results.count
+    @total_vol = @athlete.volunteering.count
+    @friends_count = @athlete.friendships.count
+    @has_friends_tab = @friends_count.positive? || @athlete.followers.exists?
+  end
+
+  def load_summary_data
+    @recent_results = results_with_event.limit(10).load
+    @recent_volunteering = volunteering_with_event.limit(10).load
+    @total_trophies = @athlete.trophies.size
+    @time_predictions = Athletes::TimePredictor.call(@athlete)
+    return if @total_results.zero?
+
+    @top_position_counts = published_results.group(:position).order(:position).count.first(5).to_h
+  end
+
+  def render_athlete_tab
+    respond_to do |format|
+      format.turbo_stream { render :swap_tab }
+    end
+  end
+
+  def results_with_event
+    @athlete.published_results.eager_load(:activity).preload(activity: :event).order(date: :desc)
+  end
+
+  def volunteering_with_event
+    @athlete.published_volunteering.eager_load(:activity).preload(activity: :event).order(date: :desc)
   end
 
   def published_results
     @published_results ||= @athlete.results.published
-  end
-
-  def load_athlete_results
-    @results = published_results.includes(activity: :event).order(date: :desc).load
-    @personal_best = published_results.order(:total_time, :date).select(:total_time, 'date AS activity_date').first
-    @last_best_position_result =
-      published_results.order(position: :asc, date: :desc).select(:position, 'date AS activity_date').first
-  end
-
-  def load_athlete_volunteering
-    @volunteering = @athlete.volunteering.includes(activity: :event).load
-    @total_vol = @volunteering.size
-  end
-
-  def total_events_count
-    result_event_ids = published_results.distinct.pluck(:event_id)
-    volunteer_event_ids = @volunteering.map { |volunteer| volunteer.activity.event_id }.uniq
-
-    (result_event_ids + volunteer_event_ids).uniq.count
   end
 end

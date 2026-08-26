@@ -1,11 +1,16 @@
 <%= turbo_frame_tag 'followers_list' do %>
-  <div class="list-group list-group-flush" id="followers">
-    <%=
-      render(
-        partial: 'friendships/friend',
-        collection: @athlete.followers.includes(:going_to_event, user: { image_attachment: :blob }).order(:name),
-        locals: { is_friends_tab: false },
-      )
-    %>
-  </div>
+  <% followers = @athlete.followers.includes(:going_to_event, user: { image_attachment: :blob }).order(:name) %>
+  <% if followers.any? %>
+    <div class="divide-y divide-line border-y border-line" id="followers">
+      <%=
+        render(
+          partial: 'friendships/friend',
+          collection: followers,
+          locals: { is_friends_tab: false },
+        )
+      %>
+    </div>
+  <% else %>
+    <p class="text-sm text-ink-muted"><%= t 'athletes.show.no_followers_list' %></p>
+  <% end %>
 <% end %>

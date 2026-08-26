@@ -1,0 +1,10 @@
+<%= render Ui::CardComponent.new(class: 'h-full') do |card| %>
+  <% card.with_header do %>
+    <h3 class="border-b border-line px-4 py-3 font-display text-base font-semibold text-ink">
+      <%= t("activities.dashboard.#{chart}") %>
+    </h3>
+  <% end %>
+  <%= turbo_frame_tag "dashboard_#{chart}", src: dashboard_chart_activities_path(chart), loading: 'lazy' do %>
+    <%= render 'dashboard_chart_skeleton' %>
+  <% end %>
+<% end %>

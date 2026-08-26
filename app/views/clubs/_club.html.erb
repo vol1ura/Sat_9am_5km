@@ -6,11 +6,11 @@
 %>
 <tr>
   <td><%= link_to club.name, club_path(club.slug) %></td>
-  <td><%= athletes_count %></td>
-  <td><%= results_count %></td>
-  <td><%= athletes_count.positive? ? (results_count.to_f / athletes_count).round(1) : 0.0 %></td>
-  <td><%= Result.time_string results_stats[:avg_seconds] %></td>
-  <td><%= Result.time_string results_stats[:best_seconds] %></td>
-  <td><%= volunteering_count %></td>
-  <td><%= athletes_count.positive? ? (volunteering_count.to_f / athletes_count).round(1) : 0.0 %></td>
+  <td class="cell-num"><%= athletes_count %></td>
+  <td class="cell-num-strong"><%= results_count %></td>
+  <td class="cell-num"><%= athletes_count.positive? ? (results_count.to_f / athletes_count).round(1) : 0.0 %></td>
+  <td class="cell-num-strong"><%= Result.time_string results_stats[:avg_seconds] %></td>
+  <td class="cell-num-strong"><%= Result.time_string results_stats[:best_seconds] %></td>
+  <td class="cell-num-strong"><%= volunteering_count %></td>
+  <td class="cell-num"><%= athletes_count.positive? ? (volunteering_count.to_f / athletes_count).round(1) : 0.0 %></td>
 </tr>

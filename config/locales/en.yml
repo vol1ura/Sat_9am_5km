@@ -484,12 +484,18 @@ en:
     show_more: Show all
     show_less: Collapse
   common:
+    close: Close
     without_token: NO TOKEN (create)
     without_name: NO NAME
     nobody: UNKNOWN
     gender_unknown: Unspecified
     title: Weekly 5-kilometer park runs
     description: Weekly Saturday 5km runs in the park. You can walk, run, or volunteer — fitness level doesn't matter. You'll find new friends and great mood here.
+  ui:
+    goal_progress_component:
+      completed: Goal reached
+      remaining: 'to badge %{threshold}: %{count} more'
+      recent_increment: "+1"
   country:
     ru: Russia
     by: Belarus
@@ -562,26 +568,36 @@ en:
   navbars:
     top:
       s95: Saturday 9 AM 5 KM
+      s95_line1: Saturday
+      s95_line2: 9 AM
+      s95_line3: 5 KM
       events: Events
-      map: Events Map
       results: Results
       recent_results: Recent Runs
       1_january: January 1
       club_ratings: Club Ratings
       top_results: Top Results
-      top_athletes: Participant Rankings
-      top_volunteers: Volunteer Rankings
+      athletes: Athletes
+      volunteers: Volunteers
       friends_protocol: Friends Protocol
       duels: Friendly Duels
-      badges: Personal Badges
+      badges: Awards
+      movement: About us
+      sections: Sections
+      about_us: S95 Movement
+      more: More
+      theme: Theme
+      ratings: Ratings
+      ratings_hub: All ratings
       profile: Profile
       settings: Settings
       admin_panel: Admin Panel
       login: Login
       logout: Logout
       search: Search
-      name_or_id: Surname or ID
+      name_or_id: Athlete or their ID
       language: Language
+      contacts: Contacts
     about_s95:
       title: About S95
       rules: Rules
@@ -596,6 +612,7 @@ en:
       email: Email
       vk: VKontakte
       telegram: Telegram
+      github: GitHub
       feedback: Feedback
     bottom:
       s95: S95 Park Runs
@@ -614,7 +631,7 @@ en:
       registration_date: Registration date
       address: Moscow, kv-l 114A Volzhsky Boulevard, bld. 3, apt. 366
       headings:
-        explore: Explore
+        sections: Sections
         connect: Contacts
   articles:
     index:
@@ -715,9 +732,15 @@ en:
       small_changes: Small changes are easiest to make directly in the browser using GitHub's visual editor!
       best_regards: With love, S95.
     feedback:
-      title: Feedback and Suggestions
-      description: We'll be grateful for any feedback and suggestions. Write if you've encountered any problems, want to offer your help, an idea, or just speak out.
-      other_contacts_html: You can also send a message to our <a href="mailto:%{our_email}" target="_blank" title="Send us email">email</a>. You'll find our other contacts at the bottom, as well as on event pages.
+      title: Contacts
+      description: Main S95 community contacts — Telegram, VKontakte, and email. You can also write to us using the feedback form below.
+      form_title: Feedback
+      open_source:
+        title: Make the system better
+        body: The system code is open. You can suggest features, report bugs, and make changes yourself.
+        link: Repository on GitHub
+      form_description: We'll be grateful for any feedback and suggestions. Write if you've encountered any problems, want to offer your help, an idea, or just speak out.
+      other_contacts_html: You'll find organizers' contacts and start location addresses on the <a href="%{events_link}">event pages</a>.
       message_label: Message
       placeholder: Your feedback or suggestion
       contact_label: Contact
@@ -736,7 +759,7 @@ en:
       body_html: >
         <p>This section is for those ready to turn their favorite park into a place where running enthusiasts and good mood gather every Saturday.</p>
 
-        <h3>Why S95?</h3>
+        <h2>Why S95?</h2>
         <p>
           <ol>
             <li>We're an international community: S95 runs take place in Russia, Belarus, and Serbia, and all results are collected in a unified system</li>
@@ -749,7 +772,7 @@ en:
           </ol>
         </p>
 
-        <h3>Action Plan</h3>
+        <h2>Action Plan</h2>
         <p>Before submitting an application, check the <a href="/events">Our Events</a> section — there might already be our runs near you. In that case, join the local team and help develop the running community in your area.</p>
         <p>
           If there are no S95 runs nearby, and you're eager to become a pioneer of the movement, you'll need:
@@ -760,43 +783,28 @@ en:
           </ul>
         </p>
         <p>From the moment of application to the first technical start, some time may pass, but the S95 team will do everything possible so your park fills with Saturday running spirit as soon as possible!</p>
-        <p>Ready to become part of a movement that changes Saturday mornings for the better? Write to us at <a href="mailto:%{info_email}" target="_blank" title="Send us email">%{info_email}</a> with the subject "Start S95" and let's create new running traditions together!</p>
       support:
         title: Support
         description: S95 runs in Moscow are organized and held with the support of "Гранты Мэра Москвы".
         acknowledgment: We thank the Moscow Government for supporting our project and developing sports in the capital.
+      cta:
+        title: Ready to become part of a movement?
+        description: Write to us with the subject "Start S95" — we'll help you launch a run in your park
+        action: Email us
     additional-events:
       title_html: Additional Starts January&nbsp;1,&nbsp;%{year}
       description: Usually, we only hold runs on Saturday, but on January 1 we make an exception and hold an additional run. On this page you can see the time and event where you can run on January 1
       time: Time
     index:
       upcoming_events: 'Upcoming Events %{date}'
-      hero_title: 'Every Saturday at 9:00!'
+      upcoming_events_title: Upcoming events
+      hero_title: 'Every Saturday'
+      hero_title_accent: 'at 9:00!'
       hero_subtitle: '5 km for all fitness levels, free. Join us!'
       my_profile: My Profile
       registration: Registration
       results: Results
       find_event: Find Nearest Run
-      stats:
-        title: S95 in numbers
-        events:
-          one: location
-          other: locations
-        activities:
-          one: run
-          other: runs
-        participants:
-          one: participant
-          other: participants
-        finishes:
-          one: finish
-          other: finishes
-        volunteers:
-          one: volunteer
-          other: volunteers
-        volunteerings:
-          one: volunteering
-          other: volunteerings
       marquee_items:
         - Park Runs
         - Results
@@ -806,8 +814,8 @@ en:
         - Ratings
         - Friends
         - Community
-      how_it_works:
-        title: How It Works?
+      getting_started:
+        title: Getting started
         registration:
           title: Registration
           description: Create a profile, fill out a simple form
@@ -864,6 +872,17 @@ en:
         download_app_store: Download from App Store
         download_apk: Download APK File
       our_partners: Our Partners
+      community_stats:
+        title: S95 in numbers
+        athletes: Active runners
+        volunteers: Active volunteers
+        events: Locations
+        activities: Runs held
+        finishes: Finishes
+        volunteering: Volunteering
+      cta_band:
+        title: Ready to start?
+        description: Register once — then just show up at the park every Saturday
   ratings:
     index:
       description: Participant rankings by various indicators. Information on this page is updated regularly, but sometimes may be slightly different. You can always check current values in the participant's profile.
@@ -912,6 +931,8 @@ en:
       search_button: Search
       reset_button: Reset
   athletes:
+    home_event_hint: Home run is your closest or most preferred location.
+    home_event_registration_hint: You can change this later in your profile settings.
     index:
       title: Search Results
       description: Search results by participant name, or by their ID (S95, parkrun, 5 versts, RunPark, ParkZhrun)
@@ -930,13 +951,18 @@ en:
       total_events: visited events
       personal_best: S95 personal best (PB)
       pb: PB
-      best_position: best position
+      best_position: Top 5 places
       no_results: No results yet.
       no_volunteering: No volunteering yet.
       results: Results
       volunteering: Volunteering
-      close: Close
       mission_minute_bingo: Mission "60 Seconds Bingo!"
+      goals: Goal progress
+      goal_runs: Runs
+      goal_volunteering: Volunteering
+      goal_events: Visited locations
+      more_details: Details
+      goal_second: Second
       table:
         pb: PB
         date: Date
@@ -944,8 +970,24 @@ en:
         pace: Pace
         place: Place
         event: Event
+        role: Role
       friends: Friends
       followers: Following
+      no_friends_list: No friends yet
+      no_followers_list: No one has added them as a friend yet
+      profile_sections: Profile sections
+      tab_summary: Overview
+      tab_results: Results
+      tab_stats: Statistics
+      tab_social: Friends
+      tab_volunteering: Volunteering
+      recent_results: Recent results
+      recent_volunteering: Recent volunteering
+      filter_all_events: All events
+      filter_all_roles: All roles
+      statistics: Statistics
+      no_trophies: No trophies yet
+      volunteering_chart: Volunteering chart
       duels: Duels
       duels_description: Compare your results with friends on the same runs
       view_duels: View Duels
@@ -959,6 +1001,7 @@ en:
       prediction_hint: Prediction is based on the best result in S95 runs over the last 3 months. Result is only possible with training appropriate for the specific distance
       no_personal_bests: Personal bests not specified.
       no_predictions: Insufficient data for prediction (need at least 3 results in the last 3 months)
+      recent_results_chart: Recent results
     statistics:
       volunteering_chart:
         h_index: h-index
@@ -968,6 +1011,10 @@ en:
         h_index_missing_roles: To increase h-index you need volunteering at %{count} more position
         volunteering_coefficient: Volunteer Coefficient
         volunteering_coefficient_explanation: Average number of volunteering sessions per every 10 runs. If equal to 1 - perfect balance between running and volunteering, more than 1 - super volunteer. Runs are only possible thanks to volunteers.
+        roles_chart_title: Distribution by roles
+        roles_chart_unit: times
+        roles_chart_total: total
+        roles_chart_error: Failed to load the chart. Try refreshing the page.
       total_events:
         finishes: Finishes
         volunteering: Volunteering
@@ -976,9 +1023,6 @@ en:
         roles: Roles
         best_position: Best Position
         best_time: Best Time
-    minute_bingo:
-      from_minute: out of 60 seconds
-      catch_them_all: catch them all
   activities:
     index:
       description: Recent S95 run results
@@ -991,12 +1035,24 @@ en:
       first_woman: First
       dashboard: Statistics for the Last Week
     dashboard:
+      participants: Participants
+      gender: Gender distribution
+      volunteers: Volunteers
+      total: total
+      people: people
+      no_data: No data for this week
+      newcomers_s95: Newcomers on S95
+      personal_bests: Personal bests
+      others: Others
+      newcomers: Newcomers
+      male: Men
+      female: Women
+      unknown: Unknown
       error: Failed to load statistics for the last week. Please refresh the page.
     show:
       title: 'Run Results %{activity}'
       description: 'Run protocol %{activity}, volunteer list and brief report'
       main_page: Main Page
-      short_report: Brief Report
       total_runners_count: run participants
       personal_bests_count: number of personal bests
       first_runners_count: first time at run
@@ -1030,10 +1086,13 @@ en:
       personal_best: 'Personal Best!'
   badges:
     index:
-      how_to_get: Participate in our events, fulfill conditions, and get badges. All badges will appear on your profile page. Their number will gradually increase.
-      about_badges: We try to come up with badges to reward both fast runners and regular participants who regularly attend our events.
+      achievements_description: Awards for completing specific tasks. Run, volunteer, reach goals — and earn badges for your profile.
+      thematic_description: Awards for participating or volunteering at fan runs. Events may take place in all S95 parks or only in specific ones — see each badge description for details.
+      archive_description: Thematic awards for fan runs held more than two years ago.
       achievements: Achievements
       thematic: Thematic
+      archive: Archive
+      empty: No badges yet
     badge:
       event_date: 'Event Date: %{date}'
     show:
@@ -1044,6 +1103,11 @@ en:
       club: Club
       result: Time
       received_date: Received Date
+      date: Date
+      holders: Holders
+      holders_count:
+        one: '%{count} holder'
+        other: '%{count} holders'
       soon: Soon!
       nobody_has: No one has this badge yet.
   clubs:
@@ -1102,7 +1166,6 @@ en:
       all_events: All events
     map:
       title: Events Map
-      as_list: As List
       locate: Where am I
       locate_failed: Could not determine your location
       fullscreen_enter: Full screen
@@ -1192,6 +1255,7 @@ en:
     field:
       edit: Edit
     edit:
+      title: Edit profile
       delete_image: Delete Photo
       delete_phone: Delete Phone %{phone}
       add_phone_html: 'To participate in partner programs, you need to add your phone number. Phone binding and verification are done using the <a href="%{link}" target="_blank" rel="noopener">Telegram bot</a> with the <code>/phone</code> command'

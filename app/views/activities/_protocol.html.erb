@@ -1,14 +1,19 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><span class="d-block d-sm-none fs-small-sm"><%= t '.position_short' %></span><span class="d-none d-sm-block"><%= t '.position_full' %></span></th>
-      <th class="fs-small-sm"><%= t '.athlete' %></th>
-      <th class="text-end fs-small-sm"><%= t '.time' %></th>
-      <th class="text-end fs-small-sm"><%= t '.pace' %></th>
-      <th class="hidden-on-phone"><%= t '.club' %></th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <%= render partial: 'result', collection: results %>
-  </tbody>
-</table>
+<div class="data-table-shell">
+  <table class="data-table sm:table-fixed">
+    <thead>
+      <tr>
+        <th class="cell-num-muted w-12">
+          <span class="block sm:hidden"><%= t '.position_short' %></span>
+          <span class="hidden sm:block"><%= t '.position_full' %></span>
+        </th>
+        <th><%= t '.athlete' %></th>
+        <th class="cell-num-strong"><%= t '.time' %></th>
+        <th class="cell-num"><%= t '.pace' %></th>
+        <th class="hidden-on-phone"><%= t '.club' %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'result', collection: results %>
+    </tbody>
+  </table>
+</div>

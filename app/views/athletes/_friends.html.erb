@@ -1,0 +1,17 @@
+<section class="mb-10 space-y-4">
+  <%= render Ui::SectionHeaderComponent.new title: t('athletes.show.friends') %>
+  <div class="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
+    <%= render Ui::CardComponent.new do %>
+      <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.friends') %></h3>
+      <%= turbo_frame_tag 'friends_list', src: friends_athlete_statistics_path(@athlete) do %>
+        <%= render '/loading_indicator' %>
+      <% end %>
+    <% end %>
+    <%= render Ui::CardComponent.new do %>
+      <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.followers') %></h3>
+      <%= turbo_frame_tag 'followers_list', src: followers_athlete_statistics_path(@athlete) do %>
+        <%= render '/loading_indicator' %>
+      <% end %>
+    <% end %>
+  </div>
+</section>

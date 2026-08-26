@@ -34,14 +34,16 @@ RSpec.describe '/athletes' do
 
   describe 'GET /athletes/1' do
     it 'renders a successful response' do
-      athlete = create(:athlete, fiveverst_code: nil)
+      athlete = create(:athlete)
       create_list(:result, 3, athlete:)
       get athlete_url(athlete)
+
       expect(response).to be_successful
+      expect(response.body).to include(goals_athlete_statistics_path(athlete))
     end
 
     context 'when athlete is unregistered and has fiveverst_code' do
-      let(:athlete) { create(:athlete, parkrun_code: nil) }
+      let(:athlete) { create(:athlete, :fiveverst) }
 
       it 'redirects guest to registration with alert' do
         get athlete_url(athlete)
@@ -60,6 +62,43 @@ RSpec.describe '/athletes' do
           expect(flash[:notice]).to eq(I18n.t('athletes.show.profile_hidden'))
         end
       end
+    end
+  end
+
+  describe 'GET /athletes/:id/results' do
+    let(:result) { create(:result) }
+
+    it 'updates subnav and tab via turbo stream' do
+      get results_athlete_url(result.athlete), as: :turbo_stream
+
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include('target="athlete_subnav"')
+      expect(response.body).to include('target="athlete_tab"')
+    end
+  end
+
+  describe 'GET /athletes/:id/volunteering' do
+    let(:volunteer) { create(:volunteer) }
+
+    it 'updates subnav and tab via turbo stream' do
+      get volunteering_athlete_url(volunteer.athlete), as: :turbo_stream
+
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include('target="athlete_subnav"')
+      expect(response.body).to include('target="athlete_tab"')
+    end
+  end
+
+  describe 'GET /athletes/:id/friends' do
+    let(:athlete) { create(:athlete, fiveverst_code: nil) }
+
+    it 'updates subnav and tab via turbo stream' do
+      create(:friendship, athlete:)
+      get friends_athlete_url(athlete), as: :turbo_stream
+
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include('target="athlete_subnav"')
+      expect(response.body).to include('target="athlete_tab"')
     end
   end
 

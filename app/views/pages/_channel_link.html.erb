@@ -1,0 +1,10 @@
+<%= external_link_to(url, { class: 'group flex items-center gap-4 px-4 py-3.5 text-ink no-underline hover:bg-accent-subtle hover:text-ink', title: label }) do %>
+  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-elevated text-brand" aria-hidden="true">
+    <i class="<%= icon %>"></i>
+  </span>
+  <span class="min-w-0 flex-1">
+    <span class="block font-medium group-hover:text-accent"><%= label %></span>
+    <span class="block truncate text-sm text-ink-muted"><%= url.delete_prefix('https://').delete_prefix('http://').delete_prefix('mailto:') %></span>
+  </span>
+  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-ink-muted" aria-hidden="true"></i>
+<% end %>

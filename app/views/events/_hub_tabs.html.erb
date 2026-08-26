@@ -1,0 +1,7 @@
+<%= render Ui::PageSubnavComponent.new(
+  aria_label: t('navbars.top.events'),
+  items: [
+    { label: t('events.index.list'), href: events_path, active: action_name == 'index' },
+    { label: t('events.index.map'), href: map_events_path, active: action_name == 'map' },
+  ],
+) %>

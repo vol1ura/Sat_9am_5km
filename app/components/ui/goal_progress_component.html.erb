@@ -1,0 +1,46 @@
+<div>
+  <div class="flex items-center justify-between gap-3">
+    <h4 class="flex min-w-0 items-center gap-2 font-display font-semibold text-ink">
+      <% if @icon.present? %>
+        <i class="fa-solid fa-<%= @icon %> text-brand" aria-hidden="true"></i>
+      <% end %>
+      <span class="truncate"><%= @title %></span>
+    </h4>
+    <div class="flex shrink-0 items-center gap-2">
+      <span class="font-display font-semibold tabular-nums text-ink"><%= @current %></span>
+      <% if @recent %>
+        <%= render Ui::BadgeComponent.new(variant: :success, label: t('.recent_increment')) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-3 flex flex-wrap gap-2">
+    <% @thresholds.each do |threshold| %>
+      <span class="<%= threshold_classes(threshold) %>"><%= threshold %></span>
+    <% end %>
+  </div>
+
+  <div
+    class="mt-3 h-2 w-full overflow-hidden rounded-full bg-line"
+    role="progressbar"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="<%= percent.round %>"
+    aria-label="<%= @title %>"
+  >
+    <div class="h-full rounded-full bg-brand" style="width: <%= percent.round %>%"></div>
+  </div>
+
+  <div class="mt-2 flex items-center justify-between gap-3 text-xs text-ink-muted">
+    <% if details? %>
+      <div class="shrink-0"><%= details %></div>
+    <% end %>
+    <p class="<%= class_names('text-end', 'ml-auto': !details?) %>">
+      <% if completed? %>
+        <%= t '.completed' %>
+      <% else %>
+        <%= t '.remaining', threshold: target, count: remaining %>
+      <% end %>
+    </p>
+  </div>
+</div>

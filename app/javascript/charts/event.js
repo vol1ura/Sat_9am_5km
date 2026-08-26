@@ -1,6 +1,7 @@
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
 import { srLocale } from 'charts/sr';
+import { apexThemeOptions, chartSparklineColors, chartTitleOptions } from 'charts/theme';
 
 const translations = {
   ru: {
@@ -56,24 +57,26 @@ export default class EventCharts {
   }
 
   #chartOptions(chartId, title, valueClass) {
-    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    const { theme, foreColor, titleStyle } = apexThemeOptions();
+    const sparklineColor = chartSparklineColors()[0];
 
     return {
       chart: {
         id: chartId,
-        group: 'sparklines',
         type: 'area',
         height: 200,
         background: 'transparent',
+        foreColor,
         sparkline: {
           enabled: true
         },
       },
       stroke: {
-        curve: 'straight'
+        curve: 'straight',
+        width: 2,
       },
       fill: {
-        opacity: 1,
+        opacity: 0.45,
       },
       series: [{
         name: this.t.count,
@@ -81,22 +84,18 @@ export default class EventCharts {
       }],
       labels: Object.keys(this.#eventsData),
       yaxis: {
-        min: 0
+        min: 0,
+        show: false,
       },
       xaxis: {
         type: 'datetime',
+        labels: { show: false },
+        axisBorder: { show: false },
+        axisTicks: { show: false },
       },
-      colors: [isDark ? '#4a5568' : '#dce6ec'],
-      theme: {
-        mode: isDark ? 'dark' : 'light',
-      },
-      title: {
-        text: title,
-        offsetX: 30,
-        style: {
-          fontSize: '16px',
-        }
-      }
+      colors: [sparklineColor],
+      theme,
+      title: chartTitleOptions(title, { offsetX: 0, style: { fontSize: '16px', color: titleStyle.color } }),
     };
   }
 }

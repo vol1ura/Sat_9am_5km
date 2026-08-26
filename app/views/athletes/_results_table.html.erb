@@ -1,0 +1,37 @@
+<% filterable = local_assigns.fetch(:filterable, false) %>
+<% events = results.map { |result| result.activity.event }.uniq(&:id).sort_by(&:name) if filterable %>
+
+<div<% if filterable %> data-controller="table-filter"<% end %>>
+  <% if filterable && events.size > 1 %>
+    <div class="mb-4 sm:max-w-xs">
+      <label class="sr-only" for="results-event-filter"><%= t 'athletes.show.table.event' %></label>
+      <select
+        id="results-event-filter"
+        class="<%= form_input_class %>"
+        data-table-filter-target="event"
+        data-action="change->table-filter#filter">
+        <option value=""><%= t 'athletes.show.filter_all_events' %></option>
+        <% events.each do |event| %>
+          <option value="<%= event.id %>"><%= event.name %></option>
+        <% end %>
+      </select>
+    </div>
+  <% end %>
+  <div class="data-table-shell">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="cell-num-muted">#</th>
+          <th><%= t 'athletes.show.table.date' %></th>
+          <th class="cell-num-strong"><%= t 'athletes.show.table.time' %></th>
+          <th class="hidden cell-num sm:table-cell"><%= t 'athletes.show.table.pace' %></th>
+          <th class="hidden cell-num md:table-cell"><%= t 'athletes.show.table.place' %></th>
+          <th><%= t 'athletes.show.table.event' %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'result', collection: results, locals: { total_results: } %>
+      </tbody>
+    </table>
+  </div>
+</div>

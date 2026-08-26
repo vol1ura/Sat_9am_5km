@@ -1,38 +1,53 @@
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
 import { srLocale } from 'charts/sr';
+import { AREA_ACCENT_FILL, apexThemeOptions, barChartOptions, chartAccentColor, chartLayoutPadding, formatCount, formatMmSs } from 'charts/theme';
 
 const translations = {
   ru: {
-    recentResults: 'Недавние результаты',
     time: 'время',
+    results: 'результаты',
+    place: 'Место',
   },
   sr: {
-    recentResults: 'Nedavni rezultati',
     time: 'vreme',
+    results: 'rezultati',
+    place: 'Pozicija',
   },
   en: {
-    recentResults: 'Recent results',
     time: 'time',
+    results: 'results',
+    place: 'Position',
   },
 };
 
 export default class AthleteCharts {
-  constructor(rows) {
+  constructor(rows = []) {
     this.rows = rows;
     const lang = document.documentElement.lang;
     this.currentLocale = translations[lang] ? lang : 'ru';
     this.t = translations[this.currentLocale];
   }
 
-  render(container) {
+  #applyLocale() {
     Apex.chart = {
       locales: [ruLocale, srLocale],
       defaultLocale: this.currentLocale,
     };
+  }
 
-    const resultsChart = new ApexCharts(container, this.#resultsChartOptions(this.t.recentResults, { max_count: 15 }));
+  render(container) {
+    this.#applyLocale();
+    const resultsChart = new ApexCharts(container, this.#resultsChartOptions({ max_count: 15 }));
     resultsChart.render();
+    return resultsChart;
+  }
+
+  renderPositions(container, { categories, counts }) {
+    this.#applyLocale();
+    const chart = new ApexCharts(container, this.#positionsChartOptions(categories, counts));
+    chart.render();
+    return chart;
   }
 
   #resultsData(max_count) {
@@ -51,20 +66,22 @@ export default class AthleteCharts {
     return { points, labels };
   }
 
-  #secondsFormatter(seconds) {
-    return `${Math.floor(seconds / 60)}:${('00' + seconds % 60).slice(-2)}`;
-  }
-
-  #resultsChartOptions(title, { max_count = undefined } = {}) {
+  #resultsChartOptions({ max_count = undefined } = {}) {
     const data = this.#resultsData(max_count);
-    const isDark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    const { theme, foreColor, axisLabels } = apexThemeOptions();
+    const accent = chartAccentColor();
+    const layout = chartLayoutPadding();
 
     return {
+      ...layout,
       chart: {
-        height: 300,
+        ...layout.chart,
+        id: 'athlete-results-chart',
+        height: 320,
         width: '100%',
         type: 'area',
         background: 'transparent',
+        foreColor,
         animations: {
           initialAnimation: {
             enabled: false
@@ -74,9 +91,11 @@ export default class AthleteCharts {
           enabled: false
         }
       },
-      fill: {
-        type: 'gradient'
+      stroke: {
+        curve: 'smooth',
+        width: 2,
       },
+      fill: AREA_ACCENT_FILL,
       plotOptions: {
         area: {
           fillTo: 'end',
@@ -87,34 +106,81 @@ export default class AthleteCharts {
         data: data.points
       }],
       xaxis: {
-        type: 'datetime'
+        type: 'datetime',
+        labels: axisLabels,
       },
       yaxis: {
         reversed: true,
         opposite: true,
         labels: {
-          formatter: this.#secondsFormatter
+          ...axisLabels,
+          formatter: formatMmSs,
         }
       },
       tooltip: {
         shared: false,
         followCursor: true,
         y: {
-          formatter: this.#secondsFormatter
+          formatter: formatMmSs,
         }
       },
-      theme: {
-        mode: isDark ? 'dark' : 'light',
-        palette: isDark ? 'palette5' : 'palette2',
-      },
-      title: {
-        text: title,
-        align: 'center',
-      },
+      theme,
+      colors: [accent],
+      title: { show: false },
       dataLabels: {
         enabled: true,
         formatter: (_, opt) => data.labels[opt.dataPointIndex]
       }
     };
+  }
+
+  #positionsChartOptions(categories, counts) {
+    const { foreColor } = apexThemeOptions();
+
+    return barChartOptions({
+      id: 'athlete-positions-chart',
+      height: 320,
+      series: [{
+        name: this.t.results,
+        data: counts,
+      }],
+      grid: {
+        padding: { top: 24 },
+      },
+      plotBar: {
+        dataLabels: { position: 'top' },
+      },
+      title: { show: false },
+      dataLabels: {
+        enabled: true,
+        offsetY: -20,
+        formatter: formatCount,
+        style: {
+          fontSize: '12px',
+          colors: [foreColor],
+        },
+      },
+      xaxis: {
+        type: 'category',
+        categories: categories.map(String),
+        title: { text: this.t.place },
+      },
+      yaxis: {
+        min: 0,
+        labels: {
+          formatter: formatCount,
+        },
+      },
+      legend: { show: false },
+      colors: [chartAccentColor()],
+      tooltip: {
+        x: {
+          formatter: (val) => `${this.t.place}: ${val}`,
+        },
+        y: {
+          formatter: formatCount,
+        },
+      },
+    });
   }
 }

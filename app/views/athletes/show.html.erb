@@ -1,345 +1,65 @@
 <%
   athlete_name = @athlete.name || t('common.nobody')
-  seconds_in_results = @athlete.stats.dig('results', 'seconds') || []
-  seconds_in_results_count = seconds_in_results.size
-  six_days_ago = 6.days.ago.beginning_of_day
-  total_results = @results.size
+  recent_since = 6.days.ago.to_date
 %>
 <% head_info :description, t('.description', athlete_name:) %>
 
-<div class="d-flex">
-  <div class="flex-grow-1">
-    <h1 class="mt-2 text-break"><%= head_info :title, athlete_name %></h1>
-    <% if @athlete.going_to_event? %>
-      <div class="badge bg-success mb-2 text-wrap">
-        <%= t 'friendships.friend.going_to', event: @athlete.going_to_event.name %>
-      </div>
-    <% end %>
-    <%= render 'friendships/button', athlete: @athlete %>
-  </div>
-  <div class="position-relative">
-    <%= image_tag user_image_path(@athlete.user), class: 'avatar', title: athlete_name %>
-    <div class="position-absolute top-0 end-0">
-      <a href="#" class="btn btn-light rounded-circle border-primary" role="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
-        <i class="fa-solid fa-qrcode" title="QR"></i>
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="accordion accordion-flush" id="accordion-personal-statistics">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-friends">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFriends" aria-expanded="false" aria-controls="flush-collapseFriends">
-        <span class="badge text-light bg-primary me-3" id="friends-counter"><%= @athlete.friends.size %></span>
-        <%= t('.friends') %>
-      </button>
-    </h2>
-    <div id="flush-collapseFriends" class="accordion-collapse collapse" aria-labelledby="flush-friends" data-bs-parent="#accordion-personal-statistics">
-      <div class="accordion-body">
-        <%= turbo_frame_tag 'friends_list', src: friends_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-          <%= render '/loading_indicator' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-followers">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFollowers" aria-expanded="false" aria-controls="flush-collapseFollowers">
-        <span class="badge text-light bg-primary me-3" id="followers-counter"><%= @athlete.followers.size %></span>
-        <%= t('.followers') %>
-      </button>
-    </h2>
-    <div id="flush-collapseFollowers" class="accordion-collapse collapse" aria-labelledby="flush-followers" data-bs-parent="#accordion-personal-statistics">
-      <div class="accordion-body">
-        <%= turbo_frame_tag 'followers_list', src: followers_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-          <%= render '/loading_indicator' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <% if @athlete.club %>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-club">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseClub" aria-expanded="false" aria-controls="flush-collapseClub">
-          <span class="badge text-light bg-primary me-3"><i class="fa-solid fa-people-group"></i></span>
-          <%= @athlete.club.name %>
-        </button>
-      </h2>
-      <div id="flush-collapseClub" class="accordion-collapse collapse" aria-labelledby="flush-club" data-bs-parent="#accordion-personal-statistics">
-        <div class="accordion-body">
-          <%= t '.show_club_html', link: link_to(@athlete.club.name, club_path(@athlete.club.slug)) %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <% if total_results.positive? %>
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-totalResults">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalResults" aria-expanded="false" aria-controls="flush-collapseTotalResults">
-            <span class="badge text-light bg-primary me-3 position-relative">
-              <%= total_results %>
-              <% if @results.first.date >= six_days_ago %>
-                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                  <span class="visually-hidden">New results</span>
-                </span>
-              <% end %>
-            </span>
-            <%= t '.total_results' %>
-          </button>
-        </h2>
-        <div id="flush-collapseTotalResults" class="accordion-collapse collapse" aria-labelledby="flush-totalResults" data-bs-parent="#accordion-personal-statistics">
-          <div class="accordion-body">
-            <%= turbo_frame_tag 'total_results', src: total_results_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-              <%= render '/loading_indicator' %>
-            <% end %>
-          </div>
-        </div>
-    </div>
-  <% end %>
-  <% if @total_vol.positive? %>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-totalVolunteering">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalVolunteering" aria-expanded="false" aria-controls="flush-collapseTotalVolunteering">
-          <span class="badge text-light bg-primary me-3"><%= @total_vol %></span>
-          <%= t '.total_volunteering' %>
-        </button>
-      </h2>
-      <div id="flush-collapseTotalVolunteering" class="accordion-collapse collapse" aria-labelledby="flush-totalVolunteering" data-bs-parent="#accordion-personal-statistics">
-        <div class="accordion-body">
-          <%= turbo_frame_tag 'volunteering_chart', src: volunteering_chart_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-            <%= render '/loading_indicator' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-totalTrophies">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalTrophies" aria-expanded="false" aria-controls="flush-collapseTotalTrophies">
-        <span class="badge text-light bg-primary me-3 position-relative">
-          <%= @total_trophies %>
-          <% if @athlete.trophies.where(created_at: six_days_ago..).any? %>
-            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-              <span class="visually-hidden">New trophies</span>
-            </span>
-          <% end %>
-        </span>
-        <%= t '.total_trophies' %>
-      </button>
-    </h2>
-    <div id="flush-collapseTotalTrophies" class="accordion-collapse collapse" aria-labelledby="flush-totalTrophies" data-bs-parent="#accordion-personal-statistics">
-      <div class="accordion-body">
-        <% if @total_trophies.positive? %>
-          <%= turbo_frame_tag 'total_trophies', src: total_trophies_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-            <%= render '/loading_indicator' %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <% if total_results.positive? %>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-totalEvents">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTotalEvents" aria-expanded="false" aria-controls="flush-collapseTotalEvents">
-          <span class="badge text-light bg-primary me-3"><%= @total_events_count %></span>
-          <%= t '.total_events' %>
-        </button>
-      </h2>
-      <div id="flush-collapseTotalEvents" class="accordion-collapse collapse" aria-labelledby="flush-totalEvents" data-bs-parent="#accordion-personal-statistics">
-        <div class="accordion-body">
-          <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-            <%= render '/loading_indicator' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-bestPositionAbsolute">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBestPositionAbsolute" aria-expanded="false" aria-controls="flush-collapseBestPositionAbsolute">
-          <span class="badge text-light bg-primary me-3 position-relative">
-            <%= @last_best_position_result.position %>
-            <% if @last_best_position_result.activity_date >= six_days_ago %>
-              <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New best position</span>
-              </span>
-            <% end %>
-          </span>
-          <%= t '.best_position' %>
-        </button>
-      </h2>
-      <div id="flush-collapseBestPositionAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-bestPositionAbsolute" data-bs-parent="#accordion-personal-statistics">
-        <div class="accordion-body">
-          <%= turbo_frame_tag 'best_position_absolute', src: best_position_absolute_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-            <%= render '/loading_indicator' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-personalBestAbsolute">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalBestAbsolute" aria-expanded="false" aria-controls="flush-collapsePersonalBestAbsolute">
-          <span class="badge text-light bg-primary me-3 position-relative">
-            <%= @personal_best.time_string %>
-            <% if @personal_best.activity_date >= six_days_ago %>
-              <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New personal best</span>
-              </span>
-            <% end %>
-          </span>
-          <%= t '.personal_best' %>
-        </button>
-      </h2>
-      <div id="flush-collapsePersonalBestAbsolute" class="accordion-collapse collapse" aria-labelledby="flush-personalBestAbsolute" data-bs-parent="#accordion-personal-statistics">
-        <div class="accordion-body">
-          <%= turbo_frame_tag 'personal_bests', src: personal_bests_athlete_statistics_path(@athlete), loading: 'lazy' do %>
-            <%= render '/loading_indicator' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <% if @athlete.personal_best_10k || @athlete.personal_best_half_marathon || @athlete.personal_best_marathon || @time_predictions.any? %>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-personalRecords">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsePersonalRecords" aria-expanded="false" aria-controls="flush-collapsePersonalRecords">
-            <span class="badge text-light bg-primary me-3">
-              <i class="fa-solid fa-trophy"></i>
-            </span>
-            <%= t '.personal_bests_section' %>
-          </button>
-        </h2>
-        <div id="flush-collapsePersonalRecords" class="accordion-collapse collapse" aria-labelledby="flush-personalRecords" data-bs-parent="#accordion-personal-statistics">
-          <div class="accordion-body">
-            <table class="table">
-              <caption>
-                <% unless @athlete.personal_best_10k || @athlete.personal_best_half_marathon || @athlete.personal_best_marathon %>
-                  <%= t '.no_personal_bests' %>
-                <% end %>
-                <% if @time_predictions.any? %>
-                  <%= t '.prediction_hint' %>
-                <% else %>
-                  <%= t '.no_predictions' %>
-                <% end %>
-              </caption>
-              <thead>
-                <tr>
-                  <th class="fs-small-sm"><%= t '.distance' %></th>
-                  <th class="fs-small-sm"><%= t '.pb' %></th>
-                  <th class="fs-small-sm"><%= t '.predicted_time' %></th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                <tr>
-                  <td><%= t '.personal_best_10k' %></td>
-                  <td><%= @athlete.personal_best_10k %></td>
-                  <td><%= Result.time_string @time_predictions[10] %></td>
-                </tr>
-                <tr>
-                  <td><%= t '.personal_best_half_marathon' %></td>
-                  <td><%= @athlete.personal_best_half_marathon %></td>
-                  <td><%= Result.time_string @time_predictions[21.1] %></td>
-                </tr>
-                <tr>
-                  <td><%= t '.personal_best_marathon' %></td>
-                  <td><%= @athlete.personal_best_marathon %></td>
-                  <td><%= Result.time_string @time_predictions[42.2] %></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
-
-<% if total_results.zero? %>
-  <p class="my-3"><%= t '.no_results' %></p>
-<% else %>
-  <h2 class="mt-3"><%= t '.results' %></h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th><%= t '.table.date' %></th>
-        <th><%= t '.table.time' %></th>
-        <th class="hidden-on-phone"><%= t '.table.pace' %></th>
-        <th class="hidden-on-phone"><%= t '.table.place' %></th>
-        <th><%= t '.table.event' %></th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <%= render partial: 'result', collection: @results, locals: { total_results: } %>
-    </tbody>
-  </table>
-  <%= render '/expand_button' if total_results > 15 %>
+<%= turbo_frame_tag 'athlete_subnav', class: 'contents', target: :_top do %>
+  <%= render 'subnav' %>
 <% end %>
 
-<h2><%= t '.volunteering' %></h2>
-<% if @total_vol.zero? %>
-  <p><%= t '.no_volunteering' %></p>
-<% else %>
-  <div class="accordion accordion-flush" id="accordionRoles">
-    <% @volunteering.group_by(&:role).each do |role, volunteering_in_role| %>
-      <div class="accordion-item">
-        <h2 id="flush-heading-<%= role %>" class="accordion-header">
-          <button class="accordion-button collapsed position-relative" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<%= role %>" aria-expanded="false" aria-controls="flush-collapse-<%= role %>">
-            <span class="badge text-light bg-primary me-3"><%= volunteering_in_role.size %></span>
-            <%= human_volunteer_role role %>
-          </button>
-        </h2>
-        <div id="flush-collapse-<%= role %>" class="accordion-collapse collapse" aria-labelledby="flush-heading-<%= role %>" data-bs-parent="#accordionRoles">
-          <div class="accordion-body">
-            <ul class="list-group list-group-flush">
-              <% volunteering_in_role.each do |vol| %>
-                <li class="list-group-item">
-                  <div class="hstack">
-                    <div class="acc-li-s">
-                      <%= link_to l(vol.activity.date), vol.activity %>
-                    </div>
-                    <div class="ms-3">
-                      <%= link_to vol.activity.event_name, event_path(vol.activity.event.code_name) %>
-                    </div>
-                  </div>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
+<section class="mb-8">
+  <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:justify-between">
+    <div class="min-w-0 w-full flex-1 sm:w-auto">
+      <h1 class="break-words font-display text-2xl font-semibold text-ink sm:text-3xl">
+        <%= head_info :title, athlete_name %>
+      </h1>
+      <% if @athlete.club %>
+        <p class="mt-2 text-ink-muted">
+          <%= link_to @athlete.club.name, club_path(@athlete.club.slug) %>
+        </p>
+      <% end %>
+      <% if @athlete.going_to_event %>
+        <%= render Ui::BadgeComponent.new(variant: :success, class: 'mt-3 max-w-full text-wrap') do %>
+          <%= t 'friendships.friend.going_to', event: @athlete.going_to_event.name %>
+        <% end %>
+      <% end %>
+      <div class="mt-4">
+        <%= render 'friendships/button', athlete: @athlete %>
       </div>
-    <% end %>
+    </div>
+    <div class="relative w-fit shrink-0">
+      <%= image_tag user_image_path(@athlete.user),
+                    class: 'h-28 w-28 rounded-full border-4 border-brand/25 object-cover sm:h-32 sm:w-32',
+                    alt: athlete_name,
+                    title: athlete_name %>
+      <button
+        type="button"
+        class="absolute -end-1 -top-1 flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-sm hover:bg-accent-subtle"
+        data-controller="dialog"
+        data-dialog-id-value="barcodeModal"
+        data-action="click->dialog#open"
+        aria-label="QR"
+      >
+        <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
+      </button>
+    </div>
   </div>
+</section>
+
+<section class="mb-8 grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+  <%= render Ui::StatComponent.new(label: t('.total_results'), value: @total_results, highlight: @total_results.positive? && @recent_results.first.date.to_date >= recent_since) %>
+  <% if @personal_best %>
+    <%= render Ui::StatComponent.new(label: t('.personal_best'), value: @personal_best.time_string, highlight: @personal_best.activity_date >= recent_since) %>
+  <% end %>
+  <%= render Ui::StatComponent.new(label: t('.total_trophies'), value: @total_trophies) %>
+  <%= render Ui::StatComponent.new(label: t('.total_volunteering'), value: @total_vol) %>
+  <%= render Ui::StatComponent.new(label: t('.friends'), value: @friends_count) %>
+  <%= render Ui::StatComponent.new(label: t('.total_events'), value: @total_events_count) %>
+</section>
+
+<%= turbo_frame_tag 'athlete_tab', class: 'block min-w-0' do %>
+  <%= render 'summary' %>
 <% end %>
 
 <%= render 'shared/barcode_modal', code: @athlete.code, barcode: @barcode %>
-
-<!-- Modal minute bingo -->
-<div class="modal fade" id="minute-bingo-modal" tabindex="-1" aria-labelledby="minute-bingo-modal-label" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title fs-5" id="minute-bingo-modal-label"><%= t '.mission_minute_bingo' %></h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <table class="mx-auto">
-          <% 6.times.each do |row| %>
-            <tr>
-              <% 10.times.each do |col| %>
-                <% x = (row * 10) + col %>
-                <td class="<%= x.in?(seconds_in_results) ? 'picked' : 'text-secondary' %>"><%= format '%02d', x %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal"><%= t '.close' %></button>
-      </div>
-    </div>
-  </div>
-</div>
