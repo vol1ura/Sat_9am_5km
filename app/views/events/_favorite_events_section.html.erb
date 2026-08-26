@@ -1,7 +1,7 @@
 <%= tag.div id: 'favorite_events_section' do %>
   <% if user_signed_in? && current_user.favorite_event_ids.any? %>
-    <% favorite_events = current_user.favorite_events.in_country(top_level_domain) %>
-    <% if favorite_events.load.any? %>
+    <% favorite_events = current_user.favorite_events.in_country(top_level_domain).with_main_image.to_a %>
+    <% if favorite_events.any? %>
       <h3 class="mb-3"><%= t '.title' %></h3>
       <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">
         <%= render partial: 'events/event_card', collection: favorite_events, as: :event %>

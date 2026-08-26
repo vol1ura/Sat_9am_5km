@@ -48,8 +48,9 @@ class Event < ApplicationRecord
   default_scope { order(:visible_order, :name) }
 
   scope :active, -> { where(active: true) }
-  scope :in_country, ->(country_code) { joins(:country).where(country: { code: country_code }) }
+  scope :in_country, ->(country_code) { where(country_id: Country.where(code: country_code).select(:id)) }
   scope :without_friends, -> { where.not(id: [4, 31]) }
+  scope :with_main_image, -> { includes(Time.current.summer? ? :summer_image_attachment : :winter_image_attachment) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[code_name country_id name town]

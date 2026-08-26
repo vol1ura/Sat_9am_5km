@@ -15,19 +15,23 @@ RSpec.describe '/events' do
   end
 
   describe 'GET /' do
-    it 'makes successful request in summer' do
-      travel_to Time.zone.local(2025, 4, 1) do
-        get events_url
-        expect(response).to be_successful
+    before do
+      user = create(:user, :with_athlete)
+      user.update! favorite_event_ids: [event.id]
+      sign_in user
+    end
+
+    shared_examples 'successful request' do |date:|
+      it 'makes successful request' do
+        travel_to date do
+          get events_url, headers: { host: 'test.ru' }
+          expect(response).to be_successful
+        end
       end
     end
 
-    it 'makes successful request in winter' do
-      travel_to Time.zone.local(2025, 11, 1) do
-        get events_url
-        expect(response).to be_successful
-      end
-    end
+    it_behaves_like 'successful request', date: Time.zone.local(2025, 4, 1)
+    it_behaves_like 'successful request', date: Time.zone.local(2025, 11, 1)
   end
 
   describe 'GET /events/:code_name' do

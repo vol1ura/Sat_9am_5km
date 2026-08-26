@@ -4,11 +4,8 @@ class EventsController < ApplicationController
   before_action :find_event, except: %i[index search map]
 
   def index
-    @events = Event.all
-    return if params[:all]
-
-    @events = @events.in_country(top_level_domain).includes(:summer_image_attachment)
-    @events = @events.includes(:winter_image_attachment) unless Time.current.summer?
+    @events = Event
+    @events = @events.in_country(top_level_domain).with_main_image unless params[:all]
   end
 
   def search
