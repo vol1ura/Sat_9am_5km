@@ -35,6 +35,7 @@
           </ul>
         </li>
         <%= render 'navbars/about_s95', with_icon: false %>
+        <%= render 'navbars/contacts', with_icon: false %>
       </ul>
 
     <div class="d-flex align-items-center gap-2 ms-auto">
@@ -133,6 +134,7 @@
             <% end %>
           </li>
           <%= render 'navbars/about_s95', with_icon: true %>
+          <%= render 'navbars/contacts', with_icon: true %>
         </ul>
 
         <%= form_with url: athletes_path, method: :get, class: 'my-3', role: 'search' do |f| %>

@@ -640,6 +640,12 @@ sr:
       feedback: Povratne informacije
       joining: Želite S95 kod vas?
       articles: Članci
+    contacts:
+      title: Kontakti
+      email: Email
+      vk: VKontakte
+      telegram: Telegram
+      feedback: Povratne informacije
     bottom:
       s95: S95 park trčanje
       slogan: 'Sistem nezavisnih park trčanja. Napravljeno od trkača za trkače. Pridružite nam se u trkama, razvoju ili kreiranju sadržaja.'
@@ -658,7 +664,7 @@ sr:
       address: Moskva, kv-l 114A Volžski bulvar, zd. 3, kv. 366
       headings:
         explore: Navigacija
-        connect: Kontaktirajte nas
+        connect: Kontakti
   articles:
     index:
       title: Članci

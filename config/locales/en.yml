@@ -588,6 +588,12 @@ en:
       feedback: Feedback
       joining: Want to Start S95?
       articles: Articles
+    contacts:
+      title: Contacts
+      email: Email
+      vk: VKontakte
+      telegram: Telegram
+      feedback: Feedback
     bottom:
       s95: S95 Park Runs
       slogan: 'Independent park run system. Made by runners for runners. Join our runs, development, or content editing.'
@@ -606,7 +612,7 @@ en:
       address: Moscow, kv-l 114A Volzhsky Boulevard, bld. 3, apt. 366
       headings:
         explore: Explore
-        connect: Get in touch
+        connect: Contacts
   articles:
     index:
       title: Articles
