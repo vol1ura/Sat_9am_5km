@@ -56,6 +56,7 @@ module Sat9am5km
 
     config.action_view.frozen_string_literal = true
     config.active_storage.service = :local
+    config.active_storage.resolve_model_to_route = :rails_storage_proxy
 
     config.telegram = config_for(:telegram)
     config.additional_events = config_for(:additional_events)
