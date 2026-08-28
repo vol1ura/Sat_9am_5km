@@ -19,6 +19,8 @@ jobs:
         run: bundle exec bundler-audit --update
       - name: Security audit application code
         run: bundle exec brakeman -q -w2
+      - name: Importmap audit
+        run: bin/importmap audit
 
   lint-ruby:
     runs-on: ubuntu-24.04
