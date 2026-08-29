@@ -8,6 +8,9 @@ class Ability
 
     cannot :destroy, User unless user.super_admin?
     can(:manage, :all) and return if user.admin?
+
+    self_volunteering(user)
+
     return if user.permissions.blank?
 
     @user = user
@@ -19,6 +22,14 @@ class Ability
   end
 
   private
+
+  def self_volunteering(user)
+    return unless user.athlete
+
+    can %i[create destroy], VolunteerApplication,
+        athlete_id: user.athlete.id, activity: { published: false, date: Date.current.. }
+    can :new, VolunteerApplication
+  end
 
   def special_permissions
     @user
@@ -35,8 +46,16 @@ class Ability
       can action.to_sym, Athlete
     else
       can action.to_sym, subject_class.constantize, permission_param(subject_class, permissions)
+      allow_volunteer_applications(action, permissions) if subject_class == 'Volunteer'
       can :new, subject_class.constantize if action.in?(%w[manage create])
     end
+  end
+
+  def allow_volunteer_applications(action, permissions)
+    event_ids = permissions.pluck(:event_id).compact.uniq
+    return if event_ids.empty?
+
+    can action.to_sym, VolunteerApplication, activity: { event_id: event_ids }
   end
 
   def permission_param(subject_class, permissions)

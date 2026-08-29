@@ -169,6 +169,7 @@ en:
         rank: rank
         number: number
         role: role
+        activity: run
         roles:
           <<: *volunteer_roles
       contact:
@@ -475,6 +476,16 @@ en:
   notification_mailer:
     parkzhrun_error: 'Error! Failed to create ParkZhrun run'
     feedback: 'New feedback on S95 website'
+  volunteer_application_mailer:
+    approved:
+      subject: 'Volunteer application approved: %{role}'
+      greeting: 'Hi, %{name}!'
+      body_html: 'Your application for <strong>%{role}</strong> at <strong>%{event_name}</strong> on %{date} has been approved. See you there!'
+      cancel_hint: If your plans change, please let the organizers know.
+    rejected:
+      subject: 'Volunteer application: %{role}'
+      greeting: 'Hi, %{name}!'
+      body: 'Unfortunately, your application for %{role} at %{event_name} on %{date} was not approved this time. Hope to see you next time!'
   user_notification_mailer:
     notify:
       subject: Check your email! Inside is information about your Saturday
@@ -1090,7 +1101,7 @@ en:
     card:
       about_participation: 'Register on the site and come Saturday morning. You can run or walk the distance. We welcome everyone regardless of age and fitness level.'
       registration: Register
-      about_volunteers: 'All events are free and organized by volunteers. Check available positions and also join the organizing team'
+      about_volunteers: 'All events are free and organized by volunteers. Want to help — submit an application for an open position and the organizer will get back to you'
       show: View
       place: Venue
       athlete: Participant
@@ -1108,14 +1119,28 @@ en:
       closest_date: closest dates
       acknowledgements: We'll be very grateful if you can provide volunteer assistance. You can choose an interesting and feasible activity for yourself that will allow you to express yourself, support friends, and have a great time.
       about_roster_html: 'Below you can see the list of <em>required positions</em>, as well as see which ones are already taken.'
-      how_to_participate_html: 'To sign up, just write in our <a href="%{tg_chat_link}" target="_blank" rel="noopener">Telegram chat</a>.'
+      how_to_participate: 'Click "Apply" next to an open position in the table below, and an organizer will review your application shortly.'
+      how_to_participate_html: 'You can also write in our <a href="%{tg_chat_link}" target="_blank" rel="noopener">Telegram chat</a>.'
       additional_positions: In addition, sometimes run directors decide to recruit additional volunteers - follow the news, or ask directly in the chat.
       main_title: Volunteering Schedule
       main_page: Main Page
       role: Role
       volunteer: Volunteer
+      slots_filled: '%{filled} of %{total} filled'
+      extra_volunteers_header: Additional volunteers
+      all_slots_full: There are no open positions right now, but you can still come to the run — ask the organizers on site to sign you up manually and give you a role.
     volunteer:
       confirm_delete: Free position %{role} (%{name})?
+      its_you: You
+      cancel: Cancel
+      add: Add volunteer
+      sign_in_to_join: Sign in to join
+      no_athlete_profile: complete your athlete profile to join
+      apply: Apply
+      application_pending: Application pending
+      withdraw_application: Withdraw
+      already_volunteering: 'You are already signed up %{role} for this day'
+      already_volunteering_short: you are already signed up for this day
   users:
     show:
       title: Settings

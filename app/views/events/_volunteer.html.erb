@@ -1,3 +1,9 @@
+<%
+  my_application = local_assigns.fetch(:my_application, nil)
+  show_apply = !volunteer && !organizer && user_signed_in? && current_user.athlete && !my_volunteering && !my_application && can?(:create, VolunteerApplication)
+  show_applied = !volunteer && !organizer && my_application
+%>
+
 <%= turbo_frame_tag "volunteer-#{idx}" do %>
   <% if volunteer %>
     <span class="d-inline-flex align-items-center gap-2 flex-nowrap w-100">
@@ -6,15 +12,38 @@
       <% else %>
         <%= link_to volunteer.name, athlete_path(volunteer.athlete), data: { turbo: false } %>
       <% end %>
+      <% if my_volunteering && my_volunteering.id == volunteer.id %>
+        <span class="badge bg-primary"><%= t '.its_you' %></span>
+      <% end %>
       <% if can?(:destroy, volunteer) %>
         <%= link_to volunteer_path(volunteer, idx:), method: :delete, class: 'text-danger ms-auto ms-md-0', data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete', role: human_volunteer_role(role), name: volunteer.name) } do %>
           <i class="fa-solid fa-xmark"></i>
         <% end %>
       <% end %>
     </span>
-  <% elsif can?(:create, Volunteer) && can?(:read, activity) %>
+  <% elsif organizer %>
     <%= link_to new_volunteer_path(activity_id: activity.id, role: role, idx: idx) do %>
       <i class="fa-solid fa-user-plus"></i>
     <% end %>
+  <% elsif show_applied %>
+    <span class="text-muted small"><%= t '.application_pending' %></span>
+    <%= link_to t('.withdraw_application'), volunteer_application_path(my_application, idx: idx),
+               data: { turbo_method: :delete }, class: 'btn btn-outline-secondary btn-sm ms-2' %>
+  <% elsif !user_signed_in? %>
+    <%= link_to t('.sign_in_to_join'), new_user_session_path, class: 'text-muted small' %>
+  <% elsif current_user.athlete.nil? %>
+    <span class="text-muted small"><%= t '.no_athlete_profile' %></span>
+  <% elsif my_volunteering %>
+    <span
+      class="text-muted small"
+      title="<%= t '.already_volunteering', role: human_volunteer_role(my_volunteering.role) %>"
+    >
+      <%= t '.already_volunteering_short' %>
+    </span>
+  <% elsif show_apply %>
+    <%= button_to t('.apply'), volunteer_applications_path,
+               params: { volunteer_application: { activity_id: activity.id, role: role }, idx: idx },
+               form_class: 'd-inline',
+               class: 'btn btn-outline-primary btn-sm' %>
   <% end %>
 <% end %>
