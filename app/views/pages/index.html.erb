@@ -22,6 +22,35 @@
   </div>
 </section>
 
+<%# Stats Section %>
+<section class="home-stats py-5">
+  <div class="container">
+    <h2 class="text-center mb-5"><%= t '.stats.title' %></h2>
+    <div class="row g-4">
+      <%
+        [
+          { key: :events, icon: 'fa-map-marker-alt' },
+          { key: :activities, icon: 'fa-flag-checkered' },
+          { key: :participants, icon: 'fa-users' },
+          { key: :finishes, icon: 'fa-stopwatch' },
+          { key: :volunteers, icon: 'fa-hands-helping' },
+          { key: :volunteerings, icon: 'fa-heart' },
+        ].each do |item|
+      %>
+        <div class="col-6 col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+              <i class="fas <%= item[:icon] %> fa-3x mb-3 text-primary"></i>
+              <div class="home-stats__value"><%= number_with_delimiter(@stats[item[:key]]) %></div>
+              <h3 class="h5 card-title mb-0"><%= t ".stats.#{item[:key]}", count: @stats[item[:key]] %></h3>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
 <%# How It Works Section %>
 <section class="how-it-works py-5">
   <div class="container">

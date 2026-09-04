@@ -2,7 +2,7 @@
 
 class PagesController < ApplicationController
   ALLOWED_PAGES = %w[
-    about feedback joining rules additional-events privacy-policy robots 5za5 donor donation
+    about feedback joining rules additional-events privacy-policy robots 5za5 donor donation team
   ].freeze
   MAX_FEEDBACK_SIZE = 2000
 
@@ -11,23 +11,11 @@ class PagesController < ApplicationController
   layout :page_layout
 
   def index
+    @stats = HomeStats.call(top_level_domain)
     @local_events = Event.active.in_country(top_level_domain).unscope(:order)
     @next_saturday = Date.tomorrow.next_week.prev_week(:saturday)
-    @jubilee_events =
-      Activity
-        .where(event: @local_events.without_friends, published: true, date: ...@next_saturday)
-        .group(:event).order(count_all: :desc).count.filter_map do |event, activities_count|
-          activity_number = activities_count.next
-          next unless (activity_number <= 50 && (activity_number % 10).zero?) || (activity_number % 100).zero?
-
-          [event, activity_number]
-        end
-    @funrun_badges =
-      Badge
-        .includes(:image_attachment)
-        .funrun_kind
-        .where(received_date: @next_saturday)
-        .where("info->>'country_code' IS NULL OR info->>'country_code' = ?", top_level_domain)
+    @jubilee_events = jubilee_events
+    @funrun_badges = funrun_badges
   end
 
   def show
@@ -70,5 +58,24 @@ class PagesController < ApplicationController
 
   def page_layout
     params[:action] == 'index' || page_name == 'donor' ? 'home' : 'application'
+  end
+
+  def jubilee_events
+    Activity
+      .where(event: @local_events.without_friends, published: true, date: ...@next_saturday)
+      .group(:event).order(count_all: :desc).count.filter_map do |event, activities_count|
+        activity_number = activities_count.next
+        next unless (activity_number <= 50 && (activity_number % 10).zero?) || (activity_number % 100).zero?
+
+        [event, activity_number]
+      end
+  end
+
+  def funrun_badges
+    Badge
+      .includes(:image_attachment)
+      .funrun_kind
+      .where(received_date: @next_saturday)
+      .where("info->>'country_code' IS NULL OR info->>'country_code' = ?", top_level_domain)
   end
 end

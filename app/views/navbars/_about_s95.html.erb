@@ -1,5 +1,12 @@
 <li class="nav-item dropdown" data-controller="dropdown">
-  <% about_s95_pages = %w[rules about donation joining] %>
+  <%
+    about_s95_pages =
+      if top_level_domain == :ru
+        %w[rules about team donation joining]
+      else
+        %w[rules about donation joining]
+      end
+  %>
   <%=
     button_tag(
       type: 'button',

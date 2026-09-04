@@ -39,6 +39,64 @@
   }
 }
 
+.home-stats {
+  background-color: var(--bs-body-bg);
+
+  .container {
+    max-width: 1200px;
+  }
+
+  h2 {
+    color: $primary;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--bs-primary);
+    }
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--bs-tertiary-bg);
+    border-radius: 15px;
+
+    i {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgb(0 0 0 / 10%) !important;
+
+      i {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__value {
+    color: $primary;
+    font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+
+    [data-bs-theme="dark"] & {
+      color: var(--bs-primary);
+    }
+  }
+}
+
 .how-it-works {
   background-color: var(--bs-tertiary-bg);
 

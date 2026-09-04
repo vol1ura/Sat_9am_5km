@@ -584,6 +584,7 @@ en:
       title: About S95
       rules: Rules
       about: S95 Movement
+      team: Team
       donation: Support the Project
       feedback: Feedback
       joining: Want to Start S95?
@@ -640,6 +641,32 @@ en:
         body: "Saturday runs are also held in other countries - these are %{countries}. All results are accounted for in a unified system and displayed in participants' personal profiles."
       back: Back
       forward: Forward
+    team:
+      description: The S95 team — the people who coordinate and develop independent park runs.
+      intro_html: S95 is dozens of <a href="%{events_link}">locations</a> in three countries, thousands of participants and hundreds of volunteers. And also the team behind the project's coordination and development.
+      join_html: If you feel ready to become part of the S95 team, write to us at <a href="mailto:%{email}">%{email}</a>. You can also sign up as a volunteer any Saturday to help with organization, or <a href="%{support_link}">support the S95 project</a> with a donation.
+      members:
+        silaev:
+          name: Maxim Silaev
+          role: Project lead
+        shiryaev:
+          name: Vladimir Shiryaev
+          role: Data analytics and Orange Team coordination (pacemakers)
+        letunovsky:
+          name: Andrey Letunovsky
+          role: Marketing activities and partner relations
+        volodin:
+          name: Yuri Volodin
+          role: Project IT team (website, mobile app, Console)
+        hohlova:
+          name: Alyona Khokhlova
+          role: Safety
+        yakovlev:
+          name: Dmitry Yakovlev
+          role: Finance and foundation relations
+        bashkina:
+          name: Regina Bashkina
+          role: Promotion and public relations
     rules:
       description: Brief rules for S95 run participants, as well as frequently asked questions
       register_with_bot_html: "If you're not registered, create a profile, filling out the <a href=\"%{link}\">registration form</a>. After confirming your email, you'll be taken to your profile with a personal barcode."
@@ -748,6 +775,26 @@ en:
       registration: Registration
       results: Results
       find_event: Find Nearest Run
+      stats:
+        title: S95 in numbers
+        events:
+          one: location
+          other: locations
+        activities:
+          one: run
+          other: runs
+        participants:
+          one: participant
+          other: participants
+        finishes:
+          one: finish
+          other: finishes
+        volunteers:
+          one: volunteer
+          other: volunteers
+        volunteerings:
+          one: volunteering
+          other: volunteerings
       marquee_items:
         - Park Runs
         - Results

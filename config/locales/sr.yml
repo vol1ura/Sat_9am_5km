@@ -636,6 +636,7 @@ sr:
       title: O S95
       rules: Pravila
       about: S95 pokret
+      team: Tim
       donation: Podržite projekat
       feedback: Povratne informacije
       joining: Želite S95 kod vas?
@@ -687,6 +688,32 @@ sr:
       registration: "Registracija"
       results: "Rezultati"
       find_event: "Pronađi najbližu trku"
+      stats:
+        title: S95 u brojkama
+        events:
+          one: lokacija
+          few: lokacije
+          other: lokacija
+        activities:
+          one: trka
+          few: trke
+          other: trka
+        participants:
+          one: učesnik
+          few: učesnika
+          other: učesnika
+        finishes:
+          one: finiš
+          few: finiša
+          other: finiša
+        volunteers:
+          one: volonter
+          few: volontera
+          other: volontera
+        volunteerings:
+          one: volontiranje
+          few: volontiranja
+          other: volontiranja
       marquee_items:
         - Park trke
         - Rezultati
@@ -767,6 +794,32 @@ sr:
         body: Danas se naše trke organizuju i u %{countries}. Svi rezultati se čuvaju u jednom sistemu odakle ćete imati uvid u profile atletiča.
       back: Nazad
       forward: Napred
+    team:
+      description: Tim projekta S95 — ljudi koji koordiniraju i razvijaju nezavisne park trke.
+      intro_html: S95 su desetine <a href="%{events_link}">lokacija</a> u tri zemlje, hiljade učesnika i stotine volontera. I još tim koji stoji iza koordinacije i razvoja projekta.
+      join_html: Ako u sebi vidite snagu i spremni ste da postanete deo tima S95, pišite nam na <a href="mailto:%{email}">%{email}</a>. Takođe možete se prijaviti kao volonter bilo koje subote i pomoći u organizaciji ili <a href="%{support_link}">podržati projekat S95</a> donacijom.
+      members:
+        silaev:
+          name: Maksim Silajev
+          role: Rukovodilac projekta
+        shiryaev:
+          name: Vladimir Širjajev
+          role: Analitika podataka i koordinacija Narandžastog tima (pejsmejkeri)
+        letunovsky:
+          name: Andrej Letunovski
+          role: Marketinške aktivnosti i saradnja sa partnerima
+        volodin:
+          name: Jurij Volodin
+          role: IT-tim projekta (sajt, mobilna aplikacija, Konsola)
+        hohlova:
+          name: Aljona Hohlova
+          role: Bezbednost
+        yakovlev:
+          name: Dmitrij Jakovlev
+          role: Finansije i saradnja sa fondovima
+        bashkina:
+          name: Regina Baškina
+          role: Promocija i odnosi sa javnošću
     rules:
       description: Kratka pravila za učesnike S95, kao i često postavljana pitanja
       register_with_bot_html: 'Ako niste registrovani, kreirajte profil, popunjavajući <a href="%{link}">formu registracije</a>. Nakon potvrde email-a, biti ćete preusmereni na vaš profil sa ličnim QR kodom.'

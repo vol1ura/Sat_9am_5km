@@ -1,0 +1,44 @@
+<%
+  team_members = [
+    { key: :silaev, athlete_id: 5249 },
+    { key: :shiryaev, athlete_id: 248 },
+    { key: :letunovsky, athlete_id: 551 },
+    { key: :hohlova, athlete_id: 4104 },
+    { key: :yakovlev, athlete_id: 3293 },
+    { key: :volodin, athlete_id: 1 },
+    { key: :bashkina, athlete_id: 4029 },
+  ]
+  info_email = ENV.fetch('INFO_EMAIL')
+%>
+<% head_info :description, t('.description') %>
+<h1><%= head_info :title, t('navbars.about_s95.team') %></h1>
+
+<p><%= t '.intro_html', events_link: events_path %></p>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 justify-content-center mb-4">
+  <% team_members.each do |member| %>
+    <% name = t ".members.#{member[:key]}.name" %>
+    <div class="col">
+      <div class="card-with-border text-center">
+        <div class="overflow-hidden rounded-top ratio ratio-1x1">
+          <%=
+            image_tag(
+              "/images/team/#{member[:key]}.jpeg",
+              class: 'team-member-photo img-scaled',
+              alt: name,
+              loading: 'lazy',
+            )
+          %>
+        </div>
+        <div class="card-body">
+          <h2 class="h5 mb-1">
+            <%= link_to name, athlete_path(member[:athlete_id]), class: 'stretched-link text-decoration-none' %>
+          </h2>
+          <p class="mb-0"><%= t ".members.#{member[:key]}.role" %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<p><%= t '.join_html', email: info_email, support_link: page_path(page: 'donation') %></p>

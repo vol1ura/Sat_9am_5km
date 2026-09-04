@@ -29,6 +29,9 @@
         <ul class="footer-links list-unstyled mb-0">
           <li><%= link_to t('navbars.about_s95.rules'), page_path(page: 'rules') %></li>
           <li><%= link_to t('navbars.about_s95.about'), page_path(page: 'about') %></li>
+          <% if top_level_domain == :ru %>
+            <li><%= link_to t('navbars.about_s95.team'), page_path(page: 'team') %></li>
+          <% end %>
           <li><%= link_to t('navbars.about_s95.donation'), page_path(page: 'donation') %></li>
           <li><%= link_to t('navbars.about_s95.joining'), page_path(page: 'joining') %></li>
           <li><%= link_to t('navbars.about_s95.articles'), articles_path %></li>
