@@ -6,6 +6,12 @@ RSpec.describe '/admin/utilities' do
   before { sign_in user }
 
   describe 'GET /admin/utilities' do
+    let(:email_user) { create(:user, :with_email) }
+    let(:telegram_user) { create(:user) }
+    let(:email_athlete) { create(:athlete, user: email_user, parkrun_code: 111_111) }
+    let(:telegram_athlete) { create(:athlete, user: telegram_user) }
+    let(:reunite_ids) { [email_athlete.id, telegram_athlete.id] }
+
     before do
       create(:result, activity_params: { date: 1.month.ago })
       create(:volunteer, activity_params: { date: 10.months.ago })
@@ -14,6 +20,17 @@ RSpec.describe '/admin/utilities' do
     it 'renders a successful response' do
       get admin_utilities_url
       expect(response).to be_successful
+    end
+
+    it 'finds the current athlete after reunite' do
+      Audited.store[:current_request_uuid] = SecureRandom.uuid
+      Athletes::Reuniter.call(Athlete.where(id: reunite_ids), reunite_ids)
+
+      get admin_utilities_url, params: { athlete_id: telegram_athlete.id }
+
+      expect(response).to be_successful
+      expect(response.body).to include(email_athlete.reload.name)
+      expect(response.body).to include(admin_athlete_path(email_athlete))
     end
   end
 

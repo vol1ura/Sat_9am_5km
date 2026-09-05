@@ -31,6 +31,19 @@ en:
         title: Published runs without volunteers
         description: Runs are held by volunteers and only thanks to volunteers, so it is extremely important to mark all volunteers as a sign of gratitude.
         empty: All published runs have volunteers
+      deleted_athlete:
+        title: Deleted athlete lookup
+        description: If an athlete was merged into another, you can find the current record by the old id.
+        athlete_id: Athlete ID
+        submit: Find
+        exists: A record with this id still exists.
+        reunited: 'The athlete was deleted during a merge. Current record:'
+        destroyed: The athlete was deleted. No related current record was found.
+        not_found: No athlete with this id was found in the database or audits.
+        deleted_name: Name at deletion
+        gender: Gender
+        deleted_at: Deleted at
+        merged_by: Merged by
       stats:
         title: Statistics
         month: Month
@@ -247,6 +260,8 @@ en:
           title: Discrepancies
         no_volunteers:
           title: No volunteers
+        deleted_athlete:
+          title: Athlete lookup
 
     devise:
       username:

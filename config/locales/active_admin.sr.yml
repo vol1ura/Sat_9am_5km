@@ -31,6 +31,19 @@ sr:
         title: Objavljena trčanja bez volontera
         description: Trčanja se održavaju zahvaljujući volonterima, pa je izuzetno važno označiti sve volontere u znak zahvalnosti.
         empty: Sva objavljena trčanja imaju volontere
+      deleted_athlete:
+        title: Pretraga obrisanog atletičara
+        description: Ako je atletičar spojen sa drugim, po starom id-u možete pronaći trenutni zapis.
+        athlete_id: ID atletičara
+        submit: Pronađi
+        exists: Zapis sa ovim id-om postoji u bazi.
+        reunited: 'Atletičar je obrisan prilikom spajanja. Trenutni zapis:'
+        destroyed: Atletičar je obrisan. Povezani trenutni zapis nije pronađen.
+        not_found: Atletičar sa ovim id-om nije pronađen u bazi ni u revizijama.
+        deleted_name: Ime u trenutku brisanja
+        gender: Pol
+        deleted_at: Datum brisanja
+        merged_by: Ko je spojio
       stats:
         title: Statistika
         month: Mesec
@@ -251,6 +264,8 @@ sr:
           title: Neslaganja
         no_volunteers:
           title: Nema volontera
+        deleted_athlete:
+          title: Pretraga atletičara
 
     devise:
       username:

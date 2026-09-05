@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+
+panel t('.title') do
+  para t('.description')
+  render 'deleted_athlete_search_form'
+
+  if lookup
+    para t(".#{lookup.status}"), class: ('empty-message' if lookup.status == :not_found)
+
+    para link_to "#{lookup.athlete.name} (##{lookup.athlete.id})", admin_athlete_path(lookup.athlete) if lookup.athlete
+
+    if lookup.snapshot.present?
+      attributes_table_for lookup do
+        row(t('.deleted_name')) { lookup.snapshot['name'] } if lookup.snapshot['name'].present?
+        row(t('.gender')) { human_gender(lookup.snapshot['gender']) } if lookup.snapshot['gender'].present?
+        if lookup.snapshot['parkrun_code'].present?
+          row(Athlete.human_attribute_name(:parkrun_code)) { lookup.snapshot['parkrun_code'] }
+        end
+        if lookup.snapshot['fiveverst_code'].present?
+          row(Athlete.human_attribute_name(:fiveverst_code)) { lookup.snapshot['fiveverst_code'] }
+        end
+        if lookup.snapshot['parkzhrun_code'].present?
+          row(Athlete.human_attribute_name(:parkzhrun_code)) { lookup.snapshot['parkzhrun_code'] }
+        end
+        if lookup.snapshot['runpark_code'].present?
+          row(Athlete.human_attribute_name(:runpark_code)) { lookup.snapshot['runpark_code'] }
+        end
+        row(t('.deleted_at')) { l lookup.merged_at, format: :long } if lookup.merged_at
+        row(t('.merged_by')) { auto_link lookup.merged_by } if lookup.merged_by
+      end
+    end
+  end
+end

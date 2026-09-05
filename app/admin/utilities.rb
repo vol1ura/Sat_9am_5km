@@ -49,6 +49,11 @@ ActiveAdmin.register_page 'Utilities' do
         render 'no_volunteers', activities:
       end
 
+      tab t('.deleted_athlete.title'), id: 'deleted-athlete' do
+        lookup = Athletes::DeletedLookup.call(params[:athlete_id].to_i) if params[:athlete_id].present?
+        render 'deleted_athlete', lookup:
+      end
+
       tab t('.analytics.title') do
         stats_for = lambda do |model|
           Activity.find_by_sql(
