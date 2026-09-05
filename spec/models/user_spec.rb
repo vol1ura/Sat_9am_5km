@@ -118,4 +118,44 @@ RSpec.describe User do
       expect(user.favorite_events).to be_empty
     end
   end
+
+  describe '#sponsor_marked' do
+    let(:user) { build(:user) }
+
+    it 'returns false when sponsor_marked_at is blank' do
+      expect(user.sponsor_marked).to be false
+    end
+
+    it 'returns true when sponsor_marked_at falls in the current year' do
+      user.sponsor_marked_at = Time.current
+      expect(user.sponsor_marked).to be true
+    end
+
+    it 'returns false when sponsor_marked_at falls in a previous year' do
+      user.sponsor_marked_at = 1.year.ago
+      expect(user.sponsor_marked).to be false
+    end
+  end
+
+  describe '#sponsor_marked=' do
+    let(:user) { build(:user) }
+
+    it 'sets sponsor_marked_at to now when marked true' do
+      user.sponsor_marked = true
+      expect(user.sponsor_marked_at.to_date).to eq(Date.current)
+    end
+
+    it 'clears sponsor_marked_at when marked false' do
+      user.sponsor_marked_at = Time.current
+      user.sponsor_marked = false
+      expect(user.sponsor_marked_at).to be_nil
+    end
+
+    it 'keeps the original timestamp when already marked this year' do
+      original_time = 3.days.ago
+      user.sponsor_marked_at = original_time
+      user.sponsor_marked = true
+      expect(user.sponsor_marked_at).to be_within(1.second).of(original_time)
+    end
+  end
 end

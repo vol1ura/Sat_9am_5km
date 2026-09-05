@@ -70,6 +70,15 @@ class User < ApplicationRecord
     disabled_notifications.include?(type.to_s)
   end
 
+  # No `?` suffix: ActiveAdmin's boolean form input reads this exact attribute name.
+  def sponsor_marked = sponsor_marked_at&.year == Date.current.year # rubocop:disable Naming/PredicateMethod
+
+  def sponsor_marked=(value)
+    marked = ActiveModel::Type::Boolean.new.cast(value)
+    self.sponsor_marked_at = Time.current if marked && !sponsor_marked
+    self.sponsor_marked_at = nil if !marked && sponsor_marked_at
+  end
+
   private
 
   def send_devise_notification(notification, *)

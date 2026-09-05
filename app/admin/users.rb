@@ -8,7 +8,7 @@ ActiveAdmin.register User do
   permit_params do
     permitted = %i[first_name last_name password password_confirmation email]
     permitted << :role if current_user.super_admin?
-    permitted << :note if current_user.admin?
+    permitted << :note << :sponsor_marked if current_user.admin?
     permitted
   end
 
@@ -31,6 +31,7 @@ ActiveAdmin.register User do
     if current_user.admin?
       column(:phone) { |u| u.phone.present? }
       column :note
+      column('Спонсор') { |u| status_tag(u.sponsor_marked) }
     end
     column :role if current_user.super_admin?
     column :created_at
@@ -46,6 +47,7 @@ ActiveAdmin.register User do
       f.input :email if (!f.object.email && !f.object.unconfirmed_email) || current_user.super_admin?
       f.input :role if current_user.super_admin?
       f.input :note if current_user.admin?
+      f.input :sponsor_marked, as: :boolean, label: 'Спонсор (сота на аватаре до конца года)' if current_user.admin?
     end
     f.actions
   end
