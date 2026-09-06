@@ -47,6 +47,12 @@ module API
         head :ok
       end
 
+      # Data format json:
+      # { "token": string }
+      def validate
+        head :ok
+      end
+
       private
 
       def find_activity!

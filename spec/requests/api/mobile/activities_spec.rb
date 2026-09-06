@@ -88,4 +88,40 @@ RSpec.describe '/api/mobile/activities' do
       it { expect(response).to have_http_status :not_found }
     end
   end
+
+  describe '/validate' do
+    subject(:send_request) { post(api_mobile_activities_validate_url, params: { token: }, as: :json) }
+
+    it 'accepts a current unpublished activity token' do
+      send_request
+      expect(response).to have_http_status :ok
+    end
+
+    context 'with invalid token' do
+      let(:token) { 'invalid' }
+
+      it 'returns not found' do
+        send_request
+        expect(response).to have_http_status :not_found
+      end
+    end
+
+    context 'when activity is not today' do
+      let(:activity_date) { Date.yesterday }
+
+      it 'returns unprocessable content' do
+        send_request
+        expect(response).to have_http_status :unprocessable_content
+      end
+    end
+
+    context 'when activity is published' do
+      before { activity.update!(published: true) }
+
+      it 'returns not found' do
+        send_request
+        expect(response).to have_http_status :not_found
+      end
+    end
+  end
 end

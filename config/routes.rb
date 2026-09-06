@@ -101,6 +101,7 @@ Rails.application.routes.draw do
       post 'activities/stopwatch', to: 'activities#stopwatch'
       post 'activities/live', to: 'activities#live'
       post 'activities/scanner', to: 'activities#scanner'
+      post 'activities/validate', to: 'activities#validate'
     end
   end
 
