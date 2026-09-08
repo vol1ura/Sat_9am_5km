@@ -39,6 +39,29 @@ RSpec.describe Athletes::Reuniter, type: :service do
 
       it { is_expected.to be false }
     end
+
+    context 'when collection is scoped to registered athletes' do
+      let(:event) { create(:event) }
+      let!(:email_athlete) { create(:athlete, user: email_user, parkrun_code: nil) }
+      let!(:telegram_athlete) { create(:athlete, user: telegram_user, parkrun_code: 1_682_225, event: event) }
+      let(:collection) { Athlete.where(id: ids).where.not(user_id: nil) }
+
+      it 'destroys the unlinked athlete and copies attributes' do
+        expect(service).to be true
+        expect(Athlete).not_to exist(id: telegram_athlete.id)
+        expect(email_athlete.reload).to have_attributes(parkrun_code: 1_682_225, event_id: event.id)
+      end
+    end
+
+    context 'when grabbing attributes fails after merging users' do
+      before { stub_const('Athletes::Reuniter::SKIPPED_ATTRIBUTES', []) }
+
+      it 'rolls back the telegram user destroy' do
+        expect(service).to be false
+        expect(User).to exist(id: telegram_user.id)
+        expect(Athlete).to exist(id: telegram_athlete.id)
+      end
+    end
   end
 
   context 'when reuniting athletes with two email users' do
