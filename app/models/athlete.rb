@@ -88,6 +88,7 @@ class Athlete < ApplicationRecord
 
   before_save :remove_name_extra_spaces, if: :will_save_change_to_name?
   before_destroy(prepend: true) { results.update_all personal_best: false, first_run: false }
+  before_destroy { Club.where(id: club_id).touch_all if club_id }
   after_save { Club.where(id: saved_change_to_club_id.compact).touch_all if saved_change_to_club_id? }
   after_commit :refresh_home_trophies, if: :saved_change_to_event_id?
 
