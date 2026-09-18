@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
+russia = Country.create!(code: 'ru')
+
 user = User.create!(
   telegram_id: ENV['DEV_TELEGRAM_ID'],
   role: 0,
   first_name: 'John',
   last_name: 'Doe',
+  country: russia,
 )
-
-russia = Country.create!(code: 'ru')
 
 kuzminki = Event.create!(
   name: 'Кузьминки',

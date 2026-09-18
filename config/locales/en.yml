@@ -51,6 +51,7 @@ en:
           admin: admin
         note: note
         telegram_user: telegram
+        country: country
         athlete: participant
         image: photo
         phone: phone

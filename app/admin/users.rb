@@ -2,6 +2,7 @@
 
 ActiveAdmin.register User do
   actions :all, except: %i[new create]
+  includes :country
 
   menu if: proc { current_user.admin? }
 
@@ -16,6 +17,7 @@ ActiveAdmin.register User do
   filter :last_name
   filter :telegram_user
   filter :email
+  filter :country
 
   scope :all
   scope :admin
@@ -33,6 +35,7 @@ ActiveAdmin.register User do
       column :note
     end
     column :role if current_user.super_admin?
+    column :country
     column :created_at
     actions
   end

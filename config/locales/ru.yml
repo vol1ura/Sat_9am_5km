@@ -57,6 +57,7 @@ ru:
           admin: админ
         note: примечание
         telegram_user: телеграм
+        country: страна
         athlete: участник
         image: фото
         phone: телефон

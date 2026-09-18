@@ -87,7 +87,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :internal do
-      resource :user, only: :create do
+      resource :user, only: [] do
         post :auth_link, on: :member
       end
       resource :athlete, only: :update

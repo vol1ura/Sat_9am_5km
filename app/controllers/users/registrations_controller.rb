@@ -12,6 +12,7 @@ module Users
       build_resource(sign_up_params)
       resource.password = SecureRandom.hex(16)
       resource.build_athlete if resource.athlete.blank?
+      resource.country = Country.find_by(code: top_level_domain)
 
       resource.validate
       collect_custom_errors

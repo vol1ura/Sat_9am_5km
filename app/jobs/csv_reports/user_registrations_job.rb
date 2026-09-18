@@ -8,9 +8,9 @@ module CsvReports
       SELECT
         users.created_at::date AS date,
         COUNT(*) AS total_count,
-        COUNT(*) FILTER (WHERE ec.code = 'ru' OR cc.code = 'ru') AS ru_count,
-        COUNT(*) FILTER (WHERE ec.code = 'by' OR cc.code = 'by') AS by_count,
-        COUNT(*) FILTER (WHERE ec.code = 'rs' OR cc.code = 'rs') AS rs_count,
+        COUNT(*) FILTER (WHERE countries.code = 'ru') AS ru_count,
+        COUNT(*) FILTER (WHERE countries.code = 'by') AS by_count,
+        COUNT(*) FILTER (WHERE countries.code = 'rs') AS rs_count,
         COUNT(*) FILTER (WHERE a.parkrun_code IS NOT NULL) AS parkrun_count,
         COUNT(*) FILTER (WHERE a.fiveverst_code IS NOT NULL) AS fiveverst_count,
         COUNT(*) FILTER (WHERE a.runpark_code IS NOT NULL) AS runpark_count,
@@ -31,11 +31,8 @@ module CsvReports
           )
         ) AS with_volunteering_count
       FROM users
+      LEFT JOIN countries ON countries.id = users.country_id
       LEFT JOIN athletes a ON a.user_id = users.id
-      LEFT JOIN events e ON e.id = a.event_id
-      LEFT JOIN clubs c ON c.id = a.club_id
-      LEFT JOIN countries ec ON ec.id = e.country_id
-      LEFT JOIN countries cc ON cc.id = c.country_id
       WHERE users.created_at::date >= ? AND users.created_at::date <= ?
       GROUP BY users.created_at::date
       ORDER BY date DESC

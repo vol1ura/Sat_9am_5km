@@ -57,6 +57,7 @@ sr:
           admin: admin
         note: napomena
         telegram_user: telegram
+        country: država
         athlete: sportista
         password: lozinka
         remember_me: Zapamti me

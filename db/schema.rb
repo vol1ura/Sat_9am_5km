@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_17_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -249,6 +249,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
     t.datetime "confirmation_sent_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
+    t.bigint "country_id"
     t.datetime "created_at", null: false
     t.text "disabled_notifications", default: [], null: false, array: true
     t.string "email"
@@ -275,6 +276,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
     t.datetime "updated_at", null: false
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["promotions"], name: "index_users_on_promotions", using: :gin
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -319,6 +321,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_120000) do
   add_foreign_key "results", "athletes", on_delete: :nullify
   add_foreign_key "trophies", "athletes"
   add_foreign_key "trophies", "badges"
+  add_foreign_key "users", "countries", on_delete: :nullify
   add_foreign_key "volunteering_positions", "events"
   add_foreign_key "volunteers", "activities"
   add_foreign_key "volunteers", "athletes"

@@ -33,6 +33,23 @@ RSpec.describe '/user' do
         )
         expect(user.athlete.gender).to eq 'male'
       end
+
+      it 'saves the default country when host has no country TLD' do
+        post user_registration_path, params: valid_params
+        expect(User.last.country).to eq Country.default
+      end
+    end
+
+    context 'when registering from a country domain' do
+      let!(:serbia) { Country.create!(code: 'rs') }
+
+      it 'saves the country of the registration domain' do
+        expect do
+          post user_registration_path, params: valid_params, headers: { host: 's95.rs' }
+        end.to change(User, :count).by(1)
+
+        expect(User.last.country).to eq serbia
+      end
     end
 
     context 'without policy_accepted' do

@@ -6,6 +6,7 @@ attributes_table_for user do
   row(:email) { |u| u.email || u.unconfirmed_email }
   row(:phone) { |u| u.phone.present? }
   row(:telegram_user) { telegram_link it }
+  row :country
   row :created_at
   if current_user.admin?
     row :role
