@@ -13,4 +13,12 @@ RSpec.describe Notification::ActivityAlertJob do
     described_class.perform_now(activity.id, %w[director results_handler], 'test')
     expect(Notification::User::Message).to have_received(:call).twice
   end
+
+  it 'skips volunteers without user' do
+    create(:volunteer, activity: activity, athlete: create(:athlete), role: 'timer')
+
+    expect { described_class.perform_now(activity.id, %w[director results_handler timer], 'test') }
+      .not_to raise_error
+    expect(Notification::User::Message).to have_received(:call).twice
+  end
 end
