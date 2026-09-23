@@ -2,7 +2,11 @@
 
 module CsvReports
   class UserRegistrationsJob < BaseJob
-    HEADERS = %w[Date TotalNew Russia Belarus Serbia ParkrunID 5verstID RunParkID WithResult WithVolunteering].freeze
+    HEADERS = %w[
+      date total_count ru_count by_count rs_count kz_count
+      parkrun_count fiveverst_count runpark_count
+      with_results_count with_volunteering_count
+    ].freeze
 
     SQL_QUERY = <<~SQL.squish
       SELECT
@@ -11,6 +15,7 @@ module CsvReports
         COUNT(*) FILTER (WHERE countries.code = 'ru') AS ru_count,
         COUNT(*) FILTER (WHERE countries.code = 'by') AS by_count,
         COUNT(*) FILTER (WHERE countries.code = 'rs') AS rs_count,
+        COUNT(*) FILTER (WHERE countries.code = 'kz') AS kz_count,
         COUNT(*) FILTER (WHERE a.parkrun_code IS NOT NULL) AS parkrun_count,
         COUNT(*) FILTER (WHERE a.fiveverst_code IS NOT NULL) AS fiveverst_count,
         COUNT(*) FILTER (WHERE a.runpark_code IS NOT NULL) AS runpark_count,
@@ -47,7 +52,7 @@ module CsvReports
         user_id,
         file: tempfile,
         filename: "user_registrations_#{Time.zone.now.to_i}.csv",
-        caption: "Отчёт по регистрациям пользователей с #{I18n.l(@from_date)} по #{I18n.l(@till_date)}",
+        caption: "User registrations report from #{I18n.l(@from_date)} till #{I18n.l(@till_date)}",
       )
     rescue StandardError => e
       Rollbar.error e, user_id:
@@ -58,12 +63,6 @@ module CsvReports
 
     private
 
-    def generate_row(stats)
-      %i[
-        date total_count ru_count by_count rs_count
-        parkrun_count fiveverst_count runpark_count
-        with_results_count with_volunteering_count
-      ].map { stats.send it }
-    end
+    def generate_row(stats) = HEADERS.map { stats.public_send it }
   end
 end
