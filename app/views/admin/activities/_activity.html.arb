@@ -49,12 +49,14 @@ panel 'Протокол' do
   end
 end
 
-incorrect_running_volunteers_ids = activity.volunteers.incorrect_on_running_positions.ids
+incorrect_volunteer_ids =
+  activity.volunteers.incorrect_on_running_positions.ids +
+  activity.volunteers.incorrect_on_non_running_positions.ids
 
 panel 'Волонтёры' do
   table_for(
     activity.volunteers_roster.includes(athlete: :event),
-    row_class: ->(v) { 'athlete-error' if incorrect_running_volunteers_ids.include?(v.id) },
+    row_class: ->(v) { 'athlete-error' if incorrect_volunteer_ids.include?(v.id) },
   ) do
     column(:role) { |v| human_volunteer_role v.role }
     column('QR-ID') { |v| athlete_code_id v.athlete }

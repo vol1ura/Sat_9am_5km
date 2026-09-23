@@ -1413,6 +1413,9 @@ ru:
     incorrect_running_volunteers: |
       *Внимание!* В забеге ID=%{activity_id} (%{activity_date}) волонтёр *%{athlete_name}* (ID=%{athlete_code}) стоит на
       беговой позиции, однако при этом он без результата в протоколе. Пожалуйста, исправьте это.
+    incorrect_non_running_volunteers: |
+      *Внимание!* В забеге ID=%{activity_id} (%{activity_date}) волонтёр *%{athlete_name}* (ID=%{athlete_code}) стоит на
+      небеговой позиции, однако в этот же день у него есть результат. Пожалуйста, исправьте это.
   shared:
     barcode_modal:
       close: Закрыть

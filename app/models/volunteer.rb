@@ -40,6 +40,21 @@ class Volunteer < ApplicationRecord
       .where(volunteer_results: { id: nil })
   end
 
+  def self.incorrect_on_non_running_positions
+    where(role: %i[marshal timer bike_leader])
+      .where(<<~SQL.squish)
+        EXISTS (
+          SELECT 1
+          FROM results r
+          INNER JOIN activities result_activities ON result_activities.id = r.activity_id
+          INNER JOIN activities volunteer_activities ON volunteer_activities.id = volunteers.activity_id
+          WHERE r.athlete_id = volunteers.athlete_id
+            AND result_activities.date = volunteer_activities.date
+            AND result_activities.published = TRUE
+        )
+      SQL
+  end
+
   private
 
   def more_than_one_volunteering

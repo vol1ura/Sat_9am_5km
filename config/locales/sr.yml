@@ -1395,6 +1395,9 @@ sr:
     incorrect_running_volunteers: |
       *Pažnja!* Događaj ID=%{activity_id} (%{activity_date}) ima volontera *%{athlete_name}* (ID=%{athlete_code}) na trkačkoj poziciji,
       međutim on nema rezultat u protokolu. Molimo vas da ispravite ovo.
+    incorrect_non_running_volunteers: |
+      *Pažnja!* Događaj ID=%{activity_id} (%{activity_date}) ima volontera *%{athlete_name}* (ID=%{athlete_code})
+      na netrkačkoj poziciji, međutim istog dana ima rezultat. Molimo vas da ispravite ovo.
   shared:
     barcode_modal:
       close: Zatvori

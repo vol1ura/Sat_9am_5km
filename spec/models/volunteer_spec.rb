@@ -27,6 +27,37 @@ RSpec.describe Volunteer do
     end
   end
 
+  describe '.incorrect_on_non_running_positions' do
+    let(:date) { 1.week.ago.to_date }
+    let(:volunteer_activity) { create(:activity, published: true, date: date) }
+    let(:result_activity) { create(:activity, published: true, date: date) }
+    let(:incorrect) { create(:volunteer, activity: volunteer_activity, athlete: create(:athlete), role: :marshal) }
+    let(:same_activity_volunteer) do
+      create(:volunteer, activity: volunteer_activity, athlete: create(:athlete), role: :timer)
+    end
+
+    before do
+      create(:result, activity: result_activity, athlete: incorrect.athlete)
+      create(:result, activity: volunteer_activity, athlete: same_activity_volunteer.athlete)
+
+      other_date_athlete = create(:athlete)
+      create(:volunteer, activity: volunteer_activity, athlete: other_date_athlete, role: :bike_leader)
+      create(:result, activity: create(:activity, published: true, date: date - 1.week), athlete: other_date_athlete)
+
+      unpublished_athlete = create(:athlete)
+      create(:volunteer, activity: volunteer_activity, athlete: unpublished_athlete, role: :marshal)
+      create(:result, activity: create(:activity, published: false, date: date), athlete: unpublished_athlete)
+
+      running_role_athlete = create(:athlete)
+      create(:volunteer, activity: volunteer_activity, athlete: running_role_athlete, role: :pacemaker)
+      create(:result, activity: result_activity, athlete: running_role_athlete)
+    end
+
+    it 'returns volunteers on non-running positions with a result on the same date' do
+      expect(described_class.incorrect_on_non_running_positions).to contain_exactly(incorrect, same_activity_volunteer)
+    end
+  end
+
   describe 'validation' do
     subject(:volunteer) { described_class.new }
 

@@ -52,7 +52,7 @@ module CsvReports
         user_id,
         file: tempfile,
         filename: "user_registrations_#{Time.zone.now.to_i}.csv",
-        caption: "User registrations report from #{I18n.l(@from_date)} till #{I18n.l(@till_date)}",
+        caption: "Отчёт по регистрациям пользователей с #{I18n.l(@from_date)} по #{I18n.l(@till_date)}",
       )
     rescue StandardError => e
       Rollbar.error e, user_id:

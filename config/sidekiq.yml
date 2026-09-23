@@ -67,6 +67,10 @@
       cron: "0 12 * * SUN"
       class: "Notification::IncorrectRunningVolunteersJob"
       queue: low
+    incorrect_non_running_volunteers:
+      cron: "15 12 * * SUN"
+      class: "Notification::IncorrectNonRunningVolunteersJob"
+      queue: low
     current_week_processing:
       cron: "0 18 * * SUN"
       class: CurrentWeekProcessingJob
