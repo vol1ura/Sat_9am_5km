@@ -87,10 +87,10 @@ export function pieChartOptions({
       ...legend,
       ...(showCountInLegend
         ? {
-            formatter: (seriesName, opts) => (
-              `${seriesName} (${formatCount(opts.w.globals.series[opts.seriesIndex])})`
-            ),
-          }
+          formatter: (seriesName, opts) => (
+            `${seriesName} (${formatCount(opts.w.globals.series[opts.seriesIndex])})`
+          ),
+        }
         : {}),
     },
     dataLabels: {

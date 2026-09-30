@@ -28,8 +28,8 @@ RSpec.describe '/athletes/:athlete_id/statistics' do
       let(:event) { create(:event) }
 
       before do
-        create(:result, athlete:, activity_params: { event: })
-        create(:volunteer, athlete:, activity_params: { event: })
+        create(:result, athlete: athlete, activity_params: { event: })
+        create(:volunteer, athlete: athlete, activity_params: { event: })
 
         get total_events_athlete_statistics_url(athlete_id: athlete.id)
       end
