@@ -1002,7 +1002,7 @@ ru:
       total_results: всего пробежек
       total_volunteering: всего волонтёрств
       total_trophies: всего наград
-      total_events: посещённые мероприятия
+      total_events: посетил локаций
       personal_best: личный рекорд С95 (ЛР)
       best_position: Топ-5 мест
       no_results: Пока нет результатов.
@@ -1045,7 +1045,6 @@ ru:
       duels: Дуэли
       duels_description: Сравнивайте свои результаты с друзьями на одинаковых забегах
       view_duels: Посмотреть дуэли
-      personal_bests_section: личные рекорды на других дистанциях
       distance: Дистанция
       personal_best: Личный рекорд (ЛР)
       pb: ЛР
@@ -1056,6 +1055,10 @@ ru:
       prediction_hint: Прогноз даётся на основе лучшего результата в забегах С95 за последние 3 месяца. Результат возможен только при условии выполнения тренировок, соответствующих конкретной дистанции
       no_personal_bests: Личные рекорды не указаны.
       no_predictions: Недостаточно данных для прогноза (нужно минимум 3 результата за последние 3 месяца)
+    summary:
+      total_events: Посещённые локации
+      trophies: Награды
+      personal_bests_section: Личные рекорды на других дистанциях
     statistics:
       volunteering_chart:
         h_index: h-индекс

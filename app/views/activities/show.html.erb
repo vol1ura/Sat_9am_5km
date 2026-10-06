@@ -12,7 +12,7 @@
   <%= sanitized_text @activity.description %>
 <% end %>
 
-<div class="data-table-shell mb-6">
+<div class="data-table-shell mt-4 mb-6">
   <ul class="divide-y divide-line bg-surface text-sm">
     <li class="flex items-center gap-3 px-2 py-2 sm:px-3">
       <%= render Ui::BadgeComponent.new(variant: :brand, label: @results.load.size) %>

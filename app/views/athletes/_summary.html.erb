@@ -39,7 +39,7 @@
     <% end %>
     <% if @total_results.positive? && (@athlete.personal_best_10k || @athlete.personal_best_half_marathon || @athlete.personal_best_marathon || @time_predictions.any?) %>
       <%= render Ui::CardComponent.new do %>
-        <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.personal_bests_section') %></h3>
+        <h3 class="mb-3 font-display font-semibold text-ink"><%= t '.personal_bests_section' %></h3>
         <div class="data-table-inset">
           <table class="data-table data-table--compact">
             <thead>
@@ -71,13 +71,13 @@
       <% end %>
     <% end %>
     <%= render Ui::CardComponent.new(class: 'md:col-span-2') do %>
-      <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.total_events') %></h3>
+      <h3 class="mb-3 font-display font-semibold text-ink"><%= t '.total_events' %></h3>
       <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete), loading: 'lazy' do %>
         <%= render '/loading_indicator' %>
       <% end %>
     <% end %>
     <%= render Ui::CardComponent.new(class: 'md:col-span-2') do %>
-      <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.total_trophies') %></h3>
+      <h3 class="mb-3 font-display font-semibold text-ink"><%= t '.trophies' %></h3>
       <% if @total_trophies.positive? %>
         <%= turbo_frame_tag 'total_trophies', src: total_trophies_athlete_statistics_path(@athlete), loading: 'lazy' do %>
           <%= render '/loading_indicator' %>

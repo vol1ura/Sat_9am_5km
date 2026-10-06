@@ -1000,7 +1000,7 @@ sr:
       total_results: ukupno trčanja
       total_volunteering: ukupno volontiranja
       total_trophies: ukupno trofeja
-      total_events: učestvovano na događaja
+      total_events: posetio lokacije
       personal_best: lični rekord S95 (LR)
       pb: LR
       best_position: Top 5 mesta
@@ -1036,16 +1036,15 @@ sr:
       duels_description: Poredite svoje rezultate sa prijateljima na istim trkama
       view_duels: Pogledaj duele
       table:
-        pb: PB
+        pb: LR
         date: Datum
         time: Vreme
         pace: Tempo
         place: Mesto
         event: Događaj
         role: Uloga
-      personal_bests_section: Lični rekordi na drugim dužinama
       distance: Dužina
-      personal_best: PB
+      personal_best: Lični rekord (LR)
       predicted_time: Prognoza
       personal_best_10k: 10 km
       personal_best_half_marathon: Polmaraton
@@ -1054,6 +1053,10 @@ sr:
       no_personal_bests: Lični rekordi nisu navedeni.
       no_predictions: Nedovoljno podataka za prognozu (potrebno je minimum 3 rezultata za posljednje 3 mjeseca)
       recent_results_chart: Nedavni rezultati
+    summary:
+      total_events: Posetio lokacije
+      trophies: Trofeje
+      personal_bests_section: Lični rekordi na drugim dužinama
     statistics:
       volunteering_chart:
         h_index: h-indeks

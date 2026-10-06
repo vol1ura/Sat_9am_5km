@@ -991,7 +991,6 @@ en:
       duels: Duels
       duels_description: Compare your results with friends on the same runs
       view_duels: View Duels
-      personal_bests_section: personal bests on other distances
       distance: Distance
       personal_best: PB
       predicted_time: Prediction
@@ -1002,6 +1001,10 @@ en:
       no_personal_bests: Personal bests not specified.
       no_predictions: Insufficient data for prediction (need at least 3 results in the last 3 months)
       recent_results_chart: Recent results
+    summary:
+      total_events: Visited events
+      trophies: Badges
+      personal_bests_section: Personal bests on other distances
     statistics:
       volunteering_chart:
         h_index: h-index
