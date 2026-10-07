@@ -630,7 +630,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.2)
   capistrano-sidekiq
   capistrano3-puma (~> 8.1.0)
-  dalli
+  dalli (< 4)
   dartsass-sprockets
   database_consistency
   devise (~> 5.0)

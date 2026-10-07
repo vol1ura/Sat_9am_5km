@@ -15,7 +15,7 @@ gem 'active_storage_validations'
 gem 'audited'
 gem 'bootsnap', require: false
 gem 'cancancan'
-gem 'dalli'
+gem 'dalli', '< 4'
 gem 'dartsass-sprockets'
 gem 'devise', '~> 5.0'
 gem 'devise-i18n'
