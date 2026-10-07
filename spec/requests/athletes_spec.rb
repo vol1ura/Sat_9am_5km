@@ -65,6 +65,24 @@ RSpec.describe '/athletes' do
     end
   end
 
+  describe 'GET /athletes/:id/summary' do
+    let(:athlete) { create(:athlete) }
+
+    it 'updates subnav and tab via turbo stream' do
+      get summary_athlete_url(athlete), as: :turbo_stream
+
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include('target="athlete_subnav"')
+      expect(response.body).to include('target="athlete_tab"')
+    end
+
+    it 'redirects HTML requests to the athlete profile' do
+      get summary_athlete_url(athlete)
+
+      expect(response).to redirect_to(athlete_url(athlete))
+    end
+  end
+
   describe 'GET /athletes/:id/results' do
     let(:result) { create(:result) }
 
@@ -74,6 +92,12 @@ RSpec.describe '/athletes' do
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include('target="athlete_subnav"')
       expect(response.body).to include('target="athlete_tab"')
+    end
+
+    it 'redirects HTML requests to the athlete profile' do
+      get results_athlete_url(result.athlete)
+
+      expect(response).to redirect_to(athlete_url(result.athlete))
     end
   end
 
@@ -87,6 +111,12 @@ RSpec.describe '/athletes' do
       expect(response.body).to include('target="athlete_subnav"')
       expect(response.body).to include('target="athlete_tab"')
     end
+
+    it 'redirects HTML requests to the athlete profile' do
+      get volunteering_athlete_url(volunteer.athlete)
+
+      expect(response).to redirect_to(athlete_url(volunteer.athlete))
+    end
   end
 
   describe 'GET /athletes/:id/friends' do
@@ -99,6 +129,12 @@ RSpec.describe '/athletes' do
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include('target="athlete_subnav"')
       expect(response.body).to include('target="athlete_tab"')
+    end
+
+    it 'redirects HTML requests to the athlete profile' do
+      get friends_athlete_url(athlete)
+
+      expect(response).to redirect_to(athlete_url(athlete))
     end
   end
 

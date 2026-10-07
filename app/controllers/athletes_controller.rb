@@ -2,6 +2,7 @@
 
 class AthletesController < ApplicationController
   before_action :set_athlete_profile, only: %i[show summary results volunteering friends]
+  before_action :redirect_html_athlete_tab, only: %i[summary results volunteering friends]
 
   def index
     query = params[:q].to_s.gsub(/[^[:alnum:][:blank:]\-']/, '').strip
@@ -32,24 +33,24 @@ class AthletesController < ApplicationController
   def summary
     @current_tab = :summary
     load_summary_data
-    render_athlete_tab
+    render :swap_tab
   end
 
   def results
     @current_tab = :results
     @results = results_with_event.load
-    render_athlete_tab
+    render :swap_tab
   end
 
   def volunteering
     @current_tab = :volunteering
     @volunteering = volunteering_with_event.load
-    render_athlete_tab
+    render :swap_tab
   end
 
   def friends
     @current_tab = :friends
-    render_athlete_tab
+    render :swap_tab
   end
 
   def best_result
@@ -94,10 +95,8 @@ class AthletesController < ApplicationController
     @top_position_counts = published_results.group(:position).order(:position).count.first(5).to_h
   end
 
-  def render_athlete_tab
-    respond_to do |format|
-      format.turbo_stream { render :swap_tab }
-    end
+  def redirect_html_athlete_tab
+    redirect_to athlete_path(@athlete) unless request.format.turbo_stream?
   end
 
   def results_with_event
