@@ -97,6 +97,7 @@
   --radius-xl: 1.25rem;
 
   --bottomnav-height: 3.5rem;
+  --header-height: calc(3.5rem + 1px + env(safe-area-inset-top, 0px));
 }
 
 .dark {
@@ -272,21 +273,55 @@
     color: transparent;
   }
 
+  .hero-section {
+    /* Fill the first screen: header above, bottom nav overlays on small viewports. */
+    min-height: calc(100svh - var(--header-height) - var(--bottomnav-height) - env(safe-area-inset-bottom, 0px));
+    min-height: calc(100dvh - var(--header-height) - var(--bottomnav-height) - env(safe-area-inset-bottom, 0px));
+  }
+
+  @media (width >= 768px) {
+    .hero-section {
+      min-height: calc(100svh - var(--header-height));
+      min-height: calc(100dvh - var(--header-height));
+    }
+  }
+
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+
+  @media (width < 1024px) {
+    .hero-image {
+      inset: auto;
+      left: 50%;
+      bottom: 0;
+      height: 120%;
+      width: 120%;
+      max-width: none;
+      transform: translateX(-50%);
+    }
+  }
+
   .hero-overlay {
     background-image: linear-gradient(
-      to bottom right,
-      rgb(28 28 40 / 90%),
-      rgb(42 41 81 / 55%),
-      rgb(196 82 106 / 28%)
+      to bottom,
+      rgb(28 28 40 / 58%) 0%,
+      rgb(42 41 81 / 36%) 42%,
+      rgb(28 28 40 / 16%) 100%
     );
   }
 
   .dark .hero-overlay {
     background-image: linear-gradient(
-      to bottom right,
-      rgb(18 18 26 / 93%),
-      rgb(42 41 81 / 62%),
-      rgb(163 68 86 / 32%)
+      to bottom,
+      rgb(18 18 26 / 66%) 0%,
+      rgb(42 41 81 / 42%) 42%,
+      rgb(18 18 26 / 22%) 100%
     );
   }
 
