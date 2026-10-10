@@ -1,20 +1,13 @@
 <div>
-  <div class="flex items-center justify-between gap-3">
-    <h4 class="flex min-w-0 items-center gap-2 font-display font-semibold text-ink">
-      <% if @icon.present? %>
-        <i class="fa-solid fa-<%= @icon %> text-brand" aria-hidden="true"></i>
-      <% end %>
-      <span class="truncate"><%= @title %></span>
-    </h4>
-    <div class="flex shrink-0 items-center gap-2">
-      <span class="font-display font-semibold tabular-nums text-ink"><%= @current %></span>
-      <% if @recent %>
-        <%= render Ui::BadgeComponent.new(variant: :success, label: t('.recent_increment')) %>
-      <% end %>
-    </div>
-  </div>
+  <%= render Ui::CardMetricHeaderComponent.new(
+        title: @title,
+        value: @current,
+        increment: (@recent ? t('.recent_increment') : nil),
+        icon: @icon,
+        heading: :h4,
+      ) %>
 
-  <div class="mt-3 flex flex-wrap gap-2">
+  <div class="flex flex-wrap gap-2">
     <% @thresholds.each do |threshold| %>
       <span class="<%= threshold_classes(threshold) %>"><%= threshold %></span>
     <% end %>

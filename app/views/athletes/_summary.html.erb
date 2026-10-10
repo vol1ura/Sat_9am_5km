@@ -31,7 +31,10 @@
         <% end %>
       <% end %>
       <%= render Ui::CardComponent.new do %>
-        <h3 class="mb-3 font-display font-semibold text-ink"><%= t('athletes.show.personal_best') %></h3>
+        <%= render Ui::CardMetricHeaderComponent.new(
+              title: t('athletes.show.personal_best'),
+              value: @personal_best&.time_string,
+            ) %>
         <%= turbo_frame_tag 'personal_bests', src: personal_bests_athlete_statistics_path(@athlete), loading: 'lazy' do %>
           <%= render '/loading_indicator' %>
         <% end %>
@@ -71,13 +74,21 @@
       <% end %>
     <% end %>
     <%= render Ui::CardComponent.new(class: 'md:col-span-2') do %>
-      <h3 class="mb-3 font-display font-semibold text-ink"><%= t '.total_events' %></h3>
+      <%= render Ui::CardMetricHeaderComponent.new(
+            title: t('.total_events'),
+            value: @total_events_count,
+            increment: ('+1' if @recent_events),
+          ) %>
       <%= turbo_frame_tag 'total_events', src: total_events_athlete_statistics_path(@athlete), loading: 'lazy' do %>
         <%= render '/loading_indicator' %>
       <% end %>
     <% end %>
     <%= render Ui::CardComponent.new(class: 'md:col-span-2') do %>
-      <h3 class="mb-3 font-display font-semibold text-ink"><%= t '.trophies' %></h3>
+      <%= render Ui::CardMetricHeaderComponent.new(
+            title: t('.trophies'),
+            value: @total_trophies,
+            increment: ("+#{@recent_trophies_count}" if @recent_trophies_count.positive?),
+          ) %>
       <% if @total_trophies.positive? %>
         <%= turbo_frame_tag 'total_trophies', src: total_trophies_athlete_statistics_path(@athlete), loading: 'lazy' do %>
           <%= render '/loading_indicator' %>

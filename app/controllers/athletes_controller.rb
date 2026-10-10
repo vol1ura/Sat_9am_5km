@@ -21,12 +21,6 @@ class AthletesController < ApplicationController
   def show
     @current_tab = :summary
     load_summary_data
-    @personal_best = published_results
-      .where(personal_best: true)
-      .order(:total_time, :date)
-      .select(:total_time, 'date AS activity_date')
-      .first
-    @total_events_count = @athlete.first_event_visit_dates.size
     @barcode = BarcodeService.call("A#{@athlete.code}", module_size: 8)
   end
 
@@ -82,17 +76,34 @@ class AthletesController < ApplicationController
     @total_results = published_results.count
     @total_vol = @athlete.volunteering.count
     @friends_count = @athlete.friendships.count
-    @has_friends_tab = @friends_count.positive? || @athlete.followers.exists?
+    @followers_count = @athlete.followers.count
+    @has_friends_tab = @friends_count.positive? || @followers_count.positive?
   end
 
   def load_summary_data
     @recent_results = results_with_event.limit(10).load
     @recent_volunteering = volunteering_with_event.limit(10).load
     @total_trophies = @athlete.trophies.size
+    @recent_trophies_count = recent_trophies_count
+    @personal_best = published_results
+      .where(personal_best: true)
+      .order(:total_time, :date)
+      .select(:total_time, 'date AS activity_date')
+      .first
+    first_event_dates = @athlete.first_event_visit_dates
+    @total_events_count = first_event_dates.size
+    @recent_events = first_event_dates.any? { |_event_id, date| date >= 6.days.ago.to_date }
     @time_predictions = Athletes::TimePredictor.call(@athlete)
     return if @total_results.zero?
 
     @top_position_counts = published_results.group(:position).order(:position).count.first(5).to_h
+  end
+
+  def recent_trophies_count
+    @athlete.trophies.joins(:badge).where(
+      'COALESCE(trophies.date, badges.received_date, trophies.created_at::date) >= ?',
+      6.days.ago.to_date,
+    ).count
   end
 
   def redirect_html_athlete_tab

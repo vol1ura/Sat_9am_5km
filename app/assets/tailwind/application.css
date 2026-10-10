@@ -630,8 +630,8 @@
   .trophy-container .trophy.active {
     animation: trophy-glow 2.5s ease-in-out infinite;
     filter:
-      drop-shadow(0 0 2px color-mix(in srgb, var(--color-accent) 35%, transparent))
-      drop-shadow(0 0 5px color-mix(in srgb, var(--color-accent) 25%, transparent));
+      drop-shadow(0 0 4px color-mix(in srgb, var(--color-accent) 45%, transparent))
+      drop-shadow(0 0 8px color-mix(in srgb, var(--color-accent) 35%, transparent));
   }
 
   @media (width < 768px) {
@@ -698,6 +698,10 @@
 
   .apexcharts-canvas {
     max-width: 100% !important;
+  }
+
+  .apexcharts-bar-area {
+    clip-path: none !important;
   }
 
   th.sortable {

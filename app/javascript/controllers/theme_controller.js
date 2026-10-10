@@ -5,6 +5,7 @@ import {
   athleteResultsChartThemeUpdateOptions,
   barAccentChartThemeUpdateOptions,
   heatmapThemeUpdateOptions,
+  volunteeringChartThemeUpdateOptions,
   pieChartThemeUpdateOptions,
   sparklineThemeUpdateOptions,
   themeUpdateOptions,
@@ -39,6 +40,8 @@ export default class extends Controller {
         chartOptions = athleteResultsChartThemeUpdateOptions();
       } else if (chartId === 'athlete-positions-chart') {
         chartOptions = barAccentChartThemeUpdateOptions();
+      } else if (chartId === 'volunteering-chart') {
+        chartOptions = volunteeringChartThemeUpdateOptions();
       } else if (chartId === 'h-index-chart') {
         chartOptions = heatmapThemeUpdateOptions();
       } else if (PIE_CHART_IDS.includes(chartId)) {

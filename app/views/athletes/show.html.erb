@@ -47,15 +47,11 @@
   </div>
 </section>
 
-<section class="mb-8 grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+<section class="mb-8 grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-4">
   <%= render Ui::StatComponent.new(label: t('.total_results'), value: @total_results, highlight: @total_results.positive? && @recent_results.first.date.to_date >= recent_since) %>
-  <% if @personal_best %>
-    <%= render Ui::StatComponent.new(label: t('.personal_best'), value: @personal_best.time_string, highlight: @personal_best.activity_date >= recent_since) %>
-  <% end %>
-  <%= render Ui::StatComponent.new(label: t('.total_trophies'), value: @total_trophies) %>
   <%= render Ui::StatComponent.new(label: t('.total_volunteering'), value: @total_vol) %>
   <%= render Ui::StatComponent.new(label: t('.friends'), value: @friends_count) %>
-  <%= render Ui::StatComponent.new(label: t('.total_events'), value: @total_events_count) %>
+  <%= render Ui::StatComponent.new(label: t('.followers'), value: @followers_count) %>
 </section>
 
 <%= turbo_frame_tag 'athlete_tab', class: 'block min-w-0' do %>

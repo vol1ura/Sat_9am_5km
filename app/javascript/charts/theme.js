@@ -112,6 +112,26 @@ export function formatCount(value) {
   return String(Math.round(value));
 }
 
+export function formatIntegerTick(value) {
+  return Number.isInteger(value) ? formatCount(value) : '';
+}
+
+export function integerCountYaxis(overrides = {}) {
+  const { labels: labelOverrides = {}, ...rest } = overrides;
+
+  return {
+    min: 0,
+    decimalsInFloat: 0,
+    stepSize: 1,
+    forceNiceScale: false,
+    ...rest,
+    labels: {
+      formatter: formatIntegerTick,
+      ...labelOverrides,
+    },
+  };
+}
+
 export function barChartOptions({
   id,
   height,
@@ -267,6 +287,17 @@ export function athleteResultsChartThemeUpdateOptions() {
       },
     },
     fill: AREA_ACCENT_FILL,
+  };
+}
+
+export function volunteeringChartThemeUpdateOptions() {
+  const { axisLabels } = apexThemeOptions();
+
+  return {
+    ...themeUpdateOptions(),
+    yaxis: integerCountYaxis({
+      labels: axisLabels,
+    }),
   };
 }
 

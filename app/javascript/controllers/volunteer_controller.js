@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 import ApexCharts from 'apexcharts';
 import { ruLocale } from 'charts/ru';
 import { srLocale } from 'charts/sr';
-import { apexThemeOptions, barChartOptions, chartHeatmapScale, chartLayoutPadding, chartTitleOptions } from 'charts/theme';
+import { apexThemeOptions, barChartOptions, chartHeatmapScale, chartLayoutPadding, chartTitleOptions, integerCountYaxis } from 'charts/theme';
 
 const translations = {
   ru: {
@@ -87,7 +87,7 @@ export default class extends Controller {
       const role = row.querySelector('th').textContent;
 
       const data = [];
-      row.querySelectorAll('td').forEach(td => data.push(td.textContent.trim()));
+      row.querySelectorAll('td').forEach(td => data.push(Number(td.textContent.trim())));
 
       series.push({
         name: role,
@@ -119,6 +119,7 @@ export default class extends Controller {
         }
       }],
       xaxis: { categories },
+      yaxis: integerCountYaxis(),
       legend: {
         position: 'right',
         offsetY: 40,
