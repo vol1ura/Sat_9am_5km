@@ -789,12 +789,12 @@ sr:
         title: Spreman za start?
         description: Registruj se jednom — i svake subote samo dođi u park
     about:
-      description: S95 je otvorena platforma koja objedinjuje nezavisne park trke koje se održavaju prema tri postulata - subota, 9 ujutru, 5 km.
+      description: 'S95 su nezavisna subotnja park trčanja: S — subota, 9 — start u 9:00, 5 — distanca 5 km. Besplatno, za sve, uz zabeležen rezultat.'
       paragraphs:
-        - 'Zamislite: subota, 9 ujutru. Sunce tek počinje da greje, ptice pevaju, a vi… već ste na startu 5-kilometarske staze. Ali ovo nije obična trka — ovo je S95, platforma koja okuplja sve koji vole trčanje, svež vazduh i dobro društvo.'
-        - 'Mnogi su već zavoleli parkrune kao događaje gde trkači i volonteri svake subote započinju dan kretanjem, druženjem i šoljom čaja iz termosa. Ali vremena se menjaju, a tradicije ostaju. Sada postoji S95 — to je čitava zajednica. Ovde možete saznati gde je najbliži trka, koji su volonteri potrebni za narednu subotu, pogledati svoje rezultate (i ponosno se pohvaliti ako ste slučajno oborili lični rekord), kao i pronaći istomišljenike koji takođe smatraju da je subotnje jutro vreme ne za spavanje, već za trčanje i druženje.'
-        - 'I najvažnije — S95 je dostupan svima. Nije bitno ko ste: maratonac sa stotinama medalja ili osoba koja je poslednji put trčala u školi na časovima fizičkog vaspitanja. Ovde nema naknade za učešće, samo „plata“ u vidu dobrog raspoloženja i osmeha. Stazu možete prošetati ili pretrčati tempom koji vam odgovara.'
-        - 'Tako da, ako još uvek niste u toku, S95 nije samo skup simbola, to je stil života, subotnji ritual i prilika da započnete dan nečim zaista kul. Uzmite patike, pozovite prijatelje i pridružite se trkama gde svaki kilometar predstavlja korak ka novim poznanstvima, avanturama ili kul fotografiji za društvene mreže.'
+        - 'S95 se čita ovako: S — subota, 9 — start u devet ujutru, 5 — pet kilometara. To su besplatna nedeljna park trčanja koja volonteri organizuju tokom cele godine za sve koji žele da dođu. Možete trčati, hodati ili pomoći na stazi — sa bilo kakvom pripremom i u bilo kom uzrastu. Rezultat se beleži u jedinstvenom sistemu; posle cilja obično ima i šolja čaja i dobro društvo.'
+        - 'U martu 2022. godine globalni parkrun je obustavio trke u Rusiji. Nismo čekali odluku sa strane: događaje smo nastavili skoro odmah, zatim su se pojavili sopstveni naziv i logo, a potom i otvorena platforma, da tradicija živi dalje. Od tada se S95 razvija kao pokret trkača i volontera sa sopstvenim principima i pravilima, a ne kao filijala tuđeg projekta.'
+        - 'Lokalni timovi najbolje poznaju svoj park i svoje ljude. Zato S95 nema štab sa krutim centralizovanim upravljanjem. Kako se lokacija razvija, odlučuju oni koji organizuju trku: kako privući nove učesnike i volontere, sa kojim gradskim inicijativama sarađivati i slično.'
+        - 'Subotnje jutro u parku je osmišljeno tako da vam bude prijatno da dođete prvi put i da zatim poželite da se vratite. Pre trke — instruktaža i zagrevanje, na stazi — volonteri, uključujući i zatvarača, da svako završi svojim tempom. Posle — čaj i razgovor. Dođite u devet: dovoljne su patike i želja da vikend započnete kretanjem. A ako već trčite sa nama — dovedite prijatelja, prijavite se kao volonter ili svratite u drugi park.'
       events_html: 'Sistem trenutno prikazuje <a href="%{link}">rezultate %{events_count} lokacija</a>: %{events}.'
       s95_abroad:
         title: S95 trke u drugim zemljama
