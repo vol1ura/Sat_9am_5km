@@ -61,7 +61,9 @@ class ClubsController < ApplicationController
 
   def set_club
     @club = Club.find_by(slug: params.expect(:slug).downcase)
-    redirect_to clubs_path, status: :found unless @club
+    return if @club
+
+    request.format.json? ? head(:not_found) : redirect_to(clubs_path, status: :found)
   end
 
   def group_and_count_clubs_for(entity, club_ids:)
