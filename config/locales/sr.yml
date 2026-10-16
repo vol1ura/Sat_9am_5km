@@ -1263,7 +1263,7 @@ sr:
       main_page: Glavna
       live_results: Online rezultati
       timer: Sekundomer
-      disclaimer: Rezultati na ovoj stranici su preliminarni i mogu biti izmenjeni nakon provjere sa finiširanim učesnicima
+      disclaimer: 'Rezultati na ovoj stranici su preliminarni i mogu biti izmenjeni nakon provjere sa finiširanim učesnicima. U koloni Odmak prikazan je odmak od prethodnog učesnika i odmak od lidera.'
     live_results_frame:
       position: Mesto
       time: Vreme

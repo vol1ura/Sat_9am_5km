@@ -134,16 +134,16 @@
           <tr class="bg-info-subtle">
             <td class="cell-num-muted"><%= @total_activities.next %></td>
             <td><%= link_to l(Date.current), live_event_path(@event.code_name) %></td>
-            <td colspan="2">
+            <td colspan="2" class="text-center">
               <%= link_to live_event_path(@event.code_name), class: 'no-underline' do %>
                 <%= render Ui::BadgeComponent.new(variant: :danger) do %>
-                  <i class="fa-solid fa-circle" style="animation: blink 0.8s infinite;"></i>
+                  <i class="fa-solid fa-circle me-1" style="animation: blink 0.8s infinite;"></i>
                   <%= t '.live_streaming' %>
                 <% end %>
               <% end %>
             </td>
             <td colspan="2" class="hidden-on-phone text-ink-muted">
-              <small><%= t '.live_streaming_description' %></small>
+              <%= t '.live_streaming_description' %>
             </td>
           </tr>
         <% end %>

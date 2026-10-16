@@ -9,12 +9,12 @@
       {
         name: safe_join([
           t('.live_results'),
-          tag.i(class: 'fa-solid fa-satellite-dish ms-1 text-danger', style: 'animation: blink 1s infinite;'),
+          tag.i(class: 'fa-solid fa-satellite-dish ms-2 text-danger', style: 'animation: blink 1s infinite;'),
         ]),
         current: true,
       },
     ] %>
 
-<div class="rounded-lg border border-info/20 bg-info-subtle px-4 py-3 text-info"><%= t('.disclaimer') %></div>
+<div class="mb-4 rounded-lg border border-info/20 bg-info-subtle px-4 py-3 text-info"><%= t '.disclaimer' %></div>
 
 <%= render 'live_results_frame', live_results: @event.live_results || {} %>

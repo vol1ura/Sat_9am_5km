@@ -1,7 +1,7 @@
 <%= turbo_frame_tag 'live_results_frame' do %>
   <%= render Ui::CardComponent.new(class: 'h-full border-brand/25 shadow-sm') do |card| %>
     <% card.with_header do %>
-      <section class="text-lg font-semibold">
+      <div class="border-b border-line px-4 py-3 text-lg font-semibold">
         <i class="fa-solid fa-stopwatch text-brand"></i>
         <% if live_results.key?('start_time') %>
           <span class="ms-2 font-mono text-brand"
@@ -13,7 +13,7 @@
         <% else %>
           <span class="ms-2 font-mono text-brand">--:--:--</span>
         <% end %>
-      </section>
+      </div>
     <% end %>
 
     <% if live_results.key?('results') %>

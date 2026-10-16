@@ -1201,7 +1201,7 @@ en:
       main_page: Main Page
       live_results: Live Streaming
       timer: Timer
-      disclaimer: Results on this page are preliminary and may be changed when verified with finished participants
+      disclaimer: 'Results on this page are preliminary and may be changed when verified with finished participants. The Gap column shows the gap to the previous participant and the gap to the leader.'
     live_results_frame:
       position: Position
       time: Time

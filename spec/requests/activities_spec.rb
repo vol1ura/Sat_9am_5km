@@ -16,7 +16,11 @@ RSpec.describe '/activities' do
     let(:athlete_fields) { %i[id name parkrun_code gender] }
 
     it 'renders a successful response' do
-      create(:participating_badge)
+      if Badge.instance_variable_defined?(:@participating_thresholds)
+        Badge.remove_instance_variable(:@participating_thresholds)
+      end
+      create(:participating_badge, type: 'result')
+      create(:participating_badge, type: 'volunteer')
       get activity_url(activity)
 
       expect(response).to be_successful
