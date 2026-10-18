@@ -1,7 +1,7 @@
 <% results_count = @results_count[result.athlete_id] %>
 
 <%= tag.tr data: { gender: result.athlete&.gender } do %>
-  <td class="position cell-num-muted"><%= result.position %></td>
+  <td class="position cell-center text-ink-muted w-10 px-1 whitespace-nowrap sm:w-20 sm:px-3"><%= result.position %></td>
   <td>
     <% if result.athlete_id %>
       <%= link_to result.athlete.name.presence || t('common.nobody'), result.athlete, class: 'athlete-link font-semibold' %>

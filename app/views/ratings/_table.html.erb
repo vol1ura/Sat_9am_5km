@@ -1,6 +1,6 @@
 <% athletes.each_with_index do |athlete, index| %>
   <tr>
-    <td class="cell-num-muted w-9 shrink-0 sm:w-12"><%= ((@page - 1) * RatingsController::PER_PAGE) + index + 1 %></td>
+    <td class="cell-num-muted w-12 shrink-0 sm:w-16"><%= ((@page - 1) * RatingsController::PER_PAGE) + index + 1 %></td>
     <td class="min-w-0"><%= link_to athlete.name, athlete, class: 'athlete-link font-semibold break-words', data: { turbo: false } %></td>
     <td class="cell-num-strong w-14 shrink-0 sm:w-28"><%= athlete.stats.dig(@rating_type, @order) || 0 %></td>
     <td class="hidden-on-phone w-48"><%= link_to athlete.club.name, club_path(athlete.club.slug), data: { turbo: false } if athlete.club %></td>

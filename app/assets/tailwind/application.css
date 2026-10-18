@@ -708,23 +708,19 @@
   }
 
   .data-table .cell-num {
-    @apply text-end tabular-nums;
+    @apply text-end tabular-nums whitespace-nowrap;
   }
 
   .data-table .cell-num-muted {
-    @apply text-end tabular-nums text-ink-muted;
+    @apply text-end tabular-nums whitespace-nowrap text-ink-muted;
   }
 
   .data-table .cell-num-strong {
-    @apply text-end font-medium tabular-nums;
-  }
-
-  .data-table td.cell-num-strong {
-    @apply whitespace-nowrap;
+    @apply text-end font-medium tabular-nums whitespace-nowrap;
   }
 
   .data-table .cell-center {
-    @apply text-center tabular-nums;
+    @apply text-center tabular-nums whitespace-nowrap;
   }
 
   .data-table > tbody {

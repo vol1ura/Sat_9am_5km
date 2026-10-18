@@ -31,7 +31,7 @@
   <table class="data-table sm:table-fixed">
     <thead>
       <tr>
-        <th class="cell-num-muted w-12"><%= t '.position' %></th>
+        <th class="cell-center text-ink-muted w-10 px-1 whitespace-nowrap sm:w-20 sm:px-3"><%= t '.position' %></th>
         <th><%= t '.name' %></th>
         <th class="cell-num-strong"><%= t '.total_time' %></th>
       </tr>
@@ -45,7 +45,7 @@
         </tr>
         <% activity.results.includes(:athlete).where(athlete: { club: @club }).order(:position).each do |result| %>
           <tr>
-            <td class="cell-num-muted"><%= result.position %></td>
+            <td class="cell-center text-ink-muted w-10 px-1 whitespace-nowrap sm:w-20 sm:px-3"><%= result.position %></td>
             <td><%= link_to result.athlete.name, result.athlete, class: 'athlete-link font-semibold' %></td>
             <td class="cell-num-strong"><%= result.time_string %></td>
           </tr>
