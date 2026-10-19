@@ -1384,7 +1384,7 @@ en:
         *5 versts ID:* %{fiveverst_code}
         *RunPark ID:* %{runpark_code}
 
-        If you find inaccuracies, report this to the volunteers of your run or write to @vol1ura
+        If you find inaccuracies, report this to the volunteers of your run or write to %{info_email}
     event_cancellation: |
       %{first_name}, hello!
 

@@ -18,6 +18,7 @@ module Notification
           parkrun_code: athlete.parkrun_code || no_value,
           fiveverst_code: athlete.fiveverst_code || no_value,
           runpark_code: athlete.runpark_code || no_value,
+          info_email: ENV.fetch('INFO_EMAIL'),
         )
       end
 

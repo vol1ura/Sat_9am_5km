@@ -1428,7 +1428,7 @@ sr:
         *5 verst ID:* %{fiveverst_code}
         *RunPark ID:* %{runpark_code}
 
-        U slučaju otkrivanja netačnosti, prijavite to volonterima vaše trke ili pišite @vol1ura
+        U slučaju otkrivanja netačnosti, prijavite to volonterima vaše trke ili pišite na %{info_email}
     event_cancellation: |
       %{first_name}, zdravo!
 
