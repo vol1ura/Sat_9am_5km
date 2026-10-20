@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_17_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_19_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -97,6 +97,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_120000) do
     t.index ["parkzhrun_code"], name: "index_athletes_on_parkzhrun_code", unique: true
     t.index ["runpark_code"], name: "index_athletes_on_runpark_code", unique: true
     t.index ["user_id"], name: "index_athletes_on_user_id", unique: true
+    t.check_constraint "fiveverst_code > 790000000", name: "chk_athletes_fiveverst_code"
+    t.check_constraint "parkrun_code < 770000000", name: "chk_athletes_parkrun_code"
+    t.check_constraint "parkzhrun_code > 690000000", name: "chk_athletes_parkzhrun_code"
+    t.check_constraint "runpark_code > '7000000000'::bigint", name: "chk_athletes_runpark_code"
   end
 
   create_table "audits", force: :cascade do |t|
@@ -229,6 +233,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_120000) do
     t.datetime "updated_at", null: false
     t.index ["activity_id", "position"], name: "index_results_on_activity_id_and_position"
     t.index ["athlete_id", "activity_id"], name: "index_results_on_athlete_id_and_activity_id", unique: true
+    t.check_constraint "\"position\" >= 1", name: "chk_results_position"
   end
 
   create_table "trophies", force: :cascade do |t|
@@ -290,6 +295,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_120000) do
     t.integer "rank", null: false
     t.integer "role", null: false
     t.index ["event_id", "role"], name: "index_volunteering_positions_on_event_id_and_role", unique: true
+    t.check_constraint "number >= 1", name: "chk_volunteering_positions_number"
+    t.check_constraint "rank >= 1", name: "chk_volunteering_positions_rank"
   end
 
   create_table "volunteers", force: :cascade do |t|
