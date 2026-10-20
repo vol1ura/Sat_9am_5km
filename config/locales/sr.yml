@@ -1178,7 +1178,7 @@ sr:
   clubs:
     index:
       description: Tabela klubova sa statistikom o ukupnom broju učesnika, volontera i trčanja
-      how_to_add_new_club_html: 'Da li vaš klub nije na listi? Pišite nam na <a href="mailto:%{mail}?subject=Add a new club (Serbia)" target="_blank" title="Pošaljite nam email">email</a> i dodaćemo ga. U poruci navedite naziv kluba, mali opis i prikačite logo kluba, ako ima.'
+      how_to_add_new_club_html: 'Da li vaš klub nije na listi? Pišite nam na <a href="mailto:%{mail}?subject=Add a new club (Serbia)" target="_blank" title="Pošaljite nam email">email</a>, i dodaćemo ga. U poruci navedite naziv kluba, mali opis i prikačite logo kluba, ako ima.'
       name: Ime
       athletes: Atletičari
       results: Rezultati
@@ -1195,14 +1195,16 @@ sr:
       description: 'Tabela učesnika i statistika za klub %{club}'
       main_page: Glavna
       clubs: Klubovi
-      athletes_count: broj učesnika
-      results_count: broj trka
-      volunteering_count: broj volontiranje
+      athletes_count: ukupno učesnika
+      results_count: ukupno rezultata
+      volunteering_count: ukupno volontiranja
       best_results: Lični rekordi učesnika
       last_week_activities: Aktivnosti članova kluba u poslednjoj nedelji
       name: Ime
-      activities: Trke
+      results: Rezultati
+      last_result: Poslednji rezultat
       volunteering: Volontiranje
+      last_volunteering: Poslednje volontiranje
       personal_best: Najbolje vreme
     last_week:
       title: 'Aktivnost učesnika %{club}'

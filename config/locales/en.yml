@@ -1116,7 +1116,7 @@ en:
   clubs:
     index:
       description: Table of clubs with statistics on total number of participants, volunteering, and runs.
-      how_to_add_new_club_html: "Your club isn't in the list? Write to us <a href=\"mailto:%{mail}?subject=Add%20new%20club\" target=\"_blank\" title=\"Send us email\">by email</a> and we'll add it. In the message, specify the club name, add a brief description, and attach the club logo if available."
+      how_to_add_new_club_html: "Your club isn't in the list? Write to us <a href=\"mailto:%{mail}?subject=Add%20new%20club\" target=\"_blank\" title=\"Send us email\">by email</a>, and we'll add it. In the message, specify the club name, add a brief description, and attach the club logo if available."
       name: Name
       athletes: Participants
       results: Results
@@ -1133,14 +1133,16 @@ en:
       description: 'Participant table and statistics for club %{club}'
       main_page: Main Page
       clubs: Clubs
-      athletes_count: number of participants
-      results_count: number of runs
-      volunteering_count: number of volunteering sessions
+      athletes_count: total participants
+      results_count: total results
+      volunteering_count: total volunteering sessions
       best_results: Personal Bests of Club Participants
       last_week_activities: Club Participants Activity Last Week
       name: Name
-      activities: Runs
+      results: Results
+      last_result: Last result
       volunteering: Volunteering
+      last_volunteering: Last volunteering
       personal_best: Best Time
     last_week:
       title: 'Activity of %{club} Participants'

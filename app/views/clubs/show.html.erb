@@ -47,10 +47,10 @@
             <span class="sort-arrow" aria-hidden="true"><i class="fa fa-caret-down"></i></span>
           </th>
           <th class="sortable cell-center" data-action="click->table-head#toggleSort">
-            <span><%= t '.activities' %></span>
+            <span><%= t '.results' %></span>
             <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
           </th>
-          <th class="sortable hidden-on-phone cell-center" data-action="click->table-head#toggleSort">
+          <th class="sortable cell-center" data-action="click->table-head#toggleSort">
             <span><%= t '.volunteering' %></span>
             <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
           </th>
@@ -58,10 +58,20 @@
             <span><%= t '.personal_best' %></span>
             <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
           </th>
+          <th class="sortable cell-center whitespace-normal" data-action="click->table-head#toggleSort">
+            <span><%= t '.last_result' %></span>
+            <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
+          </th>
+          <th class="sortable cell-center whitespace-normal" data-action="click->table-head#toggleSort">
+            <span><%= t '.last_volunteering' %></span>
+            <span class="sort-arrow" aria-hidden="true"><i class="fa"></i></span>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <%= render partial: 'athlete', collection: @athletes, cached: ->(athlete) { locale_cache_key(athlete) } %>
+        <%= render partial: 'athlete', collection: @athletes, cached: ->(athlete) {
+              locale_cache_key(athlete, @last_results[athlete.id]&.activity_id, @last_volunteering[athlete.id]&.activity_id)
+            } %>
       </tbody>
     </table>
   </div>

@@ -1,6 +1,20 @@
+<% last_result = @last_results[athlete.id] %>
+<% last_result_date = last_result&.last_date&.to_date %>
+<% last_volunteering = @last_volunteering[athlete.id] %>
+<% last_volunteering_date = last_volunteering&.last_date&.to_date %>
 <tr>
   <td sort-by="<%= athlete.name %>"><%= link_to athlete.name, athlete %></td>
   <td class="cell-center"><%= athlete.results_count %></td>
-  <td class="hidden-on-phone cell-center"><%= @count_volunteering.fetch(athlete.id, 0) %></td>
+  <td class="cell-center"><%= @count_volunteering.fetch(athlete.id, 0) %></td>
   <td class="cell-num-strong" sort-by="<%= athlete.personal_best %>"><%= Result.time_string athlete.personal_best %></td>
+  <td class="cell-center" sort-by="<%= last_result_date&.iso8601 %>">
+    <% if last_result && last_result_date %>
+      <%= link_to l(last_result_date, format: :short), activity_path(last_result.activity_id) %>
+    <% end %>
+  </td>
+  <td class="cell-center" sort-by="<%= last_volunteering_date&.iso8601 %>">
+    <% if last_volunteering && last_volunteering_date %>
+      <%= link_to l(last_volunteering_date, format: :short), activity_path(last_volunteering.activity_id) %>
+    <% end %>
+  </td>
 </tr>

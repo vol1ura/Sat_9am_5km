@@ -39,6 +39,8 @@ class ClubsController < ApplicationController
     @count_volunteering = Athlete.left_joins(:volunteering).where(club: @club).group('athletes.id').count('volunteers.id')
     @total_results_count = Result.published.joins(:athlete).where(athlete: { club: @club }).size
     @total_volunteering_count = Volunteer.published.joins(:athlete).where(athlete: { club: @club }).size
+    @last_results = last_published_records(Result)
+    @last_volunteering = last_published_records(Volunteer)
     @athletes =
       Athlete
         .where(club: @club)
@@ -71,6 +73,21 @@ class ClubsController < ApplicationController
       .where(country: { code: top_level_domain })
       .where(athletes: { club_id: club_ids })
       .group(:club_id)
+  end
+
+  def last_published_records(model)
+    table = model.table_name
+    model
+      .published
+      .joins(:athlete)
+      .where(athlete: { club: @club })
+      .select(
+        Arel.sql(
+          "DISTINCT ON (#{table}.athlete_id) #{table}.athlete_id, #{table}.activity_id, activity.date AS last_date",
+        ),
+      )
+      .order(Arel.sql("#{table}.athlete_id, activity.date DESC, #{table}.id DESC"))
+      .index_by(&:athlete_id)
   end
 
   def count_athletes_for(club_ids:)
