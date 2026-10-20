@@ -1,43 +1,50 @@
 <%= turbo_frame_tag "volunteer-#{@idx}" do %>
-  <%= form_with model: @volunteer, html: { 'data-controller' => 'autocomplete', 'data-autocomplete-url-value' => athletes_path(format: :json) } do |f| %>
+  <%= form_with model: @volunteer, html: { class: 'min-w-0 w-full', 'data-controller' => 'autocomplete', 'data-autocomplete-url-value' => athletes_path(format: :json) } do |f| %>
     <%= f.hidden_field :role %>
     <%= f.hidden_field :activity_id %>
     <%= hidden_field_tag :idx, @idx %>
     <%= f.hidden_field :athlete_id, 'data-autocomplete-target' => 'hidden' %>
-    <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
-      <div>
-        <div class="flex items-stretch">
+    <% is_comment_invalid = @volunteer.errors.key?(:comment) %>
+    <% athlete_errors = @volunteer.errors.messages.except(:comment) %>
+    <% is_athlete_invalid = athlete_errors.present? %>
+    <div class="space-y-2">
+      <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div class="min-w-0">
           <%=
             f.text_field :comment,
-                         class: 'w-full rounded-md border border-line bg-surface px-3 py-1.5 text-sm text-ink',
-                         placeholder: 'Комментарий',
+                         class: "w-full rounded-md border border-line bg-surface px-3 py-1.5 text-sm text-ink #{'border-danger' if is_comment_invalid}",
+                         placeholder: t('.comment_placeholder'),
                          minlength: 4,
                          maxlength: 40,
-                         'aria-label' => 'Comment'
+                         'aria-label' => t('.comment_placeholder'),
+                         'aria-invalid' => is_comment_invalid
           %>
-        </div>
-      </div>
-      <% is_athlete_invalid = @volunteer.errors.present? %>
-      <div class="relative volunteers-autocomplete">
-        <div class="flex items-stretch">
-          <%=
-            text_field_tag :name, @volunteer&.name,
-                           class: "min-w-0 grow rounded-l-md border border-line bg-surface px-3 py-1.5 text-sm text-ink #{'border-danger' if is_athlete_invalid}",
-                           placeholder: 'Начните вводить имя...',
-                           autocomplete: 'off',
-                           'aria-label' => 'Athlete name',
-                           'data-autocomplete-target' => 'input',
-                           'data-action' => 'keydown->autocomplete#search'
-          %>
-          <button class="inline-flex items-center justify-center rounded-r-md border border-l-0 border-line bg-surface-elevated px-3 py-1.5 text-sm hover:bg-accent-subtle" type="submit">
-            <i class="fa-solid fa-user-check text-brand"></i>
-          </button>
-          <% if is_athlete_invalid %>
-            <div class="mt-1 text-sm text-danger"><%= @volunteer.errors.messages.values.flatten.join(', ') %></div>
+          <% if is_comment_invalid %>
+            <p class="mt-1 text-sm text-danger"><%= @volunteer.errors[:comment].join(', ') %></p>
           <% end %>
         </div>
-        <ul class="absolute z-10 w-full divide-y divide-line rounded-b-md border border-line bg-surface shadow-lg" data-autocomplete-target="results" data-action="click->autocomplete#select"></ul>
+        <div class="relative min-w-0 volunteers-autocomplete">
+          <div class="flex items-stretch">
+            <%=
+              text_field_tag :name, @volunteer&.name,
+                             class: "min-w-0 grow rounded-l-md border border-line bg-surface px-3 py-1.5 text-sm text-ink #{'border-danger' if is_athlete_invalid}",
+                             placeholder: t('.name_placeholder'),
+                             autocomplete: 'off',
+                             'aria-label' => t('.name_placeholder'),
+                             'aria-invalid' => is_athlete_invalid,
+                             'data-autocomplete-target' => 'input',
+                             'data-action' => 'keydown->autocomplete#search'
+            %>
+            <button class="inline-flex shrink-0 items-center justify-center rounded-r-md border border-l-0 border-line bg-surface-elevated px-3 py-1.5 text-sm hover:bg-accent-subtle" type="submit">
+              <i class="fa-solid fa-user-check text-brand"></i>
+            </button>
+          </div>
+          <ul class="absolute z-10 mt-1 w-full divide-y divide-line rounded-md border border-line bg-surface shadow-lg" data-autocomplete-target="results" data-action="click->autocomplete#select"></ul>
+        </div>
       </div>
+      <% if is_athlete_invalid %>
+        <p class="text-sm text-danger"><%= athlete_errors.values.flatten.join(', ') %></p>
+      <% end %>
     </div>
   <% end %>
 <% end %>

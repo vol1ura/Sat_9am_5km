@@ -42,6 +42,18 @@ RSpec.describe '/volunteers' do
       end.to change(Volunteer, :count).by(1)
       expect(response).to be_successful
     end
+
+    it 'renders volunteer uniqueness error below the inputs' do
+      create(:volunteer, athlete: athlete, activity_params: { date: activity.date, published: false })
+
+      expect do
+        post volunteers_url, params: valid_attributes.merge(idx: 'results_handler-0-1')
+      end.not_to change(Volunteer, :count)
+
+      expect(response).to be_successful
+      expect(response.body).to include(I18n.t('errors.messages.more_than_one_volunteering'))
+      expect(response.body).to include('text-danger')
+    end
   end
 
   describe 'PATCH /volunteer' do

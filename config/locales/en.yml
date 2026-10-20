@@ -1239,6 +1239,10 @@ en:
       volunteer: Volunteer
     volunteer:
       confirm_delete: Free position %{role} (%{name})?
+  volunteers:
+    edit:
+      comment_placeholder: Comment
+      name_placeholder: Name or ID...
   users:
     show:
       title: Settings

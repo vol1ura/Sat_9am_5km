@@ -939,6 +939,14 @@
     @apply cursor-pointer px-2.5 py-1.5;
   }
 
+  .volunteers-autocomplete li:first-child {
+    @apply rounded-t-md;
+  }
+
+  .volunteers-autocomplete li:last-child {
+    @apply rounded-b-md;
+  }
+
   .volunteers-autocomplete li:hover {
     @apply bg-surface-elevated;
   }

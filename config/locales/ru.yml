@@ -1295,6 +1295,10 @@ ru:
       volunteer: Волонтёр
     volunteer:
       confirm_delete: Освободить позицию %{role} (%{name})?
+  volunteers:
+    edit:
+      comment_placeholder: Комментарий
+      name_placeholder: Имя или ID...
   users:
     show:
       title: Настройки

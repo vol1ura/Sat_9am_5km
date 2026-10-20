@@ -1301,6 +1301,10 @@ sr:
       volunteer: Volonter
     volunteer:
       confirm_delete: Osloboditi poziciju %{role} (%{name})?
+  volunteers:
+    edit:
+      comment_placeholder: Komentar
+      name_placeholder: Ime ili ID...
   users:
     show:
       title: Podešavanja
