@@ -791,10 +791,10 @@ sr:
     about:
       description: 'S95 su nezavisna subotnja park trčanja: S — subota, 9 — start u 9:00, 5 — distanca 5 km. Besplatno, za sve, uz zabeležen rezultat.'
       paragraphs:
-        - 'S95 se čita ovako: S — subota, 9 — start u devet ujutru, 5 — pet kilometara. To su besplatna nedeljna park trčanja koja volonteri organizuju tokom cele godine za sve koji žele da dođu. Možete trčati, hodati ili pomoći na stazi — sa bilo kakvom pripremom i u bilo kom uzrastu. Rezultat se beleži u jedinstvenom sistemu; posle cilja obično ima i šolja čaja i dobro društvo.'
+        - 'S95 se čita ovako: S — subota, 9 — start u devet ujutru, 5 — pet kilometara. To su besplatna nedeljna park trčanja koja volonteri organizuju tokom cele godine za sve koji žele da dođu. Možete trčati, hodati ili pomoći na stazi — sa bilo kojim nivoom spremnosti. Rezultat se beleži u jedinstvenom sistemu; posle cilja obično ima i šolja čaja i dobro društvo.'
         - 'U martu 2022. godine globalni parkrun je obustavio trke u Rusiji. Nismo čekali odluku sa strane: događaje smo nastavili skoro odmah, zatim su se pojavili sopstveni naziv i logo, a potom i otvorena platforma, da tradicija živi dalje. Od tada se S95 razvija kao pokret trkača i volontera sa sopstvenim principima i pravilima, a ne kao filijala tuđeg projekta.'
         - 'Lokalni timovi najbolje poznaju svoj park i svoje ljude. Zato S95 nema štab sa krutim centralizovanim upravljanjem. Kako se lokacija razvija, odlučuju oni koji organizuju trku: kako privući nove učesnike i volontere, sa kojim gradskim inicijativama sarađivati i slično.'
-        - 'Subotnje jutro u parku je osmišljeno tako da vam bude prijatno da dođete prvi put i da zatim poželite da se vratite. Pre trke — instruktaža i zagrevanje, na stazi — volonteri, uključujući i zatvarača, da svako završi svojim tempom. Posle — čaj i razgovor. Dođite u devet: dovoljne su patike i želja da vikend započnete kretanjem. A ako već trčite sa nama — dovedite prijatelja, prijavite se kao volonter ili svratite u drugi park.'
+        - 'Subotnje jutro u parku je osmišljeno tako da vam bude prijatno da dođete prvi put i da zatim poželite da se vratite. Pre trke — instruktaža i zagrevanje, na stazi — volonteri, uključujući i zatvarača, da svako završi svojim tempom. Posle — čaj i razgovor. Dovoljne su patike i želja da vikend započnete kretanjem. A ako već trčite sa nama — dovedite prijatelja, prijavite se kao volonter ili svratite u drugi park.'
       events_html: 'Sistem trenutno prikazuje <a href="%{link}">rezultate %{events_count} lokacija</a>: %{events}.'
       s95_abroad:
         title: S95 trke u drugim zemljama
@@ -839,7 +839,7 @@ sr:
         answer: Staza je dobro obeležena narandžastim čunjevima, postoji i maršal na skretanju (ako ga ima), i najverovatnije ćete biti okruženi drugim učesnicima tokom trčanja.
       about_registering:
         question: Da li je potrebno da se registrujem za učešće u trci?
-        answer_html: 'Nije obavezno, ali je preporučljivo da prođete proceduru registracije, popunjavajući nebolju <a href="%{link}">formu</a> i potvrdite email. Nakon toga, moćićete da se označite na našim trkama koristeći lični bar kod, što će vam omogućiti da ne izgubite svoje rezultate i da pratite svoje dostignuća.'
+        answer_html: 'Nije obavezno, ali je preporučljivo da prođete proceduru registracije, popunjavajući nebolju <a href="%{link}">formu</a> i potvrdite email. Nakon toga, moćićete da se označite na našim trkama koristeći lični QR kod, što će vam omogućiti da ne izgubite svoje rezultate i da pratite svoje dostignuća.'
       about_participation:
         question: 'Da li je moguće samo doći u 8:45 da trčimo zajedno?'
         answer: 'Da, možete samo doći i trčati. Registracija nije obavezna, služi samo za čuvanje vašeg rezultata u protokolu. Ako se ne registrujete, bićete navedeni u protokolu kao "Nepoznat".'
@@ -905,9 +905,9 @@ sr:
             <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su objedinjeni u jedinstvenom sistemu.</li>
             <li>Imamo motivacioni sistem nagrada i izazova — dobijajte <a href="%{badges_link}">dostignuća</a> ne samo za visoke rezultate, već i za redovno učešće i lični napredak.</li>
             <li>Naša platforma nije samo o trčanju, već i o druženju i važnoj društvenoj misiji: razvijamo volontiranje, gradimo prijateljsku zajednicu i pomažemo u pronalaženju istomišljenika.</li>
-            <li>Jednostavna i brza registracija novih učesnika, pogodan лични профил, brzi пријава на сајт, сви подаци су увек под руком. Учесници не морају да траже свој QR код где-то у пошти, да се сећају и уносе лозинку за пријаву на сајт, они ће моћи да примају обавештења о резултатима трка како је они буду објављени.</li>
-            <li>Koristimo moderne tehnologije: raznovrsne statistike i rangiranja, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku.</li>
-            <li>Imamo sopstvenu jedinstvenu mobilnu aplikaciju za organizaciju trka.</li>
+            <li>Jednostavna i brza registracija novih učesnika, pogodan lični profil, brza prijava na sajt, svi podaci su uvek pod rukom. Učesnici ne moraju da traže svoj QR kod negde u pošti, da se sećaju i unose lozinku za prijavu na sajt, oni će moći da primaju obaveštenja o rezultatima trka čim budu objavljeni.</li>
+            <li>Koristimo moderne tehnologije: raznovrsne statistike i <a href="%{ratings_link}">rangiranja</a>, mogućnost dodavanja prijatelja i praćenja ko se sprema za koju trku.</li>
+            <li>Imamo sopstvenu jedinstvenu <a href="%{app_link}">mobilnu aplikaciju</a> za organizaciju trka.</li>
             <li>Naš sistem je potpuno otvoren i zasnovan na OpenSource tehnologijama — svako može predložiti poboljšanja i učiniti platformu još boljom.</li>
           </ol>
         </p>
@@ -922,7 +922,7 @@ sr:
             <li>malo organizacionih sposobnosti i puno ljubavi prema trčanju.</li>
           </ul>
         </p>
-        <p>Od trenutka slanja prijave do prvog tehničkog starta može proći neko vreme, ali S95 tim će učiniti sve što je moguće da vaš park što pre ispuni subotnji trkački duh!</p>
+        <p>Od trenutka slanja prijave do prvog tehničkog starta može proći neko vreme, ali <a href="%{team_link}">S95 tim</a> će učiniti sve što je moguće da vaš park što pre ispuni subotnji trkački duh!</p>
       support:
         title: Podrška
         description: S95 trke u Moskvi organizuju i održavaju sa podrškom "Гранты Мэра Москвы".

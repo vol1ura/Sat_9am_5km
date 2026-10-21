@@ -650,10 +650,10 @@ en:
     about:
       description: 'S95 is independent Saturday park runs: S for Saturday, 9 for a 9:00 start, 5 for a 5 km distance. Free, for everyone, with a recorded result.'
       paragraphs:
-        - 'S95 stands for Saturday, 9 AM, 5 kilometres. These are free weekly park runs that volunteers put on year-round for anyone who wants to join. You can run, walk, or help on the course — at any fitness level, at any age. Results are recorded in a single system; after the finish there is usually a cup of tea and good company.'
+        - 'S95 stands for Saturday, 9 AM, 5 kilometres. These are free weekly park runs that volunteers put on year-round for anyone who wants to join. You can run, walk, or help on the course — at any fitness level. Results are recorded in a single system; after the finish there is usually a cup of tea and good company.'
         - 'In March 2022, global parkrun paused runs in Russia. We did not wait for an outside decision: events continued almost immediately, then came our own name and logo, and later an open platform so the tradition could live on. Since then S95 has grown as a movement of runners and volunteers with its own principles and rules, not as a branch of someone else''s project.'
         - 'Local teams know their park and their people best. That is why S95 has no headquarters with rigid central control. How a location develops is decided by those who put on the run: how to attract new participants and volunteers, which local initiatives to work with, and so on.'
-        - 'Saturday morning in the park is set up so you feel comfortable coming for the first time and then want to come back. Before the run there is a briefing and a warm-up; on the course there are volunteers, including a tail walker, so everyone can finish at their own pace. Afterwards — tea and conversation. Come at nine: sneakers and a wish to start the weekend with movement are enough. And if you already run with us — bring a friend, volunteer, or try another park.'
+        - 'Saturday morning in the park is set up so you feel comfortable coming for the first time and then want to come back. Before the run there is a briefing and a warm-up; on the course there are volunteers, including a tail walker, so everyone can finish at their own pace. Afterwards — tea and conversation. Sneakers and a wish to start the weekend with movement are enough. And if you already run with us — bring a friend, volunteer, or try another park.'
       events_html: 'Currently, our system displays <a href="%{link}">results from %{events_count} locations</a>: %{events}.'
       s95_abroad:
         title: S95 Runs Abroad
@@ -688,9 +688,9 @@ en:
           role: Promotion and public relations
     rules:
       description: Brief rules for S95 run participants, as well as frequently asked questions
-      register_with_bot_html: "If you're not registered, create a profile, filling out the <a href=\"%{link}\">registration form</a>. After confirming your email, you'll be taken to your profile with a personal barcode."
+      register_with_bot_html: "If you're not registered, create a profile, filling out the <a href=\"%{link}\">registration form</a>. After confirming your email, you'll be taken to your profile with a personal QR code."
       come_to_s95_html: 'Most importantly - come on <strong>Saturday</strong> at <strong>9 AM</strong> to one of the <a href="%{link}">events</a> and run <strong>5 km</strong>.'
-      scan_barcodes: At the finish, you'll be given a position card. Scan your personal barcode and position card with the volunteer.
+      scan_barcodes: At the finish, you'll be given a position card. Scan your personal QR code and position card with the volunteer.
       return_position_card: Return the position card.
       faq: Frequently Asked Questions
       about_markers:
@@ -698,7 +698,7 @@ en:
         answer: The course is well marked with orange cones, there's a marshal at the turnaround (if there is one), and you'll likely be running surrounded by other participants.
       about_registering:
         question: Do I need to register to participate in a run?
-        answer_html: "Not required, but it's recommended to register once, filling out a small <a href=\"%{link}\">form</a> and confirming your email. After that, you'll be able to mark yourself at any of our runs using a personal barcode, which will allow you to not lose your results and track your achievements."
+        answer_html: "Not required, but it's recommended to register once, filling out a small <a href=\"%{link}\">form</a> and confirming your email. After that, you'll be able to mark yourself at any of our runs using a personal QR code, which will allow you to not lose your results and track your achievements."
       about_participation:
         question: 'Can I just come at 8:45 to run together?'
         answer: "Yes, you can just come and run. Registration is needed so you have a result in the protocol. Register once and you can come to any run. If you don't register - you'll be in the protocol as \"Unknown\". On site, they'll help you register and enjoy five kilometers in good company."
@@ -766,8 +766,8 @@ en:
             <li>We have a motivating badge and challenge system — get <a href="%{badges_link}">achievements</a> not only for high results, but also just for participation and personal progress</li>
             <li>Our platform isn't just about running, but also about communication and social mission: we actively develop volunteering, communicate, find new friends</li>
             <li>Simple and fast registration of new participants, convenient personal account, fast login to the site, all data always at hand. Participants won't have to search for their QR code somewhere in the mail, remember and enter the password to log in to the site, they'll be able to receive notifications about the results of the runs as soon as they're published.</li>
-            <li>We use modern technologies and approaches: lots of various statistics and rankings, ability to add friends and see who's going to which run</li>
-            <li>We have our own unique mobile app for conducting runs</li>
+            <li>We use modern technologies and approaches: lots of various statistics and <a href="%{ratings_link}">rankings</a>, ability to add friends and see who's going to which run</li>
+            <li>We have our own unique <a href="%{app_link}">mobile app</a> for conducting runs</li>
             <li>Our system is completely open and uses OpenSource technologies — everyone can suggest improvements and make the platform even better</li>
           </ol>
         </p>
@@ -782,7 +782,7 @@ en:
             <li>some organizational skills and lots of love for running</li>
           </ul>
         </p>
-        <p>From the moment of application to the first technical start, some time may pass, but the S95 team will do everything possible so your park fills with Saturday running spirit as soon as possible!</p>
+        <p>From the moment of application to the first technical start, some time may pass, but the <a href="%{team_link}">S95 team</a> will do everything possible so your park fills with Saturday running spirit as soon as possible!</p>
       support:
         title: Support
         description: S95 runs in Moscow are organized and held with the support of "Гранты Мэра Москвы".

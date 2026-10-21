@@ -11,7 +11,12 @@
     %>
 
     <div class="article__body">
-      <%= t '.body_html', info_email: ENV.fetch('INFO_EMAIL'), badges_link: badges_path %>
+      <%= t '.body_html',
+            info_email: ENV.fetch('INFO_EMAIL'),
+            badges_link: badges_path,
+            ratings_link: ratings_path,
+            app_link: root_path(anchor: 'app'),
+            team_link: page_path(page: 'team') %>
 
       <% if top_level_domain == :ru %>
         <section>
