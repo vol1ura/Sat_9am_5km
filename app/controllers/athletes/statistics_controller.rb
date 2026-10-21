@@ -3,6 +3,7 @@
 module Athletes
   class StatisticsController < ApplicationController
     before_action :set_athlete
+    before_action :redirect_html_statistics
 
     def personal_bests
       @personal_bests = athlete_results.includes(activity: :event).where(personal_best: true).order(date: :desc)
@@ -60,6 +61,10 @@ module Athletes
 
     def set_athlete
       @athlete = Athlete.find(params.expect(:athlete_id))
+    end
+
+    def redirect_html_statistics
+      redirect_to athlete_path(@athlete) unless turbo_frame_request?
     end
 
     def athlete_results
