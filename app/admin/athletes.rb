@@ -11,7 +11,7 @@ ActiveAdmin.register Athlete do
   scope(:registered) { |s| s.where.not(user_id: nil) }
   scope(:duplicates) { |s| s.where(id: Athletes::DuplicatesService.call) }
 
-  filter :name
+  filter :name, filters: %i[i_cont i_start i_end]
   filter :id
   filter :parkrun_code
   filter :fiveverst_code

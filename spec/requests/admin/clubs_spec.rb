@@ -11,6 +11,16 @@ RSpec.describe '/admin/clubs' do
       get admin_clubs_url
       expect(response).to be_successful
     end
+
+    it 'filters names case-insensitively' do
+      create(:club, name: 'Moscow RUNNERS')
+      create(:club, name: 'Saint Petersburg RUNNERS')
+
+      get admin_clubs_url, params: { q: { name_i_cont: 'moscow' } }
+
+      expect(response.body).to include 'Moscow RUNNERS'
+      expect(response.body).not_to include 'Saint Petersburg RUNNERS'
+    end
   end
 
   describe 'POST /admin/clubs' do

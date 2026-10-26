@@ -13,10 +13,10 @@ ActiveAdmin.register User do
     permitted
   end
 
-  filter :first_name
-  filter :last_name
-  filter :telegram_user
-  filter :email
+  filter :first_name, filters: %i[i_cont i_start]
+  filter :last_name, filters: %i[i_cont i_start]
+  filter :telegram_user, filters: %i[i_cont i_start]
+  filter :email, filters: %i[i_cont i_start]
   filter :country
 
   scope :all

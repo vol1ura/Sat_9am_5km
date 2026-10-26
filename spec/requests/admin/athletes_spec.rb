@@ -20,6 +20,18 @@ RSpec.describe '/admin/athletes' do
     end
   end
 
+  describe 'GET /admin/athletes with a name filter' do
+    it 'filters names case-insensitively' do
+      create(:athlete, name: 'Юрий ВОЛОДИН')
+      create(:athlete, name: 'Иван ИВАНОВ')
+
+      get admin_athletes_url, params: { q: { name_i_cont: 'юрий' } }
+
+      expect(response.body).to include 'Юрий ВОЛОДИН'
+      expect(response.body).not_to include 'Иван ИВАНОВ'
+    end
+  end
+
   describe 'GET /admin/athletes/1' do
     let(:athlete) { create(:athlete) }
 

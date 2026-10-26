@@ -353,9 +353,12 @@ sr:
   ransack:
     predicates:
       cont: sadrži
+      i_cont: sadrži
       eq: jednako
       start: počinje sa
+      i_start: počinje sa
       end: završava sa
+      i_end: završava sa
       gt: veće od
       lt: manje od
 

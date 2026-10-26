@@ -14,6 +14,16 @@ RSpec.describe '/admin/users' do
       get admin_users_url
       expect(response).to be_successful
     end
+
+    it 'filters first names case-insensitively' do
+      matched_user = create(:user, first_name: 'Юрий', email: 'matched@example.com')
+      create(:user, first_name: 'Иван', email: 'unmatched@example.com')
+
+      get admin_users_url, params: { q: { first_name_i_cont: 'юрий' } }
+
+      expect(response.body).to include matched_user.email
+      expect(response.body).not_to include 'unmatched@example.com'
+    end
   end
 
   describe 'GET /admin/users/1' do

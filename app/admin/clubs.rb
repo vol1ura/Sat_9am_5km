@@ -8,7 +8,7 @@ ActiveAdmin.register Club do
 
   actions :all, except: :show
 
-  filter :name
+  filter :name, filters: %i[i_cont i_start]
   filter :country
 
   index download_links: false do

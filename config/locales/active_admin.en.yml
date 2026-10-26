@@ -347,9 +347,12 @@ en:
   ransack:
     predicates:
       cont: contains
+      i_cont: contains
       eq: equals
       start: starts with
+      i_start: starts with
       end: ends with
+      i_end: ends with
       gt: greater than
       lt: less than
 

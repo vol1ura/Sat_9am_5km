@@ -351,9 +351,12 @@ ru:
   ransack:
     predicates:
       cont: содержит
+      i_cont: содержит
       eq: равно
       start: начинается с
+      i_start: начинается с
       end: заканчивается на
+      i_end: заканчивается на
       gt: больше
       lt: меньше
 
