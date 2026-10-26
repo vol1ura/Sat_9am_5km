@@ -13,8 +13,12 @@ class Country < ApplicationRecord
 
   def host = "s95.#{code}"
 
+  def locale
+    mapped = code == 'rs' ? :sr : code.to_sym
+    I18n.available_locales.include?(mapped) ? mapped : I18n.default_locale
+  end
+
   def localized(key, **)
-    locale = code == 'rs' ? :sr : code.to_sym
-    I18n.t(key, locale: I18n.available_locales.include?(locale) ? locale : I18n.default_locale, **)
+    I18n.t(key, locale:, **)
   end
 end
