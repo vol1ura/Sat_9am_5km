@@ -1380,7 +1380,7 @@ en:
 
         It seems there were several profiles in our database belonging to you (for example, you might have been entered manually at some point). The bot merged them into one automatically and your data might have been slightly updated.
 
-        Please check the data correctness and _update your QR code_ using the /qrcode command
+        Please check the data correctness and _update your QR code_
 
         %{full_name}
         *Gender:* %{gender}

@@ -1424,7 +1424,7 @@ sr:
 
         Izgleda da je u našoj bazi bilo više profila koji pripadaju vama (na primer, možda ste ranije bili uneti ručno). Bot ih je automatski spojio u jedan i vaši podaci su možda malo ažurirani.
 
-        Molimo vas da proverite tačnost podataka i _ažurirajte vaš QR kod_ komandom /qrcode
+        Molimo vas da proverite tačnost podataka i _ažurirajte vaš QR kod_
 
         %{full_name}
         *Pol:* %{gender}
