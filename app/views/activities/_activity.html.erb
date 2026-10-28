@@ -1,5 +1,5 @@
-<% male_leader_result = activity.leader_result(:male) %>
-<% female_leader_result = activity.leader_result(:female) %>
+<% male_leader_result = @leader_results[[activity.id, 'male']] %>
+<% female_leader_result = @leader_results[[activity.id, 'female']] %>
 <tr id="<%= dom_id activity %>">
   <td><%= link_to l(activity.date), activity %></td>
   <td sort-by="<%= activity.event_name %>">
@@ -8,11 +8,15 @@
   <td><%= activity.event.town %></td>
   <td class="cell-center"><%= @results_count[activity.id] %></td>
   <td class="cell-center"><%= @volunteers_count.fetch(activity.id, 0) %></td>
-  <td><%= male_leader_result&.athlete&.name %></td>
+  <td>
+    <%= link_to male_leader_result.athlete.name, male_leader_result.athlete, class: 'athlete-link' if male_leader_result %>
+  </td>
   <td class="cell-num ps-0" sort-by="<%= male_leader_result&.total_time %>">
     <%= male_leader_result&.time_string %>
   </td>
-  <td><%= female_leader_result&.athlete&.name %></td>
+  <td>
+    <%= link_to female_leader_result.athlete.name, female_leader_result.athlete, class: 'athlete-link' if female_leader_result %>
+  </td>
   <td class="cell-num ps-0" sort-by="<%= female_leader_result&.total_time %>">
     <%= female_leader_result&.time_string %>
   </td>

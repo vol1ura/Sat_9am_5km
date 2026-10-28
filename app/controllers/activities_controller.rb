@@ -2,13 +2,9 @@
 
 class ActivitiesController < ApplicationController
   def index
-    @activities =
-      @country_events
-        .unscope(:order)
-        .filter_map { |event| event.activities.published.order(:date).last }
-        .sort_by { |activity| [activity.date, -activity.event.visible_order.to_i] }
-        .reverse
+    @activities = latest_activities
     activities_ids = @activities.map(&:id)
+    @leader_results = leader_results_for(activities_ids)
     @results_count = Result.where(activity_id: activities_ids).group(:activity_id).count
     @volunteers_count = Volunteer.where(activity_id: activities_ids).group(:activity_id).count
   end
@@ -35,6 +31,31 @@ class ActivitiesController < ApplicationController
   end
 
   private
+
+  def latest_activities
+    latest_per_event =
+      Activity
+        .published
+        .where(event_id: @country_events.unscope(:order).select(:id))
+        .select('DISTINCT ON (activities.event_id) activities.*')
+        .reorder('activities.event_id, activities.date DESC, activities.id DESC')
+
+    Activity
+      .from("(#{latest_per_event.to_sql}) activities")
+      .joins(:event)
+      .includes(:event)
+      .reorder(Arel.sql('activities.date DESC, COALESCE(events.visible_order, 0) ASC'))
+  end
+
+  def leader_results_for(activity_ids)
+    Result
+      .joins(:athlete)
+      .where(activity_id: activity_ids)
+      .select('DISTINCT ON (results.activity_id, athletes.gender) results.*')
+      .reorder('results.activity_id, athletes.gender, results.position, results.id')
+      .preload(:athlete)
+      .index_by { |result| [result.activity_id, result.athlete.gender] }
+  end
 
   def counters(model:, table:)
     model

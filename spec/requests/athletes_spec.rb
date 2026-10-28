@@ -94,6 +94,15 @@ RSpec.describe '/athletes' do
       expect(response.body).to include('target="athlete_tab"')
     end
 
+    it 'renders the empty state when the athlete has no results' do
+      athlete = create(:athlete)
+
+      get results_athlete_url(athlete), as: :turbo_stream
+
+      expect(response.body).to include(I18n.t('athletes.show.no_results'))
+      expect(response.body).to include('fa-inbox')
+    end
+
     it 'redirects HTML requests to the athlete profile' do
       get results_athlete_url(result.athlete)
 
