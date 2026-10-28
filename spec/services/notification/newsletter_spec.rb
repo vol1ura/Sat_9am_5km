@@ -25,6 +25,23 @@ RSpec.describe Notification::Newsletter do
     it_behaves_like 'successfully sends newsletter'
   end
 
+  context 'when user has email' do
+    let(:user) { create(:user, :with_email) }
+    let(:html) { '<p>Newsletter body</p>' }
+    let(:delivery) { instance_double(ActionMailer::MessageDelivery, deliver_now: true) }
+
+    before do
+      allow(Notification::MarkdownConverter).to receive(:to_html).with(newsletter.body).and_return(html)
+      allow(UserNotificationMailer).to receive(:notify).with(user, html).and_return(delivery)
+    end
+
+    it 'sends newsletter by email' do
+      expect { described_class.call newsletter, user }.to change(newsletter, :sent_count).by(1)
+      expect(delivery).to have_received(:deliver_now)
+      expect(request).not_to have_been_requested
+    end
+  end
+
   context 'when request to telegram fails' do
     before do
       request.to_return(status: 400)

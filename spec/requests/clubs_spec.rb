@@ -8,6 +8,18 @@ RSpec.describe '/clubs' do
       get clubs_url
       expect(response).to be_successful
     end
+
+    it 'renders club statistics' do
+      club = create(:club, name: 'Moscow Runners')
+      athlete = create(:athlete, club:)
+      create(:result, athlete:)
+      create(:volunteer, athlete:)
+
+      get clubs_url, headers: { 'Host' => 'test.ru' }
+
+      expect(response).to be_successful
+      expect(response.body).to include(club.name)
+    end
   end
 
   context 'with club' do

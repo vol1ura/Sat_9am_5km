@@ -2,12 +2,27 @@
 <% info_suffix = " - ##{params[:page].to_i}" if params[:page].to_i.positive? %>
 <% head_info :title, "#{@badge.name}#{info_suffix}" %>
 <% head_info :description, "#{strip_tags(@badge.conditions)}#{info_suffix}".squish %>
+<%
+  badge_hub_path =
+    if !@badge.funrun_kind?
+      achievements_badges_path
+    elsif @badge.received_date < Badge.funrun_archive_cutoff
+      archive_badges_path
+    else
+      funruns_badges_path
+    end
+%>
 
-<%= render 'shared/breadcrumbs', items: [
+<%=
+  render(
+    'shared/breadcrumbs',
+    items: [
       { name: t('.main_page'), path: root_path },
-      { name: t('navbars.top.badges'), path: badge_hub_path(@badge) },
+      { name: t('navbars.top.badges'), path: badge_hub_path },
       { name: @badge.name, current: true },
-    ] %>
+    ],
+  )
+%>
 
 <%= render Ui::CardComponent.new(class: 'mb-8') do %>
   <div class="flex flex-col items-center gap-5 sm:flex-row sm:items-start">
