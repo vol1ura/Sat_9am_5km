@@ -161,7 +161,7 @@ GEM
       rexml
     crass (1.0.8)
     csv (3.3.7)
-    dalli (3.2.13)
+    dalli (5.2.2)
       logger
     dartsass-sprockets (3.2.1)
       railties (>= 4.0.0)
@@ -631,7 +631,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.2)
   capistrano-sidekiq
   capistrano3-puma (~> 8.1.0)
-  dalli (< 4)
+  dalli (< 6)
   dartsass-sprockets
   database_consistency
   devise (~> 5.0)
