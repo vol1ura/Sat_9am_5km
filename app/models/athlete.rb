@@ -49,6 +49,7 @@ class Athlete < ApplicationRecord
   belongs_to :event, optional: true
   belongs_to :going_to_event, class_name: 'Event', optional: true
 
+  has_one :team_member, dependent: :destroy
   has_many :trophies, dependent: :destroy
   has_many :badges, through: :trophies
   has_many :results, dependent: :nullify

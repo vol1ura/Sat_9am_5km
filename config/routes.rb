@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   resources :auth_links, only: :show, module: :users, param: :token
   resources :email_sessions, only: :create, module: :users
   resources :articles, only: %i[index show], param: :page
+  resources :team_members, path: 'team', only: :index
 
   resource :user, only: %i[show edit update destroy]
   resource :cookie_consent, only: :create

@@ -332,6 +332,10 @@ en:
         new_model: Add Position
         edit_model: Edit Position
         delete_model: Delete Position
+      team_member:
+        new_model: Add to Team
+        edit_model: Edit Team Member
+        delete_model: Delete from Team
     scopes:
       all: All
       admin: Admins

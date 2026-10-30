@@ -4,7 +4,7 @@ RSpec.describe '/pages' do
   before { host! 's95.ru' }
 
   describe 'GET /pages' do
-    %w[about rules feedback team].each do |page|
+    %w[about rules feedback].each do |page|
       it "renders #{page} page with successful response", vcr: page == 'about' do
         get page_path(page:)
         expect(response).to be_successful

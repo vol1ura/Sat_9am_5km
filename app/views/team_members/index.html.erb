@@ -1,15 +1,4 @@
-<%
-  team_members = [
-    { key: :silaev, athlete_id: 5249 },
-    { key: :shiryaev, athlete_id: 248 },
-    { key: :letunovsky, athlete_id: 551 },
-    { key: :hohlova, athlete_id: 4104 },
-    { key: :yakovlev, athlete_id: 3293 },
-    { key: :volodin, athlete_id: 1 },
-    { key: :bashkina, athlete_id: 4029 },
-  ]
-  info_email = ENV.fetch('INFO_EMAIL')
-%>
+<% info_email = ENV.fetch('INFO_EMAIL') %>
 <% head_info :description, t('.description') %>
 
 <%=
@@ -21,24 +10,22 @@
 %>
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-  <% team_members.each do |member| %>
-    <% name = t ".members.#{member[:key]}.name" %>
+  <% @team_members.each do |member| %>
     <%= render Ui::CardComponent.new(hover: true, padding: false, class: 'h-full overflow-hidden') do %>
       <div class="aspect-square overflow-hidden bg-surface-elevated">
         <%=
           image_tag(
-            "/images/team/#{member[:key]}.jpeg",
+            member.photo.variant(:web),
             class: 'h-full w-full object-cover object-top',
-            alt: name,
-            loading: 'lazy',
+            alt: member.name,
           )
         %>
       </div>
       <div class="p-4 text-center">
         <h2 class="font-display text-lg font-semibold text-ink">
-          <%= link_to name, athlete_path(member[:athlete_id]), class: 'stretched-link text-ink no-underline hover:text-link' %>
+          <%= link_to member.name, member.athlete, class: 'stretched-link text-ink no-underline hover:text-link' %>
         </h2>
-        <p class="mb-0 mt-1 text-sm leading-relaxed text-ink-muted"><%= t ".members.#{member[:key]}.role" %></p>
+        <p class="mb-0 mt-1 text-sm leading-relaxed text-ink-muted"><%= member.role %></p>
       </div>
     <% end %>
   <% end %>

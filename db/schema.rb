@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_29_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -21,13 +21,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   create_enum "athlete_gender", ["male", "female"]
 
   create_table "active_admin_comments", force: :cascade do |t|
-    t.bigint "author_id"
-    t.string "author_type"
-    t.text "body"
-    t.datetime "created_at", null: false
     t.string "namespace"
-    t.bigint "resource_id"
+    t.text "body"
     t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
@@ -35,24 +35,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
-    t.string "name", null: false
-    t.bigint "record_id", null: false
-    t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_id", "record_type", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.bigint "byte_size", null: false
-    t.string "checksum"
-    t.string "content_type"
-    t.datetime "created_at", null: false
-    t.string "filename", null: false
     t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
     t.text "metadata"
     t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -63,31 +63,31 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   end
 
   create_table "activities", force: :cascade do |t|
-    t.datetime "created_at", null: false
     t.date "date", null: false
     t.text "description"
-    t.bigint "event_id", null: false
     t.boolean "published", default: false, null: false
-    t.string "token"
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
     t.index ["event_id", "date"], name: "index_activities_on_event_id_and_date"
   end
 
   create_table "athletes", force: :cascade do |t|
-    t.bigint "club_id"
-    t.datetime "created_at", null: false
-    t.bigint "event_id"
-    t.bigint "fiveverst_code"
-    t.enum "gender", enum_type: "athlete_gender"
-    t.bigint "going_to_event_id"
     t.string "name"
     t.integer "parkrun_code"
+    t.bigint "fiveverst_code"
+    t.bigint "user_id"
+    t.bigint "club_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "parkzhrun_code"
-    t.jsonb "personal_bests", default: {}, null: false
+    t.bigint "event_id"
     t.bigint "runpark_code"
     t.jsonb "stats", default: {}, null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "going_to_event_id"
+    t.jsonb "personal_bests", default: {}, null: false
+    t.enum "gender", enum_type: "athlete_gender"
     t.index ["club_id"], name: "index_athletes_on_club_id"
     t.index ["event_id"], name: "index_athletes_on_event_id"
     t.index ["fiveverst_code"], name: "index_athletes_on_fiveverst_code", unique: true
@@ -104,20 +104,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   end
 
   create_table "audits", force: :cascade do |t|
-    t.string "action"
-    t.bigint "associated_id"
-    t.string "associated_type"
     t.bigint "auditable_id"
     t.string "auditable_type"
-    t.jsonb "audited_changes"
-    t.string "comment"
-    t.datetime "created_at"
-    t.string "remote_address"
-    t.string "request_uuid"
+    t.bigint "associated_id"
+    t.string "associated_type"
     t.bigint "user_id"
     t.string "user_type"
     t.string "username"
+    t.string "action"
+    t.jsonb "audited_changes"
     t.integer "version", default: 0
+    t.string "comment"
+    t.string "remote_address"
+    t.string "request_uuid"
+    t.datetime "created_at"
     t.index ["associated_type", "associated_id"], name: "associated_index"
     t.index ["auditable_id", "auditable_type", "version"], name: "auditable_index"
     t.index ["created_at"], name: "index_audits_on_created_at"
@@ -126,21 +126,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   end
 
   create_table "badges", force: :cascade do |t|
-    t.jsonb "conditions_translations"
     t.datetime "created_at", null: false
-    t.jsonb "info", default: {}, null: false
-    t.integer "kind", default: 0, null: false
-    t.jsonb "name_translations"
-    t.date "received_date"
     t.datetime "updated_at", null: false
+    t.date "received_date"
+    t.integer "kind", default: 0, null: false
+    t.jsonb "info", default: {}, null: false
+    t.jsonb "conditions_translations"
+    t.jsonb "name_translations"
   end
 
   create_table "clubs", force: :cascade do |t|
-    t.bigint "country_id", null: false
-    t.datetime "created_at", null: false
-    t.text "description"
     t.string "name", null: false
+    t.bigint "country_id", null: false
+    t.text "description"
     t.string "slug", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_clubs_on_lower_name", unique: true
     t.index ["country_id"], name: "index_clubs_on_country_id"
@@ -148,9 +148,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   end
 
   create_table "contacts", force: :cascade do |t|
+    t.string "link", null: false
     t.integer "contact_type", null: false
     t.bigint "event_id", null: false
-    t.string "link", null: false
     t.index ["event_id", "contact_type"], name: "index_contacts_on_event_id_and_contact_type", unique: true
   end
 
@@ -163,30 +163,30 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
 
   create_table "events", force: :cascade do |t|
     t.boolean "active", default: false, null: false
-    t.boolean "auto_create_activities", default: false, null: false
-    t.string "cancellation_reason"
     t.string "code_name", null: false
-    t.bigint "country_id", null: false
-    t.datetime "created_at", null: false
-    t.text "description", null: false
-    t.decimal "latitude", precision: 10, scale: 6
-    t.jsonb "live_results"
-    t.decimal "longitude", precision: 10, scale: 6
-    t.string "name", null: false
-    t.string "place", null: false
-    t.text "place_description", null: false
-    t.string "timezone", default: "Europe/Moscow", null: false
     t.string "town", null: false
+    t.text "place_description", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", null: false
     t.integer "visible_order"
+    t.bigint "country_id", null: false
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
+    t.string "timezone", default: "Europe/Moscow", null: false
+    t.jsonb "live_results"
+    t.string "place", null: false
+    t.string "cancellation_reason"
+    t.boolean "auto_create_activities", default: false, null: false
     t.index ["code_name"], name: "index_events_on_code_name", unique: true
     t.index ["country_id"], name: "index_events_on_country_id"
   end
 
   create_table "friendships", force: :cascade do |t|
     t.bigint "athlete_id", null: false
-    t.datetime "created_at", null: false
     t.bigint "friend_id", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["athlete_id", "friend_id"], name: "index_friendships_on_athlete_id_and_friend_id", unique: true
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
@@ -194,19 +194,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
 
   create_table "newsletters", force: :cascade do |t|
     t.text "body", null: false
-    t.datetime "created_at", null: false
     t.string "picture_link"
-    t.integer "sent_count", default: 0, null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sent_count", default: 0, null: false
   end
 
   create_table "permissions", force: :cascade do |t|
-    t.string "action"
-    t.datetime "created_at", null: false
     t.bigint "event_id"
     t.string "subject_class"
-    t.datetime "updated_at", null: false
+    t.string "action"
     t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
@@ -216,37 +216,47 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   end
 
   create_table "pghero_query_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "user"
+    t.bigint "query_hash"
+    t.float "total_time"
     t.bigint "calls"
     t.datetime "captured_at", precision: nil
-    t.text "database"
-    t.bigint "query_hash"
     t.bigint "query_id"
-    t.float "total_time"
-    t.text "user"
     t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
   end
 
   create_table "results", force: :cascade do |t|
-    t.bigint "activity_id", null: false
-    t.bigint "athlete_id"
-    t.datetime "created_at", null: false
-    t.boolean "first_run", default: false, null: false
-    t.boolean "informed", default: false, null: false
-    t.boolean "personal_best", default: false, null: false
     t.integer "position"
     t.integer "total_time"
+    t.bigint "activity_id", null: false
+    t.bigint "athlete_id"
+    t.boolean "informed", default: false, null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "personal_best", default: false, null: false
+    t.boolean "first_run", default: false, null: false
     t.index ["activity_id", "position"], name: "index_results_on_activity_id_and_position"
     t.index ["athlete_id", "activity_id"], name: "index_results_on_athlete_id_and_activity_id", unique: true
     t.check_constraint "\"position\" >= 1", name: "chk_results_position"
   end
 
-  create_table "trophies", force: :cascade do |t|
+  create_table "team_members", force: :cascade do |t|
     t.bigint "athlete_id", null: false
-    t.bigint "badge_id", null: false
+    t.jsonb "role_translations", default: {}, null: false
+    t.integer "rank", default: 1, null: false
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["athlete_id"], name: "index_team_members_on_athlete_id", unique: true
+    t.check_constraint "rank >= 1", name: "chk_team_members_rank"
+  end
+
+  create_table "trophies", force: :cascade do |t|
+    t.bigint "badge_id", null: false
+    t.bigint "athlete_id", null: false
     t.date "date"
     t.jsonb "info", default: {}, null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["athlete_id"], name: "index_trophies_on_athlete_id"
     t.index ["badge_id", "athlete_id"], name: "index_trophies_on_badge_id_and_athlete_id", unique: true
@@ -254,36 +264,36 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "auth_token"
-    t.datetime "auth_token_expires_at"
-    t.datetime "confirmation_sent_at"
+    t.string "email"
+    t.string "encrypted_password"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
-    t.bigint "country_id"
-    t.datetime "created_at", null: false
-    t.text "disabled_notifications", default: [], null: false, array: true
-    t.string "email"
-    t.string "emergency_contact_name"
-    t.string "emergency_contact_phone"
-    t.string "encrypted_password"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
-    t.bigint "favorite_event_ids", default: [], null: false, array: true
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.datetime "locked_at"
-    t.string "note"
-    t.string "phone"
-    t.boolean "policy_accepted", default: false, null: false
-    t.string "promotions", default: [], null: false, array: true
-    t.datetime "remember_created_at"
-    t.datetime "reset_password_sent_at"
-    t.string "reset_password_token"
     t.integer "role"
+    t.string "note"
     t.bigint "telegram_id"
     t.string "telegram_user"
-    t.string "unconfirmed_email"
-    t.string "unlock_token"
-    t.datetime "updated_at", null: false
+    t.string "phone"
+    t.string "auth_token"
+    t.datetime "auth_token_expires_at"
+    t.string "promotions", default: [], null: false, array: true
+    t.string "emergency_contact_name"
+    t.string "emergency_contact_phone"
+    t.boolean "policy_accepted", default: false, null: false
+    t.bigint "favorite_event_ids", default: [], null: false, array: true
+    t.text "disabled_notifications", default: [], null: false, array: true
+    t.bigint "country_id"
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
@@ -296,22 +306,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
 
   create_table "volunteering_positions", force: :cascade do |t|
     t.bigint "event_id", null: false
-    t.integer "number", null: false
     t.integer "rank", null: false
     t.integer "role", null: false
+    t.integer "number", null: false
     t.index ["event_id", "role"], name: "index_volunteering_positions_on_event_id_and_role", unique: true
     t.check_constraint "number >= 1", name: "chk_volunteering_positions_number"
     t.check_constraint "rank >= 1", name: "chk_volunteering_positions_rank"
   end
 
   create_table "volunteers", force: :cascade do |t|
+    t.integer "role", null: false
     t.bigint "activity_id", null: false
     t.bigint "athlete_id", null: false
-    t.string "comment"
-    t.datetime "created_at", null: false
     t.boolean "informed", default: false, null: false
-    t.integer "role", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "comment"
     t.index ["activity_id", "athlete_id"], name: "index_volunteers_on_activity_id_and_athlete_id", unique: true
     t.index ["athlete_id"], name: "index_volunteers_on_athlete_id"
   end
@@ -331,6 +341,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_182750) do
   add_foreign_key "permissions", "users"
   add_foreign_key "results", "activities"
   add_foreign_key "results", "athletes", on_delete: :nullify
+  add_foreign_key "team_members", "athletes"
   add_foreign_key "trophies", "athletes"
   add_foreign_key "trophies", "badges"
   add_foreign_key "users", "countries", on_delete: :nullify

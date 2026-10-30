@@ -336,6 +336,10 @@ ru:
         new_model: Добавить позицию
         edit_model: Изменить позицию
         delete_model: Удалить позицию
+      team_member:
+        new_model: Добавить в команду
+        edit_model: Изменить члена команды
+        delete_model: Удалить из команды
     scopes:
       all: Все
       admin: Админы

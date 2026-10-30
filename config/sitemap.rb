@@ -16,6 +16,7 @@ Country.find_each do |country|
       page = File.basename(file, '.html.erb')
       add page_path(page) if PagesController::ALLOWED_PAGES.include?(page)
     end
+    add team_members_path
     # Add '/articles'
     add articles_path
     Dir.glob('app/views/articles/*.html.erb').each do |file|

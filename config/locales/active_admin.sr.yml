@@ -338,6 +338,10 @@ sr:
         new_model: Dodaj poziciju
         edit_model: Izmeni poziciju
         delete_model: Obriši poziciju
+      team_member:
+        new_model: Dodaj u tim
+        edit_model: Izmeni člana tima
+        delete_model: Obriši iz tima
     scopes:
       all: Svi
       admin: Admini

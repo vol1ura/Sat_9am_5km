@@ -12,7 +12,7 @@ module Navigation
     profile: { controller: 'athletes', action: 'show', signed_in: true },
     about_us: { controller: 'pages', page: 'about' },
     rules: { controller: 'pages', page: 'rules' },
-    team: { controller: 'pages', page: 'team' },
+    team: { controller: 'team_members' },
     donation: { controller: 'pages', page: 'donation' },
     joining: { controller: 'pages', page: 'joining' },
     contacts: { controller: 'pages', page: 'feedback' },
@@ -25,7 +25,7 @@ module Navigation
     CONTACTS_PAGE_ITEM,
     { key: :about_us, path: :page_path, params: { page: 'about' } },
     { key: :rules, path: :page_path, params: { page: 'rules' } },
-    { key: :team, path: :page_path, params: { page: 'team' }, domains: [:ru] },
+    { key: :team, path: :team_members_path, domains: [:ru] },
     { key: :donation, path: :page_path, params: { page: 'donation' } },
     { key: :joining, path: :page_path, params: { page: 'joining' } },
   ].freeze
