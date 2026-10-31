@@ -49,5 +49,9 @@ class ApplicationController < ActionController::Base
     MailerHost.host = request.host
   end
 
+  def render_not_found
+    render file: 'public/404.html', status: :not_found, layout: false
+  end
+
   helper_method :top_level_domain, :domain_locale, :current_locale, :policy_already_accepted?
 end

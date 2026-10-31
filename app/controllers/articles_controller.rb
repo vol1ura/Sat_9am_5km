@@ -18,6 +18,6 @@ class ArticlesController < ApplicationController
   end
 
   def validate_page
-    render file: 'public/404.html', status: :not_found if ALLOWED_PAGES.exclude?(page_name)
+    render_not_found if ALLOWED_PAGES.exclude?(page_name)
   end
 end

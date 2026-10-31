@@ -995,6 +995,7 @@ sr:
     show:
       registration_required: Molimo registrujte se na sajtu da biste videli profil učesnika. Ako je ovo vaš profil, molimo vas da se registrujete na sajtu i da nam pošaljete povratnu informaciju da bismo ga dodali vašem nalogu.
       profile_hidden: Podaci učesnika su skriveni jer još nije završio registraciju na sajtu.
+      email_not_confirmed: Profil nije dostupan dok se e-mail adresa ne potvrdi. Zatražite e-mail za potvrdu.
       description: 'Profil atletičara %{athlete_name}: rezultati, statistike i volontiranje'
       show_club_html: 'Prikaži statistike kluba %{link}'
       total_results: ukupno trčanja

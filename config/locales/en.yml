@@ -943,6 +943,7 @@ en:
     show:
       registration_required: You are trying to view the profile of an unregistered participant. If this is your profile, please register on the site and through the feedback form request to add this profile to your account.
       profile_hidden: Participant data is hidden because they have not completed registration on the site yet.
+      email_not_confirmed: This profile is unavailable until the email address is confirmed. Request a confirmation email.
       description: 'Participant Profile %{athlete_name}'
       show_club_html: 'View club statistics %{link}'
       total_results: total runs

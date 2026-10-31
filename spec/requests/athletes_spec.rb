@@ -42,6 +42,28 @@ RSpec.describe '/athletes' do
       expect(response.body).to include(goals_athlete_statistics_path(athlete))
     end
 
+    context 'when athlete has an unconfirmed user' do
+      let(:user) { create(:user, :with_email).tap { |u| u.update!(confirmed_at: nil) } }
+      let(:athlete) { create(:athlete, user:) }
+
+      it 'redirects guest to confirmation resend with alert' do
+        get athlete_url(athlete)
+
+        expect(response).to redirect_to(new_user_confirmation_url(user: { email: user.email }))
+        expect(flash[:alert]).to eq(I18n.t('athletes.show.email_not_confirmed'))
+      end
+
+      context 'when user is signed in' do
+        before { sign_in create(:user, :with_athlete) }
+
+        it 'returns not found' do
+          get athlete_url(athlete)
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
     context 'when athlete is unregistered and has fiveverst_code' do
       let(:athlete) { create(:athlete, :fiveverst) }
 

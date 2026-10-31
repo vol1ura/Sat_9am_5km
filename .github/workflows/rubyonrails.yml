@@ -16,7 +16,7 @@ jobs:
           ruby-version: 3.4.5
           bundler-cache: true
       - name: Security audit dependencies
-        run: bundle exec bundler-audit --update
+        run: bin/bundler-audit --update
       - name: Security audit application code
         run: bundle exec brakeman -q -w2
 

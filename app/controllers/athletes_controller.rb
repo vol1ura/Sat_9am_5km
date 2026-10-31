@@ -60,6 +60,7 @@ class AthletesController < ApplicationController
   def set_athlete_profile
     @athlete = Athlete.find params.expect(:id)
     return redirect_unregistered_athlete if !@athlete.user_id && @athlete.fiveverst_code
+    return redirect_unconfirmed_athlete if @athlete.user_id && !@athlete.user.confirmed?
 
     load_profile_nav
   end
@@ -69,6 +70,17 @@ class AthletesController < ApplicationController
       redirect_to activities_path, notice: t('athletes.show.profile_hidden')
     else
       redirect_to new_user_registration_path, alert: t('athletes.show.registration_required')
+    end
+  end
+
+  def redirect_unconfirmed_athlete
+    if user_signed_in?
+      render_not_found
+    else
+      redirect_to(
+        new_user_confirmation_path(user: { email: @athlete.user.email }),
+        alert: t('athletes.show.email_not_confirmed'),
+      )
     end
   end
 
