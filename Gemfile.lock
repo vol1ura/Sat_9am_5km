@@ -563,7 +563,7 @@ GEM
       ffi (~> 1.1)
     sys-filesystem (1.5.5)
       ffi (~> 1.1)
-    tailwindcss-rails (4.6.0)
+    tailwindcss-rails (4.7.0)
       railties (>= 7.0.0)
       tailwindcss-ruby (~> 4.0)
     tailwindcss-ruby (4.3.3)
