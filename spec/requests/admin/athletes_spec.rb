@@ -131,8 +131,6 @@ RSpec.describe '/admin/athletes' do
   end
 
   describe 'POST /admin/athletes' do
-    before { user.admin! }
-
     let(:result) { create(:result, athlete: nil) }
     let(:valid_attributes) do
       {
@@ -143,11 +141,30 @@ RSpec.describe '/admin/athletes' do
       }
     end
 
-    it 'creates a new contact' do
-      expect do
-        post admin_athletes_url, params: valid_attributes
-      end.to change(Athlete, :count).by(1)
-      expect(result.reload.athlete).to be_present
+    context 'when user is admin' do
+      before { user.admin! }
+
+      it 'creates a new contact' do
+        expect do
+          post admin_athletes_url, params: valid_attributes
+        end.to change(Athlete, :count).by(1)
+        expect(result.reload.athlete).to be_present
+      end
+    end
+
+    context 'without Result permission' do
+      let(:result) { create(:result, athlete: nil, activity_params: { published: true, date: 1.month.ago }) }
+
+      before { create(:permission, user: user, action: 'manage', subject_class: 'Athlete') }
+
+      it 'does not attach an athlete to an unauthorized result' do
+        expect do
+          post admin_athletes_url, params: valid_attributes
+        end.not_to change(Athlete, :count)
+
+        expect(response).to redirect_to root_path
+        expect(result.reload.athlete).to be_nil
+      end
     end
   end
 

@@ -67,7 +67,12 @@ ActiveAdmin.register User do
     if: proc { current_user.admin? },
     form: { role: [nil, 'admin'] },
   ) do |ids, inputs|
-    batch_action_collection.where(id: ids).update_all role: inputs[:role]
+    raise ActiveAdmin::AccessDenied.new(current_user, :update, User) unless current_user.admin?
+
+    role = inputs[:role].presence
+    raise ActionController::BadRequest, 'Invalid role' unless role.in?([nil, 'admin'])
+
+    batch_action_collection.where(id: ids).update_all(role:)
     redirect_to collection_path, notice: I18n.t('active_admin.users.successful_roles_changed')
   end
 end

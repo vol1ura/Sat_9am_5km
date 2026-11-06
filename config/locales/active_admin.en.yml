@@ -205,7 +205,7 @@ en:
       succesfully_destroyed:
         one: "Successfully deleted: 1 %{model}"
         other: "Successfully deleted: %{count} %{plural_model}"
-      successfully_moved_time: "Time shift (%{sign}%{delta}sec) performed for %{count} results"
+      successfully_moved_time: "Time shift (%{delta}sec) performed for %{count} results"
       selection_toggle_explanation: "(Select All / Deselect)"
       action_label: "%{title}"
       labels:

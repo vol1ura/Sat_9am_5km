@@ -92,6 +92,7 @@ ActiveAdmin.register Event do
   end
 
   member_action :analytics, method: :get, if: proc { can? :read, Event, id: resource.id } do
+    authorize! :read, resource
     @page_title = t '.title'
   end
 

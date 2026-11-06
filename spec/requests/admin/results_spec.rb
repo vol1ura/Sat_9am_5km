@@ -34,6 +34,7 @@ RSpec.describe '/admin/results' do
   context 'with manage permission' do
     before do
       create(:permission, user: user, action: 'manage', subject_class: 'Result', event_id: event.id)
+      create(:permission, user: user, action: 'update', subject_class: 'Activity', event_id: event.id)
       Bullet.unused_eager_loading_enable = false
     end
 
@@ -138,15 +139,28 @@ RSpec.describe '/admin/results' do
 
     describe 'PATCH /admin/activities/1/results/1/gender_set' do
       it 'assigns gender for athlete' do
+        create(:permission, user: user, action: 'manage', subject_class: 'Athlete')
         athlete = create(:athlete, gender: nil)
         result = create(:result, athlete:, activity:)
         patch gender_set_admin_activity_result_url(activity, result, gender: 'male', format: :js)
         expect(response).to be_successful
         expect(athlete.reload.gender).to eq 'male'
       end
+
+      it 'does not assign gender without Athlete permission' do
+        athlete = create(:athlete, gender: nil)
+        result = create(:result, athlete:, activity:)
+
+        patch gender_set_admin_activity_result_url(activity, result, gender: 'male', format: :js)
+
+        expect(response.body).to include I18n.t('active_admin.access_denied.message')
+        expect(athlete.reload.gender).to be_nil
+      end
     end
 
     describe 'POST /admin/activities/:activity_id/results/batch_action' do
+      before { activity.update!(published: false) }
+
       let(:valid_attributes) do
         {
           batch_action: :move_time,
@@ -156,10 +170,94 @@ RSpec.describe '/admin/results' do
       end
 
       it 'renders a successful response' do
-        post batch_action_admin_activity_results_url(activity, params: valid_attributes)
+        original_times = results.map(&:total_time)
+
+        expect do
+          post batch_action_admin_activity_results_url(activity, params: valid_attributes)
+        end.not_to change(Audited::Audit.where(auditable_type: 'Result'), :count)
         expect(response).to redirect_to admin_activity_results_path(activity)
         expect(flash[:notice]).to include 'Произведён сдвиг времени (-70сек) для 2 результатов'
+        expect(results.map { |result| result.reload.total_time }).to eq(original_times.map { |time| time - 70 })
       end
+
+      it 'does not update results outside the parent activity' do
+        foreign_result = create(:result)
+        foreign_time = foreign_result.total_time
+        valid_attributes[:collection_selection] = [foreign_result.id]
+
+        expect do
+          post batch_action_admin_activity_results_url(activity, params: valid_attributes)
+        end.not_to(change { results.map { |result| result.reload.total_time } })
+        expect(foreign_result.reload.total_time).to eq foreign_time
+      end
+
+      it 'does not update published results' do
+        activity.update!(published: true)
+
+        expect do
+          post batch_action_admin_activity_results_url(activity, params: valid_attributes)
+        end.not_to(change { results.map { |result| result.reload.total_time } })
+      end
+    end
+
+    describe 'POST batch destroy for a published activity' do
+      it 'does not destroy results' do
+        activity.update!(published: true)
+
+        expect do
+          post batch_action_admin_activity_results_url(activity), params: {
+            batch_action: :destroy,
+            collection_selection: results.map(&:id),
+          }
+        end.not_to change(Result, :count)
+
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
+
+  context 'with Activity update permission' do
+    before do
+      create(:permission, user: user, action: 'update', subject_class: 'Activity', event_id: event.id)
+      activity.update!(published: false)
+    end
+
+    it 'moves result time without Result update permission' do
+      original_times = results.map(&:total_time)
+
+      post batch_action_admin_activity_results_url(activity), params: {
+        batch_action: :move_time,
+        batch_action_inputs: { type: 'up', minutes: 1, seconds: 0 }.to_json,
+        collection_selection: results.map(&:id),
+      }
+
+      expect(results.map { |result| result.reload.total_time }).to eq(original_times.map { |time| time + 60 })
+    end
+  end
+
+  context 'with update permission' do
+    before do
+      create(:permission, user: user, action: 'update', subject_class: 'Result', event_id: event.id)
+    end
+
+    it 'updates a result through a custom action' do
+      put reset_athlete_admin_activity_result_url(activity, results.first, format: :js)
+
+      expect(response).to be_successful
+      expect(results.first.reload.athlete).to be_nil
+    end
+  end
+
+  context 'with destroy permission' do
+    before do
+      create(:permission, user: user, action: 'destroy', subject_class: 'Result', event_id: event.id)
+    end
+
+    it 'destroys a result through a custom action' do
+      delete drop_admin_activity_result_url(activity, results.last)
+
+      expect(response).to redirect_to admin_activity_results_path(activity)
+      expect(Result).not_to exist(results.last.id)
     end
   end
 
@@ -170,7 +268,7 @@ RSpec.describe '/admin/results' do
       it 'renders alert' do
         delete drop_time_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
-        expect(response.body).to include 'Не удалось'
+        expect(response.body).to include I18n.t('active_admin.access_denied.message')
       end
     end
 
@@ -178,7 +276,7 @@ RSpec.describe '/admin/results' do
       it 'renders alert' do
         delete drop_athlete_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
-        expect(response.body).to include 'Не удалось'
+        expect(response.body).to include I18n.t('active_admin.access_denied.message')
       end
     end
 
@@ -186,7 +284,7 @@ RSpec.describe '/admin/results' do
       it 'renders alert' do
         put reset_athlete_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
-        expect(response.body).to include 'Не удалось'
+        expect(response.body).to include I18n.t('active_admin.access_denied.message')
       end
     end
 
@@ -194,7 +292,7 @@ RSpec.describe '/admin/results' do
       it 'renders alert' do
         put up_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
-        expect(response.body).to include 'Проверьте корректность'
+        expect(response.body).to include I18n.t('active_admin.access_denied.message')
       end
     end
 
@@ -202,20 +300,38 @@ RSpec.describe '/admin/results' do
       it 'renders alert' do
         put down_admin_activity_result_url(activity, result, format: :js)
         expect(response).to be_successful
-        expect(response.body).to include 'Проверьте корректность'
+        expect(response.body).to include I18n.t('active_admin.access_denied.message')
       end
     end
 
     describe 'POST /admin/activities/1/results/2/insert_above' do
       it 'redirects to results' do
-        post insert_above_admin_activity_result_url(activity, result)
-        expect(response).to redirect_to admin_activity_results_path(activity)
+        post(
+          insert_above_admin_activity_result_url(activity, result),
+          headers: { 'HTTP_REFERER' => admin_activity_results_url(activity) },
+        )
+        expect(response).to redirect_to admin_activity_results_url(activity)
       end
 
       it 'appends new result' do
         expect do
           post insert_above_admin_activity_result_url(activity, result)
         end.not_to change(activity.results, :count)
+      end
+    end
+
+    describe 'POST /admin/activities/:activity_id/results/batch_action' do
+      it 'does not move result time' do
+        activity.update!(published: false)
+        original_times = results.map(&:total_time)
+
+        post batch_action_admin_activity_results_url(activity), params: {
+          batch_action: :move_time,
+          batch_action_inputs: { type: 'up', minutes: 1, seconds: 0 }.to_json,
+          collection_selection: results.map(&:id),
+        }
+
+        expect(results.map { |item| item.reload.total_time }).to eq original_times
       end
     end
 

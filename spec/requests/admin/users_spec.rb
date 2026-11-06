@@ -96,4 +96,13 @@ RSpec.describe '/admin/users' do
       expect(user.reload.role).to be_nil
     end
   end
+
+  describe 'DELETE /admin/users/1' do
+    it 'allows an admin to delete a user' do
+      other_user = create(:user)
+
+      expect { delete admin_user_url(other_user) }.to change(User, :count).by(-1)
+      expect(response).to redirect_to admin_users_path
+    end
+  end
 end

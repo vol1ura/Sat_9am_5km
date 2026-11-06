@@ -4,9 +4,14 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :publish, :toggle_mode, to: :update
+    alias_action :analytics, to: :read
+    alias_action :results, :volunteering, :trophies, to: :read
+    alias_action :up, :down, :drop_time, :drop_athlete, :reset_athlete, :insert_above, :gender_set, to: :update
+    alias_action :drop, to: :destroy
+
     return unless user
 
-    cannot :destroy, User unless user.super_admin?
     can(:manage, :all) and return if user.admin?
     return if user.permissions.blank?
 
@@ -55,5 +60,6 @@ class Ability
     cannot :destroy, Activity, published: true
     cannot :destroy, Athlete
     cannot :destroy, Club
+    cannot :destroy, User
   end
 end

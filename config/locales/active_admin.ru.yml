@@ -209,7 +209,7 @@ ru:
         few: "Успешно удалено: %{count} %{plural_model}"
         many: "Успешно удалено: %{count} %{plural_model}"
         other: "Успешно удалено: %{count} %{plural_model}"
-      successfully_moved_time: "Произведён сдвиг времени (%{sign}%{delta}сек) для %{count} результатов"
+      successfully_moved_time: "Произведён сдвиг времени (%{delta}сек) для %{count} результатов"
       selection_toggle_explanation: "(Отметить всё / Снять выделение)"
       action_label: "%{title}"
       labels:

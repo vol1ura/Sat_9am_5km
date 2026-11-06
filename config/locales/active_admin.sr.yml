@@ -209,7 +209,7 @@ sr:
         few: "Uspešno obrisano: %{count} %{plural_model}"
         many: "Uspešno obrisano: %{count} %{plural_model}"
         other: "Uspešno obrisano: %{count} %{plural_model}"
-      successfully_moved_time: "Promena vremena (%{sign}%{delta}sek) za %{count} rezultata"
+      successfully_moved_time: "Promena vremena (%{delta}sek) za %{count} rezultata"
       selection_toggle_explanation: "(Označi sve / Deselektuj)"
       action_label: "%{title}"
       labels:

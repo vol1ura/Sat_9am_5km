@@ -67,6 +67,10 @@ class Activity < ApplicationRecord
       .where(activity_id: Activity.published.where(date:).where.not(id:).select(:id))
   end
 
+  def mode_switchable?
+    !published? && (token? || results.empty?)
+  end
+
   def clear_live_results!
     event.update!(live_results: nil) if date.today?
   end

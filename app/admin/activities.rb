@@ -62,7 +62,7 @@ ActiveAdmin.register Activity do
   action_item(
     :toggle_mode,
     only: %i[show edit],
-    if: proc { !resource.published && (resource.token || resource.results.empty?) },
+    if: proc { resource.mode_switchable? },
   ) do
     link_to(
       resource.token ? 'Ручной режим' : 'Авто режим',
@@ -92,6 +92,9 @@ ActiveAdmin.register Activity do
   end
 
   member_action :publish, method: :patch do
+    authorize! :update, resource
+    raise ActiveAdmin::AccessDenied.new(current_user, :update, resource) if resource.published? || resource.token?
+
     if resource.results.empty?
       flash[:error] = t '.empty_protocol'
     elsif resource.doubled_results.exists?
@@ -106,6 +109,9 @@ ActiveAdmin.register Activity do
   end
 
   member_action :toggle_mode, method: :patch do
+    authorize! :update, resource
+    raise ActiveAdmin::AccessDenied.new(current_user, :update, resource) unless resource.mode_switchable?
+
     resource.update!(token: resource.token ? nil : SecureRandom.uuid)
     resource.clear_live_results!
     redirect_path = request.referer&.end_with?('edit') ? edit_admin_activity_path(resource) : admin_activity_path(resource)

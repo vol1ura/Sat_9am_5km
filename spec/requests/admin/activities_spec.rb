@@ -123,5 +123,28 @@ RSpec.describe '/admin/activities' do
       expect(response).to redirect_to admin_activity_url(activity)
       expect(activity.reload.token).to be_present
     end
+
+    it 'does not toggle mode for a published activity' do
+      activity.update!(published: true)
+
+      patch toggle_mode_admin_activity_url(activity)
+
+      expect(response).to redirect_to root_path
+      expect(activity.reload.token).to be_nil
+    end
+
+    context 'when a supervisor cannot update an old published activity' do
+      let(:user) { create(:user) }
+      let(:activity) { create(:activity, event: event, published: true, date: 1.month.ago) }
+
+      before { create(:permission, user: user, action: 'manage', subject_class: 'Activity', event: event) }
+
+      it 'does not bypass the update restriction' do
+        patch toggle_mode_admin_activity_url(activity)
+
+        expect(response).to redirect_to root_path
+        expect(activity.reload.token).to be_nil
+      end
+    end
   end
 end

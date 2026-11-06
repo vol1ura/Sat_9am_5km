@@ -47,7 +47,13 @@ ActiveAdmin.register Athlete do
 
   before_create do |athlete|
     result_id = params.dig(:athlete, :result_id)
-    athlete.results << Result.find(result_id) if result_id
+    if result_id
+      result = Result.find(result_id)
+      authorize! :manage, result
+      raise ActiveAdmin::AccessDenied.new(current_user, :manage, result) if result.athlete_id?
+
+      athlete.results << result
+    end
   end
 
   controller do
@@ -67,6 +73,7 @@ ActiveAdmin.register Athlete do
 
   batch_action :reunite, confirm: I18n.t('active_admin.athletes.confirm_reunite'),
                          if: proc { can? :manage, Athlete } do |ids|
+    authorize! :manage, Athlete
     if Athletes::Reuniter.call(batch_action_collection.where(id: ids), ids)
       flash[:notice] = I18n.t('active_admin.athletes.successful_reunite')
     else
@@ -76,16 +83,19 @@ ActiveAdmin.register Athlete do
   end
 
   member_action :results, method: :get do
+    authorize! :read, resource
     @results = resource.results.includes(activity: :event).order('activity.date DESC')
     @page_title = t '.title'
   end
 
   member_action :volunteering, method: :get do
+    authorize! :read, resource
     @volunteering = resource.volunteering.includes(activity: :event)
     @page_title = t '.title'
   end
 
   member_action :trophies, method: :get do
+    authorize! :read, resource
     @trophies = resource.trophies.includes(:badge).order(created_at: :desc)
     @page_title = t '.title'
   end
