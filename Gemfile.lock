@@ -304,9 +304,9 @@ GEM
       logger
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (6.0.6)
+    minitest (6.1.0)
       drb (~> 2.0)
-      prism (~> 1.5)
+      prism (>= 1.5, < 3)
     msgpack (1.8.3)
     net-imap (0.6.8)
       date
@@ -400,7 +400,7 @@ GEM
     rails-i18n (8.1.0)
       i18n (>= 0.7, < 2)
       railties (>= 8.0.0, < 9)
-    rails_performance (1.7.0.beta1)
+    rails_performance (1.6.0)
       browser
       railties
       redis
@@ -428,8 +428,8 @@ GEM
       prism (>= 1.6.0)
       rbs (>= 4.0.0)
       tsort
-    redis (5.4.1)
-      redis-client (>= 0.22.0)
+    redis (6.0.0)
+      redis-client (= 0.30.1)
     redis-client (0.30.1)
       connection_pool
     regexp_parser (2.13.1)
