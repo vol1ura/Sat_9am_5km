@@ -47,8 +47,7 @@ ActiveAdmin.register Activity do
       scanners.each { |file| ScannerProcessingService.call activity, file }
       flash[:notice] = t '.success_upload' if params[:activity][:timer] || scanners.any?
     end
-  rescue CSV::MalformedCSVError => e
-    Rollbar.error e
+  rescue CSV::MalformedCSVError
     flash[:error] = t '.failed_upload'
   rescue TimerProcessingService::FormatError => e
     flash[:error] = t '.bad_timer_format', message: e.message

@@ -7,7 +7,16 @@
             thresholds: @run_thresholds,
             recent: @recent_runs,
             icon: 'person-running',
-          ) %>
+          ) do |goal| %>
+        <% if @total_results.positive? %>
+          <% goal.with_details do %>
+            <%= link_to t('athletes.show.more_details'),
+                        results_athlete_path(@athlete),
+                        class: 'font-medium text-link hover:underline',
+                        data: { turbo_stream: true, turbo_frame: '_top' } %>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
     <%= render Ui::CardComponent.new do %>
       <%= render Ui::GoalProgressComponent.new(
@@ -16,7 +25,16 @@
             thresholds: @vol_thresholds,
             recent: @recent_vol,
             icon: 'heart',
-          ) %>
+          ) do |goal| %>
+        <% if @total_vol.positive? %>
+          <% goal.with_details do %>
+            <%= link_to t('athletes.show.more_details'),
+                        volunteering_athlete_path(@athlete),
+                        class: 'font-medium text-link hover:underline',
+                        data: { turbo_stream: true, turbo_frame: '_top' } %>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
     <%= render Ui::CardComponent.new do %>
       <%= render Ui::GoalProgressComponent.new(

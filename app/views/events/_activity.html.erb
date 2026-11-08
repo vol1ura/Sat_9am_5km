@@ -6,7 +6,15 @@
     <td class="date" data-date="<%= activity.date %>"><%= link_to l(activity.date), activity %></td>
     <td class="results_count cell-center"><%= @results_count[activity] %></td>
     <td class="volunteers_count cell-center"><%= @volunteers_count.fetch(activity, 0) %></td>
-    <td class="hidden-on-phone"><%= "#{male_leader_result.athlete.name} (#{male_leader_result.time_string})" if male_leader_result&.athlete %></td>
-    <td class="hidden-on-phone"><%= "#{female_leader_result.athlete.name} (#{female_leader_result.time_string})" if female_leader_result&.athlete %></td>
+    <td class="hidden-on-phone">
+      <% if male_leader_result&.athlete %>
+        <%= link_to male_leader_result.athlete.name, male_leader_result.athlete, class: 'athlete-link' %> (<%= male_leader_result.time_string %>)
+      <% end %>
+    </td>
+    <td class="hidden-on-phone">
+      <% if female_leader_result&.athlete %>
+        <%= link_to female_leader_result.athlete.name, female_leader_result.athlete, class: 'athlete-link' %> (<%= female_leader_result.time_string %>)
+      <% end %>
+    </td>
   <% end %>
 <% end %>
