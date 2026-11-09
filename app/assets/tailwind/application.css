@@ -884,46 +884,35 @@
   }
 
   nav.pagination {
-    @apply flex flex-wrap items-center justify-center md:justify-start;
+    @apply flex flex-nowrap items-stretch justify-center md:justify-start;
   }
 
-  nav.pagination span {
-    @apply relative inline-flex min-w-9 items-center justify-center border border-line bg-surface px-3 py-1.5 text-sm text-ink;
+  nav.pagination > a,
+  nav.pagination > span {
+    @apply relative inline-flex min-h-8 min-w-8 items-center justify-center border border-line bg-surface px-2 py-1.5 text-sm leading-5 text-ink no-underline sm:min-h-9 sm:min-w-9 sm:px-3;
   }
 
-  nav.pagination span + span {
+  nav.pagination > * + * {
     @apply -ml-px;
   }
 
-  nav.pagination span:first-child {
+  nav.pagination > *:first-child {
     @apply rounded-l-md;
   }
 
-  nav.pagination span:last-child {
+  nav.pagination > *:last-child {
     @apply rounded-r-md;
   }
 
-  nav.pagination span.page.current {
+  nav.pagination > span.page.current {
     @apply z-[1] bg-accent-subtle font-medium text-accent;
   }
 
-  nav.pagination span.page a,
-  nav.pagination span.next a,
-  nav.pagination span.prev a,
-  nav.pagination span.first a,
-  nav.pagination span.last a {
-    @apply block no-underline text-ink hover:text-accent;
+  nav.pagination > a:hover {
+    @apply z-[1] bg-surface-elevated text-accent;
   }
 
-  nav.pagination span.page:not(.current):hover,
-  nav.pagination span.next:hover,
-  nav.pagination span.prev:hover,
-  nav.pagination span.first:hover,
-  nav.pagination span.last:hover {
-    @apply bg-surface-elevated;
-  }
-
-  nav.pagination span.gap {
+  nav.pagination > span.gap {
     @apply border-line bg-surface text-ink-muted;
   }
 

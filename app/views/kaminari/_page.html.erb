@@ -1,7 +1,5 @@
 <% if page.current? %>
   <span class="page current" aria-current="page"><%= page %></span>
 <% else %>
-  <span class="page">
-    <%= link_to page, url, rel: page.rel, remote: remote %>
-  </span>
+  <%= link_to page, url, rel: page.rel, remote: remote, class: 'page' %>
 <% end %>
