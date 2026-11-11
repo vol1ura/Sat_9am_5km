@@ -1240,7 +1240,7 @@ sr:
       opening_soon: Uskoro otvaranje!
       start_cancelled: Sledeći start je otkazan.
       cancellation_reason: 'Razlog:'
-      inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="/" class="alert-link">naše trke</a>.'
+      inactivity_disclaimer_html: 'Pratite vesti u <a href="%{link}" class="alert-link">Telegram kanalu</a>, a u međuvremenu, dođite na ostale <a href="%{events_path}" class="alert-link">naše trke</a>.'
       place: Mesto događaja
       event_totals: Ukupno od početka
       event_dynamics: Dinamika događaja

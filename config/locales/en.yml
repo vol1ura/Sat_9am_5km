@@ -1178,7 +1178,7 @@ en:
       opening_soon: Opening Soon!
       start_cancelled: Nearest Start Cancelled.
       cancellation_reason: 'Reason:'
-      inactivity_disclaimer_html: 'Follow the news in our <a href="%{link}" class="alert-link">Telegram channel</a>, and meanwhile come to other <a href="/" class="alert-link">our runs</a>.'
+      inactivity_disclaimer_html: 'Follow the news in our <a href="%{link}" class="alert-link">Telegram channel</a>, and meanwhile come to other <a href="%{events_path}" class="alert-link">our runs</a>.'
       place: Venue
       event_totals: Over All Time There Was
       event_dynamics: Event Dynamics

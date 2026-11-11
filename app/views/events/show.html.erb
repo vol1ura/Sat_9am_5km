@@ -14,7 +14,7 @@
     <i class="fa-solid fa-triangle-exclamation shrink-0 text-2xl"></i>
     <div>
       <strong><%= t '.attention' %></strong> <%= @total_activities.zero? ? t('.opening_soon') : t('.start_cancelled') %>
-      <%= t '.inactivity_disclaimer_html', link: Rails.configuration.telegram[top_level_domain] %>
+      <%= t '.inactivity_disclaimer_html', link: Rails.configuration.telegram[top_level_domain], events_path: events_path %>
       <% if @event.cancellation_reason.present? %>
         <br><strong><%= t '.cancellation_reason' %></strong>
         <%= @event.cancellation_reason %>

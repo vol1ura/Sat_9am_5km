@@ -1233,7 +1233,7 @@ ru:
       opening_soon: Скоро открытие!
       start_cancelled: Ближайший старт отменён.
       cancellation_reason: 'Причина:'
-      inactivity_disclaimer_html: 'Следите за новостями в <a href="%{link}" class="alert-link">телеграм-канале</a>, а пока приходите на другие <a href="/" class="alert-link">наши пробежки</a>.'
+      inactivity_disclaimer_html: 'Следите за новостями в <a href="%{link}" class="alert-link">телеграм-канале</a>, а пока приходите на другие <a href="%{events_path}" class="alert-link">наши пробежки</a>.'
       place: Место проведения
       event_totals: За всё время было
       event_dynamics: Динамика мероприятия
