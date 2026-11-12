@@ -9,6 +9,7 @@ class ClubsController < ApplicationController
     result = @q.result
     result = result.order(:name) if @q.sorts.none? { |s| s.name == 'name' }
     @clubs = result.page(params[:page]).per(25)
+    @clubs = @clubs.includes(logo_attachment: :blob) if request.format.json?
     club_ids = @clubs.map(&:id)
 
     if club_ids.empty?
