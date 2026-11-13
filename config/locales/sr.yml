@@ -532,6 +532,9 @@ sr:
       next: '▶️'
       last: '⏭️'
       truncate: '&hellip;'
+  layouts:
+    mailer:
+      socials: 'Naše društvene mreže:'
   notification_mailer:
     parkzhrun_error: 'Greška! Nije moguće kreirati trku ParkŽrun'
     feedback: 'Novi odgovor na sajt S95'

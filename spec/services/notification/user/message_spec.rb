@@ -22,10 +22,12 @@ RSpec.describe Notification::User::Message do
       let(:user) { create(:user, :with_email) }
       let(:html) { '<p>Hello, user!</p>' }
       let(:delivery) { instance_double(ActionMailer::MessageDelivery, deliver_now: true) }
+      let(:mailer) { instance_double(UserNotificationMailer) }
 
       before do
         allow(Notification::MarkdownConverter).to receive(:to_html).with(message_text).and_return(html)
-        allow(UserNotificationMailer).to receive(:notify).with(user, html).and_return(delivery)
+        allow(UserNotificationMailer).to receive(:with).with(host: user.country.host).and_return(mailer)
+        allow(mailer).to receive(:notify).with(user, html).and_return(delivery)
       end
 
       it 'sends message by email' do

@@ -26,7 +26,7 @@ module Notification
 
     def deliver_by_email
       html = build_email_html
-      UserNotificationMailer.notify(@user, html).deliver_now
+      UserNotificationMailer.with(host: @user.country.host).notify(@user, html).deliver_now
     end
 
     def deliver_by_telegram

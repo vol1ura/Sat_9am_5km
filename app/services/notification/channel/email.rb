@@ -8,7 +8,7 @@ module Notification
         retry_count = 0
 
         begin
-          UserNotificationMailer.notify(user, html).deliver_now
+          UserNotificationMailer.with(host: user.country.host).notify(user, html).deliver_now
         rescue Net::OpenTimeout, Net::ReadTimeout
           (retry_count += 1) < 3 ? retry : raise
         end

@@ -9,7 +9,7 @@ ActiveAdmin.register User do
   permit_params do
     permitted = %i[first_name last_name password password_confirmation email]
     permitted << :role if current_user.super_admin?
-    permitted << :note if current_user.admin?
+    permitted << :note << :country_id if current_user.admin?
     permitted
   end
 
@@ -46,6 +46,7 @@ ActiveAdmin.register User do
     f.inputs do
       f.input :first_name
       f.input :last_name
+      f.input :country, include_blank: false if current_user.admin?
       f.input :email if (!f.object.email && !f.object.unconfirmed_email) || current_user.super_admin?
       f.input :role if current_user.super_admin?
       f.input :note if current_user.admin?

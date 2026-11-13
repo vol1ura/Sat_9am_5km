@@ -531,6 +531,9 @@ ru:
       next: '▶️'
       last: '⏭️'
       truncate: '&hellip;'
+  layouts:
+    mailer:
+      socials: 'Наши соцсети:'
   notification_mailer:
     parkzhrun_error: 'Ошибка! Не удалось создать забег ПаркЖрун'
     feedback: 'Новый отзыв на сайте С95'

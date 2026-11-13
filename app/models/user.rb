@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # :timeoutable, :trackable, :validatable, :rememberable
   devise :database_authenticatable, :confirmable, :registerable
 
-  belongs_to :country, optional: true
+  belongs_to :country
   has_one :athlete, dependent: :nullify
   accepts_nested_attributes_for :athlete, reject_if: :all_blank
   has_many :permissions, dependent: :destroy
@@ -40,7 +40,6 @@ class User < ApplicationRecord
 
   before_validation :format_emergency_contact, if: :will_save_change_to_emergency_contact_phone?
   before_save :update_athlete_name, if: proc { will_save_change_to_first_name? || will_save_change_to_last_name? }
-  before_create { self.country ||= Country.default }
 
   scope :protocol_responsible, lambda { |activity|
     joins(:athlete).where(athlete: { id: activity.volunteers.where(role: %i[director result_handler]).select(:athlete_id) })

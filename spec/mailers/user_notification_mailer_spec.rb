@@ -5,7 +5,7 @@ RSpec.describe UserNotificationMailer do
     let(:country) { countries(:ru) }
     let(:user) { build_stubbed(:user, :with_email, country:) }
     let(:html_body) { '<strong>Привет!</strong> Не пропусти субботний забег.' }
-    let(:mail) { described_class.notify(user, html_body) }
+    let(:mail) { described_class.with(host: country.host).notify(user, html_body) }
     let(:unsubscribe_url) { "https://#{country.host}/user" }
     let(:locale) { country.locale }
     let(:unsubscribe_html) do

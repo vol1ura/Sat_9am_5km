@@ -245,7 +245,7 @@ en:
       batch_destroy_confirm: 'Are you sure you want to delete selected results?'
       batch_move_time_confirm: 'Are you sure you want to move time for selected results?'
     newsletters:
-      notified: 'Newsletter sample has been sent to your Telegram'
+      notified: 'A newsletter sample has been sent to you'
     users:
       confirm_change_roles: 'Are you sure you want to change permissions for selected users?'
       successful_roles_changed: 'Permissions successfully set.'

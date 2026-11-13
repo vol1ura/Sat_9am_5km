@@ -2,6 +2,8 @@
 
 RSpec.describe '/user' do
   describe 'POST /user' do
+    before { host! 's95.ru' }
+
     let(:valid_params) do
       {
         user: {
@@ -15,23 +17,23 @@ RSpec.describe '/user' do
     end
 
     context 'with all required fields filled in' do
-      it 'creates the user and redirects to the sign-in page', :aggregate_failures do
-        expect { post user_registration_path, params: valid_params }.to change(User, :count).by(1)
-
-        expect(response).to redirect_to(new_user_session_path)
-        user = User.last
-        expect(user).to have_attributes(
+      let(:expected_attributes) do
+        {
           first_name: 'Ivan',
           last_name: 'Ivanov',
           email: 'ivan@example.com',
           policy_accepted: true,
-        )
-        expect(user.athlete.gender).to eq 'male'
+          country: countries(:ru),
+        }
       end
 
-      it 'saves the default country when host has no country TLD' do
-        post user_registration_path, params: valid_params
-        expect(User.last.country).to eq Country.default
+      it 'creates the user and redirects to the sign-in page', :aggregate_failures do
+        expect { post user_registration_path, params: valid_params }.to change(User, :count).by(1)
+
+        expect(response).to redirect_to new_user_session_path
+        user = User.last
+        expect(user).to have_attributes expected_attributes
+        expect(user.athlete.gender).to eq 'male'
       end
 
       it 'saves the optional home event when provided', :aggregate_failures do

@@ -7,10 +7,12 @@ RSpec.describe Notification::Channel::Email do
   let(:text) { 'Notification text' }
   let(:html) { '<p>Notification text</p>' }
   let(:delivery) { instance_double(ActionMailer::MessageDelivery) }
+  let(:mailer) { instance_double(UserNotificationMailer) }
 
   before do
     allow(Notification::MarkdownConverter).to receive(:to_html).with(text).and_return(html)
-    allow(UserNotificationMailer).to receive(:notify).with(user, html).and_return(delivery)
+    allow(UserNotificationMailer).to receive(:with).with(host: user.country.host).and_return(mailer)
+    allow(mailer).to receive(:notify).with(user, html).and_return(delivery)
   end
 
   it 'retries delivery after a network timeout' do

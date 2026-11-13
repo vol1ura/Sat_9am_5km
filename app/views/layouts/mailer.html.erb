@@ -9,5 +9,15 @@
 
   <body>
     <%= yield %>
+    <% unless controller.is_a?(Devise::Mailer) || controller.is_a?(AuthLinkMailer) %>
+      <p style="margin-top:24px;font-size:14px;line-height:1.5;">
+        <%= t 'layouts.mailer.socials' %><br>
+        <%= link_to t('navbars.contacts.telegram'), Rails.configuration.telegram[@mailer_country] %>
+        <% if @mailer_country == :ru %>
+          <br>
+          <%= link_to t('navbars.contacts.vk'), 'https://vk.com/s95ru' %>
+        <% end %>
+      </p>
+    <% end %>
   </body>
 </html>

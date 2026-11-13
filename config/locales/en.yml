@@ -481,6 +481,9 @@ en:
       next: '▶️'
       last: '⏭️'
       truncate: '&hellip;'
+  layouts:
+    mailer:
+      socials: 'Our social networks:'
   notification_mailer:
     parkzhrun_error: 'Error! Failed to create ParkZhrun run'
     feedback: 'New feedback on S95 website'

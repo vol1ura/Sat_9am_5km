@@ -11,6 +11,7 @@ RSpec.describe User do
       user.last_name = Faker::Name.last_name
       user.password = Faker::Internet.password(min_length: 6)
       user.email = Faker::Internet.email
+      user.country = Country.default
       expect(user).to be_valid
     end
 
@@ -25,6 +26,7 @@ RSpec.describe User do
       user.first_name = Faker::Name.first_name
       user.last_name = Faker::Name.last_name
       user.telegram_id = Faker::Number.number(digits: 10)
+      user.country = Country.default
       expect(user).to be_valid
     end
 

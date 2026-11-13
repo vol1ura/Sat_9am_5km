@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_29_150000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_13_180000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -293,7 +293,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_150000) do
     t.boolean "policy_accepted", default: false, null: false
     t.bigint "favorite_event_ids", default: [], null: false, array: true
     t.text "disabled_notifications", default: [], null: false, array: true
-    t.bigint "country_id"
+    t.bigint "country_id", null: false
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
@@ -344,7 +344,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_150000) do
   add_foreign_key "team_members", "athletes"
   add_foreign_key "trophies", "athletes"
   add_foreign_key "trophies", "badges"
-  add_foreign_key "users", "countries", on_delete: :nullify
+  add_foreign_key "users", "countries"
   add_foreign_key "volunteering_positions", "events"
   add_foreign_key "volunteers", "activities"
   add_foreign_key "volunteers", "athletes"

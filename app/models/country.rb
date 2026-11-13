@@ -3,6 +3,7 @@
 class Country < ApplicationRecord
   has_many :clubs, dependent: :destroy
   has_many :events, -> { unscope(:order) }, class_name: 'Event', dependent: :destroy, inverse_of: :country
+  has_many :users, dependent: :restrict_with_exception
   has_many :activities, through: :events
 
   validates :code, presence: true, uniqueness: true
