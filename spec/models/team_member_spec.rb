@@ -3,8 +3,14 @@
 RSpec.describe TeamMember do
   it { is_expected.not_to be_valid }
 
-  it 'valid with athlete, role, rank and photo' do
+  it 'valid with athlete, country, role, rank and photo' do
     expect(build(:team_member)).to be_valid
+  end
+
+  it 'invalid without country' do
+    member = build(:team_member)
+    member.country = nil
+    expect(member).not_to be_valid
   end
 
   it 'has rank 1 by default' do

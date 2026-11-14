@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_13_180000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_14_170000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -247,7 +247,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_13_180000) do
     t.integer "rank", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id", null: false
     t.index ["athlete_id"], name: "index_team_members_on_athlete_id", unique: true
+    t.index ["country_id"], name: "index_team_members_on_country_id"
     t.check_constraint "rank >= 1", name: "chk_team_members_rank"
   end
 
@@ -342,6 +344,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_13_180000) do
   add_foreign_key "results", "activities"
   add_foreign_key "results", "athletes", on_delete: :nullify
   add_foreign_key "team_members", "athletes"
+  add_foreign_key "team_members", "countries"
   add_foreign_key "trophies", "athletes"
   add_foreign_key "trophies", "badges"
   add_foreign_key "users", "countries"

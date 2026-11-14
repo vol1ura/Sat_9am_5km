@@ -58,6 +58,7 @@ RSpec.describe '/admin/team_members' do
       {
         team_member: {
           athlete_id: athlete.id,
+          country_id: countries(:ru).id,
           role_translations: { ru: 'Координатор', en: 'Coordinator' },
           photo: fixture_file_upload('default.png', 'image/png'),
         },
@@ -68,7 +69,13 @@ RSpec.describe '/admin/team_members' do
       expect do
         post admin_team_members_url, params: valid_attributes
       end.to change(TeamMember, :count).by(1)
-      expect(TeamMember.last).to have_attributes(athlete: athlete, name: athlete.name, role: 'Координатор', rank: 1)
+      expect(TeamMember.last).to have_attributes(
+        athlete: athlete,
+        country: countries(:ru),
+        name: athlete.name,
+        role: 'Координатор',
+        rank: 1,
+      )
     end
 
     it 'does not create a team member without photo' do

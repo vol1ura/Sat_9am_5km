@@ -8,6 +8,7 @@ active_admin_form_for [:admin, resource] do |f|
       label 'Участник', class: 'label'
       render partial: '/admin/athlete_fields', locals: { resource: f.object.athlete, form: f }
     end
+    input :country, include_blank: false, selected: f.object.country_id || Country.default.id
     input :rank, hint: 'Порядок отображения'
     localized_input :role
     input(

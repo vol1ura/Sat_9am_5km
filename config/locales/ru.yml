@@ -207,6 +207,7 @@ ru:
         role: роль
         rank: ранг
         photo: фото
+        country: страна
       badge:
         name: название
         conditions: условия получения

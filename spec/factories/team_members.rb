@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :team_member do
     athlete
+    country { Country.default }
     role { Faker::Job.title }
     sequence :rank
     after(:build) do |member|

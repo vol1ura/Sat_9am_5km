@@ -2,17 +2,19 @@
 
 ActiveAdmin.register TeamMember do
   menu priority: 110
-  includes :athlete
+  includes :athlete, :country
 
-  permit_params :athlete_id, :rank, :photo, role_translations: I18n.available_locales
+  permit_params :athlete_id, :country_id, :rank, :photo, role_translations: I18n.available_locales
 
-  config.filters = false
   config.sort_order = 'rank_asc'
+
+  filter :country
 
   index download_links: false do
     selectable_column
     column :rank
     column(:athlete, sortable: false) { |m| link_to m.name, m.athlete }
+    column :country
     column :role, sortable: false
     actions
   end
@@ -21,6 +23,7 @@ ActiveAdmin.register TeamMember do
     attributes_table do
       row :rank
       row(:athlete) { |m| link_to m.name, m.athlete }
+      row :country
       I18n.available_locales.each do |locale|
         row("#{TeamMember.human_attribute_name(:role)} (#{locale})") { |m| m.role_translations[locale.to_s] }
       end

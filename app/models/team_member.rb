@@ -2,6 +2,7 @@
 
 class TeamMember < ApplicationRecord
   belongs_to :athlete
+  belongs_to :country
 
   has_one_attached :photo do |attachable|
     attachable.variant :web, resize_to_limit: [600, 800], preprocessed: true
@@ -19,6 +20,6 @@ class TeamMember < ApplicationRecord
   delegate :name, to: :athlete, allow_nil: true
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[rank]
+    %w[country_id rank]
   end
 end

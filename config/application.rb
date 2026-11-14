@@ -65,5 +65,6 @@ module Sat9am5km
 
     config.telegram = config_for(:telegram)
     config.additional_events = config_for(:additional_events)
+    config.team_page_domains = ENV.fetch('TEAM_PAGE_DOMAINS', 'ru').split(',').map(&:to_sym).freeze
   end
 end

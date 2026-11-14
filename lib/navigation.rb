@@ -25,7 +25,7 @@ module Navigation
     CONTACTS_PAGE_ITEM,
     { key: :about_us, path: :page_path, params: { page: 'about' } },
     { key: :rules, path: :page_path, params: { page: 'rules' } },
-    { key: :team, path: :team_members_path, domains: [:ru] },
+    { key: :team, path: :team_members_path, domains: Rails.configuration.team_page_domains },
     { key: :donation, path: :page_path, params: { page: 'donation' } },
     { key: :joining, path: :page_path, params: { page: 'joining' } },
   ].freeze

@@ -201,6 +201,7 @@ en:
         role: role
         rank: rank
         photo: photo
+        country: country
       badge:
         name: name
         conditions: conditions

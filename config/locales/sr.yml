@@ -209,6 +209,7 @@ sr:
         role: uloga
         rank: redosled
         photo: fotografija
+        country: država
       badge:
         name: naziv
         conditions: uslovi za dobijanje
