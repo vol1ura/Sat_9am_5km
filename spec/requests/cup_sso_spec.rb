@@ -7,69 +7,80 @@ RSpec.describe 'GET /cup_sso' do
   include CupCredentials
 
   let(:state) { 'a' * 32 }
-  let(:callback) { 'http://127.0.0.1:8080/api/v1/auth/s95/callback' }
   let(:user) { create(:user, :with_athlete) }
 
-  before { stub_cup_credentials }
+  before do
+    stub_cup_credentials
+    host! 's95.ru'
+  end
 
   context 'when the visitor is signed in' do
     before { sign_in user }
 
-    it 'redirects to the exact cup callback with a signed token' do
-      get cup_sso_path, params: { return_to: callback, state: state }
+    it 'redirects to cup.s95.ru' do
+      get cup_sso_path, params: { state: }
 
       expect(response).to have_http_status(:found)
       location = URI(response.headers['Location'])
-      expect(location.host).to eq('127.0.0.1')
-      expect(location.path).to eq(Cup::CallbackUrl::PATH)
-      expect(signed_payload(location)['athlete_id']).to eq(user.athlete.id)
+      expect(location.host).to eq('cup.s95.ru')
+      expect(location.path).to eq(CupSsoController::CALLBACK_PATH)
     end
 
-    it 'allows only the production host over https' do
-      target = 'https://cup.s95.ru/api/v1/auth/s95/callback'
-      get cup_sso_path, params: { return_to: target, state: state }
+    it 'puts athlete_id in the signed token without admin flags' do
+      get cup_sso_path, params: { state: }
+      payload = signed_payload(URI(response.headers['Location']))
 
-      expect(response).to redirect_to(production_callback)
+      expect(payload['athlete_id']).to eq(user.athlete.id)
+      expect(payload).not_to include('is_admin', 'athlete_code')
+    end
+
+    it 'uses the country-specific cup host on s95.rs' do
+      host! 's95.rs'
+      get cup_sso_path, params: { state: }
+
+      expect(URI(response.headers['Location']).host).to eq('cup.s95.rs')
+    end
+
+    it 'uses a credential override URL for local development' do
+      allow(Rails.application.credentials).to receive(:dig).and_wrap_original do |method, *args|
+        case args
+        when %i[cup url] then 'http://127.0.0.1:8080'
+        when %i[cup sso_secret] then CupCredentials::SECRET
+        else method.call(*args)
+        end
+      end
+      get cup_sso_path, params: { state: }
+      location = URI(response.headers['Location'])
+      expect(location.host).to eq('127.0.0.1')
+      expect(location.port).to eq(8080)
     end
 
     it 'does not write to the database' do
-      expect { get cup_sso_path, params: { return_to: callback, state: state } }.not_to change(Athlete, :count)
-    end
-
-    it 'rejects a lookalike host' do
-      get cup_sso_path, params: { return_to: 'https://cup.s95.ru.evil.test/api/v1/auth/s95/callback', state: state }
-
-      expect(response).to have_http_status(:bad_request)
-    end
-
-    it 'rejects a subdomain of the public host' do
-      get cup_sso_path, params: { return_to: 'https://evil.cup.s95.ru/api/v1/auth/s95/callback', state: state }
-
-      expect(response).to have_http_status(:bad_request)
-    end
-
-    it 'rejects plain http on the public host' do
-      get cup_sso_path, params: { return_to: 'http://cup.s95.ru/api/v1/auth/s95/callback', state: state }
-
-      expect(response).to have_http_status(:bad_request)
+      expect { get cup_sso_path, params: { state: } }.not_to change(Athlete, :count)
     end
 
     it 'sends a user without an athlete back home' do
       sign_in create(:user)
-      get cup_sso_path, params: { return_to: callback, state: state }
+      get cup_sso_path, params: { state: }
 
       expect(response).to redirect_to(root_path)
     end
   end
 
   it 'sends a guest to the S95 login' do
-    get cup_sso_path, params: { return_to: callback, state: state }
+    get cup_sso_path, params: { state: }
 
     expect(response).to redirect_to(new_user_session_path)
   end
 
-  def production_callback
-    @production_callback ||= %r{\Ahttps://cup\.s95\.ru/api/v1/auth/s95/callback\?}
+  it 'returns 404 when cup sso is not configured' do
+    stub_cup_credentials(sso_secret: '')
+    sign_in user
+
+    get cup_sso_path, params: { state: }
+
+    expect(response).to have_http_status(:not_found)
+    expect(response.body).to include('404')
   end
 
   def signed_payload(location)
