@@ -113,8 +113,6 @@ Rails.application.routes.draw do
     end
     namespace :cup do
       get 'athletes/search', to: 'athletes#search'
-      post 'athletes/batch', to: 'athletes#batch'
-      get 'protocol', to: 'protocols#show'
     end
     namespace :mobile do
       get 'athletes/:code/info', to: 'athletes#info'

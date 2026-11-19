@@ -52,16 +52,15 @@ RSpec.describe '/api/cup/athletes' do
 
       expect(response.parsed_body.fetch('athletes').size).to eq(1)
     end
-  end
 
-  describe 'POST /api/cup/athletes/batch' do
     it 'counts only published volunteering on main roles when there are no runs' do
       dates = Array.new(6) { |index| Date.new(2026, 1, index + 1) }
       dates.first(4).each { |date| create(:volunteer, athlete: athlete, role: :marshal, activity_params: { date: }) }
       create(:volunteer, athlete: athlete, role: :other, activity_params: { date: dates[4] })
       create(:volunteer, athlete: athlete, role: :timer, activity_params: { date: dates[5], published: false })
 
-      post '/api/cup/athletes/batch', params: { ids: [athlete.id, 0] }, headers: headers, as: :json
+      code = Athlete::SAT_9AM_5KM_BORDER + athlete.id
+      get '/api/cup/athletes/search', params: { q: code.to_s }, headers: headers
 
       row = response.parsed_body.fetch('athletes').sole
       expect(row).to include('id' => athlete.id, 'volunteering_count' => 4)
@@ -71,14 +70,15 @@ RSpec.describe '/api/cup/athletes' do
       athlete.update!(stats: { 'results' => { 'count' => 2 }, 'volunteers' => { 'count' => 9 } })
       create(:volunteer, athlete: athlete, role: :marshal)
 
-      post '/api/cup/athletes/batch', params: { ids: [athlete.id] }, headers: headers, as: :json
+      code = Athlete::SAT_9AM_5KM_BORDER + athlete.id
+      get '/api/cup/athletes/search', params: { q: code.to_s }, headers: headers
 
       expect(response.parsed_body.fetch('athletes').sole).to include('runs_count' => 2, 'volunteering_count' => 9)
     end
 
     it 'does not insert rows' do
       expect do
-        post '/api/cup/athletes/batch', params: { ids: [athlete.id] }, headers: headers, as: :json
+        get '/api/cup/athletes/search', params: { q: 'Кубкова' }, headers: headers
       end.not_to change(Athlete, :count)
     end
   end
