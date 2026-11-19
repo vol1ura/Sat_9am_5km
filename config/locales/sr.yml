@@ -1472,3 +1472,7 @@ sr:
       ignore: Ako ste ne zatražili ovaj link, samo zanemarite ovu poruku.
       regards: "S poštovanjem,"
       team: tim S95
+  cup_sso:
+    missing_athlete: Profil sportiste nije pronađen
+  cup_sso:
+    missing_athlete: Profil sportiste nije pronađen

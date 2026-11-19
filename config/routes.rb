@@ -98,6 +98,8 @@ Rails.application.routes.draw do
     },
   )
 
+  get 'cup_sso', to: 'cup_sso#show'
+
   namespace :api, defaults: { format: :json } do
     namespace :internal do
       resource :user, only: [] do
@@ -108,6 +110,11 @@ Rails.application.routes.draw do
     namespace :parkzhrun do
       resources :athletes, only: :update
       resources :activities, only: :create
+    end
+    namespace :cup do
+      get 'athletes/search', to: 'athletes#search'
+      post 'athletes/batch', to: 'athletes#batch'
+      get 'protocol', to: 'protocols#show'
     end
     namespace :mobile do
       get 'athletes/:code/info', to: 'athletes#info'
