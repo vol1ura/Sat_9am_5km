@@ -42,13 +42,7 @@ RSpec.describe 'GET /cup_sso' do
     end
 
     it 'uses a credential override URL for local development' do
-      allow(Rails.application.credentials).to receive(:dig).and_wrap_original do |method, *args|
-        case args
-        when %i[cup url] then 'http://127.0.0.1:8080'
-        when %i[cup sso_secret] then CupCredentials::SECRET
-        else method.call(*args)
-        end
-      end
+      stub_cup_credentials(url: 'http://127.0.0.1:8080')
       get cup_sso_path, params: { state: }
       location = URI(response.headers['Location'])
       expect(location.host).to eq('127.0.0.1')
