@@ -888,7 +888,7 @@ sr:
         <h2>Zašto S95?</h2>
         <p>
           <ol>
-            <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Rusiji, Belorusiji i Srbiji, a svi rezultati su objedinjeni u jedinstvenom sistemu.</li>
+            <li>Mi smo međunarodna zajednica: S95 trke se održavaju u Srbiji, Rusiji, Belorusiji i Kazahstanu, a svi rezultati su objedinjeni u jedinstvenom sistemu.</li>
             <li>Imamo motivacioni sistem nagrada i izazova — dobijajte <a href="%{badges_link}">dostignuća</a> ne samo za visoke rezultate, već i za redovno učešće i lični napredak.</li>
             <li>Naša platforma nije samo o trčanju, već i o druženju i važnoj društvenoj misiji: razvijamo volontiranje, gradimo prijateljsku zajednicu i pomažemo u pronalaženju istomišljenika.</li>
             <li>Jednostavna i brza registracija novih učesnika, pogodan lični profil, brza prijava na sajt, svi podaci su uvek pod rukom. Učesnici ne moraju da traže svoj QR kod negde u pošti, da se sećaju i unose lozinku za prijavu na sajt, oni će moći da primaju obaveštenja o rezultatima trka čim budu objavljeni.</li>
@@ -911,7 +911,7 @@ sr:
         <p>Od trenutka slanja prijave do prvog tehničkog starta može proći neko vreme, ali <a href="%{team_link}">S95 tim</a> će učiniti sve što je moguće da vaš park što pre ispuni subotnji trkački duh!</p>
       support:
         title: Podrška
-        description: S95 trke u Moskvi organizuju i održavaju sa podrškom "Гранты Мэра Москвы".
+        description: S95 trke u Moskvi održavaju sa podrškom "Гранты Мэра Москвы".
         acknowledgment: Mi hvalimo Moskovsko Praviteljstvo za podršku našem projektu i razvoju sporta u glavnom gradu.
       cta:
         title: Spremni da otvorite S95?

@@ -748,7 +748,7 @@ en:
         <h2>Why S95?</h2>
         <p>
           <ol>
-            <li>We're an international community: S95 runs take place in Russia, Belarus, and Serbia, and all results are collected in a unified system</li>
+            <li>We're an international community: S95 runs take place in Russia, Belarus, Kazakhstan, and Serbia, and all results are collected in a unified system</li>
             <li>We have a motivating badge and challenge system — get <a href="%{badges_link}">achievements</a> not only for high results, but also just for participation and personal progress</li>
             <li>Our platform isn't just about running, but also about communication and social mission: we actively develop volunteering, communicate, find new friends</li>
             <li>Simple and fast registration of new participants, convenient personal account, fast login to the site, all data always at hand. Participants won't have to search for their QR code somewhere in the mail, remember and enter the password to log in to the site, they'll be able to receive notifications about the results of the runs as soon as they're published.</li>
@@ -771,7 +771,7 @@ en:
         <p>From the moment of application to the first technical start, some time may pass, but the <a href="%{team_link}">S95 team</a> will do everything possible so your park fills with Saturday running spirit as soon as possible!</p>
       support:
         title: Support
-        description: S95 runs in Moscow are organized and held with the support of "Гранты Мэра Москвы".
+        description: S95 runs in Moscow are held with the support of "Гранты Мэра Москвы".
         acknowledgment: We thank the Moscow Government for supporting our project and developing sports in the capital.
       cta:
         title: Ready to become part of a movement?
