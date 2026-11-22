@@ -6,6 +6,8 @@ class UsersController < ApplicationController
 
   def show
     @barcode = BarcodeService.call "A#{current_user.athlete.code}", module_size: 8
+    @mobile_pairing_code = flash[:mobile_pairing_code]
+    @mobile_sessions = current_user.mobile_sessions.active.order(last_used_at: :desc)
   end
 
   def edit; end

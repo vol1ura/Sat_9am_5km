@@ -1298,6 +1298,19 @@ sr:
       comment_placeholder: Komentar
       name_placeholder: Ime ili ID...
   users:
+    mobile_access:
+      title: Aplikacija Volonter S95
+      description: Kreirajte kod za povezivanje mobilne aplikacije. Pristup uređaja možete opozvati u bilo kom trenutku.
+      code_label: Kod potvrde
+      expires_in: Važi 5 minuta i koristi se jednom
+      generate: Kreiraj novi kod
+      generated: Kod potvrde je kreiran
+      devices: Aktivni uređaji
+      unknown_device: Nepoznat uređaj
+      revoke: Opozovi
+      revoked: Pristup uređaja je opozvan
+      revoke_all: Opozovi sve uređaje
+      revoked_all: Pristup svih uređaja je opozvan
     show:
       title: Podešavanja
       description: 'Podešavanja za %{user_name}'

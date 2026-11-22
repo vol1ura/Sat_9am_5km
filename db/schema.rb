@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_14_170000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_20_170000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -71,6 +71,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_170000) do
     t.datetime "updated_at", null: false
     t.string "token"
     t.index ["event_id", "date"], name: "index_activities_on_event_id_and_date"
+    t.index ["token"], name: "index_activities_on_token", unique: true, where: "(token IS NOT NULL)"
   end
 
   create_table "athletes", force: :cascade do |t|
@@ -190,6 +191,30 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_170000) do
     t.datetime "updated_at", null: false
     t.index ["athlete_id", "friend_id"], name: "index_friendships_on_athlete_id_and_friend_id", unique: true
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
+  end
+
+  create_table "mobile_pairing_codes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "code_digest", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "consumed_at"
+    t.integer "failed_attempts", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "expires_at"], name: "index_mobile_pairing_codes_on_user_id_and_expires_at"
+  end
+
+  create_table "mobile_sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "token_digest", null: false
+    t.string "device_name"
+    t.datetime "expires_at", null: false
+    t.datetime "last_used_at"
+    t.datetime "revoked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token_digest"], name: "index_mobile_sessions_on_token_digest", unique: true
+    t.index ["user_id", "revoked_at"], name: "index_mobile_sessions_on_user_id_and_revoked_at"
   end
 
   create_table "newsletters", force: :cascade do |t|
@@ -340,6 +365,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_170000) do
   add_foreign_key "events", "countries", on_delete: :cascade
   add_foreign_key "friendships", "athletes"
   add_foreign_key "friendships", "athletes", column: "friend_id"
+  add_foreign_key "mobile_pairing_codes", "users"
+  add_foreign_key "mobile_sessions", "users"
   add_foreign_key "permissions", "users"
   add_foreign_key "results", "activities"
   add_foreign_key "results", "athletes", on_delete: :nullify

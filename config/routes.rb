@@ -76,6 +76,10 @@ Rails.application.routes.draw do
   resources :team_members, path: 'team', only: :index
 
   resource :user, only: %i[show edit update destroy]
+  scope path: :user, module: :users do
+    resource :mobile_access, only: %i[create destroy], controller: :mobile_access
+    resources :mobile_sessions, only: :destroy
+  end
   resource :cookie_consent, only: :create
   resolve('User') { [:user] }
 
@@ -110,7 +114,25 @@ Rails.application.routes.draw do
       resources :activities, only: :create
     end
     namespace :mobile do
-      get 'athletes/:code/info', to: 'athletes#info'
+      get 'athletes/search', to: '/athletes#index'
+      post 'auth/identify', to: 'sessions#identify'
+      post 'auth/session', to: 'sessions#create'
+      delete 'auth/session', to: 'sessions#destroy'
+      get 'me', to: 'profiles#show'
+      scope module: :management do
+        resources :activities, only: :show do
+          get :upcoming, on: :collection
+          member do
+            patch :mode
+            get :publication_readiness
+            post :publish
+          end
+          resources :results, only: %i[create update destroy] do
+            patch :reorder, on: :collection
+          end
+          resources :volunteers, only: %i[create update destroy]
+        end
+      end
       post 'activities/stopwatch', to: 'activities#stopwatch'
       post 'activities/live', to: 'activities#live'
       post 'activities/scanner', to: 'activities#scanner'

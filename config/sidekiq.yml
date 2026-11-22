@@ -47,6 +47,11 @@
       class: EmptyAthletesCleanupJob
       queue: low
       description: Remove athletes without user, results, volunteering and name
+    mobile_pairing_codes_cleanup:
+      cron: "0 5 * * MON"
+      class: MobilePairingCodesCleanupJob
+      queue: low
+      description: Remove expired mobile pairing codes
     home_badge_awarding:
       cron: "30 5 * * SUN"
       class: HomeBadgeAwardingJob

@@ -1236,6 +1236,19 @@ en:
       comment_placeholder: Comment
       name_placeholder: Name or ID...
   users:
+    mobile_access:
+      title: S95 Volunteer App
+      description: Create a code to link the mobile app. Device sessions can be revoked here at any time.
+      code_label: Confirmation code
+      expires_in: Valid for 5 minutes and one use
+      generate: Create a new code
+      generated: Confirmation code created
+      devices: Active devices
+      unknown_device: Unknown device
+      revoke: Revoke
+      revoked: Device access revoked
+      revoke_all: Revoke all devices
+      revoked_all: Access revoked for all devices
     show:
       title: Settings
       description: 'Settings for user %{user_name}'

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe AutoCreateActivitiesJob do
-  include ActiveSupport::Testing::TimeHelpers
-
   it 'enqueues on low queue' do
     expect { described_class.perform_later }.to have_enqueued_job.on_queue('low')
   end

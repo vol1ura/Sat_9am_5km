@@ -32,6 +32,10 @@ class Rack::Attack
     req.ip if req.path.start_with?('/email_sessions') && req.post?
   end
 
+  throttle('mobile_auth/ip', limit: 10, period: 5.minutes) do |req|
+    req.ip if req.path.start_with?('/api/mobile/auth/') && req.post?
+  end
+
   blocklist('scrapers') do |req|
     next false unless req.path.match?(%r{\A/(activities|athletes)/\d+})
 

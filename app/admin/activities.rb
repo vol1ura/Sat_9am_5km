@@ -94,15 +94,15 @@ ActiveAdmin.register Activity do
     authorize! :update, resource
     raise ActiveAdmin::AccessDenied.new(current_user, :update, resource) if resource.published? || resource.token?
 
-    if resource.results.empty?
+    errors = Activities::Publish.call(resource)
+    if errors.include?('empty_protocol')
       flash[:error] = t '.empty_protocol'
-    elsif resource.doubled_results.exists?
+    elsif errors.include?('doubled_results')
       flash[:error] = t '.has_doubled_results'
-    elsif resource.correct?
-      resource.update!(published: true, token: nil)
-      flash[:notice] = t '.successfully_published'
-    else
+    elsif errors.any?
       flash[:error] = t '.incorrect_protocol'
+    else
+      flash[:notice] = t '.successfully_published'
     end
     redirect_to admin_activity_path(resource)
   end
@@ -111,8 +111,7 @@ ActiveAdmin.register Activity do
     authorize! :update, resource
     raise ActiveAdmin::AccessDenied.new(current_user, :update, resource) unless resource.mode_switchable?
 
-    resource.update!(token: resource.token ? nil : SecureRandom.uuid)
-    resource.clear_live_results!
+    Activities::ToggleMode.call(resource, automatic: !resource.token?)
     redirect_path = request.referer&.end_with?('edit') ? edit_admin_activity_path(resource) : admin_activity_path(resource)
     redirect_to redirect_path, notice: t(".#{resource.token ? 'auto' : 'manual'}.success")
   end

@@ -9,6 +9,17 @@ RSpec.describe Activity do
     it 'valid with event' do
       expect(activity).to be_valid
     end
+
+    it 'invalid with duplicated token' do
+      token = SecureRandom.uuid
+      create(:activity, token:)
+      expect(build(:activity, token:)).not_to be_valid
+    end
+
+    it 'valid when token is nil' do
+      create(:activity, token: nil)
+      expect(build(:activity, token: nil)).to be_valid
+    end
   end
 
   describe '#leader_result' do

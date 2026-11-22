@@ -11,6 +11,7 @@ class Activity < ApplicationRecord
   has_many :volunteers, dependent: :destroy, inverse_of: :activity
 
   validates :date, presence: true
+  validates :token, uniqueness: true, allow_nil: true
   validates_associated :volunteers, if: :will_save_change_to_date?
 
   after_commit :postprocessing, if: :saved_change_to_published?

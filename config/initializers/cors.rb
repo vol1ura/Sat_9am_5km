@@ -11,6 +11,6 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 
     resource '/api/mobile/*',
       headers: :any,
-      methods: %i[get post options head]
+      methods: %i[get post patch delete options head]
   end
 end

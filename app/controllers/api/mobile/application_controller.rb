@@ -8,6 +8,14 @@ module API
 
       rescue_from(ActiveRecord::RecordNotFound) { head :not_found }
 
+      rescue_from ActiveRecord::RecordInvalid do |error|
+        render json: { error: 'validation_failed', details: error.record.errors.to_hash }, status: :unprocessable_content
+      end
+
+      rescue_from ActionController::ParameterMissing do |error|
+        render json: { error: 'invalid_parameters', details: error.message }, status: :bad_request
+      end
+
       private
 
       def switch_locale(&)

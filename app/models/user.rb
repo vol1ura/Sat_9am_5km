@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_one :athlete, dependent: :nullify
   accepts_nested_attributes_for :athlete, reject_if: :all_blank
   has_many :permissions, dependent: :destroy
+  has_many :mobile_pairing_codes, dependent: :destroy
+  has_many :mobile_sessions, dependent: :destroy
 
   has_one_attached :image do |attachable|
     attachable.variant :web, resize_to_fill: [200, 200]

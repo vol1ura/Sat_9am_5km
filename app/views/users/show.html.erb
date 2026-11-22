@@ -19,9 +19,14 @@
         <div class="flex items-start gap-3 text-sm">
           <i class="fa-solid fa-qrcode mt-0.5 w-4 shrink-0 text-brand" aria-hidden="true"></i>
           <div>
-            <%= link_to "A#{current_user.athlete.code}", '#',
-                  class: 'font-medium',
-                  data: { controller: 'dialog', dialog_id_value: 'barcodeModal', action: 'click->dialog#open' } %>
+            <%=
+              link_to(
+                "A#{current_user.athlete.code}",
+                '#',
+                class: 'font-medium',
+                data: { controller: 'dialog', dialog_id_value: 'barcodeModal', action: 'click->dialog#open' },
+              )
+            %>
           </div>
         </div>
 
@@ -81,6 +86,60 @@
           <%= t '.edit' %>
         <% end %>
       </div>
+    <% end %>
+
+    <%= render Ui::CardComponent.new(class: 'mb-4') do %>
+      <h2 class="font-display text-xl font-semibold text-ink"><%= t 'users.mobile_access.title' %></h2>
+      <p class="mt-2 text-sm leading-relaxed text-ink-muted"><%= t 'users.mobile_access.description' %></p>
+
+      <% if @mobile_pairing_code %>
+        <div class="mt-4 rounded-lg border border-brand/30 bg-brand-subtle p-4 text-center">
+          <p class="text-sm text-ink-muted"><%= t 'users.mobile_access.code_label' %></p>
+          <p class="mt-1 font-mono text-3xl font-bold tracking-[0.3em] text-ink"><%= @mobile_pairing_code %></p>
+          <p class="mt-2 text-xs text-ink-muted"><%= t 'users.mobile_access.expires_in' %></p>
+        </div>
+      <% end %>
+
+      <div class="mt-4">
+        <%=
+          button_to(
+            t('users.mobile_access.generate'),
+            mobile_access_path,
+            method: :post,
+            class: 'inline-flex items-center rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white',
+          )
+        %>
+      </div>
+
+      <% if @mobile_sessions.any? %>
+        <h3 class="mt-6 text-sm font-semibold text-ink"><%= t 'users.mobile_access.devices' %></h3>
+        <div class="mt-2 divide-y divide-line rounded-lg border border-line">
+          <% @mobile_sessions.each do |session| %>
+            <div class="flex items-center justify-between gap-3 p-3">
+              <div class="min-w-0 text-sm">
+                <p class="truncate font-medium text-ink"><%= session.device_name.presence || t('users.mobile_access.unknown_device') %></p>
+                <p class="text-xs text-ink-muted"><%= l(session.last_used_at || session.created_at, format: :short) %></p>
+              </div>
+              <%=
+                button_to(
+                  t('users.mobile_access.revoke'),
+                  mobile_session_path(session),
+                  method: :delete,
+                  class: 'text-sm font-medium text-danger',
+                )
+              %>
+            </div>
+          <% end %>
+        </div>
+        <%=
+          button_to(
+            t('users.mobile_access.revoke_all'),
+            mobile_access_path,
+            method: :delete,
+            class: 'mt-3 text-sm font-medium text-danger',
+          )
+        %>
+      <% end %>
     <% end %>
 
     <%= render Ui::CardComponent.new(class: 'border-danger/25 bg-danger-subtle/30') do %>

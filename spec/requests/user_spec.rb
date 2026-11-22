@@ -32,6 +32,14 @@ RSpec.describe '/user' do
       it { expect(response).to be_successful }
     end
 
+    describe 'POST /user/mobile_access' do
+      it 'routes to the singular controller and creates a pairing code' do
+        expect { post mobile_access_url }.to change(MobilePairingCode, :count).by(1)
+
+        expect(response).to redirect_to user_path
+      end
+    end
+
     describe 'POST /user' do
       it 'updates user attributes' do
         expect { patch user_url, params: { user: { first_name: 'Tester' } } }
