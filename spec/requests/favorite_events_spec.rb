@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe '/favorite_events' do
   let(:user) { create(:user) }
   let(:event) { create(:event) }
