@@ -98,7 +98,7 @@ Rails.application.routes.draw do
     },
   )
 
-  get 'cup_sso', to: 'cup_sso#show'
+  get 'cup/authorize', to: 'cup#authorize'
 
   namespace :api, defaults: { format: :json } do
     namespace :internal do

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class CupSsoController < ApplicationController
+class CupController < ApplicationController
   CALLBACK_PATH = '/api/v1/auth/s95/callback'
   ALLOWED_TOP_LEVEL_DOMAINS = %i[ru rs by kz].freeze
 
   prepend_before_action :ensure_configured!
   before_action :authenticate_user!
 
-  def show
+  def authorize
     athlete = Athlete.includes(:event).find_by(user_id: current_user.id)
-    return redirect_to(root_path, alert: t('cup_sso.missing_athlete')) unless athlete
+    return redirect_to(root_path, alert: t('cup.missing_athlete')) unless athlete
 
     token = ::Cup::SsoToken.build(payload_for(athlete))
     redirect_to callback_url(token), allow_other_host: true
@@ -24,21 +24,11 @@ class CupSsoController < ApplicationController
   end
 
   def callback_url(token)
-    query = URI.encode_www_form(token:, state:)
-    base =
-      Rails.application.credentials.dig(:cup, :urls, top_level_domain) ||
-      Rails.application.credentials.dig(:cup, :url)
-
-    if base.present?
-      root = base.to_s.end_with?('/') ? base : "#{base}/"
-      URI.join(root, "#{CALLBACK_PATH}?#{query}").to_s
-    else
-      URI::HTTPS.build(
-        host: "cup.s95.#{top_level_domain}",
-        path: CALLBACK_PATH,
-        query: query,
-      ).to_s
-    end
+    URI::HTTPS.build(
+      host: "cup.s95.#{top_level_domain}",
+      path: CALLBACK_PATH,
+      query: URI.encode_www_form(token:, state:),
+    ).to_s
   end
 
   def payload_for(athlete)

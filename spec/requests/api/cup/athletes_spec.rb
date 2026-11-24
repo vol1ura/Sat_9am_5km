@@ -53,7 +53,7 @@ RSpec.describe '/api/cup/athletes' do
       expect(response.parsed_body.fetch('athletes').size).to eq(1)
     end
 
-    it 'counts only published volunteering on main roles when there are no runs' do
+    it 'returns published volunteering counts by role' do
       dates = Array.new(6) { |index| Date.new(2026, 1, index + 1) }
       dates.first(4).each { |date| create(:volunteer, athlete: athlete, role: :marshal, activity_params: { date: }) }
       create(:volunteer, athlete: athlete, role: :other, activity_params: { date: dates[4] })
@@ -63,17 +63,21 @@ RSpec.describe '/api/cup/athletes' do
       get '/api/cup/athletes/search', params: { q: code.to_s }, headers: headers
 
       row = response.parsed_body.fetch('athletes').sole
-      expect(row).to include('id' => athlete.id, 'volunteering_count' => 4)
+      expect(row).to include('id' => athlete.id)
+      expect(row['volunteering_by_role']).to eq('marshal' => 4, 'other' => 1)
+      expect(row).not_to have_key('volunteering_count')
     end
 
-    it 'uses the stored stats when the athlete already has runs' do
+    it 'reads runs_count from stored stats' do
       athlete.update!(stats: { 'results' => { 'count' => 2 }, 'volunteers' => { 'count' => 9 } })
       create(:volunteer, athlete: athlete, role: :marshal)
 
       code = Athlete::SAT_9AM_5KM_BORDER + athlete.id
       get '/api/cup/athletes/search', params: { q: code.to_s }, headers: headers
 
-      expect(response.parsed_body.fetch('athletes').sole).to include('runs_count' => 2, 'volunteering_count' => 9)
+      row = response.parsed_body.fetch('athletes').sole
+      expect(row['runs_count']).to eq(2)
+      expect(row['volunteering_by_role']).to eq('marshal' => 1)
     end
 
     it 'does not insert rows' do

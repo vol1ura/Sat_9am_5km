@@ -4,17 +4,10 @@ module API
   module Cup
     class AthletesController < ApplicationController
       MAX_SEARCH = 20
-      MAIN_ROLES = Volunteer.roles.keys - %w[other]
 
       def search
         @athletes = search_scope.to_a
-        zero_run_ids = @athletes.filter_map { |athlete| athlete.id if athlete.stats.dig('results', 'count').to_i.zero? }
-        @main_role_counts =
-          if zero_run_ids.empty?
-            {}
-          else
-            Volunteer.published.where(athlete_id: zero_run_ids, role: MAIN_ROLES).group(:athlete_id).count
-          end
+        @volunteering_by_role = volunteering_by_role(@athletes.map(&:id))
       end
 
       private
@@ -25,6 +18,21 @@ module API
 
         relation = numeric?(query) ? Athlete.where(code_params(query)) : Athlete.search_by_name(query)
         relation.includes(:event, :club).limit(MAX_SEARCH)
+      end
+
+      def volunteering_by_role(athlete_ids)
+        return {} if athlete_ids.empty?
+
+        counts = Hash.new { |by_athlete, athlete_id| by_athlete[athlete_id] = {} }
+        grouped = Volunteer.published.where(athlete_id: athlete_ids).group(:athlete_id, :role).count
+        grouped.each do |(athlete_id, role), count|
+          counts[athlete_id][role_name(role)] = count
+        end
+        counts
+      end
+
+      def role_name(role)
+        role.is_a?(Integer) ? Volunteer.roles.key(role) : role.to_s
       end
 
       def numeric?(query)
