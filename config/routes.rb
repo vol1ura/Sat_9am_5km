@@ -113,6 +113,11 @@ Rails.application.routes.draw do
       resources :athletes, only: :update
       resources :activities, only: :create
     end
+    namespace :challenger do
+      resources :athletes, only: [] do
+        get :latest_runs, on: :collection
+      end
+    end
     namespace :mobile do
       get 'athletes/search', to: '/athletes#index'
       post 'auth/identify', to: 'sessions#identify'
