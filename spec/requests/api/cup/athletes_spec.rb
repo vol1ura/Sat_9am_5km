@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative '../../../support/cup_credentials'
 
 RSpec.describe '/api/cup/athletes' do
-  include CupCredentials
-
-  let(:headers) { { 'Authorization' => "Bearer #{CupCredentials::KEY}" } }
+  let(:api_key) { 'cup-test-key' }
+  let(:headers) { { 'Authorization' => "Bearer #{api_key}" } }
   let(:event) { create(:event, name: 'Ангарские пруды', code_name: 'angarskieprudy') }
   let(:club) { create(:club, name: 'Wake&Run') }
   let!(:athlete) do
     create(:athlete, name: 'Анна Кубкова', gender: :female, event: event, club: club, stats: {})
   end
 
-  before { stub_cup_credentials }
+  before do
+    allow(Rails.application.credentials).to receive(:dig).with(:cup, :api_key).and_return(api_key)
+  end
 
   describe 'GET /api/cup/athletes/search' do
     it 'rejects a missing key' do
@@ -22,11 +22,14 @@ RSpec.describe '/api/cup/athletes' do
       expect(response).to have_http_status(:unauthorized)
     end
 
-    it 'fails closed when the api key is blank' do
-      stub_cup_credentials(api_key: '')
-      get '/api/cup/athletes/search', params: { q: 'Кубкова' }, headers: headers
+    context 'when the API key is blank' do
+      let(:api_key) { '' }
 
-      expect(response).to have_http_status(:service_unavailable)
+      it 'fails closed' do
+        get '/api/cup/athletes/search', params: { q: 'Кубкова' }, headers: headers
+
+        expect(response).to have_http_status(:service_unavailable)
+      end
     end
 
     it 'finds an athlete by name without extra queries per row' do
@@ -42,6 +45,12 @@ RSpec.describe '/api/cup/athletes' do
       get '/api/cup/athletes/search', params: { q: code.to_s }, headers: headers
 
       expect(response.parsed_body.fetch('athletes').pluck('id')).to eq([athlete.id])
+    end
+
+    it 'returns nothing for a two-digit query' do
+      get '/api/cup/athletes/search', params: { q: '12' }, headers: headers
+
+      expect(response.parsed_body.fetch('athletes')).to be_empty
     end
 
     it 'caps the result at the search limit' do

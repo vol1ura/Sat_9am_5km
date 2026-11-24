@@ -13,11 +13,7 @@ module API
       private
 
       def search_scope
-        query = params[:q].to_s.strip
-        return Athlete.none if query.length < 2
-
-        relation = numeric?(query) ? Athlete.where(code_params(query)) : Athlete.search_by_name(query)
-        relation.includes(:event, :club).limit(MAX_SEARCH)
+        Athlete.lookup(params[:q]).includes(:event, :club).limit(MAX_SEARCH)
       end
 
       def volunteering_by_role(athlete_ids)
@@ -33,14 +29,6 @@ module API
 
       def role_name(role)
         role.is_a?(Integer) ? Volunteer.roles.key(role) : role.to_s
-      end
-
-      def numeric?(query)
-        query.match?(/\A\d{3,}\z/)
-      end
-
-      def code_params(query)
-        Athlete::PersonalCode.new(query.to_i).to_params
       end
     end
   end

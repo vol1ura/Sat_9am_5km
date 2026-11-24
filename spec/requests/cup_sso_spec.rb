@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative '../support/cup_credentials'
 
 RSpec.describe 'GET /cup/authorize' do
-  include CupCredentials
-
+  let(:sso_secret) { 's' * 32 }
   let(:state) { 'a' * 32 }
   let(:user) { create(:user, :with_athlete) }
 
   before do
-    stub_cup_credentials
+    allow(Rails.application.credentials).to receive(:dig).with(:cup, :sso_secret).and_return(sso_secret)
     host! 's95.ru'
   end
 
@@ -59,20 +57,22 @@ RSpec.describe 'GET /cup/authorize' do
     expect(response).to redirect_to(new_user_session_path)
   end
 
-  it 'returns 404 when cup sso is not configured' do
-    stub_cup_credentials(sso_secret: '')
-    sign_in user
+  context 'when sso is not configured' do
+    let(:sso_secret) { '' }
 
-    get cup_authorize_path, params: { state: }
+    it 'returns 404' do
+      sign_in user
+      get cup_authorize_path, params: { state: }
 
-    expect(response).to have_http_status(:not_found)
-    expect(response.body).to include('404')
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to include('404')
+    end
   end
 
   def signed_payload(location)
     token = Rack::Utils.parse_query(location.query).fetch('token')
     outer = JSON.parse(Base64.urlsafe_decode64(token))
-    digest = OpenSSL::HMAC.digest('SHA256', CupCredentials::SECRET, outer.fetch('p'))
+    digest = OpenSSL::HMAC.digest('SHA256', sso_secret, outer.fetch('p'))
     expect(outer.fetch('s')).to eq(Base64.urlsafe_encode64(digest, padding: false))
     JSON.parse(Base64.urlsafe_decode64(outer.fetch('p')))
   end
