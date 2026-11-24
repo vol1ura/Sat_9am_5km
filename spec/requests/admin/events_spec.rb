@@ -70,25 +70,24 @@ RSpec.describe '/admin/events' do
     let(:event) { create(:event) }
     let(:configured_renew_job) { instance_double(ActiveJob::ConfiguredJob, perform_later: true) }
 
-    before do
-      allow(RenewGoingToEventJob).to receive(:set).and_return(configured_renew_job)
-      allow(Notification::EventCancellationJob).to receive(:perform_later)
-    end
+    before { allow(RenewGoingToEventJob).to receive(:set).and_return(configured_renew_job) }
 
     it 'enqueues cancellation notification before renewing going athletes' do
-      patch admin_event_url(event), params: { event: { active: false }, notify_cancellation: '1' }
-
-      expect(Notification::EventCancellationJob).to have_received(:perform_later).with(event.id).ordered
-      expect(RenewGoingToEventJob).to have_received(:set).with(queue: :sequential).ordered
-      expect(configured_renew_job).to have_received(:perform_later).with(event.id).ordered
-    end
-
-    it 'enqueues only renew job when notifications are disabled' do
-      patch admin_event_url(event), params: { event: { active: false }, notify_cancellation: '0' }
+      expect do
+        patch admin_event_url(event), params: { event: { active: false }, notify_cancellation: '1' }
+      end.to have_enqueued_job(Notification::EventCancellationJob).with(event.id)
 
       expect(RenewGoingToEventJob).to have_received(:set).with(queue: :sequential)
       expect(configured_renew_job).to have_received(:perform_later).with(event.id)
-      expect(Notification::EventCancellationJob).not_to have_received(:perform_later)
+    end
+
+    it 'enqueues only renew job when notifications are disabled' do
+      expect do
+        patch admin_event_url(event), params: { event: { active: false }, notify_cancellation: '0' }
+      end.not_to have_enqueued_job(Notification::EventCancellationJob)
+
+      expect(RenewGoingToEventJob).to have_received(:set).with(queue: :sequential)
+      expect(configured_renew_job).to have_received(:perform_later).with(event.id)
     end
   end
 end

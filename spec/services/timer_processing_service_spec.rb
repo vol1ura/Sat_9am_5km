@@ -5,12 +5,12 @@ RSpec.describe TimerProcessingService, type: :service do
 
   let(:activity) { create(:activity) }
 
-  before { allow(TimerProcessingJob).to receive(:perform_later) }
-
   shared_examples 'timer parsing' do
     it 'schedules results processing and change activity date according to timer file' do
-      expect { timer_parser }.to change(activity, :date).to(expected_date)
-      expect(TimerProcessingJob).to have_received(:perform_later).with(activity.id, expected_data).once
+      expect do
+        timer_parser
+      end.to change(activity, :date).to(expected_date)
+        .and have_enqueued_job(TimerProcessingJob).with(activity.id, expected_data).once
     end
   end
 
@@ -18,8 +18,10 @@ RSpec.describe TimerProcessingService, type: :service do
     let(:file_timer) { nil }
 
     it 'skips processing' do
-      expect(timer_parser).to be_nil
-      expect(TimerProcessingJob).not_to have_received(:perform_later)
+      result = nil
+
+      expect { result = timer_parser }.not_to have_enqueued_job(TimerProcessingJob)
+      expect(result).to be_nil
     end
   end
 

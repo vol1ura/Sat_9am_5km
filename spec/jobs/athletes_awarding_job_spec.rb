@@ -19,7 +19,6 @@ RSpec.describe AthletesAwardingJob do
         create(:participating_badge, threshold:)
         create(:participating_badge, threshold: threshold, type: 'volunteer')
       end
-      allow(FunrunAwardingJob).to receive(:perform_later).with(activity.id, jubilee_badge.id)
       allow(FunrunAwardingJob).to receive(:set).with(wait: 12.hours).and_return(FunrunAwardingJob)
 
       24.times do |idx|
@@ -32,13 +31,12 @@ RSpec.describe AthletesAwardingJob do
     end
 
     it 'creates new trophies' do
-      expect do
-        described_class.perform_now(activity.id)
-      end.to change(athlete.trophies, :count).by(3)
+      expect { described_class.perform_now(activity.id) }
+        .to change(athlete.trophies, :count).by(3)
+        .and have_enqueued_job(FunrunAwardingJob).with(activity.id, jubilee_badge.id).exactly(2).times
       expect(athlete.trophies.joins(:badge).pluck(:kind)).to contain_exactly(
         'rage', 'participating', 'participating',
       )
-      expect(FunrunAwardingJob).to have_received(:perform_later).with(activity.id, jubilee_badge.id).twice
       expect(FunrunAwardingJob).to have_received(:set).with(wait: 12.hours).once
     end
   end

@@ -6,16 +6,13 @@ RSpec.describe '/api/mobile/activities' do
   let(:token) { activity.token }
 
   describe '/stopwatch' do
-    before do
-      allow(TimerProcessingJob).to receive :perform_later
-      post(api_mobile_activities_stopwatch_url, params: request_params, as: :json)
-    end
+    subject(:send_request) { post(api_mobile_activities_stopwatch_url, params: request_params, as: :json) }
 
     context 'with valid parameters' do
       let(:request_params) { { token: token, results: [{ position: 1, total_time: '00:17:42' }] } }
 
       it 'schedules processing job' do
-        expect(TimerProcessingJob).to have_received(:perform_later).once
+        expect { send_request }.to have_enqueued_job(TimerProcessingJob).once
         expect(response).to have_http_status(:ok)
       end
     end
@@ -23,11 +20,16 @@ RSpec.describe '/api/mobile/activities' do
     context 'with invalid token' do
       let(:request_params) { { token: 'invalid', results: [] } }
 
-      it { expect(response).to have_http_status :not_found }
+      it 'returns not found' do
+        send_request
+        expect(response).to have_http_status :not_found
+      end
     end
   end
 
   describe '/scanner' do
+    subject(:send_request) { post(api_mobile_activities_scanner_url, params: request_params, as: :json) }
+
     let(:request_params) do
       {
         token: token,
@@ -38,20 +40,18 @@ RSpec.describe '/api/mobile/activities' do
       }
     end
 
-    before do
-      allow(ScannerProcessingJob).to receive :perform_later
-      post(api_mobile_activities_scanner_url, params: request_params, as: :json)
-    end
-
     it 'enqueues ScannerProcessingJob for results' do
-      expect(ScannerProcessingJob).to have_received(:perform_later).with(activity.id, be_an(Array)).once
+      expect { send_request }.to have_enqueued_job(ScannerProcessingJob).with(activity.id, be_an(Array)).once
       expect(response).to have_http_status :ok
     end
 
     context 'with invalid token' do
       let(:token) { 'invalid' }
 
-      it { expect(response).to have_http_status :not_found }
+      it 'returns not found' do
+        send_request
+        expect(response).to have_http_status :not_found
+      end
     end
   end
 
