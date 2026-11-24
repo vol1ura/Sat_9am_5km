@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AthletesController < ApplicationController
+  MAX_RUN_IDS = 100
+
   before_action :set_athlete_profile, only: %i[show summary results volunteering friends]
   before_action :redirect_html_athlete_tab, only: %i[summary results volunteering friends]
 
@@ -45,6 +47,14 @@ class AthletesController < ApplicationController
   def friends
     @current_tab = :friends
     render :swap_tab
+  end
+
+  def latest_runs
+    codes = Array(params[:ids]).filter_map { |raw| Integer(raw, exception: false) }
+    return render(json: { error: 'too many ids' }, status: :unprocessable_content) if codes.size > MAX_RUN_IDS
+
+    @codes_by_athlete_id = Athlete.ids_by_personal_code(codes).to_h.invert
+    @runs = Result.latest_published_for(@codes_by_athlete_id.keys)
   end
 
   def best_result

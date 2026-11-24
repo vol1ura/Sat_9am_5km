@@ -1,4 +1,5 @@
 json.runs @runs do |result|
+  json.code @codes_by_athlete_id[result.athlete_id]
   json.athlete_id result.athlete_id
   json.activity_id result.activity_id
   json.date result.date

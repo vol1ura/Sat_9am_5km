@@ -108,6 +108,25 @@ class Athlete < ApplicationRecord
     athlete
   end
 
+  def self.ids_by_personal_code(codes)
+    parsed = codes.map { |code| PersonalCode.new(code) }
+    return [] if parsed.empty?
+
+    found = athletes_for_personal_codes(parsed).to_a
+    parsed.filter_map { |personal| match_personal_code(found, personal) }
+  end
+
+  def self.athletes_for_personal_codes(parsed)
+    scopes = parsed.group_by(&:code_type).map { |type, items| where(type => items.map(&:id)) }
+    (scopes.reduce(:or) || none).select(:id, :parkrun_code, :parkzhrun_code, :fiveverst_code, :runpark_code)
+  end
+
+  def self.match_personal_code(athletes, personal)
+    athlete = athletes.find { |row| row.public_send(personal.code_type) == personal.id }
+    [personal.code, athlete.id] if athlete
+  end
+  private_class_method :athletes_for_personal_codes, :match_personal_code
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[
       club_id event_id id gender name parkrun_code fiveverst_code runpark_code updated_at created_at going_to_event_id
