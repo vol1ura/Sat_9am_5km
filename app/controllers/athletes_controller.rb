@@ -6,15 +6,7 @@ class AthletesController < ApplicationController
 
   def index
     query = params[:q].to_s.gsub(/[^[:alnum:][:blank:]\-']/, '').strip
-    criteria = Athlete.order(:event_id).limit(100)
-    @athletes =
-      if query.length < 3
-        Athlete.none
-      elsif query.match?(/^\d+$/)
-        criteria.where(**Athlete::PersonalCode.new(query.to_i).to_params)
-      else
-        criteria.search_by_name(query)
-      end
+    @athletes = Athlete.order(:event_id).limit(100).merge(Athlete.lookup(query))
     redirect_to athlete_path(@athletes.take) if request.format.html? && @athletes.load.one?
   end
 

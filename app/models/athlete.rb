@@ -95,6 +95,17 @@ class Athlete < ApplicationRecord
 
   store_accessor :personal_bests, *PERSONAL_BEST_DISTANCES, prefix: :personal_best
 
+  def self.lookup(query)
+    query = query.to_s.strip
+    return none if query.length < 3
+
+    if query.match?(/\A\d+\z/)
+      where(**PersonalCode.new(query.to_i).to_params)
+    else
+      search_by_name(query)
+    end
+  end
+
   def self.find_or_scrape_by_code!(code)
     personal_code = PersonalCode.new code
     code_type = personal_code.code_type

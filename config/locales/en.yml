@@ -1442,3 +1442,5 @@ en:
       ignore: If you did not request this link, please ignore this email.
       regards: "Best regards,"
       team: S95 team
+  cup:
+    missing_athlete: Athlete profile was not found

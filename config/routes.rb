@@ -102,6 +102,8 @@ Rails.application.routes.draw do
     },
   )
 
+  get 'cup/authorize', to: 'cup#authorize'
+
   namespace :api, defaults: { format: :json } do
     namespace :internal do
       resource :user, only: [] do
@@ -112,6 +114,9 @@ Rails.application.routes.draw do
     namespace :parkzhrun do
       resources :athletes, only: :update
       resources :activities, only: :create
+    end
+    namespace :cup do
+      get 'athletes/search', to: 'athletes#search'
     end
     namespace :mobile do
       get 'athletes/search', to: '/athletes#index'
