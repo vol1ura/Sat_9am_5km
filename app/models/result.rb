@@ -12,6 +12,16 @@ class Result < ApplicationRecord
 
   scope :published, -> { joins(:activity).where(activity: { published: true }) }
 
+  def self.latest_published_for(athlete_ids)
+    return none if athlete_ids.blank?
+
+    published
+      .select(Arel.sql('DISTINCT ON (results.athlete_id) results.*'))
+      .where(athlete_id: athlete_ids, total_time: 1..)
+      .order(Arel.sql('results.athlete_id, activity.date DESC, results.id DESC'))
+      .preload(activity: :event)
+  end
+
   delegate :date, to: :activity
 
   def self.parse_total_time(string)
